@@ -169,75 +169,76 @@ docker-compose up -d
 
 ### Environment variables
 
-| Name                                                | Description                                                                             | Default Value                                          | Can be set |
-|-----------------------------------------------------|-----------------------------------------------------------------------------------------|--------------------------------------------------------|------------|
-| `$CASSANDRA_BASE_DIR`                               | Cassandra installation directory.                                                       | `${BITNAMI_ROOT_DIR}/cassandra`                        |            |
-| `$CASSANDRA_BIN_DIR`                                | Cassandra binary directory.                                                             | `${CASSANDRA_BASE_DIR}/bin`                            |            |
-| `$CASSANDRA_CONF_DIR`                               | Cassandra configuration directory.                                                      | `${CASSANDRA_BASE_DIR}/conf`                           |            |
-| `$CASSANDRA_VOLUME_DIR`                             | Cassandra persistence directory.                                                        | `/bitnami/cassandra`                                   | &check;    |
-| `$CASSANDRA_DATA_DIR`                               | Cassandra directory where data is stored.                                               | `${CASSANDRA_VOLUME_DIR}/data`                         | &check;    |
-| `$CASSANDRA_COMMITLOG_DIR`                          | Cassandra commit log directory.                                                         | `${CASSANDRA_DATA_DIR}/commitlog`                      | &check;    |
-| `$CASSANDRA_DEFAULT_CONF_DIR`                       | Cassandra configuration directory.                                                      | `${CASSANDRA_BASE_DIR}/conf.default`                   |            |
-| `$CASSANDRA_INITSCRIPTS_DIR`                        | Cassandra directory for init scripts.                                                   | `/docker-entrypoint-initdb.d`                          |            |
-| `$CASSANDRA_LOG_DIR`                                | Cassandra directory for logs.                                                           | `${CASSANDRA_BASE_DIR}/logs`                           |            |
-| `$CASSANDRA_MOUNTED_CONF_DIR`                       | Cassandra directory for mounted configuration files.                                    | `${CASSANDRA_VOLUME_DIR}/conf`                         | &check;    |
-| `$CASSANDRA_TMP_DIR`                                | Cassandra directory for temporary files.                                                | `${CASSANDRA_BASE_DIR}/tmp`                            |            |
-| `$JAVA_BASE_DIR`                                    | Java base directory.                                                                    | `${BITNAMI_ROOT_DIR}/java`                             |            |
-| `$JAVA_BIN_DIR`                                     | Java binary directory.                                                                  | `${JAVA_BASE_DIR}/bin`                                 |            |
-| `$PYTHON_BASE_DIR`                                  | Python base directory.                                                                  | `${BITNAMI_ROOT_DIR}/python`                           |            |
-| `$PYTHON_BIN_DIR`                                   | Python binary directory.                                                                | `${PYTHON_BASE_DIR}/bin`                               |            |
-| `$CASSANDRA_CONF_FILE`                              | Path to the Cassandra configuration file.                                               | `${CASSANDRA_CONF_DIR}/cassandra.yaml`                 |            |
-| `$CASSANDRA_LOG_FILE`                               | Path to the Cassandra log file.                                                         | `${CASSANDRA_LOG_DIR}/cassandra.log`                   |            |
-| `$CASSANDRA_FIRST_BOOT_LOG_FILE`                    | Path to the Cassandra first boot log file.                                              | `${CASSANDRA_LOG_DIR}/cassandra_first_boot.log`        |            |
-| `$CASSANDRA_INITSCRIPTS_BOOT_LOG_FILE`              | Path to the Cassandra first boot log file.                                              | `${CASSANDRA_LOG_DIR}/cassandra_init_scripts_boot.log` |            |
-| `$CASSANDRA_PID_FILE`                               | Path to the PID file for Cassandra.                                                     | `${CASSANDRA_TMP_DIR}/cassandra.pid`                   |            |
-| `$CASSANDRA_DAEMON_USER`                            | Cassandra system user.                                                                  | `cassandra`                                            |            |
-| `$CASSANDRA_DAEMON_GROUP`                           | Cassandra system group.                                                                 | `cassandra`                                            |            |
-| `$CASSANDRA_CLIENT_ENCRYPTION`                      | Enable client encryption.                                                               | `false`                                                | &check;    |
-| `$CASSANDRA_CLUSTER_NAME`                           | Cassandra cluster name.                                                                 | `My Cluster`                                           | &check;    |
-| `$CASSANDRA_DATACENTER`                             | Cassandra datacenter name.                                                              | `dc1`                                                  | &check;    |
-| `$CASSANDRA_ENABLE_REMOTE_CONNECTIONS`              | Enable connection from remote locations.                                                | `true`                                                 | &check;    |
-| `$CASSANDRA_ENABLE_RPC`                             | Enable RPC endpoint in Cassandra.                                                       | `true`                                                 | &check;    |
-| `$CASSANDRA_ENABLE_USER_DEFINED_FUNCTIONS`          | Enable user defined functions.                                                          | `false`                                                | &check;    |
-| `$CASSANDRA_ENABLE_SCRIPTED_USER_DEFINED_FUNCTIONS` | Enable scripted user defined functions.                                                 | `false`                                                | &check;    |
-| `$CASSANDRA_ENDPOINT_SNITCH`                        | Name of the cluster endpoint snitch.                                                    | `SimpleSnitch`                                         | &check;    |
-| `$CASSANDRA_HOST`                                   | Cassandra host name.                                                                    |                                                        | &check;    |
-| `$CASSANDRA_INTERNODE_ENCRYPTION`                   | Internode encryption type.                                                              | `none`                                                 | &check;    |
-| `$CASSANDRA_NUM_TOKENS`                             | Number of tokens in cluster connection.                                                 | `256`                                                  | &check;    |
-| `$CASSANDRA_PASSWORD_SEEDER`                        | Set the node as password seeder in the clustre.                                         | `no`                                                   | &check;    |
-| `$CASSANDRA_SEEDS`                                  | List of cluster seeds.                                                                  | `$CASSANDRA_HOST`                                      | &check;    |
-| `$CASSANDRA_PEERS`                                  | List of cluster peers.                                                                  | `$CASSANDRA_SEEDS`                                     | &check;    |
-| `$CASSANDRA_PEERS`                                  | List of cluster peers.                                                                  | `$CASSANDRA_SEEDS`                                     | &check;    |
-| `$CASSANDRA_NODES`                                  | List of cluster nodes (seeders and non seeders)                                         |                                                        | &check;    |
-| `$CASSANDRA_RACK`                                   | Cassandra rack name.                                                                    | `rack1`                                                | &check;    |
-| `$CASSANDRA_BROADCAST_ADDRESS`                      | Node broadcast address.                                                                 |                                                        | &check;    |
-| `$CASSANDRA_AUTOMATIC_SSTABLE_UPGRADE`              | Automatically upgrade sstables after upgrade.                                           | `false`                                                | &check;    |
-| `$CASSANDRA_STARTUP_CQL`                            | Startup CQL commands to run at boot.                                                    |                                                        | &check;    |
-| `$CASSANDRA_IGNORE_INITDB_SCRIPTS`                  | Ignore the execution of init scripts                                                    | `no`                                                   | &check;    |
-| `$CASSANDRA_CQL_PORT_NUMBER`                        | CQL port.                                                                               | `9042`                                                 | &check;    |
-| `$CASSANDRA_JMX_PORT_NUMBER`                        | JMX port.                                                                               | `7199`                                                 | &check;    |
-| `$CASSANDRA_TRANSPORT_PORT_NUMBER`                  | Transport port.                                                                         | `7000`                                                 | &check;    |
-| `$CASSANDRA_CQL_MAX_RETRIES`                        | Maximum retries for CQL startup operations.                                             | `20`                                                   | &check;    |
-| `$CASSANDRA_CQL_SLEEP_TIME`                         | Sleep time for CQL startup operations.                                                  | `5`                                                    | &check;    |
-| `$CASSANDRA_INIT_MAX_RETRIES`                       | Maximum retries for init startup operations.                                            | `100`                                                  | &check;    |
-| `$CASSANDRA_INIT_SLEEP_TIME`                        | Sleep time for init startup operations.                                                 | `5`                                                    | &check;    |
-| `$CASSANDRA_PEER_CQL_MAX_RETRIES`                   | Maximum retries for peer startup operations.                                            | `100`                                                  | &check;    |
-| `$CASSANDRA_PEER_CQL_SLEEP_TIME`                    | Sleep time for peer startup operations.                                                 | `10`                                                   | &check;    |
-| `$CASSANDRA_AUTO_SNAPSHOT_TTL`                      | Take an automatic snapshot of the data before truncating a keyspace or dropping a table | `30d`                                                  | &check;    |
-| `$ALLOW_EMPTY_PASSWORD`                             | Allow no credentials in the installation.                                               | `no`                                                   | &check;    |
-| `$CASSANDRA_AUTHORIZER`                             | Cassandra connection authorizer.                                                        | `CassandraAuthorizer`                                  | &check;    |
-| `$CASSANDRA_AUTHENTICATOR`                          | Cassandra connection authenticator.                                                     | `PasswordAuthenticator`                                | &check;    |
-| `$CASSANDRA_USER`                                   | Cassandra username.                                                                     | `cassandra`                                            | &check;    |
-| `$CASSANDRA_PASSWORD`                               | Cassandra password.                                                                     |                                                        | &check;    |
-| `$CASSANDRA_KEYSTORE_PASSWORD`                      | Cassandra keystore password.                                                            | `cassandra`                                            | &check;    |
-| `$CASSANDRA_TRUSTSTORE_PASSWORD`                    | Cassandra truststore password.                                                          | `cassandra`                                            | &check;    |
-| `$CASSANDRA_KEYSTORE_LOCATION`                      | Cassandra keystore location.                                                            | `${CASSANDRA_VOLUME_DIR}/secrets/keystore`             | &check;    |
-| `$CASSANDRA_TRUSTSTORE_LOCATION`                    | Cassandra truststore location.                                                          | `${CASSANDRA_VOLUME_DIR}/secrets/truststore`           | &check;    |
-| `$CASSANDRA_TMP_P12_FILE`                           | Cassandra temporary p12 file location.                                                  | `${CASSANDRA_TMP_DIR}/keystore.p12`                    |            |
-| `$CASSANDRA_SSL_CERT_FILE`                          | Cassandra SSL certificate location.                                                     | `${CASSANDRA_VOLUME_DIR}/client.cer.pem`               |            |
-| `$CASSANDRA_SSL_VALIDATE`                           | Perform SSL validation on the certificates.                                             | `false`                                                | &check;    |
-| `$SSL_VERSION`                                      | TLS version to use when connecting.                                                     | `TLSv1_2`                                              | &check;    |
+#### Customizable environment variables
 
+| Name                                               | Description                                                                             | Default Value                                |
+|----------------------------------------------------|-----------------------------------------------------------------------------------------|----------------------------------------------|
+| `CASSANDRA_VOLUME_DIR`                             | Cassandra persistence directory.                                                        | `/bitnami/cassandra`                         |
+| `CASSANDRA_DATA_DIR`                               | Cassandra directory where data is stored.                                               | `${CASSANDRA_VOLUME_DIR}/data`               |
+| `CASSANDRA_COMMITLOG_DIR`                          | Cassandra commit log directory.                                                         | `${CASSANDRA_DATA_DIR}/commitlog`            |
+| `CASSANDRA_MOUNTED_CONF_DIR`                       | Cassandra directory for mounted configuration files.                                    | `${CASSANDRA_VOLUME_DIR}/conf`               |
+| `CASSANDRA_CLIENT_ENCRYPTION`                      | Enable client encryption.                                                               | `false`                                      |
+| `CASSANDRA_CLUSTER_NAME`                           | Cassandra cluster name.                                                                 | `My Cluster`                                 |
+| `CASSANDRA_DATACENTER`                             | Cassandra datacenter name.                                                              | `dc1`                                        |
+| `CASSANDRA_ENABLE_REMOTE_CONNECTIONS`              | Enable connection from remote locations.                                                | `true`                                       |
+| `CASSANDRA_ENABLE_RPC`                             | Enable RPC endpoint in Cassandra.                                                       | `true`                                       |
+| `CASSANDRA_ENABLE_USER_DEFINED_FUNCTIONS`          | Enable user defined functions.                                                          | `false`                                      |
+| `CASSANDRA_ENABLE_SCRIPTED_USER_DEFINED_FUNCTIONS` | Enable scripted user defined functions.                                                 | `false`                                      |
+| `CASSANDRA_ENDPOINT_SNITCH`                        | Name of the cluster endpoint snitch.                                                    | `SimpleSnitch`                               |
+| `CASSANDRA_INTERNODE_ENCRYPTION`                   | Internode encryption type.                                                              | `none`                                       |
+| `CASSANDRA_NUM_TOKENS`                             | Number of tokens in cluster connection.                                                 | `256`                                        |
+| `CASSANDRA_PASSWORD_SEEDER`                        | Set the node as password seeder in the clustre.                                         | `no`                                         |
+| `CASSANDRA_SEEDS`                                  | List of cluster seeds.                                                                  | `$CASSANDRA_HOST`                            |
+| `CASSANDRA_PEERS`                                  | List of cluster peers.                                                                  | `$CASSANDRA_SEEDS`                           |
+| `CASSANDRA_PEERS`                                  | List of cluster peers.                                                                  | `$CASSANDRA_SEEDS`                           |
+| `CASSANDRA_RACK`                                   | Cassandra rack name.                                                                    | `rack1`                                      |
+| `CASSANDRA_AUTOMATIC_SSTABLE_UPGRADE`              | Automatically upgrade sstables after upgrade.                                           | `false`                                      |
+| `CASSANDRA_IGNORE_INITDB_SCRIPTS`                  | Ignore the execution of init scripts                                                    | `no`                                         |
+| `CASSANDRA_CQL_PORT_NUMBER`                        | CQL port.                                                                               | `9042`                                       |
+| `CASSANDRA_JMX_PORT_NUMBER`                        | JMX port.                                                                               | `7199`                                       |
+| `CASSANDRA_TRANSPORT_PORT_NUMBER`                  | Transport port.                                                                         | `7000`                                       |
+| `CASSANDRA_CQL_MAX_RETRIES`                        | Maximum retries for CQL startup operations.                                             | `20`                                         |
+| `CASSANDRA_CQL_SLEEP_TIME`                         | Sleep time for CQL startup operations.                                                  | `5`                                          |
+| `CASSANDRA_INIT_MAX_RETRIES`                       | Maximum retries for init startup operations.                                            | `100`                                        |
+| `CASSANDRA_INIT_SLEEP_TIME`                        | Sleep time for init startup operations.                                                 | `5`                                          |
+| `CASSANDRA_PEER_CQL_MAX_RETRIES`                   | Maximum retries for peer startup operations.                                            | `100`                                        |
+| `CASSANDRA_PEER_CQL_SLEEP_TIME`                    | Sleep time for peer startup operations.                                                 | `10`                                         |
+| `CASSANDRA_AUTO_SNAPSHOT_TTL`                      | Take an automatic snapshot of the data before truncating a keyspace or dropping a table | `30d`                                        |
+| `ALLOW_EMPTY_PASSWORD`                             | Allow no credentials in the installation.                                               | `no`                                         |
+| `CASSANDRA_AUTHORIZER`                             | Cassandra connection authorizer.                                                        | `CassandraAuthorizer`                        |
+| `CASSANDRA_AUTHENTICATOR`                          | Cassandra connection authenticator.                                                     | `PasswordAuthenticator`                      |
+| `CASSANDRA_USER`                                   | Cassandra username.                                                                     | `cassandra`                                  |
+| `CASSANDRA_KEYSTORE_PASSWORD`                      | Cassandra keystore password.                                                            | `cassandra`                                  |
+| `CASSANDRA_TRUSTSTORE_PASSWORD`                    | Cassandra truststore password.                                                          | `cassandra`                                  |
+| `CASSANDRA_KEYSTORE_LOCATION`                      | Cassandra keystore location.                                                            | `${CASSANDRA_VOLUME_DIR}/secrets/keystore`   |
+| `CASSANDRA_TRUSTSTORE_LOCATION`                    | Cassandra truststore location.                                                          | `${CASSANDRA_VOLUME_DIR}/secrets/truststore` |
+| `CASSANDRA_SSL_VALIDATE`                           | Perform SSL validation on the certificates.                                             | `false`                                      |
+| `SSL_VERSION`                                      | TLS version to use when connecting.                                                     | `TLSv1_2`                                    |
+
+#### Read-only environment variables
+
+| Name                                  | Description                                | Value                                                  |
+|---------------------------------------|--------------------------------------------|--------------------------------------------------------|
+| `CASSANDRA_BASE_DIR`                  | Cassandra installation directory.          | `${BITNAMI_ROOT_DIR}/cassandra`                        |
+| `CASSANDRA_BIN_DIR`                   | Cassandra binary directory.                | `${CASSANDRA_BASE_DIR}/bin`                            |
+| `CASSANDRA_CONF_DIR`                  | Cassandra configuration directory.         | `${CASSANDRA_BASE_DIR}/conf`                           |
+| `CASSANDRA_DEFAULT_CONF_DIR`          | Cassandra configuration directory.         | `${CASSANDRA_BASE_DIR}/conf.default`                   |
+| `CASSANDRA_INITSCRIPTS_DIR`           | Cassandra directory for init scripts.      | `/docker-entrypoint-initdb.d`                          |
+| `CASSANDRA_LOG_DIR`                   | Cassandra directory for logs.              | `${CASSANDRA_BASE_DIR}/logs`                           |
+| `CASSANDRA_TMP_DIR`                   | Cassandra directory for temporary files.   | `${CASSANDRA_BASE_DIR}/tmp`                            |
+| `JAVA_BASE_DIR`                       | Java base directory.                       | `${BITNAMI_ROOT_DIR}/java`                             |
+| `JAVA_BIN_DIR`                        | Java binary directory.                     | `${JAVA_BASE_DIR}/bin`                                 |
+| `PYTHON_BASE_DIR`                     | Python base directory.                     | `${BITNAMI_ROOT_DIR}/python`                           |
+| `PYTHON_BIN_DIR`                      | Python binary directory.                   | `${PYTHON_BASE_DIR}/bin`                               |
+| `CASSANDRA_CONF_FILE`                 | Path to the Cassandra configuration file.  | `${CASSANDRA_CONF_DIR}/cassandra.yaml`                 |
+| `CASSANDRA_LOG_FILE`                  | Path to the Cassandra log file.            | `${CASSANDRA_LOG_DIR}/cassandra.log`                   |
+| `CASSANDRA_FIRST_BOOT_LOG_FILE`       | Path to the Cassandra first boot log file. | `${CASSANDRA_LOG_DIR}/cassandra_first_boot.log`        |
+| `CASSANDRA_INITSCRIPTS_BOOT_LOG_FILE` | Path to the Cassandra first boot log file. | `${CASSANDRA_LOG_DIR}/cassandra_init_scripts_boot.log` |
+| `CASSANDRA_PID_FILE`                  | Path to the PID file for Cassandra.        | `${CASSANDRA_TMP_DIR}/cassandra.pid`                   |
+| `CASSANDRA_DAEMON_USER`               | Cassandra system user.                     | `cassandra`                                            |
+| `CASSANDRA_DAEMON_GROUP`              | Cassandra system group.                    | `cassandra`                                            |
+| `CASSANDRA_TMP_P12_FILE`              | Cassandra temporary p12 file location.     | `${CASSANDRA_TMP_DIR}/keystore.p12`                    |
+| `CASSANDRA_SSL_CERT_FILE`             | Cassandra SSL certificate location.        | `${CASSANDRA_VOLUME_DIR}/client.cer.pem`               |
 
 Additionally, any environment variable beginning with the following prefix will be mapped to its corresponding Apache Cassandra key in the proper file:
 
