@@ -13,13 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name elasticsearch bitnami/elasticsearch:latest
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/elasticsearch/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 You can find the available configuration options in the [Environment Variables](#environment-variables) section.
 
 ## Why use Bitnami Images?
@@ -184,84 +177,72 @@ docker-compose up -d
 
 ### Environment variables
 
-| Name                                               | Description                                                                                                            | Default Value                                  | Can be set |
-|----------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|------------------------------------------------|------------|
-| `$DB_FLAVOR`                                       | Database flavor. Valid values: `elasticsearch` or `opensearch`.                                                        | `elasticsearch`                                |            |
-| `$ELASTICSEARCH_VOLUME_DIR`                        | Persistence base directory                                                                                             | `/bitnami/elasticsearch`                       |            |
-| `$ELASTICSEARCH_BASE_DIR`                          | Elasticsearch installation directory                                                                                   | `/opt/bitnami/elasticsearch`                   |            |
-| `$ELASTICSEARCH_CONF_DIR`                          | Elasticsearch configuration directory                                                                                  | `${DB_BASE_DIR}/config`                        |            |
-| `$ELASTICSEARCH_CERTS_DIR`                         | Path to certificates folder.                                                                                           | `${DB_CONF_DIR}/certs`                         | &check;    |
-| `$ELASTICSEARCH_LOGS_DIR`                          | Elasticsearch logs directory                                                                                           | `${DB_BASE_DIR}/logs`                          |            |
-| `$ELASTICSEARCH_PLUGINS_DIR`                       | Elasticsearch plugins directory                                                                                        | `${DB_BASE_DIR}/plugins`                       |            |
-| `$ELASTICSEARCH_DATA_DIR`                          | Elasticsearch data directory                                                                                           | `${DB_VOLUME_DIR}/data`                        |            |
-| `$ELASTICSEARCH_DATA_DIR_LIST`                     | Comma, semi-colon or space separated list of directories to use for data storage                                       |                                                | &check;    |
-| `$ELASTICSEARCH_TMP_DIR`                           | Elasticsearch temporary directory                                                                                      | `${DB_BASE_DIR}/tmp`                           |            |
-| `$ELASTICSEARCH_BIN_DIR`                           | Elasticsearch executables directory                                                                                    | `${DB_BASE_DIR}/bin`                           |            |
-| `$ELASTICSEARCH_MOUNTED_PLUGINS_DIR`               | Directory where plugins are mounted                                                                                    | `${DB_VOLUME_DIR}/plugins`                     |            |
-| `$ELASTICSEARCH_CONF_FILE`                         | Path to Elasticsearch configuration file                                                                               | `${DB_CONF_DIR}/elasticsearch.yml`             |            |
-| `$ELASTICSEARCH_LOG_FILE`                          | Path to the Elasticsearch log file                                                                                     | `${DB_LOGS_DIR}/elasticsearch.log`             |            |
-| `$ELASTICSEARCH_PID_FILE`                          | Path to the Elasticsearch pid file                                                                                     | `${DB_TMP_DIR}/elasticsearch.pid`              |            |
-| `$ELASTICSEARCH_INITSCRIPTS_DIR`                   | Path to the Elasticsearch container init scripts directory                                                             | `/docker-entrypoint-initdb.d`                  |            |
-| `$ELASTICSEARCH_DAEMON_USER`                       | Elasticsearch system user                                                                                              | `elasticsearch`                                |            |
-| `$ELASTICSEARCH_DAEMON_GROUP`                      | Elasticsearch system group                                                                                             | `elasticsearch`                                |            |
-| `$ELASTICSEARCH_BIND_ADDRESS`                      | Elasticsearch bind address                                                                                             |                                                | &check;    |
-| `$ELASTICSEARCH_ADVERTISED_HOSTNAME`               | Elasticsearch advertised hostname, used for publish                                                                    |                                                | &check;    |
-| `$ELASTICSEARCH_CLUSTER_HOSTS`                     | Elasticsearch cluster hosts                                                                                            |                                                | &check;    |
-| `$ELASTICSEARCH_CLUSTER_MASTER_HOSTS`              | Elasticsearch cluster master hosts                                                                                     |                                                | &check;    |
-| `$ELASTICSEARCH_CLUSTER_NAME`                      | Elasticsearch cluster name                                                                                             |                                                | &check;    |
-| `$ELASTICSEARCH_HEAP_SIZE`                         | Elasticsearch heap size                                                                                                | `1024m`                                        | &check;    |
-| `$ELASTICSEARCH_HEAP_SIZE`                         | Elasticsearch heap size                                                                                                |                                                | &check;    |
-| `$ELASTICSEARCH_MAX_ALLOWED_MEMORY_PERCENTAGE`     | Elasticsearch maximum allowed memory percentage                                                                        | `100`                                          | &check;    |
-| `$ELASTICSEARCH_MAX_ALLOWED_MEMORY`                | Elasticsearch maximum allowed memory amount (in megabytes)                                                             |                                                | &check;    |
-| `$ELASTICSEARCH_MAX_TIMEOUT`                       | Elasticsearch maximum init timeout                                                                                     | `60`                                           | &check;    |
-| `$ELASTICSEARCH_LOCK_ALL_MEMORY`                   | Sets bootstrap.memory_lock parameter                                                                                   | `no`                                           | &check;    |
-| `$ELASTICSEARCH_DISABLE_JVM_HEAP_DUMP`             | Disable JVM Heap dump                                                                                                  | `no`                                           | &check;    |
-| `$ELASTICSEARCH_DISABLE_GC_LOGS`                   | Disable GC logs                                                                                                        | `no`                                           | &check;    |
-| `$ELASTICSEARCH_IS_DEDICATED_NODE`                 | If false, Elasticsearch will be configured with all the roles, deploy as dedicated node using DB_NODE_ROLES.           | `no`                                           | &check;    |
-| `$ELASTICSEARCH_MINIMUM_MASTER_NODES`              | Minimum number of master nodes                                                                                         |                                                | &check;    |
-| `$ELASTICSEARCH_NODE_NAME`                         | Elasticsearch node name                                                                                                |                                                | &check;    |
-| `$ELASTICSEARCH_FS_SNAPSHOT_REPO_PATH`             | Elasticsearch node port number                                                                                         |                                                | &check;    |
-| `$ELASTICSEARCH_NODE_ROLES`                        | Comma-separated list of Elasticsearch roles. If empty, will be deployed as a coordinating-only node.                   |                                                | &check;    |
-| `$ELASTICSEARCH_PLUGINS`                           | List of Elasticsearch plugins to activate                                                                              |                                                | &check;    |
-| `$ELASTICSEARCH_TRANSPORT_PORT_NUMBER`             | Elasticsearch node port number                                                                                         | `9300`                                         | &check;    |
-| `$ELASTICSEARCH_HTTP_PORT_NUMBER`                  | Elasticsearch port                                                                                                     | `9200`                                         | &check;    |
-| `$ELASTICSEARCH_ENABLE_SECURITY`                   | Enable Elasticsearch security settings.                                                                                | `false`                                        | &check;    |
-| `$ELASTICSEARCH_PASSWORD`                          | Password for "elastic" user.                                                                                           | `bitnami`                                      | &check;    |
-| `$ELASTICSEARCH_USERNAME`                          | Username of the Elasticsearch superuser.                                                                               | `elastic`                                      |            |
-| `$ELASTICSEARCH_TLS_VERIFICATION_MODE`             | Elasticsearch TLS verification mode in transport layer.                                                                | `full`                                         | &check;    |
-| `$ELASTICSEARCH_TLS_USE_PEM`                       | Configure Security settings using PEM certificates.                                                                    | `false`                                        | &check;    |
-| `$ELASTICSEARCH_KEYSTORE_PASSWORD`                 | Password for the Elasticsearch keystore containing the certificates or password-protected PEM key.                     |                                                | &check;    |
-| `$ELASTICSEARCH_TRUSTSTORE_PASSWORD`               | Password for the Elasticsearch truststore.                                                                             |                                                | &check;    |
-| `$ELASTICSEARCH_KEY_PASSWORD`                      | Password for the Elasticsearch node PEM key.                                                                           |                                                | &check;    |
-| `$ELASTICSEARCH_KEYSTORE_LOCATION`                 | Path to Keystore                                                                                                       | `${DB_CERTS_DIR}/elasticsearch.keystore.jks`   | &check;    |
-| `$ELASTICSEARCH_TRUSTSTORE_LOCATION`               | Path to Truststore.                                                                                                    | `${DB_CERTS_DIR}/elasticsearch.truststore.jks` | &check;    |
-| `$ELASTICSEARCH_NODE_CERT_LOCATION`                | Path to PEM node certificate.                                                                                          | `${DB_CERTS_DIR}/tls.crt`                      | &check;    |
-| `$ELASTICSEARCH_NODE_KEY_LOCATION`                 | Path to PEM node key.                                                                                                  | `${DB_CERTS_DIR}/tls.key`                      | &check;    |
-| `$ELASTICSEARCH_CA_CERT_LOCATION`                  | Path to CA certificate.                                                                                                | `${DB_CERTS_DIR}/ca.crt`                       | &check;    |
-| `$ELASTICSEARCH_SKIP_TRANSPORT_TLS`                | Skips transport layer TLS configuration. Useful when deploying single-node clusters.                                   | `false`                                        | &check;    |
-| `$ELASTICSEARCH_TRANSPORT_TLS_USE_PEM`             | Configure transport layer TLS settings using PEM certificates.                                                         | `$DB_TLS_USE_PEM`                              | &check;    |
-| `$ELASTICSEARCH_TRANSPORT_TLS_KEYSTORE_PASSWORD`   | Password for the Elasticsearch transport layer TLS keystore containing the certificates or password-protected PEM key. | `$DB_KEYSTORE_PASSWORD`                        | &check;    |
-| `$ELASTICSEARCH_TRANSPORT_TLS_TRUSTSTORE_PASSWORD` | Password for the Elasticsearch transport layer TLS truststore.                                                         | `$DB_TRUSTSTORE_PASSWORD`                      | &check;    |
-| `$ELASTICSEARCH_TRANSPORT_TLS_KEY_PASSWORD`        | Password for the Elasticsearch transport layer TLS node PEM key.                                                       | `$DB_KEY_PASSWORD`                             | &check;    |
-| `$ELASTICSEARCH_TRANSPORT_TLS_KEYSTORE_LOCATION`   | Path to Keystore for transport layer TLS.                                                                              | `$DB_KEYSTORE_LOCATION`                        | &check;    |
-| `$ELASTICSEARCH_TRANSPORT_TLS_TRUSTSTORE_LOCATION` | Path to Truststore for transport layer TLS.                                                                            | `$DB_TRUSTSTORE_LOCATION`                      | &check;    |
-| `$ELASTICSEARCH_TRANSPORT_TLS_NODE_CERT_LOCATION`  | Path to PEM node certificate for transport layer TLS.                                                                  | `$DB_NODE_CERT_LOCATION`                       | &check;    |
-| `$ELASTICSEARCH_TRANSPORT_TLS_NODE_KEY_LOCATION`   | Path to PEM node key for transport layer TLS.                                                                          | `$DB_NODE_KEY_LOCATION`                        | &check;    |
-| `$ELASTICSEARCH_TRANSPORT_TLS_CA_CERT_LOCATION`    | Path to CA certificate for transport layer TLS.                                                                        | `$DB_CA_CERT_LOCATION`                         | &check;    |
-| `$ELASTICSEARCH_ENABLE_REST_TLS`                   | Enable TLS encryption for REST API communications.                                                                     | `true`                                         | &check;    |
-| `$ELASTICSEARCH_HTTP_TLS_USE_PEM`                  | Configure HTTP TLS settings using PEM certificates.                                                                    | `$DB_TLS_USE_PEM`                              | &check;    |
-| `$ELASTICSEARCH_HTTP_TLS_KEYSTORE_PASSWORD`        | Password for the Elasticsearch HTTP TLS keystore containing the certificates or password-protected PEM key.            | `$DB_KEYSTORE_PASSWORD`                        | &check;    |
-| `$ELASTICSEARCH_HTTP_TLS_TRUSTSTORE_PASSWORD`      | Password for the Elasticsearch HTTP TLS truststore.                                                                    | `$DB_TRUSTSTORE_PASSWORD`                      | &check;    |
-| `$ELASTICSEARCH_HTTP_TLS_KEY_PASSWORD`             | Password for the Elasticsearch HTTP TLS node PEM key.                                                                  | `$DB_KEY_PASSWORD`                             | &check;    |
-| `$ELASTICSEARCH_HTTP_TLS_KEYSTORE_LOCATION`        | Path to Keystore for HTTP TLS.                                                                                         | `$DB_KEYSTORE_LOCATION`                        | &check;    |
-| `$ELASTICSEARCH_HTTP_TLS_TRUSTSTORE_LOCATION`      | Path to Truststore for HTTP TLS.                                                                                       | `$DB_TRUSTSTORE_LOCATION`                      | &check;    |
-| `$ELASTICSEARCH_HTTP_TLS_NODE_CERT_LOCATION`       | Path to PEM node certificate for HTTP TLS.                                                                             | `$DB_NODE_CERT_LOCATION`                       | &check;    |
-| `$ELASTICSEARCH_HTTP_TLS_NODE_KEY_LOCATION`        | Path to PEM node key for HTTP TLS.                                                                                     | `$DB_NODE_KEY_LOCATION`                        | &check;    |
-| `$ELASTICSEARCH_HTTP_TLS_CA_CERT_LOCATION`         | Path to CA certificate for HTTP TLS.                                                                                   | `$DB_CA_CERT_LOCATION`                         | &check;    |
-| `$ELASTICSEARCH_ENABLE_FIPS_MODE`                  | Enables FIPS mode of operation                                                                                         | `false`                                        | &check;    |
-| `$ELASTICSEARCH_KEYS`                              | Comma-separated list of key=value to be added to the Elasticsearch keystore                                            |                                                | &check;    |
-| `$ELASTICSEARCH_ACTION_DESTRUCTIVE_REQUIRES_NAME`  | Enable action destructive requires name                                                                                |                                                | &check;    |
+#### Customizable environment variables
 
+| Name                                              | Description                                                                                                            | Default Value                                  |
+|---------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|------------------------------------------------|
+| `ELASTICSEARCH_CERTS_DIR`                         | Path to certificates folder.                                                                                           | `${DB_CONF_DIR}/certs`                         |
+| `ELASTICSEARCH_HEAP_SIZE`                         | Elasticsearch heap size                                                                                                | `1024m`                                        |
+| `ELASTICSEARCH_MAX_ALLOWED_MEMORY_PERCENTAGE`     | Elasticsearch maximum allowed memory percentage                                                                        | `100`                                          |
+| `ELASTICSEARCH_MAX_TIMEOUT`                       | Elasticsearch maximum init timeout                                                                                     | `60`                                           |
+| `ELASTICSEARCH_LOCK_ALL_MEMORY`                   | Sets bootstrap.memory_lock parameter                                                                                   | `no`                                           |
+| `ELASTICSEARCH_DISABLE_JVM_HEAP_DUMP`             | Disable JVM Heap dump                                                                                                  | `no`                                           |
+| `ELASTICSEARCH_DISABLE_GC_LOGS`                   | Disable GC logs                                                                                                        | `no`                                           |
+| `ELASTICSEARCH_IS_DEDICATED_NODE`                 | If false, Elasticsearch will be configured with all the roles, deploy as dedicated node using DB_NODE_ROLES.           | `no`                                           |
+| `ELASTICSEARCH_TRANSPORT_PORT_NUMBER`             | Elasticsearch node port number                                                                                         | `9300`                                         |
+| `ELASTICSEARCH_HTTP_PORT_NUMBER`                  | Elasticsearch port                                                                                                     | `9200`                                         |
+| `ELASTICSEARCH_ENABLE_SECURITY`                   | Enable Elasticsearch security settings.                                                                                | `false`                                        |
+| `ELASTICSEARCH_PASSWORD`                          | Password for "elastic" user.                                                                                           | `bitnami`                                      |
+| `ELASTICSEARCH_TLS_VERIFICATION_MODE`             | Elasticsearch TLS verification mode in transport layer.                                                                | `full`                                         |
+| `ELASTICSEARCH_TLS_USE_PEM`                       | Configure Security settings using PEM certificates.                                                                    | `false`                                        |
+| `ELASTICSEARCH_KEYSTORE_LOCATION`                 | Path to Keystore                                                                                                       | `${DB_CERTS_DIR}/elasticsearch.keystore.jks`   |
+| `ELASTICSEARCH_TRUSTSTORE_LOCATION`               | Path to Truststore.                                                                                                    | `${DB_CERTS_DIR}/elasticsearch.truststore.jks` |
+| `ELASTICSEARCH_NODE_CERT_LOCATION`                | Path to PEM node certificate.                                                                                          | `${DB_CERTS_DIR}/tls.crt`                      |
+| `ELASTICSEARCH_NODE_KEY_LOCATION`                 | Path to PEM node key.                                                                                                  | `${DB_CERTS_DIR}/tls.key`                      |
+| `ELASTICSEARCH_CA_CERT_LOCATION`                  | Path to CA certificate.                                                                                                | `${DB_CERTS_DIR}/ca.crt`                       |
+| `ELASTICSEARCH_SKIP_TRANSPORT_TLS`                | Skips transport layer TLS configuration. Useful when deploying single-node clusters.                                   | `false`                                        |
+| `ELASTICSEARCH_TRANSPORT_TLS_USE_PEM`             | Configure transport layer TLS settings using PEM certificates.                                                         | `$DB_TLS_USE_PEM`                              |
+| `ELASTICSEARCH_TRANSPORT_TLS_KEYSTORE_PASSWORD`   | Password for the Elasticsearch transport layer TLS keystore containing the certificates or password-protected PEM key. | `$DB_KEYSTORE_PASSWORD`                        |
+| `ELASTICSEARCH_TRANSPORT_TLS_TRUSTSTORE_PASSWORD` | Password for the Elasticsearch transport layer TLS truststore.                                                         | `$DB_TRUSTSTORE_PASSWORD`                      |
+| `ELASTICSEARCH_TRANSPORT_TLS_KEY_PASSWORD`        | Password for the Elasticsearch transport layer TLS node PEM key.                                                       | `$DB_KEY_PASSWORD`                             |
+| `ELASTICSEARCH_TRANSPORT_TLS_KEYSTORE_LOCATION`   | Path to Keystore for transport layer TLS.                                                                              | `$DB_KEYSTORE_LOCATION`                        |
+| `ELASTICSEARCH_TRANSPORT_TLS_TRUSTSTORE_LOCATION` | Path to Truststore for transport layer TLS.                                                                            | `$DB_TRUSTSTORE_LOCATION`                      |
+| `ELASTICSEARCH_TRANSPORT_TLS_NODE_CERT_LOCATION`  | Path to PEM node certificate for transport layer TLS.                                                                  | `$DB_NODE_CERT_LOCATION`                       |
+| `ELASTICSEARCH_TRANSPORT_TLS_NODE_KEY_LOCATION`   | Path to PEM node key for transport layer TLS.                                                                          | `$DB_NODE_KEY_LOCATION`                        |
+| `ELASTICSEARCH_TRANSPORT_TLS_CA_CERT_LOCATION`    | Path to CA certificate for transport layer TLS.                                                                        | `$DB_CA_CERT_LOCATION`                         |
+| `ELASTICSEARCH_ENABLE_REST_TLS`                   | Enable TLS encryption for REST API communications.                                                                     | `true`                                         |
+| `ELASTICSEARCH_HTTP_TLS_USE_PEM`                  | Configure HTTP TLS settings using PEM certificates.                                                                    | `$DB_TLS_USE_PEM`                              |
+| `ELASTICSEARCH_HTTP_TLS_KEYSTORE_PASSWORD`        | Password for the Elasticsearch HTTP TLS keystore containing the certificates or password-protected PEM key.            | `$DB_KEYSTORE_PASSWORD`                        |
+| `ELASTICSEARCH_HTTP_TLS_TRUSTSTORE_PASSWORD`      | Password for the Elasticsearch HTTP TLS truststore.                                                                    | `$DB_TRUSTSTORE_PASSWORD`                      |
+| `ELASTICSEARCH_HTTP_TLS_KEY_PASSWORD`             | Password for the Elasticsearch HTTP TLS node PEM key.                                                                  | `$DB_KEY_PASSWORD`                             |
+| `ELASTICSEARCH_HTTP_TLS_KEYSTORE_LOCATION`        | Path to Keystore for HTTP TLS.                                                                                         | `$DB_KEYSTORE_LOCATION`                        |
+| `ELASTICSEARCH_HTTP_TLS_TRUSTSTORE_LOCATION`      | Path to Truststore for HTTP TLS.                                                                                       | `$DB_TRUSTSTORE_LOCATION`                      |
+| `ELASTICSEARCH_HTTP_TLS_NODE_CERT_LOCATION`       | Path to PEM node certificate for HTTP TLS.                                                                             | `$DB_NODE_CERT_LOCATION`                       |
+| `ELASTICSEARCH_HTTP_TLS_NODE_KEY_LOCATION`        | Path to PEM node key for HTTP TLS.                                                                                     | `$DB_NODE_KEY_LOCATION`                        |
+| `ELASTICSEARCH_HTTP_TLS_CA_CERT_LOCATION`         | Path to CA certificate for HTTP TLS.                                                                                   | `$DB_CA_CERT_LOCATION`                         |
+| `ELASTICSEARCH_ENABLE_FIPS_MODE`                  | Enables FIPS mode of operation                                                                                         | `false`                                        |
+
+#### Read-only environment variables
+
+| Name                                | Description                                                     | Value                              |
+|-------------------------------------|-----------------------------------------------------------------|------------------------------------|
+| `DB_FLAVOR`                         | Database flavor. Valid values: `elasticsearch` or `opensearch`. | `elasticsearch`                    |
+| `ELASTICSEARCH_VOLUME_DIR`          | Persistence base directory                                      | `/bitnami/elasticsearch`           |
+| `ELASTICSEARCH_BASE_DIR`            | Elasticsearch installation directory                            | `/opt/bitnami/elasticsearch`       |
+| `ELASTICSEARCH_CONF_DIR`            | Elasticsearch configuration directory                           | `${DB_BASE_DIR}/config`            |
+| `ELASTICSEARCH_LOGS_DIR`            | Elasticsearch logs directory                                    | `${DB_BASE_DIR}/logs`              |
+| `ELASTICSEARCH_PLUGINS_DIR`         | Elasticsearch plugins directory                                 | `${DB_BASE_DIR}/plugins`           |
+| `ELASTICSEARCH_DATA_DIR`            | Elasticsearch data directory                                    | `${DB_VOLUME_DIR}/data`            |
+| `ELASTICSEARCH_TMP_DIR`             | Elasticsearch temporary directory                               | `${DB_BASE_DIR}/tmp`               |
+| `ELASTICSEARCH_BIN_DIR`             | Elasticsearch executables directory                             | `${DB_BASE_DIR}/bin`               |
+| `ELASTICSEARCH_MOUNTED_PLUGINS_DIR` | Directory where plugins are mounted                             | `${DB_VOLUME_DIR}/plugins`         |
+| `ELASTICSEARCH_CONF_FILE`           | Path to Elasticsearch configuration file                        | `${DB_CONF_DIR}/elasticsearch.yml` |
+| `ELASTICSEARCH_LOG_FILE`            | Path to the Elasticsearch log file                              | `${DB_LOGS_DIR}/elasticsearch.log` |
+| `ELASTICSEARCH_PID_FILE`            | Path to the Elasticsearch pid file                              | `${DB_TMP_DIR}/elasticsearch.pid`  |
+| `ELASTICSEARCH_INITSCRIPTS_DIR`     | Path to the Elasticsearch container init scripts directory      | `/docker-entrypoint-initdb.d`      |
+| `ELASTICSEARCH_DAEMON_USER`         | Elasticsearch system user                                       | `elasticsearch`                    |
+| `ELASTICSEARCH_DAEMON_GROUP`        | Elasticsearch system group                                      | `elasticsearch`                    |
+| `ELASTICSEARCH_USERNAME`            | Username of the Elasticsearch superuser.                        | `elastic`                          |
 
 When you start the elasticsearch image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
@@ -529,6 +510,12 @@ $ docker-compose up -d
 
 * Elasticsearch container can be configured as a dedicated node with 4 different types: *master*, *data*, *coordinating* or *ingest*.
   Previously it was only achievable by using a custom `elasticsearch_custom.yml` file. From now on, you can use the environment variables `ELASTICSEARCH_IS_DEDICATED_NODE` & `ELASTICSEARCH_NODE_TYPE` to configure it.
+
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/elasticsearch).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## Contributing
 
