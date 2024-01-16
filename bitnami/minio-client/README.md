@@ -13,13 +13,6 @@ Disclaimer: All software products, projects and company names are trademark(TM) 
 docker run --name minio-client bitnami/minio-client:latest
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/minio-client/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -67,20 +60,23 @@ docker build -t bitnami/APP:latest .
 
 ## Environment variables
 
-| Name                          | Description                                     | Default Value                      | Can be set |
-|-------------------------------|-------------------------------------------------|------------------------------------|------------|
-| `$MINIO_CLIENT_BASE_DIR`      | MinIO Client installation directory.            | `${BITNAMI_ROOT_DIR}/minio-client` |            |
-| `$MINIO_CLIENT_BIN_DIR`       | MinIO Client directory for binaries.            | `${MINIO_CLIENT_BASE_DIR}/bin`     |            |
-| `$MINIO_CLIENT_CONF_DIR`      | MinIO Client directory for configuration files. | `${MINIO_CLIENT_BASE_DIR}/.mc`     | &check;    |
-| `$MINIO_CLIENT_CONF_DIR`      | MinIO Client directory for configuration files. | `/.mc`                             | &check;    |
-| `$MINIO_SERVER_HOST`          | MinIO Server host.                              |                                    | &check;    |
-| `$MINIO_SERVER_PORT_NUMBER`   | MinIO Server port number.                       | `9000`                             | &check;    |
-| `$MINIO_SERVER_SCHEME`        | MinIO Server web scheme.                        | `http`                             | &check;    |
-| `$MINIO_SERVER_ROOT_USER`     | MinIO Server root user name.                    |                                    | &check;    |
-| `$MINIO_SERVER_ROOT_PASSWORD` | Password for MinIO Server root user.            |                                    | &check;    |
-| `$MINIO_DAEMON_USER`          | MinIO system user.                              | `minio`                            |            |
-| `$MINIO_DAEMON_GROUP`         | MinIO system group.                             | `minio`                            |            |
+### Customizable environment variables
 
+| Name                       | Description                                     | Default Value                  |
+|----------------------------|-------------------------------------------------|--------------------------------|
+| `MINIO_CLIENT_CONF_DIR`    | MinIO Client directory for configuration files. | `${MINIO_CLIENT_BASE_DIR}/.mc` |
+| `MINIO_CLIENT_CONF_DIR`    | MinIO Client directory for configuration files. | `/.mc`                         |
+| `MINIO_SERVER_PORT_NUMBER` | MinIO Server port number.                       | `9000`                         |
+| `MINIO_SERVER_SCHEME`      | MinIO Server web scheme.                        | `http`                         |
+
+### Read-only environment variables
+
+| Name                    | Description                          | Value                              |
+|-------------------------|--------------------------------------|------------------------------------|
+| `MINIO_CLIENT_BASE_DIR` | MinIO Client installation directory. | `${BITNAMI_ROOT_DIR}/minio-client` |
+| `MINIO_CLIENT_BIN_DIR`  | MinIO Client directory for binaries. | `${MINIO_CLIENT_BASE_DIR}/bin`     |
+| `MINIO_DAEMON_USER`     | MinIO system user.                   | `minio`                            |
+| `MINIO_DAEMON_GROUP`    | MinIO system group.                  | `minio`                            |
 
 ## Connecting to other containers
 
@@ -146,6 +142,12 @@ docker run --rm --name minio-client \
 ```
 
 Find more information about the client configuration in the [MinIO(R) Client documentation](https://docs.min.io/docs/minio-admin-complete-guide.html).
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 
