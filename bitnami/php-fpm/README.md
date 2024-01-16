@@ -13,13 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run -it --name phpfpm -v /path/to/app:/app bitnami/php-fpm
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/php-fpm/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -201,6 +194,33 @@ docker run -it --name php-fpm -v /path/to/app:/app bitnami/php-fpm \
 
 ## Configuration
 
+### Environment variables
+
+#### Customizable environment variables
+
+#### Read-only environment variables
+
+| Name                                          | Description                                                                                                 | Value                             |
+|-----------------------------------------------|-------------------------------------------------------------------------------------------------------------|-----------------------------------|
+| `PHP_BASE_DIR`                                | PHP-FPM installation directory.                                                                             | `${BITNAMI_ROOT_DIR}/php`         |
+| `PHP_BIN_DIR`                                 | PHP directory for binary executables.                                                                       | `${PHP_BASE_DIR}/bin`             |
+| `PHP_CONF_DIR`                                | PHP configuration directory.                                                                                | `${PHP_BASE_DIR}/etc`             |
+| `PHP_TMP_DIR`                                 | PHP directory for runtime temporary files.                                                                  | `${PHP_BASE_DIR}/var/run`         |
+| `PHP_CONF_FILE`                               | Path to the PHP configuration file.                                                                         | `${PHP_CONF_DIR}/php.ini`         |
+| `PHP_DEFAULT_OPCACHE_INTERNED_STRINGS_BUFFER` | Default amount of memory used to store interned strings, in megabytes.                                      | `16`                              |
+| `PHP_DEFAULT_OPCACHE_MEMORY_CONSUMPTION`      | Default size of the OPcache shared memory storage, in megabytes.                                            | `192`                             |
+| `PHP_DEFAULT_OPCACHE_FILE_CACHE`              | Default path to the second-level OPcache cache directory.                                                   | `${PHP_TMP_DIR}/opcache_file`     |
+| `PHP_FPM_SBIN_DIR`                            | PHP-FPM directory for binary executables.                                                                   | `${PHP_BASE_DIR}/sbin`            |
+| `PHP_FPM_LOGS_DIR`                            | PHP-FPM directory for logs.                                                                                 | `${PHP_BASE_DIR}/logs`            |
+| `PHP_FPM_LOG_FILE`                            | PHP-FPM log file.                                                                                           | `${PHP_FPM_LOGS_DIR}/php-fpm.log` |
+| `PHP_FPM_CONF_FILE`                           | Path to the PHP-FPM configuration file.                                                                     | `${PHP_CONF_DIR}/php-fpm.conf`    |
+| `PHP_FPM_PID_FILE`                            | Path to the PHP-FPM PID file.                                                                               | `${PHP_TMP_DIR}/php-fpm.pid`      |
+| `PHP_FPM_DEFAULT_LISTEN_ADDRESS`              | Default PHP-FPM listen address. Can be a port number, a host:port combination or the path to a socket file. | `${PHP_TMP_DIR}/www.sock`         |
+| `PHP_FPM_DAEMON_USER`                         | PHP-FPM system user.                                                                                        | `daemon`                          |
+| `PHP_FPM_DAEMON_GROUP`                        | PHP-FPM system group.                                                                                       | `daemon`                          |
+| `PHP_EXPOSE_PHP`                              | Enables HTTP header with PHP version.                                                                       | `0`                               |
+| `PHP_OUTPUT_BUFFERING`                        | Size of the output buffer for PHP                                                                           | `8196`                            |
+
 ### Mount a custom config file
 
 You can mount a custom config file from your host to edit the default configuration for the php-fpm docker image. The following is an example to alter the configuration of the _php-fpm.conf_ configuration file:
@@ -381,6 +401,12 @@ docker-compose up phpfpm
 ### 5.5.30-0 (2015-10-06)
 
 * `/app` directory is no longer exported as a volume. This caused problems when building on top of the image, since changes in the volume are not persisted between Dockerfile `RUN` instructions. To keep the previous behavior (so that you can mount the volume in another container), create the container with the `-v /app` option.
+
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes.
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## Contributing
 
