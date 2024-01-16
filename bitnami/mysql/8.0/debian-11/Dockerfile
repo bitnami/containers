@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2024-01-16T14:27:40Z" \
+      org.opencontainers.image.created="2024-01-16T20:31:41Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.0.35-debian-11-r3" \
+      org.opencontainers.image.ref.name="8.0.36-debian-11-r0" \
       org.opencontainers.image.title="mysql" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="8.0.35"
+      org.opencontainers.image.version="8.0.36"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -27,7 +27,7 @@ RUN install_packages ca-certificates curl gcc-10 libaio1 libcom-err2 libgcc-s1 l
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "ini-file-1.4.6-5-linux-${OS_ARCH}-debian-11" \
-      "mysql-8.0.35-1-linux-${OS_ARCH}-debian-11" \
+      "mysql-8.0.36-0-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -46,7 +46,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mysql/postunpack.sh
-ENV APP_VERSION="8.0.35" \
+ENV APP_VERSION="8.0.36" \
     BITNAMI_APP_NAME="mysql" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mysql/bin:/opt/bitnami/mysql/sbin:$PATH"
 
