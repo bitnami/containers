@@ -13,13 +13,6 @@ Disclaimer: All software products, projects and company names are trademark(TM) 
 docker run --name minio bitnami/minio:latest
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/minio/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -187,37 +180,42 @@ docker-compose up -d
 
 ### Environment variables
 
-| Name                                      | Description                                                                | Default Value                                      | Can be set |
-|-------------------------------------------|----------------------------------------------------------------------------|----------------------------------------------------|------------|
-| `$MINIO_BASE_DIR`                         | MinIO installation directory.                                              | `${BITNAMI_ROOT_DIR}/minio`                        |            |
-| `$MINIO_BIN_DIR`                          | MinIO directory for binaries.                                              | `${MINIO_BASE_DIR}/bin`                            |            |
-| `$MINIO_CERTS_DIR`                        | MinIO directory for TLS certificates.                                      | `/certs`                                           |            |
-| `$MINIO_LOGS_DIR`                         | MinIO directory for log files.                                             | `${MINIO_BASE_DIR}/log`                            |            |
-| `$MINIO_TMP_DIR`                          | MinIO directory for log files.                                             | `${MINIO_BASE_DIR}/tmp`                            |            |
-| `$MINIO_SECRETS_DIR`                      | MinIO directory for credentials.                                           | `${MINIO_BASE_DIR}/secrets`                        |            |
-| `$MINIO_DATA_DIR`                         | MinIO directory for data.                                                  | `/bitnami/minio/data`                              |            |
-| `$MINIO_DATA_DIR`                         | MinIO directory for data.                                                  | `/bitnami/minio/data`                              |            |
-| `$MINIO_LOG_FILE`                         | MinIO log file.                                                            | `${MINIO_LOGS_DIR}/minio.log`                      |            |
-| `$MINIO_PID_FILE`                         | MinIO PID file.                                                            | `${MINIO_TMP_DIR}/minio.pid`                       |            |
-| `$MINIO_DAEMON_USER`                      | MinIO system user.                                                         | `minio`                                            |            |
-| `$MINIO_DAEMON_GROUP`                     | MinIO system group.                                                        | `minio`                                            |            |
-| `$MINIO_API_PORT_NUMBER`                  | MinIO API port number.                                                     | `9000`                                             | &check;    |
-| `$MINIO_API_PORT_NUMBER`                  | MinIO API port number.                                                     | `9080`                                             | &check;    |
-| `$MINIO_CONSOLE_PORT_NUMBER`              | MinIO RMI port number.                                                     | `9001`                                             | &check;    |
-| `$MINIO_SCHEME`                           | MinIO web scheme.                                                          | `http`                                             | &check;    |
-| `$MINIO_SKIP_CLIENT`                      | Skip MinIO client configuration.                                           | `no`                                               | &check;    |
-| `$MINIO_DISTRIBUTED_MODE_ENABLED`         | Enable MinIO distributed mode.                                             | `no`                                               | &check;    |
-| `$MINIO_DEFAULT_BUCKETS`                  | MinIO default buckets.                                                     |                                                    | &check;    |
-| `$MINIO_STARTUP_TIMEOUT`                  | MinIO startup timeout.                                                     | `10`                                               | &check;    |
-| `$MINIO_SERVER_URL`                       | MinIO server external URL.                                                 | `$MINIO_SCHEME://localhost:$MINIO_API_PORT_NUMBER` | &check;    |
-| `$MINIO_APACHE_CONSOLE_HTTP_PORT_NUMBER`  | MinIO Console UI HTTP port, exposed via Apache with basic authentication.  | `80`                                               | &check;    |
-| `$MINIO_APACHE_CONSOLE_HTTPS_PORT_NUMBER` | MinIO Console UI HTTPS port, exposed via Apache with basic authentication. | `443`                                              | &check;    |
-| `$MINIO_APACHE_API_HTTP_PORT_NUMBER`      | MinIO API HTTP port, exposed via Apache with basic authentication.         | `9000`                                             | &check;    |
-| `$MINIO_APACHE_API_HTTPS_PORT_NUMBER`     | MinIO API HTTPS port, exposed via Apache with basic authentication.        | `9443`                                             | &check;    |
-| `$MINIO_FORCE_NEW_KEYS`                   | Force recreating MinIO keys.                                               | `no`                                               | &check;    |
-| `$MINIO_ROOT_USER`                        | MinIO root user name.                                                      | `minio`                                            | &check;    |
-| `$MINIO_ROOT_PASSWORD`                    | Password for MinIO root user.                                              | `miniosecret`                                      | &check;    |
+#### Customizable environment variables
 
+| Name                                     | Description                                                                | Default Value                                      |
+|------------------------------------------|----------------------------------------------------------------------------|----------------------------------------------------|
+| `MINIO_API_PORT_NUMBER`                  | MinIO API port number.                                                     | `9000`                                             |
+| `MINIO_API_PORT_NUMBER`                  | MinIO API port number.                                                     | `9080`                                             |
+| `MINIO_CONSOLE_PORT_NUMBER`              | MinIO RMI port number.                                                     | `9001`                                             |
+| `MINIO_SCHEME`                           | MinIO web scheme.                                                          | `http`                                             |
+| `MINIO_SKIP_CLIENT`                      | Skip MinIO client configuration.                                           | `no`                                               |
+| `MINIO_DISTRIBUTED_MODE_ENABLED`         | Enable MinIO distributed mode.                                             | `no`                                               |
+| `MINIO_STARTUP_TIMEOUT`                  | MinIO startup timeout.                                                     | `10`                                               |
+| `MINIO_SERVER_URL`                       | MinIO server external URL.                                                 | `$MINIO_SCHEME://localhost:$MINIO_API_PORT_NUMBER` |
+| `MINIO_APACHE_CONSOLE_HTTP_PORT_NUMBER`  | MinIO Console UI HTTP port, exposed via Apache with basic authentication.  | `80`                                               |
+| `MINIO_APACHE_CONSOLE_HTTPS_PORT_NUMBER` | MinIO Console UI HTTPS port, exposed via Apache with basic authentication. | `443`                                              |
+| `MINIO_APACHE_API_HTTP_PORT_NUMBER`      | MinIO API HTTP port, exposed via Apache with basic authentication.         | `9000`                                             |
+| `MINIO_APACHE_API_HTTPS_PORT_NUMBER`     | MinIO API HTTPS port, exposed via Apache with basic authentication.        | `9443`                                             |
+| `MINIO_FORCE_NEW_KEYS`                   | Force recreating MinIO keys.                                               | `no`                                               |
+| `MINIO_ROOT_USER`                        | MinIO root user name.                                                      | `minio`                                            |
+| `MINIO_ROOT_PASSWORD`                    | Password for MinIO root user.                                              | `miniosecret`                                      |
+
+#### Read-only environment variables
+
+| Name                 | Description                           | Value                         |
+|----------------------|---------------------------------------|-------------------------------|
+| `MINIO_BASE_DIR`     | MinIO installation directory.         | `${BITNAMI_ROOT_DIR}/minio`   |
+| `MINIO_BIN_DIR`      | MinIO directory for binaries.         | `${MINIO_BASE_DIR}/bin`       |
+| `MINIO_CERTS_DIR`    | MinIO directory for TLS certificates. | `/certs`                      |
+| `MINIO_LOGS_DIR`     | MinIO directory for log files.        | `${MINIO_BASE_DIR}/log`       |
+| `MINIO_TMP_DIR`      | MinIO directory for log files.        | `${MINIO_BASE_DIR}/tmp`       |
+| `MINIO_SECRETS_DIR`  | MinIO directory for credentials.      | `${MINIO_BASE_DIR}/secrets`   |
+| `MINIO_DATA_DIR`     | MinIO directory for data.             | `/bitnami/minio/data`         |
+| `MINIO_DATA_DIR`     | MinIO directory for data.             | `/bitnami/minio/data`         |
+| `MINIO_LOG_FILE`     | MinIO log file.                       | `${MINIO_LOGS_DIR}/minio.log` |
+| `MINIO_PID_FILE`     | MinIO PID file.                       | `${MINIO_TMP_DIR}/minio.pid`  |
+| `MINIO_DAEMON_USER`  | MinIO system user.                    | `minio`                       |
+| `MINIO_DAEMON_GROUP` | MinIO system group.                   | `minio`                       |
 
 Additionally, MiNIO can be configured via environment variables as detailed at [MinIO(R) documentation](https://docs.min.io/docs/minio-server-configuration-guide.html).
 
@@ -494,6 +492,12 @@ or using Docker Compose:
 ```console
 docker-compose up minio
 ```
+
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/minio).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## Contributing
 
