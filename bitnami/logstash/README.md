@@ -13,13 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name logstash bitnami/logstash:latest
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/logstash/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -131,51 +124,52 @@ docker run -d -p 8080:8080 bitnami/logstash:latest
 
 ### Environment variables
 
-| Name                                      | Description                                                            | Default Value                                                      | Can be set |
-|-------------------------------------------|------------------------------------------------------------------------|--------------------------------------------------------------------|------------|
-| `$LOGSTASH_BASE_DIR`                      | Logstash installation directory                                        | `/opt/bitnami/logstash`                                            |            |
-| `$LOGSTASH_CONF_DIR`                      | Logstash settings files directory                                      | `${LOGSTASH_BASE_DIR}/config`                                      |            |
-| `$LOGSTASH_PIPELINE_CONF_DIR`             | Logstash pipeline configuration files directory                        | `${LOGSTASH_BASE_DIR}/pipeline`                                    |            |
-| `$LOGSTASH_BIN_DIR`                       | Logstash executables directory                                         | `${LOGSTASH_BASE_DIR}/bin`                                         |            |
-| `$LOGSTASH_CONF_FILE`                     | Path to Logstash settings file                                         | `${LOGSTASH_CONF_DIR}/logstash.yml`                                |            |
-| `$LOGSTASH_PIPELINE_CONF_FILENAME`        | Logstash pipeline file name                                            | `logstash.conf`                                                    | &check;    |
-| `$LOGSTASH_PIPELINE_CONF_FILE`            | Path to Logstash pipeline configuration file                           | `${LOGSTASH_PIPELINE_CONF_DIR}/${LOGSTASH_PIPELINE_CONF_FILENAME}` |            |
-| `$LOGSTASH_VOLUME_DIR`                    | Persistence base directory                                             | `/bitnami/logstash`                                                |            |
-| `$LOGSTASH_DATA_DIR`                      | Logstash data directory                                                | `${LOGSTASH_VOLUME_DIR}/data`                                      |            |
-| `$LOGSTASH_MOUNTED_CONF_DIR`              | Directory where Logstash settings files will be mounted.               | `${LOGSTASH_VOLUME_DIR}/config`                                    |            |
-| `$LOGSTASH_MOUNTED_PIPELINE_CONF_DIR`     | Directory where Logstash pipeline configuration files will be mounted. | `${LOGSTASH_VOLUME_DIR}/pipeline`                                  |            |
-| `$LOGSTASH_LOGS_DIR`                      | Logstash logs directory                                                | `${LOGSTASH_BASE_DIR}/logs`                                        |            |
-| `$LOGSTASH_TMP_DIR`                       | Logstash directory for temporary files                                 | `${LOGSTASH_BASE_DIR}/tmp`                                         |            |
-| `$LOGSTASH_PID_FILE`                      | Logstash PID file                                                      | `${LOGSTASH_TMP_DIR}/logstash.pid`                                 |            |
-| `$LOGSTASH_DAEMON_USER`                   | Logstash system user                                                   | `logstash`                                                         |            |
-| `$LOGSTASH_DAEMON_GROUP`                  | Logstash system group                                                  | `logstash`                                                         |            |
-| `$LOGSTASH_BIND_ADDRESS`                  | Logstash listen address                                                | `0.0.0.0`                                                          | &check;    |
-| `$LOGSTASH_EXPOSE_API`                    | Whether to expose the expose the Logstash API                          | `no`                                                               | &check;    |
-| `$LOGSTASH_API_PORT_NUMBER`               | Logstash API port number                                               | `9600`                                                             | &check;    |
-| `$LOGSTASH_PIPELINE_CONF_STRING`          | Logstash pipeline configuration in a string                            |                                                                    | &check;    |
-| `$LOGSTASH_PLUGINS`                       | List of Logstash plugins to install                                    |                                                                    | &check;    |
-| `$LOGSTASH_EXTRA_FLAGS`                   | Extra arguments for running the Logstash server                        |                                                                    | &check;    |
-| `$LOGSTASH_HEAP_SIZE`                     | Logstash heap size                                                     | `1024m`                                                            | &check;    |
-| `$LOGSTASH_HEAP_SIZE`                     | Logstash heap size                                                     |                                                                    | &check;    |
-| `$LOGSTASH_MAX_ALLOWED_MEMORY_PERCENTAGE` | Logstash maximum allowed memory percentage                             | `100`                                                              | &check;    |
-| `$LOGSTASH_MAX_ALLOWED_MEMORY`            | Logstash maximum allowed memory amount (in megabytes)                  |                                                                    | &check;    |
-| `$LOGSTASH_ENABLE_MULTIPLE_PIPELINES`     | Whether to enable multiple pipelines support                           | `no`                                                               | &check;    |
-| `$LOGSTASH_ENABLE_BEATS_INPUT`            | Whether to listen for incoming Beats connections                       | `no`                                                               | &check;    |
-| `$LOGSTASH_BEATS_PORT_NUMBER`             | Port number for listening to incoming Beats connections                | `5044`                                                             | &check;    |
-| `$LOGSTASH_ENABLE_GELF_INPUT`             | Whether to listen for incoming Gelf connections                        | `no`                                                               | &check;    |
-| `$LOGSTASH_GELF_PORT_NUMBER`              | Port number for listening to incoming Beats connections                | `12201`                                                            | &check;    |
-| `$LOGSTASH_ENABLE_HTTP_INPUT`             | Whether to listen for incoming HTTP connections                        | `yes`                                                              | &check;    |
-| `$LOGSTASH_HTTP_PORT_NUMBER`              | Port number for listening to incoming Beats connections                | `8080`                                                             | &check;    |
-| `$LOGSTASH_ENABLE_TCP_INPUT`              | Whether to listen for incoming TDP connections                         | `no`                                                               | &check;    |
-| `$LOGSTASH_TCP_PORT_NUMBER`               | Port number for listening to incoming TCP connections                  | `5010`                                                             | &check;    |
-| `$LOGSTASH_ENABLE_UDP_INPUT`              | Whether to listen for incoming UDP connections                         | `no`                                                               | &check;    |
-| `$LOGSTASH_UDP_PORT_NUMBER`               | Port number for listening to incoming UDP connections                  | `5000`                                                             | &check;    |
-| `$LOGSTASH_ENABLE_STDOUT_OUTPUT`          | Whether to output to an Elasticsearch server                           | `yes`                                                              | &check;    |
-| `$LOGSTASH_ENABLE_ELASTICSEARCH_OUTPUT`   | Whether to output to an Elasticsearch server                           | `no`                                                               | &check;    |
-| `$LOGSTASH_ELASTICSEARCH_HOST`            | Elasticsearch server hostname                                          | `elasticsearch`                                                    | &check;    |
-| `$LOGSTASH_ELASTICSEARCH_PORT_NUMBER`     | Elasticsearch server port                                              | `9200`                                                             | &check;    |
-| `$JAVA_HOME`                              | Java installation folder.                                              | `${BITNAMI_ROOT_DIR}/java`                                         |            |
+#### Customizable environment variables
 
+| Name                                     | Description                                             | Default Value   |
+|------------------------------------------|---------------------------------------------------------|-----------------|
+| `LOGSTASH_PIPELINE_CONF_FILENAME`        | Logstash pipeline file name                             | `logstash.conf` |
+| `LOGSTASH_BIND_ADDRESS`                  | Logstash listen address                                 | `0.0.0.0`       |
+| `LOGSTASH_EXPOSE_API`                    | Whether to expose the expose the Logstash API           | `no`            |
+| `LOGSTASH_API_PORT_NUMBER`               | Logstash API port number                                | `9600`          |
+| `LOGSTASH_HEAP_SIZE`                     | Logstash heap size                                      | `1024m`         |
+| `LOGSTASH_MAX_ALLOWED_MEMORY_PERCENTAGE` | Logstash maximum allowed memory percentage              | `100`           |
+| `LOGSTASH_ENABLE_MULTIPLE_PIPELINES`     | Whether to enable multiple pipelines support            | `no`            |
+| `LOGSTASH_ENABLE_BEATS_INPUT`            | Whether to listen for incoming Beats connections        | `no`            |
+| `LOGSTASH_BEATS_PORT_NUMBER`             | Port number for listening to incoming Beats connections | `5044`          |
+| `LOGSTASH_ENABLE_GELF_INPUT`             | Whether to listen for incoming Gelf connections         | `no`            |
+| `LOGSTASH_GELF_PORT_NUMBER`              | Port number for listening to incoming Beats connections | `12201`         |
+| `LOGSTASH_ENABLE_HTTP_INPUT`             | Whether to listen for incoming HTTP connections         | `yes`           |
+| `LOGSTASH_HTTP_PORT_NUMBER`              | Port number for listening to incoming Beats connections | `8080`          |
+| `LOGSTASH_ENABLE_TCP_INPUT`              | Whether to listen for incoming TDP connections          | `no`            |
+| `LOGSTASH_TCP_PORT_NUMBER`               | Port number for listening to incoming TCP connections   | `5010`          |
+| `LOGSTASH_ENABLE_UDP_INPUT`              | Whether to listen for incoming UDP connections          | `no`            |
+| `LOGSTASH_UDP_PORT_NUMBER`               | Port number for listening to incoming UDP connections   | `5000`          |
+| `LOGSTASH_ENABLE_STDOUT_OUTPUT`          | Whether to output to an Elasticsearch server            | `yes`           |
+| `LOGSTASH_ENABLE_ELASTICSEARCH_OUTPUT`   | Whether to output to an Elasticsearch server            | `no`            |
+| `LOGSTASH_ELASTICSEARCH_HOST`            | Elasticsearch server hostname                           | `elasticsearch` |
+| `LOGSTASH_ELASTICSEARCH_PORT_NUMBER`     | Elasticsearch server port                               | `9200`          |
+
+#### Read-only environment variables
+
+| Name                                 | Description                                                            | Value                                                              |
+|--------------------------------------|------------------------------------------------------------------------|--------------------------------------------------------------------|
+| `LOGSTASH_BASE_DIR`                  | Logstash installation directory                                        | `/opt/bitnami/logstash`                                            |
+| `LOGSTASH_CONF_DIR`                  | Logstash settings files directory                                      | `${LOGSTASH_BASE_DIR}/config`                                      |
+| `LOGSTASH_PIPELINE_CONF_DIR`         | Logstash pipeline configuration files directory                        | `${LOGSTASH_BASE_DIR}/pipeline`                                    |
+| `LOGSTASH_BIN_DIR`                   | Logstash executables directory                                         | `${LOGSTASH_BASE_DIR}/bin`                                         |
+| `LOGSTASH_CONF_FILE`                 | Path to Logstash settings file                                         | `${LOGSTASH_CONF_DIR}/logstash.yml`                                |
+| `LOGSTASH_PIPELINE_CONF_FILE`        | Path to Logstash pipeline configuration file                           | `${LOGSTASH_PIPELINE_CONF_DIR}/${LOGSTASH_PIPELINE_CONF_FILENAME}` |
+| `LOGSTASH_VOLUME_DIR`                | Persistence base directory                                             | `/bitnami/logstash`                                                |
+| `LOGSTASH_DATA_DIR`                  | Logstash data directory                                                | `${LOGSTASH_VOLUME_DIR}/data`                                      |
+| `LOGSTASH_MOUNTED_CONF_DIR`          | Directory where Logstash settings files will be mounted.               | `${LOGSTASH_VOLUME_DIR}/config`                                    |
+| `LOGSTASH_MOUNTED_PIPELINE_CONF_DIR` | Directory where Logstash pipeline configuration files will be mounted. | `${LOGSTASH_VOLUME_DIR}/pipeline`                                  |
+| `LOGSTASH_LOGS_DIR`                  | Logstash logs directory                                                | `${LOGSTASH_BASE_DIR}/logs`                                        |
+| `LOGSTASH_TMP_DIR`                   | Logstash directory for temporary files                                 | `${LOGSTASH_BASE_DIR}/tmp`                                         |
+| `LOGSTASH_PID_FILE`                  | Logstash PID file                                                      | `${LOGSTASH_TMP_DIR}/logstash.pid`                                 |
+| `LOGSTASH_DAEMON_USER`               | Logstash system user                                                   | `logstash`                                                         |
+| `LOGSTASH_DAEMON_GROUP`              | Logstash system group                                                  | `logstash`                                                         |
+| `JAVA_HOME`                          | Java installation folder.                                              | `${BITNAMI_ROOT_DIR}/java`                                         |
 
 ### Using a configuration string
 
@@ -295,6 +289,12 @@ docker run --name logstash bitnami/logstash:latest
 ### 7.15.2-debian-10-r12
 
 * Pipeline configuration files (i.e. `default_config.conf`) are being added into the `/opt/bitnami/logstash/pipeline` directory, instead of `/opt/bitnami/logstash/config`. Subsequently, `LOGSTASH_CONF_FILENAME` was renamed to `LOGSTASH_PIPELINE_CONF_FILENAME`, and `LOGSTASH_CONF_STRING` was renamed to `LOGSTASH_PIPELINE_CONF_STRING`.
+
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/logstash).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## Contributing
 
