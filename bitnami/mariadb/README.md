@@ -179,6 +179,7 @@ docker-compose up -d
 | `MARIADB_MASTER_PORT_NUMBER`      | Port number for the MariaDB master node.                                                                                  | `3306`        |
 | `MARIADB_MASTER_ROOT_USER`        | MariaDB database root user of the master host.                                                                            | `root`        |
 | `MARIADB_MASTER_DELAY`            | MariaDB database replication delay.                                                                                       | `0`           |
+| `MARIADB_REPLICATION_SLAVE_DUMP`  | Make a dump on master and update slave MariaDB database                                                                   | `false`       |
 | `MARIADB_SKIP_TEST_DB`            | Whether to skip creating the test database.                                                                               | `no`          |
 | `MARIADB_CLIENT_ENABLE_SSL`       | Whether to force SSL for connections to the MariaDB database.                                                             | `no`          |
 | `MARIADB_CLIENT_EXTRA_FLAGS`      | Whether to force SSL connections with the "mysql" CLI tool. Useful for applications that rely on the CLI instead of APIs. | `no`          |
