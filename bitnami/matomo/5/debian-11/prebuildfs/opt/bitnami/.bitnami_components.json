@@ -1,0 +1,44 @@
+{
+    "apache": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "2.4.58-2"
+    },
+    "ini-file": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.4.6-5"
+    },
+    "libphp": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "8.2.15-0"
+    },
+    "matomo": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "5.0.1-0"
+    },
+    "mysql-client": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "10.11.6-1"
+    },
+    "php": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "8.2.14-1"
+    },
+    "render-template": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.0.6-5"
+    }
+}
