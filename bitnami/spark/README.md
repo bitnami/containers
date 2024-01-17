@@ -12,8 +12,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ### Docker Compose
 
 ```console
-curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/spark/docker-compose.yml
-docker-compose up
+docker run --name spark bitnami/spark:latest
 ```
 
 You can find the available configuration options in the [Environment Variables](#environment-variables) section.
@@ -353,6 +352,12 @@ docker-compose up spark
 ### 2.4.5-debian-10-r49
 
 * This image now has an aws-cli and two jars: hadoop-aws and aws-java-sdk for provide an easier way to use AWS.
+
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/spark).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## Contributing
 
