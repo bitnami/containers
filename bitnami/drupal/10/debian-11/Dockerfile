@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2024-01-16T14:47:46Z" \
+      org.opencontainers.image.created="2024-01-17T21:49:07Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="10.2.1-debian-11-r1" \
+      org.opencontainers.image.ref.name="10.2.2-debian-11-r0" \
       org.opencontainers.image.title="drupal" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="10.2.1"
+      org.opencontainers.image.version="10.2.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,9 +29,9 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
       "php-8.2.14-1-linux-${OS_ARCH}-debian-11" \
       "apache-2.4.58-2-linux-${OS_ARCH}-debian-11" \
       "mysql-client-11.2.2-0-linux-${OS_ARCH}-debian-11" \
-      "libphp-8.2.14-0-linux-${OS_ARCH}-debian-11" \
+      "libphp-8.2.15-0-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.6-5-linux-${OS_ARCH}-debian-11" \
-      "drupal-10.2.1-0-linux-${OS_ARCH}-debian-11" \
+      "drupal-10.2.2-0-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -55,7 +55,7 @@ RUN /opt/bitnami/scripts/drupal/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="10.2.1" \
+    APP_VERSION="10.2.2" \
     BITNAMI_APP_NAME="drupal" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/drupal/vendor/bin:$PATH"
 
