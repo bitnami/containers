@@ -63,6 +63,12 @@ To run commands inside this container you can use `docker run`, for example to e
 docker run --rm --name sealed-secrets bitnami/sealed-secrets:latest -- kubeseal --version
 ```
 
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
