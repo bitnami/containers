@@ -13,13 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run -it --name supabase-realtime bitnami/supabase-realtime
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/supabase-realtime/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -73,18 +66,10 @@ Bitnami provides up-to-date versions of Supabase Realtime, including security pa
 docker pull bitnami/supabase-realtime:latest
 ```
 
-or if you're using Docker Compose, update the value of the image property to `bitnami/supabase-realtime:latest`.
-
 #### Step 2: Remove the currently running container
 
 ```console
 docker rm -v supabase-realtime
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v supabase-realtime
 ```
 
 #### Step 3: Run the new image
@@ -95,45 +80,42 @@ Re-create your container from the new image.
 docker run --name supabase-realtime bitnami/supabase-realtime:latest
 ```
 
-or using Docker Compose:
-
-```console
-docker-compose up supabase-realtime
-```
-
 ## Configuration
 
 ### Environment variables
 
-| Name                                | Description                                                                  | Default Value                                         | Can be set |
-|-------------------------------------|------------------------------------------------------------------------------|-------------------------------------------------------|------------|
-| `$SUPABASE_REALTIME_BASE_DIR`       | Supabase-realtime installation directory.                                    | `${BITNAMI_ROOT_DIR}/supabase-realtime`               |            |
-| `$SUPABASE_REALTIME_LOGS_DIR`       | Directory where Supabase-realtime logs are stored.                           | `${SUPABASE_REALTIME_BASE_DIR}/logs`                  |            |
-| `$SUPABASE_REALTIME_LOG_FILE`       | Directory where Supabase-realtime logs are stored.                           | `${SUPABASE_REALTIME_LOGS_DIR}/supabase-realtime.log` |            |
-| `$SUPABASE_REALTIME_BIN_DIR`        | Supabase-realtime directory for binary executables.                          | `${SUPABASE_REALTIME_BASE_DIR}/bin`                   |            |
-| `$SUPABASE_REALTIME_TMP_DIR`        | Directory where Supabase-realtime temporary files are stored.                | `${SUPABASE_REALTIME_BASE_DIR}/tmp`                   |            |
-| `$SUPABASE_REALTIME_PID_FILE`       | Path to the PID file for Supabase-realtime.                                  | `${SUPABASE_REALTIME_TMP_DIR}/supabase-realtime.pid`  |            |
-| `$SUPABASE_REALTIME_EXTRA_ENV_FILE` | File to store extra environment variables for the harbor-jobservice service. | `${SUPABASE_REALTIME_BASE_DIR}/.env`                  |            |
-| `$DB_HOST`                          | Database host                                                                | `localhost`                                           | &check;    |
-| `$DB_PORT`                          | Database port number                                                         | `5432`                                                | &check;    |
-| `$DB_NAME`                          | Database name                                                                | `postgres`                                            | &check;    |
-| `$DB_USER`                          | Database user username                                                       | `postgres`                                            | &check;    |
-| `$DB_PASSWORD`                      | Database password                                                            |                                                       | &check;    |
-| `$DB_SSL`                           | Database SSL connection enabled                                              | `disable`                                             | &check;    |
-| `$API_JWT_SECRET`                   | API Secret                                                                   |                                                       | &check;    |
-| `$SECRET_KEY_BASE`                  | Key Base Secret                                                              |                                                       | &check;    |
-| `$PORT`                             | Service Port                                                                 | `9500`                                                | &check;    |
-| `$FLY_APP_NAME`                     | App Name                                                                     | `realtime`                                            | &check;    |
-| `$FLY_ALLOC_ID`                     | Alloc ID                                                                     | `realtime`                                            | &check;    |
-| `$ERL_AFLAGS`                       | Flags                                                                        | `-proto_dist inet_tcp`                                | &check;    |
-| `$REPLICATION_MODE`                 | Replication Mode                                                             | `RLS`                                                 | &check;    |
-| `$REPLICATION_POLL_INTERVAL`        | Replication pool interval                                                    | `100`                                                 | &check;    |
-| `$SECURE_CHANNELS`                  | Secure channels                                                              | `true`                                                | &check;    |
-| `$SLOT_NAME`                        | Slot name                                                                    | `supabase_realtime_rls`                               | &check;    |
-| `$TEMPORARY_SLOT`                   | Temporary Slot                                                               | `true`                                                | &check;    |
-| `$SUPABASE_REALTIME_DAEMON_USER`    | postgrest system user.                                                       | `supabase`                                            |            |
-| `$SUPABASE_REALTIME_DAEMON_GROUP`   | postgrest system group.                                                      | `supabase`                                            |            |
+#### Customizable environment variables
 
+| Name                        | Description                     | Default Value           |
+|-----------------------------|---------------------------------|-------------------------|
+| `DB_HOST`                   | Database host                   | `localhost`             |
+| `DB_PORT`                   | Database port number            | `5432`                  |
+| `DB_NAME`                   | Database name                   | `postgres`              |
+| `DB_USER`                   | Database user username          | `postgres`              |
+| `DB_SSL`                    | Database SSL connection enabled | `disable`               |
+| `PORT`                      | Service Port                    | `9500`                  |
+| `FLY_APP_NAME`              | App Name                        | `realtime`              |
+| `FLY_ALLOC_ID`              | Alloc ID                        | `realtime`              |
+| `ERL_AFLAGS`                | Flags                           | `-proto_dist inet_tcp`  |
+| `REPLICATION_MODE`          | Replication Mode                | `RLS`                   |
+| `REPLICATION_POLL_INTERVAL` | Replication pool interval       | `100`                   |
+| `SECURE_CHANNELS`           | Secure channels                 | `true`                  |
+| `SLOT_NAME`                 | Slot name                       | `supabase_realtime_rls` |
+| `TEMPORARY_SLOT`            | Temporary Slot                  | `true`                  |
+
+#### Read-only environment variables
+
+| Name                               | Description                                                                  | Value                                                 |
+|------------------------------------|------------------------------------------------------------------------------|-------------------------------------------------------|
+| `SUPABASE_REALTIME_BASE_DIR`       | Supabase-realtime installation directory.                                    | `${BITNAMI_ROOT_DIR}/supabase-realtime`               |
+| `SUPABASE_REALTIME_LOGS_DIR`       | Directory where Supabase-realtime logs are stored.                           | `${SUPABASE_REALTIME_BASE_DIR}/logs`                  |
+| `SUPABASE_REALTIME_LOG_FILE`       | Directory where Supabase-realtime logs are stored.                           | `${SUPABASE_REALTIME_LOGS_DIR}/supabase-realtime.log` |
+| `SUPABASE_REALTIME_BIN_DIR`        | Supabase-realtime directory for binary executables.                          | `${SUPABASE_REALTIME_BASE_DIR}/bin`                   |
+| `SUPABASE_REALTIME_TMP_DIR`        | Directory where Supabase-realtime temporary files are stored.                | `${SUPABASE_REALTIME_BASE_DIR}/tmp`                   |
+| `SUPABASE_REALTIME_PID_FILE`       | Path to the PID file for Supabase-realtime.                                  | `${SUPABASE_REALTIME_TMP_DIR}/supabase-realtime.pid`  |
+| `SUPABASE_REALTIME_EXTRA_ENV_FILE` | File to store extra environment variables for the harbor-jobservice service. | `${SUPABASE_REALTIME_BASE_DIR}/.env`                  |
+| `SUPABASE_REALTIME_DAEMON_USER`    | postgrest system user.                                                       | `supabase`                                            |
+| `SUPABASE_REALTIME_DAEMON_GROUP`   | postgrest system group.                                                      | `supabase`                                            |
 
 ### Running commands
 
@@ -144,6 +126,12 @@ docker run --rm --name supabase-realtime bitnami/supabase-realtime:latest --help
 ```
 
 Check the [official Supabase Realtime documentation](https://github.com/supabase/realtime) for more information about how to use Supabase Realtime.
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 
