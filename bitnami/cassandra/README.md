@@ -13,13 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name cassandra bitnami/cassandra:latest
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/cassandra/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
 
 ## Why use Bitnami Images?
@@ -526,6 +519,12 @@ docker-compose up cassandra
 ### 3.11.2-r22
 
 * The Apache Cassandra container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Apache Cassandra daemon was started as the `cassandra` user. From now on, both the container and the Apache Cassandra daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
+
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/cassandra).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## Contributing
 
