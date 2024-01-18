@@ -10,14 +10,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-docker run -it --name argo-cd bitnami/argo-cd
-```
-
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/argo-cd/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run -it --name argo-cd bitnami/argo-cd:latest
 ```
 
 ## Why use Bitnami Images?
@@ -73,18 +66,10 @@ Bitnami provides up-to-date versions of Argo CD, including security patches, soo
 docker pull bitnami/argo-cd:latest
 ```
 
-or if you're using Docker Compose, update the value of the image property to `bitnami/argo-cd:latest`.
-
 #### Step 2: Remove the currently running container
 
 ```console
 docker rm -v argo-cd
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v argo-cd
 ```
 
 #### Step 3: Run the new image
@@ -93,12 +78,6 @@ Re-create your container from the new image.
 
 ```console
 docker run --name argo-cd bitnami/argo-cd:latest
-```
-
-or using Docker Compose:
-
-```console
-docker-compose up argo-cd
 ```
 
 ## Configuration
@@ -112,6 +91,12 @@ docker run --rm --name argo-cd bitnami/argo-cd:latest --help
 ```
 
 Check the [official Argo CD documentation](https://argo-cd.readthedocs.io/en/stable/operator-manual/server-commands/argocd-server/) for the list of the available parameters.
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 
