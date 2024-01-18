@@ -15,7 +15,7 @@
 . /opt/bitnami/scripts/libvalidations.sh
 
 ########################
-# Change a Cassandra configuration yaml file by setting a property (cannot use yq because it removes comments)
+# Change a Cassandra configuration yaml file by setting a property
 # Globals:
 #   CASSANDRA_*
 # Arguments:
@@ -59,7 +59,7 @@ cassandra_set_default_host() {
 }
 
 ########################
-# Change a Cassandra configuration yaml file by setting a property as an array (cannot use yq because it removes comments)
+# Change a Cassandra configuration yaml file by setting a property as an array
 # Globals:
 #   CASSANDRA_*
 # Arguments:
