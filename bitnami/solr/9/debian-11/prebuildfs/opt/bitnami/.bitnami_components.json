@@ -3,12 +3,12 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "17.0.9-11-6"
+        "version": "17.0.10-13-0"
     },
     "solr": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "9.4.0-0"
+        "version": "9.4.1-0"
     }
 }
