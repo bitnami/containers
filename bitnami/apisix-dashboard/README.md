@@ -10,14 +10,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-docker run -it --name apisix-dashboard bitnami/apisix-dashboard
-```
-
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/apisix-dashboard/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run -it --name apisix-dashboard bitnami/apisix-dashboard:latest
 ```
 
 ## Why use Bitnami Images?
@@ -73,18 +66,10 @@ Bitnami provides up-to-date versions of Apache APISIX Dashboard, including secur
 docker pull bitnami/apisix-dashboard:latest
 ```
 
-or if you're using Docker Compose, update the value of the image property to `bitnami/apisix-dashboard:latest`.
-
 #### Step 2: Remove the currently running container
 
 ```console
 docker rm -v apisix-dashboard
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v apisix-dashboard
 ```
 
 #### Step 3: Run the new image
@@ -93,12 +78,6 @@ Re-create your container from the new image.
 
 ```console
 docker run --name apisix-dashboard bitnami/apisix-dashboard:latest
-```
-
-or using Docker Compose:
-
-```console
-docker-compose up apisix-dashboard
 ```
 
 ## Configuration
@@ -113,6 +92,12 @@ docker run --rm --name apisix-dashboard bitnami/apisix-dashboard:latest --help
 
 Check the [official Apache APISIX Dashboard documentation](https://apisix.apache.org/docs/) for more information about how to use Apache APISIX Dashboard.
 
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
+
 ## Contributing
 
 We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
@@ -123,7 +108,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

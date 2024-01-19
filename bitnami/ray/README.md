@@ -13,13 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run -it --name ray bitnami/ray
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/ray/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ## Why use Bitnami Images?
 
 - Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -109,18 +102,10 @@ Bitnami provides up-to-date versions of Ray, including security patches, soon af
 docker pull bitnami/ray:latest
 ```
 
-or if you're using Docker Compose, update the value of the image property to `bitnami/ray:latest`.
-
 #### Step 2: Remove the currently running container
 
 ```console
 docker rm -v ray
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v ray
 ```
 
 #### Step 3: Run the new image
@@ -131,11 +116,11 @@ Re-create your container from the new image.
 docker run --name ray bitnami/ray:latest
 ```
 
-or using Docker Compose:
+## Notable Changes
 
-```console
-docker-compose up ray
-```
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 
@@ -147,7 +132,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-12-06T23:13:13Z" \
+      org.opencontainers.image.created="2024-01-10T19:18:57Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.6.2-debian-11-r111" \
+      org.opencontainers.image.ref.name="0.6.3-debian-11-r1" \
       org.opencontainers.image.title="whereabouts" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="0.6.2"
+      org.opencontainers.image.version="0.6.3"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +26,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "whereabouts-0.6.2-7-linux-${OS_ARCH}-debian-11" \
+      "whereabouts-0.6.3-1-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -43,7 +43,7 @@ RUN apt-get autoremove --purge -y curl && \
 RUN useradd -r -u 1001 -g root whereabouts
 RUN ln -sf /opt/bitnami/whereabouts/bin/whereabouts /whereabouts && ln -sf /opt/bitnami/whereabouts/bin/ip-control-loop /ip-control-loop && ln -sf /opt/bitnami/whereabouts/bin/install-cni.sh /install-cni.sh && mkdir -p /bitnami/whereabouts/host && chmod g+rwX -R /bitnami/whereabouts/host && ln -sf /bitnami/whereabouts/host /host
 
-ENV APP_VERSION="0.6.2" \
+ENV APP_VERSION="0.6.3" \
     BITNAMI_APP_NAME="whereabouts" \
     PATH="/opt/bitnami/whereabouts/bin:$PATH"
 

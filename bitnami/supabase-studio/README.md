@@ -103,6 +103,32 @@ docker-compose up supabase-studio
 
 ## Configuration
 
+### Environment variables
+
+| Name                             | Description                                                         | Default Value                         | Can be set |
+|----------------------------------|---------------------------------------------------------------------|---------------------------------------|------------|
+| `$SUPABASE_BASE_DIR`             | Supabase installation directory.                                    | `${BITNAMI_ROOT_DIR}/supabase`        |            |
+| `$SUPABASE_LOGS_DIR`             | Directory where Supabas logs are stored.                            | `${SUPABASE_BASE_DIR}/logs`           |            |
+| `$SUPABASE_LOG_FILE`             | Directory where Supabase logs are stored.                           | `${SUPABASE_LOGS_DIR}/supabase.log`   |            |
+| `$SUPABASE_BIN_DIR`              | Supabase directory for binary files.                                | `${SUPABASE_BASE_DIR}/bin`            |            |
+| `$SUPABASE_SECRETS_DIR`          | Directory where Supabase keys files are stored.                     | `${SUPABASE_BASE_DIR}/keys`           | &check;    |
+| `$SUPABASE_TMP_DIR`              | Directory where Supabase temporary files are stored.                | `${SUPABASE_BASE_DIR}/tmp`            |            |
+| `$SUPABASE_PID_FILE`             | Path to the PID file for Supabase.                                  | `${SUPABASE_TMP_DIR}/supabase.pid`    |            |
+| `$SUPABASE_EXTRA_ENV_FILE`       | File to store extra environment variables for the supabase service. | `${SUPABASE_BASE_DIR}/.env`           |            |
+| `$SUPABASE_ANON_KEY_FILENAME`    | Supabase anon key filename                                          | `${SUPABASE_SECRETS_DIR}/anon-key`    | &check;    |
+| `$SUPABASE_SERVICE_KEY_FILENAME` | Supabase service key filename                                       | `${SUPABASE_SECRETS_DIR}/service-key` | &check;    |
+| `$SUPABASE_SECRET_KEY_FILENAME`  | Supabase admin key filename                                         | `${SUPABASE_SECRETS_DIR}/secret`      | &check;    |
+| `$SUPABASE_ANON_KEY`             | Supabase anon key                                                   |                                       | &check;    |
+| `$SUPABASE_SERVICE_KEY`          | Supabase service key                                                |                                       | &check;    |
+| `$SUPABASE_SECRET_KEY`           | Supabase admin key                                                  |                                       | &check;    |
+| `$PORT`                          | Supabase service port                                               | `4000`                                | &check;    |
+| `$SUPABASE_PUBLIC_URL`           | Supabase public urli                                                | `http://localhost:80`                 | &check;    |
+| `$STUDIO_PG_META_URL`            | Supabase PG Meta URL                                                | `http://localhost/pg`                 | &check;    |
+| `$SUPABASE_URL`                  | Supabase URL                                                        | `http://localhost/`                   | &check;    |
+| `$SUPABASE_DAEMON_USER`          | postgrest system user.                                              | `supabase`                            |            |
+| `$SUPABASE_DAEMON_GROUP`         | postgrest system group.                                             | `supabase`                            |            |
+
+
 ### Running commands
 
 To run commands inside this container you can use `docker run`, for example to execute `supabase-studio --help` you can follow the example below:
@@ -123,7 +149,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

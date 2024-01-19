@@ -14,13 +14,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/acmesolver:latest
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/acmesolver/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 **Warning**: These quick setups are only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
 
 ## Pre-requisites
@@ -56,6 +49,12 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 
 For further documentation, please check [here](https://github.com/jetstack/cert-manager/blob/master/docs)
 
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
@@ -66,7 +65,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

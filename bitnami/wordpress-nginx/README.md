@@ -9,8 +9,7 @@
 ## TL;DR
 
 ```console
-curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/wordpress-nginx/docker-compose.yml
-docker-compose up
+docker run --name wordpress-nginx bitnami/wordpress-nginx:latest
 ```
 
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
@@ -64,18 +63,7 @@ docker build -t bitnami/APP:latest .
 
 WordPress requires access to a MySQL or MariaDB database to store information. We'll use the [Bitnami Docker Image for MariaDB](https://github.com/bitnami/containers/tree/main/bitnami/mariadb) for the database requirements.
 
-### Run the application using Docker Compose
-
-The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/wordpress-nginx/docker-compose.yml) file. Run the application using it as shown below:
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/wordpress-nginx/docker-compose.yml > docker-compose.yml
-docker-compose up
-```
-
 ### Using the Docker Command Line
-
-If you want to run the application manually instead of using `docker-compose`, these are the basic steps you need to run:
 
 #### Step 1: Create a network
 
@@ -113,6 +101,17 @@ docker run -d --name wordpress \
 ```
 
 Access your application at `http://your-ip/`
+
+### Run the application using Docker Compose
+
+```console
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/wordpress-nginx/docker-compose.yml > docker-compose.yml
+docker-compose up
+```
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes.
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## Persisting your application
 
@@ -193,9 +192,64 @@ docker run -d --name wordpress \
 
 ### Environment variables
 
+#### Customizable environment variables
+
+| Name                                             | Description                                                                                                                                                                                                                                        | Default Value                      |
+|--------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------|
+| `WORDPRESS_DATA_TO_PERSIST`                      | Files to persist relative to the WordPress installation directory. To provide multiple values, separate them with a whitespace.                                                                                                                    | `wp-config.php wp-content`         |
+| `WORDPRESS_ENABLE_HTTPS`                         | Whether to enable HTTPS for WordPress by default.                                                                                                                                                                                                  | `no`                               |
+| `WORDPRESS_BLOG_NAME`                            | WordPress blog name.                                                                                                                                                                                                                               | `"User's blog"`                    |
+| `WORDPRESS_SCHEME`                               | Scheme to generate application URLs. Deprecated by `WORDPRESS_ENABLE_HTTPS`.                                                                                                                                                                       | `http`                             |
+| `WORDPRESS_HTACCESS_OVERRIDE_NONE`               | Set the Apache `AllowOverride` variable to `None`. All the default directives will be loaded from `/opt/bitnami/wordpress/wordpress-htaccess.conf`.                                                                                                | `yes`                              |
+| `WORDPRESS_ENABLE_HTACCESS_PERSISTENCE`          | Persist the custom changes of the htaccess. It depends on the value of `WORDPRESS_HTACCESS_OVERRIDE_NONE`, when `yes` it will persist `/opt/bitnami/wordpress/wordpress-htaccess.conf` if `no` it will persist `/opt/bitnami/wordpress/.htaccess`. | `no`                               |
+| `WORDPRESS_RESET_DATA_PERMISSIONS`               | Force resetting ownership/permissions on persisted data when initializing, otherwise it assumes the ownership/permissions are correct. Ignored when running as non-root.                                                                           | `no`                               |
+| `WORDPRESS_TABLE_PREFIX`                         | Table prefix to use in WordPress.                                                                                                                                                                                                                  | `wp_`                              |
+| `WORDPRESS_PLUGINS`                              | List of WordPress plugins to install and activate, separated via commas. Can also be set to `all` to activate all currently installed plugins, or `none` to skip.                                                                                  | `none`                             |
+| `WORDPRESS_SKIP_BOOTSTRAP`                       | Whether to perform initial bootstrapping for the application.                                                                                                                                                                                      | `no`                               |
+| `WORDPRESS_AUTO_UPDATE_LEVEL`                    | Level of auto-updates to allow for the WordPress core installation. Valid values: `major`, `minor`, `none`.                                                                                                                                        | `none`                             |
+| `WORDPRESS_ENABLE_REVERSE_PROXY`                 | Enable WordPress support for reverse proxy headers                                                                                                                                                                                                 | `no`                               |
+| `WORDPRESS_ENABLE_XML_RPC`                       | Enable the WordPress XML-RPC endpoint                                                                                                                                                                                                              | `no`                               |
+| `WORDPRESS_USERNAME`                             | WordPress user name.                                                                                                                                                                                                                               | `user`                             |
+| `WORDPRESS_PASSWORD`                             | WordPress user password.                                                                                                                                                                                                                           | `bitnami`                          |
+| `WORDPRESS_EMAIL`                                | WordPress user e-mail address.                                                                                                                                                                                                                     | `user@example.com`                 |
+| `WORDPRESS_FIRST_NAME`                           | WordPress user first name.                                                                                                                                                                                                                         | `UserName`                         |
+| `WORDPRESS_LAST_NAME`                            | WordPress user last name.                                                                                                                                                                                                                          | `LastName`                         |
+| `WORDPRESS_ENABLE_MULTISITE`                     | Enable WordPress Multisite configuration.                                                                                                                                                                                                          | `no`                               |
+| `WORDPRESS_MULTISITE_NETWORK_TYPE`               | WordPress Multisite network type to enable. Valid values: `subfolder`, `subdirectory`, `subdomain`.                                                                                                                                                | `subdomain`                        |
+| `WORDPRESS_MULTISITE_EXTERNAL_HTTP_PORT_NUMBER`  | External HTTP port for WordPress Multisite.                                                                                                                                                                                                        | `80`                               |
+| `WORDPRESS_MULTISITE_EXTERNAL_HTTPS_PORT_NUMBER` | External HTTPS port for WordPress Multisite.                                                                                                                                                                                                       | `443`                              |
+| `WORDPRESS_MULTISITE_ENABLE_NIP_IO_REDIRECTION`  | Whether to enable IP address redirection to nip.io wildcard DNS when enabling WordPress Multisite. This is only supported when running on an IP address with subdomain network type.                                                               | `no`                               |
+| `WORDPRESS_MULTISITE_FILEUPLOAD_MAXK`            | Maximum upload file size allowed for WordPress Multisite uploads, in kilobytes.                                                                                                                                                                    | `81920`                            |
+| `WORDPRESS_DATABASE_HOST`                        | Database server host.                                                                                                                                                                                                                              | `$WORDPRESS_DEFAULT_DATABASE_HOST` |
+| `WORDPRESS_DATABASE_PORT_NUMBER`                 | Database server port.                                                                                                                                                                                                                              | `3306`                             |
+| `WORDPRESS_DATABASE_NAME`                        | Database name.                                                                                                                                                                                                                                     | `bitnami_wordpress`                |
+| `WORDPRESS_DATABASE_USER`                        | Database user name.                                                                                                                                                                                                                                | `bn_wordpress`                     |
+| `WORDPRESS_ENABLE_DATABASE_SSL`                  | Whether to enable SSL for database connections.                                                                                                                                                                                                    | `no`                               |
+| `WORDPRESS_VERIFY_DATABASE_SSL`                  | Whether to verify the database SSL certificate when SSL is enabled for database connections.                                                                                                                                                       | `yes`                              |
+| `WORDPRESS_OVERRIDE_DATABASE_SETTINGS`           | Override the database settings in persistence.                                                                                                                                                                                                     | `no`                               |
+
+#### Read-only environment variables
+
+| Name                              | Description                                          | Value                                 |
+|-----------------------------------|------------------------------------------------------|---------------------------------------|
+| `WORDPRESS_BASE_DIR`              | WordPress installation directory.                    | `${BITNAMI_ROOT_DIR}/wordpress`       |
+| `WORDPRESS_CONF_FILE`             | Configuration file for WordPress.                    | `${WORDPRESS_BASE_DIR}/wp-config.php` |
+| `WP_CLI_BASE_DIR`                 | WP-CLI installation directory.                       | `${BITNAMI_ROOT_DIR}/wp-cli`          |
+| `WP_CLI_BIN_DIR`                  | WP-CLI directory for binary files.                   | `${WP_CLI_BASE_DIR}/bin`              |
+| `WP_CLI_CONF_DIR`                 | WP-CLI directory for configuration files.            | `${WP_CLI_BASE_DIR}/conf`             |
+| `WP_CLI_CONF_FILE`                | Configuration file for WP-CLI.                       | `${WP_CLI_CONF_DIR}/wp-cli.yml`       |
+| `WORDPRESS_VOLUME_DIR`            | WordPress directory for mounted configuration files. | `${BITNAMI_VOLUME_DIR}/wordpress`     |
+| `WORDPRESS_DEFAULT_DATABASE_HOST` | Default database server host.                        | `mariadb`                             |
+| `WORDPRESS_DEFAULT_DATABASE_HOST` | Default database server host.                        | `127.0.0.1`                           |
+| `PHP_DEFAULT_MEMORY_LIMIT`        | Default PHP memory limit.                            | `512M`                                |
+| `PHP_DEFAULT_POST_MAX_SIZE`       | Default PHP post_max_size.                           | `80M`                                 |
+| `PHP_DEFAULT_UPLOAD_MAX_FILESIZE` | Default PHP upload_max_size.                         | `80M`                                 |
+| `WP_CLI_DAEMON_USER`              | WP-CLI system user.                                  | `daemon`                              |
+| `WP_CLI_DAEMON_GROUP`             | WP-CLI system group.                                 | `daemon`                              |
+
 When you start the WordPress image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
-- For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/wordpress-nginx/docker-compose.yml) file present in this repository:
+* For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/wordpress-nginx/docker-compose.yml) file present in this repository:
 
     ```yaml
     wordpress:
@@ -205,7 +259,7 @@ When you start the WordPress image, you can adjust the configuration of the inst
       ...
     ```
 
-- For manual execution add a `--env` option with each variable and value:
+* For manual execution add a `--env` option with each variable and value:
 
     ```console
     $ docker run -d --name wordpress -p 80:8080 -p 443:8443 \
@@ -215,104 +269,13 @@ When you start the WordPress image, you can adjust the configuration of the inst
       bitnami/wordpress-nginx:latest
     ```
 
-Available environment variables:
+### Examples
 
-#### User and Site configuration
-
-- `NGINX_HTTP_PORT_NUMBER`: Port used by NGINX for HTTP. Default: **8080**
-- `NGINX_HTTPS_PORT_NUMBER`: Port used by NGINX for HTTPS. Default: **8443**
-- `NGINX_ENABLE_ABSOLUTE_REDIRECT`: Use absolute URLs in Location header in redirections. Default: **no**
-- `NGINX_ENABLE_PORT_IN_REDIRECT`: Use listening port in redirections issued by NGINX. Default: **no**
-- `WORDPRESS_USERNAME`: WordPress application username. Default: **user**
-- `WORDPRESS_PASSWORD`: WordPress application password. Default: **bitnami**
-- `WORDPRESS_EMAIL`: WordPress application email. Default: **user@example.com**
-- `WORDPRESS_FIRST_NAME`: WordPress user first name. Default: **FirstName**
-- `WORDPRESS_LAST_NAME`: WordPress user last name. Default: **LastName**
-- `WORDPRESS_BLOG_NAME`: WordPress blog name. Default: **User's blog**
-- `WORDPRESS_DATA_TO_PERSIST`: Space separated list of files and directories to persist. Use a space to persist no data: `" "`. Default: **"wp-config.php wp-content"**
-- `WORDPRESS_RESET_DATA_PERMISSIONS`: Force resetting ownership/permissions on persisted data when restarting WordPress, otherwise it assumes the ownership/permissions are correct. Ignored when running WP as non-root. Default: **no**
-- `WORDPRESS_TABLE_PREFIX`: Table prefix to use in WordPress. Default: **wp_**
-- `WORDPRESS_PLUGINS`: List of WordPress plugins to install and activate, separated via commas. Can also be set to `all` to activate all currently installed plugins, or `none` to skip. Default: **none**
-- `WORDPRESS_EXTRA_INSTALL_ARGS`: Extra flags to append to the WordPress 'wp core install' command call. No defaults.
-- `WORDPRESS_EXTRA_CLI_ARGS`: Extra flags to append to all WP-CLI command calls. No defaults.
-- `WORDPRESS_EXTRA_WP_CONFIG_CONTENT`: Extra configuration to append to wp-config.php during install. No defaults.
-- `WORDPRESS_ENABLE_HTTPS`: Whether to use HTTPS by default. Default: **no**
-- `WORDPRESS_SKIP_BOOTSTRAP`: Skip the WordPress installation wizard. This is necessary when providing a database with existing WordPress data. Default: **no**
-- `WORDPRESS_AUTO_UPDATE_LEVEL`: Level of auto-updates to allow for the WordPress core installation. Valid values: `major`, `minor`, `none`. Default: **none**
-- `WORDPRESS_ENABLE_REVERSE_PROXY`: Enable WordPress support for reverse proxy headers. Default: **no**
-- `WORDPRESS_ENABLE_XML_RPC`: Enable the WordPress XML-RPC endpoint. Default: **no**
-
-#### Multisite configuration
-
-- `WORDPRESS_ENABLE_MULTISITE`: Enable WordPress Multisite configuration. Default: **no**
-- `WORDPRESS_MULTISITE_HOST`: WordPress hostname/address. Only used for Multisite installations. No defaults.
-- `WORDPRESS_MULTISITE_EXTERNAL_HTTP_PORT_NUMBER`: Port to used by WordPress to generate URLs and links when accessing using HTTP. Will be ignored if multisite mode is not enabled. Default **80**
-- `WORDPRESS_MULTISITE_EXTERNAL_HTTPS_PORT_NUMBER`: Port to used by WordPress to generate URLs and links when accessing using HTTPS. Will be ignored if multisite mode is not enabled. Default **443**
-- `WORDPRESS_MULTISITE_NETWORK_TYPE`: WordPress Multisite network type to enable. Valid values: `subfolder`, `subdirectory`, `subdomain`. Default: **subdomain**
-- `WORDPRESS_MULTISITE_ENABLE_NIP_IO_REDIRECTION`: Whether to enable IP address redirection to nip.io wildcard DNS when enabling WordPress Multisite. This is useful when running on an IP address with subdomain network type. Default: **no**
-- `WORDPRESS_MULTISITE_FILEUPLOAD_MAXK`: Maximum upload file size allowed for WordPress Multisite uploads, in kilobytes. Default: **81920**
-
-#### Database connection configuration
-
-- `WORDPRESS_DATABASE_HOST`: Hostname for the MariaDB or MySQL server. Default: **mariadb**
-- `WORDPRESS_DATABASE_PORT_NUMBER`: Port used by the MariaDB or MySQL server. Default: **3306**
-- `WORDPRESS_DATABASE_NAME`: Database name that WordPress will use to connect with the database. Default: **bitnami_wordpress**
-- `WORDPRESS_DATABASE_USER`: Database user that WordPress will use to connect with the database. Default: **bn_wordpress**
-- `WORDPRESS_DATABASE_PASSWORD`: Database password that WordPress will use to connect with the database. No defaults.
-- `WORDPRESS_ENABLE_DATABASE_SSL`: Whether to enable SSL for database connections. Default: **no**
-- `WORDPRESS_VERIFY_DATABASE_SSL`: Whether to verify the database SSL certificate when SSL is enabled for database connections. Default: **yes**
-- `WORDPRESS_DATABASE_SSL_CERT_FILE`: Path to the database client certificate file. No defaults
-- `WORDPRESS_DATABASE_SSL_KEY_FILE`: Path to the database client certificate key file. No defaults
-- `WORDPRESS_DATABASE_SSL_CA_FILE`: Path to the database server CA bundle file. No defaults
-- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-#### Create a database for WordPress using mysql-client
-
-- `MYSQL_CLIENT_FLAVOR`: SQL database flavor. Valid values: `mariadb` or `mysql`. Default: **mariadb**
-- `MYSQL_CLIENT_DATABASE_HOST`: Hostname for the MariaDB or MySQL server. Default: **mariadb**
-- `MYSQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by the MariaDB or MySQL server. Default: **3306**
-- `MYSQL_CLIENT_DATABASE_ROOT_USER`: Database admin user. Default: **root**
-- `MYSQL_CLIENT_DATABASE_ROOT_PASSWORD`: Database password for the database admin user. No defaults.
-- `MYSQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No defaults.
-- `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No defaults.
-- `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
-- `MYSQL_CLIENT_CREATE_DATABASE_CHARACTER_SET`: Character set to use for the new database. No defaults.
-- `MYSQL_CLIENT_CREATE_DATABASE_COLLATE`: Database collation to use for the new database. No defaults.
-- `MYSQL_CLIENT_ENABLE_SSL_WRAPPER`: Whether to force SSL connections to the database via the `mysql` CLI tool. Useful for applications that rely on the CLI instead of APIs. Default: **no**
-- `MYSQL_CLIENT_ENABLE_SSL`: Whether to force SSL connections for the database. Default: **no**
-- `MYSQL_CLIENT_SSL_CA_FILE`: Path to the SSL CA file for the new database. No defaults
-- `MYSQL_CLIENT_SSL_CERT_FILE`: Path to the SSL CA file for the new database. No defaults
-- `MYSQL_CLIENT_SSL_KEY_FILE`: Path to the SSL CA file for the new database. No defaults
-- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-#### SMTP Configuration
-
-To configure WordPress to send email using SMTP you can set the following environment variables:
-
-- `WORDPRESS_SMTP_HOST`: SMTP host.
-- `WORDPRESS_SMTP_PORT`: SMTP port.
-- `WORDPRESS_SMTP_USER`: SMTP account user.
-- `WORDPRESS_SMTP_PASSWORD`: SMTP account password.
-
-#### PHP configuration
-
-- `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. Default: **yes**
-- `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
-- `PHP_MAX_EXECUTION_TIME`: Maximum execution time for PHP scripts. No default.
-- `PHP_MAX_INPUT_TIME`: Maximum input time for PHP scripts. No default.
-- `PHP_MAX_INPUT_VARS`: Maximum amount of input variables for PHP scripts. No default.
-- `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
-- `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
-- `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
-- `PHP_OUTPUT_BUFFERING`: Size of the output buffer for PHP. Default: **8196**
-
-#### Examples
-
-##### SMTP configuration using a Gmail account
+#### SMTP configuration using a Gmail account
 
 This would be an example of SMTP configuration using a Gmail account:
 
-- Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/wordpress-nginx/docker-compose.yml) file present in this repository:
+* Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/wordpress-nginx/docker-compose.yml) file present in this repository:
 
     ```yaml
       wordpress:
@@ -328,7 +291,7 @@ This would be an example of SMTP configuration using a Gmail account:
       ...
     ```
 
-- For manual execution:
+* For manual execution:
 
     ```console
     $ docker run -d --name wordpress -p 80:8080 -p 443:8443 \
@@ -347,7 +310,7 @@ This would be an example of SMTP configuration using a Gmail account:
 
 The Bitnami WordPress container supports connecting the WordPress application to an external database. This would be an example of using an external database for WordPress.
 
-- Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/wordpress-nginx/docker-compose.yml) file present in this repository:
+* Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/wordpress-nginx/docker-compose.yml) file present in this repository:
 
     ```diff
        wordpress:
@@ -363,7 +326,7 @@ The Bitnami WordPress container supports connecting the WordPress application to
          ...
     ```
 
-- For manual execution:
+* For manual execution:
 
     ```console
     $ docker run -d --name wordpress\
@@ -386,13 +349,13 @@ The Bitnami WordPress container includes the command line interface **wp-cli** t
 
 This would be an example of using **wp-cli** to display the help menu:
 
-- Using `docker-compose` command:
+* Using `docker-compose` command:
 
 ```console
 docker-compose exec wordpress wp help
 ```
 
-- Using `docker` command:
+* Using `docker` command:
 
 ```console
 docker exec wordpress wp help
@@ -515,10 +478,10 @@ The Bitnami WordPress with NGINX Docker image is designed to be extended so it c
 
 Before extending this image, please note there are certain configuration settings you can modify using the original image:
 
-- Settings that can be adapted using environment variables. For instance, you can change the ports used by NGINX for HTTP and HTTPS, by setting the environment variables `NGINX_HTTP_PORT_NUMBER` and `NGINX_HTTPS_PORT_NUMBER` respectively.
-- [Adding custom server blocks](https://github.com/bitnami/containers/blob/main/bitnami/nginx#adding-custom-server-blocks).
-- [Replacing the 'nginx.conf' file](https://github.com/bitnami/containers/blob/main/bitnami/nginx#full-configuration).
-- [Using custom SSL certificates](https://github.com/bitnami/containers/blob/main/bitnami/nginx#using-custom-ssl-certificates).
+* Settings that can be adapted using environment variables. For instance, you can change the ports used by NGINX for HTTP and HTTPS, by setting the environment variables `NGINX_HTTP_PORT_NUMBER` and `NGINX_HTTPS_PORT_NUMBER` respectively.
+* [Adding custom server blocks](https://github.com/bitnami/containers/blob/main/bitnami/nginx#adding-custom-server-blocks).
+* [Replacing the 'nginx.conf' file](https://github.com/bitnami/containers/blob/main/bitnami/nginx#full-configuration).
+* [Using custom SSL certificates](https://github.com/bitnami/containers/blob/main/bitnami/nginx#using-custom-ssl-certificates).
 
 If your desired customizations cannot be covered using the methods mentioned above, extend the image. To do so, create your own image using a Dockerfile with the format below:
 
@@ -530,9 +493,9 @@ FROM bitnami/wordpress-nginx
 
 Here is an example of extending the image with the following modifications:
 
-- Install the `vim` editor
-- Modify the NGINX configuration file
-- Modify the ports used by NGINX
+* Install the `vim` editor
+* Modify the NGINX configuration file
+* Modify the ports used by NGINX
 
 ```Dockerfile
 FROM bitnami/wordpress-nginx
@@ -574,32 +537,32 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
 
 ### 6.4.1-debian-11-r5
 
-- The XML-RCP endpoint has been disabled by default. Users can manually activate via the new `WORDPRESS_ENABLE_XML_RPC` environment variable.
+* The XML-RCP endpoint has been disabled by default. Users can manually activate via the new `WORDPRESS_ENABLE_XML_RPC` environment variable.
 
 ### 5.7.1-debian-10-r22
 
-- The size of the container image has been decreased.
-- The configuration logic is now based on Bash scripts in the *rootfs/* folder.
-- Multisite support was added via `WORDPRESS_ENABLE_MULTISITE` and related environment variables.
-- Plugins can be installed and activated on the first deployment via `WORDPRESS_PLUGINS`.
-- Added support for limiting auto-updates to WordPress core via `WORDPRESS_AUTO_UPDATE_LEVEL`. In addition, auto-updates have been disabled by default. To update WordPress core, we recommend to swap the container image version for your deployment instead of using the built-in update functionality.
-- This image now supports connecting to MySQL and MariaDB databases securely via SSL.
+* The size of the container image has been decreased.
+* The configuration logic is now based on Bash scripts in the *rootfs/* folder.
+* Multisite support was added via `WORDPRESS_ENABLE_MULTISITE` and related environment variables.
+* Plugins can be installed and activated on the first deployment via `WORDPRESS_PLUGINS`.
+* Added support for limiting auto-updates to WordPress core via `WORDPRESS_AUTO_UPDATE_LEVEL`. In addition, auto-updates have been disabled by default. To update WordPress core, we recommend to swap the container image version for your deployment instead of using the built-in update functionality.
+* This image now supports connecting to MySQL and MariaDB databases securely via SSL.
 
 ### 5.3.2-debian-10-r30
 
-- The WordPress with NGINX container has been migrated to a "non-root" user approach. Previously the container ran as the `root` user and the NGINX daemon was started as the `daemon` user. From now on, both the container and the NGINX daemon run as user `1001`. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
-- Consequences:
-  - The HTTP/HTTPS ports exposed by the container are now `8080/8443` instead of `80/443`.
-  - Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating the WP site by exporting its content, and importing it on a new WordPress container. In the links below you'll find some alternatives:
-    - [Migrate WordPress using All-in-One WP Migration plugin](https://docs.bitnami.com/general/how-to/migrate-wordpress/)
-    - [Migrate WordPress using VaultPress](https://vaultpress.com/)
-  - No writing permissions will be granted on `wp-config.php` by default.
+* The WordPress with NGINX container has been migrated to a "non-root" user approach. Previously the container ran as the `root` user and the NGINX daemon was started as the `daemon` user. From now on, both the container and the NGINX daemon run as user `1001`. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
+* Consequences:
+  * The HTTP/HTTPS ports exposed by the container are now `8080/8443` instead of `80/443`.
+  * Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating the WP site by exporting its content, and importing it on a new WordPress container. In the links below you'll find some alternatives:
+    * [Migrate WordPress using All-in-One WP Migration plugin](https://docs.bitnami.com/general/how-to/migrate-wordpress/)
+    * [Migrate WordPress using VaultPress](https://vaultpress.com/)
+  * No writing permissions will be granted on `wp-config.php` by default.
 
 ### 5.2.1-debian-9-r8 and 5.2.1-ol-7-r8
 
-- This image has been adapted so it's easier to customize. See the [Customize this image](#customize-this-image) section for more information.
-- The PHP configuration volume (`/bitnami/php`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the PHP configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom PHP configuration files are advised to mount a volume for the configuration at `/opt/bitnami/php/conf`, or mount specific configuration files individually.
-- Enabling custom NGINX certificates by placing them at `/opt/bitnami/nginx/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`.
+* This image has been adapted so it's easier to customize. See the [Customize this image](#customize-this-image) section for more information.
+* The PHP configuration volume (`/bitnami/php`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the PHP configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom PHP configuration files are advised to mount a volume for the configuration at `/opt/bitnami/php/conf`, or mount specific configuration files individually.
+* Enabling custom NGINX certificates by placing them at `/opt/bitnami/nginx/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`.
 
 ## Contributing
 
@@ -611,7 +574,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

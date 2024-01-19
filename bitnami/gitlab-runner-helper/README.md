@@ -13,13 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run -it --name gitlab-runner-helper bitnami/gitlab-runner-helper
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/gitlab-runner-helper/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -75,18 +68,10 @@ Bitnami provides up-to-date versions of Gitlab Runner Helper, including security
 docker pull bitnami/gitlab-runner-helper:latest
 ```
 
-or if you're using Docker Compose, update the value of the image property to `bitnami/gitlab-runner-helper:latest`.
-
 #### Step 2: Remove the currently running container
 
 ```console
 docker rm -v gitlab-runner-helper
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v gitlab-runner-helper
 ```
 
 #### Step 3: Run the new image
@@ -95,12 +80,6 @@ Re-create your container from the new image.
 
 ```console
 docker run --name gitlab-runner-helper bitnami/gitlab-runner-helper:latest
-```
-
-or using Docker Compose:
-
-```console
-docker-compose up gitlab-runner-helper
 ```
 
 ## Configuration
@@ -115,6 +94,12 @@ docker run --rm --name gitlab-runner-helper bitnami/gitlab-runner–helper:lates
 
 Check the [official Gitlab Runner Helper documentation](https://docs.gitlab.com/runner/configuration/advanced-configuration.html#helper-image) for the list of the available parameters.
 
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
+
 ## Contributing
 
 We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
@@ -125,7 +110,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

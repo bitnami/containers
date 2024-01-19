@@ -21,6 +21,7 @@ set -o pipefail
 . /opt/bitnami/scripts/liblog.sh
 
 # Ensure the required config files exist
+mkdir -p "${REPORTSERVER_CONF_DIR}"
 touch "${REPORTSERVER_CONF_DIR}"/{persistence,reportserver,rsinit}.properties
 
 # Ensure the ReportServer base directory exists and has proper permissions

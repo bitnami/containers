@@ -3,7 +3,7 @@
 
 command:
   list-run-operations:
-    exec: cd /opt/bitnami/supabase/studio; timeout --preserve-status 5 npm run start || true
+    exec: cd /opt/bitnami/supabase/apps/studio; timeout --preserve-status 5 npm run start || true
     timeout: 8000
     exit-status: 0
     stdout:

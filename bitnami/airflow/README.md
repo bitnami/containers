@@ -295,58 +295,68 @@ This container supports the installation of additional python modules at start-u
 
 ### Environment variables
 
-The Airflow instance can be customized by specifying environment variables on the first run. The following environment values are provided to customize Airflow:
+| Name                                   | Description                                                           | Default Value                               | Can be set |
+|----------------------------------------|-----------------------------------------------------------------------|---------------------------------------------|------------|
+| `$AIRFLOW_BASE_DIR`                    | Airflow installation directory.                                       | `${BITNAMI_ROOT_DIR}/airflow`               |            |
+| `$AIRFLOW_HOME`                        | Airflow home directory.                                               | `${AIRFLOW_BASE_DIR}`                       |            |
+| `$AIRFLOW_BIN_DIR`                     | Airflow directory for binary executables.                             | `${AIRFLOW_BASE_DIR}/venv/bin`              |            |
+| `$AIRFLOW_LOGS_DIR`                    | Airflow logs directory.                                               | `${AIRFLOW_BASE_DIR}/logs`                  |            |
+| `$AIRFLOW_SCHEDULER_LOGS_DIR`          | Airflow scheduler logs directory.                                     | `${AIRFLOW_LOGS_DIR}/scheduler`             |            |
+| `$AIRFLOW_LOG_FILE`                    | Airflow log file.                                                     | `${AIRFLOW_LOGS_DIR}/airflow-webserver.log` |            |
+| `$AIRFLOW_CONF_FILE`                   | Airflow configuration file.                                           | `${AIRFLOW_BASE_DIR}/airflow.cfg`           |            |
+| `$AIRFLOW_WEBSERVER_CONF_FILE`         | Airflow configuration file.                                           | `${AIRFLOW_BASE_DIR}/webserver_config.py`   |            |
+| `$AIRFLOW_TMP_DIR`                     | Airflow directory temporary files.                                    | `${AIRFLOW_BASE_DIR}/tmp`                   |            |
+| `$AIRFLOW_PID_FILE`                    | Path to the Airflow PID file.                                         | `${AIRFLOW_TMP_DIR}/airflow-webserver.pid`  |            |
+| `$AIRFLOW_DAGS_DIR`                    | Airflow data to be persisted.                                         | `${AIRFLOW_BASE_DIR}/dags`                  |            |
+| `$AIRFLOW_DAEMON_USER`                 | Airflow system user.                                                  | `airflow`                                   |            |
+| `$AIRFLOW_DAEMON_GROUP`                | Airflow system group.                                                 | `airflow`                                   |            |
+| `$AIRFLOW_USERNAME`                    | Airflow username                                                      | `user`                                      | &check;    |
+| `$AIRFLOW_PASSWORD`                    | Airflow password                                                      | `bitnami`                                   | &check;    |
+| `$AIRFLOW_FIRSTNAME`                   | Airflow firstname                                                     | `Firstname`                                 | &check;    |
+| `$AIRFLOW_LASTNAME`                    | Airflow lastname                                                      | `Lastname`                                  | &check;    |
+| `$AIRFLOW_EMAIL`                       | Airflow email                                                         | `user@example.com`                          | &check;    |
+| `$AIRFLOW_EXECUTOR`                    | Airflow executor.                                                     | `SequentialExecutor`                        | &check;    |
+| `$AIRFLOW_EXECUTOR`                    | Airflow executor.                                                     | `CeleryExecutor`                            | &check;    |
+| `$AIRFLOW_RAW_FERNET_KEY`              | Airflow raw/unencoded Fernet key                                      |                                             | &check;    |
+| `$AIRFLOW_FERNET_KEY`                  | Airflow Fernet key                                                    |                                             | &check;    |
+| `$AIRFLOW_SECRET_KEY`                  | Airflow Secret key                                                    |                                             | &check;    |
+| `$AIRFLOW_WEBSERVER_HOST`              | Airflow webserver host                                                | `127.0.0.1`                                 | &check;    |
+| `$AIRFLOW_WEBSERVER_PORT_NUMBER`       | Airflow webserver port.                                               | `8080`                                      | &check;    |
+| `$AIRFLOW_LOAD_EXAMPLES`               | To load example tasks into the application.                           | `yes`                                       | &check;    |
+| `$AIRFLOW_BASE_URL`                    | Airflow webserver base URL.                                           |                                             | &check;    |
+| `$AIRFLOW_HOSTNAME_CALLABLE`           | Method to obtain the hostname.                                        |                                             | &check;    |
+| `$AIRFLOW_HOSTNAME_CALLABLE`           | Method to obtain the hostname.                                        | `socket.gethostname`                        | &check;    |
+| `$AIRFLOW_POOL_NAME`                   | Pool name.                                                            |                                             | &check;    |
+| `$AIRFLOW_POOL_SIZE`                   | Pool size, required with AIRFLOW_POOL_NAME.                           |                                             | &check;    |
+| `$AIRFLOW_POOL_DESC`                   | Pool description, required with AIRFLOW_POOL_NAME.                    |                                             | &check;    |
+| `$AIRFLOW_DATABASE_HOST`               | Hostname for PostgreSQL server.                                       | `postgresql`                                | &check;    |
+| `$AIRFLOW_DATABASE_HOST`               | Hostname for PostgreSQL server.                                       | `127.0.0.1`                                 | &check;    |
+| `$AIRFLOW_DATABASE_PORT_NUMBER`        | Port used by PostgreSQL server.                                       | `5432`                                      | &check;    |
+| `$AIRFLOW_DATABASE_NAME`               | Database name that Airflow will use to connect with the database.     | `bitnami_airflow`                           | &check;    |
+| `$AIRFLOW_DATABASE_USERNAME`           | Database user that Airflow will use to connect with the database.     | `bn_airflow`                                | &check;    |
+| `$AIRFLOW_DATABASE_PASSWORD`           | Database password that Airflow will use to connect with the database. |                                             | &check;    |
+| `$AIRFLOW_DATABASE_USE_SSL`            | Set to yes if the database is using SSL.                              | `no`                                        | &check;    |
+| `$AIRFLOW_REDIS_USE_SSL`               | Set to yes if Redis(R) uses SSL.                                      | `no`                                        | &check;    |
+| `$REDIS_HOST`                          | Hostname for Redis(R) server.                                         | `redis`                                     | &check;    |
+| `$REDIS_HOST`                          | Hostname for Redis(R) server.                                         | `127.0.0.1`                                 | &check;    |
+| `$REDIS_PORT_NUMBER`                   | Port used by Redis(R) server.                                         | `6379`                                      | &check;    |
+| `$REDIS_USER`                          | User that Airflow will use to connect with Redis(R).                  |                                             | &check;    |
+| `$REDIS_PASSWORD`                      | Password that Airflow will use to connect with Redis(R).              |                                             | &check;    |
+| `$REDIS_DATABASE`                      | Name of the Redis(R) database.                                        | `1`                                         | &check;    |
+| `$AIRFLOW_LDAP_ENABLE`                 | Enable LDAP authentication.                                           | `no`                                        | &check;    |
+| `$AIRFLOW_LDAP_URI`                    | LDAP server URI.                                                      |                                             | &check;    |
+| `$AIRFLOW_LDAP_SEARCH`                 | LDAP search base.                                                     |                                             | &check;    |
+| `$AIRFLOW_LDAP_UID_FIELD`              | LDAP field used for uid.                                              |                                             | &check;    |
+| `$AIRFLOW_LDAP_BIND_USER`              | LDAP user name.                                                       |                                             | &check;    |
+| `$AIRFLOW_LDAP_BIND_PASSWORD`          | LDAP user password.                                                   |                                             | &check;    |
+| `$AIRFLOW_LDAP_USER_REGISTRATION`      | User self registration.                                               | `True`                                      | &check;    |
+| `$AIRFLOW_LDAP_USER_REGISTRATION_ROLE` | Role name to be assign when a user registers himself.                 |                                             | &check;    |
+| `$AIRFLOW_LDAP_ROLES_MAPPING`          | Mapping from LDAP DN to a list of Airflow roles.                      |                                             | &check;    |
+| `$AIRFLOW_LDAP_ROLES_SYNC_AT_LOGIN`    | Replace ALL the user roles each login, or only on registration.       | `True`                                      | &check;    |
+| `$AIRFLOW_LDAP_USE_TLS`                | Use LDAP SSL.                                                         | `False`                                     | &check;    |
+| `$AIRFLOW_LDAP_ALLOW_SELF_SIGNED`      | Allow self signed certicates in LDAP ssl.                             | `True`                                      | &check;    |
+| `$AIRFLOW_LDAP_TLS_CA_CERTIFICATE`     | File that store the CA for LDAP ssl.                                  |                                             | &check;    |
 
-#### User configuration
-
-* `AIRFLOW_USERNAME`: Airflow application username. Default: **user**
-* `AIRFLOW_PASSWORD`: Airflow application password. Default: **bitnami**
-* `AIRFLOW_EMAIL`: Airflow application email. Default: **user@example.com**
-
-#### Airflow configuration
-
-* `AIRFLOW_EXECUTOR`: Airflow executor. Default: **SequentialExecutor**
-* `AIRFLOW_FERNET_KEY`: Airflow Fernet key. No defaults.
-* `AIRFLOW_SECRET_KEY`: Airflow Secret key. No defaults.
-* `AIRFLOW_WEBSERVER_HOST`: Airflow webserver host. Default: **127.0.0.1**
-* `AIRFLOW_WEBSERVER_PORT_NUMBER`: Airflow webserver port. Default: **8080**
-* `AIRFLOW_LOAD_EXAMPLES`: To load example tasks into the application. Default: **yes**
-* `AIRFLOW_BASE_URL`: Airflow webserver base URL. No defaults.
-* `AIRFLOW_HOSTNAME_CALLABLE`: Method to obtain the hostname. No defaults.
-* `AIRFLOW_POOL_NAME`: Pool name. No defaults.
-* `AIRFLOW_POOL_SIZE`: Pool size, required with `AIRFLOW_POOL_NAME`. No defaults.
-* `AIRFLOW_POOL_DESC`: Pool description, required with `AIRFLOW_POOL_NAME`. No defaults.
-
-#### Use an existing database
-
-* `AIRFLOW_DATABASE_HOST`: Hostname for PostgreSQL server. Default: **postgresql**
-* `AIRFLOW_DATABASE_PORT_NUMBER`: Port used by PostgreSQL server. Default: **5432**
-* `AIRFLOW_DATABASE_NAME`: Database name that Airflow will use to connect with the database. Default: **bitnami_airflow**
-* `AIRFLOW_DATABASE_USERNAME`: Database user that Airflow will use to connect with the database. Default: **bn_airflow**
-* `AIRFLOW_DATABASE_PASSWORD`: Database password that Airflow will use to connect with the database. No defaults.
-* `AIRFLOW_DATABASE_USE_SSL`: Set to yes if the database is using SSL. Default: **no**
-* `AIRFLOW_REDIS_USE_SSL`: Set to yes if Redis(R) uses SSL. Default: **no**
-* `REDIS_HOST`: Hostname for Redis(R) server. Default: **redis**
-* `REDIS_PORT_NUMBER`: Port used by Redis(R) server. Default: **6379**
-* `REDIS_USER`: User that Airflow will use to connect with Redis(R). No defaults.
-* `REDIS_PASSWORD`: Password that Airflow will use to connect with Redis(R). No defaults.
-* `REDIS_DATABASE`: Database number for Redis(R) server. Default: **1**
-
-#### Airflow LDAP authentication
-
-* `AIRFLOW_LDAP_ENABLE`: Enable LDAP authentication. Default: **no**
-* `AIRFLOW_LDAP_URI`: LDAP server URI. No defaults.
-* `AIRFLOW_LDAP_SEARCH`: LDAP search base. No defaults.
-* `AIRFLOW_LDAP_UID_FIELD`: LDAP field used for uid. No defaults.
-* `AIRFLOW_LDAP_BIND_USER`: LDAP user name. No defaults.
-* `AIRFLOW_LDAP_BIND_PASSWORD`: LDAP user password. No defaults.
-* `AIRFLOW_USER_REGISTRATION`: User self registration. Default: **True**
-* `AIRFLOW_USER_REGISTRATION_ROLE`: Role for the created user. No defaults.
-* `AIRFLOW_LDAP_ROLES_MAPPING`: Mapping from LDAP DN to a list of Airflow roles. No defaults.
-* `AIRFLOW_LDAP_ROLES_SYNC_AT_LOGIN`: Replace ALL the user's roles each login, or only on registration. Default: **True**
-* `AIRFLOW_LDAP_USE_TLS`: Use LDAP SSL. Defaults: **False**.
-* `AIRFLOW_LDAP_ALLOW_SELF_SIGNED`: Allow self signed certicates in LDAP ssl. Default: **True**
-* `AIRFLOW_LDAP_TLS_CA_CERTIFICATE`: File that store the CA for LDAP ssl. No defaults.
 
 > In addition to the previous environment variables, all the parameters from the configuration file can be overwritten by using environment variables with this format: `AIRFLOW__{SECTION}__{KEY}`. Note the double underscores.
 
@@ -396,7 +406,7 @@ To configure Airflow to send email using SMTP you can set the following environm
 * `AIRFLOW__SMTP__SMTP_SSL`: To use SSL communication. Default: **False**
 * `AIRFLOW__SMTP__SMTP_USER`: User of SMTP used for authentication (likely email). No defaults.
 * `AIRFLOW__SMTP__SMTP_PASSWORD`: Password for SMTP. No defaults.
-* `AIRFLOW__SMTP__SMTP_MAIL_FROM`: To modify the "from email address". Default: **airflow@example.com**
+* `AIRFLOW__SMTP__SMTP_MAIL_FROM`: To modify the "from email address". Default: **<airflow@example.com>**
 
 This would be an example of SMTP configuration using a GMail account:
 
@@ -460,7 +470,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

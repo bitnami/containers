@@ -228,9 +228,6 @@ pgbouncer_initialize() {
         if ! is_empty_value "$PGBOUNCER_AUTH_USER"; then
             database_value+=" auth_user=$PGBOUNCER_AUTH_USER"
         fi
-        if ! is_empty_value "$PGBOUNCER_AUTH_DBNAME"; then
-            database_value+=" auth_dbname=$PGBOUNCER_AUTH_DBNAME"
-        fi
         if ! is_empty_value "$PGBOUNCER_CONNECT_QUERY"; then
             database_value+=" connect_query='${PGBOUNCER_CONNECT_QUERY}'"
         fi
@@ -299,6 +296,7 @@ pgbouncer_initialize() {
             "log_pooler_errors:${PGBOUNCER_LOG_POOLER_ERRORS}"
             "log_stats:${PGBOUNCER_LOG_STATS}"
             "stats_period:${PGBOUNCER_STATS_PERIOD}"
+            "server_fast_close:${PGBOUNCER_SERVER_FAST_CLOSE}"
             "server_lifetime:${PGBOUNCER_SERVER_LIFETIME}"
             "server_idle_timeout:${PGBOUNCER_SERVER_IDLE_TIMEOUT}"
             "server_connect_timeout:${PGBOUNCER_SERVER_CONNECT_TIMEOUT}"

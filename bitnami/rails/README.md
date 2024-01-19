@@ -12,9 +12,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ### Local workspace
 
 ```console
-mkdir ~/myapp && cd ~/myapp
-curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/rails/docker-compose.yml
-docker-compose up
+docker run --name rails bitnami/rails:latest
 ```
 
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [MariaDB container](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#readme) for a more secure deployment.
@@ -135,6 +133,24 @@ Following are a few examples of launching some commonly used Rails development c
 > $ docker-compose restart myapp
 > ```
 
+## Environment variables
+
+### Customizable environment variables
+
+| Name                         | Description                            | Default Value   |
+|------------------------------|----------------------------------------|-----------------|
+| `RAILS_ENV`                  | Rails environment mode.                | `development`   |
+| `RAILS_SKIP_ACTIVE_RECORD`   | Skip active record configuration.      | `no`            |
+| `RAILS_SKIP_DB_SETUP`        | Skip database configuration.           | `no`            |
+| `RAILS_SKIP_DB_WAIT`         | Skip waiting for database to be ready. | `no`            |
+| `RAILS_RETRY_ATTEMPTS`       | Rails retry attempts.                  | `30`            |
+| `RAILS_DATABASE_TYPE`        | Database server type.                  | `mariadb`       |
+| `RAILS_DATABASE_HOST`        | Database server host.                  | `mariadb`       |
+| `RAILS_DATABASE_PORT_NUMBER` | Database server port.                  | `3306`          |
+| `RAILS_DATABASE_NAME`        | Database name.                         | `bitnami_myapp` |
+
+### Read-only environment variables
+
 ## Configuring your database
 
 You can configure the MariaDB hostname and database name to use for development purposes using the environment variables **DATABASE_HOST** & **DATABASE_NAME**.
@@ -197,6 +213,12 @@ When the `myapp` service container is restarted, it will install all the missing
 
 * Decrease the size of the container. The configuration logic is now based on Bash scripts in the `rootfs/` folder.
 
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes.
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues/new) or submitting a [pull request](https://github.com/bitnami/containers/pulls/new) with your contribution.
@@ -213,7 +235,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

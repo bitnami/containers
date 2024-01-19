@@ -1,5 +1,0 @@
-version: '2'
-
-services:
-  attu:
-    image: docker.io/bitnami/attu:2

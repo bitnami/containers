@@ -10,14 +10,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-docker run -it --name appsmith bitnami/appsmith
-```
-
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/appsmith/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run -it --name appsmith bitnami/appsmith:latest
 ```
 
 ## Why use Bitnami Images?
@@ -105,6 +98,56 @@ docker-compose up appsmith
 
 ### Environment variables
 
+#### Customizable environment variables
+
+| Name                            | Description                                             | Default Value         |
+|---------------------------------|---------------------------------------------------------|-----------------------|
+| `ALLOW_EMPTY_PASSWORD`          | Allow an empty password.                                | `no`                  |
+| `APPSMITH_USERNAME`             | Appsmith default username.                              | `user`                |
+| `APPSMITH_PASSWORD`             | Appsmith default password.                              | `bitnami`             |
+| `APPSMITH_EMAIL`                | Appsmith default email.                                 | `user@example.com`    |
+| `APPSMITH_MODE`                 | Appsmith service to run (can be backend, client or UI). | `backend`             |
+| `APPSMITH_ENCRYPTION_PASSWORD`  | Appsmith database encryption password.                  | `bitnami123`          |
+| `APPSMITH_API_HOST`             | Appsmith API host.                                      | `appsmith-api`        |
+| `APPSMITH_API_HOST`             | Appsmith API host.                                      | `127.0.0.1`           |
+| `APPSMITH_API_PORT`             | Appsmith API port.                                      | `8080`                |
+| `APPSMITH_UI_HTTP_PORT`         | Appsmith UI HTTP port.                                  | `8080`                |
+| `APPSMITH_UI_HTTP_PORT`         | Appsmith UI HTTP port.                                  | `80`                  |
+| `APPSMITH_UI_HTTPS_PORT`        | Appsmith UI HTTPS port.                                 | `8443`                |
+| `APPSMITH_UI_HTTPS_PORT`        | Appsmith UI HTTPS port.                                 | `443`                 |
+| `APPSMITH_RTS_HOST`             | Appsmith RTS port.                                      | `appsmith-rts`        |
+| `APPSMITH_RTS_HOST`             | Appsmith RTS port.                                      | `127.0.0.1`           |
+| `APPSMITH_RTS_PORT`             | Appsmith RTS port.                                      | `8091`                |
+| `APPSMITH_DATABASE_HOST`        | Database server hosts (comma-separated list).           | `mongodb`             |
+| `APPSMITH_DATABASE_HOST`        | Database server hosts (comma-separated list).           | `127.0.0.1`           |
+| `APPSMITH_DATABASE_PORT_NUMBER` | Database server port.                                   | `27017`               |
+| `APPSMITH_DATABASE_NAME`        | Database name.                                          | `bitnami_appsmith`    |
+| `APPSMITH_DATABASE_USER`        | Database user name.                                     | `bn_appsmith`         |
+| `APPSMITH_DATABASE_INIT_DELAY`  | Time to wait before the database is actually ready.     | `0`                   |
+| `APPSMITH_REDIS_HOST`           | Redis server host.                                      | `redis`               |
+| `APPSMITH_REDIS_HOST`           | Redis server host.                                      | `127.0.0.1`           |
+| `APPSMITH_REDIS_PORT_NUMBER`    | Redis server port.                                      | `6379`                |
+| `APPSMITH_STARTUP_TIMEOUT`      | Appsmith startup check timeout.                         | `120`                 |
+| `APPSMITH_STARTUP_ATTEMPTS`     | Appsmith startup check attempts.                        | `5`                   |
+| `APPSMITH_DATA_TO_PERSIST`      | Data to persist from installations.                     | `$APPSMITH_CONF_FILE` |
+
+#### Read-only environment variables
+
+| Name                    | Description                       | Value                              |
+|-------------------------|-----------------------------------|------------------------------------|
+| `APPSMITH_BASE_DIR`     | Appsmith installation directory.  | `${BITNAMI_ROOT_DIR}/appsmith`     |
+| `APPSMITH_VOLUME_DIR`   | Appsmith volume directory.        | `/bitnami/appsmith`                |
+| `APPSMITH_LOG_DIR`      | Appsmith logs directory.          | `${APPSMITH_BASE_DIR}/logs`        |
+| `APPSMITH_LOG_FILE`     | Appsmith log file.                | `${APPSMITH_LOG_DIR}/appsmith.log` |
+| `APPSMITH_CONF_DIR`     | Appsmith configuration directory. | `${APPSMITH_BASE_DIR}/conf`        |
+| `APPSMITH_CONF_FILE`    | Appsmith configuration file.      | `${APPSMITH_CONF_DIR}/docker.env`  |
+| `APPSMITH_TMP_DIR`      | Appsmith temporary directory.     | `${APPSMITH_BASE_DIR}/tmp`         |
+| `APPSMITH_PID_FILE`     | Appsmith PID file.                | `${APPSMITH_TMP_DIR}/appsmith.pid` |
+| `APPSMITH_RTS_LOG_FILE` | Appsmith RTS log file.            | `${APPSMITH_LOG_DIR}/rts.log`      |
+| `APPSMITH_RTS_PID_FILE` | Appsmith RTS PID file.            | `${APPSMITH_TMP_DIR}/rts.pid`      |
+| `APPSMITH_DAEMON_USER`  | Appsmith daemon system user.      | `appsmith`                         |
+| `APPSMITH_DAEMON_GROUP` | Appsmith daemon system group.     | `appsmith`                         |
+
 When you start the Appsmith image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. Please note that some variables are only considered when the container is started for the first time. If you want to add a new environment variable:
 
 * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/appsmith/docker-compose.yml) file present in this repository:
@@ -139,33 +182,6 @@ Appsmith supports three running modes:
 * Client: Contains the UI of Appsmith. This is the main entrypoint for users.
 
 The running mode is defined via the `APPSMITH_MODE` environment variable. The possible values are `backend`, `rts` and `client`.
-
-##### User and Site configuration
-
-* `APPSMITH_UI_HTTP_PORT`: Port used by the Client for HTTP. Default: **8080**
-* `APPSMITH_USERNAME`: Appsmith application username. Default: **user**
-* `APPSMITH_PASSWORD`: Appsmith application password. Default: **bitnami**
-* `APPSMITH_EMAIL`: Appsmith application email. Default: **user@example.com**
-* `APPSMITH_DATA_TO_PERSIST`: Space separated list of files and directories to persist. Use a space to persist no data: `" "`. Default: **"docker.env"**
-
-##### Salt and keys configuration
-
-Authentication unique keys and salts. Specify these values to prevent cookies from being invalidated when creating a new container or when using multiple containers to serve the same Appsmith instance. By default these values are generated randomly:
-
-* `APPSMITH_ENCRYPTION_PASSWORD`: Database encryption password. Default: **bitnami**.
-* `APPSMITH_ENCRYPTION_SALT`: Database encryption salt. Default: **bitnami**.
-
-##### Database connection configuration
-
-* `APPSMITH_DATABASE_HOST`: Hostname for the MongoDB(TM) servers (comma separated). Default: **mongodb**
-* `APPSMITH_DATABASE_PORT_NUMBER`: Port used by the MongoDB(TM) server. Default: **27017**
-* `APPSMITH_DATABASE_NAME`: Database name that Appsmith will use to connect with the database. Default: **bitnami_appsmith**
-* `APPSMITH_DATABASE_USER`: Database user that Appsmith will use to connect with the database. Default: **bn_appsmith**
-* `APPSMITH_DATABASE_PASSWORD`: Database password that Appsmith will use to connect with the database. No defaults.
-* `APPSMITH_REDIS_HOST`: Hostname for the Redis(TM) server. Default: **redis**
-* `APPSMITH_REDIS_PORT_NUMBER`: Port used by the Redis(TM) server. Default: **6379**
-* `APPSMITH_REDIS_PASSWORD`: Database password that Appsmith will use to connect with the database. No defaults.
-* `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
 ##### Connect Appsmith container to an existing database
 
@@ -218,6 +234,12 @@ docker-compose logs wordpress
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/appsmith).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
+
 ## Contributing
 
 We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
@@ -228,7 +250,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

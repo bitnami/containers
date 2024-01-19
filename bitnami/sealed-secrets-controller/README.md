@@ -9,7 +9,7 @@
 ## TL;DR
 
 ```console
-docker run --name sealed-secrets-controller bitnami/sealed-secrets-controller:latest
+docker run --name sealed-secrets bitnami/sealed-secrets:latest
 ```
 
 ## Why use Bitnami Images?
@@ -33,16 +33,16 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 
 ## Get this image
 
-The recommended way to get the Bitnami sealed-secrets-controller Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/sealed-secrets-controller).
+The recommended way to get the Bitnami sealed-secrets Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/sealed-secrets).
 
 ```console
-docker pull bitnami/sealed-secrets-controller:latest
+docker pull bitnami/sealed-secrets:latest
 ```
 
-To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/sealed-secrets-controller/tags/) in the Docker Hub Registry.
+To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/sealed-secrets/tags/) in the Docker Hub Registry.
 
 ```console
-docker pull bitnami/sealed-secrets-controller:[TAG]
+docker pull bitnami/sealed-secrets:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
@@ -60,8 +60,14 @@ docker build -t bitnami/APP:latest .
 To run commands inside this container you can use `docker run`, for example to execute `kubeseal --version` you can follow the example below:
 
 ```console
-docker run --rm --name sealed-secrets-controller bitnami/sealed-secrets-controller:latest -- kubeseal --version
+docker run --rm --name sealed-secrets bitnami/sealed-secrets:latest -- kubeseal --version
 ```
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 
@@ -73,7 +79,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

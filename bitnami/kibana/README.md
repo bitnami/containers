@@ -12,8 +12,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ### Docker Compose
 
 ```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/kibana/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run --name kibana bitnami/kibana:latest
 ```
 
 ## Why use Bitnami Images?
@@ -63,18 +62,9 @@ docker build -t bitnami/APP:latest .
 
 ## How to use this image
 
-### Run the application using Docker Compose
-
-The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/kibana/docker-compose.yml) file. Run the application using it as shown below:
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/kibana/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ### Run the application manually
 
-If you want to run the application manually instead of using docker-compose, these are the basic steps you need to run:
+If you want to run the application manually instead of using the chart, these are the basic steps you need to run:
 
 1. Create a new network for the application and the database:
 
@@ -110,16 +100,6 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ```console
 docker run -v /path/to/kibana-persistence:/bitnami/kibana bitnami/kibana:latest
-```
-
-or modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/kibana/docker-compose.yml) file present in this repository:
-
-```yaml
-kibana:
-  ...
-  volumes:
-    - /path/to/kibana-persistence:/bitnami/kibana
-  ...
 ```
 
 > NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
@@ -161,64 +141,64 @@ docker run -d --name myapp \
 > 1. Please update the **YOUR_APPLICATION_IMAGE_** placeholder in the above snippet with your application image
 > 2. In your application container, use the hostname `kibana-server` to connect to the Kibana server
 
-### Using a Docker Compose file
-
-When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the Kibana server from your own custom application image which is identified in the following snippet by the service name `myapp`.
-
-```yaml
-version: '2'
-
-networks:
-  app-tier:
-    driver: bridge
-
-services:
-  kibana:
-    image: 'bitnami/kibana:latest'
-    networks:
-      - app-tier
-  myapp:
-    image: 'YOUR_APPLICATION_IMAGE'
-    networks:
-      - app-tier
-```
-
-> **IMPORTANT**:
->
-> 1. Please update the **YOUR_APPLICATION_IMAGE_** placeholder in the above snippet with your application image
-> 2. In your application container, use the hostname `kibana` to connect to the Kibana server
-
-Launch the containers using:
-
-```console
-docker-compose up -d
-```
-
 ## Configuration
 
 ### Environment variables
 
-When you start the kibana image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. The following environment values are provided to custom Kibana:
+#### Customizable environment variables
 
-* `KIBANA_ELASTICSEARCH_URL`: Elasticsearch URL. Provide Client node url in the case of a cluster. Default: **elasticsearch**
-* `KIBANA_ELASTICSEARCH_PORT_NUMBER`: Elasticsearch port. Default: **9200**
-* `KIBANA_HOST`: Kibana host. Default: **0.0.0.0**
-* `KIBANA_PORT_NUMBER`: Kibana port. Default: **5601**
-* `KIBANA_WAIT_READY_MAX_RETRIES`: Max retries to wait for Kibana to be ready. Default: **30**
-* `KIBANA_INITSCRIPTS_START_SERVER`: Whether to start the Kibana server before executing the init scripts. Default: **yes**
-* `KIBANA_FORCE_INITSCRIPTS`: Whether to force the execution of the init scripts. Default: **no**
+| Name                                         | Description                                                                         | Default Value                                                    |
+|----------------------------------------------|-------------------------------------------------------------------------------------|------------------------------------------------------------------|
+| `KIBANA_ELASTICSEARCH_URL`                   | Elasticsearch URL. Provide Client node url in the case of a cluster                 | `elasticsearch`                                                  |
+| `KIBANA_ELASTICSEARCH_URL`                   | Elasticsearch URL. Provide Client node url in the case of a cluster                 | `127.0.0.1`                                                      |
+| `KIBANA_ELASTICSEARCH_PORT_NUMBER`           | Elasticsearch port                                                                  | `9200`                                                           |
+| `KIBANA_HOST`                                | Kibana host                                                                         | `0.0.0.0`                                                        |
+| `KIBANA_PORT_NUMBER`                         | Kibana port                                                                         | `5601`                                                           |
+| `KIBANA_WAIT_READY_MAX_RETRIES`              | Max retries to wait for Kibana to be ready                                          | `30`                                                             |
+| `KIBANA_INITSCRIPTS_START_SERVER`            | Whether to start the Kibana server before executing the init scripts                | `yes`                                                            |
+| `KIBANA_FORCE_INITSCRIPTS`                   | Whether to force the execution of the init scripts                                  | `no`                                                             |
+| `KIBANA_DISABLE_STRICT_CSP`                  | Disable strict Content Security Policy (CSP) for Kibana                             | `no`                                                             |
+| `KIBANA_CERTS_DIR`                           | Path to certificates folder.                                                        | `${SERVER_CONF_DIR}/certs`                                       |
+| `KIBANA_SERVER_ENABLE_TLS`                   | Enable TLS for inbound connections via HTTPS.                                       | `false`                                                          |
+| `KIBANA_SERVER_KEYSTORE_LOCATION`            | Path to Keystore                                                                    | `${SERVER_CERTS_DIR}/server/kibana.keystore.p12`                 |
+| `KIBANA_SERVER_TLS_USE_PEM`                  | Configure Kibana server TLS settings using PEM certificates.                        | `false`                                                          |
+| `KIBANA_SERVER_CERT_LOCATION`                | Path to PEM node certificate.                                                       | `${SERVER_CERTS_DIR}/server/tls.crt`                             |
+| `KIBANA_SERVER_KEY_LOCATION`                 | Path to PEM node key.                                                               | `${SERVER_CERTS_DIR}/server/tls.key`                             |
+| `KIBANA_ELASTICSEARCH_ENABLE_TLS`            | Enable TLS for Elasticsearch communications.                                        | `false`                                                          |
+| `KIBANA_ELASTICSEARCH_TLS_VERIFICATION_MODE` | Elasticsearch TLS verification mode.                                                | `full`                                                           |
+| `KIBANA_ELASTICSEARCH_TRUSTSTORE_LOCATION`   | Path to Elasticsearch Truststore.                                                   | `${SERVER_CERTS_DIR}/elasticsearch/elasticsearch.truststore.p12` |
+| `KIBANA_ELASTICSEARCH_TLS_USE_PEM`           | Configure Elasticsearch TLS settings using PEM certificates.                        | `false`                                                          |
+| `KIBANA_ELASTICSEARCH_CA_CERT_LOCATION`      | Path to Elasticsearch CA certificate.                                               | `${SERVER_CERTS_DIR}/elasticsearch/ca.crt`                       |
+| `KIBANA_DISABLE_STRICT_CSP`                  | Disable strict Content Security Policy (CSP) for Kibana                             | `no`                                                             |
+| `KIBANA_CREATE_USER`                         | Enable the creation of the kibana_system user, if it doesnt exists                  | `false`                                                          |
+| `KIBANA_NEWSFEED_ENABLED`                    | Control whether to enable the newsfeed system for the Kibana UI notification center | `true`                                                           |
+| `KIBANA_ELASTICSEARCH_REQUESTTIMEOUT`        | Time in milliseconds to wait for responses from the back end or Elasticsearch       | `30000`                                                          |
+| `APACHE_KIBANA_USERNAME`                     | Kibana user to configure basic authentication                                       | `user`                                                           |
+| `APACHE_KIBANA_PASSWORD`                     | Kibana password to configure basic authentication                                   | `bitnami`                                                        |
 
-#### Specifying Environment Variables using Docker Compose
+#### Read-only environment variables
 
-This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/kibana/docker-compose.yml) file present in this repository:
+| Name                      | Description                                                                                   | Value                           |
+|---------------------------|-----------------------------------------------------------------------------------------------|---------------------------------|
+| `SERVER_FLAVOR`           | Server flavor. Valid values: `kibana` or `opensearch-dashboards`.                             | `kibana`                        |
+| `BITNAMI_VOLUME_DIR`      | Directory where to mount volumes                                                              | `/bitnami`                      |
+| `KIBANA_VOLUME_DIR`       | Kibana persistence directory                                                                  | `${BITNAMI_VOLUME_DIR}/kibana`  |
+| `KIBANA_BASE_DIR`         | Kibana installation directory                                                                 | `${BITNAMI_ROOT_DIR}/kibana`    |
+| `KIBANA_CONF_DIR`         | Kibana configuration directory                                                                | `${SERVER_BASE_DIR}/config`     |
+| `KIBANA_LOGS_DIR`         | Kibana logs directory                                                                         | `${SERVER_BASE_DIR}/logs`       |
+| `KIBANA_TMP_DIR`          | Kibana temporary directory                                                                    | `${SERVER_BASE_DIR}/tmp`        |
+| `KIBANA_BIN_DIR`          | Kibana executable directory                                                                   | `${SERVER_BASE_DIR}/bin`        |
+| `KIBANA_PLUGINS_DIR`      | Kibana plugins directory                                                                      | `${SERVER_BASE_DIR}/plugins`    |
+| `KIBANA_DATA_DIR`         | Kibana data directory                                                                         | `${SERVER_VOLUME_DIR}/data`     |
+| `KIBANA_MOUNTED_CONF_DIR` | Directory for including custom configuration files (that override the default generated ones) | `${SERVER_VOLUME_DIR}/conf`     |
+| `KIBANA_CONF_FILE`        | Path to Kibana configuration file                                                             | `${SERVER_CONF_DIR}/kibana.yml` |
+| `KIBANA_LOG_FILE`         | Path to the Kibana log file                                                                   | `${SERVER_LOGS_DIR}/kibana.log` |
+| `KIBANA_PID_FILE`         | Path to the Kibana pid file                                                                   | `${SERVER_TMP_DIR}/kibana.pid`  |
+| `KIBANA_INITSCRIPTS_DIR`  | Path to the Kibana container init scripts directory                                           | `/docker-entrypoint-initdb.d`   |
+| `KIBANA_DAEMON_USER`      | Kibana system user                                                                            | `kibana`                        |
+| `KIBANA_DAEMON_GROUP`     | Kibana system group                                                                           | `kibana`                        |
 
-```yaml
-kibana:
-  ...
-  environment:
-    - KIBANA_ELASTICSEARCH_URL=elasticsearch
-  ...
-```
+When you start the kibana image, you can adjust the configuration of the instance by passing one or more environment variables on the `docker run` command line.
 
 #### Specifying Environment Variables on the Docker command line
 
@@ -244,16 +224,6 @@ Run the Kibana image, mounting a directory from your host.
 docker run --name kibana -v /path/to/kibana-persistence:/bitnami bitnami/kibana:latest
 ```
 
-or modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/kibana/docker-compose.yml) file present in this repository:
-
-```yaml
-kibana:
-  ...
-  volumes:
-    - /path/to/kibana-persistence:/bitnami/kibana
-  ...
-```
-
 #### Step 2: Edit the configuration
 
 Edit the configuration on your host using your favorite editor.
@@ -270,12 +240,6 @@ After changing the configuration, restart your Kibana container for changes to t
 docker restart kibana
 ```
 
-or using Docker Compose:
-
-```console
-docker-compose restart kibana
-```
-
 Refer to the [configuration](https://www.elastic.co/guide/en/kibana/current/settings.html) manual for the complete list of configuration options.
 
 ## Logging
@@ -284,12 +248,6 @@ The Bitnami Kibana Docker image sends the container logs to the `stdout`. To vie
 
 ```console
 docker logs kibana
-```
-
-or using Docker Compose:
-
-```console
-docker-compose logs kibana
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -306,21 +264,12 @@ Bitnami provides up-to-date versions of Kibana, including security patches, soon
 docker pull bitnami/kibana:latest
 ```
 
-or if you're using Docker Compose, update the value of the image property to
-`bitnami/kibana:latest`.
-
 #### Step 2: Stop and backup the currently running container
 
 Stop the currently running container using the command
 
 ```console
 docker stop kibana
-```
-
-or using Docker Compose:
-
-```console
-docker-compose stop kibana
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/kibana-persistence` using:
@@ -339,12 +288,6 @@ You can use these snapshots to restore the application state should the upgrade 
 docker rm -v kibana
 ```
 
-or using Docker Compose:
-
-```console
-docker-compose rm -v kibana
-```
-
 #### Step 4: Run the new image
 
 Re-create your container from the new image, restoring your backup if necessary.
@@ -353,13 +296,11 @@ Re-create your container from the new image, restoring your backup if necessary.
 docker run --name kibana bitnami/kibana:latest
 ```
 
-or using Docker Compose:
-
-```console
-docker-compose up kibana
-```
-
 ## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ### 6.8.15-debian-10-r12 & 7.10.2-debian-10-r62 & 7.12.0-debian-10-r0
 
@@ -387,7 +328,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -13,15 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name mysql -e ALLOW_EMPTY_PASSWORD=yes bitnami/mysql:latest
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/mysql/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
-**Warning**: These quick setups are only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -174,6 +165,48 @@ docker-compose up -d
 ```
 
 ## Configuration
+
+### Environment variables
+
+#### Customizable environment variables
+
+| Name                            | Description                                                                                                               | Default Value |
+|---------------------------------|---------------------------------------------------------------------------------------------------------------------------|---------------|
+| `ALLOW_EMPTY_PASSWORD`          | Allow MySQL access without any password.                                                                                  | `no`          |
+| `MYSQL_ROOT_USER`               | MySQL database root user.                                                                                                 | `root`        |
+| `MYSQL_MASTER_PORT_NUMBER`      | Port number for the MySQL master node.                                                                                    | `3306`        |
+| `MYSQL_MASTER_ROOT_USER`        | MySQL database root user of the master host.                                                                              | `root`        |
+| `MYSQL_MASTER_DELAY`            | MySQL database replication delay.                                                                                         | `0`           |
+| `MYSQL_REPLICATION_SLAVE_DUMP`  | Make a dump on master and update slave MySQL database                                                                     | `false`       |
+| `MYSQL_CLIENT_ENABLE_SSL`       | Whether to force SSL for connections to the MySQL database.                                                               | `no`          |
+| `MYSQL_CLIENT_EXTRA_FLAGS`      | Whether to force SSL connections with the "mysql" CLI tool. Useful for applications that rely on the CLI instead of APIs. | `no`          |
+| `MYSQL_STARTUP_WAIT_RETRIES`    | Number of retries waiting for the database to be running.                                                                 | `300`         |
+| `MYSQL_STARTUP_WAIT_SLEEP_TIME` | Sleep time between retries waiting for the database to be running.                                                        | `2`           |
+| `MYSQL_ENABLE_SLOW_QUERY`       | Whether to enable slow query logs.                                                                                        | `0`           |
+| `MYSQL_LONG_QUERY_TIME`         | How much time, in seconds, defines a slow query.                                                                          | `10.0`        |
+
+#### Read-only environment variables
+
+| Name                          | Description                                                | Value                         |
+|-------------------------------|------------------------------------------------------------|-------------------------------|
+| `DB_FLAVOR`                   | SQL database flavor. Valid values: `mariadb` or `mysql`.   | `mysql`                       |
+| `DB_BASE_DIR`                 | Base path for MySQL files.                                 | `${BITNAMI_ROOT_DIR}/mysql`   |
+| `DB_VOLUME_DIR`               | MySQL directory for persisted files.                       | `${BITNAMI_VOLUME_DIR}/mysql` |
+| `DB_DATA_DIR`                 | MySQL directory for data files.                            | `${DB_VOLUME_DIR}/data`       |
+| `DB_BIN_DIR`                  | MySQL directory where executable binary files are located. | `${DB_BASE_DIR}/bin`          |
+| `DB_SBIN_DIR`                 | MySQL directory where service binary files are located.    | `${DB_BASE_DIR}/bin`          |
+| `DB_CONF_DIR`                 | MySQL configuration directory.                             | `${DB_BASE_DIR}/conf`         |
+| `DB_LOGS_DIR`                 | MySQL logs directory.                                      | `${DB_BASE_DIR}/logs`         |
+| `DB_TMP_DIR`                  | MySQL directory for temporary files.                       | `${DB_BASE_DIR}/tmp`          |
+| `DB_CONF_FILE`                | Main MySQL configuration file.                             | `${DB_CONF_DIR}/my.cnf`       |
+| `DB_PID_FILE`                 | MySQL PID file.                                            | `${DB_TMP_DIR}/mysqld.pid`    |
+| `DB_SOCKET_FILE`              | MySQL Server socket file.                                  | `${DB_TMP_DIR}/mysql.sock`    |
+| `DB_DAEMON_USER`              | Users that will execute the MySQL Server process.          | `mysql`                       |
+| `DB_DAEMON_GROUP`             | Group that will execute the MySQL Server process.          | `mysql`                       |
+| `MYSQL_DEFAULT_PORT_NUMBER`   | Default port number to use for the MySQL Server service.   | `3306`                        |
+| `MYSQL_DEFAULT_CHARACTER_SET` | Default MySQL character set.                               | `utf8mb4`                     |
+| `MYSQL_DEFAULT_BIND_ADDRESS`  | Default MySQL bind address.                                | `0.0.0.0`                     |
+| `MYSQL_DISABLE_SERVICE`       | Whether to disable the MySQL service by default.           | `no`                          |
 
 ### Initializing a new instance
 
@@ -388,6 +421,11 @@ docker-compose up --detach --scale mysql-master=1 --scale mysql-slave=3
 The above command scales up the number of slaves to `3`. You can scale down in the same manner.
 
 > **Note**: You should not scale up/down the number of master nodes. Always have only one master node running.
+
+If your master database is missing some binary files, the replication will break. It's possible to add `MYSQL_REPLICATION_SLAVE_DUMP=true` to make a dump on the master and import it on the slave.
+
+> **Note**: The master database must be only used by this process until the end to avoid missing data.
+> **Note**: This process will use "RESET MASTER" on the master database, removing all binary log files that are listed in the index file. It is recommended to make a backup of binary files to avoid possible data loss, in case something goes wrong.
 
 ### Configuration file
 
@@ -659,6 +697,12 @@ $ docker-compose up -d
 * `ALLOW_EMPTY_PASSWORD` has been added to the available env variables. It can be used to allow blank passwords for MySQL.
 * By default the MySQL image requires a root password to start. You can specify it using the `MYSQL_ROOT_PASSWORD` env variable or disable this requirement by setting the `ALLOW_EMPTY_PASSWORD`  env variable to `yes` (testing or development scenarios).
 
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/mysql).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
@@ -669,7 +713,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

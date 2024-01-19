@@ -55,6 +55,19 @@ docker build -t bitnami/APP:latest .
 
 ## Configuration
 
+### Environment variables
+
+#### Customizable environment variables
+
+#### Read-only environment variables
+
+| Name                                     | Description                                                           | Value                                                            |
+|------------------------------------------|-----------------------------------------------------------------------|------------------------------------------------------------------|
+| `SCDF_COMPOSED_TASK_RUNNER_BASE_DIR`     | Base path for SCDF COMPOSED TASK RUNNER files.                        | `${BITNAMI_ROOT_DIR}/spring-cloud-dataflow-composed-task-runner` |
+| `SCDF_COMPOSED_TASK_RUNNER_M2_DIR`       | SCDF COMPOSED TASK RUNNER maven root dir.                             | `/.m2`                                                           |
+| `SCDF_COMPOSED_TASK_RUNNER_DAEMON_USER`  | Users that will execute the SCDF COMPOSED TASK RUNNER Server process. | `dataflow`                                                       |
+| `SCDF_COMPOSED_TASK_RUNNER_DAEMON_GROUP` | Group that will execute the SCDF COMPOSED TASK RUNNER Server process. | `dataflow`                                                       |
+
 ### Running commands
 
 To run tasks inside this container you can use `docker run`:
@@ -73,7 +86,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

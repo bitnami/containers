@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-12-24T08:09:43Z" \
+      org.opencontainers.image.created="2024-01-12T18:02:22Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="5.1.1-debian-11-r2" \
+      org.opencontainers.image.ref.name="5.1.1-debian-11-r6" \
       org.opencontainers.image.title="redmine" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="5.1.1"
@@ -25,11 +25,11 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages acl ca-certificates curl ghostscript git gsfonts imagemagick libaudit1 libbrotli1 libbsd0 libcap-ng0 libcom-err2 libcrypt1 libcurl4 libedit2 libffi7 libgcc-s1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed6 libicu67 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblz4-1 liblzma5 libmariadb3 libmd0 libncurses6 libnettle8 libnghttp2-14 libp11-kit0 libpam0g libpcre2-8-0 libpq5 libpsl5 libreadline-dev libreadline8 librtmp1 libsasl2-2 libssh2-1 libssl-dev libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 libyaml-dev procps sqlite3 zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "yq-4.40.5-0-linux-${OS_ARCH}-debian-11" \
+      "yq-4.40.5-1-linux-${OS_ARCH}-debian-11" \
       "ruby-3.0.6-9-linux-${OS_ARCH}-debian-11" \
       "postgresql-client-16.1.0-0-linux-${OS_ARCH}-debian-11" \
       "mysql-client-11.2.2-0-linux-${OS_ARCH}-debian-11" \
-      "redmine-5.1.1-0-linux-${OS_ARCH}-debian-11" \
+      "redmine-5.1.1-2-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
