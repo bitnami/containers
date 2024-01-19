@@ -92,6 +92,40 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 
 ## Configuration
 
+### Environment variables
+
+#### Customizable environment variables
+
+| Name                          | Description                                                                          | Default Value                           |
+|-------------------------------|--------------------------------------------------------------------------------------|-----------------------------------------|
+| `GRAFANA_TMP_DIR`             | Grafana directory for temporary runtime files.                                       | `${GRAFANA_BASE_DIR}/tmp`               |
+| `GRAFANA_PID_FILE`            | Grafana PID file.                                                                    | `${GRAFANA_TMP_DIR}/grafana.pid`        |
+| `GRAFANA_DEFAULT_PLUGINS_DIR` | Grafana directory for default plugins.                                               | `${GRAFANA_BASE_DIR}/default-plugins`   |
+| `GF_PATHS_HOME`               | Grafana home directory.                                                              | `$GRAFANA_BASE_DIR`                     |
+| `GF_PATHS_CONFIG`             | Grafana configuration file.                                                          | `${GRAFANA_BASE_DIR}/conf/grafana.ini`  |
+| `GF_PATHS_DATA`               | Grafana directory for data files.                                                    | `${GRAFANA_BASE_DIR}/data`              |
+| `GF_PATHS_LOGS`               | Grafana directory for log files.                                                     | `${GRAFANA_BASE_DIR}/logs`              |
+| `GF_PATHS_PLUGINS`            | Grafana directory for plugins.                                                       | `${GF_PATHS_DATA}/plugins`              |
+| `GF_PATHS_PROVISIONING`       | Grafana directory for provisioning configurations.                                   | `${GRAFANA_BASE_DIR}/conf/provisioning` |
+| `GF_INSTALL_PLUGINS_SKIP_TLS` | Whether to skip TLS certificate verification when installing plugins                 | `yes`                                   |
+| `GRAFANA_MIGRATION_LOCK`      | Enable the migration lock mechanism to avoid issues caused by concurrent migrations. | `false`                                 |
+| `GRAFANA_SLEEP_TIME`          | Sleep time between migration status check attempts.                                  | `10`                                    |
+| `GRAFANA_RETRY_ATTEMPTS`      | Number of retries to check migration status.                                         | `12`                                    |
+
+#### Read-only environment variables
+
+| Name                       | Description                                                 | Value                         |
+|----------------------------|-------------------------------------------------------------|-------------------------------|
+| `GRAFANA_BASE_DIR`         | Grafana installation directory.                             | `${BITNAMI_ROOT_DIR}/grafana` |
+| `GRAFANA_BIN_DIR`          | Grafana directory for binary executables.                   | `${GRAFANA_BASE_DIR}/bin`     |
+| `GRAFANA_DAEMON_USER`      | Grafana system user.                                        | `grafana`                     |
+| `GRAFANA_DAEMON_GROUP`     | Grafana system group.                                       | `grafana`                     |
+| `GF_OP_PATHS_CONFIG`       | Grafana Operator configuration directory.                   | `/etc/grafana/grafana.ini`    |
+| `GF_OP_PATHS_DATA`         | Grafana Operator directory for data files.                  | `/var/lib/grafana`            |
+| `GF_OP_PATHS_LOGS`         | Grafana Operator directory for log files.                   | `/var/log/grafana`            |
+| `GF_OP_PATHS_PROVISIONING` | Grafana Operator directory for provisioning configurations. | `/etc/grafana/provisioning`   |
+| `GF_OP_PLUGINS_INIT_DIR`   | Grafana Operator directory for plugins.                     | `/opt/plugins`                |
+
 ### Dev config
 
 Update the `grafana.ini` configuration file in the `/opt/bitnami/grafana/conf` directory to override default configuration options. You only need to add the options you want to override. Config files are applied in the order of:
@@ -257,6 +291,12 @@ You can still build your custom image adding your custom plugins or install them
 ### 6.7.2-debian-10-r18
 
 * Grafana doesn't ship the [`grafana-image-renderer` plugin](https://github.com/grafana/grafana-image-renderer/) by default anymore since it's not compatible with K8s distros with IPv6 disable. Instead, the `GF_INSTALL_PLUGINS` environment variable is set by default including this plugin so it's installed during the container's initialization, users can easily avoid it by overwriting the environment variable.
+
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/grafana).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## Contributing
 
