@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2024-01-10T02:33:22Z" \
+      org.opencontainers.image.created="2024-01-19T10:30:28Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.7.1-debian-11-r3" \
+      org.opencontainers.image.ref.name="1.8.0-debian-11-r0" \
       org.opencontainers.image.title="apisix-ingress-controller" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.7.1"
+      org.opencontainers.image.version="1.8.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,9 +26,9 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "yq-4.40.5-0-linux-${OS_ARCH}-debian-11" \
-      "render-template-1.0.6-4-linux-${OS_ARCH}-debian-11" \
-      "apisix-ingress-controller-1.7.1-2-linux-${OS_ARCH}-debian-11" \
+      "yq-4.40.5-1-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.6-5-linux-${OS_ARCH}-debian-11" \
+      "apisix-ingress-controller-1.8.0-0-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -43,8 +43,9 @@ RUN apt-get autoremove --purge -y curl && \
     apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN useradd -r -u 1001 -g root apisix-ingress-controller
+RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
-ENV APP_VERSION="1.7.1" \
+ENV APP_VERSION="1.8.0" \
     BITNAMI_APP_NAME="apisix-ingress-controller" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/apisix-ingress-controller/bin:$PATH"
 
