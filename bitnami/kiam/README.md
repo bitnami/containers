@@ -13,7 +13,7 @@ From Bitnami, we will update the container image and Helm chart, as usual, bundl
 ## TL;DR
 
 ```console
-docker run --name Kiam bitnami/kiam:latest
+docker run --name kiam bitnami/kiam:latest
 ```
 
 ## Why use Bitnami Images?
@@ -68,6 +68,12 @@ docker run --rm --name kiam bitnami/kiam:latest -- --version
 ```
 
 Check the [official Kiam documentation](https://github.com/uswitch/kiam/tree/master/docs) for a list of the available parameters.
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 
