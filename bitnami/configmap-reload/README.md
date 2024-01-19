@@ -56,6 +56,12 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
+
 ## Configuration
 
 Find how to configure ConfigMap Reload in its [official documentation](https://github.com/jimmidyson/configmap-reload/blob/master/README.md).
