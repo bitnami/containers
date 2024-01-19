@@ -114,7 +114,7 @@ The Schema Registry container can be setup to serve clients securely via TLS. To
 
 The keystore and trustore **must** be mounted in the `/opt/bitnami/schema-registry/certs` directory as `ssl.keystore.jks` and `ssl.truststore.jks` respectively. Currently, only JKS formats are supported. Note that the environment variables `SCHEMA_REGISTRY_SSL_KEYSTORE_LOCATION` or `SCHEMA_REGISTRY_SSL_TRUSTSTORE_LOCATION` **will not** override the expected location or file names. Please follow the instructions provided or you will get this error at startup: 
 
-Here is a docker-compose.yaml example that exposes a TLS listener on port 8082
+Here is a `docker-compose.yml` example that exposes a TLS listener on port `8082`:
 
 ``` yaml
 schema-registry:
