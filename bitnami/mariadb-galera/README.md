@@ -15,13 +15,6 @@ docker run --name mariadb \
   bitnami/mariadb-galera:latest
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/mariadb-galera/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 **Warning**: These quick setups are only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
 
 ## Why use Bitnami Images?
@@ -174,6 +167,66 @@ docker-compose up -d
 ```
 
 ## Configuration
+
+### Environment variables
+
+#### Customizable environment variables
+
+| Name                                  | Description                                                                                                               | Default Value                             |
+|---------------------------------------|---------------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
+| `ALLOW_EMPTY_PASSWORD`                | Allow MariaDB Galera access without any password.                                                                         | `no`                                      |
+| `MARIADB_ROOT_USER`                   | MariaDB Galera database root user.                                                                                        | `root`                                    |
+| `MARIADB_MASTER_PORT_NUMBER`          | Port number for the MariaDB Galera master node.                                                                           | `3306`                                    |
+| `MARIADB_MASTER_ROOT_USER`            | MariaDB Galera database root user of the master host.                                                                     | `root`                                    |
+| `MARIADB_MASTER_DELAY`                | MariaDB Galera database replication delay.                                                                                | `0`                                       |
+| `MARIADB_REPLICATION_SLAVE_DUMP`      | Make a dump on master and update slave MariaDB Galera database                                                            | `false`                                   |
+| `MARIADB_SKIP_TEST_DB`                | Whether to skip creating the test database.                                                                               | `no`                                      |
+| `MARIADB_CLIENT_ENABLE_SSL`           | Whether to force SSL for connections to the MariaDB Galera database.                                                      | `no`                                      |
+| `MARIADB_CLIENT_EXTRA_FLAGS`          | Whether to force SSL connections with the "mysql" CLI tool. Useful for applications that rely on the CLI instead of APIs. | `no`                                      |
+| `MARIADB_STARTUP_WAIT_RETRIES`        | Number of retries waiting for the database to be running.                                                                 | `300`                                     |
+| `MARIADB_STARTUP_WAIT_SLEEP_TIME`     | Sleep time between retries waiting for the database to be running.                                                        | `2`                                       |
+| `MARIADB_ENABLE_SLOW_QUERY`           | Whether to enable slow query logs.                                                                                        | `0`                                       |
+| `MARIADB_LONG_QUERY_TIME`             | How much time, in seconds, defines a slow query.                                                                          | `10.0`                                    |
+| `MARIADB_GALERA_CONF_DIR`             | MariaDB Galera configuration directory                                                                                    | `/opt/bitnami/mariadb/conf`               |
+| `MARIADB_GALERA_MOUNTED_CONF_DIR`     | Directory for including custom configuration files (that override the default generated ones)                             | `/bitnami/conf`                           |
+| `MARIADB_GALERA_CLUSTER_NAME`         | Galera cluster name.                                                                                                      | `$DB_GALERA_DEFAULT_CLUSTER_NAME`         |
+| `MARIADB_GALERA_SST_METHOD`           | State Snapshot Transfer (SST) method to use.                                                                              | `$DB_GALERA_DEFAULT_SST_METHOD`           |
+| `MARIADB_GALERA_MARIABACKUP_USER`     | Username to use with the "mariabackup" tool for State Snapshot Transfer (SST).                                            | `$DB_GALERA_DEFAULT_MARIABACKUP_USER`     |
+| `MARIADB_GALERA_MARIABACKUP_PASSWORD` | Password for the username to use with the "mariabackup" tool for State Snapshot Transfer (SST).                           | `$DB_GALERA_DEFAULT_MARIABACKUP_PASSWORD` |
+| `MARIADB_ENABLE_LDAP`                 | Whether to enable LDAP for MariaDB Galera.                                                                                | `no`                                      |
+| `MARIADB_ENABLE_TLS`                  | Whether to enable SSL/TLS for MariaDB Galera.                                                                             | `no`                                      |
+| `MARIADB_REPLICATION_USER`            | MariaDB Galera replication database user.                                                                                 | `monitor`                                 |
+| `MARIADB_REPLICATION_PASSWORD`        | Password for the MariaDB Galera replication database user.                                                                | `monitor`                                 |
+
+#### Read-only environment variables
+
+| Name                                      | Description                                                                                                         | Value                             |
+|-------------------------------------------|---------------------------------------------------------------------------------------------------------------------|-----------------------------------|
+| `DB_FLAVOR`                               | SQL database flavor. Valid values: `mariadb` or `mysql`.                                                            | `mariadb`                         |
+| `DB_BASE_DIR`                             | Base path for MariaDB Galera files.                                                                                 | `${BITNAMI_ROOT_DIR}/mariadb`     |
+| `DB_VOLUME_DIR`                           | MariaDB Galera directory for persisted files.                                                                       | `${BITNAMI_VOLUME_DIR}/mariadb`   |
+| `DB_DATA_DIR`                             | MariaDB Galera directory for data files.                                                                            | `${DB_VOLUME_DIR}/data`           |
+| `DB_BIN_DIR`                              | MariaDB Galera directory where executable binary files are located.                                                 | `${DB_BASE_DIR}/bin`              |
+| `DB_SBIN_DIR`                             | MariaDB Galera directory where service binary files are located.                                                    | `${DB_BASE_DIR}/sbin`             |
+| `DB_CONF_DIR`                             | MariaDB Galera configuration directory.                                                                             | `${DB_BASE_DIR}/conf`             |
+| `DB_LOGS_DIR`                             | MariaDB Galera logs directory.                                                                                      | `${DB_BASE_DIR}/logs`             |
+| `DB_TMP_DIR`                              | MariaDB Galera directory for temporary files.                                                                       | `${DB_BASE_DIR}/tmp`              |
+| `DB_CONF_FILE`                            | Main MariaDB Galera configuration file.                                                                             | `${DB_CONF_DIR}/my.cnf`           |
+| `DB_PID_FILE`                             | MariaDB Galera PID file.                                                                                            | `${DB_TMP_DIR}/mysqld.pid`        |
+| `DB_SOCKET_FILE`                          | MariaDB Galera Server socket file.                                                                                  | `${DB_TMP_DIR}/mysql.sock`        |
+| `DB_DAEMON_USER`                          | Users that will execute the MariaDB Galera Server process.                                                          | `mysql`                           |
+| `DB_DAEMON_GROUP`                         | Group that will execute the MariaDB Galera Server process.                                                          | `mysql`                           |
+| `MARIADB_DEFAULT_PORT_NUMBER`             | Default port number to use for the MariaDB Galera Server service.                                                   | `3306`                            |
+| `MARIADB_DEFAULT_CHARACTER_SET`           | Default MariaDB Galera character set.                                                                               | `utf8mb4`                         |
+| `MARIADB_DEFAULT_BIND_ADDRESS`            | Default MariaDB Galera bind address.                                                                                | `0.0.0.0`                         |
+| `MARIADB_DISABLE_SERVICE`                 | Whether to disable the MariaDB Galera service by default.                                                           | `no`                              |
+| `MARIADB_GALERA_GRASTATE_FILE`            | Path to the Galera "grastate.dat" file.                                                                             | `${DB_DATA_DIR}/grastate.dat`     |
+| `MARIADB_GALERA_BOOTSTRAP_DIR`            | Path to the Galera directory that will contain a file for checking whether the node is already bootstrapped or not. | `${DB_VOLUME_DIR}/.bootstrap`     |
+| `MARIADB_GALERA_BOOTSTRAP_FILE`           | Path to the Galera file that will check whether the node is already bootstrapped or not.                            | `${DB_GALERA_BOOTSTRAP_DIR}/done` |
+| `MARIADB_GALERA_DEFAULT_CLUSTER_ADDRESS`  | Default Galera cluster address.                                                                                     | `gcomm://`                        |
+| `MARIADB_GALERA_DEFAULT_CLUSTER_NAME`     | Default Galera cluster name.                                                                                        | `galera`                          |
+| `MARIADB_GALERA_DEFAULT_SST_METHOD`       | Default State Snapshot Transfer (SST) method to use.                                                                | `mariabackup`                     |
+| `MARIADB_GALERA_DEFAULT_MARIABACKUP_USER` | Default username to use with the "mariabackup" tool for State Snapshot Transfer (SST).                              | `mariabackup`                     |
 
 ### Initializing a new instance
 
@@ -700,6 +753,12 @@ docker-compose up mariadb
 
 * `10.1.43-centos-7-r78`, `10.2.30-centos-7-r40`, `10.3.21-centos-7-r41`, and `10.4.11-centos-7-r32` are considered the latest images based on CentOS.
 * Standard supported distros: Debian & OEL.
+
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/mariadb-galera).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## Contributing
 
