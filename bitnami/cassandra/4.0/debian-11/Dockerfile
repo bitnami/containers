@@ -8,10 +8,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2024-01-18T20:19:00Z" \
+      org.opencontainers.image.created="2024-01-19T16:35:59Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.0.11-debian-11-r88" \
+      org.opencontainers.image.ref.name="4.0.11-debian-11-r89" \
       org.opencontainers.image.title="cassandra" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="4.0.11"
@@ -46,6 +46,7 @@ RUN apt-get autoremove --purge -y curl && \
 RUN chmod g+rwX /opt/bitnami
 RUN ln -s /opt/bitnami/scripts/cassandra/entrypoint.sh /entrypoint.sh
 RUN ln -s /opt/bitnami/scripts/cassandra/run.sh /run.sh
+RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/cassandra/postunpack.sh
