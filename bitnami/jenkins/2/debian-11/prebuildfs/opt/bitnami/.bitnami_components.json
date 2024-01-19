@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "17.0.9-11-6"
+        "version": "17.0.10-13-0"
     },
     "jenkins": {
         "arch": "amd64",
@@ -15,6 +15,6 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.6-4"
+        "version": "1.0.6-5"
     }
 }
