@@ -107,30 +107,10 @@ You can overwrite the default configuration file by mounting your own configurat
 docker run --name fluentd -v /path/to/fluentd.conf:/opt/bitnami/fluentd/conf/fluentd.conf bitnami/fluentd:latest
 ```
 
-You can also do this by changing the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/fluentd/docker-compose.yml) file present in this repository:
-
-```yaml
-fluentd:
-  ...
-  volumes:
-    - /path/to/fluentd.conf:/opt/bitnami/fluentd/conf/fluentd.conf
-  ...
-```
-
 You can also extend the default configuration by importing your custom configuration with the "@include" directive. It is a simple as creating a directory with you custom config files and mount it on the directory `/opt/bitnami/fluentd/conf/conf.d`:
 
 ```console
 docker run --name fluentd -v /path/to/custom-conf-directory:/opt/bitnami/fluentd/conf/conf.d bitnami/fluentd:latest
-```
-
-You can also do this by changing the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/fluentd/docker-compose.yml) file present in this repository:
-
-```yaml
-fluentd:
-  ...
-  volumes:
-    - /path/to/custom-conf-directory:/opt/bitnami/fluentd/conf/conf.d
-  ...
 ```
 
 Find more information about this feature, consult [official documentation](https://docs.fluentd.org/configuration/config-file)
@@ -229,6 +209,12 @@ Re-create your container from the new image, restoring your backup if necessary.
 ```console
 docker run --name fluentd bitnami/fluentd:latest
 ```
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/fluentd).
 
 ## Contributing
 
