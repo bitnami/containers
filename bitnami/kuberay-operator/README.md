@@ -13,13 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run -it --name kuberay-operator bitnami/kuberay-operator
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/kuberay-operator/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ## Why use Bitnami Images?
 
 - Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -73,18 +66,10 @@ Bitnami provides up-to-date versions of KubeRay, including security patches, soo
 docker pull bitnami/kuberay-operator:latest
 ```
 
-or if you're using Docker Compose, update the value of the image property to `bitnami/kuberay-operator:latest`.
-
 #### Step 2: Remove the currently running container
 
 ```console
 docker rm -v kuberay-operator
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v kuberay-operator
 ```
 
 #### Step 3: Run the new image
@@ -93,12 +78,6 @@ Re-create your container from the new image.
 
 ```console
 docker run --name kuberay-operator bitnami/kuberay-operator:latest
-```
-
-or using Docker Compose:
-
-```console
-docker-compose up kuberay-operator
 ```
 
 ## Configuration
@@ -112,6 +91,12 @@ docker run --rm --name kuberay-operator bitnami/kuberay-operator:latest --help
 ```
 
 Check the [official KubeRay documentation](https://ray.io) for more information about how to use KubeRay.
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/kuberay).
 
 ## Contributing
 
