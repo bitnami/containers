@@ -12,14 +12,8 @@
 docker run --name concourse bitnami/concourse:latest
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/concourse/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
-**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [PostgreSQL container](https://github.com/bitnami/containers/tree/main/bitnami/postgresql#readme) for a more secure deployment.
+**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [PostgreSQL container](https://github.com/bitnami/containers/tree/main/bit
+nami/postgresql#readme) for a more secure deployment.
 
 ## Why use Bitnami Images?
 
@@ -120,49 +114,54 @@ Find how to configure Concourse in its [official documentation](https://concours
 
 ### Environment variables
 
-| Name                                               | Description                                                             | Default Value                                | Can be set |
-|----------------------------------------------------|-------------------------------------------------------------------------|----------------------------------------------|------------|
-| `$CONCOURSE_BASE_DIR`                              | Concourse installation directory.                                       | `${BITNAMI_ROOT_DIR}/concourse`              |            |
-| `$CONCOURSE_BIN_DIR`                               | Concourse directory for binary files.                                   | `${CONCOURSE_BASE_DIR}/bin`                  |            |
-| `$CONCOURSE_LOGS_DIR`                              | Concourse logs directory.                                               | `${CONCOURSE_BASE_DIR}/logs`                 |            |
-| `$CONCOURSE_TMP_DIR`                               | Concourse temporary directory.                                          | `${CONCOURSE_BASE_DIR}/tmp`                  |            |
-| `$CONCOURSE_WEB_PUBLIC_DIR`                        | Concourse web/public directory.                                         | `${CONCOURSE_BASE_DIR}/web/public`           | &check;    |
-| `$CONCOURSE_WEB_LOG_FILE`                          | Concourse log file for the web service.                                 | `${CONCOURSE_LOGS_DIR}/concourse-web.log`    |            |
-| `$CONCOURSE_WEB_PID_FILE`                          | Concourse PID file for the web service.                                 | `${CONCOURSE_TMP_DIR}/concourse-web.pid`     |            |
-| `$CONCOURSE_WORKER_LOG_FILE`                       | Concourse log file for the worker service.                              | `${CONCOURSE_LOGS_DIR}/concourse-worker.log` |            |
-| `$CONCOURSE_WORKER_PID_FILE`                       | Concourse PID file for the worker service.                              | `${CONCOURSE_TMP_DIR}/concourse-worker.pid`  |            |
-| `$CONCOURSE_KEY_DIR`                               | Concourse keys directory.                                               | `${CONCOURSE_BASE_DIR}/concourse-keys`       |            |
-| `$CONCOURSE_SESSION_SIGNING_KEY_FILE`              | Concourse private key for signing.                                      | `${CONCOURSE_KEY_DIR}/session_signing_key`   | &check;    |
-| `$CONCOURSE_TSA_HOST_KEY_FILE`                     | Concourse private key for TSA.                                          | `${CONCOURSE_KEY_DIR}/tsa_host_key`          | &check;    |
-| `$CONCOURSE_TSA_HOST_PUBLIC_KEY_FILE`              | Concourse public key for TSA.                                           | `${CONCOURSE_TSA_HOST_KEY_FILE}.pub`         | &check;    |
-| `$CONCOURSE_TSA_WORKER_KEY_FILE`                   | Concourse private key for worker.                                       | `${CONCOURSE_KEY_DIR}/worker_key`            | &check;    |
-| `$CONCOURSE_TSA_WORKER_PUBLIC_KEY_FILE`            | Concourse public key for worker.                                        | `${CONCOURSE_TSA_WORKER_PRIVATE_KEY}.pub`    | &check;    |
-| `$CONCOURSE_VOLUME_DIR`                            | Concourse directory for mounted data.                                   | `${BITNAMI_VOLUME_DIR}/concourse`            |            |
-| `$CONCOURSE_DAEMON_USER`                           | Concourse daemon system user.                                           | `concourse`                                  |            |
-| `$CONCOURSE_DAEMON_GROUP`                          | Concourse daemon system group.                                          | `concourse`                                  |            |
-| `$CONCOURSE_USERNAME`                              | Concourse main local user.                                              | `user`                                       | &check;    |
-| `$CONCOURSE_PASSWORD`                              | Concourse local user password.                                          | `bitnami`                                    | &check;    |
-| `$CONCOURSE_RUNTIME`                               | Concourse runtime.                                                      | `containerd`                                 | &check;    |
-| `$CONCOURSE_WEB_PORT_NUMBER`                       | Concourse Web port.                                                     | `8080`                                       | &check;    |
-| `$CONCOURSE_WEB_TSA_PORT_NUMBER`                   | Concourse Web TSA port                                                  | `2222`                                       | &check;    |
-| `$CONCOURSE_WEB_TSA_DEBUG_PORT_NUMBER`             | Concourse Web Debug TSA port                                            | `2221`                                       | &check;    |
-| `$CONCOURSE_WORKER_GARDEN_PORT_NUMBER`             | Concourse Worker Garden port                                            | `7777`                                       | &check;    |
-| `$CONCOURSE_WORKER_BAGGAGECLAIM_PORT_NUMBER`       | Concourse worker Baggageclaim port                                      | `7788`                                       | &check;    |
-| `$CONCOURSE_WORKER_BAGGAGECLAIM_DEBUG_PORT_NUMBER` | Concourse worker Baggageclaim debug port                                | `7787`                                       | &check;    |
-| `$CONCOURSE_WORKER_HEALTH_PORT_NUMBER`             | Concourse worker healthcheck port                                       | `8888`                                       | &check;    |
-| `$CONCOURSE_BIND_IP`                               | Concourse bind IP                                                       | `0.0.0.0`                                    | &check;    |
-| `$CONCOURSE_TSA_BIND_IP`                           | Concourse TSA bind IP                                                   | `127.0.0.1`                                  | &check;    |
-| `$CONCOURSE_TSA_DEBUG_BIND_IP`                     | Concourse TSA debug bind IP                                             | `127.0.0.1`                                  | &check;    |
-| `$CONCOURSE_EXTERNAL_URL`                          | Concourse external URL                                                  | `http://127.0.0.1`                           | &check;    |
-| `$CONCOURSE_PEER_ADDRESS`                          | Concourse peer address                                                  | `127.0.0.1`                                  | &check;    |
-| `$CONCOURSE_APACHE_HTTP_PORT_NUMBER`               | Concourse Web HTTP port, exposed via Apache with basic authentication.  | `80`                                         | &check;    |
-| `$CONCOURSE_APACHE_HTTPS_PORT_NUMBER`              | Concourse Web HTTPS port, exposed via Apache with basic authentication. | `443`                                        | &check;    |
-| `$CONCOURSE_DATABASE_HOST`                         | Database host address.                                                  | `127.0.0.1`                                  | &check;    |
-| `$CONCOURSE_DATABASE_PORT_NUMBER`                  | Database host port.                                                     | `5432`                                       | &check;    |
-| `$CONCOURSE_DATABASE_NAME`                         | Database name.                                                          | `bitnami_concourse`                          | &check;    |
-| `$CONCOURSE_DATABASE_USERNAME`                     | Database username.                                                      | `bn_concourse`                               | &check;    |
-| `$CONCOURSE_DATABASE_PASSWORD`                     | Database password.                                                      |                                              | &check;    |
+#### Customizable environment variables
 
+| Name                                              | Description                                                             | Default Value                              |
+|---------------------------------------------------|-------------------------------------------------------------------------|--------------------------------------------|
+| `CONCOURSE_WEB_PUBLIC_DIR`                        | Concourse web/public directory.                                         | `${CONCOURSE_BASE_DIR}/web/public`         |
+| `CONCOURSE_SESSION_SIGNING_KEY_FILE`              | Concourse private key for signing.                                      | `${CONCOURSE_KEY_DIR}/session_signing_key` |
+| `CONCOURSE_TSA_HOST_KEY_FILE`                     | Concourse private key for TSA.                                          | `${CONCOURSE_KEY_DIR}/tsa_host_key`        |
+| `CONCOURSE_TSA_HOST_PUBLIC_KEY_FILE`              | Concourse public key for TSA.                                           | `${CONCOURSE_TSA_HOST_KEY_FILE}.pub`       |
+| `CONCOURSE_TSA_WORKER_KEY_FILE`                   | Concourse private key for worker.                                       | `${CONCOURSE_KEY_DIR}/worker_key`          |
+| `CONCOURSE_TSA_WORKER_PUBLIC_KEY_FILE`            | Concourse public key for worker.                                        | `${CONCOURSE_TSA_WORKER_PRIVATE_KEY}.pub`  |
+| `CONCOURSE_USERNAME`                              | Concourse main local user.                                              | `user`                                     |
+| `CONCOURSE_PASSWORD`                              | Concourse local user password.                                          | `bitnami`                                  |
+| `CONCOURSE_RUNTIME`                               | Concourse runtime.                                                      | `containerd`                               |
+| `CONCOURSE_WEB_PORT_NUMBER`                       | Concourse Web port.                                                     | `8080`                                     |
+| `CONCOURSE_WEB_TSA_PORT_NUMBER`                   | Concourse Web TSA port                                                  | `2222`                                     |
+| `CONCOURSE_WEB_TSA_DEBUG_PORT_NUMBER`             | Concourse Web Debug TSA port                                            | `2221`                                     |
+| `CONCOURSE_WORKER_GARDEN_PORT_NUMBER`             | Concourse Worker Garden port                                            | `7777`                                     |
+| `CONCOURSE_WORKER_BAGGAGECLAIM_PORT_NUMBER`       | Concourse worker Baggageclaim port                                      | `7788`                                     |
+| `CONCOURSE_WORKER_BAGGAGECLAIM_DEBUG_PORT_NUMBER` | Concourse worker Baggageclaim debug port                                | `7787`                                     |
+| `CONCOURSE_WORKER_HEALTH_PORT_NUMBER`             | Concourse worker healthcheck port                                       | `8888`                                     |
+| `CONCOURSE_BIND_IP`                               | Concourse bind IP                                                       | `0.0.0.0`                                  |
+| `CONCOURSE_TSA_BIND_IP`                           | Concourse TSA bind IP                                                   | `127.0.0.1`                                |
+| `CONCOURSE_TSA_DEBUG_BIND_IP`                     | Concourse TSA debug bind IP                                             | `127.0.0.1`                                |
+| `CONCOURSE_EXTERNAL_URL`                          | Concourse external URL                                                  | `http://127.0.0.1`                         |
+| `CONCOURSE_PEER_ADDRESS`                          | Concourse peer address                                                  | `127.0.0.1`                                |
+| `CONCOURSE_APACHE_HTTP_PORT_NUMBER`               | Concourse Web HTTP port, exposed via Apache with basic authentication.  | `80`                                       |
+| `CONCOURSE_APACHE_HTTPS_PORT_NUMBER`              | Concourse Web HTTPS port, exposed via Apache with basic authentication. | `443`                                      |
+| `CONCOURSE_DATABASE_HOST`                         | Database host address.                                                  | `127.0.0.1`                                |
+| `CONCOURSE_DATABASE_PORT_NUMBER`                  | Database host port.                                                     | `5432`                                     |
+| `CONCOURSE_DATABASE_NAME`                         | Database name.                                                          | `bitnami_concourse`                        |
+| `CONCOURSE_DATABASE_USERNAME`                     | Database username.                                                      | `bn_concourse`                             |
+
+#### Read-only environment variables
+
+| Name                        | Description                                | Value                                        |
+|-----------------------------|--------------------------------------------|----------------------------------------------|
+| `CONCOURSE_BASE_DIR`        | Concourse installation directory.          | `${BITNAMI_ROOT_DIR}/concourse`              |
+| `CONCOURSE_BIN_DIR`         | Concourse directory for binary files.      | `${CONCOURSE_BASE_DIR}/bin`                  |
+| `CONCOURSE_LOGS_DIR`        | Concourse logs directory.                  | `${CONCOURSE_BASE_DIR}/logs`                 |
+| `CONCOURSE_TMP_DIR`         | Concourse temporary directory.             | `${CONCOURSE_BASE_DIR}/tmp`                  |
+| `CONCOURSE_WEB_LOG_FILE`    | Concourse log file for the web service.    | `${CONCOURSE_LOGS_DIR}/concourse-web.log`    |
+| `CONCOURSE_WEB_PID_FILE`    | Concourse PID file for the web service.    | `${CONCOURSE_TMP_DIR}/concourse-web.pid`     |
+| `CONCOURSE_WORKER_LOG_FILE` | Concourse log file for the worker service. | `${CONCOURSE_LOGS_DIR}/concourse-worker.log` |
+| `CONCOURSE_WORKER_PID_FILE` | Concourse PID file for the worker service. | `${CONCOURSE_TMP_DIR}/concourse-worker.pid`  |
+| `CONCOURSE_KEY_DIR`         | Concourse keys directory.                  | `${CONCOURSE_BASE_DIR}/concourse-keys`       |
+| `CONCOURSE_VOLUME_DIR`      | Concourse directory for mounted data.      | `${BITNAMI_VOLUME_DIR}/concourse`            |
+| `CONCOURSE_DAEMON_USER`     | Concourse daemon system user.              | `concourse`                                  |
+| `CONCOURSE_DAEMON_GROUP`    | Concourse daemon system group.             | `concourse`                                  |
 
 ## Logging
 
@@ -207,6 +206,12 @@ Re-create your container from the new image.
 ```console
 docker run --name concourse bitnami/concourse:latest
 ```
+
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/concourse).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## Contributing
 
