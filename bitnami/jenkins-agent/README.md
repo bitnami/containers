@@ -64,17 +64,28 @@ docker build -t bitnami/APP:latest .
 
 ### Environment variables
 
-When you start the Jenkins Agent image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
+#### Customizable environment variables
 
-* For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/jenkins/docker-compose.yml) file present in this repository:
+| Name                       | Description                                                                        | Default Value                      |
+|----------------------------|------------------------------------------------------------------------------------|------------------------------------|
+| `JENKINS_AGENT_WORKDIR`    | The working directory of the remoting instance (stores cache and logs by default). | `${JENKINS_AGENT_VOLUME_DIR}/home` |
+| `JENKINS_AGENT_WEB_SOCKET` | Make a WebSocket connection to Jenkins rather than using the TCP port              | `false`                            |
+| `JAVA_HOME`                | Java Home directory.                                                               | `${BITNAMI_ROOT_DIR}/java`         |
 
-    ```yaml
-    jenkins-agent:
-      ...
-      environment:
-        - JENKINS_URL=http://jenkins:port
-      ...
-    ```
+#### Read-only environment variables
+
+| Name                         | Description                                          | Value                                         |
+|------------------------------|------------------------------------------------------|-----------------------------------------------|
+| `JENKINS_AGENT_BASE_DIR`     | Jenkins Agent installation directory.                | `${BITNAMI_ROOT_DIR}/jenkins-agent`           |
+| `JENKINS_AGENT_LOGS_DIR`     | Jenkins Agent directory for log files.               | `${JENKINS_AGENT_BASE_DIR}/logs`              |
+| `JENKINS_AGENT_LOG_FILE`     | Path to the Jenkins Agent log file.                  | `${JENKINS_AGENT_LOGS_DIR}/jenkins-agent.log` |
+| `JENKINS_AGENT_TMP_DIR`      | Jenkins Agent directory for runtime temporary files. | `${JENKINS_AGENT_BASE_DIR}/tmp`               |
+| `JENKINS_AGENT_PID_FILE`     | Path to the Jenkins Agent PID file.                  | `${JENKINS_AGENT_TMP_DIR}/jenkins-agent.pid`  |
+| `JENKINS_AGENT_VOLUME_DIR`   | Persistence base directory.                          | `${BITNAMI_VOLUME_DIR}/jenkins`               |
+| `JENKINS_AGENT_DAEMON_USER`  | Jenkins Agent system user.                           | `jenkins`                                     |
+| `JENKINS_AGENT_DAEMON_GROUP` | Jenkins Agent system group.                          | `jenkins`                                     |
+
+When you start the Jenkins Agent image, you can adjust the configuration of the instance by passing one or more environment variables either on the `docker run` command line. If you want to add a new environment variable:
 
 * For manual execution add a `--env` option with each variable and value:
 
@@ -84,37 +95,12 @@ When you start the Jenkins Agent image, you can adjust the configuration of the 
       bitnami/jenkins-agent:latest
     ```
 
-Available environment variables:
-
-#### User and Site configuration
-
-* `JENKINS_AGENT_WORKDIR`: The working directory of the remoting instance (stores cache and logs by default). Default: **/bitnami/jenkins/home**
-* `JENKINS_URL`: Specify the Jenkins root URLs to connect to.
-* `JENKINS_AGENT_TUNNEL`: Connect to the specified host and port, instead of connecting directly to Jenkins. Useful when connection to Jenkins needs to be tunneled.
-* `JENKINS_AGENT_PROTOCOLS`: Specify the remoting protocols to attempt when instanceIdentity is provided.
-* `JENKINS_AGENT_DIRECT_CONNECTION`: Connect directly to this TCP agent port, skipping the HTTP(S) connection.
-* `JENKINS_AGENT_INSTANCE_IDENTITY`: The base64 encoded InstanceIdentity byte array of the Jenkins controller.
-* `JENKINS_AGENT_WEB_SOCKET`: Make a WebSocket connection to Jenkins rather than using the TCP port. Default: **false**
-* `JENKINS_AGENT_SECRET`: Jenkins Agent name.
-* `JENKINS_AGENT_NAME`: Jenkins Agent secret.
-
-##### JAVA configuration
-
-* `JAVA_OPTS`: Customize JVM parameters. No defaults.
-* `JAVA_HOME`: Java Home directory. Default: **/opt/bitnami/java**
-
 ## Logging
 
 The Bitnami Jenkins Agent Docker image sends the container logs to `stdout`. To view the logs:
 
 ```console
 docker logs jenkins
-```
-
-Or using Docker Compose:
-
-```console
-docker-compose logs jenkins
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -134,6 +120,12 @@ FROM bitnami/jenkins-agent
 ## Put your customizations below
 ...
 ```
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 
