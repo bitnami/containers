@@ -13,13 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run -it --name fluxcd-helm-controller bitnami/fluxcd-helm-controller
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/fluxcd-helm-controller/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -73,18 +66,10 @@ Bitnami provides up-to-date versions of Flux Helm Controller, including security
 docker pull bitnami/fluxcd-helm-controller:latest
 ```
 
-or if you're using Docker Compose, update the value of the image property to `bitnami/fluxcd-helm-controller:latest`.
-
 #### Step 2: Remove the currently running container
 
 ```console
 docker rm -v fluxcd-helm-controller
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v fluxcd-helm-controller
 ```
 
 #### Step 3: Run the new image
@@ -93,12 +78,6 @@ Re-create your container from the new image.
 
 ```console
 docker run --name fluxcd-helm-controller bitnami/fluxcd-helm-controller:latest
-```
-
-or using Docker Compose:
-
-```console
-docker-compose up fluxcd-helm-controller
 ```
 
 ## Configuration
@@ -112,6 +91,12 @@ docker run --rm --name fluxcd-helm-controller bitnami/fluxcd-helm-controller:lat
 ```
 
 Check the [official Flux Helm Controller documentation](https://github.com/fluxcd/helm-controller) for more information about how to use Flux Helm Controller.
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 
