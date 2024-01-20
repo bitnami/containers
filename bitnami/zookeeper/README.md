@@ -13,18 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name zookeeper bitnami/zookeeper:latest
 ```
 
-### Docker Compose
-
-```yaml
-version: '2'
-
-services:
-  zookeeper:
-    image: 'bitnami/zookeeper:latest'
-    ports:
-      - '2181:2181'
-```
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -174,59 +162,69 @@ docker-compose up -d
 
 ## Configuration
 
-The configuration can easily be setup with the Bitnami Apache ZooKeeper Docker image using the following environment variables:
+### Environment variables
 
-* `ZOO_PORT_NUMBER`: Apache ZooKeeper client port. Default: **2181**
-* `ZOO_SERVER_ID`: ID of the server in the ensemble. Default: **1**
-* `ZOO_TICK_TIME`: Basic time unit in milliseconds used by Apache ZooKeeper for heartbeats. Default: **2000**
-* `ZOO_PRE_ALLOC_SIZE`': Block size for transaction log file. Default: **65536**
-* `ZOO_SNAPCOUNT`: The number of transactions recorded in the transaction log before a snapshot can be taken (and the transaction log rolled). Default: **100000**
-* `ZOO_INIT_LIMIT`: Apache ZooKeeper uses to limit the length of time the Apache ZooKeeper servers in quorum have to connect to a leader. Default: **10**
-* `ZOO_SYNC_LIMIT`: How far out of date a server can be from a leader. Default: **5**
-* `ZOO_MAX_CNXNS`: Limits the total number of concurrent connections that can be made to an Apache ZooKeeper server. Setting it to 0 entirely removes the limit. Default: **0**
-* `ZOO_MAX_CLIENT_CNXNS`: Limits the number of concurrent connections that a single client may make to a single member of the Apache ZooKeeper ensemble. Default: **60**
-* `ZOO_4LW_COMMANDS_WHITELIST`: List of whitelisted [4LW](https://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_4lw) commands. Default: **srvr, mntr**
-* `ZOO_SERVERS`: Comma, space or semi-colon separated list of servers. Example: zoo1:2888:3888,zoo2:2888:3888 or if specifying server IDs zoo1:2888:3888::1,zoo2:2888:3888::2. Default: No defaults.
-* `ZOO_CLIENT_USER`: User that will use Apache ZooKeeper clients to auth. Default: No defaults.
-* `ZOO_CLIENT_PASSWORD`: Password that will use Apache ZooKeeper clients to auth. Default: No defaults.
-* `ZOO_CLIENT_PASSWORD_FILE`: Absolute path to a file that contains the password that will be used by Apache ZooKeeper clients to perform authentication. Default: No defaults.
-* `ZOO_SERVER_USERS`: Comma, semicolon or whitespace separated  list of user to be created.  Example: user1,user2,admin. Default: No defaults
-* `ZOO_SERVER_PASSWORDS`: Comma, semicolon or whitespace separated list of passwords to assign to users when created. Example: pass4user1, pass4user2, pass4admin. Default: No defaults
-* `ZOO_SERVER_PASSWORDS_FILE`: Absolute path to a file that contains a comma, semicolon or whitespace separated list of passwords to assign to users when created. Example: pass4user1, pass4user2, pass4admin. Default: No defaults
-* `ZOO_ENABLE_AUTH`: Enable Apache ZooKeeper auth. It uses SASL/Digest-MD5. Default: **no**
-* `ZOO_RECONFIG_ENABLED`: Enable Apache ZooKeeper Dynamic Reconfiguration. Default: **no**
-* `ZOO_LISTEN_ALLIPS_ENABLED`: Listen for connections from its peers on all available IP addresses. Default: **no**
-* `ZOO_AUTOPURGE_INTERVAL`: The time interval in hours for which the autopurge task is triggered. Set to a positive integer (1 and above) to enable auto purging of old snapshots and log files. Default: **0**
-* `ZOO_MAX_SESSION_TIMEOUT`: Maximum session timeout in milliseconds that the server will allow the client to negotiate. Default: **40000**
-* `ZOO_AUTOPURGE_RETAIN_COUNT`: When auto purging is enabled, Apache ZooKeeper retains the most recent snapshots and the corresponding transaction logs in the dataDir and dataLogDir respectively to this number and deletes the rest. Minimum value is 3. Default: **3**
-* `ZOO_HEAP_SIZE`: Size in MB for the Java Heap options (Xmx and XMs). This env var is ignored if Xmx an Xms are configured via `JVMFLAGS`. Default: **1024**
-* `ZOO_ENABLE_PROMETHEUS_METRICS`: Expose Prometheus metrics. Default: **no**
-* `ZOO_PROMETHEUS_METRICS_PORT_NUMBER`: Port where a Jetty server will expose Prometheus metrics. Default: **7000**
-* `ALLOW_ANONYMOUS_LOGIN`: If set to true, Allow to accept connections from unauthenticated users. Default: **no**
-* `ZOO_LOG_LEVEL`: Apache ZooKeeper log level. Available levels are: `ALL`, `DEBUG`, `INFO`, `WARN`, `ERROR`, `FATAL`, `OFF`, `TRACE`. Default: **INFO**
-* `JVMFLAGS`: Default JVMFLAGS for the Apache ZooKeeper process. Default: No defaults
-* `ZOO_TLS_CLIENT_ENABLE`: Enable tls for client communication. Default: **false**
-* `ZOO_TLS_PORT_NUMBER`: Zookeeper TLS port. Default: 3181
-* `ZOO_TLS_CLIENT_KEYSTORE_FILE`: KeyStore file: Default: No Defaults
-* `ZOO_TLS_CLIENT_KEYSTORE_PASSWORD`: KeyStore file password. This can be an environment variable. It will be evaluated by bash. Default: No Defaults
-* `ZOO_TLS_CLIENT_TRUSTSTORE_FILE`: TrustStore file: Default: No Defaults
-* `ZOO_TLS_CLIENT_TRUSTSTORE_PASSWORD`: TrustStore file password. This can be an environment variable. It will be evaluated by bash. Default: No Defaults
-* `ZOO_TLS_CLIENT_AUTH`: Specifies options to authenticate TLS connections from clients. Available values are: `none`, `want`, `need`. Default: **need**
-* `ZOO_TLS_QUORUM_ENABLE`: Enable tls for quorum communication. Default: **false**
-* `ZOO_TLS_QUORUM_KEYSTORE_FILE`: KeyStore file: Default: No Defaults
-* `ZOO_TLS_QUORUM_KEYSTORE_PASSWORD`: KeyStore file password. This can be an environment variable. It will be evaluated by bash. Default: No Defaults
-* `ZOO_TLS_QUORUM_TRUSTSTORE_FILE`: TrustStore file: Default: No Defaults
-* `ZOO_TLS_QUORUM_TRUSTSTORE_PASSWORD`: TrustStore file password. This can be an environment variable. It will be evaluated by bash. Default: No Defaults
-* `ZOO_TLS_QUORUM_CLIENT_AUTH`: Specifies options to authenticate TLS connections from clients. Available values are: `none`, `want`, `need`. Default: **need**
-* `ZOO_ENABLE_ADMIN_SERVER`: Enable [admin server](https://zookeeper.apache.org/doc/r3.5.7/zookeeperAdmin.html#sc_adminserver). Default: **yes**
-* `ZOO_ADMIN_SERVER_PORT_NUMBER`: [Admin server](https://zookeeper.apache.org/doc/r3.5.7/zookeeperAdmin.html#sc_adminserver) port. Default: **8080**
-* `ZOO_PEER_TYPE`: Zookeeper Node [Peer type](https://zookeeper.apache.org/doc/r3.6.3/zookeeperObservers.html). Default: No Defaults
+#### Customizable environment variables
+
+| Name                                 | Description                                                                                                                                                                                                          | Default Value |
+|--------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+| `ZOO_PORT_NUMBER`                    | ZooKeeper client port.                                                                                                                                                                                               | `2181`        |
+| `ZOO_SERVER_ID`                      | ID of the server in the ensemble.                                                                                                                                                                                    | `1`           |
+| `ZOO_ENABLE_ADMIN_SERVER`            | Whether to enable the ZooKeeper admin server.                                                                                                                                                                        | `yes`         |
+| `ZOO_ADMIN_SERVER_PORT_NUMBER`       | ZooKeeper admin server port.                                                                                                                                                                                         | `8080`        |
+| `ZOO_TICK_TIME`                      | Basic time unit in milliseconds used by ZooKeeper for heartbeats.                                                                                                                                                    | `2000`        |
+| `ZOO_INIT_LIMIT`                     | ZooKeeper uses to limit the length of time the ZooKeeper servers in quorum have to connect to a leader                                                                                                               | `10`          |
+| `ZOO_SYNC_LIMIT`                     | How far out of date a server can be from a leader.                                                                                                                                                                   | `5`           |
+| `ZOO_MAX_CNXNS`                      | Limits the total number of concurrent connections that can be made to a ZooKeeper server. Setting it to 0 entirely removes the limit.                                                                                | `0`           |
+| `ZOO_MAX_CLIENT_CNXNS`               | Limits the number of concurrent connections that a single client may make to a single member of the ZooKeeper ensemble.                                                                                              | `60`          |
+| `ZOO_AUTOPURGE_INTERVAL`             | The time interval in hours for which the autopurge task is triggered. Set to a positive integer (1 and above) to enable auto purging of old snapshots and log files.                                                 | `0`           |
+| `ZOO_AUTOPURGE_RETAIN_COUNT`         | When auto purging is enabled, ZooKeeper retains the most recent snapshots and the corresponding transaction logs in the dataDir and dataLogDir respectively to this number and deletes the rest. Minimum value is 3. | `3`           |
+| `ZOO_LOG_LEVEL`                      | ZooKeeper log level. Available levels are: `ALL`, `DEBUG`, `INFO`, `WARN`, `ERROR`, `FATAL`, `OFF`, `TRACE`.                                                                                                         | `INFO`        |
+| `ZOO_4LW_COMMANDS_WHITELIST`         | List of whitelisted 4LW commands.                                                                                                                                                                                    | `srvr, mntr`  |
+| `ZOO_RECONFIG_ENABLED`               | Enable ZooKeeper Dynamic Reconfiguration.                                                                                                                                                                            | `no`          |
+| `ZOO_LISTEN_ALLIPS_ENABLED`          | Listen for connections from its peers on all available IP addresses.                                                                                                                                                 | `no`          |
+| `ZOO_ENABLE_PROMETHEUS_METRICS`      | Expose Prometheus metrics.                                                                                                                                                                                           | `no`          |
+| `ZOO_PROMETHEUS_METRICS_PORT_NUMBER` | Port where a Jetty server will expose Prometheus metrics.                                                                                                                                                            | `7000`        |
+| `ZOO_MAX_SESSION_TIMEOUT`            | Maximum session timeout in milliseconds that the server will allow the client to negotiate.                                                                                                                          | `40000`       |
+| `ZOO_PRE_ALLOC_SIZE`                 | Block size for transaction log file.                                                                                                                                                                                 | `65536`       |
+| `ZOO_SNAPCOUNT`                      | The number of transactions recorded in the transaction log before a snapshot can be taken (and the transaction log rolled).                                                                                          | `100000`      |
+| `ZOO_HC_TIMEOUT`                     | Timeout for the Zookeeper healthcheck script (in seconds).                                                                                                                                                           | `5`           |
+| `ZOO_TLS_CLIENT_ENABLE`              | Enable TLS for client communication.                                                                                                                                                                                 | `false`       |
+| `ZOO_TLS_PORT_NUMBER`                | Zookeeper TLS port.                                                                                                                                                                                                  | `3181`        |
+| `ZOO_TLS_CLIENT_AUTH`                | Specifies options to authenticate TLS connections from clients. Available values are: `none`, `want`, `need`.                                                                                                        | `need`        |
+| `ZOO_TLS_QUORUM_ENABLE`              | Enable TLS for quorum communication.                                                                                                                                                                                 | `false`       |
+| `ZOO_TLS_QUORUM_CLIENT_AUTH`         | Specifies options to authenticate TLS connections from clients. Available values are: `none`, `want`, `need`.                                                                                                        | `need`        |
+| `ZOO_HEAP_SIZE`                      | Size in MB for the Java Heap options (Xmx and XMs). This env var is ignored if Xmx an Xms are configured via `JVMFLAGS`.                                                                                             | `1024`        |
+| `ALLOW_ANONYMOUS_LOGIN`              | If set to true, Allow to accept connections from unauthenticated users                                                                                                                                               | `no`          |
+| `ZOO_ENABLE_AUTH`                    | Enable ZooKeeper auth. It uses SASL/Digest-MD5.                                                                                                                                                                      | `no`          |
+| `ZOO_ENABLE_QUORUM_AUTH`             | Enable ZooKeeper auth. It uses SASL/Digest-MD5.                                                                                                                                                                      | `no`          |
+
+#### Read-only environment variables
+
+| Name               | Description                                           | Value                           |
+|--------------------|-------------------------------------------------------|---------------------------------|
+| `ZOO_BASE_DIR`     | ZooKeeper installation directory.                     | `${BITNAMI_ROOT_DIR}/zookeeper` |
+| `ZOO_VOLUME_DIR`   | ZooKeeper persistence directory.                      | `/bitnami/zookeeper`            |
+| `ZOO_DATA_DIR`     | ZooKeeper directory where data is stored.             | `${ZOO_VOLUME_DIR}/data`        |
+| `ZOO_CONF_DIR`     | ZooKeeper configuration directory.                    | `${ZOO_BASE_DIR}/conf`          |
+| `ZOO_CONF_FILE`    | ZooKeeper configuration file.                         | `${ZOO_CONF_DIR}/zoo.cfg`       |
+| `ZOO_LOG_DIR`      | Directory where ZooKeeper logs are stored.            | `${ZOO_BASE_DIR}/logs`          |
+| `ZOO_LOG_FILE`     | Directory where ZooKeeper logs are stored.            | `${ZOO_LOG_DIR}/zookeeper.out`  |
+| `ZOO_BIN_DIR`      | ZooKeeper directory for binary executables.           | `${ZOO_BASE_DIR}/bin`           |
+| `ZOO_TMP_DIR`      | Directory where ZooKeeper temporary files are stored. | `${ZOO_BASE_DIR}/tmp`           |
+| `ZOO_PID_FILE`     | Path to the PID file for ZooKeeper.                   | `${ZOO_TMP_DIR}/zookeeper.pid`  |
+| `ZOO_DAEMON_USER`  | ZooKeeper system user.                                | `zookeeper`                     |
+| `ZOO_DAEMON_GROUP` | ZooKeeper system group.                               | `zookeeper`                     |
+
+When you start the Apache ZooKeeper image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
+
+* For manual execution add a -e option with each variable and value:
 
 ```console
 docker run --name zookeeper -e ZOO_SERVER_ID=1 bitnami/zookeeper:latest
 ```
 
-or modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/zookeeper/docker-compose.yml) file present in this repository:
+* For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/zookeeper/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -582,6 +580,12 @@ docker-compose up zookeeper
 ### 3.4.10-r0
 
 * New release
+
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/zookeeper).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## Contributing
 
