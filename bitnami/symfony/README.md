@@ -13,11 +13,8 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ```console
 mkdir ~/myapp && cd ~/myapp
-curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/symfony/docker-compose.yml
-docker-compose up
+docker run --name codeigniter -v ${PWD}/my-project:/app bitnami/codeigniter:latest
 ```
-
-**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [MariaDB container](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#readme) for a more secure deployment.
 
 ## Why use Bitnami Images?
 
@@ -48,92 +45,89 @@ The Bitnami Symfony Development Container has been carefully engineered to provi
 
 ## Getting started
 
-The quickest way to get started with the Bitnami Symfony Development Container is using [docker-compose](https://docs.docker.com/compose/).
+Symfony requires access to a MySQL or MariaDB database to store information. We'll use the [Bitnami Docker Image for MariaDB](https://github.com/bitnami/containers/tree/main/bitnami/mariadb) for the database requirements.
 
-Begin by creating a directory for your Symfony application:
-
-```console
-mkdir ~/myapp
-cd ~/myapp
-```
-
-Download the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/containers/main/bitnami/symfony/docker-compose.yml) file in the application directory:
+### Step 1: Create a network
 
 ```console
-curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/symfony/docker-compose.yml
+docker network create codeigniter-network
 ```
 
-Set a few environment variables in the `docker-compose.yml`:
-
-```yaml
-version: '2'
-
-services:
-  myapp:
-    image: 'bitnami/symfony:1'
-    ports:
-      - '8000:8000'
-    volumes:
-      - '.:/app'
-    environment:
-      - SYMFONY_PROJECT_NAME=myapp
-      - MARIADB_HOST=mariadb
-      - MARIADB_PORT_NUMBER=3306
-      - MARIADB_USER=bobby
-      - MARIADB_PASSWORD=tables
-      - MARIADB_DATABASE=myapp
-    depends_on:
-      - mariadb
-  mariadb:
-    image: 'bitnami/mariadb:10.11'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=bobby
-      - MARIADB_PASSWORD=tables
-      - MARIADB_DATABASE=myapp
-```
-
-Finally launch the Symfony application development environment using:
+### Step 2: Create a volume for MariaDB persistence and create a MariaDB container
 
 ```console
-docker-compose up
+$ docker volume create --name mariadb_data
+docker run -d --name mariadb \
+  --env ALLOW_EMPTY_PASSWORD=yes \
+  --env MARIADB_USER=bn_myapp \
+  --env MARIADB_DATABASE=bitnami_myapp \
+  --network codeigniter-network \
+  --volume mariadb_data:/bitnami/mariadb \
+  bitnami/mariadb:latest
 ```
 
-The above command creates a container service for Symfony development and bootstraps a new Symfony application, named `myapp` in working directory. You can use your favorite IDE for developing the application.
+### Step 3: Launch the container using the local current directory as volume
 
-After the built-in PHP application server has been started, visit `http://localhost:8000` in your favorite web browser and you'll be greeted by the Symfony welcome page.
+```console
+$ docker run -d --name codeigniter \
+  -p 8000:8000 \
+  --env DB_HOST=mariadb \
+  --env DB_PORT=3306 \
+  --env DB_USERNAME=bn_myapp \
+  --env DB_DATABASE=bitnami_myapp \
+  --env SYMFONY_PROJECT_SKELETON=symfony/skeleton \
+  --network codeigniter-network \
+  --volume ${PWD}/my-project:/app \
+  bitnami/codeigniter:latest
+```
+
+Among other things, the above command creates a container service, named `myapp`, for Symfony development and bootstraps a new Symfony application in the application directory. You can use your favorite IDE for developing the application.
+
+> **Note**
+>
+> If the application directory contained the source code of an existing Symfony application, the Bitnami Symfony Development Container would load the existing application instead of bootstrapping a new one.
+
+After the application server has been launched in the `myapp` service, visit `http://localhost:8000` in your favorite web browser and you'll be greeted by the default Symfony welcome page.
+
+**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [MariaDB container](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#readme) for a more secure deployment.
 
 ## Executing commands
 
-Commands can be launched inside the `myapp` Symfony Development Container with `docker-compose` using the [exec](https://docs.docker.com/compose/reference/exec/) command.
-
-> **Note**:
->
-> The `exec` command was added to `docker-compose` in release [1.7.0](https://github.com/docker/compose/blob/master/CHANGELOG.md#170-2016-04-13). Please ensure that you're using `docker-compose` version `1.7.0` or higher.
+Commands can be launched inside the `myapp` Symfony Development Container with `docker` using the [exec](https://docs.docker.com/engine/reference/commandline/exec/) command.
 
 The general structure of the `exec` command is:
 
 ```console
-docker-compose exec <service> <command>
+docker exec <container-name> <command>
 ```
 
-where `<service>` is the name of the container service as described in the `docker-compose.yml` file and `<command>` is the command you want to launch inside the service.
+where `<command>` is the command you want to launch inside the container.
 
-Following are a few examples:
+## Environment variables
 
-* Create a new project named `foo`:
+### Customizable environment variables
 
-  ```console
-  docker-compose run myapp nami execute symfony createProject foo
-  ```
+| Name                           | Description                  | Default Value   |
+|--------------------------------|------------------------------|-----------------|
+| `SYMFONY_PORT_NUMBER`          | Symfony server port.         | `8000`          |
+| `SYMFONY_SKIP_DATABASE`        | Skip database configuration. | `no`            |
+| `SYMFONY_DATABASE_HOST`        | Database server host.        | `mariadb`       |
+| `SYMFONY_DATABASE_PORT_NUMBER` | Database server port.        | `3306`          |
+| `SYMFONY_DATABASE_NAME`        | Database name.               | `bitnami_myapp` |
+| `SYMFONY_DATABASE_USER`        | Database user name.          | `bn_myapp`      |
 
-* Create a new project named `bar` which uses Symfony version `2.5.0`
+### Read-only environment variables
 
-  ```console
-  docker-compose run myapp nami execute symfony createProject "bar 2.5.0"
-  ```
+| Name                   | Description                                 | Value                          |
+|------------------------|---------------------------------------------|--------------------------------|
+| `SYMFONY_BASE_DIR`     | Symfony installation directory.             | `${BITNAMI_ROOT_DIR}/symfony`  |
+| `SYMFONY_SKELETON_DIR` | Symfony default skeleton project directory. | `${SYMFONY_BASE_DIR}/skeleton` |
 
-  Note: In the above two examples the `docker-compose.yml` file should be updated so that the `SYMFONY_PROJECT_NAME` specifies the project name that should be served my the PHP application server.
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Issues
 
