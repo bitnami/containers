@@ -10,14 +10,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-docker run -it --name mlflow bitnami/mlflow
-```
-
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/mlflow/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run -it --name mlflow bitnami/mlflow:latest
 ```
 
 ## Why use Bitnami Images?
@@ -109,18 +102,10 @@ Bitnami provides up-to-date versions of MLflow, including security patches, soon
 docker pull bitnami/mlflow:latest
 ```
 
-or if you're using Docker Compose, update the value of the image property to `bitnami/mlflow:latest`.
-
 #### Step 2: Remove the currently running container
 
 ```console
 docker rm -v mlflow
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v mlflow
 ```
 
 #### Step 3: Run the new image
@@ -131,11 +116,11 @@ Re-create your container from the new image.
 docker run --name mlflow bitnami/mlflow:latest
 ```
 
-or using Docker Compose:
+## Notable Changes
 
-```console
-docker-compose up mlflow
-```
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 

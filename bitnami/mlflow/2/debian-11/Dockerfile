@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-12-24T08:18:34Z" \
+      org.opencontainers.image.created="2024-01-20T00:06:00Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.9.2-debian-11-r1" \
+      org.opencontainers.image.ref.name="2.9.2-debian-11-r2" \
       org.opencontainers.image.title="mlflow" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2.9.2"
@@ -42,6 +42,7 @@ RUN apt-get autoremove --purge -y curl && \
     apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN useradd -r -u 1001 -g root mlflow
+RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN mkdir /.local && chmod g+rwX /.local
 
 RUN mkdir -p /app/mlruns /app/mlartifacts /bitnami/mlflow && chmod g+rwX /app /app/mlruns /app/mlartifacts /bitnami/mlflow && ln -s /opt/bitnami/python/lib/*/site-packages/mlflow/server/auth/ /bitnami/mlflow-basic-auth
