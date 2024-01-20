@@ -9,11 +9,8 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ## TL;DR
 
-### Docker Compose
-
 ```console
-curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/airflow-scheduler/docker-compose.yml
-docker-compose up
+docker run --name airflow-scheduler bitnami/airflow-scheduler:latest
 ```
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
@@ -46,18 +43,7 @@ To run this application you need [Docker Engine](https://www.docker.com/products
 Apache Airflow Scheduler is a component of an Airflow solution configuring with the `CeleryExecutor`. Hence, you will need to rest of Airflow components for this image to work.
 You will need an [Airflow Webserver](https://github.com/bitnami/containers/tree/main/bitnami/airflow), one or more [Airflow Workers](https://github.com/bitnami/containers/tree/main/bitnami/airflow-worker), a [PostgreSQL database](https://github.com/bitnami/containers/tree/main/bitnami/postgresql) and a [Redis(R) server](https://github.com/bitnami/containers/tree/main/bitnami/redis).
 
-### Using Docker Compose
-
-The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/airflow-scheduler/docker-compose.yml) file. Run the application using it as shown below:
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/airflow-scheduler/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ### Using the Docker Command Line
-
-If you want to run the application manually instead of using `docker-compose`, these are the basic steps you need to run:
 
 1. Create a network
 
@@ -280,6 +266,17 @@ services:
       bitnami/airflow-worker:latest
     ```
 
+### Using `docker-compose.yaml`
+
+```console
+curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/airflow/docker-compose.yml
+docker-compose up
+```
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/airflow).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
+
 ## Configuration
 
 ### Installing additional python modules
@@ -288,32 +285,44 @@ This container supports the installation of additional python modules at start-u
 
 ### Environment variables
 
-The Apache Airflow Scheduler instance can be customized by specifying environment variables on the first run. The following environment values are provided to customize Apache Airflow Scheduler:
+#### Customizable environment variables
 
-#### Apache Airflow Scheduler configuration
+| Name                            | Description                                                       | Default Value        |
+|---------------------------------|-------------------------------------------------------------------|----------------------|
+| `AIRFLOW_EXECUTOR`              | Airflow executor.                                                 | `SequentialExecutor` |
+| `AIRFLOW_EXECUTOR`              | Airflow executor.                                                 | `CeleryExecutor`     |
+| `AIRFLOW_WEBSERVER_HOST`        | Airflow webserver host                                            | `127.0.0.1`          |
+| `AIRFLOW_WEBSERVER_PORT_NUMBER` | Airflow webserver port.                                           | `8080`               |
+| `AIRFLOW_LOAD_EXAMPLES`         | To load example tasks into the application.                       | `yes`                |
+| `AIRFLOW_HOSTNAME_CALLABLE`     | Method to obtain the hostname.                                    | `socket.gethostname` |
+| `AIRFLOW_DATABASE_HOST`         | Hostname for PostgreSQL server.                                   | `postgresql`         |
+| `AIRFLOW_DATABASE_HOST`         | Hostname for PostgreSQL server.                                   | `127.0.0.1`          |
+| `AIRFLOW_DATABASE_PORT_NUMBER`  | Port used by PostgreSQL server.                                   | `5432`               |
+| `AIRFLOW_DATABASE_NAME`         | Database name that Airflow will use to connect with the database. | `bitnami_airflow`    |
+| `AIRFLOW_DATABASE_USERNAME`     | Database user that Airflow will use to connect with the database. | `bn_airflow`         |
+| `AIRFLOW_DATABASE_USE_SSL`      | Set to yes if the database is using SSL.                          | `no`                 |
+| `AIRFLOW_REDIS_USE_SSL`         | Set to yes if Redis(R) uses SSL.                                  | `no`                 |
+| `REDIS_HOST`                    | Hostname for Redis(R) server.                                     | `redis`              |
+| `REDIS_HOST`                    | Hostname for Redis(R) server.                                     | `127.0.0.1`          |
+| `REDIS_PORT_NUMBER`             | Port used by Redis(R) server.                                     | `6379`               |
+| `REDIS_DATABASE`                | Name of the Redis(R) database.                                    | `1`                  |
 
-* `AIRFLOW_EXECUTOR`: Apache Airflow Scheduler executor. Default: **SequentialExecutor**
-* `AIRFLOW_FERNET_KEY`: Apache Airflow Scheduler Fernet key. No defaults.
-* `AIRFLOW_SECRET_KEY`: Apache Airflow Scheduler Secret key. No defaults.
-* `AIRFLOW_WEBSERVER_HOST`: Apache Airflow Scheduler webserver host. Default: **airflow**
-* `AIRFLOW_WEBSERVER_PORT_NUMBER`: Apache Airflow Scheduler webserver port. Default: **8080**
-* `AIRFLOW_LOAD_EXAMPLES`: To load example tasks into the application. Default: **yes**
-* `AIRFLOW_HOSTNAME_CALLABLE`: Method to obtain the hostname. No defaults.
+#### Read-only environment variables
 
-#### Use an existing database
-
-* `AIRFLOW_DATABASE_HOST`: Hostname for PostgreSQL server. Default: **postgresql**
-* `AIRFLOW_DATABASE_PORT_NUMBER`: Port used by PostgreSQL server. Default: **5432**
-* `AIRFLOW_DATABASE_NAME`: Database name that Apache Airflow Scheduler will use to connect with the database. Default: **bitnami_airflow**
-* `AIRFLOW_DATABASE_USERNAME`: Database user that Apache Airflow Scheduler will use to connect with the database. Default: **bn_airflow**
-* `AIRFLOW_DATABASE_PASSWORD`: Database password that Apache Airflow Scheduler will use to connect with the database. No defaults.
-* `AIRFLOW_DATABASE_USE_SSL`: Set to yes if the database uses SSL. Default: **no**
-* `AIRFLOW_REDIS_USE_SSL`: Set to yes if Redis(R) uses SSL. Default: **no**
-* `REDIS_HOST`: Hostname for Redis(R) server. Default: **redis**
-* `REDIS_PORT_NUMBER`: Port used by Redis(R) server. Default: **6379**
-* `REDIS_USER`: USER that Apache Airflow Scheduler will use to connect with Redis(R). No defaults.
-* `REDIS_PASSWORD`: Password that Apache Airflow Scheduler will use to connect with Redis(R). No defaults.
-* `REDIS_DATABASE`: Database number for Redis(R) server. Default: **1**
+| Name                         | Description                               | Value                                       |
+|------------------------------|-------------------------------------------|---------------------------------------------|
+| `AIRFLOW_BASE_DIR`           | Airflow installation directory.           | `${BITNAMI_ROOT_DIR}/airflow`               |
+| `AIRFLOW_HOME`               | Airflow home directory.                   | `${AIRFLOW_BASE_DIR}`                       |
+| `AIRFLOW_BIN_DIR`            | Airflow directory for binary executables. | `${AIRFLOW_BASE_DIR}/venv/bin`              |
+| `AIRFLOW_LOGS_DIR`           | Airflow logs directory.                   | `${AIRFLOW_BASE_DIR}/logs`                  |
+| `AIRFLOW_SCHEDULER_LOGS_DIR` | Airflow scheduler logs directory.         | `${AIRFLOW_LOGS_DIR}/scheduler`             |
+| `AIRFLOW_LOG_FILE`           | Airflow logs file.                        | `${AIRFLOW_LOGS_DIR}/airflow-scheduler.log` |
+| `AIRFLOW_CONF_FILE`          | Airflow configuration file.               | `${AIRFLOW_BASE_DIR}/airflow.cfg`           |
+| `AIRFLOW_TMP_DIR`            | Airflow directory temporary files.        | `${AIRFLOW_BASE_DIR}/tmp`                   |
+| `AIRFLOW_PID_FILE`           | Path to the Airflow PID file.             | `${AIRFLOW_TMP_DIR}/airflow-scheduler.pid`  |
+| `AIRFLOW_DAGS_DIR`           | Airflow data to be persisted.             | `${AIRFLOW_BASE_DIR}/dags`                  |
+| `AIRFLOW_DAEMON_USER`        | Airflow system user.                      | `airflow`                                   |
+| `AIRFLOW_DAEMON_GROUP`       | Airflow system group.                     | `airflow`                                   |
 
 > In addition to the previous environment variables, all the parameters from the configuration file can be overwritten by using environment variables with this format: `AIRFLOW__{SECTION}__{KEY}`. Note the double underscores.
 
@@ -355,6 +364,10 @@ docker run -d --name airflow -p 8080:8080 \
 ```
 
 ## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ### 1.10.15-debian-10-r18 and 2.0.1-debian-10-r52
 
