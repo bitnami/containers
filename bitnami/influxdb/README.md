@@ -13,13 +13,6 @@ InfluxDB(TM) is a trademark owned by InfluxData, which is not affiliated with, a
 docker run --name influxdb bitnami/influxdb:latest
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/influxdb/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -166,7 +159,53 @@ docker-compose up -d
 
 InfluxDB (TM) can be configured via environment variables or using a configuration file (`influxdb.conf`). If a configuration option is not specified in either the configuration file or in an environment variable, InfluxDB (TM) uses its internal default configuration.
 
-Variables must be prefixed by `INFLUXD_`, find more [here](https://docs.influxdata.com/influxdb/v2.0/reference/config-options).
+### Environment variables
+
+#### Customizable environment variables
+
+| Name                              | Description                                      | Default Value                          |
+|-----------------------------------|--------------------------------------------------|----------------------------------------|
+| `INFLUXDB_DATA_DIR`               | InfluxDB directory where data is stored.         | `${INFLUXDB_VOLUME_DIR}/data`          |
+| `INFLUXDB_DATA_WAL_DIR`           | InfluxDB directory where the WAL file is stored. | `${INFLUXDB_VOLUME_DIR}/wal`           |
+| `INFLUXDB_META_DIR`               | InfluxDB directory where metadata is stored.     | `${INFLUXDB_VOLUME_DIR}/meta`          |
+| `INFLUXDB_REPORTING_DISABLED`     | Whether to disable InfluxDB reporting.           | `true`                                 |
+| `INFLUXDB_HTTP_PORT_NUMBER`       | Port number used by InfluxDB HTTP server.        | `8086`                                 |
+| `INFLUXDB_HTTP_BIND_ADDRESS`      | InfluxDB HTTP bind address.                      | `0.0.0.0:${INFLUXDB_HTTP_PORT_NUMBER}` |
+| `INFLUXDB_HTTP_READINESS_TIMEOUT` | InfluxDB HTTP port readiness timeout in seconds. | `60`                                   |
+| `INFLUXDB_PORT_NUMBER`            | Port number used by InfluxDB.                    | `8088`                                 |
+| `INFLUXDB_BIND_ADDRESS`           | InfluxDB bind address.                           | `0.0.0.0:${INFLUXDB_PORT_NUMBER}`      |
+| `INFLUXDB_PORT_READINESS_TIMEOUT` | InfluxDB port readiness timeout in seconds.      | `30`                                   |
+| `INFLUXDB_HTTP_AUTH_ENABLED`      | Whether to enable InfluxDB HTTP auth.            | `true`                                 |
+| `INFLUXDB_ADMIN_USER`             | InfluxDB admin username.                         | `admin`                                |
+| `INFLUXDB_ADMIN_CONFIG_NAME`      | InfluxDB admin user config name.                 | `default`                              |
+| `INFLUXDB_ADMIN_ORG`              | InfluxDB admin org.                              | `primary`                              |
+| `INFLUXDB_ADMIN_BUCKET`           | InfluxDB admin user bucket.                      | `primary`                              |
+| `INFLUXDB_ADMIN_RETENTION`        | InfluxDB admin user retention.                   | `0`                                    |
+| `INFLUXDB_USER_ORG`               | Additional InfluxDB user org.                    | `${INFLUXDB_ADMIN_ORG}`                |
+| `INFLUXDB_CREATE_USER_TOKEN`      | Whether to create user token for InfluxDB.       | `no`                                   |
+
+#### Read-only environment variables
+
+| Name                       | Description                                                  | Value                                 |
+|----------------------------|--------------------------------------------------------------|---------------------------------------|
+| `INFLUXDB_BASE_DIR`        | InfluxDB installation directory.                             | `${BITNAMI_ROOT_DIR}/influxdb`        |
+| `INFLUXDB_VOLUME_DIR`      | InfluxDB persistence directory.                              | `${BITNAMI_VOLUME_DIR}/influxdb`      |
+| `INFLUXDB_BIN_DIR`         | InfluxDB directory for binary executables.                   | `${INFLUXDB_BASE_DIR}/bin`            |
+| `INFLUXDB_CONF_DIR`        | InfluxDB configuration directory.                            | `${INFLUXDB_BASE_DIR}/etc`            |
+| `INFLUXDB_CONF_FILE`       | InfluxDB configuration file.                                 | `${INFLUXDB_CONF_DIR}/influxdb.conf`  |
+| `INFLUXDB_INITSCRIPTS_DIR` | Directory where to look for InfluxDB init scripts.           | `/docker-entrypoint-initdb.d`         |
+| `INFLUXDB_LOGS_DIR`        | Directory where InfluxDB logs are stored.                    | `${INFLUXDB_BASE_DIR}/var/log`        |
+| `INFLUXDB_LOG_FILE`        | InfluxDB log file.                                           | `${INFLUXDB_LOGS_DIR}/influxdb.log`   |
+| `INFLUXDB_TMP_DIR`         | Directory where InfluxDB temporary files are stored.         | `${INFLUXDB_BASE_DIR}/var/run`        |
+| `INFLUXDB_PID_FILE`        | Path to the PID file for InfluxDB.                           | `${INFLUXDB_TMP_DIR}/influxdb.pid`    |
+| `INFLUXD_ENGINE_PATH`      | InfluxDB 2.x alias for engine path.                          | `${INFLUXDB_VOLUME_DIR}`              |
+| `INFLUXD_BOLT_PATH`        | InfluxDB 2.x alias for bolt path.                            | `${INFLUXDB_VOLUME_DIR}/influxd.bolt` |
+| `INFLUXD_CONFIG_PATH`      | InfluxDB 2.x alias for configuration file path.              | `${INFLUXDB_CONF_DIR}/influxdb.conf`  |
+| `INFLUX_CONFIGS_PATH`      | InfluxDB 2.x alias for paths to extra configuration folders. | `${INFLUXDB_VOLUME_DIR}/configs`      |
+| `INFLUXDB_DAEMON_USER`     | InfluxDB system user.                                        | `influxdb`                            |
+| `INFLUXDB_DAEMON_GROUP`    | InfluxDB system group.                                       | `influxdb`                            |
+
+Additionally, InfluxDB (TM) can be configured using its internal environment variables prefixed by `INFLUXD_`, find more information [here](https://docs.influxdata.com/influxdb/v2.0/reference/config-options).
 
 > Note: The settings at the environment variables override the equivalent options in the configuration file."
 
@@ -388,6 +427,12 @@ or using Docker Compose:
 ```console
 docker-compose up influxdb
 ```
+
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/influxdb).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## Contributing
 

@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2024-01-05T07:36:01Z" \
+      org.opencontainers.image.created="2024-01-20T01:02:07Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="17.0.20240105-debian-11-r0" \
+      org.opencontainers.image.ref.name="17.0.20240105-debian-11-r1" \
       org.opencontainers.image.title="odoo" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="17.0.20240105"
@@ -26,7 +26,7 @@ RUN install_packages acl ca-certificates curl fontconfig libbsd0 libbz2-1.0 libc
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "python-3.11.7-2-linux-${OS_ARCH}-debian-11" \
-      "render-template-1.0.6-4-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.6-5-linux-${OS_ARCH}-debian-11" \
       "postgresql-client-16.1.0-0-linux-${OS_ARCH}-debian-11" \
       "node-18.19.0-0-linux-${OS_ARCH}-debian-11" \
       "odoo-17.0.20240105-0-linux-${OS_ARCH}-debian-11" \
@@ -42,6 +42,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     done
 RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
+RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN curl -sLO "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.bullseye_${OS_ARCH}.deb" && \
     if [ "$OS_ARCH" = "amd64" ]; then \
       echo "9c687f0c58cf50e01f2a6375d2e34372f8feeec56a84690ea113d298fccadd98  wkhtmltox_0.12.6.1-3.bullseye_${OS_ARCH}.deb" | sha256sum -c - ; \

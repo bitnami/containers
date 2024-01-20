@@ -2,8 +2,10 @@
 # SPDX-License-Identifier: APACHE-2.0
 
 version: '2'
+
 services:
-  prometheus-operator:
-    image: docker.io/bitnami/prometheus-operator:0
+  kubeapps:
+    image: docker.io/bitnami/kubeapps-dashboard:2
     ports:
-      - 8080:8080
+      - '80:80'
+      - '443:443'

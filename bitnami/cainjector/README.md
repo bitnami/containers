@@ -11,14 +11,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/cainjector:latest
-```
-
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/cainjector/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run --name cainjector -e ALLOW_EMPTY_PASSWORD=yes bitnami/cainjector:latest
 ```
 
 **Warning**: These quick setups are only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
@@ -55,6 +48,12 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 ### Further documentation
 
 For further documentation, please check [here](https://github.com/jetstack/cert-manager/blob/master/docs)
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 

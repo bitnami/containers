@@ -3,7 +3,7 @@
 
 version: '2'
 services:
-  nats-exporter:
-    image: docker.io/bitnami/nats-exporter:0
+  supabase:
+    image: docker.io/bitnami/supabase-studio:0
     ports:
-      - 7777:7777
+      - '80:3000'

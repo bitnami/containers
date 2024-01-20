@@ -10,8 +10,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/magento/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run --name magento bitnami/magento:latest
 ```
 
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
@@ -67,18 +66,7 @@ docker build -t bitnami/APP:latest .
 
 Magento requires access to a MySQL or MariaDB database to store information. We'll use the [Bitnami Docker Image for MariaDB](https://github.com/bitnami/containers/tree/main/bitnami/mariadb) for the database requirements.
 
-### Run the application using Docker Compose
-
-The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/magento/docker-compose.yml) file. Run the application using it as shown below:
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/magento/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ### Using the Docker Command Line
-
-If you want to run the application manually instead of using `docker-compose`, these are the basic steps you need to run:
 
 #### Step 1: Create a network
 
@@ -149,6 +137,17 @@ php bin/magento setup:di:compile
 php bin/magento setup:static-content:deploy -f
 php bin/magento cache:flush
 ```
+
+### Run the application using Docker Compose
+
+```console
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/magento/docker-compose.yml > docker-compose.yml
+docker-compose up -d
+```
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/magento).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## Persisting your application
 
@@ -227,6 +226,54 @@ When the container is executed for the first time, it will execute the files wit
 
 ### Environment variables
 
+#### Customizable environment variables
+
+| Name                                 | Description                                                                                                                   | Default Value       |
+|--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|---------------------|
+| `MAGENTO_DATA_TO_PERSIST`            | Files to persist relative to the Magento installation directory. To provide multiple values, separate them with a whitespace. | `$MAGENTO_BASE_DIR` |
+| `MAGENTO_HOST`                       | Magento host domain or IP address.                                                                                            | `localhost`         |
+| `MAGENTO_ENABLE_HTTPS`               | Whether to enable SSL to access the Magento store.                                                                            | `no`                |
+| `MAGENTO_ENABLE_ADMIN_HTTPS`         | Whether to use SSL to access the Magento administration panel.                                                                | `no`                |
+| `MAGENTO_EXTERNAL_HTTP_PORT_NUMBER`  | Port to access Magento from outside of the instance using HTTP.                                                               | `80`                |
+| `MAGENTO_EXTERNAL_HTTPS_PORT_NUMBER` | Port to access Magento from outside of the instance using HTTPS.                                                              | `443`               |
+| `MAGENTO_FIRST_NAME`                 | Magento user first name.                                                                                                      | `FirstName`         |
+| `MAGENTO_LAST_NAME`                  | Magento user last name.                                                                                                       | `LastName`          |
+| `MAGENTO_MODE`                       | Magento mode.                                                                                                                 | `default`           |
+| `MAGENTO_ADMIN_URL_PREFIX`           | URL prefix to access the Magento administration panel.                                                                        | `admin`             |
+| `MAGENTO_DEPLOY_STATIC_CONTENT`      | Whether to deploy Magento static content during the initialization, to optimize initial page load time.                       | `no`                |
+| `MAGENTO_KEEP_STATIC`                | Whether to keep the content of 'pub/static' folder during the initialization.                                                 | `no`                |
+| `MAGENTO_SKIP_REINDEX`               | Whether to skip Magento re-index during the initialization.                                                                   | `no`                |
+| `MAGENTO_SKIP_BOOTSTRAP`             | Whether to perform initial bootstrapping for the application.                                                                 | `no`                |
+| `MAGENTO_USERNAME`                   | Magento user login name.                                                                                                      | `user`              |
+| `MAGENTO_PASSWORD`                   | Magento user password.                                                                                                        | `bitnami1`          |
+| `MAGENTO_EMAIL`                      | Magento user e-mail address.                                                                                                  | `user@example.com`  |
+| `MAGENTO_ENABLE_HTTP_CACHE`          | Whether to enable a HTTP cache server for Magento (i.e. Varnish).                                                             | `no`                |
+| `MAGENTO_DATABASE_HOST`              | Database server host.                                                                                                         | `mariadb`           |
+| `MAGENTO_DATABASE_HOST`              | Database server host.                                                                                                         | `127.0.0.1`         |
+| `MAGENTO_DATABASE_PORT_NUMBER`       | Database server port.                                                                                                         | `3306`              |
+| `MAGENTO_DATABASE_NAME`              | Database name.                                                                                                                | `bitnami_magento`   |
+| `MAGENTO_DATABASE_USER`              | Database user name.                                                                                                           | `bn_magento`        |
+| `MAGENTO_ENABLE_DATABASE_SSL`        | Whether to enable SSL for database connections.                                                                               | `no`                |
+| `MAGENTO_VERIFY_DATABASE_SSL`        | Whether to verify the database SSL certificate when SSL is enabled for database connections.                                  | `yes`               |
+| `MAGENTO_SEARCH_ENGINE`              | Magento search engine to use.                                                                                                 | `elasticsearch7`    |
+| `MAGENTO_ELASTICSEARCH_HOST`         | Elasticsearch server host.                                                                                                    | `elasticsearch`     |
+| `MAGENTO_ELASTICSEARCH_HOST`         | Elasticsearch server host.                                                                                                    | `127.0.0.1`         |
+| `MAGENTO_ELASTICSEARCH_PORT_NUMBER`  | Elasticsearch server port.                                                                                                    | `9200`              |
+| `MAGENTO_ELASTICSEARCH_USE_HTTPS`    | Whether to use https to connect with Elasticsearch.                                                                           | `no`                |
+| `MAGENTO_ELASTICSEARCH_ENABLE_AUTH`  | Whether to enable authentication for connections to the Elasticsearch server.                                                 | `no`                |
+
+#### Read-only environment variables
+
+| Name                             | Description                                        | Value                                 |
+|----------------------------------|----------------------------------------------------|---------------------------------------|
+| `MAGENTO_BASE_DIR`               | Magento installation directory.                    | `${BITNAMI_ROOT_DIR}/magento`         |
+| `MAGENTO_BIN_DIR`                | Magento directory for executable files.            | `${MAGENTO_BASE_DIR}/bin`             |
+| `MAGENTO_CONF_FILE`              | Configuration file for Magento.                    | `${MAGENTO_BASE_DIR}/app/etc/env.php` |
+| `MAGENTO_VOLUME_DIR`             | Magento directory for mounted configuration files. | `${BITNAMI_VOLUME_DIR}/magento`       |
+| `PHP_DEFAULT_MAX_EXECUTION_TIME` | Default PHP max execution time.                    | `18000`                               |
+| `PHP_DEFAULT_MEMORY_LIMIT`       | Default PHP memory limit.                          | `2G`                                  |
+| `PHP_DEFAULT_MEMORY_LIMIT`       | Default PHP memory limit.                          | `1G`                                  |
+
 When you start the Magento image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
 * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/magento/docker-compose.yml) file present in this repository:
@@ -248,94 +295,6 @@ magento:
     --volume /path/to/magento-persistence:/bitnami \
     bitnami/magento:latest
   ```
-
-Available environment variables:
-
-#### User and Site configuration
-
-* `APACHE_HTTP_PORT_NUMBER`: Port used by Apache for HTTP. Default: **8080**
-* `APACHE_HTTPS_PORT_NUMBER`: Port used by Apache for HTTPS. Default: **8443**
-* `MAGENTO_EXTERNAL_HTTP_PORT_NUMBER`: Port to access Magento from outside of the container using HTTP. Used to configure Magento's internal routes. Default: **80**
-* `MAGENTO_EXTERNAL_HTTPS_PORT_NUMBER`: Port to access Magento from outside of the container using HTTPS. Used to configure Magento's internal routes. Default: **443**
-* `MAGENTO_USERNAME`: Magento application username. Default: **user**
-* `MAGENTO_PASSWORD`: Magento application password. Default: **bitnami1**
-* `MAGENTO_EMAIL`: Magento application email. Default: **user@example.com**
-* `MAGENTO_FIRST_NAME`: Magento application first name. Default: **FirstName**
-* `MAGENTO_LAST_NAME`: Magento application last name. Default: **LastName**
-* `MAGENTO_HOST`: Magento host domain or IP address. Default: **localhost**
-* `MAGENTO_MODE`: Magento mode. Valid values: default, production, developer. Default: **default**
-* `MAGENTO_EXTRA_INSTALL_ARGS`: Extra flags to append to the Magento 'setup:install' command call. No defaults
-* `MAGENTO_ADMIN_URL_PREFIX`: URL prefix to access the Magento Admin. Default: **admin**
-* `MAGENTO_ENABLE_HTTPS`: Whether to use SSL to access the Magento Store. Valid values: yes, no. Default: **no**
-* `MAGENTO_ENABLE_ADMIN_HTTPS`: Whether to use SSL to access the Magento Admin. Valid values: yes, no. Default: **no**
-* `MAGENTO_DEPLOY_STATIC_CONTENT`: Whether to deploy Magento static content during the initialization, to optimize initial page load time. Default: **no**
-* `MAGENTO_KEEP_STATIC`: Whether to keep the content of 'pub/static' folder during the initialization. Default: **no**
-* `MAGENTO_SKIP_REINDEX`: Whether to skip Magento re-index during the initialization. Default: **no**
-* `MAGENTO_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. Default: **no**
-
-#### HTTP cache server
-
-* `MAGENTO_ENABLE_HTTP_CACHE`: Whether to enable a HTTP cache server for Magento (i.e. Varnish). Default: **no**
-* `MAGENTO_HTTP_CACHE_BACKEND_HOST`: HTTP cache backend hostname. No defaults
-* `MAGENTO_HTTP_CACHE_BACKEND_PORT_NUMBER`: HTTP cache backend port. No defaults
-* `MAGENTO_HTTP_CACHE_SERVER_HOST`: HTTP cache server hostname. No defaults
-* `MAGENTO_HTTP_CACHE_SERVER_PORT_NUMBER`: HTTP cache server hostname. No defaults
-
-#### Search engines
-
-* `MAGENTO_SEARCH_ENGINE`: Magento search engine. Default: **elasticsearch7**
-* `MAGENTO_ELASTICSEARCH_HOST`: Elasticsearch server host, if using Elasticsearch as a search engine. Default: **elasticsearch**
-* `MAGENTO_ELASTICSEARCH_PORT_NUMBER`: Elasticsearch server port number, if using Elasticsearch as a search engine. Default: **9200**
-* `MAGENTO_ELASTICSEARCH_USE_HTTPS`: Whether to request Elasticsearch server with 'https://' prefix. Default: **no**
-* `MAGENTO_ELASTICSEARCH_ENABLE_AUTH`: Whether to enable authentication for connections to the Elasticsearch server. Default: **no**
-* `MAGENTO_ELASTICSEARCH_USER`: Elasticsearch server user login, if using Elasticsearch as a search engine and authentication is enabled. No defaults
-* `MAGENTO_ELASTICSEARCH_PASSWORD`: Elasticsearch server user password, if using Elasticsearch as a search engine and authentication is enabled. No defaults
-
-#### Database server connection credentials and configuration
-
-* `MAGENTO_DATABASE_HOST`: Hostname for MariaDB server. Default: **mariadb**
-* `MAGENTO_DATABASE_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
-* `MAGENTO_DATABASE_NAME`: Database name that Magento will use to connect with the database. Default: **bitnami_magento**
-* `MAGENTO_DATABASE_USER`: Database user that Magento will use to connect with the database. Default: **bn_magento**
-* `MAGENTO_DATABASE_PASSWORD`: Database password that Magento will use to connect with the database. No defaults.
-* `MAGENTO_ENABLE_DATABASE_SSL`: Whether to enable SSL for database connections. Default: **no**
-* `MAGENTO_VERIFY_DATABASE_SSL`: Whether to verify the database SSL certificate when SSL is enabled for database connections. Default: **yes**
-* `MAGENTO_DATABASE_SSL_CERT_FILE`: Path to the database client certificate file. No defaults
-* `MAGENTO_DATABASE_SSL_KEY_FILE`: Path to the database client certificate key file. No defaults
-* `MAGENTO_DATABASE_SSL_CA_FILE`: Path to the database server CA bundle file. No defaults
-* `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-#### Create a database for Magento using mysql-client
-
-* `MYSQL_CLIENT_FLAVOR`: SQL database flavor. Valid values: `mariadb` or `mysql`. Default: **mariadb**.
-* `MYSQL_CLIENT_DATABASE_HOST`: Hostname for MariaDB server. Default: **mariadb**
-* `MYSQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
-* `MYSQL_CLIENT_DATABASE_ROOT_USER`: Database admin user. Default: **root**
-* `MYSQL_CLIENT_DATABASE_ROOT_PASSWORD`: Database password for the database admin user. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_CHARACTER_SET`: Character set to use for the new database. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_COLLATE`: Database collation to use for the new database. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_PRIVILEGES`: Database privileges to grant for the user specified in `MYSQL_CLIENT_CREATE_DATABASE_USER` to the database specified in `MYSQL_CLIENT_CREATE_DATABASE_NAME`. No defaults.
-* `MYSQL_CLIENT_ENABLE_SSL_WRAPPER`: Whether to force SSL connections to the database via the `mysql` CLI tool. Useful for applications that rely on the CLI instead of APIs. Default: **no**
-* `MYSQL_CLIENT_ENABLE_SSL`: Whether to force SSL connections for the database. Default: **no**
-* `MYSQL_CLIENT_SSL_CA_FILE`: Path to the SSL CA file for the new database. No defaults
-* `MYSQL_CLIENT_SSL_CERT_FILE`: Path to the SSL CA file for the new database. No defaults
-* `MYSQL_CLIENT_SSL_KEY_FILE`: Path to the SSL CA file for the new database. No defaults
-* `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-#### PHP configuration
-
-* `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. No default.
-* `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
-* `PHP_MAX_EXECUTION_TIME`: Maximum execution time for PHP scripts. Default: **18000**
-* `PHP_MAX_INPUT_TIME`: Maximum input time for PHP scripts. No default.
-* `PHP_MAX_INPUT_VARS`: Maximum amount of input variables for PHP scripts. No default.
-* `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **756M**
-* `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
-* `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
-* `PHP_OUTPUT_BUFFERING`: Size of the output buffer for PHP. Default: **8196**
 
 ## Logging
 

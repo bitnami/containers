@@ -13,13 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run -it --name vault-csi-provider bitnami/vault-csi-provider
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/vault-csi-provider/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -73,18 +66,10 @@ Bitnami provides up-to-date versions of HashiCorp Vault CSI Provider, including 
 docker pull bitnami/vault-csi-provider:latest
 ```
 
-or if you're using Docker Compose, update the value of the image property to `bitnami/vault-csi-provider:latest`.
-
 #### Step 2: Remove the currently running container
 
 ```console
 docker rm -v vault-csi-provider
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v vault-csi-provider
 ```
 
 #### Step 3: Run the new image
@@ -93,12 +78,6 @@ Re-create your container from the new image.
 
 ```console
 docker run --name vault-csi-provider bitnami/vault-csi-provider:latest
-```
-
-or using Docker Compose:
-
-```console
-docker-compose up vault-csi-provider
 ```
 
 ## Configuration
@@ -112,6 +91,12 @@ docker run --rm --name vault-csi-provider bitnami/vault-csi-provider:latest --he
 ```
 
 Check the [official HashiCorp Vault CSI Provider documentation](https://github.com/hashicorp/vault-csi-provider) for more information about how to use HashiCorp Vault CSI Provider.
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 

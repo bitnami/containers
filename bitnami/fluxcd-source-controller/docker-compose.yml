@@ -4,5 +4,5 @@
 version: '2'
 
 services:
-  pinniped-cli:
-    image: docker.io/bitnami/pinniped-cli:0
+  fluxcd-source-controller:
+    image: 

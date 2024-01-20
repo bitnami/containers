@@ -13,13 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name contour bitnami/contour:latest
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/contour/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -75,16 +68,6 @@ For persistence you should mount a directory at the `/bitnami` path. If the moun
 docker run \
     -v /path/to/contour-persistence:/bitnami/contour \
     bitnami/contour:latest
-```
-
-You can also do this with a minor change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/contour/docker-compose.yml) file present in this repository:
-
-```yaml
-contour:
-  ...
-  volumes:
-    - /path/to/contour-persistence:/bitnami/contour
-  ...
 ```
 
 ## Connecting to other containers
@@ -162,6 +145,10 @@ docker run --name contour bitnami/contour:latest
 ```
 
 ## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ### 1.20.0-debian-10-r8 Rename branch 1.20
 

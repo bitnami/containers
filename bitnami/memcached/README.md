@@ -13,13 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name memcached bitnami/memcached:latest
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/memcached/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -142,6 +135,33 @@ docker-compose up -d
 ```
 
 ## Configuration
+
+### Environment variables
+
+#### Customizable environment variables
+
+| Name                    | Description                                                | Default Value |
+|-------------------------|------------------------------------------------------------|---------------|
+| `MEMCACHED_PORT_NUMBER` | Port number used by Memcached.                             | `11211`       |
+| `MEMCACHED_USERNAME`    | Memcached admin username.                                  | `root`        |
+| `MEMCACHED_MAX_TIMEOUT` | Maximum timeout in seconds for Memcached to start or stop. | `5`           |
+
+#### Read-only environment variables
+
+| Name                     | Description                                 | Value                                 |
+|--------------------------|---------------------------------------------|---------------------------------------|
+| `MEMCACHED_BASE_DIR`     | Memcached installation directory.           | `${BITNAMI_ROOT_DIR}/memcached`       |
+| `MEMCACHED_CONF_DIR`     | Memcached configuration directory.          | `${MEMCACHED_BASE_DIR}/conf`          |
+| `MEMCACHED_BIN_DIR`      | Memcached directory for binary executables. | `${MEMCACHED_BASE_DIR}/bin`           |
+| `MEMCACHED_TMP_DIR`      | Memcached directory for temporary files.    | `${MEMCACHED_BASE_DIR}/tmp`           |
+| `MEMCACHED_LOGS_DIR`     | Memcached directory for logs.               | `${MEMCACHED_BASE_DIR}/logs`          |
+| `MEMCACHED_LOG_FILE`     | Path to the Memcached log file.             | `${MEMCACHED_LOGS_DIR}/memcached.log` |
+| `MEMCACHED_PID_FILE`     | Path to the Memcached PID file.             | `${MEMCACHED_TMP_DIR}/memcached.pid`  |
+| `SASL_CONF_PATH`         | Memcached SASL configuration directory.     | `${MEMCACHED_CONF_DIR}/sasl2`         |
+| `SASL_CONF_FILE`         | Memcached SASL configuration                | `${SASL_CONF_PATH}/memcached.conf`    |
+| `SASL_DB_FILE`           | Memcached SASL database file.               | `${SASL_CONF_PATH}/memcachedsasldb`   |
+| `MEMCACHED_DAEMON_USER`  | Memcached system user.                      | `memcached`                           |
+| `MEMCACHED_DAEMON_GROUP` | Memcached system group.                     | `memcached`                           |
 
 ### Specify the cache size
 
@@ -365,6 +385,12 @@ docker-compose up memcached
 ### 1.4.25-r0
 
 * The logs are always sent to the `stdout` and are no longer collected in the volume.
+
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/memcached).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## Contributing
 
