@@ -10,8 +10,7 @@ Disclaimer: The respective trademarks mentioned in the offering are owned by the
 ## TL;DR
 
 ```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/moodle/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run --name moodle bitnami/moodle:latest
 ```
 
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
@@ -67,18 +66,7 @@ docker build -t bitnami/APP:latest .
 
 Moodle&trade; requires access to a MySQL or MariaDB database to store information. We'll use the [Bitnami Docker Image for MariaDB](https://github.com/bitnami/containers/tree/main/bitnami/mariadb) for the database requirements.
 
-### Run the application using Docker Compose
-
-The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/moodle/docker-compose.yml) file. Run the application using it as shown below:
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/moodle/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ### Using the Docker Command Line
-
-If you want to run the application manually instead of using `docker-compose`, these are the basic steps you need to run:
 
 #### Step 1: Create a network
 
@@ -117,6 +105,17 @@ docker run -d --name moodle \
 ```
 
 Access your application at `http://your-ip/`
+
+### Run the application using Docker Compose
+
+```console
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/moodle/docker-compose.yml > docker-compose.yml
+docker-compose up -d
+```
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/moodle).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## Persisting your application
 
@@ -194,6 +193,37 @@ docker run -d --name moodle \
 
 ### Environment variables
 
+#### Customizable environment variables
+
+| Name                          | Description                                                                                                                  | Default Value                      |
+|-------------------------------|------------------------------------------------------------------------------------------------------------------------------|------------------------------------|
+| `MOODLE_DATA_DIR`             | Directory where to store Moodle data files.                                                                                  | `${BITNAMI_VOLUME_DIR}/moodledata` |
+| `MOODLE_DATA_TO_PERSIST`      | Files to persist relative to the Moodle installation directory. To provide multiple values, separate them with a whitespace. | `$MOODLE_BASE_DIR`                 |
+| `MOODLE_SITE_NAME`            | Moodle site name.                                                                                                            | `New Site`                         |
+| `MOODLE_CRON_MINUTES`         | Moodle cron frequency in minutes.                                                                                            | `1`                                |
+| `MOODLE_REVERSEPROXY`         | Activate the reverseproxy feature of Moodle.                                                                                 | `no`                               |
+| `MOODLE_SSLPROXY`             | Activate the sslproxy feature of Moodle.                                                                                     | `no`                               |
+| `MOODLE_LANG`                 | Allow to define default site language                                                                                        | `en`                               |
+| `MOODLE_USERNAME`             | Moodle user name.                                                                                                            | `user`                             |
+| `MOODLE_PASSWORD`             | Moodle user password.                                                                                                        | `bitnami`                          |
+| `MOODLE_EMAIL`                | Moodle user e-mail address.                                                                                                  | `user@example.com`                 |
+| `MOODLE_DATABASE_TYPE`        | Database type to be used for the Moodle installation.                                                                        | `mariadb`                          |
+| `MOODLE_DATABASE_HOST`        | Database server host.                                                                                                        | `mariadb`                          |
+| `MOODLE_DATABASE_HOST`        | Database server host.                                                                                                        | `127.0.0.1`                        |
+| `MOODLE_DATABASE_PORT_NUMBER` | Database server port.                                                                                                        | `3306`                             |
+| `MOODLE_DATABASE_NAME`        | Database name.                                                                                                               | `bitnami_moodle`                   |
+| `MOODLE_DATABASE_USER`        | Database user name.                                                                                                          | `bn_moodle`                        |
+
+#### Read-only environment variables
+
+| Name                         | Description                                                | Value                           |
+|------------------------------|------------------------------------------------------------|---------------------------------|
+| `MOODLE_BASE_DIR`            | Moodle installation directory.                             | `${BITNAMI_ROOT_DIR}/moodle`    |
+| `MOODLE_CONF_FILE`           | Configuration file for Moodle.                             | `${MOODLE_BASE_DIR}/config.php` |
+| `MOODLE_VOLUME_DIR`          | Persisted directory for Moodle files.                      | `${BITNAMI_VOLUME_DIR}/moodle`  |
+| `PHP_DEFAULT_MEMORY_LIMIT`   | Default PHP memory limit.                                  | `256M`                          |
+| `PHP_DEFAULT_MAX_INPUT_VARS` | Default maximum amount of input variables for PHP scripts. | `5000`                          |
+
 When you start the Moodle&trade; image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
 * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/moodle/docker-compose.yml) file present in this repository:
@@ -217,86 +247,7 @@ moodle:
     bitnami/moodle:latest
   ```
 
-Available environment variables:
-
-#### User and Site configuration
-
-* `MOODLE_USERNAME`: Moodle application username. Default: **user**
-* `MOODLE_PASSWORD`: Moodle application password. Default: **bitnami**
-* `MOODLE_EMAIL`: Moodle application email. Default: **user@example.com**
-* `MOODLE_SITE_NAME`: Moodle site name. Default: **New Site**
-* `MOODLE_SKIP_BOOTSTRAP`: Do not initialize the Moodle database for a new deployment. This is necessary in case you use a database that already has Moodle data. Default: **no**
-* `MOODLE_HOST`: Allows you to configure Moodle's wwwroot feature. Ex: example.com. By default it is a PHP superglobal variable. Default: **$_SERVER['HTTP_HOST']**
-* `MOODLE_REVERSEPROXY`: Allows you to activate the reverseproxy feature of Moodle. Default: **no**
-* `MOODLE_SSLPROXY`: Allows you to activate the sslproxy feature of Moodle. Default: **no**
-* `MOODLE_LANG`: Allows you to set the default site language. Default: **en**
-
-#### Use an existing database
-
-* `MOODLE_DATABASE_TYPE`: Database type. Valid values: *mariadb*, *mysqli*, *pgsql*, *auroramysql*. Default: **mariadb**
-* `MOODLE_DATABASE_HOST`: Hostname for database server. Default: **mariadb**
-* `MOODLE_DATABASE_PORT_NUMBER`: Port used by database server. Default: **3306**
-* `MOODLE_DATABASE_NAME`: Database name that Moodle will use to connect with the database. Default: **bitnami_moodle**
-* `MOODLE_DATABASE_USER`: Database user that Moodle will use to connect with the database. Default: **bn_moodle**
-* `MOODLE_DATABASE_PASSWORD`: Database password that Moodle will use to connect with the database. No defaults.
-* `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-#### Create a database for Moodle using mysql-client
-
-* `MYSQL_CLIENT_FLAVOR`: SQL database flavor. Valid values: `mariadb` or `mysql`. Default: **mariadb**.
-* `MYSQL_CLIENT_DATABASE_HOST`: Hostname for MariaDB server. Default: **mariadb**
-* `MYSQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
-* `MYSQL_CLIENT_DATABASE_ROOT_USER`: Database admin user. Default: **root**
-* `MYSQL_CLIENT_DATABASE_ROOT_PASSWORD`: Database password for the database admin user. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_CHARACTER_SET`: Character set to use for the new database. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_COLLATE`: Database collation to use for the new database. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_PRIVILEGES`: Database privileges to grant for the user specified in `MYSQL_CLIENT_CREATE_DATABASE_USER` to the database specified in `MYSQL_CLIENT_CREATE_DATABASE_NAME`. No defaults.
-* `MYSQL_CLIENT_ENABLE_SSL_WRAPPER`: Whether to force SSL connections to the database via the `mysql` CLI tool. Useful for applications that rely on the CLI instead of APIs. Default: **no**
-* `MYSQL_CLIENT_ENABLE_SSL`: Whether to force SSL connections for the database. Default: **no**
-* `MYSQL_CLIENT_SSL_CA_FILE`: Path to the SSL CA file for the new database. No defaults
-* `MYSQL_CLIENT_SSL_CERT_FILE`: Path to the SSL CA file for the new database. No defaults
-* `MYSQL_CLIENT_SSL_KEY_FILE`: Path to the SSL CA file for the new database. No defaults
-* `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-#### Create a database for Moodle using postgresql-client
-
-* `POSTGRESQL_CLIENT_DATABASE_HOST`: Hostname for the PostgreSQL server. Default: **postgresql**
-* `POSTGRESQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by the PostgreSQL server. Default: **5432**
-* `POSTGRESQL_CLIENT_POSTGRES_USER`: Database admin user. Default: **root**
-* `POSTGRESQL_CLIENT_POSTGRES_PASSWORD`: Database password for the database admin user. No defaults.
-* `POSTGRESQL_CLIENT_CREATE_DATABASE_NAMES`: List of new databases to be created by the postgresql-client module. No defaults.
-* `POSTGRESQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the postgresql-client module. No defaults.
-* `POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `POSTGRESQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
-* `POSTGRESQL_CLIENT_CREATE_DATABASE_EXTENSIONS`: PostgreSQL extensions to enable in the specified database during the first initialization. No defaults.
-* `POSTGRESQL_CLIENT_EXECUTE_SQL`: SQL code to execute in the PostgreSQL server. No defaults.
-* `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-#### SMTP Configuration
-
-To configure Moodle&trade; to send email using SMTP you can set the following environment variables:
-
-* `MOODLE_SMTP_HOST`: SMTP host.
-* `MOODLE_SMTP_PORT`: SMTP port.
-* `MOODLE_SMTP_USER`: SMTP account user.
-* `MOODLE_SMTP_PASSWORD`: SMTP account password.
-* `MOODLE_SMTP_PROTOCOL`: SMTP protocol.
-
-#### PHP configuration
-
-* `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. No default.
-* `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
-* `PHP_MAX_EXECUTION_TIME`: Maximum execution time for PHP scripts. No default.
-* `PHP_MAX_INPUT_TIME`: Maximum input time for PHP scripts. No default.
-* `PHP_MAX_INPUT_VARS`: Maximum amount of input variables for PHP scripts. No default.
-* `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
-* `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
-* `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
-* `PHP_OUTPUT_BUFFERING`: Size of the output buffer for PHP. Default: **8196**
-
-#### Examples
+### Examples
 
 This would be an example of SMTP configuration using a Gmail account:
 
