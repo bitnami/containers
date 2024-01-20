@@ -13,13 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run -it --name supabase-postgres bitnami/supabase-postgres
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/supabase-postgres/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -73,18 +66,10 @@ Bitnami provides up-to-date versions of Supabase Postgres, including security pa
 docker pull bitnami/supabase-postgres:latest
 ```
 
-or if you're using Docker Compose, update the value of the image property to `bitnami/supabase-postgres:latest`.
-
 #### Step 2: Remove the currently running container
 
 ```console
 docker rm -v supabase-postgres
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v supabase-postgres
 ```
 
 #### Step 3: Run the new image
@@ -95,15 +80,15 @@ Re-create your container from the new image.
 docker run --name supabase-postgres bitnami/supabase-postgres:latest
 ```
 
-or using Docker Compose:
-
-```console
-docker-compose up supabase-postgres
-```
-
 ## Configuration
 
 This container is fully compatible with the [bitnami/postgresql](https://github.com/bitnami/containers/tree/main/bitnami/postgresql) container. Read the [bitnami/postgresql documentation](https://github.com/bitnami/containers/tree/main/bitnami/postgresql#configuration) for instructions on how to configure the container.
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 
