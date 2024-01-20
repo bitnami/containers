@@ -10,11 +10,11 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/odoo/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run --name odoo bitnami/odoo:latest
 ```
 
-**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
+**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure d
+eployment.
 
 ## Why use Bitnami Images?
 
@@ -68,18 +68,7 @@ docker build -t bitnami/APP:latest .
 
 Odoo requires access to a PostgreSQL database to store information. We'll use the [Bitnami Docker Image for PostgreSQL](https://github.com/bitnami/containers/tree/main/bitnami/postgresql) for the database requirements.
 
-### Run the application using Docker Compose
-
-The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/odoo/docker-compose.yml) file. Run the application using it as shown below:
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/odoo/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ### Using the Docker Command Line
-
-If you want to run the application manually instead of using `docker-compose`, these are the basic steps you need to run:
 
 #### Step 1: Create a network
 
@@ -113,6 +102,17 @@ docker run -d --name odoo \
 ```
 
 Access your application at `http://your-ip/`
+
+### Run the application using Docker Compose
+
+```console
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/odoo/docker-compose.yml > docker-compose.yml
+docker-compose up -d
+```
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/odoo).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## Persisting your application
 
@@ -185,43 +185,42 @@ docker run -d --name odoo \
 
 ### Environment variables
 
-| Name                            | Description                                                                                                                | Default Value                                          | Can be set |
-|---------------------------------|----------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------|------------|
-| `$ODOO_BASE_DIR`                | Odoo installation directory.                                                                                               | `${BITNAMI_ROOT_DIR}/odoo`                             |            |
-| `$ODOO_BIN_DIR`                 | Odoo directory for binary executables.                                                                                     | `${ODOO_BASE_DIR}/bin`                                 |            |
-| `$ODOO_CONF_DIR`                | Odoo directory for configuration files.                                                                                    | `${ODOO_BASE_DIR}/conf`                                |            |
-| `$ODOO_CONF_FILE`               | Configuration file for Odoo.                                                                                               | `${ODOO_CONF_DIR}/odoo.conf`                           |            |
-| `$ODOO_DATA_DIR`                | Odoo directory for data files.                                                                                             | `${ODOO_BASE_DIR}/data`                                |            |
-| `$ODOO_ADDONS_DIR`              | Odoo directory for addons.                                                                                                 | `${ODOO_ADDONS_DIR:-${ODOO_BASE_DIR}/addons}`          |            |
-| `$ODOO_TMP_DIR`                 | Odoo directory for temporary files.                                                                                        | `${ODOO_BASE_DIR}/tmp`                                 |            |
-| `$ODOO_PID_FILE`                | PID file for Odoo.                                                                                                         | `${ODOO_TMP_DIR}/odoo.pid`                             |            |
-| `$ODOO_LOGS_DIR`                | Odoo directory for log files.                                                                                              | `${ODOO_BASE_DIR}/log`                                 |            |
-| `$ODOO_LOG_FILE`                | Log file for Odoo.                                                                                                         | `${ODOO_LOGS_DIR}/odoo-server.log`                     |            |
-| `$ODOO_VOLUME_DIR`              | Odoo directory for mounted configuration files.                                                                            | `${BITNAMI_VOLUME_DIR}/odoo`                           |            |
-| `$ODOO_DATA_TO_PERSIST`         | Files to persist relative to the Odoo installation directory. To provide multiple values, separate them with a whitespace. | `${ODOO_ADDONS_DIR} ${ODOO_CONF_DIR} ${ODOO_DATA_DIR}` | &check;    |
-| `$ODOO_DAEMON_USER`             | Odoo system user.                                                                                                          | `odoo`                                                 |            |
-| `$ODOO_DAEMON_GROUP`            | Odoo system group.                                                                                                         | `odoo`                                                 |            |
-| `$ODOO_PORT_NUMBER`             | Port number in which Odoo will run.                                                                                        | `8069`                                                 | &check;    |
-| `$ODOO_LONGPOLLING_PORT_NUMBER` | Port number in which the Odoo Longpolling service will run.                                                                | `8072`                                                 | &check;    |
-| `$ODOO_SKIP_BOOTSTRAP`          | Whether to perform initial bootstrapping for the application.                                                              | `no`                                                   | &check;    |
-| `$ODOO_SKIP_MODULES_UPDATE`     | Whether to perform initial update of the plugins installed.                                                                | `no`                                                   | &check;    |
-| `$ODOO_LOAD_DEMO_DATA`          | Whether to load demo data.                                                                                                 | `no`                                                   | &check;    |
-| `$ODOO_EMAIL`                   | Odoo user e-mail address.                                                                                                  | `user@example.com`                                     | &check;    |
-| `$ODOO_PASSWORD`                | Odoo user password.                                                                                                        | `bitnami`                                              | &check;    |
-| `$ODOO_SMTP_HOST`               | Odoo SMTP server host.                                                                                                     |                                                        | &check;    |
-| `$ODOO_SMTP_PORT_NUMBER`        | Odoo SMTP server port number.                                                                                              |                                                        | &check;    |
-| `$ODOO_SMTP_USER`               | Odoo SMTP server user.                                                                                                     |                                                        | &check;    |
-| `$ODOO_SMTP_PASSWORD`           | Odoo SMTP server user password.                                                                                            |                                                        | &check;    |
-| `$ODOO_SMTP_PROTOCOL`           | Odoo SMTP server protocol to use.                                                                                          |                                                        | &check;    |
-| `$ODOO_DEFAULT_DATABASE_HOST`   | Default database server host.                                                                                              | `postgresql`                                           |            |
-| `$ODOO_DEFAULT_DATABASE_HOST`   | Default database server host.                                                                                              | `127.0.0.1`                                            |            |
-| `$ODOO_DATABASE_HOST`           | Database server host.                                                                                                      | `$ODOO_DEFAULT_DATABASE_HOST`                          | &check;    |
-| `$ODOO_DATABASE_PORT_NUMBER`    | Database server port.                                                                                                      | `5432`                                                 | &check;    |
-| `$ODOO_DATABASE_NAME`           | Database name.                                                                                                             | `bitnami_odoo`                                         | &check;    |
-| `$ODOO_DATABASE_USER`           | Database user name.                                                                                                        | `bn_odoo`                                              | &check;    |
-| `$ODOO_DATABASE_PASSWORD`       | Database user password.                                                                                                    |                                                        | &check;    |
-| `$ODOO_DATABASE_FILTER`         | Database filter                                                                                                            |                                                        | &check;    |
+#### Customizable environment variables
 
+| Name                           | Description                                                                                                                | Default Value                                          |
+|--------------------------------|----------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------|
+| `ODOO_DATA_TO_PERSIST`         | Files to persist relative to the Odoo installation directory. To provide multiple values, separate them with a whitespace. | `${ODOO_ADDONS_DIR} ${ODOO_CONF_DIR} ${ODOO_DATA_DIR}` |
+| `ODOO_PORT_NUMBER`             | Port number in which Odoo will run.                                                                                        | `8069`                                                 |
+| `ODOO_LONGPOLLING_PORT_NUMBER` | Port number in which the Odoo Longpolling service will run.                                                                | `8072`                                                 |
+| `ODOO_SKIP_BOOTSTRAP`          | Whether to perform initial bootstrapping for the application.                                                              | `no`                                                   |
+| `ODOO_SKIP_MODULES_UPDATE`     | Whether to perform initial update of the plugins installed.                                                                | `no`                                                   |
+| `ODOO_LOAD_DEMO_DATA`          | Whether to load demo data.                                                                                                 | `no`                                                   |
+| `ODOO_EMAIL`                   | Odoo user e-mail address.                                                                                                  | `user@example.com`                                     |
+| `ODOO_PASSWORD`                | Odoo user password.                                                                                                        | `bitnami`                                              |
+| `ODOO_DATABASE_HOST`           | Database server host.                                                                                                      | `$ODOO_DEFAULT_DATABASE_HOST`                          |
+| `ODOO_DATABASE_PORT_NUMBER`    | Database server port.                                                                                                      | `5432`                                                 |
+| `ODOO_DATABASE_NAME`           | Database name.                                                                                                             | `bitnami_odoo`                                         |
+| `ODOO_DATABASE_USER`           | Database user name.                                                                                                        | `bn_odoo`                                              |
+
+#### Read-only environment variables
+
+| Name                         | Description                                     | Value                                         |
+|------------------------------|-------------------------------------------------|-----------------------------------------------|
+| `ODOO_BASE_DIR`              | Odoo installation directory.                    | `${BITNAMI_ROOT_DIR}/odoo`                    |
+| `ODOO_BIN_DIR`               | Odoo directory for binary executables.          | `${ODOO_BASE_DIR}/bin`                        |
+| `ODOO_CONF_DIR`              | Odoo directory for configuration files.         | `${ODOO_BASE_DIR}/conf`                       |
+| `ODOO_CONF_FILE`             | Configuration file for Odoo.                    | `${ODOO_CONF_DIR}/odoo.conf`                  |
+| `ODOO_DATA_DIR`              | Odoo directory for data files.                  | `${ODOO_BASE_DIR}/data`                       |
+| `ODOO_ADDONS_DIR`            | Odoo directory for addons.                      | `${ODOO_ADDONS_DIR:-${ODOO_BASE_DIR}/addons}` |
+| `ODOO_TMP_DIR`               | Odoo directory for temporary files.             | `${ODOO_BASE_DIR}/tmp`                        |
+| `ODOO_PID_FILE`              | PID file for Odoo.                              | `${ODOO_TMP_DIR}/odoo.pid`                    |
+| `ODOO_LOGS_DIR`              | Odoo directory for log files.                   | `${ODOO_BASE_DIR}/log`                        |
+| `ODOO_LOG_FILE`              | Log file for Odoo.                              | `${ODOO_LOGS_DIR}/odoo-server.log`            |
+| `ODOO_VOLUME_DIR`            | Odoo directory for mounted configuration files. | `${BITNAMI_VOLUME_DIR}/odoo`                  |
+| `ODOO_DAEMON_USER`           | Odoo system user.                               | `odoo`                                        |
+| `ODOO_DAEMON_GROUP`          | Odoo system group.                              | `odoo`                                        |
+| `ODOO_DEFAULT_DATABASE_HOST` | Default database server host.                   | `postgresql`                                  |
+| `ODOO_DEFAULT_DATABASE_HOST` | Default database server host.                   | `127.0.0.1`                                   |
 
 When you start the Odoo image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
