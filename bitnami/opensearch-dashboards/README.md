@@ -10,14 +10,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-docker run -it --name opensearch-dashboards bitnami/opensearch-dashboards
-```
-
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/opensearch-dashboards/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run -it --name opensearch-dashboards bitnami/opensearch-dashboards:latest
 ```
 
 ## Why use Bitnami Images?
@@ -73,18 +66,10 @@ Bitnami provides up-to-date versions of OpenSearch Dashboards, including securit
 docker pull bitnami/opensearch-dashboards:latest
 ```
 
-or if you're using Docker Compose, update the value of the image property to `bitnami/opensearch-dashboards:latest`.
-
 #### Step 2: Remove the currently running container
 
 ```console
 docker rm -v opensearch-dashboards
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v opensearch-dashboards
 ```
 
 #### Step 3: Run the new image
@@ -95,13 +80,58 @@ Re-create your container from the new image.
 docker run --name opensearch-dashboards bitnami/opensearch-dashboards:latest
 ```
 
-or using Docker Compose:
-
-```console
-docker-compose up opensearch-dashboards
-```
-
 ## Configuration
+
+### Environment variables
+
+#### Customizable environment variables
+
+| Name                                                     | Description                                                                         | Default Value                                                   |
+|----------------------------------------------------------|-------------------------------------------------------------------------------------|-----------------------------------------------------------------|
+| `OPENSEARCH_DASHBOARDS_OPENSEARCH_URL`                   | Opensearch URL. Provide Client node url in the case of a cluster                    | `opensearch`                                                    |
+| `OPENSEARCH_DASHBOARDS_OPENSEARCH_URL`                   | Opensearch URL. Provide Client node url in the case of a cluster                    | `127.0.0.1`                                                     |
+| `OPENSEARCH_DASHBOARDS_OPENSEARCH_PORT_NUMBER`           | Elasticsearch port                                                                  | `9200`                                                          |
+| `OPENSEARCH_DASHBOARDS_HOST`                             | Opensearch Dashboards host                                                          | `0.0.0.0`                                                       |
+| `OPENSEARCH_DASHBOARDS_PORT_NUMBER`                      | Opensearch Dashboards port                                                          | `5601`                                                          |
+| `OPENSEARCH_DASHBOARDS_WAIT_READY_MAX_RETRIES`           | Max retries to wait for Opensearch Dashboards to be ready                           | `30`                                                            |
+| `OPENSEARCH_DASHBOARDS_INITSCRIPTS_START_SERVER`         | Whether to start the Opensearch Dashboards server before executing the init scripts | `yes`                                                           |
+| `OPENSEARCH_DASHBOARDS_FORCE_INITSCRIPTS`                | Whether to force the execution of the init scripts                                  | `no`                                                            |
+| `OPENSEARCH_DASHBOARDS_DISABLE_STRICT_CSP`               | Disable strict Content Security Policy (CSP) for Opensearch Dashboards              | `no`                                                            |
+| `OPENSEARCH_DASHBOARDS_CERTS_DIR`                        | Path to certificates folder.                                                        | `${SERVER_CONF_DIR}/certs`                                      |
+| `OPENSEARCH_DASHBOARDS_SERVER_ENABLE_TLS`                | Enable TLS for inbound connections via HTTPS.                                       | `false`                                                         |
+| `OPENSEARCH_DASHBOARDS_SERVER_KEYSTORE_LOCATION`         | Path to Keystore                                                                    | `${SERVER_CERTS_DIR}/server/opensearch-dashboards.keystore.p12` |
+| `OPENSEARCH_DASHBOARDS_SERVER_TLS_USE_PEM`               | Configure Opensearch Dashboards server TLS settings using PEM certificates.         | `false`                                                         |
+| `OPENSEARCH_DASHBOARDS_SERVER_CERT_LOCATION`             | Path to PEM node certificate.                                                       | `${SERVER_CERTS_DIR}/server/tls.crt`                            |
+| `OPENSEARCH_DASHBOARDS_SERVER_KEY_LOCATION`              | Path to PEM node key.                                                               | `${SERVER_CERTS_DIR}/server/tls.key`                            |
+| `OPENSEARCH_DASHBOARDS_OPENSEARCH_ENABLE_TLS`            | Enable TLS for Opensearch communications.                                           | `false`                                                         |
+| `OPENSEARCH_DASHBOARDS_OPENSEARCH_TLS_VERIFICATION_MODE` | Opensearch TLS verification mode.                                                   | `full`                                                          |
+| `OPENSEARCH_DASHBOARDS_OPENSEARCH_TRUSTSTORE_LOCATION`   | Path to Opensearch Truststore.                                                      | `${SERVER_CERTS_DIR}/opensearch/opensearch.truststore.p12`      |
+| `OPENSEARCH_DASHBOARDS_OPENSEARCH_TLS_USE_PEM`           | Configure Opensearch TLS settings using PEM certificates.                           | `false`                                                         |
+| `OPENSEARCH_DASHBOARDS_OPENSEARCH_CA_CERT_LOCATION`      | Path to Opensearch CA certificate.                                                  | `${SERVER_CERTS_DIR}/opensearch/ca.crt`                         |
+| `APACHE_OPENSEARCH_DASHBOARDS_USERNAME`                  | Kibana user to configure basic authentication                                       | `user`                                                          |
+| `APACHE_OPENSEARCH_DASHBOARDS_PASSWORD`                  | Kibana password to configure basic authentication                                   | `bitnami`                                                       |
+
+#### Read-only environment variables
+
+| Name                                     | Description                                                                                   | Value                                          |
+|------------------------------------------|-----------------------------------------------------------------------------------------------|------------------------------------------------|
+| `SERVER_FLAVOR`                          | Server flavor. Valid values: `kibana` or `opensearch-dashboards`.                             | `opensearch-dashboards`                        |
+| `BITNAMI_VOLUME_DIR`                     | Directory where to mount volumes                                                              | `/bitnami`                                     |
+| `OPENSEARCH_DASHBOARDS_VOLUME_DIR`       | Opensearch Dashboards persistence directory                                                   | `${BITNAMI_VOLUME_DIR}/opensearch-dashboards`  |
+| `OPENSEARCH_DASHBOARDS_BASE_DIR`         | Opensearch Dashboards installation directory                                                  | `${BITNAMI_ROOT_DIR}/opensearch-dashboards`    |
+| `OPENSEARCH_DASHBOARDS_CONF_DIR`         | Opensearch Dashboards configuration directory                                                 | `${SERVER_BASE_DIR}/config`                    |
+| `OPENSEARCH_DASHBOARDS_LOGS_DIR`         | Opensearch Dashboards logs directory                                                          | `${SERVER_BASE_DIR}/logs`                      |
+| `OPENSEARCH_DASHBOARDS_TMP_DIR`          | Opensearch Dashboards temporary directory                                                     | `${SERVER_BASE_DIR}/tmp`                       |
+| `OPENSEARCH_DASHBOARDS_BIN_DIR`          | Opensearch Dashboards executable directory                                                    | `${SERVER_BASE_DIR}/bin`                       |
+| `OPENSEARCH_DASHBOARDS_PLUGINS_DIR`      | Opensearch Dashboards plugins directory                                                       | `${SERVER_BASE_DIR}/plugins`                   |
+| `OPENSEARCH_DASHBOARDS_DATA_DIR`         | Opensearch Dashboards data directory                                                          | `${SERVER_VOLUME_DIR}/data`                    |
+| `OPENSEARCH_DASHBOARDS_MOUNTED_CONF_DIR` | Directory for including custom configuration files (that override the default generated ones) | `${SERVER_VOLUME_DIR}/conf`                    |
+| `OPENSEARCH_DASHBOARDS_CONF_FILE`        | Path to Opensearch Dashboards configuration file                                              | `${SERVER_CONF_DIR}/opensearch_dashboards.yml` |
+| `OPENSEARCH_DASHBOARDS_LOG_FILE`         | Path to the Opensearch Dashboards log file                                                    | `${SERVER_LOGS_DIR}/opensearch-dashboards.log` |
+| `OPENSEARCH_DASHBOARDS_PID_FILE`         | Path to the Opensearch Dashboards pid file                                                    | `${SERVER_TMP_DIR}/opensearch-dashboards.pid`  |
+| `OPENSEARCH_DASHBOARDS_INITSCRIPTS_DIR`  | Path to the Opensearch Dashboards container init scripts directory                            | `/docker-entrypoint-initdb.d`                  |
+| `OPENSEARCH_DASHBOARDS_DAEMON_USER`      | Opensearch Dashboards system user                                                             | `opensearch-dashboards`                        |
+| `OPENSEARCH_DASHBOARDS_DAEMON_GROUP`     | Opensearch Dashboards system group                                                            | `opensearch-dashboards`                        |
 
 ### Running commands
 
@@ -113,6 +143,12 @@ docker run --rm --name opensearch-dashboards bitnami/opensearch-dashboards:lates
 
 Check the [official OpenSearch Dashboards documentation](https://opensearch.org/docs/) for more information about how to use OpenSearch Dashboards.
 
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
+
 ## Contributing
 
 We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
@@ -123,7 +159,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 Bitnami
+Copyright &copy; 2024 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
