@@ -66,6 +66,12 @@ docker run --rm --name percona-xtrabackup bitnami/percona-xtrabackup:latest -- x
 
 Check the [official percona-xtrabackup documentation](https://www.percona.com/doc/percona-xtrabackup/LATEST/manual.html) for a list of the available parameters.
 
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
