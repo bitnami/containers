@@ -9,11 +9,8 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ## TL;DR
 
-### Docker Compose
-
 ```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/prometheus-rsocket-proxy/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run --name prometheus-rsocket-proxy bitnami/prometheus-rsocket-proxy:latest
 ```
 
 ## Why use Bitnami Images?
@@ -64,6 +61,12 @@ docker build -t bitnami/APP:latest .
 ## Configuration
 
 For further documentation, please check [here](https://github.com/micrometer-metrics/prometheus-rsocket-proxy).
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 
