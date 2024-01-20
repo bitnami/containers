@@ -18,13 +18,6 @@ curl -o resnet_50_classification_1.tar.gz https://storage.googleapis.com/tfhub-m
 tar xzf resnet_50_classification_1.tar.gz -C 1
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/tensorflow-resnet/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -50,26 +43,15 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 
 ## Prerequisites
 
-To run this application you need Docker Engine 1.10.0. Docker Compose is recommended with a version 1.6.0 or later.
+To run this application you need Docker Engine 1.10.0.
 
 ## How to use this image
 
 ### Run TensorFlow ResNet client with TensorFlow Serving
 
-Running TensorFlow ResNet client with the TensorFlow Serving server is the recommended way. You can either use docker-compose or run the containers manually.
-
-#### Run the application using Docker Compose
-
-The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/tensorflow-resnet/docker-compose.yml) file. Run the application using it as shown below:
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/tensorflow-resnet/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
+Running TensorFlow ResNet client with the TensorFlow Serving server is the recommended way.
 
 #### Run the application manually
-
-If you want to run the application manually instead of using docker-compose, these are the basic steps you need to run:
 
 1. Create a new network for the application and the database:
 
@@ -103,8 +85,7 @@ Bitnami provides up-to-date versions of Tensorflow-Serving and TensorFlow ResNet
 
 2. Stop your container
 
-    * For docker-compose: `$ docker-compose stop tensorflow-resnet`
-    * For manual execution: `$ docker stop tensorflow-resnet`
+    * `$ docker stop tensorflow-resnet`
 
 3. Take a snapshot of the application state
 
@@ -118,13 +99,11 @@ You can use these snapshots to restore the application state should the upgrade 
 
 1. Remove the currently running container
 
-    * For docker-compose: `$ docker-compose rm tensorflow-resnet`
-    * For manual execution: `$ docker rm tensorflow-resnet`
+    * `$ docker rm tensorflow-resnet`
 
 2. Run the new image
 
-    * For docker-compose: `$ docker-compose up tensorflow-resnet`
-    * For manual execution (mount the directories if needed): `docker run --name tensorflow-resnet bitnami/tensorflow-resnet:latest`
+    * Mount the directories if needed: `docker run --name tensorflow-resnet bitnami/tensorflow-resnet:latest`
 
 ## Configuration
 
@@ -162,10 +141,20 @@ Once you have deployed both the TensorFlow Serving and TensorFlow ResNet contain
 
 Tensorflow Resnet can be customized by specifying environment variables on the first run. The following environment values are provided to custom Tensorflow:
 
-* `TF_RESNET_SERVING_PORT_NUMBER`: TensorFlow Serving Port. Default: **8500**
-* `TF_RESNET_SERVING_HOST`: TensorFlow Serving server name. Default: **tensorflow-serving**
+#### Customizable environment variables
+
+| Name                            | Description                    | Default Value        |
+|---------------------------------|--------------------------------|----------------------|
+| `TF_RESNET_SERVING_PORT_NUMBER` | Tensorflow serving port number | `8500`               |
+| `TF_RESNET_SERVING_HOST`        | Tensorflow serving host name   | `tensorflow-serving` |
+
+#### Read-only environment variables
 
 ## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ### 2.4.1-debian-10-r87
 
