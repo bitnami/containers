@@ -1,9 +1,0 @@
-# Copyright VMware, Inc.
-# SPDX-License-Identifier: APACHE-2.0
-
-version: '2'
-services:
-  nginx-exporter:
-    image: docker.io/bitnami/nginx-exporter:1
-    ports:
-      - 9113:9113
