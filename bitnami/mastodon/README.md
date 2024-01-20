@@ -13,13 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run -it --name mastodon bitnami/mastodon
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/mastodon/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -105,6 +98,75 @@ docker-compose up mastodon
 
 ### Environment variables
 
+#### Customizable environment variables
+
+| Name                                 | Description                                                                                           | Default Value                                                                  |
+|--------------------------------------|-------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+| `MASTODON_MODE`                      | Mastodon service to run (can be web, streaming or sidekiq).                                           | `web`                                                                          |
+| `ALLOW_EMPTY_PASSWORD`               | Allow an empty password.                                                                              | `no`                                                                           |
+| `MASTODON_CREATE_ADMIN`              | Create admin for Mastodon.                                                                            | `true`                                                                         |
+| `MASTODON_ADMIN_USERNAME`            | Mastodon admin username.                                                                              | `user`                                                                         |
+| `MASTODON_ADMIN_PASSWORD`            | Mastodon admin password.                                                                              | `bitnami1`                                                                     |
+| `MASTODON_ADMIN_EMAIL`               | Mastodon admin email.                                                                                 | `user@bitnami.org`                                                             |
+| `MASTODON_ALLOW_ALL_DOMAINS`         | Allow accessing Mastodon with any domain.                                                             | `true`                                                                         |
+| `MASTODON_SECRET_KEY_BASE`           | Mastodon secret key base.                                                                             | `bitnami123`                                                                   |
+| `MASTODON_OTP_SECRET`                | Mastodon OTP secret.                                                                                  | `bitnami123`                                                                   |
+| `MASTODON_HTTPS_ENABLED`             | Enable HTTPS in Mastodon.                                                                             | `false`                                                                        |
+| `MASTODON_ASSETS_PRECOMPILE`         | Run rake assets:precompile on startup.                                                                | `true`                                                                         |
+| `MASTODON_WEB_DOMAIN`                | Mastodon web domain (for generating links).                                                           | `127.0.0.1`                                                                    |
+| `MASTODON_WEB_HOST`                  | Mastodon web host (for the streaming and sidekiq services to access).                                 | `mastodon`                                                                     |
+| `MASTODON_WEB_PORT_NUMBER`           | Mastodon web port.                                                                                    | `3000`                                                                         |
+| `MASTODON_STREAMING_PORT_NUMBER`     | Mastodon streaming port.                                                                              | `4000`                                                                         |
+| `MASTODON_STREAMING_API_BASE_URL`    | Mastodon public api base url.                                                                         | `ws://localhost:${MASTODON_STREAMING_PORT_NUMBER}`                             |
+| `RAILS_SERVE_STATIC_FILES`           | Have puma server the static files in the public/ folder                                               | `true`                                                                         |
+| `RAILS_SERVE_STATIC_FILES`           | Have puma server the static files in the public/ folder                                               | `false`                                                                        |
+| `MASTODON_BIND_ADDRESS`              | Address to listen for interfaces                                                                      | `0.0.0.0`                                                                      |
+| `MASTODON_DATA_TO_PERSIST`           | Data to persist from installations.                                                                   | `$MASTODON_ASSETS_DIR $MASTODON_SYSTEM_DIR`                                    |
+| `MASTODON_MIGRATE_DATABASE`          | Run rake db:migrate job.                                                                              | `true`                                                                         |
+| `MASTODON_DATABASE_HOST`             | Database server host.                                                                                 | `postgresql`                                                                   |
+| `MASTODON_DATABASE_HOST`             | Database server host.                                                                                 | `127.0.0.1`                                                                    |
+| `MASTODON_DATABASE_PORT_NUMBER`      | Database server port.                                                                                 | `5432`                                                                         |
+| `MASTODON_DATABASE_NAME`             | Database name.                                                                                        | `bitnami_mastodon`                                                             |
+| `MASTODON_DATABASE_USERNAME`         | Database user name.                                                                                   | `bn_mastodon`                                                                  |
+| `MASTODON_DATABASE_POOL`             | Number of DB pool processes.                                                                          | `5`                                                                            |
+| `MASTODON_REDIS_HOST`                | Redis server host.                                                                                    | `redis`                                                                        |
+| `MASTODON_REDIS_HOST`                | Redis server host.                                                                                    | `127.0.0.1`                                                                    |
+| `MASTODON_REDIS_PORT_NUMBER`         | Redis server port.                                                                                    | `6379`                                                                         |
+| `MASTODON_ELASTICSEARCH_ENABLED`     | Enable Elasticsearch.                                                                                 | `true`                                                                         |
+| `MASTODON_MIGRATE_ELASTICSEARCH`     | Run rake chewy:upgrade on startup.                                                                    | `true`                                                                         |
+| `MASTODON_ELASTICSEARCH_HOST`        | Elasticsearch server host.                                                                            | `elasticsearch`                                                                |
+| `MASTODON_ELASTICSEARCH_HOST`        | Elasticsearch server host.                                                                            | `127.0.0.1`                                                                    |
+| `MASTODON_ELASTICSEARCH_PORT_NUMBER` | Elasticsearch server port.                                                                            | `9200`                                                                         |
+| `MASTODON_ELASTICSEARCH_USER`        | Elasticsearch user password.                                                                          | `elastic`                                                                      |
+| `MASTODON_S3_ENABLED`                | Enable S3                                                                                             | `false`                                                                        |
+| `MASTODON_S3_BUCKET`                 | S3 Bucket for storing data                                                                            | `bitnami_mastodon`                                                             |
+| `MASTODON_S3_HOSTNAME`               | S3 endpoint                                                                                           | `minio`                                                                        |
+| `MASTODON_S3_PROTOCOL`               | S3 protocol (can be https or http)                                                                    | `http`                                                                         |
+| `MASTODON_S3_PORT_NUMBER`            | S3 port                                                                                               | `9000`                                                                         |
+| `MASTODON_S3_ALIAS_HOST`             | S3 route for uploaded files (for generating links in Mastodon)                                        | `localhost:${MASTODON_S3_PORT_NUMBER}`                                         |
+| `MASTODON_S3_REGION`                 | S3 region                                                                                             | `us-east-1`                                                                    |
+| `MASTODON_S3_ENDPOINT`               | S3 endpoint                                                                                           | `${MASTODON_S3_PROTOCOL}://${MASTODON_S3_HOSTNAME}:${MASTODON_S3_PORT_NUMBER}` |
+| `MASTODON_STARTUP_ATTEMPTS`          | Startup check attempts.                                                                               | `40`                                                                           |
+| `MASTODON_ENABLE_SERVICES`           | Whether to enable all Mastodon services by default. This requires the hostname to be properly set up. | `false`                                                                        |
+
+#### Read-only environment variables
+
+| Name                          | Description                              | Value                                |
+|-------------------------------|------------------------------------------|--------------------------------------|
+| `MASTODON_BASE_DIR`           | Mastodon installation directory.         | `${BITNAMI_ROOT_DIR}/mastodon`       |
+| `MASTODON_VOLUME_DIR`         | Mastodon volume directory.               | `/bitnami/mastodon`                  |
+| `MASTODON_ASSETS_DIR`         | Mastodon public assets directory.        | `${MASTODON_BASE_DIR}/public/assets` |
+| `MASTODON_SYSTEM_DIR`         | Mastodon public system directory.        | `${MASTODON_BASE_DIR}/public/system` |
+| `MASTODON_TMP_DIR`            | Mastodon tmp directory.                  | `${MASTODON_BASE_DIR}/tmp`           |
+| `MASTODON_LOGS_DIR`           | Mastodon logs directory.                 | `${MASTODON_BASE_DIR}/log`           |
+| `NODE_ENV`                    | Node.js environment mode                 | `production`                         |
+| `RAILS_ENV`                   | Rails environment mode                   | `production`                         |
+| `MASTODON_DAEMON_USER`        | Mastodon daemon system user.             | `mastodon`                           |
+| `MASTODON_DAEMON_GROUP`       | Mastodon daemon system group.            | `mastodon`                           |
+| `MASTODON_WEB_PID_FILE`       | PID file for mastodon-web service.       | `${MASTODON_TMP_DIR}/web.pid`        |
+| `MASTODON_STREAMING_PID_FILE` | PID file for mastodon-streaming service. | `${MASTODON_TMP_DIR}/streaming.pid`  |
+| `MASTODON_SIDEKIQ_PID_FILE`   | PID file for mastodon-sidekiq service.   | `${MASTODON_TMP_DIR}/sidekiq.pid`    |
+
 When you start the Mastodon image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. Please note that some variables are only considered when the container is started for the first time. If you want to add a new environment variable:
 
 * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mastodon/docker-compose.yml) file present in this repository:
@@ -141,24 +203,6 @@ Mastodon supports three running modes:
 * Sidekiq: Performs background operations like sending emails.
 
 The running mode is defined via the `MASTODON_MODE` environment variable. The possible values are `web`, `streaming` and `sidekiq`.
-
-##### User and Site configuration
-
-* `MASTODON_CREATE_ADMIN`: Create admin users if it does not exist. Default: **true**
-* `MASTODON_ADMIN_USERNAME`: Mastodon application username. Default: **user**
-* `MASTODON_ADMIN_PASSWORD`: Mastodon application password. Default: **bitnami1**
-* `MASTODON_ADMIN_EMAIL`: Mastodon application email. Default: **user@bitnami.org**
-* `MASTODON_HTTPS_ENABLED`: Set the Mastodon Puma server as HTTPS. Default: **false**.
-* `MASTODON_ALLOW_ALL_DOMAINS`: Disable the Mastodon host verification process. Default: **true**.
-* `MASTODON_DATA_TO_PERSIST`: Space separated list of files and directories to persist. Use a space to persist no data: `" "`. Default: **public/system, public/assets**
-
-##### Startup operations
-
-At startup, several operations are necessary. In order to allow multiple replicas of the web server, the container allows enabling certain operations via flags:
-
-* `MASTODON_PRECOMPILE_ASSETS`: Perform `rake assets:precompile` at startup. Default: **true**.
-* `MASTODON_MIGRATE_DATABASE`: Perform `rake db:migrate`. Default: **true**.
-* `MASTODON_MIGRATE_ELASTICSEARCH`: Perform `rake chewy:upgrade`. Default: **true**.
 
 ##### Connect Mastodon container to an existing database
 
@@ -209,6 +253,12 @@ docker-compose logs mastodon
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/mastodon).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## Contributing
 
