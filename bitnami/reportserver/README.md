@@ -10,8 +10,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/reportserver/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run --name reportserver bitnami/reportserver:latest
 ```
 
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
@@ -65,18 +64,7 @@ docker build -t bitnami/APP:latest .
 
 ReportServer Community requires access to a MySQL or MariaDB database to store information. We'll use the [Bitnami Docker Image for MariaDB](https://github.com/bitnami/containers/tree/main/bitnami/mariadb) for the database requirements.
 
-### Run the application using Docker Compose
-
-The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/reportserver/docker-compose.yml) file. Run the application using it as shown below:
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/reportserver/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ### Using the Docker Command Line
-
-If you want to run the application manually instead of using `docker-compose`, these are the basic steps you need to run:
 
 #### Step 1: Create a network
 
@@ -114,6 +102,17 @@ docker run -d --name reportserver \
 ```
 
 Access your application at `http://your-ip/`
+
+### Run the application using Docker Compose
+
+```console
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/reportserver/docker-compose.yml > docker-compose.yml
+docker-compose up -d
+```
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes.
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## Persisting your application
 
@@ -190,9 +189,39 @@ docker run -d --name reportserver \
 
 ### Environment variables
 
+#### Customizable environment variables
+
+| Name                                | Description                       | Default Value                                                     |
+|-------------------------------------|-----------------------------------|-------------------------------------------------------------------|
+| `REPORTSERVER_INSTALL_DEMO_DATA`    | Whether to install demo data.     | `no`                                                              |
+| `REPORTSERVER_USERNAME`             | ReportServer user name.           | `user`                                                            |
+| `REPORTSERVER_PASSWORD`             | ReportServer user password.       | `bitnami`                                                         |
+| `REPORTSERVER_EMAIL`                | ReportServer user e-mail address. | `user@example.com`                                                |
+| `REPORTSERVER_FIRST_NAME`           | ReportServer user first name.     | `FirstName`                                                       |
+| `REPORTSERVER_LAST_NAME`            | ReportServer user last name.      | `LastName`                                                        |
+| `REPORTSERVER_SMTP_PROTOCOL`        | Enable SMTP SSL.                  | `tls`                                                             |
+| `REPORTSERVER_DATABASE_HOST`        | Database server host.             | `$REPORTSERVER_DEFAULT_DATABASE_HOST`                             |
+| `REPORTSERVER_DATABASE_PORT_NUMBER` | Database server port.             | `3306`                                                            |
+| `REPORTSERVER_DATABASE_NAME`        | Database name.                    | `bitnami_reportserver`                                            |
+| `REPORTSERVER_DATABASE_USER`        | Database user name.               | `bn_reportserver`                                                 |
+| `TOMCAT_EXTRA_JAVA_OPTS`            | Tomcat extra java options.        | `$TOMCAT_EXTRA_JAVA_OPTS -Drs.configdir=${REPORTSERVER_CONF_DIR}` |
+
+#### Read-only environment variables
+
+| Name                                  | Description                           | Value                                              |
+|---------------------------------------|---------------------------------------|----------------------------------------------------|
+| `REPORTSERVER_BASE_DIR`               | ReportServer installation directory.  | `${BITNAMI_ROOT_DIR}/reportserver`                 |
+| `REPORTSERVER_CONF_DIR`               | ReportServer configuration directory. | `${REPORTSERVER_BASE_DIR}/WEB-INF/classes`         |
+| `REPORTSERVER_CONF_FILE`              | Configuration file for ReportServer.  | `${REPORTSERVER_CONF_DIR}/reportserver.properties` |
+| `REPORTSERVER_DAEMON_USER`            | ReportServer system user.             | `tomcat`                                           |
+| `REPORTSERVER_DAEMON_GROUP`           | ReportServer system group.            | `tomcat`                                           |
+| `REPORTSERVER_DEFAULT_DATABASE_HOST`  | Default database server host.         | `mariadb`                                          |
+| `REPORTSERVER_DEFAULT_DATABASE_HOST`  | Default database server host.         | `127.0.0.1`                                        |
+| `REPORTSERVER_TOMCAT_AJP_PORT_NUMBER` | Tomcat AJP port number.               | `8009`                                             |
+
 When you start the ReportServer Community image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
-- For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/reportserver/docker-compose.yml) file present in this repository:
+* For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/reportserver/docker-compose.yml) file present in this repository:
 
     ```yaml
     reportserver:
@@ -202,7 +231,7 @@ When you start the ReportServer Community image, you can adjust the configuratio
       ...
     ```
 
-- For manual execution add a `--env` option with each variable and value:
+* For manual execution add a `--env` option with each variable and value:
 
     ```console
     $ docker run -d --name reportserver -p 80:8080 -p 443:8443 \
@@ -212,57 +241,13 @@ When you start the ReportServer Community image, you can adjust the configuratio
       bitnami/reportserver:latest
     ```
 
-Available environment variables:
+### Examples
 
-#### User and Site configuration
-
-- `REPORTSERVER_USERNAME`: ReportServer Community application username. Default: **user**
-- `REPORTSERVER_PASSWORD`: ReportServer Community application password. Default: **bitnami**
-- `REPORTSERVER_EMAIL`: ReportServer Community application email. Default: **user@example.com**
-- `REPORTSERVER_FIRST_NAME`: ReportServer Community first name. Default: **FirstName**
-- `REPORTSERVER_LAST_NAME`: ReportServer Community last name. Default: **LastName**
-
-#### Database connection configuration
-
-- `REPORTSERVER_DATABASE_HOST`: Hostname for the MariaDB or MySQL server. Default: **mariadb**
-- `REPORTSERVER_DATABASE_PORT_NUMBER`: Port used by the MariaDB or MySQL server. Default: **3306**
-- `REPORTSERVER_DATABASE_NAME`: Database name that ReportServer Community will use to connect with the database. Default: **bitnami_reportserver**
-- `REPORTSERVER_DATABASE_USER`: Database user that ReportServer Community will use to connect with the database. Default: **bn_reportserver**
-- `REPORTSERVER_DATABASE_PASSWORD`: Database password that ReportServer Community will use to connect with the database. No default.
-- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-#### Create a database for ReportServer Community using mysql-client
-
-- `MYSQL_CLIENT_DATABASE_HOST`: Hostname for the MariaDB or MySQL server. Default: **mariadb**
-- `MYSQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by the MariaDB or MySQL server. Default: **3306**
-- `MYSQL_CLIENT_DATABASE_ROOT_USER`: Database admin user. Default: **root**
-- `MYSQL_CLIENT_DATABASE_ROOT_PASSWORD`: Database password for the database admin user. No default.
-- `MYSQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No default.
-- `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No default.
-- `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No default.
-- `MYSQL_CLIENT_CREATE_DATABASE_CHARACTER_SET`: Character set to use for the new database. No default.
-- `MYSQL_CLIENT_CREATE_DATABASE_COLLATE`: Database collation to use for the new database. No default.
-- `MYSQL_CLIENT_ENABLE_SSL`: Whether to enable SSL connections for the new database. Default: **no**
-- `MYSQL_CLIENT_SSL_CA_FILE`: Path to the SSL CA file for the new database. No default.
-- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-#### SMTP Configuration
-
-To configure ReportServer Community to send email using SMTP you can set the following environment variables:
-
-- `REPORTSERVER_SMTP_HOST`: SMTP host.
-- `REPORTSERVER_SMTP_PORT`: SMTP port.
-- `REPORTSERVER_SMTP_USER`: SMTP account user.
-- `REPORTSERVER_SMTP_PASSWORD`: SMTP account password.
-- `REPORTSERVER_SMTP_PROTOCOL`: If specified, SMTP protocol to use. Allowed values: *tls*, *ssl*. No default.
-
-#### Examples
-
-##### SMTP configuration using a Gmail account
+#### SMTP configuration using a Gmail account
 
 This would be an example of SMTP configuration using a Gmail account:
 
-- Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/reportserver/docker-compose.yml) file present in this repository:
+* Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/reportserver/docker-compose.yml) file present in this repository:
 
     ```yaml
       reportserver:
@@ -278,7 +263,7 @@ This would be an example of SMTP configuration using a Gmail account:
       ...
     ```
 
-- For manual execution:
+* For manual execution:
 
     ```console
     $ docker run -d --name reportserver -p 80:8080 -p 443:8443 \
@@ -293,11 +278,11 @@ This would be an example of SMTP configuration using a Gmail account:
       bitnami/reportserver:latest
     ```
 
-##### Connect ReportServer Community container to an existing database
+#### Connect ReportServer Community container to an existing database
 
 The Bitnami ReportServer Community container supports connecting the ReportServer Community application to an external database. This would be an example of using an external database for ReportServer Community.
 
-- Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/reportserver/docker-compose.yml) file present in this repository:
+* Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/reportserver/docker-compose.yml) file present in this repository:
 
     ```diff
        reportserver:
@@ -313,7 +298,7 @@ The Bitnami ReportServer Community container supports connecting the ReportServe
          ...
     ```
 
-- For manual execution:
+* For manual execution:
 
     ```console
     $ docker run -d --name reportserver\
@@ -447,12 +432,12 @@ More information is available from the [ReportServer website](https://reportserv
 
 ### 3.7.0-6044-debian-10-r52
 
-- The size of the container image has been reduced.
-- The configuration logic is now based on Bash scripts in the *rootfs/* folder.
+* The size of the container image has been reduced.
+* The configuration logic is now based on Bash scripts in the *rootfs/* folder.
 
 ### 3.1.2-6022-debian-10-r23
 
-- Java distribution has been migrated from AdoptOpenJDK to OpenJDK Liberica. As part of VMware, we have an agreement with Bell Software to distribute the Liberica distribution of OpenJDK. That way, we can provide support & the latest versions and security releases for Java.
+* Java distribution has been migrated from AdoptOpenJDK to OpenJDK Liberica. As part of VMware, we have an agreement with Bell Software to distribute the Liberica distribution of OpenJDK. That way, we can provide support & the latest versions and security releases for Java.
 
 ## Contributing
 
