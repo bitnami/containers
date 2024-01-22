@@ -10,8 +10,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/jasperreports/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run --name jasperreports bitnami/jasperreports:latest
 ```
 
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
@@ -71,15 +70,6 @@ docker build -t bitnami/APP:latest .
 
 JasperReports requires access to a MySQL or MariaDB database to store information. We'll use the [Bitnami Docker Image for MariaDB](https://github.com/bitnami/containers/tree/main/bitnami/mariadb) for the database requirements.
 
-### Run the application using Docker Compose
-
-The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/jasperreports/docker-compose.yml) file. Run the application using it as shown below:
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/jasperreports/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ### Provide jasper specific file config
 
 ```diff
@@ -105,8 +95,6 @@ docker-compose up -d
 ```
 
 ### Using the Docker Command Line
-
-If you want to run the application manually instead of using `docker-compose`, these are the basic steps you need to run:
 
 #### Step 1: Create a network
 
@@ -143,6 +131,17 @@ docker run -d --name jasperreports \
 ```
 
 Access your application at `http://your-ip/`
+
+### Run the application using Docker Compose
+
+```console
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/jasperreports/docker-compose.yml > docker-compose.yml
+docker-compose up -d
+```
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/jasperreports).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## Persisting your application
 
@@ -218,9 +217,44 @@ docker run -d --name jasperreports \
 
 ### Environment variables
 
+#### Customizable environment variables
+
+| Name                                 | Description                                                                                                                         | Default Value                                                                                                                                                               |
+|--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `JASPERREPORTS_DATA_TO_PERSIST`      | Files to persist relative to the JasperReports installation directory. To provide multiple values, separate them with a whitespace. | `buildomatic/default_master.properties buildomatic/conf_source/db/mysql/db.template.properties buildomatic/conf_source/db/postgresql/db.template.properties .jrsks .jrsksp` |
+| `JASPERREPORTS_HOST`                 | JasperReports host name.                                                                                                            | `localhost`                                                                                                                                                                 |
+| `JASPERREPORTS_SKIP_BOOTSTRAP`       | Whether to perform initial bootstrapping for the application.                                                                       | `no`                                                                                                                                                                        |
+| `JASPERREPORTS_USE_ROOT_URL`         | Move the application to root.                                                                                                       | `false`                                                                                                                                                                     |
+| `JASPERREPORTS_USERNAME`             | JasperReports user name.                                                                                                            | `jasperadmin`                                                                                                                                                               |
+| `JASPERREPORTS_PASSWORD`             | JasperReports user password.                                                                                                        | `bitnami`                                                                                                                                                                   |
+| `JASPERREPORTS_EMAIL`                | JasperReports user e-mail address.                                                                                                  | `user@example.com`                                                                                                                                                          |
+| `JASPERREPORTS_SMTP_PROTOCOL`        | JasperReports SMTP server protocol to use.                                                                                          | `smtp`                                                                                                                                                                      |
+| `JASPERREPORTS_SMTP_EMAIL`           | JasperReports SMTP server email to use.                                                                                             | `fromuser@example.com`                                                                                                                                                      |
+| `JASPERREPORTS_DATABASE_TYPE`        | Database server type.                                                                                                               | `mariadb`                                                                                                                                                                   |
+| `JASPERREPORTS_DATABASE_HOST`        | Database server host.                                                                                                               | `$JASPERREPORTS_DEFAULT_DATABASE_HOST`                                                                                                                                      |
+| `JASPERREPORTS_DATABASE_PORT_NUMBER` | Database server port.                                                                                                               | `3306`                                                                                                                                                                      |
+| `JASPERREPORTS_DATABASE_NAME`        | Database name.                                                                                                                      | `bitnami_jasperreports`                                                                                                                                                     |
+| `JASPERREPORTS_DATABASE_USER`        | Database user name.                                                                                                                 | `bn_jasperreports`                                                                                                                                                          |
+
+#### Read-only environment variables
+
+| Name                                   | Description                                              | Value                                                 |
+|----------------------------------------|----------------------------------------------------------|-------------------------------------------------------|
+| `JASPERREPORTS_BASE_DIR`               | JasperReports installation directory.                    | `${BITNAMI_ROOT_DIR}/jasperreports`                   |
+| `JASPERREPORTS_CONF_DIR`               | Configuration directory for JasperReports.               | `${JASPERREPORTS_BASE_DIR}/buildomatic`               |
+| `JASPERREPORTS_LOGS_DIR`               | Log directory for JasperReports.                         | `${JASPERREPORTS_BASE_DIR}/WEB-INF/logs`              |
+| `JASPERREPORTS_LOG_FILE`               | Log file for JasperReports.                              | `${JASPERREPORTS_LOGS_DIR}/jasperserver.log`          |
+| `JASPERREPORTS_CONF_FILE`              | Configuration file for JasperReports.                    | `${JASPERREPORTS_CONF_DIR}/default_master.properties` |
+| `JASPERREPORTS_VOLUME_DIR`             | JasperReports directory for mounted configuration files. | `${BITNAMI_VOLUME_DIR}/jasperreports`                 |
+| `JASPERREPORTS_DAEMON_USER`            | JasperReports system user.                               | `tomcat`                                              |
+| `JASPERREPORTS_DAEMON_GROUP`           | JasperReports system group.                              | `tomcat`                                              |
+| `JASPERREPORTS_TOMCAT_AJP_PORT_NUMBER` | Tomcat AJP port number.                                  | `8009`                                                |
+| `JASPERREPORTS_DEFAULT_DATABASE_HOST`  | Default database server host.                            | `mariadb`                                             |
+| `JASPERREPORTS_DEFAULT_DATABASE_HOST`  | Default database server host.                            | `127.0.0.1`                                           |
+
 When you start the JasperReports image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
-- For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/jasperreports/docker-compose.yml) file present in this repository:
+* For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/jasperreports/docker-compose.yml) file present in this repository:
 
     ```yaml
     jasperreports:
@@ -230,7 +264,7 @@ When you start the JasperReports image, you can adjust the configuration of the 
       ...
     ```
 
-- For manual execution add a `--env` option with each variable and value:
+* For manual execution add a `--env` option with each variable and value:
 
     ```console
     $ docker run -d --name jasperreports -p 80:8080 -p 443:8443 \
@@ -240,62 +274,13 @@ When you start the JasperReports image, you can adjust the configuration of the 
       bitnami/jasperreports:latest
     ```
 
-Available environment variables:
-
-#### User and Site configuration
-
-- `JASPERREPORTS_USERNAME`: JasperReports application username. Default: **jasperadmin**
-- `JASPERREPORTS_PASSWORD`: JasperReports application password. Default: **bitnami**
-- `JASPERREPORTS_EMAIL`: JasperReports application email. Default: **<user@example.com>**
-- `JASPERREPORTS_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. This is necessary in case you use a database that already has JasperReports data. Default: **no**
-
-#### Database connection configuration
-
-- `JASPERREPORTS_DATABASE_TYPE`: Database type to be used for the JasperReports installation. Allowed values: `mariadb`, `mysql`, `postgresql`. Default: **mariadb**
-- `JASPERREPORTS_DATABASE_HOST`: Hostname for the MariaDB or MySQL server. Default: **mariadb**
-- `JASPERREPORTS_DATABASE_PORT_NUMBER`: Port used by the MariaDB or MySQL server. Default: **3306**
-- `JASPERREPORTS_DATABASE_NAME`: Database name that JasperReports will use to connect with the database. Default: **bitnami_jasperreports**
-- `JASPERREPORTS_DATABASE_USER`: Database user that JasperReports will use to connect with the database. Default: **bn_jasperreports**
-- `JASPERREPORTS_DATABASE_PASSWORD`: Database password that JasperReports will use to connect with the database. No default.
-- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-#### Create a database for JasperReports using mysql-client
-
-- `MYSQL_CLIENT_DATABASE_HOST`: Hostname for the MariaDB or MySQL server. Default: **mariadb**
-- `MYSQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by the MariaDB or MySQL server. Default: **3306**
-- `MYSQL_CLIENT_DATABASE_ROOT_USER`: Database admin user. Default: **root**
-- `MYSQL_CLIENT_DATABASE_ROOT_PASSWORD`: Database password for the database admin user. No default.
-- `MYSQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No default.
-- `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No default.
-- `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No default.
-- `MYSQL_CLIENT_CREATE_DATABASE_CHARACTER_SET`: Character set to use for the new database. No default.
-- `MYSQL_CLIENT_CREATE_DATABASE_COLLATE`: Database collation to use for the new database. No default.
-- `MYSQL_CLIENT_ENABLE_SSL`: Whether to enable SSL connections for the new database. Default: **no**
-- `MYSQL_CLIENT_SSL_CA_FILE`: Path to the SSL CA file for the new database. No default.
-- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-#### SMTP Configuration
-
-To configure JasperReports to send email using SMTP you can set the following environment variables:
-
-- `JASPERREPORTS_SMTP_HOST`: SMTP host.
-- `JASPERREPORTS_SMTP_PORT_NUMBER`: SMTP port.
-- `JASPERREPORTS_SMTP_USER`: SMTP account user.
-- `JASPERREPORTS_SMTP_PASSWORD`: SMTP account password.
-- `JASPERREPORTS_SMTP_PROTOCOL`: If specified, SMTP protocol to use. Allowed values: *smtp*, *smtps*. Default: **smtp**.
-- `JASPERREPORTS_SMTP_EMAIL`: Custom email address for the 'From:' field. If not specified, the `JASPERREPORTS_SMTP_USER` value is used.
-
-#### JasperReports base URL configuration
-
-- `JASPERREPORTS_USE_ROOT_URL`: JasperReports application default URL. Default: **false** at <http://example.com/jasperserver>. <http://example.com/> if **true**.
-
 #### Examples
 
 ##### SMTP configuration using a Gmail account
 
 This would be an example of SMTP configuration using a Gmail account:
 
-- Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/jasperreports/docker-compose.yml) file present in this repository:
+* Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/jasperreports/docker-compose.yml) file present in this repository:
 
     ```yaml
       jasperreports:
@@ -312,7 +297,7 @@ This would be an example of SMTP configuration using a Gmail account:
       ...
     ```
 
-- For manual execution:
+* For manual execution:
 
     ```console
     $ docker run -d --name jasperreports -p 80:8080 -p 443:8443 \
@@ -332,7 +317,7 @@ This would be an example of SMTP configuration using a Gmail account:
 
 The Bitnami JasperReports container supports connecting the JasperReports application to an external database. This would be an example of using an external database for JasperReports.
 
-- Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/jasperreports/docker-compose.yml) file present in this repository:
+* Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/jasperreports/docker-compose.yml) file present in this repository:
 
     ```diff
        jasperreports:
@@ -348,7 +333,7 @@ The Bitnami JasperReports container supports connecting the JasperReports applic
          ...
     ```
 
-- For manual execution:
+* For manual execution:
 
     ```console
     $ docker run -d --name jasperreports\
@@ -484,13 +469,13 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## 7.8.0-debian-10-r275
 
-- The size of the container image has been reduced.
-- The configuration logic is now based on Bash scripts in the *rootfs/* folder.
-- The container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Tomcat daemon was started as the `tomcat` user. From now on, both the container and the Tomcat daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
+* The size of the container image has been reduced.
+* The configuration logic is now based on Bash scripts in the *rootfs/* folder.
+* The container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Tomcat daemon was started as the `tomcat` user. From now on, both the container and the Tomcat daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
 ## 7.2.0-debian-10-r64
 
-- Java distribution has been migrated from AdoptOpenJDK to OpenJDK Liberica. As part of VMware, we have an agreement with Bell Software to distribute the Liberica distribution of OpenJDK. That way, we can provide support & the latest versions and security releases for Java.
+* Java distribution has been migrated from AdoptOpenJDK to OpenJDK Liberica. As part of VMware, we have an agreement with Bell Software to distribute the Liberica distribution of OpenJDK. That way, we can provide support & the latest versions and security releases for Java.
 
 ## License
 
