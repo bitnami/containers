@@ -66,35 +66,34 @@ docker build -t bitnami/APP:latest .
 
 #### Customizable environment variables
 
-| Name                                  | Description                                                                                                                                                                   | Default Value                        |
-|---------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------|
-| `PGBOUNCER_LOG_FILE`                  | PgBouncer log file.                                                                                                                                                           | `${PGBOUNCER_LOG_DIR}/pgbouncer.log` |
-| `PGBOUNCER_DATABASE`                  | PgBouncer advertised database.                                                                                                                                                | `postgres`                           |
-| `PGBOUNCER_PORT`                      | PgBouncer port                                                                                                                                                                | `6432`                               |
-| `PGBOUNCER_LISTEN_ADDRESS`            | PgBouncer listen address                                                                                                                                                      | `0.0.0.0`                            |
-| `PGBOUNCER_AUTH_TYPE`                 | PgBouncer authentication type                                                                                                                                                 | `scram-sha-256`                      |
-| `PGBOUNCER_INIT_SLEEP_TIME`           | PgBouncer initialization sleep time                                                                                                                                           | `10`                                 |
-| `PGBOUNCER_SERVER_FAST_CLOSE`         | Disconnect a server in session pooling mode immediately or after the end of the current transaction if it is in `close_needed` mode, rather than waiting for the session end. | `**0**`                              |
-| `PGBOUNCER_INIT_MAX_RETRIES`          | PgBouncer initialization maximum retries                                                                                                                                      | `10`                                 |
-| `PGBOUNCER_IGNORE_STARTUP_PARAMETERS` | Ignore startup parameters in PgBouncer                                                                                                                                        | `extra_float_digits`                 |
-| `PGBOUNCER_STATS_PERIOD`              | PgBouncer stats period                                                                                                                                                        | `60`                                 |
-| `PGBOUNCER_FAIL_ON_INVALID_DSN_FILE`  | Whether init process should fail if any DSN_FILE is not found.                                                                                                                | `false`                              |
-| `PGBOUNCER_CLIENT_TLS_SSLMODE`        | PgBouncer authentication type                                                                                                                                                 | `disable`                            |
-| `PGBOUNCER_CLIENT_TLS_CIPHERS`        | PgBouncer TLS authentication ciphers                                                                                                                                          | `fast`                               |
-| `PGBOUNCER_SERVER_TLS_SSLMODE`        | PgBouncer server authentication type                                                                                                                                          | `disable`                            |
-| `PGBOUNCER_SERVER_TLS_PROTOCOLS`      | PgBouncer server TLS authentication protocol                                                                                                                                  | `secure`                             |
-| `PGBOUNCER_SERVER_TLS_CIPHERS`        | PgBouncer server TLS authentication ciphers                                                                                                                                   | `fast`                               |
-| `POSTGRESQL_USERNAME`                 | PostgreSQL backend default username                                                                                                                                           | `postgres`                           |
-| `POSTGRESQL_DATABASE`                 | Default PostgreSQL database                                                                                                                                                   | `${PGBOUNCER_DATABASE}`              |
-| `POSTGRESQL_HOST`                     | PostgreSQL backend hostname                                                                                                                                                   | `postgresql`                         |
-| `POSTGRESQL_PORT`                     | PostgreSQL backend port                                                                                                                                                       | `5432`                               |
-| `PGBOUNCER_SET_DATABASE_USER`         | Whether to include the backend PostgreSQL username in the database string.                                                                                                    | `no`                                 |
-| `PGBOUNCER_SET_DATABASE_PASSWORD`     | Whether to include the backend PostgreSQL password in the database string.                                                                                                    | `no`                                 |
-| `PGBOUNCER_FORCE_INITSCRIPTS`         | Force the init scripts running even if it is not in the first start.                                                                                                          | `false`                              |
-| `PGBOUNCER_SOCKET_DIR`                | PgBouncer socket dir                                                                                                                                                          | `/tmp/`                              |
-| `PGBOUNCER_SOCKET_MODE`               | PgBouncer socket mode                                                                                                                                                         | `0777`                               |
-| `PGBOUNCER_DAEMON_USER`               | PostgreSQL daemon user                                                                                                                                                        | `pgbouncer`                          |
-| `PGBOUNCER_DAEMON_GROUP`              | PostgreSQL daemon group                                                                                                                                                       | `pgbouncer`                          |
+| Name                                  | Description                                                                | Default Value                        |
+|---------------------------------------|----------------------------------------------------------------------------|--------------------------------------|
+| `PGBOUNCER_LOG_FILE`                  | PgBouncer log file.                                                        | `${PGBOUNCER_LOG_DIR}/pgbouncer.log` |
+| `PGBOUNCER_DATABASE`                  | PgBouncer advertised database.                                             | `postgres`                           |
+| `PGBOUNCER_PORT`                      | PgBouncer port                                                             | `6432`                               |
+| `PGBOUNCER_LISTEN_ADDRESS`            | PgBouncer listen address                                                   | `0.0.0.0`                            |
+| `PGBOUNCER_AUTH_TYPE`                 | PgBouncer authentication type                                              | `scram-sha-256`                      |
+| `PGBOUNCER_INIT_SLEEP_TIME`           | PgBouncer initialization sleep time                                        | `10`                                 |
+| `PGBOUNCER_INIT_MAX_RETRIES`          | PgBouncer initialization maximum retries                                   | `10`                                 |
+| `PGBOUNCER_IGNORE_STARTUP_PARAMETERS` | Ignore startup parameters in PgBouncer                                     | `extra_float_digits`                 |
+| `PGBOUNCER_STATS_PERIOD`              | PgBouncer stats period                                                     | `60`                                 |
+| `PGBOUNCER_FAIL_ON_INVALID_DSN_FILE`  | Whether init process should fail if any DSN_FILE is not found.             | `false`                              |
+| `PGBOUNCER_CLIENT_TLS_SSLMODE`        | PgBouncer authentication type                                              | `disable`                            |
+| `PGBOUNCER_CLIENT_TLS_CIPHERS`        | PgBouncer TLS authentication ciphers                                       | `fast`                               |
+| `PGBOUNCER_SERVER_TLS_SSLMODE`        | PgBouncer server authentication type                                       | `disable`                            |
+| `PGBOUNCER_SERVER_TLS_PROTOCOLS`      | PgBouncer server TLS authentication protocol                               | `secure`                             |
+| `PGBOUNCER_SERVER_TLS_CIPHERS`        | PgBouncer server TLS authentication ciphers                                | `fast`                               |
+| `POSTGRESQL_USERNAME`                 | PostgreSQL backend default username                                        | `postgres`                           |
+| `POSTGRESQL_DATABASE`                 | Default PostgreSQL database                                                | `${PGBOUNCER_DATABASE}`              |
+| `POSTGRESQL_HOST`                     | PostgreSQL backend hostname                                                | `postgresql`                         |
+| `POSTGRESQL_PORT`                     | PostgreSQL backend port                                                    | `5432`                               |
+| `PGBOUNCER_SET_DATABASE_USER`         | Whether to include the backend PostgreSQL username in the database string. | `no`                                 |
+| `PGBOUNCER_SET_DATABASE_PASSWORD`     | Whether to include the backend PostgreSQL password in the database string. | `no`                                 |
+| `PGBOUNCER_FORCE_INITSCRIPTS`         | Force the init scripts running even if it is not in the first start.       | `false`                              |
+| `PGBOUNCER_SOCKET_DIR`                | PgBouncer socket dir                                                       | `/tmp/`                              |
+| `PGBOUNCER_SOCKET_MODE`               | PgBouncer socket mode                                                      | `0777`                               |
+| `PGBOUNCER_DAEMON_USER`               | PostgreSQL daemon user                                                     | `pgbouncer`                          |
+| `PGBOUNCER_DAEMON_GROUP`              | PostgreSQL daemon group                                                    | `pgbouncer`                          |
 
 #### Read-only environment variables
 
