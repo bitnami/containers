@@ -399,6 +399,8 @@ kafka_validate() {
                 if [[ "$protocol" = "SASL_PLAINTEXT" ]] || [[ "$protocol" = "SASL_SSL" ]]; then
                     if is_empty_value "${KAFKA_CFG_SASL_MECHANISM_CONTROLLER_PROTOCOL:-}"; then
                         print_validation_error "When using SASL for controller comunication the mechanism should be provided at KAFKA_CFG_SASL_MECHANISM_CONTROLLER_PROTOCOL"
+                    elif [[ "$KAFKA_CFG_SASL_MECHANISM_CONTROLLER_PROTOCOL" =~ SCRAM ]]; then
+                        warn "KRaft controller listener may not support SCRAM-SHA-256/SCRAM-SHA-512 mechanisms. If facing any issues, we recommend switching to PLAIN mechanism. More information at: https://issues.apache.org/jira/browse/KAFKA-15513"
                     fi
                     if is_empty_value "${KAFKA_CONTROLLER_USER:-}" || is_empty_value "${KAFKA_CONTROLLER_PASSWORD:-}"; then
                         print_validation_error "In order to configure SASL authentication for Kafka control plane communications, you must provide the SASL credentials. Set the environment variables KAFKA_CONTROLLER_USER and KAFKA_CONTROLLER_PASSWORD to configure the credentials for SASL authentication with between controllers."
