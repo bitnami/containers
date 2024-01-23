@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2024-01-20T06:46:15Z" \
+      org.opencontainers.image.created="2024-01-22T23:34:59Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.0.2-debian-11-r70" \
+      org.opencontainers.image.ref.name="4.0.2-debian-11-r71" \
       org.opencontainers.image.title="jupyter-base-notebook" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="4.0.2"
@@ -27,7 +27,7 @@ RUN install_packages ca-certificates curl libbrotli1 libbz2-1.0 libcom-err2 libc
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "miniconda-23.11.0-0-linux-${OS_ARCH}-debian-11" \
-      "jupyter-base-notebook-4.0.2-17-linux-${OS_ARCH}-debian-11" \
+      "jupyter-base-notebook-4.0.2-18-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
