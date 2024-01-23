@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2024-01-22T12:01:59Z" \
+      org.opencontainers.image.created="2024-01-22T23:41:15Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="6.0.12-debian-11-r7" \
+      org.opencontainers.image.ref.name="6.0.13-debian-11-r0" \
       org.opencontainers.image.title="mongodb" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="6.0.12"
+      org.opencontainers.image.version="6.0.13"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -30,7 +30,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
       "wait-for-port-1.0.7-5-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.6-5-linux-${OS_ARCH}-debian-11" \
       "mongodb-shell-2.1.1-0-linux-${OS_ARCH}-debian-11" \
-      "mongodb-6.0.12-3-linux-${OS_ARCH}-debian-11" \
+      "mongodb-6.0.13-0-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -49,7 +49,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mongodb/postunpack.sh
-ENV APP_VERSION="6.0.12" \
+ENV APP_VERSION="6.0.13" \
     BITNAMI_APP_NAME="mongodb" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mongodb/bin:$PATH"
 
