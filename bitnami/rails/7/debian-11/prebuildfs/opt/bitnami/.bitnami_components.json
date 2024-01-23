@@ -3,36 +3,36 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.11.5-1"
+        "version": "10.11.6-1"
     },
     "node": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "18.18.2-0"
+        "version": "18.19.0-0"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.11.6-6"
+        "version": "3.11.7-2"
     },
     "rails": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.1.1-1"
+        "version": "7.1.3-0"
     },
     "ruby": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.2.2-8"
+        "version": "3.2.3-0"
     },
     "wait-for-port": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.7-2"
+        "version": "1.0.7-5"
     }
 }

@@ -1,4 +1,4 @@
-# Grafana Image Renderer packaged by Bitnami
+# Bitnami package for Grafana Image Renderer
 
 ## What is Grafana Image Renderer?
 
@@ -18,7 +18,7 @@ docker run --name grafana-image-renderer bitnami/grafana-image-renderer:latest
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -108,6 +108,29 @@ docker run -d --name grafana \
 
 You can customize Grafana Image Renderer settings by replacing the default configuration file with your custom configuration, or using environment variables.
 
+### Environment variables
+
+#### Customizable environment variables
+
+| Name                                    | Description                                          | Default Value |
+|-----------------------------------------|------------------------------------------------------|---------------|
+| `GRAFANA_IMAGE_RENDERER_LISTEN_ADDRESS` | Grafana Image Renderer listen address                | `127.0.0.1`   |
+| `GRAFANA_IMAGE_RENDERER_PORT_NUMBER`    | Grafana Image Renderer port number                   | `8080`        |
+| `GRAFANA_IMAGE_RENDERER_ENABLE_METRICS` | Whether to enable metrics for Grafana Image Renderer | `yes`         |
+
+#### Read-only environment variables
+
+| Name                                  | Description                                                  | Value                                                 |
+|---------------------------------------|--------------------------------------------------------------|-------------------------------------------------------|
+| `GRAFANA_IMAGE_RENDERER_BASE_DIR`     | Path to the Grafana Image Renderer installation directory    | `${BITNAMI_ROOT_DIR}/grafana-image-renderer`          |
+| `GRAFANA_IMAGE_RENDERER_TMP_DIR`      | Grafana Image Renderer directory for temporary runtime files | `${GRAFANA_IMAGE_RENDERER_BASE_DIR}/tmp`              |
+| `GRAFANA_IMAGE_RENDERER_LOGS_DIR`     | Grafana Image Renderer directory for log files               | `${GRAFANA_IMAGE_RENDERER_BASE_DIR}/logs`             |
+| `GRAFANA_IMAGE_RENDERER_PID_FILE`     | Grafana Image Renderer PID file                              | `${GRAFANA_IMAGE_RENDERER_TMP_DIR}/renderer.pid`      |
+| `GRAFANA_IMAGE_RENDERER_LOG_FILE`     | Grafana Image Renderer log file                              | `${GRAFANA_IMAGE_RENDERER_LOGS_DIR}/renderer.log`     |
+| `GRAFANA_IMAGE_RENDERER_CONF_FILE`    | Path to the Grafana Image Renderer configuration file        | `${GRAFANA_IMAGE_RENDERER_BASE_DIR}/conf/config.json` |
+| `GRAFANA_IMAGE_RENDERER_DAEMON_USER`  | Grafana system user.                                         | `grafana-image-renderer`                              |
+| `GRAFANA_IMAGE_RENDERER_DAEMON_GROUP` | Grafana system group.                                        | `grafana-image-renderer`                              |
+
 ### Configuration file
 
 The image looks for a `config.json` file in `/opt/bitnami/grafana-image-renderer/conf/`. You can mount a volume at `/opt/bitnami/grafana-image-renderer/conf/` and copy/edit the `config.json` file in the `/path/to/grafana-image-renderer-conf/` path. The default configurations will be populated to the `conf/` directory if it's empty.
@@ -121,17 +144,12 @@ The image looks for a `config.json` file in `/opt/bitnami/grafana-image-renderer
 
 #### Step 1: Run the Grafana Image Renderer container
 
-Run the Grafana Image Renderer container, mounting a directory from your host. Using Docker Compose:
+Run the Grafana Image Renderer container, mounting a directory from your host.
 
-```diff
-     image: bitnami/grafana-image-renderer:1
-     ports:
-       - 8080:8080
-+    volumes:
-+      - /path/to/grafana-image-renderer-conf/:/opt/bitnami/grafana-image-renderer/conf/
-     environment:
-       HTTP_PORT: "8080"
-       HTTP_HOST: "0.0.0.0"
+docker run --name grafana-image-renderer bitnami/grafana-image-renderer:latest
+
+```console
+docker run --name grafana-image-renderer -v ${PWD}/path/to/grafana-image-renderer-conf:/opt/bitnami/grafana-image-renderer/conf/ bitnami/grafana-image-renderer:latest
 ```
 
 #### Step 2: Edit the configuration
@@ -144,11 +162,7 @@ vi /path/to/grafana-image-renderer-conf/config.json
 
 #### Step 3: Restart Grafana Image Renderer
 
-After changing the configuration, restart your Grafana Image Renderer container for changes to take effect. Using Docker Compose:
-
-```console
-docker-compose restart grafana-image-renderer
-```
+After changing the configuration, restart your Grafana Image Renderer container for changes to take effect.
 
 After that, your configuration will be taken into account in the server's behaviour.
 
@@ -196,6 +210,12 @@ Re-create your container from the new image:
 docker run --name grafana-image-renderer bitnami/grafana-image-renderer:latest
 ```
 
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
@@ -206,7 +226,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -8,57 +8,15 @@ on: # rebuild any PRs and main branch changes
       - main
       - bitnami:main
 permissions: {}
-env:
-  CSP_API_URL: https://console.cloud.vmware.com
-  CSP_API_TOKEN: ${{ secrets.CSP_API_TESTING_TOKEN }}
-  VIB_PUBLIC_URL: https://cp.bromelia.vmware.com
 # Avoid concurrency over the same PR
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
 jobs:
-  license-headers-linter:
-    runs-on: ubuntu-latest
-    name: License Headers Linter
-    permissions:
-      contents: read
-      pull-requests: write
-    steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
-        name: Checkout Repository
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-      - id: get-modified-files
-        name: 'Get modified files'
-        env:
-          DIFF_URL: "${{github.event.pull_request.diff_url}}"
-          TEMP_FILE: "${{runner.temp}}/pr-${{github.event.number}}.diff"
-        run: |
-          # This request doesn't consume API calls.
-          curl -Lkso $TEMP_FILE $DIFF_URL
-          files_changed="$(sed -nr 's/[\-\+]{3} [ab]\/(.*)/\1/p' $TEMP_FILE | sort | uniq)"
-          dockerfiles=()
-          while read -r file_changed; do
-            # Avoid removed files
-            if [[ -f "${file_changed}" ]]; then
-              dockerfiles+=("${file_changed}")
-            fi
-          done <<< "$(echo "$files_changed" | grep -oE ".*/Dockerfile$" | sort | uniq || true)"
-          if [[ ${#dockerfiles[@]} -gt 0 ]]; then
-            # There are modifications on dockerfiles
-            export dockerfiles_json=$(printf "%s\n" "${dockerfiles[@]}" | jq -R . | jq -cs .)
-            # Overwrite configuration file to analyze only changed dockerfiles
-            yq -i '. | .header.paths=env(dockerfiles_json)' .licenserc.yaml
-            echo "result=success" >> $GITHUB_OUTPUT
-          else
-            echo "result=skip" >> $GITHUB_OUTPUT
-          fi
-      - name: Check license Headers
-        uses: apache/skywalking-eyes/header@6b2529214f6b1ccee3ec92bb0adfeabf6f66f538
-        if: ${{ steps.get-modified-files.outputs.result == 'success' }}
   get-containers:
     runs-on: ubuntu-latest
     name: Get modified containers
+    permissions:
+      pull-requests: read
     if: |
       github.event.pull_request.state != 'closed' &&
       (
@@ -67,20 +25,20 @@ jobs:
     outputs:
       result: ${{ steps.get-containers.outputs.result }}
       containers: ${{ steps.get-containers.outputs.containers }}
+      dockerfiles: ${{ steps.get-containers.outputs.dockerfiles }}
     steps:
       - id: get-containers
         name: Get modified containers
         env:
-          DIFF_URL: "${{github.event.pull_request.diff_url}}"
-          TEMP_FILE: "${{runner.temp}}/pr-${{github.event.number}}.diff"
+          PULL_REQUEST_NUMBER: "${{ github.event.pull_request.number }}"
+          GITHUB_TOKEN: "${{ github.token }}"
         run: |
-          # This request doesn't consume API calls.
-          curl -Lkso $TEMP_FILE $DIFF_URL
-          files_changed="$(sed -nr 's/[\-\+]{3} [ab]\/(.*)/\1/p' $TEMP_FILE | sort | uniq)"
+          files_changed="$(gh api --paginate /repos/${GITHUB_REPOSITORY}/pulls/${PULL_REQUEST_NUMBER}/files | jq -r '.[] | .filename')"
           # Adding || true to avoid "Process exited with code 1" errors
           flavors=($(echo "$files_changed" | xargs dirname | grep -o "^bitnami/[^/]*/[^/]*/[^/]*" | sort | uniq || true))
           assets=($(echo "$files_changed" | xargs dirname | sed -nr "s|bitnami/([^/]*)/.*|\1|p" | sort | uniq || true))
           non_readme_files=$(echo "$files_changed" | grep -vc "\.md" || true)
+          dockerfiles=($(echo "$files_changed" | grep -oE ".*/Dockerfile$" | sort | uniq || true))
 
           if [[ "$non_readme_files" -le "0" ]]; then
             # The only changes are .md files -> SKIP
@@ -90,9 +48,39 @@ jobs:
             echo "result=skip" >> $GITHUB_OUTPUT
           else
             containers_json=$(printf "%s\n" "${flavors[@]}" | jq -R . | jq -cs .)
+            dockerfiles_json=$(printf "%s\n" "${dockerfiles[@]}" | jq -R . | jq -cs .)
             echo "result=ok" >> $GITHUB_OUTPUT
             echo "containers=${containers_json}" >> $GITHUB_OUTPUT
+            echo "dockerfiles=${dockerfiles_json}" >> $GITHUB_OUTPUT
           fi
+  license-headers-linter:
+    runs-on: ubuntu-latest
+    name: License Headers Linter
+    permissions:
+      contents: read
+      pull-requests: write
+    needs: get-containers
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        name: Checkout Repository
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+      - id: get-modified-files
+        name: 'Get modified files'
+        env:
+          DOCKERFILES: "${{ needs.get-containers.outputs.dockerfiles }}"
+        run: |
+          if [[ -n "${DOCKERFILES}" ]]; then
+            # Overwrite configuration file to analyze only changed dockerfiles
+            yq -i '. | .header.paths=env(DOCKERFILES)' .licenserc.yaml
+            echo "result=success" >> $GITHUB_OUTPUT
+          else
+            echo "result=skip" >> $GITHUB_OUTPUT
+          fi
+      - name: Check license Headers
+        uses: apache/skywalking-eyes/header@6b2529214f6b1ccee3ec92bb0adfeabf6f66f538
+        if: ${{ steps.get-modified-files.outputs.result == 'success' }}
   vib-verify:
     runs-on: ubuntu-latest
     needs: get-containers
@@ -103,6 +91,10 @@ jobs:
     name: VIB Verify
     permissions: 
       contents: read
+    env:
+      CSP_API_URL: https://console.cloud.vmware.com
+      CSP_API_TOKEN: ${{ secrets.CSP_API_TESTING_TOKEN }}
+      VIB_PUBLIC_URL: https://cp.bromelia.vmware.com
     continue-on-error: false
     strategy:
       fail-fast: false
@@ -174,7 +166,7 @@ jobs:
     steps:
       - id: get-status
         name: Check Status
-        uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
         with:
           result-encoding: string
           script: |
@@ -224,7 +216,7 @@ jobs:
       # Approve the CI's PR automatically, as it has been tested in our internal pipeline already
       # Approved by the 'github-actions' user; a PR can't be approved by its author
       - name: PR Approval
-        uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
         with:
           result-encoding: string
           retries: 3
@@ -237,7 +229,7 @@ jobs:
             });
       - name: Merge
         id: merge
-        uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
         with:
           result-encoding: string
           retries: 3
@@ -254,7 +246,7 @@ jobs:
       # post a comment on the PR and assign a maintainer agent to review it
       - name: Manual review required
         if: ${{ always() && steps.merge.outcome != 'success' }}
-        uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
         env:
           BODY: |
             There has been an error during the automated release process. Manual revision is now required.

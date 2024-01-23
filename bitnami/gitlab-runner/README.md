@@ -1,4 +1,4 @@
-# Gitlab Runner packaged by Bitnami
+# Bitnami package for Gitlab Runner
 
 ## What is Gitlab Runner?
 
@@ -13,19 +13,12 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run -it --name gitlab-runner bitnami/gitlab-runner
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/gitlab-runner/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -73,18 +66,10 @@ Bitnami provides up-to-date versions of Gitlab Runner, including security patche
 docker pull bitnami/gitlab-runner:latest
 ```
 
-or if you're using Docker Compose, update the value of the image property to `bitnami/gitlab-runner:latest`.
-
 #### Step 2: Remove the currently running container
 
 ```console
 docker rm -v gitlab-runner
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v gitlab-runner
 ```
 
 #### Step 3: Run the new image
@@ -93,12 +78,6 @@ Re-create your container from the new image.
 
 ```console
 docker run --name gitlab-runner bitnami/gitlab-runner:latest
-```
-
-or using Docker Compose:
-
-```console
-docker-compose up gitlab-runner
 ```
 
 ## Configuration
@@ -113,6 +92,12 @@ docker run --rm --name gitlab-runner bitnami/gitlab-runner:latest --help
 
 Check the [official Gitlab Runner documentation](https://docs.gitlab.com/runner/commands/) for the list of the available parameters.
 
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
+
 ## Contributing
 
 We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
@@ -123,7 +108,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

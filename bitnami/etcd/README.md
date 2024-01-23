@@ -1,4 +1,4 @@
-# Etcd packaged by Bitnami
+# Bitnami package for Etcd
 
 ## What is Etcd?
 
@@ -10,14 +10,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-docker run -it --name Etcd bitnami/etcd
-```
-
-### Docker Compose
-
-```console
-curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/etcd/docker-compose.yml
-docker-compose up
+docker run -it --name etcd bitnami/etcd:latest
 ```
 
 ## Why use Bitnami Images?
@@ -25,7 +18,7 @@ docker-compose up
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -181,13 +174,61 @@ Etcd:
 
 You can find a sample configuration file on this [link](https://github.com/coreos/etcd/blob/master/etcd.conf.yml.sample)
 
-Apart from providing your custom configuration file, you can also modify the server behavior via configuration flags exposed as environment variables.
+### Environment variables
 
-For example if you want to modify the flag `--my-flag`, you will need to set the `ETCD_MY_FLAG` environment variable.
+Apart from providing your custom configuration file, you can also modify the server behavior via configuration as environment variables.
 
-The previous rule applies to all [etcd flags](https://coreos.com/etcd/docs/latest/op-guide/configuration.html).
+#### Customizable environment variables
 
-> Note: by default the environment variable `ETCDCTL_API` is set to `3`. Modify this environment variable to use a different API version.
+| Name                                   | Description                                                                                  | Default Value                       |
+|----------------------------------------|----------------------------------------------------------------------------------------------|-------------------------------------|
+| `ETCD_CFG_DATA_DIR`                    | etcd member name.                                                                            | `$ETCD_DATA_DIR`                    |
+| `ETCD_SNAPSHOTS_DIR`                   | etcd snaphots directory (used on "disaster recovery" feature).                               | `/snapshots`                        |
+| `ETCD_SNAPSHOT_HISTORY_LIMIT`          | etcd snaphots history limit.                                                                 | `1`                                 |
+| `ETCD_INIT_SNAPSHOTS_DIR`              | etcd init snaphots directory (used on "init from snapshot" feature).                         | `/init-snapshot`                    |
+| `ALLOW_NONE_AUTHENTICATION`            | Allow accessing etcd without any password.                                                   | `no`                                |
+| `ETCD_START_FROM_SNAPSHOT`             | Whether etcd should start from an existing snapshot or not.                                  | `no`                                |
+| `ETCD_DISASTER_RECOVERY`               | Whether etcd should try or not to recover from snapshots when the cluste disastrously fails. | `no`                                |
+| `ETCD_ON_K8S`                          | Whether etcd is running on a K8s environment or not.                                         | `no`                                |
+| `ETCDCTL_API`                          | etcdctl API version.                                                                         | `3`                                 |
+| `ETCD_DISABLE_STORE_MEMBER_ID`         | Disable writing the member id in a file.                                                     | `no`                                |
+| `ETCD_DISABLE_PRESTOP`                 | Disable running the pre-stop hook.                                                           | `no`                                |
+| `ETCD_CFG_NAME`                        | etcd member name.                                                                            | `$ETCD_NAME`                        |
+| `ETCD_LOG_LEVEL`                       | etcd log level.                                                                              | `info`                              |
+| `ETCD_CFG_LOG_LEVEL`                   | etcd log level.                                                                              | `$ETCD_LOG_LEVEL`                   |
+| `ETCD_LISTEN_CLIENT_URLS`              | List of URLs to listen on for client traffic.                                                | `http://0.0.0.0:2379`               |
+| `ETCD_CFG_LISTEN_CLIENT_URLS`          | List of URLs to listen on for peer traffic.                                                  | `$ETCD_LISTEN_CLIENT_URLS`          |
+| `ETCD_ADVERTISE_CLIENT_URLS`           | List of this member client URLs to advertise to the rest of the cluster.                     | `http://127.0.0.1:2379`             |
+| `ETCD_CFG_ADVERTISE_CLIENT_URLS`       | List of this member client URLs to advertise to the rest of the cluster.                     | `$ETCD_ADVERTISE_CLIENT_URLS`       |
+| `ETCD_CFG_INITIAL_CLUSTER`             | Initial list of members to bootstrap a cluster.                                              | `$ETCD_INITIAL_CLUSTER`             |
+| `ETCD_CFG_INITIAL_CLUSTER_STATE`       | Initial cluster state. Allowed values: "new" or "existing".                                  | `$ETCD_INITIAL_CLUSTER_STATE`       |
+| `ETCD_CFG_LISTEN_PEER_URLS`            | List of URLs to listen on for peer traffic.                                                  | `$ETCD_LISTEN_PEER_URLS`            |
+| `ETCD_CFG_INITIAL_ADVERTISE_PEER_URLS` | List of this member peer URLs to advertise to the rest of the cluster while bootstrapping.   | `$ETCD_INITIAL_ADVERTISE_PEER_URLS` |
+| `ETCD_CFG_INITIAL_CLUSTER_TOKEN`       | Unique initial cluster token used for bootstrapping.                                         | `$ETCD_INITIAL_CLUSTER_TOKEN`       |
+| `ETCD_AUTO_TLS`                        | Use generated certificates for TLS communications with clients.                              | `false`                             |
+| `ETCD_CFG_AUTO_TLS`                    | Use generated certificates for TLS communications with clients.                              | `$ETCD_AUTO_TLS`                    |
+| `ETCD_CLIENT_CERT_AUTH`                | Enable client cert authentication                                                            | `false`                             |
+| `ETCD_PEER_AUTO_TLS`                   | Use generated certificates for TLS communications with peers.                                | `false`                             |
+| `ETCD_CFG_PEER_AUTO_TLS`               | Use generated certificates for TLS communications with peers.                                | `$ETCD_PEER_AUTO_TLS`               |
+
+#### Read-only environment variables
+
+| Name                        | Description                                                          | Value                              |
+|-----------------------------|----------------------------------------------------------------------|------------------------------------|
+| `ETCD_BASE_DIR`             | etcd installation directory.                                         | `/opt/bitnami/etcd`                |
+| `ETCD_VOLUME_DIR`           | Persistence base directory.                                          | `/bitnami/etcd`                    |
+| `ETCD_BIN_DIR`              | etcd executables directory.                                          | `${ETCD_BASE_DIR}/bin`             |
+| `ETCD_DATA_DIR`             | etcd data directory.                                                 | `${ETCD_VOLUME_DIR}/data`          |
+| `ETCD_CONF_DIR`             | etcd configuration directory.                                        | `${ETCD_BASE_DIR}/conf`            |
+| `ETCD_LOGS_DIR`             | Directory where ETCD logs are stored.                                | `${ETCD_BASE_DIR}/log`             |
+| `ETCD_TMP_DIR`              | Directory where ETCD temporary files are stored.                     | `${ETCD_BASE_DIR}/tmp`             |
+| `ETCD_PID_FILE`             | Path to the PID file for etcd.                                       | `${ETCD_TMP_DIR}/etcd.pid`         |
+| `ETCD_CONF_FILE`            | Airflow configuration file.                                          | `${ETCD_CONF_DIR}/etcd.yaml`       |
+| `ETCD_NEW_MEMBERS_ENV_FILE` | File containining the etcd environment to use after adding a member. | `${ETCD_DATA_DIR}/new_member_envs` |
+| `ETCD_DAEMON_USER`          | etcd system user name.                                               | `etcd`                             |
+| `ETCD_DAEMON_GROUP`         | etcd system user group.                                              | `etcd`                             |
+
+Additionally, you can configure etcd using the upstream env variables [here](https://etcd.io/docs/v3.4/op-guide/configuration/)
 
 ## Notable Changes
 
@@ -207,6 +248,12 @@ The previous rule applies to all [etcd flags](https://coreos.com/etcd/docs/lates
 
 For further documentation, please check [Etcd documentation](https://coreos.com/etcd/docs/latest/) or its [GitHub repository](https://github.com/coreos/etcd)
 
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/etcd).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
@@ -217,7 +264,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

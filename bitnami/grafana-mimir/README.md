@@ -1,4 +1,4 @@
-# Grafana Mimir packaged by Bitnami
+# Bitnami package for Grafana Mimir
 
 ## What is Grafana Mimir?
 
@@ -18,7 +18,7 @@ docker run --name grafana-mimir bitnami/grafana-mimir:latest
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -74,19 +74,13 @@ In order for the container to work, you need to mount your custom `mimir.yaml` f
 docker run --rm --name grafana-mimir -v /path/to/mimir.yaml:/bitnami/grafana-mimir/conf/mimir.yaml bitnami/grafana-mimir:latest
 ```
 
-Using docker-compose:
-
-```yaml
-version: '2'
-services:
-
-  grafana-mimir:
-    image: grafana-mimir
-    volumes:
-      - /path/to/mimir.yaml:/bitnami/grafana-mimir/conf/mimir.yaml
-```
-
 Check the [official Grafana Mimir documentation](https://grafana.com/docs/mimir/latest/) to understand the possible configurations.
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 
@@ -98,7 +92,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

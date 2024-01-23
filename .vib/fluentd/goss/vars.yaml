@@ -30,6 +30,10 @@ modules:
     - fluentd
     - activesupport
     - elasticsearch-xpack
+sed_in_place:
+  exclude_paths:
+    # Ignore gems directory (not bitnami-related)
+    - /opt/bitnami/fluentd/gems
 version:
   bin_name: fluentd
   flag: --version

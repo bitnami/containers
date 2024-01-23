@@ -92,6 +92,7 @@ wordpress_validate() {
     check_yes_no_value "WORDPRESS_SKIP_BOOTSTRAP"
     check_multi_value "WORDPRESS_AUTO_UPDATE_LEVEL" "major minor none"
     check_yes_no_value "WORDPRESS_ENABLE_REVERSE_PROXY"
+    check_yes_no_value "WORDPRESS_ENABLE_XML_RPC"
 
     # Multisite validations
     check_yes_no_value "WORDPRESS_ENABLE_MULTISITE"
@@ -726,6 +727,12 @@ wordpress_generate_web_server_configuration() {
         error "Unknown WordPress Multisite network mode"
         return 1
     fi
+
+    if ! is_boolean_yes "$WORDPRESS_ENABLE_XML_RPC"; then
+        apache_config+=$'\n'"$(render-template "${template_dir}/apache-wordpress-disable-xml-rpc.tpl")"
+        nginx_config+=$'\n'"$(render-template "${template_dir}/nginx-wordpress-disable-xml-rpc.tpl")"
+    fi
+
     web_server_config_create_flags+=("--apache-extra-directory-configuration" "$apache_config" "--nginx-additional-configuration" "$nginx_config")
     [[ -n "$nginx_external_config" ]] && web_server_config_create_flags+=("--nginx-external-configuration" "$nginx_external_config")
     ensure_web_server_app_configuration_exists "wordpress" --type "php" "${web_server_config_create_flags[@]}"

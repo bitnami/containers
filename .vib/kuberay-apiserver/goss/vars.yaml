@@ -1,0 +1,6 @@
+binaries:
+  - kuberay-apiserver
+root_dir: /opt/bitnami
+directories:
+  - paths:
+      - /opt/bitnami/kuberay-apiserver

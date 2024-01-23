@@ -1,4 +1,4 @@
-# Apache Airflow Worker packaged by Bitnami
+# Bitnami package for Apache Airflow Worker
 
 ## What is Apache Airflow Worker?
 
@@ -9,11 +9,8 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ## TL;DR
 
-### Docker Compose
-
 ```console
-curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/airflow-worker/docker-compose.yml
-docker-compose up
+docker run --name airflow-worker bitnami/airflow-worker:latest
 ```
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
@@ -23,7 +20,7 @@ You can find the default credentials and available configuration options in the 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -46,18 +43,7 @@ To run this application you need [Docker Engine](https://www.docker.com/products
 Airflow Worker is a component of an Airflow solution configuring with the `CeleryExecutor`. Hence, you will need to rest of Airflow components for this image to work.
 You will need an [Airflow Webserver](https://github.com/bitnami/containers/tree/main/bitnami/airflow), an [Airflow Scheduler](https://github.com/bitnami/containers/tree/main/bitnami/airflow-scheduler), a [PostgreSQL database](https://github.com/bitnami/containers/tree/main/bitnami/postgresql) and a [Redis(R) server](https://github.com/bitnami/containers/tree/main/bitnami/redis).
 
-### Using Docker Compose
-
-The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/airflow-worker/docker-compose.yml) file. Run the application using it as shown below:
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/airflow-worker/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ### Using the Docker Command Line
-
-If you want to run the application manually instead of using `docker-compose`, these are the basic steps you need to run:
 
 1. Create a network
 
@@ -138,6 +124,17 @@ If you want to run the application manually instead of using `docker-compose`, t
     ```
 
   Access your application at `http://your-ip:8080`
+
+### Using `docker-compose.yaml`
+
+```console
+curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/airflow/docker-compose.yml
+docker-compose up
+```
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/airflow).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ### Persisting your application
 
@@ -289,32 +286,42 @@ This container supports the installation of additional python modules at start-u
 
 ### Environment variables
 
-The Airflow Worker instance can be customized by specifying environment variables on the first run. The following environment values are provided to customize Airflow Worker:
+#### Customizable environment variables
 
-#### Airflow Worker configuration
+| Name                            | Description                                                       | Default Value        |
+|---------------------------------|-------------------------------------------------------------------|----------------------|
+| `AIRFLOW_EXECUTOR`              | Airflow executor.                                                 | `SequentialExecutor` |
+| `AIRFLOW_EXECUTOR`              | Airflow executor.                                                 | `CeleryExecutor`     |
+| `AIRFLOW_WEBSERVER_HOST`        | Airflow webserver host                                            | `127.0.0.1`          |
+| `AIRFLOW_WEBSERVER_PORT_NUMBER` | Airflow webserver port.                                           | `8080`               |
+| `AIRFLOW_HOSTNAME_CALLABLE`     | Method to obtain the hostname.                                    | `socket.gethostname` |
+| `AIRFLOW_DATABASE_HOST`         | Hostname for PostgreSQL server.                                   | `postgresql`         |
+| `AIRFLOW_DATABASE_HOST`         | Hostname for PostgreSQL server.                                   | `127.0.0.1`          |
+| `AIRFLOW_DATABASE_PORT_NUMBER`  | Port used by PostgreSQL server.                                   | `5432`               |
+| `AIRFLOW_DATABASE_NAME`         | Database name that Airflow will use to connect with the database. | `bitnami_airflow`    |
+| `AIRFLOW_DATABASE_USERNAME`     | Database user that Airflow will use to connect with the database. | `bn_airflow`         |
+| `AIRFLOW_DATABASE_USE_SSL`      | Set to yes if the database is using SSL.                          | `no`                 |
+| `AIRFLOW_REDIS_USE_SSL`         | Set to yes if Redis(R) uses SSL.                                  | `no`                 |
+| `REDIS_HOST`                    | Hostname for Redis(R) server.                                     | `redis`              |
+| `REDIS_HOST`                    | Hostname for Redis(R) server.                                     | `127.0.0.1`          |
+| `REDIS_PORT_NUMBER`             | Port used by Redis(R) server.                                     | `6379`               |
+| `REDIS_DATABASE`                | Name of the Redis(R) database.                                    | `1`                  |
 
-* `AIRFLOW_EXECUTOR`: Airflow Worker executor. Default: **SequentialExecutor**
-* `AIRFLOW_FERNET_KEY`: Airflow Worker Fernet key. No defaults.
-* `AIRFLOW_SECRET_KEY`: Airflow Worker Secret key. No defaults.
-* `AIRFLOW_WEBSERVER_HOST`: Airflow Worker webserver host. Default: **airflow**
-* `AIRFLOW_WEBSERVER_PORT_NUMBER`: Airflow Worker webserver port. Default: **8080**
-* `AIRFLOW_HOSTNAME_CALLABLE`: Method to obtain the hostname. No defaults.
-* `AIRFLOW_QUEUE`: A queue for the worker to pull tasks from. No defaults.
+#### Read-only environment variables
 
-#### Use an existing database
-
-* `AIRFLOW_DATABASE_HOST`: Hostname for PostgreSQL server. Default: **postgresql**
-* `AIRFLOW_DATABASE_PORT_NUMBER`: Port used by PostgreSQL server. Default: **5432**
-* `AIRFLOW_DATABASE_NAME`: Database name that Airflow Worker will use to connect with the database. Default: **bitnami_airflow**
-* `AIRFLOW_DATABASE_USERNAME`: Database user that Airflow Worker will use to connect with the database. Default: **bn_airflow**
-* `AIRFLOW_DATABASE_PASSWORD`: Database password that Airflow Worker will use to connect with the database. No defaults.
-* `AIRFLOW_DATABASE_USE_SSL`: Set to yes if the database uses SSL. Default: **no**
-* `AIRFLOW_REDIS_USE_SSL`: Set to yes if Redis(R) uses SSL. Default: **no**
-* `REDIS_HOST`: Hostname for Redis(R) server. Default: **redis**
-* `REDIS_PORT_NUMBER`: Port used by Redis(R) server. Default: **6379**
-* `REDIS_USER`: User that Airflow Worker will use to connect with Redis(R). No defaults.
-* `REDIS_PASSWORD`: Password that Airflow Worker will use to connect with Redis(R). No defaults.
-* `REDIS_DATABASE`: Database number for Redis(R) server. Default: **1**
+| Name                   | Description                               | Value                                    |
+|------------------------|-------------------------------------------|------------------------------------------|
+| `AIRFLOW_BASE_DIR`     | Airflow installation directory.           | `${BITNAMI_ROOT_DIR}/airflow`            |
+| `AIRFLOW_HOME`         | Airflow home directory.                   | `${AIRFLOW_BASE_DIR}`                    |
+| `AIRFLOW_BIN_DIR`      | Airflow directory for binary executables. | `${AIRFLOW_BASE_DIR}/venv/bin`           |
+| `AIRFLOW_LOGS_DIR`     | Airflow logs directory.                   | `${AIRFLOW_BASE_DIR}/logs`               |
+| `AIRFLOW_LOG_FILE`     | Airflow logs directory.                   | `${AIRFLOW_LOGS_DIR}/airflow-worker.log` |
+| `AIRFLOW_CONF_FILE`    | Airflow configuration file.               | `${AIRFLOW_BASE_DIR}/airflow.cfg`        |
+| `AIRFLOW_TMP_DIR`      | Airflow directory temporary files.        | `${AIRFLOW_BASE_DIR}/tmp`                |
+| `AIRFLOW_PID_FILE`     | Path to the Airflow PID file.             | `${AIRFLOW_TMP_DIR}/airflow-worker.pid`  |
+| `AIRFLOW_DAGS_DIR`     | Airflow data to be persisted.             | `${AIRFLOW_BASE_DIR}/dags`               |
+| `AIRFLOW_DAEMON_USER`  | Airflow system user.                      | `airflow`                                |
+| `AIRFLOW_DAEMON_GROUP` | Airflow system group.                     | `airflow`                                |
 
 > In addition to the previous environment variables, all the parameters from the configuration file can be overwritten by using environment variables with this format: `AIRFLOW__{SECTION}__{KEY}`. Note the double underscores.
 
@@ -356,6 +363,10 @@ docker run -d --name airflow -p 8080:8080 \
 
 ## Notable Changes
 
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
+
 ### 1.10.15-debian-10-r18 and 2.0.1-debian-10-r51
 
 * The size of the container image has been decreased.
@@ -371,7 +382,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

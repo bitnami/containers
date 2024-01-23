@@ -25,7 +25,7 @@ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -107,6 +107,65 @@ services:
 ```
 
 ## Configuration
+
+### Environment variables
+
+#### Customizable environment variables
+
+| Name                                   | Description                                                                                   | Default Value                       |
+|----------------------------------------|-----------------------------------------------------------------------------------------------|-------------------------------------|
+| `MONGODB_DISABLE_SERVICE`              | Whether to disable the MongoDB service by default.                                            | `no`                                |
+| `MONGODB_MOUNTED_CONF_DIR`             | Directory for including custom configuration files (that override the default generated ones) | `${MONGODB_VOLUME_DIR}/conf`        |
+| `MONGODB_INIT_RETRY_ATTEMPTS`          | Maximum retries for checking the service initialization status                                | `7`                                 |
+| `MONGODB_INIT_RETRY_DELAY`             | Time (in seconds) to wait between retries for checking the service initialization status      | `5`                                 |
+| `MONGODB_PORT_NUMBER`                  | MongoDB port                                                                                  | `$MONGODB_DEFAULT_PORT_NUMBER`      |
+| `MONGODB_ENABLE_MAJORITY_READ`         | Enable majority read in MongoDB operations                                                    | `true`                              |
+| `MONGODB_DEFAULT_ENABLE_MAJORITY_READ` | Enable majority read in MongoDB operations set at build time                                  | `true`                              |
+| `MONGODB_ENABLE_NUMACTL`               | Execute commands using numactl                                                                | `false`                             |
+| `MONGODB_ADVERTISE_IP`                 | Whether advertised hostname is set to container ip                                            | `false`                             |
+| `MONGODB_DISABLE_JAVASCRIPT`           | Disable MongoDB server-side javascript execution                                              | `no`                                |
+| `MONGODB_ROOT_USER`                    | User name for the MongoDB root user                                                           | `root`                              |
+| `ALLOW_EMPTY_PASSWORD`                 | Permit accessing MongoDB without setting any password                                         | `no`                                |
+| `MONGODB_REPLICA_SET_NAME`             | Name of the MongoDB replica set                                                               | `$MONGODB_DEFAULT_REPLICA_SET_NAME` |
+| `MONGODB_INITIAL_PRIMARY_PORT_NUMBER`  | Port of the replica set primary node (necessary for arbiter and secondary nodes)              | `27017`                             |
+| `MONGODB_INITIAL_PRIMARY_ROOT_USER`    | Primary node root username (necessary for arbiter and secondary nodes)                        | `root`                              |
+| `MONGODB_SET_SECONDARY_OK`             | Mark node as readable. Necessary for cases where the PVC is lost                              | `no`                                |
+| `MONGODB_CFG_PRIMARY_PORT_NUMBER`      | MongoDB config server primary host port. Mandatory for shardsvr mode                          | `27017`                             |
+| `MONGODB_MONGOS_PORT_NUMBER`           | MongoDB mongos port. Mandatory for shardsvr mode                                              | `27017`                             |
+
+#### Read-only environment variables
+
+| Name                                      | Description                                                            | Value                                     |
+|-------------------------------------------|------------------------------------------------------------------------|-------------------------------------------|
+| `MONGODB_VOLUME_DIR`                      | Persistence base directory                                             | `$BITNAMI_VOLUME_DIR/mongodb`             |
+| `MONGODB_BASE_DIR`                        | MongoDB installation directory                                         | `$BITNAMI_ROOT_DIR/mongodb`               |
+| `MONGODB_CONF_DIR`                        | MongoDB configuration directory                                        | `$MONGODB_BASE_DIR/conf`                  |
+| `MONGODB_LOG_DIR`                         | MongoDB logs directory                                                 | `$MONGODB_BASE_DIR/logs`                  |
+| `MONGODB_DATA_DIR`                        | MongoDB data directory                                                 | `${MONGODB_VOLUME_DIR}/data`              |
+| `MONGODB_TMP_DIR`                         | MongoDB temporary directory                                            | `$MONGODB_BASE_DIR/tmp`                   |
+| `MONGODB_BIN_DIR`                         | MongoDB executables directory                                          | `$MONGODB_BASE_DIR/bin`                   |
+| `MONGODB_TEMPLATES_DIR`                   | Directory where the mongodb.conf template file is stored               | `$MONGODB_BASE_DIR/templates`             |
+| `MONGODB_MONGOD_TEMPLATES_FILE`           | Path to the mongodb.conf template file                                 | `$MONGODB_TEMPLATES_DIR/mongodb.conf.tpl` |
+| `MONGODB_CONF_FILE`                       | Path to MongoDB configuration file                                     | `$MONGODB_CONF_DIR/mongodb.conf`          |
+| `MONGODB_KEY_FILE`                        | Path to the MongoDB replica set keyfile                                | `$MONGODB_CONF_DIR/keyfile`               |
+| `MONGODB_DB_SHELL_FILE`                   | Path to MongoDB dbshell file                                           | `/.dbshell`                               |
+| `MONGODB_RC_FILE`                         | Path to MongoDB rc file                                                | `/.mongorc.js`                            |
+| `MONGOSH_DIR`                             | Path to mongosh directory                                              | `/.mongodb`                               |
+| `MONGOSH_RC_FILE`                         | Path to mongosh rc file                                                | `/.mongoshrc.js`                          |
+| `MONGODB_PID_FILE`                        | Path to the MongoDB PID file                                           | `$MONGODB_TMP_DIR/mongodb.pid`            |
+| `MONGODB_LOG_FILE`                        | Path to the MongoDB log file                                           | `$MONGODB_LOG_DIR/mongodb.log`            |
+| `MONGODB_INITSCRIPTS_DIR`                 | Path to the MongoDB container init scripts directory                   | `/docker-entrypoint-initdb.d`             |
+| `MONGODB_DAEMON_USER`                     | MongoDB system user                                                    | `mongo`                                   |
+| `MONGODB_DAEMON_GROUP`                    | MongoDB system group                                                   | `mongo`                                   |
+| `MONGODB_DEFAULT_PORT_NUMBER`             | MongoDB port set at build time                                         | `27017`                                   |
+| `MONGODB_DEFAULT_ENABLE_JOURNAL`          | Enable MongoDB journal at build time                                   | `true`                                    |
+| `MONGODB_DEFAULT_DISABLE_SYSTEM_LOG`      | Disable MongoDB daemon system log set at build time                    | `false`                                   |
+| `MONGODB_DEFAULT_ENABLE_DIRECTORY_PER_DB` | Use a separate folder for storing each database data set at build time | `false`                                   |
+| `MONGODB_DEFAULT_ENABLE_IPV6`             | Use IPv6 for database connections set at build time                    | `false`                                   |
+| `MONGODB_DEFAULT_SYSTEM_LOG_VERBOSITY`    | MongoDB daemon log level set at build time                             | `0`                                       |
+| `MONGODB_DEFAULT_REPLICA_SET_NAME`        | Name of the MongoDB replica set at build time                          | `replicaset`                              |
+| `MONGODB_MONGOS_TEMPLATES_FILE`           | Path to MongoDB Sharded template file                                  | `$MONGODB_TEMPLATES_DIR/mongos.conf.tpl`  |
+| `MONGODB_MONGOS_CONF_FILE`                | MongoDB mongos configuration file. Used by mongos node                 | `$MONGODB_CONF_DIR/mongos.conf`           |
 
 ### Setting up a sharded cluster
 
@@ -332,7 +391,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

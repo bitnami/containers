@@ -383,7 +383,7 @@ mongodb_start_bg() {
     fi
 
     # wait until the server is up and answering queries
-    if ! retry_while "mongodb_is_mongodb_started" "$MONGODB_MAX_TIMEOUT"; then
+    if ! retry_while "mongodb_is_mongodb_started" "$MONGODB_INIT_RETRY_ATTEMPTS" "$MONGODB_INIT_RETRY_DELAY"; then
         error "MongoDB did not start"
         exit 1
     fi
@@ -423,7 +423,7 @@ mongodb_stop() {
     info "Stopping MongoDB..."
 
     stop_service_using_pid "$MONGODB_PID_FILE"
-    if ! retry_while "is_mongodb_not_running" "$MONGODB_MAX_TIMEOUT"; then
+    if ! retry_while "is_mongodb_not_running" "$MONGODB_INIT_RETRY_ATTEMPTS" "$MONGODB_INIT_RETRY_DELAY"; then
         error "MongoDB failed to stop"
         exit 1
     fi
@@ -606,7 +606,7 @@ mongodb_set_auth_conf() {
     local authorization
 
     if ! mongodb_is_file_external "$conf_file_name"; then
-        if [[ -n "$MONGODB_ROOT_PASSWORD" ]] || [[ -n "$MONGODB_PASSWORD" ]]; then
+        if [[ -n "$MONGODB_ROOT_PASSWORD" ]] || [[ -n "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" ]] || [[ -n "$MONGODB_PASSWORD" ]]; then
             authorization="$(yq eval .security.authorization "$MONGODB_CONF_FILE")"
             if [[ "$authorization" = "disabled" ]]; then
 
@@ -1003,7 +1003,7 @@ mongodb_configure_primary() {
     info "Configuring MongoDB primary node"
     wait-for-port --timeout 360 "$MONGODB_PORT_NUMBER"
 
-    if ! retry_while "mongodb_is_primary_node_initiated $node $port" "$MONGODB_MAX_TIMEOUT"; then
+    if ! retry_while "mongodb_is_primary_node_initiated $node $port" "$MONGODB_INIT_RETRY_ATTEMPTS" "$MONGODB_INIT_RETRY_DELAY"; then
         error "MongoDB primary node failed to get configured"
         exit 1
     fi
@@ -1024,7 +1024,7 @@ mongodb_wait_confirmation() {
     local -r port="${2:?port is required}"
 
     debug "Waiting until ${node}:${port} is added to the replica set..."
-    if ! retry_while "mongodb_node_currently_in_cluster ${node} ${port}" "$MONGODB_MAX_TIMEOUT"; then
+    if ! retry_while "mongodb_node_currently_in_cluster ${node} ${port}" "$MONGODB_INIT_RETRY_ATTEMPTS" "$MONGODB_INIT_RETRY_DELAY"; then
         error "Unable to confirm that ${node}:${port} has been added to the replica set!"
         exit 1
     else
@@ -1098,14 +1098,14 @@ mongodb_wait_for_node() {
     debug "Waiting for primary node..."
 
     info "Trying to connect to MongoDB server $host..."
-    if ! retry_while "wait-for-port --host $host --timeout 10 $port" "$MONGODB_MAX_TIMEOUT"; then
+    if ! retry_while "wait-for-port --host $host --timeout 10 $port" "$MONGODB_INIT_RETRY_ATTEMPTS" "$MONGODB_INIT_RETRY_DELAY"; then
         error "Unable to connect to host $host"
         exit 1
     else
         info "Found MongoDB server listening at $host:$port !"
     fi
 
-    if ! retry_while "mongodb_is_node_available $host $port $user $password" "$MONGODB_MAX_TIMEOUT"; then
+    if ! retry_while "mongodb_is_node_available $host $port $user $password" "$MONGODB_INIT_RETRY_ATTEMPTS" "$MONGODB_INIT_RETRY_DELAY"; then
         error "Node $host did not become available"
         exit 1
     else
@@ -1130,7 +1130,7 @@ mongodb_wait_for_primary_node() {
     mongodb_wait_for_node "$host" "$port" "$user" "$password"
 
     debug "Waiting for primary host $host to be ready..."
-    if ! retry_while "mongodb_is_primary_node_up $host $port $user $password" "$MONGODB_MAX_TIMEOUT"; then
+    if ! retry_while "mongodb_is_primary_node_up $host $port $user $password" "$MONGODB_INIT_RETRY_ATTEMPTS" "$MONGODB_INIT_RETRY_DELAY"; then
         error "Unable to validate $host as primary node in the replica set scenario!"
         exit 1
     else
@@ -1158,7 +1158,7 @@ mongodb_configure_secondary() {
         info "Node currently in the cluster"
     else
         info "Adding node to the cluster"
-        if ! retry_while "mongodb_is_secondary_node_pending $node $port" "$MONGODB_MAX_TIMEOUT"; then
+        if ! retry_while "mongodb_is_secondary_node_pending $node $port" "$MONGODB_INIT_RETRY_ATTEMPTS" "$MONGODB_INIT_RETRY_DELAY"; then
             error "Secondary node did not get ready"
             exit 1
         fi
@@ -1166,14 +1166,14 @@ mongodb_configure_secondary() {
 
         # Ensure that secondary nodes do not count as voting members until they are fully initialized
         # https://docs.mongodb.com/manual/reference/method/rs.add/#behavior
-        if ! retry_while "mongodb_is_secondary_node_ready $node $port" "$MONGODB_MAX_TIMEOUT"; then
+        if ! retry_while "mongodb_is_secondary_node_ready $node $port" "$MONGODB_INIT_RETRY_ATTEMPTS" "$MONGODB_INIT_RETRY_DELAY"; then
             error "Secondary node did not get marked as secondary"
             exit 1
         fi
 
         # Grant voting rights to node
         # https://docs.mongodb.com/manual/tutorial/modify-psa-replica-set-safely/
-        if ! retry_while "mongodb_configure_secondary_node_voting $node $port" "$MONGODB_MAX_TIMEOUT"; then
+        if ! retry_while "mongodb_configure_secondary_node_voting $node $port" "$MONGODB_INIT_RETRY_ATTEMPTS" "$MONGODB_INIT_RETRY_DELAY"; then
             error "Secondary node did not get marked as secondary"
             exit 1
         fi
@@ -1208,7 +1208,7 @@ mongodb_configure_hidden() {
         info "Node currently in the cluster"
     else
         info "Adding hidden node to the cluster"
-        if ! retry_while "mongodb_is_hidden_node_pending $node $port" "$MONGODB_MAX_TIMEOUT"; then
+        if ! retry_while "mongodb_is_hidden_node_pending $node $port" "$MONGODB_INIT_RETRY_ATTEMPTS" "$MONGODB_INIT_RETRY_DELAY"; then
             error "Hidden node did not get ready"
             exit 1
         fi
@@ -1236,7 +1236,7 @@ mongodb_configure_arbiter() {
         info "Node currently in the cluster"
     else
         info "Configuring MongoDB arbiter node"
-        if ! retry_while "mongodb_is_arbiter_node_pending $node $port" "$MONGODB_MAX_TIMEOUT"; then
+        if ! retry_while "mongodb_is_arbiter_node_pending $node $port" "$MONGODB_INIT_RETRY_ATTEMPTS" "$MONGODB_INIT_RETRY_DELAY"; then
             error "Arbiter node did not get ready"
             exit 1
         fi
@@ -1277,7 +1277,7 @@ EOF
 mongodb_wait_until_sync_complete() {
     info "Waiting until initial data sync is complete..."
 
-    if ! retry_while "mongodb_is_not_in_sync" "$MONGODB_MAX_TIMEOUT" 1; then
+    if ! retry_while "mongodb_is_not_in_sync" "$MONGODB_INIT_RETRY_ATTEMPTS" "$MONGODB_INIT_RETRY_DELAY" 1; then
         error "Initial data sync did not finish after $MONGODB_MAX_TIMEOUT seconds"
         exit 1
     else

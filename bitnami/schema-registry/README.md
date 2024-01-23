@@ -1,4 +1,4 @@
-# Confluent Schema Registry packaged by Bitnami
+# Bitnami package for Confluent Schema Registry
 
 ## What is Confluent Schema Registry?
 
@@ -18,7 +18,7 @@ docker run --name schema-registry bitnami/schema-registry:latest
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -58,6 +58,28 @@ docker build -t bitnami/APP:latest .
 
 ### Environment variables
 
+#### Customizable environment variables
+
+| Name                               | Description                                                                                   | Default Value                       |
+|------------------------------------|-----------------------------------------------------------------------------------------------|-------------------------------------|
+| `SCHEMA_REGISTRY_MOUNTED_CONF_DIR` | Directory for including custom configuration files (that override the default generated ones) | `${SCHEMA_REGISTRY_VOLUME_DIR}/etc` |
+
+#### Read-only environment variables
+
+| Name                                    | Description                                                                               | Value                                                                    |
+|-----------------------------------------|-------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
+| `SCHEMA_REGISTRY_BASE_DIR`              | Base path for SCHEMA REGISTRY files.                                                      | `${BITNAMI_ROOT_DIR}/schema-registry`                                    |
+| `SCHEMA_REGISTRY_VOLUME_DIR`            | SCHEMA REGISTRY directory for persisted files.                                            | `${BITNAMI_VOLUME_DIR}/schema-registry`                                  |
+| `SCHEMA_REGISTRY_BIN_DIR`               | SCHEMA REGISTRY certificates directory.                                                   | `${SCHEMA_REGISTRY_BASE_DIR}/bin`                                        |
+| `SCHEMA_REGISTRY_CERTS_DIR`             | SCHEMA REGISTRY certificates directory.                                                   | `${SCHEMA_REGISTRY_BASE_DIR}/certs`                                      |
+| `SCHEMA_REGISTRY_CONF_DIR`              | SCHEMA REGISTRY configuration directory.                                                  | `${SCHEMA_REGISTRY_BASE_DIR}/etc`                                        |
+| `SCHEMA_REGISTRY_LOGS_DIR`              | SCHEMA REGISTRY logs directory.                                                           | `${SCHEMA_REGISTRY_BASE_DIR}/logs`                                       |
+| `SCHEMA_REGISTRY_CONF_FILE`             | Main SCHEMA REGISTRY configuration file.                                                  | `${SCHEMA_REGISTRY_CONF_DIR}/schema-registry/schema-registry.properties` |
+| `SCHEMA_REGISTRY_DAEMON_USER`           | Users that will execute the SCHEMA REGISTRY Server process.                               | `schema-registry`                                                        |
+| `SCHEMA_REGISTRY_DAEMON_GROUP`          | Group that will execute the SCHEMA REGISTRY Server process.                               | `schema-registry`                                                        |
+| `SCHEMA_REGISTRY_DEFAULT_LISTENERS`     | Comma-separated list of listeners that listen for API requests over either HTTP or HTTPS. | `http://0.0.0.0:8081`                                                    |
+| `SCHEMA_REGISTRY_DEFAULT_KAFKA_BROKERS` | List of Kafka brokers to connect to.                                                      | `PLAINTEXT://localhost:9092`                                             |
+
 When you start the Confluent Schema Registry image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. Please note that some variables are only considered when the container is started for the first time. If you want to add a new environment variable:
 
 * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/schema-registry/docker-compose.yml) file present in this repository:
@@ -80,26 +102,6 @@ When you start the Confluent Schema Registry image, you can adjust the configura
       bitnami/schema-registry:latest
     ```
 
-Available environment variables:
-
-#### Schema Registry settings
-
-* `SCHEMA_REGISTRY_KAFKA_BROKERS`: List of Kafka brokers to connect to. Default: **PLAINTEXT://localhost:9092**.
-* `SCHEMA_REGISTRY_ADVERTISED_HOSTNAME`: Advertised hostname in ZooKeeper. Default: **container IP**.
-* `SCHEMA_REGISTRY_KAFKA_KEYSTORE_PASSWORD`: Password to access the keystore. Default: **empty value**.
-* `SCHEMA_REGISTRY_KAFKA_KEY_PASSWORD`: Password to be able to used ssl secured kafka broker with Schema Registry. Default: **empty value**.
-* `SCHEMA_REGISTRY_KAFKA_TRUSTSTORE_PASSWORD`: Password to access the truststore. Default: **empty value**.
-* `SCHEMA_REGISTRY_KAFKA_SASL_USER`: SASL user to authenticate with Kafka. Default: **empty value**.
-* `SCHEMA_REGISTRY_KAFKA_SASL_PASSWORD`: SASL password to authenticate with Kafka. Default: **empty value**.
-* `SCHEMA_REGISTRY_LISTENERS`: Comma-separated list of listeners that listen for API requests over either HTTP or HTTPS. Default: **<http://0.0.0.0:8081>**.
-* `SCHEMA_REGISTRY_SSL_KEYSTORE_PASSWORD`: Password to access the SSL keystore. Default: **empty value**.
-* `SCHEMA_REGISTRY_SSL_KEY_PASSWORD`: Password to access the SSL key. Default: **empty value**.
-* `SCHEMA_REGISTRY_SSL_TRUSTSTORE_PASSWORD`: Password to access the SSL truststore. Default: **empty value**.
-* `SCHEMA_REGISTRY_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM`: Endpoint identification algorithm to validate the server hostname using the server certificate. Default: **empty value**.
-* `SCHEMA_REGISTRY_CLIENT_AUTHENTICATION`: Client authentication configuration. Valid options: `NONE`, `REQUESTED`, or `REQUIRED`.
-* `SCHEMA_REGISTRY_AVRO_COMPATIBILY_LEVEL`: The Avro compatibility type. Valid options: `NONE`, `BACKWARD`, `BACKWARD_TRANSITIVE`, `FORWARD`, `FORWARD_TRANSITIVE`, `FULL`, or `FULL_TRANSITIVE`.
-* `SCHEMA_REGISTRY_DEBUG`: Enable Schema Registry debug logs. Valid options: true or false. Default: **false**.
-
 #### Kafka settings
 
 Please check the configuration settings for the Kakfa service in the [Kafka's README file](https://github.com/bitnami/containers/tree/main/bitnami/kafka#configuration).
@@ -107,6 +109,12 @@ Please check the configuration settings for the Kakfa service in the [Kafka's RE
 #### Zookeeper settings
 
 Please check the configuration settings for the Kakfa service in the [Zookeeper's README file](https://github.com/bitnami/containers/tree/main/bitnami/zookeeper#configuration).
+
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/schema-registry).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## Contributing
 
@@ -118,7 +126,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

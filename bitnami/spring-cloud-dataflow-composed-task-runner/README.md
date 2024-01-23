@@ -1,4 +1,4 @@
-# SCDF Composed Task Runner packaged by Bitnami
+# Bitnami package for SCDF Composed Task Runner
 
 ## What is SCDF Composed Task Runner?
 
@@ -17,7 +17,7 @@ docker run --name spring-cloud-dataflow-composed-task-runner bitnami/spring-clou
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -55,6 +55,19 @@ docker build -t bitnami/APP:latest .
 
 ## Configuration
 
+### Environment variables
+
+#### Customizable environment variables
+
+#### Read-only environment variables
+
+| Name                                     | Description                                                           | Value                                                            |
+|------------------------------------------|-----------------------------------------------------------------------|------------------------------------------------------------------|
+| `SCDF_COMPOSED_TASK_RUNNER_BASE_DIR`     | Base path for SCDF COMPOSED TASK RUNNER files.                        | `${BITNAMI_ROOT_DIR}/spring-cloud-dataflow-composed-task-runner` |
+| `SCDF_COMPOSED_TASK_RUNNER_M2_DIR`       | SCDF COMPOSED TASK RUNNER maven root dir.                             | `/.m2`                                                           |
+| `SCDF_COMPOSED_TASK_RUNNER_DAEMON_USER`  | Users that will execute the SCDF COMPOSED TASK RUNNER Server process. | `dataflow`                                                       |
+| `SCDF_COMPOSED_TASK_RUNNER_DAEMON_GROUP` | Group that will execute the SCDF COMPOSED TASK RUNNER Server process. | `dataflow`                                                       |
+
 ### Running commands
 
 To run tasks inside this container you can use `docker run`:
@@ -62,6 +75,12 @@ To run tasks inside this container you can use `docker run`:
 ```console
 docker run --rm --name spring-cloud-dataflow-composed-task-runner bitnami/spring-cloud-dataflow-composed-task-runner:latest <runner_args>
 ```
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 
@@ -73,7 +92,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

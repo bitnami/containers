@@ -1,4 +1,4 @@
-# TensorFlow Serving packaged by Bitnami
+# Bitnami package for TensorFlow Serving
 
 ## What is TensorFlow Serving?
 
@@ -13,13 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name tensorflow-serving bitnami/tensorflow-serving:latest
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/tensorflow-serving/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 You can find the available configuration options in the [Environment Variables](#environment-variables) section.
 
 ## Why use Bitnami Images?
@@ -27,7 +20,7 @@ You can find the available configuration options in the [Environment Variables](
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -193,11 +186,34 @@ docker-compose up -d
 
 Tensorflow Serving can be customized by specifying environment variables on the first run. The following environment values are provided to custom Tensorflow:
 
-* `TENSORFLOW_SERVING_PORT_NUMBER`: TensorFlow Serving Port. Default: **8500**
-* `TENSORFLOW_SERVING_REST_API_PORT_NUMBER`: TensorFlow Serving Rest API Port. Default: **8501**
-* `TENSORFLOW_SERVING_MODEL_NAME`: TensorFlow Model to serve. Default: **resnet**
-* `TENSORFLOW_SERVING_ENABLE_MONITORING`: Expose Prometheus metrics. Default: **no**
-* `TENSORFLOW_SERVING_MONITORING_PATH`: The API path where the metrics can be scraped. Default: **/monitoring/prometheus/metrics**
+#### Customizable environment variables
+
+| Name                                      | Description                  | Default Value                    |
+|-------------------------------------------|------------------------------|----------------------------------|
+| `TENSORFLOW_SERVING_ENABLE_MONITORING`    | Enable tensorflow monitoring | `no`                             |
+| `TENSORFLOW_SERVING_MODEL_NAME`           | Tensorflow model name        | `resnet`                         |
+| `TENSORFLOW_SERVING_MONITORING_PATH`      | Tensorflow monitoring path   | `/monitoring/prometheus/metrics` |
+| `TENSORFLOW_SERVING_PORT_NUMBER`          | Tensorflow port number       | `8500`                           |
+| `TENSORFLOW_SERVING_REST_API_PORT_NUMBER` | Tensorflow API port number   | `8501`                           |
+
+#### Read-only environment variables
+
+| Name                                      | Description                                   | Value                                                    |
+|-------------------------------------------|-----------------------------------------------|----------------------------------------------------------|
+| `BITNAMI_VOLUME_DIR`                      | Directory where to mount volumes.             | `/bitnami`                                               |
+| `TENSORFLOW_SERVING_BASE_DIR`             | Tensorflow installation directory.            | `${BITNAMI_ROOT_DIR}/tensorflow-serving`                 |
+| `TENSORFLOW_SERVING_BIN_DIR`              | Tensorflow directory for binary executables.  | `${TENSORFLOW_SERVING_BASE_DIR}/bin`                     |
+| `TENSORFLOW_SERVING_TMP_DIR`              | Tensorflow directory for temp files.          | `${TENSORFLOW_SERVING_BASE_DIR}/tmp`                     |
+| `TENSORFLOW_SERVING_PID_FILE`             | Tensorflow PID file.                          | `${TENSORFLOW_SERVING_TMP_DIR}/tensorflow-serving.pid`   |
+| `TENSORFLOW_SERVING_CONF_DIR`             | Tensorflow directory for configuration files. | `${TENSORFLOW_SERVING_BASE_DIR}/conf`                    |
+| `TENSORFLOW_SERVING_CONF_FILE`            | Tensorflow configuration file.                | `${TENSORFLOW_SERVING_CONF_DIR}/tensorflow-serving.conf` |
+| `TENSORFLOW_SERVING_MONITORING_CONF_FILE` | Tensorflow directory for configuration files. | `${TENSORFLOW_SERVING_CONF_DIR}/monitoring.conf`         |
+| `TENSORFLOW_SERVING_LOGS_DIR`             | Tensorflow directory for logs files.          | `${TENSORFLOW_SERVING_BASE_DIR}/logs`                    |
+| `TENSORFLOW_SERVING_LOGS_FILE`            | Tensorflow logs files.                        | `${TENSORFLOW_SERVING_LOGS_DIR}/tensorflow-serving.log`  |
+| `TENSORFLOW_SERVING_VOLUME_DIR`           | Tensorflow persistence directory.             | `${BITNAMI_VOLUME_DIR}/tensorflow-serving`               |
+| `TENSORFLOW_SERVING_MODEL_DATA`           | Tensorflow data to persist.                   | `${BITNAMI_VOLUME_DIR}/model-data`                       |
+| `TENSORFLOW_SERVING_DAEMON_USER`          | Tensorflow system user                        | `tensorflow`                                             |
+| `TENSORFLOW_SERVING_DAEMON_GROUP`         | Tensorflow system group                       | `tensorflow`                                             |
 
 ### Configuration file
 
@@ -340,6 +356,12 @@ docker-compose start tensorflow-serving
 
 * The default serving port has changed from 9000 to 8500.
 
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/tensorflow-resnet).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
@@ -350,7 +372,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

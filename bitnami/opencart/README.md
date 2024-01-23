@@ -1,4 +1,4 @@
-# OpenCart packaged by Bitnami
+# Bitnami package for OpenCart
 
 ## What is OpenCart?
 
@@ -10,18 +10,18 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/opencart/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run --name opencart bitnami/opencart:latest
 ```
 
-**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
+**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure d
+eployment.
 
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -71,18 +71,7 @@ docker build -t bitnami/APP:latest .
 
 OpenCart requires access to a MySQL or MariaDB database to store information. We'll use the [Bitnami Docker Image for MariaDB](https://github.com/bitnami/containers/tree/main/bitnami/mariadb) for the database requirements.
 
-### Run the application using Docker Compose
-
-The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/opencart/docker-compose.yml) file. Run the application using it as shown below:
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/opencart/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ### Using the Docker Command Line
-
-If you want to run the application manually instead of using `docker-compose`, these are the basic steps you need to run:
 
 #### Step 1: Create a network
 
@@ -123,11 +112,22 @@ Then you can access the OpenCart storefront at `http://your-ip/`. To access the 
 
 *Note:* If you want to access your application from a public IP or hostname you need to configure OpenCart for it. You can handle it adjusting the configuration of the instance by setting the environment variable `OPENCART_HOST` to your public IP or hostname.
 
+### Run the application using Docker Compose
+
+```console
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/opencart/docker-compose.yml > docker-compose.yml
+docker-compose up -d
+```
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/opencart).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
+
 ## Persisting your application
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a directory at the `/bitnami/opencart` path. If the mounted directory is empty, it will be initialized on the first run. Additionally you should mount a volume for persistence of the MariaDB data](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#persisting-your-database).
+For persistence you should mount a directory at the `/bitnami/opencart` path. If the mounted directory is empty, it will be initialized on the first run. Additionally you should [mount a volume for persistence of the MariaDB data](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#persisting-your-database).
 
 The above examples define the Docker volumes named `mariadb_data` and `opencart_data`. The OpenCart application state will persist as long as volumes are not removed.
 
@@ -198,6 +198,35 @@ docker run -d --name opencart \
 
 ### Environment variables
 
+#### Customizable environment variables
+
+| Name                                  | Description                                                                                                                    | Default Value                          |
+|---------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|----------------------------------------|
+| `OPENCART_DATA_TO_PERSIST`            | Files to persist relative to the OpenCart installation directory. To provide multiple values, separate them with a whitespace. | `config.php administration/config.php` |
+| `OPENCART_EXTERNAL_HTTP_PORT_NUMBER`  | Port to used by OpenCart to generate URLs and links when accessing using HTTP.                                                 | `80`                                   |
+| `OPENCART_EXTERNAL_HTTPS_PORT_NUMBER` | Port to used by OpenCart to generate URLs and links when accessing using HTTPS.                                                | `443`                                  |
+| `OPENCART_ENABLE_HTTPS`               | Whether to use HTTPS by default.                                                                                               | `no`                                   |
+| `OPENCART_USERNAME`                   | OpenCart user name.                                                                                                            | `user`                                 |
+| `OPENCART_PASSWORD`                   | OpenCart user password.                                                                                                        | `bitnami`                              |
+| `OPENCART_EMAIL`                      | OpenCart user e-mail address.                                                                                                  | `user@example.com`                     |
+| `OPENCART_DATABASE_HOST`              | Database server host.                                                                                                          | `$OPENCART_DEFAULT_DATABASE_HOST`      |
+| `OPENCART_DATABASE_PORT_NUMBER`       | Database server port.                                                                                                          | `3306`                                 |
+| `OPENCART_DATABASE_NAME`              | Database name.                                                                                                                 | `bitnami_opencart`                     |
+| `OPENCART_DATABASE_USER`              | Database user name.                                                                                                            | `bn_opencart`                          |
+
+#### Read-only environment variables
+
+| Name                             | Description                                               | Value                                            |
+|----------------------------------|-----------------------------------------------------------|--------------------------------------------------|
+| `OPENCART_BASE_DIR`              | OpenCart installation directory.                          | `${BITNAMI_ROOT_DIR}/opencart`                   |
+| `OPENCART_CONF_FILE`             | Configuration file for OpenCart.                          | `${OPENCART_BASE_DIR}/config.php`                |
+| `OPENCART_ADMIN_CONF_FILE`       | Configuration file for the OpenCart administration panel. | `${OPENCART_BASE_DIR}/administration/config.php` |
+| `OPENCART_VOLUME_DIR`            | OpenCart directory for mounted configuration files.       | `${BITNAMI_VOLUME_DIR}/opencart`                 |
+| `OPENCART_STORAGE_DIR`           | OpenCart directory for mounted configuration files.       | `${BITNAMI_VOLUME_DIR}/opencart_storage`         |
+| `OPENCART_DEFAULT_DATABASE_HOST` | Default database server host.                             | `mariadb`                                        |
+| `OPENCART_DEFAULT_DATABASE_HOST` | Default database server host.                             | `127.0.0.1`                                      |
+| `PHP_DEFAULT_MEMORY_LIMIT`       | Default PHP memory limit.                                 | `256M`                                           |
+
 When you start the OpenCart image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
 * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/opencart/docker-compose.yml) file present in this repository:
@@ -220,72 +249,7 @@ opencart:
     bitnami/opencart:latest
   ```
 
-Available environment variables:
-
-#### User and Site configuration
-
-* `APACHE_HTTP_PORT_NUMBER`: Port to bind by Apache for HTTP. Default: **8080**
-* `APACHE_HTTPS_PORT_NUMBER`: Port to bind by Apache for HTTPS. Default: **8443**
-* `OPENCART_USERNAME`: OpenCart application username. Default: **user**
-* `OPENCART_PASSWORD`: OpenCart application password. Default: **bitnami**
-* `OPENCART_EMAIL`: OpenCart application email. Default: **user@example.com**
-* `OPENCART_HOST`: OpenCart server hostname/address.
-* `OPENCART_ENABLE_HTTPS`: Whether to use HTTPS by default. Default: **no**.
-* `OPENCART_EXTERNAL_HTTP_PORT_NUMBER`: Port to used by OpenCart to generate URLs and links when accessing using HTTP. Default **80**.
-* `OPENCART_EXTERNAL_HTTPS_PORT_NUMBER`: Port to used by OpenCart to generate URLs and links when accessing using HTTPS. Default **443**.
-* `OPENCART_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. Default: **no**
-
-#### Use an existing database
-
-* `OPENCART_DATABASE_HOST`: Hostname for MariaDB server. Default: **mariadb**
-* `OPENCART_DATABASE_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
-* `OPENCART_DATABASE_NAME`: Database name that OpenCart will use to connect with the database. Default: **bitnami_opencart**
-* `OPENCART_DATABASE_USER`: Database user that OpenCart will use to connect with the database. Default: **bn_opencart**
-* `OPENCART_DATABASE_PASSWORD`: Database password that OpenCart will use to connect with the database. No defaults.
-* `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-#### Create a database for OpenCart using mysql-client
-
-* `MYSQL_CLIENT_FLAVOR`: SQL database flavor. Valid values: `mariadb` or `mysql`. Default: **mariadb**.
-* `MYSQL_CLIENT_DATABASE_HOST`: Hostname for MariaDB server. Default: **mariadb**
-* `MYSQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
-* `MYSQL_CLIENT_DATABASE_ROOT_USER`: Database admin user. Default: **root**
-* `MYSQL_CLIENT_DATABASE_ROOT_PASSWORD`: Database password for the database admin user. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_CHARACTER_SET`: Character set to use for the new database. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_COLLATE`: Database collation to use for the new database. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_PRIVILEGES`: Database privileges to grant for the user specified in `MYSQL_CLIENT_CREATE_DATABASE_USER` to the database specified in `MYSQL_CLIENT_CREATE_DATABASE_NAME`. No defaults.
-* `MYSQL_CLIENT_ENABLE_SSL_WRAPPER`: Whether to force SSL connections to the database via the `mysql` CLI tool. Useful for applications that rely on the CLI instead of APIs. Default: **no**
-* `MYSQL_CLIENT_ENABLE_SSL`: Whether to force SSL connections for the database. Default: **no**
-* `MYSQL_CLIENT_SSL_CA_FILE`: Path to the SSL CA file for the new database. No defaults
-* `MYSQL_CLIENT_SSL_CERT_FILE`: Path to the SSL CA file for the new database. No defaults
-* `MYSQL_CLIENT_SSL_KEY_FILE`: Path to the SSL CA file for the new database. No defaults
-* `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-#### SMTP Configuration
-
-To configure OpenCart to send email using SMTP you can set the following environment variables:
-
-* `OPENCART_SMTP_HOST`: SMTP host.
-* `OPENCART_SMTP_PORT`: SMTP port.
-* `OPENCART_SMTP_USER`: SMTP account user.
-* `OPENCART_SMTP_PASSWORD`: SMTP account password.
-
-#### PHP configuration
-
-* `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. No default.
-* `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
-* `PHP_MAX_EXECUTION_TIME`: Maximum execution time for PHP scripts. No default.
-* `PHP_MAX_INPUT_TIME`: Maximum input time for PHP scripts. No default.
-* `PHP_MAX_INPUT_VARS`: Maximum amount of input variables for PHP scripts. No default.
-* `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
-* `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
-* `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
-* `PHP_OUTPUT_BUFFERING`: Size of the output buffer for PHP. Default: **8196**
-
-#### Example
+### Example
 
 This would be an example of SMTP configuration using a Gmail account:
 
@@ -528,7 +492,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

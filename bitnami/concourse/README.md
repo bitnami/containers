@@ -1,4 +1,4 @@
-# Concourse packaged by Bitnami
+# Bitnami package for Concourse
 
 ## What is Concourse?
 
@@ -12,21 +12,15 @@
 docker run --name concourse bitnami/concourse:latest
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/concourse/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
-**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [PostgreSQL container](https://github.com/bitnami/containers/tree/main/bitnami/postgresql#readme) for a more secure deployment.
+**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [PostgreSQL container](https://github.com/bitnami/containers/tree/main/bit
+nami/postgresql#readme) for a more secure deployment.
 
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -118,6 +112,57 @@ We can launch another container using the same flag (`--network NETWORK`) in the
 
 Find how to configure Concourse in its [official documentation](https://concourse-ci.org//docs.html).
 
+### Environment variables
+
+#### Customizable environment variables
+
+| Name                                              | Description                                                             | Default Value                              |
+|---------------------------------------------------|-------------------------------------------------------------------------|--------------------------------------------|
+| `CONCOURSE_WEB_PUBLIC_DIR`                        | Concourse web/public directory.                                         | `${CONCOURSE_BASE_DIR}/web/public`         |
+| `CONCOURSE_SESSION_SIGNING_KEY_FILE`              | Concourse private key for signing.                                      | `${CONCOURSE_KEY_DIR}/session_signing_key` |
+| `CONCOURSE_TSA_HOST_KEY_FILE`                     | Concourse private key for TSA.                                          | `${CONCOURSE_KEY_DIR}/tsa_host_key`        |
+| `CONCOURSE_TSA_HOST_PUBLIC_KEY_FILE`              | Concourse public key for TSA.                                           | `${CONCOURSE_TSA_HOST_KEY_FILE}.pub`       |
+| `CONCOURSE_TSA_WORKER_KEY_FILE`                   | Concourse private key for worker.                                       | `${CONCOURSE_KEY_DIR}/worker_key`          |
+| `CONCOURSE_TSA_WORKER_PUBLIC_KEY_FILE`            | Concourse public key for worker.                                        | `${CONCOURSE_TSA_WORKER_PRIVATE_KEY}.pub`  |
+| `CONCOURSE_USERNAME`                              | Concourse main local user.                                              | `user`                                     |
+| `CONCOURSE_PASSWORD`                              | Concourse local user password.                                          | `bitnami`                                  |
+| `CONCOURSE_RUNTIME`                               | Concourse runtime.                                                      | `containerd`                               |
+| `CONCOURSE_WEB_PORT_NUMBER`                       | Concourse Web port.                                                     | `8080`                                     |
+| `CONCOURSE_WEB_TSA_PORT_NUMBER`                   | Concourse Web TSA port                                                  | `2222`                                     |
+| `CONCOURSE_WEB_TSA_DEBUG_PORT_NUMBER`             | Concourse Web Debug TSA port                                            | `2221`                                     |
+| `CONCOURSE_WORKER_GARDEN_PORT_NUMBER`             | Concourse Worker Garden port                                            | `7777`                                     |
+| `CONCOURSE_WORKER_BAGGAGECLAIM_PORT_NUMBER`       | Concourse worker Baggageclaim port                                      | `7788`                                     |
+| `CONCOURSE_WORKER_BAGGAGECLAIM_DEBUG_PORT_NUMBER` | Concourse worker Baggageclaim debug port                                | `7787`                                     |
+| `CONCOURSE_WORKER_HEALTH_PORT_NUMBER`             | Concourse worker healthcheck port                                       | `8888`                                     |
+| `CONCOURSE_BIND_IP`                               | Concourse bind IP                                                       | `0.0.0.0`                                  |
+| `CONCOURSE_TSA_BIND_IP`                           | Concourse TSA bind IP                                                   | `127.0.0.1`                                |
+| `CONCOURSE_TSA_DEBUG_BIND_IP`                     | Concourse TSA debug bind IP                                             | `127.0.0.1`                                |
+| `CONCOURSE_EXTERNAL_URL`                          | Concourse external URL                                                  | `http://127.0.0.1`                         |
+| `CONCOURSE_PEER_ADDRESS`                          | Concourse peer address                                                  | `127.0.0.1`                                |
+| `CONCOURSE_APACHE_HTTP_PORT_NUMBER`               | Concourse Web HTTP port, exposed via Apache with basic authentication.  | `80`                                       |
+| `CONCOURSE_APACHE_HTTPS_PORT_NUMBER`              | Concourse Web HTTPS port, exposed via Apache with basic authentication. | `443`                                      |
+| `CONCOURSE_DATABASE_HOST`                         | Database host address.                                                  | `127.0.0.1`                                |
+| `CONCOURSE_DATABASE_PORT_NUMBER`                  | Database host port.                                                     | `5432`                                     |
+| `CONCOURSE_DATABASE_NAME`                         | Database name.                                                          | `bitnami_concourse`                        |
+| `CONCOURSE_DATABASE_USERNAME`                     | Database username.                                                      | `bn_concourse`                             |
+
+#### Read-only environment variables
+
+| Name                        | Description                                | Value                                        |
+|-----------------------------|--------------------------------------------|----------------------------------------------|
+| `CONCOURSE_BASE_DIR`        | Concourse installation directory.          | `${BITNAMI_ROOT_DIR}/concourse`              |
+| `CONCOURSE_BIN_DIR`         | Concourse directory for binary files.      | `${CONCOURSE_BASE_DIR}/bin`                  |
+| `CONCOURSE_LOGS_DIR`        | Concourse logs directory.                  | `${CONCOURSE_BASE_DIR}/logs`                 |
+| `CONCOURSE_TMP_DIR`         | Concourse temporary directory.             | `${CONCOURSE_BASE_DIR}/tmp`                  |
+| `CONCOURSE_WEB_LOG_FILE`    | Concourse log file for the web service.    | `${CONCOURSE_LOGS_DIR}/concourse-web.log`    |
+| `CONCOURSE_WEB_PID_FILE`    | Concourse PID file for the web service.    | `${CONCOURSE_TMP_DIR}/concourse-web.pid`     |
+| `CONCOURSE_WORKER_LOG_FILE` | Concourse log file for the worker service. | `${CONCOURSE_LOGS_DIR}/concourse-worker.log` |
+| `CONCOURSE_WORKER_PID_FILE` | Concourse PID file for the worker service. | `${CONCOURSE_TMP_DIR}/concourse-worker.pid`  |
+| `CONCOURSE_KEY_DIR`         | Concourse keys directory.                  | `${CONCOURSE_BASE_DIR}/concourse-keys`       |
+| `CONCOURSE_VOLUME_DIR`      | Concourse directory for mounted data.      | `${BITNAMI_VOLUME_DIR}/concourse`            |
+| `CONCOURSE_DAEMON_USER`     | Concourse daemon system user.              | `concourse`                                  |
+| `CONCOURSE_DAEMON_GROUP`    | Concourse daemon system group.             | `concourse`                                  |
+
 ## Logging
 
 The Bitnami concourse Docker image sends the container logs to `stdout`. To view the logs:
@@ -162,6 +207,12 @@ Re-create your container from the new image.
 docker run --name concourse bitnami/concourse:latest
 ```
 
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/concourse).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
@@ -172,7 +223,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

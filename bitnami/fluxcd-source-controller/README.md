@@ -1,10 +1,10 @@
-# Flux Source Controller packaged by Bitnami
+# Bitnami package for Flux
 
-## What is Flux Source Controller?
+## What is Flux?
 
 > Source Controller is a component of Flux. Flux is a tool for keeping Kubernetes clusters in sync with sources of configuration.
 
-[Overview of Flux Source Controller](https://github.com/fluxcd/source-controller)
+[Overview of Flux](https://github.com/fluxcd/source-controller)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
@@ -25,11 +25,11 @@ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
-Looking to use Flux Source Controller in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+Looking to use Flux in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
 
 ## Supported tags and respective `Dockerfile` links
 
@@ -41,7 +41,7 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 
 ## Get this image
 
-The recommended way to get the Bitnami Flux Source Controller Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/fluxcd-source-controller).
+The recommended way to get the Bitnami Flux Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/fluxcd-source-controller).
 
 ```console
 docker pull bitnami/fluxcd-source-controller:latest
@@ -65,7 +65,7 @@ docker build -t bitnami/APP:latest .
 
 ### Upgrade this image
 
-Bitnami provides up-to-date versions of Flux Source Controller, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
+Bitnami provides up-to-date versions of Flux, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
 #### Step 1: Get the updated image
 
@@ -111,7 +111,7 @@ To run commands inside this container you can use `docker run`, for example to e
 docker run --rm --name fluxcd-source-controller bitnami/fluxcd-source-controller:latest --help
 ```
 
-Check the [official Flux Source Controller documentation](https://github.com/fluxcd/source-controller) for more information about how to use Flux Source Controller.
+Check the [official Flux documentation](https://github.com/fluxcd/source-controller) for more information about how to use Flux.
 
 ## Contributing
 
@@ -123,7 +123,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

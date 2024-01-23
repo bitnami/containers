@@ -1,10 +1,10 @@
-# Notation packaged by Bitnami
+# Bitnami package for Notation
 
 ## What is Notation?
 
 > Notation is a CLI project to add signatures as standard items in the OCI registry ecosystem, and to build a set of simple tooling for signing and verifying these signatures.
 
-[Overview of Notation](https://github.com/notaryproject/notation)
+[Overview of Notation](https://notaryproject.dev)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
@@ -13,19 +13,12 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run -it --name notation bitnami/notation
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/notation/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -73,18 +66,10 @@ Bitnami provides up-to-date versions of Notation, including security patches, so
 docker pull bitnami/notation:latest
 ```
 
-or if you're using Docker Compose, update the value of the image property to `bitnami/notation:latest`.
-
 #### Step 2: Remove the currently running container
 
 ```console
 docker rm -v notation
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v notation
 ```
 
 #### Step 3: Run the new image
@@ -93,12 +78,6 @@ Re-create your container from the new image.
 
 ```console
 docker run --name notation bitnami/notation:latest
-```
-
-or using Docker Compose:
-
-```console
-docker-compose up notation
 ```
 
 ## Configuration
@@ -220,6 +199,12 @@ registry.my-network:5000/<image-name>@sha256:073b75987e95b89f187a89809f08a320339
 
 Check the [official Notation documentation](https://notaryproject.dev/docs/quickstart-guides/quickstart/) for more information about how to use Notation.
 
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
+
 ## Contributing
 
 We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
@@ -230,7 +215,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

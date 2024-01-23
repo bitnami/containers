@@ -1,4 +1,4 @@
-# Joomla! packaged by Bitnami
+# Bitnami package for Joomla!
 
 ## What is Joomla!?
 
@@ -23,7 +23,7 @@ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -73,18 +73,7 @@ docker build -t bitnami/APP:latest .
 
 Joomla! requires access to a MySQL or MariaDB database to store information. We'll use the [Bitnami Docker Image for MariaDB](https://github.com/bitnami/containers/tree/main/bitnami/mariadb) for the database requirements.
 
-#### Run the application using Docker Compose
-
-The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/joomla/docker-compose.yml) file. Run the application using it as shown below:
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/joomla/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 #### Using the Docker Command Line
-
-If you want to run the application manually instead of using `docker-compose`, these are the basic steps you need to run:
 
 ##### Step 1: Create a network
 
@@ -123,11 +112,22 @@ docker run -d --name joomla \
 
 Access your application at `http://your-ip/`
 
+#### Run the application using Docker Compose
+
+```console
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/joomla/docker-compose.yml > docker-compose.yml
+docker-compose up -d
+```
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/joomla).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
+
 ### Persisting your application
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a directory at the `/bitnami/joomla` path. If the mounted directory is empty, it will be initialized on the first run. Additionally you should mount a volume for persistence of the MariaDB data](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#persisting-your-database).
+For persistence you should mount a directory at the `/bitnami/joomla` path. If the mounted directory is empty, it will be initialized on the first run. Additionally you should [mount a volume for persistence of the MariaDB data](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#persisting-your-database).
 
 The above examples define the Docker volumes named mariadb_data and joomla_data. The Joomla! application state will persist as long as volumes are not removed.
 
@@ -198,6 +198,36 @@ docker run -d --name joomla \
 
 ### Environment variables
 
+#### Customizable environment variables
+
+| Name                                  | Description                                                                                                                   | Default Value                          |
+|---------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|----------------------------------------|
+| `JOOMLA_DATA_TO_PERSIST`              | Files to persist relative to the Joomla! installation directory. To provide multiple values, separate them with a whitespace. | `$JOOMLA_BASE_DIR`                     |
+| `JOOMLA_LOAD_SAMPLE_DATA`             | Load Joomla sample data.                                                                                                      | `yes`                                  |
+| `JOOMLA_USERNAME`                     | Joomla! user name.                                                                                                            | `user`                                 |
+| `JOOMLA_PASSWORD`                     | Joomla! user password.                                                                                                        | `bitnami`                              |
+| `JOOMLA_EMAIL`                        | Joomla! user e-mail address.                                                                                                  | `user@example.com`                     |
+| `JOOMLA_SITE_NAME`                    | Joomla! site name                                                                                                             | `$JOOMLA_DEFAULT_SITE_NAME`            |
+| `JOOMLA_DEFAULT_DATABASE_PORT_NUMBER` | Database server port.                                                                                                         | `3306`                                 |
+| `JOOMLA_DATABASE_HOST`                | Database server host.                                                                                                         | `$JOOMLA_DEFAULT_DATABASE_HOST`        |
+| `JOOMLA_DATABASE_PORT_NUMBER`         | Database server port.                                                                                                         | `$JOOMLA_DEFAULT_DATABASE_PORT_NUMBER` |
+| `JOOMLA_DATABASE_NAME`                | Database name.                                                                                                                | `bitnami_joomla`                       |
+| `JOOMLA_DATABASE_USER`                | Database user name.                                                                                                           | `bn_joomla`                            |
+
+#### Read-only environment variables
+
+| Name                           | Description                                 | Value                                  |
+|--------------------------------|---------------------------------------------|----------------------------------------|
+| `JOOMLA_BASE_DIR`              | Joomla! installation directory.             | `${BITNAMI_ROOT_DIR}/joomla`           |
+| `JOOMLA_TMP_DIR`               | Joomla! installation directory.             | `${JOOMLA_BASE_DIR}/tmp`               |
+| `JOOMLA_LOGS_DIR`              | Joomla! installation directory.             | `${JOOMLA_BASE_DIR}/logs`              |
+| `JOOMLA_CONF_FILE`             | Configuration file for Joomla!.             | `${JOOMLA_BASE_DIR}/configuration.php` |
+| `JOOMLA_VOLUME_DIR`            | Joomla! directory for persisted data files. | `${BITNAMI_VOLUME_DIR}/joomla`         |
+| `JOOMLA_DEFAULT_SITE_NAME`     | Joomla! default site name                   | `My site`                              |
+| `JOOMLA_DEFAULT_DATABASE_HOST` | Default database server host.               | `mariadb`                              |
+| `JOOMLA_DEFAULT_DATABASE_HOST` | Default database server host.               | `127.0.0.1`                            |
+| `PHP_DEFAULT_MEMORY_LIMIT`     | Default PHP memory limit.                   | `256M`                                 |
+
 When you start the Joomla! image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
 * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/joomla/docker-compose.yml) file present in this repository:
@@ -219,72 +249,6 @@ joomla:
     --volume /path/to/joomla-persistence:/bitnami \
     bitnami/joomla:latest
   ```
-
-Available environment variables:
-
-#### User and Site configuration
-
-* `JOOMLA_USERNAME`: Joomla! application username. Default: **user**
-* `JOOMLA_PASSWORD`: Joomla! application password. Default: **bitnami**
-* `JOOMLA_EMAIL`: Joomla! application email. Default: **user@example.com**
-* `JOOMLA_SITE_NAME`: Joomla! site name. Default: **New Site**
-* `JOOMLA_SECRET`: Secret value for data encryption (auto-generated if not provided). No defaults.
-* `JOOMLA_LOAD_SAMPLE_DATA`: Load Joomla sample data. Default: **yes**
-* `JOOMLA_SKIP_BOOTSTRAP`: Do not initialize the Joomla! database for a new deployment. This is necessary in case you use a database that already has Joomla! data. Default: **no**
-
-#### Use an existing database
-
-* `JOOMLA_DATABASE_TYPE`: Database type. Valid values: *mariadb*, *mysqli*. Default: **mariadb**
-* `JOOMLA_DATABASE_HOST`: Hostname for database server. Default: **mariadb**
-* `JOOMLA_DATABASE_PORT_NUMBER`: Port used by database server. Default: **3306**
-* `JOOMLA_DATABASE_NAME`: Database name that Joomla! will use to connect with the database. Default: **bitnami_joomla**
-* `JOOMLA_DATABASE_USER`: Database user that Joomla! will use to connect with the database. Default: **bn_joomla**
-* `JOOMLA_DATABASE_PASSWORD`: Database password that Joomla! will use to connect with the database. No defaults.
-* `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-#### Create a database for Joomla! using mysql-client
-
-* `MYSQL_CLIENT_FLAVOR`: SQL database flavor. Valid values: `mariadb` or `mysql`. Default: **mariadb**.
-* `MYSQL_CLIENT_DATABASE_HOST`: Hostname for MariaDB server. Default: **mariadb**
-* `MYSQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
-* `MYSQL_CLIENT_DATABASE_ROOT_USER`: Database admin user. Default: **root**
-* `MYSQL_CLIENT_DATABASE_ROOT_PASSWORD`: Database password for the database admin user. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_CHARACTER_SET`: Character set to use for the new database. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_COLLATE`: Database collation to use for the new database. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_PRIVILEGES`: Database privileges to grant for the user specified in `MYSQL_CLIENT_CREATE_DATABASE_USER` to the database specified in `MYSQL_CLIENT_CREATE_DATABASE_NAME`. No defaults.
-* `MYSQL_CLIENT_ENABLE_SSL_WRAPPER`: Whether to force SSL connections to the database via the `mysql` CLI tool. Useful for applications that rely on the CLI instead of APIs. Default: **no**
-* `MYSQL_CLIENT_ENABLE_SSL`: Whether to force SSL connections for the database. Default: **no**
-* `MYSQL_CLIENT_SSL_CA_FILE`: Path to the SSL CA file for the new database. No defaults
-* `MYSQL_CLIENT_SSL_CERT_FILE`: Path to the SSL CA file for the new database. No defaults
-* `MYSQL_CLIENT_SSL_KEY_FILE`: Path to the SSL CA file for the new database. No defaults
-* `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-#### SMTP Configuration
-
-To configure Joomla! to send email using SMTP you can set the following environment variables:
-
-* `JOOMLA_SMTP_HOST`: SMTP host.
-* `JOOMLA_SMTP_PORT`: SMTP port.
-* `JOOMLA_SMTP_USER`: SMTP account user.
-* `JOOMLA_SMTP_PASSWORD`: SMTP account password.
-* `JOOMLA_SMTP_PROTOCOL`: SMTP protocol.
-* `JOOMLA_SMTP_SENDER_EMAIL`: SMTP sender email.
-* `JOOMLA_SMTP_SENDER_NAME`: SMTP sender name.
-
-#### PHP configuration
-
-* `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. No default.
-* `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
-* `PHP_MAX_EXECUTION_TIME`: Maximum execution time for PHP scripts. No default.
-* `PHP_MAX_INPUT_TIME`: Maximum input time for PHP scripts. No default.
-* `PHP_MAX_INPUT_VARS`: Maximum amount of input variables for PHP scripts. No default.
-* `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
-* `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
-* `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
-* `PHP_OUTPUT_BUFFERING`: Size of the output buffer for PHP. Default: **8196**
 
 #### Example
 
@@ -534,7 +498,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

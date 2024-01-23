@@ -1,4 +1,4 @@
-# Apache Tomcat packaged by Bitnami
+# Bitnami package for Apache Tomcat
 
 ## What is Apache Tomcat?
 
@@ -10,8 +10,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/tomcat/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run --name tomcat bitnami/tomcat:latest
 ```
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
@@ -21,7 +20,7 @@ You can find the default credentials and available configuration options in the 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -141,18 +140,43 @@ Access your web server in the browser by navigating to `http://localhost:8080`.
 
 ### Environment variables
 
-The Apache Tomcat instance can be customized by specifying environment variables on the first run. The following environment values are provided to custom Apache Tomcat:
+#### Customizable environment variables
 
-* `TOMCAT_SHUTDOWN_PORT_NUMBER`: Apache Tomcat shutdown port. Default: **8005**
-* `TOMCAT_HTTP_PORT_NUMBER`: Apache Tomcat HTTP port. Default: **8080**
-* `TOMCAT_AJP_PORT_NUMBER`: Apache Tomcat AJP port. Default: **8009**
-* `TOMCAT_USERNAME`: Apache Tomcat user. Default: **manager**
-* `TOMCAT_PASSWORD`: Apache Tomcat password. No defaults.
-* `TOMCAT_ALLOW_REMOTE_MANAGEMENT`: Whether to allow connections from remote addresses to the Apache Tomcat manager application. Default: **no**
-* `TOMCAT_ENABLE_AUTH`: Whether to enable authentication for Apache Tomcat manager application. Default: **yes**
-* `TOMCAT_ENABLE_AJP`: Whether to enable the Apache Tomcat AJP connector. Default: **no**
-* `TOMCAT_EXTRA_JAVA_OPTS`: Additional Java settings for Apache Tomcat. No defaults.
-* `TOMCAT_INSTALL_DEFAULT_WEBAPPS`: Whether to add default webapps (ROOT, manager, host-manager, etc.) for deployment. Default: **yes**
+| Name                             | Description                                                                           | Default Value                                                                                                                                                |
+|----------------------------------|---------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `TOMCAT_SHUTDOWN_PORT_NUMBER`    | Tomcat shutdown port number.                                                          | `8005`                                                                                                                                                       |
+| `TOMCAT_HTTP_PORT_NUMBER`        | Tomcat HTTP port number.                                                              | `8080`                                                                                                                                                       |
+| `TOMCAT_AJP_PORT_NUMBER`         | Tomcat AJP port number.                                                               | `8009`                                                                                                                                                       |
+| `TOMCAT_USERNAME`                | Tomcat username.                                                                      | `manager`                                                                                                                                                    |
+| `TOMCAT_ALLOW_REMOTE_MANAGEMENT` | Whether to allow connections from remote addresses to the Tomcat manager application. | `yes`                                                                                                                                                        |
+| `TOMCAT_ALLOW_REMOTE_MANAGEMENT` | Whether to allow connections from remote addresses to the Tomcat manager application. | `no`                                                                                                                                                         |
+| `TOMCAT_ENABLE_AUTH`             | Whether to enable authentication for Tomcat manager applications.                     | `yes`                                                                                                                                                        |
+| `TOMCAT_ENABLE_AJP`              | Whether to enable the Tomcat AJP connector.                                           | `no`                                                                                                                                                         |
+| `TOMCAT_START_RETRIES`           | The number or retries while waiting for Catalina to start.                            | `12`                                                                                                                                                         |
+| `TOMCAT_INSTALL_DEFAULT_WEBAPPS` | Whether to add default webapps (ROOT, manager, host-manager, etc.) for deployment.    | `yes`                                                                                                                                                        |
+| `JAVA_OPTS`                      | Java runtime parameters.                                                              | `-Djava.awt.headless=true -XX:+UseG1GC -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true -Duser.home=${TOMCAT_HOME}` |
+
+#### Read-only environment variables
+
+| Name                     | Description                                        | Value                                 |
+|--------------------------|----------------------------------------------------|---------------------------------------|
+| `TOMCAT_BASE_DIR`        | Tomcat installation directory.                     | `${BITNAMI_ROOT_DIR}/tomcat`          |
+| `TOMCAT_VOLUME_DIR`      | Tomcat persistence directory.                      | `/bitnami/tomcat`                     |
+| `TOMCAT_BIN_DIR`         | Tomcat directory for binary files.                 | `${TOMCAT_BASE_DIR}/bin`              |
+| `TOMCAT_LIB_DIR`         | Tomcat directory for library files.                | `${TOMCAT_BASE_DIR}/lib`              |
+| `TOMCAT_WORK_DIR`        | Tomcat directory for runtime files.                | `${TOMCAT_BASE_DIR}/work`             |
+| `TOMCAT_WEBAPPS_DIR`     | Tomcat directory where webapps are stored.         | `${TOMCAT_VOLUME_DIR}/webapps`        |
+| `TOMCAT_CONF_DIR`        | Tomcat configuration directory.                    | `${TOMCAT_BASE_DIR}/conf`             |
+| `TOMCAT_CONF_FILE`       | Tomcat configuration file.                         | `${TOMCAT_CONF_DIR}/server.xml`       |
+| `TOMCAT_USERS_CONF_FILE` | Tomcat configuration file.                         | `${TOMCAT_CONF_DIR}/tomcat-users.xml` |
+| `TOMCAT_LOGS_DIR`        | Directory where Tomcat logs are stored.            | `${TOMCAT_BASE_DIR}/logs`             |
+| `TOMCAT_TMP_DIR`         | Directory where Tomcat temporary files are stored. | `${TOMCAT_BASE_DIR}/temp`             |
+| `TOMCAT_LOG_FILE`        | Path to the log file for Tomcat.                   | `${TOMCAT_LOGS_DIR}/catalina.out`     |
+| `TOMCAT_PID_FILE`        | Path to the PID file for Tomcat.                   | `${TOMCAT_TMP_DIR}/catalina.pid`      |
+| `TOMCAT_HOME`            | Tomcat home directory.                             | `$TOMCAT_BASE_DIR`                    |
+| `TOMCAT_DAEMON_USER`     | Tomcat system user.                                | `tomcat`                              |
+| `TOMCAT_DAEMON_GROUP`    | Tomcat system group.                               | `tomcat`                              |
+| `JAVA_HOME`              | Java installation folder.                          | `${BITNAMI_ROOT_DIR}/java`            |
 
 #### Creating a custom user
 
@@ -300,6 +324,12 @@ docker-compose up tomcat
 * All volumes have been merged at `/bitnami/tomcat`. Now you only need to mount a single volume at `/bitnami/tomcat` for persistence.
 * The logs are always sent to the `stdout` and are no longer collected in the volume.
 
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/tomcat).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
@@ -310,7 +340,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

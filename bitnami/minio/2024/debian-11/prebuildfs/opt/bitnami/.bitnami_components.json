@@ -1,0 +1,20 @@
+{
+    "minio": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "2024.1.18-0"
+    },
+    "minio-client": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "2024.1.18-0"
+    },
+    "wait-for-port": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.0.7-5"
+    }
+}

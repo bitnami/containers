@@ -13,19 +13,12 @@ Disclaimer: Redis is a registered trademark of Redis Ltd. Any rights therein are
 docker run --name redis-cluster -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis-cluster:latest
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/redis-cluster/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -168,39 +161,48 @@ services:
 
 ### Environment variables
 
-The following env vars are supported for this container:
+#### Customizable environment variables
 
-| Name                                    | Description                                                                                                                                                                   |
-|-----------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `REDIS_DISABLE_COMMANDS`                | Disables the specified Redis(R) commands                                                                                                                                      |
-| `REDIS_PORT_NUMBER`                     | Set the Redis(R) port. Default=: `6379`                                                                                                                                       |
-| `REDIS_PASSWORD`                        | Set the Redis(R) password. Default: `bitnami`                                                                                                                                 |
-| `ALLOW_EMPTY_PASSWORD`                  | Enables access without password                                                                                                                                               |
-| `REDIS_DNS_RETRIES`                     | Number of retries to get the IPs of the provided `REDIS_NODES`. It will wait 5 seconds between retries                                                                        |
-| `REDISCLI_AUTH`                         | Provide the same value as the configured `REDIS_PASSWORD` for the redis-cli tool to authenticate                                                                              |
-| `REDIS_CLUSTER_CREATOR`                 | Set to `yes` if the container will be the one on charge of initialize the cluster. This node will also be part of the cluster.                                                |
-| `REDIS_CLUSTER_REPLICAS`                | Number of replicas for every master that the cluster will have.                                                                                                               |
-| `REDIS_NODES`                           | String delimited by spaces containing the hostnames of all of the nodes that will be part of the cluster                                                                      |
-| `REDIS_CLUSTER_ANNOUNCE_IP`             | IP that the node should announce, used for non dynamic ip environments                                                                                                        |
-| `REDIS_CLUSTER_ANNOUNCE_PORT`           | Port that the node should announce, used for non dynamic ip environments.                                                                                                     |
-| `REDIS_CLUSTER_ANNOUNCE_HOSTNAME`       | Hostname that node should announce, used for non dynamic ip environments.                                                                                                     |
-| `REDIS_CLUSTER_PREFERRED_ENDPOINT_TYPE` | Preferred endpoint type which cluster should use, options- ip, hostname                                                                                                       |
-| `REDIS_CLUSTER_ANNOUNCE_BUS_PORT`       | The cluster bus port to announce.                                                                                                                                             |
-| `REDIS_CLUSTER_DYNAMIC_IPS`             | Set to `no` if your Redis(R) cluster will be created with statical IPs. Default: `yes`                                                                                        |
-| `REDIS_TLS_ENABLED`                     | Whether to enable TLS for traffic or not. Defaults to `no`.                                                                                                                   |
-| `REDIS_TLS_PORT_NUMBER`                 | Port used for TLS secure traffic. Defaults to `6379`.                                                                                                                         |
-| `REDIS_TLS_CERT_FILE`                   | File containing the certificate file for the TLS traffic. No defaults.                                                                                                        |
-| `REDIS_TLS_KEY_FILE`                    | File containing the key for certificate. No defaults.                                                                                                                         |
-| `REDIS_TLS_CA_FILE`                     | File containing the CA of the certificate. No defaults.                                                                                                                       |
-| `REDIS_TLS_DH_PARAMS_FILE`              | File containing DH params (in order to support DH based ciphers). No defaults.                                                                                                |
-| `REDIS_TLS_AUTH_CLIENTS`                | Whether to require clients to authenticate or not. Defaults to `yes`.                                                                                                         |
-| `REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP` | Number of seconds to wait before initializing the cluster. Set this to a higher value if you sometimes have issues with initial cluster creation. Defaults to `0`.            |
-| `REDIS_CLUSTER_DNS_LOOKUP_RETRIES`      | Number of retries for the node's DNS lookup during the initial cluster creation. Defaults to `5`.                                                                             |
-| `REDIS_CLUSTER_DNS_LOOKUP_SLEEP`        | Number of seconds to wait between each node's DNS lookup during the initial cluster creation. Defaults to `1`.                                                                |
-| `REDIS_IO_THREADS`                      | Number of threads to implement multithreading operations. Defaults to `1`.                                                                                                    |
-| `REDIS_IO_THREADS_DO_READS`             | Enables multithreading for read operations. Defaults to `false`.                                                                                                              |
-| `REDIS_RDB_POLICY`                      | Set this variable to enable RDB persistent storage RDB data synchronization strategy configuration example `900#1 300#10 60#1000` Defaults to disable RDB persistent storage. |
-| `REDIS_RDB_POLICY_DISABLED`             | If set to `yes` the container will skip the configuration of RDB policy ('save' setting) and rely on Redis(R) default. If `REDIS_RDB_POLICY` is provided, this will be ignored. Defaults to `no`.                                                |
+| Name                                    | Description                                                     | Default Value                              |
+|-----------------------------------------|-----------------------------------------------------------------|--------------------------------------------|
+| `REDIS_DATA_DIR`                        | Redis data directory                                            | `${REDIS_VOLUME_DIR}/data`                 |
+| `REDIS_OVERRIDES_FILE`                  | Redis config overrides file                                     | `${REDIS_MOUNTED_CONF_DIR}/overrides.conf` |
+| `REDIS_DATABASE`                        | Default Redis database                                          | `redis`                                    |
+| `REDIS_AOF_ENABLED`                     | Enable AOF                                                      | `yes`                                      |
+| `REDIS_RDB_POLICY_DISABLED`             | Allows to enable RDP policy persistence                         | `no`                                       |
+| `REDIS_MASTER_PORT_NUMBER`              | Redis master host port (used by slaves)                         | `6379`                                     |
+| `REDIS_PORT_NUMBER`                     | Redis port number                                               | `$REDIS_DEFAULT_PORT_NUMBER`               |
+| `REDIS_ALLOW_REMOTE_CONNECTIONS`        | Allow remote connection to the service                          | `yes`                                      |
+| `ALLOW_EMPTY_PASSWORD`                  | Allow password-less access                                      | `no`                                       |
+| `REDIS_TLS_ENABLED`                     | Enable TLS                                                      | `no`                                       |
+| `REDIS_TLS_PORT_NUMBER`                 | Redis TLS port (requires REDIS_ENABLE_TLS=yes)                  | `6379`                                     |
+| `REDIS_TLS_AUTH_CLIENTS`                | Enable Redis TLS client authentication                          | `yes`                                      |
+| `REDIS_CLUSTER_CREATOR`                 | Launch the cluster bootstrap command                            | `no`                                       |
+| `REDIS_CLUSTER_REPLICAS`                | Number of cluster replicas                                      | `1`                                        |
+| `REDIS_CLUSTER_DYNAMIC_IPS`             | Use dynamic IPS for cluster creation                            | `yes`                                      |
+| `REDIS_DNS_RETRIES`                     | Number of retries in order to get an addresable domain name     | `120`                                      |
+| `REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP` | Time to wait before the DNS lookup                              | `0`                                        |
+| `REDIS_CLUSTER_DNS_LOOKUP_RETRIES`      | Number of retires for the DNS lookup                            | `1`                                        |
+| `REDIS_CLUSTER_DNS_LOOKUP_SLEEP`        | Time to sleep between DNS lookups                               | `1`                                        |
+| `REDIS_CLUSTER_PREFERRED_ENDPOINT_TYPE` | Preferred endpoint type which cluster should use (ip, hostname) | `ip`                                       |
+
+#### Read-only environment variables
+
+| Name                        | Description                           | Value                           |
+|-----------------------------|---------------------------------------|---------------------------------|
+| `REDIS_VOLUME_DIR`          | Persistence base directory            | `/bitnami/redis`                |
+| `REDIS_BASE_DIR`            | Redis installation directory          | `${BITNAMI_ROOT_DIR}/redis`     |
+| `REDIS_CONF_DIR`            | Redis configuration directory         | `${REDIS_BASE_DIR}/etc`         |
+| `REDIS_MOUNTED_CONF_DIR`    | Redis mounted configuration directory | `${REDIS_BASE_DIR}/mounted-etc` |
+| `REDIS_CONF_FILE`           | Redis configuration file              | `${REDIS_CONF_DIR}/redis.conf`  |
+| `REDIS_LOG_DIR`             | Redis logs directory                  | `${REDIS_BASE_DIR}/logs`        |
+| `REDIS_LOG_FILE`            | Redis log file                        | `${REDIS_LOG_DIR}/redis.log`    |
+| `REDIS_TMP_DIR`             | Redis temporary directory             | `${REDIS_BASE_DIR}/tmp`         |
+| `REDIS_PID_FILE`            | Redis PID file                        | `${REDIS_TMP_DIR}/redis.pid`    |
+| `REDIS_BIN_DIR`             | Redis executables directory           | `${REDIS_BASE_DIR}/bin`         |
+| `REDIS_DAEMON_USER`         | Redis system user                     | `redis`                         |
+| `REDIS_DAEMON_GROUP`        | Redis system group                    | `redis`                         |
+| `REDIS_DEFAULT_PORT_NUMBER` | Redis port number (Build time)        | `6379`                          |
 
 Once all the Redis(R) nodes are running you need to execute command like the following to initiate the cluster:
 
@@ -305,6 +307,12 @@ docker run --name redis-cluster bitnami/redis-cluster:latest
 
 The cluster initialization logic has changed. Now the container in charge of initialize the cluster will also be part of the cluster. It will initialize Redis in background, create the cluster and then bring back to foreground the Redis process.
 
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/redis-cluster).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
@@ -315,7 +323,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -3,18 +3,18 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "17.0.9-11-1"
+        "version": "17.0.10-13-0"
     },
     "spring-cloud-dataflow": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.11.1-0"
+        "version": "2.11.2-1"
     },
     "yq": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.35.2-3"
+        "version": "4.40.5-1"
     }
 }

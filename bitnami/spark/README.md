@@ -1,4 +1,4 @@
-# Apache Spark packaged by Bitnami
+# Bitnami package for Apache Spark
 
 ## What is Apache Spark?
 
@@ -12,8 +12,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ### Docker Compose
 
 ```console
-curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/spark/docker-compose.yml
-docker-compose up
+docker run --name spark bitnami/spark:latest
 ```
 
 You can find the available configuration options in the [Environment Variables](#environment-variables) section.
@@ -23,7 +22,7 @@ You can find the available configuration options in the [Environment Variables](
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -75,6 +74,43 @@ docker build -t bitnami/APP:latest .
 
 ### Environment variables
 
+#### Customizable environment variables
+
+| Name                                     | Description                                                                      | Default Value                                  |
+|------------------------------------------|----------------------------------------------------------------------------------|------------------------------------------------|
+| `SPARK_MODE`                             | Spark cluster mode to run (can be master or worker).                             | `master`                                       |
+| `SPARK_MASTER_URL`                       | Url where the worker can find the master. Only needed when spark mode is worker. | `spark://spark-master:7077`                    |
+| `SPARK_NO_DAEMONIZE`                     | Spark does not run as a daemon.                                                  | `true`                                         |
+| `SPARK_RPC_AUTHENTICATION_ENABLED`       | Enable RPC authentication.                                                       | `no`                                           |
+| `SPARK_RPC_ENCRYPTION_ENABLED`           | Enable RPC encryption.                                                           | `no`                                           |
+| `SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED` | Enable local storage encryption.                                                 | `no`                                           |
+| `SPARK_SSL_ENABLED`                      | Enable SSL configuration.                                                        | `no`                                           |
+| `SPARK_SSL_KEYSTORE_FILE`                | Location of the key store.                                                       | `${SPARK_CONF_DIR}/certs/spark-keystore.jks`   |
+| `SPARK_SSL_TRUSTSTORE_FILE`              | Location of the key store.                                                       | `${SPARK_CONF_DIR}/certs/spark-truststore.jks` |
+| `SPARK_SSL_NEED_CLIENT_AUTH`             | Whether to require client authentication.                                        | `yes`                                          |
+| `SPARK_SSL_PROTOCOL`                     | TLS protocol to use.                                                             | `TLSv1.2`                                      |
+| `SPARK_METRICS_ENABLED`                  | Whether to enable metrics for Spark.                                             | `false`                                        |
+
+#### Read-only environment variables
+
+| Name                    | Description                    | Value                                   |
+|-------------------------|--------------------------------|-----------------------------------------|
+| `SPARK_BASE_DIR`        | Spark installation directory.  | `${BITNAMI_ROOT_DIR}/spark`             |
+| `SPARK_CONF_DIR`        | Spark configuration directory. | `${SPARK_BASE_DIR}/conf`                |
+| `SPARK_WORK_DIR`        | Spark workspace directory.     | `${SPARK_BASE_DIR}/work`                |
+| `SPARK_CONF_FILE`       | Spark configuration file path. | `${SPARK_CONF_DIR}/spark-defaults.conf` |
+| `SPARK_LOG_DIR`         | Spark logs directory.          | `${SPARK_BASE_DIR}/logs`                |
+| `SPARK_TMP_DIR`         | Spark tmp directory.           | `${SPARK_BASE_DIR}/tmp`                 |
+| `SPARK_JARS_DIR`        | Spark jar directory.           | `${SPARK_BASE_DIR}/jars`                |
+| `SPARK_INITSCRIPTS_DIR` | Spark init scripts directory.  | `/docker-entrypoint-initdb.d`           |
+| `SPARK_USER`            | Spark user.                    | `spark`                                 |
+| `SPARK_DAEMON_USER`     | Spark system user.             | `spark`                                 |
+| `SPARK_DAEMON_GROUP`    | Spark system group.            | `spark`                                 |
+
+Additionally, more environment variables natively supported by Apache Spark can be found [at the official documentation](https://spark.apache.org/docs/latest/spark-standalone.html#cluster-launch-scripts).
+
+For example, you could still use `SPARK_WORKER_CORES` or `SPARK_WORKER_MEMORY` to configure the number of cores and the amount of memory to be used by a worker machine.
+
 When you start the spark image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
 * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/spark/docker-compose.yml) file present in this repository:
@@ -95,28 +131,6 @@ docker run -d --name spark \
   -e SPARK_MODE=master \
   bitnami/spark
 ```
-
-Available variables:
-
-* SPARK_MODE: Cluster mode starting Apache Spark. Valid values: *master*, *worker*. Default: **master**
-* SPARK_MASTER_URL: Url where the worker can find the master. Only needed when spark mode is *worker*. Default: **spark://spark-master:7077**
-* SPARK_RPC_AUTHENTICATION_ENABLED: Enable RPC authentication. Default: **no**
-* SPARK_RPC_AUTHENTICATION_SECRET: The secret key used for RPC authentication. No defaults.
-* SPARK_RPC_ENCRYPTION_ENABLED: Enable RPC encryption. Default: **no**
-* SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED: Enable local storage encryption: Default **no**
-* SPARK_SSL_ENABLED: Enable SSL configuration. Default: **no**
-* SPARK_SSL_KEY_PASSWORD: The password to the private key in the key store. No defaults.
-* SPARK_SSL_KEYSTORE_FILE: Location of the key store. Default: **/opt/bitnami/spark/conf/certs/spark-keystore.jks**.
-* SPARK_SSL_KEYSTORE_PASSWORD: The password for the key store. No defaults.
-* SPARK_SSL_TRUSTSTORE_PASSWORD: The password for the trust store. No defaults.
-* SPARK_SSL_TRUSTSTORE_FILE: Location of the key store. Default: **/opt/bitnami/spark/conf/certs/spark-truststore.jks**.
-* SPARK_SSL_NEED_CLIENT_AUTH: Whether to require client authentication. Default: **yes**
-* SPARK_SSL_PROTOCOL: TLS protocol to use. Default: **TLSv1.2**
-* SPARK_DAEMON_USER: Apache Spark system user when the container is started as root. Default: **spark**
-* SPARK_DAEMON_GROUP: Apache Spark system group when the container is started as root. Default: **spark**
-
-More environment variables natively supported by Apache Spark can be found [at the official documentation](https://spark.apache.org/docs/latest/spark-standalone.html#cluster-launch-scripts).
-For example, you could still use `SPARK_WORKER_CORES` or `SPARK_WORKER_MEMORY` to configure the number of cores and the amount of memory to be used by a worker machine.
 
 ### Security
 
@@ -339,6 +353,12 @@ docker-compose up spark
 
 * This image now has an aws-cli and two jars: hadoop-aws and aws-java-sdk for provide an easier way to use AWS.
 
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/spark).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
@@ -349,7 +369,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

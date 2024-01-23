@@ -3,12 +3,12 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "26.1.2-0"
+        "version": "26.2.1-0"
     },
     "rabbitmq": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.12.8-1"
+        "version": "3.12.12-0"
     }
 }

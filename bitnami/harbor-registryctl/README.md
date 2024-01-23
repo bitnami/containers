@@ -1,4 +1,4 @@
-# Harbor Registryctl packaged by Bitnami
+# Bitnami package for Harbor Registryctl
 
 ## What is Harbor Registryctl?
 
@@ -8,20 +8,19 @@
 
 ## TL;DR
 
-```console
-curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/harbor-portal/docker-compose.yml
-curl -L https://github.com/bitnami/containers/archive/main.tar.gz | tar xz --strip=2 containers-main/bitnami/harbor-portal && cp -RL harbor-portal/config . && rm -rf harbor-portal
-docker-compose up
-```
+This container is part of the [Harbor solution](https://github.com/bitnami/charts/tree/main/bitnami/harbor) that is primarily intended to be deployed in Kubernetes.
 
-> Please note you are downloading the docker-compose.yml file from the Harbor Portal component repository.
+```console
+docker run --name harbor-registryctl bitnami/harbor-registryctl:latest
+```
 
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on minideb a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
+* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use Harbor Registryctl in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
@@ -50,6 +49,32 @@ Harbor Registryctl is a component of the Harbor application. In order to get the
 
 For further information about the specific component itself, please refer to the [source repository documentation](https://github.com/goharbor/harbor/tree/main/docs).
 
+### Environment variables
+
+#### Customizable environment variables
+
+#### Read-only environment variables
+
+| Name                                | Description                                                                   | Value                                                   |
+|-------------------------------------|-------------------------------------------------------------------------------|---------------------------------------------------------|
+| `HARBOR_REGISTRYCTL_BASE_DIR`       | harbor-registryctl installation directory.                                    | `${BITNAMI_ROOT_DIR}/harbor-registryctl`                |
+| `HARBOR_REGISTRYCTL_VOLUME_DIR`     | harbor-registry volume directory.                                             | `${BITNAMI_VOLUME_DIR}/harbor-registry`                 |
+| `HARBOR_REGISTRYCTL_STORAGE_DIR`    | harbor-registry storage directory.                                            | `${HARBOR_REGISTRYCTL_VOLUME_DIR}/storage`              |
+| `HARBOR_REGISTRYCTL_STORAGE_DIR`    | harbor-registry storage directory.                                            | `/storage`                                              |
+| `HARBOR_REGISTRYCTL_LOGS_DIR`       | harbor-registryctl logs directory.                                            | `${HARBOR_REGISTRYCTL_BASE_DIR}/logs`                   |
+| `HARBOR_REGISTRYCTL_TMP_DIR`        | harbor-registryctl directory for temporary files.                             | `${HARBOR_REGISTRYCTL_BASE_DIR}/tmp`                    |
+| `HARBOR_REGISTRYCTL_DAEMON_USER`    | harbor-registryctl system user.                                               | `harbor`                                                |
+| `HARBOR_REGISTRYCTL_DAEMON_GROUP`   | harbor-registryctl system group.                                              | `harbor`                                                |
+| `HARBOR_REGISTRYCTL_PID_FILE`       | PID file for harbor-registryctl service.                                      | `${HARBOR_REGISTRYCTL_TMP_DIR}/harbor-registryctl.pid`  |
+| `HARBOR_REGISTRYCTL_LOG_FILE`       | Log file for harbor-registryctl service.                                      | `${HARBOR_REGISTRYCTL_LOGS_DIR}/harbor-registryctl.log` |
+| `HARBOR_REGISTRYCTL_EXTRA_ENV_FILE` | File to store extra environment variables for the harbor-registryctl service. | `${HARBOR_REGISTRYCTL_BASE_DIR}/.env`                   |
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
@@ -60,7 +85,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

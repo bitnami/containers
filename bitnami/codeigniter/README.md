@@ -1,4 +1,4 @@
-# CodeIgniter packaged by Bitnami
+# Bitnami package for CodeIgniter
 
 ## What is CodeIgniter?
 
@@ -13,18 +13,15 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ```console
 mkdir ~/myapp && cd ~/myapp
-curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/codeigniter/docker-compose.yml
-docker-compose up
+docker run --name codeigniter -v ${PWD}/my-project:/app bitnami/codeigniter:latest
 ```
-
-**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [MariaDB container](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#readme) for a more secure deployment.
 
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -48,56 +45,88 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 
 ## Getting started
 
-The quickest way to get started with the Bitnami CodeIgniter Development Container is using [docker-compose](https://docs.docker.com/compose/).
+CodeIgniter requires access to a MySQL or MariaDB database to store information. We'll use the [Bitnami Docker Image for MariaDB](https://github.com/bitnami/containers/tree/main/bitnami/mariadb) for the database requirements.
 
-Begin by creating a directory for your CodeIgniter application:
-
-```console
-mkdir ~/myapp
-cd ~/myapp
-```
-
-Download the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/containers/main/bitnami/codeigniter/docker-compose.yml) file in the application directory:
+### Step 1: Create a network
 
 ```console
-curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/codeigniter/docker-compose.yml
+docker network create codeigniter-network
 ```
 
-Finally launch the CodeIgniter application development environment using:
+### Step 2: Create a volume for MariaDB persistence and create a MariaDB container
 
 ```console
-docker-compose up
+$ docker volume create --name mariadb_data
+docker run -d --name mariadb \
+  --env ALLOW_EMPTY_PASSWORD=yes \
+  --env MARIADB_USER=bn_myapp \
+  --env MARIADB_DATABASE=bitnami_myapp \
+  --network codeigniter-network \
+  --volume mariadb_data:/bitnami/mariadb \
+  bitnami/mariadb:latest
 ```
 
-The above command creates a container service for CodeIgniter development and bootstraps a new CodeIgniter application, named `myapp` in working directory. You can use your favorite IDE for developing the application.
+### Step 3: Launch the container using the local current directory as volume
 
-After the builtin PHP application server has been launched, visit `http://localhost:8000` in your favorite web browser and you'll be greeted the CodeIgniter welcome page.
+```console
+$ docker run -d --name codeigniter \
+  -p 8000:8000 \
+  --env DB_HOST=mariadb \
+  --env DB_PORT=3306 \
+  --env DB_USERNAME=bn_myapp \
+  --env DB_DATABASE=bitnami_myapp \
+  --network codeigniter-network \
+  --volume ${PWD}/my-project:/app \
+  bitnami/codeigniter:latest
+```
+
+Among other things, the above command creates a container service, named `myapp`, for CodeIgniter development and bootstraps a new CodeIgniter application in the application directory. You can use your favorite IDE for developing the application.
+
+> **Note**
+>
+> If the application directory contained the source code of an existing CodeIgniter application, the Bitnami CodeIgniter Development Container would load the existing application instead of bootstrapping a new one.
+
+After the application server has been launched in the `myapp` service, visit `http://localhost:8000` in your favorite web browser and you'll be greeted by the default CodeIgniter welcome page.
+
+**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [MariaDB container](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#readme) for a more secure deployment.
+
+### Environment variables
+
+#### Customizable environment variables
+
+| Name                               | Description                  | Default Value   |
+|------------------------------------|------------------------------|-----------------|
+| `CODEIGNITER_PORT_NUMBER`          | CodeIgniter server port.     | `8000`          |
+| `CODEIGNITER_PROJECT_NAME`         | CodeIgniter project name.    | `myapp`         |
+| `CODEIGNITER_SKIP_DATABASE`        | Skip database configuration. | `no`            |
+| `CODEIGNITER_DATABASE_HOST`        | Database server host.        | `mariadb`       |
+| `CODEIGNITER_DATABASE_PORT_NUMBER` | Database server port.        | `3306`          |
+| `CODEIGNITER_DATABASE_NAME`        | Database name.               | `bitnami_myapp` |
+| `CODEIGNITER_DATABASE_USER`        | Database user name.          | `bn_myapp`      |
+
+#### Read-only environment variables
+
+| Name                   | Description                         | Value                             |
+|------------------------|-------------------------------------|-----------------------------------|
+| `CODEIGNITER_BASE_DIR` | CodeIgniter installation directory. | `${BITNAMI_ROOT_DIR}/codeigniter` |
 
 ## Executing commands
 
-Commands can be launched inside the `myapp` CodeIgniter Development Container with `docker-compose` using the [exec](https://docs.docker.com/compose/reference/exec/) command.
-
-> **Note**:
->
-> The `exec` command was added to `docker-compose` in release [1.7.0](https://github.com/docker/compose/blob/master/CHANGELOG.md#170-2016-04-13). Please ensure that you're using `docker-compose` version `1.7.0` or higher.
+Commands can be launched inside the `myapp` CodeIgniter Development Container with `docker` using the [exec](https://docs.docker.com/engine/reference/commandline/exec/) command.
 
 The general structure of the `exec` command is:
 
 ```console
-docker-compose exec <service> <command>
+docker exec <container-name> <command>
 ```
 
-where `<service>` is the name of the container service as described in the `docker-compose.yml` file and `<command>` is the command you want to launch inside the service.
+where `<command>` is the command you want to launch inside the container.
 
-Following are a few examples:
+## Notable Changes
 
-* Create a new project named `foo`:
+### Starting January 16, 2024
 
-  ```console
-  docker-compose run myapp nami execute codeigniter createProject foo
-  ```
-
-  Additionally, in the `docker-compose.yml` file you need to update the `CODEIGNITER_PROJECT_NAME` environment variable to `foo` so that the built-in PHP application server serves the application from the `foo` directory.
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Issues
 
@@ -111,7 +140,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

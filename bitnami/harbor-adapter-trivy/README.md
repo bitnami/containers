@@ -1,4 +1,4 @@
-# Harbor Adapter Trivy packaged by Bitnami
+# Bitnami package for Harbor Adapter Trivy
 
 ## What is Harbor Adapter Trivy?
 
@@ -9,12 +9,10 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ## TL;DR
 
-This container is part of the [Harbor solution](https://github.com/bitnami/charts/tree/main/bitnami/harbor) that is primarily intended to be deployed in Kubernetes. You can deploy Harbor solution and then enable this specific container with the command below:
+This container is part of the [Harbor solution](https://github.com/bitnami/charts/tree/main/bitnami/harbor) that is primarily intended to be deployed in Kubernetes.
 
 ```console
-curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/harbor-portal/docker-compose.yml
-curl -L https://github.com/bitnami/containers/archive/main.tar.gz | tar xz --strip=2 containers-main/bitnami/harbor-portal && cp -RL harbor-portal/config . && rm -rf harbor-portal
-docker-compose up
+docker run --name harbor-adapter-trivy bitnami/harbor-adapter-trivy:latest
 ```
 
 ## Why use Bitnami Images?
@@ -22,11 +20,9 @@ docker-compose up
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
-
-Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deployment and management of Helm Charts in clusters.
 
 Looking to use Harbor Adapter Trivy in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
 
@@ -76,16 +72,6 @@ docker run \
     bitnami/harbor-adapter-trivy:latest
 ```
 
-You can also do this with a minor change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/harbor-adapter-trivy/docker-compose.yml) file present in this repository:
-
-```yaml
-harbor-adapter-trivy:
-  ...
-  volumes:
-    - /path/to/harbor-adapter-trivy-persistence:/bitnami
-  ...
-```
-
 ## Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a different server running inside a container can easily be accessed by your application containers and vice-versa.
@@ -117,6 +103,29 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 Harbor Adapter Trivy is a component of the Harbor application. In order to get the Harbor application running on Kubernetes we encourage you to check the [bitnami/harbor Helm chart](https://github.com/bitnami/charts/tree/master/bitnami/harbor) and configure it using the options exposed in the values.yaml file.
 
 For further information about the specific component itself, please refer to the [source repository documentation](https://github.com/aquasecurity/harbor-scanner-trivy#configuration).
+
+### Environment variables
+
+#### Customizable environment variables
+
+| Name                        | Description                                  | Default Value                                |
+|-----------------------------|----------------------------------------------|----------------------------------------------|
+| `SCANNER_TRIVY_VOLUME_DIR`  | harbor-adapter-trivy installation directory. | `${BITNAMI_VOLUME_DIR}/harbor-adapter-trivy` |
+| `SCANNER_TRIVY_CACHE_DIR`   | harbor-adapter-trivy installation directory. | `${SCANNER_TRIVY_VOLUME_DIR}/.cache/trivy`   |
+| `SCANNER_TRIVY_REPORTS_DIR` | harbor-adapter-trivy installation directory. | `${SCANNER_TRIVY_VOLUME_DIR}/.cache/reports` |
+
+#### Read-only environment variables
+
+| Name                           | Description                                                                     | Value                                                |
+|--------------------------------|---------------------------------------------------------------------------------|------------------------------------------------------|
+| `SCANNER_TRIVY_BASE_DIR`       | harbor-adapter-trivy installation directory.                                    | `${BITNAMI_ROOT_DIR}/harbor-adapter-trivy`           |
+| `SCANNER_TRIVY_LOGS_DIR`       | harbor-adapter-trivy logs directory.                                            | `${SCANNER_TRIVY_BASE_DIR}/logs`                     |
+| `SCANNER_TRIVY_TMP_DIR`        | harbor-adapter-trivy directory for temporary files.                             | `${SCANNER_TRIVY_BASE_DIR}/tmp`                      |
+| `SCANNER_TRIVY_DAEMON_USER`    | harbor-adapter-trivy system user.                                               | `trivy-scanner`                                      |
+| `SCANNER_TRIVY_DAEMON_GROUP`   | harbor-adapter-trivy system group.                                              | `trivy-scanner`                                      |
+| `SCANNER_TRIVY_PID_FILE`       | PID file for harbor-adapter-trivy service.                                      | `${SCANNER_TRIVY_TMP_DIR}/harbor-adapter-trivy.pid`  |
+| `SCANNER_TRIVY_LOG_FILE`       | Log file for harbor-adapter-trivy service.                                      | `${SCANNER_TRIVY_LOGS_DIR}/harbor-adapter-trivy.log` |
+| `SCANNER_TRIVY_EXTRA_ENV_FILE` | File to store extra environment variables for the harbor-adapter-trivy service. | `${SCANNER_TRIVY_BASE_DIR}/.env`                     |
 
 ## Logging
 
@@ -162,6 +171,12 @@ Re-create your container from the new image.
 docker run --name harbor-adapter-trivy bitnami/harbor-adapter-trivy:latest
 ```
 
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
@@ -172,7 +187,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

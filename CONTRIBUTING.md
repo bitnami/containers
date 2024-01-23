@@ -50,8 +50,9 @@ Notice the `Author` and `Signed-off-by` lines match. If they don't your PR will 
 ### PR Approval and Release Process
 
 1. Changes are manually reviewed by Bitnami team members usually within a business day.
-2. Once the changes are accepted, the PR is tested (if needed) into the Bitnami CI pipeline, the container is deployed and tested (verification and functional tests) using docker-compose and Helm (if there is an associated Helm Chart).
-3. The PR is merged by the reviewer(s) in the GitHub `master` branch.
-4. Then our CI/CD system is going to push the container image to the different registries including the recently merged changes.
+2. The changes are automatically tested using our GitHub CI workflow.
+3. Once the changes are accepted, the PR is tested (if needed) into the internal Bitnami CI pipeline. This may include testing both container and any associated Helm Chart.
+4. The PR is merged by the reviewer(s) in the GitHub `main` branch.
+5. Then our CI/CD system is going to push the container image to the different registries including the recently merged changes.
 
 ***NOTE***: Please note that, in terms of time, may be a slight difference between the appearance of the code in GitHub and the image with the changes in the different registries.

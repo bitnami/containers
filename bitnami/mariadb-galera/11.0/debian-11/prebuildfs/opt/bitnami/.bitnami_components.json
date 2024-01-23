@@ -3,12 +3,12 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.4.6-1"
+        "version": "1.4.6-5"
     },
     "mariadb-galera": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.3-2"
+        "version": "11.0.4-4"
     }
 }

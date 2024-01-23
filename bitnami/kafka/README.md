@@ -1,4 +1,4 @@
-# Apache Kafka packaged by Bitnami
+# Bitnami package for Apache Kafka
 
 ## What is Apache Kafka?
 
@@ -9,13 +9,8 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ## TL;DR
 
-## Run the application using Docker Compose
-
-The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/kafka/docker-compose.yml) file. Run the application using it as shown below:
-
 ```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/kafka/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run --name kafka bitnami/kafka:latest
 ```
 
 ## Why use Bitnami Images?
@@ -23,7 +18,7 @@ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -177,39 +172,45 @@ docker-compose up -d
 
 ## Configuration
 
-The configuration can easily be setup with the Bitnami Apache Kafka Docker image using the following environment variables:
+### Environment variables
 
-* `KAFKA_CERTIFICATE_PASSWORD`: Password for certificates. No defaults.
-* `KAFKA_HEAP_OPTS`: Apache Kafka's Java Heap size. Default: **-Xmx1024m -Xms1024m**.
-* `KAFKA_ZOOKEEPER_PROTOCOL`: Authentication protocol for Zookeeper connections. Allowed protocols: **PLAINTEXT**, **SASL**, **SSL**, and **SASL_SSL**. Defaults: **PLAINTEXT**.
-* `KAFKA_ZOOKEEPER_USER`: Apache Kafka Zookeeper user for SASL authentication. No defaults.
-* `KAFKA_ZOOKEEPER_PASSWORD`: Apache Kafka Zookeeper user password for SASL authentication. No defaults.
-* `KAFKA_ZOOKEEPER_TLS_KEYSTORE_PASSWORD`: Apache Kafka Zookeeper keystore file password and key password. No defaults.
-* `KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD`: Apache Kafka Zookeeper truststore file password. No defaults.
-* `KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME`: Verify Zookeeper hostname on TLS certificates. Defaults: **true**.
-* `KAFKA_ZOOKEEPER_TLS_TYPE`: Choose the TLS certificate format to use. Allowed values: `JKS`, `PEM`. Defaults: **JKS**.
-* `KAFKA_CFG_LISTENERS`: Kafka `listeners` configuration override. No defaults.
-* `KAFKA_CFG_ADVERTISED_LISTENERS`: Kafka `advertised.listeners` configuration override. No defaults.
-* `KAFKA_CFG_SASL_ENABLED_MECHANISMS`: Allowed mechanism when using SASL either for clients, inter broker, or zookeeper comunications. Allowed values: `PLAIN`, `SCRAM-SHA-256`, `SCRAM-SHA-512` or a comma separated combination of those values. Default: **PLAIN,SCRAM-SHA-256,SCRAM-SHA-512**. NOTE: KRaft <= 3.4 does not yet support SCRAM mechanisms, so this list will be automatically reduced to only `PLAIN` SASL mechanism.
-* `KAFKA_TLS_CLIENT_AUTH`: Sets the value for `ssl.client.auth`. Allowed values: `required`, `requested`, `none`. Defaults: **required**.
-* `KAFKA_TLS_<uppercase_listener_name>_CLIENT_AUTH`: Sets the value for `listener.name.<listener>.ssl.client.auth` used to configure mTLS with SASL. Allowed values: `required`, `requested`, `none`.
-* `KAFKA_TLS_TYPE`: Choose the TLS certificate format to use. Allowed values: `JKS`, `PEM`. Defaults: **JKS**.
-* `KAFKA_CLIENT_USERS`: Users that will be created into Zookeeper when using SASL for client communications. Separated by commas. Default: **user**
-* `KAFKA_CLIENT_PASSWORDS`: Passwords for the users specified at`KAFKA_CLIENT_USERS`. Separated by commas. Default: **bitnami**
-* `KAFKA_CFG_MAX_PARTITION_FETCH_BYTES`:  The maximum amount of data per-partition the server will return. No defaults.
-* `KAFKA_CFG_MAX_REQUEST_SIZE`: The maximum size of a request in bytes. No defaults.
-* `KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL`: SASL mechanism to use for inter broker communications. No defaults. NOTE: KRaft <= 3.4 does not yet support SCRAM mechanisms, so the only supported SASL mechanism in KRaft mode would be `PLAIN`.
-* `KAFKA_INTER_BROKER_USER`: Apache Kafka inter broker communication user. Default: **user**.
-* `KAFKA_INTER_BROKER_PASSWORD`: Apache Kafka inter broker communication password. Default: **bitnami**.
-* `KAFKA_CFG_SASL_MECHANISM_CONTROLLER_PROTOCOL`: SASL mechanism to use for controllers communications. No defaults. NOTE: KRaft <= 3.4 does not yet support SCRAM mechanisms, so the only supported SASL mechanism in KRaft mode would be `PLAIN`.
-* `KAFKA_CONTROLLER_USER`: Apache Kafka controllers communication user. Default: **controller_user**.
-* `KAFKA_CONTROLLER_PASSWORD`: Apache Kafka controllers communication password. Default: **bitnami**.
-* `KAFKA_CFG_PROCESS_ROLES`: Node roles when running in KRaft mode. No defaults.
-* `KAFKA_CFG_NODE_ID`: Unique node id, required when running in KRaft mode. No defaults.
-* `KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP`: Maps each listener with a Apache Kafka security protocol. If node is set with `controller` role, this setting is in required order to assign a security protocol for the `CONTROLLER LISTENER`. E.g.: `PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT`. No defaults.
-* `KAFKA_CFG_CONTROLLER_QUORUM_VOTERS`: Map of id/endpoint information for the set of controller quorum voters in a comma-separated list of {id}@{host}:{port} entries. No defaults.
-* `KAFKA_CFG_CONTROLLER_LISTENER_NAMES`: Comma-separated list of the names of the listeners used by the controller. This is required if running in KRaft mode. No defaults.
-* `KAFKA_KRAFT_CLUSTER_ID`: Kafka cluster ID when using Kafka Raft (KRaft). No defaults.
+#### Customizable environment variables
+
+| Name                                  | Description                                                                                                                                                                            | Default Value                       |
+|---------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|
+| `KAFKA_MOUNTED_CONF_DIR`              | Kafka directory for mounted configuration files.                                                                                                                                       | `${KAFKA_VOLUME_DIR}/config`        |
+| `KAFKA_INTER_BROKER_USER`             | Kafka inter broker communication user.                                                                                                                                                 | `user`                              |
+| `KAFKA_INTER_BROKER_PASSWORD`         | Kafka inter broker communication password.                                                                                                                                             | `bitnami`                           |
+| `KAFKA_CONTROLLER_USER`               | Kafka control plane communication user.                                                                                                                                                | `controller_user`                   |
+| `KAFKA_CONTROLLER_PASSWORD`           | Kafka control plane communication password.                                                                                                                                            | `bitnami`                           |
+| `KAFKA_TLS_TYPE`                      | Choose the TLS certificate format to use.                                                                                                                                              | `JKS`                               |
+| `KAFKA_TLS_CLIENT_AUTH`               | Configures kafka broker to request client authentication.                                                                                                                              | `required`                          |
+| `KAFKA_CFG_SASL_ENABLED_MECHANISMS`   | Kafka `sasl.enabled.mechanisms` configuration override.                                                                                                                                | `PLAIN,SCRAM-SHA-256,SCRAM-SHA-512` |
+| `KAFKA_SKIP_KRAFT_STORAGE_INIT`       | If set to true, skip Kraft storage initialization when process.roles are configured.                                                                                                   | `false`                             |
+| `KAFKA_ZOOKEEPER_PROTOCOL`            | Authentication protocol for Zookeeper connections. Allowed protocols: `PLAINTEXT`, `SASL, SSL`, and `SASL_SSL`.                                                                        | `PLAINTEXT`                         |
+| `KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME` | Verify Zookeeper hostname on TLS certificates.                                                                                                                                         | `true`                              |
+| `KAFKA_ZOOKEEPER_TLS_TYPE`            | Choose the TLS certificate format to use. Allowed values: `JKS`, `PEM`.                                                                                                                | `JKS`                               |
+| `KAFKA_CLIENT_USERS`                  | List of additional users to `KAFKA_CLIENT_USER` that will be created into Zookeeper when using `SASL_SCRAM` for client communications. Separated by commas, semicolons or whitespaces. | `user`                              |
+| `KAFKA_CLIENT_PASSWORDS`              | Passwords for the users specified at `KAFKA_CLIENT_USERS`. Separated by commas, semicolons or whitespaces.                                                                             | `bitnami`                           |
+| `KAFKA_HEAP_OPTS`                     | Kafka heap options for Java.                                                                                                                                                           | `-Xmx1024m -Xms1024m`               |
+
+#### Read-only environment variables
+
+| Name                    | Description                                       | Value                                 |
+|-------------------------|---------------------------------------------------|---------------------------------------|
+| `KAFKA_BASE_DIR`        | Kafka installation directory.                     | `${BITNAMI_ROOT_DIR}/kafka`           |
+| `KAFKA_VOLUME_DIR`      | Kafka persistence directory.                      | `/bitnami/kafka`                      |
+| `KAFKA_DATA_DIR`        | Kafka directory where data is stored.             | `${KAFKA_VOLUME_DIR}/data`            |
+| `KAFKA_CONF_DIR`        | Kafka configuration directory.                    | `${KAFKA_BASE_DIR}/config`            |
+| `KAFKA_CONF_FILE`       | Kafka configuration file.                         | `${KAFKA_CONF_DIR}/server.properties` |
+| `KAFKA_CERTS_DIR`       | Kafka directory for certificate files.            | `${KAFKA_CONF_DIR}/certs`             |
+| `KAFKA_INITSCRIPTS_DIR` | Kafka directory for init scripts.                 | `/docker-entrypoint-initdb.d`         |
+| `KAFKA_LOG_DIR`         | Directory where Kafka logs are stored.            | `${KAFKA_BASE_DIR}/logs`              |
+| `KAFKA_TMP_DIR`         | Directory where Kafka temporary files are stored. | `${KAFKA_BASE_DIR}/tmp`               |
+| `KAFKA_PID_FILE`        | Path to the PID file for Kafka.                   | `${KAFKA_TMP_DIR}/kafka.pid`          |
+| `KAFKA_HOME`            | Kafka home directory.                             | `$KAFKA_BASE_DIR`                     |
+| `KAFKA_DAEMON_USER`     | Kafka system user.                                | `kafka`                               |
+| `KAFKA_DAEMON_GROUP`    | Kafka system group.                               | `kafka`                               |
 
 Additionally, any environment variable beginning with `KAFKA_CFG_` will be mapped to its corresponding Apache Kafka key. For example, use `KAFKA_CFG_BACKGROUND_THREADS` in order to set `background.threads` or `KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE` in order to configure `auto.create.topics.enable`.
 
@@ -1024,6 +1025,12 @@ Configuration changes. Most environment variables now start with `KAFKA_CFG_`, a
 
 * New Bitnami release
 
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/kafka).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
+
 ## Contributing
 
 We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
@@ -1040,7 +1047,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

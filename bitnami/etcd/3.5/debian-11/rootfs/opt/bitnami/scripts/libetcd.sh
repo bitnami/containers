@@ -341,16 +341,23 @@ etcd_store_member_id() {
 #   None
 ########################
 etcd_configure_rbac() {
-    info "Enabling etcd authentication"
 
     ! is_etcd_running && etcd_start_bg
     read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
 
     is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
     if retry_while "etcdctl ${extra_flags[*]} member list" >/dev/null 2>&1; then
-        debug_execute etcdctl "${extra_flags[@]}" user add root --interactive=false <<<"$ETCD_ROOT_PASSWORD"
-        debug_execute etcdctl "${extra_flags[@]}" user grant-role root root
-        debug_execute etcdctl "${extra_flags[@]}" auth enable
+        if retry_while "etcdctl ${extra_flags[*]} auth status" >/dev/null 2>&1; then
+            if etcdctl "${extra_flags[@]}" auth status | grep -q "Authentication Status: true"; then
+                info "Authentication already enabled"
+            else
+                info "Enabling etcd authentication"
+                is_boolean_yes "$ETCD_ON_K8S" && extra_flags=("--endpoints=$(etcdctl_get_endpoints)")
+                etcdctl "${extra_flags[@]}" user add root --interactive=false <<<"$ETCD_ROOT_PASSWORD"
+                etcdctl "${extra_flags[@]}" user grant-role root root
+                etcdctl "${extra_flags[@]}" auth enable
+            fi
+        fi
     fi
     etcd_stop
 }
@@ -644,16 +651,6 @@ etcd_initialize() {
                 exit 1
             fi
         else
-            if [[ ${#initial_members[@]} -gt 1 ]]; then
-                # When there's more than one etcd replica, RBAC should be only enabled in one member
-                if ! is_empty_value "$ETCD_ROOT_PASSWORD" && [[ "$ETCD_INITIAL_CLUSTER_STATE" = "new" ]] && [[ "${initial_members[0]}" = *"$ETCD_INITIAL_ADVERTISE_PEER_URLS"* ]]; then
-                    etcd_configure_rbac
-                else
-                    debug "Skipping RBAC configuration in member $ETCD_NAME"
-                fi
-            else
-                ! is_empty_value "$ETCD_ROOT_PASSWORD" && etcd_configure_rbac
-            fi
             etcd_store_member_id
         fi
     else
@@ -728,6 +725,18 @@ etcd_initialize() {
                 [[ -f "$ETCD_CONF_FILE" ]] && etcd_conf_write "initial-cluster-state" "$ETCD_INITIAL_CLUSTER_STATE"
             fi
         fi
+    fi
+
+    # For both existing and new deployments, configure RBAC if set
+    if [[ ${#initial_members[@]} -gt 1 ]]; then
+        # When there's more than one etcd replica, RBAC should be only enabled in one member
+        if ! is_empty_value "$ETCD_ROOT_PASSWORD" && [[ "${initial_members[0]}" = *"$ETCD_INITIAL_ADVERTISE_PEER_URLS"* ]]; then
+            etcd_configure_rbac
+        else
+            debug "Skipping RBAC configuration in member $ETCD_NAME"
+        fi
+    else
+        ! is_empty_value "$ETCD_ROOT_PASSWORD" && etcd_configure_rbac
     fi
 
     # Avoid exit code of previous commands to affect the result of this function

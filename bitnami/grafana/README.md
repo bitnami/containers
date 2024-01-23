@@ -1,4 +1,4 @@
-# Grafana packaged by Bitnami
+# Bitnami package for Grafana
 
 ## What is Grafana?
 
@@ -18,7 +18,7 @@ docker run --name grafana bitnami/grafana:latest
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -91,6 +91,40 @@ docker run --name grafana-node1 --network grafana-network bitnami/grafana:latest
 We can launch another containers using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
 
 ## Configuration
+
+### Environment variables
+
+#### Customizable environment variables
+
+| Name                          | Description                                                                          | Default Value                           |
+|-------------------------------|--------------------------------------------------------------------------------------|-----------------------------------------|
+| `GRAFANA_TMP_DIR`             | Grafana directory for temporary runtime files.                                       | `${GRAFANA_BASE_DIR}/tmp`               |
+| `GRAFANA_PID_FILE`            | Grafana PID file.                                                                    | `${GRAFANA_TMP_DIR}/grafana.pid`        |
+| `GRAFANA_DEFAULT_PLUGINS_DIR` | Grafana directory for default plugins.                                               | `${GRAFANA_BASE_DIR}/default-plugins`   |
+| `GF_PATHS_HOME`               | Grafana home directory.                                                              | `$GRAFANA_BASE_DIR`                     |
+| `GF_PATHS_CONFIG`             | Grafana configuration file.                                                          | `${GRAFANA_BASE_DIR}/conf/grafana.ini`  |
+| `GF_PATHS_DATA`               | Grafana directory for data files.                                                    | `${GRAFANA_BASE_DIR}/data`              |
+| `GF_PATHS_LOGS`               | Grafana directory for log files.                                                     | `${GRAFANA_BASE_DIR}/logs`              |
+| `GF_PATHS_PLUGINS`            | Grafana directory for plugins.                                                       | `${GF_PATHS_DATA}/plugins`              |
+| `GF_PATHS_PROVISIONING`       | Grafana directory for provisioning configurations.                                   | `${GRAFANA_BASE_DIR}/conf/provisioning` |
+| `GF_INSTALL_PLUGINS_SKIP_TLS` | Whether to skip TLS certificate verification when installing plugins                 | `yes`                                   |
+| `GRAFANA_MIGRATION_LOCK`      | Enable the migration lock mechanism to avoid issues caused by concurrent migrations. | `false`                                 |
+| `GRAFANA_SLEEP_TIME`          | Sleep time between migration status check attempts.                                  | `10`                                    |
+| `GRAFANA_RETRY_ATTEMPTS`      | Number of retries to check migration status.                                         | `12`                                    |
+
+#### Read-only environment variables
+
+| Name                       | Description                                                 | Value                         |
+|----------------------------|-------------------------------------------------------------|-------------------------------|
+| `GRAFANA_BASE_DIR`         | Grafana installation directory.                             | `${BITNAMI_ROOT_DIR}/grafana` |
+| `GRAFANA_BIN_DIR`          | Grafana directory for binary executables.                   | `${GRAFANA_BASE_DIR}/bin`     |
+| `GRAFANA_DAEMON_USER`      | Grafana system user.                                        | `grafana`                     |
+| `GRAFANA_DAEMON_GROUP`     | Grafana system group.                                       | `grafana`                     |
+| `GF_OP_PATHS_CONFIG`       | Grafana Operator configuration directory.                   | `/etc/grafana/grafana.ini`    |
+| `GF_OP_PATHS_DATA`         | Grafana Operator directory for data files.                  | `/var/lib/grafana`            |
+| `GF_OP_PATHS_LOGS`         | Grafana Operator directory for log files.                   | `/var/log/grafana`            |
+| `GF_OP_PATHS_PROVISIONING` | Grafana Operator directory for provisioning configurations. | `/etc/grafana/provisioning`   |
+| `GF_OP_PLUGINS_INIT_DIR`   | Grafana Operator directory for plugins.                     | `/opt/plugins`                |
 
 ### Dev config
 
@@ -258,6 +292,12 @@ You can still build your custom image adding your custom plugins or install them
 
 * Grafana doesn't ship the [`grafana-image-renderer` plugin](https://github.com/grafana/grafana-image-renderer/) by default anymore since it's not compatible with K8s distros with IPv6 disable. Instead, the `GF_INSTALL_PLUGINS` environment variable is set by default including this plugin so it's installed during the container's initialization, users can easily avoid it by overwriting the environment variable.
 
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/grafana).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
@@ -268,7 +308,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -13,13 +13,6 @@ Disclaimer: Redis is a registered trademark of Redis Ltd. Any rights therein are
 docker run --name redis-sentinel -e REDIS_MASTER_HOST=redis bitnami/redis-sentinel:latest
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/redis-sentinel/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
 
 ## Why use Bitnami Images?
@@ -27,7 +20,7 @@ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -105,119 +98,49 @@ docker run -it --rm \
     bitnami/redis-sentinel:latest
 ```
 
-### Using a Docker Compose file
-
-When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the Redis(R) server from your own custom application image which is identified in the following snippet by the service name `myapp`.
-
-```yaml
-version: '2'
-
-networks:
-  app-tier:
-    driver: bridge
-
-services:
-  redis:
-    image: 'bitnami/redis:latest'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    networks:
-      - app-tier
-  redis-sentinel:
-    image: 'bitnami/redis-sentinel:latest'
-    environment:
-      - REDIS_MASTER_HOST=redis
-    ports:
-      - '26379:26379'
-    networks:
-      - app-tier
-```
-
-Launch the containers using:
-
-```console
-docker-compose up -d
-```
-
-#### Using Master-Slave setups
-
-When using Sentinel in Master-Slave setup, if you want to set the passwords for Master and Slave nodes, consider having the **same** `REDIS_PASSWORD` and `REDIS_MASTER_PASSWORD` for them.
-
-```yaml
-version: '2'
-
-networks:
-  app-tier:
-    driver: bridge
-
-services:
-  redis:
-    image: 'bitnami/redis:latest'
-    environment:
-      - REDIS_REPLICATION_MODE=master
-      - REDIS_PASSWORD=str0ng_passw0rd
-    networks:
-      - app-tier
-    ports:
-      - '6379'
-  redis-slave:
-    image: 'bitnami/redis:latest'
-    environment:
-      - REDIS_REPLICATION_MODE=slave
-      - REDIS_MASTER_HOST=redis
-      - REDIS_MASTER_PASSWORD=str0ng_passw0rd
-      - REDIS_PASSWORD=str0ng_passw0rd
-    ports:
-      - '6379'
-    depends_on:
-      - redis
-    networks:
-      - app-tier
-  redis-sentinel:
-    image: 'bitnami/redis-sentinel:latest'
-    environment:
-      - REDIS_MASTER_PASSWORD=str0ng_passw0rd
-    depends_on:
-      - redis
-      - redis-slave
-    ports:
-      - '26379-26381:26379'
-    networks:
-      - app-tier
-```
-
-Launch the containers using:
-
-```console
-docker-compose up --scale redis-sentinel=3 -d
-```
-
 ## Configuration
 
 ### Environment variables
 
-The Redis(R) Sentinel instance can be customized by specifying environment variables on the first run. The following environment values are provided to customize Redis(R) Sentinel:
+#### Customizable environment variables
 
-* `REDIS_MASTER_HOST`: Host of the Redis(R) master to monitor. Default: **redis**.
-* `REDIS_MASTER_PORT_NUMBER`: Port of the Redis(R) master to monitor. Default: **6379**.
-* `REDIS_MASTER_SET`: Name of the set of Redis(R) instances to monitor. Default: **mymaster**.
-* `REDIS_MASTER_PASSWORD`: Password to authenticate with the master. No defaults. As an alternative, you can mount a file with the password and set the `REDIS_MASTER_PASSWORD_FILE` variable.
-* `REDIS_MASTER_USER`: Username to authenticate with when ACL is enabled for the master. No defaults. This is available only for Redis(R) 6 or higher. If not specified, Redis(R) Sentinel will try to authenticate with just the password (using `sentinel auth-pass <master-name> <password>`).
-* `REDIS_SENTINEL_PORT_NUMBER`: Redis(R) Sentinel port. Default: **26379**.
-* `REDIS_SENTINEL_QUORUM`: Number of Sentinels that need to agree about the fact the master is not reachable. Default: **2**.
-* `REDIS_SENTINEL_PASSWORD`: Password to authenticate with this sentinel and to authenticate to other sentinels. No defaults. Needs to be identical on all sentinels. As an alternative, you can mount a file with the password and set the `REDIS_SENTINEL_PASSWORD_FILE` variable.
-* `REDIS_SENTINEL_DOWN_AFTER_MILLISECONDS`: Number of milliseconds before master is declared down. Default: **60000**.
-* `REDIS_SENTINEL_FAILOVER_TIMEOUT`: Specifies the failover timeout in milliseconds. Default: **180000**.
-* `REDIS_SENTINEL_RESOLVE_HOSTNAMES`: Enables sentinel hostnames support. This is available only for Redis(R) 6.2 or higher.  Default: **no**.
-* `REDIS_SENTINEL_TLS_ENABLED`: Whether to enable TLS for traffic or not. Default: **no**.
-* `REDIS_SENTINEL_TLS_PORT_NUMBER`: Port used for TLS secure traffic. Default: **26379**.
-* `REDIS_SENTINEL_TLS_CERT_FILE`: File containing the certificate file for the TLS traffic. No defaults.
-* `REDIS_SENTINEL_TLS_KEY_FILE`: File containing the key for certificate. No defaults.
-* `REDIS_SENTINEL_TLS_CA_FILE`: File containing the CA of the certificate. No defaults.
-* `REDIS_SENTINEL_TLS_DH_PARAMS_FILE`: File containing DH params (in order to support DH based ciphers). No defaults.
-* `REDIS_SENTINEL_TLS_AUTH_CLIENTS`: Whether to require clients to authenticate or not. Default: **yes**.
-* `REDIS_SENTINEL_ANNOUNCE_IP`: Use the specified IP address in the HELLO messages used to gossip its presence. Default: **auto-detected local address**.
-* `REDIS_SENTINEL_ANNOUNCE_PORT`: Use the specified port in the HELLO messages used to gossip its presence. Default: **port specified in `REDIS_SENTINEL_PORT_NUMBER`**.
+| Name                                             | Description                                                            | Default Value                         |
+|--------------------------------------------------|------------------------------------------------------------------------|---------------------------------------|
+| `REDIS_SENTINEL_DATA_DIR`                        | Redis data directory                                                   | `${REDIS_SENTINEL_VOLUME_DIR}/data`   |
+| `REDIS_SENTINEL_DATABASE`                        | Default Redis database                                                 | `redis`                               |
+| `REDIS_SENTINEL_AOF_ENABLED`                     | Enable AOF                                                             | `yes`                                 |
+| `REDIS_SENTINEL_PORT_NUMBER`                     | Redis Sentinel host port                                               | `$REDIS_SENTINEL_DEFAULT_PORT_NUMBER` |
+| `REDIS_SENTINEL_QUORUM`                          | Minimum number of sentinel nodes in order to reach a failover decision | `2`                                   |
+| `REDIS_SENTINEL_DOWN_AFTER_MILLISECONDS`         | Time (in milliseconds) to consider a node to be down                   | `60000`                               |
+| `REDIS_SENTINEL_FAILOVER_TIMEOUT`                | Specifies the failover timeout (in milliseconds)                       | `180000`                              |
+| `REDIS_SENTINEL_MASTER_REBOOT_DOWN_AFTER_PERIOD` | Specifies the timeout (in milliseconds) for rebooting a master         | `0`                                   |
+| `REDIS_SENTINEL_RESOLVE_HOSTNAMES`               | Enables hostnames support                                              | `yes`                                 |
+| `REDIS_SENTINEL_ANNOUNCE_HOSTNAMES`              | Announce hostnames                                                     | `no`                                  |
+| `ALLOW_EMPTY_PASSWORD`                           | Allow password-less access                                             | `no`                                  |
+| `REDIS_SENTINEL_TLS_ENABLED`                     | Enable TLS for Redis authentication                                    | `no`                                  |
+| `REDIS_SENTINEL_TLS_PORT_NUMBER`                 | Redis TLS port (requires REDIS_SENTINEL_ENABLE_TLS=yes)                | `26379`                               |
+| `REDIS_SENTINEL_TLS_AUTH_CLIENTS`                | Enable Redis TLS client authentication                                 | `yes`                                 |
+| `REDIS_MASTER_HOST`                              | Redis master host (used by slaves)                                     | `redis`                               |
+| `REDIS_MASTER_PORT_NUMBER`                       | Redis master host port (used by slaves)                                | `6379`                                |
+| `REDIS_MASTER_SET`                               | Redis sentinel master set                                              | `mymaster`                            |
+
+#### Read-only environment variables
+
+| Name                                 | Description                           | Value                                          |
+|--------------------------------------|---------------------------------------|------------------------------------------------|
+| `REDIS_SENTINEL_VOLUME_DIR`          | Persistence base directory            | `/bitnami/redis-sentinel`                      |
+| `REDIS_SENTINEL_BASE_DIR`            | Redis installation directory          | `${BITNAMI_ROOT_DIR}/redis-sentinel`           |
+| `REDIS_SENTINEL_CONF_DIR`            | Redis configuration directory         | `${REDIS_SENTINEL_BASE_DIR}/etc`               |
+| `REDIS_SENTINEL_MOUNTED_CONF_DIR`    | Redis mounted configuration directory | `${REDIS_SENTINEL_BASE_DIR}/mounted-etc`       |
+| `REDIS_SENTINEL_CONF_FILE`           | Redis configuration file              | `${REDIS_SENTINEL_CONF_DIR}/sentinel.conf`     |
+| `REDIS_SENTINEL_LOG_DIR`             | Redis logs directory                  | `${REDIS_SENTINEL_BASE_DIR}/logs`              |
+| `REDIS_SENTINEL_LOG_FILE`            | Redis log file                        | `${REDIS_SENTINEL_LOG_DIR}/redis-sentinel.log` |
+| `REDIS_SENTINEL_TMP_DIR`             | Redis temporary directory             | `${REDIS_SENTINEL_BASE_DIR}/tmp`               |
+| `REDIS_SENTINEL_PID_FILE`            | Redis PID file                        | `${REDIS_SENTINEL_TMP_DIR}/redis-sentinel.pid` |
+| `REDIS_SENTINEL_BIN_DIR`             | Redis executables directory           | `${REDIS_SENTINEL_BASE_DIR}/bin`               |
+| `REDIS_SENTINEL_DAEMON_USER`         | Redis system user                     | `redis`                                        |
+| `REDIS_SENTINEL_DAEMON_GROUP`        | Redis system group                    | `redis`                                        |
+| `REDIS_SENTINEL_DEFAULT_PORT_NUMBER` | Redis Sentinel host port              | `26379`                                        |
 
 ### Securing Redis(R) Sentinel traffic
 
@@ -240,24 +163,6 @@ When enabling TLS, conventional standard traffic is disabled by default. However
         bitnami/redis-sentinel:latest
     ```
 
-2. Modifying the `docker-compose.yml` file present in this repository:
-
-    ```yaml
-      redis-sentinel:
-      ...
-        environment:
-          ...
-          - REDIS_SENTINEL_TLS_ENABLED=yes
-          - REDIS_SENTINEL_TLS_CERT_FILE=/opt/bitnami/redis/certs/redis.crt
-          - REDIS_SENTINEL_TLS_KEY_FILE=/opt/bitnami/redis/certs/redis.key
-          - REDIS_SENTINEL_TLS_CA_FILE=/opt/bitnami/redis/certs/redisCA.crt
-        ...
-        volumes:
-          - /path/to/certs:/opt/bitnami/redis/certs
-        ...
-      ...
-    ```
-
 Alternatively, you may also provide with this configuration in your [custom](https://github.com/bitnami/containers/blob/main/bitnami/redis-sentinel#configuration-file) configuration file.
 
 ### Configuration file
@@ -273,17 +178,6 @@ docker run --name redis-sentinel \
     -e REDIS_MASTER_HOST=redis \
     -v /path/to/redis-sentinel/persistence:/bitnami \
     bitnami/redis-sentinel:latest
-```
-
-You can also modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/redis-sentinel/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  redis-sentinel:
-  ...
-    volumes:
-      - /path/to/redis-persistence:/bitnami
-  ...
 ```
 
 #### Step 2: Edit the configuration
@@ -302,12 +196,6 @@ After changing the configuration, restart your Redis(R) container for changes to
 docker restart redis
 ```
 
-or using Docker Compose:
-
-```console
-docker-compose restart redis
-```
-
 Refer to the [Redis(R) configuration](http://redis.io/topics/config) manual for the complete list of configuration options.
 
 ## Logging
@@ -316,12 +204,6 @@ The Bitnami Redis(R) Sentinel Docker Image sends the container logs to the `stdo
 
 ```console
 docker logs redis
-```
-
-or using Docker Compose:
-
-```console
-docker-compose logs redis
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -338,21 +220,12 @@ Bitnami provides up-to-date versions of Redis(R) Sentinel, including security pa
 docker pull bitnami/redis-sentinel:latest
 ```
 
-or if you're using Docker Compose, update the value of the image property to
-`bitnami/redis-sentinel:latest`.
-
 #### Step 2: Stop and backup the currently running container
 
 Stop the currently running container using the command
 
 ```console
 docker stop redis
-```
-
-or using Docker Compose:
-
-```console
-docker-compose stop redis
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/redis-persistence` using:
@@ -367,12 +240,6 @@ rsync -a /path/to/redis-persistence /path/to/redis-persistence.bkp.$(date +%Y%m%
 docker rm -v redis
 ```
 
-or using Docker Compose:
-
-```console
-docker-compose rm -v redis
-```
-
 #### Step 4: Run the new image
 
 Re-create your container from the new image.
@@ -381,13 +248,11 @@ Re-create your container from the new image.
 docker run --name redis bitnami/redis-sentinel:latest
 ```
 
-or using Docker Compose:
-
-```console
-docker-compose up redis
-```
-
 ## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ### 4.0.14-debian-9-r201, 4.0.14-ol-7-r222, 5.0.5-debian-9-r169, 5.0.5-ol-7-r175
 
@@ -407,7 +272,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

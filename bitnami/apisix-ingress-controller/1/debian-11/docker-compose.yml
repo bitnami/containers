@@ -1,8 +1,0 @@
-# Copyright VMware, Inc.
-# SPDX-License-Identifier: APACHE-2.0
-
-version: '2'
-
-services:
-  apisix-ingress-controller:
-    image: docker.io/bitnami/apisix-ingress-controller:1

@@ -1,4 +1,4 @@
-# PgBouncer packaged by Bitnami
+# Bitnami package for PgBouncer
 
 ## What is PgBouncer?
 
@@ -13,13 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name pgbouncer bitnami/pgbouncer:latest
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/pgbouncer/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
 
 ## Why use Bitnami Images?
@@ -27,7 +20,7 @@ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -69,36 +62,62 @@ docker build -t bitnami/APP:latest .
 
 ## Configuration
 
+### Environment variables
+
+#### Customizable environment variables
+
+| Name                                  | Description                                                                | Default Value                        |
+|---------------------------------------|----------------------------------------------------------------------------|--------------------------------------|
+| `PGBOUNCER_LOG_FILE`                  | PgBouncer log file.                                                        | `${PGBOUNCER_LOG_DIR}/pgbouncer.log` |
+| `PGBOUNCER_DATABASE`                  | PgBouncer advertised database.                                             | `postgres`                           |
+| `PGBOUNCER_PORT`                      | PgBouncer port                                                             | `6432`                               |
+| `PGBOUNCER_LISTEN_ADDRESS`            | PgBouncer listen address                                                   | `0.0.0.0`                            |
+| `PGBOUNCER_AUTH_TYPE`                 | PgBouncer authentication type                                              | `scram-sha-256`                      |
+| `PGBOUNCER_INIT_SLEEP_TIME`           | PgBouncer initialization sleep time                                        | `10`                                 |
+| `PGBOUNCER_INIT_MAX_RETRIES`          | PgBouncer initialization maximum retries                                   | `10`                                 |
+| `PGBOUNCER_IGNORE_STARTUP_PARAMETERS` | Ignore startup parameters in PgBouncer                                     | `extra_float_digits`                 |
+| `PGBOUNCER_STATS_PERIOD`              | PgBouncer stats period                                                     | `60`                                 |
+| `PGBOUNCER_FAIL_ON_INVALID_DSN_FILE`  | Whether init process should fail if any DSN_FILE is not found.             | `false`                              |
+| `PGBOUNCER_CLIENT_TLS_SSLMODE`        | PgBouncer authentication type                                              | `disable`                            |
+| `PGBOUNCER_CLIENT_TLS_CIPHERS`        | PgBouncer TLS authentication ciphers                                       | `fast`                               |
+| `PGBOUNCER_SERVER_TLS_SSLMODE`        | PgBouncer server authentication type                                       | `disable`                            |
+| `PGBOUNCER_SERVER_TLS_PROTOCOLS`      | PgBouncer server TLS authentication protocol                               | `secure`                             |
+| `PGBOUNCER_SERVER_TLS_CIPHERS`        | PgBouncer server TLS authentication ciphers                                | `fast`                               |
+| `POSTGRESQL_USERNAME`                 | PostgreSQL backend default username                                        | `postgres`                           |
+| `POSTGRESQL_DATABASE`                 | Default PostgreSQL database                                                | `${PGBOUNCER_DATABASE}`              |
+| `POSTGRESQL_HOST`                     | PostgreSQL backend hostname                                                | `postgresql`                         |
+| `POSTGRESQL_PORT`                     | PostgreSQL backend port                                                    | `5432`                               |
+| `PGBOUNCER_SET_DATABASE_USER`         | Whether to include the backend PostgreSQL username in the database string. | `no`                                 |
+| `PGBOUNCER_SET_DATABASE_PASSWORD`     | Whether to include the backend PostgreSQL password in the database string. | `no`                                 |
+| `PGBOUNCER_FORCE_INITSCRIPTS`         | Force the init scripts running even if it is not in the first start.       | `false`                              |
+| `PGBOUNCER_SOCKET_DIR`                | PgBouncer socket dir                                                       | `/tmp/`                              |
+| `PGBOUNCER_SOCKET_MODE`               | PgBouncer socket mode                                                      | `0777`                               |
+| `PGBOUNCER_DAEMON_USER`               | PostgreSQL daemon user                                                     | `pgbouncer`                          |
+| `PGBOUNCER_DAEMON_GROUP`              | PostgreSQL daemon group                                                    | `pgbouncer`                          |
+
+#### Read-only environment variables
+
+| Name                         | Description                                            | Value                                       |
+|------------------------------|--------------------------------------------------------|---------------------------------------------|
+| `PGBOUNCER_BASE_DIR`         | PgBouncer installation directory.                      | `${BITNAMI_ROOT_DIR}/pgbouncer`             |
+| `PGBOUNCER_CONF_DIR`         | PgBouncer configuration directory.                     | `${PGBOUNCER_BASE_DIR}/conf`                |
+| `PGBOUNCER_LOG_DIR`          | PgBouncer logs directory.                              | `${PGBOUNCER_BASE_DIR}/logs`                |
+| `PGBOUNCER_TMP_DIR`          | PgBouncer temporary directory.                         | `${PGBOUNCER_BASE_DIR}/tmp`                 |
+| `PGBOUNCER_PID_FILE`         | PgBouncer pid file.                                    | `${PGBOUNCER_TMP_DIR}/pgbouncer.pid`        |
+| `PGBOUNCER_CONF_FILE`        | PgBouncer configuration file.                          | `${PGBOUNCER_CONF_DIR}/pgbouncer.ini`       |
+| `PGBOUNCER_AUTH_FILE`        | PgBouncer authentication file.                         | `${PGBOUNCER_CONF_DIR}/userlist.txt`        |
+| `PGBOUNCER_VOLUME_DIR`       | PgBouncer volume directory.                            | `${BITNAMI_VOLUME_DIR}/pgbouncer`           |
+| `PGBOUNCER_MOUNTED_CONF_DIR` | PgBouncer mounted configuration directory.             | `${PGBOUNCER_VOLUME_DIR}/conf`              |
+| `PGBOUNCER_INITSCRIPTS_DIR`  | PgBouncer init scripts directory.                      | `/docker-entrypoint-initdb.d`               |
+| `NSS_WRAPPER_LIB`            | Flag for startup (necessary for the postgresql client) | `/opt/bitnami/common/lib/libnss_wrapper.so` |
+
 ### Daemon settings
 
 The following parameters can be set for the PgBouncer daemon:
 
 ### Authentication
 
-The authentication mode can be set using the `PGBOUNCER_AUTH_TYPE` variable, which can be set to any of the values available [in the official PgBouncer documentation](https://www.pgbouncer.org/config.html). In the case of the `scram-sha-256` authentication type (default value), set the backend PostgreSQL credentials as explained in the [Backend PostgreSQL connection section](#backend-postgresql-connection).
-
-### Backend PostgreSQL connection
-
-The Bitnami PgBouncer container requires a running PostgreSQL installation to connect to. This is configured with the following environment variables.
-
-* `POSTGRESQL_USERNAME`: Backend PostgreSQL username. Default: **postgres**.
-* `POSTGRESQL_PASSWORD`: Backend PostgreSQL password. No defaults.
-* `POSTGRESQL_DATABASE`: Backend PostgreSQL Database name to connect to. Default: **${PGBOUNCER_DATABASE}**.
-* `POSTGRESQL_HOST`: Backend PostgreSQL hostname. Default: **postgresql**.
-* `POSTGRESQL_PORT`: Backend PostgreSQL port. Default: **5432**.
-* `PGBOUNCER_SET_DATABASE_USER`: Whether to include the backend PostgreSQL username in the database string. Default **no**.
-* `PGBOUNCER_SET_DATABASE_PASSWORD`: Whether to include the backend PostgreSQL password in the database string. Default **no**.
-* `PGBOUNCER_CONNECT_QUERY`: Query which will be executed after a connection is established. No Defaults.
-* `PGBOUNCER_DSN_${i}`: PgBouncer configuration string for extra PostgreSQL server, where `i` is a number starting at zero (`0`).
-* `PGBOUNCER_DSN_${i}_FILE`: As an alternative to specifying extra PostgreSQL servers *directly* using `PGBOUNCER_DSN_${i}` (see above), specify file paths containing the values, one file per PostgreSQL server. This is in line how other variables get read from `$…_FILE` if it is provided. – By default, when a file is missing, a warning will be printed, and all others will be used. If you set `$PGBOUNCER_FAIL_ON_INVALID_DSN_FILE` to `true`, the initialisation process will instead abort with an error.
-* `PGBOUNCER_USERLIST_FILE`: Custom PgBouncer userlists file with connection credentials for any extra PostgreSQL backend. Required line format (including quotes): `"<postresql-user>" "<password>"`.
-
-### Port and address binding
-
-The listening port and listening address can be configured with the following environment variables:
-
-* `PGBOUNCER_PORT`: PgBouncer port. Default: **6432**.
-* `PGBOUNCER_BIND_ADDRESS`: PgBouncer bind address. Default: **0.0.0.0**.
+The authentication mode can be set using the `PGBOUNCER_AUTH_TYPE` variable, which can be set to any of the values available [in the official PgBouncer documentation](https://www.pgbouncer.org/config.html). In the case of the `scram-sha-256` authentication type (default value), set the backend PostgreSQL credentials as using the variables described in the [Environment Variables](#environment-variables) table.
 
 ### Extra arguments to PgBouncer startup
 
@@ -116,29 +135,7 @@ docker run --name pgbouncer \
 
 In case you'd like pgbouncer to expose your database with a different name, you can use the `PGBOUNCER_DATABASE` variable.
 To expose the same database name as the backend, set `PGBOUNCER_DATABASE="$POSTGRESQL_DATABASE"`.
-
-### Other options
-
-* `PGBOUNCER_AUTH_USER`: PgBouncer will use this user to connect to the database and query the PostgreSQL backend for a user and password. No defaults.
-* `PGBOUNCER_AUTH_QUERY`: PgBouncer will use this query to connect to the database and query the PostgreSQL backend for a user and password. No defaults.
-* `PGBOUNCER_AUTH_TYPE`: PgBouncer authentication type. Default: **scram-sha-256**
-* `PGBOUNCER_AUTH_HBA_FILE`: HBA configuration file to use if auth_type is set to hba. No defaults.
-* `PGBOUNCER_USERLIST`: Specify content of the *userlist.txt* file
-* `PGBOUNCER_POOL_MODE` : PgBouncer pool mode. Allowed values: session, transaction and statement. Default: **session**.
-* `PGBOUNCER_INIT_SLEEP_TIME` : PgBouncer initialization sleep time. Default: **10**.
-* `PGBOUNCER_INIT_MAX_RETRIES` : PgBouncer initialization maximum retries. Default: **10**.
-* `PGBOUNCER_QUERY_WAIT_TIMEOUT` : PgBouncer maximum time queries are allowed to spend waiting for execution. Default: **120**.
-* `PGBOUNCER_MAX_CLIENT_CONN` : PgBouncer maximum number of client connections allowed. Default: **120**.
-* `PGBOUNCER_MAX_DB_CONNECTIONS` : PgBouncer maximum number of database connections allowed. Default: **0 (unlimited)**.
-* `PGBOUNCER_IDLE_TRANSACTION_TIMEOUT` : PgBouncer maximum time for a client to be in "idle in transaction" state. Default: **0.0**.
-* `PGBOUNCER_DEFAULT_POOL_SIZE` : PgBouncer maximum server connections to allow per user/database pair. Default: **20**.
-* `PGBOUNCER_MIN_POOL_SIZE` : PgBouncer has at least this amount of open connections. Default: **0 (disabled)**.
-* `PGBOUNCER_RESERVE_POOL_SIZE` : PgBouncer allows this amount of additional connections. Default: **0 (disabled)**.
-* `PGBOUNCER_IGNORE_STARTUP_PARAMETERS`: you can use this to set `ignore_startup_parameters` in the auto-generated `pgbouncer.ini`. This can be useful for solving certain connection issues. See <https://www.pgbouncer.org/> config.html for more details.
-* `PGBOUNCER_SERVER_IDLE_TIMEOUT`: PgBouncer maximum time in seconds a server connection can be idle. If 0 then the timeout is disabled. Default: **600**
-* `PGBOUNCER_SERVER_RESET_QUERY`: PgBouncer query sent to server on connection release before making it available to other clients. Default: **DISCARD ALL**
-* `PGBOUNCER_STATS_USERS`: PgBouncer comma-separated list of database users that are allowed to connect and run read-only queries. No defaults.
-* `PGBOUNCER_MAX_PREPARED_STATEMENTS`: PgBouncer maximum number of cached prepared statements. Default: **0 (disabled)**.
+To expose a ["fallback database" (wildcard that matches any)](https://www.pgbouncer.org/config.html#section-databases)), set `PGBOUNCER_DATABASE="*"`.
 
 ### Initializing a new instance
 
@@ -282,7 +279,7 @@ Refer to the [server configuration](https://www.pgbouncer.org/usage.html) manual
 
 It is possible to connect a single PgBouncer instance with multiple PostgreSQL backends. By using as many `PGBOUNCER_DSN_${i}` environment variables (with `i` starting at zero, `0`) as needed, and the `PGBOUNCER_USERLIST_FILE` variable pointing to a mounted volume with the required credentials for any extra PostgreSQL database in the format `"<postgresql-user>" "<password>"`.
 
-The PgBouncer initialization process requires one PostgreSQL backend to be configured using the different `POSTGRESQL_*` variables listed in the [backend PostgreSQL connection](#backend-postgresql-connection), but the rest of backends connections can be provided using the method explained in this section. An example `docker-compose.yaml` for this scenario can be found below
+The PgBouncer initialization process requires one PostgreSQL backend to be configured using the different `POSTGRESQL_*` variables listed in the [Environment Variables](#environment-variables) section, but the rest of backends connections can be provided using the method explained in this section. An example `docker-compose.yaml` for this scenario can be found below
 
 ```yaml
   pg1:
@@ -351,6 +348,12 @@ $ docker exec -it -u root debian-11-pgbouncer-1 psql -p 6432 -U postgres pg2 -c 
   (1 row)
 ```
 
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes.
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
@@ -361,7 +364,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -1,4 +1,4 @@
-# Laravel packaged by Bitnami
+# Bitnami package for Laravel
 
 ## What is Laravel?
 
@@ -13,18 +13,15 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ```console
 mkdir ~/myapp && cd ~/myapp
-curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/laravel/docker-compose.yml
-docker-compose up
+docker run --name laravel -v ${PWD}/my-project:/app bitnami/laravel:latest
 ```
-
-**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [MariaDB container](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#readme) for a more secure deployment.
 
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -48,25 +45,39 @@ The Bitnami Laravel Development Container has been carefully engineered to provi
 
 ## Getting started
 
-The quickest way to get started with the Bitnami Laravel Development Container is using [docker-compose](https://docs.docker.com/compose/).
+Laravel requires access to a MySQL or MariaDB database to store information. We'll use the [Bitnami Docker Image for MariaDB](https://github.com/bitnami/containers/tree/main/bitnami/mariadb) for the database requirements.
 
-Begin by creating a directory for your Laravel application:
+### Step 1: Create a network
 
 ```console
-mkdir ~/myapp
-cd ~/myapp
+docker network create laravel-network
 ```
 
-Download the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/containers/main/bitnami/laravel/docker-compose.yml) file in the application directory:
+### Step 2: Create a volume for MariaDB persistence and create a MariaDB container
 
 ```console
-curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/laravel/docker-compose.yml
+$ docker volume create --name mariadb_data
+docker run -d --name mariadb \
+  --env ALLOW_EMPTY_PASSWORD=yes \
+  --env MARIADB_USER=bn_myapp \
+  --env MARIADB_DATABASE=bitnami_myapp \
+  --network laravel-network \
+  --volume mariadb_data:/bitnami/mariadb \
+  bitnami/mariadb:latest
 ```
 
-Finally launch the Laravel application development environment using:
+### Step 3: Launch the container using the local current directory as volume 
 
 ```console
-docker-compose up
+$ docker run -d --name laravel \
+  -p 8000:8000 \
+  --env DB_HOST=mariadb \
+  --env DB_PORT=3306 \
+  --env DB_USERNAME=bn_myapp \
+  --env DB_DATABASE=bitnami_myapp \
+  --network laravel-network \
+  --volume ${PWD}/my-project:/app \
+  bitnami/laravel:latest
 ```
 
 Among other things, the above command creates a container service, named `myapp`, for Laravel development and bootstraps a new Laravel application in the application directory. You can use your favorite IDE for developing the application.
@@ -75,55 +86,48 @@ Among other things, the above command creates a container service, named `myapp`
 >
 > If the application directory contained the source code of an existing Laravel application, the Bitnami Laravel Development Container would load the existing application instead of bootstrapping a new one.
 
-After the artisan application server has been launched in the `myapp` service, visit `http://localhost:8000` in your favorite web browser and you'll be greeted by the default Laravel welcome page.
+After the application server has been launched in the `myapp` service, visit `http://localhost:8000` in your favorite web browser and you'll be greeted by the default Laravel welcome page.
 
-> **Note**
->
-> If no application available at `http://localhost:8000` and you're running Docker on Windows, you might need to uncomment `privileged` setting for `myapp` container. Later, re-launch the Laravel application development environment as stated before.
+**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [MariaDB container](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#readme) for a more secure deployment.
 
-In addition to the Laravel Development Container, the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/containers/main/bitnami/laravel/docker-compose.yml) file also configures a MariaDB service to serve as the database backend of your Laravel application.
+## Environment variables
+
+### Customizable environment variables
+
+| Name                           | Description                                    | Default Value   |
+|--------------------------------|------------------------------------------------|-----------------|
+| `LARAVEL_PORT_NUMBER`          | Laravel server port.                           | `8000`          |
+| `LARAVEL_SKIP_COMPOSER_UPDATE` | Skip command to execute Composer dependencies. | `no`            |
+| `LARAVEL_SKIP_DATABASE`        | Skip database configuration.                   | `no`            |
+| `LARAVEL_DATABASE_TYPE`        | Database server type.                          | `mysql`         |
+| `LARAVEL_DATABASE_HOST`        | Database server host.                          | `mariadb`       |
+| `LARAVEL_DATABASE_PORT_NUMBER` | Database server port.                          | `3306`          |
+| `LARAVEL_DATABASE_NAME`        | Database name.                                 | `bitnami_myapp` |
+| `LARAVEL_DATABASE_USER`        | Database user name.                            | `bn_myapp`      |
+
+### Read-only environment variables
+
+| Name               | Description                     | Value                         |
+|--------------------|---------------------------------|-------------------------------|
+| `LARAVEL_BASE_DIR` | Laravel installation directory. | `${BITNAMI_ROOT_DIR}/laravel` |
 
 ## Executing commands
 
-Commands can be launched inside the `myapp` Laravel Development Container with `docker-compose` using the [exec](https://docs.docker.com/compose/reference/exec/) command.
-
-> **Note**:
->
-> The `exec` command was added to `docker-compose` in release [1.7.0](https://github.com/docker/compose/blob/master/CHANGELOG.md#170-2016-04-13). Please ensure that you're using `docker-compose` version `1.7.0` or higher.
+Commands can be launched inside the `myapp` Laravel Development Container with `docker` using the [exec](https://docs.docker.com/engine/reference/commandline/exec/) command.
 
 The general structure of the `exec` command is:
 
 ```console
-docker-compose exec <service> <command>
+docker exec <container-name> <command>
 ```
 
-, where `<service>` is the name of the container service as described in the `docker-compose.yml` file and `<command>` is the command you want to launch inside the service.
+where `<command>` is the command you want to launch inside the container.
 
-Following are a few examples of launching some commonly used Laravel development commands inside the `myapp` service container.
+## Notable Changes
 
-* List all `artisan` commands:
+### Starting January 16, 2024
 
-  ```console
-  docker-compose exec myapp php artisan list
-  ```
-
-* List all registered routes:
-
-  ```console
-  docker-compose exec myapp php artisan route:list
-  ```
-
-* Create a new application controller named `UserController`:
-
-  ```console
-  docker-compose exec myapp php artisan make:controller UserController
-  ```
-
-* Installing a new composer package called `phpmailer/phpmailer` with version `5.2.*`:
-
-  ```console
-  docker-compose exec myapp composer require phpmailer/phpmailer:5.2.*
-  ```
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 
@@ -147,7 +151,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

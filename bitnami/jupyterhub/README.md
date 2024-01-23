@@ -1,4 +1,4 @@
-# JupyterHub packaged by Bitnami
+# Bitnami package for JupyterHub
 
 ## What is JupyterHub?
 
@@ -16,7 +16,7 @@ This image is meant to run in a Kubernetes cluster.
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -58,6 +58,38 @@ Non-root container images add an extra layer of security and are generally recom
 
 ## Configuration
 
+### Environment variables
+
+#### Customizable environment variables
+
+| Name                              | Description                   | Default Value        |
+|-----------------------------------|-------------------------------|----------------------|
+| `JUPYTERHUB_USERNAME`             | JupyterHub admin username.    | `user`               |
+| `JUPYTERHUB_PASSWORD`             | JupyterHub admin password.    | `bitnami`            |
+| `JUPYTERHUB_PROXY_PORT_NUMBER`    | JupyterHub proxy port number. | `8000`               |
+| `JUPYTERHUB_DATABASE_TYPE`        | Database server type.         | `postgresql`         |
+| `JUPYTERHUB_DATABASE_HOST`        | Database server host.         | `127.0.0.1`          |
+| `JUPYTERHUB_DATABASE_PORT_NUMBER` | Database server port.         | `5432`               |
+| `JUPYTERHUB_DATABASE_NAME`        | Database name.                | `bitnami_jupyterhub` |
+| `JUPYTERHUB_DATABASE_USER`        | Database user name.           | `bn_jupyterhub`      |
+
+#### Read-only environment variables
+
+| Name                        | Description                                  | Value                                             |
+|-----------------------------|----------------------------------------------|---------------------------------------------------|
+| `JUPYTERHUB_BASE_DIR`       | JupyterHub installation directory.           | `${BITNAMI_ROOT_DIR}/jupyterhub`                  |
+| `JUPYTERHUB_BIN_DIR`        | JupyterHub directory for binary executables. | `${BITNAMI_ROOT_DIR}/miniconda/bin`               |
+| `JUPYTERHUB_PROXY_BIN_DIR`  | JupyterHub directory for binary executables. | `${BITNAMI_ROOT_DIR}/configurable-http-proxy/bin` |
+| `JUPYTERHUB_CONF_DIR`       | JupyterHub configuration directory.          | `${JUPYTERHUB_BASE_DIR}/etc`                      |
+| `JUPYTERHUB_CONF_FILE`      | JupyterHub configuration file.               | `${JUPYTERHUB_CONF_DIR}/jupyterhub_config.py`     |
+| `JUPYTERHUB_LOGS_DIR`       | JupyterHub logs directory.                   | `${JUPYTERHUB_BASE_DIR}/logs`                     |
+| `JUPYTERHUB_LOG_FILE`       | JupyterHub log file.                         | `${JUPYTERHUB_LOGS_DIR}/jupyterhub.log`           |
+| `JUPYTERHUB_TMP_DIR`        | JupyterHub temporary directory.              | `${JUPYTERHUB_BASE_DIR}/tmp`                      |
+| `JUPYTERHUB_PID_FILE`       | JupyterHub PID file.                         | `${JUPYTERHUB_TMP_DIR}/jupyterhub.pid`            |
+| `JUPYTERHUB_PROXY_PID_FILE` | JupyterHub proxy PID file.                   | `${JUPYTERHUB_TMP_DIR}/jupyterhub-proxy.pid`      |
+| `JUPYTERHUB_DAEMON_USER`    | JupyterHub daemon system user.               | `jupyterhub`                                      |
+| `JUPYTERHUB_DAEMON_GROUP`   | JupyterHub daemon system group.              | `jupyterhub`                                      |
+
 ### Running commands
 
 To run commands inside this container you can use `docker run`, for example to execute `jupyterhub --version` you can follow the example below:
@@ -72,6 +104,12 @@ Check the [official Jupyter Hub documentation](https://jupyterhub.readthedocs.io
 docker run --rm --name jupyterhub bitnami/jupyterhub:latest --help-all
 ```
 
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/jupyterhub).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
@@ -82,7 +120,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

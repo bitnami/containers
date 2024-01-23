@@ -1,0 +1,14 @@
+{
+    "kong-ingress-controller": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "3.0.2-0"
+    },
+    "wait-for-port": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.0.7-5"
+    }
+}

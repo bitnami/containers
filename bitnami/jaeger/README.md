@@ -9,17 +9,17 @@
 ## TL;DR
 
 ```console
-docker run --name v bitnami/jaeger:latest
+docker run --name jaeger bitnami/jaeger:latest
 ```
 
 ## Why use Bitnami Images?
 
-- Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
-- With Bitnami images the latest bug fixes and features are available as soon as possible.
-- Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-- All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
-- All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
-- Bitnami container images are released on a regular basis with the latest distribution packages available.
+* Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
+* With Bitnami images the latest bug fixes and features are available as soon as possible.
+* Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
+* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use jaeger in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
 
@@ -59,6 +59,47 @@ Non-root container images add an extra layer of security and are generally recom
 
 ## Configuration
 
+### Environment variables
+
+#### Customizable environment variables
+
+| Name                                        | Description                                                                | Default Value |
+|---------------------------------------------|----------------------------------------------------------------------------|---------------|
+| `JAEGER_USERNAME`                           | Jaeger username.                                                           | `user`        |
+| `JAEGER_PASSWORD`                           | Jaeger password.                                                           | `bitnami`     |
+| `JAEGER_AGENT_ZIPKIN_UDP_PORT_NUMBER`       | Jaeger Agent UDP port. Accept zipkin.thrift over compact thrift protocol   | `5775`        |
+| `JAEGER_AGENT_COMPACT_UDP_PORT_NUMBER`      | Jaeger Agent UDP port. Accept jaeger.thrift over compact thrift protocol   | `6831`        |
+| `JAEGER_AGENT_BINARY_UDP_PORT_NUMBER`       | Jaeger Agent UDP port. Accept jaeger.thrift over binary thrift protocol    | `6832`        |
+| `JAEGER_AGENT_HTTP_PORT_NUMBER`             | Jaeger Agent HTTP port. Serve configs.                                     | `5778`        |
+| `JAEGER_QUERY_HTTP_PORT_NUMBER`             | Jaeger Query HTTP port.                                                    | `16686`       |
+| `JAEGER_QUERY_GRPC_PORT_NUMBER`             | Jaeger Query GRPC port.                                                    | `16685`       |
+| `JAEGER_COLLECTOR_HTTP_PORT_NUMBER`         | Jaeger Collector HTTP port. Accept jaeger.thrift directly from clients     | `14268`       |
+| `JAEGER_COLLECTOR_GRPC_PORT_NUMBER`         | Jaeger Collector GRPC port. Accept jaeger.thrift directly from clients     | `14250`       |
+| `JAEGER_ADMIN_HTTP_PORT_NUMBER`             | Jaeger Admin port.                                                         | `14269`       |
+| `JAEGER_APACHE_COLLECTOR_HTTP_PORT_NUMBER`  | Jaeger Collector HTTP port, exposed via Apache with basic authentication.  | `14270`       |
+| `JAEGER_APACHE_COLLECTOR_HTTPS_PORT_NUMBER` | Jaeger Collector HTTPS port, exposed via Apache with basic authentication. | `14271`       |
+| `SPAN_STORAGE_TYPE`                         | Jaeger storage type.                                                       | `cassandra`   |
+| `JAEGER_CASSANDRA_HOST`                     | Cassandra server host.                                                     | `127.0.0.1`   |
+| `JAEGER_CASSANDRA_PORT_NUMBER`              | Cassandra server port.                                                     | `9042`        |
+| `JAEGER_CASSANDRA_KEYSPACE`                 | Cassandra keyspace.                                                        | `bn_jaeger`   |
+| `JAEGER_CASSANDRA_DATACENTER`               | Cassandra keyspace.                                                        | `dc1`         |
+| `JAEGER_CASSANDRA_USER`                     | Cassandra user name.                                                       | `cassandra`   |
+
+#### Read-only environment variables
+
+| Name                  | Description                        | Value                           |
+|-----------------------|------------------------------------|---------------------------------|
+| `JAEGER_BASE_DIR`     | Jaeger installation directory.     | `${BITNAMI_ROOT_DIR}/jaeger`    |
+| `JAEGER_BIN_DIR`      | Jaeger directory for binary files. | `${JAEGER_BASE_DIR}/bin`        |
+| `JAEGER_CONF_DIR`     | Jaeger configuration directory.    | `${JAEGER_BASE_DIR}/conf`       |
+| `JAEGER_CONF_FILE`    | Jaeger configuration file.         | `${JAEGER_CONF_DIR}/jaeger.yml` |
+| `JAEGER_LOGS_DIR`     | Jaeger logs directory.             | `${JAEGER_BASE_DIR}/logs`       |
+| `JAEGER_LOG_FILE`     | Jaeger log file.                   | `${JAEGER_LOGS_DIR}/jaeger.log` |
+| `JAEGER_TMP_DIR`      | Jaeger temporary directory.        | `${JAEGER_BASE_DIR}/tmp`        |
+| `JAEGER_PID_FILE`     | Jaeger PID file.                   | `${JAEGER_TMP_DIR}/jaeger.pid`  |
+| `JAEGER_DAEMON_USER`  | Jaeger daemon system user.         | `jaeger`                        |
+| `JAEGER_DAEMON_GROUP` | Jaeger daemon system group.        | `jaeger`                        |
+
 ### Running commands
 
 To run commands inside this container you can use `docker run`, for example to execute `jaeger-all-in-one --help` you can follow the example below:
@@ -68,6 +109,12 @@ docker run --rm --name jaeger bitnami/jaeger:latest --help
 ```
 
 Check the [official jaeger documentation](https://www.jaegertracing.io//docs) for more information.
+
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/jaeger).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## Contributing
 
@@ -79,7 +126,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -1,4 +1,4 @@
-# Tensorflow packaged by Bitnami
+# Bitnami package for Tensorflow
 
 ## What is Tensorflow?
 
@@ -13,23 +13,16 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run -it --name tensorflow bitnami/tensorflow
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/tensorflow/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ## Why use Bitnami Images?
 
-- Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
-- With Bitnami images the latest bug fixes and features are available as soon as possible.
-- Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-- All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
-- All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
-- Bitnami container images are released on a regular basis with the latest distribution packages available.
+* Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
+* With Bitnami images the latest bug fixes and features are available as soon as possible.
+* Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
+* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* Bitnami container images are released on a regular basis with the latest distribution packages available.
 
-Looking to use Tensorflow in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+Looking to use Tensorflow in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
 
 ## Why use a non-root container?
 
@@ -90,7 +83,7 @@ If your Tensorflow app has a `requirements.txt` defining your app's dependencies
 
 ```console
 docker run -it --name tensorflow -v /path/to/app:/app bitnami/tensorflow \
-  sh -c "pip install --file requirements.txt && python script.py"
+  sh -c "pip install -r requirements.txt && python script.py"
 ```
 
 **Further Reading:**
@@ -109,18 +102,10 @@ Bitnami provides up-to-date versions of Tensorflow, including security patches, 
 docker pull bitnami/tensorflow:latest
 ```
 
-or if you're using Docker Compose, update the value of the image property to `bitnami/tensorflow:latest`.
-
 #### Step 2: Remove the currently running container
 
 ```console
 docker rm -v tensorflow
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v tensorflow
 ```
 
 #### Step 3: Run the new image
@@ -131,11 +116,11 @@ Re-create your container from the new image.
 docker run --name tensorflow bitnami/tensorflow:latest
 ```
 
-or using Docker Compose:
+## Notable Changes
 
-```console
-docker-compose up tensorflow
-```
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 
@@ -147,7 +132,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

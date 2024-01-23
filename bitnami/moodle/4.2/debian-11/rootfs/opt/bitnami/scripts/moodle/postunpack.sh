@@ -48,6 +48,7 @@ web_server_validate
 ensure_web_server_app_configuration_exists "moodle" --type php --apache-additional-configuration '
 RewriteEngine On
 
+RewriteRule ^/phpmyadmin - [L,NC]
 RewriteRule "(\/vendor\/)" - [F]
 RewriteRule "(\/node_modules\/)" - [F]
 RewriteRule "(^|/)\.(?!well-known\/)" - [F]

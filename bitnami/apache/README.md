@@ -1,4 +1,4 @@
-# Apache packaged by Bitnami
+# Bitnami package for Apache
 
 ## What is Apache?
 
@@ -13,13 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name apache bitnami/apache:latest
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/apache/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 You can find the available configuration options in the [Environment Variables](#environment-variables) section.
 
 ## Why use Bitnami Images?
@@ -27,7 +20,7 @@ You can find the available configuration options in the [Environment Variables](
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -126,6 +119,34 @@ Access your web server in the browser by navigating to `http://localhost:8080/`.
 
 ### Environment variables
 
+#### Customizable environment variables
+
+| Name                   | Description                    | Default Value |
+|------------------------|--------------------------------|---------------|
+| `APACHE_SERVER_TOKENS` | Apache ServerTokens directive. | `Prod`        |
+
+#### Read-only environment variables
+
+| Name                               | Description                                               | Value                           |
+|------------------------------------|-----------------------------------------------------------|---------------------------------|
+| `WEB_SERVER_TYPE`                  | Web server type                                           | `apache`                        |
+| `APACHE_BASE_DIR`                  | Apache installation directory.                            | `${BITNAMI_ROOT_DIR}/apache`    |
+| `APACHE_BIN_DIR`                   | Apache directory for binary executables.                  | `${APACHE_BASE_DIR}/bin`        |
+| `APACHE_CONF_DIR`                  | Apache configuration directory.                           | `${APACHE_BASE_DIR}/conf`       |
+| `APACHE_HTDOCS_DIR`                | Directory containing HTTP files to serve via Apache.      | `${APACHE_BASE_DIR}/htdocs`     |
+| `APACHE_TMP_DIR`                   | Apache directory for runtime temporary files.             | `${APACHE_BASE_DIR}/var/run`    |
+| `APACHE_LOGS_DIR`                  | Apache directory for logs.                                | `${APACHE_BASE_DIR}/logs`       |
+| `APACHE_VHOSTS_DIR`                | Apache directory for virtual hosts.                       | `${APACHE_CONF_DIR}/vhosts`     |
+| `APACHE_HTACCESS_DIR`              | Apache directory for htaccess files.                      | `${APACHE_VHOSTS_DIR}/htaccess` |
+| `APACHE_CONF_FILE`                 | Path to the Apache configuration.                         | `${APACHE_CONF_DIR}/httpd.conf` |
+| `APACHE_PID_FILE`                  | Path to the Apache PID file.                              | `${APACHE_TMP_DIR}/httpd.pid`   |
+| `APACHE_DAEMON_USER`               | Apache system user.                                       | `daemon`                        |
+| `APACHE_DAEMON_GROUP`              | Apache system group.                                      | `daemon`                        |
+| `APACHE_DEFAULT_HTTP_PORT_NUMBER`  | Default Apache HTTP port number to enable at build time.  | `8080`                          |
+| `APACHE_DEFAULT_HTTP_PORT_NUMBER`  | Default Apache HTTP port number to enable at build time.  | `80`                            |
+| `APACHE_DEFAULT_HTTPS_PORT_NUMBER` | Default Apache HTTPS port number to enable at build time. | `8443`                          |
+| `APACHE_DEFAULT_HTTPS_PORT_NUMBER` | Default Apache HTTPS port number to enable at build time. | `443`                           |
+
 When you start the Apache image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
 * For docker-compose add the variable name and value under the application section:
@@ -151,11 +172,6 @@ docker run -d --name apache -p 80:8081 -p 443:443 \
   --e APACHE_HTTP_PORT_NUMBER=8081 \
   bitnami/apache:latest
 ```
-
-Available variables:
-
-* `APACHE_HTTP_PORT_NUMBER`: Port used by Apache for HTTP. Default: **8080**
-* `APACHE_HTTPS_PORT_NUMBER`: Port used by Apache for HTTPS. Default: **8443**
 
 ### Adding custom virtual hosts
 
@@ -492,6 +508,12 @@ docker-compose up apache
 
 * The `/app` directory is no longer exported as a volume. This caused problems when building on top of the image, since changes in the volume are not persisted between Dockerfile `RUN` instructions. To keep the previous behavior (so that you can mount the volume in another container), create the container with the `-v /app` option.
 
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/apache).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
@@ -502,7 +524,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

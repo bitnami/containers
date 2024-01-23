@@ -1,4 +1,4 @@
-# MariaDB packaged by Bitnami
+# Bitnami package for MariaDB
 
 ## What is MariaDB?
 
@@ -13,13 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name mariadb -e ALLOW_EMPTY_PASSWORD=yes bitnami/mariadb:latest
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/mariadb/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 **Warning**: These quick setups are only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
 
 ## Why use Bitnami Images?
@@ -27,7 +20,7 @@ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -174,6 +167,49 @@ docker-compose up -d
 ```
 
 ## Configuration
+
+### Environment variables
+
+#### Customizable environment variables
+
+| Name                              | Description                                                                                                               | Default Value |
+|-----------------------------------|---------------------------------------------------------------------------------------------------------------------------|---------------|
+| `ALLOW_EMPTY_PASSWORD`            | Allow MariaDB access without any password.                                                                                | `no`          |
+| `MARIADB_ROOT_USER`               | MariaDB database root user.                                                                                               | `root`        |
+| `MARIADB_MASTER_PORT_NUMBER`      | Port number for the MariaDB master node.                                                                                  | `3306`        |
+| `MARIADB_MASTER_ROOT_USER`        | MariaDB database root user of the master host.                                                                            | `root`        |
+| `MARIADB_MASTER_DELAY`            | MariaDB database replication delay.                                                                                       | `0`           |
+| `MARIADB_REPLICATION_SLAVE_DUMP`  | Make a dump on master and update slave MariaDB database                                                                   | `false`       |
+| `MARIADB_SKIP_TEST_DB`            | Whether to skip creating the test database.                                                                               | `no`          |
+| `MARIADB_CLIENT_ENABLE_SSL`       | Whether to force SSL for connections to the MariaDB database.                                                             | `no`          |
+| `MARIADB_CLIENT_EXTRA_FLAGS`      | Whether to force SSL connections with the "mysql" CLI tool. Useful for applications that rely on the CLI instead of APIs. | `no`          |
+| `MARIADB_STARTUP_WAIT_RETRIES`    | Number of retries waiting for the database to be running.                                                                 | `300`         |
+| `MARIADB_STARTUP_WAIT_SLEEP_TIME` | Sleep time between retries waiting for the database to be running.                                                        | `2`           |
+| `MARIADB_ENABLE_SLOW_QUERY`       | Whether to enable slow query logs.                                                                                        | `0`           |
+| `MARIADB_LONG_QUERY_TIME`         | How much time, in seconds, defines a slow query.                                                                          | `10.0`        |
+
+#### Read-only environment variables
+
+| Name                            | Description                                                  | Value                           |
+|---------------------------------|--------------------------------------------------------------|---------------------------------|
+| `DB_FLAVOR`                     | SQL database flavor. Valid values: `mariadb` or `mysql`.     | `mariadb`                       |
+| `DB_BASE_DIR`                   | Base path for MariaDB files.                                 | `${BITNAMI_ROOT_DIR}/mariadb`   |
+| `DB_VOLUME_DIR`                 | MariaDB directory for persisted files.                       | `${BITNAMI_VOLUME_DIR}/mariadb` |
+| `DB_DATA_DIR`                   | MariaDB directory for data files.                            | `${DB_VOLUME_DIR}/data`         |
+| `DB_BIN_DIR`                    | MariaDB directory where executable binary files are located. | `${DB_BASE_DIR}/bin`            |
+| `DB_SBIN_DIR`                   | MariaDB directory where service binary files are located.    | `${DB_BASE_DIR}/sbin`           |
+| `DB_CONF_DIR`                   | MariaDB configuration directory.                             | `${DB_BASE_DIR}/conf`           |
+| `DB_LOGS_DIR`                   | MariaDB logs directory.                                      | `${DB_BASE_DIR}/logs`           |
+| `DB_TMP_DIR`                    | MariaDB directory for temporary files.                       | `${DB_BASE_DIR}/tmp`            |
+| `DB_CONF_FILE`                  | Main MariaDB configuration file.                             | `${DB_CONF_DIR}/my.cnf`         |
+| `DB_PID_FILE`                   | MariaDB PID file.                                            | `${DB_TMP_DIR}/mysqld.pid`      |
+| `DB_SOCKET_FILE`                | MariaDB Server socket file.                                  | `${DB_TMP_DIR}/mysql.sock`      |
+| `DB_DAEMON_USER`                | Users that will execute the MariaDB Server process.          | `mysql`                         |
+| `DB_DAEMON_GROUP`               | Group that will execute the MariaDB Server process.          | `mysql`                         |
+| `MARIADB_DEFAULT_PORT_NUMBER`   | Default port number to use for the MariaDB Server service.   | `3306`                          |
+| `MARIADB_DEFAULT_CHARACTER_SET` | Default MariaDB character set.                               | `utf8mb4`                       |
+| `MARIADB_DEFAULT_BIND_ADDRESS`  | Default MariaDB bind address.                                | `0.0.0.0`                       |
+| `MARIADB_DISABLE_SERVICE`       | Whether to disable the MariaDB service by default.           | `no`                            |
 
 ### Initializing a new instance
 
@@ -729,6 +765,12 @@ $ docker-compose up -d
 * All volumes have been merged at `/bitnami/mariadb`. Now you only need to mount a single volume at `/bitnami/mariadb` for persistence.
 * The logs are always sent to the `stdout` and are no longer collected in the volume.
 
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/mariadb).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
@@ -739,7 +781,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

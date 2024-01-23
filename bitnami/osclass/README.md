@@ -1,4 +1,4 @@
-# Osclass packaged by Bitnami
+# Bitnami package for Osclass
 
 ## What is Osclass?
 
@@ -10,20 +10,20 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/osclass/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run --name osclass bitnami/osclass:latest
 ```
 
-**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
+**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure d
+eployment.
 
 ## Why use Bitnami Images?
 
-- Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
-- With Bitnami images the latest bug fixes and features are available as soon as possible.
-- Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-- All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
-- All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
-- Bitnami container images are released on a regular basis with the latest distribution packages available.
+* Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
+* With Bitnami images the latest bug fixes and features are available as soon as possible.
+* Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
+* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use Osclass in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
 
@@ -71,18 +71,7 @@ docker build -t bitnami/APP:latest .
 
 Osclass requires access to a MySQL or MariaDB database to store information. We'll use the [Bitnami Docker Image for MariaDB](https://github.com/bitnami/containers/tree/main/bitnami/mariadb) for the database requirements.
 
-### Run the application using Docker Compose
-
-The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/osclass/docker-compose.yml) file. Run the application using it as shown below:
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/osclass/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ### Using the Docker Command Line
-
-If you want to run the application manually instead of using `docker-compose`, these are the basic steps you need to run:
 
 #### Step 1: Create a network
 
@@ -120,6 +109,17 @@ docker run -d --name osclass \
 ```
 
 Access your application at `http://your-ip/`
+
+### Run the application using Docker Compose
+
+```console
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/osclass/docker-compose.yml > docker-compose.yml
+docker-compose up -d
+```
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/osclass).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## Persisting your application
 
@@ -196,9 +196,34 @@ docker run -d --name osclass \
 
 ### Environment variables
 
+#### Customizable environment variables
+
+| Name                           | Description                                                                                                                   | Default Value                                                                                                  |
+|--------------------------------|-------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| `OSCLASS_DATA_TO_PERSIST`      | Files to persist relative to the Osclass installation directory. To provide multiple values, separate them with a whitespace. | `config.php oc-content/uploads oc-content/downloads oc-content/languages oc-content/plugins oc-content/themes` |
+| `OSCLASS_USERNAME`             | Osclass user name.                                                                                                            | `user`                                                                                                         |
+| `OSCLASS_PASSWORD`             | Osclass user password.                                                                                                        | `bitnami`                                                                                                      |
+| `OSCLASS_EMAIL`                | Osclass user e-mail address.                                                                                                  | `user@example.com`                                                                                             |
+| `OSCLASS_WEB_TITLE`            | Osclass web title.                                                                                                            | `Sample Web Page`                                                                                              |
+| `OSCLASS_DATABASE_HOST`        | Database server host.                                                                                                         | `$OSCLASS_DEFAULT_DATABASE_HOST`                                                                               |
+| `OSCLASS_DATABASE_PORT_NUMBER` | Database server port.                                                                                                         | `3306`                                                                                                         |
+| `OSCLASS_DATABASE_NAME`        | Database name.                                                                                                                | `bitnami_osclass`                                                                                              |
+| `OSCLASS_DATABASE_USER`        | Database user name.                                                                                                           | `bn_osclass`                                                                                                   |
+
+#### Read-only environment variables
+
+| Name                            | Description                                        | Value                            |
+|---------------------------------|----------------------------------------------------|----------------------------------|
+| `OSCLASS_BASE_DIR`              | Osclass installation directory.                    | `${BITNAMI_ROOT_DIR}/osclass`    |
+| `OSCLASS_CONF_FILE`             | Configuration file for Osclass.                    | `${OSCLASS_BASE_DIR}/config.php` |
+| `OSCLASS_VOLUME_DIR`            | Osclass directory for mounted configuration files. | `${BITNAMI_VOLUME_DIR}/osclass`  |
+| `OSCLASS_DEFAULT_DATABASE_HOST` | Default database server host.                      | `mariadb`                        |
+| `OSCLASS_DEFAULT_DATABASE_HOST` | Default database server host.                      | `127.0.0.1`                      |
+| `PHP_DEFAULT_MEMORY_LIMIT`      | Default PHP memory limit.                          | `256M`                           |
+
 When you start the Osclass image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
-- For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/osclass/docker-compose.yml) file present in this repository:
+* For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/osclass/docker-compose.yml) file present in this repository:
 
     ```yaml
     osclass:
@@ -208,7 +233,7 @@ When you start the Osclass image, you can adjust the configuration of the instan
       ...
     ```
 
-- For manual execution add a `--env` option with each variable and value:
+* For manual execution add a `--env` option with each variable and value:
 
     ```console
     $ docker run -d --name osclass -p 80:8080 -p 443:8443 \
@@ -218,70 +243,13 @@ When you start the Osclass image, you can adjust the configuration of the instan
       bitnami/osclass:latest
     ```
 
-Available environment variables:
+### Examples
 
-#### User and Site configuration
-
-- `APACHE_HTTP_PORT_NUMBER`: Port used by Apache for HTTP. Default: **8080**
-- `APACHE_HTTPS_PORT_NUMBER`: Port used by Apache for HTTPS. Default: **8443**
-- `OSCLASS_USERNAME`: Osclass application username. Default: **user**
-- `OSCLASS_PASSWORD`: Osclass application password. Default: **bitnami**
-- `OSCLASS_EMAIL`: Osclass application email. Default: **user@example.com**
-- `OSCLASS_WEB_TITLE`: Osclass application title. Default: **Sample Web Page**
-- `OSCLASS_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. This is necessary in case you use a database that already has Osclass data. Default: **no**
-
-#### Database connection configuration
-
-- `OSCLASS_DATABASE_HOST`: Hostname for the MariaDB or MySQL server. Default: **mariadb**
-- `OSCLASS_DATABASE_PORT_NUMBER`: Port used by the MariaDB or MySQL server. Default: **3306**
-- `OSCLASS_DATABASE_NAME`: Database name that Osclass will use to connect with the database. Default: **bitnami_osclass**
-- `OSCLASS_DATABASE_USER`: Database user that Osclass will use to connect with the database. Default: **bn_osclass**
-- `OSCLASS_DATABASE_PASSWORD`: Database password that Osclass will use to connect with the database. No defaults.
-- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-#### Create a database for Osclass using mysql-client
-
-- `MYSQL_CLIENT_DATABASE_HOST`: Hostname for the MariaDB or MySQL server. Default: **mariadb**
-- `MYSQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by the MariaDB or MySQL server. Default: **3306**
-- `MYSQL_CLIENT_DATABASE_ROOT_USER`: Database admin user. Default: **root**
-- `MYSQL_CLIENT_DATABASE_ROOT_PASSWORD`: Database password for the database admin user. No defaults.
-- `MYSQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No defaults.
-- `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No defaults.
-- `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
-- `MYSQL_CLIENT_CREATE_DATABASE_CHARACTER_SET`: Character set to use for the new database. No defaults.
-- `MYSQL_CLIENT_CREATE_DATABASE_COLLATE`: Database collation to use for the new database. No defaults.
-- `MYSQL_CLIENT_ENABLE_SSL`: Whether to enable SSL connections for the new database. Default: **no**
-- `MYSQL_CLIENT_SSL_CA_FILE`: Path to the SSL CA file for the new database. No defaults
-- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-#### SMTP Configuration
-
-To configure Osclass to send email using SMTP you can set the following environment variables:
-
-- `OSCLASS_SMTP_HOST`: SMTP host.
-- `OSCLASS_SMTP_PORT`: SMTP port.
-- `OSCLASS_SMTP_USER`: SMTP account user.
-- `OSCLASS_SMTP_PASSWORD`: SMTP account password.
-
-#### PHP configuration
-
-- `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. Default: **yes**
-- `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
-- `PHP_MAX_EXECUTION_TIME`: Maximum execution time for PHP scripts. No default.
-- `PHP_MAX_INPUT_TIME`: Maximum input time for PHP scripts. No default.
-- `PHP_MAX_INPUT_VARS`: Maximum amount of input variables for PHP scripts. No default.
-- `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
-- `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
-- `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
-- `PHP_OUTPUT_BUFFERING`: Size of the output buffer for PHP. Default: **8196**
-
-#### Examples
-
-##### SMTP configuration using a Gmail account
+#### SMTP configuration using a Gmail account
 
 This would be an example of SMTP configuration using a Gmail account:
 
-- Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/osclass/docker-compose.yml) file present in this repository:
+* Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/osclass/docker-compose.yml) file present in this repository:
 
     ```yaml
       osclass:
@@ -297,7 +265,7 @@ This would be an example of SMTP configuration using a Gmail account:
       ...
     ```
 
-- For manual execution:
+* For manual execution:
 
     ```console
     $ docker run -d --name osclass -p 80:8080 -p 443:8443 \
@@ -312,11 +280,11 @@ This would be an example of SMTP configuration using a Gmail account:
       bitnami/osclass:latest
     ```
 
-##### Connect Osclass container to an existing database
+#### Connect Osclass container to an existing database
 
 The Bitnami Osclass container supports connecting the Osclass application to an external database. This would be an example of using an external database for Osclass.
 
-- Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/osclass/docker-compose.yml) file present in this repository:
+* Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/osclass/docker-compose.yml) file present in this repository:
 
     ```diff
        osclass:
@@ -332,7 +300,7 @@ The Bitnami Osclass container supports connecting the Osclass application to an 
          ...
     ```
 
-- For manual execution:
+* For manual execution:
 
     ```console
     $ docker run -d --name osclass\
@@ -464,10 +432,10 @@ The Bitnami Osclass Docker image is designed to be extended so it can be used as
 
 Before extending this image, please note there are certain configuration settings you can modify using the original image:
 
-- Settings that can be adapted using environment variables. For instance, you can change the ports used by Apache for HTTP and HTTPS, by setting the environment variables `APACHE_HTTP_PORT_NUMBER` and `APACHE_HTTPS_PORT_NUMBER` respectively.
-- [Adding custom virtual hosts](https://github.com/bitnami/containers/blob/main/bitnami/apache#adding-custom-virtual-hosts).
-- [Replacing the 'httpd.conf' file](https://github.com/bitnami/containers/blob/main/bitnami/apache#full-configuration).
-- [Using custom SSL certificates](https://github.com/bitnami/containers/blob/main/bitnami/apache#using-custom-ssl-certificates).
+* Settings that can be adapted using environment variables. For instance, you can change the ports used by Apache for HTTP and HTTPS, by setting the environment variables `APACHE_HTTP_PORT_NUMBER` and `APACHE_HTTPS_PORT_NUMBER` respectively.
+* [Adding custom virtual hosts](https://github.com/bitnami/containers/blob/main/bitnami/apache#adding-custom-virtual-hosts).
+* [Replacing the 'httpd.conf' file](https://github.com/bitnami/containers/blob/main/bitnami/apache#full-configuration).
+* [Using custom SSL certificates](https://github.com/bitnami/containers/blob/main/bitnami/apache#using-custom-ssl-certificates).
 
 If your desired customizations cannot be covered using the methods mentioned above, extend the image. To do so, create your own image using a Dockerfile with the format below:
 
@@ -479,9 +447,9 @@ FROM bitnami/osclass
 
 Here is an example of extending the image with the following modifications:
 
-- Install the `vim` editor
-- Modify the Apache configuration file
-- Modify the ports used by Apache
+* Install the `vim` editor
+* Modify the Apache configuration file
+* Modify the ports used by Apache
 
 ```Dockerfile
 FROM bitnami/osclass
@@ -523,11 +491,11 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
 
 ### 4.4.0-debian-10-r12
 
-- The size of the container image has been decreased.
-- The configuration logic is now based on Bash scripts in the *rootfs/* folder.
-- The Osclass container image has been migrated to a "non-root" user approach. Previously the container ran as the `root` user and the Apache daemon was started as the `daemon` user. From now on, both the container and the Apache daemon run as user `1001`. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile, or `user: root` in `docker-compose.yml`. Consequences:
-  - The HTTP/HTTPS ports exposed by the container are now `8080/8443` instead of `80/443`.
-  - Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating the Osclass site by exporting its content, and importing it on a new Osclass container. Follow the steps in [Backing up your container](#backing-up-your-container) and [Restoring a backup](#restoring-a-backup) to migrate the data between the old and new container.
+* The size of the container image has been decreased.
+* The configuration logic is now based on Bash scripts in the *rootfs/* folder.
+* The Osclass container image has been migrated to a "non-root" user approach. Previously the container ran as the `root` user and the Apache daemon was started as the `daemon` user. From now on, both the container and the Apache daemon run as user `1001`. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile, or `user: root` in `docker-compose.yml`. Consequences:
+  * The HTTP/HTTPS ports exposed by the container are now `8080/8443` instead of `80/443`.
+  * Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating the Osclass site by exporting its content, and importing it on a new Osclass container. Follow the steps in [Backing up your container](#backing-up-your-container) and [Restoring a backup](#restoring-a-backup) to migrate the data between the old and new container.
 
 To upgrade a previous Bitnami Osclass container image, which did not support non-root, the easiest way is to start the new image as a root user and updating the port numbers. Modify your docker-compose.yml file as follows:
 
@@ -544,10 +512,10 @@ To upgrade a previous Bitnami Osclass container image, which did not support non
 
 ### 3.7.4-debian-9-r254 and 3.7.4-ol-7-r322
 
-- This image has been adapted so it's easier to customize. See the [Customize this image](#customize-this-image) section for more information.
-- The Apache configuration volume (`/bitnami/apache`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the Apache configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom Apache configuration files are advised to mount a volume for the configuration at `/opt/bitnami/apache/conf`, or mount specific configuration files individually.
-- The PHP configuration volume (`/bitnami/php`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the PHP configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom PHP configuration files are advised to mount a volume for the configuration at `/opt/bitnami/php/conf`, or mount specific configuration files individually.
-- Enabling custom Apache certificates by placing them at `/opt/bitnami/apache/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`.
+* This image has been adapted so it's easier to customize. See the [Customize this image](#customize-this-image) section for more information.
+* The Apache configuration volume (`/bitnami/apache`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the Apache configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom Apache configuration files are advised to mount a volume for the configuration at `/opt/bitnami/apache/conf`, or mount specific configuration files individually.
+* The PHP configuration volume (`/bitnami/php`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the PHP configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom PHP configuration files are advised to mount a volume for the configuration at `/opt/bitnami/php/conf`, or mount specific configuration files individually.
+* Enabling custom Apache certificates by placing them at `/opt/bitnami/apache/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`.
 
 ## Contributing
 
@@ -559,7 +527,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

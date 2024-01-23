@@ -17,7 +17,7 @@ docker run --name ksql bitnami/ksql:latest
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -53,6 +53,37 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
+## Environment variables
+
+### Customizable environment variables
+
+| Name                    | Description                                                                                   | Default Value            |
+|-------------------------|-----------------------------------------------------------------------------------------------|--------------------------|
+| `KSQL_MOUNTED_CONF_DIR` | Directory for including custom configuration files (that override the default generated ones) | `${KSQL_VOLUME_DIR}/etc` |
+
+### Read-only environment variables
+
+| Name                             | Description                                                                               | Value                                     |
+|----------------------------------|-------------------------------------------------------------------------------------------|-------------------------------------------|
+| `KSQL_BASE_DIR`                  | Base path for KSQL files.                                                                 | `${BITNAMI_ROOT_DIR}/ksql`                |
+| `KSQL_VOLUME_DIR`                | KSQL directory for persisted files.                                                       | `${BITNAMI_VOLUME_DIR}/ksql`              |
+| `KSQL_DATA_DIR`                  | KSQL data directory.                                                                      | `${KSQL_VOLUME_DIR}/data`                 |
+| `KSQL_BIN_DIR`                   | KSQL bin directory.                                                                       | `${KSQL_BASE_DIR}/bin`                    |
+| `KSQL_CONF_DIR`                  | KSQL configuration directory.                                                             | `${KSQL_BASE_DIR}/etc/ksqldb`             |
+| `KSQL_LOGS_DIR`                  | KSQL logs directory.                                                                      | `${KSQL_BASE_DIR}/logs`                   |
+| `KSQL_CONF_FILE`                 | Main KSQL configuration file.                                                             | `${KSQL_CONF_DIR}/ksql-server.properties` |
+| `KSQL_CERTS_DIR`                 | KSQL certificates directory.                                                              | `${KSQL_BASE_DIR}/certs`                  |
+| `KSQL_DAEMON_USER`               | Users that will execute the KSQL Server process.                                          | `ksql`                                    |
+| `KSQL_DAEMON_GROUP`              | Group that will execute the KSQL Server process.                                          | `ksql`                                    |
+| `KSQL_DEFAULT_LISTENERS`         | Comma-separated list of listeners that listen for API requests over either HTTP or HTTPS. | `http://0.0.0.0:8088`                     |
+| `KSQL_DEFAULT_BOOTSTRAP_SERVERS` | List of Kafka brokers to bootstrap Kafka cluster information from.                        | `localhost:9092`                          |
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
@@ -63,7 +94,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

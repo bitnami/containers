@@ -1,4 +1,4 @@
-# Multus CNI packaged by Bitnami
+# Bitnami package for Multus CNI
 
 ## What is Multus CNI?
 
@@ -11,14 +11,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-docker run -it --name multus-cni bitnami/multus-cni
-```
-
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/multus-cni/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run -it --name multus-cni bitnami/multus-cni:latest
 ```
 
 ## Why use Bitnami Images?
@@ -26,7 +19,7 @@ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -74,18 +67,10 @@ Bitnami provides up-to-date versions of Multus CNI, including security patches, 
 docker pull bitnami/multus-cni:latest
 ```
 
-or if you're using Docker Compose, update the value of the image property to `bitnami/multus-cni:latest`.
-
 #### Step 2: Remove the currently running container
 
 ```console
 docker rm -v multus-cni
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v multus-cni
 ```
 
 #### Step 3: Run the new image
@@ -94,12 +79,6 @@ Re-create your container from the new image.
 
 ```console
 docker run --name multus-cni bitnami/multus-cni:latest
-```
-
-or using Docker Compose:
-
-```console
-docker-compose up multus-cni
 ```
 
 ## Configuration
@@ -114,6 +93,12 @@ docker run --rm --entrypoint /opt/bitnami/multus-cni/bin/multus-daemon --name mu
 
 Check the [official Multus CNI documentation](https://github.com/k8snetworkplumbingwg/multus-cni) for more information about how to use Multus CNI.
 
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
+
 ## Contributing
 
 We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
@@ -124,7 +109,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
