@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2024-01-03T08:26:03Z" \
+      org.opencontainers.image.created="2024-01-23T17:28:35Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.1.0-1-debian-11-r2" \
+      org.opencontainers.image.ref.name="8.1.0-1-debian-11-r3" \
       org.opencontainers.image.title="percona-mysql" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="8.1.0-1"
@@ -27,9 +27,9 @@ RUN install_packages ca-certificates curl libaio1 libaudit1 libbrotli1 libbz2-1.
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "percona-xtrabackup-binary-8.1.0-1-1-linux-${OS_ARCH}-debian-11" \
-      "ini-file-1.4.6-4-linux-${OS_ARCH}-debian-11" \
-      "percona-mysql-8.1.0-1-2-linux-${OS_ARCH}-debian-11" \
       "mysql-shell-8.1.1-0-linux-${OS_ARCH}-debian-11" \
+      "ini-file-1.4.6-5-linux-${OS_ARCH}-debian-11" \
+      "percona-mysql-8.1.0-1-2-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -44,6 +44,7 @@ RUN apt-get autoremove --purge -y curl && \
     apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
+RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
