@@ -8,11 +8,8 @@
 
 ## TL;DR
 
-### Docker Compose
-
 ```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/spring-cloud-skipper/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run --name spring-cloud-skipper bitnami/spring-cloud-skipper:latest
 ```
 
 ## Why use Bitnami Images?
@@ -99,6 +96,12 @@ A relational database is used to store stream and task definitions as well as th
 Consult the [spring-cloud-skipper Reference Documentation](https://docs.spring.io/spring-cloud-skipper/docs/current/reference/htmlsingle/#_local_platform_configuration) to find the completed list of documentation.
 
 In the same way, you might need to customize the JVM. Use the `JAVA_OPTS` environment variable for this purpose.
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 
