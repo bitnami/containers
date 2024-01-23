@@ -201,12 +201,11 @@ After that, your changes will be taken into account in the server's behaviour.
 By default, this container bundles a generic set of jar files but the default image can be extended to add as many jars as needed for your specific use case. For instance, the following Dockerfile adds [`aws-java-sdk-bundle-1.11.704.jar`](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-bundle/1.11.704):
 
 ```Dockerfile
-FROM curlimages/curl-base:latest as curl
-RUN curl https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.11.704/aws-java-sdk-bundle-1.11.704.jar --output /tmp/aws-java-sdk-bundle-1.11.704.jar
-
 FROM bitnami/spark
+USER root
+RUN install_packages curl
 USER 1001
-COPY --from=curl /tmp/aws-java-sdk-bundle-1.11.704.jar /opt/bitnami/spark/jars/aws-java-sdk-bundle-1.11.704.jar
+RUN curl https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.11.704/aws-java-sdk-bundle-1.11.704.jar --output /opt/bitnami/spark/jars/aws-java-sdk-bundle-1.11.704.jar
 ```
 
 #### Using a different version of Hadoop jars
