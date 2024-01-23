@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "6.0.12-3"
+        "version": "6.0.13-0"
     },
     "mongodb-shell": {
         "arch": "amd64",
