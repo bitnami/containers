@@ -3,6 +3,18 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.2.3-1"
+        "version": "10.3.1-0"
+    },
+    "ini-file": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.4.6-5"
+    },
+    "mysql-client": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "10.11.6-1"
     }
 }
