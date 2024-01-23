@@ -216,7 +216,8 @@ Go to <https://spark.apache.org/downloads.html> and copy the download url bundli
 
 ```Dockerfile
 FROM bitnami/spark:3.0.0
-
+USER root
+RUN install_packages curl
 USER 1001
 RUN rm -r /opt/bitnami/spark/jars && \
     curl --location http://mirror.cc.columbia.edu/pub/software/apache/spark/spark-3.0.0/spark-3.0.0-bin-hadoop2.7.tgz | \
