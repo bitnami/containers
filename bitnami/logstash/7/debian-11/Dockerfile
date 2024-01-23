@@ -9,13 +9,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2024-01-22T15:06:15Z" \
+      org.opencontainers.image.created="2024-01-23T19:27:41Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.17.16-debian-11-r2" \
+      org.opencontainers.image.ref.name="7.17.17-debian-11-r0" \
       org.opencontainers.image.title="logstash" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="7.17.16"
+      org.opencontainers.image.version="7.17.17"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -30,7 +30,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "yq-4.40.5-1-linux-${OS_ARCH}-debian-11" \
       "java-17.0.10-13-0-linux-${OS_ARCH}-debian-11" \
-      "logstash-7.17.16-0-linux-${OS_ARCH}-debian-11" \
+      "logstash-7.17.17-0-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -50,7 +50,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/logstash/postunpack.sh
-ENV APP_VERSION="7.17.16" \
+ENV APP_VERSION="7.17.17" \
     BITNAMI_APP_NAME="logstash" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:/opt/bitnami/logstash/bin:$PATH"
