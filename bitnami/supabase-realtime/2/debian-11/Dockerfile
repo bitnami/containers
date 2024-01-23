@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2024-01-20T05:13:18Z" \
+      org.opencontainers.image.created="2024-01-23T01:12:39Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.25.59-debian-11-r1" \
+      org.opencontainers.image.ref.name="2.25.60-debian-11-r0" \
       org.opencontainers.image.title="supabase-realtime" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.25.59"
+      org.opencontainers.image.version="2.25.60"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +26,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libgcc-s1 libssl1.1 libstdc++6 libtinfo6 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "supabase-realtime-2.25.59-0-linux-${OS_ARCH}-debian-11" \
+      "supabase-realtime-2.25.60-0-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -44,7 +44,7 @@ RUN useradd -r -u 1001 -g root supabase-realtime
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN chmod g+rwX -R /opt/bitnami/supabase-realtime/lib/tzdata-*/priv
 
-ENV APP_VERSION="2.25.59" \
+ENV APP_VERSION="2.25.60" \
     BITNAMI_APP_NAME="supabase-realtime" \
     PATH="/opt/bitnami/supabase-realtime/bin:$PATH"
 
