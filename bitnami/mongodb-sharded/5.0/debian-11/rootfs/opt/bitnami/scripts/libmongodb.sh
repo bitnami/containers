@@ -1278,7 +1278,7 @@ mongodb_wait_until_sync_complete() {
     info "Waiting until initial data sync is complete..."
 
     if ! retry_while "mongodb_is_not_in_sync" "$MONGODB_INIT_RETRY_ATTEMPTS" "$MONGODB_INIT_RETRY_DELAY" 1; then
-        error "Initial data sync did not finish after $MONGODB_MAX_TIMEOUT seconds"
+        error "Initial data sync did not finish after $((MONGODB_INIT_RETRY_ATTEMPTS * MONGODB_INIT_RETRY_DELAY)) seconds"
         exit 1
     else
         info "initial data sync completed"
