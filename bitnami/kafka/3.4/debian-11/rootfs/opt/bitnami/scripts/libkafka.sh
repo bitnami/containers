@@ -940,7 +940,6 @@ kafka_initialize() {
         kafka_configure_from_environment_variables
         # Configure Kafka producer/consumer to set up message sizes
         ! is_empty_value "${KAFKA_CFG_MAX_REQUEST_SIZE:-}" && kafka_common_conf_set "$KAFKA_CONF_DIR/producer.properties" max.request.size "$KAFKA_CFG_MAX_REQUEST_SIZE"
-        ! is_empty_value "${KAFKA_CFG_MESSAGE_MAX_BYTES:-}" && kafka_server_conf_set message.max.bytes "$KAFKA_CFG_MESSAGE_MAX_BYTES"
         ! is_empty_value "${KAFKA_CFG_MAX_PARTITION_FETCH_BYTES:-}" && kafka_common_conf_set "$KAFKA_CONF_DIR/consumer.properties" max.partition.fetch.bytes "$KAFKA_CFG_MAX_PARTITION_FETCH_BYTES"
         # Zookeeper mode additional settings
         if ! is_empty_value "${KAFKA_CFG_ZOOKEEPER_CONNECT:-}"; then
