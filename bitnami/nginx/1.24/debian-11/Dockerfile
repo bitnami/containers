@@ -40,6 +40,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     done
 RUN apt-get autoremove --purge -y curl && \
     apt-get update && apt-get upgrade -y && \
+    apt-get -y install gettext-base && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
