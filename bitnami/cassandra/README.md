@@ -196,6 +196,7 @@ docker-compose up -d
 | `CASSANDRA_INIT_SLEEP_TIME`                        | Sleep time for init startup operations.                                                 | `5`                                          |
 | `CASSANDRA_PEER_CQL_MAX_RETRIES`                   | Maximum retries for peer startup operations.                                            | `100`                                        |
 | `CASSANDRA_PEER_CQL_SLEEP_TIME`                    | Sleep time for peer startup operations.                                                 | `10`                                         |
+| `CASSANDRA_DELAY_START_TIME`                       | Delay Cassandra start for the provided number of seconds                                | `0`                                          |
 | `CASSANDRA_AUTO_SNAPSHOT_TTL`                      | Take an automatic snapshot of the data before truncating a keyspace or dropping a table | `30d`                                        |
 | `ALLOW_EMPTY_PASSWORD`                             | Allow no credentials in the installation.                                               | `no`                                         |
 | `CASSANDRA_AUTHORIZER`                             | Cassandra connection authorizer.                                                        | `CassandraAuthorizer`                        |

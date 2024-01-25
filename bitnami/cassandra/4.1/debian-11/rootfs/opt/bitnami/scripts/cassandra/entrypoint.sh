@@ -18,6 +18,11 @@ set -o pipefail
 
 print_welcome_page
 
+if is_positive_int $CASSANDRA_DELAY_START_TIME && [ $CASSANDRA_DELAY_START_TIME -gt 0 ]; then
+    info "** Delaying Cassandra start by $CASSANDRA_DELAY_START_TIME seconds **"
+    sleep $CASSANDRA_DELAY_START_TIME
+fi
+
 if [[ "$*" = *"/opt/bitnami/scripts/cassandra/run.sh"* || "$*" = *"/run.sh"* ]]; then
     info "** Starting Cassandra setup **"
     /opt/bitnami/scripts/cassandra/setup.sh
