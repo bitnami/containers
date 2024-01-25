@@ -215,13 +215,13 @@ In a similar way that in the previous section, you may want to use a different v
 Go to <https://spark.apache.org/downloads.html> and copy the download url bundling the Hadoop version you want and matching the Apache Spark version of the container. Extend the Bitnami container image as below:
 
 ```Dockerfile
-FROM bitnami/spark:3.0.0
+FROM bitnami/spark:3.5.0
 USER root
 RUN install_packages curl
 USER 1001
 RUN rm -r /opt/bitnami/spark/jars && \
-    curl --location http://mirror.cc.columbia.edu/pub/software/apache/spark/spark-3.0.0/spark-3.0.0-bin-hadoop2.7.tgz | \
-    tar --extract --gzip --strip=1 --directory /opt/bitnami/spark/ spark-3.0.0-bin-hadoop2.7/jars/
+    curl --location https://dlcdn.apache.org/spark/spark-3.5.0/spark-3.5.0-bin-hadoop3.tgz | \
+    tar --extract --gzip --strip=1 --directory /opt/bitnami/spark/ spark-3.5.0-bin-hadoop3/jars/
 ```
 
 You can check the Hadoop version by running the following commands in the new container image:
