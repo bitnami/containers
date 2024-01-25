@@ -22,7 +22,7 @@ ENV HOME="/" \
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
-## Install required system packages and dependencies
+### Install required system packages and dependencies
 RUN install_packages ca-certificates curl git krb5-user libbsd0 libbz2-1.0 libcdt5 libcgraph6 libcom-err2 libcrypt1 libedit2 libexpat1 libffi7 libgcc-s1 libgmp10 libgnutls30 libgss-dev libgssapi-krb5-2 libgvc6 libhogweed6 libicu67 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5-dev libkrb5support0 libldap-2.4-2 libltdl7 liblz4-1 liblzma5 libmariadb3 libmd0 libncursesw6 libnettle8 libnsl2 libp11-kit0 libpathplan4 libreadline8 libsasl2-2 libsasl2-modules libsqlite3-0 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtinfo6 libtirpc3 libunistring2 libuuid1 libxml2 libxmlsec1 libxmlsec1-openssl libxslt1.1 locales netbase procps tzdata zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
