@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2024-01-20T01:28:03Z" \
+      org.opencontainers.image.created="2024-01-27T01:48:59Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.0.35-30-debian-11-r3" \
+      org.opencontainers.image.ref.name="8.0.35-30-debian-11-r4" \
       org.opencontainers.image.title="percona-xtrabackup" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="8.0.35-30"
@@ -26,7 +26,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libaio1 libbrotli1 libcom-err2 libcurl4 libev4 libffi7 libgcc-s1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed6 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblz4-1 liblzma5 libnettle8 libnghttp2-14 libp11-kit0 libprocps8 libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl1.1 libstdc++6 libsystemd0 libtasn1-6 libunistring2 libzstd1 procps rsync zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "percona-xtrabackup-8.0.35-30-1-linux-${OS_ARCH}-debian-11" \
+      "percona-xtrabackup-8.0.35-30-2-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
