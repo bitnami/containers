@@ -9,13 +9,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.21.0-2"
+        "version": "1.21.0-3"
     },
     "postgresql-client": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "14.10.0-0"
+        "version": "14.10.0-1"
     },
     "wait-for-port": {
         "arch": "amd64",
