@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2024-01-19T22:45:03Z" \
+      org.opencontainers.image.created="2024-01-27T18:38:18Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.9.0-debian-11-r20" \
+      org.opencontainers.image.ref.name="2.9.0-debian-11-r21" \
       org.opencontainers.image.title="kubeapps-dashboard" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2.9.0"
@@ -25,9 +25,9 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libcrypt1 libgeoip1 libpcre3 libssl1.1 openssl procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "nginx-1.25.3-2-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.6-5-linux-${OS_ARCH}-debian-11" \
-      "kubeapps-2.9.0-1-linux-${OS_ARCH}-debian-11" \
+      "nginx-1.25.3-2-linux-${OS_ARCH}-debian-11" \
+      "kubeapps-2.9.0-2-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -54,7 +54,7 @@ ENV APP_VERSION="2.9.0" \
     BITNAMI_APP_NAME="kubeapps-dashboard" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
-    PATH="/opt/bitnami/nginx/sbin:/opt/bitnami/common/bin:$PATH"
+    PATH="/opt/bitnami/common/bin:/opt/bitnami/nginx/sbin:$PATH"
 
 EXPOSE 8080 8443
 
