@@ -3,13 +3,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.10.0-1"
+        "version": "2.10.0-2"
     },
     "ini-file": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.4.6-5"
+        "version": "1.4.6-6"
     },
     "wait-for-port": {
         "arch": "amd64",
