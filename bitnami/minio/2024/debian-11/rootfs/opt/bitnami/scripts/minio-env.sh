@@ -39,6 +39,7 @@ minio_env_vars=(
     MINIO_FORCE_NEW_KEYS
     MINIO_ROOT_USER
     MINIO_ROOT_PASSWORD
+    MINIO_DATA_DIR
 )
 for env_var in "${minio_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -60,7 +61,7 @@ export MINIO_CERTS_DIR="/certs"
 export MINIO_LOGS_DIR="${MINIO_BASE_DIR}/log"
 export MINIO_TMP_DIR="${MINIO_BASE_DIR}/tmp"
 export MINIO_SECRETS_DIR="${MINIO_BASE_DIR}/secrets"
-export MINIO_DATA_DIR="/bitnami/minio/data"
+export MINIO_DATA_DIR="${MINIO_DATA_DIR:-/bitnami/minio/data}"
 export MINIO_LOG_FILE="${MINIO_LOGS_DIR}/minio.log"
 export MINIO_PID_FILE="${MINIO_TMP_DIR}/minio.pid"
 export PATH="${MINIO_BIN_DIR}:${PATH}"

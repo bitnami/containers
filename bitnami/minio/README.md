@@ -68,7 +68,7 @@ docker build -t bitnami/APP:latest .
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a directory at the `/bitnami/minio/data` path.
+For persistence you can mount a directory at the `/bitnami/minio/data` path by default.
 
 ```console
 docker run --name minio \
@@ -86,6 +86,31 @@ services:
   ...
     volumes:
       - /path/to/minio-persistence:/bitnami/minio/data
+  ...
+```
+
+You can also mount a volume to a custom path inside the container, provided that you run the container using the `MINIO_DATA_DIR` environment variable.
+
+```console
+docker run --name minio \
+    --publish 9000:9000 \
+    --publish 9001:9001 \
+    --volume /path/to/minio-persistence:/custom/path/within/container \
+    --env MINIO_DATA_DIR=/custom/path/within/container \
+    bitnami/minio:latest
+```
+
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/minio/docker-compose.yml) file present in this repository:
+
+```yaml
+services:
+  minio:
+  ...
+    volumes:
+      - /path/to/minio-persistence:/custom/path/within/container
+  ...
+    environment:
+      - MINIO_DATA_DIR=/custom/path/within/container
   ...
 ```
 
@@ -199,6 +224,7 @@ docker-compose up -d
 | `MINIO_FORCE_NEW_KEYS`                   | Force recreating MinIO keys.                                               | `no`                                               |
 | `MINIO_ROOT_USER`                        | MinIO root user name.                                                      | `minio`                                            |
 | `MINIO_ROOT_PASSWORD`                    | Password for MinIO root user.                                              | `miniosecret`                                      |
+| `MINIO_DATA_DIR`                         | Directory that stores MinIO object data                                    | `/bitnami/minio/data`                              |
 
 #### Read-only environment variables
 
@@ -210,14 +236,12 @@ docker-compose up -d
 | `MINIO_LOGS_DIR`     | MinIO directory for log files.        | `${MINIO_BASE_DIR}/log`       |
 | `MINIO_TMP_DIR`      | MinIO directory for log files.        | `${MINIO_BASE_DIR}/tmp`       |
 | `MINIO_SECRETS_DIR`  | MinIO directory for credentials.      | `${MINIO_BASE_DIR}/secrets`   |
-| `MINIO_DATA_DIR`     | MinIO directory for data.             | `/bitnami/minio/data`         |
-| `MINIO_DATA_DIR`     | MinIO directory for data.             | `/bitnami/minio/data`         |
 | `MINIO_LOG_FILE`     | MinIO log file.                       | `${MINIO_LOGS_DIR}/minio.log` |
 | `MINIO_PID_FILE`     | MinIO PID file.                       | `${MINIO_TMP_DIR}/minio.pid`  |
 | `MINIO_DAEMON_USER`  | MinIO system user.                    | `minio`                       |
 | `MINIO_DAEMON_GROUP` | MinIO system group.                   | `minio`                       |
 
-Additionally, MiNIO can be configured via environment variables as detailed at [MinIO(R) documentation](https://docs.min.io/docs/minio-server-configuration-guide.html).
+Additionally, MinIO can be configured via environment variables as detailed at [MinIO(R) documentation](https://docs.min.io/docs/minio-server-configuration-guide.html).
 
 A MinIO(R) Client  (`mc`) is also shipped on this image that can be used to perform administrative tasks as described at the [MinIO(R) Client documentation](https://docs.min.io/docs/minio-admin-complete-guide.html). In the example below, the client is used to obtain the server info:
 
