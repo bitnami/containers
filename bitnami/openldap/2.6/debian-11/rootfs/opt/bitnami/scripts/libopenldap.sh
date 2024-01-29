@@ -646,13 +646,7 @@ ldap_initialize() {
         if is_boolean_yes "$LDAP_ENABLE_SYNCPROV"; then
             ldap_enable_syncprov
         fi
-        # enable tls
-        if is_boolean_yes "$LDAP_ENABLE_TLS"; then
-            ldap_configure_tls
-            if is_boolean_yes "$LDAP_REQUIRE_TLS"; then
-                ldap_configure_tls_required
-            fi
-        fi
+        # load custom ldifs
         if ! is_dir_empty "$LDAP_CUSTOM_LDIF_DIR"; then
             ldap_add_custom_ldifs
         elif ! is_boolean_yes "$LDAP_SKIP_DEFAULT_TREE"; then
@@ -660,7 +654,14 @@ ldap_initialize() {
         else
             info "Skipping default schemas/tree structure"
         fi
-        ldap_stop
+        # enable tls
+        if is_boolean_yes "$LDAP_ENABLE_TLS"; then
+            ldap_configure_tls
+            if is_boolean_yes "$LDAP_REQUIRE_TLS"; then
+                ldap_configure_tls_required
+            fi
+        fi
+       ldap_stop
     fi
 }
 
