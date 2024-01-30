@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2024-01-09T09:14:41Z" \
+      org.opencontainers.image.created="2024-01-30T10:42:44Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.1.4-debian-11-r0" \
+      org.opencontainers.image.ref.name="3.1.4-debian-11-r1" \
       org.opencontainers.image.title="discourse" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.1.4"
@@ -26,12 +26,12 @@ RUN install_packages acl advancecomp ca-certificates curl file gifsicle git host
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "python-3.11.7-2-linux-${OS_ARCH}-debian-11" \
-      "wait-for-port-1.0.7-4-linux-${OS_ARCH}-debian-11" \
-      "ruby-3.2.2-9-linux-${OS_ARCH}-debian-11" \
-      "postgresql-client-16.1.0-0-linux-${OS_ARCH}-debian-11" \
-      "node-18.19.0-0-linux-${OS_ARCH}-debian-11" \
-      "brotli-1.1.0-0-linux-${OS_ARCH}-debian-11" \
-      "discourse-3.1.4-0-linux-${OS_ARCH}-debian-11" \
+      "wait-for-port-1.0.7-7-linux-${OS_ARCH}-debian-11" \
+      "ruby-3.2.3-0-linux-${OS_ARCH}-debian-11" \
+      "postgresql-client-16.1.0-1-linux-${OS_ARCH}-debian-11" \
+      "node-18.19.0-1-linux-${OS_ARCH}-debian-11" \
+      "brotli-1.1.0-1-linux-${OS_ARCH}-debian-11" \
+      "discourse-3.1.4-1-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -45,6 +45,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
 RUN apt-get autoremove --purge -y curl && \
     apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
+RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN /opt/bitnami/ruby/bin/gem install --force bundler -v '< 2'
 
 COPY rootfs /
