@@ -3,19 +3,19 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "5.76.2-1"
+        "version": "5.78.0-0"
     },
     "mysql-client": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.11.6-1"
+        "version": "10.11.6-2"
     },
     "node": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "18.19.0-0"
+        "version": "18.19.0-1"
     },
     "python": {
         "arch": "amd64",
