@@ -10,11 +10,11 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/discourse/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run --name discourse bitnami/discourse:latest
 ```
 
-**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
+**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure d
+eployment.
 
 ## Why use Bitnami Images?
 
@@ -61,18 +61,7 @@ docker build -t bitnami/APP:latest .
 
 Discourse requires access to a PostgreSQL database to store information. We'll use the [Bitnami Docker Image for PostgreSQL](https://github.com/bitnami/containers/tree/main/bitnami/postgresql) for the database requirements.
 
-### Run the application using Docker Compose
-
-The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/discourse/docker-compose.yml) file. Run the application using it as shown below:
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/discourse/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ### Using the Docker Command Line
-
-If you want to run the application manually instead of using `docker-compose`, these are the basic steps you need to run:
 
 #### Step 1: Create a network
 
@@ -131,6 +120,17 @@ docker run -d --name sidekiq \
 ```
 
 Access your application at `http://your-ip/`
+
+### Run the application using Docker Compose
+
+```console
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/discourse/docker-compose.yml > docker-compose.yml
+docker-compose up -d
+```
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/discourse).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ### Troubleshooting discourse
 
@@ -250,17 +250,69 @@ docker run -d --name sidekiq \
 
 You can mount your configuration files to the `/opt/bitnami/discourse/mounted-conf` directory. Make sure that your configuration files follow the standardized names used by Discourse. Some of the most common files include:
 
-- `discourse.conf`
-- `database.yml`
-- `site_settings.yml`
+* `discourse.conf`
+* `database.yml`
+* `site_settings.yml`
 
 The set of default standard configuration files may be found [here](https://github.com/discourse/discourse/tree/master/config). You may refer to the the Discourse [webpage](https://www.discourse.org/) for further details and specific configuration guides.
 
 ### Environment variables
 
+#### Customizable environment variables
+
+| Name                                   | Description                                                                                                                     | Default Value                           |
+|----------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
+| `DISCOURSE_DATA_TO_PERSIST`            | Files to persist relative to the Discourse installation directory. To provide multiple values, separate them with a whitespace. | `plugins public/backups public/uploads` |
+| `DISCOURSE_ENABLE_HTTPS`               | Whether to enable HTTPS for Discourse by default.                                                                               | `no`                                    |
+| `DISCOURSE_EXTERNAL_HTTP_PORT_NUMBER`  | External HTTP port for Discourse.                                                                                               | `80`                                    |
+| `DISCOURSE_EXTERNAL_HTTPS_PORT_NUMBER` | External HTTPS port for Discourse.                                                                                              | `443`                                   |
+| `DISCOURSE_HOST`                       | Discourse host name.                                                                                                            | `www.example.com`                       |
+| `DISCOURSE_PORT_NUMBER`                | Port number in which Discourse will run.                                                                                        | `3000`                                  |
+| `DISCOURSE_SITE_NAME`                  | Discourse site name.                                                                                                            | `My site!`                              |
+| `DISCOURSE_ENV`                        | Discourse environment mode. Allowed values: *development*, *production*, *test*.                                                | `production`                            |
+| `DISCOURSE_PRECOMPILE_ASSETS`          | Whether to precompile assets during the initialization. Required when installing plugins.                                       | `no`                                    |
+| `DISCOURSE_PRECOMPILE_ASSETS`          | Whether to precompile assets during the initialization. Required when installing plugins.                                       | `yes`                                   |
+| `DISCOURSE_ENABLE_CONF_PERSISTENCE`    | Whether to enable persistence of the Discourse `discourse.conf` configuration file.                                             | `no`                                    |
+| `DISCOURSE_EXTRA_CONF_CONTENT`         | Extra configuration to append to the `discourse.conf` configuration file.                                                       | `yes`                                   |
+| `DISCOURSE_PASSENGER_SPAWN_METHOD`     | Passenger method used for spawning application processes. Valid values: direct, smart.                                          | `direct`                                |
+| `DISCOURSE_USERNAME`                   | Discourse user name.                                                                                                            | `user`                                  |
+| `DISCOURSE_PASSWORD`                   | Discourse user password.                                                                                                        | `bitnami123`                            |
+| `DISCOURSE_EMAIL`                      | Discourse user e-mail address.                                                                                                  | `user@example.com`                      |
+| `DISCOURSE_FIRST_NAME`                 | Discourse user first name.                                                                                                      | `UserName`                              |
+| `DISCOURSE_LAST_NAME`                  | Discourse user last name.                                                                                                       | `LastName`                              |
+| `DISCOURSE_SMTP_AUTH`                  | Discourse SMTP authentication method. Allowed values: *login*, *plain*, *cram_md5*.                                             | `login`                                 |
+| `DISCOURSE_DATABASE_HOST`              | Database server host.                                                                                                           | `$DISCOURSE_DEFAULT_DATABASE_HOST`      |
+| `DISCOURSE_DATABASE_PORT_NUMBER`       | Database server port.                                                                                                           | `5432`                                  |
+| `DISCOURSE_DATABASE_NAME`              | Database name.                                                                                                                  | `bitnami_discourse`                     |
+| `DISCOURSE_DATABASE_USER`              | Database user name.                                                                                                             | `bn_discourse`                          |
+| `DISCOURSE_DB_BACKUP_HOST`             | Database backup server host.                                                                                                    | `$DISCOURSE_DATABASE_HOST`              |
+| `DISCOURSE_DB_BACKUP_PORT`             | Database backup server port.                                                                                                    | `$DISCOURSE_DATABASE_PORT_NUMBER`       |
+| `DISCOURSE_REDIS_HOST`                 | Redis(R) server host.                                                                                                           | `$DISCOURSE_DEFAULT_REDIS_HOST`         |
+| `DISCOURSE_REDIS_PORT_NUMBER`          | Redis(R) server port.                                                                                                           | `6379`                                  |
+| `DISCOURSE_REDIS_USE_SSL`              | Whether to enable SSL for Redis(R).                                                                                             | `no`                                    |
+
+#### Read-only environment variables
+
+| Name                              | Description                                          | Value                                         |
+|-----------------------------------|------------------------------------------------------|-----------------------------------------------|
+| `DISCOURSE_BASE_DIR`              | Discourse installation directory.                    | `${BITNAMI_ROOT_DIR}/discourse`               |
+| `DISCOURSE_CONF_FILE`             | Configuration file for Discourse.                    | `${DISCOURSE_BASE_DIR}/config/discourse.conf` |
+| `YARN_CACHE_FOLDER`               | Yarn cache folder                                    | `${DISCOURSE_BASE_DIR}/tmp/cache`             |
+| `DISCOURSE_VOLUME_DIR`            | Discourse directory for mounted configuration files. | `${BITNAMI_VOLUME_DIR}/discourse`             |
+| `DISCOURSE_DAEMON_USER`           | Discourse system user.                               | `discourse`                                   |
+| `DISCOURSE_DAEMON_USER`           | Discourse system user.                               | `daemon`                                      |
+| `DISCOURSE_DAEMON_GROUP`          | Discourse system group.                              | `discourse`                                   |
+| `DISCOURSE_DAEMON_GROUP`          | Discourse system group.                              | `daemon`                                      |
+| `DISCOURSE_DEFAULT_DATABASE_HOST` | Default database server host.                        | `postgresql`                                  |
+| `DISCOURSE_DEFAULT_DATABASE_HOST` | Default database server host.                        | `127.0.0.1`                                   |
+| `DISCOURSE_DEFAULT_REDIS_HOST`    | Default Redis(R) server host.                        | `redis`                                       |
+| `DISCOURSE_DEFAULT_REDIS_HOST`    | Default Redis(R) server host.                        | `127.0.0.1`                                   |
+| `DISCOURSE_SIDEKIQ_PID_FILE`      | PID file for sidekiq service.                        | `${DISCOURSE_BASE_DIR}/tmp/sidekiq.pid`       |
+| `DISCOURSE_SIDEKIQ_LOG_FILE`      | Log file for sidekiq service.                        | `${DISCOURSE_BASE_DIR}/log/sidekiq.log`       |
+
 When you start the Discourse image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
-- For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/discourse/docker-compose.yml) file present in this repository:
+* For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/discourse/docker-compose.yml) file present in this repository:
 
     ```yaml
     discourse:
@@ -270,7 +322,7 @@ When you start the Discourse image, you can adjust the configuration of the inst
       ...
     ```
 
-- For manual execution add a `--env` option with each variable and value:
+* For manual execution add a `--env` option with each variable and value:
 
     ```console
     $ docker run -d --name discourse -p 80:8080 -p 443:8443 \
@@ -280,76 +332,13 @@ When you start the Discourse image, you can adjust the configuration of the inst
       bitnami/discourse:latest
     ```
 
-Available environment variables:
-
-#### User and Site configuration
-
-- `DISCOURSE_ENABLE_HTTPS`: Whether to use HTTPS by default. Default: **no**
-- `DISCOURSE_EXTERNAL_HTTP_PORT_NUMBER`: Port to used by Discourse to generate URLs and links when accessing using HTTP. Will be ignored if multisite mode is not enabled. Default **80**
-- `DISCOURSE_EXTERNAL_HTTPS_PORT_NUMBER`: Port to used by Discourse to generate URLs and links when accessing using HTTPS. Will be ignored if multisite mode is not enabled. Default **443**
-- `DISCOURSE_USERNAME`: Discourse application username. Default: **user**
-- `DISCOURSE_PASSWORD`: Discourse application password. Default: **bitnami123**
-- `DISCOURSE_EMAIL`: Discourse application email. Default: **user@example.com**
-- `DISCOURSE_FIRST_NAME`: Discourse user first name. Default: **UserName**
-- `DISCOURSE_LAST_NAME`: Discourse user last name. Default: **LastName**
-- `DISCOURSE_SITE_NAME`: Discourse site name. Default: **My site!**
-- `DISCOURSE_HOST`: Discourse hostname to create application URLs for features such as email notifications and emojis. It can be either an IP or a domain. Default: **www.example.com**
-- `DISCOURSE_PRECOMPILE_ASSETS`: Whether to precompile assets during the initialization. Required when installing plugins. Default: **yes**
-- `DISCOURSE_EXTRA_CONF_CONTENT`: Extra configuration to append to the `discourse.conf` configuration file. No defaults.
-- `DISCOURSE_PASSENGER_SPAWN_METHOD`: Passenger method used for spawning application processes. Valid values: direct, smart. Default: **direct**
-- `DISCOURSE_PASSENGER_EXTRA_FLAGS`: Extra flags to pass to the Passenger start command. No defaults.
-- `DISCOURSE_PORT_NUMBER`: Port number in which Discourse will run. Default: **3000**
-- `DISCOURSE_ENV`: Discourse environment mode. Allowed values: *development*, *production*, *test*. Default: **production**
-- `DISCOURSE_ENABLE_CONF_PERSISTENCE`: Whether to enable persistence of the Discourse `discourse.conf` configuration file. Default: **no**
-- `DISCOURSE_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. This is necessary in case you use a database that already has Discourse data. Default: **no**
-
-#### Database connection configuration
-
-- `DISCOURSE_DATABASE_HOST`: Hostname for PostgreSQL server. Default: **postgresql**
-- `DISCOURSE_DATABASE_PORT_NUMBER`: Port used by the PostgreSQL server. Default: **5432**
-- `DISCOURSE_DATABASE_NAME`: Database name that Discourse will use to connect with the database. Default: **bitnami_discourse**
-- `DISCOURSE_DATABASE_USER`: Database user that Discourse will use to connect with the database. Default: **bn_discourse**
-- `DISCOURSE_DATABASE_PASSWORD`: Database password that Discourse will use to connect with the database. No defaults.
-- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-#### Redis connection configuration
-
-- `DISCOURSE_REDIS_HOST`: Hostname for Redis(R). Default: **redis**
-- `DISCOURSE_REDIS_PORT_NUMBER`: Port used by Redis(R). Default: **6379**
-- `DISCOURSE_REDIS_PASSWORD`: Password for Redis(R).
-- `DISCOURSE_REDIS_USE_SSL`: Whether to enable SSL for Redis(R). Default: **no**
-
-#### Create a database for Discourse using postgresql-client
-
-- `POSTGRESQL_CLIENT_DATABASE_HOST`: Hostname for the PostgreSQL server. Default: **postgresql**
-- `POSTGRESQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by the PostgreSQL server. Default: **5432**
-- `POSTGRESQL_CLIENT_POSTGRES_USER`: Database admin user. Default: **root**
-- `POSTGRESQL_CLIENT_POSTGRES_PASSWORD`: Database password for the database admin user. No defaults.
-- `POSTGRESQL_CLIENT_CREATE_DATABASE_NAMES`: List of new databases to be created by the postgresql-client module. No defaults.
-- `POSTGRESQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the postgresql-client module. No defaults.
-- `POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `POSTGRESQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
-- `POSTGRESQL_CLIENT_CREATE_DATABASE_EXTENSIONS`: PostgreSQL extensions to enable in the specified database during the first initialization. No defaults.
-- `POSTGRESQL_CLIENT_EXECUTE_SQL`: SQL code to execute in the PostgreSQL server. No defaults.
-- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-#### SMTP Configuration
-
-To configure Discourse to send email using SMTP you can set the following environment variables:
-
-- `DISCOURSE_SMTP_HOST`: SMTP host.
-- `DISCOURSE_SMTP_PORT`: SMTP port.
-- `DISCOURSE_SMTP_USER`: SMTP account user.
-- `DISCOURSE_SMTP_PASSWORD`: SMTP account password.
-- `DISCOURSE_SMTP_PROTOCOL`: If specified, SMTP protocol to use. Allowed values: tls, ssl. No default.
-- `DISCOURSE_SMTP_AUTH`: SMTP authentication method. Allowed values: *login*, *plain*, *cram_md5*. Default: **login**.
-
 #### Examples
 
 ##### SMTP configuration using a Gmail account
 
 This would be an example of SMTP configuration using a Gmail account:
 
-- Modify the environment variables used for the `discourse` and `sidekiq` containers in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/discourse/docker-compose.yml) file present in this repository:
+* Modify the environment variables used for the `discourse` and `sidekiq` containers in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/discourse/docker-compose.yml) file present in this repository:
 
     ```yaml
       discourse:
@@ -374,9 +363,9 @@ This would be an example of SMTP configuration using a Gmail account:
       ...
     ```
 
-- For manual execution:
+* For manual execution:
 
-  - First, create the Discourse container:
+  * First, create the Discourse container:
 
     ```console
     $ docker run -d --name discourse -p 80:8080 -p 443:8443 \
@@ -392,7 +381,7 @@ This would be an example of SMTP configuration using a Gmail account:
       bitnami/discourse:latest
     ```
 
-  - Then, create the Sidekiq container:
+  * Then, create the Sidekiq container:
 
     ```console
     $ docker run -d --name sidekiq \
@@ -422,7 +411,7 @@ See the [documentation on troubleshooting SMTP issues](https://docs.bitnami.com/
 
 The Bitnami Discourse container supports connecting the Discourse application to an external database. This would be an example of using an external database for Discourse.
 
-- Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/discourse/docker-compose.yml) file present in this repository:
+* Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/discourse/docker-compose.yml) file present in this repository:
 
     ```diff
        discourse:
@@ -438,7 +427,7 @@ The Bitnami Discourse container supports connecting the Discourse application to
          ...
     ```
 
-- For manual execution:
+* For manual execution:
 
     ```console
     $ docker run -d --name discourse\
@@ -566,20 +555,20 @@ docker-compose up -d
 
 ### 2.7.0-debian-10-r4
 
-- The size of the container image has been decreased.
-- The configuration logic is now based on Bash scripts in the *rootfs/* folder.
+* The size of the container image has been decreased.
+* The configuration logic is now based on Bash scripts in the *rootfs/* folder.
 
 ### 2.4.4-debian-10-r8 release
 
-- Discourse and Sidekiq now make use of the same volume to persist data. This solves issues related to being unable to locate some files generated on-demand by the Sidekiq job scheduler.
+* Discourse and Sidekiq now make use of the same volume to persist data. This solves issues related to being unable to locate some files generated on-demand by the Sidekiq job scheduler.
 
 ### 2.3.2-debian-9-r48 and 2.3.2-ol-7-r47
 
-- The Discourse container now uses Passenger's ['direct' process spawning method](https://www.phusionpassenger.com/docs/advanced_guides/in_depth/ruby/spawn_methods.html) (instead of the default 'smart'), which fixes a bug where settings would randomly revert back to the original values. This setting may cause an increase in memory usage. It is possible to configure the spawning method by setting the `DISCOURSE_PASSENGER_SPAWN_METHOD` environment variable.
+* The Discourse container now uses Passenger's ['direct' process spawning method](https://www.phusionpassenger.com/docs/advanced_guides/in_depth/ruby/spawn_methods.html) (instead of the default 'smart'), which fixes a bug where settings would randomly revert back to the original values. This setting may cause an increase in memory usage. It is possible to configure the spawning method by setting the `DISCOURSE_PASSENGER_SPAWN_METHOD` environment variable.
 
 ### 2.2.5-debian-9-r9 and 2.2.5-ol-7-r8
 
-- It is now possible to import existing Discourse databases from other installations. In order to do this, use the environment variable `DISCOURSE_SKIP_INSTALL`, which forces the container not to run the initial Discourse setup wizard.
+* It is now possible to import existing Discourse databases from other installations. In order to do this, use the environment variable `DISCOURSE_SKIP_INSTALL`, which forces the container not to run the initial Discourse setup wizard.
 
 ## Contributing
 

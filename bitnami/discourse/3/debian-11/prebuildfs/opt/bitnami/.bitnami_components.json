@@ -3,25 +3,25 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.1.0-0"
+        "version": "1.1.0-1"
     },
     "discourse": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.1.4-0"
+        "version": "3.1.4-1"
     },
     "node": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "18.19.0-0"
+        "version": "18.19.0-1"
     },
     "postgresql-client": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "16.1.0-0"
+        "version": "16.1.0-1"
     },
     "python": {
         "arch": "amd64",
@@ -33,12 +33,12 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.2.2-9"
+        "version": "3.2.3-0"
     },
     "wait-for-port": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.7-4"
+        "version": "1.0.7-7"
     }
 }
