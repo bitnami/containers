@@ -3,13 +3,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.4.6-5"
+        "version": "1.4.6-7"
     },
     "pgbouncer": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.21.0-3"
+        "version": "1.21.0-4"
     },
     "postgresql-client": {
         "arch": "amd64",
@@ -21,6 +21,6 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.7-5"
+        "version": "1.0.7-7"
     }
 }
