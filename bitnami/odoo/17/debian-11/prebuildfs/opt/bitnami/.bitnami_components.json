@@ -3,30 +3,30 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "18.19.0-0"
+        "version": "18.19.0-1"
     },
     "odoo": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "17.0.20240105-0"
+        "version": "17.0.20240105-1"
     },
     "postgresql-client": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "16.1.0-0"
+        "version": "16.1.0-1"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.11.7-2"
+        "version": "3.11.7-3"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.6-5"
+        "version": "1.0.6-7"
     }
 }
