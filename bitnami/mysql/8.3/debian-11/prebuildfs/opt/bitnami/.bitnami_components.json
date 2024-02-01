@@ -1,0 +1,14 @@
+{
+    "ini-file": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.4.6-7"
+    },
+    "mysql": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "8.3.0-0"
+    }
+}
