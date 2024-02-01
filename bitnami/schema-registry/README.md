@@ -118,7 +118,7 @@ The keystore and trustore **must** be mounted in the `/opt/bitnami/schema-regist
 
 Here is a `docker-compose.yml` example that exposes a TLS listener on port `8082`:
 
-``` yaml
+```yaml
 schema-registry:
   image: bitnami/schema-registry
   ports:
