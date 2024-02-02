@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.4.58-5"
+        "version": "2.4.58-6"
     },
     "libphp": {
         "arch": "amd64",
@@ -21,7 +21,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.27-2"
+        "version": "8.1.27-3"
     },
     "prestashop": {
         "arch": "amd64",
