@@ -220,6 +220,7 @@ However, in some environments such as Kubernetes, it can help to wait some time 
 ### Enable RDB persistence and set policies
 
 When using RDB persistence and configuring related persistence strategies, it will be special. You need to use `#` to separate parameters.
+
 1. Using `docker run`
 
     ```console
@@ -227,7 +228,9 @@ When using RDB persistence and configuring related persistence strategies, it wi
         -e REDIS_RDB_POLICY_DISABLED="900#1 300#10 60#10000" \
         bitnami/redis-cluster:latest
     ```
+
 2. Add parameters to the `docker-compose.yml` file present in this repository:
+
     ```yaml
       redis-cluster:
       ...
