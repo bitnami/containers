@@ -3,19 +3,19 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "17.0.10-13-0"
+        "version": "17.0.10-13-1"
     },
     "mysql-client": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.11.6-1"
+        "version": "10.11.6-2"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.6-5"
+        "version": "1.0.6-7"
     },
     "reportserver": {
         "arch": "amd64",
@@ -27,6 +27,6 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "9.0.85-1"
+        "version": "9.0.85-2"
     }
 }
