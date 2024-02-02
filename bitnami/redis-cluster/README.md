@@ -217,30 +217,6 @@ Where you can add all the `node:port` that you want. The `--cluster-replicas` pa
 Depending on the environment you're deploying into, you might run into issues where the cluster initialization is not completing successfully. One of the issue is related to the DNS lookup of the redis nodes performed during cluster initialization. By default, this DNS lookup is performed as soon as all the redis nodes reply to a successful ping.
 However, in some environments such as Kubernetes, it can help to wait some time before performing this DNS lookup in order to prevent getting stale records. To this end, you can increase `REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP` to a value around `30` which has been found to be good in most cases.
 
-### Enable RDB persistence and set policies
-
-When using RDB persistence and configuring related persistence strategies, it will be special. You need to use `#` to separate parameters.
-
-1. Using `docker run`
-
-    ```console
-    $ docker run --name redis-cluster \
-        -e REDIS_RDB_POLICY_DISABLED="900#1 300#10 60#10000" \
-        bitnami/redis-cluster:latest
-    ```
-
-2. Add parameters to the `docker-compose.yml` file present in this repository:
-
-    ```yaml
-      redis-cluster:
-      ...
-        environment:
-          ...
-          - REDIS_RDB_POLICY_DISABLED="900#1 300#10 60#10000"
-        ...
-      ...
-    ```
-
 ### Securing Redis(R) Cluster traffic
 
 Starting with version 6, Redis(R) adds the support for SSL/TLS connections. Should you desire to enable this optional feature, you may use the aforementioned `REDIS_TLS_*` environment variables to configure the application.
