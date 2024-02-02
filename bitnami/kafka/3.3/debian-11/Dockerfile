@@ -8,10 +8,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2024-01-27T17:23:30Z" \
+      org.opencontainers.image.created="2024-02-02T07:30:29Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.3.2-debian-11-r246" \
+      org.opencontainers.image.ref.name="3.3.2-debian-11-r247" \
       org.opencontainers.image.title="kafka" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.3.2"
@@ -27,10 +27,10 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "wait-for-port-1.0.7-5-linux-${OS_ARCH}-debian-11" \
-      "render-template-1.0.6-5-linux-${OS_ARCH}-debian-11" \
-      "java-17.0.10-13-0-linux-${OS_ARCH}-debian-11" \
-      "kafka-3.3.2-10-linux-${OS_ARCH}-debian-11" \
+      "wait-for-port-1.0.7-7-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.6-7-linux-${OS_ARCH}-debian-11" \
+      "java-17.0.10-13-1-linux-${OS_ARCH}-debian-11" \
+      "kafka-3.3.2-11-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
