@@ -330,6 +330,23 @@ services:
       - REDIS_AOF_ENABLED=no
   ...
 ```
+### Enable RDB persistence
+
+When using RDB persistence and configuring related persistence strategies, it will be special. You need to use `#` to separate parameters.
+
+```console
+$ docker run --name redis -e REDIS_RDB_POLICY_DISABLED="900#1 300#10 60#10000" bitnami/redis:latest
+```
+Alternatively, add parameters to the `docker-compose.yml` file present in this repository:
+
+```yaml
+services:
+  redis:
+  ...
+  environment:
+    - REDIS_RDB_POLICY_DISABLED="900#1 300#10 60#10000"
+  ...
+```
 
 ### Enabling Access Control List
 
