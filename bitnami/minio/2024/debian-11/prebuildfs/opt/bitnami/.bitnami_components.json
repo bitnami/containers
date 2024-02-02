@@ -3,13 +3,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2024.1.29-1"
+        "version": "2024.1.31-0"
     },
     "minio-client": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2024.1.28-0"
+        "version": "2024.1.31-0"
     },
     "wait-for-port": {
         "arch": "amd64",
