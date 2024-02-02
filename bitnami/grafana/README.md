@@ -114,17 +114,18 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 
 #### Read-only environment variables
 
-| Name                       | Description                                                 | Value                         |
-|----------------------------|-------------------------------------------------------------|-------------------------------|
-| `GRAFANA_BASE_DIR`         | Grafana installation directory.                             | `${BITNAMI_ROOT_DIR}/grafana` |
-| `GRAFANA_BIN_DIR`          | Grafana directory for binary executables.                   | `${GRAFANA_BASE_DIR}/bin`     |
-| `GRAFANA_DAEMON_USER`      | Grafana system user.                                        | `grafana`                     |
-| `GRAFANA_DAEMON_GROUP`     | Grafana system group.                                       | `grafana`                     |
-| `GF_OP_PATHS_CONFIG`       | Grafana Operator configuration directory.                   | `/etc/grafana/grafana.ini`    |
-| `GF_OP_PATHS_DATA`         | Grafana Operator directory for data files.                  | `/var/lib/grafana`            |
-| `GF_OP_PATHS_LOGS`         | Grafana Operator directory for log files.                   | `/var/log/grafana`            |
-| `GF_OP_PATHS_PROVISIONING` | Grafana Operator directory for provisioning configurations. | `/etc/grafana/provisioning`   |
-| `GF_OP_PLUGINS_INIT_DIR`   | Grafana Operator directory for plugins.                     | `/opt/plugins`                |
+| Name                       | Description                                                 | Value                           |
+|----------------------------|-------------------------------------------------------------|---------------------------------|
+| `GRAFANA_BASE_DIR`         | Grafana installation directory.                             | `${BITNAMI_ROOT_DIR}/grafana`   |
+| `GRAFANA_BIN_DIR`          | Grafana directory for binary executables.                   | `${GRAFANA_BASE_DIR}/bin`       |
+| `GRAFANA_DAEMON_USER`      | Grafana system user.                                        | `grafana`                       |
+| `GRAFANA_DAEMON_GROUP`     | Grafana system group.                                       | `grafana`                       |
+| `GF_VOLUME_DIR`            | Grafana volume directory.                                   | `${BITNAMI_VOLUME_DIR}/grafana` |
+| `GF_OP_PATHS_CONFIG`       | Grafana Operator configuration directory.                   | `/etc/grafana/grafana.ini`      |
+| `GF_OP_PATHS_DATA`         | Grafana Operator directory for data files.                  | `/var/lib/grafana`              |
+| `GF_OP_PATHS_LOGS`         | Grafana Operator directory for log files.                   | `/var/log/grafana`              |
+| `GF_OP_PATHS_PROVISIONING` | Grafana Operator directory for provisioning configurations. | `/etc/grafana/provisioning`     |
+| `GF_OP_PLUGINS_INIT_DIR`   | Grafana Operator directory for plugins.                     | `/opt/plugins`                  |
 
 ### Dev config
 
