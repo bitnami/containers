@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2024-01-31T08:31:13Z" \
+      org.opencontainers.image.created="2024-02-02T13:17:16Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.3.11-debian-11-r6" \
+      org.opencontainers.image.ref.name="3.3.11-debian-11-r7" \
       org.opencontainers.image.title="phpbb" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.3.11"
@@ -27,8 +27,8 @@ RUN install_packages acl ca-certificates curl jq libaudit1 libbrotli1 libbsd0 li
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "render-template-1.0.6-7-linux-${OS_ARCH}-debian-11" \
-      "php-8.2.15-1-linux-${OS_ARCH}-debian-11" \
-      "apache-2.4.58-4-linux-${OS_ARCH}-debian-11" \
+      "php-8.2.15-2-linux-${OS_ARCH}-debian-11" \
+      "apache-2.4.58-6-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.11.6-2-linux-${OS_ARCH}-debian-11" \
       "libphp-8.2.15-3-linux-${OS_ARCH}-debian-11" \
       "phpbb-3.3.11-1-linux-${OS_ARCH}-debian-11" \
