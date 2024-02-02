@@ -331,6 +331,25 @@ services:
   ...
 ```
 
+### Enable RDB persistence
+
+When using RDB persistence and configuring related persistence strategies, it will be special. You need to use `#` to separate parameters.
+
+```console
+docker run --name redis -e REDIS_RDB_POLICY_DISABLED="900#1 300#10 60#10000" bitnami/redis:latest
+```
+
+Alternatively, add parameters to the `docker-compose.yml` file present in this repository:
+
+```yaml
+services:
+  redis:
+  ...
+  environment:
+    - REDIS_RDB_POLICY_DISABLED="900#1 300#10 60#10000"
+  ...
+```
+
 ### Enabling Access Control List
 
 Redis(R) offers [ACL](https://redis.io/topics/acl) since 6.0 which allows certain connections to be limited in terms of the commands that can be executed and the keys that can be accessed. We strongly recommend enabling ACL in production by specifiying the `REDIS_ACLFILE`.
