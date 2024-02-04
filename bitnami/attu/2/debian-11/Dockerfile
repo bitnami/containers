@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2024-02-02T11:41:18Z" \
+      org.opencontainers.image.created="2024-02-04T13:05:36Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.3.7-debian-11-r1" \
+      org.opencontainers.image.ref.name="2.3.8-debian-11-r0" \
       org.opencontainers.image.title="attu" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.3.7"
+      org.opencontainers.image.version="2.3.8"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,7 +28,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "python-3.11.7-3-linux-${OS_ARCH}-debian-11" \
       "node-18.19.0-1-linux-${OS_ARCH}-debian-11" \
-      "attu-2.3.7-0-linux-${OS_ARCH}-debian-11" \
+      "attu-2.3.8-0-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -46,7 +46,7 @@ RUN useradd -r -u 1001 -g root attu
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN ln -s /opt/bitnami/attu /app && mkdir -p /.cache/yarn && chmod g+rwX /.cache/yarn && mkdir -p /.yarn && chmod g+rwX /.yarn && mkdir /.npm && chmod g+rwX /.npm
 
-ENV APP_VERSION="2.3.7" \
+ENV APP_VERSION="2.3.8" \
     BITNAMI_APP_NAME="attu" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:$PATH"
 
