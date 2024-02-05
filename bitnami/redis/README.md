@@ -476,8 +476,11 @@ Starting with version 6, Redis(R) adds the support for SSL/TLS connections. Shou
 * `REDIS_TLS_CERT_FILE`: File containing the certificate file for the TLS traffic. No defaults.
 * `REDIS_TLS_KEY_FILE`: File containing the key for certificate. No defaults.
 * `REDIS_TLS_CA_FILE`: File containing the CA of the certificate. No defaults.
+* `REDIS_TLS_CA_DIR`: Directory containing the CA certificates. No defaults.
 * `REDIS_TLS_DH_PARAMS_FILE`: File containing DH params (in order to support DH based ciphers). No defaults.
 * `REDIS_TLS_AUTH_CLIENTS`: Whether to require clients to authenticate or not. Defaults to `yes`.
+
+When both `REDIS_TLS_CA_FILE` and `REDIS_TLS_CA_DIR` are set, `REDIS_TLS_CA_FILE` is used preferentially.
 
 When enabling TLS, conventional standard traffic is disabled by default. However this new feature is not mutually exclusive, which means it is possible to listen to both TLS and non-TLS connection simultaneously. To enable non-TLS traffic, set `REDIS_TLS_PORT_NUMBER` to another port different than `0`.
 
