@@ -599,12 +599,12 @@ postgresql_initialize() {
     local create_conf_file=yes
     local create_pghba_file=yes
 
-    if postgresql_is_file_external "postgresql.conf"; then
+    if repmgr_is_file_external "postgresql.conf"; then
         info "Custom configuration $POSTGRESQL_CONF_FILE detected"
         create_conf_file=no
     fi
 
-    if postgresql_is_file_external "pg_hba.conf"; then
+    if repmgr_is_file_external "pg_hba.conf"; then
         info "Custom configuration $POSTGRESQL_PGHBA_FILE detected"
         create_pghba_file=no
     fi
