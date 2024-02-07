@@ -9,7 +9,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "20230404.1.0-4"
+        "version": "20230404.1.0-5"
     },
     "libphp": {
         "arch": "amd64",
