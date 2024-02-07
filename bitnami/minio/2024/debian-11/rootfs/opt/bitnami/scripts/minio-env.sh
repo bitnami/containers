@@ -24,6 +24,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
 minio_env_vars=(
+    MINIO_DATA_DIR
     MINIO_API_PORT_NUMBER
     MINIO_CONSOLE_PORT_NUMBER
     MINIO_SCHEME
@@ -39,7 +40,6 @@ minio_env_vars=(
     MINIO_FORCE_NEW_KEYS
     MINIO_ROOT_USER
     MINIO_ROOT_PASSWORD
-    MINIO_DATA_DIR
 )
 for env_var in "${minio_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"

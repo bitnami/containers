@@ -68,7 +68,7 @@ docker build -t bitnami/APP:latest .
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you can mount a directory at the `/bitnami/minio/data` path by default.
+For persistence you should mount a directory at the `/bitnami/minio/data` path.
 
 ```console
 docker run --name minio \
@@ -209,6 +209,8 @@ docker-compose up -d
 
 | Name                                     | Description                                                                | Default Value                                      |
 |------------------------------------------|----------------------------------------------------------------------------|----------------------------------------------------|
+| `MINIO_DATA_DIR`                         | MinIO directory for data.                                                  | `/bitnami/minio/data`                              |
+| `MINIO_DATA_DIR`                         | MinIO directory for data.                                                  | `/bitnami/minio/data`                              |
 | `MINIO_API_PORT_NUMBER`                  | MinIO API port number.                                                     | `9000`                                             |
 | `MINIO_API_PORT_NUMBER`                  | MinIO API port number.                                                     | `9080`                                             |
 | `MINIO_CONSOLE_PORT_NUMBER`              | MinIO RMI port number.                                                     | `9001`                                             |
@@ -224,7 +226,6 @@ docker-compose up -d
 | `MINIO_FORCE_NEW_KEYS`                   | Force recreating MinIO keys.                                               | `no`                                               |
 | `MINIO_ROOT_USER`                        | MinIO root user name.                                                      | `minio`                                            |
 | `MINIO_ROOT_PASSWORD`                    | Password for MinIO root user.                                              | `miniosecret`                                      |
-| `MINIO_DATA_DIR`                         | Directory that stores MinIO object data                                    | `/bitnami/minio/data`                              |
 
 #### Read-only environment variables
 
