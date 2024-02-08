@@ -1,5 +1,9 @@
 # Bitnami package for ReportServer Community
 
+## Deprecation Notice
+
+The ReportServer container is no longer maintained by upstream and is now deprecated. This image will no longer be released in our catalog, but already released container images will still persist in the registries.
+
 ## What is ReportServer Community?
 
 > ReportServer is the open source business intelligence tool for fast information access and analysis. It integrates multiple reporting engines and features an intuitive dashboard component.
