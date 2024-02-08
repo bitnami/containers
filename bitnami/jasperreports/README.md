@@ -1,9 +1,5 @@
 # Bitnami package for JasperReports
 
-## Deprecation Notice
-
-The JasperReports container is no longer maintained by upstream and is now deprecated. This image will no longer be released in our catalog, but already released container images will still persist in the registries.
-
 ## What is JasperReports?
 
 > JasperReports Server is a stand-alone and embeddable reporting server. It is a central information hub, with reporting and analytics that can be embedded into web and mobile applications.
