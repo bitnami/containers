@@ -36,10 +36,10 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2024-02-07T09:18:27Z" \
+      org.opencontainers.image.created="2024-02-08T09:21:11Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.25.0-debian-11-r4" \
+      org.opencontainers.image.ref.name="0.25.0-debian-11-r5" \
       org.opencontainers.image.title="sealed-secrets-kubeseal" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.25.0"
