@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2024-02-08T19:33:01Z" \
+      org.opencontainers.image.created="2024-02-10T23:43:31Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.25.3-debian-11-r8" \
+      org.opencontainers.image.ref.name="1.25.3-debian-11-r9" \
       org.opencontainers.image.title="nginx" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.25.3"
