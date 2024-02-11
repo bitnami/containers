@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2024-02-07T17:39:22Z" \
+      org.opencontainers.image.created="2024-02-11T01:13:55Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.10.0-debian-11-r0" \
+      org.opencontainers.image.ref.name="1.10.0-debian-11-r1" \
       org.opencontainers.image.title="appsmith" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.10.0"
@@ -30,8 +30,8 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
       "python-3.11.8-0-linux-${OS_ARCH}-debian-11" \
       "wait-for-port-1.0.7-8-linux-${OS_ARCH}-debian-11" \
       "node-18.19.0-1-linux-${OS_ARCH}-debian-11" \
-      "nginx-1.25.3-4-linux-${OS_ARCH}-debian-11" \
-      "mongodb-shell-2.1.3-0-linux-${OS_ARCH}-debian-11" \
+      "nginx-1.25.3-5-linux-${OS_ARCH}-debian-11" \
+      "mongodb-shell-2.1.4-0-linux-${OS_ARCH}-debian-11" \
       "java-17.0.10-13-1-linux-${OS_ARCH}-debian-11" \
       "appsmith-1.10.0-0-linux-${OS_ARCH}-debian-11" \
     ) ; \
