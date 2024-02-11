@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2024-02-02T19:18:23Z" \
+      org.opencontainers.image.created="2024-02-11T09:27:23Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.2.5-debian-11-r1" \
+      org.opencontainers.image.ref.name="4.2.5-debian-11-r2" \
       org.opencontainers.image.title="mastodon" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="4.2.5"
@@ -26,11 +26,11 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages acl ca-certificates curl ffmpeg file imagemagick libbrotli1 libbsd0 libbz2-1.0 libcom-err2 libcrypt1 libcurl4 libedit2 libffi7 libgcc-s1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed6 libicu67 libidn11 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblz4-1 liblzma5 libmd0 libncursesw6 libnettle8 libnghttp2-14 libnsl2 libp11-kit0 libpcre2-8-0 libpq5 libpsl5 libreadline-dev libreadline8 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl-dev libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libtirpc3 libunistring2 libuuid1 libxml2 libxslt1.1 libyaml-dev procps sqlite3 zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "python-3.11.7-3-linux-${OS_ARCH}-debian-11" \
-      "wait-for-port-1.0.7-7-linux-${OS_ARCH}-debian-11" \
+      "python-3.11.8-0-linux-${OS_ARCH}-debian-11" \
+      "wait-for-port-1.0.7-8-linux-${OS_ARCH}-debian-11" \
       "ruby-3.0.6-10-linux-${OS_ARCH}-debian-11" \
       "redis-client-7.0.15-1-linux-${OS_ARCH}-debian-11" \
-      "postgresql-client-16.1.0-1-linux-${OS_ARCH}-debian-11" \
+      "postgresql-client-16.2.0-0-linux-${OS_ARCH}-debian-11" \
       "node-18.19.0-1-linux-${OS_ARCH}-debian-11" \
       "mastodon-4.2.5-0-linux-${OS_ARCH}-debian-11" \
     ) ; \
