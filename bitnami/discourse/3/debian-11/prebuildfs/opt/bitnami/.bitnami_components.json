@@ -21,13 +21,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "16.1.0-1"
+        "version": "16.2.0-0"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.11.7-3"
+        "version": "3.11.8-0"
     },
     "ruby": {
         "arch": "amd64",
@@ -39,6 +39,6 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.7-7"
+        "version": "1.0.7-8"
     }
 }
