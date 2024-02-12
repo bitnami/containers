@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2024-02-12T09:17:07Z" \
+      org.opencontainers.image.created="2024-02-12T20:17:49Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.13.1-debian-11-r9" \
+      org.opencontainers.image.ref.name="0.13.2-debian-11-r0" \
       org.opencontainers.image.title="deepspeed" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="0.13.1"
+      org.opencontainers.image.version="0.13.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,7 +28,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "render-template-1.0.6-8-linux-${OS_ARCH}-debian-11" \
       "python-3.10.13-15-linux-${OS_ARCH}-debian-11" \
-      "deepspeed-0.13.1-2-linux-${OS_ARCH}-debian-11" \
+      "deepspeed-0.13.2-0-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -48,7 +48,7 @@ RUN mkdir /.local && chmod g+rwX /.local
 
 COPY rootfs /
 RUN mkdir /app /.cache && mkdir -p /home/deepspeed/.local && mkdir -p /home/deepspeed/.ssh && mkdir /home/deepspeed/.cache && ln -s /home/deepspeed/.local /opt/bitnami/deepspeed && ln -s /home/deepspeed/.ssh /opt/bitnami/deepspeed && ln -s /home/deepspeed/.cache /opt/bitnami/deepspeed && chmod g+rwX /app /.cache /home/deepspeed/.cache /home/deepspeed/.local
-ENV APP_VERSION="0.13.1" \
+ENV APP_VERSION="0.13.2" \
     BITNAMI_APP_NAME="deepspeed" \
     CFLAGS="-s -I/opt/bitnami/python/include -I/opt/bitnami/common/include" \
     CPLUS_INCLUDE_PATH="/opt/bitnami/common/include" \
