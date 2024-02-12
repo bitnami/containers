@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2024-02-12T00:17:31Z" \
+      org.opencontainers.image.created="2024-02-12T14:28:37Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.10.0-debian-11-r4" \
+      org.opencontainers.image.ref.name="1.11.0-debian-11-r0" \
       org.opencontainers.image.title="appsmith" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.10.0"
+      org.opencontainers.image.version="1.11.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -33,7 +33,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
       "nginx-1.25.3-5-linux-${OS_ARCH}-debian-11" \
       "mongodb-shell-2.1.4-0-linux-${OS_ARCH}-debian-11" \
       "java-17.0.10-13-1-linux-${OS_ARCH}-debian-11" \
-      "appsmith-1.10.0-0-linux-${OS_ARCH}-debian-11" \
+      "appsmith-1.11.0-0-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -52,7 +52,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 COPY rootfs /
 RUN /opt/bitnami/scripts/nginx/postunpack.sh
 RUN /opt/bitnami/scripts/appsmith/postunpack.sh
-ENV APP_VERSION="1.10.0" \
+ENV APP_VERSION="1.11.0" \
     BITNAMI_APP_NAME="appsmith" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
