@@ -1052,7 +1052,7 @@ mongodb_is_primary_node_up() {
 db.isMaster().ismaster
 EOF
     )
-    grep -q "\[direct: \S\+\] admin> true" <<<"$result"
+    grep -qE ".*\[direct:\s?\S+\]\s+admin>\s+true" <<<"$result"
 }
 
 ########################
