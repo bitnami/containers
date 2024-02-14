@@ -410,11 +410,7 @@ appsmith_backend_start_bg() {
 
     echo "$!" >"$APPSMITH_PID_FILE"
 
-    if ! retry_while "debug_execute wait-for-port --timeout ${APPSMITH_STARTUP_TIMEOUT} ${APPSMITH_API_PORT}" "$APPSMITH_STARTUP_ATTEMPTS"; then
-        error "Appsmith backend failed to start"
-        debug "Logs: $(cat "$log_file")"
-        exit 1
-    fi
+    wait_for_log_entry "Please open http://localhost:<port> in your browser to experience Appsmith!" "$log_file"
     info "Appsmith started successfully"
 }
 
