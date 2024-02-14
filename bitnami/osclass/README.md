@@ -1,9 +1,5 @@
 # Bitnami package for Osclass
 
-## Deprecation Notice
-
-The Osclass container will no longer be released in our catalog, but already released container images will still persist in the registries.
-
 ## What is Osclass?
 
 > Osclass allows you to easily create a classifieds site without any technical knowledge. It provides support for presenting general ads or specialized ads, is customizable, extensible and multilingual.
