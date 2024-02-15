@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2024-02-14T17:37:57Z" \
+      org.opencontainers.image.created="2024-02-15T02:11:37Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="15.0.20240210-debian-11-r10" \
+      org.opencontainers.image.ref.name="15.0.20240210-debian-11-r11" \
       org.opencontainers.image.title="odoo" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="15.0.20240210"
@@ -28,7 +28,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
       "python-3.10.13-15-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.6-8-linux-${OS_ARCH}-debian-11" \
       "postgresql-client-16.2.0-0-linux-${OS_ARCH}-debian-11" \
-      "node-18.19.0-1-linux-${OS_ARCH}-debian-11" \
+      "node-18.19.1-0-linux-${OS_ARCH}-debian-11" \
       "odoo-15.0.20240210-0-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
