@@ -228,11 +228,7 @@ redis_validate() {
             print_validation_error "The private key file in the specified path ${REDIS_TLS_KEY_FILE} does not exist"
         fi
         if [[ -z "$REDIS_TLS_CA_FILE" ]]; then
-            if [[ -z "$REDIS_TLS_CA_DIR" ]]; then
-                print_validation_error "You must provide either a CA X.509 certificate or a CA certificates directory in order to use TLS"
-            elif [[ ! -d "$REDIS_TLS_CA_DIR" ]]; then
-                print_validation_error "The CA certificates directory specified by path ${REDIS_TLS_CA_DIR} does not exist"
-            fi
+            print_validation_error "You must provide a CA X.509 certificate in order to use TLS"
         elif [[ ! -f "$REDIS_TLS_CA_FILE" ]]; then
             print_validation_error "The CA X.509 certificate file in the specified path ${REDIS_TLS_CA_FILE} does not exist"
         fi
@@ -269,8 +265,7 @@ redis_configure_replication() {
     elif [[ "$REDIS_REPLICATION_MODE" =~ ^(slave|replica)$ ]]; then
         if [[ -n "$REDIS_SENTINEL_HOST" ]]; then
             local -a sentinel_info_command=("redis-cli" "-h" "${REDIS_SENTINEL_HOST}" "-p" "${REDIS_SENTINEL_PORT_NUMBER}")
-            is_boolean_yes "$REDIS_TLS_ENABLED" && sentinel_info_command+=("--tls" "--cert" "${REDIS_TLS_CERT_FILE}" "--key" "${REDIS_TLS_KEY_FILE}")
-            is_empty_value "$REDIS_TLS_CA_FILE" && sentinel_info_command+=("--cacertdir" "${REDIS_TLS_CA_DIR}") || sentinel_info_command+=("--cacert" "${REDIS_TLS_CA_FILE}")
+            is_boolean_yes "$REDIS_TLS_ENABLED" && sentinel_info_command+=("--tls" "--cert" "${REDIS_TLS_CERT_FILE}" "--key" "${REDIS_TLS_KEY_FILE}" "--cacert" "${REDIS_TLS_CA_FILE}")
             sentinel_info_command+=("sentinel" "get-master-addr-by-name" "${REDIS_SENTINEL_MASTER_NAME}")
             read -r -a REDIS_SENTINEL_INFO <<< "$("${sentinel_info_command[@]}" | tr '\n' ' ')"
             REDIS_MASTER_HOST=${REDIS_SENTINEL_INFO[0]}
@@ -436,7 +431,7 @@ redis_configure_default() {
             fi
             redis_conf_set tls-cert-file "$REDIS_TLS_CERT_FILE"
             redis_conf_set tls-key-file "$REDIS_TLS_KEY_FILE"
-            is_empty_value "$REDIS_TLS_CA_FILE" && redis_conf_set tls-ca-cert-dir "$REDIS_TLS_CA_DIR" || redis_conf_set tls-ca-cert-file "$REDIS_TLS_CA_FILE"
+            redis_conf_set tls-ca-cert-file "$REDIS_TLS_CA_FILE"
             ! is_empty_value "$REDIS_TLS_KEY_FILE_PASS" && redis_conf_set tls-key-file-pass "$REDIS_TLS_KEY_FILE_PASS"
             [[ -n "$REDIS_TLS_DH_PARAMS_FILE" ]] && redis_conf_set tls-dh-params-file "$REDIS_TLS_DH_PARAMS_FILE"
             redis_conf_set tls-auth-clients "$REDIS_TLS_AUTH_CLIENTS"
