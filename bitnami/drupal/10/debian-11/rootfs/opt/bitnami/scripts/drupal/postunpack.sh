@@ -58,72 +58,7 @@ php_conf_set memory_limit "$PHP_DEFAULT_MEMORY_LIMIT"
 # Enable default web server configuration for Drupal
 info "Creating default web server configuration for Drupal"
 web_server_validate
-ensure_web_server_app_configuration_exists "drupal" \
-    --type php \
-    --nginx-additional-configuration $'
-location = /favicon.ico {
-  log_not_found off;
-  access_log off;
-}
-
-location = /robots.txt {
-  allow all;
-  log_not_found off;
-  access_log off;
-}
-
-location ~ ^/sites/.*/private/ {
-  return 403;
-}
-
-# Block access to scripts in site files directory
-location ~ ^/sites/[^/]+/files/.*\.php$ {
-  deny all;
-}
-
-# Allow "Well-Known URIs" as per RFC 5785
-location ~* ^/.well-known/ {
-  allow all;
-}
-
-location / {
-  try_files $uri /index.php?$query_string;
-}
-
-location @rewrite {
-  rewrite ^/(.*)$ /index.php?q=$1;
-}
-
-# Don\'t allow direct access to PHP files in the vendor directory.
-location ~ /vendor/.*\.php$ {
-  deny all;
-  return 404;
-}
-
-# Fighting with Styles? This little gem is amazing.
-location ~ ^/sites/.*/files/styles/ {
-  try_files $uri @rewrite;
-}
-
-# Handle private files through Drupal. Private file\'s path can come
-# with a language prefix.
-location ~ ^(/[a-z\-]+)?/system/files/ {
-  try_files $uri /index.php?$query_string;
-}
-
-location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg)$ {
-  try_files $uri @rewrite;
-  expires max;
-  log_not_found off;
-}'
-
-# Fix common issues running Drupal on top of the NGINX web server, if enabled
-# See: https://pantheon.io/blog/update-your-nginx-config-drupal-8
-nginx_php_fpm_conf_file="${BITNAMI_ROOT_DIR}/nginx/conf/bitnami/php-fpm.conf"
-if [[ -f "$nginx_php_fpm_conf_file" ]]; then
-    replace_in_file "$nginx_php_fpm_conf_file" '^(\s*)(fastcgi_index\s+index\.php;)$' '\1\2\n\1fastcgi_split_path_info ^(.+?\.php)(|/.*)$;'
-    replace_in_file "$nginx_php_fpm_conf_file" '(\s\\.php\$)(\s)' '\1|^/update.php\2'
-fi
+ensure_web_server_app_configuration_exists "drupal" --type php
 
 # Re-create .htaccess file after being moved into 'apache/conf/vhosts/htaccess' directory, to avoid Drupal warning
 drupal_fix_htaccess_warning_protection

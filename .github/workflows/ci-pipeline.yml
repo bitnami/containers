@@ -93,7 +93,7 @@ jobs:
       contents: read
     env:
       CSP_API_URL: https://console.cloud.vmware.com
-      CSP_API_TOKEN: ${{ secrets.CSP_API_TESTING_TOKEN }}
+      CSP_API_TOKEN: ${{ secrets.CSP_API_TOKEN }}
       VIB_PUBLIC_URL: https://cp.bromelia.vmware.com
     continue-on-error: false
     strategy:

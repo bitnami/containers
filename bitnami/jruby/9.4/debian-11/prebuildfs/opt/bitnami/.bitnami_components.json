@@ -15,12 +15,12 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "18.19.0-1"
+        "version": "18.19.1-0"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.11.7-3"
+        "version": "3.11.8-0"
     }
 }

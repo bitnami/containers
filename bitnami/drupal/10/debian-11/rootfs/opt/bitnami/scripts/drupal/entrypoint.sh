@@ -19,7 +19,7 @@ set -o pipefail
 
 print_welcome_page
 
-if [[ "$1" = "/opt/bitnami/scripts/$(web_server_type)/run.sh" || "$1" = "/opt/bitnami/scripts/nginx-php-fpm/run.sh" ]]; then
+if [[ "$1" = "/opt/bitnami/scripts/$(web_server_type)/run.sh" ]]; then
     info "** Starting Drupal setup **"
     /opt/bitnami/scripts/"$(web_server_type)"/setup.sh
     /opt/bitnami/scripts/php/setup.sh

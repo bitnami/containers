@@ -9,7 +9,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "16.1.0-1"
+        "version": "16.2.0-0"
     },
     "sonarqube": {
         "arch": "amd64",

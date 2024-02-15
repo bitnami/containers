@@ -24,6 +24,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
 minio_env_vars=(
+    MINIO_DATA_DIR
     MINIO_API_PORT_NUMBER
     MINIO_CONSOLE_PORT_NUMBER
     MINIO_SCHEME
@@ -60,7 +61,7 @@ export MINIO_CERTS_DIR="/certs"
 export MINIO_LOGS_DIR="${MINIO_BASE_DIR}/log"
 export MINIO_TMP_DIR="${MINIO_BASE_DIR}/tmp"
 export MINIO_SECRETS_DIR="${MINIO_BASE_DIR}/secrets"
-export MINIO_DATA_DIR="/bitnami/minio/data"
+export MINIO_DATA_DIR="${MINIO_DATA_DIR:-/bitnami/minio/data}"
 export MINIO_LOG_FILE="${MINIO_LOGS_DIR}/minio.log"
 export MINIO_PID_FILE="${MINIO_TMP_DIR}/minio.pid"
 export PATH="${MINIO_BIN_DIR}:${PATH}"
