@@ -607,6 +607,7 @@ Refer to [issues/27124](https://github.com/bitnami/containers/issues/27124) for 
 | Name                                  | Description                                         | Value                                         |
 |---------------------------------------|-----------------------------------------------------|-----------------------------------------------|
 | `POSTGRESQL_BASE_DIR`                 | PostgreSQL installation directory                   | `/opt/bitnami/postgresql`                     |
+| `POSTGRESQL_DEFAULT_CONF_DIR`         | PostgreSQL configuration directory                  | `$POSTGRESQL_BASE_DIR/conf.default`           |
 | `POSTGRESQL_CONF_DIR`                 | PostgreSQL configuration directory                  | `$POSTGRESQL_BASE_DIR/conf`                   |
 | `POSTGRESQL_MOUNTED_CONF_DIR`         | PostgreSQL mounted configuration directory          | `$POSTGRESQL_VOLUME_DIR/conf`                 |
 | `POSTGRESQL_CONF_FILE`                | PostgreSQL configuration file                       | `$POSTGRESQL_CONF_DIR/postgresql.conf`        |
