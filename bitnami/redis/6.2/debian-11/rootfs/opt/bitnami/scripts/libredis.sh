@@ -270,8 +270,7 @@ redis_configure_replication() {
         if [[ -n "$REDIS_SENTINEL_HOST" ]]; then
             local -a sentinel_info_command=("redis-cli" "-h" "${REDIS_SENTINEL_HOST}" "-p" "${REDIS_SENTINEL_PORT_NUMBER}")
             is_boolean_yes "$REDIS_TLS_ENABLED" && sentinel_info_command+=("--tls" "--cert" "${REDIS_TLS_CERT_FILE}" "--key" "${REDIS_TLS_KEY_FILE}")
-            is_empty_value "$REDIS_TLS_CA_FILE" && sentinel_info_command+=("--cacertdir" "${REDIS_TLS_CA_DIR}")
-            ! is_empty_value "$REDIS_TLS_CA_FILE" && sentinel_info_command+=("--cacert" "${REDIS_TLS_CA_FILE}")
+is_empty_value "$REDIS_TLS_CA_FILE" && sentinel_info_command+=("--cacertdir" "${REDIS_TLS_CA_DIR}") || sentinel_info_command+=("--cacert" "${REDIS_TLS_CA_FILE}")
             sentinel_info_command+=("sentinel" "get-master-addr-by-name" "${REDIS_SENTINEL_MASTER_NAME}")
             read -r -a REDIS_SENTINEL_INFO <<< "$("${sentinel_info_command[@]}" | tr '\n' ' ')"
             REDIS_MASTER_HOST=${REDIS_SENTINEL_INFO[0]}
