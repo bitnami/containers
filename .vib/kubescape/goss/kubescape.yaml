@@ -1,0 +1,16 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+command:
+  check-scan:
+    exec: kubescape scan https://github.com/bitnami-labs/sealed-secrets/tree/main/helm/sealed-secrets --format=json
+    exit-status: 0
+    timeout: 30000
+    stderr:
+      - "Overall compliance-score"
+  check-oss-assessment:
+    exec: /opt/bitnami/scripts/kubescape/entrypoint.sh oss-assessment https://github.com/bitnami-labs/sealed-secrets/tree/main/helm/sealed-secrets
+    exit-status: 0
+    timeout: 30000
+    stdout:
+      - "\"security\":"
