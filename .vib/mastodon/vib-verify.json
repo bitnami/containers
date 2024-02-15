@@ -48,7 +48,7 @@
         {
           "action_id": "trivy",
           "params": {
-            "threshold": "CRITICAL",
+            "threshold": "LOW",
             "vuln_type": [
               "OS"
             ]
