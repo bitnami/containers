@@ -84,6 +84,7 @@ docker build -t bitnami/APP:latest .
 | `DB_BIN_DIR`                  | Percona Server for MySQL directory where executable binary files are located. | `${DB_BASE_DIR}/bin`          |
 | `DB_SBIN_DIR`                 | Percona Server for MySQL directory where service binary files are located.    | `${DB_BASE_DIR}/bin`          |
 | `DB_CONF_DIR`                 | Percona Server for MySQL configuration directory.                             | `${DB_BASE_DIR}/conf`         |
+| `DB_DEFAULT_CONF_DIR`         | Percona Server for MySQL default configuration directory.                     | `${DB_BASE_DIR}/conf.default` |
 | `DB_LOGS_DIR`                 | Percona Server for MySQL logs directory.                                      | `${DB_BASE_DIR}/logs`         |
 | `DB_TMP_DIR`                  | Percona Server for MySQL directory for temporary files.                       | `${DB_BASE_DIR}/tmp`          |
 | `DB_CONF_FILE`                | Main Percona Server for MySQL configuration file.                             | `${DB_CONF_DIR}/my.cnf`       |
