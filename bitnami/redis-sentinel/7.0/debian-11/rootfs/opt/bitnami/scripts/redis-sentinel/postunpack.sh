@@ -18,7 +18,7 @@ set -o pipefail
 . /opt/bitnami/scripts/liblog.sh
 
 # Ensure non-root user has write permissions on a set of directories
-for dir in "$REDIS_SENTINEL_BASE_DIR" "$REDIS_SENTINEL_CONF_DIR" "$REDIS_SENTINEL_LOG_DIR" "$REDIS_SENTINEL_TMP_DIR" "$REDIS_SENTINEL_VOLUME_DIR" "${REDIS_SENTINEL_VOLUME_DIR}/conf"; do
+for dir in "$REDIS_SENTINEL_BASE_DIR" "$REDIS_SENTINEL_CONF_DIR" "$REDIS_SENTINEL_LOG_DIR" "$REDIS_SENTINEL_TMP_DIR" "$REDIS_SENTINEL_VOLUME_DIR" "${REDIS_SENTINEL_VOLUME_DIR}/conf" "$REDIS_SENTINEL_DEFAULT_CONF_DIR"; do
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
 done
@@ -30,3 +30,7 @@ redis_conf_set "pidfile" "$REDIS_SENTINEL_PID_FILE"
 # Send logs to stdout
 redis_conf_set "daemonize" "no"
 redis_conf_set "logfile" ""
+
+# Copy all initially generated configuration files to the default directory
+# (this is to avoid breaking when entrypoint is being overridden)
+cp -r "${REDIS_SENTINEL_CONF_DIR}/"* "$REDIS_SENTINEL_DEFAULT_CONF_DIR"
