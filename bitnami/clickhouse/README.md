@@ -210,6 +210,7 @@ In order to have your custom files inside the docker image you can mount them as
 | `CLICKHOUSE_BASE_DIR`         | ClickHouse installation directory.  | `${BITNAMI_ROOT_DIR}/clickhouse`             |
 | `CLICKHOUSE_VOLUME_DIR`       | ClickHouse volume directory.        | `/bitnami/clickhouse`                        |
 | `CLICKHOUSE_CONF_DIR`         | ClickHouse configuration directory. | `${CLICKHOUSE_BASE_DIR}/etc`                 |
+| `CLICKHOUSE_DEFAULT_CONF_DIR` | ClickHouse configuration directory. | `${CLICKHOUSE_BASE_DIR}/etc.default`         |
 | `CLICKHOUSE_MOUNTED_CONF_DIR` | ClickHouse configuration directory. | `${CLICKHOUSE_VOLUME_DIR}/etc`               |
 | `CLICKHOUSE_DATA_DIR`         | ClickHouse data directory.          | `${CLICKHOUSE_VOLUME_DIR}/data`              |
 | `CLICKHOUSE_LOG_DIR`          | ClickHouse logs directory.          | `${CLICKHOUSE_BASE_DIR}/logs`                |
