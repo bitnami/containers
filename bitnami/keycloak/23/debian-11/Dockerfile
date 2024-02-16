@@ -53,6 +53,8 @@ ENV APP_VERSION="23.0.6" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:/opt/bitnami/keycloak/bin:$PATH"
 
+EXPOSE 8080 8443
+
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/scripts/keycloak/entrypoint.sh" ]
 CMD [ "/opt/bitnami/scripts/keycloak/run.sh" ]
