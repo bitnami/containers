@@ -8,10 +8,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2024-02-16T01:25:38Z" \
+      org.opencontainers.image.created="2024-02-16T07:41:31Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="17.0.10-13-debian-11-r19" \
+      org.opencontainers.image.ref.name="17.0.10-13-debian-11-r20" \
       org.opencontainers.image.title="java" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="17.0.10-13"
