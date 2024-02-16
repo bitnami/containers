@@ -20,7 +20,7 @@ set -o pipefail
 # bypassing the setup.sh logic. If the file already exists do not overwrite (in
 # case someone mounts a configuration file in /opt/bitnami/mariadb/conf)
 debug "Copying files from $DB_DEFAULT_CONF_DIR to $DB_CONF_DIR"
-cp -nfr "$DB_DEFAULT_CONF_DIR"/. "$DB_CONF_DIR"
+cp -nr "$DB_DEFAULT_CONF_DIR"/. "$DB_CONF_DIR"
 
 print_welcome_page
 
