@@ -16,7 +16,7 @@ set -o pipefail
 . /opt/bitnami/scripts/librediscluster.sh
 . /opt/bitnami/scripts/libfs.sh
 
-for dir in "$REDIS_VOLUME_DIR" "$REDIS_DATA_DIR" "$REDIS_BASE_DIR" "$REDIS_CONF_DIR"; do
+for dir in "$REDIS_VOLUME_DIR" "$REDIS_DATA_DIR" "$REDIS_BASE_DIR" "$REDIS_CONF_DIR" "$REDIS_DEFAULT_CONF_DIR"; do
     ensure_dir_exists "$dir"
 done
 
