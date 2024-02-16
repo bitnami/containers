@@ -37,3 +37,7 @@ chmod 660 "$MONGODB_CONF_FILE"
 
 # Redirect all logging to stdout
 ln -sf /dev/stdout "$MONGODB_LOG_FILE"
+
+# Copy all initially generated configuration files to the default directory
+# (this is to avoid breaking when entrypoint is being overridden)
+cp -r "${MONGODB_CONF_DIR}/"* "$MONGODB_DEFAULT_CONF_DIR"
