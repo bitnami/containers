@@ -131,6 +131,7 @@ docker run -it --rm \
 | `REDIS_SENTINEL_VOLUME_DIR`          | Persistence base directory            | `/bitnami/redis-sentinel`                      |
 | `REDIS_SENTINEL_BASE_DIR`            | Redis installation directory          | `${BITNAMI_ROOT_DIR}/redis-sentinel`           |
 | `REDIS_SENTINEL_CONF_DIR`            | Redis configuration directory         | `${REDIS_SENTINEL_BASE_DIR}/etc`               |
+| `REDIS_SENTINEL_DEFAULT_CONF_DIR`    | Redis default configuration directory | `${REDIS_SENTINEL_BASE_DIR}/etc.default`       |
 | `REDIS_SENTINEL_MOUNTED_CONF_DIR`    | Redis mounted configuration directory | `${REDIS_SENTINEL_BASE_DIR}/mounted-etc`       |
 | `REDIS_SENTINEL_CONF_FILE`           | Redis configuration file              | `${REDIS_SENTINEL_CONF_DIR}/sentinel.conf`     |
 | `REDIS_SENTINEL_LOG_DIR`             | Redis logs directory                  | `${REDIS_SENTINEL_BASE_DIR}/logs`              |
