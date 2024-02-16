@@ -16,6 +16,12 @@ set -o pipefail
 # Load MariaDB environment variables
 . /opt/bitnami/scripts/mariadb-env.sh
 
+# We add the copy from default config in the entrypoint to not break users 
+# bypassing the setup.sh logic. If the file already exists do not overwrite (in
+# case someone mounts a configuration file in /opt/bitnami/mariadb/conf)
+debug "Copying files from $DB_DEFAULT_CONF_DIR to $DB_CONF_DIR"
+cp -nfr "$DB_DEFAULT_CONF_DIR"/. "$DB_CONF_DIR"
+
 print_welcome_page
 
 if [[ "$1" = "/opt/bitnami/scripts/mariadb-galera/run.sh" ]]; then
