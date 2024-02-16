@@ -76,6 +76,7 @@ unset redis_env_vars
 export REDIS_VOLUME_DIR="/bitnami/redis"
 export REDIS_BASE_DIR="${BITNAMI_ROOT_DIR}/redis"
 export REDIS_CONF_DIR="${REDIS_BASE_DIR}/etc"
+export REDIS_DEFAULT_CONF_DIR="${REDIS_BASE_DIR}/etc.default"
 export REDIS_DATA_DIR="${REDIS_DATA_DIR:-${REDIS_VOLUME_DIR}/data}"
 export REDIS_MOUNTED_CONF_DIR="${REDIS_BASE_DIR}/mounted-etc"
 export REDIS_OVERRIDES_FILE="${REDIS_OVERRIDES_FILE:-${REDIS_MOUNTED_CONF_DIR}/overrides.conf}"
