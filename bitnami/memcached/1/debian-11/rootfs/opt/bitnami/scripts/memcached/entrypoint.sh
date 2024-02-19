@@ -19,6 +19,12 @@ set -o pipefail
 
 print_welcome_page
 
+# We add the copy from default config in the entrypoint to not break users 
+# bypassing the setup.sh logic. If the file already exists do not overwrite (in
+# case someone mounts a configuration file in /opt/bitnami/memcached/conf)
+debug "Copying files from $MEMCACHED_DEFAULT_CONF_DIR to $MEMCACHED_CONF_DIR"
+cp -nfr "$MEMCACHED_DEFAULT_CONF_DIR"/. "$MEMCACHED_CONF_DIR"
+
 if [[ "$*" = *"/opt/bitnami/scripts/memcached/run.sh"* || "$*" = *"/run.sh"* ]]; then
     info "** Starting Memcached setup **"
     /opt/bitnami/scripts/memcached/setup.sh
