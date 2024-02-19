@@ -51,6 +51,7 @@ unset memcached_env_vars
 # Paths
 export MEMCACHED_BASE_DIR="${BITNAMI_ROOT_DIR}/memcached"
 export MEMCACHED_CONF_DIR="${MEMCACHED_BASE_DIR}/conf"
+export MEMCACHED_DEFAULT_CONF_DIR="${MEMCACHED_BASE_DIR}/conf.default"
 export MEMCACHED_BIN_DIR="${MEMCACHED_BASE_DIR}/bin"
 export PATH="${MEMCACHED_BIN_DIR}:${BITNAMI_ROOT_DIR}/common/bin:${PATH}"
 

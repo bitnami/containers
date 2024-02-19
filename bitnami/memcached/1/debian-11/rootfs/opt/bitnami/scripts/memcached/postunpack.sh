@@ -21,3 +21,7 @@ for dir in "$MEMCACHED_CONF_DIR" "$SASL_CONF_PATH"; do
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
 done
+
+# Copy all initially generated configuration files to the default directory
+# (this is to avoid breaking when entrypoint is being overridden)
+cp -r "${MEMCACHED_CONF_DIR}/"* "$MEMCACHED_DEFAULT_CONF_DIR"
