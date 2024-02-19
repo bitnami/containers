@@ -18,7 +18,7 @@ set -o pipefail
 # Load environment
 . /opt/bitnami/scripts/mongodb-env.sh
 
-for dir in "$MONGODB_TMP_DIR" "$MONGODB_LOG_DIR" "$MONGODB_CONF_DIR" "$MONGODB_DATA_DIR" "$MONGODB_VOLUME_DIR" "$MONGODB_INITSCRIPTS_DIR"; do
+for dir in "$MONGODB_TMP_DIR" "$MONGODB_LOG_DIR" "$MONGODB_CONF_DIR" "$MONGODB_DEFAULT_CONF_DIR" "$MONGODB_DATA_DIR" "$MONGODB_VOLUME_DIR" "$MONGODB_INITSCRIPTS_DIR"; do
     ensure_dir_exists "$dir"
 done
 chmod -R g+rwX "$MONGODB_TMP_DIR" "$MONGODB_LOG_DIR" "$MONGODB_CONF_DIR" "$MONGODB_DATA_DIR" "$MONGODB_VOLUME_DIR" "$MONGODB_INITSCRIPTS_DIR"
@@ -38,3 +38,6 @@ chmod g+w "$MONGODB_CONF_FILE"
 chmod g+w "$MONGODB_MONGOS_CONF_FILE"
 # Redirect all logging to stdout
 ln -sf /dev/stdout "$MONGODB_LOG_FILE"
+# Copy all initially generated configuration files to the default directory
+# (this is to avoid breaking when entrypoint is being overridden)
+cp -r "${MONGODB_CONF_DIR}/"* "$MONGODB_DEFAULT_CONF_DIR"
