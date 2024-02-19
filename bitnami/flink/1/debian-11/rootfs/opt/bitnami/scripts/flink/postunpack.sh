@@ -21,6 +21,7 @@ set -o pipefail
 dirs=(
     "${FLINK_WORK_DIR}"
     "${FLINK_CONF_DIR}"
+    "${FLINK_DEFAULT_CONF_DIR}"
     "${FLINK_VOLUME_DIR}"
 )
 
@@ -35,3 +36,7 @@ done
 # Set up execution permissions for /bin folder
 ensure_dir_exists "${FLINK_WORK_DIR}/bin"
 configure_permissions_ownership "${FLINK_WORK_DIR}/bin" -d "775" -f "775"
+
+# Copy all initially generated configuration files to the default directory
+# (this is to avoid breaking when entrypoint is being overridden)
+cp -r "${FLINK_CONF_DIR}/"* "$FLINK_DEFAULT_CONF_DIR"
