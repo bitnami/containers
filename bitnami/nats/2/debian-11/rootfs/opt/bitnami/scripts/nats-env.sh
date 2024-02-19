@@ -65,6 +65,7 @@ unset nats_env_vars
 export NATS_BASE_DIR="${BITNAMI_ROOT_DIR}/nats"
 export NATS_BIN_DIR="${NATS_BASE_DIR}/bin"
 export NATS_CONF_DIR="${NATS_BASE_DIR}/conf"
+export NATS_DEFAULT_CONF_DIR="${NATS_BASE_DIR}/conf.default"
 export NATS_LOGS_DIR="${NATS_BASE_DIR}/logs"
 export NATS_TMP_DIR="${NATS_BASE_DIR}/tmp"
 export NATS_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/nats"

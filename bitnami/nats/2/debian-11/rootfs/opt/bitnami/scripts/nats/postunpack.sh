@@ -20,7 +20,7 @@ set -o pipefail
 
 # Ensure required directories exist
 chmod g+rwX "$NATS_BASE_DIR"
-for dir in "$NATS_VOLUME_DIR" "$NATS_DATA_DIR" "$NATS_MOUNTED_CONF_DIR" "$NATS_CONF_DIR" "$NATS_LOGS_DIR" "$NATS_TMP_DIR" "$NATS_INITSCRIPTS_DIR"; do
+for dir in "$NATS_VOLUME_DIR" "$NATS_DATA_DIR" "$NATS_MOUNTED_CONF_DIR" "$NATS_CONF_DIR" "$NATS_DEFAULT_CONF_DIR" "$NATS_LOGS_DIR" "$NATS_TMP_DIR" "$NATS_INITSCRIPTS_DIR"; do
     ensure_dir_exists "$dir"
     configure_permissions_ownership "$dir" -d "775" -f "664"
 done
@@ -32,3 +32,7 @@ chmod g+rw "$NATS_CONF_FILE"
 
 # Redirect all logging to stdout
 ln -sf /dev/stdout "$NATS_LOG_FILE"
+
+# Copy all initially generated configuration files to the default directory
+# (this is to avoid breaking when entrypoint is being overridden)
+cp -r "${NATS_CONF_DIR}/"* "$NATS_DEFAULT_CONF_DIR"

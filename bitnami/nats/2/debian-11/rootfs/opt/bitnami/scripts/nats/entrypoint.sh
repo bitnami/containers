@@ -19,6 +19,12 @@ set -o pipefail
 
 print_welcome_page
 
+# We add the copy from default config in the entrypoint to not break users 
+# bypassing the setup.sh logic. If the file already exists do not overwrite (in
+# case someone mounts a configuration file in /opt/bitnami/nats/conf)
+debug "Copying files from $NATS_DEFAULT_CONF_DIR to $NATS_CONF_DIR"
+cp -nr "$NATS_DEFAULT_CONF_DIR"/. "$NATS_CONF_DIR"
+
 if [[ "$*" = *"/opt/bitnami/scripts/nats/run.sh"* ]]; then
     info "** Starting NATS setup **"
     /opt/bitnami/scripts/nats/setup.sh
