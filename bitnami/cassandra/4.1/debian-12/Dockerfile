@@ -8,10 +8,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-02-19T15:10:26Z" \
+      org.opencontainers.image.created="2024-02-20T15:44:18Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.1.4-debian-12-r1" \
+      org.opencontainers.image.ref.name="4.1.4-debian-12-r2" \
       org.opencontainers.image.title="cassandra" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="4.1.4"
@@ -28,7 +28,7 @@ RUN install_packages ca-certificates curl libbz2-1.0 libcom-err2 libcrypt1 libff
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "python-3.11.8-0-linux-${OS_ARCH}-debian-12" \
-      "java-11.0.22-12-1-linux-${OS_ARCH}-debian-12" \
+      "java-11.0.22-12-2-linux-${OS_ARCH}-debian-12" \
       "cassandra-4.1.4-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
