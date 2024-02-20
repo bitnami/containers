@@ -1,0 +1,68 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+version: '2'
+services:
+  postgresql:
+    image: docker.io/bitnami/postgresql:16
+    volumes:
+      - 'postgresql_data:/bitnami/postgresql'
+    environment:
+      - POSTGRESQL_DATABASE=bitnami_mastodon
+      - POSTGRESQL_USERNAME=bn_mastodon
+      - POSTGRESQL_PASSWORD=bitnami1
+  redis:
+    image: docker.io/bitnami/redis:7.0
+    volumes:
+      - 'redis_data:/bitnami/redis'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+  elasticsearch:
+    image: docker.io/bitnami/elasticsearch:8
+    volumes:
+      - 'elasticsearch_data:/bitnami/elasticsearch/data'
+    environment:
+      - ELASTICSEARCH_ENABLE_SECURITY=true
+      - ELASTICSEARCH_SKIP_TRANSPORT_TLS=true
+      - ELASTICSEARCH_ENABLE_REST_TLS=false
+      - ELASTICSEARCH_PASSWORD=bitnami123
+  mastodon:
+    image: docker.io/bitnami/mastodon:4
+    ports:
+      - 80:3000
+    volumes:
+      - 'mastodon_data:/bitnami/mastodon'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MASTODON_MODE=web
+      - MASTODON_DATABASE_PASSWORD=bitnami1
+      - MASTODON_ELASTICSEARCH_PASSWORD=bitnami123
+  mastodon-streaming:
+    image: docker.io/bitnami/mastodon:4
+    ports:
+      - 4000:4000
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MASTODON_MODE=streaming
+      - MASTODON_DATABASE_PASSWORD=bitnami1
+      - MASTODON_ELASTICSEARCH_PASSWORD=bitnami123
+  mastodon-sidekiq:
+    image: docker.io/bitnami/mastodon:4
+    volumes:
+      - 'mastodon_data:/bitnami/mastodon'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MASTODON_MODE=sidekiq
+      - MASTODON_DATABASE_PASSWORD=bitnami1
+      - MASTODON_ELASTICSEARCH_PASSWORD=bitnami123
+volumes:
+  postgresql_data:
+    driver: local
+  minio_data:
+    driver: local
+  redis_data:
+    driver: local
+  elasticsearch_data:
+    driver: local
+  mastodon_data:
+    driver: local
