@@ -1,0 +1,53 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+version: '2'
+
+services:
+  postgresql:
+    image: docker.io/bitnami/postgresql:16
+    volumes:
+      - 'postgresql_data:/bitnami/postgresql'
+    environment:
+      - POSTGRESQL_DATABASE=bitnami_airflow
+      - POSTGRESQL_USERNAME=bn_airflow
+      - POSTGRESQL_PASSWORD=bitnami1
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+  redis:
+    image: docker.io/bitnami/redis:7.0
+    volumes:
+      - 'redis_data:/bitnami'
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+  airflow-scheduler:
+    image: docker.io/bitnami/airflow-scheduler:2
+    environment:
+      - AIRFLOW_DATABASE_NAME=bitnami_airflow
+      - AIRFLOW_DATABASE_USERNAME=bn_airflow
+      - AIRFLOW_DATABASE_PASSWORD=bitnami1
+      - AIRFLOW_EXECUTOR=CeleryExecutor
+      - AIRFLOW_WEBSERVER_HOST=airflow
+  airflow-worker:
+    image: docker.io/bitnami/airflow-worker:2
+    environment:
+      - AIRFLOW_DATABASE_NAME=bitnami_airflow
+      - AIRFLOW_DATABASE_USERNAME=bn_airflow
+      - AIRFLOW_DATABASE_PASSWORD=bitnami1
+      - AIRFLOW_EXECUTOR=CeleryExecutor
+      - AIRFLOW_WEBSERVER_HOST=airflow
+  airflow:
+    image: docker.io/bitnami/airflow:2
+    environment:
+      - AIRFLOW_DATABASE_NAME=bitnami_airflow
+      - AIRFLOW_DATABASE_USERNAME=bn_airflow
+      - AIRFLOW_DATABASE_PASSWORD=bitnami1
+      - AIRFLOW_EXECUTOR=CeleryExecutor
+    ports:
+      - '8080:8080'
+volumes:
+  postgresql_data:
+    driver: local
+  redis_data:
+    driver: local
