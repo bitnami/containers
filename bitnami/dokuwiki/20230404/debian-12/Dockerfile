@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-02-19T23:24:09Z" \
+      org.opencontainers.image.created="2024-02-20T16:31:24Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="20230404.1.0-debian-12-r21" \
+      org.opencontainers.image.ref.name="20230404.1.0-debian-12-r22" \
       org.opencontainers.image.title="dokuwiki" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="20230404.1.0"
@@ -27,9 +27,9 @@ RUN install_packages acl ca-certificates curl ldap-utils libbrotli1 libbsd0 libb
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "render-template-1.0.6-8-linux-${OS_ARCH}-debian-12" \
-      "php-8.2.16-0-linux-${OS_ARCH}-debian-12" \
+      "php-8.2.16-1-linux-${OS_ARCH}-debian-12" \
       "apache-2.4.58-7-linux-${OS_ARCH}-debian-12" \
-      "libphp-8.2.16-0-linux-${OS_ARCH}-debian-12" \
+      "libphp-8.2.16-1-linux-${OS_ARCH}-debian-12" \
       "dokuwiki-20230404.1.0-3-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
