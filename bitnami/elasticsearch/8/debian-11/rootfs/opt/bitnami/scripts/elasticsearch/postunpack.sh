@@ -33,3 +33,19 @@ for dir in "$DB_TMP_DIR" "$DB_DATA_DIR" "$DB_LOGS_DIR" "${DB_BASE_DIR}/plugins" 
 done
 
 elasticsearch_install_plugins
+
+# Copy all initially generated configuration files to the default directory
+# (this is to avoid breaking when entrypoint is being overridden)
+cp -r "${DB_CONF_DIR}/"* "$DB_DEFAULT_CONF_DIR"
+
+if ! is_dir_empty "$DB_PLUGINS_DIR"; then
+    # Move all initially installed plugins to the default plugins directory. In
+    # order to not dramatically increase the container size we add symlinks in the
+    # plugins directory (to avoid breaking when the entrypoint is being overridden)
+    for plugin_path in "${DB_PLUGINS_DIR}"/*; do
+        plugin_name="$(basename "$plugin_path")"
+        plugin_moved_path="${DB_DEFAULT_PLUGINS_DIR}/${plugin_name}"
+        mv "$plugin_path" "$plugin_moved_path"
+        ln -s "$plugin_moved_path" "$plugin_path"
+    done
+fi
