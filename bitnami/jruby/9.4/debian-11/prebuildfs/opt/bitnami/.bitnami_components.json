@@ -3,13 +3,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "17.0.10-13-1"
+        "version": "17.0.10-13-2"
     },
     "jruby": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "9.4.5-0-3"
+        "version": "9.4.5-0-4"
     },
     "node": {
         "arch": "amd64",
