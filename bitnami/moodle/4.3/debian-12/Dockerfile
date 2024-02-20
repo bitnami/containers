@@ -9,10 +9,10 @@ ARG WITH_ALL_LOCALES="no"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-02-15T19:02:24Z" \
+      org.opencontainers.image.created="2024-02-20T18:27:55Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.3.3-debian-12-r1" \
+      org.opencontainers.image.ref.name="4.3.3-debian-12-r2" \
       org.opencontainers.image.title="moodle" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="4.3.3"
@@ -28,12 +28,12 @@ RUN install_packages acl ca-certificates cron curl libaudit1 libbrotli1 libbsd0 
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "render-template-1.0.6-8-linux-${OS_ARCH}-debian-12" \
-      "php-8.1.27-5-linux-${OS_ARCH}-debian-12" \
-      "apache-2.4.58-6-linux-${OS_ARCH}-debian-12" \
-      "postgresql-client-13.14.0-0-linux-${OS_ARCH}-debian-12" \
-      "mysql-client-11.2.3-0-linux-${OS_ARCH}-debian-12" \
-      "libphp-8.1.27-2-linux-${OS_ARCH}-debian-12" \
-      "moodle-4.3.3-0-linux-${OS_ARCH}-debian-12" \
+      "php-8.1.27-6-linux-${OS_ARCH}-debian-12" \
+      "apache-2.4.58-7-linux-${OS_ARCH}-debian-12" \
+      "postgresql-client-13.14.0-1-linux-${OS_ARCH}-debian-12" \
+      "mysql-client-11.2.3-1-linux-${OS_ARCH}-debian-12" \
+      "libphp-8.1.27-3-linux-${OS_ARCH}-debian-12" \
+      "moodle-4.3.3-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
