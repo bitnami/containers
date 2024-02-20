@@ -29,3 +29,14 @@ redis_conf_set port "$REDIS_DEFAULT_PORT_NUMBER"
 redis_conf_set dir "$REDIS_DATA_DIR"
 redis_conf_set pidfile "$REDIS_PID_FILE"
 redis_conf_set daemonize yes
+
+redis_conf_set logfile "" # Log to stdout
+
+# Disable RDB persistence, AOF persistence already enabled.
+# Ref: https://redis.io/topics/persistence#interactions-between-aof-and-rdb-persistence
+# Ref 2: https://github.com/bitnami/bitnami-docker-redis/pull/115
+redis_conf_set save ""
+
+# Copy all initially generated configuration files to the default directory
+# (this is to avoid breaking when entrypoint is being overridden)
+cp -r "${REDIS_CONF_DIR}/"* "$REDIS_DEFAULT_CONF_DIR"
