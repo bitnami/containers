@@ -1,8 +1,0 @@
-{
-    "git": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "2.43.2-0"
-    }
-}

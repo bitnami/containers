@@ -1,9 +1,0 @@
----
-protocol: "http"
-port: 8080
-log_level: "INFO"
-registry_config: "/etc/registry/config.yml"
-
-#https_config:
-#  cert: "server.crt"
-#  key: "server.key"
