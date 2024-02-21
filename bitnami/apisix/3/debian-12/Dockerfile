@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-02-20T15:27:15Z" \
+      org.opencontainers.image.created="2024-02-21T11:25:29Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.8.0-debian-12-r6" \
+      org.opencontainers.image.ref.name="3.8.0-debian-12-r7" \
       org.opencontainers.image.title="apisix" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.8.0"
@@ -27,7 +27,7 @@ RUN install_packages ca-certificates curl libcrypt1 libffi8 libgcc-s1 libgmp10 l
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "yq-4.41.1-0-linux-${OS_ARCH}-debian-12" \
-      "render-template-1.0.6-8-linux-${OS_ARCH}-debian-12" \
+      "render-template-1.0.6-9-linux-${OS_ARCH}-debian-12" \
       "apisix-3.8.0-2-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
