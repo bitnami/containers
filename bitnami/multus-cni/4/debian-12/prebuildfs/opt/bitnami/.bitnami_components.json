@@ -1,0 +1,8 @@
+{
+    "multus-cni": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "4.0.2-10"
+    }
+}

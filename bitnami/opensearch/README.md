@@ -231,25 +231,27 @@ docker-compose up -d
 
 #### Read-only environment variables
 
-| Name                             | Description                                                     | Value                           |
-|----------------------------------|-----------------------------------------------------------------|---------------------------------|
-| `DB_FLAVOR`                      | Database flavor. Valid values: `elasticsearch` or `opensearch`. | `opensearch`                    |
-| `OPENSEARCH_VOLUME_DIR`          | Persistence base directory                                      | `/bitnami/opensearch`           |
-| `OPENSEARCH_BASE_DIR`            | Opensearch installation directory                               | `/opt/bitnami/opensearch`       |
-| `OPENSEARCH_CONF_DIR`            | Opensearch configuration directory                              | `${DB_BASE_DIR}/config`         |
-| `OPENSEARCH_LOGS_DIR`            | Opensearch logs directory                                       | `${DB_BASE_DIR}/logs`           |
-| `OPENSEARCH_PLUGINS_DIR`         | Opensearch plugins directory                                    | `${DB_BASE_DIR}/plugins`        |
-| `OPENSEARCH_DATA_DIR`            | Opensearch data directory                                       | `${DB_VOLUME_DIR}/data`         |
-| `OPENSEARCH_TMP_DIR`             | Opensearch temporary directory                                  | `${DB_BASE_DIR}/tmp`            |
-| `OPENSEARCH_BIN_DIR`             | Opensearch executables directory                                | `${DB_BASE_DIR}/bin`            |
-| `OPENSEARCH_MOUNTED_PLUGINS_DIR` | Directory where plugins are mounted                             | `${DB_VOLUME_DIR}/plugins`      |
-| `OPENSEARCH_CONF_FILE`           | Path to Opensearch configuration file                           | `${DB_CONF_DIR}/opensearch.yml` |
-| `OPENSEARCH_LOG_FILE`            | Path to the Opensearch log file                                 | `${DB_LOGS_DIR}/opensearch.log` |
-| `OPENSEARCH_PID_FILE`            | Path to the Opensearch pid file                                 | `${DB_TMP_DIR}/opensearch.pid`  |
-| `OPENSEARCH_INITSCRIPTS_DIR`     | Path to the Opensearch container init scripts directory         | `/docker-entrypoint-initdb.d`   |
-| `OPENSEARCH_DAEMON_USER`         | Opensearch system user                                          | `opensearch`                    |
-| `OPENSEARCH_DAEMON_GROUP`        | Opensearch system group                                         | `opensearch`                    |
-| `OPENSEARCH_USERNAME`            | Username of the Opensearch superuser.                           | `admin`                         |
+| Name                             | Description                                                     | Value                            |
+|----------------------------------|-----------------------------------------------------------------|----------------------------------|
+| `DB_FLAVOR`                      | Database flavor. Valid values: `elasticsearch` or `opensearch`. | `opensearch`                     |
+| `OPENSEARCH_VOLUME_DIR`          | Persistence base directory                                      | `/bitnami/opensearch`            |
+| `OPENSEARCH_BASE_DIR`            | Opensearch installation directory                               | `/opt/bitnami/opensearch`        |
+| `OPENSEARCH_CONF_DIR`            | Opensearch configuration directory                              | `${DB_BASE_DIR}/config`          |
+| `OPENSEARCH_DEFAULT_CONF_DIR`    | Opensearch default configuration directory                      | `${DB_BASE_DIR}/config.default`  |
+| `OPENSEARCH_LOGS_DIR`            | Opensearch logs directory                                       | `${DB_BASE_DIR}/logs`            |
+| `OPENSEARCH_PLUGINS_DIR`         | Opensearch plugins directory                                    | `${DB_BASE_DIR}/plugins`         |
+| `OPENSEARCH_DEFAULT_PLUGINS_DIR` | Opensearch default plugins directory                            | `${DB_BASE_DIR}/plugins.default` |
+| `OPENSEARCH_DATA_DIR`            | Opensearch data directory                                       | `${DB_VOLUME_DIR}/data`          |
+| `OPENSEARCH_TMP_DIR`             | Opensearch temporary directory                                  | `${DB_BASE_DIR}/tmp`             |
+| `OPENSEARCH_BIN_DIR`             | Opensearch executables directory                                | `${DB_BASE_DIR}/bin`             |
+| `OPENSEARCH_MOUNTED_PLUGINS_DIR` | Directory where plugins are mounted                             | `${DB_VOLUME_DIR}/plugins`       |
+| `OPENSEARCH_CONF_FILE`           | Path to Opensearch configuration file                           | `${DB_CONF_DIR}/opensearch.yml`  |
+| `OPENSEARCH_LOG_FILE`            | Path to the Opensearch log file                                 | `${DB_LOGS_DIR}/opensearch.log`  |
+| `OPENSEARCH_PID_FILE`            | Path to the Opensearch pid file                                 | `${DB_TMP_DIR}/opensearch.pid`   |
+| `OPENSEARCH_INITSCRIPTS_DIR`     | Path to the Opensearch container init scripts directory         | `/docker-entrypoint-initdb.d`    |
+| `OPENSEARCH_DAEMON_USER`         | Opensearch system user                                          | `opensearch`                     |
+| `OPENSEARCH_DAEMON_GROUP`        | Opensearch system group                                         | `opensearch`                     |
+| `OPENSEARCH_USERNAME`            | Username of the Opensearch superuser.                           | `admin`                          |
 
 When you start the opensearch image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 

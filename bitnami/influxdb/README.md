@@ -186,24 +186,25 @@ InfluxDB (TM) can be configured via environment variables or using a configurati
 
 #### Read-only environment variables
 
-| Name                       | Description                                                  | Value                                 |
-|----------------------------|--------------------------------------------------------------|---------------------------------------|
-| `INFLUXDB_BASE_DIR`        | InfluxDB installation directory.                             | `${BITNAMI_ROOT_DIR}/influxdb`        |
-| `INFLUXDB_VOLUME_DIR`      | InfluxDB persistence directory.                              | `${BITNAMI_VOLUME_DIR}/influxdb`      |
-| `INFLUXDB_BIN_DIR`         | InfluxDB directory for binary executables.                   | `${INFLUXDB_BASE_DIR}/bin`            |
-| `INFLUXDB_CONF_DIR`        | InfluxDB configuration directory.                            | `${INFLUXDB_BASE_DIR}/etc`            |
-| `INFLUXDB_CONF_FILE`       | InfluxDB configuration file.                                 | `${INFLUXDB_CONF_DIR}/influxdb.conf`  |
-| `INFLUXDB_INITSCRIPTS_DIR` | Directory where to look for InfluxDB init scripts.           | `/docker-entrypoint-initdb.d`         |
-| `INFLUXDB_LOGS_DIR`        | Directory where InfluxDB logs are stored.                    | `${INFLUXDB_BASE_DIR}/var/log`        |
-| `INFLUXDB_LOG_FILE`        | InfluxDB log file.                                           | `${INFLUXDB_LOGS_DIR}/influxdb.log`   |
-| `INFLUXDB_TMP_DIR`         | Directory where InfluxDB temporary files are stored.         | `${INFLUXDB_BASE_DIR}/var/run`        |
-| `INFLUXDB_PID_FILE`        | Path to the PID file for InfluxDB.                           | `${INFLUXDB_TMP_DIR}/influxdb.pid`    |
-| `INFLUXD_ENGINE_PATH`      | InfluxDB 2.x alias for engine path.                          | `${INFLUXDB_VOLUME_DIR}`              |
-| `INFLUXD_BOLT_PATH`        | InfluxDB 2.x alias for bolt path.                            | `${INFLUXDB_VOLUME_DIR}/influxd.bolt` |
-| `INFLUXD_CONFIG_PATH`      | InfluxDB 2.x alias for configuration file path.              | `${INFLUXDB_CONF_DIR}/influxdb.conf`  |
-| `INFLUX_CONFIGS_PATH`      | InfluxDB 2.x alias for paths to extra configuration folders. | `${INFLUXDB_VOLUME_DIR}/configs`      |
-| `INFLUXDB_DAEMON_USER`     | InfluxDB system user.                                        | `influxdb`                            |
-| `INFLUXDB_DAEMON_GROUP`    | InfluxDB system group.                                       | `influxdb`                            |
+| Name                        | Description                                                  | Value                                 |
+|-----------------------------|--------------------------------------------------------------|---------------------------------------|
+| `INFLUXDB_BASE_DIR`         | InfluxDB installation directory.                             | `${BITNAMI_ROOT_DIR}/influxdb`        |
+| `INFLUXDB_VOLUME_DIR`       | InfluxDB persistence directory.                              | `${BITNAMI_VOLUME_DIR}/influxdb`      |
+| `INFLUXDB_BIN_DIR`          | InfluxDB directory for binary executables.                   | `${INFLUXDB_BASE_DIR}/bin`            |
+| `INFLUXDB_CONF_DIR`         | InfluxDB configuration directory.                            | `${INFLUXDB_BASE_DIR}/etc`            |
+| `INFLUXDB_DEFAULT_CONF_DIR` | InfluxDB default configuration directory.                    | `${INFLUXDB_BASE_DIR}/etc.default`    |
+| `INFLUXDB_CONF_FILE`        | InfluxDB configuration file.                                 | `${INFLUXDB_CONF_DIR}/influxdb.conf`  |
+| `INFLUXDB_INITSCRIPTS_DIR`  | Directory where to look for InfluxDB init scripts.           | `/docker-entrypoint-initdb.d`         |
+| `INFLUXDB_LOGS_DIR`         | Directory where InfluxDB logs are stored.                    | `${INFLUXDB_BASE_DIR}/var/log`        |
+| `INFLUXDB_LOG_FILE`         | InfluxDB log file.                                           | `${INFLUXDB_LOGS_DIR}/influxdb.log`   |
+| `INFLUXDB_TMP_DIR`          | Directory where InfluxDB temporary files are stored.         | `${INFLUXDB_BASE_DIR}/var/run`        |
+| `INFLUXDB_PID_FILE`         | Path to the PID file for InfluxDB.                           | `${INFLUXDB_TMP_DIR}/influxdb.pid`    |
+| `INFLUXD_ENGINE_PATH`       | InfluxDB 2.x alias for engine path.                          | `${INFLUXDB_VOLUME_DIR}`              |
+| `INFLUXD_BOLT_PATH`         | InfluxDB 2.x alias for bolt path.                            | `${INFLUXDB_VOLUME_DIR}/influxd.bolt` |
+| `INFLUXD_CONFIG_PATH`       | InfluxDB 2.x alias for configuration file path.              | `${INFLUXDB_CONF_DIR}/influxdb.conf`  |
+| `INFLUX_CONFIGS_PATH`       | InfluxDB 2.x alias for paths to extra configuration folders. | `${INFLUXDB_VOLUME_DIR}/configs`      |
+| `INFLUXDB_DAEMON_USER`      | InfluxDB system user.                                        | `influxdb`                            |
+| `INFLUXDB_DAEMON_GROUP`     | InfluxDB system group.                                       | `influxdb`                            |
 
 Additionally, InfluxDB (TM) can be configured using its internal environment variables prefixed by `INFLUXD_`, find more information [here](https://docs.influxdata.com/influxdb/v2.0/reference/config-options).
 

@@ -1,8 +1,0 @@
-{
-    "argo-cd": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "2.10.0-1"
-    }
-}

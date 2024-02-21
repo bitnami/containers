@@ -1,0 +1,26 @@
+{
+    "couchdb": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "3.3.3-3"
+    },
+    "erlang": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "25.3.2-9-1"
+    },
+    "ini-file": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "1.4.6-9"
+    },
+    "wait-for-port": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "1.0.7-8"
+    }
+}
