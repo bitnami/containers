@@ -37,6 +37,7 @@ elasticsearch_install_plugins
 # Copy all initially generated configuration files to the default directory
 # (this is to avoid breaking when entrypoint is being overridden)
 cp -r "${DB_CONF_DIR}/"* "$DB_DEFAULT_CONF_DIR"
+chmod o+rX -R "$DB_DEFAULT_CONF_DIR"
 
 if ! is_dir_empty "$DB_PLUGINS_DIR"; then
     # Move all initially installed plugins to the default plugins directory.
@@ -45,4 +46,5 @@ if ! is_dir_empty "$DB_PLUGINS_DIR"; then
         plugin_moved_path="${DB_DEFAULT_PLUGINS_DIR}/${plugin_name}"
         mv "$plugin_path" "$plugin_moved_path"
     done
+    chmod o+rX -R "$DB_DEFAULT_PLUGINS_DIR"
 fi
