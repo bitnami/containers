@@ -1,5 +1,9 @@
 # Bitnami package for JRuby
 
+## Deprecation Notice
+
+The JRuby container will no longer be released in our catalog, but already released container images will still persist in the registries.
+
 ## What is JRuby?
 
 > JRuby is a 100% Java implementation of the Ruby programming language. It is Ruby for the JVM. JRuby provides a complete set of core built-in classes and syntax for the Ruby language.
