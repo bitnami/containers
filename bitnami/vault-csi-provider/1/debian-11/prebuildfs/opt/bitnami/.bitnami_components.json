@@ -1,8 +1,0 @@
-{
-    "vault-csi-provider": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.4.1-5"
-    }
-}
