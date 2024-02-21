@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-02-20T19:29:29Z" \
+      org.opencontainers.image.created="2024-02-21T14:23:21Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="15.0.20240210-debian-12-r3" \
+      org.opencontainers.image.ref.name="15.0.20240210-debian-12-r4" \
       org.opencontainers.image.title="odoo" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="15.0.20240210"
@@ -25,9 +25,9 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages acl ca-certificates curl fontconfig libbrotli1 libbsd0 libbz2-1.0 libc6 libcap2-bin libcom-err2 libcrypt1 libedit2 libffi8 libfreetype6 libgcc-s1 libgmp10 libgnutls30 libgssapi-krb5-2 libhogweed6 libicu72 libidn2-0 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.5-0 liblz4-1 liblzma5 libmd0 libncursesw6 libnettle8 libnsl2 libp11-kit0 libpng16-16 libpq5 libreadline8 libsasl2-2 libsqlite3-0 libssl3 libstdc++6 libtasn1-6 libtinfo6 libtirpc3 libunistring2 libuuid1 libx11-6 libxcb1 libxext6 libxml2 libxrender1 libxslt1.1 procps xfonts-75dpi xfonts-base zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "python-3.10.13-18-linux-${OS_ARCH}-debian-12" \
-      "render-template-1.0.6-8-linux-${OS_ARCH}-debian-12" \
-      "postgresql-client-16.2.0-1-linux-${OS_ARCH}-debian-12" \
+      "python-3.10.13-19-linux-${OS_ARCH}-debian-12" \
+      "render-template-1.0.6-9-linux-${OS_ARCH}-debian-12" \
+      "postgresql-client-16.2.0-2-linux-${OS_ARCH}-debian-12" \
       "node-18.19.1-0-linux-${OS_ARCH}-debian-12" \
       "odoo-15.0.20240210-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
