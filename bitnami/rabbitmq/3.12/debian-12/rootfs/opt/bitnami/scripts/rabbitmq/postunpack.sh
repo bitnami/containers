@@ -17,7 +17,7 @@ set -o pipefail
 # Load RabbitMQ environment variables
 . /opt/bitnami/scripts/rabbitmq-env.sh
 
-for dir in "$RABBITMQ_BIN_DIR" "$RABBITMQ_INITSCRIPTS_DIR" "$RABBITMQ_CONF_DIR" "$RABBITMQ_DATA_DIR" "$RABBITMQ_HOME_DIR" "$RABBITMQ_LIB_DIR" "$RABBITMQ_LOGS_DIR" "$RABBITMQ_PLUGINS_DIR"; do
+for dir in "$RABBITMQ_BIN_DIR" "$RABBITMQ_INITSCRIPTS_DIR" "$RABBITMQ_CONF_DIR" "$RABBITMQ_DEFAULT_CONF_DIR" "$RABBITMQ_DATA_DIR" "$RABBITMQ_HOME_DIR" "$RABBITMQ_LIB_DIR" "$RABBITMQ_LOGS_DIR" "$RABBITMQ_PLUGINS_DIR"; do
     ensure_dir_exists "$dir"
 done
 chmod -R g+rwX "$RABBITMQ_INITSCRIPTS_DIR" "$RABBITMQ_BIN_DIR" "$RABBITMQ_CONF_DIR" "$RABBITMQ_DATA_DIR" "$RABBITMQ_HOME_DIR" "$RABBITMQ_LIB_DIR" "$RABBITMQ_LOGS_DIR" "$RABBITMQ_PLUGINS_DIR"
@@ -46,3 +46,9 @@ mkdir -p "/var/lib/rabbitmq/mnesia"
 chmod -R g+rwX "/var/lib/rabbitmq/mnesia"
 rm -rf "$RABBITMQ_DATA_DIR"
 ln -s "/var/lib/rabbitmq/mnesia" "$RABBITMQ_DATA_DIR"
+
+if ! is_dir_empty "$RABBITMQ_CONF_DIR"; then
+    # Copy all initially generated configuration files to the default directory
+    # (this is to avoid breaking when entrypoint is being overridden)
+    cp -r "${RABBITMQ_CONF_DIR}/"* "$RABBITMQ_DEFAULT_CONF_DIR"
+fi
