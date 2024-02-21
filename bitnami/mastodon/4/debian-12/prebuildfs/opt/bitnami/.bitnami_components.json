@@ -15,13 +15,13 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "16.2.0-1"
+        "version": "16.2.0-2"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.11.8-1"
+        "version": "3.11.8-2"
     },
     "redis-client": {
         "arch": "amd64",
