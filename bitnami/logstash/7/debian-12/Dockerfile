@@ -9,10 +9,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-02-20T14:56:59Z" \
+      org.opencontainers.image.created="2024-02-21T12:14:47Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.17.18-debian-12-r4" \
+      org.opencontainers.image.ref.name="7.17.18-debian-12-r5" \
       org.opencontainers.image.title="logstash" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="7.17.18"
