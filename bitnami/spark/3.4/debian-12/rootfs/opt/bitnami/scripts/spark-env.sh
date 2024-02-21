@@ -58,6 +58,7 @@ unset spark_env_vars
 # Paths
 export SPARK_BASE_DIR="${BITNAMI_ROOT_DIR}/spark"
 export SPARK_CONF_DIR="${SPARK_BASE_DIR}/conf"
+export SPARK_DEFAULT_CONF_DIR="${SPARK_BASE_DIR}/conf.default"
 export SPARK_WORK_DIR="${SPARK_BASE_DIR}/work"
 export SPARK_CONF_FILE="${SPARK_CONF_DIR}/spark-defaults.conf"
 export SPARK_LOG_DIR="${SPARK_BASE_DIR}/logs"
