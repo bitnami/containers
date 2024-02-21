@@ -18,6 +18,12 @@ set -o pipefail
 
 print_welcome_page
 
+# We add the copy from default config in the entrypoint to not break users 
+# bypassing the setup.sh logic. If the file already exists do not overwrite (in
+# case someone mounts a configuration file in /opt/bitnami/spark/conf)
+debug "Copying files from $SPARK_DEFAULT_CONF_DIR to $SPARK_CONF_DIR"
+cp -nr "$SPARK_DEFAULT_CONF_DIR"/. "$SPARK_CONF_DIR"
+
 if [ ! $EUID -eq 0 ] && [ -e "$LIBNSS_WRAPPER_PATH" ]; then
     echo "spark:x:$(id -u):$(id -g):Spark:$SPARK_HOME:/bin/false" > "$NSS_WRAPPER_PASSWD"
     echo "spark:x:$(id -g):" > "$NSS_WRAPPER_GROUP"
