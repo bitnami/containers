@@ -816,8 +816,7 @@ kafka_configure_from_environment_variables() {
         done
 
         value="${!var}"
-        # Skip empty variables from kafka-env.sh
-        ! is_empty_value "$value" && kafka_server_conf_set "$key" "$value"
+        kafka_server_conf_set "$key" "$value"
     done
 }
 
