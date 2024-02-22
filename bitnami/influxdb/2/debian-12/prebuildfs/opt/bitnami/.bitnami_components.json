@@ -1,0 +1,14 @@
+{
+    "influxdb": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "2.7.5-5"
+    },
+    "wait-for-port": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "1.0.7-8"
+    }
+}

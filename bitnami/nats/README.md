@@ -186,24 +186,25 @@ docker-compose up -d
 
 #### Read-only environment variables
 
-| Name                               | Description                                                                                    | Value                         |
-|------------------------------------|------------------------------------------------------------------------------------------------|-------------------------------|
-| `NATS_BASE_DIR`                    | NATS installation directory.                                                                   | `${BITNAMI_ROOT_DIR}/nats`    |
-| `NATS_BIN_DIR`                     | NATS directory for binaries.                                                                   | `${NATS_BASE_DIR}/bin`        |
-| `NATS_CONF_DIR`                    | NATS directory for configuration files.                                                        | `${NATS_BASE_DIR}/conf`       |
-| `NATS_LOGS_DIR`                    | NATS directory for log files.                                                                  | `${NATS_BASE_DIR}/logs`       |
-| `NATS_TMP_DIR`                     | NATS directory for temporary files.                                                            | `${NATS_BASE_DIR}/tmp`        |
-| `NATS_VOLUME_DIR`                  | NATS persistence base directory.                                                               | `${BITNAMI_VOLUME_DIR}/nats`  |
-| `NATS_DATA_DIR`                    | NATS directory for data.                                                                       | `${NATS_VOLUME_DIR}/data`     |
-| `NATS_MOUNTED_CONF_DIR`            | Directory for including custom configuration files (that override the default generated ones). | `${NATS_VOLUME_DIR}/conf`     |
-| `NATS_INITSCRIPTS_DIR`             | Path to NATS init scripts directory                                                            | `/docker-entrypoint-initdb.d` |
-| `NATS_DAEMON_USER`                 | NATS system user.                                                                              | `nats`                        |
-| `NATS_DAEMON_GROUP`                | NATS system group.                                                                             | `nats`                        |
-| `NATS_DEFAULT_BIND_ADDRESS`        | Default NATS bind address to enable at build time.                                             | `0.0.0.0`                     |
-| `NATS_DEFAULT_CLIENT_PORT_NUMBER`  | Default NATS CLIENT port number to enable at build time.                                       | `4222`                        |
-| `NATS_DEFAULT_HTTP_PORT_NUMBER`    | Default NATS HTTP port number to enable at build time.                                         | `8222`                        |
-| `NATS_DEFAULT_HTTPS_PORT_NUMBER`   | Default NATS HTTPS port number to enable at build time.                                        | `8443`                        |
-| `NATS_DEFAULT_CLUSTER_PORT_NUMBER` | Default NATS CLUSTER port number to enable at build time.                                      | `6222`                        |
+| Name                               | Description                                                                                    | Value                           |
+|------------------------------------|------------------------------------------------------------------------------------------------|---------------------------------|
+| `NATS_BASE_DIR`                    | NATS installation directory.                                                                   | `${BITNAMI_ROOT_DIR}/nats`      |
+| `NATS_BIN_DIR`                     | NATS directory for binaries.                                                                   | `${NATS_BASE_DIR}/bin`          |
+| `NATS_CONF_DIR`                    | NATS directory for configuration files.                                                        | `${NATS_BASE_DIR}/conf`         |
+| `NATS_DEFAULT_CONF_DIR`            | NATS default directory for configuration files.                                                | `${NATS_BASE_DIR}/conf.default` |
+| `NATS_LOGS_DIR`                    | NATS directory for log files.                                                                  | `${NATS_BASE_DIR}/logs`         |
+| `NATS_TMP_DIR`                     | NATS directory for temporary files.                                                            | `${NATS_BASE_DIR}/tmp`          |
+| `NATS_VOLUME_DIR`                  | NATS persistence base directory.                                                               | `${BITNAMI_VOLUME_DIR}/nats`    |
+| `NATS_DATA_DIR`                    | NATS directory for data.                                                                       | `${NATS_VOLUME_DIR}/data`       |
+| `NATS_MOUNTED_CONF_DIR`            | Directory for including custom configuration files (that override the default generated ones). | `${NATS_VOLUME_DIR}/conf`       |
+| `NATS_INITSCRIPTS_DIR`             | Path to NATS init scripts directory                                                            | `/docker-entrypoint-initdb.d`   |
+| `NATS_DAEMON_USER`                 | NATS system user.                                                                              | `nats`                          |
+| `NATS_DAEMON_GROUP`                | NATS system group.                                                                             | `nats`                          |
+| `NATS_DEFAULT_BIND_ADDRESS`        | Default NATS bind address to enable at build time.                                             | `0.0.0.0`                       |
+| `NATS_DEFAULT_CLIENT_PORT_NUMBER`  | Default NATS CLIENT port number to enable at build time.                                       | `4222`                          |
+| `NATS_DEFAULT_HTTP_PORT_NUMBER`    | Default NATS HTTP port number to enable at build time.                                         | `8222`                          |
+| `NATS_DEFAULT_HTTPS_PORT_NUMBER`   | Default NATS HTTPS port number to enable at build time.                                        | `8443`                          |
+| `NATS_DEFAULT_CLUSTER_PORT_NUMBER` | Default NATS CLUSTER port number to enable at build time.                                      | `6222`                          |
 
 When you start the NATS image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 

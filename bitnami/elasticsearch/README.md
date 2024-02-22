@@ -230,8 +230,10 @@ docker-compose up -d
 | `ELASTICSEARCH_VOLUME_DIR`          | Persistence base directory                                      | `/bitnami/elasticsearch`           |
 | `ELASTICSEARCH_BASE_DIR`            | Elasticsearch installation directory                            | `/opt/bitnami/elasticsearch`       |
 | `ELASTICSEARCH_CONF_DIR`            | Elasticsearch configuration directory                           | `${DB_BASE_DIR}/config`            |
+| `ELASTICSEARCH_DEFAULT_CONF_DIR`    | Elasticsearch default configuration directory                   | `${DB_BASE_DIR}/config.default`    |
 | `ELASTICSEARCH_LOGS_DIR`            | Elasticsearch logs directory                                    | `${DB_BASE_DIR}/logs`              |
 | `ELASTICSEARCH_PLUGINS_DIR`         | Elasticsearch plugins directory                                 | `${DB_BASE_DIR}/plugins`           |
+| `ELASTICSEARCH_DEFAULT_PLUGINS_DIR` | Elasticsearch default plugins directory                         | `${DB_BASE_DIR}/plugins.default`   |
 | `ELASTICSEARCH_DATA_DIR`            | Elasticsearch data directory                                    | `${DB_VOLUME_DIR}/data`            |
 | `ELASTICSEARCH_TMP_DIR`             | Elasticsearch temporary directory                               | `${DB_BASE_DIR}/tmp`               |
 | `ELASTICSEARCH_BIN_DIR`             | Elasticsearch executables directory                             | `${DB_BASE_DIR}/bin`               |

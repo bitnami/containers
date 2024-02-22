@@ -1,0 +1,26 @@
+{
+    "ghost": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "5.79.4-0"
+    },
+    "mysql-client": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "10.11.7-1"
+    },
+    "node": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "18.19.1-0"
+    },
+    "python": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "3.11.8-2"
+    }
+}

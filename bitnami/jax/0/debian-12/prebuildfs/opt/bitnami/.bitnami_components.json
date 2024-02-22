@@ -1,0 +1,14 @@
+{
+    "jax": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "0.4.24-10"
+    },
+    "python": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "3.11.8-2"
+    }
+}

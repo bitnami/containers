@@ -1,0 +1,14 @@
+{
+    "aws-cli": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "1.32.40-1"
+    },
+    "python": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "3.11.8-2"
+    }
+}

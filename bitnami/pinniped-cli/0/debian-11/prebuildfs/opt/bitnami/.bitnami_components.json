@@ -1,8 +1,0 @@
-{
-    "pinniped-cli": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "0.28.0-3"
-    }
-}

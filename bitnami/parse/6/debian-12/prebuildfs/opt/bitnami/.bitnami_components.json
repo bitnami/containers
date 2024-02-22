@@ -1,0 +1,26 @@
+{
+    "mongodb-shell": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "2.1.5-0"
+    },
+    "node": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "18.19.1-0"
+    },
+    "parse": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "6.4.0-4"
+    },
+    "python": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "3.11.8-2"
+    }
+}

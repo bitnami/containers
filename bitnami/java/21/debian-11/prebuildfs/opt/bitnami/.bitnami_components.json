@@ -1,8 +1,0 @@
-{
-    "java": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "21.0.2-14-1"
-    }
-}

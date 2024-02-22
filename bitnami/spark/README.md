@@ -93,19 +93,20 @@ docker build -t bitnami/APP:latest .
 
 #### Read-only environment variables
 
-| Name                    | Description                    | Value                                   |
-|-------------------------|--------------------------------|-----------------------------------------|
-| `SPARK_BASE_DIR`        | Spark installation directory.  | `${BITNAMI_ROOT_DIR}/spark`             |
-| `SPARK_CONF_DIR`        | Spark configuration directory. | `${SPARK_BASE_DIR}/conf`                |
-| `SPARK_WORK_DIR`        | Spark workspace directory.     | `${SPARK_BASE_DIR}/work`                |
-| `SPARK_CONF_FILE`       | Spark configuration file path. | `${SPARK_CONF_DIR}/spark-defaults.conf` |
-| `SPARK_LOG_DIR`         | Spark logs directory.          | `${SPARK_BASE_DIR}/logs`                |
-| `SPARK_TMP_DIR`         | Spark tmp directory.           | `${SPARK_BASE_DIR}/tmp`                 |
-| `SPARK_JARS_DIR`        | Spark jar directory.           | `${SPARK_BASE_DIR}/jars`                |
-| `SPARK_INITSCRIPTS_DIR` | Spark init scripts directory.  | `/docker-entrypoint-initdb.d`           |
-| `SPARK_USER`            | Spark user.                    | `spark`                                 |
-| `SPARK_DAEMON_USER`     | Spark system user.             | `spark`                                 |
-| `SPARK_DAEMON_GROUP`    | Spark system group.            | `spark`                                 |
+| Name                     | Description                            | Value                                   |
+|--------------------------|----------------------------------------|-----------------------------------------|
+| `SPARK_BASE_DIR`         | Spark installation directory.          | `${BITNAMI_ROOT_DIR}/spark`             |
+| `SPARK_CONF_DIR`         | Spark configuration directory.         | `${SPARK_BASE_DIR}/conf`                |
+| `SPARK_DEFAULT_CONF_DIR` | Spark default configuration directory. | `${SPARK_BASE_DIR}/conf.default`        |
+| `SPARK_WORK_DIR`         | Spark workspace directory.             | `${SPARK_BASE_DIR}/work`                |
+| `SPARK_CONF_FILE`        | Spark configuration file path.         | `${SPARK_CONF_DIR}/spark-defaults.conf` |
+| `SPARK_LOG_DIR`          | Spark logs directory.                  | `${SPARK_BASE_DIR}/logs`                |
+| `SPARK_TMP_DIR`          | Spark tmp directory.                   | `${SPARK_BASE_DIR}/tmp`                 |
+| `SPARK_JARS_DIR`         | Spark jar directory.                   | `${SPARK_BASE_DIR}/jars`                |
+| `SPARK_INITSCRIPTS_DIR`  | Spark init scripts directory.          | `/docker-entrypoint-initdb.d`           |
+| `SPARK_USER`             | Spark user.                            | `spark`                                 |
+| `SPARK_DAEMON_USER`      | Spark system user.                     | `spark`                                 |
+| `SPARK_DAEMON_GROUP`     | Spark system group.                    | `spark`                                 |
 
 Additionally, more environment variables natively supported by Apache Spark can be found [at the official documentation](https://spark.apache.org/docs/latest/spark-standalone.html#cluster-launch-scripts).
 

@@ -199,6 +199,7 @@ docker-compose up -d
 | `DB_BIN_DIR`                    | MariaDB directory where executable binary files are located. | `${DB_BASE_DIR}/bin`            |
 | `DB_SBIN_DIR`                   | MariaDB directory where service binary files are located.    | `${DB_BASE_DIR}/sbin`           |
 | `DB_CONF_DIR`                   | MariaDB configuration directory.                             | `${DB_BASE_DIR}/conf`           |
+| `DB_DEFAULT_CONF_DIR`           | MariaDB default configuration directory.                     | `${DB_BASE_DIR}/conf.default`   |
 | `DB_LOGS_DIR`                   | MariaDB logs directory.                                      | `${DB_BASE_DIR}/logs`           |
 | `DB_TMP_DIR`                    | MariaDB directory for temporary files.                       | `${DB_BASE_DIR}/tmp`            |
 | `DB_CONF_FILE`                  | Main MariaDB configuration file.                             | `${DB_CONF_DIR}/my.cnf`         |

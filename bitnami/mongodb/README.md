@@ -192,6 +192,7 @@ docker-compose up -d
 | `MONGODB_VOLUME_DIR`                      | Persistence base directory                                             | `$BITNAMI_VOLUME_DIR/mongodb`             |
 | `MONGODB_BASE_DIR`                        | MongoDB installation directory                                         | `$BITNAMI_ROOT_DIR/mongodb`               |
 | `MONGODB_CONF_DIR`                        | MongoDB configuration directory                                        | `$MONGODB_BASE_DIR/conf`                  |
+| `MONGODB_DEFAULT_CONF_DIR`                | MongoDB default configuration directory                                | `$MONGODB_BASE_DIR/conf.default`          |
 | `MONGODB_LOG_DIR`                         | MongoDB logs directory                                                 | `$MONGODB_BASE_DIR/logs`                  |
 | `MONGODB_DATA_DIR`                        | MongoDB data directory                                                 | `${MONGODB_VOLUME_DIR}/data`              |
 | `MONGODB_TMP_DIR`                         | MongoDB temporary directory                                            | `$MONGODB_BASE_DIR/tmp`                   |

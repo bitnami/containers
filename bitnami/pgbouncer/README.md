@@ -342,7 +342,7 @@ And this is the content of the `userlists.txt` file:
 Once initialized, the scenario above provides access to three diferent PostgreSQL backends from a single PgBouncer instance. As an example, you can request the PostgreSQL version of the backend server number two (notice it is the only running PostgreSQL 15.x in this scenario):
 
 ```bash
-$ docker exec -it -u root debian-11-pgbouncer-1 psql -p 6432 -U postgres pg2 -c "show server_version;"
+$ docker exec -it -u root debian-12-pgbouncer-1 psql -p 6432 -U postgres pg2 -c "show server_version;"
  server_version
  ----------------
   15.4

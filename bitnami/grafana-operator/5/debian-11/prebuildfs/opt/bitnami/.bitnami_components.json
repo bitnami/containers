@@ -1,8 +1,0 @@
-{
-    "grafana-operator": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "5.6.3-0"
-    }
-}

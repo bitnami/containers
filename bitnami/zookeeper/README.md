@@ -201,20 +201,21 @@ docker-compose up -d
 
 #### Read-only environment variables
 
-| Name               | Description                                           | Value                           |
-|--------------------|-------------------------------------------------------|---------------------------------|
-| `ZOO_BASE_DIR`     | ZooKeeper installation directory.                     | `${BITNAMI_ROOT_DIR}/zookeeper` |
-| `ZOO_VOLUME_DIR`   | ZooKeeper persistence directory.                      | `/bitnami/zookeeper`            |
-| `ZOO_DATA_DIR`     | ZooKeeper directory where data is stored.             | `${ZOO_VOLUME_DIR}/data`        |
-| `ZOO_CONF_DIR`     | ZooKeeper configuration directory.                    | `${ZOO_BASE_DIR}/conf`          |
-| `ZOO_CONF_FILE`    | ZooKeeper configuration file.                         | `${ZOO_CONF_DIR}/zoo.cfg`       |
-| `ZOO_LOG_DIR`      | Directory where ZooKeeper logs are stored.            | `${ZOO_BASE_DIR}/logs`          |
-| `ZOO_LOG_FILE`     | Directory where ZooKeeper logs are stored.            | `${ZOO_LOG_DIR}/zookeeper.out`  |
-| `ZOO_BIN_DIR`      | ZooKeeper directory for binary executables.           | `${ZOO_BASE_DIR}/bin`           |
-| `ZOO_TMP_DIR`      | Directory where ZooKeeper temporary files are stored. | `${ZOO_BASE_DIR}/tmp`           |
-| `ZOO_PID_FILE`     | Path to the PID file for ZooKeeper.                   | `${ZOO_TMP_DIR}/zookeeper.pid`  |
-| `ZOO_DAEMON_USER`  | ZooKeeper system user.                                | `zookeeper`                     |
-| `ZOO_DAEMON_GROUP` | ZooKeeper system group.                               | `zookeeper`                     |
+| Name                   | Description                                           | Value                           |
+|------------------------|-------------------------------------------------------|---------------------------------|
+| `ZOO_BASE_DIR`         | ZooKeeper installation directory.                     | `${BITNAMI_ROOT_DIR}/zookeeper` |
+| `ZOO_VOLUME_DIR`       | ZooKeeper persistence directory.                      | `/bitnami/zookeeper`            |
+| `ZOO_DATA_DIR`         | ZooKeeper directory where data is stored.             | `${ZOO_VOLUME_DIR}/data`        |
+| `ZOO_CONF_DIR`         | ZooKeeper configuration directory.                    | `${ZOO_BASE_DIR}/conf`          |
+| `ZOO_DEFAULT_CONF_DIR` | ZooKeeper default configuration directory.            | `${ZOO_BASE_DIR}/conf.default`  |
+| `ZOO_CONF_FILE`        | ZooKeeper configuration file.                         | `${ZOO_CONF_DIR}/zoo.cfg`       |
+| `ZOO_LOG_DIR`          | Directory where ZooKeeper logs are stored.            | `${ZOO_BASE_DIR}/logs`          |
+| `ZOO_LOG_FILE`         | Directory where ZooKeeper logs are stored.            | `${ZOO_LOG_DIR}/zookeeper.out`  |
+| `ZOO_BIN_DIR`          | ZooKeeper directory for binary executables.           | `${ZOO_BASE_DIR}/bin`           |
+| `ZOO_TMP_DIR`          | Directory where ZooKeeper temporary files are stored. | `${ZOO_BASE_DIR}/tmp`           |
+| `ZOO_PID_FILE`         | Path to the PID file for ZooKeeper.                   | `${ZOO_TMP_DIR}/zookeeper.pid`  |
+| `ZOO_DAEMON_USER`      | ZooKeeper system user.                                | `zookeeper`                     |
+| `ZOO_DAEMON_GROUP`     | ZooKeeper system group.                               | `zookeeper`                     |
 
 When you start the Apache ZooKeeper image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 

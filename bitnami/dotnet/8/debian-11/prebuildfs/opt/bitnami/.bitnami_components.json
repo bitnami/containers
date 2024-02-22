@@ -1,8 +1,0 @@
-{
-    "dotnet": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "8.0.2-0"
-    }
-}

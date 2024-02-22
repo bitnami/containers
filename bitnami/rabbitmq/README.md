@@ -198,6 +198,7 @@ docker-compose up -d
 | `RABBITMQ_BIN_DIR`            | RabbitMQ executables directory.                        | `${RABBITMQ_BASE_DIR}/sbin`                                       |
 | `RABBITMQ_DATA_DIR`           | RabbitMQ data directory.                               | `${RABBITMQ_VOLUME_DIR}/mnesia`                                   |
 | `RABBITMQ_CONF_DIR`           | RabbitMQ configuration directory.                      | `${RABBITMQ_BASE_DIR}/etc/rabbitmq`                               |
+| `RABBITMQ_DEFAULT_CONF_DIR`   | RabbitMQ default configuration directory.              | `${RABBITMQ_BASE_DIR}/etc/rabbitmq.default`                       |
 | `RABBITMQ_CONF_ENV_FILE`      | RabbitMQ configuration file for environment variables. | `${RABBITMQ_CONF_DIR}/rabbitmq-env.conf`                          |
 | `RABBITMQ_HOME_DIR`           | RabbitMQ home directory.                               | `${RABBITMQ_BASE_DIR}/.rabbitmq`                                  |
 | `RABBITMQ_LIB_DIR`            | RabbitMQ lib directory.                                | `${RABBITMQ_BASE_DIR}/var/lib/rabbitmq`                           |

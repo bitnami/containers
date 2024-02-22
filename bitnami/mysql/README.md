@@ -196,6 +196,7 @@ docker-compose up -d
 | `DB_BIN_DIR`                  | MySQL directory where executable binary files are located. | `${DB_BASE_DIR}/bin`          |
 | `DB_SBIN_DIR`                 | MySQL directory where service binary files are located.    | `${DB_BASE_DIR}/bin`          |
 | `DB_CONF_DIR`                 | MySQL configuration directory.                             | `${DB_BASE_DIR}/conf`         |
+| `DB_DEFAULT_CONF_DIR`         | MySQL default configuration directory.                     | `${DB_BASE_DIR}/conf.default` |
 | `DB_LOGS_DIR`                 | MySQL logs directory.                                      | `${DB_BASE_DIR}/logs`         |
 | `DB_TMP_DIR`                  | MySQL directory for temporary files.                       | `${DB_BASE_DIR}/tmp`          |
 | `DB_CONF_FILE`                | Main MySQL configuration file.                             | `${DB_CONF_DIR}/my.cnf`       |

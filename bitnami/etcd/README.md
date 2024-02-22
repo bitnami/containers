@@ -220,6 +220,7 @@ Apart from providing your custom configuration file, you can also modify the ser
 | `ETCD_BIN_DIR`              | etcd executables directory.                                          | `${ETCD_BASE_DIR}/bin`             |
 | `ETCD_DATA_DIR`             | etcd data directory.                                                 | `${ETCD_VOLUME_DIR}/data`          |
 | `ETCD_CONF_DIR`             | etcd configuration directory.                                        | `${ETCD_BASE_DIR}/conf`            |
+| `ETCD_DEFAULT_CONF_DIR`     | etcd default configuration directory.                                | `${ETCD_BASE_DIR}/conf.default`    |
 | `ETCD_LOGS_DIR`             | Directory where ETCD logs are stored.                                | `${ETCD_BASE_DIR}/log`             |
 | `ETCD_TMP_DIR`              | Directory where ETCD temporary files are stored.                     | `${ETCD_BASE_DIR}/tmp`             |
 | `ETCD_PID_FILE`             | Path to the PID file for etcd.                                       | `${ETCD_TMP_DIR}/etcd.pid`         |
