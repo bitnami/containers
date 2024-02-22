@@ -9,12 +9,12 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.10.13-19"
+        "version": "3.10.13-20"
     },
     "spark": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.3.4-3"
+        "version": "3.3.4-4"
     }
 }
