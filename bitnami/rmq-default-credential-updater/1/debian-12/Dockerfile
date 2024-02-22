@@ -14,7 +14,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "rmq-default-credential-updater-1.0.4-7-linux-${OS_ARCH}-debian-12" \
+      "rmq-default-credential-updater-1.0.4-8-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -36,10 +36,10 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2024-02-21T13:43:09Z" \
+      org.opencontainers.image.created="2024-02-22T00:45:13Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.0.4-debian-12-r13" \
+      org.opencontainers.image.ref.name="1.0.4-debian-12-r14" \
       org.opencontainers.image.title="rmq-default-credential-updater" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.0.4"
