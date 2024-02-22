@@ -305,6 +305,7 @@ volumes:
 |--------------------------------|---------------------------------------------|--------------------------------------------|
 | `CONSUL_BASE_DIR`              | Consul installation directory.              | `${BITNAMI_ROOT_DIR}/consul`               |
 | `CONSUL_CONF_DIR`              | Consul configuration directory.             | `${CONSUL_BASE_DIR}/conf`                  |
+| `CONSUL_DEFAULT_CONF_DIR`      | Consul default configuration directory.     | `${CONSUL_BASE_DIR}/conf.default`          |
 | `CONSUL_BIN_DIR`               | Consul binary directory.                    | `${CONSUL_BASE_DIR}/bin`                   |
 | `CONSUL_CONF_FILE`             | Consul configuration file.                  | `${CONSUL_CONF_DIR}/consul.json`           |
 | `CONSUL_ENCRYPT_FILE`          | Consul encrytion configuration file.        | `${CONSUL_CONF_DIR}/encrypt.json`          |
