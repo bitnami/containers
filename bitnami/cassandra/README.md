@@ -239,6 +239,7 @@ Additionally, any environment variable beginning with the following prefix will 
 * `CASSANDRA_CFG_ENV_`: Will add the corresponding key and the provided value to `cassandra-env.sh`.
 * `CASSANDRA_CFG_RACKDC_`: Will add the corresponding key and the provided value to `cassandra-rackdc.properties`.
 * `CASSANDRA_CFG_COMMITLOG_`: Will add the corresponding key and the provided value to `commitlog_archiving.properties`.
+* `CASSANDRA_CFG_YAML_`: Will add the corresponding key and the provided value to `cassandra.yaml`. Please note that you can't update commented or nested parameters in `cassandra.yaml`.
 
 For example, use `CASSANDRA_CFG_RACKDC_PREFER_LOCAL=true` in order to configure `prefer_local` in `cassandra-rackdc.properties`.
 
