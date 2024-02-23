@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-02-21T12:47:58Z" \
+      org.opencontainers.image.created="2024-02-23T01:51:48Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.13.2-debian-12-r3" \
+      org.opencontainers.image.ref.name="0.13.2-debian-12-r4" \
       org.opencontainers.image.title="deepspeed" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.13.2"
@@ -27,8 +27,8 @@ RUN install_packages build-essential ca-certificates curl git jq libbz2-1.0 libc
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "render-template-1.0.6-9-linux-${OS_ARCH}-debian-12" \
-      "python-3.10.13-19-linux-${OS_ARCH}-debian-12" \
-      "deepspeed-0.13.2-1-linux-${OS_ARCH}-debian-12" \
+      "python-3.10.13-20-linux-${OS_ARCH}-debian-12" \
+      "deepspeed-0.13.2-2-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
