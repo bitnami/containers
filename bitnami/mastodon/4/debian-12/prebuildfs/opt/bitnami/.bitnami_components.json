@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "4.2.7-0"
+        "version": "4.2.8-0"
     },
     "node": {
         "arch": "amd64",
@@ -21,24 +21,24 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.11.8-2"
+        "version": "3.11.8-3"
     },
     "redis-client": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "7.0.15-2"
+        "version": "7.0.15-3"
     },
     "ruby": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.2.3-2"
+        "version": "3.2.3-3"
     },
     "wait-for-port": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.7-8"
+        "version": "1.0.7-9"
     }
 }
