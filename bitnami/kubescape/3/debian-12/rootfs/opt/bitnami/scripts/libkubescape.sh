@@ -16,34 +16,133 @@
 # Load Kubescape environment variables
 . /opt/bitnami/scripts/kubescape-env.sh
 
-kubescape_oss_assessment() {
-  local project="${2:?missing project argument}"
+########################
+# Prints the usage instructions for the oss_assessment custom action
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+kubescape_oss_assessment_usage() {
 
+  echo """
+Usage:
+  docker run --rm -it bitnami/kubescape:<tag> oss-assessment scan [project] [flags]
+
+Examples:
+
+  Scan command is for scanning an existing cluster or kubernetes manifest files based on pre-defined frameworks
+
+  # Scan git repository
+  docker run --rm -it bitnami/kubescape oss-assessment <repository_url>
+
+  # Scan remote Kubernetes cluster.
+  docker run --rm -it -v /path/to/.kubeconfig:/.kubeconfig bitnami/kubescape oss-assessment --kubeconfig /.kubeconfig
+
+  # Scan and save the results into a file
+  docker run --rm -it -v /path/to/output:/output bitnami/kubescape oss-assessment --output /output/report.json
+
+  # Disable kubescape logs
+  docker run --rm -it bitnami/kubescape oss-assessment 'repository_url' --log-level error
+
+  # Enable debug logs
+  docker run --rm -it -e BITNAMI_DEBUG=true bitnami/kubescape oss-assessment 'repository_url' --log-level error
+
+  # Disable all logs and export result using docker output
+  docker run --rm -it bitnami/kubescape oss-assessment 'repository_url' --silent > report.json
+
+  # NOTE: When using volumes, permission changes may be required because of the container running as user 1001
+
+Flags:
+      --kubeconfig string                      Paths to a kubeconfig. Required to scan Kubernetes cluster.
+  -h, --help                                   Print help for oss-assessment action
+  -o, --output string                          Output file. Print output to file and not stdout
+  -l, --log-level string                       Log level for the kubescape scan and kubescape scan image commands.
+  -r, --retries                                Number of retries for each 'kubescape scan image' command.
+  -s, --silent                                 Do not display any logs in stdout, only the resulting report.
+
+  # NOTE: Additionally, other 'kubescape scan' flags can be added, run 'kubescape scan -h' for additional information.
+  """
+}
+
+########################
+# Runs a kubescape scan and enriches it with Vulnerabilities information for images available in Tanzu Application Catalog
+# Arguments:
+#   - project_url (optional)
+#   - Supported kubescape flags
+# Returns:
+#   None
+#########################
+kubescape_oss_assessment() {
+
+  local cmd="kubescape"
+  local scan_args=("scan" "--format=json")
+  local scan_image_args=("scan" "image" "--format=json")
+  local silent="false"
+  local output=""
+  local retries="3"
+
+  # Handle input
+  while [[ $# -gt 0 ]]; do
+    key="$1"
+    case $key in
+      oss-assessment)
+          shift
+          ;;
+      -h|--help)
+          kubescape_oss_assessment_usage
+          exit 0
+          ;;
+      -o|--output)
+          output="$2"
+          shift 2
+          ;;
+      -s|--silent)
+          silent="true"
+          shift
+          ;;
+      -r|--retries)
+          retries="$2"
+          shift 2
+          ;;
+      *)
+          scan_args+=("$1")
+          shift
+          ;;
+    esac
+  done
+
+  # Check that Tanzu Application Catalog file exists
   if [[ -f "${TANZU_APPLICATION_CATALOG_FILE}" ]]; then
     TAC_PRODUCTS=$(jq -r '.[].product.key' "$TANZU_APPLICATION_CATALOG_FILE")
   else
     error "The Bitnami Catalog JSON file is missing: ${TANZU_APPLICATION_CATALOG_FILE}"
   fi
 
-  # By default, all logging outputs are omitted so the command only prints the command result.
-  # TODO: Add options -o/--output and -l/--logger, so users can either configure a output file and/or custom log level
-
-  debug "Running kubescape scan"
   # Run Kubescape scan for the provided project and add custom field 'security'
-  KUBESCAPE_OUTPUT="$(kubescape scan "$project" --format=json 2> /dev/null | jq '.security = []')"
+  info "Running command '${cmd} ${scan_args[*]}'"
+  if is_boolean_yes "$silent"; then
+    KUBESCAPE_OUTPUT="$(${cmd} "${scan_args[@]}" 2> /dev/null | jq '.security = []' || true)"
+  else
+    KUBESCAPE_OUTPUT="$(${cmd} "${scan_args[@]}" | jq '.security = []' || true)"
+  fi
+  if [[ -n "$KUBESCAPE_OUTPUT" ]]; then
+    ! is_boolean_yes "$silent" && debug "Result:\n$KUBESCAPE_OUTPUT"
+  else
+    error "Failed to execute command 'kubescape scan'."
+    exit 1
+  fi
 
-  debug "Searching images available in Tanzu Application Catalog"
-
+  # Search for images available in Tanzu Application Catalog
+  ! is_boolean_yes "$silent" && info "Searching images available in Tanzu Application Catalog"
   local -a matching_images
   readarray -t project_images < <(echo "$KUBESCAPE_OUTPUT" | jq -r '.resources[]?.object?.spec?.template?.spec?.containers[]?.image')
 
   for image in "${project_images[@]}"; do
-    debug "Found image: $image"
-    # Search for applications available in the Tanzu Application Catalog
+    ! is_boolean_yes "$silent" && info "Found image: $image"
     for tac_image in $TAC_PRODUCTS; do
-      # If application is available in TAC, run vulnerability scan for the image and append its result to the Kubescape output
       if [[ $image =~ $tac_image ]]; then
-        debug "Found Tanzu Application Catalog image matching! Adding image '${image}' to the scanning list"
+        ! is_boolean_yes "$silent" && info "Found Tanzu Application Catalog image matching! Adding image '${image}' to the scanning list"
         matching_images+=("$image")
         break
       fi
@@ -52,45 +151,39 @@ kubescape_oss_assessment() {
 
   # Filter out duplicated images
   read -r -a unique_matching_images <<< "$(echo "${matching_images[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' ')"
+  ! is_boolean_yes "$silent" && info "Scanning images ${unique_matching_images[*]}"
+  images_scanned=0
 
-  # For each image available in TAC, add a vulnerability report to the original project scan
+  # For each image available in Tanzu Application Catalog, add a vulnerability report to the original project scan
   for image in "${unique_matching_images[@]}"; do
-    local registry
-    local tag
-    local repository
-    local skip="no"
-
-    debug "Running 'kubescape scan image ${image}'"
-
-    registry="$(echo "$image" | grep '/' | cut -d/ -f1 | grep '\.' || true)"
-    tag="$(echo "$image" | grep ':' | cut -d: -f2 || echo "latest")"
-    repository="$(echo "$image" | cut -d: -f1 | sed "s|^$registry/||")"
-
-    # Skip images that require authentication
-    if [[ -n "$registry" ]]; then
-      # Skip older quay.io images
-      # Ref. https://github.com/kubescape/kubescape/issues/1605
-      if [[ "$registry" == "quay.io" ]]; then
-        # Older images can be detected by the presence of 'signatures' key in the manifest
-        if [[ "$(curl -sL "https://${registry}/v2/${repository}/manifests/${tag}" | jq '.signatures')" != "null" ]]; then
-          debug "Skipping image '${image}'. Reason: Old quai.io image. Ref: https://github.com/kubescape/kubescape/issues/1605"
-          skip="yes"
-        fi
+    ! is_boolean_yes "$silent" && info "Running command '${cmd} ${scan_image_args[*]} ${image}'"
+    KUBESCAPE_IMAGE_OUTPUT=""
+    for ((i = 1; i <= retries; i += 1)); do
+      KUBESCAPE_IMAGE_OUTPUT="$(${cmd} "${scan_image_args[@]}" "${image}" 2> /dev/null || echo '')"
+      if [[ -n "$KUBESCAPE_IMAGE_OUTPUT" ]]; then
+        debug "Result: $KUBESCAPE_IMAGE_OUTPUT"
+        break
+      else
+        ! is_boolean_yes "$silent" && warn "Image scan failed. Retrying... ${i}/${retries}"
       fi
+    done
 
-      # Skip if registry requires authentication
-      HTTP_CODE="$(curl -sL -o /dev/null --write-out "%{http_code}" "https://${registry}")"
-      if [[ ${HTTP_CODE} -lt 200 || ${HTTP_CODE} -gt 299 ]]; then
-        debug "Skipping image '${image}'. Reason: Failed to connect to 'https://${registry}' (code ${HTTP_CODE})"
-        skip="yes"
-      fi
-    fi
-    if ! is_boolean_yes "$skip"; then
-      KUBESCAPE_IMAGE_VULNS="$(kubescape scan image "$image" --format=json --logger error | jq --arg image "$image" '{imageID: $image, vulnerabilities: [.matches[].vulnerability | {id, severity}]}')"
+    if [[ -n "$KUBESCAPE_IMAGE_OUTPUT" ]]; then
+      KUBESCAPE_IMAGE_VULNS="$(jq --arg image "$image" '{imageID: $image, vulnerabilities: [.matches[].vulnerability | {id, severity}]}' <(echo "$KUBESCAPE_IMAGE_OUTPUT"))"
       KUBESCAPE_OUTPUT="$(jq '.security += [input]' <(echo "$KUBESCAPE_OUTPUT") <(echo "$KUBESCAPE_IMAGE_VULNS"))"
+      info "Image successfully scanned."
+      images_scanned="$((images_scanned + 1))"
+    else
+      warn "Failed to scan image '${image}' after several attempts."
     fi
   done
 
-  debug "OSS Assessment report successfully generated"
-  echo "$KUBESCAPE_OUTPUT"
+  info "Report contains ${images_scanned}/${#unique_matching_images[@]} images available in Tanzu Application Catalog"
+
+  ! is_boolean_yes "$silent" && info "OSS Assessment report successfully generated"
+  if [[ -n "$output" ]]; then
+    echo "$KUBESCAPE_OUTPUT" > "$output"
+  else
+    echo "$KUBESCAPE_OUTPUT"
+  fi
 }
