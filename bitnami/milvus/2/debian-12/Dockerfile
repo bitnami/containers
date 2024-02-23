@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-02-21T12:36:18Z" \
+      org.opencontainers.image.created="2024-02-23T12:20:41Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.3.9-debian-12-r2" \
+      org.opencontainers.image.ref.name="2.3.10-debian-12-r0" \
       org.opencontainers.image.title="milvus" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.3.9"
+      org.opencontainers.image.version="2.3.10"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -27,9 +27,9 @@ RUN install_packages ca-certificates curl libgcc-s1 libgomp1 libstdc++6 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "yq-4.41.1-0-linux-${OS_ARCH}-debian-12" \
-      "wait-for-port-1.0.7-8-linux-${OS_ARCH}-debian-12" \
+      "wait-for-port-1.0.7-9-linux-${OS_ARCH}-debian-12" \
       "render-template-1.0.6-9-linux-${OS_ARCH}-debian-12" \
-      "milvus-2.3.9-0-linux-${OS_ARCH}-debian-12" \
+      "milvus-2.3.10-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -47,7 +47,7 @@ RUN useradd -r -u 1001 -g root milvus
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN mkdir -p /opt/bitnami/milvus/tmp && chmod g+rwX /opt/bitnami/milvus/tmp && ln -s /opt/bitnami/milvus/tmp /run/milvus && mkdir -p /bitnami/milvus/data && chmod g+rwX /bitnami/milvus/data && ln -s /bitnami/milvus/data /var/lib/milvus && ln -s /opt/bitnami/milvus /milvus
 
-ENV APP_VERSION="2.3.9" \
+ENV APP_VERSION="2.3.10" \
     BITNAMI_APP_NAME="milvus" \
     LD_LIBRARY_PATH="/opt/bitnami/milvus/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/milvus/bin:$PATH"
