@@ -13,7 +13,7 @@
 # Load PostgreSQL & repmgr environment variables
 . /opt/bitnami/scripts/postgresql-env.sh
 
-for dir in "$POSTGRESQL_INITSCRIPTS_DIR" "$POSTGRESQL_TMP_DIR" "$POSTGRESQL_LOG_DIR" "$POSTGRESQL_CONF_DIR" "${POSTGRESQL_CONF_DIR}/conf.d" "$POSTGRESQL_MOUNTED_CONF_DIR" "${POSTGRESQL_MOUNTED_CONF_DIR}/conf.d" "$POSTGRESQL_VOLUME_DIR" "$REPMGR_CONF_DIR" "$REPMGR_TMP_DIR"; do
+for dir in "$POSTGRESQL_INITSCRIPTS_DIR" "$POSTGRESQL_TMP_DIR" "$POSTGRESQL_LOG_DIR" "$POSTGRESQL_CONF_DIR" "${POSTGRESQL_CONF_DIR}/conf.d" "$POSTGRESQL_DEFAULT_CONF_DIR" "$POSTGRESQL_MOUNTED_CONF_DIR" "${POSTGRESQL_MOUNTED_CONF_DIR}/conf.d" "$POSTGRESQL_VOLUME_DIR" "$REPMGR_CONF_DIR" "$REPMGR_TMP_DIR"; do
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
 done
@@ -25,3 +25,8 @@ chmod +x "$REPMGR_EVENTS_DIR"/router.sh "$REPMGR_EVENTS_DIR"/execs/*sh "$REPMGR_
 
 # Redirect all logging to stdout
 ln -sf /dev/stdout "$POSTGRESQL_LOG_FILE"
+
+# Copy all initially generated configuration files to the default directory
+# (this is to avoid breaking when entrypoint is being overridden)
+cp -r "${POSTGRESQL_CONF_DIR}/"* "$POSTGRESQL_DEFAULT_CONF_DIR"
+
