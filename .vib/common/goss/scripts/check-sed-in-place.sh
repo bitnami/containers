@@ -12,6 +12,5 @@ for file in "${files[@]}"; do
   if [[ -n $EXCLUDE_PATHS ]] && [[ "$file" =~ $EXCLUDE_PATHS ]]; then
     continue
   fi
-  echo $file
   [[ $(grep -cE "sed -i|sed --in-place" "$file") -eq 0 ]] || exit 1
 done
