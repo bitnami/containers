@@ -18,6 +18,12 @@ set -o pipefail
 
 print_welcome_page
 
+# We add the copy from default config in the entrypoint to not break users 
+# bypassing the setup.sh logic. If the file already exists do not overwrite (in
+# case someone mounts a configuration file in /opt/bitnami/kong/conf)
+debug "Copying files from $KONG_DEFAULT_CONF_DIR to $KONG_CONF_DIR"
+cp -nr "$KONG_DEFAULT_CONF_DIR"/. "$KONG_CONF_DIR"
+
 if [[ "$*" = *"/opt/bitnami/scripts/kong/run.sh"* ]]; then
     info "** Starting Kong setup **"
     /opt/bitnami/scripts/kong/setup.sh
