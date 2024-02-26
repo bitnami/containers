@@ -10,4 +10,9 @@ files:
   - paths:
       - /opt/bitnami/grafana-image-renderer/conf/config.json
       - /opt/bitnami/grafana-image-renderer/plugin.json
+linked_libraries:
+  timeout: 45000
 root_dir: /opt/bitnami
+sed_in_place:
+  exclude_paths:
+    - /opt/bitnami/grafana-image-renderer/node_modules
