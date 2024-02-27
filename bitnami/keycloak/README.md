@@ -101,22 +101,23 @@ docker build -t bitnami/APP:latest .
 
 #### Read-only environment variables
 
-| Name                         | Description                                             | Value                           |
-|------------------------------|---------------------------------------------------------|---------------------------------|
-| `BITNAMI_VOLUME_DIR`         | Directory where to mount volumes.                       | `/bitnami`                      |
-| `JAVA_HOME`                  | Java installation directory                             | `/opt/bitnami/java`             |
-| `KEYCLOAK_BASE_DIR`          | Keycloak base directory                                 | `/opt/bitnami/keycloak`         |
-| `KEYCLOAK_BIN_DIR`           | Keycloak bin directory                                  | `$KEYCLOAK_BASE_DIR/bin`        |
-| `KEYCLOAK_PROVIDERS_DIR`     | Keycloak Wildfly extensions directory                   | `$KEYCLOAK_BASE_DIR/providers`  |
-| `KEYCLOAK_LOG_DIR`           | Keycloak bin directory                                  | `$KEYCLOAK_PROVIDERS_DIR/log`   |
-| `KEYCLOAK_TMP_DIR`           | Keycloak tmp directory                                  | `$KEYCLOAK_PROVIDERS_DIR/tmp`   |
-| `KEYCLOAK_DOMAIN_TMP_DIR`    | Keycloak tmp directory                                  | `$KEYCLOAK_BASE_DIR/domain/tmp` |
-| `WILDFLY_BASE_DIR`           | Wildfly base directory                                  | `/opt/bitnami/wildfly`          |
-| `KEYCLOAK_VOLUME_DIR`        | Path to keycloak mount directory                        | `/bitnami/keycloak`             |
-| `KEYCLOAK_CONF_DIR`          | Keycloak configuration directory                        | `$KEYCLOAK_BASE_DIR/conf`       |
-| `KEYCLOAK_INITSCRIPTS_DIR`   | Path to keycloak init scripts directory                 | `/docker-entrypoint-initdb.d`   |
-| `KEYCLOAK_CONF_FILE`         | Name of the keycloak configuration file (relative path) | `keycloak.conf`                 |
-| `KEYCLOAK_DEFAULT_CONF_FILE` | Name of the keycloak configuration file (relative path) | `keycloak.conf`                 |
+| Name                         | Description                                             | Value                             |
+|------------------------------|---------------------------------------------------------|-----------------------------------|
+| `BITNAMI_VOLUME_DIR`         | Directory where to mount volumes.                       | `/bitnami`                        |
+| `JAVA_HOME`                  | Java installation directory                             | `/opt/bitnami/java`               |
+| `KEYCLOAK_BASE_DIR`          | Keycloak base directory                                 | `/opt/bitnami/keycloak`           |
+| `KEYCLOAK_BIN_DIR`           | Keycloak bin directory                                  | `$KEYCLOAK_BASE_DIR/bin`          |
+| `KEYCLOAK_PROVIDERS_DIR`     | Keycloak Wildfly extensions directory                   | `$KEYCLOAK_BASE_DIR/providers`    |
+| `KEYCLOAK_LOG_DIR`           | Keycloak bin directory                                  | `$KEYCLOAK_PROVIDERS_DIR/log`     |
+| `KEYCLOAK_TMP_DIR`           | Keycloak tmp directory                                  | `$KEYCLOAK_PROVIDERS_DIR/tmp`     |
+| `KEYCLOAK_DOMAIN_TMP_DIR`    | Keycloak tmp directory                                  | `$KEYCLOAK_BASE_DIR/domain/tmp`   |
+| `WILDFLY_BASE_DIR`           | Wildfly base directory                                  | `/opt/bitnami/wildfly`            |
+| `KEYCLOAK_VOLUME_DIR`        | Path to keycloak mount directory                        | `/bitnami/keycloak`               |
+| `KEYCLOAK_CONF_DIR`          | Keycloak configuration directory                        | `$KEYCLOAK_BASE_DIR/conf`         |
+| `KEYCLOAK_DEFAULT_CONF_DIR`  | Keycloak default configuration directory                | `$KEYCLOAK_BASE_DIR/conf.default` |
+| `KEYCLOAK_INITSCRIPTS_DIR`   | Path to keycloak init scripts directory                 | `/docker-entrypoint-initdb.d`     |
+| `KEYCLOAK_CONF_FILE`         | Name of the keycloak configuration file (relative path) | `keycloak.conf`                   |
+| `KEYCLOAK_DEFAULT_CONF_FILE` | Name of the keycloak configuration file (relative path) | `keycloak.conf`                   |
 
 ### Extra arguments to Keycloak startup
 
