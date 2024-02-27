@@ -62,6 +62,7 @@ export KONG_CONF_FILE="${KONG_CONF_DIR}/kong.conf"
 export KONG_DEFAULT_CONF_FILE="${KONG_CONF_DIR}/kong.conf.default"
 export KONG_INITSCRIPTS_DIR="/docker-entrypoint-initdb.d"
 export KONG_SERVER_DIR="${KONG_BASE_DIR}/server"
+export KONG_DEFAULT_SERVER_DIR="${KONG_BASE_DIR}/server.default"
 export KONG_LOGS_DIR="${KONG_BASE_DIR}/logs"
 export PATH="${KONG_BASE_DIR}/bin:${KONG_BASE_DIR}/openresty/bin:${KONG_BASE_DIR}/openresty/nginx/sbin:${KONG_BASE_DIR}/luarocks/bin:${PATH}"
 
