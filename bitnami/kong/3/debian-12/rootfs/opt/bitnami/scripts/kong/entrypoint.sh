@@ -24,6 +24,9 @@ print_welcome_page
 debug "Copying files from $KONG_DEFAULT_CONF_DIR to $KONG_CONF_DIR"
 cp -nr "$KONG_DEFAULT_CONF_DIR"/. "$KONG_CONF_DIR"
 
+if ! is_dir_empty "$KONG_DEFAULT_SERVER_DIR"; then
+    cp -nr "$KONG_DEFAULT_SERVER_DIR"/. "$KONG_SERVER_DIR"
+fi
 if [[ "$*" = *"/opt/bitnami/scripts/kong/run.sh"* ]]; then
     info "** Starting Kong setup **"
     /opt/bitnami/scripts/kong/setup.sh
