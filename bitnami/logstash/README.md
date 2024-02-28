@@ -156,7 +156,9 @@ docker run -d -p 8080:8080 bitnami/logstash:latest
 |--------------------------------------|------------------------------------------------------------------------|--------------------------------------------------------------------|
 | `LOGSTASH_BASE_DIR`                  | Logstash installation directory                                        | `/opt/bitnami/logstash`                                            |
 | `LOGSTASH_CONF_DIR`                  | Logstash settings files directory                                      | `${LOGSTASH_BASE_DIR}/config`                                      |
+| `LOGSTASH_DEFAULT_CONF_DIR`          | Logstash default settings files directory                              | `${LOGSTASH_BASE_DIR}/config.default`                              |
 | `LOGSTASH_PIPELINE_CONF_DIR`         | Logstash pipeline configuration files directory                        | `${LOGSTASH_BASE_DIR}/pipeline`                                    |
+| `LOGSTASH_DEFAULT_PIPELINE_CONF_DIR` | Logstash default pipeline configuration files directory                | `${LOGSTASH_BASE_DIR}/pipeline.default`                            |
 | `LOGSTASH_BIN_DIR`                   | Logstash executables directory                                         | `${LOGSTASH_BASE_DIR}/bin`                                         |
 | `LOGSTASH_CONF_FILE`                 | Path to Logstash settings file                                         | `${LOGSTASH_CONF_DIR}/logstash.yml`                                |
 | `LOGSTASH_PIPELINE_CONF_FILE`        | Path to Logstash pipeline configuration file                           | `${LOGSTASH_PIPELINE_CONF_DIR}/${LOGSTASH_PIPELINE_CONF_FILENAME}` |
