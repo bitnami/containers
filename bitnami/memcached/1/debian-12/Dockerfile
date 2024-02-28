@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-02-22T09:17:57Z" \
+      org.opencontainers.image.created="2024-02-28T03:57:08Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.6.23-debian-12-r8" \
+      org.opencontainers.image.ref.name="1.6.24-debian-12-r0" \
       org.opencontainers.image.title="memcached" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.6.23"
+      org.opencontainers.image.version="1.6.24"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +26,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libevent-2.1-7 libsasl2-2 libsasl2-modules libssl3 netcat-openbsd procps sasl2-bin
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "memcached-1.6.23-2-linux-${OS_ARCH}-debian-12" \
+      "memcached-1.6.24-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -47,7 +47,7 @@ RUN ln -s /opt/bitnami/scripts/memcached/run.sh /run.sh
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/memcached/postunpack.sh
-ENV APP_VERSION="1.6.23" \
+ENV APP_VERSION="1.6.24" \
     BITNAMI_APP_NAME="memcached" \
     PATH="/opt/bitnami/memcached/bin:$PATH"
 
