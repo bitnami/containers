@@ -336,7 +336,7 @@ kong_custom_init_scripts() {
 #########################
 find_opentelemetry_source() {
     local path
-    path="$(find "$KONG_BASE_DIR" -name "opentelemetry" -print | grep "include")"
+    path="$(find "$KONG_BASE_DIR" -name "opentelemetry" -print | grep "include" | grep "luajit")"
     echo "$path"
 }
 
@@ -353,7 +353,7 @@ install_opentelemetry() {
     local -r source_dir="$(find_opentelemetry_source)"
     local -r destination_dir="/usr/local/kong/include"
     mkdir -p "$destination_dir"
-    ln -s "$source_dir" "${destination_dir}/opentelemetry"
+    ln -sf "$source_dir" "${destination_dir}/opentelemetry"
 }
 
 ########################
@@ -369,7 +369,7 @@ configure_lua_paths() {
     local -a dest_files=("${@}")
     local -r lua_paths_file="/tmp/lua-paths.sh"
     # Skip the PATH environment variable. We are already setting it.
-    "${KONG_BASE_DIR}/luarocks/bin/luarocks" path > "$lua_paths_file"
+    "${KONG_BASE_DIR}/openresty/bin/luarocks" path > "$lua_paths_file"
     remove_in_file "$lua_paths_file" "^export\s+PATH=.*$"
     for dest_file in "${dest_files[@]}"; do
         echo "# 'luarocks path' configuration" >> "$dest_file"

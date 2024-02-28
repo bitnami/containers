@@ -113,25 +113,27 @@ docker run --name opensearch-dashboards bitnami/opensearch-dashboards:latest
 
 #### Read-only environment variables
 
-| Name                                     | Description                                                                                   | Value                                          |
-|------------------------------------------|-----------------------------------------------------------------------------------------------|------------------------------------------------|
-| `SERVER_FLAVOR`                          | Server flavor. Valid values: `kibana` or `opensearch-dashboards`.                             | `opensearch-dashboards`                        |
-| `BITNAMI_VOLUME_DIR`                     | Directory where to mount volumes                                                              | `/bitnami`                                     |
-| `OPENSEARCH_DASHBOARDS_VOLUME_DIR`       | Opensearch Dashboards persistence directory                                                   | `${BITNAMI_VOLUME_DIR}/opensearch-dashboards`  |
-| `OPENSEARCH_DASHBOARDS_BASE_DIR`         | Opensearch Dashboards installation directory                                                  | `${BITNAMI_ROOT_DIR}/opensearch-dashboards`    |
-| `OPENSEARCH_DASHBOARDS_CONF_DIR`         | Opensearch Dashboards configuration directory                                                 | `${SERVER_BASE_DIR}/config`                    |
-| `OPENSEARCH_DASHBOARDS_LOGS_DIR`         | Opensearch Dashboards logs directory                                                          | `${SERVER_BASE_DIR}/logs`                      |
-| `OPENSEARCH_DASHBOARDS_TMP_DIR`          | Opensearch Dashboards temporary directory                                                     | `${SERVER_BASE_DIR}/tmp`                       |
-| `OPENSEARCH_DASHBOARDS_BIN_DIR`          | Opensearch Dashboards executable directory                                                    | `${SERVER_BASE_DIR}/bin`                       |
-| `OPENSEARCH_DASHBOARDS_PLUGINS_DIR`      | Opensearch Dashboards plugins directory                                                       | `${SERVER_BASE_DIR}/plugins`                   |
-| `OPENSEARCH_DASHBOARDS_DATA_DIR`         | Opensearch Dashboards data directory                                                          | `${SERVER_VOLUME_DIR}/data`                    |
-| `OPENSEARCH_DASHBOARDS_MOUNTED_CONF_DIR` | Directory for including custom configuration files (that override the default generated ones) | `${SERVER_VOLUME_DIR}/conf`                    |
-| `OPENSEARCH_DASHBOARDS_CONF_FILE`        | Path to Opensearch Dashboards configuration file                                              | `${SERVER_CONF_DIR}/opensearch_dashboards.yml` |
-| `OPENSEARCH_DASHBOARDS_LOG_FILE`         | Path to the Opensearch Dashboards log file                                                    | `${SERVER_LOGS_DIR}/opensearch-dashboards.log` |
-| `OPENSEARCH_DASHBOARDS_PID_FILE`         | Path to the Opensearch Dashboards pid file                                                    | `${SERVER_TMP_DIR}/opensearch-dashboards.pid`  |
-| `OPENSEARCH_DASHBOARDS_INITSCRIPTS_DIR`  | Path to the Opensearch Dashboards container init scripts directory                            | `/docker-entrypoint-initdb.d`                  |
-| `OPENSEARCH_DASHBOARDS_DAEMON_USER`      | Opensearch Dashboards system user                                                             | `opensearch-dashboards`                        |
-| `OPENSEARCH_DASHBOARDS_DAEMON_GROUP`     | Opensearch Dashboards system group                                                            | `opensearch-dashboards`                        |
+| Name                                        | Description                                                                                   | Value                                          |
+|---------------------------------------------|-----------------------------------------------------------------------------------------------|------------------------------------------------|
+| `SERVER_FLAVOR`                             | Server flavor. Valid values: `kibana` or `opensearch-dashboards`.                             | `opensearch-dashboards`                        |
+| `BITNAMI_VOLUME_DIR`                        | Directory where to mount volumes                                                              | `/bitnami`                                     |
+| `OPENSEARCH_DASHBOARDS_VOLUME_DIR`          | Opensearch Dashboards persistence directory                                                   | `${BITNAMI_VOLUME_DIR}/opensearch-dashboards`  |
+| `OPENSEARCH_DASHBOARDS_BASE_DIR`            | Opensearch Dashboards installation directory                                                  | `${BITNAMI_ROOT_DIR}/opensearch-dashboards`    |
+| `OPENSEARCH_DASHBOARDS_CONF_DIR`            | Opensearch Dashboards configuration directory                                                 | `${SERVER_BASE_DIR}/config`                    |
+| `OPENSEARCH_DASHBOARDS_DEFAULT_CONF_DIR`    | Opensearch Dashboards default configuration directory                                         | `${SERVER_BASE_DIR}/config.default`            |
+| `OPENSEARCH_DASHBOARDS_LOGS_DIR`            | Opensearch Dashboards logs directory                                                          | `${SERVER_BASE_DIR}/logs`                      |
+| `OPENSEARCH_DASHBOARDS_TMP_DIR`             | Opensearch Dashboards temporary directory                                                     | `${SERVER_BASE_DIR}/tmp`                       |
+| `OPENSEARCH_DASHBOARDS_BIN_DIR`             | Opensearch Dashboards executable directory                                                    | `${SERVER_BASE_DIR}/bin`                       |
+| `OPENSEARCH_DASHBOARDS_PLUGINS_DIR`         | Opensearch Dashboards plugins directory                                                       | `${SERVER_BASE_DIR}/plugins`                   |
+| `OPENSEARCH_DASHBOARDS_DEFAULT_PLUGINS_DIR` | Opensearch Dashboards default plugins directory                                               | `${SERVER_BASE_DIR}/plugins.default`           |
+| `OPENSEARCH_DASHBOARDS_DATA_DIR`            | Opensearch Dashboards data directory                                                          | `${SERVER_VOLUME_DIR}/data`                    |
+| `OPENSEARCH_DASHBOARDS_MOUNTED_CONF_DIR`    | Directory for including custom configuration files (that override the default generated ones) | `${SERVER_VOLUME_DIR}/conf`                    |
+| `OPENSEARCH_DASHBOARDS_CONF_FILE`           | Path to Opensearch Dashboards configuration file                                              | `${SERVER_CONF_DIR}/opensearch_dashboards.yml` |
+| `OPENSEARCH_DASHBOARDS_LOG_FILE`            | Path to the Opensearch Dashboards log file                                                    | `${SERVER_LOGS_DIR}/opensearch-dashboards.log` |
+| `OPENSEARCH_DASHBOARDS_PID_FILE`            | Path to the Opensearch Dashboards pid file                                                    | `${SERVER_TMP_DIR}/opensearch-dashboards.pid`  |
+| `OPENSEARCH_DASHBOARDS_INITSCRIPTS_DIR`     | Path to the Opensearch Dashboards container init scripts directory                            | `/docker-entrypoint-initdb.d`                  |
+| `OPENSEARCH_DASHBOARDS_DAEMON_USER`         | Opensearch Dashboards system user                                                             | `opensearch-dashboards`                        |
+| `OPENSEARCH_DASHBOARDS_DAEMON_GROUP`        | Opensearch Dashboards system group                                                            | `opensearch-dashboards`                        |
 
 ### Running commands
 

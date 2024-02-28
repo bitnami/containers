@@ -111,18 +111,21 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 
 #### Read-only environment variables
 
-| Name                     | Description                                         | Value                                |
-|--------------------------|-----------------------------------------------------|--------------------------------------|
-| `KONG_BASE_DIR`          | Kong installation directory.                        | `${BITNAMI_ROOT_DIR}/kong`           |
-| `KONG_CONF_DIR`          | Kong configuration directory.                       | `${KONG_BASE_DIR}/conf`              |
-| `KONG_CONF_FILE`         | Kong configuration file.                            | `${KONG_CONF_DIR}/kong.conf`         |
-| `KONG_DEFAULT_CONF_FILE` | Kong default configuration file.                    | `${KONG_CONF_DIR}/kong.conf.default` |
-| `KONG_INITSCRIPTS_DIR`   | Kong directory for init scripts.                    | `/docker-entrypoint-initdb.d`        |
-| `KONG_SERVER_DIR`        | Directory where Kong Openresty instance is created. | `${KONG_BASE_DIR}/server`            |
-| `KONG_LOGS_DIR`          | Directory where Kong logs are stored.               | `${KONG_SERVER_DIR}/logs`            |
-| `KONG_PID_FILE`          | Path to the PID file for Kong.                      | `${KONG_SERVER_DIR}/pids/nginx.pid`  |
-| `KONG_DAEMON_USER`       | Kong system user.                                   | `kong`                               |
-| `KONG_DAEMON_GROUP`      | Kong system group.                                  | `kong`                               |
+| Name                      | Description                                           | Value                                |
+|---------------------------|-------------------------------------------------------|--------------------------------------|
+| `KONG_BASE_DIR`           | Kong installation directory.                          | `${BITNAMI_ROOT_DIR}/kong`           |
+| `KONG_CONF_DIR`           | Kong configuration directory.                         | `${KONG_BASE_DIR}/conf`              |
+| `KONG_DEFAULT_CONF_DIR`   | Kong configuration directory.                         | `${KONG_BASE_DIR}/conf.default`      |
+| `KONG_CONF_FILE`          | Kong configuration file.                              | `${KONG_CONF_DIR}/kong.conf`         |
+| `KONG_DEFAULT_CONF_FILE`  | Kong default configuration file.                      | `${KONG_CONF_DIR}/kong.conf.default` |
+| `KONG_INITSCRIPTS_DIR`    | Kong directory for init scripts.                      | `/docker-entrypoint-initdb.d`        |
+| `KONG_SERVER_DIR`         | Directory where Kong Openresty instance is created.   | `${KONG_BASE_DIR}/server`            |
+| `KONG_PREFIX`             | Kong installation directory.                          | `${KONG_SERVER_DIR}`                 |
+| `KONG_DEFAULT_SERVER_DIR` | Directory with default Kong Openresty instance files. | `${KONG_BASE_DIR}/server.default`    |
+| `KONG_LOGS_DIR`           | Directory where Kong logs are stored.                 | `${KONG_BASE_DIR}/logs`              |
+| `KONG_PID_FILE`           | Path to the PID file for Kong.                        | `${KONG_SERVER_DIR}/pids/nginx.pid`  |
+| `KONG_DAEMON_USER`        | Kong system user.                                     | `kong`                               |
+| `KONG_DAEMON_GROUP`       | Kong system group.                                    | `kong`                               |
 
 Additionally, this container also supports configuring Kong via environment values starting with `KONG_`. For instance, by setting the `KONG_LOG_LEVEL` environment variable, Kong will take into account this value rather than the property set in `kong.conf`. It is recommended to set the following environment variables:
 

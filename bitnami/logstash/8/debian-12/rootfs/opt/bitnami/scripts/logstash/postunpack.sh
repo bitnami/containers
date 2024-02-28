@@ -19,7 +19,7 @@ set -o pipefail
 info "Creating Logstash daemon user"
 ensure_user_exists "$LOGSTASH_DAEMON_USER" --group "$LOGSTASH_DAEMON_GROUP"
 
-for dir in "$LOGSTASH_BASE_DIR/vendor/bundle/jruby" "$LOGSTASH_CONF_DIR" "$LOGSTASH_PIPELINE_CONF_DIR" "$LOGSTASH_MOUNTED_CONF_DIR" "$LOGSTASH_MOUNTED_PIPELINE_CONF_DIR" "$LOGSTASH_VOLUME_DIR" "$LOGSTASH_DATA_DIR"; do
+for dir in "$LOGSTASH_BASE_DIR/vendor/bundle/jruby" "$LOGSTASH_CONF_DIR" "$LOGSTASH_PIPELINE_CONF_DIR" "$LOGSTASH_DEFAULT_CONF_DIR" "$LOGSTASH_DEFAULT_PIPELINE_CONF_DIR" "$LOGSTASH_MOUNTED_CONF_DIR" "$LOGSTASH_MOUNTED_PIPELINE_CONF_DIR" "$LOGSTASH_VOLUME_DIR" "$LOGSTASH_DATA_DIR"; do
     ensure_dir_exists "$dir"
     configure_permissions_ownership "$dir" -d "775" -f "664" -u "$LOGSTASH_DAEMON_USER" -g "root"
 done
@@ -54,3 +54,18 @@ rootLogger.appenderRef.console.ref = \${sys:ls.log.format}_console
 EOF
 
 logstash_install_plugins
+
+# As the gems directory depends on the jruby version, we need to create a symlink /opt/bitnami/logstash/gems
+# so we can mount an emptydir in readOnlyRootFilesystem
+ln -s /opt/bitnami/logstash/vendor/bundle/jruby/*/gems /opt/bitnami/logstash/gems
+
+# Copy all initially generated configuration files to the default directory
+# (this is to avoid breaking when entrypoint is being overridden)
+if ! is_dir_empty "$LOGSTASH_CONF_DIR"; then
+    cp -r "$LOGSTASH_CONF_DIR"/* "$LOGSTASH_DEFAULT_CONF_DIR"
+    chmod o+r -R "$LOGSTASH_DEFAULT_CONF_DIR"
+fi
+if ! is_dir_empty "$LOGSTASH_PIPELINE_CONF_DIR"; then
+    cp -r "$LOGSTASH_PIPELINE_CONF_DIR"/* "$LOGSTASH_DEFAULT_PIPELINE_CONF_DIR"
+    chmod o+r -R "$LOGSTASH_DEFAULT_PIPELINE_CONF_DIR"
+fi

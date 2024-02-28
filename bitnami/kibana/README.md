@@ -178,25 +178,27 @@ docker run -d --name myapp \
 
 #### Read-only environment variables
 
-| Name                      | Description                                                                                   | Value                           |
-|---------------------------|-----------------------------------------------------------------------------------------------|---------------------------------|
-| `SERVER_FLAVOR`           | Server flavor. Valid values: `kibana` or `opensearch-dashboards`.                             | `kibana`                        |
-| `BITNAMI_VOLUME_DIR`      | Directory where to mount volumes                                                              | `/bitnami`                      |
-| `KIBANA_VOLUME_DIR`       | Kibana persistence directory                                                                  | `${BITNAMI_VOLUME_DIR}/kibana`  |
-| `KIBANA_BASE_DIR`         | Kibana installation directory                                                                 | `${BITNAMI_ROOT_DIR}/kibana`    |
-| `KIBANA_CONF_DIR`         | Kibana configuration directory                                                                | `${SERVER_BASE_DIR}/config`     |
-| `KIBANA_LOGS_DIR`         | Kibana logs directory                                                                         | `${SERVER_BASE_DIR}/logs`       |
-| `KIBANA_TMP_DIR`          | Kibana temporary directory                                                                    | `${SERVER_BASE_DIR}/tmp`        |
-| `KIBANA_BIN_DIR`          | Kibana executable directory                                                                   | `${SERVER_BASE_DIR}/bin`        |
-| `KIBANA_PLUGINS_DIR`      | Kibana plugins directory                                                                      | `${SERVER_BASE_DIR}/plugins`    |
-| `KIBANA_DATA_DIR`         | Kibana data directory                                                                         | `${SERVER_VOLUME_DIR}/data`     |
-| `KIBANA_MOUNTED_CONF_DIR` | Directory for including custom configuration files (that override the default generated ones) | `${SERVER_VOLUME_DIR}/conf`     |
-| `KIBANA_CONF_FILE`        | Path to Kibana configuration file                                                             | `${SERVER_CONF_DIR}/kibana.yml` |
-| `KIBANA_LOG_FILE`         | Path to the Kibana log file                                                                   | `${SERVER_LOGS_DIR}/kibana.log` |
-| `KIBANA_PID_FILE`         | Path to the Kibana pid file                                                                   | `${SERVER_TMP_DIR}/kibana.pid`  |
-| `KIBANA_INITSCRIPTS_DIR`  | Path to the Kibana container init scripts directory                                           | `/docker-entrypoint-initdb.d`   |
-| `KIBANA_DAEMON_USER`      | Kibana system user                                                                            | `kibana`                        |
-| `KIBANA_DAEMON_GROUP`     | Kibana system group                                                                           | `kibana`                        |
+| Name                         | Description                                                                                   | Value                                |
+|------------------------------|-----------------------------------------------------------------------------------------------|--------------------------------------|
+| `SERVER_FLAVOR`              | Server flavor. Valid values: `kibana` or `opensearch-dashboards`.                             | `kibana`                             |
+| `BITNAMI_VOLUME_DIR`         | Directory where to mount volumes                                                              | `/bitnami`                           |
+| `KIBANA_VOLUME_DIR`          | Kibana persistence directory                                                                  | `${BITNAMI_VOLUME_DIR}/kibana`       |
+| `KIBANA_BASE_DIR`            | Kibana installation directory                                                                 | `${BITNAMI_ROOT_DIR}/kibana`         |
+| `KIBANA_CONF_DIR`            | Kibana configuration directory                                                                | `${SERVER_BASE_DIR}/config`          |
+| `KIBANA_DEFAULT_CONF_DIR`    | Kibana default configuration directory                                                        | `${SERVER_BASE_DIR}/config.default`  |
+| `KIBANA_LOGS_DIR`            | Kibana logs directory                                                                         | `${SERVER_BASE_DIR}/logs`            |
+| `KIBANA_TMP_DIR`             | Kibana temporary directory                                                                    | `${SERVER_BASE_DIR}/tmp`             |
+| `KIBANA_BIN_DIR`             | Kibana executable directory                                                                   | `${SERVER_BASE_DIR}/bin`             |
+| `KIBANA_PLUGINS_DIR`         | Kibana plugins directory                                                                      | `${SERVER_BASE_DIR}/plugins`         |
+| `KIBANA_DEFAULT_PLUGINS_DIR` | Kibana default plugins directory                                                              | `${SERVER_BASE_DIR}/plugins.default` |
+| `KIBANA_DATA_DIR`            | Kibana data directory                                                                         | `${SERVER_VOLUME_DIR}/data`          |
+| `KIBANA_MOUNTED_CONF_DIR`    | Directory for including custom configuration files (that override the default generated ones) | `${SERVER_VOLUME_DIR}/conf`          |
+| `KIBANA_CONF_FILE`           | Path to Kibana configuration file                                                             | `${SERVER_CONF_DIR}/kibana.yml`      |
+| `KIBANA_LOG_FILE`            | Path to the Kibana log file                                                                   | `${SERVER_LOGS_DIR}/kibana.log`      |
+| `KIBANA_PID_FILE`            | Path to the Kibana pid file                                                                   | `${SERVER_TMP_DIR}/kibana.pid`       |
+| `KIBANA_INITSCRIPTS_DIR`     | Path to the Kibana container init scripts directory                                           | `/docker-entrypoint-initdb.d`        |
+| `KIBANA_DAEMON_USER`         | Kibana system user                                                                            | `kibana`                             |
+| `KIBANA_DAEMON_GROUP`        | Kibana system group                                                                           | `kibana`                             |
 
 When you start the kibana image, you can adjust the configuration of the instance by passing one or more environment variables on the `docker run` command line.
 

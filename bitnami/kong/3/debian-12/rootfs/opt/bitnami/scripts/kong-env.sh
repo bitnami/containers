@@ -56,11 +56,14 @@ unset kong_env_vars
 # Paths
 export KONG_BASE_DIR="${BITNAMI_ROOT_DIR}/kong"
 export KONG_CONF_DIR="${KONG_BASE_DIR}/conf"
+export KONG_DEFAULT_CONF_DIR="${KONG_BASE_DIR}/conf.default"
 export KONG_CONF_FILE="${KONG_CONF_DIR}/kong.conf"
 export KONG_DEFAULT_CONF_FILE="${KONG_CONF_DIR}/kong.conf.default"
 export KONG_INITSCRIPTS_DIR="/docker-entrypoint-initdb.d"
 export KONG_SERVER_DIR="${KONG_BASE_DIR}/server"
-export KONG_LOGS_DIR="${KONG_SERVER_DIR}/logs"
+export KONG_PREFIX="${KONG_SERVER_DIR}"
+export KONG_DEFAULT_SERVER_DIR="${KONG_BASE_DIR}/server.default"
+export KONG_LOGS_DIR="${KONG_BASE_DIR}/logs"
 export PATH="${KONG_BASE_DIR}/bin:${KONG_BASE_DIR}/openresty/bin:${KONG_BASE_DIR}/openresty/nginx/sbin:${KONG_BASE_DIR}/luarocks/bin:${PATH}"
 
 # System users (when running with a privileged user)
