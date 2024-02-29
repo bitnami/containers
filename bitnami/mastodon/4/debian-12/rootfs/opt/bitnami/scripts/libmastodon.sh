@@ -238,7 +238,7 @@ mastodon_ensure_admin_user_exists() {
     # We use the tootctl tool to create the admin user
     # https://github.com/mastodon/mastodon/blob/main/chart/templates/job-create-admin.yaml#L50
     local -r cmd=("tootctl")
-    local -r args=("accounts" "create" "$MASTODON_ADMIN_USERNAME" "--email" "$MASTODON_ADMIN_EMAIL" "--confirmed" "--role" "Owner")
+    local -r args=("accounts" "create" "$MASTODON_ADMIN_USERNAME" "--email" "$MASTODON_ADMIN_EMAIL" "--approve" "--confirmed" "--role" "Owner")
     local res=""
     if am_i_root; then
         # Adding true to avoid the logic to exit
@@ -278,7 +278,7 @@ EOF
 #########################
 mastodon_wait_for_postgresql_connection() {
     local -r connection_string="${1:?missing connection string}"
-    info "Waiting for PostgreSQL to be ready at ${connection_string#*@}"
+    info "Waiting for PostgreSQL to be ready at ${connection_string##*@}"
     check_postgresql_connection() {
         local -r psql_args=("$connection_string" "-c" "SELECT 1")
         local -r res=$(psql "${psql_args[@]}" 2>&1)
