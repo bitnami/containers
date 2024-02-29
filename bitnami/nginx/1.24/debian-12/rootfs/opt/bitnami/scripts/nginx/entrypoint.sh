@@ -18,6 +18,13 @@ set -o pipefail
 
 print_welcome_page
 
+# We add the copy from default config in the entrypoint to not break users
+# bypassing the setup.sh logic. If the file already exists do not overwrite (in
+# case someone mounts a configuration file in /opt/bitnami/nginx/conf)
+debug "Copying files from $NGINX_DEFAULT_CONF_DIR to $NGINX_CONF_DIR"
+cp -nr "$NGINX_DEFAULT_CONF_DIR"/. "$NGINX_CONF_DIR"
+
+
 if [[ "$1" = "/opt/bitnami/scripts/nginx/run.sh" ]]; then
     info "** Starting NGINX setup **"
     /opt/bitnami/scripts/nginx/setup.sh
