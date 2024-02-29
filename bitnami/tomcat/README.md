@@ -158,25 +158,26 @@ Access your web server in the browser by navigating to `http://localhost:8080`.
 
 #### Read-only environment variables
 
-| Name                     | Description                                        | Value                                 |
-|--------------------------|----------------------------------------------------|---------------------------------------|
-| `TOMCAT_BASE_DIR`        | Tomcat installation directory.                     | `${BITNAMI_ROOT_DIR}/tomcat`          |
-| `TOMCAT_VOLUME_DIR`      | Tomcat persistence directory.                      | `/bitnami/tomcat`                     |
-| `TOMCAT_BIN_DIR`         | Tomcat directory for binary files.                 | `${TOMCAT_BASE_DIR}/bin`              |
-| `TOMCAT_LIB_DIR`         | Tomcat directory for library files.                | `${TOMCAT_BASE_DIR}/lib`              |
-| `TOMCAT_WORK_DIR`        | Tomcat directory for runtime files.                | `${TOMCAT_BASE_DIR}/work`             |
-| `TOMCAT_WEBAPPS_DIR`     | Tomcat directory where webapps are stored.         | `${TOMCAT_VOLUME_DIR}/webapps`        |
-| `TOMCAT_CONF_DIR`        | Tomcat configuration directory.                    | `${TOMCAT_BASE_DIR}/conf`             |
-| `TOMCAT_CONF_FILE`       | Tomcat configuration file.                         | `${TOMCAT_CONF_DIR}/server.xml`       |
-| `TOMCAT_USERS_CONF_FILE` | Tomcat configuration file.                         | `${TOMCAT_CONF_DIR}/tomcat-users.xml` |
-| `TOMCAT_LOGS_DIR`        | Directory where Tomcat logs are stored.            | `${TOMCAT_BASE_DIR}/logs`             |
-| `TOMCAT_TMP_DIR`         | Directory where Tomcat temporary files are stored. | `${TOMCAT_BASE_DIR}/temp`             |
-| `TOMCAT_LOG_FILE`        | Path to the log file for Tomcat.                   | `${TOMCAT_LOGS_DIR}/catalina.out`     |
-| `TOMCAT_PID_FILE`        | Path to the PID file for Tomcat.                   | `${TOMCAT_TMP_DIR}/catalina.pid`      |
-| `TOMCAT_HOME`            | Tomcat home directory.                             | `$TOMCAT_BASE_DIR`                    |
-| `TOMCAT_DAEMON_USER`     | Tomcat system user.                                | `tomcat`                              |
-| `TOMCAT_DAEMON_GROUP`    | Tomcat system group.                               | `tomcat`                              |
-| `JAVA_HOME`              | Java installation folder.                          | `${BITNAMI_ROOT_DIR}/java`            |
+| Name                      | Description                                        | Value                                 |
+|---------------------------|----------------------------------------------------|---------------------------------------|
+| `TOMCAT_BASE_DIR`         | Tomcat installation directory.                     | `${BITNAMI_ROOT_DIR}/tomcat`          |
+| `TOMCAT_VOLUME_DIR`       | Tomcat persistence directory.                      | `/bitnami/tomcat`                     |
+| `TOMCAT_BIN_DIR`          | Tomcat directory for binary files.                 | `${TOMCAT_BASE_DIR}/bin`              |
+| `TOMCAT_LIB_DIR`          | Tomcat directory for library files.                | `${TOMCAT_BASE_DIR}/lib`              |
+| `TOMCAT_WORK_DIR`         | Tomcat directory for runtime files.                | `${TOMCAT_BASE_DIR}/work`             |
+| `TOMCAT_WEBAPPS_DIR`      | Tomcat directory where webapps are stored.         | `${TOMCAT_VOLUME_DIR}/webapps`        |
+| `TOMCAT_CONF_DIR`         | Tomcat configuration directory.                    | `${TOMCAT_BASE_DIR}/conf`             |
+| `TOMCAT_DEFAULT_CONF_DIR` | Tomcat default configuration directory.            | `${TOMCAT_BASE_DIR}/conf.default`     |
+| `TOMCAT_CONF_FILE`        | Tomcat configuration file.                         | `${TOMCAT_CONF_DIR}/server.xml`       |
+| `TOMCAT_USERS_CONF_FILE`  | Tomcat configuration file.                         | `${TOMCAT_CONF_DIR}/tomcat-users.xml` |
+| `TOMCAT_LOGS_DIR`         | Directory where Tomcat logs are stored.            | `${TOMCAT_BASE_DIR}/logs`             |
+| `TOMCAT_TMP_DIR`          | Directory where Tomcat temporary files are stored. | `${TOMCAT_BASE_DIR}/temp`             |
+| `TOMCAT_LOG_FILE`         | Path to the log file for Tomcat.                   | `${TOMCAT_LOGS_DIR}/catalina.out`     |
+| `TOMCAT_PID_FILE`         | Path to the PID file for Tomcat.                   | `${TOMCAT_TMP_DIR}/catalina.pid`      |
+| `TOMCAT_HOME`             | Tomcat home directory.                             | `$TOMCAT_BASE_DIR`                    |
+| `TOMCAT_DAEMON_USER`      | Tomcat system user.                                | `tomcat`                              |
+| `TOMCAT_DAEMON_GROUP`     | Tomcat system group.                               | `tomcat`                              |
+| `JAVA_HOME`               | Java installation folder.                          | `${BITNAMI_ROOT_DIR}/java`            |
 
 #### Creating a custom user
 
