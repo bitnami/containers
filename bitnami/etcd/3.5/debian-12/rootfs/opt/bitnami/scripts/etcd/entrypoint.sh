@@ -12,6 +12,7 @@ set -o pipefail
 # Load libraries
 . /opt/bitnami/scripts/libbitnami.sh
 . /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libfs.sh
 
 # Load etcd environment variables
 . /opt/bitnami/scripts/etcd-env.sh
