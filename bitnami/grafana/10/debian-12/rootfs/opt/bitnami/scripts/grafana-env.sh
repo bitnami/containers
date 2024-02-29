@@ -26,6 +26,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 grafana_env_vars=(
     GRAFANA_TMP_DIR
     GRAFANA_PID_FILE
+    GRAFANA_DEFAULT_CONF_DIR
     GRAFANA_DEFAULT_PLUGINS_DIR
     GF_PATHS_HOME
     GF_PATHS_CONFIG
@@ -58,8 +59,10 @@ unset grafana_env_vars
 export GRAFANA_BASE_DIR="${BITNAMI_ROOT_DIR}/grafana"
 export GRAFANA_BIN_DIR="${GRAFANA_BASE_DIR}/bin"
 export GRAFANA_TMP_DIR="${GRAFANA_TMP_DIR:-${GRAFANA_BASE_DIR}/tmp}"
+export GRAFANA_CONF_DIR="${GRAFANA_BASE_DIR}/conf"
 export GRAFANA_PID_FILE="${GRAFANA_PID_FILE:-${GRAFANA_TMP_DIR}/grafana.pid}"
 export PATH="${GRAFANA_BIN_DIR}:${BITNAMI_ROOT_DIR}/common/bin:${PATH}"
+export GRAFANA_DEFAULT_CONF_DIR="${GRAFANA_DEFAULT_CONF_DIR:-${GRAFANA_BASE_DIR}/conf.default}"
 export GRAFANA_DEFAULT_PLUGINS_DIR="${GRAFANA_DEFAULT_PLUGINS_DIR:-${GRAFANA_BASE_DIR}/default-plugins}"
 
 # System users (when running with a privileged user)
