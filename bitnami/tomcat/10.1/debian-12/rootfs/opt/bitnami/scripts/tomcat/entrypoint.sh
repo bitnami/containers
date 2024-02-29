@@ -19,6 +19,12 @@ set -o pipefail
 
 print_welcome_page
 
+# We add the copy from default config in the entrypoint to not break users
+# bypassing the setup.sh logic. If the file already exists do not overwrite (in
+# case someone mounts a configuration file in /opt/bitnami/tomcat/conf)
+debug "Copying files from $TOMCAT_DEFAULT_CONF_DIR to $TOMCAT_CONF_DIR"
+cp -nr "$TOMCAT_DEFAULT_CONF_DIR"/. "$TOMCAT_CONF_DIR"
+
 if [[ "$*" = *"/opt/bitnami/scripts/tomcat/run.sh"* ]]; then
     info "** Starting tomcat setup **"
     /opt/bitnami/scripts/tomcat/setup.sh
