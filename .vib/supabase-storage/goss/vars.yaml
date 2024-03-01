@@ -10,7 +10,6 @@ directories:
 files:
   - paths:
       - /opt/bitnami/supabase-storage/package.json
-      - /opt/bitnami/supabase-storage/ecosystem.config.js
 root_dir: /opt/bitnami
 sed_in_place:
   exclude_paths:
