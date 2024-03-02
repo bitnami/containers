@@ -210,9 +210,7 @@ docker-compose up -d
 | Name                                     | Description                                                                | Default Value                                      |
 |------------------------------------------|----------------------------------------------------------------------------|----------------------------------------------------|
 | `MINIO_DATA_DIR`                         | MinIO directory for data.                                                  | `/bitnami/minio/data`                              |
-| `MINIO_DATA_DIR`                         | MinIO directory for data.                                                  | `/bitnami/minio/data`                              |
 | `MINIO_API_PORT_NUMBER`                  | MinIO API port number.                                                     | `9000`                                             |
-| `MINIO_API_PORT_NUMBER`                  | MinIO API port number.                                                     | `9080`                                             |
 | `MINIO_CONSOLE_PORT_NUMBER`              | MinIO RMI port number.                                                     | `9001`                                             |
 | `MINIO_SCHEME`                           | MinIO web scheme.                                                          | `http`                                             |
 | `MINIO_SKIP_CLIENT`                      | Skip MinIO client configuration.                                           | `no`                                               |
