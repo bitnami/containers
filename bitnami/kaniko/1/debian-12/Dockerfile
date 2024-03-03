@@ -15,7 +15,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "kaniko-1.20.1-1-linux-${OS_ARCH}-debian-12" \
+      "kaniko-1.21.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -40,19 +40,19 @@ ENV HOME="/root" \
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2024-02-21T12:01:02Z" \
+      org.opencontainers.image.created="2024-03-03T10:00:59Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.20.1-debian-12-r3" \
+      org.opencontainers.image.ref.name="1.21.0-debian-12-r0" \
       org.opencontainers.image.title="kaniko" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.20.1"
+      org.opencontainers.image.version="1.21.0"
 
 COPY prebuildfs /
 COPY rootfs /
 COPY --from=builder /out /
 
-ENV APP_VERSION="1.20.1" \
+ENV APP_VERSION="1.21.0" \
     BITNAMI_APP_NAME="kaniko" \
     DOCKER_CONFIG="/kaniko/.docker" \
     DOCKER_CREDENTIAL_GCR_CONFIG="/kaniko/.config/gcloud/docker_credential_gcr_config.json" \
