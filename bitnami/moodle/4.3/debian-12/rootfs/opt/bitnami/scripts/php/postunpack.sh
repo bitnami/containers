@@ -29,7 +29,7 @@ php_conf_set "upload_tmp_dir" "${PHP_BASE_DIR}/tmp"
 php_conf_set "session.save_path" "${PHP_TMP_DIR}/session"
 
 # Ensure directories used by PHP-FPM exist and have proper ownership and permissions
-for dir in "$PHP_CONF_DIR" "${PHP_BASE_DIR}/tmp" "$PHP_TMP_DIR" "$PHP_FPM_LOGS_DIR" "${PHP_TMP_DIR}/session"; do
+for dir in "$PHP_CONF_DIR" "$PHP_DEFAULT_CONF_DIR" "${PHP_BASE_DIR}/tmp" "$PHP_TMP_DIR" "$PHP_FPM_LOGS_DIR" "${PHP_TMP_DIR}/session"; do
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
 done
@@ -41,3 +41,7 @@ touch "${PHP_CONF_DIR}/common.conf"
 # Log to stdout/stderr for easy debugging
 ln -sf "/dev/stdout" "$PHP_FPM_LOG_FILE"
 php_conf_set "error_log" "/dev/stderr"
+
+# Copy all initially generated configuration files to the default directory
+# (this is to avoid breaking when entrypoint is being overridden)
+cp -r "$PHP_CONF_DIR"/* "$PHP_DEFAULT_CONF_DIR"
