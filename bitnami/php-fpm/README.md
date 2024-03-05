@@ -205,6 +205,7 @@ docker run -it --name php-fpm -v /path/to/app:/app bitnami/php-fpm \
 | `PHP_BASE_DIR`                                | PHP-FPM installation directory.                                                                             | `${BITNAMI_ROOT_DIR}/php`         |
 | `PHP_BIN_DIR`                                 | PHP directory for binary executables.                                                                       | `${PHP_BASE_DIR}/bin`             |
 | `PHP_CONF_DIR`                                | PHP configuration directory.                                                                                | `${PHP_BASE_DIR}/etc`             |
+| `PHP_DEFAULT_CONF_DIR`                        | PHP configuration directory.                                                                                | `${PHP_BASE_DIR}/etc.default`     |
 | `PHP_TMP_DIR`                                 | PHP directory for runtime temporary files.                                                                  | `${PHP_BASE_DIR}/var/run`         |
 | `PHP_CONF_FILE`                               | Path to the PHP configuration file.                                                                         | `${PHP_CONF_DIR}/php.ini`         |
 | `PHP_DEFAULT_OPCACHE_INTERNED_STRINGS_BUFFER` | Default amount of memory used to store interned strings, in megabytes.                                      | `16`                              |
