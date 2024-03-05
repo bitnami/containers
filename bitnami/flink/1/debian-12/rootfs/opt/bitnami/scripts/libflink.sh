@@ -101,25 +101,8 @@ flink_configure_from_environment_variables() {
 #   None
 #########################
 flink_initialize() {
-      local -r app_name="flink"
-
-      flink_setup_jemalloc
-
-      if ! is_app_initialized "$app_name"; then
-          # Ensure Discourse persisted directories exist (i.e. when a volume has been mounted to /bitnami)
-          info "Ensuring Flink directories exist"
-          ensure_dir_exists "$FLINK_VOLUME_DIR"
-          # Use daemon:root ownership for compatibility when running as a non-root user
-          am_i_root && configure_permissions_ownership "$FLINK_VOLUME_DIR" -d "775" -f "664" -u "$FLINK_DAEMON_USER" -g "$FLINK_DAEMON_GROUP"
-
-          flink_prepare_configuration
-
-          info "Persisting Flink installation"
-          persist_app "$app_name" "$FLINK_DATA_TO_PERSIST"
-      else
-          info "Restoring persisted Flink installation"
-          restore_persisted_app "$app_name" "$FLINK_DATA_TO_PERSIST"
-      fi
+    flink_setup_jemalloc
+    flink_prepare_configuration
 }
 
 ########################
