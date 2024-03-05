@@ -4,7 +4,7 @@
 FROM docker.io/bitnami/minideb:bookworm
 
 ARG TARGETARCH
-# TEST
+
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
       org.opencontainers.image.created="2024-02-11T03:26:55Z" \
