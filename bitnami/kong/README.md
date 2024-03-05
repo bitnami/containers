@@ -122,7 +122,7 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 | `KONG_SERVER_DIR`         | Directory where Kong Openresty instance is created.   | `${KONG_BASE_DIR}/server`            |
 | `KONG_PREFIX`             | Kong installation directory.                          | `${KONG_SERVER_DIR}`                 |
 | `KONG_DEFAULT_SERVER_DIR` | Directory with default Kong Openresty instance files. | `${KONG_BASE_DIR}/server.default`    |
-| `KONG_LOGS_DIR`           | Directory where Kong logs are stored.                 | `${KONG_BASE_DIR}/logs`              |
+| `KONG_LOGS_DIR`           | Directory where Kong logs are stored.                 | `${KONG_SERVER_DIR}/logs`            |
 | `KONG_PID_FILE`           | Path to the PID file for Kong.                        | `${KONG_SERVER_DIR}/pids/nginx.pid`  |
 | `KONG_DAEMON_USER`        | Kong system user.                                     | `kong`                               |
 | `KONG_DAEMON_GROUP`       | Kong system group.                                    | `kong`                               |
