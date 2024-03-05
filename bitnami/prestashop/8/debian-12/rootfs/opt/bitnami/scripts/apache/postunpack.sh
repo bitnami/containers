@@ -109,7 +109,7 @@ EOF
 apache_setup_bitnami_config
 
 # Ensure non-root user has write permissions on a set of directories
-for dir in "$APACHE_TMP_DIR" "$APACHE_CONF_DIR" "$APACHE_LOGS_DIR" "$APACHE_VHOSTS_DIR" "$APACHE_HTACCESS_DIR" "$APACHE_HTDOCS_DIR"; do
+for dir in "$APACHE_TMP_DIR" "$APACHE_CONF_DIR" "$APACHE_LOGS_DIR" "$APACHE_VHOSTS_DIR" "$APACHE_HTACCESS_DIR" "$APACHE_HTDOCS_DIR" "$APACHE_DEFAULT_CONF_DIR"; do
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
 done
@@ -125,3 +125,7 @@ ln -sf "/dev/stderr" "${APACHE_LOGS_DIR}/error_log"
 # Source: https://stackoverflow.com/questions/94445/using-openssl-what-does-unable-to-write-random-state-mean
 
 touch /.rnd && chmod g+rw /.rnd
+
+# Copy all initially generated configuration files to the default directory
+# (this is to avoid breaking when entrypoint is being overridden)
+cp -r "$APACHE_CONF_DIR"/* "$APACHE_DEFAULT_CONF_DIR"
