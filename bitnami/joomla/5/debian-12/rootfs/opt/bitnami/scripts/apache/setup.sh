@@ -10,6 +10,7 @@ set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
+. /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libapache.sh
 
@@ -22,6 +23,12 @@ apache_validate
 # Ensure Apache daemon user exists when running as 'root'
 am_i_root && ensure_user_exists "$APACHE_DAEMON_USER" --group "$APACHE_DAEMON_GROUP"
 
+if ! is_dir_empty "$APACHE_DEFAULT_CONF_DIR"; then
+    # We add the copy from default config in the initialize function for web applications
+    # that make use of the Apache setup.sh script
+    debug "Copying files from $APACHE_DEFAULT_CONF_DIR to $APACHE_CONF_DIR"
+    cp -nr "$APACHE_DEFAULT_CONF_DIR"/. "$APACHE_CONF_DIR"
+fi
 # Generate SSL certs (without a passphrase)
 ensure_dir_exists "${APACHE_CONF_DIR}/bitnami/certs"
 if [[ ! -f "${APACHE_CONF_DIR}/bitnami/certs/server.crt" ]]; then

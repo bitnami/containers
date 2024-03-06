@@ -25,6 +25,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # variable will be overridden with the value specified in that file
 airflow_scheduler_env_vars=(
     AIRFLOW_EXECUTOR
+    AIRFLOW_FORCE_OVERWRITE_CONF_FILE
     AIRFLOW_RAW_FERNET_KEY
     AIRFLOW_FERNET_KEY
     AIRFLOW_SECRET_KEY
@@ -77,6 +78,7 @@ export AIRFLOW_DAEMON_GROUP="airflow"
 
 # Airflow configuration
 export AIRFLOW_EXECUTOR="${AIRFLOW_EXECUTOR:-SequentialExecutor}"
+export AIRFLOW_FORCE_OVERWRITE_CONF_FILE="${AIRFLOW_FORCE_OVERWRITE_CONF_FILE:-no}"
 export AIRFLOW_RAW_FERNET_KEY="${AIRFLOW_RAW_FERNET_KEY:-}"
 export AIRFLOW_FERNET_KEY="${AIRFLOW_FERNET_KEY:-}"
 export AIRFLOW_SECRET_KEY="${AIRFLOW_SECRET_KEY:-}"

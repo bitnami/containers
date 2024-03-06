@@ -28,7 +28,7 @@ chmod g+rwX "$TOMCAT_HOME"
 # Make TOMCAT_LIB_DIR writable (non-recursively, for security reasons) for non-root approach, some apps may copy files there
 chmod g+rwX "$TOMCAT_LIB_DIR"
 # Make required folders writable by the Tomcat web server user
-for dir in "$TOMCAT_TMP_DIR" "$TOMCAT_LOGS_DIR" "$TOMCAT_CONF_DIR" "$TOMCAT_WORK_DIR" "$TOMCAT_WEBAPPS_DIR" "${TOMCAT_BASE_DIR}/webapps"; do
+for dir in "$TOMCAT_TMP_DIR" "$TOMCAT_LOGS_DIR" "$TOMCAT_CONF_DIR" "$TOMCAT_WORK_DIR" "$TOMCAT_WEBAPPS_DIR" "${TOMCAT_BASE_DIR}/webapps" "$TOMCAT_DEFAULT_CONF_DIR"; do
     ensure_dir_exists "$dir"
     # Use tomcat:root ownership for compatibility when running as a non-root user
     configure_permissions_ownership "$dir" -d "775" -f "664" -u "$TOMCAT_DAEMON_USER" -g "root"
@@ -49,3 +49,7 @@ ln -sf tomcat "${BITNAMI_ROOT_DIR}/apache-tomcat"
 
 # Users can mount their webapps at /app
 ln -sf "$TOMCAT_WEBAPPS_DIR" /app
+
+# Copy all initially generated configuration files to the default directory
+# (this is to avoid breaking when entrypoint is being overridden)
+cp -r "$TOMCAT_CONF_DIR"/* "$TOMCAT_DEFAULT_CONF_DIR"

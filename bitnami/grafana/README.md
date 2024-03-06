@@ -100,7 +100,8 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 |-------------------------------|--------------------------------------------------------------------------------------|-----------------------------------------|
 | `GRAFANA_TMP_DIR`             | Grafana directory for temporary runtime files.                                       | `${GRAFANA_BASE_DIR}/tmp`               |
 | `GRAFANA_PID_FILE`            | Grafana PID file.                                                                    | `${GRAFANA_TMP_DIR}/grafana.pid`        |
-| `GRAFANA_DEFAULT_PLUGINS_DIR` | Grafana directory for default plugins.                                               | `${GRAFANA_BASE_DIR}/default-plugins`   |
+| `GRAFANA_DEFAULT_CONF_DIR`    | Grafana directory for default plugins.                                               | `${GRAFANA_BASE_DIR}/conf.default`      |
+| `GRAFANA_DEFAULT_PLUGINS_DIR` | Grafana directory for default configuration files.                                   | `${GRAFANA_BASE_DIR}/default-plugins`   |
 | `GF_PATHS_HOME`               | Grafana home directory.                                                              | `$GRAFANA_BASE_DIR`                     |
 | `GF_PATHS_CONFIG`             | Grafana configuration file.                                                          | `${GRAFANA_BASE_DIR}/conf/grafana.ini`  |
 | `GF_PATHS_DATA`               | Grafana directory for data files.                                                    | `${GRAFANA_BASE_DIR}/data`              |
@@ -118,6 +119,7 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 |----------------------------|-------------------------------------------------------------|---------------------------------|
 | `GRAFANA_BASE_DIR`         | Grafana installation directory.                             | `${BITNAMI_ROOT_DIR}/grafana`   |
 | `GRAFANA_BIN_DIR`          | Grafana directory for binary executables.                   | `${GRAFANA_BASE_DIR}/bin`       |
+| `GRAFANA_CONF_DIR`         | Grafana directory for configuration.                        | `${GRAFANA_BASE_DIR}/conf`      |
 | `GRAFANA_DAEMON_USER`      | Grafana system user.                                        | `grafana`                       |
 | `GRAFANA_DAEMON_GROUP`     | Grafana system group.                                       | `grafana`                       |
 | `GF_VOLUME_DIR`            | Grafana volume directory.                                   | `${BITNAMI_VOLUME_DIR}/grafana` |

@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-02-24T19:38:15Z" \
+      org.opencontainers.image.created="2024-03-04T16:22:18Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.0.35-27-debian-12-r7" \
+      org.opencontainers.image.ref.name="8.0.36-28-debian-12-r0" \
       org.opencontainers.image.title="percona-mysql" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="8.0.35-27"
+      org.opencontainers.image.version="8.0.36-28"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,7 +28,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "mysql-shell-8.0.36-2-linux-${OS_ARCH}-debian-12" \
       "ini-file-1.4.6-9-linux-${OS_ARCH}-debian-12" \
-      "percona-mysql-8.0.35-27-2-linux-${OS_ARCH}-debian-12" \
+      "percona-mysql-8.0.36-28-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -48,7 +48,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mysql/postunpack.sh
-ENV APP_VERSION="8.0.35-27" \
+ENV APP_VERSION="8.0.36-28" \
     BITNAMI_APP_NAME="percona-mysql" \
     MYSQL_HOME="/opt/bitnami/mysql/conf" \
     PATH="/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/mysql/sbin:$PATH"

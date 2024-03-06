@@ -18,7 +18,9 @@ set -o pipefail
 # Load etcd environment variables
 . /opt/bitnami/scripts/etcd-env.sh
 
-is_empty_value "$ETCD_ROOT_PASSWORD" && unset ETCD_ROOT_PASSWORD
+# We need to unset ETCD_ROOT_PASSWORD otherwise it will be logged by etcd process
+unset ETCD_ROOT_PASSWORD
+
 if [[ -f "$ETCD_NEW_MEMBERS_ENV_FILE" ]]; then
     debug "Loading env vars of existing cluster"
     . "$ETCD_NEW_MEMBERS_ENV_FILE"

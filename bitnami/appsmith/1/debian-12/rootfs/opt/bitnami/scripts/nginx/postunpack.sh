@@ -38,7 +38,7 @@ nginx_patch_httpoxy_vulnerability() {
 rm -rf "${BITNAMI_ROOT_DIR}/certs" "${BITNAMI_ROOT_DIR}/server_blocks"
 
 # Ensure non-root user has write permissions on a set of directories
-for dir in "$NGINX_VOLUME_DIR" "$NGINX_CONF_DIR" "$NGINX_INITSCRIPTS_DIR" "$NGINX_SERVER_BLOCKS_DIR" "${NGINX_CONF_DIR}/bitnami" "${NGINX_CONF_DIR}/bitnami/certs" "$NGINX_LOGS_DIR" "$NGINX_TMP_DIR"; do
+for dir in "$NGINX_VOLUME_DIR" "$NGINX_CONF_DIR" "$NGINX_INITSCRIPTS_DIR" "$NGINX_SERVER_BLOCKS_DIR" "${NGINX_CONF_DIR}/bitnami" "${NGINX_CONF_DIR}/bitnami/certs" "$NGINX_LOGS_DIR" "$NGINX_TMP_DIR" "$NGINX_DEFAULT_CONF_DIR"; do
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
 done
@@ -72,3 +72,8 @@ ln -sf "/dev/stderr" "${NGINX_LOGS_DIR}/error.log"
 # Source: https://stackoverflow.com/questions/94445/using-openssl-what-does-unable-to-write-random-state-mean
 
 touch /.rnd && chmod g+rw /.rnd
+
+# Copy all initially generated configuration files to the default directory
+# (this is to avoid breaking when entrypoint is being overridden)
+cp -r "${NGINX_CONF_DIR}"/* "$NGINX_DEFAULT_CONF_DIR"
+

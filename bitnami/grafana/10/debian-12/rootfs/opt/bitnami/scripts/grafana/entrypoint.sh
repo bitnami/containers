@@ -28,6 +28,12 @@ function is_exec() {
 
 print_welcome_page
 
+# We add the copy from default config in the entrypoint to not break users
+# bypassing the setup.sh logic. If the file already exists do not overwrite (in
+# case someone mounts a configuration file in /opt/bitnami/postgresql/conf)
+debug "Copying files from $GRAFANA_DEFAULT_CONF_DIR to $GRAFANA_CONF_DIR"
+cp -nr "$GRAFANA_DEFAULT_CONF_DIR"/. "$GRAFANA_CONF_DIR"
+
 if [[ "$1" = "/opt/bitnami/scripts/grafana/run.sh" ]] || ! is_exec "$1"; then
     # This catches the error-code from libgrafana.sh for the immediate exit when the grafana-operator is used. And ensure that the exit code is kept silently.
     /opt/bitnami/scripts/grafana/setup.sh || GRAFANA_OPERATOR_IMMEDIATE_EXIT=$?
