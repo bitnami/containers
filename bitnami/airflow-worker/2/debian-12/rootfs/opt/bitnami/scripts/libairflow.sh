@@ -115,7 +115,7 @@ airflow_initialize() {
     done
 
     # The configuration file is not persisted. If it is not provided, generate it based on env vars
-    if [[ ! -f "$AIRFLOW_CONF_FILE" ]]; then
+    if [[ ! -f "$AIRFLOW_CONF_FILE" ]] || is_boolean_yes "$AIRFLOW_FORCE_OVERWRITE_CONF_FILE"; then
         info "No injected configuration file found. Creating default config file"
         airflow_generate_config
     else
