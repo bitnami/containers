@@ -75,7 +75,7 @@ etcd_setup_from_environment_variables() {
         "ETCD_CFG_CA_FILE"
     )
     info "Generating etcd config file using env variables"
-    # Map environment variables to config properties for cassandra-env.sh
+    # Map environment variables to config properties for etcd-env.sh
     for var in "${!ETCD_CFG_@}"; do
         value="${!var:-}"
         if [[ -n "$value" ]]; then
@@ -288,13 +288,28 @@ etcdctl_auth_flags() {
     local -a authFlags=()
 
     ! is_empty_value "$ETCD_ROOT_PASSWORD" && authFlags+=("--user" "root:$ETCD_ROOT_PASSWORD")
+    echo "${authFlags[*]} $(etcdctl_auth_norbac_flags)"
+}
+
+########################
+# Obtain etcdctl authentication flags to use (before RBAC is enabled)
+# Globals:
+#   ETCD_*
+# Arguments:
+#   None
+# Returns:
+#   Array with extra flags to use for authentication
+#########################
+etcdctl_auth_norbac_flags() {
+    local -a authFlags=()
+
     if [[ $ETCD_AUTO_TLS = true ]]; then
         authFlags+=("--cert" "${ETCD_DATA_DIR}/fixtures/client/cert.pem" "--key" "${ETCD_DATA_DIR}/fixtures/client/key.pem")
     else
         [[ -f "$ETCD_CERT_FILE" ]] && [[ -f "$ETCD_KEY_FILE" ]] && authFlags+=("--cert" "$ETCD_CERT_FILE" "--key" "$ETCD_KEY_FILE")
         [[ -f "$ETCD_TRUSTED_CA_FILE" ]] && authFlags+=("--cacert" "$ETCD_TRUSTED_CA_FILE")
     fi
-    echo "${authFlags[@]}"
+    echo "${authFlags[*]}"
 }
 
 ########################
@@ -343,7 +358,7 @@ etcd_store_member_id() {
 etcd_configure_rbac() {
 
     ! is_etcd_running && etcd_start_bg
-    read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
+    read -r -a extra_flags <<<"$(etcdctl_auth_norbac_flags)"
 
     is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
     if retry_while "etcdctl ${extra_flags[*]} member list" >/dev/null 2>&1; then
@@ -352,7 +367,6 @@ etcd_configure_rbac() {
                 info "Authentication already enabled"
             else
                 info "Enabling etcd authentication"
-                is_boolean_yes "$ETCD_ON_K8S" && extra_flags=("--endpoints=$(etcdctl_get_endpoints)")
                 etcdctl "${extra_flags[@]}" user add root --interactive=false <<<"$ETCD_ROOT_PASSWORD"
                 etcdctl "${extra_flags[@]}" user grant-role root root
                 etcdctl "${extra_flags[@]}" auth enable
