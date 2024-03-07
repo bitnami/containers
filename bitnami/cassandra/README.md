@@ -241,9 +241,7 @@ Additionally, any environment variable beginning with the following prefix will 
 * `CASSANDRA_CFG_COMMITLOG_`: Will add the corresponding key and the provided value to `commitlog_archiving.properties`.
 * `CASSANDRA_CFG_YAML_`: Will add the corresponding key and the provided value to `cassandra.yaml`.
 
-For example, use `CASSANDRA_CFG_RACKDC_PREFER_LOCAL=true` in order to configure `prefer_local` in `cassandra-rackdc.properties`.
-To update the `cassandra.yaml` file and set `internode_compression` to `all` use `CASSANDRA_CFG_YAML_INTERNODE_COMPRESSION=all`.
-In the same way you can update nested options in the `cassandra.yaml`. For example, `CASSANDRA_CFG_YAML_CACHED_ROWS_WARN_THRESHOLD` will set `cached_rows_warn_threshold` in the `replica_filtering_protection` section.
+For example, use `CASSANDRA_CFG_RACKDC_PREFER_LOCAL=true` in order to configure `prefer_local` in `cassandra-rackdc.properties`. Or, use `CASSANDRA_CFG_YAML_INTERNODE_COMPRESSION=all` in order to set `internode_compression` to `all` in `cassandra.yaml`.
 
 **NOTE:** Environment variables will be omitted when mounting a configuration file
 

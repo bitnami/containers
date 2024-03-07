@@ -1157,24 +1157,6 @@ cassandra_commitlog_conf_set() {
 }
 
 ########################
-# Set a configuration setting value to cassandra.yaml
-# Globals:
-#   CASSANDRA_CONF_DIR
-# Arguments:
-#   $1 - key
-#   $2 - value
-# Returns:
-#   None
-#########################
-cassandra_yaml_conf_set() {
-    if ! cassandra_is_file_external "cassandra.yaml"; then
-        cassandra_yaml_set $1 $2 'no'
-    else
-        debug "cassandra.yaml mounted. Skipping data directory configuration"
-    fi
-}
-
-########################
 # Configure Cassandra configuration files from environment variables
 # Globals:
 #   CASSANDRA_*
@@ -1184,13 +1166,6 @@ cassandra_yaml_conf_set() {
 #   None
 #########################
 cassandra_setup_from_environment_variables() {
-    # Map environment variables to config properties for cassandra.yaml
-    for var in "${!CASSANDRA_CFG_YAML_@}"; do
-        # shellcheck disable=SC2001
-        key="$(echo "$var" | sed -e 's/^CASSANDRA_CFG_YAML_//g' | tr '[:upper:]' '[:lower:]')"
-        value="${!var}"
-        cassandra_yaml_conf_set "$key" "$value"
-    done
     # Map environment variables to config properties for cassandra-env.sh
     for var in "${!CASSANDRA_CFG_ENV_@}"; do
         # shellcheck disable=SC2001
@@ -1210,6 +1185,17 @@ cassandra_setup_from_environment_variables() {
         value="${!var}"
         cassandra_commitlog_conf_set "$key" "$value"
     done
+    if ! cassandra_is_file_external "cassandra.yaml"; then
+        # Map environment variables to config properties for cassandra.yaml
+        for var in "${!CASSANDRA_CFG_YAML_@}"; do
+            # shellcheck disable=SC2001
+            key="$(echo "$var" | sed -e 's/^CASSANDRA_CFG_YAML_//g' | tr '[:upper:]' '[:lower:]')"
+            value="${!var}"
+            cassandra_yaml_set "$key" "$value"
+        done
+    else
+        debug "cassandra.yaml mounted. Skipping data directory configuration"
+    fi
 }
 
 ########################
