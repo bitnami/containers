@@ -22,7 +22,7 @@ print_welcome_page
 # bypassing the setup.sh logic. If the file already exists do not overwrite (in
 # case someone mounts a configuration file in /opt/bitnami/nginx/conf)
 debug "Copying files from $NGINX_DEFAULT_CONF_DIR to $NGINX_CONF_DIR"
-cp -nr "$NGINX_DEFAULT_CONF_DIR"/. "$NGINX_CONF_DIR"
+cp -nr "$NGINX_DEFAULT_CONF_DIR"/. "$NGINX_CONF_DIR" || true
 
 
 if [[ "$1" = "/opt/bitnami/scripts/nginx/run.sh" ]]; then
