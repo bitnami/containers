@@ -70,6 +70,12 @@ docker run --rm --name rabbitmq-cluster-operator bitnami/rabbitmq-cluster-operat
 
 Check the [official RabbitMQ Cluster Operator documentation](https://github.com/rabbitmq/cluster-operator/tree/main/docs) for more information.
 
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.

@@ -13,13 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run -it --name argo-workflow-cli bitnami/argo-workflow-cli
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/argo-workflow-cli/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -81,18 +74,10 @@ Bitnami provides up-to-date versions of Argo Workflows CLI, including security p
 docker pull bitnami/argo-workflow-cli:latest
 ```
 
-or if you're using Docker Compose, update the value of the image property to `bitnami/argo-workflow-cli:latest`.
-
 #### Step 2: Remove the currently running container
 
 ```console
 docker rm -v argo-workflow-cli
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v argo-workflow-cli
 ```
 
 #### Step 3: Run the new image
@@ -101,12 +86,6 @@ Re-create your container from the new image.
 
 ```console
 docker run --name argo-workflow-cli bitnami/argo-workflow-cli:latest
-```
-
-or using Docker Compose:
-
-```console
-docker-compose up argo-workflow-cli
 ```
 
 ## Configuration
@@ -120,6 +99,12 @@ docker run --rm --name argo-workflow-cli bitnami/argo-workflow-cli:latest --help
 ```
 
 Check the [official Argo Workflows CLI documentation](https://argoproj.github.io/argo-workflows/cli/argo/) for the list of the available parameters.
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 

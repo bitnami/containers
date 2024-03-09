@@ -1,8 +1,0 @@
-{
-    "kiam": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "4.2.0-169"
-    }
-}

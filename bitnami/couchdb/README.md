@@ -13,13 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name couchdb bitnami/couchdb:latest
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/couchdb/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -117,18 +110,33 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 
 ## Configuration
 
-The configuration can easily be setup in the Bitnami CouchDB Docker image by using the following environment variables:
+### Environment variables
 
-* `COUCHDB_NODENAME`: A server alias for clustering support. Default: **couchdb@127.0.0.1**
-* `COUCHDB_PORT_NUMBER`: Standard port for all HTTP API requests. Default: **5984**
-* `COUCHDB_CLUSTER_PORT_NUMBER`: Port for cluster communication. Default: **9100**
-* `COUCHDB_BIND_ADDRESS`: Address binding for the standard port. Default: **0.0.0.0**
-* `COUCHDB_CREATE_DATABASES`: If set to yes, during the first initialization of the container the system databases will be created. Default: **yes**
-* `COUCHDB_USER`: The username of the administrator user when authentication is enabled. Default: **admin**
-* `COUCHDB_PASSWORD`: The password to use for login with the admin user set in the `COUCHDB_USER` environment variable. Default: **couchdb**
-* `COUCHDB_PASSWORD_FILE`: Path to a file that contains the password for the custom user set in the `COUCHDB_USER` environment variable. This will override the value specified in `COUCHDB_PASSWORD`. No defaults.
-* `COUCHDB_SECRET`: The secret token for Proxy and Cookie Authentication. If it is not specified, it will be randomly generated. No defaults.
-* `COUCHDB_SECRET_FILE`: Path to a file that contains the contents of the secret parameter for CouchDB. This will override the value specified in `COUCHDB_SECRET`. No defaults.
+#### Customizable environment variables
+
+| Name                       | Description                                                                              | Default Value |
+|----------------------------|------------------------------------------------------------------------------------------|---------------|
+| `COUCHDB_CREATE_DATABASES` | Whether to create CouchDB system databases during initialization. Useful for clustering. | `yes`         |
+| `COUCHDB_USER`             | CouchDB admin username.                                                                  | `admin`       |
+| `COUCHDB_PASSWORD`         | Password for the CouchDB admin user.                                                     | `couchdb`     |
+| `COUCHDB_SECRET`           | CouchDB secret/token used for proxy and cookie authentication.                           | `bitnami`     |
+
+#### Read-only environment variables
+
+| Name                   | Description                                         | Value                                          |
+|------------------------|-----------------------------------------------------|------------------------------------------------|
+| `COUCHDB_BASE_DIR`     | CouchDB installation directory.                     | `${BITNAMI_ROOT_DIR}/couchdb`                  |
+| `COUCHDB_VOLUME_DIR`   | CouchDB persistence directory.                      | `/bitnami/couchdb`                             |
+| `COUCHDB_BIN_DIR`      | CouchDB directory for binary executables.           | `${COUCHDB_BASE_DIR}/bin`                      |
+| `COUCHDB_CONF_DIR`     | CouchDB configuration directory.                    | `${COUCHDB_BASE_DIR}/etc`                      |
+| `COUCHDB_CONF_FILE`    | CouchDB configuration file.                         | `${COUCHDB_CONF_DIR}/default.d/10-bitnami.ini` |
+| `COUCHDB_DATA_DIR`     | CouchDB directory where data is stored.             | `${COUCHDB_VOLUME_DIR}/data`                   |
+| `COUCHDB_LOGS_DIR`     | Directory where CouchDB logs are stored.            | `${COUCHDB_BASE_DIR}/var/log`                  |
+| `COUCHDB_LOG_FILE`     | CouchDB log file.                                   | `${COUCHDB_LOGS_DIR}/couch.log`                |
+| `COUCHDB_TMP_DIR`      | Directory where CouchDB temporary files are stored. | `${COUCHDB_BASE_DIR}/var/run`                  |
+| `COUCHDB_PID_FILE`     | Path to the PID file for CouchDB.                   | `${COUCHDB_TMP_DIR}/couchdb.pid`               |
+| `COUCHDB_DAEMON_USER`  | CouchDB system user.                                | `couchdb`                                      |
+| `COUCHDB_DAEMON_GROUP` | CouchDB system group.                               | `couchdb`                                      |
 
 You can specify these environment variables in the `docker run` command:
 
@@ -316,6 +324,12 @@ docker run --name couchdb bitnami/couchdb:latest
 ### 3.0.0-0-debian-10-r0
 
 * The usage of 'ALLOW_ANONYMOUS_LOGIN' is now deprecated. Please, specify a password for the admin user (defaults to "admin") by setting the 'COUCHDB_PASSWORD' environment variable.
+
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/couchdb).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## Contributing
 

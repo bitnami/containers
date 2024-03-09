@@ -10,14 +10,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-docker run -it --name node bitnami/node
-```
-
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/node/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run -it --name node bitnami/node:latest
 ```
 
 ## Why use Bitnami Images?
@@ -211,16 +204,6 @@ We may want to make our Node.js web server only accessible via an nginx web serv
 docker network create app-tier --driver bridge
 ```
 
-or using Docker Compose:
-
-```yaml
-version: '2'
-
-networks:
-  app-tier:
-    driver: bridge
-```
-
 #### Step 2: Create a virtual host
 
 Let's create an nginx virtual host to reverse proxy to our Node.js container.
@@ -254,19 +237,6 @@ docker run -it --name myapp --network app-tier \
   bitnami/node node index.js
 ```
 
-or using Docker Compose:
-
-```yaml
-version: '2'
-myapp:
-  image: bitnami/node
-  command: node index.js
-  networks:
-    - app-tier
-  volumes:
-    - .:/app
-```
-
 #### Step 4: Run the nginx image
 
 ```console
@@ -274,18 +244,6 @@ docker run -it \
   -v /path/to/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf:ro \
   --network app-tier \
   bitnami/nginx
-```
-
-or using Docker Compose:
-
-```yaml
-version: '2'
-nginx:
-  image: bitnami/nginx
-  networks:
-    - app-tier
-  volumes:
-    - /path/to/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf:ro
 ```
 
 ## Maintenance
@@ -300,18 +258,10 @@ Bitnami provides up-to-date versions of Node.js, including security patches, soo
 docker pull bitnami/node:latest
 ```
 
-or if you're using Docker Compose, update the value of the image property to `bitnami/node:latest`.
-
 #### Step 2: Remove the currently running container
 
 ```console
 docker rm -v node
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v node
 ```
 
 #### Step 3: Run the new image
@@ -322,13 +272,11 @@ Re-create your container from the new image.
 docker run --name node bitnami/node:latest
 ```
 
-or using Docker Compose:
-
-```console
-docker-compose up node
-```
-
 ## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ### 6.2.0-r0 (2016-05-11)
 

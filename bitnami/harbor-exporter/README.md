@@ -8,12 +8,10 @@
 
 ## TL;DR
 
-This container is part of the [Harbor solution](https://github.com/bitnami/charts/tree/main/bitnami/harbor) that is primarily intended to be deployed in Kubernetes. You can deploy Harbor solution and then enable this specific container with the command below:
+This container is part of the [Harbor solution](https://github.com/bitnami/charts/tree/main/bitnami/harbor) that is primarily intended to be deployed in Kubernetes.
 
 ```console
-curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/harbor-portal/docker-compose.yml
-curl -L https://github.com/bitnami/containers/archive/main.tar.gz | tar xz --strip=2 containers-main/bitnami/harbor-portal && cp -RL harbor-portal/config . && rm -rf harbor-portal
-docker-compose up
+docker run --name harbor-exporter bitnami/harbor-exporter:latest
 ```
 
 ## Why use Bitnami Images?
@@ -50,6 +48,41 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 harbor-exporter is a component of the Harbor application. In order to get the Harbor application running on Kubernetes we encourage you to check the [bitnami/harbor Helm chart](https://github.com/bitnami/charts/tree/master/bitnami/harbor) and configure it using the options exposed in the values.yaml file.
 
 For further information about the specific component itself, please refer to the [source repository documentation](https://github.com/goharbor/harbor/tree/main/docs
+
+### Environment variables
+
+#### Customizable environment variables
+
+| Name                           | Description                                                                                | Default Value                         |
+|--------------------------------|--------------------------------------------------------------------------------------------|---------------------------------------|
+| `HARBOR_EXPORTER_BASE_DIR`     | harbor-exporter installation directory.                                                    | `${BITNAMI_ROOT_DIR}/harbor-exporter` |
+| `HARBOR_EXPORTER_LOGS_DIR`     | harbor-exporter installation directory.                                                    | `${HARBOR_EXPORTER_BASE_DIR}/logs`    |
+| `HARBOR_EXPORTER_TMP_DIR`      | harbor-exporter installation directory.                                                    | `${HARBOR_EXPORTER_BASE_DIR}/tmp`     |
+| `HARBOR_DATABASE_PORT`         | The port of external database                                                              | `5432`                                |
+| `HARBOR_DATABASE_SSLMODE`      | Database certificate verfication: require, verify-full, verify-ca, disable (default value) | `disable`                             |
+| `HARBOR_SERVICE_SCHEME`        | Core service scheme (http or https)                                                        | `http`                                |
+| `HARBOR_SERVICE_HOST`          | Core service hostname                                                                      | `core`                                |
+| `HARBOR_SERVICE_PORT`          | Core service port                                                                          | `8080`                                |
+| `HARBOR_REDIS_NAMESPACE`       | Redis namespace for jobservice. Default `harbor_job_service_namespace                      | `harbor_job_service_namespace`        |
+| `HARBOR_REDIS_TIMEOUT`         | Redis connection timeout.                                                                  | `3600`                                |
+| `HARBOR_EXPORTER_PORT`         | Port for exporter metrics                                                                  | `9090`                                |
+| `HARBOR_EXPORTER_METRICS_PATH` | URL path for exporter metrics.                                                             | `/metrics`                            |
+
+#### Read-only environment variables
+
+| Name                             | Description                                                                | Value                                             |
+|----------------------------------|----------------------------------------------------------------------------|---------------------------------------------------|
+| `HARBOR_EXPORTER_DAEMON_USER`    | harbor-exporter system user.                                               | `harbor`                                          |
+| `HARBOR_EXPORTER_DAEMON_GROUP`   | harbor-exporter system group.                                              | `harbor`                                          |
+| `HARBOR_EXPORTER_PID_FILE`       | PID file for harbor-exporter service.                                      | `${HARBOR_EXPORTER_TMP_DIR}/harbor-exporter.pid`  |
+| `HARBOR_EXPORTER_LOG_FILE`       | Log file for harbor-exporter service.                                      | `${HARBOR_EXPORTER_LOGS_DIR}/harbor-exporter.log` |
+| `HARBOR_EXPORTER_EXTRA_ENV_FILE` | File to store extra environment variables for the harbor-exporter service. | `${HARBOR_EXPORTER_BASE_DIR}/.env`                |
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 

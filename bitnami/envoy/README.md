@@ -76,6 +76,12 @@ docker run --rm -v /path/to/your/envoy.yaml:/opt/bitnami/envoy/conf/envoy.yaml b
 
 Visit the [official envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/configuration) for all the available configurations.
 
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/contour).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.

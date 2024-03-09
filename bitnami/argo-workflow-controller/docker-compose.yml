@@ -1,8 +1,0 @@
-# Copyright VMware, Inc.
-# SPDX-License-Identifier: APACHE-2.0
-
-version: '2'
-
-services:
-  argo-workflow-controller:
-    image: docker.io/bitnami/argo-workflow-controller:3

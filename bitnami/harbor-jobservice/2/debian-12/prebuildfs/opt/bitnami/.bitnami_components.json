@@ -1,0 +1,14 @@
+{
+    "harbor-jobservice": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "2.10.0-6"
+    },
+    "yq": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "4.42.1-1"
+    }
+}

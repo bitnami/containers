@@ -13,13 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run -it --name supabase-postgres-meta bitnami/supabase-postgres-meta
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/supabase-postgres-meta/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -73,18 +66,10 @@ Bitnami provides up-to-date versions of Supabase postgres-meta, including securi
 docker pull bitnami/supabase-postgres-meta:latest
 ```
 
-or if you're using Docker Compose, update the value of the image property to `bitnami/supabase-postgres-meta:latest`.
-
 #### Step 2: Remove the currently running container
 
 ```console
 docker rm -v supabase-postgres-meta
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v supabase-postgres-meta
 ```
 
 #### Step 3: Run the new image
@@ -95,13 +80,34 @@ Re-create your container from the new image.
 docker run --name supabase-postgres-meta bitnami/supabase-postgres-meta:latest
 ```
 
-or using Docker Compose:
-
-```console
-docker-compose up supabase-postgres-meta
-```
-
 ## Configuration
+
+### Environment variables
+
+#### Customizable environment variables
+
+| Name                  | Description            | Default Value    |
+|-----------------------|------------------------|------------------|
+| `PG_META_DB_HOST`     | Database host          | `localhost`      |
+| `PG_META_DB_PORT`     | Database port number   | `5432`           |
+| `PG_META_DB_NAME`     | Database name          | `postgres`       |
+| `PG_META_DB_USER`     | Database user username | `supabase_admin` |
+| `PG_META_DB_SSL_MODE` | Database SSL mode      | `disable`        |
+| `PG_META_PORT`        | Service Port           | `9600`           |
+
+#### Read-only environment variables
+
+| Name                                    | Description                                                                       | Value                                                           |
+|-----------------------------------------|-----------------------------------------------------------------------------------|-----------------------------------------------------------------|
+| `SUPABASE_POSTGRES_META_BASE_DIR`       | Supabase-postgres-meta installation directory.                                    | `${BITNAMI_ROOT_DIR}/supabase-postgres-meta`                    |
+| `SUPABASE_POSTGRES_META_LOGS_DIR`       | Directory where Supabase-postgres-meta logs are stored.                           | `${SUPABASE_POSTGRES_META_BASE_DIR}/logs`                       |
+| `SUPABASE_POSTGRES_META_LOG_FILE`       | Directory where Supabase-postgres-meta logs are stored.                           | `${SUPABASE_POSTGRES_META_LOGS_DIR}/supabase-postgres-meta.log` |
+| `SUPABASE_POSTGRES_META_BIN_DIR`        | Supabase-postgres-meta directory for binary executables.                          | `${SUPABASE_POSTGRES_META_BASE_DIR}/node_modules/.bin`          |
+| `SUPABASE_POSTGRES_META_TMP_DIR`        | Directory where Supabase-postgres-meta temporary files are stored.                | `${SUPABASE_POSTGRES_META_BASE_DIR}/tmp`                        |
+| `SUPABASE_POSTGRES_META_PID_FILE`       | Path to the PID file for Supabase-postgres-meta.                                  | `${SUPABASE_POSTGRES_META_TMP_DIR}/supabase-postgres-meta.pid`  |
+| `SUPABASE_POSTGRES_META_EXTRA_ENV_FILE` | File to store extra environment variables for the supabase-postgres-meta service. | `${SUPABASE_POSTGRES_META_BASE_DIR}/.env`                       |
+| `SUPABASE_POSTGRES_META_DAEMON_USER`    | postgrest system user.                                                            | `supabase`                                                      |
+| `SUPABASE_POSTGRES_META_DAEMON_GROUP`   | postgrest system group.                                                           | `supabase`                                                      |
 
 ### Running commands
 
@@ -112,6 +118,12 @@ docker run --rm --name supabase-postgres-meta bitnami/supabase-postgres-meta:lat
 ```
 
 Check the [official Supabase postgres-meta documentation](https://github.com/supabase/postgres-meta) for more information about how to use Supabase postgres-meta.
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 

@@ -18,7 +18,7 @@ services:
       - 'minio_1_data_0:/data-1-0'
       - 'minio_1_data_1:/data-1-1'
   minio-0:
-    image: docker.io/bitnami/minio:2023
+    image: docker.io/bitnami/minio:2024
     volumes:
       - 'minio_0_data_0:/data-0'
       - 'minio_0_data_1:/data-1'
@@ -30,7 +30,7 @@ services:
     depends_on:
       - prepare-data
   minio-1:
-    image: docker.io/bitnami/minio:2023
+    image: docker.io/bitnami/minio:2024
     volumes:
       - 'minio_1_data_0:/data-0'
       - 'minio_1_data_1:/data-1'

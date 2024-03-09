@@ -10,14 +10,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-docker run -it --name argo-workflow-exec bitnami/argo-workflow-exec
-```
-
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/argo-workflow-exec/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run -it --name argo-workflow-exec bitnami/argo-workflow-exec:latest
 ```
 
 ## Why use Bitnami Images?
@@ -77,18 +70,10 @@ Bitnami provides up-to-date versions of Argo Workflows Executor, including secur
 docker pull bitnami/argo-workflow-exec:latest
 ```
 
-or if you're using Docker Compose, update the value of the image property to `bitnami/argo-workflow-exec:latest`.
-
 #### Step 2: Remove the currently running container
 
 ```console
 docker rm -v argo-workflow-exec
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v argo-workflow-exec
 ```
 
 #### Step 3: Run the new image
@@ -97,12 +82,6 @@ Re-create your container from the new image.
 
 ```console
 docker run --name argo-workflow-exec bitnami/argo-workflow-exec:latest
-```
-
-or using Docker Compose:
-
-```console
-docker-compose up argo-workflow-exec
 ```
 
 ## Configuration
@@ -116,6 +95,12 @@ docker run --rm --name argo-workflow-exec bitnami/argo-workflow-exec:latest --he
 ```
 
 Check the [official Argo Workflows Executor documentation](https://argoproj.github.io/argo-workflows/workflow-executors/) for the list of the available parameters.
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 

@@ -66,6 +66,10 @@ docker run --name git bitnami/git:latest git --version
 
 ## Notable Changes
 
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
+
 ### 2.31.0-debian-10-r2
 
 * The `ENTRYPOINT` of the container has been modified to load a proper NSS environment that enables git ssh connections when running the container as non-root.

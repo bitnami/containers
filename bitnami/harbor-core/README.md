@@ -8,13 +8,11 @@
 
 ## TL;DR
 
-```console
-curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/harbor-portal/docker-compose.yml
-curl -L https://github.com/bitnami/containers/archive/main.tar.gz | tar xz --strip=2 containers-main/bitnami/harbor-portal && cp -RL harbor-portal/config . && rm -rf harbor-portal
-docker-compose up
-```
+This container is part of the [Harbor solution](https://github.com/bitnami/charts/tree/main/bitnami/harbor) that is primarily intended to be deployed in Kubernetes.
 
-> Please note you are downloading the docker-compose.yml file from the Harbor Portal component repository.
+```console
+docker run --name harbor-core bitnami/harbor-core:latest
+```
 
 ## Why use Bitnami Images?
 
@@ -50,6 +48,31 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 Harbor Core is a component of the Harbor application. In order to get the Harbor application running on Kubernetes we encourage you to check the [bitnami/harbor Helm chart](https://github.com/bitnami/charts/tree/master/bitnami/harbor) and configure it using the options exposed in the values.yaml file.
 
 For further information about the specific component itself, please refer to the [source repository documentation](https://github.com/goharbor/harbor/tree/main/docs).
+
+### Environment variables
+
+#### Customizable environment variables
+
+#### Read-only environment variables
+
+| Name                         | Description                                                            | Value                                     |
+|------------------------------|------------------------------------------------------------------------|-------------------------------------------|
+| `HARBOR_CORE_BASE_DIR`       | harbor-core installation directory.                                    | `${BITNAMI_ROOT_DIR}/harbor-core`         |
+| `HARBOR_CORE_VOLUME_DIR`     | harbor-core volume directory.                                          | `${BITNAMI_VOLUME_DIR}/harbor-core`       |
+| `HARBOR_CORE_VOLUME_DIR`     | harbor-core volume directory.                                          | `/data`                                   |
+| `HARBOR_CORE_LOGS_DIR`       | harbor-core logs directory.                                            | `${HARBOR_CORE_BASE_DIR}/logs`            |
+| `HARBOR_CORE_TMP_DIR`        | harbor-core directory for temporary files.                             | `${HARBOR_CORE_BASE_DIR}/tmp`             |
+| `HARBOR_CORE_DAEMON_USER`    | harbor-core system user.                                               | `harbor`                                  |
+| `HARBOR_CORE_DAEMON_GROUP`   | harbor-core system group.                                              | `harbor`                                  |
+| `HARBOR_CORE_PID_FILE`       | PID file for harbor-core service.                                      | `${HARBOR_CORE_TMP_DIR}/harbor-core.pid`  |
+| `HARBOR_CORE_LOG_FILE`       | Log file for harbor-core service.                                      | `${HARBOR_CORE_LOGS_DIR}/harbor-core.log` |
+| `HARBOR_CORE_EXTRA_ENV_FILE` | File to store extra environment variables for the harbor-core service. | `${HARBOR_CORE_BASE_DIR}/.env`            |
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 

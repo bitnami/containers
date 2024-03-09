@@ -10,11 +10,11 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/mediawiki/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run --name mediawiki bitnami/mediawiki:latest
 ```
 
-**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
+**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure d
+eployment.
 
 ## Why use Bitnami Images?
 
@@ -71,18 +71,7 @@ docker build -t bitnami/APP:latest .
 
 MediaWiki requires access to a MySQL or MariaDB database to store information. We'll use the [Bitnami Docker Image for MariaDB](https://github.com/bitnami/containers/tree/main/bitnami/mariadb) for the database requirements.
 
-### Run the application using Docker Compose
-
-The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mediawiki/docker-compose.yml) file. Run the application using it as shown below:
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/mediawiki/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ### Using the Docker Command Line
-
-If you want to run the application manually instead of using `docker-compose`, these are the basic steps you need to run:
 
 #### Step 1: Create a network
 
@@ -121,11 +110,22 @@ docker run -d --name mediawiki \
 
 Access your application at `http://your-ip/`
 
+### Run the application using Docker Compose
+
+```console
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/mediawiki/docker-compose.yml > docker-compose.yml
+docker-compose up -d
+```
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/mediawiki).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
+
 ## Persisting your application
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a directory at the `/bitnami/mediawiki` path. If the mounted directory is empty, it will be initialized on the first run. Additionally you should mount a volume for persistence of the MariaDB data](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#persisting-your-database).
+For persistence you should mount a directory at the `/bitnami/mediawiki` path. If the mounted directory is empty, it will be initialized on the first run. Additionally you should [mount a volume for persistence of the MariaDB data](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#persisting-your-database).
 
 The above examples define the Docker volumes named mariadb_data and mediawiki_data. The MediaWiki application state will persist as long as volumes are not removed.
 
@@ -196,6 +196,37 @@ docker run -d --name mediawiki \
 
 ### Environment variables
 
+#### Customizable environment variables
+
+| Name                                   | Description                                                                                                                                                                        | Default Value                               |
+|----------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
+| `MEDIAWIKI_DATA_TO_PERSIST`            | Files to persist relative to the MediaWiki installation directory. To provide multiple values, separate them with a whitespace.                                                    | `images extensions skins LocalSettings.php` |
+| `MEDIAWIKI_WIKI_NAME`                  | MediaWiki wiki name.                                                                                                                                                               | `Bitnami MediaWiki`                         |
+| `MEDIAWIKI_WIKI_PREFIX`                | Base path to use for MediaWiki wiki URLs.                                                                                                                                          | `/wiki`                                     |
+| `MEDIAWIKI_HOST`                       | MediaWiki application host.                                                                                                                                                        | `localhost`                                 |
+| `MEDIAWIKI_ENABLE_HTTPS`               | Whether to use HTTPS by default.                                                                                                                                                   | `no`                                        |
+| `MEDIAWIKI_EXTERNAL_HTTP_PORT_NUMBER`  | Port to used by MediaWiki to generate URLs and links when accessing using HTTP.                                                                                                    | `80`                                        |
+| `MEDIAWIKI_EXTERNAL_HTTPS_PORT_NUMBER` | Port to used by MediaWiki to generate URLs and links when accessing using HTTPS.                                                                                                   | `443`                                       |
+| `MEDIAWIKI_USERNAME`                   | MediaWiki user name.                                                                                                                                                               | `user`                                      |
+| `MEDIAWIKI_PASSWORD`                   | MediaWiki user password.                                                                                                                                                           | `bitnami123`                                |
+| `MEDIAWIKI_EMAIL`                      | MediaWiki user e-mail address.                                                                                                                                                     | `user@example.com`                          |
+| `MEDIAWIKI_SMTP_HOST_ID`               | MediaWiki SMTP server host ID. It is a MediaWiki-specific setting used to build the Message-ID email header. If not provided, it will default to the value of MEDIAWIKI_SMTP_HOST. | `$MEDIAWIKI_SMTP_HOST`                      |
+| `MEDIAWIKI_ENABLE_SMTP_AUTH`           | Whether to use authentication for SMTP server. Valid values: `yes`, `no`.                                                                                                          | `yes`                                       |
+| `MEDIAWIKI_DATABASE_HOST`              | Database server host.                                                                                                                                                              | `mariadb`                                   |
+| `MEDIAWIKI_DATABASE_HOST`              | Database server host.                                                                                                                                                              | `127.0.0.1`                                 |
+| `MEDIAWIKI_DATABASE_PORT_NUMBER`       | Database server port.                                                                                                                                                              | `3306`                                      |
+| `MEDIAWIKI_DATABASE_NAME`              | Database name.                                                                                                                                                                     | `bitnami_mediawiki`                         |
+| `MEDIAWIKI_DATABASE_USER`              | Database user name.                                                                                                                                                                | `bn_mediawiki`                              |
+
+#### Read-only environment variables
+
+| Name                       | Description                                          | Value                                     |
+|----------------------------|------------------------------------------------------|-------------------------------------------|
+| `MEDIAWIKI_BASE_DIR`       | MediaWiki installation directory.                    | `${BITNAMI_ROOT_DIR}/mediawiki`           |
+| `MEDIAWIKI_CONF_FILE`      | Configuration file for MediaWiki.                    | `${MEDIAWIKI_BASE_DIR}/LocalSettings.php` |
+| `MEDIAWIKI_VOLUME_DIR`     | MediaWiki directory for mounted configuration files. | `${BITNAMI_VOLUME_DIR}/mediawiki`         |
+| `PHP_DEFAULT_MEMORY_LIMIT` | Default PHP memory limit.                            | `256M`                                    |
+
 When you start the MediaWiki image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
 * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mediawiki/docker-compose.yml) file present in this repository:
@@ -217,71 +248,6 @@ mediawiki:
     --volume /path/to/mediawiki-persistence:/bitnami/mediawiki \
     bitnami/mediawiki:latest
   ```
-
-Available variables:
-
-#### User and Site configuration
-
-* `MEDIAWIKI_USERNAME`: MediaWiki application username. Default: **user**
-* `MEDIAWIKI_PASSWORD`: MediaWiki application password. Default: **bitnami123** (min 10 characters, alphanumeric, no special characters)
-* `MEDIAWIKI_EMAIL`: MediaWiki application email. Default: **user@example.com**
-* `MEDIAWIKI_WIKI_NAME`: MediaWiki wiki name. Default: **Bitnami MediaWiki**
-* `MEDIAWIKI_HOST`: MediaWiki application host. No defaults.
-* `MEDIAWIKI_EXTERNAL_HTTP_PORT_NUMBER`: Port to used by MediaWiki to generate URLs and links when accessing using HTTP. Default **80**.
-* `MEDIAWIKI_EXTERNAL_HTTPS_PORT_NUMBER`: Port to used by MediaWiki to generate URLs and links when accessing using HTTPS. Default **443**.
-* `MEDIAWIKI_ENABLE_HTTPS`: Whether to use HTTPS by default. Default: **no**.
-
-#### Use an existing database
-
-* `MEDIAWIKI_DATABASE_HOST`: Hostname for MariaDB server. Default: **mariadb**
-* `MEDIAWIKI_DATABASE_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
-* `MEDIAWIKI_DATABASE_NAME`: Database name that MediaWiki will use to connect with the database. Default: **bitnami_mediawiki**
-* `MEDIAWIKI_DATABASE_USER`: Database user that MediaWiki will use to connect with the database. Default: **bn_mediawiki**
-* `MEDIAWIKI_DATABASE_PASSWORD`: Database password that MediaWiki will use to connect with the database. No defaults.
-* `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-#### Create a database for MediaWiki using mysql-client
-
-* `MYSQL_CLIENT_FLAVOR`: SQL database flavor. Valid values: `mariadb` or `mysql`. Default: **mariadb**.
-* `MYSQL_CLIENT_DATABASE_HOST`: Hostname for MariaDB server. Default: **mariadb**
-* `MYSQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
-* `MYSQL_CLIENT_DATABASE_ROOT_USER`: Database admin user. Default: **root**
-* `MYSQL_CLIENT_DATABASE_ROOT_PASSWORD`: Database password for the database admin user. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_CHARACTER_SET`: Character set to use for the new database. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_COLLATE`: Database collation to use for the new database. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_PRIVILEGES`: Database privileges to grant for the user specified in `MYSQL_CLIENT_CREATE_DATABASE_USER` to the database specified in `MYSQL_CLIENT_CREATE_DATABASE_NAME`. No defaults.
-* `MYSQL_CLIENT_ENABLE_SSL_WRAPPER`: Whether to force SSL connections to the database via the `mysql` CLI tool. Useful for applications that rely on the CLI instead of APIs. Default: **no**
-* `MYSQL_CLIENT_ENABLE_SSL`: Whether to force SSL connections for the database. Default: **no**
-* `MYSQL_CLIENT_SSL_CA_FILE`: Path to the SSL CA file for the new database. No defaults
-* `MYSQL_CLIENT_SSL_CERT_FILE`: Path to the SSL CA file for the new database. No defaults
-* `MYSQL_CLIENT_SSL_KEY_FILE`: Path to the SSL CA file for the new database. No defaults
-* `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-#### SMTP Configuration
-
-To configure MediaWiki to send email using SMTP you can set the following environment variables:
-
-* `MEDIAWIKI_SMTP_HOST`: SMTP host.
-* `MEDIAWIKI_SMTP_HOST_ID`: SMTP host ID. It is a MediaWiki-specific setting used to build the Message-ID email header. If not provided, it will default to the value of `MEDIAWIKI_SMTP_HOST`.
-* `MEDIAWIKI_SMTP_PORT`: SMTP port.
-* `MEDIAWIKI_SMTP_USER`: SMTP account user (if being used).
-* `MEDIAWIKI_SMTP_PASSWORD`: SMTP account password (if being used).
-* `MEDIAWIKI_ENABLE_SMTP_AUTH`: Whether to use authentication for SMTP server. Valid values: `yes`, `no`. Default: **yes**
-
-#### PHP configuration
-
-* `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. No default.
-* `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
-* `PHP_MAX_EXECUTION_TIME`: Maximum execution time for PHP scripts. No default.
-* `PHP_MAX_INPUT_TIME`: Maximum input time for PHP scripts. No default.
-* `PHP_MAX_INPUT_VARS`: Maximum amount of input variables for PHP scripts. No default.
-* `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
-* `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
-* `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
-* `PHP_OUTPUT_BUFFERING`: Size of the output buffer for PHP. Default: **8196**
 
 #### Example
 

@@ -13,13 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name solr bitnami/solr:latest
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/solr/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 You can find the available configuration options in the [Environment Variables](#environment-variables) section.
 
 ## Why use Bitnami Images?
@@ -149,43 +142,49 @@ docker-compose up -d
 
 ### Environment variables
 
-When you start the solr image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. The following environment values are provided to custom Solr:
+#### Customizable environment variables
 
-* `SOLR_PORT_NUMBER`: Port used by Solr server. Default: **8983**
-* `SOLR_SERVER_DIR`: Specify the Solr server directory. Default: **/opt/bitnami/solr/server**
-* `SOLR_CORES`: List of core names to create at first run separated by either a space, (``), a comma (`,`) or a semicolon (`;`). No default. (E.g.: '**my_core_en,my_core_es**')
-* `SOLR_CORE_CONF_DIR`: Configuration directory to copy when creating a new core. Default: **data_driven_schema_configs**
-* `SOLR_OPTS`: List of Solr server options and flags separated by either a space, (``), a comma (`,`) or a semicolon (`;`). No default. (E.g.: '**-XX:+AggressiveOpts -XX:G1HeapRegionSize=8m**')
-* `SOLR_JETTY_HOST`: Configuration to listen on a specific IP address or host name.Default: **0.0.0.0**
-* `SOLR_SECURITY_MANAGER_ENABLED`: Java security manager disabled. Default: **false**
+| Name                            | Description                                                                   | Default Value                                      |
+|---------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------|
+| `SOLR_ENABLE_CLOUD_MODE`        | Starts solr in cloud mode                                                     | `no`                                               |
+| `SOLR_NUMBER_OF_NODES`          | Number of nodes of the solr cloud cluster                                     | `1`                                                |
+| `SOLR_JETTY_HOST`               | Configuration to listen on a specific IP address or host name                 | `0.0.0.0`                                          |
+| `SOLR_SECURITY_MANAGER_ENABLED` | Solr Java security manager                                                    | `false`                                            |
+| `SOLR_JAVA_MEM`                 | Solr JVM memory                                                               | `-Xms512m -Xmx512m`                                |
+| `SOLR_PORT_NUMBER`              | Solr port number                                                              | `8983`                                             |
+| `SOLR_COLLECTION_REPLICAS`      | Solar collection replicas                                                     | `1`                                                |
+| `SOLR_COLLECTION_SHARDS`        | Solar collection shards                                                       | `1`                                                |
+| `SOLR_ENABLE_AUTHENTICATION`    | Enables authentication                                                        | `no`                                               |
+| `SOLR_ENABLE_AUTHENTICATION`    | Enables authentication                                                        | `yes`                                              |
+| `SOLR_ADMIN_USERNAME`           | Administrator Username                                                        | `admin`                                            |
+| `SOLR_ADMIN_PASSWORD`           | Administrator password                                                        | `bitnami`                                          |
+| `SOLR_CLOUD_BOOTSTRAP`          | Indicates if this node is the one that performs the boostraping               | `no`                                               |
+| `SOLR_CORE_CONF_DIR`            | Solar CORE configuration directory                                            | `${SOLR_SERVER_DIR}/solr/configsets/_default/conf` |
+| `SOLR_SSL_ENABLED`              | Indicates if Solr starts with SSL enabled                                     | `no`                                               |
+| `SOLR_SSL_CHECK_PEER_NAME`      | Indicates if Solr should check the peer names                                 | `false`                                            |
+| `SOLR_ZK_MAX_RETRIES`           | Maximum retries when waiting for zookeeper configuration operations to finish | `5`                                                |
+| `SOLR_ZK_SLEEP_TIME`            | Sleep time when waiting for zookeeper configuration operations to finish      | `5`                                                |
+| `SOLR_ZK_CHROOT`                | ZooKeeper ZNode chroot where to store solr data. Default: /solr               | `/solr`                                            |
 
-Cluster related environment variables:
+#### Read-only environment variables
 
-* `SOLR_CLOUD_BOOTSTRAP`: Indicates if this node is going to bootstrap the cluster. Default: **no**
-* `SOLR_ENABLE_CLOUD_MODE`: Enable cloud mode. Default: **no**
-* `SOLR_COLLECTION`: Create collection at the first run. By default, it will not create a core. (E.g.: '**my_collection**')
-* `SOLR_COLLECTION_SHARDS`: Number of shards for the collection created at first run. Default: **1**
-* `SOLR_COLLECTION_REPLICAS`: Number of replicas for the collection create at first run. Default: **1**
-* `SOLR_NUMBER_OF_NODES`: Number of the node of the Solr cloud cluster. Default: **1**
-* `SOLR_HOST`: Name of the node. If not set the node IP will be used. Default: **null**
-* `SORL_ZK_SLEEP_TIME`: Sleep time when waiting for init configuration operations to finish. Default: **5**
-* `SOLR_ZK_MAX_RETRIES`: Maximum retries when waiting for init configuration operations to finish. Default: **5**
-* `SOLR_ZK_CHROOT`: ZooKeeper ZNode chroot where to store solr data. Default: **/solr**
+| Name                   | Description                            | Value                                          |
+|------------------------|----------------------------------------|------------------------------------------------|
+| `BITNAMI_VOLUME_DIR`   | Directory where to mount volumes.      | `/bitnami`                                     |
+| `SOLR_BASE_DIR`        | Solr installation directory.           | `${BITNAMI_ROOT_DIR}/solr`                     |
+| `SOLR_JAVA_HOME`       | JAVA installation directory.           | `${BITNAMI_ROOT_DIR}/java`                     |
+| `SOLR_BIN_DIR`         | Solr directory for binary executables. | `${SOLR_BASE_DIR}/bin`                         |
+| `SOLR_TMP_DIR`         | Solr directory for temp files.         | `${SOLR_BASE_DIR}/tmp`                         |
+| `SOLR_PID_DIR`         | Solr directory for PID files.          | `${SOLR_BASE_DIR}/tmp`                         |
+| `SOLR_LOGS_DIR`        | Solr directory for logs files.         | `${SOLR_BASE_DIR}/logs`                        |
+| `SOLR_SERVER_DIR`      | Solr directory for server files.       | `${SOLR_BASE_DIR}/server`                      |
+| `SOLR_VOLUME_DIR`      | Solr persistence directory.            | `${BITNAMI_VOLUME_DIR}/solr`                   |
+| `SOLR_DATA_TO_PERSIST` | Solr data to persist.                  | `server/solr`                                  |
+| `SOLR_PID_FILE`        | Solr PID file                          | `${SOLR_PID_DIR}/solr-${SOLR_PORT_NUMBER}.pid` |
+| `SOLR_DAEMON_USER`     | Solr system user                       | `solr`                                         |
+| `SOLR_DAEMON_GROUP`    | Solr system group                      | `solr`                                         |
 
-Authentication related environment variables:
-
-* `SOLR_ENABLE_AUTHENTICATION`: Enable the authentication, you can indicate the administrator credentials with the following variables. Default: **no**
-* `SOLR_ADMIN_USERNAME`: Username for the administrator user. Default: **admin**
-* `SOLR_ADMIN_PASSWORD`: Password for the administrator user. Default: **Bitnami**
-
-SSL related environment variables:
-
-* `SOLR_SSL_ENABLED`: Indicates if solr is going to enable SSL. Default: **no**
-* `SOLR_SSL_KEY_STORE`: Key store file. Default: **null**
-* `SOLR_SSL_KEY_STORE_PASSWORD`: Password for the key store file. Default: **null**
-* `SOLR_SSL_TRUST_STORE`: Trust store file. Default: **null**
-* `SOLR_SSL_TRUST_STORE_PASSWORD`: Password for the trust store file. Default: **null**
-* `SOLR_SSL_CHECK_PEER_NAME`: Indicates if the peer name should be checked. Default: **false**
+When you start the solr image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
 
 #### Specifying Environment Variables using Docker Compose
 
@@ -319,6 +318,12 @@ docker-compose up solr
 ### 7.4.0-r23
 
 * The Solr container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Solr daemon was started as the `solr` user. From now on, both the container and the Solr daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
+
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/solr).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## Contributing
 

@@ -64,7 +64,7 @@ Let's take a look at an example and try to understand it!
         {
           "action_id": "trivy",
           "params": {
-            "threshold": "CRITICAL",
+            "threshold": "LOW",
             "vuln_type": [
               "OS"
             ]

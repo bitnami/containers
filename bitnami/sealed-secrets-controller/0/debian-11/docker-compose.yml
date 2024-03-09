@@ -1,7 +1,0 @@
-# Copyright VMware, Inc.
-# SPDX-License-Identifier: APACHE-2.0
-
-version: '2'
-services:
-  myapp:
-    image: docker.io/bitnami/sealed-secrets-controller:0

@@ -15,5 +15,5 @@ files:
       - /opt/bitnami/wildfly/bin/standalone.conf
 root_dir: /opt/bitnami
 version:
-  bin_name: standalone.sh
-  flag: --version
+  bin_name: grep "Final</version>" /opt/bitnami/wildfly/docs/licenses/licenses.xml
+  flag: ""

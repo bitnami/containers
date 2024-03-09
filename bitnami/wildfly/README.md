@@ -13,13 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name wildfly bitnami/wildfly:latest
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/wildfly/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -178,6 +171,39 @@ $ docker exec -it wildfly-server \
 
 ## Configuration
 
+### Environment variables
+
+#### Customizable environment variables
+
+| Name                       | Description                                                                                   | Default Value                           |
+|----------------------------|-----------------------------------------------------------------------------------------------|-----------------------------------------|
+| `WILDFLY_CONF_FILE`        | Path to the WildFly configuration file.                                                       | `${WILDFLY_CONF_DIR}/standalone.xml`    |
+| `WILDFLY_MOUNTED_CONF_DIR` | Directory for including custom configuration files (that override the default generated ones) | `${WILDFLY_VOLUME_DIR}/configuration`   |
+| `WILDFLY_DATA_DIR`         | WildFly data directory.                                                                       | `${WILDFLY_VOLUME_DIR}/standalone/data` |
+| `WILDFLY_USERNAME`         | WildFly admin username.                                                                       | `user`                                  |
+| `JAVA_HOME`                | Java Home directory.                                                                          | `${BITNAMI_ROOT_DIR}/java`              |
+
+#### Read-only environment variables
+
+| Name                                        | Description                                                                      | Value                                          |
+|---------------------------------------------|----------------------------------------------------------------------------------|------------------------------------------------|
+| `WILDFLY_BASE_DIR`                          | WildFly installation directory.                                                  | `${BITNAMI_ROOT_DIR}/wildfly`                  |
+| `WILDFLY_HOME_DIR`                          | WildFly user home directory.                                                     | `/home/wildfly`                                |
+| `WILDFLY_BIN_DIR`                           | WildFly directory for binary executables.                                        | `${WILDFLY_BASE_DIR}/bin`                      |
+| `WILDFLY_CONF_DIR`                          | WildFly server configuration directory.                                          | `${WILDFLY_BASE_DIR}/standalone/configuration` |
+| `WILDFLY_LOGS_DIR`                          | WildFly directory for log files.                                                 | `${WILDFLY_BASE_DIR}/standalone/log`           |
+| `WILDFLY_TMP_DIR`                           | WildFly directory for runtime temporary files.                                   | `${WILDFLY_BASE_DIR}/standalone/tmp`           |
+| `WILDFLY_PID_FILE`                          | Path to the WildFly PID file.                                                    | `${WILDFLY_TMP_DIR}/wildfly.pid`               |
+| `WILDFLY_VOLUME_DIR`                        | WildFly directory for mounted configuration files.                               | `${BITNAMI_VOLUME_DIR}/wildfly`                |
+| `WILDFLY_DAEMON_USER`                       | WildFly system user.                                                             | `wildfly`                                      |
+| `WILDFLY_DAEMON_GROUP`                      | WildFly system group.                                                            | `wildfly`                                      |
+| `WILDFLY_DEFAULT_SERVER_LISTEN_ADDRESS`     | Default WildFLY SERVER listen address to enable at build time.                   | `0.0.0.0`                                      |
+| `WILDFLY_DEFAULT_MANAGEMENT_LISTEN_ADDRESS` | Default WildFLY MANAGEMENT listen address to enable at build time.               | `127.0.0.1`                                    |
+| `WILDFLY_DEFAULT_HTTP_PORT_NUMBER`          | Default WildFLY HTTP port number to enable at build time.                        | `8080`                                         |
+| `WILDFLY_DEFAULT_AJP_PORT_NUMBER`           | Default WildFLY AJP port number to enable at build time.                         | `8009`                                         |
+| `WILDFLY_DEFAULT_MANAGEMENT_PORT_NUMBER`    | Default WildFLY MANAGEMENT port number to enable at build time.                  | `9990`                                         |
+| `LAUNCH_JBOSS_IN_BACKGROUND`                | Ensure signals are forwarded to the JVM process correctly for graceful shutdown. | `true`                                         |
+
 ### Creating a custom user
 
 By default, a management user named `user` is created with the default password `bitnami`. Passing the `WILDFLY_PASSWORD` environment variable when running the image for the first time will set the password of this user to the value of `WILDFLY_PASSWORD`.
@@ -326,6 +352,12 @@ Consequences:
 
 * All volumes have been merged at `/bitnami/wildfly`. Now you only need to mount a single volume at `/bitnami/wildfly` for persistence.
 * The logs are always sent to the `stdout` and are no longer collected in the volume.
+
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/wildfly).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## Contributing
 

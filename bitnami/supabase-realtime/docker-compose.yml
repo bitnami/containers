@@ -1,8 +1,0 @@
-# Copyright VMware, Inc.
-# SPDX-License-Identifier: APACHE-2.0
-
-version: '2'
-
-services:
-  supabase-realtime:
-    image: docker.io/bitnami/supabase-realtime:2

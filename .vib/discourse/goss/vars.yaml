@@ -24,3 +24,6 @@ directories:
 root_dir: /opt/bitnami
 linked_libraries:
   timeout: 60000
+sed_in_place:
+  exclude_paths:
+    - /opt/bitnami/discourse/vendor/bundle/ruby/3.2.0/gems/ffi-1.16.3/ext/ffi_c/libffi/testsuite/emscripten/build-tests.sh

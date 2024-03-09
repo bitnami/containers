@@ -13,8 +13,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ```console
 mkdir ~/myapp && cd ~/myapp
-curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/express/docker-compose.yml
-docker-compose up
+docker run --name express -v ${PWD}/my-project:/app bitnami/express:latest
 ```
 
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [MongoDB&reg; container](https://github.com/bitnami/containers/blob/main/bitnami/mongodb#readme) for a more secure deployment.
@@ -79,6 +78,24 @@ After the Node application server has been launched in the `myapp` service, visi
 
 In addition to the Express Development Container, the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/containers/main/bitnami/express/docker-compose.yml) file also configures a MongoDB&reg; service to serve as the NoSQL database backend of your Express application.
 
+## Environment variables
+
+### Customizable environment variables
+
+| Name                                              | Description                         | Default Value |
+|---------------------------------------------------|-------------------------------------|---------------|
+| `EXPRESS_SKIP_DATABASE_WAIT`                      | Skip waiting for database.          | `no`          |
+| `EXPRESS_SKIP_DATABASE_MIGRATE`                   | Skip database migration.            | `no`          |
+| `EXPRESS_SKIP_SAMPLE_CODE`                        | Skip copying sample code.           | `no`          |
+| `EXPRESS_SKIP_NPM_INSTALL`                        | Skip installation of NPM modules.   | `no`          |
+| `EXPRESS_SKIP_BOWER_INSTALL`                      | Skip installation of Bower modules. | `no`          |
+| `EXPRESS_DEFAULT_MARIADB_DATABASE_PORT_NUMBER`    | Default MariaDB database port.      | `3306`        |
+| `EXPRESS_DEFAULT_MONGODB_DATABASE_PORT_NUMBER`    | Default MongoDB database port.      | `27017`       |
+| `EXPRESS_DEFAULT_MYSQL_DATABASE_PORT_NUMBER`      | Default MySQL database port.        | `3306`        |
+| `EXPRESS_DEFAULT_POSTGRESQL_DATABASE_PORT_NUMBER` | Default PostgreSQL database port.   | `5432`        |
+
+### Read-only environment variables
+
 ## Executing commands
 
 Commands can be launched inside the `myapp` Express Development Container with `docker-compose` using the [exec](https://docs.docker.com/compose/reference/exec/) command.
@@ -139,6 +156,16 @@ The Express Development Container generates a Dockerfile in your working directo
    ```
 
 3. Update orchestration files to reference the pushed image
+
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes.
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
+
+## Contributing
+
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 

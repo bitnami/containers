@@ -74,19 +74,13 @@ In order for the container to work, you need to mount your custom `mimir.yaml` f
 docker run --rm --name grafana-mimir -v /path/to/mimir.yaml:/bitnami/grafana-mimir/conf/mimir.yaml bitnami/grafana-mimir:latest
 ```
 
-Using docker-compose:
-
-```yaml
-version: '2'
-services:
-
-  grafana-mimir:
-    image: grafana-mimir
-    volumes:
-      - /path/to/mimir.yaml:/bitnami/grafana-mimir/conf/mimir.yaml
-```
-
 Check the [official Grafana Mimir documentation](https://grafana.com/docs/mimir/latest/) to understand the possible configurations.
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 

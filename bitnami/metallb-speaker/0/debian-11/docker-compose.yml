@@ -1,7 +1,0 @@
-# Copyright VMware, Inc.
-# SPDX-License-Identifier: APACHE-2.0
-
-version: '2'
-services:
-  metallb-speaker:
-    image: docker.io/bitnami/metallb-speaker:0

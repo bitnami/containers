@@ -13,13 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run -it --name fluxcd-kustomize-controller bitnami/fluxcd-kustomize-controller
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/fluxcd-kustomize-controller/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -73,18 +66,10 @@ Bitnami provides up-to-date versions of Flux Kustomize Controller, including sec
 docker pull bitnami/fluxcd-kustomize-controller:latest
 ```
 
-or if you're using Docker Compose, update the value of the image property to `bitnami/fluxcd-kustomize-controller:latest`.
-
 #### Step 2: Remove the currently running container
 
 ```console
 docker rm -v fluxcd-kustomize-controller
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v fluxcd-kustomize-controller
 ```
 
 #### Step 3: Run the new image
@@ -93,12 +78,6 @@ Re-create your container from the new image.
 
 ```console
 docker run --name fluxcd-kustomize-controller bitnami/fluxcd-kustomize-controller:latest
-```
-
-or using Docker Compose:
-
-```console
-docker-compose up fluxcd-kustomize-controller
 ```
 
 ## Configuration
@@ -112,6 +91,12 @@ docker run --rm --name fluxcd-kustomize-controller bitnami/fluxcd-kustomize-cont
 ```
 
 Check the [official Flux Kustomize Controller documentation](https://github.com/fluxcd/kustomize-controller) for more information about how to use Flux Kustomize Controller.
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 

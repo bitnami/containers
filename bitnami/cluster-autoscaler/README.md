@@ -10,14 +10,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/cluster-autoscaler:latest
-```
-
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/cluster-autoscaler/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run --name cluster-autoscaler -e ALLOW_EMPTY_PASSWORD=yes bitnami/cluster-autoscaler:latest
 ```
 
 **Warning**: These quick setups are only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
@@ -125,6 +118,12 @@ For example, for a node label of foo=bar, you would tag the ASG with:
     "Key": "k8s.io/cluster-autoscaler/node-template/label/foo"
 }
 ```
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 

@@ -1,8 +1,0 @@
-{
-    "grafana-loki": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "2.9.3-0"
-    }
-}

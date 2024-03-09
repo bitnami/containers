@@ -88,6 +88,31 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 
 Find all the configuration options in the [Airflow Prometheus Exporter documentation](https://github.com/PBWebMedia/airflow-prometheus-exporter#run).
 
+### Environment variables
+
+#### Customizable environment variables
+
+| Name                                | Description                              | Default Value                          |
+|-------------------------------------|------------------------------------------|----------------------------------------|
+| `AIRFLOW_EXPORTER_BASE_DIR`         | airflow-exporter installation directory. | `${BITNAMI_ROOT_DIR}/airflow-exporter` |
+| `AIRFLOW_EXPORTER_LOGS_DIR`         | airflow-exporter installation directory. | `${AIRFLOW_EXPORTER_BASE_DIR}/logs`    |
+| `AIRFLOW_EXPORTER_TMP_DIR`          | airflow-exporter installation directory. | `${AIRFLOW_EXPORTER_BASE_DIR}/tmp`     |
+| `AIRFLOW_EXPORTER_DATABASE_BACKEND` | The database backend                     | `postgres`                             |
+| `AIRFLOW_EXPORTER_DATABASE_HOST`    | The hostname of the database             | `127.0.0.1`                            |
+| `AIRFLOW_EXPORTER_DATABASE_PORT`    | The port of the database                 | `5432`                                 |
+| `AIRFLOW_EXPORTER_DATABASE_USER`    | The user of the database                 | `bn_airflow`                           |
+| `AIRFLOW_EXPORTER_DATABASE_NAME`    | The name of the database                 | `bitnami_airflow`                      |
+
+#### Read-only environment variables
+
+| Name                            | Description                                        | Value                                               |
+|---------------------------------|----------------------------------------------------|-----------------------------------------------------|
+| `AIRFLOW_EXPORTER_BIN_DIR`      | airflow-exporter directory for binary executables. | `${AIRFLOW_EXPORTER_BASE_DIR}/bin`                  |
+| `AIRFLOW_EXPORTER_DAEMON_USER`  | airflow-exporter system user.                      | `airflow`                                           |
+| `AIRFLOW_EXPORTER_DAEMON_GROUP` | airflow-exporter system group.                     | `airflow`                                           |
+| `AIRFLOW_EXPORTER_PID_FILE`     | PID file for airflow-exporter service.             | `${AIRFLOW_EXPORTER_TMP_DIR}/airflow-exporter.pid`  |
+| `AIRFLOW_EXPORTER_LOG_FILE`     | Log file for airflow-exporter service.             | `${AIRFLOW_EXPORTER_LOGS_DIR}/airflow-exporter.log` |
+
 ## Logging
 
 The Bitnami Airflow Exporter Docker image sends the container logs to `stdout`. To view the logs:
@@ -131,6 +156,12 @@ Re-create your container from the new image.
 ```console
 docker run --name airflow-exporter bitnami/airflow-exporter:latest
 ```
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 

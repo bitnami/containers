@@ -3,7 +3,6 @@ binaries:
   - cqlsh
   - python
   - java
-  - yq
 files:
   - mode: "0755"
     paths:

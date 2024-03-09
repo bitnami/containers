@@ -1,0 +1,20 @@
+{
+    "apisix-dashboard": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "3.0.1-15"
+    },
+    "render-template": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "1.0.6-10"
+    },
+    "yq": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "4.42.1-1"
+    }
+}

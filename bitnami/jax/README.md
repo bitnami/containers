@@ -13,13 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run -it --name jax bitnami/jax
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/jax/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -109,18 +102,10 @@ Bitnami provides up-to-date versions of JAX, including security patches, soon af
 docker pull bitnami/jax:latest
 ```
 
-or if you're using Docker Compose, update the value of the image property to `bitnami/jax:latest`.
-
 #### Step 2: Remove the currently running container
 
 ```console
 docker rm -v jax
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v jax
 ```
 
 #### Step 3: Run the new image
@@ -131,11 +116,11 @@ Re-create your container from the new image.
 docker run --name jax bitnami/jax:latest
 ```
 
-or using Docker Compose:
+## Notable Changes
 
-```console
-docker-compose up jax
-```
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 

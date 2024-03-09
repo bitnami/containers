@@ -3,8 +3,8 @@ binaries:
   - npm
 directories:
   - paths:
-      - /opt/bitnami/supabase/studio/public
-      - /opt/bitnami/supabase/studio/.next/static
+      - /opt/bitnami/supabase/apps/studio/public
+      - /opt/bitnami/supabase/apps/studio/.next/static
 files:
   - paths:
       - /opt/bitnami/supabase/package-lock.json

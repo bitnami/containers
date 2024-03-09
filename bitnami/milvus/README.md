@@ -13,13 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run -it --name milvus bitnami/milvus
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/milvus/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -73,18 +66,10 @@ Bitnami provides up-to-date versions of Milvus, including security patches, soon
 docker pull bitnami/milvus:latest
 ```
 
-or if you're using Docker Compose, update the value of the image property to `bitnami/milvus:latest`.
-
 #### Step 2: Remove the currently running container
 
 ```console
 docker rm -v milvus
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v milvus
 ```
 
 #### Step 3: Run the new image
@@ -93,12 +78,6 @@ Re-create your container from the new image.
 
 ```console
 docker run --name milvus bitnami/milvus:latest
-```
-
-or using Docker Compose:
-
-```console
-docker-compose up milvus
 ```
 
 ## Configuration
@@ -112,6 +91,12 @@ docker run --rm --name milvus bitnami/milvus:latest --help
 ```
 
 Check the [official Milvus documentation](https://milvus.io/docs/) for more information about how to use Milvus.
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 

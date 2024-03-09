@@ -1,0 +1,20 @@
+{
+    "java": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "17.0.10-13-2"
+    },
+    "logstash": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "8.12.2-0"
+    },
+    "yq": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "4.42.1-0"
+    }
+}

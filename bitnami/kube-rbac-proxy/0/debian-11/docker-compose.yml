@@ -1,7 +1,0 @@
-# Copyright VMware, Inc.
-# SPDX-License-Identifier: APACHE-2.0
-
-version: '2'
-services:
-  kube-rbac-proxy:
-    image: docker.io/bitnami/kube-rbac-proxy:0

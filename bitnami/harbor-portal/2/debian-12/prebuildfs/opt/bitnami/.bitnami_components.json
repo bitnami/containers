@@ -1,0 +1,20 @@
+{
+    "harbor": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "2.10.0-10"
+    },
+    "nginx": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "1.25.4-0"
+    },
+    "render-template": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "1.0.6-9"
+    }
+}

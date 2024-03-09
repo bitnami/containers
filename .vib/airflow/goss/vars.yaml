@@ -21,15 +21,14 @@ version:
   bin_name: airflow
   flag: version
 subpackages:
-  - async
   - amazon
   - celery
-  - /cncf.kubernetes/
   - docker
+  - elasticsearch
+  - google
   - hashicorp
   - ldap
-  - google
-  - /microsoft.azure/
   - mysql
   - postgres
   - redis
+  - statsd

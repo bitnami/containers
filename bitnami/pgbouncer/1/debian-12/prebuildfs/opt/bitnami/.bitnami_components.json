@@ -1,0 +1,26 @@
+{
+    "ini-file": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "1.4.6-9"
+    },
+    "pgbouncer": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "1.22.1-0"
+    },
+    "postgresql-client": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "14.11.0-2"
+    },
+    "wait-for-port": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "1.0.7-9"
+    }
+}

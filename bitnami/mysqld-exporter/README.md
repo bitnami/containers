@@ -134,6 +134,10 @@ docker run --name mysqld-exporter bitnami/mysqld-exporter:latest
 
 ## Notable Changes
 
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
+
 ### 0.12.1-centos-7-r175
 
 * `0.12.1-centos-7-r175` is considered the latest image based on CentOS.

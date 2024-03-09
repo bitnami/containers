@@ -12,8 +12,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ### Docker Compose
 
 ```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/phpmyadmin/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run --name phpmyadmin bitnami/phpmyadmin:latest
 ```
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
@@ -51,18 +50,7 @@ To run this application you need [Docker Engine](https://www.docker.com/products
 
 phpMyAdmin requires access to a MySQL database or MariaDB database to work. We'll use our very own [MariaDB image](https://github.com/bitnami/containers/tree/main/bitnami/mariadb).
 
-### Using Docker Compose
-
-The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/phpmyadmin/docker-compose.yml) file. Run the application using it as shown below:
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/phpmyadmin/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ### Using the Docker Command Line
-
-If you want to run the application manually instead of using `docker-compose`, these are the basic steps you need to run:
 
 1. Create a network
 
@@ -89,6 +77,17 @@ If you want to run the application manually instead of using `docker-compose`, t
     ```
 
     Access your application at `http://your-ip/`
+
+### Using Docker Compose
+
+```console
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/phpmyadmin/docker-compose.yml > docker-compose.yml
+docker-compose up -d
+```
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/phpmyadmin).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ### Persisting your application
 
@@ -169,43 +168,40 @@ The `bitnami/phpmyadmin:latest` tag always points to the most recent release. To
 
 ### Environment variables
 
-The phpMyAdmin instance can be customized by specifying environment variables on the first run. The following environment values are provided to custom phpMyAdmin:
+#### Customizable environment variables
 
-* `PHPMYADMIN_ALLOW_ARBITRARY_SERVER`: Allows you to enter database server hostname on login form. Default: **false**
-* `PHPMYADMIN_ALLOW_REMOTE_CONNECTIONS`: Whether to allow access from any source. When disabled, only connections from 127.0.0.1 will be allowed. Default: **yes**
-* `PHPMYADMIN_ABSOLUTE_URI`: If specified, absolute URL to phpMyAdmin when generating links. No defaults
-* `DATABASE_ALLOW_NO_PASSWORD`: Whether to allow logins without a password. Default: **yes**
-* `DATABASE_HOST`: Database server host. Default: **mariadb**
-* `DATABASE_USER`: Database username.
-* `DATABASE_PASSWORD`: Database password.
-* `DATABASE_PORT_NUMBER`: Database server port. Default: **3306**
-* `DATABASE_ENABLE_SSL`: Whether to enable SSL for the connection between phpMyAdmin and the MySQL server to secure the connection. Default: **no**
-* `DATABASE_SSL_KEY`: Path to the client key file when using SSL. Default: **no**
-* `DATABASE_SSL_CERT`: Path to the client certificate file when using SSL.
-* `DATABASE_SSL_CA`: Path to the CA file when using SSL.
-* `DATABASE_SSL_CA_PATH`: Directory containing trusted SSL CA certificates in PEM format.
-* `DATABASE_SSL_CIPHERS`: List of allowable ciphers for connections when using SSL.
-* `DATABASE_SSL_VERIFY`: Enable SSL certificate validation. Default: **yes**
-* `CONFIGURATION_STORAGE_ENABLE`: Enable phpMyAdmin configuration storage. Default: **no**
-* `CONFIGURATION_STORAGE_DB_USER`: phpMyAdmin configuration storage database user (ignored unless `CONFIGURATION_STORAGE_ENABLE` is set to **yes**). Default: **pma**
-* `CONFIGURATION_STORAGE_DB_PASSWORD`: phpMyAdmin configuration storage database password (ignored unless `CONFIGURATION_STORAGE_ENABLE` is set to **yes**). No defaults.
-* `CONFIGURATION_STORAGE_DB_HOST`: phpMyAdmin configuration storage database server hostname (ignored unless `CONFIGURATION_STORAGE_ENABLE` is set to **yes**). Default: **mariadb**
-* `CONFIGURATION_STORAGE_DB_PORT_NUMBER`: phpMyAdmin configuration storage database server port (ignored unless `CONFIGURATION_STORAGE_ENABLE` is set to **yes**). Default: **3306**
-* `CONFIGURATION_STORAGE_DB_NAME`: phpMyAdmin configuration storage database name (ignored unless `CONFIGURATION_STORAGE_ENABLE` is set to **yes**). Default: **phpmyadmin**
-* `CONFIGURATION_ALLOWDENY_ORDER`: Set the AllowDeny order. If your rule order is empty, then IP authorization is disabled. Available values are: `deny,allow`, `allow,deny`, `explicit`. No defaults.
-* `CONFIGURATION_ALLOWDENY_RULES`: Array of strings to allow or deny hosts/user to connect to the database. The value must be literal, following the format `'allow' | 'deny' <username> [from] <ipmask>`. No defaults.
+| Name                                   | Description                                                                                | Default Value                                  |
+|----------------------------------------|--------------------------------------------------------------------------------------------|------------------------------------------------|
+| `PHPMYADMIN_ALLOW_REMOTE_CONNECTIONS`  | Whether to allow remote connections for phpMyAdmin, or force local connections by default. | `$PHPMYADMIN_DEFAULT_ALLOW_REMOTE_CONNECTIONS` |
+| `PHPMYADMIN_URL_PREFIX`                | URL prefix where phpMyAdmin will be accessible from.                                       | `$PHPMYADMIN_DEFAULT_URL_PREFIX`               |
+| `DATABASE_SSL_VERIFY`                  | Enable SSL certificate validation.                                                         | `yes`                                          |
+| `CONFIGURATION_STORAGE_ENABLE`         | Enable phpMyAdmin configuration storage.                                                   | `no`                                           |
+| `CONFIGURATION_STORAGE_DB_HOST`        | phpMyAdmin configuration storage database server hostname.                                 | `mariadb`                                      |
+| `CONFIGURATION_STORAGE_DB_PORT_NUMBER` | phpMyAdmin configuration storage database server port.                                     | `3306`                                         |
+| `CONFIGURATION_STORAGE_DB_USER`        | phpMyAdmin configuration storage database user.                                            | `pma`                                          |
+| `CONFIGURATION_STORAGE_DB_NAME`        | phpMyAdmin configuration storage database name.                                            | `phpmyadmin`                                   |
 
-#### PHP configuration
+#### Read-only environment variables
 
-* `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. No default.
-* `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
-* `PHP_MAX_EXECUTION_TIME`: Maximum execution time for PHP scripts. No default.
-* `PHP_MAX_INPUT_TIME`: Maximum input time for PHP scripts. No default.
-* `PHP_MAX_INPUT_VARS`: Maximum amount of input variables for PHP scripts. No default.
-* `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
-* `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. Default: **80M**
-* `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP upload. Default: **80M**
-* `PHP_OUTPUT_BUFFERING`: Size of the output buffer for PHP. Default: **8196**
+| Name                                          | Description                                                                                                                              | Value                                     |
+|-----------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
+| `PHPMYADMIN_BASE_DIR`                         | phpMyAdmin installation directory.                                                                                                       | `${BITNAMI_ROOT_DIR}/phpmyadmin`          |
+| `PHPMYADMIN_VOLUME_DIR`                       | phpMyAdmin directory for mounted configuration files.                                                                                    | `${BITNAMI_VOLUME_DIR}/phpmyadmin`        |
+| `PHPMYADMIN_TMP_DIR`                          | phpMyAdmin directory for temporary files.                                                                                                | `${PHPMYADMIN_BASE_DIR}/tmp`              |
+| `PHPMYADMIN_CONF_FILE`                        | Configuration file for phpMyAdmin.                                                                                                       | `${PHPMYADMIN_BASE_DIR}/config.inc.php`   |
+| `PHPMYADMIN_MOUNTED_CONF_FILE`                | Mounted configuration file for phpMyAdmin. It will be copied to the phpMyAdmin installation directory during the initialization process. | `${PHPMYADMIN_VOLUME_DIR}/config.inc.php` |
+| `PHPMYADMIN_DEFAULT_ALLOW_ARBITRARY_SERVER`   | Whether to enable database server hostname by default.                                                                                   | `no`                                      |
+| `PHPMYADMIN_DEFAULT_ALLOW_REMOTE_CONNECTIONS` | Whether to allow remote connections for phpMyAdmin, or force local connections.                                                          | `yes`                                     |
+| `PHPMYADMIN_DEFAULT_ALLOW_REMOTE_CONNECTIONS` | Whether to allow remote connections for phpMyAdmin, or force local connections.                                                          | `no`                                      |
+| `PHPMYADMIN_DEFAULT_URL_PREFIX`               | Default URL prefix where phpMyAdmin will be accessible from.                                                                             | `/phpmyadmin`                             |
+| `DATABASE_DEFAULT_HOST`                       | Default database server host.                                                                                                            | `mariadb`                                 |
+| `DATABASE_DEFAULT_HOST`                       | Default database server host.                                                                                                            | `127.0.0.1`                               |
+| `DATABASE_DEFAULT_PORT_NUMBER`                | Default database server port.                                                                                                            | `3306`                                    |
+| `DATABASE_DEFAULT_ALLOW_NO_PASSWORD`          | Whether to allow logins without a password.                                                                                              | `yes`                                     |
+| `DATABASE_DEFAULT_ALLOW_NO_PASSWORD`          | Whether to allow logins without a password.                                                                                              | `no`                                      |
+| `PHP_DEFAULT_UPLOAD_MAX_FILESIZE`             | Default max PHP upload file size.                                                                                                        | `80M`                                     |
+| `PHP_DEFAULT_POST_MAX_SIZE`                   | Default max PHP POST size.                                                                                                               | `80M`                                     |
+| `PHP_DEFAULT_MEMORY_LIMIT`                    | Default PHP memory limit.                                                                                                                | `256M`                                    |
 
 #### Specifying Environment variables using Docker Compose
 

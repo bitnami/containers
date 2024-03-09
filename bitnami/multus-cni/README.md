@@ -11,14 +11,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-docker run -it --name multus-cni bitnami/multus-cni
-```
-
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/multus-cni/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run -it --name multus-cni bitnami/multus-cni:latest
 ```
 
 ## Why use Bitnami Images?
@@ -74,18 +67,10 @@ Bitnami provides up-to-date versions of Multus CNI, including security patches, 
 docker pull bitnami/multus-cni:latest
 ```
 
-or if you're using Docker Compose, update the value of the image property to `bitnami/multus-cni:latest`.
-
 #### Step 2: Remove the currently running container
 
 ```console
 docker rm -v multus-cni
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v multus-cni
 ```
 
 #### Step 3: Run the new image
@@ -94,12 +79,6 @@ Re-create your container from the new image.
 
 ```console
 docker run --name multus-cni bitnami/multus-cni:latest
-```
-
-or using Docker Compose:
-
-```console
-docker-compose up multus-cni
 ```
 
 ## Configuration
@@ -113,6 +92,12 @@ docker run --rm --entrypoint /opt/bitnami/multus-cni/bin/multus-daemon --name mu
 ```
 
 Check the [official Multus CNI documentation](https://github.com/k8snetworkplumbingwg/multus-cni) for more information about how to use Multus CNI.
+
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 

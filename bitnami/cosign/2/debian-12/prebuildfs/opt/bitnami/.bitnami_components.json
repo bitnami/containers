@@ -1,0 +1,8 @@
+{
+    "cosign": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "2.2.3-3"
+    }
+}

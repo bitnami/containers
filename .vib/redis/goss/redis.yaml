@@ -12,7 +12,7 @@ file:
       - "daemonize yes"
 command:
   check-redis-server:
-    exec: redis-server /opt/bitnami/redis/etc/redis.conf && ps aux
+    exec: redis-server /opt/bitnami/redis/etc/redis.conf && sleep 5 && ps aux
     exit-status: 0
     timeout: 20000
     stdout:

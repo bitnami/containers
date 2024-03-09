@@ -10,8 +10,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/dokuwiki/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run --name dokuwiki bitnami/dokuwiki:latest
 ```
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
@@ -112,6 +111,25 @@ docker run -d --name dokuwiki \
 
 ### Environment variables
 
+#### Customizable environment variables
+
+| Name                       | Description                                                                                                                    | Default Value                                                                 |
+|----------------------------|--------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| `DOKUWIKI_DATA_TO_PERSIST` | Files to persist relative to the DokuWiki installation directory. To provide multiple values, separate them with a whitespace. | `data conf lib/plugins lib/tpl lib/images/smileys/local lib/images/interwiki` |
+| `DOKUWIKI_USERNAME`        | DokuWiki superuser username                                                                                                    | `user`                                                                        |
+| `DOKUWIKI_FULL_NAME`       | Full Name of the DokuWiki superuser                                                                                            | `FirstName LastName`                                                          |
+| `DOKUWIKI_EMAIL`           | Email for the application superuser                                                                                            | `user@example.com`                                                            |
+| `DOKUWIKI_PASSWORD`        | DokuWiki password                                                                                                              | `bitnami1`                                                                    |
+| `DOKUWIKI_WIKI_NAME`       | Name for the wiki                                                                                                              | `Bitnami DokuWiki`                                                            |
+
+#### Read-only environment variables
+
+| Name                       | Description                                         | Value                            |
+|----------------------------|-----------------------------------------------------|----------------------------------|
+| `DOKUWIKI_BASE_DIR`        | DokuWiki installation directory.                    | `${BITNAMI_ROOT_DIR}/dokuwiki`   |
+| `DOKUWIKI_VOLUME_DIR`      | DokuWiki directory for mounted configuration files. | `${BITNAMI_VOLUME_DIR}/dokuwiki` |
+| `PHP_DEFAULT_MEMORY_LIMIT` | Default PHP memory limit.                           | `256M`                           |
+
 When you start the DokuWiki image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
 * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/dokuwiki/docker-compose.yml) file present in this repository:
@@ -133,28 +151,6 @@ dokuwiki:
     --volume /path/to/dokuwiki-persistence:/bitnami/dokuwiki \
     bitnami/dokuwiki:latest
   ```
-
-Available environment variables:
-
-#### User and Site configuration
-
-* `DOKUWIKI_USERNAME`: Dokuwiki application username. Default: **user**
-* `DOKUWIKI_FULL_NAME`: Dokuwiki application user full name. Default: **Full Name**
-* `DOKUWIKI_PASSWORD`: Dokuwiki application password. Default: **bitnami1**
-* `DOKUWIKI_EMAIL`: Dokuwiki application email. Default: **user@example.com**
-* `DOKUWIKI_WIKI_NAME`: Dokuwiki wiki name. Default: **Bitnami DokuWiki**
-
-#### PHP configuration
-
-* `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. No default.
-* `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
-* `PHP_MAX_EXECUTION_TIME`: Maximum execution time for PHP scripts. No default.
-* `PHP_MAX_INPUT_TIME`: Maximum input time for PHP scripts. No default.
-* `PHP_MAX_INPUT_VARS`: Maximum amount of input variables for PHP scripts. No default.
-* `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
-* `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
-* `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
-* `PHP_OUTPUT_BUFFERING`: Size of the output buffer for PHP. Default: **8196**
 
 ## Logging
 
@@ -348,6 +344,12 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
 
 * Custom InterWiki shortcut icons, available in `lib/images/interwiki/`, are now persisted.
 * In order to upgrade your image from previous versions.
+
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/dokuwiki).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## Contributing
 

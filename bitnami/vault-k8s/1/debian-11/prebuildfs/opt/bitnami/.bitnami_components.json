@@ -1,8 +1,0 @@
-{
-    "vault-k8s": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.3.1-2"
-    }
-}

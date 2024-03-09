@@ -65,6 +65,12 @@ docker run --rm --name spring-cloud-dataflow-shell bitnami/spring-cloud-dataflow
 
 Consult the [spring-cloud-dataflow-shell Reference Documentation](https://docs.spring.io/spring-cloud-dataflow/docs/current/reference/htmlsingle/#shell) to find the completed list of commands available.
 
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.

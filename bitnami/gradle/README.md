@@ -10,14 +10,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-docker run -it --name gradle bitnami/gradle
-```
-
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/gradle/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run -it --name gradle bitnami/gradle:latest
 ```
 
 ## Why use Bitnami Images?
@@ -89,18 +82,10 @@ Bitnami provides up-to-date versions of Gradle, including security patches, soon
 docker pull bitnami/gradle:latest
 ```
 
-or if you're using Docker Compose, update the value of the image property to `bitnami/gradle:latest`.
-
 #### Step 2: Remove the currently running container
 
 ```console
 docker rm -v gradle
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v gradle
 ```
 
 #### Step 3: Run the new image
@@ -111,11 +96,11 @@ Re-create your container from the new image.
 docker run --name gradle bitnami/gradle:latest
 ```
 
-or using Docker Compose:
+## Notable Changes
 
-```console
-docker-compose up gradle
-```
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 

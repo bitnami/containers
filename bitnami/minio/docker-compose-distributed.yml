@@ -5,7 +5,7 @@ version: '2'
 
 services:
   minio:
-    image: docker.io/bitnami/minio:2023
+    image: docker.io/bitnami/minio:2024
     ports:
       - 9000:9000
       - 9001:9001
@@ -17,7 +17,7 @@ services:
       - MINIO_DISTRIBUTED_MODE_ENABLED=yes
       - MINIO_DISTRIBUTED_NODES=minio,minio2,minio3,minio4
   minio2:
-    image: docker.io/bitnami/minio:2023
+    image: docker.io/bitnami/minio:2024
     volumes:
       - 'minio_2_data:/bitnami/minio/data'
     environment:
@@ -26,7 +26,7 @@ services:
       - MINIO_DISTRIBUTED_MODE_ENABLED=yes
       - MINIO_DISTRIBUTED_NODES=minio,minio2,minio3,minio4
   minio3:
-    image: docker.io/bitnami/minio:2023
+    image: docker.io/bitnami/minio:2024
     volumes:
       - 'minio_3_data:/bitnami/minio/data'
     environment:
@@ -35,7 +35,7 @@ services:
       - MINIO_DISTRIBUTED_MODE_ENABLED=yes
       - MINIO_DISTRIBUTED_NODES=minio,minio2,minio3,minio4
   minio4:
-    image: docker.io/bitnami/minio:2023
+    image: docker.io/bitnami/minio:2024
     volumes:
       - 'minio_4_data:/bitnami/minio/data'
     environment:

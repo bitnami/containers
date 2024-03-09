@@ -13,11 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name openresty bitnami/openresty:latest
 ```
 
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/openresty/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -73,17 +68,6 @@ This OpenResty image exposes a volume at `/app`. Content mounted here is served 
 docker run -v /path/to/app:/app bitnami/openresty:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/openresty/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  openresty:
-  ...
-    volumes:
-      - /path/to/app:/app
-  ...
-```
-
 ## Accessing your server from the host
 
 To access your web server from your host machine you can ask Docker to map a random port on your host to ports `8080` and `8443` exposed in the container.
@@ -108,6 +92,36 @@ docker run -p 9000:8080 bitnami/openresty:latest
 Access your web server in the browser by navigating to `http://localhost:9000`.
 
 ## Configuration
+
+### Environment variables
+
+#### Customizable environment variables
+
+| Name                          | Description                                                          | Default Value |
+|-------------------------------|----------------------------------------------------------------------|---------------|
+| `OPENRESTY_FORCE_INITSCRIPTS` | Force the init scripts running even if it is not in the first start. | `false`       |
+
+#### Read-only environment variables
+
+| Name                                  | Description                                                  | Value                                       |
+|---------------------------------------|--------------------------------------------------------------|---------------------------------------------|
+| `OPENRESTY_BASE_DIR`                  | OpenResty installation directory.                            | `${BITNAMI_ROOT_DIR}/openresty`             |
+| `OPENRESTY_VOLUME_DIR`                | OpenResty directory for mounted files.                       | `${BITNAMI_VOLUME_DIR}/openresty`           |
+| `OPENRESTY_BIN_DIR`                   | OpenResty directory for binary executables.                  | `${OPENRESTY_BASE_DIR}/bin`                 |
+| `OPENRESTY_CONF_DIR`                  | OpenResty configuration directory.                           | `${OPENRESTY_BASE_DIR}/nginx/conf`          |
+| `OPENRESTY_HTDOCS_DIR`                | Directory containing HTTP files to serve via OpenResty.      | `${OPENRESTY_BASE_DIR}/nginx/html`          |
+| `OPENRESTY_TMP_DIR`                   | OpenResty directory for runtime temporary files.             | `${OPENRESTY_BASE_DIR}/nginx/tmp`           |
+| `OPENRESTY_LOGS_DIR`                  | OpenResty directory for logs.                                | `${OPENRESTY_BASE_DIR}/nginx/logs`          |
+| `OPENRESTY_SERVER_BLOCKS_DIR`         | OpenResty directory for virtual hosts.                       | `${OPENRESTY_CONF_DIR}/nginx/server_blocks` |
+| `OPENRESTY_SITE_DIR`                  | OpenResty directory for installing Lua packages.             | `${OPENRESTY_BASE_DIR}/site`                |
+| `OPENRESTY_INITSCRIPTS_DIR`           | OpenResty init scripts directory.                            | `/docker-entrypoint-initdb.d`               |
+| `OPM_BASE_DIR`                        | OpenResty package manager base directory.                    | `/home/openresty`                           |
+| `OPENRESTY_CONF_FILE`                 | Path to the OpenResty configuration.                         | `${OPENRESTY_CONF_DIR}/nginx.conf`          |
+| `OPENRESTY_PID_FILE`                  | Path to the OpenResty PID file.                              | `${OPENRESTY_TMP_DIR}/nginx.pid`            |
+| `OPENRESTY_DAEMON_USER`               | OpenResty system user.                                       | `daemon`                                    |
+| `OPENRESTY_DAEMON_GROUP`              | OpenResty system group.                                      | `daemon`                                    |
+| `OPENRESTY_DEFAULT_HTTP_PORT_NUMBER`  | Default OpenResty HTTP port number to enable at build time.  | `8080`                                      |
+| `OPENRESTY_DEFAULT_HTTPS_PORT_NUMBER` | Default OpenResty HTTPS port number to enable at build time. | `8443`                                      |
 
 ### Initializing a new instance
 
@@ -138,17 +152,6 @@ server {
 docker run --name openresty \
   -v /path/to/my_server_block.conf:/opt/bitnami/openresty/nginx/conf/server_blocks/my_server_block.conf:ro \
   bitnami/openresty:latest
-```
-
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/openresty/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  openresty:
-  ...
-    volumes:
-      - /path/to/my_server_block.conf:/opt/bitnami/openresty/nginx/conf/server_blocks/my_server_block.conf:ro
-  ...
 ```
 
 ### Using custom SSL certificates
@@ -200,18 +203,6 @@ docker run --name openresty \
   bitnami/openresty:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/openresty/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  openresty:
-  ...
-    volumes:
-    - /path/to/openresty-persistence/certs:/certs
-    - /path/to/my_server_block.conf:/opt/bitnami/openresty/nginx/conf/server_blocks/my_server_block.conf:ro
-  ...
-```
-
 ### Full configuration
 
 The image looks for configurations in `/opt/bitnami/openresty/nginx/conf/nginx.conf`. You can overwrite the `nginx.conf` file using your own custom configuration file.
@@ -220,17 +211,6 @@ The image looks for configurations in `/opt/bitnami/openresty/nginx/conf/nginx.c
 docker run --name openresty \
   -v /path/to/your_nginx.conf:/opt/bitnami/openresty/nginx/conf/nginx.conf:ro \
   bitnami/openresty:latest
-```
-
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/openresty/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  openresty:
-  ...
-    volumes:
-      - /path/to/your_nginx.conf:/opt/bitnami/openresty/nginx/conf/nginx.conf:ro
-  ...
 ```
 
 ### Adding lua modules
@@ -276,12 +256,6 @@ The Bitnami OpenResty Docker image sends the container logs to the `stdout`. To 
 
 ```console
 docker logs openresty
-```
-
-or using Docker Compose:
-
-```console
-docker-compose logs openresty
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -336,40 +310,6 @@ EXPOSE 8181 8143
 USER 1002
 ```
 
-Based on the extended image, you can use a Docker Compose file like the one below to add other features:
-
-* Add a custom server block
-* Add custom certificates
-* Clone your web application and serve it through OpenResty
-
-```yaml
-version: '2'
-
-services:
-  openresty:
-    build: .
-    ports:
-      - '80:8181'
-      - '443:8443'
-    depends_on:
-      - cloner
-    volumes:
-      - ./config/my_server_block.conf:/opt/bitnami/openresty/nginx/conf/server_blocks/my_server_block.conf:ro
-      - ./certs:/certs
-      - data:/app
-  cloner:
-    image: 'bitnami/git:latest'
-    command:
-      - clone
-      - https://github.com/cloudacademy/static-website-example
-      - /app
-    volumes:
-      - data:/app
-volumes:
-  data:
-    driver: local
-```
-
 ## Maintenance
 
 ### Upgrade this image
@@ -382,9 +322,6 @@ Bitnami provides up-to-date versions of OpenResty, including security patches, s
 docker pull bitnami/openresty:latest
 ```
 
-or if you're using Docker Compose, update the value of the image property to
-`bitnami/openresty:latest`.
-
 #### Step 2: Stop and backup the currently running container
 
 Stop the currently running container using the command
@@ -393,22 +330,10 @@ Stop the currently running container using the command
 docker stop openresty
 ```
 
-or using Docker Compose:
-
-```console
-docker-compose stop openresty
-```
-
 #### Step 3: Remove the currently running container
 
 ```console
 docker rm -v openresty
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v openresty
 ```
 
 #### Step 4: Run the new image
@@ -419,11 +344,11 @@ Re-create your container from the new image.
 docker run --name nginx bitnami/openresty:latest
 ```
 
-or using Docker Compose:
+## Notable Changes
 
-```console
-docker-compose up openresty
-```
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ## Contributing
 

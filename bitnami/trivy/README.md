@@ -70,6 +70,12 @@ docker run --rm --name trivy bitnami/trivy:latest --version
 
 Check the [official Trivy documentation](https://github.com/aquasecurity/trivy#usage) for a list of the available parameters.
 
+## Notable Changes
+
+### Starting January 16, 2024
+
+* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.

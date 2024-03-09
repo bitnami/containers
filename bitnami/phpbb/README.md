@@ -10,8 +10,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/phpbb/docker-compose.yml > docker-compose.yml
-docker-compose up -d
+docker run --name phpbb bitnami/phpbb:latest
 ```
 
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
@@ -75,18 +74,7 @@ docker build -t bitnami/APP:latest .
 
 phpBB requires access to a MySQL or MariaDB database to store information. We'll use the [Bitnami Docker Image for MariaDB](https://github.com/bitnami/containers/tree/main/bitnami/mariadb) for the database requirements.
 
-### Run the application using Docker Compose
-
-The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/phpbb/docker-compose.yml) file. Run the application using it as shown below:
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/phpbb/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 ### Using the Docker Command Line
-
-If you want to run the application manually instead of using `docker-compose`, these are the basic steps you need to run:
 
 #### Step 1: Create a network
 
@@ -125,11 +113,22 @@ docker run -d --name phpbb \
 
 Access your application at `http://your-ip/`
 
+### Run the application using Docker Compose
+
+```console
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/phpbb/docker-compose.yml > docker-compose.yml
+docker-compose up -d
+```
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/phpbb).
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
+
 ## Persisting your application
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a directory at the `/bitnami/phpbb` path. If the mounted directory is empty, it will be initialized on the first run. Additionally you should mount a volume for persistence of the MariaDB data](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#persisting-your-database).
+For persistence you should mount a directory at the `/bitnami/phpbb` path. If the mounted directory is empty, it will be initialized on the first run. Additionally you should [mount a volume for persistence of the MariaDB data](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#persisting-your-database).
 
 The above examples define the Docker volumes named mariadb_data and phpbb_data. The phpBB application state will persist as long as volumes are not removed.
 
@@ -200,6 +199,46 @@ docker run -d --name phpbb \
 
 ### Environment variables
 
+#### Customizable environment variables
+
+| Name                               | Description                                                                                                                 | Default Value                                       |
+|------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------|
+| `PHPBB_DATA_TO_PERSIST`            | Files to persist relative to the phpBB installation directory. To provide multiple values, separate them with a whitespace. | `store language files images config.php ext styles` |
+| `PHPBB_FORUM_LANGUAGE`             | phpBB forum language.                                                                                                       | `en`                                                |
+| `PHPBB_FORUM_NAME`                 | phpBB forum name.                                                                                                           | `My forum`                                          |
+| `PHPBB_COOKIE_SECURE`              | Use secure cookies.                                                                                                         | `false`                                             |
+| `PHPBB_FORUM_DESCRIPTION`          | phpBB forum description.                                                                                                    | `A little text to describe your forum`              |
+| `PHPBB_FORUM_SERVER_PROTOCOL`      | phpBB forum server protocol.                                                                                                | `http://`                                           |
+| `PHPBB_FORUM_SERVER_PORT`          | phpBB forum server port.                                                                                                    | `80`                                                |
+| `PHPBB_DISABLE_SESSION_VALIDATION` | Disable session validation.                                                                                                 | `false`                                             |
+| `PHPBB_HOST`                       | phpBB forum hostname.                                                                                                       | `localhost`                                         |
+| `PHPBB_USERNAME`                   | phpBB user name.                                                                                                            | `user`                                              |
+| `PHPBB_PASSWORD`                   | phpBB user password.                                                                                                        | `bitnami`                                           |
+| `PHPBB_EMAIL`                      | phpBB user e-mail address.                                                                                                  | `user@example.com`                                  |
+| `PHPBB_SMTP_PROTOCOL`              | phpBB SMTP server protocol to use.                                                                                          | `plain`                                             |
+| `PHPBB_DATABASE_HOST`              | Database server host.                                                                                                       | `$PHPBB_DEFAULT_DATABASE_HOST`                      |
+| `PHPBB_DATABASE_PORT_NUMBER`       | Database server port.                                                                                                       | `3306`                                              |
+| `PHPBB_DATABASE_NAME`              | Database name.                                                                                                              | `bitnami_phpbb`                                     |
+| `PHPBB_DATABASE_USER`              | Database user name.                                                                                                         | `bn_phpbb`                                          |
+
+#### Read-only environment variables
+
+| Name                          | Description                                                                                                                    | Value                                     |
+|-------------------------------|--------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
+| `PHPBB_BASE_DIR`              | phpBB installation directory.                                                                                                  | `${BITNAMI_ROOT_DIR}/phpbb`               |
+| `PHPBB_BIN_DIR`               | phpBB binary directory.                                                                                                        | `${PHPBB_BASE_DIR}/bin`                   |
+| `PHPBB_CACHE_DIR`             | phpBB cache directory.                                                                                                         | `${PHPBB_BASE_DIR}/cache`                 |
+| `PHPBB_STORE_DIR`             | phpBB store directory.                                                                                                         | `${PHPBB_BASE_DIR}/store`                 |
+| `PHPBB_WIZARD_DIR`            | phpBB installation wizard scripts.                                                                                             | `${PHPBB_BASE_DIR}/install`               |
+| `PHPBB_CONF_FILE`             | Configuration file for phpBB.                                                                                                  | `${PHPBB_BASE_DIR}/config.php`            |
+| `PHPBB_INSTALL_JSON_FILE`     | Configuration file for phpBB.                                                                                                  | `${PHPBB_WIZARD_DIR}/install_config.json` |
+| `PHPBB_INSTALL_PHP_FILE`      | Configuration script for phpBB.                                                                                                | `${PHPBB_STORE_DIR}/install_config.php`   |
+| `PHPBB_VOLUME_DIR`            | phpBB directory for mounted configuration files.                                                                               | `${BITNAMI_VOLUME_DIR}/phpbb`             |
+| `PHPBB_MOUNTED_CONF_FILE`     | Mounted configuration file for phpBB. It will be copied to the phpBB installation directory during the initialization process. | `${PHPBB_VOLUME_DIR}/config.inc.php`      |
+| `PHPBB_DEFAULT_DATABASE_HOST` | Default database server host.                                                                                                  | `mariadb`                                 |
+| `PHPBB_DEFAULT_DATABASE_HOST` | Default database server host.                                                                                                  | `127.0.0.1`                               |
+| `PHP_DEFAULT_MEMORY_LIMIT`    | Default PHP memory limit.                                                                                                      | `256M`                                    |
+
 When you start the phpBB image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
 * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/phpbb/docker-compose.yml) file present in this repository:
@@ -222,75 +261,7 @@ phpbb:
     bitnami/phpbb:latest
   ```
 
-Available environment variables:
-
-#### User and Site configuration
-
-* `APACHE_HTTP_PORT_NUMBER`: Port used by Apache for HTTP. Default: **8080**
-* `APACHE_HTTPS_PORT_NUMBER`: Port used by Apache for HTTPS. Default: **8443**
-* `PHPBB_USERNAME`: phpBB application username. Default: **user**
-* `PHPBB_PASSWORD`: phpBB application password. Default: **bitnami**
-* `PHPBB_EMAIL`: phpBB application email. Default: **user@example.com**
-* `PHPBB_FORUM_NAME`: Forum Name. Default: **My forum**
-* `PHPBB_FORUM_DESCRIPTION`: Forum Description. Default: **A little text to describe your forum**
-* `PHPBB_HOST`: phpBB application host. No defaults.
-* `PHPBB_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. Default: **no**
-* `PHPBB_COOKIE_SECURE`: Have secure cookies enabled. Default: **no**
-* `PHPBB_FORUM_SERVER_PROTOCOL`: Forum server protocol for the URL generation. Default: **<http://>**
-* `PHPBB_DISABLE_SESSION_VALIDATION`: Disable session validation. This is for phpBB to work in Kubernetes installations. Default: **false**
-
-#### Use an existing database
-
-* `PHPBB_DATABASE_HOST`: Hostname for MariaDB server. Default: **mariadb**
-* `PHPBB_DATABASE_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
-* `PHPBB_DATABASE_NAME`: Database name that phpBB will use to connect with the database. Default: **bitnami_phpbb**
-* `PHPBB_DATABASE_USER`: Database user that phpBB will use to connect with the database. Default: **bn_phpbb**
-* `PHPBB_DATABASE_PASSWORD`: Database password that phpBB will use to connect with the database. No defaults.
-* `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-#### Create a database for phpBB using mysql-client
-
-* `MYSQL_CLIENT_FLAVOR`: SQL database flavor. Valid values: `mariadb` or `mysql`. Default: **mariadb**.
-* `MYSQL_CLIENT_DATABASE_HOST`: Hostname for MariaDB server. Default: **mariadb**
-* `MYSQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
-* `MYSQL_CLIENT_DATABASE_ROOT_USER`: Database admin user. Default: **root**
-* `MYSQL_CLIENT_DATABASE_ROOT_PASSWORD`: Database password for the database admin user. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_CHARACTER_SET`: Character set to use for the new database. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_COLLATE`: Database collation to use for the new database. No defaults.
-* `MYSQL_CLIENT_CREATE_DATABASE_PRIVILEGES`: Database privileges to grant for the user specified in `MYSQL_CLIENT_CREATE_DATABASE_USER` to the database specified in `MYSQL_CLIENT_CREATE_DATABASE_NAME`. No defaults.
-* `MYSQL_CLIENT_ENABLE_SSL_WRAPPER`: Whether to force SSL connections to the database via the `mysql` CLI tool. Useful for applications that rely on the CLI instead of APIs. Default: **no**
-* `MYSQL_CLIENT_ENABLE_SSL`: Whether to force SSL connections for the database. Default: **no**
-* `MYSQL_CLIENT_SSL_CA_FILE`: Path to the SSL CA file for the new database. No defaults
-* `MYSQL_CLIENT_SSL_CERT_FILE`: Path to the SSL CA file for the new database. No defaults
-* `MYSQL_CLIENT_SSL_KEY_FILE`: Path to the SSL CA file for the new database. No defaults
-* `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-#### SMTP Configuration
-
-To configure phpBB to send email using SMTP you can set the following environment variables:
-
-* `PHPBB_SMTP_HOST`: SMTP host.
-* `PHPBB_SMTP_PORT`: SMTP port.
-* `PHPBB_SMTP_USER`: SMTP account user.
-* `PHPBB_SMTP_PASSWORD`: SMTP account password.
-* `PHPBB_SMTP_PROTOCOL`: SMTP protocol.
-
-#### PHP configuration
-
-* `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. No default.
-* `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
-* `PHP_MAX_EXECUTION_TIME`: Maximum execution time for PHP scripts. No default.
-* `PHP_MAX_INPUT_TIME`: Maximum input time for PHP scripts. No default.
-* `PHP_MAX_INPUT_VARS`: Maximum amount of input variables for PHP scripts. No default.
-* `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
-* `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
-* `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
-* `PHP_OUTPUT_BUFFERING`: Size of the output buffer for PHP. Default: **8196**
-
-#### Example
+### Example
 
 This would be an example of SMTP configuration using a Gmail account:
 

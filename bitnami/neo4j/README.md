@@ -13,13 +13,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name neo4j bitnami/neo4j:latest
 ```
 
-### Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/neo4j/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
 
 ## Why use Bitnami Images?
@@ -145,17 +138,47 @@ docker-compose up -d
 
 ### Environment variables
 
-When you start the neo4j image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. The following environment values are provided to custom Neo4j:
+#### Customizable environment variables
 
-* `NEO4J_PASSWORD`: Password used by Neo4j server. Default: **bitnami1**
-* `NEO4J_HOST`: Hostname used to configure Neo4j advertised address. It can be either an IP or a domain. If left empty, it will be resolved to the machine IP. Default: **empty**
-* `NEO4J_BOLT_PORT_NUMBER`: Port used by Neo4j https. Default: **7687**
-* `NEO4J_HTTP_PORT_NUMBER`: Port used by Neo4j http. Default: **7474**
-* `NEO4J_HTTPS_PORT_NUMBER`: Port used by Neo4j https. Default: **7473**
-* `NEO4J_BIND_ADDRESS`: Bind address. Default: **0.0.0.0**
-* `NEO4J_ALLOW_UPGRADE`: Allow automatic schema upgrades. Default: **true**
-* `NEO4J_APOC_IMPORT_FILE_ENABLED`: Allow importing files using the apoc library. Default: **true**
-* `NEO4J_APOC_IMPORT_FILE_USE_NEO4J_CONFIG`: Port used by Neo4j https. Default: **false**
+| Name                                      | Description                                   | Default Value |
+|-------------------------------------------|-----------------------------------------------|---------------|
+| `NEO4J_BIND_ADDRESS`                      | Neo4j bind address                            | `0.0.0.0`     |
+| `NEO4J_ALLOW_UPGRADE`                     | Allow automatic schema upgrades               | `true`        |
+| `NEO4J_PASSWORD`                          | Neo4j password.                               | `bitnami1`    |
+| `NEO4J_APOC_IMPORT_FILE_ENABLED`          | Allow importing files using the apoc library  | `true`        |
+| `NEO4J_APOC_IMPORT_FILE_USE_NEO4J_CONFIG` | Use neo4j configuration with the apoc library | `false`       |
+| `NEO4J_BOLT_PORT_NUMBER`                  | Port used for the bolt protocol.              | `7687`        |
+| `NEO4J_HTTP_PORT_NUMBER`                  | Port used for the http protocol.              | `7474`        |
+| `NEO4J_HTTPS_PORT_NUMBER`                 | Port used for the https protocol.             | `7473`        |
+
+#### Read-only environment variables
+
+| Name                        | Description                                      | Value                              |
+|-----------------------------|--------------------------------------------------|------------------------------------|
+| `NEO4J_BASE_DIR`            | Neo4j installation directory.                    | `${BITNAMI_ROOT_DIR}/neo4j`        |
+| `NEO4J_VOLUME_DIR`          | Neo4j volume directory.                          | `/bitnami/neo4j`                   |
+| `NEO4J_DATA_DIR`            | Neo4j volume directory.                          | `$NEO4J_VOLUME_DIR/data`           |
+| `NEO4J_TMP_DIR`             | Neo4j temp directory.                            | `${NEO4J_BASE_DIR}/run`            |
+| `NEO4J_LOGS_DIR`            | Neo4j logs directory.                            | `${NEO4J_BASE_DIR}/logs`           |
+| `NEO4J_LOG_FILE`            | Neo4j log file.                                  | `${NEO4J_LOGS_DIR}/neo4j.log`      |
+| `NEO4J_PID_FILE`            | Neo4j PID file.                                  | `${NEO4J_TMP_DIR}/neo4j.pid`       |
+| `NEO4J_CONF_DIR`            | Configuration dir for Neo4j.                     | `${NEO4J_BASE_DIR}/conf`           |
+| `NEO4J_PLUGINS_DIR`         | Plugins dir for Neo4j.                           | `${NEO4J_BASE_DIR}/plugins`        |
+| `NEO4J_METRICS_DIR`         | Metrics dir for Neo4j.                           | `${NEO4J_VOLUME_DIR}/metrics`      |
+| `NEO4J_CERTIFICATES_DIR`    | Certificates dir for Neo4j.                      | `${NEO4J_VOLUME_DIR}/certificates` |
+| `NEO4J_IMPORT_DIR`          | Import dir for Neo4j.                            | `${NEO4J_VOLUME_DIR}/import`       |
+| `NEO4J_MOUNTED_CONF_DIR`    | Mounted Configuration dir for Neo4j.             | `${NEO4J_VOLUME_DIR}/conf/`        |
+| `NEO4J_MOUNTED_PLUGINS_DIR` | Mounted Plugins dir for Neo4j.                   | `${NEO4J_VOLUME_DIR}/plugins/`     |
+| `NEO4J_INITSCRIPTS_DIR`     | Path to neo4j init scripts directory             | `/docker-entrypoint-initdb.d`      |
+| `NEO4J_CONF_FILE`           | Configuration file for Neo4j.                    | `${NEO4J_CONF_DIR}/neo4j.conf`     |
+| `NEO4J_APOC_CONF_FILE`      | Configuration file for Neo4j.                    | `${NEO4J_CONF_DIR}/apoc.conf`      |
+| `NEO4J_VOLUME_DIR`          | Neo4j directory for mounted configuration files. | `${BITNAMI_VOLUME_DIR}/neo4j`      |
+| `NEO4J_DATA_TO_PERSIST`     | Neo4j data to persist.                           | `data`                             |
+| `NEO4J_DAEMON_USER`         | Neo4j system user.                               | `neo4j`                            |
+| `NEO4J_DAEMON_GROUP`        | Neo4j system group.                              | `neo4j`                            |
+| `JAVA_HOME`                 | Java installation folder.                        | `${BITNAMI_ROOT_DIR}/java`         |
+
+When you start the neo4j image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
 
 #### Specifying Environment Variables using Docker Compose
 
@@ -297,6 +320,12 @@ docker-compose up neo4j
 ### 3.4.3-r13
 
 * The Neo4j container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Neo4j daemon was started as the `neo4j` user. From now on, both the container and the Neo4j daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
+
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes.
+
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## Contributing
 
