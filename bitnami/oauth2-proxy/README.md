@@ -87,7 +87,7 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 ## Configuration
 
 Oauth2-proxy can be configured via config file, command line options or environment variables.
-[Further information](https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/overview)
+[Further information](https://oauth2-proxy.github.io/oauth2-proxy/configuration/overview)
 
 ## Logging
 
