@@ -60,6 +60,7 @@ Flags:
   -l, --log-level string                       Log level for the kubescape scan and kubescape scan image commands.
   -r, --retries                                Number of retries for each 'kubescape scan image' command.
   -s, --silent                                 Do not display any logs in stdout, only the resulting report.
+  --skip-default-frameworks                    If set to true, skips the default frameworks configuration
 
   # NOTE: Additionally, other 'kubescape scan' flags can be added, run 'kubescape scan -h' for additional information.
   """
@@ -79,6 +80,7 @@ kubescape_oss_assessment() {
   local scan_args=("scan" "--format=json")
   local scan_image_args=("scan" "image" "--format=json")
   local silent="false"
+  local skip_frameworks="false"
   local output=""
   local retries="3"
 
@@ -105,6 +107,10 @@ kubescape_oss_assessment() {
           retries="$2"
           shift 2
           ;;
+      --skip-default-frameworks)
+          skip_frameworks="true"
+          shift 1
+          ;;
       *)
           scan_args+=("$1")
           shift
@@ -117,6 +123,18 @@ kubescape_oss_assessment() {
     TAC_PRODUCTS=$(jq -r '.[].product.key' "$TANZU_APPLICATION_CATALOG_FILE")
   else
     error "The Bitnami Catalog JSON file is missing: ${TANZU_APPLICATION_CATALOG_FILE}"
+  fi
+
+  # By default, Kubescape only runs NSA and MITRE frameworks
+  # We want to extend that to also include SOC2 and CIS frameworks
+  if ! is_boolean_yes "$skip_frameworks"; then
+    readarray -t frameworks < <(${cmd} list frameworks --format=json | jq '.[]' | grep -Ei "nsa|mitre|soc2|cis-v" | sed 's/"//g')
+    if [[ "${#frameworks[@]}" -gt 0 ]]; then
+      info  "OSS Assessment scan will use the following frameworks: ${frameworks[*]}"
+      scan_args+=("frameworks" "$(tr ' ' ',' <<< "${frameworks[*]}")")
+    else
+      warn "Could not obtain frameworks, using default ones."
+    fi
   fi
 
   # Run Kubescape scan for the provided project and add custom field 'security'
