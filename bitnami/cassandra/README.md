@@ -181,6 +181,8 @@ docker-compose up -d
 | `CASSANDRA_INTERNODE_ENCRYPTION`                   | Internode encryption type.                                                              | `none`                                       |
 | `CASSANDRA_NUM_TOKENS`                             | Number of tokens in cluster connection.                                                 | `256`                                        |
 | `CASSANDRA_PASSWORD_SEEDER`                        | Set the node as password seeder in the clustre.                                         | `no`                                         |
+| `CASSANDRA_BROADCAST_ADDRESS`                      | The IP address a node tells other nodes in the cluster to contact it by.                | `$CASSANDRA_HOST`                            |
+| `CASSANDRA_BROADCAST_RPC_ADDRESS`                  | RPC address to broadcast to drivers and other Cassandra nodes.                          | `$CASSANDRA_HOST`                            |
 | `CASSANDRA_SEEDS`                                  | List of cluster seeds.                                                                  | `$CASSANDRA_HOST`                            |
 | `CASSANDRA_PEERS`                                  | List of cluster peers.                                                                  | `$CASSANDRA_SEEDS`                           |
 | `CASSANDRA_PEERS`                                  | List of cluster peers.                                                                  | `$CASSANDRA_SEEDS`                           |
