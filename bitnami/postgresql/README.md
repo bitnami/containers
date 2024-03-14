@@ -186,12 +186,12 @@ docker-compose up -d
 | `POSTGRESQL_USERNAME`                  | PostgreSQL default username                                                                      | `postgres`                                 |
 | `POSTGRESQL_ENABLE_LDAP`               | Enable LDAP for PostgreSQL authentication                                                        | `no`                                       |
 | `POSTGRESQL_INITSCRIPTS_USERNAME`      | Username for the psql scripts included in /docker-entrypoint.initdb                              | `$POSTGRESQL_USERNAME`                     |
-| `POSTGRESQL_INITSCRIPTS_PASSWORD`      | Password for the PostgreSQL init scritps user                                                    | `$POSTGRESQL_PASSWORD`                     |
+| `POSTGRESQL_INITSCRIPTS_PASSWORD`      | Password for the PostgreSQL init scripts user                                                    | `$POSTGRESQL_PASSWORD`                     |
 | `POSTGRESQL_ENABLE_TLS`                | Whether to enable TLS for traffic or not                                                         | `no`                                       |
 | `POSTGRESQL_TLS_PREFER_SERVER_CIPHERS` | Whether to use the server TLS cipher preferences rather than the client                          | `yes`                                      |
 | `POSTGRESQL_SHARED_PRELOAD_LIBRARIES`  | List of libraries to preload at PostgreSQL initialization                                        | `pgaudit`                                  |
 | `POSTGRESQL_CLIENT_MIN_MESSAGES`       | Set log level of errors to send to the client                                                    | `error`                                    |
-| `POSTGRESQL_WAL_LEVEL`                 | Set the postgres user connection limit                                                           | `replica`                                  |
+| `POSTGRESQL_WAL_LEVEL`                 | Set the write-ahead log level                                                                    | `replica`                                  |
 | `POSTGRESQL_AUTOCTL_CONF_DIR`          | Path to the configuration dir for the pg_autoctl command                                         | `${POSTGRESQL_AUTOCTL_VOLUME_DIR}/.config` |
 | `POSTGRESQL_AUTOCTL_MODE`              | pgAutoFailover node type, valid values [monitor, postgres]                                       | `postgres`                                 |
 | `POSTGRESQL_AUTOCTL_MONITOR_HOST`      | Hostname for the monitor component                                                               | `monitor`                                  |
@@ -460,7 +460,7 @@ The above command scales up the number of slaves to `3`. You can scale down in t
 
 #### Synchronous commits
 
-By default, the slaves instances are configued with asynchronous replication. In order to guarantee more data stability (at the cost of some performance), it is possible to set synchronous commits (i.e. a transaction commit will not return success to the client until it has been written in a set of replicas) using the following environment variables.
+By default, the slave instances are configured with asynchronous replication. In order to guarantee more data stability (at the cost of some performance), it is possible to set synchronous commits (i.e. a transaction commit will not return success to the client until it has been written in a set of replicas) using the following environment variables.
 
 * `POSTGRESQL_SYNCHRONOUS_COMMIT_MODE`: Establishes the type of synchronous commit. The available options are: `on`, `remote_apply`, `remote_write`, `local` and `off`. The default value is `on`. For more information, check the [official PostgreSQL documentation](https://www.postgresql.org/docs/9.6/runtime-config-wal.html#GUC-SYNCHRONOUS-COMMIT).
 * `POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS`: Establishes the number of replicas that will enable synchronous replication. This number must not be above the number of slaves that you configure in the cluster.
