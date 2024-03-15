@@ -229,7 +229,6 @@ docker run -d --name ghost \
 | `GHOST_DAEMON_GROUP`          | Ghost system group.                                | `ghost`                                    |
 | `GHOST_DEFAULT_PORT_NUMBER`   | Default Ghost port number to enable at build time. | `2368`                                     |
 | `GHOST_DEFAULT_DATABASE_HOST` | Default database server host.                      | `mysql`                                    |
-| `GHOST_DEFAULT_DATABASE_HOST` | Default database server host.                      | `127.0.0.1`                                |
 
 When you start the Ghost image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
