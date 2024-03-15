@@ -8,10 +8,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-02-29T17:25:56Z" \
+      org.opencontainers.image.created="2024-03-15T01:04:34Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="10.1.19-debian-12-r1" \
+      org.opencontainers.image.ref.name="10.1.19-debian-12-r2" \
       org.opencontainers.image.title="tomcat" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="10.1.19"
@@ -27,9 +27,9 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libssl3 procps xmlstarlet zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "render-template-1.0.6-9-linux-${OS_ARCH}-debian-12" \
+      "render-template-1.0.6-10-linux-${OS_ARCH}-debian-12" \
       "java-17.0.10-13-2-linux-${OS_ARCH}-debian-12" \
-      "tomcat-10.1.19-0-linux-${OS_ARCH}-debian-12" \
+      "tomcat-10.1.19-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
