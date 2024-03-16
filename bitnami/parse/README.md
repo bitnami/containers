@@ -194,7 +194,6 @@ Bitnami provides up-to-date versions of Mongodb and Parse, including security pa
 | Name                         | Description                                   | Default Value                  |
 |------------------------------|-----------------------------------------------|--------------------------------|
 | `PARSE_ENABLE_HTTPS`         | Whether to enable HTTPS for Parse by default. | `no`                           |
-| `PARSE_BIND_HOST`            | Parse bind host.                              | `127.0.0.1`                    |
 | `PARSE_BIND_HOST`            | Parse bind host.                              | `0.0.0.0`                      |
 | `PARSE_HOST`                 | Parse host.                                   | `127.0.0.1`                    |
 | `PARSE_PORT_NUMBER`          | Port number in which Parse will run.          | `1337`                         |
@@ -222,7 +221,6 @@ Bitnami provides up-to-date versions of Mongodb and Parse, including security pa
 | `PARSE_DAEMON_USER`           | Parse system user.                               | `parse`                         |
 | `PARSE_DAEMON_GROUP`          | Parse system group.                              | `parse`                         |
 | `PARSE_DEFAULT_DATABASE_HOST` | Default database server host.                    | `mongodb`                       |
-| `PARSE_DEFAULT_DATABASE_HOST` | Default database server host.                    | `127.0.0.1`                     |
 
 When you start the parse image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
