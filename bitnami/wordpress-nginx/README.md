@@ -240,7 +240,6 @@ docker run -d --name wordpress \
 | `WP_CLI_CONF_FILE`                | Configuration file for WP-CLI.                       | `${WP_CLI_CONF_DIR}/wp-cli.yml`       |
 | `WORDPRESS_VOLUME_DIR`            | WordPress directory for mounted configuration files. | `${BITNAMI_VOLUME_DIR}/wordpress`     |
 | `WORDPRESS_DEFAULT_DATABASE_HOST` | Default database server host.                        | `mariadb`                             |
-| `WORDPRESS_DEFAULT_DATABASE_HOST` | Default database server host.                        | `127.0.0.1`                           |
 | `PHP_DEFAULT_MEMORY_LIMIT`        | Default PHP memory limit.                            | `512M`                                |
 | `PHP_DEFAULT_POST_MAX_SIZE`       | Default PHP post_max_size.                           | `80M`                                 |
 | `PHP_DEFAULT_UPLOAD_MAX_FILESIZE` | Default PHP upload_max_size.                         | `80M`                                 |
