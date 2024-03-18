@@ -223,7 +223,6 @@ docker run -d --name drupal \
 | `DRUPAL_VOLUME_DIR`            | Drupal directory for mounted configuration files.                                                                                | `${BITNAMI_VOLUME_DIR}/drupal`                  |
 | `DRUPAL_MOUNTED_CONF_FILE`     | Mounted configuration file for Drupal. It will be copied to the Drupal installation directory during the initialization process. | `${DRUPAL_VOLUME_DIR}/settings.php`             |
 | `DRUPAL_DEFAULT_DATABASE_HOST` | Default database server host.                                                                                                    | `mariadb`                                       |
-| `DRUPAL_DEFAULT_DATABASE_HOST` | Default database server host.                                                                                                    | `127.0.0.1`                                     |
 | `PHP_DEFAULT_MEMORY_LIMIT`     | Default PHP memory limit.                                                                                                        | `256M`                                          |
 
 When you start the Drupal image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
