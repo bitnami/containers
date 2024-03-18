@@ -727,12 +727,12 @@ docker-compose up mariadb
 * Backwards compatibility is not guaranteed when data is persisted using docker-compose. You can use the workaround below to overcome it:
 
 ```console
-$ docker-compose down
+docker-compose down
 ## Change the mount point
 sed -i -e 's#mariadb_data:/bitnami#mariadb_data:/bitnami/mariadb#g' docker-compose.yml
 ## Pull the latest bitnami/mariadb image
-$ docker pull bitnami/mariadb:latest
-$ docker-compose up -d
+docker pull bitnami/mariadb:latest
+docker-compose up -d
 ```
 
 ### 10.1.28-r2 and 10.2.16-r2

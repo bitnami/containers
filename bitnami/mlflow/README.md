@@ -88,7 +88,7 @@ docker run -it --name mlflow -v /path/to/app:/app bitnami/mlflow \
 
 **Further Reading:**
 
-- [mlflow documentation](https://mlflow.org/docs/)
+* [mlflow documentation](https://mlflow.org/docs/)
 
 ## Maintenance
 

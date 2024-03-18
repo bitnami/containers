@@ -496,12 +496,12 @@ docker-compose up elasticsearch
 * Backwards compatibility is not guaranteed when data is persisted using docker-compose. You can use the workaround below to overcome it:
 
 ```console
-$ docker-compose down
+docker-compose down
 # Change the mount point
 sed -i -e 's#elasticsearch_data:/bitnami#elasticsearch_data:/bitnami/elasticsearch/data#g' docker-compose.yml
 # Pull the latest bitnami/elasticsearch image
-$ docker pull bitnami/elasticsearch:latest
-$ docker-compose up -d
+docker pull bitnami/elasticsearch:latest
+docker-compose up -d
 ```
 
 ### 6.2.3-r7 & 5.6.4-r18

@@ -88,7 +88,7 @@ docker run -it --name jax -v /path/to/app:/app bitnami/jax \
 
 **Further Reading:**
 
-- [jax documentation](https://jax.readthedocs.iodocs/)
+* [jax documentation](https://jax.readthedocs.iodocs/)
 
 ## Maintenance
 

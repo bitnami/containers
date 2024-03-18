@@ -88,7 +88,7 @@ docker run -it --name ray -v /path/to/app:/app bitnami/ray \
 
 **Further Reading:**
 
-- [ray documentation](https://ray.iodocs/)
+* [ray documentation](https://ray.iodocs/)
 
 ## Maintenance
 

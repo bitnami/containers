@@ -671,12 +671,12 @@ docker-compose up mysql
 * Backwards compatibility is not guaranteed when data is persisted using docker-compose. You can use the workaround below to overcome it:
 
 ```console
-$ docker-compose down
+docker-compose down
 ## Change the mount point
 sed -i -e 's#mysql_data:/bitnami#mysql_data:/bitnami/mysql/data#g' docker-compose.yml
 ## Pull the latest bitnami/mysql image
-$ docker pull bitnami/mysql:latest
-$ docker-compose up -d
+docker pull bitnami/mysql:latest
+docker-compose up -d
 ```
 
 ### 5.7.22-r18 and 8.0.11-r16

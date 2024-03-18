@@ -66,7 +66,7 @@ docker run -d --name mariadb \
   bitnami/mariadb:latest
 ```
 
-### Step 3: Launch the container using the local current directory as volume 
+### Step 3: Launch the container using the local current directory as volume
 
 ```console
 $ docker run -d --name laravel \

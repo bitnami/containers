@@ -88,7 +88,7 @@ docker run -it --name tensorflow -v /path/to/app:/app bitnami/tensorflow \
 
 **Further Reading:**
 
-- [tensorflow documentation](https://tensorflow.orgdocs/)
+* [tensorflow documentation](https://tensorflow.orgdocs/)
 
 ## Maintenance
 
