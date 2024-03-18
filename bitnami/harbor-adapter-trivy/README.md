@@ -116,16 +116,11 @@ For further information about the specific component itself, please refer to the
 
 #### Read-only environment variables
 
-| Name                           | Description                                                                     | Value                                                |
-|--------------------------------|---------------------------------------------------------------------------------|------------------------------------------------------|
-| `SCANNER_TRIVY_BASE_DIR`       | harbor-adapter-trivy installation directory.                                    | `${BITNAMI_ROOT_DIR}/harbor-adapter-trivy`           |
-| `SCANNER_TRIVY_LOGS_DIR`       | harbor-adapter-trivy logs directory.                                            | `${SCANNER_TRIVY_BASE_DIR}/logs`                     |
-| `SCANNER_TRIVY_TMP_DIR`        | harbor-adapter-trivy directory for temporary files.                             | `${SCANNER_TRIVY_BASE_DIR}/tmp`                      |
-| `SCANNER_TRIVY_DAEMON_USER`    | harbor-adapter-trivy system user.                                               | `trivy-scanner`                                      |
-| `SCANNER_TRIVY_DAEMON_GROUP`   | harbor-adapter-trivy system group.                                              | `trivy-scanner`                                      |
-| `SCANNER_TRIVY_PID_FILE`       | PID file for harbor-adapter-trivy service.                                      | `${SCANNER_TRIVY_TMP_DIR}/harbor-adapter-trivy.pid`  |
-| `SCANNER_TRIVY_LOG_FILE`       | Log file for harbor-adapter-trivy service.                                      | `${SCANNER_TRIVY_LOGS_DIR}/harbor-adapter-trivy.log` |
-| `SCANNER_TRIVY_EXTRA_ENV_FILE` | File to store extra environment variables for the harbor-adapter-trivy service. | `${SCANNER_TRIVY_BASE_DIR}/.env`                     |
+| Name                         | Description                                  | Value                                      |
+|------------------------------|----------------------------------------------|--------------------------------------------|
+| `SCANNER_TRIVY_BASE_DIR`     | harbor-adapter-trivy installation directory. | `${BITNAMI_ROOT_DIR}/harbor-adapter-trivy` |
+| `SCANNER_TRIVY_DAEMON_USER`  | harbor-adapter-trivy system user.            | `trivy-scanner`                            |
+| `SCANNER_TRIVY_DAEMON_GROUP` | harbor-adapter-trivy system group.           | `trivy-scanner`                            |
 
 ## Logging
 
