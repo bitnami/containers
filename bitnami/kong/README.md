@@ -106,8 +106,6 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 | `KONG_ADMIN_LISTEN`            | Kong admin listen address.                         | `${KONG_ADMIN_LISTEN_ADDRESS}:${KONG_ADMIN_HTTP_PORT_NUMBER}, ${KONG_ADMIN_LISTEN_ADDRESS}:${KONG_ADMIN_HTTPS_PORT_NUMBER} ssl` |
 | `KONG_ADMIN_LISTEN_OVERRIDE`   | Override admin listen.                             | `no`                                                                                                                            |
 | `KONG_DATABASE`                | Select database for Kong.                          | `postgres`                                                                                                                      |
-| `KONG_DATABASE`                | Select database for Kong.                          | `postgres`                                                                                                                      |
-| `KONG_NGINX_USER`              | Set nginx user.                                    | `${KONG_DAEMON_USER} ${KONG_DAEMON_GROUP}`                                                                                      |
 
 #### Read-only environment variables
 
@@ -123,7 +121,6 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 | `KONG_PREFIX`             | Kong installation directory.                          | `${KONG_SERVER_DIR}`                 |
 | `KONG_DEFAULT_SERVER_DIR` | Directory with default Kong Openresty instance files. | `${KONG_BASE_DIR}/server.default`    |
 | `KONG_LOGS_DIR`           | Directory where Kong logs are stored.                 | `${KONG_SERVER_DIR}/logs`            |
-| `KONG_PID_FILE`           | Path to the PID file for Kong.                        | `${KONG_SERVER_DIR}/pids/nginx.pid`  |
 | `KONG_DAEMON_USER`        | Kong system user.                                     | `kong`                               |
 | `KONG_DAEMON_GROUP`       | Kong system group.                                    | `kong`                               |
 
