@@ -227,7 +227,6 @@ docker run -d --name prestashop \
 | `PRESTASHOP_CONF_FILE`             | Configuration file for PrestaShop.                         | `${PRESTASHOP_BASE_DIR}/app/config/parameters.php` |
 | `PRESTASHOP_VOLUME_DIR`            | PrestaShop directory for mounted configuration files.      | `${BITNAMI_VOLUME_DIR}/prestashop`                 |
 | `PRESTASHOP_DEFAULT_DATABASE_HOST` | Default database server host.                              | `mariadb`                                          |
-| `PRESTASHOP_DEFAULT_DATABASE_HOST` | Default database server host.                              | `127.0.0.1`                                        |
 | `PHP_DEFAULT_MAX_INPUT_VARS`       | Default maximum amount of input variables for PHP scripts. | `5000`                                             |
 | `PHP_DEFAULT_MEMORY_LIMIT`         | Default memory limit for PHP scripts.                      | `256M`                                             |
 | `PHP_DEFAULT_POST_MAX_SIZE`        | Default maximum size for PHP POST requests.                | `128M`                                             |
