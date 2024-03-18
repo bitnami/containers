@@ -101,7 +101,7 @@ parse_validate() {
 parse_initialize() {
     # In order to maintain backwards compatibility, we check if the config.json is mounted
     local -r persisted_conf_file="/bitnami/parse/config.json"
-    if ! [[ -f "$persisted_conf_file" ]]; then
+    if ! [[ -f "$persisted_conf_file" ]] || is_boolean_yes "$PARSE_FORCE_OVERWRITE_CONF_FILE"; then
         # Create configuration file.
         # Based on https://github.com/parse-community/parse-server/blob/master/bootstrap.sh
         info "Ensuring Parse directories exist"
