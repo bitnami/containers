@@ -162,11 +162,11 @@ Bitnami provides up-to-date versions of Parse Dashboard, including security patc
 
 | Name                                         | Description                                             | Default Value |
 |----------------------------------------------|---------------------------------------------------------|---------------|
+| `PARSE_DASHBOARD_FORCE_OVERWRITE_CONF_FILE`  | Force the config.json config file generation.           | `no`          |
 | `PARSE_DASHBOARD_ENABLE_HTTPS`               | Whether to enable HTTPS for Parse Dashboard by default. | `no`          |
 | `PARSE_DASHBOARD_EXTERNAL_HTTP_PORT_NUMBER`  | External HTTP port for Parse Dashboard.                 | `80`          |
 | `PARSE_DASHBOARD_EXTERNAL_HTTPS_PORT_NUMBER` | External HTTPS port for Parse Dashboard.                | `443`         |
 | `PARSE_DASHBOARD_PARSE_HOST`                 | Parse host name.                                        | `parse`       |
-| `PARSE_DASHBOARD_PARSE_HOST`                 | Parse host name.                                        | `127.0.0.1`   |
 | `PARSE_DASHBOARD_PORT_NUMBER`                | Port number in which Parse Dashboard will run.          | `4040`        |
 | `PARSE_DASHBOARD_PARSE_PORT_NUMBER`          | Parse server port number.                               | `1337`        |
 | `PARSE_DASHBOARD_PARSE_APP_ID`               | A sample string environment variable.                   | `myappID`     |

@@ -24,6 +24,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
 parse_dashboard_env_vars=(
+    PARSE_DASHBOARD_FORCE_OVERWRITE_CONF_FILE
     PARSE_DASHBOARD_ENABLE_HTTPS
     PARSE_DASHBOARD_EXTERNAL_HTTP_PORT_NUMBER
     PARSE_DASHBOARD_EXTERNAL_HTTPS_PORT_NUMBER
@@ -65,6 +66,7 @@ export PARSE_DASHBOARD_LOGS_DIR="${PARSE_DASHBOARD_BASE_DIR}/logs"
 export PARSE_DASHBOARD_PID_FILE="${PARSE_DASHBOARD_TMP_DIR}/parse-dashboard.pid"
 export PARSE_DASHBOARD_LOG_FILE="${PARSE_DASHBOARD_LOGS_DIR}/parse-dashboard.log"
 export PARSE_DASHBOARD_CONF_FILE="${PARSE_DASHBOARD_BASE_DIR}/config.json"
+export PARSE_DASHBOARD_FORCE_OVERWRITE_CONF_FILE="${PARSE_DASHBOARD_FORCE_OVERWRITE_CONF_FILE:-no}"
 
 # Parse persistence configuration
 export PARSE_DASHBOARD_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/parse-dashboard"
