@@ -24,6 +24,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
 parse_env_vars=(
+    PARSE_FORCE_OVERWRITE_CONF_FILE
     PARSE_ENABLE_HTTPS
     PARSE_BIND_HOST
     PARSE_HOST
@@ -68,6 +69,7 @@ export PARSE_PID_FILE="${PARSE_TMP_DIR}/parse.pid"
 export PARSE_LOG_FILE="${PARSE_LOGS_DIR}/parse.log"
 export PARSE_CONF_FILE="${PARSE_BASE_DIR}/config.json"
 export PATH="${BITNAMI_ROOT_DIR}/node/bin:${PATH}"
+export PARSE_FORCE_OVERWRITE_CONF_FILE="${PARSE_FORCE_OVERWRITE_CONF_FILE:-no}"
 
 # Parse persistence configuration
 export PARSE_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/parse"
