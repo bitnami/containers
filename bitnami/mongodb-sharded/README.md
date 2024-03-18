@@ -107,7 +107,6 @@ services:
 
 | Name                                   | Description                                                                                   | Default Value                       |
 |----------------------------------------|-----------------------------------------------------------------------------------------------|-------------------------------------|
-| `MONGODB_DISABLE_SERVICE`              | Whether to disable the MongoDB service by default.                                            | `no`                                |
 | `MONGODB_MOUNTED_CONF_DIR`             | Directory for including custom configuration files (that override the default generated ones) | `${MONGODB_VOLUME_DIR}/conf`        |
 | `MONGODB_INIT_RETRY_ATTEMPTS`          | Maximum retries for checking the service initialization status                                | `7`                                 |
 | `MONGODB_INIT_RETRY_DELAY`             | Time (in seconds) to wait between retries for checking the service initialization status      | `5`                                 |
