@@ -88,7 +88,7 @@ parse_dashboard_validate() {
 #########################
 parse_dashboard_initialize() {
     local -r persisted_conf_file="/bitnami/parse-dashboard/config.json"
-    if ! [[ -f "$persisted_conf_file" ]]; then
+    if ! [[ -f "$persisted_conf_file" ]] || is_boolean_yes "$PARSE_DASHBOARD_FORCE_OVERWRITE_CONF_FILE"; then
         # Ensure Parse persisted directories exist (i.e. when a volume has been mounted to /bitnami)
         info "Ensuring Parse directories exist"
         ensure_dir_exists "$PARSE_DASHBOARD_VOLUME_DIR"
