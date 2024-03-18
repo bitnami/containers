@@ -191,21 +191,22 @@ Bitnami provides up-to-date versions of Mongodb and Parse, including security pa
 
 #### Customizable environment variables
 
-| Name                         | Description                                   | Default Value                  |
-|------------------------------|-----------------------------------------------|--------------------------------|
-| `PARSE_ENABLE_HTTPS`         | Whether to enable HTTPS for Parse by default. | `no`                           |
-| `PARSE_BIND_HOST`            | Parse bind host.                              | `0.0.0.0`                      |
-| `PARSE_HOST`                 | Parse host.                                   | `127.0.0.1`                    |
-| `PARSE_PORT_NUMBER`          | Port number in which Parse will run.          | `1337`                         |
-| `PARSE_APP_ID`               | Parse app ID.                                 | `myappID`                      |
-| `PARSE_MASTER_KEY`           | Parse master key.                             | `mymasterKey`                  |
-| `PARSE_APP_NAME`             | Parse app name.                               | `parse-server`                 |
-| `PARSE_MOUNT_PATH`           | Parse mount path.                             | `/parse`                       |
-| `PARSE_ENABLE_CLOUD_CODE`    | Enable Parse cloud code support.              | `no`                           |
-| `PARSE_DATABASE_HOST`        | Database server host.                         | `$PARSE_DEFAULT_DATABASE_HOST` |
-| `PARSE_DATABASE_PORT_NUMBER` | Database server port.                         | `27017`                        |
-| `PARSE_DATABASE_NAME`        | Database name.                                | `bitnami_parse`                |
-| `PARSE_DATABASE_USER`        | Database user name.                           | `bn_parse`                     |
+| Name                              | Description                                   | Default Value                  |
+|-----------------------------------|-----------------------------------------------|--------------------------------|
+| `PARSE_FORCE_OVERWRITE_CONF_FILE` | Force the config.json config file generation. | `no`                           |
+| `PARSE_ENABLE_HTTPS`              | Whether to enable HTTPS for Parse by default. | `no`                           |
+| `PARSE_BIND_HOST`                 | Parse bind host.                              | `0.0.0.0`                      |
+| `PARSE_HOST`                      | Parse host.                                   | `127.0.0.1`                    |
+| `PARSE_PORT_NUMBER`               | Port number in which Parse will run.          | `1337`                         |
+| `PARSE_APP_ID`                    | Parse app ID.                                 | `myappID`                      |
+| `PARSE_MASTER_KEY`                | Parse master key.                             | `mymasterKey`                  |
+| `PARSE_APP_NAME`                  | Parse app name.                               | `parse-server`                 |
+| `PARSE_MOUNT_PATH`                | Parse mount path.                             | `/parse`                       |
+| `PARSE_ENABLE_CLOUD_CODE`         | Enable Parse cloud code support.              | `no`                           |
+| `PARSE_DATABASE_HOST`             | Database server host.                         | `$PARSE_DEFAULT_DATABASE_HOST` |
+| `PARSE_DATABASE_PORT_NUMBER`      | Database server port.                         | `27017`                        |
+| `PARSE_DATABASE_NAME`             | Database name.                                | `bitnami_parse`                |
+| `PARSE_DATABASE_USER`             | Database user name.                           | `bn_parse`                     |
 
 #### Read-only environment variables
 
