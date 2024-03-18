@@ -109,23 +109,17 @@ docker-compose up appsmith
 | `APPSMITH_MODE`                 | Appsmith service to run (can be backend, client or UI). | `backend`             |
 | `APPSMITH_ENCRYPTION_PASSWORD`  | Appsmith database encryption password.                  | `bitnami123`          |
 | `APPSMITH_API_HOST`             | Appsmith API host.                                      | `appsmith-api`        |
-| `APPSMITH_API_HOST`             | Appsmith API host.                                      | `127.0.0.1`           |
 | `APPSMITH_API_PORT`             | Appsmith API port.                                      | `8080`                |
 | `APPSMITH_UI_HTTP_PORT`         | Appsmith UI HTTP port.                                  | `8080`                |
-| `APPSMITH_UI_HTTP_PORT`         | Appsmith UI HTTP port.                                  | `80`                  |
 | `APPSMITH_UI_HTTPS_PORT`        | Appsmith UI HTTPS port.                                 | `8443`                |
-| `APPSMITH_UI_HTTPS_PORT`        | Appsmith UI HTTPS port.                                 | `443`                 |
 | `APPSMITH_RTS_HOST`             | Appsmith RTS port.                                      | `appsmith-rts`        |
-| `APPSMITH_RTS_HOST`             | Appsmith RTS port.                                      | `127.0.0.1`           |
 | `APPSMITH_RTS_PORT`             | Appsmith RTS port.                                      | `8091`                |
 | `APPSMITH_DATABASE_HOST`        | Database server hosts (comma-separated list).           | `mongodb`             |
-| `APPSMITH_DATABASE_HOST`        | Database server hosts (comma-separated list).           | `127.0.0.1`           |
 | `APPSMITH_DATABASE_PORT_NUMBER` | Database server port.                                   | `27017`               |
 | `APPSMITH_DATABASE_NAME`        | Database name.                                          | `bitnami_appsmith`    |
 | `APPSMITH_DATABASE_USER`        | Database user name.                                     | `bn_appsmith`         |
 | `APPSMITH_DATABASE_INIT_DELAY`  | Time to wait before the database is actually ready.     | `0`                   |
 | `APPSMITH_REDIS_HOST`           | Redis server host.                                      | `redis`               |
-| `APPSMITH_REDIS_HOST`           | Redis server host.                                      | `127.0.0.1`           |
 | `APPSMITH_REDIS_PORT_NUMBER`    | Redis server port.                                      | `6379`                |
 | `APPSMITH_STARTUP_TIMEOUT`      | Appsmith startup check timeout.                         | `120`                 |
 | `APPSMITH_STARTUP_ATTEMPTS`     | Appsmith startup check attempts.                        | `5`                   |
@@ -143,8 +137,6 @@ docker-compose up appsmith
 | `APPSMITH_CONF_FILE`    | Appsmith configuration file.      | `${APPSMITH_CONF_DIR}/docker.env`  |
 | `APPSMITH_TMP_DIR`      | Appsmith temporary directory.     | `${APPSMITH_BASE_DIR}/tmp`         |
 | `APPSMITH_PID_FILE`     | Appsmith PID file.                | `${APPSMITH_TMP_DIR}/appsmith.pid` |
-| `APPSMITH_RTS_LOG_FILE` | Appsmith RTS log file.            | `${APPSMITH_LOG_DIR}/rts.log`      |
-| `APPSMITH_RTS_PID_FILE` | Appsmith RTS PID file.            | `${APPSMITH_TMP_DIR}/rts.pid`      |
 | `APPSMITH_DAEMON_USER`  | Appsmith daemon system user.      | `appsmith`                         |
 | `APPSMITH_DAEMON_GROUP` | Appsmith daemon system group.     | `appsmith`                         |
 
