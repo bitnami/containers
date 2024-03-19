@@ -140,29 +140,32 @@ docker-compose up -d
 
 #### Customizable environment variables
 
-| Name                    | Description                                                | Default Value |
-|-------------------------|------------------------------------------------------------|---------------|
-| `MEMCACHED_PORT_NUMBER` | Port number used by Memcached.                             | `11211`       |
-| `MEMCACHED_USERNAME`    | Memcached admin username.                                  | `root`        |
-| `MEMCACHED_MAX_TIMEOUT` | Maximum timeout in seconds for Memcached to start or stop. | `5`           |
+| Name                        | Description                                                            | Default Value |
+|-----------------------------|------------------------------------------------------------------------|---------------|
+| `MEMCACHED_LISTEN_ADDRESS`  | Host that the Memcached service will bind to.                          | `nil`         |
+| `MEMCACHED_PORT_NUMBER`     | Port number used by Memcached.                                         | `11211`       |
+| `MEMCACHED_USERNAME`        | Memcached admin username.                                              | `root`        |
+| `MEMCACHED_PASSWORD`        | Password for the Memcached admin user.                                 | `nil`         |
+| `MEMCACHED_MAX_ITEM_SIZE`   | Memcached maximum item size.                                           | `nil`         |
+| `MEMCACHED_EXTRA_FLAGS`     | Extra flags to be used when running Memcached.                         | `nil`         |
+| `MEMCACHED_MAX_TIMEOUT`     | Maximum timeout in seconds for Memcached to start or stop.             | `5`           |
+| `MEMCACHED_CACHE_SIZE`      | Memcached cache size in MB.                                            | `nil`         |
+| `MEMCACHED_MAX_CONNECTIONS` | Maximum amount of concurrent connections that Memcached will tolerate. | `nil`         |
+| `MEMCACHED_THREADS`         | Amount of process threads that Memcached will use.                     | `nil`         |
 
 #### Read-only environment variables
 
-| Name                         | Description                                 | Value                                 |
-|------------------------------|---------------------------------------------|---------------------------------------|
-| `MEMCACHED_BASE_DIR`         | Memcached installation directory.           | `${BITNAMI_ROOT_DIR}/memcached`       |
-| `MEMCACHED_CONF_DIR`         | Memcached configuration directory.          | `${MEMCACHED_BASE_DIR}/conf`          |
-| `MEMCACHED_DEFAULT_CONF_DIR` | Memcached configuration directory.          | `${MEMCACHED_BASE_DIR}/conf.default`  |
-| `MEMCACHED_BIN_DIR`          | Memcached directory for binary executables. | `${MEMCACHED_BASE_DIR}/bin`           |
-| `MEMCACHED_TMP_DIR`          | Memcached directory for temporary files.    | `${MEMCACHED_BASE_DIR}/tmp`           |
-| `MEMCACHED_LOGS_DIR`         | Memcached directory for logs.               | `${MEMCACHED_BASE_DIR}/logs`          |
-| `MEMCACHED_LOG_FILE`         | Path to the Memcached log file.             | `${MEMCACHED_LOGS_DIR}/memcached.log` |
-| `MEMCACHED_PID_FILE`         | Path to the Memcached PID file.             | `${MEMCACHED_TMP_DIR}/memcached.pid`  |
-| `SASL_CONF_PATH`             | Memcached SASL configuration directory.     | `${MEMCACHED_CONF_DIR}/sasl2`         |
-| `SASL_CONF_FILE`             | Memcached SASL configuration                | `${SASL_CONF_PATH}/memcached.conf`    |
-| `SASL_DB_FILE`               | Memcached SASL database file.               | `${SASL_CONF_PATH}/memcachedsasldb`   |
-| `MEMCACHED_DAEMON_USER`      | Memcached system user.                      | `memcached`                           |
-| `MEMCACHED_DAEMON_GROUP`     | Memcached system group.                     | `memcached`                           |
+| Name                         | Description                                 | Value                                |
+|------------------------------|---------------------------------------------|--------------------------------------|
+| `MEMCACHED_BASE_DIR`         | Memcached installation directory.           | `${BITNAMI_ROOT_DIR}/memcached`      |
+| `MEMCACHED_CONF_DIR`         | Memcached configuration directory.          | `${MEMCACHED_BASE_DIR}/conf`         |
+| `MEMCACHED_DEFAULT_CONF_DIR` | Memcached configuration directory.          | `${MEMCACHED_BASE_DIR}/conf.default` |
+| `MEMCACHED_BIN_DIR`          | Memcached directory for binary executables. | `${MEMCACHED_BASE_DIR}/bin`          |
+| `SASL_CONF_PATH`             | Memcached SASL configuration directory.     | `${MEMCACHED_CONF_DIR}/sasl2`        |
+| `SASL_CONF_FILE`             | Memcached SASL configuration                | `${SASL_CONF_PATH}/memcached.conf`   |
+| `SASL_DB_FILE`               | Memcached SASL database file.               | `${SASL_CONF_PATH}/memcachedsasldb`  |
+| `MEMCACHED_DAEMON_USER`      | Memcached system user.                      | `memcached`                          |
+| `MEMCACHED_DAEMON_GROUP`     | Memcached system group.                     | `memcached`                          |
 
 ### Specify the cache size
 
