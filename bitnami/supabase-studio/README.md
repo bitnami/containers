@@ -86,30 +86,29 @@ docker run --name supabase-studio bitnami/supabase-studio:latest
 
 #### Customizable environment variables
 
-| Name                            | Description                                     | Default Value                         |
-|---------------------------------|-------------------------------------------------|---------------------------------------|
-| `SUPABASE_SECRETS_DIR`          | Directory where Supabase keys files are stored. | `${SUPABASE_BASE_DIR}/keys`           |
-| `SUPABASE_ANON_KEY_FILENAME`    | Supabase anon key filename                      | `${SUPABASE_SECRETS_DIR}/anon-key`    |
-| `SUPABASE_SERVICE_KEY_FILENAME` | Supabase service key filename                   | `${SUPABASE_SECRETS_DIR}/service-key` |
-| `SUPABASE_SECRET_KEY_FILENAME`  | Supabase admin key filename                     | `${SUPABASE_SECRETS_DIR}/secret`      |
-| `PORT`                          | Supabase service port                           | `4000`                                |
-| `SUPABASE_PUBLIC_URL`           | Supabase public urli                            | `http://localhost:80`                 |
-| `STUDIO_PG_META_URL`            | Supabase PG Meta URL                            | `http://localhost/pg`                 |
-| `SUPABASE_URL`                  | Supabase URL                                    | `http://localhost/`                   |
+| Name                            | Description                   | Default Value                         |
+|---------------------------------|-------------------------------|---------------------------------------|
+| `SUPABASE_ANON_KEY_FILENAME`    | Supabase anon key filename    | `${SUPABASE_SECRETS_DIR}/anon-key`    |
+| `SUPABASE_SERVICE_KEY_FILENAME` | Supabase service key filename | `${SUPABASE_SECRETS_DIR}/service-key` |
+| `SUPABASE_SECRET_KEY_FILENAME`  | Supabase admin key filename   | `${SUPABASE_SECRETS_DIR}/secret`      |
+| `SUPABASE_ANON_KEY`             | Supabase anon key             | `nil`                                 |
+| `SUPABASE_SERVICE_KEY`          | Supabase service key          | `nil`                                 |
+| `SUPABASE_SECRET_KEY`           | Supabase admin key            | `nil`                                 |
+| `PORT`                          | Supabase service port         | `4000`                                |
+| `SUPABASE_PUBLIC_URL`           | Supabase public urli          | `http://localhost:80`                 |
+| `STUDIO_PG_META_URL`            | Supabase PG Meta URL          | `http://localhost/pg`                 |
+| `SUPABASE_URL`                  | Supabase URL                  | `http://localhost/`                   |
 
 #### Read-only environment variables
 
-| Name                      | Description                                                         | Value                               |
-|---------------------------|---------------------------------------------------------------------|-------------------------------------|
-| `SUPABASE_BASE_DIR`       | Supabase installation directory.                                    | `${BITNAMI_ROOT_DIR}/supabase`      |
-| `SUPABASE_LOGS_DIR`       | Directory where Supabas logs are stored.                            | `${SUPABASE_BASE_DIR}/logs`         |
-| `SUPABASE_LOG_FILE`       | Directory where Supabase logs are stored.                           | `${SUPABASE_LOGS_DIR}/supabase.log` |
-| `SUPABASE_BIN_DIR`        | Supabase directory for binary files.                                | `${SUPABASE_BASE_DIR}/bin`          |
-| `SUPABASE_TMP_DIR`        | Directory where Supabase temporary files are stored.                | `${SUPABASE_BASE_DIR}/tmp`          |
-| `SUPABASE_PID_FILE`       | Path to the PID file for Supabase.                                  | `${SUPABASE_TMP_DIR}/supabase.pid`  |
-| `SUPABASE_EXTRA_ENV_FILE` | File to store extra environment variables for the supabase service. | `${SUPABASE_BASE_DIR}/.env`         |
-| `SUPABASE_DAEMON_USER`    | postgrest system user.                                              | `supabase`                          |
-| `SUPABASE_DAEMON_GROUP`   | postgrest system group.                                             | `supabase`                          |
+| Name                    | Description                               | Value                               |
+|-------------------------|-------------------------------------------|-------------------------------------|
+| `SUPABASE_BASE_DIR`     | Supabase installation directory.          | `${BITNAMI_ROOT_DIR}/supabase`      |
+| `SUPABASE_LOGS_DIR`     | Directory where Supabas logs are stored.  | `${SUPABASE_BASE_DIR}/logs`         |
+| `SUPABASE_LOG_FILE`     | Directory where Supabase logs are stored. | `${SUPABASE_LOGS_DIR}/supabase.log` |
+| `SUPABASE_BIN_DIR`      | Supabase directory for binary files.      | `${SUPABASE_BASE_DIR}/bin`          |
+| `SUPABASE_DAEMON_USER`  | postgrest system user.                    | `supabase`                          |
+| `SUPABASE_DAEMON_GROUP` | postgrest system group.                   | `supabase`                          |
 
 ### Running commands
 
