@@ -97,17 +97,14 @@ docker run --name supabase-postgres-meta bitnami/supabase-postgres-meta:latest
 
 #### Read-only environment variables
 
-| Name                                    | Description                                                                       | Value                                                           |
-|-----------------------------------------|-----------------------------------------------------------------------------------|-----------------------------------------------------------------|
-| `SUPABASE_POSTGRES_META_BASE_DIR`       | Supabase-postgres-meta installation directory.                                    | `${BITNAMI_ROOT_DIR}/supabase-postgres-meta`                    |
-| `SUPABASE_POSTGRES_META_LOGS_DIR`       | Directory where Supabase-postgres-meta logs are stored.                           | `${SUPABASE_POSTGRES_META_BASE_DIR}/logs`                       |
-| `SUPABASE_POSTGRES_META_LOG_FILE`       | Directory where Supabase-postgres-meta logs are stored.                           | `${SUPABASE_POSTGRES_META_LOGS_DIR}/supabase-postgres-meta.log` |
-| `SUPABASE_POSTGRES_META_BIN_DIR`        | Supabase-postgres-meta directory for binary executables.                          | `${SUPABASE_POSTGRES_META_BASE_DIR}/node_modules/.bin`          |
-| `SUPABASE_POSTGRES_META_TMP_DIR`        | Directory where Supabase-postgres-meta temporary files are stored.                | `${SUPABASE_POSTGRES_META_BASE_DIR}/tmp`                        |
-| `SUPABASE_POSTGRES_META_PID_FILE`       | Path to the PID file for Supabase-postgres-meta.                                  | `${SUPABASE_POSTGRES_META_TMP_DIR}/supabase-postgres-meta.pid`  |
-| `SUPABASE_POSTGRES_META_EXTRA_ENV_FILE` | File to store extra environment variables for the supabase-postgres-meta service. | `${SUPABASE_POSTGRES_META_BASE_DIR}/.env`                       |
-| `SUPABASE_POSTGRES_META_DAEMON_USER`    | postgrest system user.                                                            | `supabase`                                                      |
-| `SUPABASE_POSTGRES_META_DAEMON_GROUP`   | postgrest system group.                                                           | `supabase`                                                      |
+| Name                                  | Description                                              | Value                                                           |
+|---------------------------------------|----------------------------------------------------------|-----------------------------------------------------------------|
+| `SUPABASE_POSTGRES_META_BASE_DIR`     | Supabase-postgres-meta installation directory.           | `${BITNAMI_ROOT_DIR}/supabase-postgres-meta`                    |
+| `SUPABASE_POSTGRES_META_LOGS_DIR`     | Directory where Supabase-postgres-meta logs are stored.  | `${SUPABASE_POSTGRES_META_BASE_DIR}/logs`                       |
+| `SUPABASE_POSTGRES_META_LOG_FILE`     | Directory where Supabase-postgres-meta logs are stored.  | `${SUPABASE_POSTGRES_META_LOGS_DIR}/supabase-postgres-meta.log` |
+| `SUPABASE_POSTGRES_META_BIN_DIR`      | Supabase-postgres-meta directory for binary executables. | `${SUPABASE_POSTGRES_META_BASE_DIR}/node_modules/.bin`          |
+| `SUPABASE_POSTGRES_META_DAEMON_USER`  | postgrest system user.                                   | `supabase`                                                      |
+| `SUPABASE_POSTGRES_META_DAEMON_GROUP` | postgrest system group.                                  | `supabase`                                                      |
 
 ### Running commands
 
