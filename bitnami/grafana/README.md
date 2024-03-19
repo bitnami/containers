@@ -108,7 +108,9 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 | `GF_PATHS_LOGS`               | Grafana directory for log files.                                                     | `${GRAFANA_BASE_DIR}/logs`              |
 | `GF_PATHS_PLUGINS`            | Grafana directory for plugins.                                                       | `${GF_PATHS_DATA}/plugins`              |
 | `GF_PATHS_PROVISIONING`       | Grafana directory for provisioning configurations.                                   | `${GRAFANA_BASE_DIR}/conf/provisioning` |
+| `GF_INSTALL_PLUGINS`          | Grafana plugins to install                                                           | `nil`                                   |
 | `GF_INSTALL_PLUGINS_SKIP_TLS` | Whether to skip TLS certificate verification when installing plugins                 | `yes`                                   |
+| `GF_FEATURE_TOGGLES`          | Comma-separated list of Grafana feature toggles.                                     | `nil`                                   |
 | `GRAFANA_MIGRATION_LOCK`      | Enable the migration lock mechanism to avoid issues caused by concurrent migrations. | `false`                                 |
 | `GRAFANA_SLEEP_TIME`          | Sleep time between migration status check attempts.                                  | `10`                                    |
 | `GRAFANA_RETRY_ATTEMPTS`      | Number of retries to check migration status.                                         | `12`                                    |
