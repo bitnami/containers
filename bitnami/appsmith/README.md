@@ -108,6 +108,7 @@ docker-compose up appsmith
 | `APPSMITH_EMAIL`                | Appsmith default email.                                 | `user@example.com`    |
 | `APPSMITH_MODE`                 | Appsmith service to run (can be backend, client or UI). | `backend`             |
 | `APPSMITH_ENCRYPTION_PASSWORD`  | Appsmith database encryption password.                  | `bitnami123`          |
+| `APPSMITH_ENCRYPTION_SALT`      | Appsmith database encryption salt.                      | `nil`                 |
 | `APPSMITH_API_HOST`             | Appsmith API host.                                      | `appsmith-api`        |
 | `APPSMITH_API_PORT`             | Appsmith API port.                                      | `8080`                |
 | `APPSMITH_UI_HTTP_PORT`         | Appsmith UI HTTP port.                                  | `8080`                |
@@ -118,9 +119,11 @@ docker-compose up appsmith
 | `APPSMITH_DATABASE_PORT_NUMBER` | Database server port.                                   | `27017`               |
 | `APPSMITH_DATABASE_NAME`        | Database name.                                          | `bitnami_appsmith`    |
 | `APPSMITH_DATABASE_USER`        | Database user name.                                     | `bn_appsmith`         |
+| `APPSMITH_DATABASE_PASSWORD`    | Database user password.                                 | `nil`                 |
 | `APPSMITH_DATABASE_INIT_DELAY`  | Time to wait before the database is actually ready.     | `0`                   |
 | `APPSMITH_REDIS_HOST`           | Redis server host.                                      | `redis`               |
 | `APPSMITH_REDIS_PORT_NUMBER`    | Redis server port.                                      | `6379`                |
+| `APPSMITH_REDIS_PASSWORD`       | Redis user password.                                    | `nil`                 |
 | `APPSMITH_STARTUP_TIMEOUT`      | Appsmith startup check timeout.                         | `120`                 |
 | `APPSMITH_STARTUP_ATTEMPTS`     | Appsmith startup check attempts.                        | `5`                   |
 | `APPSMITH_DATA_TO_PERSIST`      | Data to persist from installations.                     | `$APPSMITH_CONF_FILE` |
