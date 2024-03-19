@@ -207,6 +207,7 @@ Bitnami provides up-to-date versions of Mongodb and Parse, including security pa
 | `PARSE_DATABASE_PORT_NUMBER`      | Database server port.                         | `27017`                        |
 | `PARSE_DATABASE_NAME`             | Database name.                                | `bitnami_parse`                |
 | `PARSE_DATABASE_USER`             | Database user name.                           | `bn_parse`                     |
+| `PARSE_DATABASE_PASSWORD`         | Database user password.                       | `nil`                          |
 
 #### Read-only environment variables
 
