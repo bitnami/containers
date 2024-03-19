@@ -163,37 +163,42 @@ kubescape_oss_assessment() {
   read -r -a unique_matching_images <<< "$(echo "${matching_images[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' ')"
   ! is_boolean_yes "$silent" && info "Scanning images ${unique_matching_images[*]}"
   images_scanned=0
+  images_success_scanned=0
 
   # For each image available in Tanzu Application Catalog, add a vulnerability report to the original project scan
   for image in "${unique_matching_images[@]}"; do
-    ! is_boolean_yes "$silent" && info "Running command '${cmd} ${scan_image_args[*]} ${image}'"
     KUBESCAPE_IMAGE_OUTPUT=""
+    info "Scanning image $((images_scanned + 1)) out of ${#unique_matching_images[@]}: ${image}"
     for ((i = 1; i <= retries; i += 1)); do
       KUBESCAPE_IMAGE_OUTPUT="$(${cmd} "${scan_image_args[@]}" "${image}" 2> /dev/null || echo '')"
       if [[ -n "$KUBESCAPE_IMAGE_OUTPUT" ]]; then
         debug "Result: $KUBESCAPE_IMAGE_OUTPUT"
         break
       else
-        ! is_boolean_yes "$silent" && warn "Image scan failed. Retrying... ${i}/${retries}"
+        ! is_boolean_yes "$silent" && debug "Image scan failed. Retrying... ${i}/${retries}"
       fi
     done
 
     if [[ -n "$KUBESCAPE_IMAGE_OUTPUT" ]]; then
       KUBESCAPE_IMAGE_VULNS="$(jq --arg image "$image" '{imageID: $image, vulnerabilities: [.matches[].vulnerability | {id, severity}]}' <(echo "$KUBESCAPE_IMAGE_OUTPUT"))"
       KUBESCAPE_OUTPUT="$(jq '.security += [input]' <(echo "$KUBESCAPE_OUTPUT") <(echo "$KUBESCAPE_IMAGE_VULNS"))"
-      info "Image successfully scanned."
-      images_scanned="$((images_scanned + 1))"
+      images_success_scanned="$((images_success_scanned + 1))"
     else
-      warn "Failed to scan image '${image}' after several attempts."
+      debug "Failed to scan image '${image}' after several attempts."
     fi
+    images_scanned="$((images_scanned + 1))"
   done
 
-  info "Report contains ${images_scanned}/${#unique_matching_images[@]} images available in Tanzu Application Catalog"
+  info "Total scanned: ${images_success_scanned} out of ${#unique_matching_images[@]}"
 
   ! is_boolean_yes "$silent" && info "OSS Assessment report successfully generated"
   if [[ -n "$output" ]]; then
     echo "$KUBESCAPE_OUTPUT" > "$output"
   else
     echo "$KUBESCAPE_OUTPUT"
+  fi
+
+  if [[ "${images_success_scanned}" != "${#unique_matching_images[@]}" ]]; then
+    info "For getting a more complete report, visit the OSS Health Assessment FAQ to scan images from private repositories."
   fi
 }
