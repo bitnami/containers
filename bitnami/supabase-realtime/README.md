@@ -105,17 +105,14 @@ docker run --name supabase-realtime bitnami/supabase-realtime:latest
 
 #### Read-only environment variables
 
-| Name                               | Description                                                                  | Value                                                 |
-|------------------------------------|------------------------------------------------------------------------------|-------------------------------------------------------|
-| `SUPABASE_REALTIME_BASE_DIR`       | Supabase-realtime installation directory.                                    | `${BITNAMI_ROOT_DIR}/supabase-realtime`               |
-| `SUPABASE_REALTIME_LOGS_DIR`       | Directory where Supabase-realtime logs are stored.                           | `${SUPABASE_REALTIME_BASE_DIR}/logs`                  |
-| `SUPABASE_REALTIME_LOG_FILE`       | Directory where Supabase-realtime logs are stored.                           | `${SUPABASE_REALTIME_LOGS_DIR}/supabase-realtime.log` |
-| `SUPABASE_REALTIME_BIN_DIR`        | Supabase-realtime directory for binary executables.                          | `${SUPABASE_REALTIME_BASE_DIR}/bin`                   |
-| `SUPABASE_REALTIME_TMP_DIR`        | Directory where Supabase-realtime temporary files are stored.                | `${SUPABASE_REALTIME_BASE_DIR}/tmp`                   |
-| `SUPABASE_REALTIME_PID_FILE`       | Path to the PID file for Supabase-realtime.                                  | `${SUPABASE_REALTIME_TMP_DIR}/supabase-realtime.pid`  |
-| `SUPABASE_REALTIME_EXTRA_ENV_FILE` | File to store extra environment variables for the harbor-jobservice service. | `${SUPABASE_REALTIME_BASE_DIR}/.env`                  |
-| `SUPABASE_REALTIME_DAEMON_USER`    | postgrest system user.                                                       | `supabase`                                            |
-| `SUPABASE_REALTIME_DAEMON_GROUP`   | postgrest system group.                                                      | `supabase`                                            |
+| Name                             | Description                                         | Value                                                 |
+|----------------------------------|-----------------------------------------------------|-------------------------------------------------------|
+| `SUPABASE_REALTIME_BASE_DIR`     | Supabase-realtime installation directory.           | `${BITNAMI_ROOT_DIR}/supabase-realtime`               |
+| `SUPABASE_REALTIME_LOGS_DIR`     | Directory where Supabase-realtime logs are stored.  | `${SUPABASE_REALTIME_BASE_DIR}/logs`                  |
+| `SUPABASE_REALTIME_LOG_FILE`     | Directory where Supabase-realtime logs are stored.  | `${SUPABASE_REALTIME_LOGS_DIR}/supabase-realtime.log` |
+| `SUPABASE_REALTIME_BIN_DIR`      | Supabase-realtime directory for binary executables. | `${SUPABASE_REALTIME_BASE_DIR}/bin`                   |
+| `SUPABASE_REALTIME_DAEMON_USER`  | postgrest system user.                              | `supabase`                                            |
+| `SUPABASE_REALTIME_DAEMON_GROUP` | postgrest system group.                             | `supabase`                                            |
 
 ### Running commands
 
