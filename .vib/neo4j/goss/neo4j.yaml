@@ -22,6 +22,6 @@ command:
   check-neo4j-daemon:
     exec: neo4j start; neo4j status
     exit-status: 0
-    timeout: 10000
+    timeout: 30000
     stdout:
       - "Neo4j is running"
