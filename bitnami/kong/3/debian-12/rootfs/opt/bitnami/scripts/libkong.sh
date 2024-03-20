@@ -132,7 +132,10 @@ kong_initialize() {
     info "Waiting for database connection to succeed"
     kong_configure_from_environment_variables
 
-    while ! kong_migrations_list_output="$(kong migrations list 2>&1)"; do
+    debug "Running kong prepare"
+    kong prepare -c "$KONG_CONF_FILE" -p "$KONG_PREFIX"
+
+    while ! kong_migrations_list_output="$(kong migrations list -c "$KONG_CONF_FILE" -p "$KONG_PREFIX" 2>&1)"; do
         if is_boolean_yes "$KONG_MIGRATE" && [[ "$kong_migrations_list_output" =~ "Database needs bootstrapping"* ]] || [[ "$kong_migrations_list_output" =~ "migrations available" ]]; then
             break
         fi
@@ -143,11 +146,11 @@ kong_initialize() {
 
     if is_boolean_yes "$KONG_MIGRATE"; then
         info "Migrating database"
-        kong migrations bootstrap
-        while ! kong migrations list; do
+        kong migrations bootstrap -c "$KONG_CONF_FILE" -p "$KONG_PREFIX"
+        while ! kong migrations list -c "$KONG_CONF_FILE" -p "$KONG_PREFIX"; do
             debug "Error during the initial bootstrap for the database, will retry"
-            kong migrations up
-            kong migrations finish
+            kong migrations up -c "$KONG_CONF_FILE" -p "$KONG_PREFIX"
+            kong migrations finish -c "$KONG_CONF_FILE" -p "$KONG_PREFIX"
         done
     fi
 
@@ -262,7 +265,7 @@ is_kong_not_running() {
 kong_stop() {
     local -r retries=5
     local -r sleep_time=5
-    kong stop
+    kong stop -c "$KONG_CONF_FILE" -p "$KONG_PREFIX"
     if ! retry_while is_kong_not_running "$retries" "$sleep_time"; then
         error "Kong failed to shut down"
         exit 1
@@ -282,7 +285,7 @@ kong_start_bg() {
     local -r retries=5
     local -r sleep_time=5
     info "Starting kong in background"
-    kong start &
+    kong start -c "$KONG_CONF_FILE" -p "$KONG_PREFIX" &
     if retry_while is_kong_running "$retries" "$sleep_time"; then
         info "Kong started successfully in background"
     fi
