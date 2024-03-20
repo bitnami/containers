@@ -130,18 +130,19 @@ docker-compose up appsmith
 
 #### Read-only environment variables
 
-| Name                    | Description                       | Value                              |
-|-------------------------|-----------------------------------|------------------------------------|
-| `APPSMITH_BASE_DIR`     | Appsmith installation directory.  | `${BITNAMI_ROOT_DIR}/appsmith`     |
-| `APPSMITH_VOLUME_DIR`   | Appsmith volume directory.        | `/bitnami/appsmith`                |
-| `APPSMITH_LOG_DIR`      | Appsmith logs directory.          | `${APPSMITH_BASE_DIR}/logs`        |
-| `APPSMITH_LOG_FILE`     | Appsmith log file.                | `${APPSMITH_LOG_DIR}/appsmith.log` |
-| `APPSMITH_CONF_DIR`     | Appsmith configuration directory. | `${APPSMITH_BASE_DIR}/conf`        |
-| `APPSMITH_CONF_FILE`    | Appsmith configuration file.      | `${APPSMITH_CONF_DIR}/docker.env`  |
-| `APPSMITH_TMP_DIR`      | Appsmith temporary directory.     | `${APPSMITH_BASE_DIR}/tmp`         |
-| `APPSMITH_PID_FILE`     | Appsmith PID file.                | `${APPSMITH_TMP_DIR}/appsmith.pid` |
-| `APPSMITH_DAEMON_USER`  | Appsmith daemon system user.      | `appsmith`                         |
-| `APPSMITH_DAEMON_GROUP` | Appsmith daemon system group.     | `appsmith`                         |
+| Name                        | Description                               | Value                               |
+|-----------------------------|-------------------------------------------|-------------------------------------|
+| `APPSMITH_BASE_DIR`         | Appsmith installation directory.          | `${BITNAMI_ROOT_DIR}/appsmith`      |
+| `APPSMITH_VOLUME_DIR`       | Appsmith volume directory.                | `/bitnami/appsmith`                 |
+| `APPSMITH_LOG_DIR`          | Appsmith logs directory.                  | `${APPSMITH_BASE_DIR}/logs`         |
+| `APPSMITH_LOG_FILE`         | Appsmith log file.                        | `${APPSMITH_LOG_DIR}/appsmith.log`  |
+| `APPSMITH_CONF_DIR`         | Appsmith configuration directory.         | `${APPSMITH_BASE_DIR}/conf`         |
+| `APPSMITH_DEFAULT_CONF_DIR` | Appsmith default configuration directory. | `${APPSMITH_BASE_DIR}/conf.default` |
+| `APPSMITH_CONF_FILE`        | Appsmith configuration file.              | `${APPSMITH_CONF_DIR}/docker.env`   |
+| `APPSMITH_TMP_DIR`          | Appsmith temporary directory.             | `${APPSMITH_BASE_DIR}/tmp`          |
+| `APPSMITH_PID_FILE`         | Appsmith PID file.                        | `${APPSMITH_TMP_DIR}/appsmith.pid`  |
+| `APPSMITH_DAEMON_USER`      | Appsmith daemon system user.              | `appsmith`                          |
+| `APPSMITH_DAEMON_GROUP`     | Appsmith daemon system group.             | `appsmith`                          |
 
 When you start the Appsmith image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. Please note that some variables are only considered when the container is started for the first time. If you want to add a new environment variable:
 
