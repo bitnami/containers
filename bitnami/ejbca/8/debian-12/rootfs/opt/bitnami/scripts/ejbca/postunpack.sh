@@ -20,8 +20,8 @@ set -o pipefail
 ensure_user_exists "$EJBCA_DAEMON_USER" --group "$EJBCA_DAEMON_GROUP" --system
 
 for dir in "$EJBCA_BASE_DIR" "$EJBCA_WILDFLY_BASE_DIR"  "$EJBCA_TMP_DIR" "$EJBCA_VOLUME_DIR" \
-           "$EJBCA_WILDFLY_VOLUME_DIR" "${EJBCA_WILDFLY_BASE_DIR}/standalone" \
-           "${EJBCA_WILDFLY_BASE_DIR}/domain" "$EJBCA_WILDFLY_TMP_DIR"; do
+           "$EJBCA_WILDFLY_VOLUME_DIR" "${EJBCA_WILDFLY_STANDALONE_DIR}" "${EJBCA_WILDFLY_DEFAULT_STANDALONE_DIR}" \
+           "${EJBCA_CONF_DIR}" "${EJBCA_DEFAULT_CONF_DIR}" "${EJBCA_WILDFLY_BASE_DIR}/domain" "$EJBCA_WILDFLY_TMP_DIR"; do
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
     chown -R "${EJBCA_DAEMON_USER}:root" "$dir"
