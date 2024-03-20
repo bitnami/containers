@@ -203,16 +203,24 @@ docker run -d --name opencart \
 | Name                                  | Description                                                                                                                    | Default Value                          |
 |---------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|----------------------------------------|
 | `OPENCART_DATA_TO_PERSIST`            | Files to persist relative to the OpenCart installation directory. To provide multiple values, separate them with a whitespace. | `config.php administration/config.php` |
+| `OPENCART_HOST`                       | OpenCart server hostname.                                                                                                      | `nil`                                  |
 | `OPENCART_EXTERNAL_HTTP_PORT_NUMBER`  | Port to used by OpenCart to generate URLs and links when accessing using HTTP.                                                 | `80`                                   |
 | `OPENCART_EXTERNAL_HTTPS_PORT_NUMBER` | Port to used by OpenCart to generate URLs and links when accessing using HTTPS.                                                | `443`                                  |
 | `OPENCART_ENABLE_HTTPS`               | Whether to use HTTPS by default.                                                                                               | `no`                                   |
+| `OPENCART_SKIP_BOOTSTRAP`             | Whether to perform initial bootstrapping for the application.                                                                  | `nil`                                  |
 | `OPENCART_USERNAME`                   | OpenCart user name.                                                                                                            | `user`                                 |
 | `OPENCART_PASSWORD`                   | OpenCart user password.                                                                                                        | `bitnami`                              |
 | `OPENCART_EMAIL`                      | OpenCart user e-mail address.                                                                                                  | `user@example.com`                     |
+| `OPENCART_SMTP_HOST`                  | OpenCart SMTP server host.                                                                                                     | `nil`                                  |
+| `OPENCART_SMTP_PORT_NUMBER`           | OpenCart SMTP server port number.                                                                                              | `nil`                                  |
+| `OPENCART_SMTP_USER`                  | OpenCart SMTP server user.                                                                                                     | `nil`                                  |
+| `OPENCART_SMTP_PASSWORD`              | OpenCart SMTP server user password.                                                                                            | `nil`                                  |
+| `OPENCART_SMTP_PROTOCOL`              | OpenCart SMTP server protocol to use.                                                                                          | `nil`                                  |
 | `OPENCART_DATABASE_HOST`              | Database server host.                                                                                                          | `$OPENCART_DEFAULT_DATABASE_HOST`      |
 | `OPENCART_DATABASE_PORT_NUMBER`       | Database server port.                                                                                                          | `3306`                                 |
 | `OPENCART_DATABASE_NAME`              | Database name.                                                                                                                 | `bitnami_opencart`                     |
 | `OPENCART_DATABASE_USER`              | Database user name.                                                                                                            | `bn_opencart`                          |
+| `OPENCART_DATABASE_PASSWORD`          | Database user password.                                                                                                        | `nil`                                  |
 
 #### Read-only environment variables
 
@@ -224,7 +232,6 @@ docker run -d --name opencart \
 | `OPENCART_VOLUME_DIR`            | OpenCart directory for mounted configuration files.       | `${BITNAMI_VOLUME_DIR}/opencart`                 |
 | `OPENCART_STORAGE_DIR`           | OpenCart directory for mounted configuration files.       | `${BITNAMI_VOLUME_DIR}/opencart_storage`         |
 | `OPENCART_DEFAULT_DATABASE_HOST` | Default database server host.                             | `mariadb`                                        |
-| `OPENCART_DEFAULT_DATABASE_HOST` | Default database server host.                             | `127.0.0.1`                                      |
 | `PHP_DEFAULT_MEMORY_LIMIT`       | Default PHP memory limit.                                 | `256M`                                           |
 
 When you start the OpenCart image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
