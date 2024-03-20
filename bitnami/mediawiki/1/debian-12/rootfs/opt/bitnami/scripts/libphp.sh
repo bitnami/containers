@@ -59,7 +59,12 @@ php_conf_set() {
 php_initialize() {
     # Configure PHP options based on the runtime environment
     info "Configuring PHP options"
+    if ! is_dir_empty "$PHP_DEFAULT_CONF_DIR"; then
+        # Copy default configuration to php configuration directory
+        cp -nr "$PHP_DEFAULT_CONF_DIR"/. "$PHP_CONF_DIR"
+    fi
     php_set_runtime_config "$PHP_CONF_FILE"
+
 
     # PHP-FPM configuration
     ! is_empty_value "$PHP_FPM_LISTEN_ADDRESS" && info "Setting PHP-FPM listen option" && php_conf_set "listen" "$PHP_FPM_LISTEN_ADDRESS" "${PHP_CONF_DIR}/php-fpm.d/www.conf"
