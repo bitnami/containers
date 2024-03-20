@@ -202,6 +202,7 @@ docker run -d --name prestashop \
 | Name                                    | Description                                                                                                                      | Default Value                       |
 |-----------------------------------------|----------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|
 | `PRESTASHOP_DATA_TO_PERSIST`            | Files to persist relative to the PrestaShop installation directory. To provide multiple values, separate them with a whitespace. | `$PRESTASHOP_BASE_DIR`              |
+| `PRESTASHOP_HOST`                       | PrestaShop server hostname.                                                                                                      | `nil`                               |
 | `PRESTASHOP_ENABLE_HTTPS`               | Whether to use HTTPS by default.                                                                                                 | `no`                                |
 | `PRESTASHOP_EXTERNAL_HTTP_PORT_NUMBER`  | Port to used by PrestaShop to generate URLs and links when accessing using HTTP.                                                 | `80`                                |
 | `PRESTASHOP_EXTERNAL_HTTPS_PORT_NUMBER` | Port to used by PrestaShop to generate URLs and links when accessing using HTTPS.                                                | `443`                               |
@@ -209,15 +210,22 @@ docker run -d --name prestashop \
 | `PRESTASHOP_COUNTRY`                    | Default country of the store.                                                                                                    | `us`                                |
 | `PRESTASHOP_LANGUAGE`                   | Default language of the store (ISO code).                                                                                        | `en`                                |
 | `PRESTASHOP_TIMEZONE`                   | Default timezone for the store.                                                                                                  | `America/Los_Angeles`               |
+| `PRESTASHOP_SKIP_BOOTSTRAP`             | Whether to perform initial bootstrapping for the application.                                                                    | `nil`                               |
 | `PRESTASHOP_FIRST_NAME`                 | PrestaShop user first name.                                                                                                      | `Bitnami`                           |
 | `PRESTASHOP_LAST_NAME`                  | PrestaShop user last name.                                                                                                       | `User`                              |
 | `PRESTASHOP_PASSWORD`                   | PrestaShop user password.                                                                                                        | `bitnami1`                          |
 | `PRESTASHOP_EMAIL`                      | PrestaShop user e-mail address.                                                                                                  | `user@example.com`                  |
+| `PRESTASHOP_SMTP_HOST`                  | PrestaShop SMTP server host.                                                                                                     | `nil`                               |
+| `PRESTASHOP_SMTP_PORT_NUMBER`           | PrestaShop SMTP server port number.                                                                                              | `nil`                               |
+| `PRESTASHOP_SMTP_USER`                  | PrestaShop SMTP server user.                                                                                                     | `nil`                               |
+| `PRESTASHOP_SMTP_PASSWORD`              | PrestaShop SMTP server user password.                                                                                            | `nil`                               |
+| `PRESTASHOP_SMTP_PROTOCOL`              | PrestaShop SMTP server protocol to use.                                                                                          | `nil`                               |
 | `PRESTASHOP_DATABASE_HOST`              | Database server host.                                                                                                            | `$PRESTASHOP_DEFAULT_DATABASE_HOST` |
 | `PRESTASHOP_DATABASE_PORT_NUMBER`       | Database server port.                                                                                                            | `3306`                              |
 | `PRESTASHOP_DATABASE_NAME`              | Database name.                                                                                                                   | `bitnami_prestashop`                |
 | `PRESTASHOP_DATABASE_PREFIX`            | Database prefix.                                                                                                                 | `ps_`                               |
 | `PRESTASHOP_DATABASE_USER`              | Database user name.                                                                                                              | `bn_prestashop`                     |
+| `PRESTASHOP_DATABASE_PASSWORD`          | Database user password.                                                                                                          | `nil`                               |
 
 #### Read-only environment variables
 
