@@ -140,16 +140,17 @@ docker-compose up -d
 
 #### Customizable environment variables
 
-| Name                                      | Description                                   | Default Value |
-|-------------------------------------------|-----------------------------------------------|---------------|
-| `NEO4J_BIND_ADDRESS`                      | Neo4j bind address                            | `0.0.0.0`     |
-| `NEO4J_ALLOW_UPGRADE`                     | Allow automatic schema upgrades               | `true`        |
-| `NEO4J_PASSWORD`                          | Neo4j password.                               | `bitnami1`    |
-| `NEO4J_APOC_IMPORT_FILE_ENABLED`          | Allow importing files using the apoc library  | `true`        |
-| `NEO4J_APOC_IMPORT_FILE_USE_NEO4J_CONFIG` | Use neo4j configuration with the apoc library | `false`       |
-| `NEO4J_BOLT_PORT_NUMBER`                  | Port used for the bolt protocol.              | `7687`        |
-| `NEO4J_HTTP_PORT_NUMBER`                  | Port used for the http protocol.              | `7474`        |
-| `NEO4J_HTTPS_PORT_NUMBER`                 | Port used for the https protocol.             | `7473`        |
+| Name                                      | Description                                                                                                                                   | Default Value |
+|-------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+| `NEO4J_HOST`                              | Hostname used to configure Neo4j advertised address. It can be either an IP or a domain. If left empty, it will be resolved to the machine IP | `nil`         |
+| `NEO4J_BIND_ADDRESS`                      | Neo4j bind address                                                                                                                            | `0.0.0.0`     |
+| `NEO4J_ALLOW_UPGRADE`                     | Allow automatic schema upgrades                                                                                                               | `true`        |
+| `NEO4J_PASSWORD`                          | Neo4j password.                                                                                                                               | `bitnami1`    |
+| `NEO4J_APOC_IMPORT_FILE_ENABLED`          | Allow importing files using the apoc library                                                                                                  | `true`        |
+| `NEO4J_APOC_IMPORT_FILE_USE_NEO4J_CONFIG` | Use neo4j configuration with the apoc library                                                                                                 | `false`       |
+| `NEO4J_BOLT_PORT_NUMBER`                  | Port used for the bolt protocol.                                                                                                              | `7687`        |
+| `NEO4J_HTTP_PORT_NUMBER`                  | Port used for the http protocol.                                                                                                              | `7474`        |
+| `NEO4J_HTTPS_PORT_NUMBER`                 | Port used for the https protocol.                                                                                                             | `7473`        |
 
 #### Read-only environment variables
 
