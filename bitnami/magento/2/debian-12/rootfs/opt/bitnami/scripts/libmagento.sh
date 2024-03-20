@@ -99,7 +99,7 @@ magento_validate() {
     fi
 
     # Search engine configuration validations
-    check_multi_value "MAGENTO_SEARCH_ENGINE" "elasticsearch5 elasticsearch6 elasticsearch7"
+    check_multi_value "MAGENTO_SEARCH_ENGINE" "elasticsearch7 opensearch"
     if [[ "$MAGENTO_SEARCH_ENGINE" =~ ^elasticsearch ]]; then
         check_resolved_hostname "$MAGENTO_ELASTICSEARCH_HOST"
         validate_port "$MAGENTO_ELASTICSEARCH_PORT_NUMBER"
@@ -107,6 +107,17 @@ magento_validate() {
         if is_boolean_yes "$MAGENTO_ELASTICSEARCH_ENABLE_AUTH"; then
             check_empty_value "MAGENTO_ELASTICSEARCH_USER"
             check_empty_value "MAGENTO_ELASTICSEARCH_PASSWORD"
+        fi
+    fi
+
+    # OpenSearch engine configuration validation
+     if [[ "$MAGENTO_SEARCH_ENGINE" =~ ^opensearch ]]; then
+        check_resolved_hostname "$MAGENTO_OPENSEARCH_HOST"
+        validate_port "$MAGENTO_OPENSEARCH_PORT_NUMBER"
+        check_yes_no_value "MAGENTO_OPENSEARCH_ENABLE_AUTH"
+        if is_boolean_yes "$MAGENTO_OPENSEARCH_ENABLE_AUTH"; then
+            check_empty_value "MAGENTO_OPENSEARCH_USER"
+            check_empty_value "MAGENTO_OPENSEARCH_PASSWORD"
         fi
     fi
 
@@ -138,6 +149,7 @@ magento_initialize() {
     # Check if Magento has already been initialized and persisted in a previous run
     local db_host db_port db_name db_user db_pass
     local es_host es_port es_user es_pass
+    local oss_host oss_port oss_user oss_pass
     local -r app_name="magento"
     if ! is_app_initialized "$app_name"; then
         # Parse user inputs for the Magento CLI calls below
@@ -204,6 +216,31 @@ magento_initialize() {
                 "--elasticsearch-password" "$es_pass"
             )
         fi
+        if [[ "$MAGENTO_SEARCH_ENGINE" =~ ^opensearch ]]; then
+            oss_host="$MAGENTO_OPENSEARCH_HOST"
+            oss_port="$MAGENTO_OPENSEARCH_PORT_NUMBER"
+            oss_user="$MAGENTO_OPENSEARCH_USER"
+            oss_pass="$MAGENTO_OPENSEARCH_PASSWORD"
+            # Define whether Opensearch auth is enabled
+            local oss_auth="0"
+            is_boolean_yes "$MAGENTO_OPENSEARCH_ENABLE_AUTH" && oss_auth="1"
+            # Elasticsearch configuration is stored in the database, so we only need to specify for 'setup:install'
+            if is_boolean_yes "$MAGENTO_OPENSEARCH_USE_HTTPS"; then
+                magento_install_cli_flags+=(
+                    "--opensearch-host" "https://$oss_host"
+                )
+            else
+                magento_install_cli_flags+=(
+                    "--opensearch-host" "$oss_host"
+                )
+            fi
+            magento_install_cli_flags+=(
+                "--opensearch-port" "$oss_port"
+                "--opensearch-enable-auth" "$oss_auth"
+                "--opensearch-username" "$oss_user"
+                "--opensearch-password" "$oss_pass"
+            )
+        fi
         # Allow to specify extra CLI flags, but ensure they are added last
         local -a magento_extra_cli_flags
         read -r -a magento_extra_cli_flags <<< "$MAGENTO_EXTRA_INSTALL_ARGS"
@@ -227,6 +264,10 @@ magento_initialize() {
         if [[ "$MAGENTO_SEARCH_ENGINE" =~ ^elasticsearch ]]; then
             info "Trying to connect to Elasticsearch"
             magento_wait_for_es_connection "$es_host" "$es_port"
+        fi
+        if [[ "$MAGENTO_SEARCH_ENGINE" =~ ^opensearch ]]; then
+            info "Trying to connect to Opensearch"
+            magento_wait_for_es_connection "$oss_host" "$oss_port"
         fi
 
         if ! is_boolean_yes "$MAGENTO_SKIP_BOOTSTRAP"; then
@@ -355,6 +396,13 @@ magento_initialize() {
             es_port="$MAGENTO_ELASTICSEARCH_PORT_NUMBER"
             info "Trying to connect to Elasticsearch"
             magento_wait_for_es_connection "$es_host" "$es_port"
+        fi
+
+        if [[ "$MAGENTO_SEARCH_ENGINE" =~ ^opensearch ]]; then
+            oss_host="$MAGENTO_OPENSEARCH_HOST"
+            oss_port="$MAGENTO_OPENSEARCH_PORT_NUMBER"
+            info "Trying to connect to Elasticsearch"
+            magento_wait_for_es_connection "$oss_host" "$oss_port"
         fi
 
         # Perform database schema upgrade
