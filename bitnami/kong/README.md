@@ -106,6 +106,7 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 | `KONG_ADMIN_LISTEN`            | Kong admin listen address.                         | `${KONG_ADMIN_LISTEN_ADDRESS}:${KONG_ADMIN_HTTP_PORT_NUMBER}, ${KONG_ADMIN_LISTEN_ADDRESS}:${KONG_ADMIN_HTTPS_PORT_NUMBER} ssl` |
 | `KONG_ADMIN_LISTEN_OVERRIDE`   | Override admin listen.                             | `no`                                                                                                                            |
 | `KONG_DATABASE`                | Select database for Kong.                          | `postgres`                                                                                                                      |
+| `KONG_PG_PASSWORD`             | PostgreSQL password for Kong.                      | `nil`                                                                                                                           |
 
 #### Read-only environment variables
 
