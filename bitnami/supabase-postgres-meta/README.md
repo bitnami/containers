@@ -92,6 +92,7 @@ docker run --name supabase-postgres-meta bitnami/supabase-postgres-meta:latest
 | `PG_META_DB_PORT`     | Database port number   | `5432`           |
 | `PG_META_DB_NAME`     | Database name          | `postgres`       |
 | `PG_META_DB_USER`     | Database user username | `supabase_admin` |
+| `PG_META_DB_PASSWORD` | Database password      | `nil`            |
 | `PG_META_DB_SSL_MODE` | Database SSL mode      | `disable`        |
 | `PG_META_PORT`        | Service Port           | `9600`           |
 
