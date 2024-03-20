@@ -72,6 +72,7 @@ Non-root container images add an extra layer of security and are generally recom
 | `JUPYTERHUB_DATABASE_PORT_NUMBER` | Database server port.         | `5432`               |
 | `JUPYTERHUB_DATABASE_NAME`        | Database name.                | `bitnami_jupyterhub` |
 | `JUPYTERHUB_DATABASE_USER`        | Database user name.           | `bn_jupyterhub`      |
+| `JUPYTERHUB_DATABASE_PASSWORD`    | Database user password.       | `nil`                |
 
 #### Read-only environment variables
 
