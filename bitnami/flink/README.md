@@ -65,33 +65,29 @@ Non-root container images add an extra layer of security and are generally recom
 
 #### Customizable environment variables
 
-| Name                                      | Description                                      | Default Value                         |
-|-------------------------------------------|--------------------------------------------------|---------------------------------------|
-| `FLINK_MODE`                              | Flink default mode.                              | `jobmanager`                          |
-| `FLINK_CFG_REST_PORT`                     | The port that the client connects to.            | `8081`                                |
-| `FLINK_TASK_MANAGER_NUMBER_OF_TASK_SLOTS` | Number of task slots for taskmanager.            | `$(grep -c ^processor /proc/cpuinfo)` |
-| `APACHE_FLINK_USERNAME`                   | Flink user to configure basic authentication     | `user`                                |
-| `APACHE_FLINK_PASSWORD`                   | Flink password to configure basic authentication | `bitnami`                             |
+| Name                                      | Description                                                                                           | Default Value                         |
+|-------------------------------------------|-------------------------------------------------------------------------------------------------------|---------------------------------------|
+| `FLINK_MODE`                              | Flink default mode.                                                                                   | `jobmanager`                          |
+| `FLINK_CFG_REST_PORT`                     | The port that the client connects to.                                                                 | `8081`                                |
+| `FLINK_TASK_MANAGER_NUMBER_OF_TASK_SLOTS` | Number of task slots for taskmanager.                                                                 | `$(grep -c ^processor /proc/cpuinfo)` |
+| `FLINK_PROPERTIES`                        | List of Flink cluster configuration options separated by new line, the same way as in the flink-conf. | `nil`                                 |
 
 #### Read-only environment variables
 
-| Name                         | Description                                                                                                                 | Value                                                     |
-|------------------------------|-----------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
-| `FLINK_BASE_DIR`             | Flink installation directory.                                                                                               | `${BITNAMI_ROOT_DIR}/flink`                               |
-| `FLINK_BIN_DIR`              | Flink installation directory.                                                                                               | `${FLINK_BASE_DIR}/bin`                                   |
-| `FLINK_WORK_DIR`             | Flink installation directory.                                                                                               | `${FLINK_BASE_DIR}`                                       |
-| `FLINK_LOG_DIR`              | Flink log directory.                                                                                                        | `${FLINK_BASE_DIR}/log`                                   |
-| `FLINK_CONF_DIR`             | Flink configuration directory.                                                                                              | `${FLINK_BASE_DIR}/conf`                                  |
-| `FLINK_DEFAULT_CONF_DIR`     | Flink configuration directory.                                                                                              | `${FLINK_BASE_DIR}/conf.default`                          |
-| `FLINK_CONF_FILE`            | Flink configuration file name.                                                                                              | `flink-conf.yaml`                                         |
-| `FLINK_CONF_FILE_PATH`       | Flink configuration file path.                                                                                              | `${FLINK_CONF_DIR}/${FLINK_CONF_FILE}`                    |
-| `FLINK_VOLUME_DIR`           | Flink directory for mounted configuration files.                                                                            | `${BITNAMI_VOLUME_DIR}/flink`                             |
-| `FLINK_DATA_TO_PERSIST`      | Files to persist relative to the Flink installation directory. To provide multiple values, separate them with a whitespace. | `conf plugins`                                            |
-| `FLINK_DAEMON_USER`          | Flink daemon system user.                                                                                                   | `flink`                                                   |
-| `FLINK_DAEMON_GROUP`         | Flink daemon system group.                                                                                                  | `flink`                                                   |
-| `FLINK_PID_DIR`              | Default location for PID files                                                                                              | `${FLINK_BASE_DIR}/pid`                                   |
-| `FLINK_JOBMANAGER_PID_FILE`  | PID file for flink-jobmanager service.                                                                                      | `${FLINK_PID_DIR}/flink-jobmanager-standalonesession.pid` |
-| `FLINK_TASKMANAGER_PID_FILE` | PID file for flink-jobmanager service.                                                                                      | `${FLINK_PID_DIR}/flink-taskmanager-taskexecutor.pid`     |
+| Name                     | Description                                                                                                                 | Value                                  |
+|--------------------------|-----------------------------------------------------------------------------------------------------------------------------|----------------------------------------|
+| `FLINK_BASE_DIR`         | Flink installation directory.                                                                                               | `${BITNAMI_ROOT_DIR}/flink`            |
+| `FLINK_BIN_DIR`          | Flink installation directory.                                                                                               | `${FLINK_BASE_DIR}/bin`                |
+| `FLINK_WORK_DIR`         | Flink installation directory.                                                                                               | `${FLINK_BASE_DIR}`                    |
+| `FLINK_LOG_DIR`          | Flink log directory.                                                                                                        | `${FLINK_BASE_DIR}/log`                |
+| `FLINK_CONF_DIR`         | Flink configuration directory.                                                                                              | `${FLINK_BASE_DIR}/conf`               |
+| `FLINK_DEFAULT_CONF_DIR` | Flink configuration directory.                                                                                              | `${FLINK_BASE_DIR}/conf.default`       |
+| `FLINK_CONF_FILE`        | Flink configuration file name.                                                                                              | `config.yaml`                          |
+| `FLINK_CONF_FILE_PATH`   | Flink configuration file path.                                                                                              | `${FLINK_CONF_DIR}/${FLINK_CONF_FILE}` |
+| `FLINK_VOLUME_DIR`       | Flink directory for mounted configuration files.                                                                            | `${BITNAMI_VOLUME_DIR}/flink`          |
+| `FLINK_DATA_TO_PERSIST`  | Files to persist relative to the Flink installation directory. To provide multiple values, separate them with a whitespace. | `conf plugins`                         |
+| `FLINK_DAEMON_USER`      | Flink daemon system user.                                                                                                   | `flink`                                |
+| `FLINK_DAEMON_GROUP`     | Flink daemon system group.                                                                                                  | `flink`                                |
 
 ### Running commands
 
