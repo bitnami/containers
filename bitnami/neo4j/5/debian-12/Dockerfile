@@ -59,5 +59,3 @@ EXPOSE 7473 7474 8756
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/scripts/neo4j/entrypoint.sh" ]
 CMD [ "/opt/bitnami/scripts/neo4j/run.sh" ]
-
-# Dummy change to force VIB execution
