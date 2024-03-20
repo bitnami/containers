@@ -203,15 +203,24 @@ docker run -d --name drupal \
 | `DRUPAL_DATA_TO_PERSIST`      | Files to persist relative to the Drupal installation directory. To provide multiple values, separate them with a whitespace. | `sites/ themes/ modules/ profiles/` |
 | `DRUPAL_PROFILE`              | Drupal installation profile.                                                                                                 | `standard`                          |
 | `DRUPAL_SITE_NAME`            | Drupal blog name.                                                                                                            | `My blog`                           |
+| `DRUPAL_SKIP_BOOTSTRAP`       | Whether to perform initial bootstrapping for the application.                                                                | `nil`                               |
+| `DRUPAL_ENABLE_MODULES`       | Comma or space separated list of installed modules to enable during the first initialization.                                | `nil`                               |
+| `DRUPAL_CONFIG_SYNC_DIR`      | Drupal sync configuration directory location. Only used when `DRUPAL_SKIP_BOOTSTRAP` is enabled.                             | `nil`                               |
+| `DRUPAL_HASH_SALT`            | Drupal string used to generate random values. Only used when `DRUPAL_SKIP_BOOTSTRAP` is enabled.                             | `nil`                               |
 | `DRUPAL_USERNAME`             | Drupal user name.                                                                                                            | `user`                              |
 | `DRUPAL_PASSWORD`             | Drupal user password.                                                                                                        | `bitnami`                           |
 | `DRUPAL_EMAIL`                | Drupal user e-mail address.                                                                                                  | `user@example.com`                  |
+| `DRUPAL_SMTP_HOST`            | Drupal SMTP server host.                                                                                                     | `nil`                               |
 | `DRUPAL_SMTP_PORT_NUMBER`     | Drupal SMTP server port number.                                                                                              | `25`                                |
+| `DRUPAL_SMTP_USER`            | Drupal SMTP server user.                                                                                                     | `nil`                               |
+| `DRUPAL_SMTP_PASSWORD`        | Drupal SMTP server user password.                                                                                            | `nil`                               |
 | `DRUPAL_SMTP_PROTOCOL`        | Drupal SMTP server protocol.                                                                                                 | `standard`                          |
 | `DRUPAL_DATABASE_HOST`        | Database server host.                                                                                                        | `$DRUPAL_DEFAULT_DATABASE_HOST`     |
 | `DRUPAL_DATABASE_PORT_NUMBER` | Database server port.                                                                                                        | `3306`                              |
 | `DRUPAL_DATABASE_NAME`        | Database name.                                                                                                               | `bitnami_drupal`                    |
 | `DRUPAL_DATABASE_USER`        | Database user name.                                                                                                          | `bn_drupal`                         |
+| `DRUPAL_DATABASE_PASSWORD`    | Database user password.                                                                                                      | `nil`                               |
+| `DRUPAL_DATABASE_TLS_CA_FILE` | TLS CA certificate for connections.                                                                                          | `nil`                               |
 
 #### Read-only environment variables
 
