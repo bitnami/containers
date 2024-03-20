@@ -26,6 +26,8 @@ debug "Copying files from $EJBCA_DEFAULT_CONF_DIR to $EJBCA_CONF_DIR"
 cp -nr "$EJBCA_DEFAULT_CONF_DIR"/. "$EJBCA_CONF_DIR" || true
 debug "Copying files from $EJBCA_WILDFLY_DEFAULT_STANDALONE_DIR to $EJBCA_WILDFLY_STANDALONE_DIR"
 cp -nr "$EJBCA_WILDFLY_DEFAULT_STANDALONE_DIR"/. "$EJBCA_WILDFLY_STANDALONE_DIR" || true
+debug "Copying files from $EJBCA_WILDFLY_DEFAULT_DOMAIN_DIR to $EJBCA_WILDFLY_DOMAIN_DIR"
+cp -nr "$EJBCA_WILDFLY_DEFAULT_DOMAIN_DIR"/. "$EJBCA_WILDFLY_DOMAIN_DIR" || true
 
 if [[ "$*" = *"/opt/bitnami/scripts/ejbca/run.sh"* ]]; then
     info "** Starting ejbca setup **"
