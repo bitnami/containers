@@ -205,15 +205,24 @@ docker run -d --name ghost \
 | `GHOST_EXTERNAL_HTTP_PORT_NUMBER`  | External HTTP port for Ghost.                                                                                               | `80`                             |
 | `GHOST_EXTERNAL_HTTPS_PORT_NUMBER` | External HTTPS port for Ghost.                                                                                              | `443`                            |
 | `GHOST_HOST`                       | Ghost host name.                                                                                                            | `localhost`                      |
+| `GHOST_PORT_NUMBER`                | Port number in which Ghost will run.                                                                                        | `nil`                            |
 | `GHOST_BLOG_TITLE`                 | Ghost blog title.                                                                                                           | `"User's blog"`                  |
+| `GHOST_SKIP_BOOTSTRAP`             | Whether to perform initial bootstrapping for the application.                                                               | `nil`                            |
 | `GHOST_USERNAME`                   | Ghost user name.                                                                                                            | `user`                           |
 | `GHOST_PASSWORD`                   | Ghost user password.                                                                                                        | `bitnami123`                     |
 | `GHOST_EMAIL`                      | Ghost user e-mail address.                                                                                                  | `user@example.com`               |
+| `GHOST_SMTP_HOST`                  | Ghost SMTP server host.                                                                                                     | `nil`                            |
+| `GHOST_SMTP_PORT_NUMBER`           | Ghost SMTP server port number.                                                                                              | `nil`                            |
+| `GHOST_SMTP_USER`                  | Ghost SMTP server user.                                                                                                     | `nil`                            |
+| `GHOST_SMTP_PASSWORD`              | Ghost SMTP server user password.                                                                                            | `nil`                            |
+| `GHOST_SMTP_PROTOCOL`              | Ghost SMTP server protocol to use.                                                                                          | `nil`                            |
 | `GHOST_DATABASE_HOST`              | Database server host.                                                                                                       | `$GHOST_DEFAULT_DATABASE_HOST`   |
 | `GHOST_DATABASE_PORT_NUMBER`       | Database server port.                                                                                                       | `3306`                           |
 | `GHOST_DATABASE_NAME`              | Database name.                                                                                                              | `bitnami_ghost`                  |
 | `GHOST_DATABASE_USER`              | Database user name.                                                                                                         | `bn_ghost`                       |
+| `GHOST_DATABASE_PASSWORD`          | Database user password.                                                                                                     | `nil`                            |
 | `GHOST_DATABASE_ENABLE_SSL`        | Whether to enable SSL for database connection                                                                               | `no`                             |
+| `GHOST_DATABASE_SSL_CA_FILE`       | Path to the database SSL CA file                                                                                            | `nil`                            |
 
 #### Read-only environment variables
 
