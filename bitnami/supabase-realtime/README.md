@@ -92,7 +92,10 @@ docker run --name supabase-realtime bitnami/supabase-realtime:latest
 | `DB_PORT`                   | Database port number            | `5432`                  |
 | `DB_NAME`                   | Database name                   | `postgres`              |
 | `DB_USER`                   | Database user username          | `postgres`              |
+| `DB_PASSWORD`               | Database password               | `nil`                   |
 | `DB_SSL`                    | Database SSL connection enabled | `disable`               |
+| `API_JWT_SECRET`            | API Secret                      | `nil`                   |
+| `SECRET_KEY_BASE`           | Key Base Secret                 | `nil`                   |
 | `PORT`                      | Service Port                    | `9500`                  |
 | `FLY_APP_NAME`              | App Name                        | `realtime`              |
 | `FLY_ALLOC_ID`              | Alloc ID                        | `realtime`              |
