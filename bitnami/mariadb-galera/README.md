@@ -172,31 +172,62 @@ docker-compose up -d
 
 #### Customizable environment variables
 
-| Name                                  | Description                                                                                                               | Default Value                             |
-|---------------------------------------|---------------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
-| `ALLOW_EMPTY_PASSWORD`                | Allow MariaDB Galera access without any password.                                                                         | `no`                                      |
-| `MARIADB_ROOT_USER`                   | MariaDB Galera database root user.                                                                                        | `root`                                    |
-| `MARIADB_MASTER_PORT_NUMBER`          | Port number for the MariaDB Galera master node.                                                                           | `3306`                                    |
-| `MARIADB_MASTER_ROOT_USER`            | MariaDB Galera database root user of the master host.                                                                     | `root`                                    |
-| `MARIADB_MASTER_DELAY`                | MariaDB Galera database replication delay.                                                                                | `0`                                       |
-| `MARIADB_REPLICATION_SLAVE_DUMP`      | Make a dump on master and update slave MariaDB Galera database                                                            | `false`                                   |
-| `MARIADB_SKIP_TEST_DB`                | Whether to skip creating the test database.                                                                               | `no`                                      |
-| `MARIADB_CLIENT_ENABLE_SSL`           | Whether to force SSL for connections to the MariaDB Galera database.                                                      | `no`                                      |
-| `MARIADB_CLIENT_EXTRA_FLAGS`          | Whether to force SSL connections with the "mysql" CLI tool. Useful for applications that rely on the CLI instead of APIs. | `no`                                      |
-| `MARIADB_STARTUP_WAIT_RETRIES`        | Number of retries waiting for the database to be running.                                                                 | `300`                                     |
-| `MARIADB_STARTUP_WAIT_SLEEP_TIME`     | Sleep time between retries waiting for the database to be running.                                                        | `2`                                       |
-| `MARIADB_ENABLE_SLOW_QUERY`           | Whether to enable slow query logs.                                                                                        | `0`                                       |
-| `MARIADB_LONG_QUERY_TIME`             | How much time, in seconds, defines a slow query.                                                                          | `10.0`                                    |
-| `MARIADB_GALERA_CONF_DIR`             | MariaDB Galera configuration directory                                                                                    | `/opt/bitnami/mariadb/conf`               |
-| `MARIADB_GALERA_MOUNTED_CONF_DIR`     | Directory for including custom configuration files (that override the default generated ones)                             | `/bitnami/conf`                           |
-| `MARIADB_GALERA_CLUSTER_NAME`         | Galera cluster name.                                                                                                      | `$DB_GALERA_DEFAULT_CLUSTER_NAME`         |
-| `MARIADB_GALERA_SST_METHOD`           | State Snapshot Transfer (SST) method to use.                                                                              | `$DB_GALERA_DEFAULT_SST_METHOD`           |
-| `MARIADB_GALERA_MARIABACKUP_USER`     | Username to use with the "mariabackup" tool for State Snapshot Transfer (SST).                                            | `$DB_GALERA_DEFAULT_MARIABACKUP_USER`     |
-| `MARIADB_GALERA_MARIABACKUP_PASSWORD` | Password for the username to use with the "mariabackup" tool for State Snapshot Transfer (SST).                           | `$DB_GALERA_DEFAULT_MARIABACKUP_PASSWORD` |
-| `MARIADB_ENABLE_LDAP`                 | Whether to enable LDAP for MariaDB Galera.                                                                                | `no`                                      |
-| `MARIADB_ENABLE_TLS`                  | Whether to enable SSL/TLS for MariaDB Galera.                                                                             | `no`                                      |
-| `MARIADB_REPLICATION_USER`            | MariaDB Galera replication database user.                                                                                 | `monitor`                                 |
-| `MARIADB_REPLICATION_PASSWORD`        | Password for the MariaDB Galera replication database user.                                                                | `monitor`                                 |
+| Name                                          | Description                                                                                                               | Default Value                             |
+|-----------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
+| `ALLOW_EMPTY_PASSWORD`                        | Allow MariaDB Galera access without any password.                                                                         | `no`                                      |
+| `MARIADB_AUTHENTICATION_PLUGIN`               | MariaDB Galera authentication plugin to configure during the first initialization.                                        | `nil`                                     |
+| `MARIADB_ROOT_USER`                           | MariaDB Galera database root user.                                                                                        | `root`                                    |
+| `MARIADB_ROOT_PASSWORD`                       | MariaDB Galera database root user password.                                                                               | `nil`                                     |
+| `MARIADB_USER`                                | MariaDB Galera database user to create during the first initialization.                                                   | `nil`                                     |
+| `MARIADB_PASSWORD`                            | Password for the MariaDB Galera database user to create during the first initialization.                                  | `nil`                                     |
+| `MARIADB_DATABASE`                            | MariaDB Galera database to create during the first initialization.                                                        | `nil`                                     |
+| `MARIADB_MASTER_HOST`                         | Address for the MariaDB Galera master node.                                                                               | `nil`                                     |
+| `MARIADB_MASTER_PORT_NUMBER`                  | Port number for the MariaDB Galera master node.                                                                           | `3306`                                    |
+| `MARIADB_MASTER_ROOT_USER`                    | MariaDB Galera database root user of the master host.                                                                     | `root`                                    |
+| `MARIADB_MASTER_ROOT_PASSWORD`                | Password for the MariaDB Galera database root user of the the master host.                                                | `nil`                                     |
+| `MARIADB_MASTER_DELAY`                        | MariaDB Galera database replication delay.                                                                                | `0`                                       |
+| `MARIADB_REPLICATION_USER`                    | MariaDB Galera replication database user.                                                                                 | `nil`                                     |
+| `MARIADB_REPLICATION_PASSWORD`                | Password for the MariaDB Galera replication database user.                                                                | `nil`                                     |
+| `MARIADB_PORT_NUMBER`                         | Port number to use for the MariaDB Galera Server service.                                                                 | `nil`                                     |
+| `MARIADB_REPLICATION_MODE`                    | MariaDB Galera replication mode.                                                                                          | `nil`                                     |
+| `MARIADB_REPLICATION_SLAVE_DUMP`              | Make a dump on master and update slave MariaDB Galera database                                                            | `false`                                   |
+| `MARIADB_EXTRA_FLAGS`                         | Extra flags to be passed to start the MariaDB Galera Server.                                                              | `nil`                                     |
+| `MARIADB_INIT_SLEEP_TIME`                     | Sleep time when waiting for MariaDB Galera init configuration operations to finish.                                       | `nil`                                     |
+| `MARIADB_CHARACTER_SET`                       | MariaDB Galera collation to use.                                                                                          | `nil`                                     |
+| `MARIADB_COLLATE`                             | MariaDB Galera collation to use.                                                                                          | `nil`                                     |
+| `MARIADB_BIND_ADDRESS`                        | MariaDB Galera bind address.                                                                                              | `nil`                                     |
+| `MARIADB_SQL_MODE`                            | MariaDB Galera Server SQL modes to enable.                                                                                | `nil`                                     |
+| `MARIADB_SKIP_TEST_DB`                        | Whether to skip creating the test database.                                                                               | `no`                                      |
+| `MARIADB_CLIENT_ENABLE_SSL`                   | Whether to force SSL for connections to the MariaDB Galera database.                                                      | `no`                                      |
+| `MARIADB_CLIENT_SSL_CA_FILE`                  | Path to CA certificate to use for SSL connections to the MariaDB Galera database server.                                  | `nil`                                     |
+| `MARIADB_CLIENT_SSL_CERT_FILE`                | Path to client public key certificate to use for SSL connections to the MariaDB Galera database server.                   | `nil`                                     |
+| `MARIADB_CLIENT_SSL_KEY_FILE`                 | Path to client private key to use for SSL connections to the MariaDB Galera database server.                              | `nil`                                     |
+| `MARIADB_CLIENT_EXTRA_FLAGS`                  | Whether to force SSL connections with the "mysql" CLI tool. Useful for applications that rely on the CLI instead of APIs. | `no`                                      |
+| `MARIADB_STARTUP_WAIT_RETRIES`                | Number of retries waiting for the database to be running.                                                                 | `300`                                     |
+| `MARIADB_STARTUP_WAIT_SLEEP_TIME`             | Sleep time between retries waiting for the database to be running.                                                        | `2`                                       |
+| `MARIADB_ENABLE_SLOW_QUERY`                   | Whether to enable slow query logs.                                                                                        | `0`                                       |
+| `MARIADB_LONG_QUERY_TIME`                     | How much time, in seconds, defines a slow query.                                                                          | `10.0`                                    |
+| `MARIADB_GALERA_DEFAULT_NODE_NAME`            | Default logical name that the node will use to refer to itself in the Galera cluster.                                     | `nil`                                     |
+| `MARIADB_GALERA_DEFAULT_NODE_ADDRESS`         | Default node address to report to the Galera cluster.                                                                     | `nil`                                     |
+| `MARIADB_GALERA_DEFAULT_MARIABACKUP_PASSWORD` | Default password for the username to use with the "mariabackup" tool for State Snapshot Transfer (SST).                   | `nil`                                     |
+| `MARIADB_GALERA_CONF_DIR`                     | MariaDB Galera configuration directory                                                                                    | `/opt/bitnami/mariadb/conf`               |
+| `MARIADB_GALERA_MOUNTED_CONF_DIR`             | Directory for including custom configuration files (that override the default generated ones)                             | `/bitnami/conf`                           |
+| `MARIADB_GALERA_FORCE_SAFETOBOOTSTRAP`        | Whether bootstrapping should be performed even if the node is marked as not safe to bootstrap.                            | `nil`                                     |
+| `MARIADB_GALERA_CLUSTER_BOOTSTRAP`            | Whether the node should be the one performing the bootstrap process of the Galera cluster.                                | `nil`                                     |
+| `MARIADB_GALERA_CLUSTER_ADDRESS`              | Galera cluster address.                                                                                                   | `nil`                                     |
+| `MARIADB_GALERA_CLUSTER_NAME`                 | Galera cluster name.                                                                                                      | `$DB_GALERA_DEFAULT_CLUSTER_NAME`         |
+| `MARIADB_GALERA_NODE_NAME`                    | Logical name that the node uses to refer to itself in the Galera cluster, defaults to the node hostname.                  | `nil`                                     |
+| `MARIADB_GALERA_NODE_ADDRESS`                 | Node address to report to the Galera cluster, defaults to the node IP address.                                            | `nil`                                     |
+| `MARIADB_GALERA_SST_METHOD`                   | State Snapshot Transfer (SST) method to use.                                                                              | `$DB_GALERA_DEFAULT_SST_METHOD`           |
+| `MARIADB_GALERA_MARIABACKUP_USER`             | Username to use with the "mariabackup" tool for State Snapshot Transfer (SST).                                            | `$DB_GALERA_DEFAULT_MARIABACKUP_USER`     |
+| `MARIADB_GALERA_MARIABACKUP_PASSWORD`         | Password for the username to use with the "mariabackup" tool for State Snapshot Transfer (SST).                           | `$DB_GALERA_DEFAULT_MARIABACKUP_PASSWORD` |
+| `MARIADB_ENABLE_LDAP`                         | Whether to enable LDAP for MariaDB Galera.                                                                                | `no`                                      |
+| `MARIADB_ENABLE_TLS`                          | Whether to enable SSL/TLS for MariaDB Galera.                                                                             | `no`                                      |
+| `MARIADB_TLS_CERT_FILE`                       | Path to the MariaDB Galera SSL/TLS certificate file.                                                                      | `nil`                                     |
+| `MARIADB_TLS_KEY_FILE`                        | Path to the MariaDB Galera SSL/TLS certificate key file.                                                                  | `nil`                                     |
+| `MARIADB_TLS_CA_FILE`                         | Path to the MariaDB Galera SSL/TLS certificate authority CA file.                                                         | `nil`                                     |
+| `MARIADB_REPLICATION_USER`                    | MariaDB Galera replication database user.                                                                                 | `monitor`                                 |
+| `MARIADB_REPLICATION_PASSWORD`                | Password for the MariaDB Galera replication database user.                                                                | `monitor`                                 |
 
 #### Read-only environment variables
 
@@ -220,7 +251,6 @@ docker-compose up -d
 | `MARIADB_DEFAULT_PORT_NUMBER`             | Default port number to use for the MariaDB Galera Server service.                                                   | `3306`                            |
 | `MARIADB_DEFAULT_CHARACTER_SET`           | Default MariaDB Galera character set.                                                                               | `utf8mb4`                         |
 | `MARIADB_DEFAULT_BIND_ADDRESS`            | Default MariaDB Galera bind address.                                                                                | `0.0.0.0`                         |
-| `MARIADB_DISABLE_SERVICE`                 | Whether to disable the MariaDB Galera service by default.                                                           | `no`                              |
 | `MARIADB_GALERA_GRASTATE_FILE`            | Path to the Galera "grastate.dat" file.                                                                             | `${DB_DATA_DIR}/grastate.dat`     |
 | `MARIADB_GALERA_BOOTSTRAP_DIR`            | Path to the Galera directory that will contain a file for checking whether the node is already bootstrapped or not. | `${DB_VOLUME_DIR}/.bootstrap`     |
 | `MARIADB_GALERA_BOOTSTRAP_FILE`           | Path to the Galera file that will check whether the node is already bootstrapped or not.                            | `${DB_GALERA_BOOTSTRAP_DIR}/done` |
