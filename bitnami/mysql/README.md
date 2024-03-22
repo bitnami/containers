@@ -173,12 +173,33 @@ docker-compose up -d
 | Name                            | Description                                                                                                               | Default Value |
 |---------------------------------|---------------------------------------------------------------------------------------------------------------------------|---------------|
 | `ALLOW_EMPTY_PASSWORD`          | Allow MySQL access without any password.                                                                                  | `no`          |
+| `MYSQL_AUTHENTICATION_PLUGIN`   | MySQL authentication plugin to configure during the first initialization.                                                 | `nil`         |
 | `MYSQL_ROOT_USER`               | MySQL database root user.                                                                                                 | `root`        |
+| `MYSQL_ROOT_PASSWORD`           | MySQL database root user password.                                                                                        | `nil`         |
+| `MYSQL_USER`                    | MySQL database user to create during the first initialization.                                                            | `nil`         |
+| `MYSQL_PASSWORD`                | Password for the MySQL database user to create during the first initialization.                                           | `nil`         |
+| `MYSQL_DATABASE`                | MySQL database to create during the first initialization.                                                                 | `nil`         |
+| `MYSQL_MASTER_HOST`             | Address for the MySQL master node.                                                                                        | `nil`         |
 | `MYSQL_MASTER_PORT_NUMBER`      | Port number for the MySQL master node.                                                                                    | `3306`        |
 | `MYSQL_MASTER_ROOT_USER`        | MySQL database root user of the master host.                                                                              | `root`        |
+| `MYSQL_MASTER_ROOT_PASSWORD`    | Password for the MySQL database root user of the the master host.                                                         | `nil`         |
 | `MYSQL_MASTER_DELAY`            | MySQL database replication delay.                                                                                         | `0`           |
+| `MYSQL_REPLICATION_USER`        | MySQL replication database user.                                                                                          | `nil`         |
+| `MYSQL_REPLICATION_PASSWORD`    | Password for the MySQL replication database user.                                                                         | `nil`         |
+| `MYSQL_PORT_NUMBER`             | Port number to use for the MySQL Server service.                                                                          | `nil`         |
+| `MYSQL_REPLICATION_MODE`        | MySQL replication mode.                                                                                                   | `nil`         |
 | `MYSQL_REPLICATION_SLAVE_DUMP`  | Make a dump on master and update slave MySQL database                                                                     | `false`       |
+| `MYSQL_EXTRA_FLAGS`             | Extra flags to be passed to start the MySQL Server.                                                                       | `nil`         |
+| `MYSQL_INIT_SLEEP_TIME`         | Sleep time when waiting for MySQL init configuration operations to finish.                                                | `nil`         |
+| `MYSQL_CHARACTER_SET`           | MySQL collation to use.                                                                                                   | `nil`         |
+| `MYSQL_COLLATE`                 | MySQL collation to use.                                                                                                   | `nil`         |
+| `MYSQL_BIND_ADDRESS`            | MySQL bind address.                                                                                                       | `nil`         |
+| `MYSQL_SQL_MODE`                | MySQL Server SQL modes to enable.                                                                                         | `nil`         |
+| `MYSQL_IS_DEDICATED_SERVER`     | Whether the MySQL Server will run on a dedicated node.                                                                    | `nil`         |
 | `MYSQL_CLIENT_ENABLE_SSL`       | Whether to force SSL for connections to the MySQL database.                                                               | `no`          |
+| `MYSQL_CLIENT_SSL_CA_FILE`      | Path to CA certificate to use for SSL connections to the MySQL database server.                                           | `nil`         |
+| `MYSQL_CLIENT_SSL_CERT_FILE`    | Path to client public key certificate to use for SSL connections to the MySQL database server.                            | `nil`         |
+| `MYSQL_CLIENT_SSL_KEY_FILE`     | Path to client private key to use for SSL connections to the MySQL database server.                                       | `nil`         |
 | `MYSQL_CLIENT_EXTRA_FLAGS`      | Whether to force SSL connections with the "mysql" CLI tool. Useful for applications that rely on the CLI instead of APIs. | `no`          |
 | `MYSQL_STARTUP_WAIT_RETRIES`    | Number of retries waiting for the database to be running.                                                                 | `300`         |
 | `MYSQL_STARTUP_WAIT_SLEEP_TIME` | Sleep time between retries waiting for the database to be running.                                                        | `2`           |
@@ -207,7 +228,6 @@ docker-compose up -d
 | `MYSQL_DEFAULT_PORT_NUMBER`   | Default port number to use for the MySQL Server service.   | `3306`                        |
 | `MYSQL_DEFAULT_CHARACTER_SET` | Default MySQL character set.                               | `utf8mb4`                     |
 | `MYSQL_DEFAULT_BIND_ADDRESS`  | Default MySQL bind address.                                | `0.0.0.0`                     |
-| `MYSQL_DISABLE_SERVICE`       | Whether to disable the MySQL service by default.           | `no`                          |
 
 ### Initializing a new instance
 
@@ -671,12 +691,12 @@ docker-compose up mysql
 * Backwards compatibility is not guaranteed when data is persisted using docker-compose. You can use the workaround below to overcome it:
 
 ```console
-docker-compose down
+$ docker-compose down
 ## Change the mount point
 sed -i -e 's#mysql_data:/bitnami#mysql_data:/bitnami/mysql/data#g' docker-compose.yml
 ## Pull the latest bitnami/mysql image
-docker pull bitnami/mysql:latest
-docker-compose up -d
+$ docker pull bitnami/mysql:latest
+$ docker-compose up -d
 ```
 
 ### 5.7.22-r18 and 8.0.11-r16
