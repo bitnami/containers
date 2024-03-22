@@ -215,6 +215,7 @@ docker-compose up -d
 | `MINIO_SCHEME`                           | MinIO web scheme.                                                          | `http`                                             |
 | `MINIO_SKIP_CLIENT`                      | Skip MinIO client configuration.                                           | `no`                                               |
 | `MINIO_DISTRIBUTED_MODE_ENABLED`         | Enable MinIO distributed mode.                                             | `no`                                               |
+| `MINIO_DEFAULT_BUCKETS`                  | MinIO default buckets.                                                     | `nil`                                              |
 | `MINIO_STARTUP_TIMEOUT`                  | MinIO startup timeout.                                                     | `10`                                               |
 | `MINIO_SERVER_URL`                       | MinIO server external URL.                                                 | `$MINIO_SCHEME://localhost:$MINIO_API_PORT_NUMBER` |
 | `MINIO_APACHE_CONSOLE_HTTP_PORT_NUMBER`  | MinIO Console UI HTTP port, exposed via Apache with basic authentication.  | `80`                                               |
