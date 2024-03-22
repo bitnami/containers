@@ -166,10 +166,10 @@ Gitea can be configured via environment variables or using a configuration file 
 | Name                         | Description                                                                                                       | Default Value                                            |
 |------------------------------|-------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|
 | `GITEA_REPO_ROOT_PATH`       | Gitea git repositories path.                                                                                      | `${GITEA_DATA_DIR}/git/repositories`                     |
+| `GITEA_LFS_ROOT_PATH`        | Gitea git LFS path.                                                                                               | `nil`                                                    |
 | `GITEA_LOG_ROOT_PATH`        | Gitea log path.                                                                                                   | `${GITEA_TMP_DIR}/log`                                   |
-| `GITEA_LOG_ROOT_PATH`        | Gitea log path.                                                                                                   | `${GITEA_WORK_DIR}/log`                                  |
-| `GITEA_LOG_MODE`             | Gitea log mode.                                                                                                   | `file`                                                   |
-| `GITEA_LOG_ROUTER`           | Gitea log router.                                                                                                 | `file`                                                   |
+| `GITEA_LOG_MODE`             | Gitea log mode.                                                                                                   | `nil`                                                    |
+| `GITEA_LOG_ROUTER`           | Gitea log router.                                                                                                 | `nil`                                                    |
 | `GITEA_ADMIN_USER`           | Admin username.                                                                                                   | `bn_user`                                                |
 | `GITEA_ADMIN_PASSWORD`       | Admin password.                                                                                                   | `bitnami`                                                |
 | `GITEA_ADMIN_EMAIL`          | Admin user email.                                                                                                 | `user@bitnami.org`                                       |
@@ -186,13 +186,19 @@ Gitea can be configured via environment variables or using a configuration file 
 | `GITEA_LFS_START_SERVER`     | Enables Git LFS support                                                                                           | `false`                                                  |
 | `GITEA_DATABASE_TYPE`        | The database type in use [mysql, postgres].                                                                       | `postgres`                                               |
 | `GITEA_DATABASE_HOST`        | Database host address.                                                                                            | `postgresql`                                             |
-| `GITEA_DATABASE_HOST`        | Database host address.                                                                                            | `127.0.0.1`                                              |
 | `GITEA_DATABASE_PORT_NUMBER` | Database host port.                                                                                               | `5432`                                                   |
 | `GITEA_DATABASE_NAME`        | Database name.                                                                                                    | `bitnami_gitea`                                          |
 | `GITEA_DATABASE_USERNAME`    | Database username.                                                                                                | `bn_gitea`                                               |
+| `GITEA_DATABASE_PASSWORD`    | Database password.                                                                                                | `nil`                                                    |
 | `GITEA_DATABASE_SSL_MODE`    | Database SSL mode.                                                                                                | `disable`                                                |
+| `GITEA_DATABASE_SCHEMA`      | Database Schema.                                                                                                  | `nil`                                                    |
 | `GITEA_DATABASE_CHARSET`     | Database character set.                                                                                           | `utf8`                                                   |
 | `GITEA_SMTP_ENABLED`         | Enable to use a mail service.                                                                                     | `false`                                                  |
+| `GITEA_SMTP_HOST`            | SMTP mail host address (example: smtp.gitea.io).                                                                  | `nil`                                                    |
+| `GITEA_SMTP_PORT`            | SMTP mail port (example: 587).                                                                                    | `nil`                                                    |
+| `GITEA_SMTP_FROM`            | Mail from address, RFC 5322. This can be just an email address, or the "Name" email@example.com format.           | `nil`                                                    |
+| `GITEA_SMTP_USER`            | Username of mailing user (usually the senders e-mail address).                                                    | `nil`                                                    |
+| `GITEA_SMTP_PASSWORD`        | Password of mailing user. Use "your password" for quoting if you use special characters in the password.          | `nil`                                                    |
 
 #### Read-only environment variables
 
