@@ -91,8 +91,10 @@ docker run --name postgrest bitnami/postgrest:latest
 | `DB_HOST`                  | Database host                   | `localhost`      |
 | `DB_PORT`                  | Database port number            | `5432`           |
 | `DB_USER`                  | Database user username          | `postgres`       |
+| `DB_PASSWORD`              | Database user password          | `nil`            |
 | `DB_NAME`                  | Database name                   | `postgres`       |
 | `DB_SSL`                   | Database SSL connection enabled | `disable`        |
+| `PGRST_JWT_SECRET`         | Postgrest JWT secret            | `nil`            |
 | `PGRST_DB_ANON_ROLE`       | Postgrest anon role             | `anon`           |
 | `PGRST_DB_SCHEMA`          | Postgrest database schema       | `public,storage` |
 | `PGRST_DB_USE_LEGACY_GUCS` | Postgrest use legacy GUCS       | `false`          |
@@ -100,18 +102,15 @@ docker run --name postgrest bitnami/postgrest:latest
 
 #### Read-only environment variables
 
-| Name                       | Description                                                          | Value                                                                                       |
-|----------------------------|----------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
-| `POSTGREST_BASE_DIR`       | postgrest installation directory.                                    | `${BITNAMI_ROOT_DIR}/postgrest`                                                             |
-| `POSTGREST_LOGS_DIR`       | Directory where postgrest logs are stored.                           | `${POSTGREST_BASE_DIR}/logs`                                                                |
-| `POSTGREST_LOG_FILE`       | Directory where postgrest logs are stored.                           | `${POSTGREST_LOGS_DIR}/postgrest.log`                                                       |
-| `POSTGREST_BIN_DIR`        | postgrest directory for binary executables.                          | `${POSTGREST_BASE_DIR}/bin`                                                                 |
-| `POSTGREST_TMP_DIR`        | Directory where postgrest temporary files are stored.                | `${POSTGREST_BASE_DIR}/tmp`                                                                 |
-| `POSTGREST_PID_FILE`       | Path to the PID file for postgrest.                                  | `${POSTGREST_TMP_DIR}/postgrest.pid`                                                        |
-| `POSTGREST_EXTRA_ENV_FILE` | File to store extra environment variables for the postgrest service. | `${POSTGREST_BASE_DIR}/.env`                                                                |
-| `PGRST_DB_URI`             | Postgres DB URI                                                      | `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=${DB_SSL}` |
-| `POSTGREST_DAEMON_USER`    | postgrest system user.                                               | `supabase`                                                                                  |
-| `POSTGREST_DAEMON_GROUP`   | postgrest system group.                                              | `supabase`                                                                                  |
+| Name                     | Description                                 | Value                                                                                       |
+|--------------------------|---------------------------------------------|---------------------------------------------------------------------------------------------|
+| `POSTGREST_BASE_DIR`     | postgrest installation directory.           | `${BITNAMI_ROOT_DIR}/postgrest`                                                             |
+| `POSTGREST_LOGS_DIR`     | Directory where postgrest logs are stored.  | `${POSTGREST_BASE_DIR}/logs`                                                                |
+| `POSTGREST_LOG_FILE`     | Directory where postgrest logs are stored.  | `${POSTGREST_LOGS_DIR}/postgrest.log`                                                       |
+| `POSTGREST_BIN_DIR`      | postgrest directory for binary executables. | `${POSTGREST_BASE_DIR}/bin`                                                                 |
+| `PGRST_DB_URI`           | Postgres DB URI                             | `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=${DB_SSL}` |
+| `POSTGREST_DAEMON_USER`  | postgrest system user.                      | `supabase`                                                                                  |
+| `POSTGREST_DAEMON_GROUP` | postgrest system group.                     | `supabase`                                                                                  |
 
 ### Running commands
 
