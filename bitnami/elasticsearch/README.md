@@ -182,19 +182,34 @@ docker-compose up -d
 | Name                                              | Description                                                                                                            | Default Value                                  |
 |---------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|------------------------------------------------|
 | `ELASTICSEARCH_CERTS_DIR`                         | Path to certificates folder.                                                                                           | `${DB_CONF_DIR}/certs`                         |
+| `ELASTICSEARCH_DATA_DIR_LIST`                     | Comma, semi-colon or space separated list of directories to use for data storage                                       | `nil`                                          |
+| `ELASTICSEARCH_BIND_ADDRESS`                      | Elasticsearch bind address                                                                                             | `nil`                                          |
+| `ELASTICSEARCH_ADVERTISED_HOSTNAME`               | Elasticsearch advertised hostname, used for publish                                                                    | `nil`                                          |
+| `ELASTICSEARCH_CLUSTER_HOSTS`                     | Elasticsearch cluster hosts                                                                                            | `nil`                                          |
+| `ELASTICSEARCH_CLUSTER_MASTER_HOSTS`              | Elasticsearch cluster master hosts                                                                                     | `nil`                                          |
+| `ELASTICSEARCH_CLUSTER_NAME`                      | Elasticsearch cluster name                                                                                             | `nil`                                          |
 | `ELASTICSEARCH_HEAP_SIZE`                         | Elasticsearch heap size                                                                                                | `1024m`                                        |
 | `ELASTICSEARCH_MAX_ALLOWED_MEMORY_PERCENTAGE`     | Elasticsearch maximum allowed memory percentage                                                                        | `100`                                          |
+| `ELASTICSEARCH_MAX_ALLOWED_MEMORY`                | Elasticsearch maximum allowed memory amount (in megabytes)                                                             | `nil`                                          |
 | `ELASTICSEARCH_MAX_TIMEOUT`                       | Elasticsearch maximum init timeout                                                                                     | `60`                                           |
 | `ELASTICSEARCH_LOCK_ALL_MEMORY`                   | Sets bootstrap.memory_lock parameter                                                                                   | `no`                                           |
 | `ELASTICSEARCH_DISABLE_JVM_HEAP_DUMP`             | Disable JVM Heap dump                                                                                                  | `no`                                           |
 | `ELASTICSEARCH_DISABLE_GC_LOGS`                   | Disable GC logs                                                                                                        | `no`                                           |
 | `ELASTICSEARCH_IS_DEDICATED_NODE`                 | If false, Elasticsearch will be configured with all the roles, deploy as dedicated node using DB_NODE_ROLES.           | `no`                                           |
+| `ELASTICSEARCH_MINIMUM_MASTER_NODES`              | Minimum number of master nodes                                                                                         | `nil`                                          |
+| `ELASTICSEARCH_NODE_NAME`                         | Elasticsearch node name                                                                                                | `nil`                                          |
+| `ELASTICSEARCH_FS_SNAPSHOT_REPO_PATH`             | Elasticsearch node port number                                                                                         | `nil`                                          |
+| `ELASTICSEARCH_NODE_ROLES`                        | Comma-separated list of Elasticsearch roles. If empty, will be deployed as a coordinating-only node.                   | `nil`                                          |
+| `ELASTICSEARCH_PLUGINS`                           | List of Elasticsearch plugins to activate                                                                              | `nil`                                          |
 | `ELASTICSEARCH_TRANSPORT_PORT_NUMBER`             | Elasticsearch node port number                                                                                         | `9300`                                         |
 | `ELASTICSEARCH_HTTP_PORT_NUMBER`                  | Elasticsearch port                                                                                                     | `9200`                                         |
 | `ELASTICSEARCH_ENABLE_SECURITY`                   | Enable Elasticsearch security settings.                                                                                | `false`                                        |
 | `ELASTICSEARCH_PASSWORD`                          | Password for "elastic" user.                                                                                           | `bitnami`                                      |
 | `ELASTICSEARCH_TLS_VERIFICATION_MODE`             | Elasticsearch TLS verification mode in transport layer.                                                                | `full`                                         |
 | `ELASTICSEARCH_TLS_USE_PEM`                       | Configure Security settings using PEM certificates.                                                                    | `false`                                        |
+| `ELASTICSEARCH_KEYSTORE_PASSWORD`                 | Password for the Elasticsearch keystore containing the certificates or password-protected PEM key.                     | `nil`                                          |
+| `ELASTICSEARCH_TRUSTSTORE_PASSWORD`               | Password for the Elasticsearch truststore.                                                                             | `nil`                                          |
+| `ELASTICSEARCH_KEY_PASSWORD`                      | Password for the Elasticsearch node PEM key.                                                                           | `nil`                                          |
 | `ELASTICSEARCH_KEYSTORE_LOCATION`                 | Path to Keystore                                                                                                       | `${DB_CERTS_DIR}/elasticsearch.keystore.jks`   |
 | `ELASTICSEARCH_TRUSTSTORE_LOCATION`               | Path to Truststore.                                                                                                    | `${DB_CERTS_DIR}/elasticsearch.truststore.jks` |
 | `ELASTICSEARCH_NODE_CERT_LOCATION`                | Path to PEM node certificate.                                                                                          | `${DB_CERTS_DIR}/tls.crt`                      |
@@ -221,6 +236,8 @@ docker-compose up -d
 | `ELASTICSEARCH_HTTP_TLS_NODE_KEY_LOCATION`        | Path to PEM node key for HTTP TLS.                                                                                     | `$DB_NODE_KEY_LOCATION`                        |
 | `ELASTICSEARCH_HTTP_TLS_CA_CERT_LOCATION`         | Path to CA certificate for HTTP TLS.                                                                                   | `$DB_CA_CERT_LOCATION`                         |
 | `ELASTICSEARCH_ENABLE_FIPS_MODE`                  | Enables FIPS mode of operation                                                                                         | `false`                                        |
+| `ELASTICSEARCH_KEYS`                              | Comma-separated list of key=value to be added to the Elasticsearch keystore                                            | `nil`                                          |
+| `ELASTICSEARCH_ACTION_DESTRUCTIVE_REQUIRES_NAME`  | Enable action destructive requires name                                                                                | `nil`                                          |
 
 #### Read-only environment variables
 
@@ -496,12 +513,12 @@ docker-compose up elasticsearch
 * Backwards compatibility is not guaranteed when data is persisted using docker-compose. You can use the workaround below to overcome it:
 
 ```console
-docker-compose down
+$ docker-compose down
 # Change the mount point
 sed -i -e 's#elasticsearch_data:/bitnami#elasticsearch_data:/bitnami/elasticsearch/data#g' docker-compose.yml
 # Pull the latest bitnami/elasticsearch image
-docker pull bitnami/elasticsearch:latest
-docker-compose up -d
+$ docker pull bitnami/elasticsearch:latest
+$ docker-compose up -d
 ```
 
 ### 6.2.3-r7 & 5.6.4-r18
