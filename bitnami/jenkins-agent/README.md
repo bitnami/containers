@@ -66,11 +66,19 @@ docker build -t bitnami/APP:latest .
 
 #### Customizable environment variables
 
-| Name                       | Description                                                                        | Default Value                      |
-|----------------------------|------------------------------------------------------------------------------------|------------------------------------|
-| `JENKINS_AGENT_WORKDIR`    | The working directory of the remoting instance (stores cache and logs by default). | `${JENKINS_AGENT_VOLUME_DIR}/home` |
-| `JENKINS_AGENT_WEB_SOCKET` | Make a WebSocket connection to Jenkins rather than using the TCP port              | `false`                            |
-| `JAVA_HOME`                | Java Home directory.                                                               | `${BITNAMI_ROOT_DIR}/java`         |
+| Name                              | Description                                                                                                                                | Default Value                      |
+|-----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------|
+| `JENKINS_AGENT_TUNNEL`            | Connect to the specified host and port, instead of connecting directly to Jenkins. Useful when connection to Jenkins needs to be tunneled. | `nil`                              |
+| `JENKINS_AGENT_URL`               | Specify the Jenkins root URLs to connect to.                                                                                               | `nil`                              |
+| `JENKINS_AGENT_PROTOCOLS`         | Specify the remoting protocols to attempt when instanceIdentity is provided                                                                | `nil`                              |
+| `JENKINS_AGENT_DIRECT_CONNECTION` | Connect directly to this TCP agent port, skipping the HTTP(S) connection                                                                   | `nil`                              |
+| `JENKINS_AGENT_INSTANCE_IDENTITY` | The base64 encoded InstanceIdentity byte array of the Jenkins controller                                                                   | `nil`                              |
+| `JENKINS_AGENT_WORKDIR`           | The working directory of the remoting instance (stores cache and logs by default).                                                         | `${JENKINS_AGENT_VOLUME_DIR}/home` |
+| `JENKINS_AGENT_WEB_SOCKET`        | Make a WebSocket connection to Jenkins rather than using the TCP port                                                                      | `false`                            |
+| `JENKINS_AGENT_SECRET`            | Jenkins agent name                                                                                                                         | `nil`                              |
+| `JENKINS_AGENT_NAME`              | Jenkins agent secret                                                                                                                       | `nil`                              |
+| `JAVA_HOME`                       | Java Home directory.                                                                                                                       | `${BITNAMI_ROOT_DIR}/java`         |
+| `JAVA_OPTS`                       | Java options.                                                                                                                              | `nil`                              |
 
 #### Read-only environment variables
 
