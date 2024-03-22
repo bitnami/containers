@@ -99,6 +99,8 @@ Access your web server in the browser by navigating to `http://localhost:9000`.
 
 | Name                          | Description                                                          | Default Value |
 |-------------------------------|----------------------------------------------------------------------|---------------|
+| `OPENRESTY_HTTP_PORT_NUMBER`  | HTTP port number used by OpenResty.                                  | `nil`         |
+| `OPENRESTY_HTTPS_PORT_NUMBER` | HTTPS port number used by OpenResty.                                 | `nil`         |
 | `OPENRESTY_FORCE_INITSCRIPTS` | Force the init scripts running even if it is not in the first start. | `false`       |
 
 #### Read-only environment variables
