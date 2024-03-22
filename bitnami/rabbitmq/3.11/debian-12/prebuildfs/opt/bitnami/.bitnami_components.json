@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "25.3.2-9-1"
+        "version": "25.3.2-10-0"
     },
     "rabbitmq": {
         "arch": "amd64",
