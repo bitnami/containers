@@ -57,9 +57,14 @@ docker build -t bitnami/APP:latest .
 
 ### Customizable environment variables
 
-| Name                    | Description                                                                                   | Default Value            |
-|-------------------------|-----------------------------------------------------------------------------------------------|--------------------------|
-| `KSQL_MOUNTED_CONF_DIR` | Directory for including custom configuration files (that override the default generated ones) | `${KSQL_VOLUME_DIR}/etc` |
+| Name                           | Description                                                                                   | Default Value            |
+|--------------------------------|-----------------------------------------------------------------------------------------------|--------------------------|
+| `KSQL_MOUNTED_CONF_DIR`        | Directory for including custom configuration files (that override the default generated ones) | `${KSQL_VOLUME_DIR}/etc` |
+| `KSQL_LISTENERS`               | Comma-separated list of listeners that listen for API requests over either HTTP or HTTPS.     | `nil`                    |
+| `KSQL_SSL_KEYSTORE_PASSWORD`   | Password to access the SSL keystore.                                                          | `nil`                    |
+| `KSQL_SSL_TRUSTSTORE_PASSWORD` | Password to access the SSL truststore.                                                        | `nil`                    |
+| `KSQL_CLIENT_AUTHENTICATION`   | Client authentication configuration. Valid options: none, requested, over required.           | `nil`                    |
+| `KSQL_BOOTSTRAP_SERVERS`       | The set of Kafka brokers to bootstrap Kafka cluster information from.                         | `nil`                    |
 
 ### Read-only environment variables
 
