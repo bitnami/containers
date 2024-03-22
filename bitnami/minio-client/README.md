@@ -62,12 +62,14 @@ docker build -t bitnami/APP:latest .
 
 ### Customizable environment variables
 
-| Name                       | Description                                     | Default Value                  |
-|----------------------------|-------------------------------------------------|--------------------------------|
-| `MINIO_CLIENT_CONF_DIR`    | MinIO Client directory for configuration files. | `${MINIO_CLIENT_BASE_DIR}/.mc` |
-| `MINIO_CLIENT_CONF_DIR`    | MinIO Client directory for configuration files. | `/.mc`                         |
-| `MINIO_SERVER_PORT_NUMBER` | MinIO Server port number.                       | `9000`                         |
-| `MINIO_SERVER_SCHEME`      | MinIO Server web scheme.                        | `http`                         |
+| Name                         | Description                                     | Default Value |
+|------------------------------|-------------------------------------------------|---------------|
+| `MINIO_CLIENT_CONF_DIR`      | MinIO Client directory for configuration files. | `/.mc`        |
+| `MINIO_SERVER_HOST`          | MinIO Server host.                              | `nil`         |
+| `MINIO_SERVER_PORT_NUMBER`   | MinIO Server port number.                       | `9000`        |
+| `MINIO_SERVER_SCHEME`        | MinIO Server web scheme.                        | `http`        |
+| `MINIO_SERVER_ROOT_USER`     | MinIO Server root user name.                    | `nil`         |
+| `MINIO_SERVER_ROOT_PASSWORD` | Password for MinIO Server root user.            | `nil`         |
 
 ### Read-only environment variables
 
