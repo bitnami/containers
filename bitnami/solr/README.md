@@ -148,14 +148,17 @@ docker-compose up -d
 |---------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------|
 | `SOLR_ENABLE_CLOUD_MODE`        | Starts solr in cloud mode                                                     | `no`                                               |
 | `SOLR_NUMBER_OF_NODES`          | Number of nodes of the solr cloud cluster                                     | `1`                                                |
+| `SOLR_HOST`                     | Solr Host name                                                                | `nil`                                              |
 | `SOLR_JETTY_HOST`               | Configuration to listen on a specific IP address or host name                 | `0.0.0.0`                                          |
+| `SOLR_HEAP`                     | Solr Heap                                                                     | `nil`                                              |
 | `SOLR_SECURITY_MANAGER_ENABLED` | Solr Java security manager                                                    | `false`                                            |
 | `SOLR_JAVA_MEM`                 | Solr JVM memory                                                               | `-Xms512m -Xmx512m`                                |
 | `SOLR_PORT_NUMBER`              | Solr port number                                                              | `8983`                                             |
+| `SOLR_CORES`                    | Solr CORE name                                                                | `nil`                                              |
+| `SOLR_COLLECTION`               | Solr COLLECTION name                                                          | `nil`                                              |
 | `SOLR_COLLECTION_REPLICAS`      | Solar collection replicas                                                     | `1`                                                |
 | `SOLR_COLLECTION_SHARDS`        | Solar collection shards                                                       | `1`                                                |
 | `SOLR_ENABLE_AUTHENTICATION`    | Enables authentication                                                        | `no`                                               |
-| `SOLR_ENABLE_AUTHENTICATION`    | Enables authentication                                                        | `yes`                                              |
 | `SOLR_ADMIN_USERNAME`           | Administrator Username                                                        | `admin`                                            |
 | `SOLR_ADMIN_PASSWORD`           | Administrator password                                                        | `bitnami`                                          |
 | `SOLR_CLOUD_BOOTSTRAP`          | Indicates if this node is the one that performs the boostraping               | `no`                                               |
