@@ -59,6 +59,10 @@ docker build -t bitnami/APP:latest .
 
 #### Customizable environment variables
 
+| Name        | Description | Default Value |
+|-------------|-------------|---------------|
+| `JAVA_OPTS` | JVM options | `nil`         |
+
 #### Read-only environment variables
 
 | Name                                     | Description                                                           | Value                                                            |
