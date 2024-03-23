@@ -67,10 +67,14 @@ docker build -t bitnami/APP:latest .
 
 #### Customizable environment variables
 
-| Name                                         | Description                                              | Default Value |
-|----------------------------------------------|----------------------------------------------------------|---------------|
-| `SPRING_CLOUD_CONFIG_ENABLED`                | Whether to load config using Spring Cloud Config Servie. | `false`       |
-| `SPRING_CLOUD_KUBERNETES_SECRETS_ENABLE_API` | Whether to load config using Kubernetes API.             | `false`       |
+| Name                                         | Description                                                            | Default Value |
+|----------------------------------------------|------------------------------------------------------------------------|---------------|
+| `SERVER_PORT`                                | Custom port number to use for the SPRING CLOUD SKIPPER Server service. | `nil`         |
+| `SPRING_CLOUD_CONFIG_ENABLED`                | Whether to load config using Spring Cloud Config Servie.               | `false`       |
+| `SPRING_CLOUD_KUBERNETES_SECRETS_ENABLE_API` | Whether to load config using Kubernetes API.                           | `false`       |
+| `SPRING_CLOUD_KUBERNETES_CONFIG_NAME`        | Name of the ConfigMap that contains the configuration.                 | `nil`         |
+| `SPRING_CLOUD_KUBERNETES_SECRETS_PATHS`      | Paths where the secrets are going to be mount.                         | `nil`         |
+| `JAVA_OPTS`                                  | JVM options                                                            | `nil`         |
 
 #### Read-only environment variables
 
