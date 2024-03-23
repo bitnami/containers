@@ -219,6 +219,19 @@ This overlay can record accesses to a given backend database on another database
 
 Check the official page [OpenLDAP, Overlays, Access Logging](https://www.openldap.org/doc/admin26/overlays.html#Access%20Logging) for detailed configuration information.
 
+#### Reverse Group Membership Maintenance
+
+* `LDAP_ENABLE_MEMBEROF`: Enables the memberof module with the following configuration defaults unless specified otherwise. Default: **no**.
+* `LDAP_MEMBEROF_DN` : The DN that is used as modifiersName for internal modifications performed to update the reverse group membership. Will only be applied with `LDAP_ENABLE_MEMBEROF` active. Default: **rootdn of the underlying database**.
+* `LDAP_MEMBEROF_DANGLING` : Specifies the behavior when a member is deleted or modified in a way that would break the group membership. Will only be applied with `LDAP_ENABLE_MEMBEROF` active. Default: **ignore**.
+* `LDAP_MEMBEROF_DANGLINGERROR` : Can be used to modify the response code returned in case of violation. Will only be applied with `LDAP_ENABLE_MEMBEROF` active. Default: {constraint violation} **80**.
+* `LDAP_MEMBEROF_REFINT` : Determines whether the overlay will try to preserve referential integrity or not. Will only be applied with `LDAP_ENABLE_MEMBEROF` active. Must be {true|false}. Default: **FALSE**.
+* `LDAP_MEMBEROF_GROUPOC` : The name of the objectClass that triggers the reverse group membership update. Will only be applied with `LDAP_ENABLE_MEMBEROF` active. Default: **groupOfNames**.
+* `LDAP_MEMBEROF_MEMBERAD` : The name of the attribute that contains the names of the members in the group objects; it must be DN-valued. Will only be applied with `LDAP_ENABLE_MEMBEROF` active. Default: **member**.
+* `LDAP_MEMBEROF_MEMBEROFAD` : The name of  the attribute that contains the names of the groups an entry is member of; it must be DN-valued. Will only be applied with `LDAP_ENABLE_MEMBEROF` active. Default: **memberOf**.
+
+Check the official page [OpenLDAP, Overlays, Reverse Group Membership Maintenance](https://www.openldap.org/doc/admin26/overlays.html#Reverse%20Group%20Membership%20Maintenance) for detailed configuration information.
+
 #### Sync Provider
 
 * `LDAP_ENABLE_SYNCPROV`: Enables the syncrepl module with the following configuration defaults unless specified otherwise. Default: **no**.
