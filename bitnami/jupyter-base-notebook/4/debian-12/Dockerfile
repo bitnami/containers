@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-03-20T16:10:46Z" \
+      org.opencontainers.image.created="2024-03-23T21:55:51Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.1.0-debian-12-r0" \
+      org.opencontainers.image.ref.name="4.1.1-debian-12-r0" \
       org.opencontainers.image.title="jupyter-base-notebook" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="4.1.0"
+      org.opencontainers.image.version="4.1.1"
 
 ENV HOME="/opt/bitnami/jupyterhub-singleuser/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -27,7 +27,7 @@ RUN install_packages ca-certificates curl libbrotli1 libbz2-1.0 libcom-err2 libc
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "miniconda-23.11.0-2-linux-${OS_ARCH}-debian-12" \
-      "jupyter-base-notebook-4.1.0-0-linux-${OS_ARCH}-debian-12" \
+      "jupyter-base-notebook-4.1.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -45,7 +45,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN mkdir /opt/bitnami/jupyterhub-singleuser/ && chmod g+rwX /opt/bitnami/jupyterhub-singleuser/
 
-ENV APP_VERSION="4.1.0" \
+ENV APP_VERSION="4.1.1" \
     BITNAMI_APP_NAME="jupyter-base-notebook" \
     PATH="/opt/bitnami/miniconda/bin:/opt/bitnami/common/bin:$PATH"
 
