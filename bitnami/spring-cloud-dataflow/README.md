@@ -69,12 +69,17 @@ docker build -t bitnami/APP:latest .
 
 | Name                                                | Description                                                                                  | Default Value                                                                                   |
 |-----------------------------------------------------|----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
+| `SERVER_PORT`                                       | Custom port number to use for the SPRING CLOUD DATAFLOW Server service.                      | `nil`                                                                                           |
 | `SPRING_CLOUD_CONFIG_ENABLED`                       | Whether to load config using Spring Cloud Config Servie.                                     | `false`                                                                                         |
 | `SPRING_CLOUD_KUBERNETES_SECRETS_ENABLE_API`        | Whether to load config using Kubernetes API.                                                 | `false`                                                                                         |
+| `SPRING_CLOUD_KUBERNETES_CONFIG_NAME`               | Name of the ConfigMap that contains the configuration.                                       | `nil`                                                                                           |
+| `SPRING_CLOUD_KUBERNETES_SECRETS_PATHS`             | Paths where the secrets are going to be mount.                                               | `nil`                                                                                           |
 | `SPRING_CLOUD_DATAFLOW_FEATURES_STREAMS_ENABLED`    | Whether enable stream feature in dataflow. It need SPRING_CLOUD_SKIPPER_CLIENT_SERVER_URI    | `false`                                                                                         |
 | `SPRING_CLOUD_DATAFLOW_FEATURES_TASKS_ENABLED`      | Whether enable tasks feature in dataflow. It need SPRING_CLOUD_SKIPPER_CLIENT_SERVER_URI     | `false`                                                                                         |
 | `SPRING_CLOUD_DATAFLOW_FEATURES_SCHEDULES_ENABLED`  | Whether enable schedules feature in dataflow. It need SPRING_CLOUD_SKIPPER_CLIENT_SERVER_URI | `false`                                                                                         |
+| `SPRING_CLOUD_SKIPPER_CLIENT_SERVER_URI`            | Skipper server URI                                                                           | `nil`                                                                                           |
 | `SPRING_CLOUD_DATAFLOW_TASK_COMPOSEDTASKRUNNER_URI` | Workaround for https://github.com/spring-cloud/spring-cloud-dataflow/issues/5072             | `maven://org.springframework.cloud:spring-cloud-dataflow-composed-task-runner:${APP_VERSION:-}` |
+| `JAVA_OPTS`                                         | JVM options                                                                                  | `nil`                                                                                           |
 
 #### Read-only environment variables
 
