@@ -32,7 +32,10 @@ fi
 mediawiki_validate
 
 # Update web server configuration with runtime environment (needs to happen before the initialization)
-web_server_update_app_configuration "mediawiki"
+ensure_web_server_app_configuration_exists "mediawiki" --type php --apache-extra-directory-configuration "
+RewriteEngine On
+RewriteRule ^/?${MEDIAWIKI_WIKI_PREFIX:1}(/.*)?$ %{DOCUMENT_ROOT}/index.php [L]
+"
 
 # Ensure MediaWiki is initialized
 mediawiki_initialize
