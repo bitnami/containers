@@ -166,36 +166,81 @@ docker-compose up -d
 
 #### Customizable environment variables
 
-| Name                                   | Description                                                                                      | Default Value                              |
-|----------------------------------------|--------------------------------------------------------------------------------------------------|--------------------------------------------|
-| `POSTGRESQL_VOLUME_DIR`                | Persistence base directory                                                                       | `/bitnami/postgresql`                      |
-| `POSTGRESQL_DATA_DIR`                  | PostgreSQL data directory                                                                        | `${POSTGRESQL_VOLUME_DIR}/data`            |
-| `POSTGRESQL_INIT_MAX_TIMEOUT`          | Maximum initialization waiting timeout                                                           | `60`                                       |
-| `POSTGRESQL_PGCTLTIMEOUT`              | Maximum waiting timeout for pg_ctl commands                                                      | `60`                                       |
-| `POSTGRESQL_SHUTDOWN_MODE`             | Default mode for pg_ctl stop command                                                             | `fast`                                     |
-| `POSTGRESQL_CLUSTER_APP_NAME`          | Replication cluster default application name                                                     | `walreceiver`                              |
-| `POSTGRESQL_DATABASE`                  | Default PostgreSQL database                                                                      | `postgres`                                 |
-| `ALLOW_EMPTY_PASSWORD`                 | Allow password-less access                                                                       | `no`                                       |
-| `POSTGRESQL_MASTER_PORT_NUMBER`        | PostgreSQL master host port (used by slaves)                                                     | `5432`                                     |
-| `POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS`  | Number of PostgreSQL replicas that should use synchronous replication                            | `0`                                        |
-| `POSTGRESQL_PORT_NUMBER`               | PostgreSQL port number                                                                           | `5432`                                     |
-| `POSTGRESQL_ALLOW_REMOTE_CONNECTIONS`  | Modify pg_hba settings so users can access from the outside                                      | `yes`                                      |
-| `POSTGRESQL_REPLICATION_MODE`          | PostgreSQL replication mode (values: master, slave)                                              | `master`                                   |
-| `POSTGRESQL_SYNCHRONOUS_COMMIT_MODE`   | Enable synchronous replication in slaves (number defined by POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS) | `on`                                       |
-| `POSTGRESQL_FSYNC`                     | Enable fsync in write ahead logs                                                                 | `on`                                       |
-| `POSTGRESQL_USERNAME`                  | PostgreSQL default username                                                                      | `postgres`                                 |
-| `POSTGRESQL_ENABLE_LDAP`               | Enable LDAP for PostgreSQL authentication                                                        | `no`                                       |
-| `POSTGRESQL_INITSCRIPTS_USERNAME`      | Username for the psql scripts included in /docker-entrypoint.initdb                              | `$POSTGRESQL_USERNAME`                     |
-| `POSTGRESQL_INITSCRIPTS_PASSWORD`      | Password for the PostgreSQL init scritps user                                                    | `$POSTGRESQL_PASSWORD`                     |
-| `POSTGRESQL_ENABLE_TLS`                | Whether to enable TLS for traffic or not                                                         | `no`                                       |
-| `POSTGRESQL_TLS_PREFER_SERVER_CIPHERS` | Whether to use the server TLS cipher preferences rather than the client                          | `yes`                                      |
-| `POSTGRESQL_SHARED_PRELOAD_LIBRARIES`  | List of libraries to preload at PostgreSQL initialization                                        | `pgaudit`                                  |
-| `POSTGRESQL_CLIENT_MIN_MESSAGES`       | Set log level of errors to send to the client                                                    | `error`                                    |
-| `POSTGRESQL_WAL_LEVEL`                 | Set the postgres user connection limit                                                           | `replica`                                  |
-| `POSTGRESQL_AUTOCTL_CONF_DIR`          | Path to the configuration dir for the pg_autoctl command                                         | `${POSTGRESQL_AUTOCTL_VOLUME_DIR}/.config` |
-| `POSTGRESQL_AUTOCTL_MODE`              | pgAutoFailover node type, valid values [monitor, postgres]                                       | `postgres`                                 |
-| `POSTGRESQL_AUTOCTL_MONITOR_HOST`      | Hostname for the monitor component                                                               | `monitor`                                  |
-| `POSTGRESQL_AUTOCTL_HOSTNAME`          | Hostname by which postgres is reachable                                                          | `$(hostname --fqdn)`                       |
+| Name                                       | Description                                                                                      | Default Value                              |
+|--------------------------------------------|--------------------------------------------------------------------------------------------------|--------------------------------------------|
+| `POSTGRESQL_VOLUME_DIR`                    | Persistence base directory                                                                       | `/bitnami/postgresql`                      |
+| `POSTGRESQL_DATA_DIR`                      | PostgreSQL data directory                                                                        | `${POSTGRESQL_VOLUME_DIR}/data`            |
+| `POSTGRESQL_EXTRA_FLAGS`                   | Extra flags for PostgreSQL initialization                                                        | `nil`                                      |
+| `POSTGRESQL_INIT_MAX_TIMEOUT`              | Maximum initialization waiting timeout                                                           | `60`                                       |
+| `POSTGRESQL_PGCTLTIMEOUT`                  | Maximum waiting timeout for pg_ctl commands                                                      | `60`                                       |
+| `POSTGRESQL_SHUTDOWN_MODE`                 | Default mode for pg_ctl stop command                                                             | `fast`                                     |
+| `POSTGRESQL_CLUSTER_APP_NAME`              | Replication cluster default application name                                                     | `walreceiver`                              |
+| `POSTGRESQL_DATABASE`                      | Default PostgreSQL database                                                                      | `postgres`                                 |
+| `POSTGRESQL_INITDB_ARGS`                   | Optional args for PostreSQL initdb operation                                                     | `nil`                                      |
+| `ALLOW_EMPTY_PASSWORD`                     | Allow password-less access                                                                       | `no`                                       |
+| `POSTGRESQL_INITDB_WAL_DIR`                | Optional init db wal directory                                                                   | `nil`                                      |
+| `POSTGRESQL_MASTER_HOST`                   | PostgreSQL master host (used by slaves)                                                          | `nil`                                      |
+| `POSTGRESQL_MASTER_PORT_NUMBER`            | PostgreSQL master host port (used by slaves)                                                     | `5432`                                     |
+| `POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS`      | Number of PostgreSQL replicas that should use synchronous replication                            | `0`                                        |
+| `POSTGRESQL_SYNCHRONOUS_REPLICAS_MODE`     | PostgreSQL synchronous replication mode (values: empty, FIRST, ANY)                              | `nil`                                      |
+| `POSTGRESQL_PORT_NUMBER`                   | PostgreSQL port number                                                                           | `5432`                                     |
+| `POSTGRESQL_ALLOW_REMOTE_CONNECTIONS`      | Modify pg_hba settings so users can access from the outside                                      | `yes`                                      |
+| `POSTGRESQL_REPLICATION_MODE`              | PostgreSQL replication mode (values: master, slave)                                              | `master`                                   |
+| `POSTGRESQL_REPLICATION_USER`              | PostgreSQL replication user                                                                      | `nil`                                      |
+| `POSTGRESQL_SYNCHRONOUS_COMMIT_MODE`       | Enable synchronous replication in slaves (number defined by POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS) | `on`                                       |
+| `POSTGRESQL_FSYNC`                         | Enable fsync in write ahead logs                                                                 | `on`                                       |
+| `POSTGRESQL_USERNAME`                      | PostgreSQL default username                                                                      | `postgres`                                 |
+| `POSTGRESQL_ENABLE_LDAP`                   | Enable LDAP for PostgreSQL authentication                                                        | `no`                                       |
+| `POSTGRESQL_LDAP_URL`                      | PostgreSQL LDAP server url (requires POSTGRESQL_ENABLE_LDAP=yes)                                 | `nil`                                      |
+| `POSTGRESQL_LDAP_PREFIX`                   | PostgreSQL LDAP prefix (requires POSTGRESQL_ENABLE_LDAP=yes)                                     | `nil`                                      |
+| `POSTGRESQL_LDAP_SUFFIX`                   | PostgreSQL LDAP suffix (requires POSTGRESQL_ENABLE_LDAP=yes)                                     | `nil`                                      |
+| `POSTGRESQL_LDAP_SERVER`                   | PostgreSQL LDAP server (requires POSTGRESQL_ENABLE_LDAP=yes)                                     | `nil`                                      |
+| `POSTGRESQL_LDAP_PORT`                     | PostgreSQL LDAP port (requires POSTGRESQL_ENABLE_LDAP=yes)                                       | `nil`                                      |
+| `POSTGRESQL_LDAP_SCHEME`                   | PostgreSQL LDAP scheme (requires POSTGRESQL_ENABLE_LDAP=yes)                                     | `nil`                                      |
+| `POSTGRESQL_LDAP_TLS`                      | PostgreSQL LDAP tls setting (requires POSTGRESQL_ENABLE_LDAP=yes)                                | `nil`                                      |
+| `POSTGRESQL_LDAP_BASE_DN`                  | PostgreSQL LDAP base DN settings (requires POSTGRESQL_ENABLE_LDAP=yes)                           | `nil`                                      |
+| `POSTGRESQL_LDAP_BIND_DN`                  | PostgreSQL LDAP bind DN settings (requires POSTGRESQL_ENABLE_LDAP=yes)                           | `nil`                                      |
+| `POSTGRESQL_LDAP_BIND_PASSWORD`            | PostgreSQL LDAP bind password (requires POSTGRESQL_ENABLE_LDAP=yes)                              | `nil`                                      |
+| `POSTGRESQL_LDAP_SEARCH_ATTR`              | PostgreSQL LDAP search attribute (requires POSTGRESQL_ENABLE_LDAP=yes)                           | `nil`                                      |
+| `POSTGRESQL_LDAP_SEARCH_FILTER`            | PostgreSQL LDAP search filter (requires POSTGRESQL_ENABLE_LDAP=yes)                              | `nil`                                      |
+| `POSTGRESQL_INITSCRIPTS_USERNAME`          | Username for the psql scripts included in /docker-entrypoint.initdb                              | `$POSTGRESQL_USERNAME`                     |
+| `POSTGRESQL_PASSWORD`                      | Password for the PostgreSQL created user                                                         | `nil`                                      |
+| `POSTGRESQL_POSTGRES_PASSWORD`             | Password for the PostgreSQL postgres user                                                        | `nil`                                      |
+| `POSTGRESQL_REPLICATION_PASSWORD`          | Password for the PostgreSQL replication user                                                     | `nil`                                      |
+| `POSTGRESQL_INITSCRIPTS_PASSWORD`          | Password for the PostgreSQL init scritps user                                                    | `$POSTGRESQL_PASSWORD`                     |
+| `POSTGRESQL_ENABLE_TLS`                    | Whether to enable TLS for traffic or not                                                         | `no`                                       |
+| `POSTGRESQL_TLS_CERT_FILE`                 | File containing the certificate for the TLS traffic                                              | `nil`                                      |
+| `POSTGRESQL_TLS_KEY_FILE`                  | File containing the key for certificate                                                          | `nil`                                      |
+| `POSTGRESQL_TLS_CA_FILE`                   | File containing the CA of the certificate                                                        | `nil`                                      |
+| `POSTGRESQL_TLS_CRL_FILE`                  | File containing a Certificate Revocation List                                                    | `nil`                                      |
+| `POSTGRESQL_TLS_PREFER_SERVER_CIPHERS`     | Whether to use the server TLS cipher preferences rather than the client                          | `yes`                                      |
+| `POSTGRESQL_SHARED_PRELOAD_LIBRARIES`      | List of libraries to preload at PostgreSQL initialization                                        | `pgaudit`                                  |
+| `POSTGRESQL_PGAUDIT_LOG`                   | Comma-separated list of actions to log with pgaudit                                              | `nil`                                      |
+| `POSTGRESQL_PGAUDIT_LOG_CATALOG`           | Enable pgaudit log catalog (pgaudit.log_catalog setting)                                         | `nil`                                      |
+| `POSTGRESQL_PGAUDIT_LOG_PARAMETER`         | Enable pgaudit log parameter (pgaudit.log_parameter setting)                                     | `nil`                                      |
+| `POSTGRESQL_LOG_CONNECTIONS`               | Add a log entry per user connection                                                              | `nil`                                      |
+| `POSTGRESQL_LOG_DISCONNECTIONS`            | Add a log entry per user disconnection                                                           | `nil`                                      |
+| `POSTGRESQL_LOG_HOSTNAME`                  | Log the client host name when accessing                                                          | `nil`                                      |
+| `POSTGRESQL_CLIENT_MIN_MESSAGES`           | Set log level of errors to send to the client                                                    | `error`                                    |
+| `POSTGRESQL_LOG_LINE_PREFIX`               | Set the format of the log lines                                                                  | `nil`                                      |
+| `POSTGRESQL_LOG_TIMEZONE`                  | Set the timezone                                                                                 | `nil`                                      |
+| `POSTGRESQL_TIMEZONE`                      | Set the log timezone                                                                             | `nil`                                      |
+| `POSTGRESQL_MAX_CONNECTIONS`               | Set the maximum amount of connections                                                            | `nil`                                      |
+| `POSTGRESQL_TCP_KEEPALIVES_IDLE`           | Set the TCP keepalive idle time                                                                  | `nil`                                      |
+| `POSTGRESQL_TCP_KEEPALIVES_INTERVAL`       | Set the TCP keepalive interval time                                                              | `nil`                                      |
+| `POSTGRESQL_TCP_KEEPALIVES_COUNT`          | Set the TCP keepalive count                                                                      | `nil`                                      |
+| `POSTGRESQL_STATEMENT_TIMEOUT`             | Set the SQL statement timeout                                                                    | `nil`                                      |
+| `POSTGRESQL_PGHBA_REMOVE_FILTERS`          | Comma-separated list of strings for removing pg_hba.conf lines (example: md5, local)             | `nil`                                      |
+| `POSTGRESQL_USERNAME_CONNECTION_LIMIT`     | Set the user connection limit                                                                    | `nil`                                      |
+| `POSTGRESQL_POSTGRES_CONNECTION_LIMIT`     | Set the postgres user connection limit                                                           | `nil`                                      |
+| `POSTGRESQL_WAL_LEVEL`                     | Set the postgres user connection limit                                                           | `replica`                                  |
+| `POSTGRESQL_DEFAULT_TOAST_COMPRESSION`     | Set the postgres default compression                                                             | `nil`                                      |
+| `POSTGRESQL_PASSWORD_ENCRYPTION`           | Set the passwords encryption method                                                              | `nil`                                      |
+| `POSTGRESQL_DEFAULT_TRANSACTION_ISOLATION` | Set transaction isolation                                                                        | `nil`                                      |
+| `POSTGRESQL_AUTOCTL_CONF_DIR`              | Path to the configuration dir for the pg_autoctl command                                         | `${POSTGRESQL_AUTOCTL_VOLUME_DIR}/.config` |
+| `POSTGRESQL_AUTOCTL_MODE`                  | pgAutoFailover node type, valid values [monitor, postgres]                                       | `postgres`                                 |
+| `POSTGRESQL_AUTOCTL_MONITOR_HOST`          | Hostname for the monitor component                                                               | `monitor`                                  |
+| `POSTGRESQL_AUTOCTL_HOSTNAME`              | Hostname by which postgres is reachable                                                          | `$(hostname --fqdn)`                       |
 
 #### Read-only environment variables
 
