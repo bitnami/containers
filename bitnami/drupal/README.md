@@ -22,7 +22,7 @@ eployment.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use Drupal in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
@@ -203,15 +203,24 @@ docker run -d --name drupal \
 | `DRUPAL_DATA_TO_PERSIST`      | Files to persist relative to the Drupal installation directory. To provide multiple values, separate them with a whitespace. | `sites/ themes/ modules/ profiles/` |
 | `DRUPAL_PROFILE`              | Drupal installation profile.                                                                                                 | `standard`                          |
 | `DRUPAL_SITE_NAME`            | Drupal blog name.                                                                                                            | `My blog`                           |
+| `DRUPAL_SKIP_BOOTSTRAP`       | Whether to perform initial bootstrapping for the application.                                                                | `nil`                               |
+| `DRUPAL_ENABLE_MODULES`       | Comma or space separated list of installed modules to enable during the first initialization.                                | `nil`                               |
+| `DRUPAL_CONFIG_SYNC_DIR`      | Drupal sync configuration directory location. Only used when `DRUPAL_SKIP_BOOTSTRAP` is enabled.                             | `nil`                               |
+| `DRUPAL_HASH_SALT`            | Drupal string used to generate random values. Only used when `DRUPAL_SKIP_BOOTSTRAP` is enabled.                             | `nil`                               |
 | `DRUPAL_USERNAME`             | Drupal user name.                                                                                                            | `user`                              |
 | `DRUPAL_PASSWORD`             | Drupal user password.                                                                                                        | `bitnami`                           |
 | `DRUPAL_EMAIL`                | Drupal user e-mail address.                                                                                                  | `user@example.com`                  |
+| `DRUPAL_SMTP_HOST`            | Drupal SMTP server host.                                                                                                     | `nil`                               |
 | `DRUPAL_SMTP_PORT_NUMBER`     | Drupal SMTP server port number.                                                                                              | `25`                                |
+| `DRUPAL_SMTP_USER`            | Drupal SMTP server user.                                                                                                     | `nil`                               |
+| `DRUPAL_SMTP_PASSWORD`        | Drupal SMTP server user password.                                                                                            | `nil`                               |
 | `DRUPAL_SMTP_PROTOCOL`        | Drupal SMTP server protocol.                                                                                                 | `standard`                          |
 | `DRUPAL_DATABASE_HOST`        | Database server host.                                                                                                        | `$DRUPAL_DEFAULT_DATABASE_HOST`     |
 | `DRUPAL_DATABASE_PORT_NUMBER` | Database server port.                                                                                                        | `3306`                              |
 | `DRUPAL_DATABASE_NAME`        | Database name.                                                                                                               | `bitnami_drupal`                    |
 | `DRUPAL_DATABASE_USER`        | Database user name.                                                                                                          | `bn_drupal`                         |
+| `DRUPAL_DATABASE_PASSWORD`    | Database user password.                                                                                                      | `nil`                               |
+| `DRUPAL_DATABASE_TLS_CA_FILE` | TLS CA certificate for connections.                                                                                          | `nil`                               |
 
 #### Read-only environment variables
 
@@ -223,7 +232,6 @@ docker run -d --name drupal \
 | `DRUPAL_VOLUME_DIR`            | Drupal directory for mounted configuration files.                                                                                | `${BITNAMI_VOLUME_DIR}/drupal`                  |
 | `DRUPAL_MOUNTED_CONF_FILE`     | Mounted configuration file for Drupal. It will be copied to the Drupal installation directory during the initialization process. | `${DRUPAL_VOLUME_DIR}/settings.php`             |
 | `DRUPAL_DEFAULT_DATABASE_HOST` | Default database server host.                                                                                                    | `mariadb`                                       |
-| `DRUPAL_DEFAULT_DATABASE_HOST` | Default database server host.                                                                                                    | `127.0.0.1`                                     |
 | `PHP_DEFAULT_MEMORY_LIMIT`     | Default PHP memory limit.                                                                                                        | `256M`                                          |
 
 When you start the Drupal image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:

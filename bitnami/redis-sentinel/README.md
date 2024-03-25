@@ -21,7 +21,7 @@ docker run --name redis-sentinel -e REDIS_MASTER_HOST=redis bitnami/redis-sentin
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use Redis&reg; Sentinel in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
@@ -107,8 +107,11 @@ docker run -it --rm \
 | Name                                             | Description                                                            | Default Value                         |
 |--------------------------------------------------|------------------------------------------------------------------------|---------------------------------------|
 | `REDIS_SENTINEL_DATA_DIR`                        | Redis data directory                                                   | `${REDIS_SENTINEL_VOLUME_DIR}/data`   |
+| `REDIS_SENTINEL_DISABLE_COMMANDS`                | Commands to disable in Redis                                           | `nil`                                 |
 | `REDIS_SENTINEL_DATABASE`                        | Default Redis database                                                 | `redis`                               |
 | `REDIS_SENTINEL_AOF_ENABLED`                     | Enable AOF                                                             | `yes`                                 |
+| `REDIS_SENTINEL_HOST`                            | Redis Sentinel host                                                    | `nil`                                 |
+| `REDIS_SENTINEL_MASTER_NAME`                     | Redis Sentinel master name                                             | `nil`                                 |
 | `REDIS_SENTINEL_PORT_NUMBER`                     | Redis Sentinel host port                                               | `$REDIS_SENTINEL_DEFAULT_PORT_NUMBER` |
 | `REDIS_SENTINEL_QUORUM`                          | Minimum number of sentinel nodes in order to reach a failover decision | `2`                                   |
 | `REDIS_SENTINEL_DOWN_AFTER_MILLISECONDS`         | Time (in milliseconds) to consider a node to be down                   | `60000`                               |
@@ -117,8 +120,17 @@ docker run -it --rm \
 | `REDIS_SENTINEL_RESOLVE_HOSTNAMES`               | Enables hostnames support                                              | `yes`                                 |
 | `REDIS_SENTINEL_ANNOUNCE_HOSTNAMES`              | Announce hostnames                                                     | `no`                                  |
 | `ALLOW_EMPTY_PASSWORD`                           | Allow password-less access                                             | `no`                                  |
+| `REDIS_SENTINEL_PASSWORD`                        | Password for Redis                                                     | `nil`                                 |
+| `REDIS_MASTER_USER`                              | Redis master node username                                             | `nil`                                 |
+| `REDIS_MASTER_PASSWORD`                          | Redis master node password                                             | `nil`                                 |
+| `REDIS_SENTINEL_ANNOUNCE_IP`                     | IP address used to gossip its presence                                 | `nil`                                 |
+| `REDIS_SENTINEL_ANNOUNCE_PORT`                   | Port used to gossip its presence                                       | `nil`                                 |
 | `REDIS_SENTINEL_TLS_ENABLED`                     | Enable TLS for Redis authentication                                    | `no`                                  |
 | `REDIS_SENTINEL_TLS_PORT_NUMBER`                 | Redis TLS port (requires REDIS_SENTINEL_ENABLE_TLS=yes)                | `26379`                               |
+| `REDIS_SENTINEL_TLS_CERT_FILE`                   | Redis TLS certificate file                                             | `nil`                                 |
+| `REDIS_SENTINEL_TLS_KEY_FILE`                    | Redis TLS key file                                                     | `nil`                                 |
+| `REDIS_SENTINEL_TLS_CA_FILE`                     | Redis TLS CA file                                                      | `nil`                                 |
+| `REDIS_SENTINEL_TLS_DH_PARAMS_FILE`              | Redis TLS DH parameter file                                            | `nil`                                 |
 | `REDIS_SENTINEL_TLS_AUTH_CLIENTS`                | Enable Redis TLS client authentication                                 | `yes`                                 |
 | `REDIS_MASTER_HOST`                              | Redis master host (used by slaves)                                     | `redis`                               |
 | `REDIS_MASTER_PORT_NUMBER`                       | Redis master host port (used by slaves)                                | `6379`                                |
@@ -135,7 +147,6 @@ docker run -it --rm \
 | `REDIS_SENTINEL_MOUNTED_CONF_DIR`    | Redis mounted configuration directory | `${REDIS_SENTINEL_BASE_DIR}/mounted-etc`       |
 | `REDIS_SENTINEL_CONF_FILE`           | Redis configuration file              | `${REDIS_SENTINEL_CONF_DIR}/sentinel.conf`     |
 | `REDIS_SENTINEL_LOG_DIR`             | Redis logs directory                  | `${REDIS_SENTINEL_BASE_DIR}/logs`              |
-| `REDIS_SENTINEL_LOG_FILE`            | Redis log file                        | `${REDIS_SENTINEL_LOG_DIR}/redis-sentinel.log` |
 | `REDIS_SENTINEL_TMP_DIR`             | Redis temporary directory             | `${REDIS_SENTINEL_BASE_DIR}/tmp`               |
 | `REDIS_SENTINEL_PID_FILE`            | Redis PID file                        | `${REDIS_SENTINEL_TMP_DIR}/redis-sentinel.pid` |
 | `REDIS_SENTINEL_BIN_DIR`             | Redis executables directory           | `${REDIS_SENTINEL_BASE_DIR}/bin`               |

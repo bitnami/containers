@@ -19,6 +19,16 @@ set -o pipefail
 
 print_welcome_page
 
+# We add the copy from default config in the entrypoint to not break users
+# bypassing the setup.sh logic. If the file already exists do not overwrite (in
+# case someone mounts a configuration file in /opt/bitnami/ejbca/conf or /opt/bitnami/wildfly/standalone)
+debug "Copying files from $EJBCA_DEFAULT_CONF_DIR to $EJBCA_CONF_DIR"
+cp -nr "$EJBCA_DEFAULT_CONF_DIR"/. "$EJBCA_CONF_DIR" || true
+debug "Copying files from $EJBCA_WILDFLY_DEFAULT_STANDALONE_DIR to $EJBCA_WILDFLY_STANDALONE_DIR"
+cp -nr "$EJBCA_WILDFLY_DEFAULT_STANDALONE_DIR"/. "$EJBCA_WILDFLY_STANDALONE_DIR" || true
+debug "Copying files from $EJBCA_WILDFLY_DEFAULT_DOMAIN_DIR to $EJBCA_WILDFLY_DOMAIN_DIR"
+cp -nr "$EJBCA_WILDFLY_DEFAULT_DOMAIN_DIR"/. "$EJBCA_WILDFLY_DOMAIN_DIR" || true
+
 if [[ "$*" = *"/opt/bitnami/scripts/ejbca/run.sh"* ]]; then
     info "** Starting ejbca setup **"
     /opt/bitnami/scripts/ejbca/setup.sh

@@ -8,13 +8,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-03-05T09:10:19Z" \
+      org.opencontainers.image.created="2024-03-20T10:45:20Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.18.1-debian-12-r11" \
+      org.opencontainers.image.ref.name="1.19.0-debian-12-r1" \
       org.opencontainers.image.title="flink" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.18.1"
+      org.opencontainers.image.version="1.19.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,7 +28,7 @@ RUN install_packages acl ca-certificates curl gettext libjemalloc2 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "java-11.0.22-12-2-linux-${OS_ARCH}-debian-12" \
-      "flink-1.18.1-3-linux-${OS_ARCH}-debian-12" \
+      "flink-1.19.0-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -47,7 +47,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 COPY rootfs /
 RUN /opt/bitnami/scripts/flink/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
-ENV APP_VERSION="1.18.1" \
+ENV APP_VERSION="1.19.0" \
     BITNAMI_APP_NAME="flink" \
     FLINK_HOME="/opt/bitnami/flink" \
     JAVA_HOME="/opt/bitnami/java" \

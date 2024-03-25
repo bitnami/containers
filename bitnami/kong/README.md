@@ -19,7 +19,7 @@ docker run --name kong bitnami/kong:latest
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use Kong in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
@@ -106,8 +106,7 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 | `KONG_ADMIN_LISTEN`            | Kong admin listen address.                         | `${KONG_ADMIN_LISTEN_ADDRESS}:${KONG_ADMIN_HTTP_PORT_NUMBER}, ${KONG_ADMIN_LISTEN_ADDRESS}:${KONG_ADMIN_HTTPS_PORT_NUMBER} ssl` |
 | `KONG_ADMIN_LISTEN_OVERRIDE`   | Override admin listen.                             | `no`                                                                                                                            |
 | `KONG_DATABASE`                | Select database for Kong.                          | `postgres`                                                                                                                      |
-| `KONG_DATABASE`                | Select database for Kong.                          | `postgres`                                                                                                                      |
-| `KONG_NGINX_USER`              | Set nginx user.                                    | `${KONG_DAEMON_USER} ${KONG_DAEMON_GROUP}`                                                                                      |
+| `KONG_PG_PASSWORD`             | PostgreSQL password for Kong.                      | `nil`                                                                                                                           |
 
 #### Read-only environment variables
 
@@ -123,7 +122,6 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 | `KONG_PREFIX`             | Kong installation directory.                          | `${KONG_SERVER_DIR}`                 |
 | `KONG_DEFAULT_SERVER_DIR` | Directory with default Kong Openresty instance files. | `${KONG_BASE_DIR}/server.default`    |
 | `KONG_LOGS_DIR`           | Directory where Kong logs are stored.                 | `${KONG_SERVER_DIR}/logs`            |
-| `KONG_PID_FILE`           | Path to the PID file for Kong.                        | `${KONG_SERVER_DIR}/pids/nginx.pid`  |
 | `KONG_DAEMON_USER`        | Kong system user.                                     | `kong`                               |
 | `KONG_DAEMON_GROUP`       | Kong system group.                                    | `kong`                               |
 

@@ -410,7 +410,7 @@ appsmith_backend_start_bg() {
 
     echo "$!" >"$APPSMITH_PID_FILE"
 
-    wait_for_log_entry "Please open http://localhost:<port> in your browser to experience Appsmith!" "$log_file"
+    wait_for_log_entry "Please open http://localhost:<port> in your browser to experience Appsmith!" "$log_file" 30 10
     info "Appsmith started successfully"
 }
 

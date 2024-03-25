@@ -5,7 +5,7 @@ version: '2.1'
 
 services:
   primary:
-    image: docker.io/bitnami/percona-mysql:8.1
+    image: docker.io/bitnami/percona-mysql:8.2
     ports:
       - '3306'
     volumes:
@@ -25,7 +25,7 @@ services:
       retries: 6
 
   secondary:
-    image: docker.io/bitnami/percona-mysql:8.1
+    image: docker.io/bitnami/percona-mysql:8.2
     ports:
       - '3306'
     depends_on:

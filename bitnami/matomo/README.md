@@ -22,7 +22,7 @@ eployment.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use Matomo in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
@@ -272,6 +272,9 @@ Bitnami provides up-to-date versions of MariaDB and Matomo, including security p
 | Name                                   | Description                                                                                                                  | Default Value                   |
 |----------------------------------------|------------------------------------------------------------------------------------------------------------------------------|---------------------------------|
 | `MATOMO_DATA_TO_PERSIST`               | Files to persist relative to the Matomo installation directory. To provide multiple values, separate them with a whitespace. | `$MATOMO_BASE_DIR`              |
+| `MATOMO_SKIP_BOOTSTRAP`                | Whether to perform initial bootstrapping for the application.                                                                | `nil`                           |
+| `MATOMO_PROXY_HOST_HEADER`             | Specify the host IP HTTP Header. Usually HTTP_X_FORWARDED_HOST. No defaults.                                                 | `nil`                           |
+| `MATOMO_PROXY_CLIENT_HEADER`           | Specify the client IP HTTP Header. Usually HTTP_X_FORWARDED_FOR.                                                             | `nil`                           |
 | `MATOMO_ENABLE_ASSUME_SECURE_PROTOCOL` | Enable assume_secure_protocol in Matomo configuration file.                                                                  | `no`                            |
 | `MATOMO_ENABLE_FORCE_SSL`              | Enable force_ssl in Matomo configuration file.                                                                               | `no`                            |
 | `MATOMO_ENABLE_PROXY_URI_HEADER`       | Enable proxy_uri_header in Matomo configuration file.                                                                        | `no`                            |
@@ -283,11 +286,23 @@ Bitnami provides up-to-date versions of MariaDB and Matomo, including security p
 | `MATOMO_WEBSITE_HOST`                  | Website host or domain to track in Matomo.                                                                                   | `https://example.org`           |
 | `MATOMO_ENABLE_TRUSTED_HOST_CHECK`     | Enable trusted host check.                                                                                                   | `no`                            |
 | `MATOMO_ENABLE_DATABASE_SSL`           | Whether to enable SSL for database connections in the Matomo configuration file.                                             | `no`                            |
+| `MATOMO_DATABASE_SSL_CA_FILE`          | Path to the database server CA bundle file.                                                                                  | `nil`                           |
+| `MATOMO_DATABASE_SSL_CERT_FILE`        | Path to the database client certificate file.                                                                                | `nil`                           |
+| `MATOMO_DATABASE_SSL_KEY_FILE`         | Path to the database client certificate key                                                                                  | `nil`                           |
 | `MATOMO_VERIFY_DATABASE_SSL`           | Whether to verify the database SSL certificate when SSL is enabled                                                           | `yes`                           |
+| `MATOMO_SMTP_HOST`                     | Matomo SMTP server host.                                                                                                     | `nil`                           |
+| `MATOMO_SMTP_PORT_NUMBER`              | Matomo SMTP server port number.                                                                                              | `nil`                           |
+| `MATOMO_SMTP_USER`                     | Matomo SMTP server user.                                                                                                     | `nil`                           |
+| `MATOMO_SMTP_PASSWORD`                 | Matomo SMTP server user password.                                                                                            | `nil`                           |
+| `MATOMO_SMTP_AUTH`                     | Matomo SMTP server auth type                                                                                                 | `nil`                           |
+| `MATOMO_SMTP_PROTOCOL`                 | Matomo SMTP server protocol to use.                                                                                          | `nil`                           |
+| `MATOMO_NOREPLY_NAME`                  | Matomo noreply name.                                                                                                         | `nil`                           |
+| `MATOMO_NOREPLY_ADDRESS`               | Matomo noreply address.                                                                                                      | `nil`                           |
 | `MATOMO_DATABASE_HOST`                 | Database server host.                                                                                                        | `$MATOMO_DEFAULT_DATABASE_HOST` |
 | `MATOMO_DATABASE_PORT_NUMBER`          | Database server port.                                                                                                        | `3306`                          |
 | `MATOMO_DATABASE_NAME`                 | Database name.                                                                                                               | `bitnami_matomo`                |
 | `MATOMO_DATABASE_USER`                 | Database user name.                                                                                                          | `bn_matomo`                     |
+| `MATOMO_DATABASE_PASSWORD`             | Database user password.                                                                                                      | `nil`                           |
 | `MATOMO_DATABASE_TABLE_PREFIX`         | Database table prefix.                                                                                                       | `matomo_`                       |
 
 #### Read-only environment variables
@@ -299,7 +314,6 @@ Bitnami provides up-to-date versions of MariaDB and Matomo, including security p
 | `MATOMO_CONF_FILE`             | Configuration file for Matomo.                    | `${MATOMO_CONF_DIR}/config.ini.php` |
 | `MATOMO_VOLUME_DIR`            | Matomo directory for mounted configuration files. | `${BITNAMI_VOLUME_DIR}/matomo`      |
 | `MATOMO_DEFAULT_DATABASE_HOST` | Default database server host.                     | `mariadb`                           |
-| `MATOMO_DEFAULT_DATABASE_HOST` | Default database server host.                     | `127.0.0.1`                         |
 | `PHP_DEFAULT_MEMORY_LIMIT`     | Default PHP memory limit.                         | `256M`                              |
 
 When you start the Matomo image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.

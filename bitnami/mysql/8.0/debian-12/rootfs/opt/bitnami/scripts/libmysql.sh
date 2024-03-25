@@ -201,7 +201,7 @@ mysql_exec_initial_dump() {
 
     FILE_LOCATION="$DB_DATA_DIR/dump_all_databases.sql"
 
-    mysqldump --verbose --all-databases -h "$DB_MASTER_HOST" -P "$DB_MASTER_PORT_NUMBER" -u "$DB_MASTER_ROOT_USER" -p"$DB_MASTER_ROOT_PASSWORD" > $FILE_LOCATION
+    mysqldump --verbose --all-databases -h "$DB_MASTER_HOST" -P "$DB_MASTER_PORT_NUMBER" -u "$DB_MASTER_ROOT_USER" -p"$DB_MASTER_ROOT_PASSWORD" > "$FILE_LOCATION"
 
     info "Finish dump databases"
 
@@ -209,7 +209,7 @@ mysql_exec_initial_dump() {
     mysql -h "$DB_MASTER_HOST" -P "$DB_MASTER_PORT_NUMBER" -u "$DB_MASTER_ROOT_USER" -p"$DB_MASTER_ROOT_PASSWORD" -se 'UNLOCK TABLES;'
 
     info "Start import dump databases"
-    mysql_execute < $FILE_LOCATION
+    mysql_execute < "$FILE_LOCATION"
     info "Finish import dump databases"
 
     mysql_execute "mysql" <<EOF
@@ -224,7 +224,7 @@ MASTER_CONNECT_RETRY=10;
 EOF
 
     info "Remove dump file"
-    rm -f $FILE_LOCATION
+    rm -f "$FILE_LOCATION"
 
     info "Finish dump process databases"
 

@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-03-14T08:20:04Z" \
+      org.opencontainers.image.created="2024-03-18T12:47:34Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.10.0-debian-12-r2" \
+      org.opencontainers.image.ref.name="1.10.0-debian-12-r3" \
       org.opencontainers.image.title="nginx-ingress-controller" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.10.0"
@@ -26,7 +26,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libabsl20220623 libbrotli1 libc-ares2 libcap2-bin libcom-err2 libcrypt1 libcurl4 libffi8 libgcc-s1 libgmp10 libgnutls30 libgrpc++1.51 libgrpc29 libgssapi-krb5-2 libhogweed6 libicu72 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.5-0 liblzma5 libnettle8 libnghttp2-14 libp11-kit0 libpcre3 libprotobuf32 libpsl5 libre2-9 librtmp1 libsasl2-2 libssh2-1 libssl3 libstdc++6 libtasn1-6 libunistring2 libxml2 libzstd1 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "nginx-ingress-controller-1.10.0-3-linux-${OS_ARCH}-debian-12" \
+      "nginx-ingress-controller-1.10.0-4-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \

@@ -18,7 +18,7 @@ docker run --name spring-cloud-dataflow bitnami/spring-cloud-dataflow:latest
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use Spring Cloud Data Flow in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
@@ -69,12 +69,17 @@ docker build -t bitnami/APP:latest .
 
 | Name                                                | Description                                                                                  | Default Value                                                                                   |
 |-----------------------------------------------------|----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
+| `SERVER_PORT`                                       | Custom port number to use for the SPRING CLOUD DATAFLOW Server service.                      | `nil`                                                                                           |
 | `SPRING_CLOUD_CONFIG_ENABLED`                       | Whether to load config using Spring Cloud Config Servie.                                     | `false`                                                                                         |
 | `SPRING_CLOUD_KUBERNETES_SECRETS_ENABLE_API`        | Whether to load config using Kubernetes API.                                                 | `false`                                                                                         |
+| `SPRING_CLOUD_KUBERNETES_CONFIG_NAME`               | Name of the ConfigMap that contains the configuration.                                       | `nil`                                                                                           |
+| `SPRING_CLOUD_KUBERNETES_SECRETS_PATHS`             | Paths where the secrets are going to be mount.                                               | `nil`                                                                                           |
 | `SPRING_CLOUD_DATAFLOW_FEATURES_STREAMS_ENABLED`    | Whether enable stream feature in dataflow. It need SPRING_CLOUD_SKIPPER_CLIENT_SERVER_URI    | `false`                                                                                         |
 | `SPRING_CLOUD_DATAFLOW_FEATURES_TASKS_ENABLED`      | Whether enable tasks feature in dataflow. It need SPRING_CLOUD_SKIPPER_CLIENT_SERVER_URI     | `false`                                                                                         |
 | `SPRING_CLOUD_DATAFLOW_FEATURES_SCHEDULES_ENABLED`  | Whether enable schedules feature in dataflow. It need SPRING_CLOUD_SKIPPER_CLIENT_SERVER_URI | `false`                                                                                         |
+| `SPRING_CLOUD_SKIPPER_CLIENT_SERVER_URI`            | Skipper server URI                                                                           | `nil`                                                                                           |
 | `SPRING_CLOUD_DATAFLOW_TASK_COMPOSEDTASKRUNNER_URI` | Workaround for https://github.com/spring-cloud/spring-cloud-dataflow/issues/5072             | `maven://org.springframework.cloud:spring-cloud-dataflow-composed-task-runner:${APP_VERSION:-}` |
+| `JAVA_OPTS`                                         | JVM options                                                                                  | `nil`                                                                                           |
 
 #### Read-only environment variables
 

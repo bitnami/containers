@@ -19,7 +19,7 @@ docker run --name mongodb bitnami/mongodb-sharded:latest
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use MongoDB&reg; Sharded in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
@@ -107,7 +107,6 @@ services:
 
 | Name                                   | Description                                                                                   | Default Value                       |
 |----------------------------------------|-----------------------------------------------------------------------------------------------|-------------------------------------|
-| `MONGODB_DISABLE_SERVICE`              | Whether to disable the MongoDB service by default.                                            | `no`                                |
 | `MONGODB_MOUNTED_CONF_DIR`             | Directory for including custom configuration files (that override the default generated ones) | `${MONGODB_VOLUME_DIR}/conf`        |
 | `MONGODB_INIT_RETRY_ATTEMPTS`          | Maximum retries for checking the service initialization status                                | `7`                                 |
 | `MONGODB_INIT_RETRY_DELAY`             | Time (in seconds) to wait between retries for checking the service initialization status      | `5`                                 |

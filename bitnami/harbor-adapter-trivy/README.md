@@ -21,7 +21,7 @@ docker run --name harbor-adapter-trivy bitnami/harbor-adapter-trivy:latest
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use Harbor Adapter Trivy in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
@@ -116,16 +116,11 @@ For further information about the specific component itself, please refer to the
 
 #### Read-only environment variables
 
-| Name                           | Description                                                                     | Value                                                |
-|--------------------------------|---------------------------------------------------------------------------------|------------------------------------------------------|
-| `SCANNER_TRIVY_BASE_DIR`       | harbor-adapter-trivy installation directory.                                    | `${BITNAMI_ROOT_DIR}/harbor-adapter-trivy`           |
-| `SCANNER_TRIVY_LOGS_DIR`       | harbor-adapter-trivy logs directory.                                            | `${SCANNER_TRIVY_BASE_DIR}/logs`                     |
-| `SCANNER_TRIVY_TMP_DIR`        | harbor-adapter-trivy directory for temporary files.                             | `${SCANNER_TRIVY_BASE_DIR}/tmp`                      |
-| `SCANNER_TRIVY_DAEMON_USER`    | harbor-adapter-trivy system user.                                               | `trivy-scanner`                                      |
-| `SCANNER_TRIVY_DAEMON_GROUP`   | harbor-adapter-trivy system group.                                              | `trivy-scanner`                                      |
-| `SCANNER_TRIVY_PID_FILE`       | PID file for harbor-adapter-trivy service.                                      | `${SCANNER_TRIVY_TMP_DIR}/harbor-adapter-trivy.pid`  |
-| `SCANNER_TRIVY_LOG_FILE`       | Log file for harbor-adapter-trivy service.                                      | `${SCANNER_TRIVY_LOGS_DIR}/harbor-adapter-trivy.log` |
-| `SCANNER_TRIVY_EXTRA_ENV_FILE` | File to store extra environment variables for the harbor-adapter-trivy service. | `${SCANNER_TRIVY_BASE_DIR}/.env`                     |
+| Name                         | Description                                  | Value                                      |
+|------------------------------|----------------------------------------------|--------------------------------------------|
+| `SCANNER_TRIVY_BASE_DIR`     | harbor-adapter-trivy installation directory. | `${BITNAMI_ROOT_DIR}/harbor-adapter-trivy` |
+| `SCANNER_TRIVY_DAEMON_USER`  | harbor-adapter-trivy system user.            | `trivy-scanner`                            |
+| `SCANNER_TRIVY_DAEMON_GROUP` | harbor-adapter-trivy system group.           | `trivy-scanner`                            |
 
 ## Logging
 

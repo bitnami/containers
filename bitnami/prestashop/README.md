@@ -21,7 +21,7 @@ docker run --name prestashop bitnami/prestashop:latest
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use PrestaShop in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
@@ -202,6 +202,7 @@ docker run -d --name prestashop \
 | Name                                    | Description                                                                                                                      | Default Value                       |
 |-----------------------------------------|----------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|
 | `PRESTASHOP_DATA_TO_PERSIST`            | Files to persist relative to the PrestaShop installation directory. To provide multiple values, separate them with a whitespace. | `$PRESTASHOP_BASE_DIR`              |
+| `PRESTASHOP_HOST`                       | PrestaShop server hostname.                                                                                                      | `nil`                               |
 | `PRESTASHOP_ENABLE_HTTPS`               | Whether to use HTTPS by default.                                                                                                 | `no`                                |
 | `PRESTASHOP_EXTERNAL_HTTP_PORT_NUMBER`  | Port to used by PrestaShop to generate URLs and links when accessing using HTTP.                                                 | `80`                                |
 | `PRESTASHOP_EXTERNAL_HTTPS_PORT_NUMBER` | Port to used by PrestaShop to generate URLs and links when accessing using HTTPS.                                                | `443`                               |
@@ -209,15 +210,22 @@ docker run -d --name prestashop \
 | `PRESTASHOP_COUNTRY`                    | Default country of the store.                                                                                                    | `us`                                |
 | `PRESTASHOP_LANGUAGE`                   | Default language of the store (ISO code).                                                                                        | `en`                                |
 | `PRESTASHOP_TIMEZONE`                   | Default timezone for the store.                                                                                                  | `America/Los_Angeles`               |
+| `PRESTASHOP_SKIP_BOOTSTRAP`             | Whether to perform initial bootstrapping for the application.                                                                    | `nil`                               |
 | `PRESTASHOP_FIRST_NAME`                 | PrestaShop user first name.                                                                                                      | `Bitnami`                           |
 | `PRESTASHOP_LAST_NAME`                  | PrestaShop user last name.                                                                                                       | `User`                              |
 | `PRESTASHOP_PASSWORD`                   | PrestaShop user password.                                                                                                        | `bitnami1`                          |
 | `PRESTASHOP_EMAIL`                      | PrestaShop user e-mail address.                                                                                                  | `user@example.com`                  |
+| `PRESTASHOP_SMTP_HOST`                  | PrestaShop SMTP server host.                                                                                                     | `nil`                               |
+| `PRESTASHOP_SMTP_PORT_NUMBER`           | PrestaShop SMTP server port number.                                                                                              | `nil`                               |
+| `PRESTASHOP_SMTP_USER`                  | PrestaShop SMTP server user.                                                                                                     | `nil`                               |
+| `PRESTASHOP_SMTP_PASSWORD`              | PrestaShop SMTP server user password.                                                                                            | `nil`                               |
+| `PRESTASHOP_SMTP_PROTOCOL`              | PrestaShop SMTP server protocol to use.                                                                                          | `nil`                               |
 | `PRESTASHOP_DATABASE_HOST`              | Database server host.                                                                                                            | `$PRESTASHOP_DEFAULT_DATABASE_HOST` |
 | `PRESTASHOP_DATABASE_PORT_NUMBER`       | Database server port.                                                                                                            | `3306`                              |
 | `PRESTASHOP_DATABASE_NAME`              | Database name.                                                                                                                   | `bitnami_prestashop`                |
 | `PRESTASHOP_DATABASE_PREFIX`            | Database prefix.                                                                                                                 | `ps_`                               |
 | `PRESTASHOP_DATABASE_USER`              | Database user name.                                                                                                              | `bn_prestashop`                     |
+| `PRESTASHOP_DATABASE_PASSWORD`          | Database user password.                                                                                                          | `nil`                               |
 
 #### Read-only environment variables
 
@@ -227,7 +235,6 @@ docker run -d --name prestashop \
 | `PRESTASHOP_CONF_FILE`             | Configuration file for PrestaShop.                         | `${PRESTASHOP_BASE_DIR}/app/config/parameters.php` |
 | `PRESTASHOP_VOLUME_DIR`            | PrestaShop directory for mounted configuration files.      | `${BITNAMI_VOLUME_DIR}/prestashop`                 |
 | `PRESTASHOP_DEFAULT_DATABASE_HOST` | Default database server host.                              | `mariadb`                                          |
-| `PRESTASHOP_DEFAULT_DATABASE_HOST` | Default database server host.                              | `127.0.0.1`                                        |
 | `PHP_DEFAULT_MAX_INPUT_VARS`       | Default maximum amount of input variables for PHP scripts. | `5000`                                             |
 | `PHP_DEFAULT_MEMORY_LIMIT`         | Default memory limit for PHP scripts.                      | `256M`                                             |
 | `PHP_DEFAULT_POST_MAX_SIZE`        | Default maximum size for PHP POST requests.                | `128M`                                             |

@@ -19,7 +19,7 @@ docker run -it --name supabase-postgres-meta bitnami/supabase-postgres-meta
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use Supabase postgres-meta in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
@@ -92,22 +92,20 @@ docker run --name supabase-postgres-meta bitnami/supabase-postgres-meta:latest
 | `PG_META_DB_PORT`     | Database port number   | `5432`           |
 | `PG_META_DB_NAME`     | Database name          | `postgres`       |
 | `PG_META_DB_USER`     | Database user username | `supabase_admin` |
+| `PG_META_DB_PASSWORD` | Database password      | `nil`            |
 | `PG_META_DB_SSL_MODE` | Database SSL mode      | `disable`        |
 | `PG_META_PORT`        | Service Port           | `9600`           |
 
 #### Read-only environment variables
 
-| Name                                    | Description                                                                       | Value                                                           |
-|-----------------------------------------|-----------------------------------------------------------------------------------|-----------------------------------------------------------------|
-| `SUPABASE_POSTGRES_META_BASE_DIR`       | Supabase-postgres-meta installation directory.                                    | `${BITNAMI_ROOT_DIR}/supabase-postgres-meta`                    |
-| `SUPABASE_POSTGRES_META_LOGS_DIR`       | Directory where Supabase-postgres-meta logs are stored.                           | `${SUPABASE_POSTGRES_META_BASE_DIR}/logs`                       |
-| `SUPABASE_POSTGRES_META_LOG_FILE`       | Directory where Supabase-postgres-meta logs are stored.                           | `${SUPABASE_POSTGRES_META_LOGS_DIR}/supabase-postgres-meta.log` |
-| `SUPABASE_POSTGRES_META_BIN_DIR`        | Supabase-postgres-meta directory for binary executables.                          | `${SUPABASE_POSTGRES_META_BASE_DIR}/node_modules/.bin`          |
-| `SUPABASE_POSTGRES_META_TMP_DIR`        | Directory where Supabase-postgres-meta temporary files are stored.                | `${SUPABASE_POSTGRES_META_BASE_DIR}/tmp`                        |
-| `SUPABASE_POSTGRES_META_PID_FILE`       | Path to the PID file for Supabase-postgres-meta.                                  | `${SUPABASE_POSTGRES_META_TMP_DIR}/supabase-postgres-meta.pid`  |
-| `SUPABASE_POSTGRES_META_EXTRA_ENV_FILE` | File to store extra environment variables for the supabase-postgres-meta service. | `${SUPABASE_POSTGRES_META_BASE_DIR}/.env`                       |
-| `SUPABASE_POSTGRES_META_DAEMON_USER`    | postgrest system user.                                                            | `supabase`                                                      |
-| `SUPABASE_POSTGRES_META_DAEMON_GROUP`   | postgrest system group.                                                           | `supabase`                                                      |
+| Name                                  | Description                                              | Value                                                           |
+|---------------------------------------|----------------------------------------------------------|-----------------------------------------------------------------|
+| `SUPABASE_POSTGRES_META_BASE_DIR`     | Supabase-postgres-meta installation directory.           | `${BITNAMI_ROOT_DIR}/supabase-postgres-meta`                    |
+| `SUPABASE_POSTGRES_META_LOGS_DIR`     | Directory where Supabase-postgres-meta logs are stored.  | `${SUPABASE_POSTGRES_META_BASE_DIR}/logs`                       |
+| `SUPABASE_POSTGRES_META_LOG_FILE`     | Directory where Supabase-postgres-meta logs are stored.  | `${SUPABASE_POSTGRES_META_LOGS_DIR}/supabase-postgres-meta.log` |
+| `SUPABASE_POSTGRES_META_BIN_DIR`      | Supabase-postgres-meta directory for binary executables. | `${SUPABASE_POSTGRES_META_BASE_DIR}/node_modules/.bin`          |
+| `SUPABASE_POSTGRES_META_DAEMON_USER`  | postgrest system user.                                   | `supabase`                                                      |
+| `SUPABASE_POSTGRES_META_DAEMON_GROUP` | postgrest system group.                                  | `supabase`                                                      |
 
 ### Running commands
 

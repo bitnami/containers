@@ -21,7 +21,7 @@ docker run --name sonarqube bitnami/sonarqube:latest
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use SonarQube&trade; in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
@@ -191,22 +191,34 @@ docker run -d --name sonarqube \
 
 #### Customizable environment variables
 
-| Name                                  | Description                                                                                                                     | Default Value                                       |
-|---------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------|
-| `SONARQUBE_MOUNTED_PROVISIONING_DIR`  | Directory for SonarQube initial provisioning.                                                                                   | `/bitnami/sonarqube-provisioning`                   |
-| `SONARQUBE_DATA_TO_PERSIST`           | Files to persist relative to the SonarQube installation directory. To provide multiple values, separate them with a whitespace. | `${SONARQUBE_DATA_DIR} ${SONARQUBE_EXTENSIONS_DIR}` |
-| `SONARQUBE_PORT_NUMBER`               | SonarQube Web application port number.                                                                                          | `9000`                                              |
-| `SONARQUBE_ELASTICSEARCH_PORT_NUMBER` | SonarQube Elasticsearch application port number.                                                                                | `9001`                                              |
-| `SONARQUBE_START_TIMEOUT`             | Timeout for the application to start in seconds.                                                                                | `300`                                               |
-| `SONARQUBE_SKIP_BOOTSTRAP`            | Whether to perform initial bootstrapping for the application.                                                                   | `no`                                                |
-| `SONARQUBE_WEB_CONTEXT`               | SonarQube prefix used to access to the application.                                                                             | `/`                                                 |
-| `SONARQUBE_USERNAME`                  | SonarQube user name.                                                                                                            | `admin`                                             |
-| `SONARQUBE_PASSWORD`                  | SonarQube user password.                                                                                                        | `bitnami`                                           |
-| `SONARQUBE_EMAIL`                     | SonarQube user e-mail address.                                                                                                  | `user@example.com`                                  |
-| `SONARQUBE_DATABASE_HOST`             | Database server host.                                                                                                           | `$SONARQUBE_DEFAULT_DATABASE_HOST`                  |
-| `SONARQUBE_DATABASE_PORT_NUMBER`      | Database server port.                                                                                                           | `5432`                                              |
-| `SONARQUBE_DATABASE_NAME`             | Database name.                                                                                                                  | `bitnami_sonarqube`                                 |
-| `SONARQUBE_DATABASE_USER`             | Database user name.                                                                                                             | `bn_sonarqube`                                      |
+| Name                                    | Description                                                                                                                                            | Default Value                                       |
+|-----------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------|
+| `SONARQUBE_MOUNTED_PROVISIONING_DIR`    | Directory for SonarQube initial provisioning.                                                                                                          | `/bitnami/sonarqube-provisioning`                   |
+| `SONARQUBE_DATA_TO_PERSIST`             | Files to persist relative to the SonarQube installation directory. To provide multiple values, separate them with a whitespace.                        | `${SONARQUBE_DATA_DIR} ${SONARQUBE_EXTENSIONS_DIR}` |
+| `SONARQUBE_PORT_NUMBER`                 | SonarQube Web application port number.                                                                                                                 | `9000`                                              |
+| `SONARQUBE_ELASTICSEARCH_PORT_NUMBER`   | SonarQube Elasticsearch application port number.                                                                                                       | `9001`                                              |
+| `SONARQUBE_START_TIMEOUT`               | Timeout for the application to start in seconds.                                                                                                       | `300`                                               |
+| `SONARQUBE_SKIP_BOOTSTRAP`              | Whether to perform initial bootstrapping for the application.                                                                                          | `no`                                                |
+| `SONARQUBE_WEB_CONTEXT`                 | SonarQube prefix used to access to the application.                                                                                                    | `/`                                                 |
+| `SONARQUBE_MAX_HEAP_SIZE`               | Maximum heap size for SonarQube services (CE, Search and Web).                                                                                         | `nil`                                               |
+| `SONARQUBE_MIN_HEAP_SIZE`               | Minimum heap size for SonarQube services (CE, Search and Web).                                                                                         | `nil`                                               |
+| `SONARQUBE_CE_JAVA_ADD_OPTS`            | Additional Java options for Compute Engine.                                                                                                            | `nil`                                               |
+| `SONARQUBE_ELASTICSEARCH_JAVA_ADD_OPTS` | Additional Java options for Elasticsearch.                                                                                                             | `nil`                                               |
+| `SONARQUBE_WEB_JAVA_ADD_OPTS`           | Additional Java options for Web.                                                                                                                       | `nil`                                               |
+| `SONARQUBE_EXTRA_PROPERTIES`            | Comma separated list of properties to be set in the sonar.properties file, e.g. `my.sonar.property1=property_value,my.sonar.property2=property_value`. | `nil`                                               |
+| `SONARQUBE_USERNAME`                    | SonarQube user name.                                                                                                                                   | `admin`                                             |
+| `SONARQUBE_PASSWORD`                    | SonarQube user password.                                                                                                                               | `bitnami`                                           |
+| `SONARQUBE_EMAIL`                       | SonarQube user e-mail address.                                                                                                                         | `user@example.com`                                  |
+| `SONARQUBE_SMTP_HOST`                   | SonarQube SMTP server host.                                                                                                                            | `nil`                                               |
+| `SONARQUBE_SMTP_PORT_NUMBER`            | SonarQube SMTP server port number.                                                                                                                     | `nil`                                               |
+| `SONARQUBE_SMTP_USER`                   | SonarQube SMTP server user.                                                                                                                            | `nil`                                               |
+| `SONARQUBE_SMTP_PASSWORD`               | SonarQube SMTP server user password.                                                                                                                   | `nil`                                               |
+| `SONARQUBE_SMTP_PROTOCOL`               | SonarQube SMTP server protocol to use.                                                                                                                 | `nil`                                               |
+| `SONARQUBE_DATABASE_HOST`               | Database server host.                                                                                                                                  | `$SONARQUBE_DEFAULT_DATABASE_HOST`                  |
+| `SONARQUBE_DATABASE_PORT_NUMBER`        | Database server port.                                                                                                                                  | `5432`                                              |
+| `SONARQUBE_DATABASE_NAME`               | Database name.                                                                                                                                         | `bitnami_sonarqube`                                 |
+| `SONARQUBE_DATABASE_USER`               | Database user name.                                                                                                                                    | `bn_sonarqube`                                      |
+| `SONARQUBE_DATABASE_PASSWORD`           | Database user password.                                                                                                                                | `nil`                                               |
 
 #### Read-only environment variables
 
@@ -228,7 +240,6 @@ docker run -d --name sonarqube \
 | `SONARQUBE_DAEMON_GROUP`          | SonarQube system group.                              | `sonarqube`                                |
 | `SONARQUBE_DAEMON_GROUP_ID`       | SonarQube system group.                              | `1001`                                     |
 | `SONARQUBE_DEFAULT_DATABASE_HOST` | Default database server host.                        | `postgresql`                               |
-| `SONARQUBE_DEFAULT_DATABASE_HOST` | Default database server host.                        | `127.0.0.1`                                |
 
 When you start the SonarQube&trade; image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 

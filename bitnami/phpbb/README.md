@@ -21,7 +21,7 @@ docker run --name phpbb bitnami/phpbb:latest
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use phpBB in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
@@ -212,14 +212,20 @@ docker run -d --name phpbb \
 | `PHPBB_FORUM_SERVER_PORT`          | phpBB forum server port.                                                                                                    | `80`                                                |
 | `PHPBB_DISABLE_SESSION_VALIDATION` | Disable session validation.                                                                                                 | `false`                                             |
 | `PHPBB_HOST`                       | phpBB forum hostname.                                                                                                       | `localhost`                                         |
+| `PHPBB_SKIP_BOOTSTRAP`             | Whether to perform initial bootstrapping for the application.                                                               | `nil`                                               |
 | `PHPBB_USERNAME`                   | phpBB user name.                                                                                                            | `user`                                              |
 | `PHPBB_PASSWORD`                   | phpBB user password.                                                                                                        | `bitnami`                                           |
 | `PHPBB_EMAIL`                      | phpBB user e-mail address.                                                                                                  | `user@example.com`                                  |
+| `PHPBB_SMTP_HOST`                  | phpBB SMTP server host.                                                                                                     | `nil`                                               |
+| `PHPBB_SMTP_PORT_NUMBER`           | phpBB SMTP server port number.                                                                                              | `nil`                                               |
+| `PHPBB_SMTP_USER`                  | phpBB SMTP server user.                                                                                                     | `nil`                                               |
+| `PHPBB_SMTP_PASSWORD`              | phpBB SMTP server user password.                                                                                            | `nil`                                               |
 | `PHPBB_SMTP_PROTOCOL`              | phpBB SMTP server protocol to use.                                                                                          | `plain`                                             |
 | `PHPBB_DATABASE_HOST`              | Database server host.                                                                                                       | `$PHPBB_DEFAULT_DATABASE_HOST`                      |
 | `PHPBB_DATABASE_PORT_NUMBER`       | Database server port.                                                                                                       | `3306`                                              |
 | `PHPBB_DATABASE_NAME`              | Database name.                                                                                                              | `bitnami_phpbb`                                     |
 | `PHPBB_DATABASE_USER`              | Database user name.                                                                                                         | `bn_phpbb`                                          |
+| `PHPBB_DATABASE_PASSWORD`          | Database user password.                                                                                                     | `nil`                                               |
 
 #### Read-only environment variables
 
@@ -236,7 +242,6 @@ docker run -d --name phpbb \
 | `PHPBB_VOLUME_DIR`            | phpBB directory for mounted configuration files.                                                                               | `${BITNAMI_VOLUME_DIR}/phpbb`             |
 | `PHPBB_MOUNTED_CONF_FILE`     | Mounted configuration file for phpBB. It will be copied to the phpBB installation directory during the initialization process. | `${PHPBB_VOLUME_DIR}/config.inc.php`      |
 | `PHPBB_DEFAULT_DATABASE_HOST` | Default database server host.                                                                                                  | `mariadb`                                 |
-| `PHPBB_DEFAULT_DATABASE_HOST` | Default database server host.                                                                                                  | `127.0.0.1`                               |
 | `PHP_DEFAULT_MEMORY_LIMIT`    | Default PHP memory limit.                                                                                                      | `256M`                                    |
 
 When you start the phpBB image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:

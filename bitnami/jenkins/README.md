@@ -21,7 +21,7 @@ You can find the default credentials and available configuration options in the 
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use Jenkins in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
@@ -149,25 +149,36 @@ If you detect any issue in the `docker-compose.yaml` file, feel free to report i
 
 #### Customizable environment variables
 
-| Name                                 | Description                                                                                                | Default Value                |
-|--------------------------------------|------------------------------------------------------------------------------------------------------------|------------------------------|
-| `JENKINS_HOME`                       | Jenkins home directory.                                                                                    | `${JENKINS_VOLUME_DIR}/home` |
-| `JENKINS_PLUGINS_LATEST`             | Set to false to install the minimum required version.                                                      | `true`                       |
-| `JENKINS_PLUGINS_LATEST_SPECIFIED`   | Set to true to install the latest dependencies of any plugin that is requested to have the latest version. | `false`                      |
-| `JENKINS_SKIP_IMAGE_PLUGINS`         | Set to true to skip the installation of image built-in plugins.                                            | `false`                      |
-| `JENKINS_OVERRIDE_PLUGINS`           | Set to true to force overriding existing plugins from the persisted volume.                                | `false`                      |
-| `JENKINS_EXTERNAL_HTTP_PORT_NUMBER`  | Port to access Jenkins from outside of the instance using HTTP.                                            | `80`                         |
-| `JENKINS_EXTERNAL_HTTPS_PORT_NUMBER` | Port to access Jenkins from outside of the instance using HTTPS.                                           | `443`                        |
-| `JENKINS_FORCE_HTTPS`                | Enable serving Jenkins through HTTPS instead of HTTP.                                                      | `no`                         |
-| `JENKINS_SKIP_BOOTSTRAP`             | Whether to perform initial bootstrapping for the application.                                              | `no`                         |
-| `JENKINS_ENABLE_SWARM`               | Enable the Jenkins Swarm configuration.                                                                    | `no`                         |
-| `JENKINS_CERTS_DIR`                  | Password of keystore.                                                                                      | `${JENKINS_HOME}`            |
-| `JENKINS_KEYSTORE_PASSWORD`          | Password of keystore.                                                                                      | `bitnami`                    |
-| `JENKINS_USERNAME`                   | Jenkins admin user name.                                                                                   | `user`                       |
-| `JENKINS_PASSWORD`                   | Jenkins admin user password.                                                                               | `bitnami`                    |
-| `JENKINS_EMAIL`                      | Jenkins admin user e-mail address.                                                                         | `user@example.com`           |
-| `JENKINS_SWARM_USERNAME`             | Jenkins user for Swarm access name .                                                                       | `swarm`                      |
-| `JAVA_HOME`                          | Java Home directory.                                                                                       | `${BITNAMI_ROOT_DIR}/java`   |
+| Name                                 | Description                                                                                                                           | Default Value                |
+|--------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|------------------------------|
+| `JENKINS_HOME`                       | Jenkins home directory.                                                                                                               | `${JENKINS_VOLUME_DIR}/home` |
+| `JENKINS_PLUGINS`                    | Comma-separated list of Jenkins plugins to be installed.                                                                              | `nil`                        |
+| `JENKINS_PLUGINS_LATEST`             | Set to false to install the minimum required version.                                                                                 | `true`                       |
+| `JENKINS_PLUGINS_LATEST_SPECIFIED`   | Set to true to install the latest dependencies of any plugin that is requested to have the latest version.                            | `false`                      |
+| `JENKINS_SKIP_IMAGE_PLUGINS`         | Set to true to skip the installation of image built-in plugins.                                                                       | `false`                      |
+| `JENKINS_OVERRIDE_PLUGINS`           | Set to true to force overriding existing plugins from the persisted volume.                                                           | `false`                      |
+| `JENKINS_OVERRIDE_PATHS`             | Comma-separated list of relative paths to be removed from the Jenkins home and recreated if present in the mounted content directory. | `nil`                        |
+| `JENKINS_HTTP_LISTEN_ADDRESS`        | Jenkins HTTP listen address.                                                                                                          | `nil`                        |
+| `JENKINS_HTTPS_LISTEN_ADDRESS`       | Jenkins HTTPS listen address.                                                                                                         | `nil`                        |
+| `JENKINS_HTTP_PORT_NUMBER`           | Jenkins HTTP port number.                                                                                                             | `nil`                        |
+| `JENKINS_HTTPS_PORT_NUMBER`          | Jenkins HTTPS port number.                                                                                                            | `nil`                        |
+| `JENKINS_JNLP_PORT_NUMBER`           | Jenkins JNLP port number.                                                                                                             | `nil`                        |
+| `JENKINS_EXTERNAL_HTTP_PORT_NUMBER`  | Port to access Jenkins from outside of the instance using HTTP.                                                                       | `80`                         |
+| `JENKINS_EXTERNAL_HTTPS_PORT_NUMBER` | Port to access Jenkins from outside of the instance using HTTPS.                                                                      | `443`                        |
+| `JENKINS_HOST`                       | Jenkins hostname.                                                                                                                     | `nil`                        |
+| `JENKINS_FORCE_HTTPS`                | Enable serving Jenkins through HTTPS instead of HTTP.                                                                                 | `no`                         |
+| `JENKINS_SKIP_BOOTSTRAP`             | Whether to perform initial bootstrapping for the application.                                                                         | `no`                         |
+| `JENKINS_ENABLE_SWARM`               | Enable the Jenkins Swarm configuration.                                                                                               | `no`                         |
+| `JENKINS_CERTS_DIR`                  | Password of keystore.                                                                                                                 | `${JENKINS_HOME}`            |
+| `JENKINS_KEYSTORE_PASSWORD`          | Password of keystore.                                                                                                                 | `bitnami`                    |
+| `JENKINS_OPTS`                       | Jenkins launcher parameters.                                                                                                          | `nil`                        |
+| `JENKINS_USERNAME`                   | Jenkins admin user name.                                                                                                              | `user`                       |
+| `JENKINS_PASSWORD`                   | Jenkins admin user password.                                                                                                          | `bitnami`                    |
+| `JENKINS_EMAIL`                      | Jenkins admin user e-mail address.                                                                                                    | `user@example.com`           |
+| `JENKINS_SWARM_USERNAME`             | Jenkins user for Swarm access name .                                                                                                  | `swarm`                      |
+| `JENKINS_SWARM_PASSWORD`             | Jenkins user for Swarm access password.                                                                                               | `nil`                        |
+| `JAVA_HOME`                          | Java Home directory.                                                                                                                  | `${BITNAMI_ROOT_DIR}/java`   |
+| `JAVA_OPTS`                          | Java options.                                                                                                                         | `nil`                        |
 
 #### Read-only environment variables
 

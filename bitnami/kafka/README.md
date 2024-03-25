@@ -19,7 +19,7 @@ docker run --name kafka bitnami/kafka:latest
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use Apache Kafka in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
@@ -176,41 +176,49 @@ docker-compose up -d
 
 #### Customizable environment variables
 
-| Name                                  | Description                                                                                                                                                                            | Default Value                       |
-|---------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|
-| `KAFKA_MOUNTED_CONF_DIR`              | Kafka directory for mounted configuration files.                                                                                                                                       | `${KAFKA_VOLUME_DIR}/config`        |
-| `KAFKA_INTER_BROKER_USER`             | Kafka inter broker communication user.                                                                                                                                                 | `user`                              |
-| `KAFKA_INTER_BROKER_PASSWORD`         | Kafka inter broker communication password.                                                                                                                                             | `bitnami`                           |
-| `KAFKA_CONTROLLER_USER`               | Kafka control plane communication user.                                                                                                                                                | `controller_user`                   |
-| `KAFKA_CONTROLLER_PASSWORD`           | Kafka control plane communication password.                                                                                                                                            | `bitnami`                           |
-| `KAFKA_TLS_TYPE`                      | Choose the TLS certificate format to use.                                                                                                                                              | `JKS`                               |
-| `KAFKA_TLS_CLIENT_AUTH`               | Configures kafka broker to request client authentication.                                                                                                                              | `required`                          |
-| `KAFKA_CFG_SASL_ENABLED_MECHANISMS`   | Kafka `sasl.enabled.mechanisms` configuration override.                                                                                                                                | `PLAIN,SCRAM-SHA-256,SCRAM-SHA-512` |
-| `KAFKA_SKIP_KRAFT_STORAGE_INIT`       | If set to true, skip Kraft storage initialization when process.roles are configured.                                                                                                   | `false`                             |
-| `KAFKA_ZOOKEEPER_PROTOCOL`            | Authentication protocol for Zookeeper connections. Allowed protocols: `PLAINTEXT`, `SASL, SSL`, and `SASL_SSL`.                                                                        | `PLAINTEXT`                         |
-| `KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME` | Verify Zookeeper hostname on TLS certificates.                                                                                                                                         | `true`                              |
-| `KAFKA_ZOOKEEPER_TLS_TYPE`            | Choose the TLS certificate format to use. Allowed values: `JKS`, `PEM`.                                                                                                                | `JKS`                               |
-| `KAFKA_CLIENT_USERS`                  | List of additional users to `KAFKA_CLIENT_USER` that will be created into Zookeeper when using `SASL_SCRAM` for client communications. Separated by commas, semicolons or whitespaces. | `user`                              |
-| `KAFKA_CLIENT_PASSWORDS`              | Passwords for the users specified at `KAFKA_CLIENT_USERS`. Separated by commas, semicolons or whitespaces.                                                                             | `bitnami`                           |
-| `KAFKA_HEAP_OPTS`                     | Kafka heap options for Java.                                                                                                                                                           | `-Xmx1024m -Xms1024m`               |
+| Name                                      | Description                                                                                                                                                                            | Default Value                       |
+|-------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|
+| `KAFKA_MOUNTED_CONF_DIR`                  | Kafka directory for mounted configuration files.                                                                                                                                       | `${KAFKA_VOLUME_DIR}/config`        |
+| `KAFKA_INTER_BROKER_USER`                 | Kafka inter broker communication user.                                                                                                                                                 | `user`                              |
+| `KAFKA_INTER_BROKER_PASSWORD`             | Kafka inter broker communication password.                                                                                                                                             | `bitnami`                           |
+| `KAFKA_CONTROLLER_USER`                   | Kafka control plane communication user.                                                                                                                                                | `controller_user`                   |
+| `KAFKA_CONTROLLER_PASSWORD`               | Kafka control plane communication password.                                                                                                                                            | `bitnami`                           |
+| `KAFKA_CERTIFICATE_PASSWORD`              | Password for certificates.                                                                                                                                                             | `nil`                               |
+| `KAFKA_TLS_TRUSTSTORE_FILE`               | Kafka truststore file location.                                                                                                                                                        | `nil`                               |
+| `KAFKA_TLS_TYPE`                          | Choose the TLS certificate format to use.                                                                                                                                              | `JKS`                               |
+| `KAFKA_TLS_CLIENT_AUTH`                   | Configures kafka broker to request client authentication.                                                                                                                              | `required`                          |
+| `KAFKA_OPTS`                              | Kafka deployment options.                                                                                                                                                              | `nil`                               |
+| `KAFKA_CFG_SASL_ENABLED_MECHANISMS`       | Kafka `sasl.enabled.mechanisms` configuration override.                                                                                                                                | `PLAIN,SCRAM-SHA-256,SCRAM-SHA-512` |
+| `KAFKA_KRAFT_CLUSTER_ID`                  | Kafka cluster ID when using Kafka Raft mode (KRaft).                                                                                                                                   | `nil`                               |
+| `KAFKA_SKIP_KRAFT_STORAGE_INIT`           | If set to true, skip Kraft storage initialization when process.roles are configured.                                                                                                   | `false`                             |
+| `KAFKA_CLIENT_LISTENER_NAME`              | Name of the listener intended to be used by clients, if set, configures the producer/consumer accordingly.                                                                             | `nil`                               |
+| `KAFKA_ZOOKEEPER_PROTOCOL`                | Authentication protocol for Zookeeper connections. Allowed protocols: `PLAINTEXT`, `SASL, SSL`, and `SASL_SSL`.                                                                        | `PLAINTEXT`                         |
+| `KAFKA_ZOOKEEPER_PASSWORD`                | Kafka Zookeeper user password for SASL authentication.                                                                                                                                 | `nil`                               |
+| `KAFKA_ZOOKEEPER_USER`                    | Kafka Zookeeper user for SASL authentication.                                                                                                                                          | `nil`                               |
+| `KAFKA_ZOOKEEPER_TLS_KEYSTORE_PASSWORD`   | Kafka Zookeeper keystore file password and key password.                                                                                                                               | `nil`                               |
+| `KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD` | Kafka Zookeeper truststore file password.                                                                                                                                              | `nil`                               |
+| `KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_FILE`     | Kafka Zookeeper truststore file location.                                                                                                                                              | `nil`                               |
+| `KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME`     | Verify Zookeeper hostname on TLS certificates.                                                                                                                                         | `true`                              |
+| `KAFKA_ZOOKEEPER_TLS_TYPE`                | Choose the TLS certificate format to use. Allowed values: `JKS`, `PEM`.                                                                                                                | `JKS`                               |
+| `KAFKA_CLIENT_USERS`                      | List of additional users to `KAFKA_CLIENT_USER` that will be created into Zookeeper when using `SASL_SCRAM` for client communications. Separated by commas, semicolons or whitespaces. | `user`                              |
+| `KAFKA_CLIENT_PASSWORDS`                  | Passwords for the users specified at `KAFKA_CLIENT_USERS`. Separated by commas, semicolons or whitespaces.                                                                             | `bitnami`                           |
+| `KAFKA_HEAP_OPTS`                         | Kafka heap options for Java.                                                                                                                                                           | `-Xmx1024m -Xms1024m`               |
 
 #### Read-only environment variables
 
-| Name                    | Description                                       | Value                                 |
-|-------------------------|---------------------------------------------------|---------------------------------------|
-| `KAFKA_BASE_DIR`        | Kafka installation directory.                     | `${BITNAMI_ROOT_DIR}/kafka`           |
-| `KAFKA_VOLUME_DIR`      | Kafka persistence directory.                      | `/bitnami/kafka`                      |
-| `KAFKA_DATA_DIR`        | Kafka directory where data is stored.             | `${KAFKA_VOLUME_DIR}/data`            |
-| `KAFKA_CONF_DIR`        | Kafka configuration directory.                    | `${KAFKA_BASE_DIR}/config`            |
-| `KAFKA_CONF_FILE`       | Kafka configuration file.                         | `${KAFKA_CONF_DIR}/server.properties` |
-| `KAFKA_CERTS_DIR`       | Kafka directory for certificate files.            | `${KAFKA_CONF_DIR}/certs`             |
-| `KAFKA_INITSCRIPTS_DIR` | Kafka directory for init scripts.                 | `/docker-entrypoint-initdb.d`         |
-| `KAFKA_LOG_DIR`         | Directory where Kafka logs are stored.            | `${KAFKA_BASE_DIR}/logs`              |
-| `KAFKA_TMP_DIR`         | Directory where Kafka temporary files are stored. | `${KAFKA_BASE_DIR}/tmp`               |
-| `KAFKA_PID_FILE`        | Path to the PID file for Kafka.                   | `${KAFKA_TMP_DIR}/kafka.pid`          |
-| `KAFKA_HOME`            | Kafka home directory.                             | `$KAFKA_BASE_DIR`                     |
-| `KAFKA_DAEMON_USER`     | Kafka system user.                                | `kafka`                               |
-| `KAFKA_DAEMON_GROUP`    | Kafka system group.                               | `kafka`                               |
+| Name                    | Description                            | Value                                 |
+|-------------------------|----------------------------------------|---------------------------------------|
+| `KAFKA_BASE_DIR`        | Kafka installation directory.          | `${BITNAMI_ROOT_DIR}/kafka`           |
+| `KAFKA_VOLUME_DIR`      | Kafka persistence directory.           | `/bitnami/kafka`                      |
+| `KAFKA_DATA_DIR`        | Kafka directory where data is stored.  | `${KAFKA_VOLUME_DIR}/data`            |
+| `KAFKA_CONF_DIR`        | Kafka configuration directory.         | `${KAFKA_BASE_DIR}/config`            |
+| `KAFKA_CONF_FILE`       | Kafka configuration file.              | `${KAFKA_CONF_DIR}/server.properties` |
+| `KAFKA_CERTS_DIR`       | Kafka directory for certificate files. | `${KAFKA_CONF_DIR}/certs`             |
+| `KAFKA_INITSCRIPTS_DIR` | Kafka directory for init scripts.      | `/docker-entrypoint-initdb.d`         |
+| `KAFKA_LOG_DIR`         | Directory where Kafka logs are stored. | `${KAFKA_BASE_DIR}/logs`              |
+| `KAFKA_HOME`            | Kafka home directory.                  | `$KAFKA_BASE_DIR`                     |
+| `KAFKA_DAEMON_USER`     | Kafka system user.                     | `kafka`                               |
+| `KAFKA_DAEMON_GROUP`    | Kafka system group.                    | `kafka`                               |
 
 Additionally, any environment variable beginning with `KAFKA_CFG_` will be mapped to its corresponding Apache Kafka key. For example, use `KAFKA_CFG_BACKGROUND_THREADS` in order to set `background.threads` or `KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE` in order to configure `auto.create.topics.enable`.
 

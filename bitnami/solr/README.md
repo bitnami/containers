@@ -21,7 +21,7 @@ You can find the available configuration options in the [Environment Variables](
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use Apache Solr in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
@@ -148,14 +148,17 @@ docker-compose up -d
 |---------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------|
 | `SOLR_ENABLE_CLOUD_MODE`        | Starts solr in cloud mode                                                     | `no`                                               |
 | `SOLR_NUMBER_OF_NODES`          | Number of nodes of the solr cloud cluster                                     | `1`                                                |
+| `SOLR_HOST`                     | Solr Host name                                                                | `nil`                                              |
 | `SOLR_JETTY_HOST`               | Configuration to listen on a specific IP address or host name                 | `0.0.0.0`                                          |
+| `SOLR_HEAP`                     | Solr Heap                                                                     | `nil`                                              |
 | `SOLR_SECURITY_MANAGER_ENABLED` | Solr Java security manager                                                    | `false`                                            |
 | `SOLR_JAVA_MEM`                 | Solr JVM memory                                                               | `-Xms512m -Xmx512m`                                |
 | `SOLR_PORT_NUMBER`              | Solr port number                                                              | `8983`                                             |
+| `SOLR_CORES`                    | Solr CORE name                                                                | `nil`                                              |
+| `SOLR_COLLECTION`               | Solr COLLECTION name                                                          | `nil`                                              |
 | `SOLR_COLLECTION_REPLICAS`      | Solar collection replicas                                                     | `1`                                                |
 | `SOLR_COLLECTION_SHARDS`        | Solar collection shards                                                       | `1`                                                |
 | `SOLR_ENABLE_AUTHENTICATION`    | Enables authentication                                                        | `no`                                               |
-| `SOLR_ENABLE_AUTHENTICATION`    | Enables authentication                                                        | `yes`                                              |
 | `SOLR_ADMIN_USERNAME`           | Administrator Username                                                        | `admin`                                            |
 | `SOLR_ADMIN_PASSWORD`           | Administrator password                                                        | `bitnami`                                          |
 | `SOLR_CLOUD_BOOTSTRAP`          | Indicates if this node is the one that performs the boostraping               | `no`                                               |

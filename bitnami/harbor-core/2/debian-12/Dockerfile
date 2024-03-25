@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-03-06T22:42:15Z" \
+      org.opencontainers.image.created="2024-03-15T09:44:04Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.10.0-debian-12-r11" \
+      org.opencontainers.image.ref.name="2.10.1-debian-12-r0" \
       org.opencontainers.image.title="harbor-core" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.10.0"
+      org.opencontainers.image.version="2.10.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,7 +28,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "wait-for-port-1.0.7-10-linux-${OS_ARCH}-debian-12" \
       "ini-file-1.4.6-10-linux-${OS_ARCH}-debian-12" \
-      "harbor-core-2.10.0-7-linux-${OS_ARCH}-debian-12" \
+      "harbor-core-2.10.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -47,7 +47,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-core/postunpack.sh
-ENV APP_VERSION="2.10.0" \
+ENV APP_VERSION="2.10.1" \
     BITNAMI_APP_NAME="harbor-core" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/harbor-core/bin:$PATH"
 

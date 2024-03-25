@@ -19,7 +19,7 @@ docker run --name minio bitnami/minio:latest
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use Bitnami Object Storage based on MinIO&reg; in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
@@ -210,13 +210,12 @@ docker-compose up -d
 | Name                                     | Description                                                                | Default Value                                      |
 |------------------------------------------|----------------------------------------------------------------------------|----------------------------------------------------|
 | `MINIO_DATA_DIR`                         | MinIO directory for data.                                                  | `/bitnami/minio/data`                              |
-| `MINIO_DATA_DIR`                         | MinIO directory for data.                                                  | `/bitnami/minio/data`                              |
 | `MINIO_API_PORT_NUMBER`                  | MinIO API port number.                                                     | `9000`                                             |
-| `MINIO_API_PORT_NUMBER`                  | MinIO API port number.                                                     | `9080`                                             |
 | `MINIO_CONSOLE_PORT_NUMBER`              | MinIO RMI port number.                                                     | `9001`                                             |
 | `MINIO_SCHEME`                           | MinIO web scheme.                                                          | `http`                                             |
 | `MINIO_SKIP_CLIENT`                      | Skip MinIO client configuration.                                           | `no`                                               |
 | `MINIO_DISTRIBUTED_MODE_ENABLED`         | Enable MinIO distributed mode.                                             | `no`                                               |
+| `MINIO_DEFAULT_BUCKETS`                  | MinIO default buckets.                                                     | `nil`                                              |
 | `MINIO_STARTUP_TIMEOUT`                  | MinIO startup timeout.                                                     | `10`                                               |
 | `MINIO_SERVER_URL`                       | MinIO server external URL.                                                 | `$MINIO_SCHEME://localhost:$MINIO_API_PORT_NUMBER` |
 | `MINIO_APACHE_CONSOLE_HTTP_PORT_NUMBER`  | MinIO Console UI HTTP port, exposed via Apache with basic authentication.  | `80`                                               |

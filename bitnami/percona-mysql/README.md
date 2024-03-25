@@ -19,7 +19,7 @@ docker run --name percona-mysql bitnami/percona-mysql:latest
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use Percona Server for MySQL in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
@@ -61,12 +61,33 @@ docker build -t bitnami/APP:latest .
 | Name                            | Description                                                                                                               | Default Value |
 |---------------------------------|---------------------------------------------------------------------------------------------------------------------------|---------------|
 | `ALLOW_EMPTY_PASSWORD`          | Allow Percona Server for MySQL access without any password.                                                               | `no`          |
+| `MYSQL_AUTHENTICATION_PLUGIN`   | Percona Server for MySQL authentication plugin to configure during the first initialization.                              | `nil`         |
 | `MYSQL_ROOT_USER`               | Percona Server for MySQL database root user.                                                                              | `root`        |
+| `MYSQL_ROOT_PASSWORD`           | Percona Server for MySQL database root user password.                                                                     | `nil`         |
+| `MYSQL_USER`                    | Percona Server for MySQL database user to create during the first initialization.                                         | `nil`         |
+| `MYSQL_PASSWORD`                | Password for the Percona Server for MySQL database user to create during the first initialization.                        | `nil`         |
+| `MYSQL_DATABASE`                | Percona Server for MySQL database to create during the first initialization.                                              | `nil`         |
+| `MYSQL_MASTER_HOST`             | Address for the Percona Server for MySQL master node.                                                                     | `nil`         |
 | `MYSQL_MASTER_PORT_NUMBER`      | Port number for the Percona Server for MySQL master node.                                                                 | `3306`        |
 | `MYSQL_MASTER_ROOT_USER`        | Percona Server for MySQL database root user of the master host.                                                           | `root`        |
+| `MYSQL_MASTER_ROOT_PASSWORD`    | Password for the Percona Server for MySQL database root user of the the master host.                                      | `nil`         |
 | `MYSQL_MASTER_DELAY`            | Percona Server for MySQL database replication delay.                                                                      | `0`           |
+| `MYSQL_REPLICATION_USER`        | Percona Server for MySQL replication database user.                                                                       | `nil`         |
+| `MYSQL_REPLICATION_PASSWORD`    | Password for the Percona Server for MySQL replication database user.                                                      | `nil`         |
+| `MYSQL_PORT_NUMBER`             | Port number to use for the Percona Server for MySQL Server service.                                                       | `nil`         |
+| `MYSQL_REPLICATION_MODE`        | Percona Server for MySQL replication mode.                                                                                | `nil`         |
 | `MYSQL_REPLICATION_SLAVE_DUMP`  | Make a dump on master and update slave Percona Server for MySQL database                                                  | `false`       |
+| `MYSQL_EXTRA_FLAGS`             | Extra flags to be passed to start the Percona Server for MySQL Server.                                                    | `nil`         |
+| `MYSQL_INIT_SLEEP_TIME`         | Sleep time when waiting for Percona Server for MySQL init configuration operations to finish.                             | `nil`         |
+| `MYSQL_CHARACTER_SET`           | Percona Server for MySQL collation to use.                                                                                | `nil`         |
+| `MYSQL_COLLATE`                 | Percona Server for MySQL collation to use.                                                                                | `nil`         |
+| `MYSQL_BIND_ADDRESS`            | Percona Server for MySQL bind address.                                                                                    | `nil`         |
+| `MYSQL_SQL_MODE`                | Percona Server for MySQL Server SQL modes to enable.                                                                      | `nil`         |
+| `MYSQL_IS_DEDICATED_SERVER`     | Whether the Percona Server for MySQL Server will run on a dedicated node.                                                 | `nil`         |
 | `MYSQL_CLIENT_ENABLE_SSL`       | Whether to force SSL for connections to the Percona Server for MySQL database.                                            | `no`          |
+| `MYSQL_CLIENT_SSL_CA_FILE`      | Path to CA certificate to use for SSL connections to the Percona Server for MySQL database server.                        | `nil`         |
+| `MYSQL_CLIENT_SSL_CERT_FILE`    | Path to client public key certificate to use for SSL connections to the Percona Server for MySQL database server.         | `nil`         |
+| `MYSQL_CLIENT_SSL_KEY_FILE`     | Path to client private key to use for SSL connections to the Percona Server for MySQL database server.                    | `nil`         |
 | `MYSQL_CLIENT_EXTRA_FLAGS`      | Whether to force SSL connections with the "mysql" CLI tool. Useful for applications that rely on the CLI instead of APIs. | `no`          |
 | `MYSQL_STARTUP_WAIT_RETRIES`    | Number of retries waiting for the database to be running.                                                                 | `300`         |
 | `MYSQL_STARTUP_WAIT_SLEEP_TIME` | Sleep time between retries waiting for the database to be running.                                                        | `2`           |
@@ -95,7 +116,6 @@ docker build -t bitnami/APP:latest .
 | `MYSQL_DEFAULT_PORT_NUMBER`   | Default port number to use for the Percona Server for MySQL Server service.   | `3306`                        |
 | `MYSQL_DEFAULT_CHARACTER_SET` | Default Percona Server for MySQL character set.                               | `utf8mb4`                     |
 | `MYSQL_DEFAULT_BIND_ADDRESS`  | Default Percona Server for MySQL bind address.                                | `0.0.0.0`                     |
-| `MYSQL_DISABLE_SERVICE`       | Whether to disable the Percona Server for MySQL service by default.           | `no`                          |
 | `MYSQL_HOME`                  | Path to the MYSQL home                                                        | `$DB_CONF_DIR`                |
 
 ## Using `docker-compose.yaml`

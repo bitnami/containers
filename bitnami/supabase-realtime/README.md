@@ -19,7 +19,7 @@ docker run -it --name supabase-realtime bitnami/supabase-realtime
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use Supabase Realtime in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
@@ -92,7 +92,10 @@ docker run --name supabase-realtime bitnami/supabase-realtime:latest
 | `DB_PORT`                   | Database port number            | `5432`                  |
 | `DB_NAME`                   | Database name                   | `postgres`              |
 | `DB_USER`                   | Database user username          | `postgres`              |
+| `DB_PASSWORD`               | Database password               | `nil`                   |
 | `DB_SSL`                    | Database SSL connection enabled | `disable`               |
+| `API_JWT_SECRET`            | API Secret                      | `nil`                   |
+| `SECRET_KEY_BASE`           | Key Base Secret                 | `nil`                   |
 | `PORT`                      | Service Port                    | `9500`                  |
 | `FLY_APP_NAME`              | App Name                        | `realtime`              |
 | `FLY_ALLOC_ID`              | Alloc ID                        | `realtime`              |
@@ -105,17 +108,14 @@ docker run --name supabase-realtime bitnami/supabase-realtime:latest
 
 #### Read-only environment variables
 
-| Name                               | Description                                                                  | Value                                                 |
-|------------------------------------|------------------------------------------------------------------------------|-------------------------------------------------------|
-| `SUPABASE_REALTIME_BASE_DIR`       | Supabase-realtime installation directory.                                    | `${BITNAMI_ROOT_DIR}/supabase-realtime`               |
-| `SUPABASE_REALTIME_LOGS_DIR`       | Directory where Supabase-realtime logs are stored.                           | `${SUPABASE_REALTIME_BASE_DIR}/logs`                  |
-| `SUPABASE_REALTIME_LOG_FILE`       | Directory where Supabase-realtime logs are stored.                           | `${SUPABASE_REALTIME_LOGS_DIR}/supabase-realtime.log` |
-| `SUPABASE_REALTIME_BIN_DIR`        | Supabase-realtime directory for binary executables.                          | `${SUPABASE_REALTIME_BASE_DIR}/bin`                   |
-| `SUPABASE_REALTIME_TMP_DIR`        | Directory where Supabase-realtime temporary files are stored.                | `${SUPABASE_REALTIME_BASE_DIR}/tmp`                   |
-| `SUPABASE_REALTIME_PID_FILE`       | Path to the PID file for Supabase-realtime.                                  | `${SUPABASE_REALTIME_TMP_DIR}/supabase-realtime.pid`  |
-| `SUPABASE_REALTIME_EXTRA_ENV_FILE` | File to store extra environment variables for the harbor-jobservice service. | `${SUPABASE_REALTIME_BASE_DIR}/.env`                  |
-| `SUPABASE_REALTIME_DAEMON_USER`    | postgrest system user.                                                       | `supabase`                                            |
-| `SUPABASE_REALTIME_DAEMON_GROUP`   | postgrest system group.                                                      | `supabase`                                            |
+| Name                             | Description                                         | Value                                                 |
+|----------------------------------|-----------------------------------------------------|-------------------------------------------------------|
+| `SUPABASE_REALTIME_BASE_DIR`     | Supabase-realtime installation directory.           | `${BITNAMI_ROOT_DIR}/supabase-realtime`               |
+| `SUPABASE_REALTIME_LOGS_DIR`     | Directory where Supabase-realtime logs are stored.  | `${SUPABASE_REALTIME_BASE_DIR}/logs`                  |
+| `SUPABASE_REALTIME_LOG_FILE`     | Directory where Supabase-realtime logs are stored.  | `${SUPABASE_REALTIME_LOGS_DIR}/supabase-realtime.log` |
+| `SUPABASE_REALTIME_BIN_DIR`      | Supabase-realtime directory for binary executables. | `${SUPABASE_REALTIME_BASE_DIR}/bin`                   |
+| `SUPABASE_REALTIME_DAEMON_USER`  | postgrest system user.                              | `supabase`                                            |
+| `SUPABASE_REALTIME_DAEMON_GROUP` | postgrest system group.                             | `supabase`                                            |
 
 ### Running commands
 

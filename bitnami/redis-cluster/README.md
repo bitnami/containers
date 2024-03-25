@@ -19,7 +19,7 @@ docker run --name redis-cluster -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis-cluste
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use Redis&reg; Cluster in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
@@ -163,28 +163,51 @@ services:
 
 #### Customizable environment variables
 
-| Name                                    | Description                                                     | Default Value                              |
-|-----------------------------------------|-----------------------------------------------------------------|--------------------------------------------|
-| `REDIS_DATA_DIR`                        | Redis data directory                                            | `${REDIS_VOLUME_DIR}/data`                 |
-| `REDIS_OVERRIDES_FILE`                  | Redis config overrides file                                     | `${REDIS_MOUNTED_CONF_DIR}/overrides.conf` |
-| `REDIS_DATABASE`                        | Default Redis database                                          | `redis`                                    |
-| `REDIS_AOF_ENABLED`                     | Enable AOF                                                      | `yes`                                      |
-| `REDIS_RDB_POLICY_DISABLED`             | Allows to enable RDP policy persistence                         | `no`                                       |
-| `REDIS_MASTER_PORT_NUMBER`              | Redis master host port (used by slaves)                         | `6379`                                     |
-| `REDIS_PORT_NUMBER`                     | Redis port number                                               | `$REDIS_DEFAULT_PORT_NUMBER`               |
-| `REDIS_ALLOW_REMOTE_CONNECTIONS`        | Allow remote connection to the service                          | `yes`                                      |
-| `ALLOW_EMPTY_PASSWORD`                  | Allow password-less access                                      | `no`                                       |
-| `REDIS_TLS_ENABLED`                     | Enable TLS                                                      | `no`                                       |
-| `REDIS_TLS_PORT_NUMBER`                 | Redis TLS port (requires REDIS_ENABLE_TLS=yes)                  | `6379`                                     |
-| `REDIS_TLS_AUTH_CLIENTS`                | Enable Redis TLS client authentication                          | `yes`                                      |
-| `REDIS_CLUSTER_CREATOR`                 | Launch the cluster bootstrap command                            | `no`                                       |
-| `REDIS_CLUSTER_REPLICAS`                | Number of cluster replicas                                      | `1`                                        |
-| `REDIS_CLUSTER_DYNAMIC_IPS`             | Use dynamic IPS for cluster creation                            | `yes`                                      |
-| `REDIS_DNS_RETRIES`                     | Number of retries in order to get an addresable domain name     | `120`                                      |
-| `REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP` | Time to wait before the DNS lookup                              | `0`                                        |
-| `REDIS_CLUSTER_DNS_LOOKUP_RETRIES`      | Number of retires for the DNS lookup                            | `1`                                        |
-| `REDIS_CLUSTER_DNS_LOOKUP_SLEEP`        | Time to sleep between DNS lookups                               | `1`                                        |
-| `REDIS_CLUSTER_PREFERRED_ENDPOINT_TYPE` | Preferred endpoint type which cluster should use (ip, hostname) | `ip`                                       |
+| Name                                    | Description                                                               | Default Value                              |
+|-----------------------------------------|---------------------------------------------------------------------------|--------------------------------------------|
+| `REDIS_DATA_DIR`                        | Redis data directory                                                      | `${REDIS_VOLUME_DIR}/data`                 |
+| `REDIS_OVERRIDES_FILE`                  | Redis config overrides file                                               | `${REDIS_MOUNTED_CONF_DIR}/overrides.conf` |
+| `REDIS_DISABLE_COMMANDS`                | Commands to disable in Redis                                              | `nil`                                      |
+| `REDIS_DATABASE`                        | Default Redis database                                                    | `redis`                                    |
+| `REDIS_AOF_ENABLED`                     | Enable AOF                                                                | `yes`                                      |
+| `REDIS_RDB_POLICY`                      | Enable RDB policy persitence                                              | `nil`                                      |
+| `REDIS_RDB_POLICY_DISABLED`             | Allows to enable RDP policy persistence                                   | `no`                                       |
+| `REDIS_MASTER_HOST`                     | Redis master host (used by slaves)                                        | `nil`                                      |
+| `REDIS_MASTER_PORT_NUMBER`              | Redis master host port (used by slaves)                                   | `6379`                                     |
+| `REDIS_PORT_NUMBER`                     | Redis port number                                                         | `$REDIS_DEFAULT_PORT_NUMBER`               |
+| `REDIS_ALLOW_REMOTE_CONNECTIONS`        | Allow remote connection to the service                                    | `yes`                                      |
+| `REDIS_REPLICATION_MODE`                | Redis replication mode (values: master, slave)                            | `nil`                                      |
+| `REDIS_REPLICA_IP`                      | The replication announce ip                                               | `nil`                                      |
+| `REDIS_REPLICA_PORT`                    | The replication announce port                                             | `nil`                                      |
+| `REDIS_EXTRA_FLAGS`                     | Additional flags pass to 'redis-server' commands                          | `nil`                                      |
+| `ALLOW_EMPTY_PASSWORD`                  | Allow password-less access                                                | `no`                                       |
+| `REDIS_PASSWORD`                        | Password for Redis                                                        | `nil`                                      |
+| `REDIS_MASTER_PASSWORD`                 | Redis master node password                                                | `nil`                                      |
+| `REDIS_ACLFILE`                         | Redis ACL file                                                            | `nil`                                      |
+| `REDIS_IO_THREADS_DO_READS`             | Enable multithreading when reading socket                                 | `nil`                                      |
+| `REDIS_IO_THREADS`                      | Number of threads                                                         | `nil`                                      |
+| `REDIS_TLS_ENABLED`                     | Enable TLS                                                                | `no`                                       |
+| `REDIS_TLS_PORT_NUMBER`                 | Redis TLS port (requires REDIS_ENABLE_TLS=yes)                            | `6379`                                     |
+| `REDIS_TLS_CERT_FILE`                   | Redis TLS certificate file                                                | `nil`                                      |
+| `REDIS_TLS_CA_DIR`                      | Directory containing TLS CA certificates                                  | `nil`                                      |
+| `REDIS_TLS_KEY_FILE`                    | Redis TLS key file                                                        | `nil`                                      |
+| `REDIS_TLS_KEY_FILE_PASS`               | Redis TLS key file passphrase                                             | `nil`                                      |
+| `REDIS_TLS_CA_FILE`                     | Redis TLS CA file                                                         | `nil`                                      |
+| `REDIS_TLS_DH_PARAMS_FILE`              | Redis TLS DH parameter file                                               | `nil`                                      |
+| `REDIS_TLS_AUTH_CLIENTS`                | Enable Redis TLS client authentication                                    | `yes`                                      |
+| `REDIS_CLUSTER_CREATOR`                 | Launch the cluster bootstrap command                                      | `no`                                       |
+| `REDIS_CLUSTER_REPLICAS`                | Number of cluster replicas                                                | `1`                                        |
+| `REDIS_CLUSTER_DYNAMIC_IPS`             | Use dynamic IPS for cluster creation                                      | `yes`                                      |
+| `REDIS_CLUSTER_ANNOUNCE_IP`             | IP to use for announcing the cluster service                              | `nil`                                      |
+| `REDIS_CLUSTER_ANNOUNCE_PORT`           | Client port to use for announcing the cluster service                     | `nil`                                      |
+| `REDIS_CLUSTER_ANNOUNCE_BUS_PORT`       | Cluster message bus port to use for announcing the cluster service        | `nil`                                      |
+| `REDIS_DNS_RETRIES`                     | Number of retries in order to get an addresable domain name               | `120`                                      |
+| `REDIS_NODES`                           | List of Redis cluster nodes                                               | `nil`                                      |
+| `REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP` | Time to wait before the DNS lookup                                        | `0`                                        |
+| `REDIS_CLUSTER_DNS_LOOKUP_RETRIES`      | Number of retires for the DNS lookup                                      | `1`                                        |
+| `REDIS_CLUSTER_DNS_LOOKUP_SLEEP`        | Time to sleep between DNS lookups                                         | `1`                                        |
+| `REDIS_CLUSTER_ANNOUNCE_HOSTNAME`       | Hostname that node should announce, used for non dynamic ip environments. | `nil`                                      |
+| `REDIS_CLUSTER_PREFERRED_ENDPOINT_TYPE` | Preferred endpoint type which cluster should use (ip, hostname)           | `ip`                                       |
 
 #### Read-only environment variables
 

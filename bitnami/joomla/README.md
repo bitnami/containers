@@ -24,7 +24,7 @@ docker-compose up -d
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use Joomla! in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
@@ -204,15 +204,25 @@ docker run -d --name joomla \
 |---------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|----------------------------------------|
 | `JOOMLA_DATA_TO_PERSIST`              | Files to persist relative to the Joomla! installation directory. To provide multiple values, separate them with a whitespace. | `$JOOMLA_BASE_DIR`                     |
 | `JOOMLA_LOAD_SAMPLE_DATA`             | Load Joomla sample data.                                                                                                      | `yes`                                  |
+| `JOOMLA_SKIP_BOOTSTRAP`               | Whether to perform initial bootstrapping for the application.                                                                 | `nil`                                  |
 | `JOOMLA_USERNAME`                     | Joomla! user name.                                                                                                            | `user`                                 |
 | `JOOMLA_PASSWORD`                     | Joomla! user password.                                                                                                        | `bitnami`                              |
 | `JOOMLA_EMAIL`                        | Joomla! user e-mail address.                                                                                                  | `user@example.com`                     |
 | `JOOMLA_SITE_NAME`                    | Joomla! site name                                                                                                             | `$JOOMLA_DEFAULT_SITE_NAME`            |
+| `JOOMLA_SECRET`                       | Secret value for data encryption (auto-generated if not provided)                                                             | `nil`                                  |
+| `JOOMLA_SMTP_HOST`                    | Joomla! SMTP server host.                                                                                                     | `nil`                                  |
+| `JOOMLA_SMTP_PORT_NUMBER`             | Joomla! SMTP server port number.                                                                                              | `nil`                                  |
+| `JOOMLA_SMTP_USER`                    | Joomla! SMTP server user.                                                                                                     | `nil`                                  |
+| `JOOMLA_SMTP_PASSWORD`                | Joomla! SMTP server user password.                                                                                            | `nil`                                  |
+| `JOOMLA_SMTP_PROTOCOL`                | Joomla! SMTP server protocol.                                                                                                 | `nil`                                  |
+| `JOOMLA_SMTP_SENDER_EMAIL`            | Joomla! SMTP Sender email.                                                                                                    | `nil`                                  |
+| `JOOMLA_SMTP_SENDER_NAME`             | Joomla! SMTP Sender name.                                                                                                     | `nil`                                  |
 | `JOOMLA_DEFAULT_DATABASE_PORT_NUMBER` | Database server port.                                                                                                         | `3306`                                 |
 | `JOOMLA_DATABASE_HOST`                | Database server host.                                                                                                         | `$JOOMLA_DEFAULT_DATABASE_HOST`        |
 | `JOOMLA_DATABASE_PORT_NUMBER`         | Database server port.                                                                                                         | `$JOOMLA_DEFAULT_DATABASE_PORT_NUMBER` |
 | `JOOMLA_DATABASE_NAME`                | Database name.                                                                                                                | `bitnami_joomla`                       |
 | `JOOMLA_DATABASE_USER`                | Database user name.                                                                                                           | `bn_joomla`                            |
+| `JOOMLA_DATABASE_PASSWORD`            | Database user password.                                                                                                       | `nil`                                  |
 
 #### Read-only environment variables
 
@@ -225,7 +235,6 @@ docker run -d --name joomla \
 | `JOOMLA_VOLUME_DIR`            | Joomla! directory for persisted data files. | `${BITNAMI_VOLUME_DIR}/joomla`         |
 | `JOOMLA_DEFAULT_SITE_NAME`     | Joomla! default site name                   | `My site`                              |
 | `JOOMLA_DEFAULT_DATABASE_HOST` | Default database server host.               | `mariadb`                              |
-| `JOOMLA_DEFAULT_DATABASE_HOST` | Default database server host.               | `127.0.0.1`                            |
 | `PHP_DEFAULT_MEMORY_LIMIT`     | Default PHP memory limit.                   | `256M`                                 |
 
 When you start the Joomla! image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:

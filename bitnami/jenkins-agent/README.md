@@ -21,7 +21,7 @@ You can find all the available configuration options in the [Environment Variabl
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use Jenkins Agent in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
@@ -66,11 +66,19 @@ docker build -t bitnami/APP:latest .
 
 #### Customizable environment variables
 
-| Name                       | Description                                                                        | Default Value                      |
-|----------------------------|------------------------------------------------------------------------------------|------------------------------------|
-| `JENKINS_AGENT_WORKDIR`    | The working directory of the remoting instance (stores cache and logs by default). | `${JENKINS_AGENT_VOLUME_DIR}/home` |
-| `JENKINS_AGENT_WEB_SOCKET` | Make a WebSocket connection to Jenkins rather than using the TCP port              | `false`                            |
-| `JAVA_HOME`                | Java Home directory.                                                               | `${BITNAMI_ROOT_DIR}/java`         |
+| Name                              | Description                                                                                                                                | Default Value                      |
+|-----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------|
+| `JENKINS_AGENT_TUNNEL`            | Connect to the specified host and port, instead of connecting directly to Jenkins. Useful when connection to Jenkins needs to be tunneled. | `nil`                              |
+| `JENKINS_AGENT_URL`               | Specify the Jenkins root URLs to connect to.                                                                                               | `nil`                              |
+| `JENKINS_AGENT_PROTOCOLS`         | Specify the remoting protocols to attempt when instanceIdentity is provided                                                                | `nil`                              |
+| `JENKINS_AGENT_DIRECT_CONNECTION` | Connect directly to this TCP agent port, skipping the HTTP(S) connection                                                                   | `nil`                              |
+| `JENKINS_AGENT_INSTANCE_IDENTITY` | The base64 encoded InstanceIdentity byte array of the Jenkins controller                                                                   | `nil`                              |
+| `JENKINS_AGENT_WORKDIR`           | The working directory of the remoting instance (stores cache and logs by default).                                                         | `${JENKINS_AGENT_VOLUME_DIR}/home` |
+| `JENKINS_AGENT_WEB_SOCKET`        | Make a WebSocket connection to Jenkins rather than using the TCP port                                                                      | `false`                            |
+| `JENKINS_AGENT_SECRET`            | Jenkins agent name                                                                                                                         | `nil`                              |
+| `JENKINS_AGENT_NAME`              | Jenkins agent secret                                                                                                                       | `nil`                              |
+| `JAVA_HOME`                       | Java Home directory.                                                                                                                       | `${BITNAMI_ROOT_DIR}/java`         |
+| `JAVA_OPTS`                       | Java options.                                                                                                                              | `nil`                              |
 
 #### Read-only environment variables
 

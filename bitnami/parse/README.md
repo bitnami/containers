@@ -21,7 +21,7 @@ You can find the default credentials and available configuration options in the 
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use Parse Server in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
@@ -191,22 +191,23 @@ Bitnami provides up-to-date versions of Mongodb and Parse, including security pa
 
 #### Customizable environment variables
 
-| Name                         | Description                                   | Default Value                  |
-|------------------------------|-----------------------------------------------|--------------------------------|
-| `PARSE_ENABLE_HTTPS`         | Whether to enable HTTPS for Parse by default. | `no`                           |
-| `PARSE_BIND_HOST`            | Parse bind host.                              | `127.0.0.1`                    |
-| `PARSE_BIND_HOST`            | Parse bind host.                              | `0.0.0.0`                      |
-| `PARSE_HOST`                 | Parse host.                                   | `127.0.0.1`                    |
-| `PARSE_PORT_NUMBER`          | Port number in which Parse will run.          | `1337`                         |
-| `PARSE_APP_ID`               | Parse app ID.                                 | `myappID`                      |
-| `PARSE_MASTER_KEY`           | Parse master key.                             | `mymasterKey`                  |
-| `PARSE_APP_NAME`             | Parse app name.                               | `parse-server`                 |
-| `PARSE_MOUNT_PATH`           | Parse mount path.                             | `/parse`                       |
-| `PARSE_ENABLE_CLOUD_CODE`    | Enable Parse cloud code support.              | `no`                           |
-| `PARSE_DATABASE_HOST`        | Database server host.                         | `$PARSE_DEFAULT_DATABASE_HOST` |
-| `PARSE_DATABASE_PORT_NUMBER` | Database server port.                         | `27017`                        |
-| `PARSE_DATABASE_NAME`        | Database name.                                | `bitnami_parse`                |
-| `PARSE_DATABASE_USER`        | Database user name.                           | `bn_parse`                     |
+| Name                              | Description                                   | Default Value                  |
+|-----------------------------------|-----------------------------------------------|--------------------------------|
+| `PARSE_FORCE_OVERWRITE_CONF_FILE` | Force the config.json config file generation. | `no`                           |
+| `PARSE_ENABLE_HTTPS`              | Whether to enable HTTPS for Parse by default. | `no`                           |
+| `PARSE_BIND_HOST`                 | Parse bind host.                              | `0.0.0.0`                      |
+| `PARSE_HOST`                      | Parse host.                                   | `127.0.0.1`                    |
+| `PARSE_PORT_NUMBER`               | Port number in which Parse will run.          | `1337`                         |
+| `PARSE_APP_ID`                    | Parse app ID.                                 | `myappID`                      |
+| `PARSE_MASTER_KEY`                | Parse master key.                             | `mymasterKey`                  |
+| `PARSE_APP_NAME`                  | Parse app name.                               | `parse-server`                 |
+| `PARSE_MOUNT_PATH`                | Parse mount path.                             | `/parse`                       |
+| `PARSE_ENABLE_CLOUD_CODE`         | Enable Parse cloud code support.              | `no`                           |
+| `PARSE_DATABASE_HOST`             | Database server host.                         | `$PARSE_DEFAULT_DATABASE_HOST` |
+| `PARSE_DATABASE_PORT_NUMBER`      | Database server port.                         | `27017`                        |
+| `PARSE_DATABASE_NAME`             | Database name.                                | `bitnami_parse`                |
+| `PARSE_DATABASE_USER`             | Database user name.                           | `bn_parse`                     |
+| `PARSE_DATABASE_PASSWORD`         | Database user password.                       | `nil`                          |
 
 #### Read-only environment variables
 
@@ -222,7 +223,6 @@ Bitnami provides up-to-date versions of Mongodb and Parse, including security pa
 | `PARSE_DAEMON_USER`           | Parse system user.                               | `parse`                         |
 | `PARSE_DAEMON_GROUP`          | Parse system group.                              | `parse`                         |
 | `PARSE_DEFAULT_DATABASE_HOST` | Default database server host.                    | `mongodb`                       |
-| `PARSE_DEFAULT_DATABASE_HOST` | Default database server host.                    | `127.0.0.1`                     |
 
 When you start the parse image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 

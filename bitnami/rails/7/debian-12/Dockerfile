@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-02-21T23:53:36Z" \
+      org.opencontainers.image.created="2024-03-23T00:40:31Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.1.3-debian-12-r9" \
+      org.opencontainers.image.ref.name="7.1.3-debian-12-r10" \
       org.opencontainers.image.title="rails" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="7.1.3"
@@ -25,9 +25,9 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages build-essential ca-certificates curl git libaudit1 libbz2-1.0 libcap-ng0 libcom-err2 libcrypt1 libffi8 libgcc-s1 libgmp10 libgnutls30 libgssapi-krb5-2 libhogweed6 libicu72 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.5-0 liblzma5 libmariadb3 libncurses6 libncursesw6 libnettle8 libnsl2 libp11-kit0 libpam0g libpq5 libreadline-dev libreadline8 libsasl2-2 libsqlite3-0 libssl-dev libssl3 libstdc++6 libtasn1-6 libtinfo6 libtirpc3 libunistring2 libxml2 libyaml-0-2 libyaml-dev pkg-config procps sqlite3 sudo unzip zlib1g zlib1g-dev
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "python-3.11.8-2-linux-${OS_ARCH}-debian-12" \
-      "wait-for-port-1.0.7-8-linux-${OS_ARCH}-debian-12" \
-      "ruby-3.2.3-2-linux-${OS_ARCH}-debian-12" \
+      "python-3.11.8-4-linux-${OS_ARCH}-debian-12" \
+      "wait-for-port-1.0.7-10-linux-${OS_ARCH}-debian-12" \
+      "ruby-3.2.3-3-linux-${OS_ARCH}-debian-12" \
       "node-18.19.1-0-linux-${OS_ARCH}-debian-12" \
       "mysql-client-10.11.7-1-linux-${OS_ARCH}-debian-12" \
       "rails-7.1.3-3-linux-${OS_ARCH}-debian-12" \
