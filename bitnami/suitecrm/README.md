@@ -193,6 +193,7 @@ docker run -d --name suitecrm \
 | Name                                  | Description                                                                                                                    | Default Value                     |
 |---------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|
 | `SUITECRM_DATA_TO_PERSIST`            | Files to persist relative to the SuiteCRM installation directory. To provide multiple values, separate them with a whitespace. | `$SUITECRM_BASE_DIR`              |
+| `SUITECRM_SKIP_BOOTSTRAP`             | Whether to perform initial bootstrapping for the application.                                                                  | `nil`                             |
 | `SUITECRM_USERNAME`                   | SuiteCRM user name.                                                                                                            | `user`                            |
 | `SUITECRM_PASSWORD`                   | SuiteCRM user password.                                                                                                        | `bitnami`                         |
 | `SUITECRM_EMAIL`                      | SuiteCRM user e-mail address.                                                                                                  | `user@example.com`                |
@@ -201,12 +202,18 @@ docker run -d --name suitecrm \
 | `SUITECRM_EXTERNAL_HTTP_PORT_NUMBER`  | Port to used by SuiteCRM to generate URLs and links when accessing using HTTP.                                                 | `80`                              |
 | `SUITECRM_EXTERNAL_HTTPS_PORT_NUMBER` | Port to used by SuiteCRM to generate URLs and links when accessing using HTTPS.                                                | `443`                             |
 | `SUITECRM_VALIDATE_USER_IP`           | Whether or not to validate te user IP.                                                                                         | `true`                            |
+| `SUITECRM_SMTP_HOST`                  | SuiteCRM SMTP server host.                                                                                                     | `nil`                             |
+| `SUITECRM_SMTP_PORT_NUMBER`           | SuiteCRM SMTP server port number.                                                                                              | `nil`                             |
+| `SUITECRM_SMTP_USER`                  | SuiteCRM SMTP server user.                                                                                                     | `nil`                             |
+| `SUITECRM_SMTP_PASSWORD`              | SuiteCRM SMTP server user password.                                                                                            | `nil`                             |
+| `SUITECRM_SMTP_PROTOCOL`              | SuiteCRM SMTP server protocol to use.                                                                                          | `nil`                             |
 | `SUITECRM_SMTP_NOTIFY_ADDRESS`        | SuiteCRM email address to use in notifications.                                                                                | `${SUITECRM_EMAIL}`               |
 | `SUITECRM_SMTP_NOTIFY_NAME`           | SuiteCRM name to use in notifications.                                                                                         | `SuiteCRM`                        |
 | `SUITECRM_DATABASE_HOST`              | Database server host.                                                                                                          | `$SUITECRM_DEFAULT_DATABASE_HOST` |
 | `SUITECRM_DATABASE_PORT_NUMBER`       | Database server port.                                                                                                          | `3306`                            |
 | `SUITECRM_DATABASE_NAME`              | Database name.                                                                                                                 | `bitnami_suitecrm`                |
 | `SUITECRM_DATABASE_USER`              | Database user name.                                                                                                            | `bn_suitecrm`                     |
+| `SUITECRM_DATABASE_PASSWORD`          | Database user password.                                                                                                        | `nil`                             |
 
 #### Read-only environment variables
 
@@ -218,7 +225,6 @@ docker run -d --name suitecrm \
 | `SUITECRM_VOLUME_DIR`               | SuiteCRM directory for mounted configuration files.                                                                                  | `${BITNAMI_VOLUME_DIR}/suitecrm`                   |
 | `SUITECRM_MOUNTED_CONF_FILE`        | Mounted configuration file for SuiteCRM. It will be copied to the SuiteCRM installation directory during the initialization process. | `${SUITECRM_VOLUME_DIR}/config_si.php`             |
 | `SUITECRM_DEFAULT_DATABASE_HOST`    | Default database server host.                                                                                                        | `mariadb`                                          |
-| `SUITECRM_DEFAULT_DATABASE_HOST`    | Default database server host.                                                                                                        | `127.0.0.1`                                        |
 | `PHP_DEFAULT_MEMORY_LIMIT`          | Default PHP memory limit.                                                                                                            | `256M`                                             |
 | `PHP_DEFAULT_POST_MAX_SIZE`         | Default maximum size for PHP POST requests.                                                                                          | `60M`                                              |
 | `PHP_DEFAULT_UPLOAD_MAX_FILESIZE`   | Default maximum file size for PHP uploads.                                                                                           | `60M`                                              |
