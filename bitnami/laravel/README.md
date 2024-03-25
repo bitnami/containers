@@ -104,6 +104,7 @@ After the application server has been launched in the `myapp` service, visit `ht
 | `LARAVEL_DATABASE_PORT_NUMBER` | Database server port.                          | `3306`          |
 | `LARAVEL_DATABASE_NAME`        | Database name.                                 | `bitnami_myapp` |
 | `LARAVEL_DATABASE_USER`        | Database user name.                            | `bn_myapp`      |
+| `LARAVEL_DATABASE_PASSWORD`    | Database user password.                        | `nil`           |
 
 ### Read-only environment variables
 
