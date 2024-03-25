@@ -207,7 +207,7 @@ docker-compose up -d
 | `POSTGRESQL_PASSWORD`                      | Password for the PostgreSQL created user                                                         | `nil`                                      |
 | `POSTGRESQL_POSTGRES_PASSWORD`             | Password for the PostgreSQL postgres user                                                        | `nil`                                      |
 | `POSTGRESQL_REPLICATION_PASSWORD`          | Password for the PostgreSQL replication user                                                     | `nil`                                      |
-| `POSTGRESQL_INITSCRIPTS_PASSWORD`          | Password for the PostgreSQL init scritps user                                                    | `$POSTGRESQL_PASSWORD`                     |
+| `POSTGRESQL_INITSCRIPTS_PASSWORD`          | Password for the PostgreSQL init scripts user                                                    | `$POSTGRESQL_PASSWORD`                     |
 | `POSTGRESQL_ENABLE_TLS`                    | Whether to enable TLS for traffic or not                                                         | `no`                                       |
 | `POSTGRESQL_TLS_CERT_FILE`                 | File containing the certificate for the TLS traffic                                              | `nil`                                      |
 | `POSTGRESQL_TLS_KEY_FILE`                  | File containing the key for certificate                                                          | `nil`                                      |
@@ -233,7 +233,7 @@ docker-compose up -d
 | `POSTGRESQL_PGHBA_REMOVE_FILTERS`          | Comma-separated list of strings for removing pg_hba.conf lines (example: md5, local)             | `nil`                                      |
 | `POSTGRESQL_USERNAME_CONNECTION_LIMIT`     | Set the user connection limit                                                                    | `nil`                                      |
 | `POSTGRESQL_POSTGRES_CONNECTION_LIMIT`     | Set the postgres user connection limit                                                           | `nil`                                      |
-| `POSTGRESQL_WAL_LEVEL`                     | Set the postgres user connection limit                                                           | `replica`                                  |
+| `POSTGRESQL_WAL_LEVEL`                     | Set the write-ahead log level                                                                    | `replica`                                  |
 | `POSTGRESQL_DEFAULT_TOAST_COMPRESSION`     | Set the postgres default compression                                                             | `nil`                                      |
 | `POSTGRESQL_PASSWORD_ENCRYPTION`           | Set the passwords encryption method                                                              | `nil`                                      |
 | `POSTGRESQL_DEFAULT_TRANSACTION_ISOLATION` | Set transaction isolation                                                                        | `nil`                                      |
@@ -505,7 +505,7 @@ The above command scales up the number of slaves to `3`. You can scale down in t
 
 #### Synchronous commits
 
-By default, the slaves instances are configued with asynchronous replication. In order to guarantee more data stability (at the cost of some performance), it is possible to set synchronous commits (i.e. a transaction commit will not return success to the client until it has been written in a set of replicas) using the following environment variables.
+By default, the slave instances are configured with asynchronous replication. In order to guarantee more data stability (at the cost of some performance), it is possible to set synchronous commits (i.e. a transaction commit will not return success to the client until it has been written in a set of replicas) using the following environment variables.
 
 * `POSTGRESQL_SYNCHRONOUS_COMMIT_MODE`: Establishes the type of synchronous commit. The available options are: `on`, `remote_apply`, `remote_write`, `local` and `off`. The default value is `on`. For more information, check the [official PostgreSQL documentation](https://www.postgresql.org/docs/9.6/runtime-config-wal.html#GUC-SYNCHRONOUS-COMMIT).
 * `POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS`: Establishes the number of replicas that will enable synchronous replication. This number must not be above the number of slaves that you configure in the cluster.
