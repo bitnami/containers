@@ -287,26 +287,29 @@ This container supports the installation of additional python modules at start-u
 
 #### Customizable environment variables
 
-| Name                                | Description                                                       | Default Value        |
-|-------------------------------------|-------------------------------------------------------------------|----------------------|
-| `AIRFLOW_EXECUTOR`                  | Airflow executor.                                                 | `SequentialExecutor` |
-| `AIRFLOW_EXECUTOR`                  | Airflow executor.                                                 | `CeleryExecutor`     |
-| `AIRFLOW_FORCE_OVERWRITE_CONF_FILE` | Force the airflow.cfg config file generation.                     | `no`                 |
-| `AIRFLOW_WEBSERVER_HOST`            | Airflow webserver host                                            | `127.0.0.1`          |
-| `AIRFLOW_WEBSERVER_PORT_NUMBER`     | Airflow webserver port.                                           | `8080`               |
-| `AIRFLOW_LOAD_EXAMPLES`             | To load example tasks into the application.                       | `yes`                |
-| `AIRFLOW_HOSTNAME_CALLABLE`         | Method to obtain the hostname.                                    | `socket.gethostname` |
-| `AIRFLOW_DATABASE_HOST`             | Hostname for PostgreSQL server.                                   | `postgresql`         |
-| `AIRFLOW_DATABASE_HOST`             | Hostname for PostgreSQL server.                                   | `127.0.0.1`          |
-| `AIRFLOW_DATABASE_PORT_NUMBER`      | Port used by PostgreSQL server.                                   | `5432`               |
-| `AIRFLOW_DATABASE_NAME`             | Database name that Airflow will use to connect with the database. | `bitnami_airflow`    |
-| `AIRFLOW_DATABASE_USERNAME`         | Database user that Airflow will use to connect with the database. | `bn_airflow`         |
-| `AIRFLOW_DATABASE_USE_SSL`          | Set to yes if the database is using SSL.                          | `no`                 |
-| `AIRFLOW_REDIS_USE_SSL`             | Set to yes if Redis(R) uses SSL.                                  | `no`                 |
-| `REDIS_HOST`                        | Hostname for Redis(R) server.                                     | `redis`              |
-| `REDIS_HOST`                        | Hostname for Redis(R) server.                                     | `127.0.0.1`          |
-| `REDIS_PORT_NUMBER`                 | Port used by Redis(R) server.                                     | `6379`               |
-| `REDIS_DATABASE`                    | Name of the Redis(R) database.                                    | `1`                  |
+| Name                                | Description                                                           | Default Value        |
+|-------------------------------------|-----------------------------------------------------------------------|----------------------|
+| `AIRFLOW_EXECUTOR`                  | Airflow executor.                                                     | `SequentialExecutor` |
+| `AIRFLOW_FORCE_OVERWRITE_CONF_FILE` | Force the airflow.cfg config file generation.                         | `no`                 |
+| `AIRFLOW_RAW_FERNET_KEY`            | Airflow raw/unencoded Fernet key                                      | `nil`                |
+| `AIRFLOW_FERNET_KEY`                | Airflow Fernet key                                                    | `nil`                |
+| `AIRFLOW_SECRET_KEY`                | Airflow Secret key                                                    | `nil`                |
+| `AIRFLOW_WEBSERVER_HOST`            | Airflow webserver host                                                | `127.0.0.1`          |
+| `AIRFLOW_WEBSERVER_PORT_NUMBER`     | Airflow webserver port.                                               | `8080`               |
+| `AIRFLOW_LOAD_EXAMPLES`             | To load example tasks into the application.                           | `yes`                |
+| `AIRFLOW_HOSTNAME_CALLABLE`         | Method to obtain the hostname.                                        | `nil`                |
+| `AIRFLOW_DATABASE_HOST`             | Hostname for PostgreSQL server.                                       | `postgresql`         |
+| `AIRFLOW_DATABASE_PORT_NUMBER`      | Port used by PostgreSQL server.                                       | `5432`               |
+| `AIRFLOW_DATABASE_NAME`             | Database name that Airflow will use to connect with the database.     | `bitnami_airflow`    |
+| `AIRFLOW_DATABASE_USERNAME`         | Database user that Airflow will use to connect with the database.     | `bn_airflow`         |
+| `AIRFLOW_DATABASE_PASSWORD`         | Database password that Airflow will use to connect with the database. | `nil`                |
+| `AIRFLOW_DATABASE_USE_SSL`          | Set to yes if the database is using SSL.                              | `no`                 |
+| `AIRFLOW_REDIS_USE_SSL`             | Set to yes if Redis(R) uses SSL.                                      | `no`                 |
+| `REDIS_HOST`                        | Hostname for Redis(R) server.                                         | `redis`              |
+| `REDIS_PORT_NUMBER`                 | Port used by Redis(R) server.                                         | `6379`               |
+| `REDIS_USER`                        | User that Airflow will use to connect with Redis(R).                  | `nil`                |
+| `REDIS_PASSWORD`                    | Password that Airflow will use to connect with Redis(R).              | `nil`                |
+| `REDIS_DATABASE`                    | Name of the Redis(R) database.                                        | `1`                  |
 
 #### Read-only environment variables
 
