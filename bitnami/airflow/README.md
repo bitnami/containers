@@ -295,36 +295,51 @@ This container supports the installation of additional python modules at start-u
 
 #### Customizable environment variables
 
-| Name                                | Description                                                       | Default Value        |
-|-------------------------------------|-------------------------------------------------------------------|----------------------|
-| `AIRFLOW_USERNAME`                  | Airflow username                                                  | `user`               |
-| `AIRFLOW_PASSWORD`                  | Airflow password                                                  | `bitnami`            |
-| `AIRFLOW_FIRSTNAME`                 | Airflow firstname                                                 | `Firstname`          |
-| `AIRFLOW_LASTNAME`                  | Airflow lastname                                                  | `Lastname`           |
-| `AIRFLOW_EMAIL`                     | Airflow email                                                     | `user@example.com`   |
-| `AIRFLOW_EXECUTOR`                  | Airflow executor.                                                 | `SequentialExecutor` |
-| `AIRFLOW_EXECUTOR`                  | Airflow executor.                                                 | `CeleryExecutor`     |
-| `AIRFLOW_FORCE_OVERWRITE_CONF_FILE` | Force the airflow.cfg config file generation.                     | `no`                 |
-| `AIRFLOW_WEBSERVER_HOST`            | Airflow webserver host                                            | `127.0.0.1`          |
-| `AIRFLOW_WEBSERVER_PORT_NUMBER`     | Airflow webserver port.                                           | `8080`               |
-| `AIRFLOW_LOAD_EXAMPLES`             | To load example tasks into the application.                       | `yes`                |
-| `AIRFLOW_HOSTNAME_CALLABLE`         | Method to obtain the hostname.                                    | `socket.gethostname` |
-| `AIRFLOW_DATABASE_HOST`             | Hostname for PostgreSQL server.                                   | `postgresql`         |
-| `AIRFLOW_DATABASE_HOST`             | Hostname for PostgreSQL server.                                   | `127.0.0.1`          |
-| `AIRFLOW_DATABASE_PORT_NUMBER`      | Port used by PostgreSQL server.                                   | `5432`               |
-| `AIRFLOW_DATABASE_NAME`             | Database name that Airflow will use to connect with the database. | `bitnami_airflow`    |
-| `AIRFLOW_DATABASE_USERNAME`         | Database user that Airflow will use to connect with the database. | `bn_airflow`         |
-| `AIRFLOW_DATABASE_USE_SSL`          | Set to yes if the database is using SSL.                          | `no`                 |
-| `AIRFLOW_REDIS_USE_SSL`             | Set to yes if Redis(R) uses SSL.                                  | `no`                 |
-| `REDIS_HOST`                        | Hostname for Redis(R) server.                                     | `redis`              |
-| `REDIS_HOST`                        | Hostname for Redis(R) server.                                     | `127.0.0.1`          |
-| `REDIS_PORT_NUMBER`                 | Port used by Redis(R) server.                                     | `6379`               |
-| `REDIS_DATABASE`                    | Name of the Redis(R) database.                                    | `1`                  |
-| `AIRFLOW_LDAP_ENABLE`               | Enable LDAP authentication.                                       | `no`                 |
-| `AIRFLOW_LDAP_USER_REGISTRATION`    | User self registration.                                           | `True`               |
-| `AIRFLOW_LDAP_ROLES_SYNC_AT_LOGIN`  | Replace ALL the user roles each login, or only on registration.   | `True`               |
-| `AIRFLOW_LDAP_USE_TLS`              | Use LDAP SSL.                                                     | `False`              |
-| `AIRFLOW_LDAP_ALLOW_SELF_SIGNED`    | Allow self signed certicates in LDAP ssl.                         | `True`               |
+| Name                                  | Description                                                           | Default Value        |
+|---------------------------------------|-----------------------------------------------------------------------|----------------------|
+| `AIRFLOW_USERNAME`                    | Airflow username                                                      | `user`               |
+| `AIRFLOW_PASSWORD`                    | Airflow password                                                      | `bitnami`            |
+| `AIRFLOW_FIRSTNAME`                   | Airflow firstname                                                     | `Firstname`          |
+| `AIRFLOW_LASTNAME`                    | Airflow lastname                                                      | `Lastname`           |
+| `AIRFLOW_EMAIL`                       | Airflow email                                                         | `user@example.com`   |
+| `AIRFLOW_EXECUTOR`                    | Airflow executor.                                                     | `SequentialExecutor` |
+| `AIRFLOW_RAW_FERNET_KEY`              | Airflow raw/unencoded Fernet key                                      | `nil`                |
+| `AIRFLOW_FORCE_OVERWRITE_CONF_FILE`   | Force the airflow.cfg config file generation.                         | `no`                 |
+| `AIRFLOW_FERNET_KEY`                  | Airflow Fernet key                                                    | `nil`                |
+| `AIRFLOW_SECRET_KEY`                  | Airflow Secret key                                                    | `nil`                |
+| `AIRFLOW_WEBSERVER_HOST`              | Airflow webserver host                                                | `127.0.0.1`          |
+| `AIRFLOW_WEBSERVER_PORT_NUMBER`       | Airflow webserver port.                                               | `8080`               |
+| `AIRFLOW_LOAD_EXAMPLES`               | To load example tasks into the application.                           | `yes`                |
+| `AIRFLOW_BASE_URL`                    | Airflow webserver base URL.                                           | `nil`                |
+| `AIRFLOW_HOSTNAME_CALLABLE`           | Method to obtain the hostname.                                        | `nil`                |
+| `AIRFLOW_POOL_NAME`                   | Pool name.                                                            | `nil`                |
+| `AIRFLOW_POOL_SIZE`                   | Pool size, required with AIRFLOW_POOL_NAME.                           | `nil`                |
+| `AIRFLOW_POOL_DESC`                   | Pool description, required with AIRFLOW_POOL_NAME.                    | `nil`                |
+| `AIRFLOW_DATABASE_HOST`               | Hostname for PostgreSQL server.                                       | `postgresql`         |
+| `AIRFLOW_DATABASE_PORT_NUMBER`        | Port used by PostgreSQL server.                                       | `5432`               |
+| `AIRFLOW_DATABASE_NAME`               | Database name that Airflow will use to connect with the database.     | `bitnami_airflow`    |
+| `AIRFLOW_DATABASE_USERNAME`           | Database user that Airflow will use to connect with the database.     | `bn_airflow`         |
+| `AIRFLOW_DATABASE_PASSWORD`           | Database password that Airflow will use to connect with the database. | `nil`                |
+| `AIRFLOW_DATABASE_USE_SSL`            | Set to yes if the database is using SSL.                              | `no`                 |
+| `AIRFLOW_REDIS_USE_SSL`               | Set to yes if Redis(R) uses SSL.                                      | `no`                 |
+| `REDIS_HOST`                          | Hostname for Redis(R) server.                                         | `redis`              |
+| `REDIS_PORT_NUMBER`                   | Port used by Redis(R) server.                                         | `6379`               |
+| `REDIS_USER`                          | User that Airflow will use to connect with Redis(R).                  | `nil`                |
+| `REDIS_PASSWORD`                      | Password that Airflow will use to connect with Redis(R).              | `nil`                |
+| `REDIS_DATABASE`                      | Name of the Redis(R) database.                                        | `1`                  |
+| `AIRFLOW_LDAP_ENABLE`                 | Enable LDAP authentication.                                           | `no`                 |
+| `AIRFLOW_LDAP_URI`                    | LDAP server URI.                                                      | `nil`                |
+| `AIRFLOW_LDAP_SEARCH`                 | LDAP search base.                                                     | `nil`                |
+| `AIRFLOW_LDAP_UID_FIELD`              | LDAP field used for uid.                                              | `nil`                |
+| `AIRFLOW_LDAP_BIND_USER`              | LDAP user name.                                                       | `nil`                |
+| `AIRFLOW_LDAP_BIND_PASSWORD`          | LDAP user password.                                                   | `nil`                |
+| `AIRFLOW_LDAP_USER_REGISTRATION`      | User self registration.                                               | `True`               |
+| `AIRFLOW_LDAP_USER_REGISTRATION_ROLE` | Role name to be assign when a user registers himself.                 | `nil`                |
+| `AIRFLOW_LDAP_ROLES_MAPPING`          | Mapping from LDAP DN to a list of Airflow roles.                      | `nil`                |
+| `AIRFLOW_LDAP_ROLES_SYNC_AT_LOGIN`    | Replace ALL the user roles each login, or only on registration.       | `True`               |
+| `AIRFLOW_LDAP_USE_TLS`                | Use LDAP SSL.                                                         | `False`              |
+| `AIRFLOW_LDAP_ALLOW_SELF_SIGNED`      | Allow self signed certicates in LDAP ssl.                             | `True`               |
+| `AIRFLOW_LDAP_TLS_CA_CERTIFICATE`     | File that store the CA for LDAP ssl.                                  | `nil`                |
 
 #### Read-only environment variables
 
