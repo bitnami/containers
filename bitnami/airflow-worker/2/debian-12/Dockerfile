@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-03-12T16:57:30Z" \
+      org.opencontainers.image.created="2024-03-26T00:01:21Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.8.3-debian-12-r0" \
+      org.opencontainers.image.ref.name="2.8.4-debian-12-r0" \
       org.opencontainers.image.title="airflow-worker" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.8.3"
+      org.opencontainers.image.version="2.8.4"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -27,10 +27,10 @@ RUN install_packages ca-certificates curl git krb5-user libbsd0 libbz2-1.0 libco
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "wait-for-port-1.0.7-10-linux-${OS_ARCH}-debian-12" \
-      "python-3.11.8-3-linux-${OS_ARCH}-debian-12" \
+      "python-3.11.8-4-linux-${OS_ARCH}-debian-12" \
       "postgresql-client-16.2.0-2-linux-${OS_ARCH}-debian-12" \
       "ini-file-1.4.6-10-linux-${OS_ARCH}-debian-12" \
-      "airflow-worker-2.8.3-0-linux-${OS_ARCH}-debian-12" \
+      "airflow-worker-2.8.4-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -56,7 +56,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/airflow-worker/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV AIRFLOW_HOME="/opt/bitnami/airflow" \
-    APP_VERSION="2.8.3" \
+    APP_VERSION="2.8.4" \
     BITNAMI_APP_NAME="airflow-worker" \
     C_FORCE_ROOT="True" \
     LANG="en_US.UTF-8" \
