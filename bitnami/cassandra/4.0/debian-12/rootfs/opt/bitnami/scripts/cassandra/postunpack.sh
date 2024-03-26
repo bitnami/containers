@@ -11,10 +11,16 @@
 # Load Cassandra environment variables
 . /opt/bitnami/scripts/cassandra-env.sh
 
-for dir in "$CASSANDRA_INITSCRIPTS_DIR" "$CASSANDRA_TMP_DIR" "$CASSANDRA_CONF_DIR" "$CASSANDRA_LOG_DIR" "$CASSANDRA_MOUNTED_CONF_DIR" "$CASSANDRA_VOLUME_DIR"; do
+
+for dir in "$CASSANDRA_INITSCRIPTS_DIR" "$CASSANDRA_TMP_DIR" "$CASSANDRA_LOG_DIR" "$CASSANDRA_MOUNTED_CONF_DIR" "$CASSANDRA_VOLUME_DIR"; do
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
 done
+
+# Copy configuration files for the scripts to work
+ensure_dir_exists "$CASSANDRA_CONF_DIR"
+cassandra_copy_default_config
+chmod -R g+rwX "$CASSANDRA_CONF_DIR"
 
 # Create wrapper for cqlsh
 cat <<EOF >"${CASSANDRA_BIN_DIR}/cqlsh"

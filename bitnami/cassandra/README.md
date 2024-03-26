@@ -178,14 +178,18 @@ docker-compose up -d
 | `CASSANDRA_ENABLE_USER_DEFINED_FUNCTIONS`          | Enable user defined functions.                                                          | `false`                                      |
 | `CASSANDRA_ENABLE_SCRIPTED_USER_DEFINED_FUNCTIONS` | Enable scripted user defined functions.                                                 | `false`                                      |
 | `CASSANDRA_ENDPOINT_SNITCH`                        | Name of the cluster endpoint snitch.                                                    | `SimpleSnitch`                               |
+| `CASSANDRA_HOST`                                   | Cassandra host name.                                                                    | `nil`                                        |
 | `CASSANDRA_INTERNODE_ENCRYPTION`                   | Internode encryption type.                                                              | `none`                                       |
 | `CASSANDRA_NUM_TOKENS`                             | Number of tokens in cluster connection.                                                 | `256`                                        |
 | `CASSANDRA_PASSWORD_SEEDER`                        | Set the node as password seeder in the clustre.                                         | `no`                                         |
 | `CASSANDRA_SEEDS`                                  | List of cluster seeds.                                                                  | `$CASSANDRA_HOST`                            |
 | `CASSANDRA_PEERS`                                  | List of cluster peers.                                                                  | `$CASSANDRA_SEEDS`                           |
 | `CASSANDRA_PEERS`                                  | List of cluster peers.                                                                  | `$CASSANDRA_SEEDS`                           |
+| `CASSANDRA_NODES`                                  | List of cluster nodes (seeders and non seeders)                                         | `nil`                                        |
 | `CASSANDRA_RACK`                                   | Cassandra rack name.                                                                    | `rack1`                                      |
+| `CASSANDRA_BROADCAST_ADDRESS`                      | Node broadcast address.                                                                 | `nil`                                        |
 | `CASSANDRA_AUTOMATIC_SSTABLE_UPGRADE`              | Automatically upgrade sstables after upgrade.                                           | `false`                                      |
+| `CASSANDRA_STARTUP_CQL`                            | Startup CQL commands to run at boot.                                                    | `nil`                                        |
 | `CASSANDRA_IGNORE_INITDB_SCRIPTS`                  | Ignore the execution of init scripts                                                    | `no`                                         |
 | `CASSANDRA_CQL_PORT_NUMBER`                        | CQL port.                                                                               | `9042`                                       |
 | `CASSANDRA_JMX_PORT_NUMBER`                        | JMX port.                                                                               | `7199`                                       |
@@ -202,6 +206,7 @@ docker-compose up -d
 | `CASSANDRA_AUTHORIZER`                             | Cassandra connection authorizer.                                                        | `CassandraAuthorizer`                        |
 | `CASSANDRA_AUTHENTICATOR`                          | Cassandra connection authenticator.                                                     | `PasswordAuthenticator`                      |
 | `CASSANDRA_USER`                                   | Cassandra username.                                                                     | `cassandra`                                  |
+| `CASSANDRA_PASSWORD`                               | Cassandra password.                                                                     | `nil`                                        |
 | `CASSANDRA_KEYSTORE_PASSWORD`                      | Cassandra keystore password.                                                            | `cassandra`                                  |
 | `CASSANDRA_TRUSTSTORE_PASSWORD`                    | Cassandra truststore password.                                                          | `cassandra`                                  |
 | `CASSANDRA_KEYSTORE_LOCATION`                      | Cassandra keystore location.                                                            | `${CASSANDRA_VOLUME_DIR}/secrets/keystore`   |
