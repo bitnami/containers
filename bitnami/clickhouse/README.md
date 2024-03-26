@@ -197,6 +197,7 @@ In order to have your custom files inside the docker image you can mount them as
 |------------------------------------|-------------------------------|---------------|
 | `ALLOW_EMPTY_PASSWORD`             | Allow an empty password.      | `no`          |
 | `CLICKHOUSE_ADMIN_USER`            | ClickHouse admin username.    | `default`     |
+| `CLICKHOUSE_ADMIN_PASSWORD`        | ClickHouse admin password.    | `nil`         |
 | `CLICKHOUSE_HTTP_PORT`             | ClickHouse HTTP port.         | `8123`        |
 | `CLICKHOUSE_TCP_PORT`              | ClickHouse TCP port.          | `9000`        |
 | `CLICKHOUSE_MYSQL_PORT`            | ClickHouse MySQL port.        | `9004`        |
