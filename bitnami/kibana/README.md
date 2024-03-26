@@ -147,34 +147,39 @@ docker run -d --name myapp \
 
 #### Customizable environment variables
 
-| Name                                         | Description                                                                         | Default Value                                                    |
-|----------------------------------------------|-------------------------------------------------------------------------------------|------------------------------------------------------------------|
-| `KIBANA_ELASTICSEARCH_URL`                   | Elasticsearch URL. Provide Client node url in the case of a cluster                 | `elasticsearch`                                                  |
-| `KIBANA_ELASTICSEARCH_URL`                   | Elasticsearch URL. Provide Client node url in the case of a cluster                 | `127.0.0.1`                                                      |
-| `KIBANA_ELASTICSEARCH_PORT_NUMBER`           | Elasticsearch port                                                                  | `9200`                                                           |
-| `KIBANA_HOST`                                | Kibana host                                                                         | `0.0.0.0`                                                        |
-| `KIBANA_PORT_NUMBER`                         | Kibana port                                                                         | `5601`                                                           |
-| `KIBANA_WAIT_READY_MAX_RETRIES`              | Max retries to wait for Kibana to be ready                                          | `30`                                                             |
-| `KIBANA_INITSCRIPTS_START_SERVER`            | Whether to start the Kibana server before executing the init scripts                | `yes`                                                            |
-| `KIBANA_FORCE_INITSCRIPTS`                   | Whether to force the execution of the init scripts                                  | `no`                                                             |
-| `KIBANA_DISABLE_STRICT_CSP`                  | Disable strict Content Security Policy (CSP) for Kibana                             | `no`                                                             |
-| `KIBANA_CERTS_DIR`                           | Path to certificates folder.                                                        | `${SERVER_CONF_DIR}/certs`                                       |
-| `KIBANA_SERVER_ENABLE_TLS`                   | Enable TLS for inbound connections via HTTPS.                                       | `false`                                                          |
-| `KIBANA_SERVER_KEYSTORE_LOCATION`            | Path to Keystore                                                                    | `${SERVER_CERTS_DIR}/server/kibana.keystore.p12`                 |
-| `KIBANA_SERVER_TLS_USE_PEM`                  | Configure Kibana server TLS settings using PEM certificates.                        | `false`                                                          |
-| `KIBANA_SERVER_CERT_LOCATION`                | Path to PEM node certificate.                                                       | `${SERVER_CERTS_DIR}/server/tls.crt`                             |
-| `KIBANA_SERVER_KEY_LOCATION`                 | Path to PEM node key.                                                               | `${SERVER_CERTS_DIR}/server/tls.key`                             |
-| `KIBANA_ELASTICSEARCH_ENABLE_TLS`            | Enable TLS for Elasticsearch communications.                                        | `false`                                                          |
-| `KIBANA_ELASTICSEARCH_TLS_VERIFICATION_MODE` | Elasticsearch TLS verification mode.                                                | `full`                                                           |
-| `KIBANA_ELASTICSEARCH_TRUSTSTORE_LOCATION`   | Path to Elasticsearch Truststore.                                                   | `${SERVER_CERTS_DIR}/elasticsearch/elasticsearch.truststore.p12` |
-| `KIBANA_ELASTICSEARCH_TLS_USE_PEM`           | Configure Elasticsearch TLS settings using PEM certificates.                        | `false`                                                          |
-| `KIBANA_ELASTICSEARCH_CA_CERT_LOCATION`      | Path to Elasticsearch CA certificate.                                               | `${SERVER_CERTS_DIR}/elasticsearch/ca.crt`                       |
-| `KIBANA_DISABLE_STRICT_CSP`                  | Disable strict Content Security Policy (CSP) for Kibana                             | `no`                                                             |
-| `KIBANA_CREATE_USER`                         | Enable the creation of the kibana_system user, if it doesnt exists                  | `false`                                                          |
-| `KIBANA_NEWSFEED_ENABLED`                    | Control whether to enable the newsfeed system for the Kibana UI notification center | `true`                                                           |
-| `KIBANA_ELASTICSEARCH_REQUESTTIMEOUT`        | Time in milliseconds to wait for responses from the back end or Elasticsearch       | `30000`                                                          |
-| `APACHE_KIBANA_USERNAME`                     | Kibana user to configure basic authentication                                       | `user`                                                           |
-| `APACHE_KIBANA_PASSWORD`                     | Kibana password to configure basic authentication                                   | `bitnami`                                                        |
+| Name                                         | Description                                                                                        | Default Value                                                    |
+|----------------------------------------------|----------------------------------------------------------------------------------------------------|------------------------------------------------------------------|
+| `KIBANA_ELASTICSEARCH_URL`                   | Elasticsearch URL. Provide Client node url in the case of a cluster                                | `elasticsearch`                                                  |
+| `KIBANA_ELASTICSEARCH_PORT_NUMBER`           | Elasticsearch port                                                                                 | `9200`                                                           |
+| `KIBANA_HOST`                                | Kibana host                                                                                        | `0.0.0.0`                                                        |
+| `KIBANA_PORT_NUMBER`                         | Kibana port                                                                                        | `5601`                                                           |
+| `KIBANA_WAIT_READY_MAX_RETRIES`              | Max retries to wait for Kibana to be ready                                                         | `30`                                                             |
+| `KIBANA_INITSCRIPTS_START_SERVER`            | Whether to start the Kibana server before executing the init scripts                               | `yes`                                                            |
+| `KIBANA_FORCE_INITSCRIPTS`                   | Whether to force the execution of the init scripts                                                 | `no`                                                             |
+| `KIBANA_DISABLE_STRICT_CSP`                  | Disable strict Content Security Policy (CSP) for Kibana                                            | `no`                                                             |
+| `KIBANA_CERTS_DIR`                           | Path to certificates folder.                                                                       | `${SERVER_CONF_DIR}/certs`                                       |
+| `KIBANA_SERVER_ENABLE_TLS`                   | Enable TLS for inbound connections via HTTPS.                                                      | `false`                                                          |
+| `KIBANA_SERVER_KEYSTORE_LOCATION`            | Path to Keystore                                                                                   | `${SERVER_CERTS_DIR}/server/kibana.keystore.p12`                 |
+| `KIBANA_SERVER_KEYSTORE_PASSWORD`            | Password for the Elasticsearch keystore containing the certificates or password-protected PEM key. | `nil`                                                            |
+| `KIBANA_SERVER_TLS_USE_PEM`                  | Configure Kibana server TLS settings using PEM certificates.                                       | `false`                                                          |
+| `KIBANA_SERVER_CERT_LOCATION`                | Path to PEM node certificate.                                                                      | `${SERVER_CERTS_DIR}/server/tls.crt`                             |
+| `KIBANA_SERVER_KEY_LOCATION`                 | Path to PEM node key.                                                                              | `${SERVER_CERTS_DIR}/server/tls.key`                             |
+| `KIBANA_SERVER_KEY_PASSWORD`                 | Password for the Elasticsearch node PEM key.                                                       | `nil`                                                            |
+| `KIBANA_PASSWORD`                            | Kibana password.                                                                                   | `nil`                                                            |
+| `KIBANA_ELASTICSEARCH_ENABLE_TLS`            | Enable TLS for Elasticsearch communications.                                                       | `false`                                                          |
+| `KIBANA_ELASTICSEARCH_TLS_VERIFICATION_MODE` | Elasticsearch TLS verification mode.                                                               | `full`                                                           |
+| `KIBANA_ELASTICSEARCH_TRUSTSTORE_LOCATION`   | Path to Elasticsearch Truststore.                                                                  | `${SERVER_CERTS_DIR}/elasticsearch/elasticsearch.truststore.p12` |
+| `KIBANA_ELASTICSEARCH_TRUSTSTORE_PASSWORD`   | Password for the Elasticsearch truststore.                                                         | `nil`                                                            |
+| `KIBANA_ELASTICSEARCH_TLS_USE_PEM`           | Configure Elasticsearch TLS settings using PEM certificates.                                       | `false`                                                          |
+| `KIBANA_ELASTICSEARCH_CA_CERT_LOCATION`      | Path to Elasticsearch CA certificate.                                                              | `${SERVER_CERTS_DIR}/elasticsearch/ca.crt`                       |
+| `KIBANA_DISABLE_STRICT_CSP`                  | Disable strict Content Security Policy (CSP) for Kibana                                            | `no`                                                             |
+| `KIBANA_CREATE_USER`                         | Enable the creation of the kibana_system user, if it doesnt exists                                 | `false`                                                          |
+| `KIBANA_ELASTICSEARCH_PASSWORD`              | Password for the elastic superuser. Required if KIBANA_CREATE_USER is enabled                      | `nil`                                                            |
+| `KIBANA_SERVER_PUBLICBASEURL`                | Publicly available URL that end-users access Kibana at                                             | `nil`                                                            |
+| `KIBANA_XPACK_SECURITY_ENCRYPTIONKEY`        | Encryption key so that sessions are not invalidated                                                | `nil`                                                            |
+| `KIBANA_XPACK_REPORTING_ENCRYPTIONKEY`       | Static encryption key for reporting                                                                | `nil`                                                            |
+| `KIBANA_NEWSFEED_ENABLED`                    | Control whether to enable the newsfeed system for the Kibana UI notification center                | `true`                                                           |
+| `KIBANA_ELASTICSEARCH_REQUESTTIMEOUT`        | Time in milliseconds to wait for responses from the back end or Elasticsearch                      | `30000`                                                          |
 
 #### Read-only environment variables
 
