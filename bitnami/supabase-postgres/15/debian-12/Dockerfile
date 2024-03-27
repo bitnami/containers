@@ -9,10 +9,10 @@ ARG WITH_ALL_LOCALES="no"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-03-25T03:18:52Z" \
+      org.opencontainers.image.created="2024-03-27T02:15:01Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="15.1.1-debian-12-r16" \
+      org.opencontainers.image.ref.name="15.1.1-debian-12-r17" \
       org.opencontainers.image.title="supabase-postgres" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="15.1.1"
@@ -29,7 +29,7 @@ RUN install_packages ca-certificates curl libbrotli1 libbsd0 libbz2-1.0 libcom-e
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "java-17.0.10-13-2-linux-${OS_ARCH}-debian-12" \
-      "supabase-postgres-15.1.1-11-linux-${OS_ARCH}-debian-12" \
+      "supabase-postgres-15.1.1-12-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
