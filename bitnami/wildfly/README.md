@@ -175,13 +175,20 @@ $ docker exec -it wildfly-server \
 
 #### Customizable environment variables
 
-| Name                       | Description                                                                                   | Default Value                           |
-|----------------------------|-----------------------------------------------------------------------------------------------|-----------------------------------------|
-| `WILDFLY_CONF_FILE`        | Path to the WildFly configuration file.                                                       | `${WILDFLY_CONF_DIR}/standalone.xml`    |
-| `WILDFLY_MOUNTED_CONF_DIR` | Directory for including custom configuration files (that override the default generated ones) | `${WILDFLY_VOLUME_DIR}/configuration`   |
-| `WILDFLY_DATA_DIR`         | WildFly data directory.                                                                       | `${WILDFLY_VOLUME_DIR}/standalone/data` |
-| `WILDFLY_USERNAME`         | WildFly admin username.                                                                       | `user`                                  |
-| `JAVA_HOME`                | Java Home directory.                                                                          | `${BITNAMI_ROOT_DIR}/java`              |
+| Name                                | Description                                                                                   | Default Value                           |
+|-------------------------------------|-----------------------------------------------------------------------------------------------|-----------------------------------------|
+| `WILDFLY_CONF_FILE`                 | Path to the WildFly configuration file.                                                       | `${WILDFLY_CONF_DIR}/standalone.xml`    |
+| `WILDFLY_MOUNTED_CONF_DIR`          | Directory for including custom configuration files (that override the default generated ones) | `${WILDFLY_VOLUME_DIR}/configuration`   |
+| `WILDFLY_DATA_DIR`                  | WildFly data directory.                                                                       | `${WILDFLY_VOLUME_DIR}/standalone/data` |
+| `WILDFLY_SERVER_LISTEN_ADDRESS`     | WildFly server listen address.                                                                | `nil`                                   |
+| `WILDFLY_MANAGEMENT_LISTEN_ADDRESS` | WildFly management listen address.                                                            | `nil`                                   |
+| `WILDFLY_HTTP_PORT_NUMBER`          | Port number used by the WildFly for HTTP connections.                                         | `nil`                                   |
+| `WILDFLY_AJP_PORT_NUMBER`           | Port number used by the WildFly for AJP connections.                                          | `nil`                                   |
+| `WILDFLY_MANAGEMENT_PORT_NUMBER`    | Port number used by the WildFly management interface.                                         | `nil`                                   |
+| `WILDFLY_USERNAME`                  | WildFly admin username.                                                                       | `user`                                  |
+| `WILDFLY_PASSWORD`                  | WildFly admin user password.                                                                  | `nil`                                   |
+| `JAVA_HOME`                         | Java Home directory.                                                                          | `${BITNAMI_ROOT_DIR}/java`              |
+| `JAVA_OPTS`                         | Java options.                                                                                 | `nil`                                   |
 
 #### Read-only environment variables
 
@@ -193,6 +200,10 @@ $ docker exec -it wildfly-server \
 | `WILDFLY_CONF_DIR`                          | WildFly server configuration directory.                                          | `${WILDFLY_BASE_DIR}/standalone/configuration` |
 | `WILDFLY_LOGS_DIR`                          | WildFly directory for log files.                                                 | `${WILDFLY_BASE_DIR}/standalone/log`           |
 | `WILDFLY_TMP_DIR`                           | WildFly directory for runtime temporary files.                                   | `${WILDFLY_BASE_DIR}/standalone/tmp`           |
+| `WILDFLY_DOMAIN_DIR`                        | Wildfly domain directory.                                                        | `${WILDFLY_BASE_DIR}/domain`                   |
+| `WILDFLY_STANDALONE_DIR`                    | Wildfly standalone directory.                                                    | `${WILDFLY_BASE_DIR}/standalone`               |
+| `WILDFLY_DEFAULT_DOMAIN_DIR`                | Wildfly default domain directory.                                                | `${WILDFLY_BASE_DIR}/domain.default`           |
+| `WILDFLY_DEFAULT_STANDALONE_DIR`            | Wildfly default standalone directory.                                            | `${WILDFLY_BASE_DIR}/standalone.default`       |
 | `WILDFLY_PID_FILE`                          | Path to the WildFly PID file.                                                    | `${WILDFLY_TMP_DIR}/wildfly.pid`               |
 | `WILDFLY_VOLUME_DIR`                        | WildFly directory for mounted configuration files.                               | `${BITNAMI_VOLUME_DIR}/wildfly`                |
 | `WILDFLY_DAEMON_USER`                       | WildFly system user.                                                             | `wildfly`                                      |
