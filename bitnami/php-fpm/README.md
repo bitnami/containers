@@ -198,6 +198,18 @@ docker run -it --name php-fpm -v /path/to/app:/app bitnami/php-fpm \
 
 #### Customizable environment variables
 
+| Name                      | Description                                                                                         | Default Value |
+|---------------------------|-----------------------------------------------------------------------------------------------------|---------------|
+| `PHP_FPM_LISTEN_ADDRESS`  | PHP-FPM listen address. Can be a port number, a host:port combination or the path to a socket file. | `nil`         |
+| `PHP_DATE_TIMEZONE`       | PHP timezone.                                                                                       | `nil`         |
+| `PHP_ENABLE_OPCACHE`      | Enables OPcache for PHP scripts.                                                                    | `nil`         |
+| `PHP_MAX_EXECUTION_TIME`  | Maximum execution time for PHP scripts.                                                             | `nil`         |
+| `PHP_MAX_INPUT_TIME`      | Maximum input time for PHP scripts.                                                                 | `nil`         |
+| `PHP_MAX_INPUT_VARS`      | Maximum amount of input variables for PHP scripts.                                                  | `nil`         |
+| `PHP_MEMORY_LIMIT`        | Memory limit for PHP scripts.                                                                       | `nil`         |
+| `PHP_POST_MAX_SIZE`       | Maximum size for PHP POST requests.                                                                 | `nil`         |
+| `PHP_UPLOAD_MAX_FILESIZE` | Maximum file size for PHP uploads.                                                                  | `nil`         |
+
 #### Read-only environment variables
 
 | Name                                          | Description                                                                                                 | Value                             |
