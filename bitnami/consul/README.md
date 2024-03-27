@@ -278,26 +278,31 @@ volumes:
 
 #### Customizable environment variables
 
-| Name                            | Description                      | Default Value |
-|---------------------------------|----------------------------------|---------------|
-| `CONSUL_RPC_PORT_NUMBER`        | Consul RPC port number.          | `8300`        |
-| `CONSUL_HTTP_PORT_NUMBER`       | Consul RPC port number.          | `8500`        |
-| `CONSUL_DNS_PORT_NUMBER`        | Consul DNS port number.          | `8600`        |
-| `CONSUL_DNS_PORT_NUMBER`        | Consul DNS port number.          | `8600`        |
-| `CONSUL_AGENT_MODE`             | Consul agent mode.               | `server`      |
-| `CONSUL_DISABLE_KEYRING_FILE`   | Disable keyring file in Consul.  | `false`       |
-| `CONSUL_SERF_LAN_ADDRESS`       | LAN address for Serf daemon.     | `0.0.0.0`     |
-| `CONSUL_SERF_LAN_PORT_NUMBER`   | LAN port for Serf daemon.        | `8301`        |
-| `CONSUL_CLIENT_LAN_ADDRESS`     | LAN address for Consul clients.  | `0.0.0.0`     |
-| `CONSUL_RETRY_JOIN_ADDRESS`     | Consul node retry join address.  | `127.0.0.1`   |
-| `CONSUL_RETRY_JOIN_WAN_ADDRESS` | Consul retry join WAN address.   | `127.0.0.1`   |
-| `CONSUL_ENABLE_UI`              | Enable User Interface in Consul. | `true`        |
-| `CONSUL_BOOTSTRAP_EXPECT`       | Expect bootstrap in Consul.      | `1`           |
-| `CONSUL_RAFT_MULTIPLIER`        | Consul Raft multiplier.          | `1`           |
-| `CONSUL_GOSSIP_ENCRYPTION`      | Use gossip encryption in Consul. | `no`          |
-| `CONSUL_DATACENTER`             | Consul datacenter name.          | `dc1`         |
-| `CONSUL_DOMAIN`                 | Consul domain.                   | `consul`      |
-| `CONSUL_DISABLE_HOST_NODE_ID`   | Disable host node ID.            | `true`        |
+| Name                            | Description                                         | Default Value |
+|---------------------------------|-----------------------------------------------------|---------------|
+| `CONSUL_RPC_PORT_NUMBER`        | Consul RPC port number.                             | `8300`        |
+| `CONSUL_HTTP_PORT_NUMBER`       | Consul RPC port number.                             | `8500`        |
+| `CONSUL_DNS_PORT_NUMBER`        | Consul DNS port number.                             | `8600`        |
+| `CONSUL_DNS_PORT_NUMBER`        | Consul DNS port number.                             | `8600`        |
+| `CONSUL_AGENT_MODE`             | Consul agent mode.                                  | `server`      |
+| `CONSUL_DISABLE_KEYRING_FILE`   | Disable keyring file in Consul.                     | `false`       |
+| `CONSUL_SERF_LAN_ADDRESS`       | LAN address for Serf daemon.                        | `0.0.0.0`     |
+| `CONSUL_SERF_LAN_PORT_NUMBER`   | LAN port for Serf daemon.                           | `8301`        |
+| `CONSUL_CLIENT_LAN_ADDRESS`     | LAN address for Consul clients.                     | `0.0.0.0`     |
+| `CONSUL_RETRY_JOIN_ADDRESS`     | Consul node retry join address.                     | `127.0.0.1`   |
+| `CONSUL_RETRY_JOIN_WAN_ADDRESS` | Consul retry join WAN address.                      | `127.0.0.1`   |
+| `CONSUL_BIND_INTERFACE`         | Consul bind interface.                              | `nil`         |
+| `CONSUL_BIND_ADDR`              | Consul bind address.                                | `nil`         |
+| `CONSUL_ENABLE_UI`              | Enable User Interface in Consul.                    | `true`        |
+| `CONSUL_BOOTSTRAP_EXPECT`       | Expect bootstrap in Consul.                         | `1`           |
+| `CONSUL_RAFT_MULTIPLIER`        | Consul Raft multiplier.                             | `1`           |
+| `CONSUL_LOCAL_CONFIG`           | Consul local configuration.                         | `nil`         |
+| `CONSUL_GOSSIP_ENCRYPTION`      | Use gossip encryption in Consul.                    | `no`          |
+| `CONSUL_GOSSIP_ENCRYPTION_KEY`  | Base64-encoded Consul gossip private symmetric key. | `nil`         |
+| `CONSUL_DATACENTER`             | Consul datacenter name.                             | `dc1`         |
+| `CONSUL_DOMAIN`                 | Consul domain.                                      | `consul`      |
+| `CONSUL_NODE_NAME`              | Consul domain name.                                 | `nil`         |
+| `CONSUL_DISABLE_HOST_NODE_ID`   | Disable host node ID.                               | `true`        |
 
 #### Read-only environment variables
 
