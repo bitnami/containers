@@ -168,6 +168,7 @@ docker-compose up -d
 | `SOLR_ZK_MAX_RETRIES`           | Maximum retries when waiting for zookeeper configuration operations to finish | `5`                                                |
 | `SOLR_ZK_SLEEP_TIME`            | Sleep time when waiting for zookeeper configuration operations to finish      | `5`                                                |
 | `SOLR_ZK_CHROOT`                | ZooKeeper ZNode chroot where to store solr data. Default: /solr               | `/solr`                                            |
+| `SOLR_ZK_HOSTS`                 | ZooKeeper nodes (comma-separated list of `host:port`)                         | unset                                              |
 
 #### Read-only environment variables
 
