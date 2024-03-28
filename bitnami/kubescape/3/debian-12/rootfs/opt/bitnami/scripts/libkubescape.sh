@@ -180,7 +180,7 @@ kubescape_oss_assessment() {
     done
 
     if [[ -n "$KUBESCAPE_IMAGE_OUTPUT" ]]; then
-      KUBESCAPE_IMAGE_VULNS="$(jq --arg image "$image" '{imageID: $image, vulnerabilities: [.matches[].vulnerability | {id, severity}]}' <(echo "$KUBESCAPE_IMAGE_OUTPUT"))"
+      KUBESCAPE_IMAGE_VULNS="$(jq --arg image "$image" '{imageID: $image, vulnerabilities: [.matches[].vulnerability | {id, severity, urls}]}' <(echo "$KUBESCAPE_IMAGE_OUTPUT"))"
       KUBESCAPE_OUTPUT="$(jq '.security += [input]' <(echo "$KUBESCAPE_OUTPUT") <(echo "$KUBESCAPE_IMAGE_VULNS"))"
       images_success_scanned="$((images_success_scanned + 1))"
     else
