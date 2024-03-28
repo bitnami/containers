@@ -171,7 +171,7 @@ services:
 | `REDIS_DATABASE`                        | Default Redis database                                                    | `redis`                                    |
 | `REDIS_AOF_ENABLED`                     | Enable AOF                                                                | `yes`                                      |
 | `REDIS_RDB_POLICY`                      | Enable RDB policy persitence                                              | `nil`                                      |
-| `REDIS_RDB_POLICY_DISABLED`             | Allows to enable RDP policy persistence                                   | `no`                                       |
+| `REDIS_RDB_POLICY_DISABLED`             | Allows to enable RDB policy persistence                                   | `no`                                       |
 | `REDIS_MASTER_HOST`                     | Redis master host (used by slaves)                                        | `nil`                                      |
 | `REDIS_MASTER_PORT_NUMBER`              | Redis master host port (used by slaves)                                   | `6379`                                     |
 | `REDIS_PORT_NUMBER`                     | Redis port number                                                         | `$REDIS_DEFAULT_PORT_NUMBER`               |
@@ -280,6 +280,37 @@ When enabling TLS, conventional standard traffic is disabled by default. However
     ```
 
 Alternatively, you may also provide with this configuration in your [custom](https://github.com/bitnami/containers/blob/main/bitnami/redis-cluster#configuration-file) configuration file.
+
+### Enable redis cluster RDB persistence
+
+Since the use of `REDIS_RDB_POLICY_DISABLED` and `REDIS_RDB_POLICY` parameters is rather special, we explain it here.
+When the value of `REDIS_RDB_POLICY_DISABLED` is `no` the redis default persistence strategy will be used. If you want to modify the default strategy, you can configure it through REDIS_RDB_POLICY
+Here is a demonstration of modifying the default persistence strategy
+
+1. Using `docker run`
+
+    ```console
+    $ docker run --name redis-cluster \
+        -v /path/to/redis-cluster-persistence:/bitnami \
+        -e ALLOW_EMPTY_PASSWORD=yes \
+        -e REDIS_RDB_POLICY_DISABLED=no
+        -e REDIS_RDB_POLICY="900#1 600#5 300#10 120#50 60#1000 30#10000"
+        bitnami/redis-cluster:latest
+    ```
+
+2. Modifying the `docker-compose.yml` file present in this repository:
+
+    ```yaml
+      redis-cluster:
+      ...
+        environment:
+          ...
+          - REDIS_TLS_ENABLED=yes
+          - REDIS_RDB_POLICY_DISABLED=no
+          - REDIS_RDB_POLICY="900#1 600#5 300#10 120#50 60#1000 30#10000"   
+        ...
+      ...
+    ```
 
 ## Logging
 
