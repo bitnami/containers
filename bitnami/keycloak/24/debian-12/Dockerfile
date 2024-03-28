@@ -51,7 +51,8 @@ RUN /opt/bitnami/scripts/keycloak/postunpack.sh
 ENV APP_VERSION="24.0.2" \
     BITNAMI_APP_NAME="keycloak" \
     JAVA_HOME="/opt/bitnami/java" \
-    PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:/opt/bitnami/keycloak/bin:$PATH"
+    PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:/opt/bitnami/keycloak/bin:$PATH" \
+    KC_RUN_IN_CONTAINER="true"
 
 EXPOSE 8080 8443
 
