@@ -415,6 +415,10 @@ cassandra_setup_cluster() {
             cassandra_yaml_set "broadcast_address" "$CASSANDRA_BROADCAST_ADDRESS"
         fi
 
+        if [[ -n "$CASSANDRA_BROADCAST_RPC_ADDRESS" ]]; then
+            cassandra_yaml_set "broadcast_rpc_address" "$CASSANDRA_BROADCAST_RPC_ADDRESS"
+        fi
+
         if [[ -n "$CASSANDRA_AUTOMATIC_SSTABLE_UPGRADE" ]]; then
             cassandra_yaml_set "automatic_sstable_upgrade" "$CASSANDRA_AUTOMATIC_SSTABLE_UPGRADE"
         fi
