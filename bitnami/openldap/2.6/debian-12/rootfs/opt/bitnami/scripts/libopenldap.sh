@@ -86,6 +86,14 @@ export LDAP_ACCESSLOG_LOGOLDATTR="${LDAP_ACCESSLOG_LOGOLDATTR:-objectClass}"
 export LDAP_ACCESSLOG_ADMIN_USERNAME="${LDAP_ACCESSLOG_ADMIN_USERNAME:-admin}"
 export LDAP_ACCESSLOG_ADMIN_DN="${LDAP_ACCESSLOG_ADMIN_USERNAME/#/cn=},${LDAP_ACCESSLOG_DB:-cn=accesslog}"
 export LDAP_ACCESSLOG_ADMIN_PASSWORD="${LDAP_ACCESSLOG_PASSWORD:-accesspassword}"
+export LDAP_ENABLE_MEMBEROF="${LDAP_ENABLE_MEMBEROF:-no}"
+export LDAP_MEMBEROF_DN="${LDAP_MEMBEROF_DN:-${LDAP_ROOT}}"
+export LDAP_MEMBEROF_DANGLING="${LDAP_MEMBEROF_DANGLING:-ignore}"
+export LDAP_MEMBEROF_DANGLINGERROR="${LDAP_MEMBEROF_DANGLINGERROR:-80}"
+export LDAP_MEMBEROF_REFINT="${LDAP_MEMBEROF_REFINT:-FALSE}"
+export LDAP_MEMBEROF_GROUPOC="${LDAP_MEMBEROF_GROUPOC:-groupOfNames}"
+export LDAP_MEMBEROF_MEMBERAD="${LDAP_MEMBEROF_MEMBERAD:-member}"
+export LDAP_MEMBEROF_MEMBEROFAD="${LDAP_MEMBEROF_MEMBEROFAD:-memberOf}"
 export LDAP_ENABLE_SYNCPROV="${LDAP_ENABLE_SYNCPROV:-no}"
 export LDAP_SYNCPROV_CHECKPPOINT="${LDAP_SYNCPROV_CHECKPPOINT:-100 10}"
 export LDAP_SYNCPROV_SESSIONLOG="${LDAP_SYNCPROV_SESSIONLOG:-100}"
@@ -642,6 +650,10 @@ ldap_initialize() {
         if is_boolean_yes "$LDAP_ENABLE_ACCESSLOG"; then
             ldap_enable_accesslog
         fi
+        # enable memberof overlay
+        if is_boolean_yes "$LDAP_ENABLE_MEMBEROF"; then
+            ldap_enable_memberof
+        fi
         # enable syncprov overlay
         if is_boolean_yes "$LDAP_ENABLE_SYNCPROV"; then
             ldap_enable_syncprov
@@ -896,6 +908,37 @@ olcAccessLogOldAttr: $LDAP_ACCESSLOG_LOGOLDATTR
 EOF
     info "adding accesslog_create_overlay_configuration.ldif"
     debug_execute ldapadd -Q -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/accesslog_create_overlay_configuration.ldif"
+}
+
+########################
+# OpenLDAP configure Reverse Group Membership Maintenance
+# Globals:
+#   LDAP_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+ldap_enable_memberof() {
+    info "Configure Reverse Group Membership Maintenance"
+    # Load module
+    ldap_load_module "/opt/bitnami/openldap/lib/openldap" "memberof.so"
+    # Add Reverse Group Membership Maintenance overlay
+    cat > "${LDAP_SHARE_DIR}/memberof_create_overlay_configuration.ldif" << EOF
+dn: olcOverlay=memberof,olcDatabase={2}mdb,cn=config
+objectClass: olcOverlayConfig
+objectClass: olcMemberOfConfig
+olcOverlay: memberof
+olcMemberOfDN: $LDAP_MEMBEROF_DN
+olcMemberOfDangling: $LDAP_MEMBEROF_DANGLING
+olcMemberOfDanglingError: $LDAP_MEMBEROF_DANGLINGERROR
+olcMemberOfRefInt: $LDAP_MEMBEROF_REFINT
+olcMemberOfGroupOC: $LDAP_MEMBEROF_GROUPOC
+olcMemberOfMemberAD: $LDAP_MEMBEROF_MEMBERAD
+olcMemberOfMemberOfAD: $LDAP_MEMBEROF_MEMBEROFAD
+EOF
+    cat "${LDAP_SHARE_DIR}/memberof_create_overlay_configuration.ldif"
+    debug_execute ldapadd -Q -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/memberof_create_overlay_configuration.ldif"
 }
 
 ########################
