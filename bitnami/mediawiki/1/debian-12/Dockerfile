@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-03-20T12:57:18Z" \
+      org.opencontainers.image.created="2024-03-29T01:06:52Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.41.0-debian-12-r11" \
+      org.opencontainers.image.ref.name="1.41.1-debian-12-r0" \
       org.opencontainers.image.title="mediawiki" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.41.0"
+      org.opencontainers.image.version="1.41.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -27,11 +27,11 @@ RUN install_packages acl ca-certificates curl libaudit1 libbrotli1 libbsd0 libbz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "render-template-1.0.6-10-linux-${OS_ARCH}-debian-12" \
-      "php-8.1.27-8-linux-${OS_ARCH}-debian-12" \
+      "php-8.1.27-9-linux-${OS_ARCH}-debian-12" \
       "apache-2.4.58-8-linux-${OS_ARCH}-debian-12" \
       "mysql-client-11.2.3-1-linux-${OS_ARCH}-debian-12" \
       "libphp-8.1.27-3-linux-${OS_ARCH}-debian-12" \
-      "mediawiki-1.41.0-2-linux-${OS_ARCH}-debian-12" \
+      "mediawiki-1.41.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -56,7 +56,7 @@ RUN /opt/bitnami/scripts/mediawiki/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="1.41.0" \
+    APP_VERSION="1.41.1" \
     BITNAMI_APP_NAME="mediawiki" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:$PATH"
 
