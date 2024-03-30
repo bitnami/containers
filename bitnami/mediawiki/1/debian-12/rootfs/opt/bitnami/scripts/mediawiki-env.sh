@@ -28,6 +28,7 @@ mediawiki_env_vars=(
     MEDIAWIKI_SKIP_BOOTSTRAP
     MEDIAWIKI_WIKI_NAME
     MEDIAWIKI_WIKI_PREFIX
+    MEDIAWIKI_SCRIPT_PATH
     MEDIAWIKI_HOST
     MEDIAWIKI_ENABLE_HTTPS
     MEDIAWIKI_EXTERNAL_HTTP_PORT_NUMBER
@@ -82,6 +83,7 @@ export MEDIAWIKI_DATA_TO_PERSIST="${MEDIAWIKI_DATA_TO_PERSIST:-images extensions
 export MEDIAWIKI_SKIP_BOOTSTRAP="${MEDIAWIKI_SKIP_BOOTSTRAP:-}" # only used during the first initialization
 export MEDIAWIKI_WIKI_NAME="${MEDIAWIKI_WIKI_NAME:-Bitnami MediaWiki}" # only used during the first initialization
 export MEDIAWIKI_WIKI_PREFIX="${MEDIAWIKI_WIKI_PREFIX:-/wiki}" # only used during the first initialization
+export MEDIAWIKI_SCRIPT_PATH="${MEDIAWIKI_SCRIPT_PATH:-/w}" # only used during the first initialization
 export MEDIAWIKI_HOST="${MEDIAWIKI_HOST:-localhost}" # only used during the first initialization
 export MEDIAWIKI_ENABLE_HTTPS="${MEDIAWIKI_ENABLE_HTTPS:-no}" # only used during the first initialization
 export MEDIAWIKI_EXTERNAL_HTTP_PORT_NUMBER="${MEDIAWIKI_EXTERNAL_HTTP_PORT_NUMBER:-80}" # only used during the first initialization

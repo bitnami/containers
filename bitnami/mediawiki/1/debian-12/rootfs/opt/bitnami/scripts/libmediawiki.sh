@@ -299,7 +299,7 @@ EOF
 #########################
 mediawiki_configure_short_urls() {
     info "Setting MediaWiki short URLs"
-    mediawiki_conf_set "\$wgScriptPath" ""
+    mediawiki_conf_set "\$wgScriptPath" "$MEDIAWIKI_SCRIPT_PATH"
     cat >>"$MEDIAWIKI_CONF_FILE" <<EOF
 \$wgArticlePath = "$MEDIAWIKI_WIKI_PREFIX/\$1";
 \$wgUsePathInfo = true;
