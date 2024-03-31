@@ -3,13 +3,13 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "2.4.58-7"
+        "version": "2.4.58-8"
     },
     "libphp": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.2.16-1"
+        "version": "8.2.17-0"
     },
     "magento": {
         "arch": "amd64",
@@ -27,18 +27,18 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.2.16-2"
+        "version": "8.2.17-1"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.6-9"
+        "version": "1.0.6-10"
     },
     "wait-for-port": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.7-9"
+        "version": "1.0.7-10"
     }
 }
