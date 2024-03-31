@@ -197,10 +197,17 @@ docker run -d --name odoo \
 | `ODOO_LOAD_DEMO_DATA`          | Whether to load demo data.                                                                                                 | `no`                                                   |
 | `ODOO_EMAIL`                   | Odoo user e-mail address.                                                                                                  | `user@example.com`                                     |
 | `ODOO_PASSWORD`                | Odoo user password.                                                                                                        | `bitnami`                                              |
+| `ODOO_SMTP_HOST`               | Odoo SMTP server host.                                                                                                     | `nil`                                                  |
+| `ODOO_SMTP_PORT_NUMBER`        | Odoo SMTP server port number.                                                                                              | `nil`                                                  |
+| `ODOO_SMTP_USER`               | Odoo SMTP server user.                                                                                                     | `nil`                                                  |
+| `ODOO_SMTP_PASSWORD`           | Odoo SMTP server user password.                                                                                            | `nil`                                                  |
+| `ODOO_SMTP_PROTOCOL`           | Odoo SMTP server protocol to use.                                                                                          | `nil`                                                  |
 | `ODOO_DATABASE_HOST`           | Database server host.                                                                                                      | `$ODOO_DEFAULT_DATABASE_HOST`                          |
 | `ODOO_DATABASE_PORT_NUMBER`    | Database server port.                                                                                                      | `5432`                                                 |
 | `ODOO_DATABASE_NAME`           | Database name.                                                                                                             | `bitnami_odoo`                                         |
 | `ODOO_DATABASE_USER`           | Database user name.                                                                                                        | `bn_odoo`                                              |
+| `ODOO_DATABASE_PASSWORD`       | Database user password.                                                                                                    | `nil`                                                  |
+| `ODOO_DATABASE_FILTER`         | Database filter                                                                                                            | `nil`                                                  |
 
 #### Read-only environment variables
 
@@ -220,7 +227,6 @@ docker run -d --name odoo \
 | `ODOO_DAEMON_USER`           | Odoo system user.                               | `odoo`                                        |
 | `ODOO_DAEMON_GROUP`          | Odoo system group.                              | `odoo`                                        |
 | `ODOO_DEFAULT_DATABASE_HOST` | Default database server host.                   | `postgresql`                                  |
-| `ODOO_DEFAULT_DATABASE_HOST` | Default database server host.                   | `127.0.0.1`                                   |
 
 When you start the Odoo image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
