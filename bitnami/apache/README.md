@@ -121,9 +121,11 @@ Access your web server in the browser by navigating to `http://localhost:8080/`.
 
 #### Customizable environment variables
 
-| Name                   | Description                    | Default Value |
-|------------------------|--------------------------------|---------------|
-| `APACHE_SERVER_TOKENS` | Apache ServerTokens directive. | `Prod`        |
+| Name                       | Description                       | Default Value |
+|----------------------------|-----------------------------------|---------------|
+| `APACHE_HTTP_PORT_NUMBER`  | HTTP port number used by Apache.  | `nil`         |
+| `APACHE_HTTPS_PORT_NUMBER` | HTTPS port number used by Apache. | `nil`         |
+| `APACHE_SERVER_TOKENS`     | Apache ServerTokens directive.    | `Prod`        |
 
 #### Read-only environment variables
 
@@ -144,9 +146,7 @@ Access your web server in the browser by navigating to `http://localhost:8080/`.
 | `APACHE_DAEMON_USER`               | Apache system user.                                       | `daemon`                          |
 | `APACHE_DAEMON_GROUP`              | Apache system group.                                      | `daemon`                          |
 | `APACHE_DEFAULT_HTTP_PORT_NUMBER`  | Default Apache HTTP port number to enable at build time.  | `8080`                            |
-| `APACHE_DEFAULT_HTTP_PORT_NUMBER`  | Default Apache HTTP port number to enable at build time.  | `80`                              |
 | `APACHE_DEFAULT_HTTPS_PORT_NUMBER` | Default Apache HTTPS port number to enable at build time. | `8443`                            |
-| `APACHE_DEFAULT_HTTPS_PORT_NUMBER` | Default Apache HTTPS port number to enable at build time. | `443`                             |
 
 When you start the Apache image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
