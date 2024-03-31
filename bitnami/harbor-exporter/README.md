@@ -47,7 +47,7 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 
 harbor-exporter is a component of the Harbor application. In order to get the Harbor application running on Kubernetes we encourage you to check the [bitnami/harbor Helm chart](https://github.com/bitnami/charts/tree/master/bitnami/harbor) and configure it using the options exposed in the values.yaml file.
 
-For further information about the specific component itself, please refer to the [source repository documentation](https://github.com/goharbor/harbor/tree/main/docs)
+For further information about the specific component itself, please refer to the [source repository documentation](https://github.com/goharbor/harbor/tree/main/docs
 
 ### Environment variables
 
@@ -56,13 +56,16 @@ For further information about the specific component itself, please refer to the
 | Name                           | Description                                                                                | Default Value                         |
 |--------------------------------|--------------------------------------------------------------------------------------------|---------------------------------------|
 | `HARBOR_EXPORTER_BASE_DIR`     | harbor-exporter installation directory.                                                    | `${BITNAMI_ROOT_DIR}/harbor-exporter` |
-| `HARBOR_EXPORTER_LOGS_DIR`     | harbor-exporter installation directory.                                                    | `${HARBOR_EXPORTER_BASE_DIR}/logs`    |
-| `HARBOR_EXPORTER_TMP_DIR`      | harbor-exporter installation directory.                                                    | `${HARBOR_EXPORTER_BASE_DIR}/tmp`     |
+| `HARBOR_DATABASE_HOST`         | The hostname of external database                                                          | `nil`                                 |
 | `HARBOR_DATABASE_PORT`         | The port of external database                                                              | `5432`                                |
+| `HARBOR_DATABASE_USERNAME`     | The username of external database                                                          | `nil`                                 |
+| `HARBOR_DATABASE_PASSWORD`     | The password of external database                                                          | `nil`                                 |
+| `HARBOR_DATABASE_DBNAME`       | The database used by core service                                                          | `nil`                                 |
 | `HARBOR_DATABASE_SSLMODE`      | Database certificate verfication: require, verify-full, verify-ca, disable (default value) | `disable`                             |
 | `HARBOR_SERVICE_SCHEME`        | Core service scheme (http or https)                                                        | `http`                                |
 | `HARBOR_SERVICE_HOST`          | Core service hostname                                                                      | `core`                                |
 | `HARBOR_SERVICE_PORT`          | Core service port                                                                          | `8080`                                |
+| `HARBOR_REDIS_URL`             | Redis URL for job service (scheme://[redis:password@]addr/db_index)                        | `nil`                                 |
 | `HARBOR_REDIS_NAMESPACE`       | Redis namespace for jobservice. Default `harbor_job_service_namespace                      | `harbor_job_service_namespace`        |
 | `HARBOR_REDIS_TIMEOUT`         | Redis connection timeout.                                                                  | `3600`                                |
 | `HARBOR_EXPORTER_PORT`         | Port for exporter metrics                                                                  | `9090`                                |
@@ -70,13 +73,10 @@ For further information about the specific component itself, please refer to the
 
 #### Read-only environment variables
 
-| Name                             | Description                                                                | Value                                             |
-|----------------------------------|----------------------------------------------------------------------------|---------------------------------------------------|
-| `HARBOR_EXPORTER_DAEMON_USER`    | harbor-exporter system user.                                               | `harbor`                                          |
-| `HARBOR_EXPORTER_DAEMON_GROUP`   | harbor-exporter system group.                                              | `harbor`                                          |
-| `HARBOR_EXPORTER_PID_FILE`       | PID file for harbor-exporter service.                                      | `${HARBOR_EXPORTER_TMP_DIR}/harbor-exporter.pid`  |
-| `HARBOR_EXPORTER_LOG_FILE`       | Log file for harbor-exporter service.                                      | `${HARBOR_EXPORTER_LOGS_DIR}/harbor-exporter.log` |
-| `HARBOR_EXPORTER_EXTRA_ENV_FILE` | File to store extra environment variables for the harbor-exporter service. | `${HARBOR_EXPORTER_BASE_DIR}/.env`                |
+| Name                           | Description                   | Value    |
+|--------------------------------|-------------------------------|----------|
+| `HARBOR_EXPORTER_DAEMON_USER`  | harbor-exporter system user.  | `harbor` |
+| `HARBOR_EXPORTER_DAEMON_GROUP` | harbor-exporter system group. | `harbor` |
 
 ## Notable Changes
 
