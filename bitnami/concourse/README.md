@@ -144,6 +144,7 @@ Find how to configure Concourse in its [official documentation](https://concours
 | `CONCOURSE_DATABASE_PORT_NUMBER`                  | Database host port.                                                     | `5432`                                     |
 | `CONCOURSE_DATABASE_NAME`                         | Database name.                                                          | `bitnami_concourse`                        |
 | `CONCOURSE_DATABASE_USERNAME`                     | Database username.                                                      | `bn_concourse`                             |
+| `CONCOURSE_DATABASE_PASSWORD`                     | Database password.                                                      | `nil`                                      |
 
 #### Read-only environment variables
 
