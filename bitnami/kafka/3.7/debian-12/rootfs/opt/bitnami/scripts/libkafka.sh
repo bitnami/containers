@@ -1001,9 +1001,15 @@ kafka_initialize() {
                     kafka_producer_consumer_conf_set security.protocol "$protocol"
                     kafka_producer_consumer_conf_set sasl.mechanism "${KAFKA_CLIENT_SASL_MECHANISM:-$(kafka_client_sasl_mechanism)}"
                 fi
-                kafka_configure_server_jaas "$listener_lower" "${role:-}"
+                # Configure inline listener jaas configuration, omitted if mounted JAAS conf file detected
+                if [[ ! -f "${KAFKA_CONF_DIR}/kafka_jaas.conf" ]]; then
+                    kafka_configure_server_jaas "$listener_lower" "${role:-}"
+                fi
             fi
         done
+        # Configure Kafka using environment variables
+        # This is executed at the end, to allow users to override properties set by the initialization logic
+        kafka_configure_from_environment_variables
     else
         info "Detected mounted server.properties file at ${KAFKA_MOUNTED_CONF_DIR}/server.properties. Skipping configuration based on env variables"
     fi
