@@ -55,18 +55,12 @@ For further information about the specific component itself, please refer to the
 
 #### Read-only environment variables
 
-| Name                         | Description                                                            | Value                                     |
-|------------------------------|------------------------------------------------------------------------|-------------------------------------------|
-| `HARBOR_CORE_BASE_DIR`       | harbor-core installation directory.                                    | `${BITNAMI_ROOT_DIR}/harbor-core`         |
-| `HARBOR_CORE_VOLUME_DIR`     | harbor-core volume directory.                                          | `${BITNAMI_VOLUME_DIR}/harbor-core`       |
-| `HARBOR_CORE_VOLUME_DIR`     | harbor-core volume directory.                                          | `/data`                                   |
-| `HARBOR_CORE_LOGS_DIR`       | harbor-core logs directory.                                            | `${HARBOR_CORE_BASE_DIR}/logs`            |
-| `HARBOR_CORE_TMP_DIR`        | harbor-core directory for temporary files.                             | `${HARBOR_CORE_BASE_DIR}/tmp`             |
-| `HARBOR_CORE_DAEMON_USER`    | harbor-core system user.                                               | `harbor`                                  |
-| `HARBOR_CORE_DAEMON_GROUP`   | harbor-core system group.                                              | `harbor`                                  |
-| `HARBOR_CORE_PID_FILE`       | PID file for harbor-core service.                                      | `${HARBOR_CORE_TMP_DIR}/harbor-core.pid`  |
-| `HARBOR_CORE_LOG_FILE`       | Log file for harbor-core service.                                      | `${HARBOR_CORE_LOGS_DIR}/harbor-core.log` |
-| `HARBOR_CORE_EXTRA_ENV_FILE` | File to store extra environment variables for the harbor-core service. | `${HARBOR_CORE_BASE_DIR}/.env`            |
+| Name                       | Description                         | Value                             |
+|----------------------------|-------------------------------------|-----------------------------------|
+| `HARBOR_CORE_BASE_DIR`     | harbor-core installation directory. | `${BITNAMI_ROOT_DIR}/harbor-core` |
+| `HARBOR_CORE_VOLUME_DIR`   | harbor-core volume directory.       | `/data`                           |
+| `HARBOR_CORE_DAEMON_USER`  | harbor-core system user.            | `harbor`                          |
+| `HARBOR_CORE_DAEMON_GROUP` | harbor-core system group.           | `harbor`                          |
 
 ## Notable Changes
 
