@@ -55,19 +55,12 @@ For further information about the specific component itself, please refer to the
 
 #### Read-only environment variables
 
-| Name                                | Description                                                                   | Value                                                   |
-|-------------------------------------|-------------------------------------------------------------------------------|---------------------------------------------------------|
-| `HARBOR_REGISTRYCTL_BASE_DIR`       | harbor-registryctl installation directory.                                    | `${BITNAMI_ROOT_DIR}/harbor-registryctl`                |
-| `HARBOR_REGISTRYCTL_VOLUME_DIR`     | harbor-registry volume directory.                                             | `${BITNAMI_VOLUME_DIR}/harbor-registry`                 |
-| `HARBOR_REGISTRYCTL_STORAGE_DIR`    | harbor-registry storage directory.                                            | `${HARBOR_REGISTRYCTL_VOLUME_DIR}/storage`              |
-| `HARBOR_REGISTRYCTL_STORAGE_DIR`    | harbor-registry storage directory.                                            | `/storage`                                              |
-| `HARBOR_REGISTRYCTL_LOGS_DIR`       | harbor-registryctl logs directory.                                            | `${HARBOR_REGISTRYCTL_BASE_DIR}/logs`                   |
-| `HARBOR_REGISTRYCTL_TMP_DIR`        | harbor-registryctl directory for temporary files.                             | `${HARBOR_REGISTRYCTL_BASE_DIR}/tmp`                    |
-| `HARBOR_REGISTRYCTL_DAEMON_USER`    | harbor-registryctl system user.                                               | `harbor`                                                |
-| `HARBOR_REGISTRYCTL_DAEMON_GROUP`   | harbor-registryctl system group.                                              | `harbor`                                                |
-| `HARBOR_REGISTRYCTL_PID_FILE`       | PID file for harbor-registryctl service.                                      | `${HARBOR_REGISTRYCTL_TMP_DIR}/harbor-registryctl.pid`  |
-| `HARBOR_REGISTRYCTL_LOG_FILE`       | Log file for harbor-registryctl service.                                      | `${HARBOR_REGISTRYCTL_LOGS_DIR}/harbor-registryctl.log` |
-| `HARBOR_REGISTRYCTL_EXTRA_ENV_FILE` | File to store extra environment variables for the harbor-registryctl service. | `${HARBOR_REGISTRYCTL_BASE_DIR}/.env`                   |
+| Name                              | Description                                | Value                                    |
+|-----------------------------------|--------------------------------------------|------------------------------------------|
+| `HARBOR_REGISTRYCTL_BASE_DIR`     | harbor-registryctl installation directory. | `${BITNAMI_ROOT_DIR}/harbor-registryctl` |
+| `HARBOR_REGISTRYCTL_STORAGE_DIR`  | harbor-registry storage directory.         | `/storage`                               |
+| `HARBOR_REGISTRYCTL_DAEMON_USER`  | harbor-registryctl system user.            | `harbor`                                 |
+| `HARBOR_REGISTRYCTL_DAEMON_GROUP` | harbor-registryctl system group.           | `harbor`                                 |
 
 ## Notable Changes
 
