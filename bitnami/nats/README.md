@@ -165,24 +165,31 @@ docker-compose up -d
 
 #### Customizable environment variables
 
-| Name                       | Description                                                                                   | Default Value                            |
-|----------------------------|-----------------------------------------------------------------------------------------------|------------------------------------------|
-| `NATS_BIND_ADDRESS`        | NATS bind address.                                                                            | `$NATS_DEFAULT_BIND_ADDRESS`             |
-| `NATS_CLIENT_PORT_NUMBER`  | NATS CLIENT port number.                                                                      | `$NATS_DEFAULT_CLIENT_PORT_NUMBER`       |
-| `NATS_HTTP_PORT_NUMBER`    | NATS HTTP port number.                                                                        | `$NATS_DEFAULT_HTTP_PORT_NUMBER`         |
-| `NATS_HTTPS_PORT_NUMBER`   | NATS HTTPS port number.                                                                       | `$NATS_DEFAULT_HTTPS_PORT_NUMBER`        |
-| `NATS_CLUSTER_PORT_NUMBER` | NATS CLUSTER port number.                                                                     | `$NATS_DEFAULT_CLUSTER_PORT_NUMBER`      |
-| `NATS_FILENAME`            | Pefix to use for NATS files (e.g. the PID file would be formed using "${NATS_FILENAME}.pid"). | `nats-server`                            |
-| `NATS_CONF_FILE`           | Path to the NATS conf file.                                                                   | `${NATS_CONF_DIR}/${NATS_FILENAME}.conf` |
-| `NATS_LOG_FILE`            | Path to the NATS log file.                                                                    | `${NATS_LOGS_DIR}/${NATS_FILENAME}.log`  |
-| `NATS_PID_FILE`            | Path to the NATS pid file.                                                                    | `${NATS_TMP_DIR}/${NATS_FILENAME}.pid`   |
-| `NATS_ENABLE_AUTH`         | Enable Authentication.                                                                        | `no`                                     |
-| `NATS_USERNAME`            | Username credential for client connections.                                                   | `nats`                                   |
-| `NATS_ENABLE_TLS`          | Enable TLS.                                                                                   | `no`                                     |
-| `NATS_TLS_CRT_FILENAME`    | TLS certificate filename.                                                                     | `${NATS_FILENAME}.crt`                   |
-| `NATS_TLS_KEY_FILENAME`    | TLS key filename.                                                                             | `${NATS_FILENAME}.key`                   |
-| `NATS_ENABLE_CLUSTER`      | Enable Cluster configuration.                                                                 | `no`                                     |
-| `NATS_CLUSTER_USERNAME`    | Username credential for route connections.                                                    | `nats`                                   |
+| Name                       | Description                                                                                        | Default Value                            |
+|----------------------------|----------------------------------------------------------------------------------------------------|------------------------------------------|
+| `NATS_BIND_ADDRESS`        | NATS bind address.                                                                                 | `$NATS_DEFAULT_BIND_ADDRESS`             |
+| `NATS_CLIENT_PORT_NUMBER`  | NATS CLIENT port number.                                                                           | `$NATS_DEFAULT_CLIENT_PORT_NUMBER`       |
+| `NATS_HTTP_PORT_NUMBER`    | NATS HTTP port number.                                                                             | `$NATS_DEFAULT_HTTP_PORT_NUMBER`         |
+| `NATS_HTTPS_PORT_NUMBER`   | NATS HTTPS port number.                                                                            | `$NATS_DEFAULT_HTTPS_PORT_NUMBER`        |
+| `NATS_CLUSTER_PORT_NUMBER` | NATS CLUSTER port number.                                                                          | `$NATS_DEFAULT_CLUSTER_PORT_NUMBER`      |
+| `NATS_FILENAME`            | Pefix to use for NATS files (e.g. the PID file would be formed using "${NATS_FILENAME}.pid").      | `nats-server`                            |
+| `NATS_CONF_FILE`           | Path to the NATS conf file.                                                                        | `${NATS_CONF_DIR}/${NATS_FILENAME}.conf` |
+| `NATS_LOG_FILE`            | Path to the NATS log file.                                                                         | `${NATS_LOGS_DIR}/${NATS_FILENAME}.log`  |
+| `NATS_PID_FILE`            | Path to the NATS pid file.                                                                         | `${NATS_TMP_DIR}/${NATS_FILENAME}.pid`   |
+| `NATS_ENABLE_AUTH`         | Enable Authentication.                                                                             | `no`                                     |
+| `NATS_USERNAME`            | Username credential for client connections.                                                        | `nats`                                   |
+| `NATS_PASSWORD`            | Password credential for client connections.                                                        | `nil`                                    |
+| `NATS_TOKEN`               | Auth token for client connections.                                                                 | `nil`                                    |
+| `NATS_ENABLE_TLS`          | Enable TLS.                                                                                        | `no`                                     |
+| `NATS_TLS_CRT_FILENAME`    | TLS certificate filename.                                                                          | `${NATS_FILENAME}.crt`                   |
+| `NATS_TLS_KEY_FILENAME`    | TLS key filename.                                                                                  | `${NATS_FILENAME}.key`                   |
+| `NATS_ENABLE_CLUSTER`      | Enable Cluster configuration.                                                                      | `no`                                     |
+| `NATS_CLUSTER_USERNAME`    | Username credential for route connections.                                                         | `nats`                                   |
+| `NATS_CLUSTER_PASSWORD`    | Password credential for route connections.                                                         | `nil`                                    |
+| `NATS_CLUSTER_TOKEN`       | Auth token for route connections.                                                                  | `nil`                                    |
+| `NATS_CLUSTER_ROUTES`      | Comma-separated list of routes to solicit and connect.                                             | `nil`                                    |
+| `NATS_CLUSTER_SEED_NODE`   | Node to use as seed server for routes announcement.                                                | `nil`                                    |
+| `NATS_EXTRA_ARGS`          | Additional command line arguments passed while starting NATS (e.g., `-js` for enabling JetStream). | `nil`                                    |
 
 #### Read-only environment variables
 
