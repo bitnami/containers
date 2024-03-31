@@ -92,26 +92,23 @@ Find all the configuration options in the [Airflow Prometheus Exporter documenta
 
 #### Customizable environment variables
 
-| Name                                | Description                              | Default Value                          |
-|-------------------------------------|------------------------------------------|----------------------------------------|
-| `AIRFLOW_EXPORTER_BASE_DIR`         | airflow-exporter installation directory. | `${BITNAMI_ROOT_DIR}/airflow-exporter` |
-| `AIRFLOW_EXPORTER_LOGS_DIR`         | airflow-exporter installation directory. | `${AIRFLOW_EXPORTER_BASE_DIR}/logs`    |
-| `AIRFLOW_EXPORTER_TMP_DIR`          | airflow-exporter installation directory. | `${AIRFLOW_EXPORTER_BASE_DIR}/tmp`     |
-| `AIRFLOW_EXPORTER_DATABASE_BACKEND` | The database backend                     | `postgres`                             |
-| `AIRFLOW_EXPORTER_DATABASE_HOST`    | The hostname of the database             | `127.0.0.1`                            |
-| `AIRFLOW_EXPORTER_DATABASE_PORT`    | The port of the database                 | `5432`                                 |
-| `AIRFLOW_EXPORTER_DATABASE_USER`    | The user of the database                 | `bn_airflow`                           |
-| `AIRFLOW_EXPORTER_DATABASE_NAME`    | The name of the database                 | `bitnami_airflow`                      |
+| Name                                 | Description                              | Default Value                          |
+|--------------------------------------|------------------------------------------|----------------------------------------|
+| `AIRFLOW_EXPORTER_BASE_DIR`          | airflow-exporter installation directory. | `${BITNAMI_ROOT_DIR}/airflow-exporter` |
+| `AIRFLOW_EXPORTER_DATABASE_BACKEND`  | The database backend                     | `postgres`                             |
+| `AIRFLOW_EXPORTER_DATABASE_HOST`     | The hostname of the database             | `127.0.0.1`                            |
+| `AIRFLOW_EXPORTER_DATABASE_PORT`     | The port of the database                 | `5432`                                 |
+| `AIRFLOW_EXPORTER_DATABASE_USER`     | The user of the database                 | `bn_airflow`                           |
+| `AIRFLOW_EXPORTER_DATABASE_PASSWORD` | The password of the database             | `nil`                                  |
+| `AIRFLOW_EXPORTER_DATABASE_NAME`     | The name of the database                 | `bitnami_airflow`                      |
 
 #### Read-only environment variables
 
-| Name                            | Description                                        | Value                                               |
-|---------------------------------|----------------------------------------------------|-----------------------------------------------------|
-| `AIRFLOW_EXPORTER_BIN_DIR`      | airflow-exporter directory for binary executables. | `${AIRFLOW_EXPORTER_BASE_DIR}/bin`                  |
-| `AIRFLOW_EXPORTER_DAEMON_USER`  | airflow-exporter system user.                      | `airflow`                                           |
-| `AIRFLOW_EXPORTER_DAEMON_GROUP` | airflow-exporter system group.                     | `airflow`                                           |
-| `AIRFLOW_EXPORTER_PID_FILE`     | PID file for airflow-exporter service.             | `${AIRFLOW_EXPORTER_TMP_DIR}/airflow-exporter.pid`  |
-| `AIRFLOW_EXPORTER_LOG_FILE`     | Log file for airflow-exporter service.             | `${AIRFLOW_EXPORTER_LOGS_DIR}/airflow-exporter.log` |
+| Name                            | Description                                        | Value                              |
+|---------------------------------|----------------------------------------------------|------------------------------------|
+| `AIRFLOW_EXPORTER_BIN_DIR`      | airflow-exporter directory for binary executables. | `${AIRFLOW_EXPORTER_BASE_DIR}/bin` |
+| `AIRFLOW_EXPORTER_DAEMON_USER`  | airflow-exporter system user.                      | `airflow`                          |
+| `AIRFLOW_EXPORTER_DAEMON_GROUP` | airflow-exporter system group.                     | `airflow`                          |
 
 ## Logging
 
