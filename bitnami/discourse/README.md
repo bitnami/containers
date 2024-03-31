@@ -268,27 +268,37 @@ The set of default standard configuration files may be found [here](https://gith
 | `DISCOURSE_EXTERNAL_HTTPS_PORT_NUMBER` | External HTTPS port for Discourse.                                                                                              | `443`                                   |
 | `DISCOURSE_HOST`                       | Discourse host name.                                                                                                            | `www.example.com`                       |
 | `DISCOURSE_PORT_NUMBER`                | Port number in which Discourse will run.                                                                                        | `3000`                                  |
+| `DISCOURSE_SKIP_BOOTSTRAP`             | Whether to perform initial bootstrapping for the application.                                                                   | `nil`                                   |
 | `DISCOURSE_SITE_NAME`                  | Discourse site name.                                                                                                            | `My site!`                              |
 | `DISCOURSE_ENV`                        | Discourse environment mode. Allowed values: *development*, *production*, *test*.                                                | `production`                            |
-| `DISCOURSE_PRECOMPILE_ASSETS`          | Whether to precompile assets during the initialization. Required when installing plugins.                                       | `no`                                    |
 | `DISCOURSE_PRECOMPILE_ASSETS`          | Whether to precompile assets during the initialization. Required when installing plugins.                                       | `yes`                                   |
 | `DISCOURSE_ENABLE_CONF_PERSISTENCE`    | Whether to enable persistence of the Discourse `discourse.conf` configuration file.                                             | `no`                                    |
 | `DISCOURSE_EXTRA_CONF_CONTENT`         | Extra configuration to append to the `discourse.conf` configuration file.                                                       | `yes`                                   |
 | `DISCOURSE_PASSENGER_SPAWN_METHOD`     | Passenger method used for spawning application processes. Valid values: direct, smart.                                          | `direct`                                |
+| `DISCOURSE_PASSENGER_EXTRA_FLAGS`      | Extra flags to pass to the Passenger start command.                                                                             | `nil`                                   |
 | `DISCOURSE_USERNAME`                   | Discourse user name.                                                                                                            | `user`                                  |
 | `DISCOURSE_PASSWORD`                   | Discourse user password.                                                                                                        | `bitnami123`                            |
 | `DISCOURSE_EMAIL`                      | Discourse user e-mail address.                                                                                                  | `user@example.com`                      |
 | `DISCOURSE_FIRST_NAME`                 | Discourse user first name.                                                                                                      | `UserName`                              |
 | `DISCOURSE_LAST_NAME`                  | Discourse user last name.                                                                                                       | `LastName`                              |
+| `DISCOURSE_SMTP_HOST`                  | Discourse SMTP server host.                                                                                                     | `nil`                                   |
+| `DISCOURSE_SMTP_PORT_NUMBER`           | Discourse SMTP server port number.                                                                                              | `nil`                                   |
+| `DISCOURSE_SMTP_USER`                  | Discourse SMTP server user.                                                                                                     | `nil`                                   |
+| `DISCOURSE_SMTP_PASSWORD`              | Discourse SMTP server user password.                                                                                            | `nil`                                   |
+| `DISCOURSE_SMTP_PROTOCOL`              | Discourse SMTP server protocol to use.                                                                                          | `nil`                                   |
 | `DISCOURSE_SMTP_AUTH`                  | Discourse SMTP authentication method. Allowed values: *login*, *plain*, *cram_md5*.                                             | `login`                                 |
+| `DISCOURSE_SMTP_OPEN_TIMEOUT`          | Discourse `smtp_open_timeout` configuration override.                                                                           | `nil`                                   |
+| `DISCOURSE_SMTP_READ_TIMEOUT`          | Discourse `smtp_read_timeout` configuration override.                                                                           | `nil`                                   |
 | `DISCOURSE_DATABASE_HOST`              | Database server host.                                                                                                           | `$DISCOURSE_DEFAULT_DATABASE_HOST`      |
 | `DISCOURSE_DATABASE_PORT_NUMBER`       | Database server port.                                                                                                           | `5432`                                  |
 | `DISCOURSE_DATABASE_NAME`              | Database name.                                                                                                                  | `bitnami_discourse`                     |
 | `DISCOURSE_DATABASE_USER`              | Database user name.                                                                                                             | `bn_discourse`                          |
+| `DISCOURSE_DATABASE_PASSWORD`          | Database user password.                                                                                                         | `nil`                                   |
 | `DISCOURSE_DB_BACKUP_HOST`             | Database backup server host.                                                                                                    | `$DISCOURSE_DATABASE_HOST`              |
 | `DISCOURSE_DB_BACKUP_PORT`             | Database backup server port.                                                                                                    | `$DISCOURSE_DATABASE_PORT_NUMBER`       |
 | `DISCOURSE_REDIS_HOST`                 | Redis(R) server host.                                                                                                           | `$DISCOURSE_DEFAULT_REDIS_HOST`         |
 | `DISCOURSE_REDIS_PORT_NUMBER`          | Redis(R) server port.                                                                                                           | `6379`                                  |
+| `DISCOURSE_REDIS_PASSWORD`             | Redis(R) user password.                                                                                                         | `nil`                                   |
 | `DISCOURSE_REDIS_USE_SSL`              | Whether to enable SSL for Redis(R).                                                                                             | `no`                                    |
 
 #### Read-only environment variables
@@ -300,15 +310,9 @@ The set of default standard configuration files may be found [here](https://gith
 | `YARN_CACHE_FOLDER`               | Yarn cache folder                                    | `${DISCOURSE_BASE_DIR}/tmp/cache`             |
 | `DISCOURSE_VOLUME_DIR`            | Discourse directory for mounted configuration files. | `${BITNAMI_VOLUME_DIR}/discourse`             |
 | `DISCOURSE_DAEMON_USER`           | Discourse system user.                               | `discourse`                                   |
-| `DISCOURSE_DAEMON_USER`           | Discourse system user.                               | `daemon`                                      |
 | `DISCOURSE_DAEMON_GROUP`          | Discourse system group.                              | `discourse`                                   |
-| `DISCOURSE_DAEMON_GROUP`          | Discourse system group.                              | `daemon`                                      |
 | `DISCOURSE_DEFAULT_DATABASE_HOST` | Default database server host.                        | `postgresql`                                  |
-| `DISCOURSE_DEFAULT_DATABASE_HOST` | Default database server host.                        | `127.0.0.1`                                   |
 | `DISCOURSE_DEFAULT_REDIS_HOST`    | Default Redis(R) server host.                        | `redis`                                       |
-| `DISCOURSE_DEFAULT_REDIS_HOST`    | Default Redis(R) server host.                        | `127.0.0.1`                                   |
-| `DISCOURSE_SIDEKIQ_PID_FILE`      | PID file for sidekiq service.                        | `${DISCOURSE_BASE_DIR}/tmp/sidekiq.pid`       |
-| `DISCOURSE_SIDEKIQ_LOG_FILE`      | Log file for sidekiq service.                        | `${DISCOURSE_BASE_DIR}/log/sidekiq.log`       |
 
 When you start the Discourse image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
