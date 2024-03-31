@@ -9,7 +9,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "20.11.1-0"
+        "version": "20.12.0-0"
     },
     "postgresql-client": {
         "arch": "amd64",
@@ -21,7 +21,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.11.8-3"
+        "version": "3.11.8-4"
     },
     "redis-client": {
         "arch": "amd64",
@@ -39,6 +39,6 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.7-9"
+        "version": "1.0.7-10"
     }
 }
