@@ -92,9 +92,12 @@ docker run --name gotrue bitnami/gotrue:latest
 | `DB_PORT`                             | Database port number            | `5432`                                                                                                       |
 | `DB_NAME`                             | Database name                   | `postgres`                                                                                                   |
 | `DB_USER`                             | Database user username          | `postgres`                                                                                                   |
+| `DB_PASSWORD`                         | Database password               | `nil`                                                                                                        |
 | `DB_SSL`                              | Database SSL connection enabled | `disable`                                                                                                    |
 | `GOTRUE_DB_DATABASE_URL`              | Database URL                    | `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?search_path=auth&sslmode=${DB_SSL}` |
 | `GOTRUE_URI_ALLOW_LIST`               |                                 | `*`                                                                                                          |
+| `GOTRUE_OPERATOR_TOKEN`               | Operator token                  | `nil`                                                                                                        |
+| `GOTRUE_JWT_SECRET`                   | JWT Secret                      | `nil`                                                                                                        |
 | `GOTRUE_SITE_URL`                     |                                 | `http://localhost:80`                                                                                        |
 | `GOTRUE_API_PORT`                     |                                 | `9999`                                                                                                       |
 | `GOTRUE_API_HOST`                     |                                 | `0.0.0.0`                                                                                                    |
@@ -119,17 +122,14 @@ docker run --name gotrue bitnami/gotrue:latest
 
 #### Read-only environment variables
 
-| Name                    | Description                                                       | Value                           |
-|-------------------------|-------------------------------------------------------------------|---------------------------------|
-| `GOTRUE_BASE_DIR`       | gotrue installation directory.                                    | `${BITNAMI_ROOT_DIR}/gotrue`    |
-| `GOTRUE_LOGS_DIR`       | Directory where gotrue logs are stored.                           | `${GOTRUE_BASE_DIR}/logs`       |
-| `GOTRUE_LOG_FILE`       | Directory where gotrue logs are stored.                           | `${GOTRUE_LOGS_DIR}/gotrue.log` |
-| `GOTRUE_BIN_DIR`        | gotrue directory for binary executables.                          | `${GOTRUE_BASE_DIR}/bin`        |
-| `GOTRUE_TMP_DIR`        | Directory where gotrue temporary files are stored.                | `${GOTRUE_BASE_DIR}/tmp`        |
-| `GOTRUE_PID_FILE`       | Path to the PID file for gotrue.                                  | `${GOTRUE_TMP_DIR}/gotrue.pid`  |
-| `GOTRUE_EXTRA_ENV_FILE` | File to store extra environment variables for the gotrue service. | `${GOTRUE_BASE_DIR}/.env`       |
-| `GOTRUE_DAEMON_USER`    | postgrest system user.                                            | `supabase`                      |
-| `GOTRUE_DAEMON_GROUP`   | postgrest system group.                                           | `supabase`                      |
+| Name                  | Description                              | Value                           |
+|-----------------------|------------------------------------------|---------------------------------|
+| `GOTRUE_BASE_DIR`     | gotrue installation directory.           | `${BITNAMI_ROOT_DIR}/gotrue`    |
+| `GOTRUE_LOGS_DIR`     | Directory where gotrue logs are stored.  | `${GOTRUE_BASE_DIR}/logs`       |
+| `GOTRUE_LOG_FILE`     | Directory where gotrue logs are stored.  | `${GOTRUE_LOGS_DIR}/gotrue.log` |
+| `GOTRUE_BIN_DIR`      | gotrue directory for binary executables. | `${GOTRUE_BASE_DIR}/bin`        |
+| `GOTRUE_DAEMON_USER`  | postgrest system user.                   | `supabase`                      |
+| `GOTRUE_DAEMON_GROUP` | postgrest system group.                  | `supabase`                      |
 
 ### Running commands
 
