@@ -73,9 +73,22 @@ Non-root container images add an extra layer of security and are generally recom
 | `JAEGER_AGENT_HTTP_PORT_NUMBER`             | Jaeger Agent HTTP port. Serve configs.                                     | `5778`        |
 | `JAEGER_QUERY_HTTP_PORT_NUMBER`             | Jaeger Query HTTP port.                                                    | `16686`       |
 | `JAEGER_QUERY_GRPC_PORT_NUMBER`             | Jaeger Query GRPC port.                                                    | `16685`       |
+| `JAEGER_COLLECTOR_ZIPKIN_PORT_NUMBER`       | Jaeger Collector Zipkin compatible port.                                   | `nil`         |
 | `JAEGER_COLLECTOR_HTTP_PORT_NUMBER`         | Jaeger Collector HTTP port. Accept jaeger.thrift directly from clients     | `14268`       |
 | `JAEGER_COLLECTOR_GRPC_PORT_NUMBER`         | Jaeger Collector GRPC port. Accept jaeger.thrift directly from clients     | `14250`       |
 | `JAEGER_ADMIN_HTTP_PORT_NUMBER`             | Jaeger Admin port.                                                         | `14269`       |
+| `JAEGER_AGENT_ZIPKIN_UDP_HOST`              | Jaeger Agent UDP host. Accept zipkin.thrift over compact thrift protocol   | `nil`         |
+| `JAEGER_AGENT_COMPACT_UDP_HOST`             | Jaeger Agent UDP host. Accept jaeger.thrift over compact thrift protocol   | `nil`         |
+| `JAEGER_AGENT_BINARY_UDP_HOST`              | Jaeger Agent UDP host. Accept jaeger.thrift over binary thrift protocol    | `nil`         |
+| `JAEGER_AGENT_HTTP_HOST`                    | Jaeger Agent HTTP host. Serve configs.                                     | `nil`         |
+| `JAEGER_QUERY_HTTP_HOST`                    | Jaeger Query HTTP host.                                                    | `nil`         |
+| `JAEGER_QUERY_GRPC_HOST`                    | Jaeger Query GRPC host.                                                    | `nil`         |
+| `JAEGER_COLLECTOR_HTTP_HOST`                | Jaeger Collector Zipkin compatible host.                                   | `nil`         |
+| `JAEGER_COLLECTOR_GRPC_HOST`                | Jaeger Collector HTTP host. Accept jaeger.thrift directly from clients     | `nil`         |
+| `JAEGER_ADMIN_HTTP_HOST`                    | Jaeger Collector GRPC host. Accept jaeger.thrift directly from clients     | `nil`         |
+| `JAEGER_COLLECTOR_ZIPKIN_HOST`              | Jaeger Admin host.                                                         | `nil`         |
+| `JAEGER_APACHE_QUERY_HTTP_PORT_NUMBER`      | Jaeger Query UI HTTP port, exposed via Apache with basic authentication.   | `nil`         |
+| `JAEGER_APACHE_QUERY_HTTPS_PORT_NUMBER`     | Jaeger Query UI HTTPS port, exposed via Apache with basic authentication.  | `nil`         |
 | `JAEGER_APACHE_COLLECTOR_HTTP_PORT_NUMBER`  | Jaeger Collector HTTP port, exposed via Apache with basic authentication.  | `14270`       |
 | `JAEGER_APACHE_COLLECTOR_HTTPS_PORT_NUMBER` | Jaeger Collector HTTPS port, exposed via Apache with basic authentication. | `14271`       |
 | `SPAN_STORAGE_TYPE`                         | Jaeger storage type.                                                       | `cassandra`   |
@@ -84,6 +97,7 @@ Non-root container images add an extra layer of security and are generally recom
 | `JAEGER_CASSANDRA_KEYSPACE`                 | Cassandra keyspace.                                                        | `bn_jaeger`   |
 | `JAEGER_CASSANDRA_DATACENTER`               | Cassandra keyspace.                                                        | `dc1`         |
 | `JAEGER_CASSANDRA_USER`                     | Cassandra user name.                                                       | `cassandra`   |
+| `JAEGER_CASSANDRA_PASSWORD`                 | Cassandra user password.                                                   | `nil`         |
 
 #### Read-only environment variables
 
