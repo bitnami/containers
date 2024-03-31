@@ -9,12 +9,12 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "18.19.1-0"
+        "version": "18.20.0-0"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.11.8-3"
+        "version": "3.11.8-4"
     }
 }
