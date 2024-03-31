@@ -228,39 +228,48 @@ When the container is executed for the first time, it will execute the files wit
 
 #### Customizable environment variables
 
-| Name                                 | Description                                                                                                                   | Default Value       |
-|--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|---------------------|
-| `MAGENTO_DATA_TO_PERSIST`            | Files to persist relative to the Magento installation directory. To provide multiple values, separate them with a whitespace. | `$MAGENTO_BASE_DIR` |
-| `MAGENTO_HOST`                       | Magento host domain or IP address.                                                                                            | `localhost`         |
-| `MAGENTO_ENABLE_HTTPS`               | Whether to enable SSL to access the Magento store.                                                                            | `no`                |
-| `MAGENTO_ENABLE_ADMIN_HTTPS`         | Whether to use SSL to access the Magento administration panel.                                                                | `no`                |
-| `MAGENTO_EXTERNAL_HTTP_PORT_NUMBER`  | Port to access Magento from outside of the instance using HTTP.                                                               | `80`                |
-| `MAGENTO_EXTERNAL_HTTPS_PORT_NUMBER` | Port to access Magento from outside of the instance using HTTPS.                                                              | `443`               |
-| `MAGENTO_FIRST_NAME`                 | Magento user first name.                                                                                                      | `FirstName`         |
-| `MAGENTO_LAST_NAME`                  | Magento user last name.                                                                                                       | `LastName`          |
-| `MAGENTO_MODE`                       | Magento mode.                                                                                                                 | `default`           |
-| `MAGENTO_ADMIN_URL_PREFIX`           | URL prefix to access the Magento administration panel.                                                                        | `admin`             |
-| `MAGENTO_DEPLOY_STATIC_CONTENT`      | Whether to deploy Magento static content during the initialization, to optimize initial page load time.                       | `no`                |
-| `MAGENTO_KEEP_STATIC`                | Whether to keep the content of 'pub/static' folder during the initialization.                                                 | `no`                |
-| `MAGENTO_SKIP_REINDEX`               | Whether to skip Magento re-index during the initialization.                                                                   | `no`                |
-| `MAGENTO_SKIP_BOOTSTRAP`             | Whether to perform initial bootstrapping for the application.                                                                 | `no`                |
-| `MAGENTO_USERNAME`                   | Magento user login name.                                                                                                      | `user`              |
-| `MAGENTO_PASSWORD`                   | Magento user password.                                                                                                        | `bitnami1`          |
-| `MAGENTO_EMAIL`                      | Magento user e-mail address.                                                                                                  | `user@example.com`  |
-| `MAGENTO_ENABLE_HTTP_CACHE`          | Whether to enable a HTTP cache server for Magento (i.e. Varnish).                                                             | `no`                |
-| `MAGENTO_DATABASE_HOST`              | Database server host.                                                                                                         | `mariadb`           |
-| `MAGENTO_DATABASE_HOST`              | Database server host.                                                                                                         | `127.0.0.1`         |
-| `MAGENTO_DATABASE_PORT_NUMBER`       | Database server port.                                                                                                         | `3306`              |
-| `MAGENTO_DATABASE_NAME`              | Database name.                                                                                                                | `bitnami_magento`   |
-| `MAGENTO_DATABASE_USER`              | Database user name.                                                                                                           | `bn_magento`        |
-| `MAGENTO_ENABLE_DATABASE_SSL`        | Whether to enable SSL for database connections.                                                                               | `no`                |
-| `MAGENTO_VERIFY_DATABASE_SSL`        | Whether to verify the database SSL certificate when SSL is enabled for database connections.                                  | `yes`               |
-| `MAGENTO_SEARCH_ENGINE`              | Magento search engine to use.                                                                                                 | `elasticsearch7`    |
-| `MAGENTO_ELASTICSEARCH_HOST`         | Elasticsearch server host.                                                                                                    | `elasticsearch`     |
-| `MAGENTO_ELASTICSEARCH_HOST`         | Elasticsearch server host.                                                                                                    | `127.0.0.1`         |
-| `MAGENTO_ELASTICSEARCH_PORT_NUMBER`  | Elasticsearch server port.                                                                                                    | `9200`              |
-| `MAGENTO_ELASTICSEARCH_USE_HTTPS`    | Whether to use https to connect with Elasticsearch.                                                                           | `no`                |
-| `MAGENTO_ELASTICSEARCH_ENABLE_AUTH`  | Whether to enable authentication for connections to the Elasticsearch server.                                                 | `no`                |
+| Name                                     | Description                                                                                                                   | Default Value       |
+|------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|---------------------|
+| `MAGENTO_DATA_TO_PERSIST`                | Files to persist relative to the Magento installation directory. To provide multiple values, separate them with a whitespace. | `$MAGENTO_BASE_DIR` |
+| `MAGENTO_HOST`                           | Magento host domain or IP address.                                                                                            | `localhost`         |
+| `MAGENTO_ENABLE_HTTPS`                   | Whether to enable SSL to access the Magento store.                                                                            | `no`                |
+| `MAGENTO_ENABLE_ADMIN_HTTPS`             | Whether to use SSL to access the Magento administration panel.                                                                | `no`                |
+| `MAGENTO_EXTERNAL_HTTP_PORT_NUMBER`      | Port to access Magento from outside of the instance using HTTP.                                                               | `80`                |
+| `MAGENTO_EXTERNAL_HTTPS_PORT_NUMBER`     | Port to access Magento from outside of the instance using HTTPS.                                                              | `443`               |
+| `MAGENTO_FIRST_NAME`                     | Magento user first name.                                                                                                      | `FirstName`         |
+| `MAGENTO_LAST_NAME`                      | Magento user last name.                                                                                                       | `LastName`          |
+| `MAGENTO_MODE`                           | Magento mode.                                                                                                                 | `default`           |
+| `MAGENTO_EXTRA_INSTALL_ARGS`             | Extra flags to append to the Magento 'setup:install' command call.                                                            | `nil`               |
+| `MAGENTO_ADMIN_URL_PREFIX`               | URL prefix to access the Magento administration panel.                                                                        | `admin`             |
+| `MAGENTO_DEPLOY_STATIC_CONTENT`          | Whether to deploy Magento static content during the initialization, to optimize initial page load time.                       | `no`                |
+| `MAGENTO_KEEP_STATIC`                    | Whether to keep the content of 'pub/static' folder during the initialization.                                                 | `no`                |
+| `MAGENTO_SKIP_REINDEX`                   | Whether to skip Magento re-index during the initialization.                                                                   | `no`                |
+| `MAGENTO_SKIP_BOOTSTRAP`                 | Whether to perform initial bootstrapping for the application.                                                                 | `no`                |
+| `MAGENTO_USERNAME`                       | Magento user login name.                                                                                                      | `user`              |
+| `MAGENTO_PASSWORD`                       | Magento user password.                                                                                                        | `bitnami1`          |
+| `MAGENTO_EMAIL`                          | Magento user e-mail address.                                                                                                  | `user@example.com`  |
+| `MAGENTO_ENABLE_HTTP_CACHE`              | Whether to enable a HTTP cache server for Magento (i.e. Varnish).                                                             | `no`                |
+| `MAGENTO_HTTP_CACHE_BACKEND_HOST`        | HTTP cache backend hostname.                                                                                                  | `nil`               |
+| `MAGENTO_HTTP_CACHE_BACKEND_PORT_NUMBER` | HTTP cache backend port.                                                                                                      | `nil`               |
+| `MAGENTO_HTTP_CACHE_SERVER_HOST`         | HTTP cache server hostname.                                                                                                   | `nil`               |
+| `MAGENTO_HTTP_CACHE_SERVER_PORT_NUMBER`  | HTTP cache server port.                                                                                                       | `nil`               |
+| `MAGENTO_DATABASE_HOST`                  | Database server host.                                                                                                         | `mariadb`           |
+| `MAGENTO_DATABASE_PORT_NUMBER`           | Database server port.                                                                                                         | `3306`              |
+| `MAGENTO_DATABASE_NAME`                  | Database name.                                                                                                                | `bitnami_magento`   |
+| `MAGENTO_DATABASE_USER`                  | Database user name.                                                                                                           | `bn_magento`        |
+| `MAGENTO_DATABASE_PASSWORD`              | Database user password.                                                                                                       | `nil`               |
+| `MAGENTO_ENABLE_DATABASE_SSL`            | Whether to enable SSL for database connections.                                                                               | `no`                |
+| `MAGENTO_VERIFY_DATABASE_SSL`            | Whether to verify the database SSL certificate when SSL is enabled for database connections.                                  | `yes`               |
+| `MAGENTO_DATABASE_SSL_CERT_FILE`         | Path to the database client certificate file.                                                                                 | `nil`               |
+| `MAGENTO_DATABASE_SSL_KEY_FILE`          | Path to the database client certificate key file.                                                                             | `nil`               |
+| `MAGENTO_DATABASE_SSL_CA_FILE`           | Path to the database server CA bundle file.                                                                                   | `nil`               |
+| `MAGENTO_SEARCH_ENGINE`                  | Magento search engine to use.                                                                                                 | `elasticsearch7`    |
+| `MAGENTO_ELASTICSEARCH_HOST`             | Elasticsearch server host.                                                                                                    | `elasticsearch`     |
+| `MAGENTO_ELASTICSEARCH_PORT_NUMBER`      | Elasticsearch server port.                                                                                                    | `9200`              |
+| `MAGENTO_ELASTICSEARCH_USE_HTTPS`        | Whether to use https to connect with Elasticsearch.                                                                           | `no`                |
+| `MAGENTO_ELASTICSEARCH_ENABLE_AUTH`      | Whether to enable authentication for connections to the Elasticsearch server.                                                 | `no`                |
+| `MAGENTO_ELASTICSEARCH_USER`             | Elasticsearch server user login.                                                                                              | `nil`               |
+| `MAGENTO_ELASTICSEARCH_PASSWORD`         | Elasticsearch server user password.                                                                                           | `nil`               |
 
 #### Read-only environment variables
 
@@ -271,7 +280,6 @@ When the container is executed for the first time, it will execute the files wit
 | `MAGENTO_CONF_FILE`              | Configuration file for Magento.                    | `${MAGENTO_BASE_DIR}/app/etc/env.php` |
 | `MAGENTO_VOLUME_DIR`             | Magento directory for mounted configuration files. | `${BITNAMI_VOLUME_DIR}/magento`       |
 | `PHP_DEFAULT_MAX_EXECUTION_TIME` | Default PHP max execution time.                    | `18000`                               |
-| `PHP_DEFAULT_MEMORY_LIMIT`       | Default PHP memory limit.                          | `2G`                                  |
 | `PHP_DEFAULT_MEMORY_LIMIT`       | Default PHP memory limit.                          | `1G`                                  |
 
 When you start the Magento image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
