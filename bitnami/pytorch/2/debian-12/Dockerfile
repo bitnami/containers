@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-03-28T01:38:30Z" \
+      org.opencontainers.image.created="2024-03-31T14:41:55Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.2.2-debian-12-r0" \
+      org.opencontainers.image.ref.name="2.2.2-debian-12-r1" \
       org.opencontainers.image.title="pytorch" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2.2.2"
