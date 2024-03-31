@@ -55,16 +55,11 @@ For further information about the specific component itself, please refer to the
 
 #### Read-only environment variables
 
-| Name                               | Description                                                                  | Value                                                 |
-|------------------------------------|------------------------------------------------------------------------------|-------------------------------------------------------|
-| `HARBOR_JOBSERVICE_BASE_DIR`       | harbor-jobservice installation directory.                                    | `${BITNAMI_ROOT_DIR}/harbor-jobservice`               |
-| `HARBOR_JOBSERVICE_LOGS_DIR`       | harbor-jobservice logs directory.                                            | `${HARBOR_JOBSERVICE_BASE_DIR}/logs`                  |
-| `HARBOR_JOBSERVICE_TMP_DIR`        | harbor-jobservice directory for temporary files.                             | `${HARBOR_JOBSERVICE_BASE_DIR}/tmp`                   |
-| `HARBOR_JOBSERVICE_DAEMON_USER`    | harbor-jobservice system user.                                               | `harbor`                                              |
-| `HARBOR_JOBSERVICE_DAEMON_GROUP`   | harbor-jobservice system group.                                              | `harbor`                                              |
-| `HARBOR_JOBSERVICE_PID_FILE`       | PID file for harbor-jobservice service.                                      | `${HARBOR_JOBSERVICE_TMP_DIR}/harbor-jobservice.pid`  |
-| `HARBOR_JOBSERVICE_LOG_FILE`       | Log file for harbor-jobservice service.                                      | `${HARBOR_JOBSERVICE_LOGS_DIR}/harbor-jobservice.log` |
-| `HARBOR_JOBSERVICE_EXTRA_ENV_FILE` | File to store extra environment variables for the harbor-jobservice service. | `${HARBOR_JOBSERVICE_BASE_DIR}/.env`                  |
+| Name                             | Description                               | Value                                   |
+|----------------------------------|-------------------------------------------|-----------------------------------------|
+| `HARBOR_JOBSERVICE_BASE_DIR`     | harbor-jobservice installation directory. | `${BITNAMI_ROOT_DIR}/harbor-jobservice` |
+| `HARBOR_JOBSERVICE_DAEMON_USER`  | harbor-jobservice system user.            | `harbor`                                |
+| `HARBOR_JOBSERVICE_DAEMON_GROUP` | harbor-jobservice system group.           | `harbor`                                |
 
 ## Notable Changes
 
