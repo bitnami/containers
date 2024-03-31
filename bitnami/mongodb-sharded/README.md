@@ -105,25 +105,52 @@ services:
 
 #### Customizable environment variables
 
-| Name                                   | Description                                                                                   | Default Value                       |
-|----------------------------------------|-----------------------------------------------------------------------------------------------|-------------------------------------|
-| `MONGODB_MOUNTED_CONF_DIR`             | Directory for including custom configuration files (that override the default generated ones) | `${MONGODB_VOLUME_DIR}/conf`        |
-| `MONGODB_INIT_RETRY_ATTEMPTS`          | Maximum retries for checking the service initialization status                                | `7`                                 |
-| `MONGODB_INIT_RETRY_DELAY`             | Time (in seconds) to wait between retries for checking the service initialization status      | `5`                                 |
-| `MONGODB_PORT_NUMBER`                  | MongoDB port                                                                                  | `$MONGODB_DEFAULT_PORT_NUMBER`      |
-| `MONGODB_ENABLE_MAJORITY_READ`         | Enable majority read in MongoDB operations                                                    | `true`                              |
-| `MONGODB_DEFAULT_ENABLE_MAJORITY_READ` | Enable majority read in MongoDB operations set at build time                                  | `true`                              |
-| `MONGODB_ENABLE_NUMACTL`               | Execute commands using numactl                                                                | `false`                             |
-| `MONGODB_ADVERTISE_IP`                 | Whether advertised hostname is set to container ip                                            | `false`                             |
-| `MONGODB_DISABLE_JAVASCRIPT`           | Disable MongoDB server-side javascript execution                                              | `no`                                |
-| `MONGODB_ROOT_USER`                    | User name for the MongoDB root user                                                           | `root`                              |
-| `ALLOW_EMPTY_PASSWORD`                 | Permit accessing MongoDB without setting any password                                         | `no`                                |
-| `MONGODB_REPLICA_SET_NAME`             | Name of the MongoDB replica set                                                               | `$MONGODB_DEFAULT_REPLICA_SET_NAME` |
-| `MONGODB_INITIAL_PRIMARY_PORT_NUMBER`  | Port of the replica set primary node (necessary for arbiter and secondary nodes)              | `27017`                             |
-| `MONGODB_INITIAL_PRIMARY_ROOT_USER`    | Primary node root username (necessary for arbiter and secondary nodes)                        | `root`                              |
-| `MONGODB_SET_SECONDARY_OK`             | Mark node as readable. Necessary for cases where the PVC is lost                              | `no`                                |
-| `MONGODB_CFG_PRIMARY_PORT_NUMBER`      | MongoDB config server primary host port. Mandatory for shardsvr mode                          | `27017`                             |
-| `MONGODB_MONGOS_PORT_NUMBER`           | MongoDB mongos port. Mandatory for shardsvr mode                                              | `27017`                             |
+| Name                                    | Description                                                                                                                                    | Default Value                       |
+|-----------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|
+| `MONGODB_MOUNTED_CONF_DIR`              | Directory for including custom configuration files (that override the default generated ones)                                                  | `${MONGODB_VOLUME_DIR}/conf`        |
+| `MONGODB_INIT_RETRY_ATTEMPTS`           | Maximum retries for checking the service initialization status                                                                                 | `7`                                 |
+| `MONGODB_INIT_RETRY_DELAY`              | Time (in seconds) to wait between retries for checking the service initialization status                                                       | `5`                                 |
+| `MONGODB_PORT_NUMBER`                   | MongoDB port                                                                                                                                   | `$MONGODB_DEFAULT_PORT_NUMBER`      |
+| `MONGODB_ENABLE_MAJORITY_READ`          | Enable majority read in MongoDB operations                                                                                                     | `true`                              |
+| `MONGODB_DEFAULT_ENABLE_MAJORITY_READ`  | Enable majority read in MongoDB operations set at build time                                                                                   | `true`                              |
+| `MONGODB_EXTRA_FLAGS`                   | Extra flags for MongoDB initialization                                                                                                         | `nil`                               |
+| `MONGODB_ENABLE_NUMACTL`                | Execute commands using numactl                                                                                                                 | `false`                             |
+| `MONGODB_SHELL_EXTRA_FLAGS`             | Extra flags when using the mongodb client during initialization (useful when mounting init scripts)                                            | `nil`                               |
+| `MONGODB_ADVERTISED_HOSTNAME`           | Hostname to use for advertising the MongoDB service                                                                                            | `nil`                               |
+| `MONGODB_ADVERTISE_IP`                  | Whether advertised hostname is set to container ip                                                                                             | `false`                             |
+| `MONGODB_ADVERTISED_PORT_NUMBER`        | MongoDB advertised port number. It is recommended to pass this environment variable if you have a proxy port forwarding requests to container. | `nil`                               |
+| `MONGODB_DISABLE_JAVASCRIPT`            | Disable MongoDB server-side javascript execution                                                                                               | `no`                                |
+| `MONGODB_ENABLE_JOURNAL`                | Enable MongoDB journal                                                                                                                         | `nil`                               |
+| `MONGODB_DISABLE_SYSTEM_LOG`            | Disable MongoDB daemon system log                                                                                                              | `nil`                               |
+| `MONGODB_ENABLE_DIRECTORY_PER_DB`       | Use a separate folder for storing each database data                                                                                           | `nil`                               |
+| `MONGODB_ENABLE_IPV6`                   | Use IPv6 for database connections                                                                                                              | `nil`                               |
+| `MONGODB_SYSTEM_LOG_VERBOSITY`          | MongoDB daemon log level                                                                                                                       | `nil`                               |
+| `MONGODB_ROOT_USER`                     | User name for the MongoDB root user                                                                                                            | `root`                              |
+| `MONGODB_ROOT_PASSWORD`                 | Password for the MongoDB root user                                                                                                             | `nil`                               |
+| `MONGODB_USERNAME`                      | User to generate at initialization time                                                                                                        | `nil`                               |
+| `MONGODB_PASSWORD`                      | Password for the non-root user specified in MONGODB_USERNAME                                                                                   | `nil`                               |
+| `MONGODB_DATABASE`                      | Name of the database to create at initialization time                                                                                          | `nil`                               |
+| `MONGODB_METRICS_USERNAME`              | User used for metrics collection, for example with mongodb_exporter                                                                            | `nil`                               |
+| `MONGODB_METRICS_PASSWORD`              | Password for the non-root user specified in MONGODB_METRICS_USERNAME                                                                           | `nil`                               |
+| `MONGODB_EXTRA_USERNAMES`               | Comma or semicolon separated list of extra users to be created.                                                                                | `nil`                               |
+| `MONGODB_EXTRA_PASSWORDS`               | Comma or semicolon separated list of passwords for the users specified in MONGODB_EXTRA_USERNAMES.                                             | `nil`                               |
+| `MONGODB_EXTRA_DATABASES`               | Comma or semicolon separated list of databases to create at initialization time for the users specified in MONGODB_EXTRA_USERNAMES.            | `nil`                               |
+| `ALLOW_EMPTY_PASSWORD`                  | Permit accessing MongoDB without setting any password                                                                                          | `no`                                |
+| `MONGODB_REPLICA_SET_MODE`              | MongoDB replica set mode. Can be one of primary, secondary or arbiter                                                                          | `nil`                               |
+| `MONGODB_REPLICA_SET_NAME`              | Name of the MongoDB replica set                                                                                                                | `$MONGODB_DEFAULT_REPLICA_SET_NAME` |
+| `MONGODB_REPLICA_SET_KEY`               | MongoDB replica set key                                                                                                                        | `nil`                               |
+| `MONGODB_INITIAL_PRIMARY_HOST`          | Hostname of the replica set primary node (necessary for arbiter and secondary nodes)                                                           | `nil`                               |
+| `MONGODB_INITIAL_PRIMARY_PORT_NUMBER`   | Port of the replica set primary node (necessary for arbiter and secondary nodes)                                                               | `27017`                             |
+| `MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD` | Primary node root user password (necessary for arbiter and secondary nodes)                                                                    | `nil`                               |
+| `MONGODB_INITIAL_PRIMARY_ROOT_USER`     | Primary node root username (necessary for arbiter and secondary nodes)                                                                         | `root`                              |
+| `MONGODB_SET_SECONDARY_OK`              | Mark node as readable. Necessary for cases where the PVC is lost                                                                               | `no`                                |
+| `MONGODB_DISABLE_ENFORCE_AUTH`          | By default, MongoDB authentication will be enforced. If set to true, MongoDB will not enforce authentication                                   | `false`                             |
+| `MONGODB_SHARDING_MODE`                 | MongoDB Sharding mode. Can be one of shardsvr, configsvr or mongos                                                                             | `nil`                               |
+| `MONGODB_CFG_REPLICA_SET_NAME`          | MongoDB config server replica set name. Mandatory for configuring mongos                                                                       | `nil`                               |
+| `MONGODB_CFG_PRIMARY_HOST`              | MongoDB config server replica set primary host. Mandatory for configuring mongos                                                               | `nil`                               |
+| `MONGODB_CFG_PRIMARY_PORT_NUMBER`       | MongoDB config server primary host port. Mandatory for shardsvr mode                                                                           | `27017`                             |
+| `MONGODB_MONGOS_HOST`                   | MongoDB mongos host. Mandatory for shardsvr mode                                                                                               | `nil`                               |
+| `MONGODB_MONGOS_PORT_NUMBER`            | MongoDB mongos port. Mandatory for shardsvr mode                                                                                               | `27017`                             |
 
 #### Read-only environment variables
 

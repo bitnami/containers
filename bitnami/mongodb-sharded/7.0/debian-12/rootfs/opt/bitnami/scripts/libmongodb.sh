@@ -604,10 +604,12 @@ mongodb_set_auth_conf() {
     local -r conf_file_name="${conf_file_path#"$MONGODB_CONF_DIR"}"
 
     local authorization
+    local localhostBypass
 
-    if ! mongodb_is_file_external "$conf_file_name"; then
+    localhostBypass="$(mongodb_conf_get "setParameter.enableLocalhostAuthBypass")"
+    authorization="$(mongodb_conf_get "security.authorization")"
+    if is_boolean_yes "$MONGODB_DISABLE_ENFORCE_AUTH"; then
         if [[ -n "$MONGODB_ROOT_PASSWORD" ]] || [[ -n "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" ]] || [[ -n "$MONGODB_PASSWORD" ]]; then
-            authorization="$(yq eval .security.authorization "$MONGODB_CONF_FILE")"
             if [[ "$authorization" = "disabled" ]]; then
 
                 info "Enabling authentication..."
@@ -617,7 +619,27 @@ mongodb_set_auth_conf() {
             fi
         fi
     else
-        debug "$conf_file_name mounted. Skipping authorization enabling"
+        warn "You have set MONGODB_DISABLE_ENFORCE_AUTH=true, settings enableLocalhostAuthBypass and security.authorization will remain with values '${localhostBypass}' and '${authorization}' respectively."
+    fi
+}
+
+########################
+# Read a configuration setting value
+# Globals:
+#   MONGODB_CONF_FILE
+# Arguments:
+#   $1 - key
+# Returns:
+#   Outputs the key to stdout (Empty response if key is not set)
+#########################
+mongodb_conf_get() {
+    local key="${1:?missing key}"
+
+    if [[ -r "$MONGODB_CONF_FILE" ]]; then
+        local -r res="$(yq eval ".${key}" "$MONGODB_CONF_FILE")"
+        if [[ ! "$res" = "null" ]]; then
+            echo "$res"
+        fi
     fi
 }
 
@@ -1393,6 +1415,8 @@ configure_permissions() {
 #   None
 #########################
 mongodb_initialize() {
+    local localhostBypass
+    local authorization
     info "Initializing MongoDB..."
 
     rm -f "$MONGODB_PID_FILE"
@@ -1417,7 +1441,15 @@ mongodb_initialize() {
         am_i_root && chown -R "$MONGODB_DAEMON_USER" "$MONGODB_DATA_DIR/db"
 
         mongodb_start_bg "$MONGODB_CONF_FILE"
-        mongodb_create_users
+
+        localhostBypass="$(mongodb_conf_get "setParameter.enableLocalhostAuthBypass")"
+        authorization="$(mongodb_conf_get "security.authorization")"
+        if [[ "$localhostBypass" != "true" && "$authorization" == "enabled" ]]; then
+            warn "Your mongodb.conf has authentication enforced, users creation will be skipped. If you'd like automatic user creation, you can disable it and it will be enabled after user creation."
+        else
+            mongodb_create_users
+            mongodb_set_auth_conf "$MONGODB_CONF_FILE"
+        fi
         if [[ -n "$MONGODB_REPLICA_SET_MODE" ]]; then
             mongodb_set_replicasetmode_conf "$MONGODB_CONF_FILE"
             mongodb_set_listen_all_conf "$MONGODB_CONF_FILE"
@@ -1435,8 +1467,6 @@ mongodb_initialize() {
             mongodb_set_replicasetmode_conf "$MONGODB_CONF_FILE"
         fi
     fi
-
-    mongodb_set_auth_conf "$MONGODB_CONF_FILE"
 }
 
 ########################
