@@ -55,19 +55,12 @@ For further information about the specific component itself, please refer to the
 
 #### Read-only environment variables
 
-| Name                             | Description                                                                | Value                                             |
-|----------------------------------|----------------------------------------------------------------------------|---------------------------------------------------|
-| `HARBOR_REGISTRY_BASE_DIR`       | harbor-registry installation directory.                                    | `${BITNAMI_ROOT_DIR}/harbor-registry`             |
-| `HARBOR_REGISTRY_VOLUME_DIR`     | harbor-registry volume directory.                                          | `${BITNAMI_VOLUME_DIR}/harbor-registry`           |
-| `HARBOR_REGISTRY_STORAGE_DIR`    | harbor-registry storage directory.                                         | `${HARBOR_REGISTRY_VOLUME_DIR}/storage`           |
-| `HARBOR_REGISTRY_STORAGE_DIR`    | harbor-registry storage directory.                                         | `/storage`                                        |
-| `HARBOR_REGISTRY_LOGS_DIR`       | harbor-registry logs directory.                                            | `${HARBOR_REGISTRY_BASE_DIR}/logs`                |
-| `HARBOR_REGISTRY_TMP_DIR`        | harbor-registry directory for temporary files.                             | `${HARBOR_REGISTRY_BASE_DIR}/tmp`                 |
-| `HARBOR_REGISTRY_DAEMON_USER`    | harbor-registry system user.                                               | `harbor`                                          |
-| `HARBOR_REGISTRY_DAEMON_GROUP`   | harbor-registry system group.                                              | `harbor`                                          |
-| `HARBOR_REGISTRY_PID_FILE`       | PID file for harbor-registry service.                                      | `${HARBOR_REGISTRY_TMP_DIR}/harbor-registry.pid`  |
-| `HARBOR_REGISTRY_LOG_FILE`       | Log file for harbor-registry service.                                      | `${HARBOR_REGISTRY_LOGS_DIR}/harbor-registry.log` |
-| `HARBOR_REGISTRY_EXTRA_ENV_FILE` | File to store extra environment variables for the harbor-registry service. | `${HARBOR_REGISTRY_BASE_DIR}/.env`                |
+| Name                           | Description                             | Value                                 |
+|--------------------------------|-----------------------------------------|---------------------------------------|
+| `HARBOR_REGISTRY_BASE_DIR`     | harbor-registry installation directory. | `${BITNAMI_ROOT_DIR}/harbor-registry` |
+| `HARBOR_REGISTRY_STORAGE_DIR`  | harbor-registry storage directory.      | `/storage`                            |
+| `HARBOR_REGISTRY_DAEMON_USER`  | harbor-registry system user.            | `harbor`                              |
+| `HARBOR_REGISTRY_DAEMON_GROUP` | harbor-registry system group.           | `harbor`                              |
 
 ## Notable Changes
 
