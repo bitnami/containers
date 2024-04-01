@@ -59,3 +59,7 @@ info "Configuring default PHP options for phpMyAdmin"
 php_conf_set upload_max_filesize "$PHP_DEFAULT_UPLOAD_MAX_FILESIZE"
 php_conf_set post_max_size "$PHP_DEFAULT_POST_MAX_SIZE"
 php_conf_set memory_limit "$PHP_DEFAULT_MEMORY_LIMIT"
+
+# Copy all initially generated configuration files to the default directory
+# (this is to avoid breaking when entrypoint is being overridden)
+cp -r "/opt/bitnami/$(web_server_type)/conf"/* "/opt/bitnami/$(web_server_type)/conf.default"
