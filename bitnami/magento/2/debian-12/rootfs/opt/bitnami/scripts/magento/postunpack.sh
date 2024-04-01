@@ -57,3 +57,7 @@ ensure_web_server_app_configuration_exists "magento" --type php \
 
 # Grant execution permissions for the Magento CLI
 chmod 775 "${MAGENTO_BIN_DIR}/magento"
+
+# Copy all initially generated configuration files to the default directory
+# (this is to avoid breaking when entrypoint is being overridden)
+cp -r "/opt/bitnami/$(web_server_type)/conf"/* "/opt/bitnami/$(web_server_type)/conf.default"
