@@ -299,6 +299,11 @@ drupal_site_install() {
     # Restrict permissions of the configuration file to keep the site secure
     if am_i_root; then
         configure_permissions_ownership "$DRUPAL_CONF_FILE" -u "root" -g "$WEB_SERVER_DAEMON_USER" -f "644"
+    else
+        # HACK: The drupal installation is changing the ownership of the sites/default folder. When running as
+        # 1001:1001 this is causing an issue with the persist_app function. This sets the folder with write permissions
+        # so the function works. We add || true to not break docker-compose installations
+        chmod u+w "${DRUPAL_BASE_DIR}/sites/default" || true
     fi
 }
 
