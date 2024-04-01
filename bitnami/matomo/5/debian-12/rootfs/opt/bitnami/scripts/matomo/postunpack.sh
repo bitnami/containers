@@ -51,3 +51,7 @@ info "Creating default web server configuration for Matomo"
 web_server_validate
 # We cannot move the .htaccess because one of the system checks will fail
 ensure_web_server_app_configuration_exists "matomo" --type php --apache-move-htaccess "no"
+
+# Copy all initially generated configuration files to the default directory
+# (this is to avoid breaking when entrypoint is being overridden)
+cp -r "/opt/bitnami/$(web_server_type)/conf"/* "/opt/bitnami/$(web_server_type)/conf.default"
