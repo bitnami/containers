@@ -49,3 +49,7 @@ ensure_web_server_app_configuration_exists "mediawiki" --type php --apache-extra
 RewriteEngine On
 RewriteRule ^/?wiki(/.*)?$ %{DOCUMENT_ROOT}/index.php [L]
 "
+
+# Copy all initially generated configuration files to the default directory
+# (this is to avoid breaking when entrypoint is being overridden)
+cp -r "/opt/bitnami/$(web_server_type)/conf"/* "/opt/bitnami/$(web_server_type)/conf.default"
