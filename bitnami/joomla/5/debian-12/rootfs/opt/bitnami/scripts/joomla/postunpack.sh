@@ -69,3 +69,7 @@ ensure_web_server_app_configuration_exists "joomla" --type php --apache-addition
 </LocationMatch>
 '
 replace_in_file "${APACHE_HTACCESS_DIR}/joomla-htaccess.conf" '(## End [-] Custom redirects)' '# Custom rewrite by Bitnami - bypass mod_dir in order to allow 80->8080 redirections when not using a reverse proxy (example: docker-compose or Kubernetes)\n  RewriteRule "^administrator$"  "administrator/"\n  \1'
+
+# Copy all initially generated configuration files to the default directory
+# (this is to avoid breaking when entrypoint is being overridden)
+cp -r "/opt/bitnami/$(web_server_type)/conf"/* "/opt/bitnami/$(web_server_type)/conf.default"
