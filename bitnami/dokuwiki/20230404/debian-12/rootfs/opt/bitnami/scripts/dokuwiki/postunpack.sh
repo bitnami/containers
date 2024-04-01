@@ -57,3 +57,7 @@ RewriteCond %{REQUEST_URI}            !^/server-status$
 RewriteRule (.*)                      doku.php?id=$1  [QSA,L]
 RewriteRule ^index.php$               doku.php
 '
+
+# Copy all initially generated configuration files to the default directory
+# (this is to avoid breaking when entrypoint is being overridden)
+cp -r "/opt/bitnami/$(web_server_type)/conf"/* "/opt/bitnami/$(web_server_type)/conf.default"
