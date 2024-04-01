@@ -62,3 +62,7 @@ ensure_web_server_app_configuration_exists "drupal" --type php
 
 # Re-create .htaccess file after being moved into 'apache/conf/vhosts/htaccess' directory, to avoid Drupal warning
 drupal_fix_htaccess_warning_protection
+
+# Copy all initially generated configuration files to the default directory
+# (this is to avoid breaking when entrypoint is being overridden)
+cp -r "/opt/bitnami/$(web_server_type)/conf"/* "/opt/bitnami/$(web_server_type)/conf.default"
