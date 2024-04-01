@@ -86,3 +86,7 @@ path: "${BITNAMI_ROOT_DIR}/wordpress"
 EOF
 render-template "${BITNAMI_ROOT_DIR}/scripts/wordpress/bitnami-templates/wp.tpl" >"${WP_CLI_BIN_DIR}/wp"
 configure_permissions_ownership "${WP_CLI_BIN_DIR}/wp" -f "755"
+
+# Copy all initially generated configuration files to the default directory
+# (this is to avoid breaking when entrypoint is being overridden)
+cp -r "/opt/bitnami/$(web_server_type)/conf"/* "/opt/bitnami/$(web_server_type)/conf.default"
