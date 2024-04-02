@@ -17,10 +17,6 @@ directories:
       - /opt/bitnami/janusgraph/logs
       - /opt/bitnami/janusgraph/scripts
       - /opt/bitnami/janusgraph/conf.default
-sed_in_place:
-  exclude_paths:
-    # Ignore Cassandra PyLib directory (not bitnami-related)
-    - \/opt\/bitnami\/janusgraph\/cassandra\/pylib\/.*
 root_dir: /opt/bitnami
 version:
   bin_name: gremlin.sh
