@@ -4,7 +4,7 @@
 version: '2'
 services:
   mariadb:
-    image: docker.io/bitnami/mariadb:11.2
+    image: docker.io/bitnami/mariadb:11.3
     volumes:
       - 'mariadb_data:/bitnami/mariadb'
     environment:
