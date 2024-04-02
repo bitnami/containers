@@ -372,65 +372,6 @@ ensure_web_server_prefix_configuration_exists() {
 }
 
 ########################
-# Ensure a web server application configuration is updated with the runtime configuration (i.e. ports)
-# It serves as a wrapper for the specific web server function
-# Globals:
-#   *
-# Arguments:
-#   $1 - App name
-# Flags:
-#   --hosts - Host listen addresses
-#   --server-name - Server name
-#   --server-aliases - Server aliases
-#   --enable-http - Enable HTTP app configuration (if not enabled already)
-#   --enable-https - Enable HTTPS app configuration (if not enabled already)
-#   --disable-http - Disable HTTP app configuration (if not disabled already)
-#   --disable-https - Disable HTTPS app configuration (if not disabled already)
-#   --http-port - HTTP port number
-#   --https-port - HTTPS port number
-# Returns:
-#   true if the configuration was updated, false otherwise
-########################
-web_server_update_app_configuration() {
-    local app="${1:?missing app}"
-    shift
-    local -a args web_servers
-    args=("$app")
-    # Validate arguments
-    while [[ "$#" -gt 0 ]]; do
-        case "$1" in
-            # Common flags
-            --enable-http \
-            | --enable-https \
-            | --disable-http \
-            | --disable-https \
-            )
-                args+=("$1")
-                ;;
-            --hosts \
-            | --server-name \
-            | --server-aliases \
-            | --http-port \
-            | --https-port \
-            )
-                args+=("$1" "${2:?missing value}")
-                shift
-                ;;
-
-            *)
-                echo "Invalid command line flag $1" >&2
-                return 1
-                ;;
-        esac
-        shift
-    done
-    read -r -a web_servers <<< "$(web_server_list)"
-    for web_server in "${web_servers[@]}"; do
-        web_server_execute "$web_server" "${web_server}_update_app_configuration" "${args[@]}"
-    done
-}
-
-########################
 # Enable loading page, which shows users that the initialization process is not yet completed
 # Globals:
 #   *
