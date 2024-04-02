@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-03-31T18:04:28Z" \
+      org.opencontainers.image.created="2024-04-02T10:47:24Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.11.3-debian-12-r1" \
+      org.opencontainers.image.ref.name="2.11.3-debian-12-r2" \
       org.opencontainers.image.title="mlflow" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2.11.3"
@@ -27,7 +27,7 @@ RUN install_packages ca-certificates curl git libbz2-1.0 libcom-err2 libcrypt1 l
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "python-3.10.14-2-linux-${OS_ARCH}-debian-12" \
-      "mlflow-2.11.3-0-linux-${OS_ARCH}-debian-12" \
+      "mlflow-2.11.3-2-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
