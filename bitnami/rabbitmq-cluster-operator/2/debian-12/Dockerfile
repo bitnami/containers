@@ -14,7 +14,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "rabbitmq-cluster-operator-2.7.0-5-linux-${OS_ARCH}-debian-12" \
+      "rabbitmq-cluster-operator-2.8.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -36,13 +36,13 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2024-03-06T19:57:52Z" \
+      org.opencontainers.image.created="2024-04-03T12:36:22Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.7.0-debian-12-r8" \
+      org.opencontainers.image.ref.name="2.8.0-debian-12-r0" \
       org.opencontainers.image.title="rabbitmq-cluster-operator" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.7.0"
+      org.opencontainers.image.version="2.8.0"
 
 COPY prebuildfs /
 COPY rootfs /
@@ -50,7 +50,7 @@ COPY --from=builder /opt/bitnami/rabbitmq-cluster-operator/bin/manager /manager
 COPY --from=builder /opt/bitnami/rabbitmq-cluster-operator/.spdx-rabbitmq-cluster-operator.spdx /opt/bitnami/rabbitmq-cluster-operator/.spdx-rabbitmq-cluster-operator.spdx
 COPY --from=builder /opt/bitnami/rabbitmq-cluster-operator/licenses /opt/bitnami/rabbitmq-cluster-operator/licenses
 
-ENV APP_VERSION="2.7.0" \
+ENV APP_VERSION="2.8.0" \
     BITNAMI_APP_NAME="rabbitmq-cluster-operator"
 
 USER 1001

@@ -1,0 +1,23 @@
+binaries:
+  - janusgraph.sh
+  - janusgraph-server.sh
+  - gremlin.sh
+  - java
+files:
+  - mode: "0664"
+    paths:
+      - /opt/bitnami/janusgraph/scripts/remote-connect.groovy
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/janusgraph
+      - /bitnami/janusgraph/data
+      - /bitnami/janusgraph/conf
+      - /opt/bitnami/janusgraph/conf
+      - /opt/bitnami/janusgraph/logs
+      - /opt/bitnami/janusgraph/scripts
+      - /opt/bitnami/janusgraph/conf.default
+root_dir: /opt/bitnami
+version:
+  bin_name: gremlin.sh
+  flag: -v
