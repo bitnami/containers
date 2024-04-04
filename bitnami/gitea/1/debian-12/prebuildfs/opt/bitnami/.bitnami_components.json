@@ -3,13 +3,13 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.21.10-0"
+        "version": "1.21.10-1"
     },
     "ini-file": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.4.6-10"
+        "version": "1.4.6-11"
     },
     "render-template": {
         "arch": "amd64",
