@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-03-31T18:08:27Z" \
+      org.opencontainers.image.created="2024-04-04T17:50:09Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.0.7-debian-12-r1" \
+      org.opencontainers.image.ref.name="7.0.8-debian-12-r0" \
       org.opencontainers.image.title="mongodb" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="7.0.7"
+      org.opencontainers.image.version="7.0.8"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -27,10 +27,10 @@ RUN install_packages ca-certificates curl libbrotli1 libcom-err2 libcurl4 libffi
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "yq-4.43.1-0-linux-${OS_ARCH}-debian-12" \
-      "wait-for-port-1.0.7-10-linux-${OS_ARCH}-debian-12" \
-      "render-template-1.0.6-10-linux-${OS_ARCH}-debian-12" \
-      "mongodb-shell-2.2.2-0-linux-${OS_ARCH}-debian-12" \
-      "mongodb-7.0.7-0-linux-${OS_ARCH}-debian-12" \
+      "wait-for-port-1.0.7-11-linux-${OS_ARCH}-debian-12" \
+      "render-template-1.0.6-11-linux-${OS_ARCH}-debian-12" \
+      "mongodb-shell-2.2.3-0-linux-${OS_ARCH}-debian-12" \
+      "mongodb-7.0.8-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -49,7 +49,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mongodb/postunpack.sh
-ENV APP_VERSION="7.0.7" \
+ENV APP_VERSION="7.0.8" \
     BITNAMI_APP_NAME="mongodb" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mongodb/bin:$PATH"
 
