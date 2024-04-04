@@ -168,7 +168,7 @@ docker-compose up -d
 | `SOLR_ZK_MAX_RETRIES`           | Maximum retries when waiting for zookeeper configuration operations to finish | `5`                                                |
 | `SOLR_ZK_SLEEP_TIME`            | Sleep time when waiting for zookeeper configuration operations to finish      | `5`                                                |
 | `SOLR_ZK_CHROOT`                | ZooKeeper ZNode chroot where to store solr data. Default: /solr               | `/solr`                                            |
-| `SOLR_ZK_HOSTS`                 | ZooKeeper nodes (comma-separated list of `host:port`)                         | unset                                              |
+| `SOLR_ZK_HOSTS`                 | ZooKeeper nodes (comma-separated list of `host:port`\)                        | `nil`                                              |
 
 #### Read-only environment variables
 
@@ -306,6 +306,10 @@ docker-compose up solr
 ```
 
 ## Notable Changes
+
+### 8.11.3-debian-12-r2 and 9.5.0-debian-12-r7
+
+* Remove HDFS modules due to CVEs
 
 ### 8.8.0-debian-10-r11
 
