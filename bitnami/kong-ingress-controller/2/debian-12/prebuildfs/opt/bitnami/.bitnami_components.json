@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "2.12.3-11"
+        "version": "2.12.3-12"
     },
     "wait-for-port": {
         "arch": "amd64",
