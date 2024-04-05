@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-04-04T11:44:06Z" \
+      org.opencontainers.image.created="2024-04-05T15:25:32Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.21.10-debian-12-r2" \
+      org.opencontainers.image.ref.name="1.21.10-debian-12-r3" \
       org.opencontainers.image.title="gitea" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.21.10"
@@ -26,8 +26,8 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages acl ca-certificates curl git procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "wait-for-port-1.0.7-10-linux-${OS_ARCH}-debian-12" \
-      "render-template-1.0.6-10-linux-${OS_ARCH}-debian-12" \
+      "wait-for-port-1.0.7-11-linux-${OS_ARCH}-debian-12" \
+      "render-template-1.0.6-11-linux-${OS_ARCH}-debian-12" \
       "ini-file-1.4.6-11-linux-${OS_ARCH}-debian-12" \
       "gitea-1.21.10-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
