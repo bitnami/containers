@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-04-04T01:02:42Z" \
+      org.opencontainers.image.created="2024-04-05T17:25:20Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.5.5-debian-12-r3" \
+      org.opencontainers.image.ref.name="3.5.5-debian-12-r4" \
       org.opencontainers.image.title="argo-workflow-exec" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.5.5"
@@ -25,7 +25,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl jq procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "kubectl-1.26.15-0-linux-${OS_ARCH}-debian-12" \
+      "kubectl-1.26.15-1-linux-${OS_ARCH}-debian-12" \
       "argo-workflow-exec-3.5.5-2-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
