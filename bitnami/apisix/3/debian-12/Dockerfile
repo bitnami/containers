@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-03-31T15:58:57Z" \
+      org.opencontainers.image.created="2024-04-05T17:47:20Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.9.0-debian-12-r1" \
+      org.opencontainers.image.ref.name="3.9.0-debian-12-r2" \
       org.opencontainers.image.title="apisix" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.9.0"
@@ -26,8 +26,8 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libcrypt1 libffi8 libgcc-s1 libgmp10 libgnutls30 libhogweed6 libidn2-0 libldap-2.5-0 libnettle8 libp11-kit0 libpcre3 libsasl2-2 libstdc++6 libtasn1-6 libunistring2 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "yq-4.43.1-0-linux-${OS_ARCH}-debian-12" \
-      "render-template-1.0.6-10-linux-${OS_ARCH}-debian-12" \
+      "yq-4.43.1-1-linux-${OS_ARCH}-debian-12" \
+      "render-template-1.0.6-11-linux-${OS_ARCH}-debian-12" \
       "apisix-3.9.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
