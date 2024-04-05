@@ -330,7 +330,7 @@ And expose the external port:
 +     - '9094:9094'
 ```
 
-**Note**: To connect from an external machine, change `localhost` above to your host's external IP/hostname and include `EXTERNAL://0.0.0.0:9093` in `KAFKA_CFG_LISTENERS` to allow for remote connections.
+**Note**: To connect from an external machine, change `localhost` above to your host's external IP/hostname and include `EXTERNAL://0.0.0.0:9094` in `KAFKA_CFG_LISTENERS` to allow for remote connections.
 
 #### Producer and consumer using external client
 
