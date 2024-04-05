@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-04-05T15:28:21Z" \
+      org.opencontainers.image.created="2024-04-05T16:45:23Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.9.6-debian-12-r4" \
+      org.opencontainers.image.ref.name="2.9.6-debian-12-r5" \
       org.opencontainers.image.title="haproxy" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2.9.6"
@@ -26,7 +26,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libcrypt1 liblua5.4-0 libssl3 lua5.4 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "haproxy-2.9.6-2-linux-${OS_ARCH}-debian-12" \
+      "haproxy-2.9.6-4-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
