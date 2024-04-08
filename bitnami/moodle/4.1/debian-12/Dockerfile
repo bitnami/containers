@@ -29,7 +29,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "render-template-1.0.6-10-linux-${OS_ARCH}-debian-12" \
       "php-8.1.27-9-linux-${OS_ARCH}-debian-12" \
-      "apache-2.4.58-8-linux-${OS_ARCH}-debian-12" \
+      "apache-2.4.59-0-linux-${OS_ARCH}-debian-12" \
       "postgresql-client-13.14.0-2-linux-${OS_ARCH}-debian-12" \
       "mysql-client-11.2.3-1-linux-${OS_ARCH}-debian-12" \
       "libphp-8.1.27-3-linux-${OS_ARCH}-debian-12" \
