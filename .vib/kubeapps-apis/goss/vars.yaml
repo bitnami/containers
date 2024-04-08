@@ -9,7 +9,7 @@ directories:
     - /opt/bitnami/kubeapps-apis/plugins/kapp-controller-packages
     - /opt/bitnami/kubeapps-apis/plugins/resources
 files:
-  - mode: "0755"
+  - mode: "0754"
     paths:
       - /opt/bitnami/kubeapps-apis/plugins/fluxv2-packages/fluxv2-packages-v1alpha1-plugin.so
       - /opt/bitnami/kubeapps-apis/plugins/helm-packages/helm-packages-v1alpha1-plugin.so
