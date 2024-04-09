@@ -1,0 +1,8 @@
+{
+    "fluent-bit": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "3.0.1-0"
+    }
+}
