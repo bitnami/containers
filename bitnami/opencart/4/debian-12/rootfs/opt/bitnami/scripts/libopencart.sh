@@ -326,6 +326,8 @@ opencart_update_hostname() {
         opencart_conf_set HTTP_SERVER "${https_url}/"
         opencart_conf_set HTTPS_SERVER "${https_url}/"
 
+        opencart_conf_set HTTP_SERVER "${https_url}/administration/" "$OPENCART_ADMIN_CONF_FILE"
+        opencart_conf_set HTTP_CATALOG "${https_url}/" "$OPENCART_ADMIN_CONF_FILE"
         opencart_conf_set HTTPS_SERVER "${https_url}/administration/" "$OPENCART_ADMIN_CONF_FILE"
         opencart_conf_set HTTPS_CATALOG "${https_url}/" "$OPENCART_ADMIN_CONF_FILE"
     else
@@ -334,6 +336,8 @@ opencart_update_hostname() {
 
         opencart_conf_set HTTP_SERVER "${http_url}/administration/" "$OPENCART_ADMIN_CONF_FILE"
         opencart_conf_set HTTP_CATALOG "${http_url}/" "$OPENCART_ADMIN_CONF_FILE"
+        opencart_conf_set HTTPS_SERVER "${http_url}/administration/" "$OPENCART_ADMIN_CONF_FILE"
+        opencart_conf_set HTTPS_CATALOG "${http_url}/" "$OPENCART_ADMIN_CONF_FILE"
     fi
 }
 
