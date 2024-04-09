@@ -104,7 +104,7 @@ docker-compose up appsmith
 |---------------------------------|---------------------------------------------------------|-----------------------|
 | `ALLOW_EMPTY_PASSWORD`          | Allow an empty password.                                | `no`                  |
 | `APPSMITH_USERNAME`             | Appsmith default username.                              | `user`                |
-| `APPSMITH_PASSWORD`             | Appsmith default password.                              | `bitnami`             |
+| `APPSMITH_PASSWORD`             | Appsmith default password.                              | `bitnami123`          |
 | `APPSMITH_EMAIL`                | Appsmith default email.                                 | `user@example.com`    |
 | `APPSMITH_MODE`                 | Appsmith service to run (can be backend, client or UI). | `backend`             |
 | `APPSMITH_ENCRYPTION_PASSWORD`  | Appsmith database encryption password.                  | `bitnami123`          |
