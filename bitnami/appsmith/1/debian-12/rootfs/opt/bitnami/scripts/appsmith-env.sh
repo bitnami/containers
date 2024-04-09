@@ -85,7 +85,7 @@ export APPSMITH_PID_FILE="${APPSMITH_TMP_DIR}/appsmith.pid"
 # Appsmith configuration parameters
 export ALLOW_EMPTY_PASSWORD="${ALLOW_EMPTY_PASSWORD:-no}"
 export APPSMITH_USERNAME="${APPSMITH_USERNAME:-user}" # only used during the first initialization
-export APPSMITH_PASSWORD="${APPSMITH_PASSWORD:-bitnami}" # only used during the first initialization
+export APPSMITH_PASSWORD="${APPSMITH_PASSWORD:-bitnami123}" # only used during the first initialization
 export APPSMITH_EMAIL="${APPSMITH_EMAIL:-user@example.com}" # only used during the first initialization
 export APPSMITH_MODE="${APPSMITH_MODE:-backend}"
 export APPSMITH_ENCRYPTION_PASSWORD="${APPSMITH_ENCRYPTION_PASSWORD:-bitnami123}" # only used during the first initialization

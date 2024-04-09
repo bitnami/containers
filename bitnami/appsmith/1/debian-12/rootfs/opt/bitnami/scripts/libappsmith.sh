@@ -354,7 +354,9 @@ appsmith_initialize() {
                     "--data-urlencode" "email=${APPSMITH_EMAIL}"
                     "--data-urlencode" "password=${APPSMITH_PASSWORD}"
                     "--data-urlencode" "allowCollectingAnnonymousData=false"
-                    "--data-urlencode" "signupForNewsletter=false")
+                    "--data-urlencode" "signupForNewsletter=false"
+                    "--data-urlencode" "proficiency=advanced"
+                    "--data-urlencode" "useCase='personal project'")
                 if ! debug_execute "${create_user_cmd[@]}" "${create_user_args[@]}"; then
                     error "Installation failed. User ${APPSMITH_USERNAME} could not be created"
                     exit 1
@@ -410,7 +412,7 @@ appsmith_backend_start_bg() {
 
     echo "$!" >"$APPSMITH_PID_FILE"
 
-    wait_for_log_entry "Please open http://localhost:<port> in your browser to experience Appsmith!" "$log_file" 30 10
+    wait_for_log_entry "License verification completed with status: valid" "$log_file" 30 10
     info "Appsmith started successfully"
 }
 
