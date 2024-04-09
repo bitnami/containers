@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-03-31T15:18:23Z" \
+      org.opencontainers.image.created="2024-04-09T22:12:57Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="6.0.420-debian-12-r1" \
+      org.opencontainers.image.ref.name="6.0.421-debian-12-r0" \
       org.opencontainers.image.title="dotnet-sdk" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="6.0.420"
+      org.opencontainers.image.version="6.0.421"
 
 ENV HOME="/app" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +26,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages build-essential ca-certificates curl git libcap2-bin libgcc-s1 libicu-dev liblttng-ust-dev libsqlite3-dev libssl-dev libstdc++6 pkg-config procps unzip wget zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "dotnet-sdk-6.0.420-0-linux-${OS_ARCH}-debian-12" \
+      "dotnet-sdk-6.0.421-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -46,7 +46,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/dotnet-sdk/postunpack.sh
-ENV APP_VERSION="6.0.420" \
+ENV APP_VERSION="6.0.421" \
     BITNAMI_APP_NAME="dotnet-sdk" \
     DOTNET_CLI_HOME="/app" \
     DOTNET_ROOT="/opt/bitnami/dotnet-sdk/bin" \
