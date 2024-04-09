@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-04-05T15:33:01Z" \
+      org.opencontainers.image.created="2024-04-09T20:23:22Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.0.8-debian-12-r1" \
+      org.opencontainers.image.ref.name="7.0.8-debian-12-r2" \
       org.opencontainers.image.title="mongodb-sharded" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="7.0.8"
@@ -30,7 +30,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
       "wait-for-port-1.0.7-11-linux-${OS_ARCH}-debian-12" \
       "render-template-1.0.6-11-linux-${OS_ARCH}-debian-12" \
       "mongodb-shell-2.2.3-0-linux-${OS_ARCH}-debian-12" \
-      "mongodb-7.0.8-0-linux-${OS_ARCH}-debian-12" \
+      "mongodb-7.0.8-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
