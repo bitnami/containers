@@ -608,7 +608,7 @@ mongodb_set_auth_conf() {
 
     localhostBypass="$(mongodb_conf_get "setParameter.enableLocalhostAuthBypass")"
     authorization="$(mongodb_conf_get "security.authorization")"
-    if is_boolean_yes "$MONGODB_DISABLE_ENFORCE_AUTH"; then
+    if ! is_boolean_yes "$MONGODB_DISABLE_ENFORCE_AUTH"; then
         if [[ -n "$MONGODB_ROOT_PASSWORD" ]] || [[ -n "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" ]] || [[ -n "$MONGODB_PASSWORD" ]]; then
             if [[ "$authorization" = "disabled" ]]; then
 
