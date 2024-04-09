@@ -126,7 +126,7 @@ parse_initialize() {
         else
             server_url+="http://"
         fi
-        server_url+="${PARSE_HOST}${PARSE_MOUNT_PATH}"
+        server_url+="${PARSE_HOST}:${PARSE_PORT_NUMBER}${PARSE_MOUNT_PATH}"
 
         parse_conf_set "serverURL" "$server_url"
         parse_conf_set "databaseURI" "$connection_string"
