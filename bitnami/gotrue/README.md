@@ -86,39 +86,40 @@ docker run --name gotrue bitnami/gotrue:latest
 
 #### Customizable environment variables
 
-| Name                                  | Description                     | Default Value                                                                                                |
-|---------------------------------------|---------------------------------|--------------------------------------------------------------------------------------------------------------|
-| `DB_HOST`                             | Database host                   | `localhost`                                                                                                  |
-| `DB_PORT`                             | Database port number            | `5432`                                                                                                       |
-| `DB_NAME`                             | Database name                   | `postgres`                                                                                                   |
-| `DB_USER`                             | Database user username          | `postgres`                                                                                                   |
-| `DB_PASSWORD`                         | Database password               | `nil`                                                                                                        |
-| `DB_SSL`                              | Database SSL connection enabled | `disable`                                                                                                    |
-| `GOTRUE_DB_DATABASE_URL`              | Database URL                    | `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?search_path=auth&sslmode=${DB_SSL}` |
-| `GOTRUE_URI_ALLOW_LIST`               |                                 | `*`                                                                                                          |
-| `GOTRUE_OPERATOR_TOKEN`               | Operator token                  | `nil`                                                                                                        |
-| `GOTRUE_JWT_SECRET`                   | JWT Secret                      | `nil`                                                                                                        |
-| `GOTRUE_SITE_URL`                     |                                 | `http://localhost:80`                                                                                        |
-| `GOTRUE_API_PORT`                     |                                 | `9999`                                                                                                       |
-| `GOTRUE_API_HOST`                     |                                 | `0.0.0.0`                                                                                                    |
-| `GOTRUE_DISABLE_SIGNUP`               |                                 | `false`                                                                                                      |
-| `GOTRUE_DB_DRIVER`                    |                                 | `postgres`                                                                                                   |
-| `GOTRUE_JWT_DEFAULT_GROUP_NAME`       |                                 | `authenticated`                                                                                              |
-| `GOTRUE_JWT_ADMIN_ROLES`              |                                 | `service_role`                                                                                               |
-| `GOTRUE_JWT_AUD`                      |                                 | `authenticated`                                                                                              |
-| `GOTRUE_JWT_EXP`                      |                                 | `3600`                                                                                                       |
-| `GOTRUE_EXTERNAL_EMAIL_ENABLED`       |                                 | `true`                                                                                                       |
-| `GOTRUE_MAILER_AUTOCONFIRM`           |                                 | `true`                                                                                                       |
-| `GOTRUE_SMTP_ADMIN_EMAIL`             |                                 | `your-mail@example.com`                                                                                      |
-| `GOTRUE_SMTP_HOST`                    |                                 | `smtp.exmaple.com`                                                                                           |
-| `GOTRUE_SMTP_PORT`                    |                                 | `587`                                                                                                        |
-| `GOTRUE_SMTP_SENDER_NAME`             |                                 | `your-mail@example.com`                                                                                      |
-| `GOTRUE_EXTERNAL_PHONE_ENABLED`       |                                 | `false`                                                                                                      |
-| `GOTRUE_SMS_AUTOCONFIRM`              |                                 | `false`                                                                                                      |
-| `GOTRUE_MAILER_URLPATHS_INVITE`       |                                 | `http://localhost:80/auth/v1/verify`                                                                         |
-| `GOTRUE_MAILER_URLPATHS_CONFIRMATION` |                                 | `http://localhost:80/auth/v1/verify`                                                                         |
-| `GOTRUE_MAILER_URLPATHS_RECOVERY`     |                                 | `http://localhost:80/auth/v1/verify`                                                                         |
-| `GOTRUE_MAILER_URLPATHS_EMAIL_CHANGE` |                                 | `http://localhost:80/auth/v1/verify`                                                                         |
+| Name                                  | Description                                  | Default Value                                                                                                |
+|---------------------------------------|----------------------------------------------|--------------------------------------------------------------------------------------------------------------|
+| `DB_HOST`                             | Database host                                | `localhost`                                                                                                  |
+| `DB_PORT`                             | Database port number                         | `5432`                                                                                                       |
+| `DB_NAME`                             | Database name                                | `postgres`                                                                                                   |
+| `DB_USER`                             | Database user username                       | `postgres`                                                                                                   |
+| `DB_PASSWORD`                         | Database password                            | `nil`                                                                                                        |
+| `DB_SSL`                              | Database SSL connection enabled              | `disable`                                                                                                    |
+| `GOTRUE_DB_DATABASE_URL`              | Database URL                                 | `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?search_path=auth&sslmode=${DB_SSL}` |
+| `GOTRUE_URI_ALLOW_LIST`               |                                              | `*`                                                                                                          |
+| `GOTRUE_OPERATOR_TOKEN`               | Operator token                               | `nil`                                                                                                        |
+| `GOTRUE_JWT_SECRET`                   | JWT Secret                                   | `nil`                                                                                                        |
+| `GOTRUE_SITE_URL`                     |                                              | `http://localhost:80`                                                                                        |
+| `GOTRUE_API_PORT`                     |                                              | `9999`                                                                                                       |
+| `GOTRUE_API_HOST`                     |                                              | `0.0.0.0`                                                                                                    |
+| `API_EXTERNAL_URL`                    | The URL on which Gotrue might be accessed at | `http://localhost:9999`                                                                                      |
+| `GOTRUE_DISABLE_SIGNUP`               |                                              | `false`                                                                                                      |
+| `GOTRUE_DB_DRIVER`                    |                                              | `postgres`                                                                                                   |
+| `GOTRUE_JWT_DEFAULT_GROUP_NAME`       |                                              | `authenticated`                                                                                              |
+| `GOTRUE_JWT_ADMIN_ROLES`              |                                              | `service_role`                                                                                               |
+| `GOTRUE_JWT_AUD`                      |                                              | `authenticated`                                                                                              |
+| `GOTRUE_JWT_EXP`                      |                                              | `3600`                                                                                                       |
+| `GOTRUE_EXTERNAL_EMAIL_ENABLED`       |                                              | `true`                                                                                                       |
+| `GOTRUE_MAILER_AUTOCONFIRM`           |                                              | `true`                                                                                                       |
+| `GOTRUE_SMTP_ADMIN_EMAIL`             |                                              | `your-mail@example.com`                                                                                      |
+| `GOTRUE_SMTP_HOST`                    |                                              | `smtp.exmaple.com`                                                                                           |
+| `GOTRUE_SMTP_PORT`                    |                                              | `587`                                                                                                        |
+| `GOTRUE_SMTP_SENDER_NAME`             |                                              | `your-mail@example.com`                                                                                      |
+| `GOTRUE_EXTERNAL_PHONE_ENABLED`       |                                              | `false`                                                                                                      |
+| `GOTRUE_SMS_AUTOCONFIRM`              |                                              | `false`                                                                                                      |
+| `GOTRUE_MAILER_URLPATHS_INVITE`       |                                              | `http://localhost:80/auth/v1/verify`                                                                         |
+| `GOTRUE_MAILER_URLPATHS_CONFIRMATION` |                                              | `http://localhost:80/auth/v1/verify`                                                                         |
+| `GOTRUE_MAILER_URLPATHS_RECOVERY`     |                                              | `http://localhost:80/auth/v1/verify`                                                                         |
+| `GOTRUE_MAILER_URLPATHS_EMAIL_CHANGE` |                                              | `http://localhost:80/auth/v1/verify`                                                                         |
 
 #### Read-only environment variables
 
