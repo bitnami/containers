@@ -15,7 +15,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "11.3.2-0"
+        "version": "11.3.2-2"
     },
     "php": {
         "arch": "amd64",
@@ -33,6 +33,6 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "6.5.2-0"
+        "version": "6.5.2-1"
     }
 }
