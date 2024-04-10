@@ -116,6 +116,9 @@ export KEYCLOAK_INITSCRIPTS_DIR="/docker-entrypoint-initdb.d"
 export KEYCLOAK_CONF_FILE="keycloak.conf"
 export KEYCLOAK_DEFAULT_CONF_FILE="keycloak.conf"
 
+# Keycloak kc.sh context (not used in config file)
+export KC_RUN_IN_CONTAINER="true"
+
 # Keycloak configuration
 KEYCLOAK_ADMIN="${KEYCLOAK_ADMIN:-"${KEYCLOAK_ADMIN_USER:-}"}"
 export KEYCLOAK_ADMIN="${KEYCLOAK_ADMIN:-user}"
