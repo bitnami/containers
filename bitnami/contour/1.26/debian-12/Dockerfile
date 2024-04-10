@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-04-05T17:54:18Z" \
+      org.opencontainers.image.created="2024-04-10T17:36:04Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.26.2-debian-12-r7" \
+      org.opencontainers.image.ref.name="1.26.3-debian-12-r0" \
       org.opencontainers.image.title="contour" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.26.2"
+      org.opencontainers.image.version="1.26.3"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +26,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "contour-1.26.2-3-linux-${OS_ARCH}-debian-12" \
+      "contour-1.26.3-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -44,7 +44,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN ln -s /opt/bitnami/contour/bin/contour /bin/contour
 
-ENV APP_VERSION="1.26.2" \
+ENV APP_VERSION="1.26.3" \
     BITNAMI_APP_NAME="contour" \
     PATH="/opt/bitnami/contour/bin:$PATH"
 
