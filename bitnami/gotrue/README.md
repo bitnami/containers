@@ -104,6 +104,7 @@ docker run --name gotrue bitnami/gotrue:latest
 | `API_EXTERNAL_URL`                    | The URL on which Gotrue might be accessed at | `http://localhost:9999`                                                                                      |
 | `GOTRUE_DISABLE_SIGNUP`               |                                              | `false`                                                                                                      |
 | `GOTRUE_DB_DRIVER`                    |                                              | `postgres`                                                                                                   |
+| `GOTRUE_DB_MIGRATIONS_PATH`           |                                              | `${GOTRUE_BASE_DIR}`                                                                                         |
 | `GOTRUE_JWT_DEFAULT_GROUP_NAME`       |                                              | `authenticated`                                                                                              |
 | `GOTRUE_JWT_ADMIN_ROLES`              |                                              | `service_role`                                                                                               |
 | `GOTRUE_JWT_AUD`                      |                                              | `authenticated`                                                                                              |
