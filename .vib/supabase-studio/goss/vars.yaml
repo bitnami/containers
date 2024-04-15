@@ -7,7 +7,7 @@ directories:
       - /opt/bitnami/supabase/apps/studio/.next/static
 files:
   - paths:
-      - /opt/bitnami/supabase/package-lock.json
+      - /opt/bitnami/supabase/package.json
 root_dir: /opt/bitnami
 sed_in_place:
   exclude_paths:

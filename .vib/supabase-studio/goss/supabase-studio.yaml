@@ -3,9 +3,8 @@
 
 command:
   list-run-operations:
-    exec: cd /opt/bitnami/supabase/apps/studio; timeout --preserve-status 5 npm run start || true
+    exec: cd /opt/bitnami/supabase/; timeout --preserve-status 5 /opt/bitnami/node/bin/node apps/studio/server.js || true
     timeout: 8000
     exit-status: 0
     stdout:
-      - "next start"
       - "Ready"
