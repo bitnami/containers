@@ -89,6 +89,9 @@ In addition to the Express Development Container, the [docker-compose.yml](https
 | `EXPRESS_SKIP_SAMPLE_CODE`                        | Skip copying sample code.           | `no`          |
 | `EXPRESS_SKIP_NPM_INSTALL`                        | Skip installation of NPM modules.   | `no`          |
 | `EXPRESS_SKIP_BOWER_INSTALL`                      | Skip installation of Bower modules. | `no`          |
+| `EXPRESS_DATABASE_TYPE`                           | Database server type.               | `nil`         |
+| `EXPRESS_DATABASE_HOST`                           | Database server host.               | `nil`         |
+| `EXPRESS_DATABASE_PORT_NUMBER`                    | Database server port number.        | `nil`         |
 | `EXPRESS_DEFAULT_MARIADB_DATABASE_PORT_NUMBER`    | Default MariaDB database port.      | `3306`        |
 | `EXPRESS_DEFAULT_MONGODB_DATABASE_PORT_NUMBER`    | Default MongoDB database port.      | `27017`       |
 | `EXPRESS_DEFAULT_MYSQL_DATABASE_PORT_NUMBER`      | Default MySQL database port.        | `3306`        |
