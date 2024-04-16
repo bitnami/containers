@@ -25,6 +25,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # variable will be overridden with the value specified in that file
 keycloak_env_vars=(
     KEYCLOAK_MOUNTED_CONF_DIR
+    KC_RUN_IN_CONTAINER
     KEYCLOAK_ADMIN
     KEYCLOAK_ADMIN_PASSWORD
     KEYCLOAK_HTTP_RELATIVE_PATH
@@ -116,8 +117,8 @@ export KEYCLOAK_INITSCRIPTS_DIR="/docker-entrypoint-initdb.d"
 export KEYCLOAK_CONF_FILE="keycloak.conf"
 export KEYCLOAK_DEFAULT_CONF_FILE="keycloak.conf"
 
-# Keycloak kc.sh context (not used in config file)
-export KC_RUN_IN_CONTAINER="true"
+# Keycloak kc.sh context
+export KC_RUN_IN_CONTAINER="${KC_RUN_IN_CONTAINER:-true}"
 
 # Keycloak configuration
 KEYCLOAK_ADMIN="${KEYCLOAK_ADMIN:-"${KEYCLOAK_ADMIN_USER:-}"}"

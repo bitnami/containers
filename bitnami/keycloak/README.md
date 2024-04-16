@@ -73,6 +73,7 @@ docker build -t bitnami/APP:latest .
 | Name                                                        | Description                                                                                           | Default Value                 |
 |-------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|-------------------------------|
 | `KEYCLOAK_MOUNTED_CONF_DIR`                                 | Directory for including custom configuration files (that override the default generated ones)         | `${KEYCLOAK_VOLUME_DIR}/conf` |
+| `KC_RUN_IN_CONTAINER`                                       | Keycloak kc.sh context                                                                                | `true`                        |
 | `KEYCLOAK_ADMIN`                                            | Keycloak administrator user                                                                           | `user`                        |
 | `KEYCLOAK_ADMIN_PASSWORD`                                   | Keycloak administrator password                                                                       | `bitnami`                     |
 | `KEYCLOAK_HTTP_RELATIVE_PATH`                               | Set the path relative to "/" for serving resources.                                                   | `/`                           |
