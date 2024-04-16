@@ -7,13 +7,15 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-04-10T07:33:29Z" \
+      org.opencontainers.image.created="2024-04-16T13:33:20Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
+      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/appsmith/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.20.0-debian-12-r0" \
+      org.opencontainers.image.ref.name="1.21.0-debian-12-r0" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/appsmith" \
       org.opencontainers.image.title="appsmith" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.20.0"
+      org.opencontainers.image.version="1.21.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -27,13 +29,13 @@ RUN install_packages acl ca-certificates curl gettext libbz2-1.0 libcom-err2 lib
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "render-template-1.0.6-11-linux-${OS_ARCH}-debian-12" \
-      "python-3.11.9-2-linux-${OS_ARCH}-debian-12" \
+      "python-3.11.9-3-linux-${OS_ARCH}-debian-12" \
       "wait-for-port-1.0.7-11-linux-${OS_ARCH}-debian-12" \
-      "node-20.12.1-0-linux-${OS_ARCH}-debian-12" \
+      "node-20.12.2-1-linux-${OS_ARCH}-debian-12" \
       "nginx-1.25.4-0-linux-${OS_ARCH}-debian-12" \
-      "mongodb-shell-2.2.3-0-linux-${OS_ARCH}-debian-12" \
+      "mongodb-shell-2.2.4-0-linux-${OS_ARCH}-debian-12" \
       "java-17.0.10-13-2-linux-${OS_ARCH}-debian-12" \
-      "appsmith-1.20.0-0-linux-${OS_ARCH}-debian-12" \
+      "appsmith-1.21.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -52,7 +54,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 COPY rootfs /
 RUN /opt/bitnami/scripts/nginx/postunpack.sh
 RUN /opt/bitnami/scripts/appsmith/postunpack.sh
-ENV APP_VERSION="1.20.0" \
+ENV APP_VERSION="1.21.0" \
     BITNAMI_APP_NAME="appsmith" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
