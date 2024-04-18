@@ -180,7 +180,7 @@ docker-compose up -d
 | `REDIS_DATABASE`                 | Default Redis database                           | `redis`                                    |
 | `REDIS_AOF_ENABLED`              | Enable AOF                                       | `yes`                                      |
 | `REDIS_RDB_POLICY`               | Enable RDB policy persitence                     | `nil`                                      |
-| `REDIS_RDB_POLICY_DISABLED`      | Allows to enable RDP policy persistence          | `no`                                       |
+| `REDIS_RDB_POLICY_DISABLED`      | Allows to enable RDB policy persistence          | `no`                                       |
 | `REDIS_MASTER_HOST`              | Redis master host (used by slaves)               | `nil`                                      |
 | `REDIS_MASTER_PORT_NUMBER`       | Redis master host port (used by slaves)          | `6379`                                     |
 | `REDIS_PORT_NUMBER`              | Redis port number                                | `$REDIS_DEFAULT_PORT_NUMBER`               |
@@ -584,6 +584,35 @@ services:
       - /path/to/overrides.conf:/opt/bitnami/redis/mounted-etc/overrides.conf
   ...
 ```
+
+### Enable Redis(R) RDB persistence
+
+When the value of `REDIS_RDB_POLICY_DISABLED` is `no` (default value) the Redis(R) default persistence strategy will be used. If you want to modify the default strategy, you can configure it through the `REDIS_RDB_POLICY` parameter. Here is a demonstration of modifying the default persistence strategy
+
+1. Using `docker run`
+
+    ```console
+    $ docker run --name redis \
+        -v /path/to/redis-data-persistence:/bitnami/redis/data \
+        -e ALLOW_EMPTY_PASSWORD=yes \
+        -e REDIS_RDB_POLICY_DISABLED=no
+        -e REDIS_RDB_POLICY="900#1 600#5 300#10 120#50 60#1000 30#10000"
+        bitnami/redis:latest
+    ```
+
+2. Modifying the `docker-compose.yml` file present in this repository:
+
+    ```yaml
+      redis:
+      ...
+        environment:
+          ...
+          - REDIS_TLS_ENABLED=yes
+          - REDIS_RDB_POLICY_DISABLED=no
+          - REDIS_RDB_POLICY="900#1 600#5 300#10 120#50 60#1000 30#10000"   
+        ...
+      ...
+    ```
 
 ## Logging
 
