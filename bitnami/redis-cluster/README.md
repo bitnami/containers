@@ -281,11 +281,9 @@ When enabling TLS, conventional standard traffic is disabled by default. However
 
 Alternatively, you may also provide with this configuration in your [custom](https://github.com/bitnami/containers/blob/main/bitnami/redis-cluster#configuration-file) configuration file.
 
-### Enable redis cluster RDB persistence
+### Enable Redis(R) Cluster RDB persistence
 
-Since the use of `REDIS_RDB_POLICY_DISABLED` and `REDIS_RDB_POLICY` parameters is rather special, we explain it here.
-When the value of `REDIS_RDB_POLICY_DISABLED` is `no` the redis default persistence strategy will be used. If you want to modify the default strategy, you can configure it through REDIS_RDB_POLICY
-Here is a demonstration of modifying the default persistence strategy
+When the value of `REDIS_RDB_POLICY_DISABLED` is `no` (default value) the Redis(R) default persistence strategy will be used. If you want to modify the default strategy, you can configure it through the `REDIS_RDB_POLICY` parameter. Here is a demonstration of modifying the default persistence strategy
 
 1. Using `docker run`
 
