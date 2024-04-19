@@ -7,13 +7,15 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-04-11T16:02:26Z" \
+      org.opencontainers.image.created="2024-04-19T18:50:22Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
+      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/prometheus-operator/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.73.1-debian-12-r0" \
+      org.opencontainers.image.ref.name="0.73.2-debian-12-r0" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/prometheus-operator" \
       org.opencontainers.image.title="prometheus-operator" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="0.73.1"
+      org.opencontainers.image.version="0.73.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +28,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "prometheus-operator-0.73.1-0-linux-${OS_ARCH}-debian-12" \
+      "prometheus-operator-0.73.2-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -45,7 +47,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN ln -sf /opt/bitnami/prometheus-operator/bin/prometheus-config-reloader /bin/prometheus-config-reloader
 RUN ln -sf /opt/bitnami/prometheus-operator/bin/operator /bin/operator
 
-ENV APP_VERSION="0.73.1" \
+ENV APP_VERSION="0.73.2" \
     BITNAMI_APP_NAME="prometheus-operator" \
     PATH="/opt/bitnami/prometheus-operator/bin:$PATH"
 
