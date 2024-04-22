@@ -909,8 +909,8 @@ elasticsearch_healthcheck() {
     local host
 
     host=$(get_elasticsearch_hostname)
-    if validate_ipv6 "$host"; then
-        host="[$host]"
+    if validate_ipv6 "${host}"; then
+        host="[${host}]"
     fi
 
     if is_boolean_yes "$DB_ENABLE_SECURITY"; then
