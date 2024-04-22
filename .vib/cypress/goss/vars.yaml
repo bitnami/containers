@@ -1,0 +1,11 @@
+binaries:
+  - node
+  - cypress
+root_dir: /opt/bitnami
+directories:
+  - paths:
+      - /opt/bitnami/node
+      - /opt/bitnami/node/lib/node_modules/cypress
+version:
+  bin_name: cypress
+  flag: --version
