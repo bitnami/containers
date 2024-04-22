@@ -189,7 +189,7 @@ If you detect any issue in the `docker-compose.yaml` file, feel free to report i
 | `JENKINS_LOG_FILE`                     | Path to the Jenkins log file.                                                              | `${JENKINS_LOGS_DIR}/jenkins.log`                       |
 | `JENKINS_TMP_DIR`                      | Jenkins directory for runtime temporary files.                                             | `${JENKINS_BASE_DIR}/tmp`                               |
 | `JENKINS_PID_FILE`                     | Path to the Jenkins PID file.                                                              | `${JENKINS_TMP_DIR}/jenkins.pid`                        |
-| `JENKINS_TEMPLATES_DIR`                | Path to the directory containg templates to generate groovy scripts.                       | `${BITNAMI_ROOT_DIR}/scripts/jenkins/bitnami-templates` |
+| `JENKINS_TEMPLATES_DIR`                | Path to the directory containing templates to generate groovy scripts.                     | `${BITNAMI_ROOT_DIR}/scripts/jenkins/bitnami-templates` |
 | `JENKINS_VOLUME_DIR`                   | Persistence base directory.                                                                | `${BITNAMI_VOLUME_DIR}/jenkins`                         |
 | `JENKINS_MOUNTED_CONTENT_DIR`          | Directory to mount custom Jenkins content (such as Groovy scripts or configuration files). | `/usr/share/jenkins/ref`                                |
 | `JENKINS_DAEMON_USER`                  | Jenkins system user.                                                                       | `jenkins`                                               |
