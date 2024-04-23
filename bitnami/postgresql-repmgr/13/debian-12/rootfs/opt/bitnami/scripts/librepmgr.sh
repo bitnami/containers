@@ -516,7 +516,7 @@ pg_basebackup_options='$waldir_option'
 EOF
 
    if is_boolean_yes "$REPMGR_FENCE_OLD_PRIMARY"; then
-        cat <<EOF >>"${REPMGR_CONF_FILE}.tmp" 
+        cat <<EOF >>"${REPMGR_CONF_FILE}.tmp"
 child_nodes_disconnect_command='/bin/bash -c ". /opt/bitnami/scripts/libpostgresql.sh && . /opt/bitnami/scripts/postgresql-env.sh && postgresql_stop && kill -TERM 1"'
 EOF
         if [[ -v REPMGR_CHILD_NODES_CHECK_INTERVAL ]]; then
@@ -537,7 +537,7 @@ EOF
     fi
 
     if [[ "$REPMGR_FENCE_OLD_PRIMARY" == "true" ]]; then
-        cat <<EOF >>"${REPMGR_CONF_FILE}.tmp" 
+        cat <<EOF >>"${REPMGR_CONF_FILE}.tmp"
 child_nodes_disconnect_command='/bin/bash -c ". /opt/bitnami/scripts/libpostgresql.sh && . /opt/bitnami/scripts/postgresql-env.sh && postgresql_stop && kill -TERM 1"'
 EOF
         if [[ -v REPMGR_CHILD_NODES_CHECK_INTERVAL ]]; then
