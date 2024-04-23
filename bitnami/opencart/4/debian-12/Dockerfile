@@ -7,10 +7,12 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-04-08T20:45:41Z" \
+      org.opencontainers.image.created="2024-04-23T14:33:49Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
+      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/opencart/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.0.2-3-debian-12-r26" \
+      org.opencontainers.image.ref.name="4.0.2-3-debian-12-r27" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/opencart" \
       org.opencontainers.image.title="opencart" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="4.0.2-3"
@@ -27,10 +29,10 @@ RUN install_packages acl ca-certificates curl libaudit1 libbrotli1 libbsd0 libbz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "render-template-1.0.6-11-linux-${OS_ARCH}-debian-12" \
-      "php-8.2.17-1-linux-${OS_ARCH}-debian-12" \
+      "php-8.2.18-5-linux-${OS_ARCH}-debian-12" \
       "apache-2.4.59-0-linux-${OS_ARCH}-debian-12" \
-      "mysql-client-11.3.2-0-linux-${OS_ARCH}-debian-12" \
-      "libphp-8.2.17-1-linux-${OS_ARCH}-debian-12" \
+      "mysql-client-11.3.2-2-linux-${OS_ARCH}-debian-12" \
+      "libphp-8.2.18-0-linux-${OS_ARCH}-debian-12" \
       "opencart-4.0.2-3-3-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
