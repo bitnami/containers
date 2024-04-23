@@ -9,7 +9,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.1.27-4"
+        "version": "8.1.28-0"
     },
     "mediawiki": {
         "arch": "amd64",
@@ -21,13 +21,13 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "11.3.2-0"
+        "version": "11.3.2-2"
     },
     "php": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.1.27-9"
+        "version": "8.1.28-4"
     },
     "render-template": {
         "arch": "amd64",
