@@ -176,6 +176,7 @@ wildfly_initialize() {
     local -r server_addr="${WILDFLY_SERVER_LISTEN_ADDRESS:-"$WILDFLY_DEFAULT_SERVER_LISTEN_ADDRESS"}"
     local -r mgm_addr="${WILDFLY_MANAGEMENT_LISTEN_ADDRESS:-"$WILDFLY_DEFAULT_MANAGEMENT_LISTEN_ADDRESS"}"
     local -r http_port="${WILDFLY_HTTP_PORT_NUMBER:-"$WILDFLY_DEFAULT_HTTP_PORT_NUMBER"}"
+    local -r https_port="${WILDFLY_HTTPS_PORT_NUMBER:-"$WILDFLY_DEFAULT_HTTPS_PORT_NUMBER"}"
     local -r ajp_port="${WILDFLY_AJP_PORT_NUMBER:-"$WILDFLY_DEFAULT_AJP_PORT_NUMBER"}"
     local -r mgm_port="${WILDFLY_MANAGEMENT_PORT_NUMBER:-"$WILDFLY_DEFAULT_MANAGEMENT_PORT_NUMBER"}"
 
@@ -197,6 +198,7 @@ wildfly_initialize() {
         info "Adapting WildFly configuration file"
         wildfly_conf_set "jboss.bind.address" "${server_addr}"
         wildfly_conf_set "jboss.http.port" "${http_port}"
+        wildfly_conf_set "jboss.https.port" "${https_port}"
         wildfly_conf_set "jboss.ajp.port" "${ajp_port}"
         wildfly_conf_set "jboss.management.http.port" "${mgm_port}"
         wildfly_conf_set "jboss.bind.address.management" "${mgm_addr}"

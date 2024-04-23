@@ -183,6 +183,7 @@ $ docker exec -it wildfly-server \
 | `WILDFLY_SERVER_LISTEN_ADDRESS`     | WildFly server listen address.                                                                | `nil`                                   |
 | `WILDFLY_MANAGEMENT_LISTEN_ADDRESS` | WildFly management listen address.                                                            | `nil`                                   |
 | `WILDFLY_HTTP_PORT_NUMBER`          | Port number used by the WildFly for HTTP connections.                                         | `nil`                                   |
+| `WILDFLY_HTTPS_PORT_NUMBER`         | Port number used by the WildFly for HTTPS connections.                                        | `nil`                                   |
 | `WILDFLY_AJP_PORT_NUMBER`           | Port number used by the WildFly for AJP connections.                                          | `nil`                                   |
 | `WILDFLY_MANAGEMENT_PORT_NUMBER`    | Port number used by the WildFly management interface.                                         | `nil`                                   |
 | `WILDFLY_USERNAME`                  | WildFly admin username.                                                                       | `user`                                  |
@@ -211,6 +212,7 @@ $ docker exec -it wildfly-server \
 | `WILDFLY_DEFAULT_SERVER_LISTEN_ADDRESS`     | Default WildFLY SERVER listen address to enable at build time.                   | `0.0.0.0`                                      |
 | `WILDFLY_DEFAULT_MANAGEMENT_LISTEN_ADDRESS` | Default WildFLY MANAGEMENT listen address to enable at build time.               | `127.0.0.1`                                    |
 | `WILDFLY_DEFAULT_HTTP_PORT_NUMBER`          | Default WildFLY HTTP port number to enable at build time.                        | `8080`                                         |
+| `WILDFLY_DEFAULT_HTTPS_PORT_NUMBER`         | Default WildFLY HTTPS port number to enable at build time.                       | `8443`                                         |
 | `WILDFLY_DEFAULT_AJP_PORT_NUMBER`           | Default WildFLY AJP port number to enable at build time.                         | `8009`                                         |
 | `WILDFLY_DEFAULT_MANAGEMENT_PORT_NUMBER`    | Default WildFLY MANAGEMENT port number to enable at build time.                  | `9990`                                         |
 | `LAUNCH_JBOSS_IN_BACKGROUND`                | Ensure signals are forwarded to the JVM process correctly for graceful shutdown. | `true`                                         |
