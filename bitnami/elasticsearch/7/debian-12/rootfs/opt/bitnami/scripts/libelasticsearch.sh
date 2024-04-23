@@ -909,7 +909,7 @@ elasticsearch_healthcheck() {
     local host
 
     host=$(get_elasticsearch_hostname)
-    if validate_ipv6 "${host}"; then
+    if validate_ipv6 "$host"; then
         host="[${host}]"
     fi
 
