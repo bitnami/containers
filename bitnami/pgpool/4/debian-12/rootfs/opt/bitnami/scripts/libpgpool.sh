@@ -87,6 +87,8 @@ export PGPOOL_AUTO_FAILBACK="${PGPOOL_AUTO_FAILBACK:-no}"
 export PGPOOL_BACKEND_APPLICATION_NAMES="${PGPOOL_BACKEND_APPLICATION_NAMES:-}"
 export PGPOOL_AUTHENTICATION_METHOD="${PGPOOL_AUTHENTICATION_METHOD:-scram-sha-256}"
 export PGPOOL_AES_KEY="${PGPOOL_AES_KEY:-$(head -c 20 /dev/urandom | base64)}"
+export PGPOOL_FAILOVER_ON_BACKEND_SHUTDOWN="${PGPOOL_FAILOVER_ON_BACKEND_SHUTDOWN:-on}"
+export PGPOOL_FAILOVER_ON_BACKEND_ERROR="${PGPOOL_FAILOVER_ON_BACKEND_ERROR:-off}"
 
 # SSL
 export PGPOOL_ENABLE_TLS="${PGPOOL_ENABLE_TLS:-no}"
@@ -505,7 +507,8 @@ pgpool_create_config() {
     pgpool_set_property "connect_timeout" "$PGPOOL_CONNECT_TIMEOUT"
     # Failover settings
     pgpool_set_property "failover_command" "echo \">>> Failover - that will initialize new primary node search!\""
-    pgpool_set_property "failover_on_backend_error" "off"
+    pgpool_set_property "failover_on_backend_error" "$PGPOOL_FAILOVER_ON_BACKEND_ERROR"
+    pgpool_set_property "failover_on_backend_shutdown" "$PGPOOL_FAILOVER_ON_BACKEND_SHUTDOWN"
     # Keeps searching for a primary node forever when a failover occurs
     pgpool_set_property "search_primary_node_timeout" "0"
     pgpool_set_property "disable_load_balance_on_write" "$PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE"
