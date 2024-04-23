@@ -8,11 +8,11 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-04-16T19:01:04Z" \
+      org.opencontainers.image.created="2024-04-23T16:59:59Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/keycloak/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="24.0.3-debian-12-r0" \
+      org.opencontainers.image.ref.name="24.0.3-debian-12-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/keycloak" \
       org.opencontainers.image.title="keycloak" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -30,7 +30,7 @@ RUN install_packages ca-certificates curl krb5-user libaio1 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "wait-for-port-1.0.7-11-linux-${OS_ARCH}-debian-12" \
-      "java-17.0.10-13-2-linux-${OS_ARCH}-debian-12" \
+      "java-17.0.11-10-0-linux-${OS_ARCH}-debian-12" \
       "keycloak-24.0.3-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
