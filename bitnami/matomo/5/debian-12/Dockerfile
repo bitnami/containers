@@ -7,10 +7,12 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-04-05T16:29:29Z" \
+      org.opencontainers.image.created="2024-04-23T17:57:23Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
+      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/matomo/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="5.0.3-debian-12-r4" \
+      org.opencontainers.image.ref.name="5.0.3-debian-12-r5" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/matomo" \
       org.opencontainers.image.title="matomo" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="5.0.3"
@@ -27,10 +29,10 @@ RUN install_packages acl ca-certificates cron curl libaudit1 libbrotli1 libbsd0 
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "render-template-1.0.6-11-linux-${OS_ARCH}-debian-12" \
-      "php-8.2.17-1-linux-${OS_ARCH}-debian-12" \
+      "php-8.2.18-5-linux-${OS_ARCH}-debian-12" \
       "apache-2.4.59-0-linux-${OS_ARCH}-debian-12" \
-      "mysql-client-10.11.7-2-linux-${OS_ARCH}-debian-12" \
-      "libphp-8.2.17-1-linux-${OS_ARCH}-debian-12" \
+      "mysql-client-10.11.7-3-linux-${OS_ARCH}-debian-12" \
+      "libphp-8.2.18-0-linux-${OS_ARCH}-debian-12" \
       "ini-file-1.4.6-11-linux-${OS_ARCH}-debian-12" \
       "matomo-5.0.3-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
