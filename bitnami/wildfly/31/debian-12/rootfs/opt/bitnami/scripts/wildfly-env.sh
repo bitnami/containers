@@ -30,6 +30,7 @@ wildfly_env_vars=(
     WILDFLY_SERVER_LISTEN_ADDRESS
     WILDFLY_MANAGEMENT_LISTEN_ADDRESS
     WILDFLY_HTTP_PORT_NUMBER
+    WILDFLY_HTTPS_PORT_NUMBER
     WILDFLY_AJP_PORT_NUMBER
     WILDFLY_MANAGEMENT_PORT_NUMBER
     WILDFLY_USERNAME
@@ -76,6 +77,7 @@ export WILDFLY_DAEMON_GROUP="wildfly"
 export WILDFLY_DEFAULT_SERVER_LISTEN_ADDRESS="0.0.0.0" # only used at build time
 export WILDFLY_DEFAULT_MANAGEMENT_LISTEN_ADDRESS="127.0.0.1" # only used at build time
 export WILDFLY_DEFAULT_HTTP_PORT_NUMBER="8080" # only used at build time
+export WILDFLY_DEFAULT_HTTPS_PORT_NUMBER="8443" # only used at build time
 export WILDFLY_DEFAULT_AJP_PORT_NUMBER="8009" # only used at build time
 export WILDFLY_DEFAULT_MANAGEMENT_PORT_NUMBER="9990" # only used at build time
 
@@ -83,6 +85,7 @@ export WILDFLY_DEFAULT_MANAGEMENT_PORT_NUMBER="9990" # only used at build time
 export WILDFLY_SERVER_LISTEN_ADDRESS="${WILDFLY_SERVER_LISTEN_ADDRESS:-}" # only used during the first initialization
 export WILDFLY_MANAGEMENT_LISTEN_ADDRESS="${WILDFLY_MANAGEMENT_LISTEN_ADDRESS:-}" # only used during the first initialization
 export WILDFLY_HTTP_PORT_NUMBER="${WILDFLY_HTTP_PORT_NUMBER:-}" # only used during the first initialization
+export WILDFLY_HTTPS_PORT_NUMBER="${WILDFLY_HTTPS_PORT_NUMBER:-}" # only used during the first initialization
 export WILDFLY_AJP_PORT_NUMBER="${WILDFLY_AJP_PORT_NUMBER:-}" # only used during the first initialization
 export WILDFLY_MANAGEMENT_PORT_NUMBER="${WILDFLY_MANAGEMENT_PORT_NUMBER:-}" # only used during the first initialization
 export LAUNCH_JBOSS_IN_BACKGROUND="true"
