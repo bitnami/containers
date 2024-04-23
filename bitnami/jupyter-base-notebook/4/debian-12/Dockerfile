@@ -7,10 +7,12 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-04-09T11:00:21Z" \
+      org.opencontainers.image.created="2024-04-23T14:23:11Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
+      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/jupyter-base-notebook/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.1.5-debian-12-r1" \
+      org.opencontainers.image.ref.name="4.1.5-debian-12-r2" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jupyter-base-notebook" \
       org.opencontainers.image.title="jupyter-base-notebook" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="4.1.5"
@@ -26,7 +28,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libcrypt1 libgcc-s1 libstdc++6 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "miniconda-24.1.2-0-linux-${OS_ARCH}-debian-12" \
+      "miniconda-24.3.0-0-linux-${OS_ARCH}-debian-12" \
       "jupyter-base-notebook-4.1.5-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
