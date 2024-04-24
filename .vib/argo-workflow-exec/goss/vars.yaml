@@ -13,4 +13,6 @@ root_dir: /opt/bitnami
 version:
   bin_name: argoexec
   flag: version
-
+sed_in_place:
+  exclude_paths:
+    - /opt/bitnami/argo-workflow-exec/hack/copy-readme.sh
