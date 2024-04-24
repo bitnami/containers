@@ -84,6 +84,7 @@ docker build -t bitnami/APP:latest .
 | `KEYCLOAK_INIT_MAX_RETRIES`                                 | Maximum retries for checking that the database works                                                  | `10`                          |
 | `KEYCLOAK_CACHE_TYPE`                                       | Defines the cache mechanism for high-availability.                                                    | `ispn`                        |
 | `KEYCLOAK_CACHE_STACK`                                      | Apply a specific cache stack                                                                          | `nil`                         |
+| `KEYCLOAK_CACHE_CONFIG_FILE`                                | Path to the cache config file                                                                         | `nil`                         |
 | `KEYCLOAK_EXTRA_ARGS`                                       | Add extra startup parameters to keycloak                                                              | `nil`                         |
 | `KEYCLOAK_ENABLE_STATISTICS`                                | Enable metrics for the database                                                                       | `false`                       |
 | `KEYCLOAK_ENABLE_HEALTH_ENDPOINTS`                          | Enable health endpoints                                                                               | `false`                       |
