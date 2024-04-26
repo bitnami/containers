@@ -1,0 +1,16 @@
+binaries:
+  - valkey-cli
+  - valkey-server
+  - wait-for-port
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami
+      - /bitnami/valkey
+      - /bitnami/valkey/data
+      - /opt/bitnami/valkey
+      - /opt/bitnami/valkey/etc
+root_dir: /opt/bitnami
+version:
+  bin_name: valkey-server
+  flag: --version
