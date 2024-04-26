@@ -46,6 +46,7 @@ mediawiki_env_vars=(
     MEDIAWIKI_DATABASE_NAME
     MEDIAWIKI_DATABASE_USER
     MEDIAWIKI_DATABASE_PASSWORD
+    MEDIAWIKI_SKIP_CONFIG_VALIDATION
     SMTP_HOST
     SMTP_HOST_ID
     SMTP_PORT
@@ -76,6 +77,7 @@ export MEDIAWIKI_CONF_FILE="${MEDIAWIKI_BASE_DIR}/LocalSettings.php"
 # MediaWiki persistence configuration
 export MEDIAWIKI_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/mediawiki"
 export MEDIAWIKI_DATA_TO_PERSIST="${MEDIAWIKI_DATA_TO_PERSIST:-images extensions skins LocalSettings.php}"
+export MEDIAWIKI_SKIP_CONFIG_VALIDATION="${MEDIAWIKI_SKIP_CONFIG_VALIDATION:-no}"
 
 # MediaWiki site configuration
 export MEDIAWIKI_SKIP_BOOTSTRAP="${MEDIAWIKI_SKIP_BOOTSTRAP:-}" # only used during the first initialization

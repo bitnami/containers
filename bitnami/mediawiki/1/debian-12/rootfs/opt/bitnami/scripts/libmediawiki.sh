@@ -151,7 +151,12 @@ mediawiki_initialize() {
         db_port="$MEDIAWIKI_DATABASE_PORT_NUMBER"
         mediawiki_wait_for_db_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
         # Perform MediaWiki database schema upgrade
-        debug_execute php "${MEDIAWIKI_BASE_DIR}/maintenance/update.php"
+        info "Performing database schema upgrade if needed"
+        update_args=""
+        if is_boolean_yes "$MEDIAWIKI_SKIP_CONFIG_VALIDATION"; then
+            update_args+=" --skip-config-validation"
+        fi
+        debug_execute php "${MEDIAWIKI_BASE_DIR}/maintenance/update.php" $update_args
     fi
 
     # Avoid exit code of previous commands to affect the result of this function
