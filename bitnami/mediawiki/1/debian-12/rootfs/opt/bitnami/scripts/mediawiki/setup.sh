@@ -38,5 +38,7 @@ RewriteRule ^/?${MEDIAWIKI_WIKI_PREFIX:1}(/.*)?$ %{DOCUMENT_ROOT}/index.php
 RewriteRule ^/?${MEDIAWIKI_SCRIPT_PATH:1}(.*)$ %{DOCUMENT_ROOT}/\$1 [L]
 "
 
+web_server_update_app_configuration "mediawiki"
+
 # Ensure MediaWiki is initialized
 mediawiki_initialize
