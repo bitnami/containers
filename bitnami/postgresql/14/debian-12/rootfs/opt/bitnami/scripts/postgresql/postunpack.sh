@@ -28,3 +28,5 @@ cp -r "${POSTGRESQL_CONF_DIR}/"* "$POSTGRESQL_DEFAULT_CONF_DIR"
 
 # Redirect all logging to stdout
 ln -sf /dev/stdout "$POSTGRESQL_LOG_DIR/postgresql.log"
+ln -sf /dev/stdout "$POSTGRESQL_LOG_DIR/postgresql.csv"
+ln -sf /dev/stdout "$POSTGRESQL_LOG_DIR/postgresql.json"
