@@ -1,0 +1,17 @@
+binaries:
+  - valkey-cli
+  - valkey-server
+  - valkey-sentinel
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/valkey-sentinel
+      - /bitnami/valkey-sentinel/conf
+      - /opt/bitnami/valkey-sentinel
+      - /opt/bitnami/valkey-sentinel/etc
+      - /opt/bitnami/valkey-sentinel/logs
+      - /opt/bitnami/valkey-sentinel/tmp
+root_dir: /opt/bitnami
+version:
+  bin_name: valkey-server
+  flag: --version
