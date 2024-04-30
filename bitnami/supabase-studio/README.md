@@ -95,9 +95,9 @@ docker run --name supabase-studio bitnami/supabase-studio:latest
 | `SUPABASE_SERVICE_KEY`          | Supabase service key          | `nil`                                 |
 | `SUPABASE_SECRET_KEY`           | Supabase admin key            | `nil`                                 |
 | `PORT`                          | Supabase service port         | `4000`                                |
-| `SUPABASE_PUBLIC_URL`           | Supabase public urli          | `http://localhost:80`                 |
-| `STUDIO_PG_META_URL`            | Supabase PG Meta URL          | `http://localhost/pg`                 |
-| `SUPABASE_URL`                  | Supabase URL                  | `http://localhost/`                   |
+| `SUPABASE_PUBLIC_URL`           | Supabase public urli          | `http://localhost:8000`               |
+| `STUDIO_PG_META_URL`            | Supabase PG Meta URL          | `http://localhost:8000/pg`            |
+| `SUPABASE_URL`                  | Supabase URL                  | `http://localhost:8000/`              |
 
 #### Read-only environment variables
 
