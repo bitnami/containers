@@ -7,15 +7,15 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-04-23T15:40:57Z" \
+      org.opencontainers.image.created="2024-04-30T09:53:50Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/fluentd/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.16.5-debian-12-r3" \
+      org.opencontainers.image.ref.name="1.17.0-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/fluentd" \
       org.opencontainers.image.title="fluentd" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.16.5"
+      org.opencontainers.image.version="1.17.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,7 +29,7 @@ RUN install_packages ca-certificates curl libcrypt1 libgcc-s1 libjemalloc-dev li
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "ruby-3.1.5-0-linux-${OS_ARCH}-debian-12" \
-      "fluentd-1.16.5-0-linux-${OS_ARCH}-debian-12" \
+      "fluentd-1.17.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -48,7 +48,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/fluentd/postunpack.sh
-ENV APP_VERSION="1.16.5" \
+ENV APP_VERSION="1.17.0" \
     BITNAMI_APP_NAME="fluentd" \
     GEM_HOME="/opt/bitnami/fluentd" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/fluentd/bin:$PATH"
