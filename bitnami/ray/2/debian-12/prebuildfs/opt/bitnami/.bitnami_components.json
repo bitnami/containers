@@ -3,12 +3,12 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.11.9-7"
+        "version": "3.11.9-8"
     },
     "ray": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "2.12.0-0"
+        "version": "2.20.0-0"
     }
 }
