@@ -825,7 +825,7 @@ mysql_upgrade() {
     if [[ "$DB_FLAVOR" = *"mysql"* ]] && [[
         "$major_version" -gt "8"
         || ( "$major_version" -eq "8" && "$minor_version" -gt "0" )
-        || ( "$major_version" -eq "8" && "$minor_version" -eq "0" && "$patch_version" -ge "16" )
+        || ( "$major_version" -eq "8" && "$minor_version" -eq "0" && "$patch_version" -le "16" )
     ]]; then
         mysql_stop
         mysql_start_bg "--upgrade=FORCE"
