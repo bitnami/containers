@@ -7,11 +7,11 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-04-23T18:48:09Z" \
+      org.opencontainers.image.created="2024-05-04T11:30:22Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/percona-mysql/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.0.36-28-debian-12-r3" \
+      org.opencontainers.image.ref.name="8.0.36-28-debian-12-r4" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/percona-mysql" \
       org.opencontainers.image.title="percona-mysql" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -28,7 +28,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libaio1 libaudit1 libbrotli1 libbz2-1.0 libcap-ng0 libcom-err2 libcrypt1 libcurl4 libev4 libffi8 libgcc-s1 libgmp10 libgnutls30 libgssapi-krb5-2 libhogweed6 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.5-0 libnettle8 libnghttp2-14 libnuma-dev libp11-kit0 libpam0g libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl3 libstdc++6 libtasn1-6 libudev0 libudev1 libunistring2 libuuid1 libzstd1 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "mysql-shell-8.0.36-2-linux-${OS_ARCH}-debian-12" \
+      "mysql-shell-8.0.37-0-linux-${OS_ARCH}-debian-12" \
       "ini-file-1.4.6-11-linux-${OS_ARCH}-debian-12" \
       "percona-mysql-8.0.36-28-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
