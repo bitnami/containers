@@ -35,9 +35,6 @@ mysql_extra_flags() {
         dbExtraFlags+=("--server-id=$randNumber" "--binlog-format=ROW" "--log-bin=mysql-bin" "--sync-binlog=1")
         if [[ "$DB_REPLICATION_MODE" = "slave" ]]; then
             dbExtraFlags+=("--relay-log=mysql-relay-bin" "--log-slave-updates=1" "--read-only=1")
-            if [[ "$DB_FLAVOR" = "mysql" ]]; then
-                dbExtraFlags+=("--master-info-repository=TABLE" "--relay-log-info-repository=TABLE")
-            fi
         elif [[ "$DB_REPLICATION_MODE" = "master" ]]; then
             dbExtraFlags+=("--innodb_flush_log_at_trx_commit=1")
         fi
