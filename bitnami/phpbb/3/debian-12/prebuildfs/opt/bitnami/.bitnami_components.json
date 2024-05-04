@@ -21,7 +21,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.2.18-5"
+        "version": "8.2.18-7"
     },
     "phpbb": {
         "arch": "amd64",
