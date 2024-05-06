@@ -1,0 +1,8 @@
+{
+    "python": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "3.7.17-1"
+    }
+}
