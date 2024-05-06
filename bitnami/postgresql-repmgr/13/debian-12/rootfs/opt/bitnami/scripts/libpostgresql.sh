@@ -587,6 +587,11 @@ postgresql_clean_from_restart() {
 postgresql_initialize() {
     info "Initializing PostgreSQL database..."
 
+    # CD FIX
+    # brak czysczenia, powoduje blad pg_ctl "pg_ctl: another server might be running; trying to start server anyway"
+    # przy odpalaniu postgresa z run.sh (po setup.sh)
+    postgresql_clean_from_restart
+
     # This fixes an issue where the trap would kill the entrypoint.sh, if a PID was left over from a previous run
     # Exec replaces the process without creating a new one, and when the container is restarted it may have the same PID
     rm -f "$POSTGRESQL_PID_FILE"
@@ -755,6 +760,7 @@ postgresql_stop() {
     local -r -a cmd=("pg_ctl" "stop" "-w" "-D" "$POSTGRESQL_DATA_DIR" "-m" "$POSTGRESQL_SHUTDOWN_MODE" "-t" "$POSTGRESQL_PGCTLTIMEOUT")
     if [[ -f "$POSTGRESQL_PID_FILE" ]]; then
         info "Stopping PostgreSQL..."
+        debug "Executing: ${cmd[@]}"
         if am_i_root; then
             run_as_user "$POSTGRESQL_DAEMON_USER" "${cmd[@]}"
         else
@@ -784,6 +790,7 @@ postgresql_start_bg() {
         pg_ctl_cmd+=("run_as_user" "$POSTGRESQL_DAEMON_USER")
     fi
     pg_ctl_cmd+=("$POSTGRESQL_BIN_DIR"/pg_ctl)
+    debug "Executing: $pg_ctl_cmd start ${pg_ctl_flags[@]}"
     if [[ "${BITNAMI_DEBUG:-false}" = true ]] || [[ $pg_logs = true ]]; then
         "${pg_ctl_cmd[@]}" "start" "${pg_ctl_flags[@]}"
     else
@@ -1080,7 +1087,10 @@ postgresql_execute_print_output() {
     [[ "${#opts[@]}" -gt 0 ]] && args+=("${opts[@]}")
 
     # Execute the Query/queries from stdin
-    PGPASSWORD=$pass psql "${args[@]}"
+    local sql_cmd
+    sql_cmd="$(</dev/stdin)"
+    debug "Executing SQL command:\n$sql_cmd"
+    PGPASSWORD=$pass psql "${args[@]}" <<<"$sql_cmd"
 }
 
 ########################
