@@ -34,4 +34,4 @@ repmgr_postgresql_configuration
 # Prepare repmgr configuration
 repmgr_generate_repmgr_config
 # Initialize PostgreSQL & repmgr
-repmgr_initialize
+repmgr_initialize || exit $?
