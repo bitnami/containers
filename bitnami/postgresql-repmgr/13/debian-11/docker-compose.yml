@@ -1,0 +1,76 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+version: '2'
+services:
+  pg-0:
+    build: .
+    ports:
+      - 5432:5432
+    volumes:
+      - pg_0_data:/bitnami/postgresql
+    environment:
+      - POSTGRESQL_POSTGRES_PASSWORD=adminpassword
+      - POSTGRESQL_USERNAME=customuser
+      - POSTGRESQL_PASSWORD=custompassword
+      - POSTGRESQL_DATABASE=customdatabase
+      - REPMGR_PASSWORD=repmgrpassword
+      - REPMGR_PRIMARY_HOST=pg-0
+      - REPMGR_PRIMARY_PORT=5432
+      - REPMGR_WITNESS_NODE=pg-witness
+      - REPMGR_WITNESS_PORT=5432
+      - REPMGR_PARTNER_NODES=pg-witness:5432,pg-1:5432
+      - REPMGR_NODE_NAME=pg-0
+      - REPMGR_NODE_NETWORK_NAME=pg-0
+      - REPMGR_PORT_NUMBER=5432
+      - BITNAMI_DEBUG=true
+      - REPMGR_LOG_LEVEL=DEBUG
+  pg-1:
+    build: .
+    ports:
+      - 5433:5432
+    volumes:
+      - pg_1_data:/bitnami/postgresql
+    environment:
+      - POSTGRESQL_POSTGRES_PASSWORD=adminpassword
+      - POSTGRESQL_USERNAME=customuser
+      - POSTGRESQL_PASSWORD=custompassword
+      - POSTGRESQL_DATABASE=customdatabase
+      - REPMGR_PASSWORD=repmgrpassword
+      - REPMGR_PRIMARY_HOST=pg-0
+      - REPMGR_PRIMARY_PORT=5432
+      - REPMGR_WITNESS_NODE=pg-witness
+      - REPMGR_WITNESS_PORT=5432
+      - REPMGR_PARTNER_NODES=pg-witness:5432,pg-0:5432
+      - REPMGR_NODE_NAME=pg-1
+      - REPMGR_NODE_NETWORK_NAME=pg-1
+      - REPMGR_PORT_NUMBER=5432
+      - BITNAMI_DEBUG=true
+      - REPMGR_LOG_LEVEL=DEBUG
+  pg-witness:
+    build: .
+    ports:
+      - 5439:5432
+    volumes:
+      - pg_witness_data:/bitnami/postgresql
+    environment:
+      - POSTGRESQL_POSTGRES_PASSWORD=adminpassword
+      - POSTGRESQL_USERNAME=customuser
+      - POSTGRESQL_PASSWORD=custompassword
+      - POSTGRESQL_DATABASE=customdatabase
+      - REPMGR_PASSWORD=repmgrpassword
+      - REPMGR_PRIMARY_HOST=pg-0
+      - REPMGR_PRIMARY_PORT=5432
+      - REPMGR_NODE_NAME=pg-witness-9
+      - REPMGR_NODE_NETWORK_NAME=pg-witness
+      - REPMGR_PORT_NUMBER=5432
+      - REPMGR_NODE_TYPE=witness
+      - BITNAMI_DEBUG=true
+      - REPMGR_LOG_LEVEL=DEBUG
+volumes:
+  pg_0_data:
+    driver: local
+  pg_1_data:
+    driver: local
+  pg_witness_data:
+    driver: local
