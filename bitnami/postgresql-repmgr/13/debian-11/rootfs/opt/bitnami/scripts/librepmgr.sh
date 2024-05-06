@@ -13,6 +13,7 @@
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libvalidations.sh
 . /opt/bitnami/scripts/libnet.sh
+. /opt/bitnami/scripts/cd_additional.sh
 
 ########################
 # Get repmgr node id
@@ -89,7 +90,7 @@ repmgr_validate() {
         error_code=1
     }
 
-    if [[ -z "$REPMGR_PARTNER_NODES" ]]; then
+    if [[ -z "$REPMGR_PARTNER_NODES" && "$REPMGR_NODE_TYPE" != "witness" ]]; then
         print_validation_error "The list of partner nodes cannot be empty. Set the environment variable REPMGR_PARTNER_NODES with a comma separated list of partner nodes."
     fi
     if [[ -z "$REPMGR_PRIMARY_HOST" ]]; then
@@ -185,6 +186,9 @@ repmgr_get_upstream_node() {
                     debug "Pretending primary set to '${suggested_primary_host}:${suggested_primary_port}'!"
                     pretending_primary_host="$suggested_primary_host"
                     pretending_primary_port="$suggested_primary_port"
+                    # CD change
+                    # Zakładamy, że 1 na liście na wyższy priorytet (wie lepiej, niż pozostałe node'y). Nie sprawdzamy czy są spięte, weryfikując kto wg nich jest primary.
+                    break
                 fi
             else
                 warn "There were more than one primary when getting primary from node '$host:$port'"
@@ -232,7 +236,7 @@ repmgr_get_primary_node() {
         fi
     else
         if [[ -z "$upstream_host" ]]; then
-            if [[ "${REPMGR_PRIMARY_HOST}:${REPMGR_PRIMARY_PORT}" != "${REPMGR_NODE_NETWORK_NAME}:${REPMGR_PORT_NUMBER}" ]]; then
+            if ! node_is_the_same_like_repmgr_primary_variable; then
                 primary_host="$REPMGR_PRIMARY_HOST"
                 primary_port="$REPMGR_PRIMARY_PORT"
             fi
@@ -268,11 +272,18 @@ repmgr_set_role() {
 
     if [[ "$REPMGR_NODE_TYPE" = "data" ]]; then
       if [[ -z "$primary_host" ]]; then
-        info "There are no nodes with primary role. Assuming the primary role..."
-        role="primary"
+          info "There are no nodes with primary role. Assuming the primary role ($REPMGR_PRIMARY_HOST:$REPMGR_PRIMARY_PORT)..."
+          primary_host="${REPMGR_PRIMARY_HOST}"
+          primary_port="${REPMGR_PRIMARY_PORT}"
+      fi
+      # CD FIX
+      # primary_node zawsze jest ustawione, jeżeli primary z witness/konfiguracji odpowiada obecnemu node'owi to ten node jest primary
+      if [[ "$primary_host" = "$REPMGR_NODE_NETWORK_NAME" && "$primary_port" = "$REPMGR_PORT_NUMBER" ]]; then
+          info "Node configured as primary"
+          role="primary"
       else
-        info "Node configured as standby"
-        role="standby"
+          info "Node configured as standby"
+          role="standby"
       fi
     else
       info "Node configured as witness"
@@ -577,28 +588,8 @@ EOF
 #   None
 #########################
 repmgr_wait_primary_node() {
-    local return_value=1
-    local -i timeout=60
-    local -i step=10
-    local -i max_tries=$((timeout / step))
-    local schemata
-    info "Waiting for primary node..."
-    debug "Wait for schema $REPMGR_DATABASE.repmgr on '${REPMGR_CURRENT_PRIMARY_HOST}:${REPMGR_CURRENT_PRIMARY_PORT}', will try $max_tries times with $step delay seconds (TIMEOUT=$timeout)"
-    for ((i = 0; i <= timeout; i += step)); do
-        local query="SELECT 1 FROM information_schema.schemata WHERE catalog_name='$REPMGR_DATABASE' AND schema_name='repmgr'"
-        if ! schemata="$(echo "$query" | NO_ERRORS=true postgresql_remote_execute "$REPMGR_CURRENT_PRIMARY_HOST" "$REPMGR_CURRENT_PRIMARY_PORT" "$REPMGR_DATABASE" "$REPMGR_USERNAME" "$REPMGR_PASSWORD" "-tA")"; then
-            debug "Host '${REPMGR_CURRENT_PRIMARY_HOST}:${REPMGR_CURRENT_PRIMARY_PORT}' is not accessible"
-        else
-            if [[ $schemata -ne 1 ]]; then
-                debug "Schema $REPMGR_DATABASE.repmgr is still not accessible"
-            else
-                debug "Schema $REPMGR_DATABASE.repmgr exists!"
-                return_value=0 && break
-            fi
-        fi
-        sleep "$step"
-    done
-    return $return_value
+    cd_repmgr_wait_node "primary" "$REPMGR_CURRENT_PRIMARY_HOST" "$REPMGR_CURRENT_PRIMARY_PORT"
+    return $?
 }
 
 ########################
@@ -627,7 +618,7 @@ repmgr_clone_primary() {
     else
         PGPASSWORD="$REPMGR_PASSWORD" debug_execute "${REPMGR_BIN_DIR}/repmgr" "${flags[@]}"
     fi
-
+    date --rfc-3339=ns > "${POSTGRESQL_DATA_DIR}/${STANDBY_ALREADY_CLONED_FILENAME}"
 }
 
 ########################
@@ -719,7 +710,7 @@ repmgr_unregister_standby() {
 #########################
 repmgr_unregister_witness() {
     info "Unregistering witness node..."
-    local -r flags=("-f" "$REPMGR_CONF_FILE" "witness" "unregister" "-h" "$REPMGR_CURRENT_PRIMARY_HOST" "--verbose")
+    local -r flags=("-f" "$REPMGR_CONF_FILE" "witness" "unregister" "-h" "$REPMGR_CURRENT_PRIMARY_HOST" "--port" "$REPMGR_CURRENT_PRIMARY_PORT" "--verbose")
 
     # The command below can fail when the node doesn't exist yet
     if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
@@ -740,9 +731,7 @@ repmgr_unregister_witness() {
 #########################
 repmgr_register_witness() {
     info "Registering witness node..."
-    local -r flags=("-f" "$REPMGR_CONF_FILE" "witness" "register" "-h" "$REPMGR_CURRENT_PRIMARY_HOST" "--force" "--verbose")
-
-    repmgr_wait_primary_node
+    local -r flags=("witness" "register" "-f" "$REPMGR_CONF_FILE" "--host" "$REPMGR_CURRENT_PRIMARY_HOST" "--port" "$REPMGR_CURRENT_PRIMARY_PORT" "--force" "--verbose")
 
     if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
         PGPASSFILE="$REPMGR_PASSFILE_PATH" debug_execute "${REPMGR_BIN_DIR}/repmgr" "${flags[@]}"
@@ -816,17 +805,43 @@ repmgr_initialize() {
     debug "Node ID: '$(repmgr_get_node_id)', Rol: '$REPMGR_ROLE', Primary Node: '${REPMGR_CURRENT_PRIMARY_HOST}:${REPMGR_CURRENT_PRIMARY_PORT}'"
     info "Initializing Repmgr..."
 
+    if [[ "$REPMGR_ROLE" != "witness" ]]; then
+        if ! node_is_the_same_like_repmgr_primary_variable ||
+              ! is_dir_empty "$POSTGRESQL_DATA_DIR" &&
+              [[ ! -f "$POSTGRESQL_DATA_DIR/$FORCE_RUN_PRIMARY_WITHOUT_WITNESS_FILENAME" ]]; then
+          cd_repmgr_wait_witness_node || exit 1
+        else
+          debug "Skipping waiting on witness"
+        fi
+    fi
+
     ensure_dir_exists "$REPMGR_LOCK_DIR"
     am_i_root && chown "$POSTGRESQL_DAEMON_USER:$POSTGRESQL_DAEMON_GROUP" "$REPMGR_LOCK_DIR"
 
     if [[ "$REPMGR_ROLE" = "standby" ]]; then
         repmgr_wait_primary_node || exit 1
-        repmgr_rewind
+        # TODO: better way to detect it's a 1st boot
+        if [[ ! -f "$POSTGRESQL_CONF_FILE" ]] || ! is_boolean_yes "$REPMGR_SWITCH_ROLE"; then
+            if [[ ! -f "${POSTGRESQL_DATA_DIR}/${STANDBY_ALREADY_CLONED_FILENAME}" ]]; then
+              repmgr_clone_primary
+            fi
+        else
+          # CD FIX
+          # uruchomienie rewind/clonowania tylko gdy jest zmienna (nie chcemy tego za każdym razem odpalać)
+          if is_boolean_yes "$REPMGR_USE_PGREWIND"; then
+            repmgr_rewind || exit $?
+          fi
+        fi
     fi
+
     postgresql_initialize
+
+    # CD FIX
+    # akcept polaczen dopiero po 1 setupowym odpaleniu postgresa
+    # Allow remote connections, required to register primary and standby nodes
+    postgresql_enable_remote_connections
+
     if ! repmgr_is_file_external "postgresql.conf"; then
-        # Allow remote connections, required to register primary and standby nodes
-        postgresql_enable_remote_connections
         # Configure port and restrict access to PostgreSQL (MD5)
         postgresql_set_property "port" "$POSTGRESQL_PORT_NUMBER"
 
@@ -836,6 +851,7 @@ repmgr_initialize() {
     if ! repmgr_is_file_external "pg_hba.conf"; then
         is_boolean_yes "$REPMGR_PGHBA_TRUST_ALL" || postgresql_restrict_pghba
     fi
+
     if [[ "$REPMGR_ROLE" = "primary" ]]; then
         if is_boolean_yes "$POSTGRESQL_FIRST_BOOT"; then
             postgresql_start_bg
@@ -847,10 +863,6 @@ repmgr_initialize() {
             repmgr_register_primary
             # Allow running custom initialization scripts
             postgresql_custom_init_scripts
-            # Set synchronous replication
-            POSTGRESQL_CLUSTER_APP_NAME="$REPMGR_PARTNER_NODES"
-            export POSTGRESQL_CLUSTER_APP_NAME
-            postgresql_configure_synchronous_replication
         elif is_boolean_yes "$REPMGR_UPGRADE_EXTENSION"; then
             # Upgrade repmgr extension
             postgresql_start_bg
@@ -858,6 +870,7 @@ repmgr_initialize() {
         else
             debug "Skipping repmgr configuration..."
         fi
+        date --rfc-3339=ns > "${POSTGRESQL_DATA_DIR}/${STANDBY_ALREADY_CLONED_FILENAME}"
     elif [[ "$REPMGR_ROLE" = "standby" ]]; then
         local -r psql_major_version="$(postgresql_get_major_version)"
 
@@ -871,16 +884,31 @@ repmgr_initialize() {
         repmgr_unregister_standby
         repmgr_register_standby
 
-        if [[ "$psql_major_version" -lt "12" ]]; then
-            info "Check if primary running..."
-            repmgr_wait_primary_node
-            repmgr_standby_follow
+        repmgr_wait_for_resolve_replication_lag
+
+        local should_follow
+        if ! should_follow=$(should_follow_primary); then
+          exit 7
+        elif is_boolean_yes "$should_follow"; then
+          repmgr_follow_primary
         fi
     elif [[ "$REPMGR_ROLE" = "witness" ]]; then
-        postgresql_start_bg
-        repmgr_create_repmgr_user
-        repmgr_create_repmgr_db
-        repmgr_unregister_witness
-        repmgr_register_witness
+        if [[ ! -f "$POSTGRESQL_DATA_DIR/$WITNESS_ALREADY_STARTED_FILENAME" ]]; then
+            repmgr_wait_primary_node || exit 1
+            postgresql_start_bg
+            repmgr_create_repmgr_user
+            repmgr_create_repmgr_db
+            # Restart PostgreSQL
+            postgresql_stop
+            postgresql_start_bg
+            repmgr_register_witness
+            date --rfc-3339=ns > "$POSTGRESQL_DATA_DIR/$WITNESS_ALREADY_STARTED_FILENAME"
+        fi
     fi
+
+    if [[ -f "$POSTGRESQL_DATA_DIR/$FORCE_RUN_PRIMARY_WITHOUT_WITNESS_FILENAME" ]]; then
+        info "$FORCE_RUN_PRIMARY_WITHOUT_WITNESS_FILENAME exists, deleting..."
+        rm -f "$POSTGRESQL_DATA_DIR/$FORCE_RUN_PRIMARY_WITHOUT_WITNESS_FILENAME"
+    fi
+    info "Repmgr initialized successfully"
 }
