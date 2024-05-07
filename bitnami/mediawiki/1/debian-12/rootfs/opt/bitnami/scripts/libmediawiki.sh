@@ -124,7 +124,11 @@ mediawiki_initialize() {
         else
             info "An already initialized MediaWiki database was provided, configuration will be skipped"
             # Perform MediaWiki database schema upgrade
-            debug_execute php "${MEDIAWIKI_BASE_DIR}/maintenance/update.php"
+            local -a update_args=()
+            if is_boolean_yes "$MEDIAWIKI_SKIP_CONFIG_VALIDATION"; then
+                update_args+=( "--skip-config-validation" )
+            fi
+            debug_execute php "${MEDIAWIKI_BASE_DIR}/maintenance/update.php" "${update_args[@]}"
         fi
 
         # Configure MediaWiki based on environment variables
