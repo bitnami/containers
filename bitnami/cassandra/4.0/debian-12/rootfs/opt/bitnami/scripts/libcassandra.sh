@@ -17,12 +17,12 @@
 ########################
 # Change a Cassandra configuration yaml file by setting a property
 # Globals:
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
 #   $1 - property
 #   $2 - value
 #   $3 - Use quotes in value (default: yes)
-#   $4 - Path to configuration file (default: $CASSANDRA_CONF_FILE)
+#   $4 - Path to configuration file (default: $DB_CONF_FILE)
 # Returns:
 #   None
 #########################
@@ -30,7 +30,7 @@ cassandra_yaml_set() {
     local -r property="${1:?missing property}"
     local -r value="${2:?missing value}"
     local -r use_quotes="${3:-yes}"
-    local -r conf_file="${4:-$CASSANDRA_CONF_FILE}"
+    local -r conf_file="${4:-$DB_CONF_FILE}"
 
     if is_boolean_yes "$use_quotes"; then
         replace_in_file "$conf_file" "^(#\s)?(\s*)(\-\s*)?${property}:.*" "\2\3${property}: '${value}'"
@@ -42,31 +42,31 @@ cassandra_yaml_set() {
 #########################
 # Set default Cassandra settings if not set
 # Globals:
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
 #   None
 # Returns:
 #   None
 #########################
 cassandra_set_default_host() {
-    if [[ -z "${CASSANDRA_HOST:-}" ]]; then
-        warn "CASSANDRA_HOST not set, defaulting to system hostname"
+    if [[ -z "${DB_HOST:-}" ]]; then
+        warn "DB_HOST not set, defaulting to system hostname"
         local -r host="$(hostname)"
-        export CASSANDRA_HOST="$host"
-        export CASSANDRA_SEEDS="${CASSANDRA_SEEDS:-$CASSANDRA_HOST}"
-        export CASSANDRA_PEERS="${CASSANDRA_PEERS:-$CASSANDRA_SEEDS}"
+        export DB_HOST="$host"
+        export DB_SEEDS="${DB_SEEDS:-$DB_HOST}"
+        export DB_PEERS="${DB_PEERS:-$DB_SEEDS}"
     fi
 }
 
 ########################
 # Change a Cassandra configuration yaml file by setting a property as an array
 # Globals:
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
 #   $1 - property
 #   $2 - comma-separated string with the different values
 #   $3 - Use quotes in value (default: no)
-#   $4 - Path to configuration file (default: $CASSANDRA_CONF_FILE)
+#   $4 - Path to configuration file (default: $DB_CONF_FILE)
 # Returns:
 #   None
 #########################
@@ -74,7 +74,7 @@ cassandra_yaml_set_as_array() {
     local -r property="${1:?missing property}"
     local -r array="${2:?missing value}"
     local -r use_quotes="${3:-no}"
-    local -r conf_file="${4:-$CASSANDRA_CONF_FILE}"
+    local -r conf_file="${4:-$DB_CONF_FILE}"
     local substitution="\2${property}:"
 
     for value in "${array[@]}"; do
@@ -88,16 +88,16 @@ cassandra_yaml_set_as_array() {
 }
 
 ########################
-# Validate settings in CASSANDRA_* environment variables
+# Validate settings in DB_* environment variables
 # Globals:
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
 #   None
 # Returns:
 #   None
 #########################
 cassandra_validate() {
-    info "Validating settings in CASSANDRA_* env vars.."
+    info "Validating settings in DB_* env vars.."
     local error_code=0
 
     # Auxiliary functions
@@ -180,70 +180,70 @@ cassandra_validate() {
         fi
     }
 
-    check_password_file CASSANDRA_PASSWORD_FILE
-    check_password_file CASSANDRA_TRUSTSTORE_PASSWORD_FILE
-    check_password_file CASSANDRA_KEYSTORE_PASSWORD_FILE
+    check_password_file DB_PASSWORD_FILE
+    check_password_file DB_TRUSTSTORE_PASSWORD_FILE
+    check_password_file DB_KEYSTORE_PASSWORD_FILE
 
-    check_empty_value CASSANDRA_RACK
-    check_empty_value CASSANDRA_DATACENTER
+    check_empty_value DB_RACK
+    check_empty_value DB_DATACENTER
 
-    if [[ -z $CASSANDRA_PASSWORD ]]; then
+    if [[ -z $DB_PASSWORD ]]; then
         if ! is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
             empty_password_warn
-            export CASSANDRA_PASSWORD="cassandra"
+            export DB_PASSWORD="cassandra"
         else
             empty_password_enabled_warn
         fi
     fi
 
-    check_default_password CASSANDRA_PASSWORD
+    check_default_password DB_PASSWORD
 
-    if is_boolean_yes "$CASSANDRA_CLIENT_ENCRYPTION" || is_boolean_yes "$CASSANDRA_INTERNODE_ENCRYPTION"; then
-        check_empty_value CASSANDRA_KEYSTORE_PASSWORD
-        check_empty_value CASSANDRA_TRUSTSTORE_PASSWORD
-        check_default_password CASSANDRA_KEYSTORE_PASSWORD
-        check_default_password CASSANDRA_TRUSTSTORE_PASSWORD
+    if is_boolean_yes "$DB_CLIENT_ENCRYPTION" || is_boolean_yes "$DB_INTERNODE_ENCRYPTION"; then
+        check_empty_value DB_KEYSTORE_PASSWORD
+        check_empty_value DB_TRUSTSTORE_PASSWORD
+        check_default_password DB_KEYSTORE_PASSWORD
+        check_default_password DB_TRUSTSTORE_PASSWORD
     fi
 
-    check_yes_no_value CASSANDRA_PASSWORD_SEEDER
-    check_true_false_value CASSANDRA_ENABLE_REMOTE_CONNECTIONS
-    check_true_false_value CASSANDRA_CLIENT_ENCRYPTION
-    check_true_false_value CASSANDRA_ENABLE_USER_DEFINED_FUNCTIONS
-    check_true_false_value CASSANDRA_ENABLE_SCRIPTED_USER_DEFINED_FUNCTIONS
-    check_positive_value CASSANDRA_NUM_TOKENS
-    check_positive_value CASSANDRA_INIT_MAX_RETRIES
-    check_positive_value CASSANDRA_CQL_MAX_RETRIES
-    check_positive_value CASSANDRA_PEER_CQL_MAX_RETRIES
-    check_positive_value CASSANDRA_INIT_SLEEP_TIME
-    check_positive_value CASSANDRA_CQL_SLEEP_TIME
-    check_positive_value CASSANDRA_PEER_CQL_SLEEP_TIME
-    check_positive_value CASSANDRA_CQL_PORT_NUMBER
-    check_positive_value CASSANDRA_JMX_PORT_NUMBER
-    check_positive_value CASSANDRA_TRANSPORT_PORT_NUMBER
+    check_yes_no_value DB_PASSWORD_SEEDER
+    check_true_false_value DB_ENABLE_REMOTE_CONNECTIONS
+    check_true_false_value DB_CLIENT_ENCRYPTION
+    check_true_false_value DB_ENABLE_USER_DEFINED_FUNCTIONS
+    check_true_false_value DB_ENABLE_SCRIPTED_USER_DEFINED_FUNCTIONS
+    check_positive_value DB_NUM_TOKENS
+    check_positive_value DB_INIT_MAX_RETRIES
+    check_positive_value DB_CQL_MAX_RETRIES
+    check_positive_value DB_PEER_CQL_MAX_RETRIES
+    check_positive_value DB_INIT_SLEEP_TIME
+    check_positive_value DB_CQL_SLEEP_TIME
+    check_positive_value DB_PEER_CQL_SLEEP_TIME
+    check_positive_value DB_CQL_PORT_NUMBER
+    check_positive_value DB_JMX_PORT_NUMBER
+    check_positive_value DB_TRANSPORT_PORT_NUMBER
 
-    check_conflicting_ports CASSANDRA_CQL_PORT_NUMBER CASSANDRA_JMX_PORT_NUMBER CASSANDRA_TRANSPORT_PORT_NUMBER
+    check_conflicting_ports DB_CQL_PORT_NUMBER DB_JMX_PORT_NUMBER DB_TRANSPORT_PORT_NUMBER
 
-    check_allowed_port CASSANDRA_CQL_PORT_NUMBER
-    check_allowed_port CASSANDRA_TRANSPORT_PORT_NUMBER
-    check_allowed_port CASSANDRA_JMX_PORT_NUMBER
+    check_allowed_port DB_CQL_PORT_NUMBER
+    check_allowed_port DB_TRANSPORT_PORT_NUMBER
+    check_allowed_port DB_JMX_PORT_NUMBER
 
-    check_resolved_hostname "$CASSANDRA_HOST"
-    for peer in ${CASSANDRA_PEERS//,/ }; do
+    check_resolved_hostname "$DB_HOST"
+    for peer in ${DB_PEERS//,/ }; do
         check_resolved_hostname "$peer"
     done
-    for seed in ${CASSANDRA_SEEDS//,/ }; do
+    for seed in ${DB_SEEDS//,/ }; do
         check_resolved_hostname "$seed"
     done
 
-    if [[ ! ${CASSANDRA_AUTO_SNAPSHOT_TTL} =~ ([1-9]{1}[0-9]{0,}[d|h|m]) ]]; then
-        print_validation_error "CASSANDRA_AUTO_SNAPSHOT_TTL accepted units: d (days), h (hours) or m (minutes)"
+    if [[ ! ${DB_AUTO_SNAPSHOT_TTL} =~ ([1-9]{1}[0-9]{0,}[d|h|m]) ]]; then
+        print_validation_error "DB_AUTO_SNAPSHOT_TTL accepted units: d (days), h (hours) or m (minutes)"
     fi
 
-    check_true_false_value CASSANDRA_SSL_VALIDATE
-    check_true_false_value CASSANDRA_AUTOMATIC_SSTABLE_UPGRADE
+    check_true_false_value DB_SSL_VALIDATE
+    check_true_false_value DB_AUTOMATIC_SSTABLE_UPGRADE
 
-    if ((${#CASSANDRA_PASSWORD} > 512)); then
-        print_validation_error "The password cannot be longer than 512 characters. Set the environment variable CASSANDRA_PASSWORD with a shorter value"
+    if ((${#DB_PASSWORD} > 512)); then
+        print_validation_error "The password cannot be longer than 512 characters. Set the environment variable DB_PASSWORD with a shorter value"
     fi
 
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
@@ -252,7 +252,7 @@ cassandra_validate() {
 ########################
 # Check if a given configuration file was mounted externally
 # Globals:
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
 #   $1 - Filename
 # Returns:
@@ -260,7 +260,7 @@ cassandra_validate() {
 #########################
 cassandra_is_file_external() {
     local -r filename="${1:?file_is_missing}"
-    if [[ -f "${CASSANDRA_MOUNTED_CONF_DIR}/${filename}" ]]; then
+    if [[ -f "${DB_MOUNTED_CONF_DIR}/${filename}" ]]; then
         true
     else
         false
@@ -270,22 +270,22 @@ cassandra_is_file_external() {
 ########################
 # Copy mounted configuration files
 # Globals:
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
 #   None
 # Returns:
 #   None
 #########################
 cassandra_copy_mounted_config() {
-    if ! is_dir_empty "$CASSANDRA_MOUNTED_CONF_DIR"; then
-        cp -Lr "$CASSANDRA_MOUNTED_CONF_DIR"/* "$CASSANDRA_CONF_DIR"
+    if ! is_dir_empty "$DB_MOUNTED_CONF_DIR"; then
+        cp -Lr "$DB_MOUNTED_CONF_DIR"/* "$DB_CONF_DIR"
     fi
 }
 
 ########################
 # Copy default configuration files in case there are no mounted ones
 # Globals:
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
 #   None
 # Returns:
@@ -293,10 +293,10 @@ cassandra_copy_mounted_config() {
 #########################
 cassandra_copy_default_config() {
     local -r tmp_file_list=/tmp/conf_file_list
-    find "$CASSANDRA_DEFAULT_CONF_DIR" -type f >$tmp_file_list
+    find "$DB_DEFAULT_CONF_DIR" -type f >$tmp_file_list
     while read -r f; do
-        filename="${f#"${CASSANDRA_DEFAULT_CONF_DIR}/"}" # Get path with subfolder
-        dest="${f//$CASSANDRA_DEFAULT_CONF_DIR/$CASSANDRA_CONF_DIR}"
+        filename="${f#"${DB_DEFAULT_CONF_DIR}/"}" # Get path with subfolder
+        dest="${f//$DB_DEFAULT_CONF_DIR/$DB_CONF_DIR}"
         if [[ -f "$dest" ]]; then
             debug "Found ${filename}. Skipping default"
         else
@@ -312,7 +312,7 @@ cassandra_copy_default_config() {
 ########################
 # Configure the path to the different data directories (ignored if cassandra.yaml is mounted)
 # Globals:
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
 #   None
 # Returns:
@@ -320,12 +320,12 @@ cassandra_copy_default_config() {
 #########################
 cassandra_setup_data_dirs() {
     if ! cassandra_is_file_external "cassandra.yaml"; then
-        cassandra_yaml_set_as_array data_file_directories "${CASSANDRA_DATA_DIR}/data" "$CASSANDRA_CONF_FILE"
+        cassandra_yaml_set_as_array data_file_directories "${DB_DATA_DIR}/data" "$DB_CONF_FILE"
 
-        cassandra_yaml_set commitlog_directory "$CASSANDRA_COMMITLOG_DIR"
-        cassandra_yaml_set hints_directory "${CASSANDRA_DATA_DIR}/hints"
-        cassandra_yaml_set cdc_raw_directory "${CASSANDRA_DATA_DIR}/cdc_raw"
-        cassandra_yaml_set saved_caches_directory "${CASSANDRA_DATA_DIR}/saved_caches"
+        cassandra_yaml_set commitlog_directory "$DB_COMMITLOG_DIR"
+        cassandra_yaml_set hints_directory "${DB_DATA_DIR}/hints"
+        cassandra_yaml_set cdc_raw_directory "${DB_DATA_DIR}/cdc_raw"
+        cassandra_yaml_set saved_caches_directory "${DB_DATA_DIR}/saved_caches"
     else
         debug "cassandra.yaml mounted. Skipping data directory configuration"
     fi
@@ -334,7 +334,7 @@ cassandra_setup_data_dirs() {
 ########################
 # Enable password-based authentication (ignored if cassandra.yaml is mounted)
 # Globals:
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
 #   None
 # Returns:
@@ -342,12 +342,12 @@ cassandra_setup_data_dirs() {
 #########################
 cassandra_enable_auth() {
     if ! cassandra_is_file_external "cassandra.yaml"; then
-        if [[ "$ALLOW_EMPTY_PASSWORD" = "yes" ]] && [[ -z $CASSANDRA_PASSWORD ]]; then
+        if [[ "$ALLOW_EMPTY_PASSWORD" = "yes" ]] && [[ -z $DB_PASSWORD ]]; then
             cassandra_yaml_set "authenticator" "AllowAllAuthenticator"
             cassandra_yaml_set "authorizer" "AllowAllAuthorizer"
         else
-            cassandra_yaml_set "authenticator" "${CASSANDRA_AUTHENTICATOR}"
-            cassandra_yaml_set "authorizer" "${CASSANDRA_AUTHORIZER}"
+            cassandra_yaml_set "authenticator" "${DB_AUTHENTICATOR}"
+            cassandra_yaml_set "authorizer" "${DB_AUTHORIZER}"
         fi
     else
         debug "cassandra.yaml mounted. Skipping authentication method configuration"
@@ -357,7 +357,7 @@ cassandra_enable_auth() {
 ########################
 # Configure logging settings (ignored if logback.xml is mounted)
 # Globals:
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
 #   None
 # Returns:
@@ -365,9 +365,9 @@ cassandra_enable_auth() {
 #########################
 cassandra_setup_logging() {
     if ! cassandra_is_file_external "logback.xml"; then
-        replace_in_file "${CASSANDRA_CONF_DIR}/logback.xml" "system[.]log" "cassandra.log"
+        replace_in_file "${DB_CONF_DIR}/logback.xml" "system[.]log" "cassandra.log"
         if [[ "$BITNAMI_DEBUG" = "false" ]]; then
-            replace_in_file "${CASSANDRA_CONF_DIR}/logback.xml" "(<appender-ref\s+ref=\"ASYNCDEBUGLOG\"\s+\/>)" "<!-- \1 -->"
+            replace_in_file "${DB_CONF_DIR}/logback.xml" "(<appender-ref\s+ref=\"ASYNCDEBUGLOG\"\s+\/>)" "<!-- \1 -->"
         fi
     else
         debug "logback.xml mounted. Skipping logging configuration"
@@ -377,7 +377,7 @@ cassandra_setup_logging() {
 ########################
 # Configure cluster settings (modifies cassandra.yaml and cassandra-env.sh if not mounted)
 # Globals:
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
 #   None
 # Returns:
@@ -388,46 +388,46 @@ cassandra_setup_cluster() {
     local rpc_address="127.0.0.1"
     local cassandra_config
 
-    if [[ "$CASSANDRA_ENABLE_REMOTE_CONNECTIONS" = "true" ]]; then
-        host="$CASSANDRA_HOST"
+    if [[ "$DB_ENABLE_REMOTE_CONNECTIONS" = "true" ]]; then
+        host="$DB_HOST"
         rpc_address="0.0.0.0"
     fi
     # cassandra.yaml changes
     if ! cassandra_is_file_external "cassandra.yaml"; then
-        cassandra_yaml_set "num_tokens" "$CASSANDRA_NUM_TOKENS" "no"
-        cassandra_yaml_set "cluster_name" "$CASSANDRA_CLUSTER_NAME"
+        cassandra_yaml_set "num_tokens" "$DB_NUM_TOKENS" "no"
+        cassandra_yaml_set "cluster_name" "$DB_CLUSTER_NAME"
         cassandra_yaml_set "listen_address" "$host"
-        cassandra_yaml_set "seeds" "$CASSANDRA_SEEDS"
-        cassandra_yaml_set "start_rpc" "$CASSANDRA_ENABLE_RPC" "no"
-        cassandra_yaml_set "enable_user_defined_functions" "$CASSANDRA_ENABLE_USER_DEFINED_FUNCTIONS" "no"
-        cassandra_yaml_set "enable_scripted_user_defined_functions" "$CASSANDRA_ENABLE_SCRIPTED_USER_DEFINED_FUNCTIONS" "no"
+        cassandra_yaml_set "seeds" "$DB_SEEDS"
+        cassandra_yaml_set "start_rpc" "$DB_ENABLE_RPC" "no"
+        cassandra_yaml_set "enable_user_defined_functions" "$DB_ENABLE_USER_DEFINED_FUNCTIONS" "no"
+        cassandra_yaml_set "enable_scripted_user_defined_functions" "$DB_ENABLE_SCRIPTED_USER_DEFINED_FUNCTIONS" "no"
         cassandra_yaml_set "rpc_address" "$rpc_address"
         cassandra_yaml_set "broadcast_rpc_address" "$host"
-        cassandra_yaml_set "endpoint_snitch" "$CASSANDRA_ENDPOINT_SNITCH"
-        cassandra_yaml_set "internode_encryption" "$CASSANDRA_INTERNODE_ENCRYPTION"
-        cassandra_yaml_set "keystore" "$CASSANDRA_KEYSTORE_LOCATION"
-        cassandra_yaml_set "keystore_password" "$CASSANDRA_KEYSTORE_PASSWORD"
-        cassandra_yaml_set "truststore" "$CASSANDRA_TRUSTSTORE_LOCATION"
-        cassandra_yaml_set "truststore_password" "$CASSANDRA_TRUSTSTORE_PASSWORD"
-        cassandra_yaml_set "auto_snapshot_ttl" "$CASSANDRA_AUTO_SNAPSHOT_TTL"
+        cassandra_yaml_set "endpoint_snitch" "$DB_ENDPOINT_SNITCH"
+        cassandra_yaml_set "internode_encryption" "$DB_INTERNODE_ENCRYPTION"
+        cassandra_yaml_set "keystore" "$DB_KEYSTORE_LOCATION"
+        cassandra_yaml_set "keystore_password" "$DB_KEYSTORE_PASSWORD"
+        cassandra_yaml_set "truststore" "$DB_TRUSTSTORE_LOCATION"
+        cassandra_yaml_set "truststore_password" "$DB_TRUSTSTORE_PASSWORD"
+        cassandra_yaml_set "auto_snapshot_ttl" "$DB_AUTO_SNAPSHOT_TTL"
 
-        if [[ -n "$CASSANDRA_BROADCAST_ADDRESS" ]]; then
-            cassandra_yaml_set "broadcast_address" "$CASSANDRA_BROADCAST_ADDRESS"
+        if [[ -n "$DB_BROADCAST_ADDRESS" ]]; then
+            cassandra_yaml_set "broadcast_address" "$DB_BROADCAST_ADDRESS"
         fi
 
-        if [[ -n "$CASSANDRA_AUTOMATIC_SSTABLE_UPGRADE" ]]; then
-            cassandra_yaml_set "automatic_sstable_upgrade" "$CASSANDRA_AUTOMATIC_SSTABLE_UPGRADE"
+        if [[ -n "$DB_AUTOMATIC_SSTABLE_UPGRADE" ]]; then
+            cassandra_yaml_set "automatic_sstable_upgrade" "$DB_AUTOMATIC_SSTABLE_UPGRADE"
         fi
 
-        cassandra_config="$(sed -E "/client_encryption_options:.*/ {N;N; s/client_encryption_options:[^\n]*(\n\s+#.*)?(\n\s+enabled:).*/client_encryption_options:\1\2 $CASSANDRA_CLIENT_ENCRYPTION/g}" "$CASSANDRA_CONF_FILE")"
-        echo "$cassandra_config" >"$CASSANDRA_CONF_FILE"
+        cassandra_config="$(sed -E "/client_encryption_options:.*/ {N;N; s/client_encryption_options:[^\n]*(\n\s+#.*)?(\n\s+enabled:).*/client_encryption_options:\1\2 $DB_CLIENT_ENCRYPTION/g}" "$DB_CONF_FILE")"
+        echo "$cassandra_config" >"$DB_CONF_FILE"
     else
         debug "cassandra.yaml mounted. Skipping cluster configuration"
     fi
 
     # cassandra-env.sh changes
     if ! cassandra_is_file_external "cassandra-env.sh"; then
-        replace_in_file "${CASSANDRA_CONF_DIR}/cassandra-env.sh" "#\s*JVM_OPTS=\"\$JVM_OPTS -Djava[.]rmi[.]server[.]hostname=[^\"]*" "JVM_OPTS=\"\$JVM_OPTS -Djava.rmi.server.hostname=${host}"
+        replace_in_file "${DB_CONF_DIR}/cassandra-env.sh" "#\s*JVM_OPTS=\"\$JVM_OPTS -Djava[.]rmi[.]server[.]hostname=[^\"]*" "JVM_OPTS=\"\$JVM_OPTS -Djava.rmi.server.hostname=${host}"
     else
         debug "cassandra-env.sh mounted. Skipping setting server hostname"
     fi
@@ -436,7 +436,7 @@ cassandra_setup_cluster() {
 ########################
 # Configure java path (ignored if cassandra-env.sh is mounted)
 # Globals:
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
 #   None
 # Returns:
@@ -444,7 +444,7 @@ cassandra_setup_cluster() {
 #########################
 cassandra_setup_java() {
     if ! cassandra_is_file_external "cassandra-env.sh"; then
-        replace_in_file "${CASSANDRA_CONF_DIR}/cassandra-env.sh" "(calculate_heap_sizes\(\))" "\nJAVA_HOME=$JAVA_BASE_DIR\nJAVA=$JAVA_BIN_DIR/java\n\n\1"
+        replace_in_file "${DB_CONF_DIR}/cassandra-env.sh" "(calculate_heap_sizes\(\))" "\nJAVA_HOME=$JAVA_BASE_DIR\nJAVA=$JAVA_BIN_DIR/java\n\n\1"
     else
         debug "cassandra-env.sh mounted. Skipping JAVA_HOME configuration"
     fi
@@ -453,7 +453,7 @@ cassandra_setup_java() {
 ########################
 # Configure jemalloc path (ignored if cassandra-env.sh is mounted)
 # Globals:
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
 #   None
 # Returns:
@@ -462,7 +462,7 @@ cassandra_setup_java() {
 cassandra_setup_jemalloc() {
     if ! cassandra_is_file_external "cassandra-env.sh"; then
         if [[ -n "$(find_jemalloc_lib)" ]]; then
-            echo "JVM_OPTS=\"\$JVM_OPTS -Dcassandra.libjemalloc=$(find_jemalloc_lib)\"" >>"${CASSANDRA_CONF_DIR}/cassandra-env.sh"
+            echo "JVM_OPTS=\"\$JVM_OPTS -Dcassandra.libjemalloc=$(find_jemalloc_lib)\"" >>"${DB_CONF_DIR}/cassandra-env.sh"
         else
             warn "Couldn't find jemalloc installed. Skipping jemalloc configuration."
         fi
@@ -474,20 +474,20 @@ cassandra_setup_jemalloc() {
 ########################
 # Change the password for the cassandra user
 # Globals:
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
 #   1 - Old password (default: cassandra)
-#   2 - New Password (default: $CASSANDRA_PASSWORD)
-#   3 - Maximum number of retries (default: $CASSANDRA_CQL_MAX_RETRIES)
-#   4 - Sleep time between retries (default: $CASSANDRA_CQL_SLEEP_TIME)
+#   2 - New Password (default: $DB_PASSWORD)
+#   3 - Maximum number of retries (default: $DB_CQL_MAX_RETRIES)
+#   4 - Sleep time between retries (default: $DB_CQL_SLEEP_TIME)
 # Returns:
 #   None
 #########################
 cassandra_change_cassandra_password() {
     local -r old_password="${1:-cassandra}"
-    local -r new_password="${2:-$CASSANDRA_PASSWORD}"
-    local -r retries="${3:-$CASSANDRA_CQL_MAX_RETRIES}"
-    local -r sleep_time="${4:-$CASSANDRA_CQL_SLEEP_TIME}"
+    local -r new_password="${2:-$DB_PASSWORD}"
+    local -r retries="${3:-$DB_CQL_MAX_RETRIES}"
+    local -r sleep_time="${4:-$DB_CQL_SLEEP_TIME}"
 
     info 'Updating the password for the "cassandra" user...'
     local -r user="cassandra"
@@ -503,24 +503,24 @@ cassandra_change_cassandra_password() {
 ########################
 # Create a new admin user
 # Globals:
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
-#   1 - New username (default: $CASSANDRA_USER)
-#   2 - New user password (default: $CASSANDRA_PASSWORD)
+#   1 - New username (default: $DB_USER)
+#   2 - New user password (default: $DB_PASSWORD)
 #   3 - Admin username (which will create the new user) (default: cassandra)
 #   4 - Admin password (default: cassandra)
-#   5 - Maximum number of retries (default: $CASSANDRA_CQL_MAX_RETRIES)
-#   6 - Sleep time between retries (default: $CASSANDRA_CQL_SLEEP_TIME)
+#   5 - Maximum number of retries (default: $DB_CQL_MAX_RETRIES)
+#   6 - Sleep time between retries (default: $DB_CQL_SLEEP_TIME)
 # Returns:
 #   None
 #########################
 cassandra_create_admin_user() {
-    local -r new_user="${1:-$CASSANDRA_USER}"
-    local -r password="${2:-$CASSANDRA_PASSWORD}"
+    local -r new_user="${1:-$DB_USER}"
+    local -r password="${2:-$DB_PASSWORD}"
     local -r admin_user="${3:-cassandra}"
     local -r admin_user_password="${4:-cassandra}"
-    local -r retries="${5:-$CASSANDRA_CQL_MAX_RETRIES}"
-    local -r sleep_time="${6:-$CASSANDRA_CQL_SLEEP_TIME}"
+    local -r retries="${5:-$DB_CQL_MAX_RETRIES}"
+    local -r sleep_time="${6:-$DB_CQL_SLEEP_TIME}"
 
     info "Creating super-user $new_user"
     local -r escaped_password="${password//\'/\'\'}"
@@ -531,7 +531,7 @@ cassandra_create_admin_user() {
 ########################
 # Configure port binding (modifies cassandra.yaml and cassandra-env.sh if not mounted)
 # Globals:
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
 #   None
 # Returns:
@@ -539,14 +539,14 @@ cassandra_create_admin_user() {
 #########################
 cassandra_setup_ports() {
     if ! cassandra_is_file_external "cassandra.yaml"; then
-        cassandra_yaml_set "native_transport_port" "$CASSANDRA_CQL_PORT_NUMBER" "no"
-        cassandra_yaml_set "storage_port" "$CASSANDRA_TRANSPORT_PORT_NUMBER" "no"
+        cassandra_yaml_set "native_transport_port" "$DB_CQL_PORT_NUMBER" "no"
+        cassandra_yaml_set "storage_port" "$DB_TRANSPORT_PORT_NUMBER" "no"
     else
         debug "cassandra.yaml mounted. Skipping native and storage ports configuration"
     fi
 
     if ! cassandra_is_file_external "cassandra-env.sh"; then
-        replace_in_file "${CASSANDRA_CONF_DIR}/cassandra-env.sh" "JMX_PORT=.*" "JMX_PORT=$CASSANDRA_JMX_PORT_NUMBER"
+        replace_in_file "${DB_CONF_DIR}/cassandra-env.sh" "JMX_PORT=.*" "JMX_PORT=$DB_JMX_PORT_NUMBER"
     else
         debug "cassandra-env.sh mounted. Skipping JMX port configuration"
     fi
@@ -555,7 +555,7 @@ cassandra_setup_ports() {
 ########################
 # Configure rack and datacenter (ignored if cassandra-rackdc.properties is mounted)
 # Globals:
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
 #   None
 # Returns:
@@ -563,8 +563,8 @@ cassandra_setup_ports() {
 #########################
 cassandra_setup_rack_dc() {
     if ! cassandra_is_file_external "cassandra-rackdc.properties"; then
-        replace_in_file "${CASSANDRA_CONF_DIR}/cassandra-rackdc.properties" "dc=.*" "dc=${CASSANDRA_DATACENTER}"
-        replace_in_file "${CASSANDRA_CONF_DIR}/cassandra-rackdc.properties" "rack=.*" "rack=${CASSANDRA_RACK}"
+        replace_in_file "${DB_CONF_DIR}/cassandra-rackdc.properties" "dc=.*" "dc=${DB_DATACENTER}"
+        replace_in_file "${DB_CONF_DIR}/cassandra-rackdc.properties" "rack=.*" "rack=${DB_RACK}"
     else
         debug "cassandra-rackdc.properties mounted. Skipping rack and datacenter configuration"
     fi
@@ -573,24 +573,24 @@ cassandra_setup_rack_dc() {
 ########################
 # Remove PIDs, log files and conf files from a previous run (case of container restart)
 # Globals:
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
 #   None
 # Returns:
 #   None
 #########################
 cassandra_clean_from_restart() {
-    rm -f "$CASSANDRA_PID_FILE"
-    rm -f "$CASSANDRA_FIRST_BOOT_LOG_FILE" "$CASSANDRA_INITSCRIPTS_BOOT_LOG_FILE"
-    if ! is_dir_empty "$CASSANDRA_CONF_DIR"; then
-        rm -rf "${CASSANDRA_CONF_DIR:?}"/*
+    rm -f "$DB_PID_FILE"
+    rm -f "$DB_FIRST_BOOT_LOG_FILE" "$DB_INITSCRIPTS_BOOT_LOG_FILE"
+    if ! is_dir_empty "$DB_CONF_DIR"; then
+        rm -rf "${DB_CONF_DIR:?}"/*
     fi
 }
 
 ########################
 # Generate the client configurartion if ssl is configured in the server
 # Globals:
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
 #   None
 # Returns:
@@ -600,21 +600,21 @@ cassandra_setup_client_ssl() {
     info "Configuring client for SSL"
 
     # The key is store in a jks keystore and needs to be converted to pks12 to be extracted
-    keytool -importkeystore -srckeystore "${CASSANDRA_KEYSTORE_LOCATION}" \
-        -destkeystore "${CASSANDRA_TMP_P12_FILE}" \
+    keytool -importkeystore -srckeystore "${DB_KEYSTORE_LOCATION}" \
+        -destkeystore "${DB_TMP_P12_FILE}" \
         -deststoretype PKCS12 \
-        -srcstorepass "${CASSANDRA_KEYSTORE_PASSWORD}" \
-        -deststorepass "${CASSANDRA_KEYSTORE_PASSWORD}"
+        -srcstorepass "${DB_KEYSTORE_PASSWORD}" \
+        -deststorepass "${DB_KEYSTORE_PASSWORD}"
 
-    openssl pkcs12 -in "${CASSANDRA_TMP_P12_FILE}" -nokeys \
-        -out "${CASSANDRA_SSL_CERT_FILE}" -passin pass:"${CASSANDRA_KEYSTORE_PASSWORD}"
-    rm "${CASSANDRA_TMP_P12_FILE}"
+    openssl pkcs12 -in "${DB_TMP_P12_FILE}" -nokeys \
+        -out "${DB_SSL_CERT_FILE}" -passin pass:"${DB_KEYSTORE_PASSWORD}"
+    rm "${DB_TMP_P12_FILE}"
 }
 
 ########################
 # Ensure Cassandra is initialized
 # Globals:
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
 #   None
 # Returns:
@@ -636,53 +636,53 @@ cassandra_initialize() {
     cassandra_setup_cluster
     cassandra_setup_from_environment_variables # Give priority to users configuration
 
-    is_boolean_yes "$CASSANDRA_CLIENT_ENCRYPTION" && cassandra_setup_client_ssl
+    is_boolean_yes "$DB_CLIENT_ENCRYPTION" && cassandra_setup_client_ssl
 
     debug "Ensuring expected directories/files exist..."
-    for dir in "$CASSANDRA_DATA_DIR" "$CASSANDRA_TMP_DIR" "$CASSANDRA_LOG_DIR"; do
+    for dir in "$DB_DATA_DIR" "$DB_TMP_DIR" "$DB_LOG_DIR"; do
         ensure_dir_exists "$dir"
-        am_i_root && chown -R "$CASSANDRA_DAEMON_USER:$CASSANDRA_DAEMON_GROUP" "$dir"
+        am_i_root && chown -R "$DB_DAEMON_USER:$DB_DAEMON_GROUP" "$dir"
     done
 
-    if ! is_dir_empty "$CASSANDRA_DATA_DIR"; then
+    if ! is_dir_empty "$DB_DATA_DIR"; then
         info "Deploying Cassandra with persisted data"
     else
         info "Deploying Cassandra from scratch"
-        cassandra_start_bg "$CASSANDRA_FIRST_BOOT_LOG_FILE"
-        if is_boolean_yes "$CASSANDRA_PASSWORD_SEEDER"; then
+        cassandra_start_bg "$DB_FIRST_BOOT_LOG_FILE"
+        if is_boolean_yes "$DB_PASSWORD_SEEDER"; then
             info "Password seeder node"
             # Check that all peers are ready
-            for peer in ${CASSANDRA_PEERS//,/ }; do
-                wait_for_cql_access "cassandra" "cassandra" "$peer" "$CASSANDRA_PEER_CQL_MAX_RETRIES" "$CASSANDRA_PEER_CQL_SLEEP_TIME"
+            for peer in ${DB_PEERS//,/ }; do
+                wait_for_cql_access "cassandra" "cassandra" "$peer" "$DB_PEER_CQL_MAX_RETRIES" "$DB_PEER_CQL_SLEEP_TIME"
             done
             # Setup user
-            if [[ "$CASSANDRA_USER" = "cassandra" ]]; then
-                cassandra_change_cassandra_password "cassandra" "$CASSANDRA_PASSWORD" "$CASSANDRA_CQL_MAX_RETRIES" "$CASSANDRA_CQL_SLEEP_TIME"
+            if [[ "$DB_USER" = "cassandra" ]]; then
+                cassandra_change_cassandra_password "cassandra" "$DB_PASSWORD" "$DB_CQL_MAX_RETRIES" "$DB_CQL_SLEEP_TIME"
             else
-                cassandra_create_admin_user "$CASSANDRA_USER" "$CASSANDRA_PASSWORD" "cassandra" "cassandra" "$CASSANDRA_CQL_MAX_RETRIES" "$CASSANDRA_CQL_SLEEP_TIME"
+                cassandra_create_admin_user "$DB_USER" "$DB_PASSWORD" "cassandra" "cassandra" "$DB_CQL_MAX_RETRIES" "$DB_CQL_SLEEP_TIME"
             fi
 
             cassandra_execute_startup_cql
         else
             info "Non-seeder node. Waiting for synchronization"
-            wait_for_cql_access "$CASSANDRA_USER" "$CASSANDRA_PASSWORD" "" "$CASSANDRA_PEER_CQL_MAX_RETRIES" "$CASSANDRA_PEER_CQL_SLEEP_TIME"
+            wait_for_cql_access "$DB_USER" "$DB_PASSWORD" "" "$DB_PEER_CQL_MAX_RETRIES" "$DB_PEER_CQL_SLEEP_TIME"
         fi
     fi
 }
 
 ########################
-# Execute Cassandra startup cql (defined in CASSANDRA_STARTUP_CQL)
+# Execute Cassandra startup cql (defined in DB_STARTUP_CQL)
 # Globals:
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
 #   None
 # Returns:
 #   None
 #########################
 cassandra_execute_startup_cql() {
-    if [[ -n "$CASSANDRA_STARTUP_CQL" ]]; then
+    if [[ -n "$DB_STARTUP_CQL" ]]; then
         info "Executing Startup CQL"
-        if ! (echo "$CASSANDRA_STARTUP_CQL" | cassandra_execute_with_retries "$CASSANDRA_CQL_MAX_RETRIES" "$CASSANDRA_CQL_SLEEP_TIME" "$CASSANDRA_USER" "$CASSANDRA_PASSWORD"); then
+        if ! (echo "$DB_STARTUP_CQL" | cassandra_execute_with_retries "$DB_CQL_MAX_RETRIES" "$DB_CQL_SLEEP_TIME" "$DB_USER" "$DB_PASSWORD"); then
             error "Failed executing startup CQL command"
             exit 1
         fi
@@ -693,21 +693,21 @@ cassandra_execute_startup_cql() {
 ########################
 # Run custom initialization scripts
 # Globals:
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
 #   None
 # Returns:
 #   None
 #########################
 cassandra_custom_init_scripts() {
-    if [[ -n "$(find "$CASSANDRA_INITSCRIPTS_DIR/" \( -type f -o -type l \) -regex ".*\.\(sh\|cql\|cql.gz\)" ! -path "*/.*/*")" ]] && [[ ! -f "$CASSANDRA_VOLUME_DIR/.user_scripts_initialized" ]]; then
-        info "Loading user's custom files from $CASSANDRA_INITSCRIPTS_DIR ..."
+    if [[ -n "$(find "$DB_INITSCRIPTS_DIR/" \( -type f -o -type l \) -regex ".*\.\(sh\|cql\|cql.gz\)" ! -path "*/.*/*")" ]] && [[ ! -f "$DB_VOLUME_DIR/.user_scripts_initialized" ]]; then
+        info "Loading user's custom files from $DB_INITSCRIPTS_DIR ..."
         local -r tmp_file="/tmp/filelist"
         if ! is_cassandra_running; then
-            cassandra_start_bg "$CASSANDRA_INITSCRIPTS_BOOT_LOG_FILE"
+            cassandra_start_bg "$DB_INITSCRIPTS_BOOT_LOG_FILE"
             wait_for_cql_access
         fi
-        find "${CASSANDRA_INITSCRIPTS_DIR}/" \( -type f -o -type l \) -regex ".*\.\(sh\|cql\|cql.gz\)" ! -path "*/.*/*" | sort >"$tmp_file"
+        find "${DB_INITSCRIPTS_DIR}/" \( -type f -o -type l \) -regex ".*\.\(sh\|cql\|cql.gz\)" ! -path "*/.*/*" | sort >"$tmp_file"
         while read -r f; do
             case "$f" in
             *.sh)
@@ -721,17 +721,17 @@ cassandra_custom_init_scripts() {
                 ;;
             *.cql)
                 debug "Executing $f"
-                cassandra_execute "$CASSANDRA_USER" "$CASSANDRA_PASSWORD" <"$f"
+                cassandra_execute "$DB_USER" "$DB_PASSWORD" <"$f"
                 ;;
             *.cql.gz)
                 debug "Executing $f"
-                gunzip -c "$f" | cassandra_execute "$CASSANDRA_USER" "$CASSANDRA_PASSWORD"
+                gunzip -c "$f" | cassandra_execute "$DB_USER" "$DB_PASSWORD"
                 ;;
             *) debug "Ignoring $f" ;;
             esac
         done <$tmp_file
         rm -f "$tmp_file"
-        touch "$CASSANDRA_VOLUME_DIR"/.user_scripts_initialized
+        touch "$DB_VOLUME_DIR"/.user_scripts_initialized
     fi
 }
 
@@ -741,7 +741,7 @@ cassandra_custom_init_scripts() {
 #   Query/queries to execute
 # Globals:
 #   BITNAMI_DEBUG
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
 #   $1 - User to run queries
 #   $2 - Password
@@ -752,16 +752,16 @@ cassandra_custom_init_scripts() {
 #   None
 #######################
 cassandra_execute() {
-    local -r user="${1:-$CASSANDRA_USER}"
-    local -r pass="${2:-$CASSANDRA_PASSWORD}"
+    local -r user="${1:-$DB_USER}"
+    local -r pass="${2:-$DB_PASSWORD}"
     local -r keyspace="${3:-}"
     local -r host="${4:-localhost}"
     local -r extra_args="${5:-}"
-    local -r port="${CASSANDRA_CQL_PORT_NUMBER}"
-    local -r cmd=("${CASSANDRA_BIN_DIR}/cqlsh")
+    local -r port="${DB_CQL_PORT_NUMBER}"
+    local -r cmd=("${DB_BIN_DIR}/cqlsh")
     local args=("-u" "$user" "-p" "$pass")
 
-    is_boolean_yes "$CASSANDRA_CLIENT_ENCRYPTION" && args+=("--ssl")
+    is_boolean_yes "$DB_CLIENT_ENCRYPTION" && args+=("--ssl")
     [[ -n "$keyspace" ]] && args+=("-k" "$keyspace")
     if [[ -n "$extra_args" ]]; then
         local extra_args_array=()
@@ -785,10 +785,10 @@ cassandra_execute() {
 #   Query/queries to execute
 # Globals:
 #   BITNAMI_DEBUG
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
-#   $1 - Maximum number of retries (default: $CASSANDRA_CQL_MAX_RETRIES)
-#   $2 - Sleep time between retries (default: $CASSANDRA_CQL_SLEEP_TIME)
+#   $1 - Maximum number of retries (default: $DB_CQL_MAX_RETRIES)
+#   $2 - Sleep time between retries (default: $DB_CQL_SLEEP_TIME)
 #   $3 - User to run queries
 #   $4 - Password
 #   $5 - Keyspace
@@ -798,10 +798,10 @@ cassandra_execute() {
 #   None
 #######################
 cassandra_execute_with_retries() {
-    local -r retries="${1:-$CASSANDRA_CQL_MAX_RETRIES}"
-    local -r sleep_time="${2:-$CASSANDRA_CQL_SLEEP_TIME}"
-    local -r user="${3:-$CASSANDRA_USER}"
-    local -r pass="${4:-$CASSANDRA_PASSWORD}"
+    local -r retries="${1:-$DB_CQL_MAX_RETRIES}"
+    local -r sleep_time="${2:-$DB_CQL_SLEEP_TIME}"
+    local -r user="${3:-$DB_USER}"
+    local -r pass="${4:-$DB_PASSWORD}"
     local -r keyspace="${5:-}"
     local -r host="${6:-localhost}"
     local -r extra_args="${7:-}"
@@ -830,26 +830,26 @@ cassandra_execute_with_retries() {
 # Wait until nodetool checks the node is ready
 # Globals:
 #   BITNAMI_DEBUG
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
-#   $1 - Maximum number of retries (default $CASSANDRA_INIT_MAX_RETRIES)
-#   $2 - Sleep time during retries (default $CASSANDRA_INIT_SLEEP_TIME)
+#   $1 - Maximum number of retries (default $DB_INIT_MAX_RETRIES)
+#   $2 - Sleep time during retries (default $DB_INIT_SLEEP_TIME)
 # Returns:
 #   None
 #########################
 wait_for_nodetool_up() {
-    local -r retries="${1:-$CASSANDRA_INIT_MAX_RETRIES}"
-    local -r sleep_time="${2:-$CASSANDRA_INIT_SLEEP_TIME}"
+    local -r retries="${1:-$DB_INIT_MAX_RETRIES}"
+    local -r sleep_time="${2:-$DB_INIT_SLEEP_TIME}"
 
     debug "Checking status with nodetool"
 
     check_function_nodetool_node_ip() {
         # Using legacy RMI URL parsing to avoid URISyntaxException: 'Malformed IPv6 address at index 7: rmi://[127.0.0.1]:7199' error
         # https://community.datastax.com/questions/13764/java-version-for-cassandra-3113.html
-        local -r check_cmd=("${CASSANDRA_BIN_DIR}/nodetool" "-Dcom.sun.jndi.rmiURLParsing=legacy")
-        local -r check_args=("status" "--port" "$CASSANDRA_JMX_PORT_NUMBER")
-        local -r machine_ip="$(dns_lookup "${CASSANDRA_BROADCAST_ADDRESS:-$CASSANDRA_HOST}" "v4")"
-        local -r check_regex="UN\s*(${CASSANDRA_HOST}|${machine_ip}|127.0.0.1)"
+        local -r check_cmd=("${DB_BIN_DIR}/nodetool" "-Dcom.sun.jndi.rmiURLParsing=legacy")
+        local -r check_args=("status" "--port" "$DB_JMX_PORT_NUMBER")
+        local -r machine_ip="$(dns_lookup "${DB_BROADCAST_ADDRESS:-$DB_HOST}" "v4")"
+        local -r check_regex="UN\s*(${DB_HOST}|${machine_ip}|127.0.0.1)"
 
         local output="/dev/null"
         if [[ "$BITNAMI_DEBUG" = "true" ]]; then
@@ -862,11 +862,11 @@ wait_for_nodetool_up() {
     check_function_nodetool_node_count() {
         # Using legacy RMI URL parsing to avoid URISyntaxException: 'Malformed IPv6 address at index 7: rmi://[127.0.0.1]:7199' error
         # https://community.datastax.com/questions/13764/java-version-for-cassandra-3113.html
-        local -r check_cmd=("${CASSANDRA_BIN_DIR}/nodetool" "-Dcom.sun.jndi.rmiURLParsing=legacy")
-        local -r check_args=("status" "--port" "$CASSANDRA_JMX_PORT_NUMBER")
-        local -r machine_ip="$(dns_lookup "${CASSANDRA_BROADCAST_ADDRESS:-$CASSANDRA_HOST}" "v4")"
+        local -r check_cmd=("${DB_BIN_DIR}/nodetool" "-Dcom.sun.jndi.rmiURLParsing=legacy")
+        local -r check_args=("status" "--port" "$DB_JMX_PORT_NUMBER")
+        local -r machine_ip="$(dns_lookup "${DB_BROADCAST_ADDRESS:-$DB_HOST}" "v4")"
         local -r check_regex="UN\s*"
-        read -r -a host_list <<<"$(tr ',;' ' ' <<<"$CASSANDRA_NODES")"
+        read -r -a host_list <<<"$(tr ',;' ' ' <<<"$DB_NODES")"
         local -r expected_node_count="${#host_list[@]}"
         local actual_node_count
 
@@ -893,7 +893,7 @@ wait_for_nodetool_up() {
         exit 1
     fi
 
-    if [[ -n "$CASSANDRA_NODES" ]]; then
+    if [[ -n "$DB_NODES" ]]; then
         if retry_while check_function_nodetool_node_count "$retries" "$sleep_time"; then
             info "All nodes reached the UN status (Up/Normal)"
             true
@@ -912,18 +912,18 @@ wait_for_nodetool_up() {
 # Wait until the log file shows that CQL is ready
 # Globals:
 #   BITNAMI_DEBUG
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
 #   $1 - Log file to check
-#   $1 - Maximum number of retries (default $CASSANDRA_INIT_MAX_RETRIES)
-#   $2 - Sleep time during retries (default $CASSANDRA_INIT_SLEEP_TIME)
+#   $1 - Maximum number of retries (default $DB_INIT_MAX_RETRIES)
+#   $2 - Sleep time during retries (default $DB_INIT_SLEEP_TIME)
 # Returns:
 #   None
 #########################
 wait_for_cql_log_entry() {
     local -r logger="${1:-/dev/stdout}"
-    local -r retries="${2:-$CASSANDRA_INIT_MAX_RETRIES}"
-    local -r sleep_time="${3:-$CASSANDRA_INIT_SLEEP_TIME}"
+    local -r retries="${2:-$DB_INIT_MAX_RETRIES}"
+    local -r sleep_time="${3:-$DB_INIT_SLEEP_TIME}"
 
     debug "Checking that log $logger contains entry \"Starting listening for CQL clients\""
 
@@ -954,22 +954,22 @@ wait_for_cql_log_entry() {
 ########################
 # Poll until the CQL command DESCRIBE KEYSPACES works successfully
 # Globals:
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
-#   1 - Username (default: $CASSANDRA_USER)
-#   2 - Password (default: $CASSANDRA_PASSWORD)
-#   3 - Hostname (default: $CASSANDRA_HOST)
-#   4 - Maximum number of retries (default: $CASSANDRA_CQL_MAX_RETRIES)
-#   5 - Sleep time between retries (default: $CASSANDRA_CQL_SLEEP_TIME)
+#   1 - Username (default: $DB_USER)
+#   2 - Password (default: $DB_PASSWORD)
+#   3 - Hostname (default: $DB_HOST)
+#   4 - Maximum number of retries (default: $DB_CQL_MAX_RETRIES)
+#   5 - Sleep time between retries (default: $DB_CQL_SLEEP_TIME)
 # Returns:
 #   None
 #########################
 wait_for_cql_access() {
-    local -r user="${1:-$CASSANDRA_USER}"
-    local -r password="${2:-$CASSANDRA_PASSWORD}"
-    local -r host="${3:-$CASSANDRA_HOST}"
-    local -r max_retries="${4:-$CASSANDRA_CQL_MAX_RETRIES}"
-    local -r sleep_time="${5:-$CASSANDRA_CQL_SLEEP_TIME}"
+    local -r user="${1:-$DB_USER}"
+    local -r password="${2:-$DB_PASSWORD}"
+    local -r host="${3:-$DB_HOST}"
+    local -r max_retries="${4:-$DB_CQL_MAX_RETRIES}"
+    local -r sleep_time="${5:-$DB_CQL_SLEEP_TIME}"
 
     info "Trying to access CQL server @ $host"
     if (echo "DESCRIBE KEYSPACES" | cassandra_execute_with_retries "$max_retries" "$sleep_time" "$user" "$password" "" "$host"); then
@@ -983,36 +983,36 @@ wait_for_cql_access() {
 ########################
 # Start Cassandra and wait until it is ready
 # Globals:
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
 #   $1 - Log file to write (default /dev/stdout)
-#   $2 - Maximum number of retries (default $CASSANDRA_INIT_MAX_RETRIES)
-#   $3 - Sleep time during retries (default $CASSANDRA_INIT_SLEEP_TIME)
+#   $2 - Maximum number of retries (default $DB_INIT_MAX_RETRIES)
+#   $3 - Sleep time during retries (default $DB_INIT_SLEEP_TIME)
 # Returns:
 #   None
 #########################
 cassandra_start_bg() {
     local -r logger="${1:-/dev/stdout}"
-    local -r retries="${2:-$CASSANDRA_INIT_MAX_RETRIES}"
-    local -r sleep_time="${3:-$CASSANDRA_INIT_SLEEP_TIME}"
+    local -r retries="${2:-$DB_INIT_MAX_RETRIES}"
+    local -r sleep_time="${3:-$DB_INIT_SLEEP_TIME}"
 
     info "Starting Cassandra"
-    local -r cmd=("$CASSANDRA_BIN_DIR/cassandra")
-    local -r args=("-p" "$CASSANDRA_PID_FILE" "-R" "-f")
+    local -r cmd=("$DB_BIN_DIR/cassandra")
+    local -r args=("-p" "$DB_PID_FILE" "-R" "-f")
 
     if am_i_root; then
-        run_as_user "$CASSANDRA_DAEMON_USER" "${cmd[@]}" "${args[@]}" >"$logger" 2>&1 &
+        run_as_user "$DB_DAEMON_USER" "${cmd[@]}" "${args[@]}" >"$logger" 2>&1 &
     else
         "${cmd[@]}" "${args[@]}" >"$logger" 2>&1 &
     fi
 
     # Even though we set the pid, cassandra is not creating the proper file, so we create it manually
-    echo $! >"$CASSANDRA_PID_FILE"
+    echo $! >"$DB_PID_FILE"
 
     info "Checking that it started up correctly"
 
     if [[ "$logger" != "/dev/stdout" ]]; then
-        am_i_root && chown "$CASSANDRA_DAEMON_USER":"$CASSANDRA_DAEMON_GROUP" "$logger"
+        am_i_root && chown "$DB_DAEMON_USER":"$DB_DAEMON_GROUP" "$logger"
         wait_for_cql_log_entry "$logger" "$retries" "$sleep_time"
     fi
     wait_for_nodetool_up "$retries" "$sleep_time"
@@ -1021,7 +1021,7 @@ cassandra_start_bg() {
 ########################
 # Stop Cassandra
 # Globals:
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
 #   None
 # Returns:
@@ -1033,29 +1033,29 @@ cassandra_stop() {
     stop_cassandra() {
         # Using legacy RMI URL parsing to avoid URISyntaxException: 'Malformed IPv6 address at index 7: rmi://[127.0.0.1]:7199' error
         # https://community.datastax.com/questions/13764/java-version-for-cassandra-3113.html
-        "${CASSANDRA_BIN_DIR}/nodetool" "-Dcom.sun.jndi.rmiURLParsing=legacy" stopdaemon
+        "${DB_BIN_DIR}/nodetool" "-Dcom.sun.jndi.rmiURLParsing=legacy" stopdaemon
         is_cassandra_not_running
     }
 
-    if ! retry_while "stop_cassandra" "$CASSANDRA_INIT_MAX_RETRIES" "$CASSANDRA_INIT_SLEEP_TIME"; then
+    if ! retry_while "stop_cassandra" "$DB_INIT_MAX_RETRIES" "$DB_INIT_SLEEP_TIME"; then
         error "Cassandra failed to stop"
         exit 1
     fi
     # Manually remove PID file
-    rm -f "$CASSANDRA_PID_FILE"
+    rm -f "$DB_PID_FILE"
 }
 
 ########################
 # Check if Cassandra is running
 # Globals:
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
 #   None
 # Returns:
 #   Boolean
 #########################
 is_cassandra_running() {
-    local -r pid="$(get_pid_from_file "$CASSANDRA_PID_FILE")"
+    local -r pid="$(get_pid_from_file "$DB_PID_FILE")"
 
     if [[ -z "$pid" ]]; then
         false
@@ -1117,7 +1117,7 @@ cassandra_common_conf_set() {
 ########################
 # Set a configuration setting value to cassandra-env.sh
 # Globals:
-#   CASSANDRA_CONF_DIR
+#   DB_CONF_DIR
 # Arguments:
 #   $1 - key
 #   $2 - values (array)
@@ -1125,13 +1125,13 @@ cassandra_common_conf_set() {
 #   None
 #########################
 cassandra_env_conf_set() {
-    cassandra_common_conf_set "${CASSANDRA_CONF_DIR}/cassandra-env.sh" "$@"
+    cassandra_common_conf_set "${DB_CONF_DIR}/cassandra-env.sh" "$@"
 }
 
 ########################
 # Set a configuration setting value to cassandra-rackdc.properties
 # Globals:
-#   CASSANDRA_CONF_DIR
+#   DB_CONF_DIR
 # Arguments:
 #   $1 - key
 #   $2 - values (array)
@@ -1139,13 +1139,13 @@ cassandra_env_conf_set() {
 #   None
 #########################
 cassandra_rackdc_conf_set() {
-    cassandra_common_conf_set "${CASSANDRA_CONF_DIR}/cassandra-rackdc.properties" "$@"
+    cassandra_common_conf_set "${DB_CONF_DIR}/cassandra-rackdc.properties" "$@"
 }
 
 ########################
 # Set a configuration setting value to commitlog_archiving.properties
 # Globals:
-#   CASSANDRA_CONF_DIR
+#   DB_CONF_DIR
 # Arguments:
 #   $1 - key
 #   $2 - values (array)
@@ -1153,13 +1153,13 @@ cassandra_rackdc_conf_set() {
 #   None
 #########################
 cassandra_commitlog_conf_set() {
-    cassandra_common_conf_set "${CASSANDRA_CONF_DIR}/commitlog_archiving.properties" "$@"
+    cassandra_common_conf_set "${DB_CONF_DIR}/commitlog_archiving.properties" "$@"
 }
 
 ########################
 # Configure Cassandra configuration files from environment variables
 # Globals:
-#   CASSANDRA_*
+#   DB_*
 # Arguments:
 #   None
 # Returns:
@@ -1167,29 +1167,29 @@ cassandra_commitlog_conf_set() {
 #########################
 cassandra_setup_from_environment_variables() {
     # Map environment variables to config properties for cassandra-env.sh
-    for var in "${!CASSANDRA_CFG_ENV_@}"; do
+    for var in "${!DB_CFG_ENV_@}"; do
         # shellcheck disable=SC2001
-        key="$(echo "$var" | sed -e 's/^CASSANDRA_CFG_ENV_//g')"
+        key="$(echo "$var" | sed -e 's/^DB_CFG_ENV_//g')"
         value="${!var}"
         cassandra_env_conf_set "$key" "$value"
     done
     # Map environment variables to config properties for cassandra-rackdc.properties
-    for var in "${!CASSANDRA_CFG_RACKDC_@}"; do
-        key="$(echo "$var" | sed -e 's/^CASSANDRA_CFG_RACKDC_//g' | tr '[:upper:]' '[:lower:]')"
+    for var in "${!DB_CFG_RACKDC_@}"; do
+        key="$(echo "$var" | sed -e 's/^DB_CFG_RACKDC_//g' | tr '[:upper:]' '[:lower:]')"
         value="${!var}"
         cassandra_rackdc_conf_set "$key" "$value"
     done
     # Map environment variables to config properties for commitlog_archiving.properties
-    for var in "${!CASSANDRA_CFG_COMMITLOG_@}"; do
-        key="$(echo "$var" | sed -e 's/^CASSANDRA_CFG_COMMITLOG_//g' | tr '[:upper:]' '[:lower:]')"
+    for var in "${!DB_CFG_COMMITLOG_@}"; do
+        key="$(echo "$var" | sed -e 's/^DB_CFG_COMMITLOG_//g' | tr '[:upper:]' '[:lower:]')"
         value="${!var}"
         cassandra_commitlog_conf_set "$key" "$value"
     done
     if ! cassandra_is_file_external "cassandra.yaml"; then
         # Map environment variables to config properties for cassandra.yaml
-        for var in "${!CASSANDRA_CFG_YAML_@}"; do
+        for var in "${!DB_CFG_YAML_@}"; do
             # shellcheck disable=SC2001
-            key="$(echo "$var" | sed -e 's/^CASSANDRA_CFG_YAML_//g' | tr '[:upper:]' '[:lower:]')"
+            key="$(echo "$var" | sed -e 's/^DB_CFG_YAML_//g' | tr '[:upper:]' '[:lower:]')"
             value="${!var}"
             cassandra_yaml_set "$key" "$value"
         done
