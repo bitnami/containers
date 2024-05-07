@@ -1,0 +1,34 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+version: '2'
+
+services:
+  valkey-primary:
+    image: docker.io/bitnami/valkey:7.2
+    ports:
+      - '6379'
+    environment:
+      - VALKEY_REPLICATION_MODE=master
+      - VALKEY_PASSWORD=my_password
+      - VALKEY_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    volumes:
+      - 'valkey_data:/bitnami/valkey/data'
+
+  valkey-secondary:
+    image: docker.io/bitnami/valkey:7.2
+    ports:
+      - '6379'
+    depends_on:
+      - valkey-primary
+    environment:
+      - VALKEY_REPLICATION_MODE=slave
+      - VALKEY_MASTER_HOST=valkey-primary
+      - VALKEY_MASTER_PORT_NUMBER=6379
+      - VALKEY_MASTER_PASSWORD=my_password
+      - VALKEY_PASSWORD=my_password
+      - VALKEY_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+
+volumes:
+  valkey_data:
+    driver: local
