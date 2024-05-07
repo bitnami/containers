@@ -34,14 +34,14 @@ info "** Starting Cassandra **"
 #
 # If none of the two cases apply, we assume it is an error and exit
 if is_cassandra_running; then
-    __run_pid="$(get_pid_from_file "$CASSANDRA_PID_FILE")"
+    __run_pid="$(get_pid_from_file "$DB_PID_FILE")"
     running_log_file=""
 
-    if [[ -f "$CASSANDRA_FIRST_BOOT_LOG_FILE" ]]; then
-        running_log_file="$CASSANDRA_FIRST_BOOT_LOG_FILE"
+    if [[ -f "$DB_FIRST_BOOT_LOG_FILE" ]]; then
+        running_log_file="$DB_FIRST_BOOT_LOG_FILE"
         info "Cassandra already running with PID $__run_pid because of the initial cluster setup"
-    elif [[ -f "$CASSANDRA_INITSCRIPTS_BOOT_LOG_FILE" ]]; then
-        running_log_file="$CASSANDRA_INITSCRIPTS_BOOT_LOG_FILE"
+    elif [[ -f "$DB_INITSCRIPTS_BOOT_LOG_FILE" ]]; then
+        running_log_file="$DB_INITSCRIPTS_BOOT_LOG_FILE"
         info "Cassandra already running PID $__run_pid because of the init scripts execution"
     else
         error "Cassandra is already running for an unexpected reason. Exiting"
@@ -53,15 +53,15 @@ if is_cassandra_running; then
     readonly __run_tail_flags=("--pid=${__run_pid}" "-n" "1000" "-f" "$running_log_file")
 
     if am_i_root; then
-        exec_as_user "$CASSANDRA_DAEMON_USER" "${__run_tail_cmd}" "${__run_tail_flags[@]}"
+        exec_as_user "$DB_DAEMON_USER" "${__run_tail_cmd}" "${__run_tail_flags[@]}"
     else
         exec "${__run_tail_cmd}" "${__run_tail_flags[@]}"
     fi
 else
-    readonly __run_cmd="${CASSANDRA_BIN_DIR}/cassandra"
-    readonly __run_flags=("-p $CASSANDRA_PID_FILE" "-R" "-f")
+    readonly __run_cmd="${DB_BIN_DIR}/cassandra"
+    readonly __run_flags=("-p $DB_PID_FILE" "-R" "-f")
     if am_i_root; then
-        exec_as_user "$CASSANDRA_DAEMON_USER" "${__run_cmd}" "${__run_flags[@]}"
+        exec_as_user "$DB_DAEMON_USER" "${__run_cmd}" "${__run_flags[@]}"
     else
         exec "${__run_cmd}" "${__run_flags[@]}"
     fi
