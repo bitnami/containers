@@ -1,4 +1,4 @@
-# Copyright VMware, Inc.
+# Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 
 FROM docker.io/bitnami/minideb:bookworm
@@ -7,14 +7,14 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-05-04T08:08:00Z" \
-      org.opencontainers.image.description="Application packaged by VMware, Inc" \
+      org.opencontainers.image.created="2024-05-07T18:21:39Z" \
+      org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/airflow-exporter/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.20220314.0-debian-12-r31" \
+      org.opencontainers.image.ref.name="0.20220314.0-debian-12-r32" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/airflow-exporter" \
       org.opencontainers.image.title="airflow-exporter" \
-      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.vendor="Broadcom, Inc." \
       org.opencontainers.image.version="0.20220314.0"
 
 ENV HOME="/" \
@@ -28,7 +28,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "airflow-exporter-0.20220314.0-13-linux-${OS_ARCH}-debian-12" \
+      "airflow-exporter-0.20220314.0-14-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
