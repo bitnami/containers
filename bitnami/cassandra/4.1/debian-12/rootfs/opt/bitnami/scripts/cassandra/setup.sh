@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright VMware, Inc.
+# Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 #
 # Bitnami Cassandra setup
@@ -23,11 +23,11 @@ cassandra_set_default_host
 # Ensure Cassandra environment variables settings are valid
 cassandra_validate
 # Ensure 'daemon' user exists when running as 'root'
-am_i_root && ensure_user_exists "$CASSANDRA_DAEMON_USER" --group "$CASSANDRA_DAEMON_GROUP"
+am_i_root && ensure_user_exists "$DB_DAEMON_USER" --group "$DB_DAEMON_GROUP"
 # Ensure Cassandra is initialized
 cassandra_initialize
 
 # Allow running custom initialization scripts
-if ! is_boolean_yes "$CASSANDRA_IGNORE_INITDB_SCRIPTS"; then
+if ! is_boolean_yes "$DB_IGNORE_INITDB_SCRIPTS"; then
     cassandra_custom_init_scripts
 fi
