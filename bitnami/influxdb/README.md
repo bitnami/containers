@@ -157,7 +157,7 @@ docker-compose up -d
 
 ## Configuration
 
-InfluxDB (TM) can be configured via environment variables or using a configuration file (`influxdb.conf`). If a configuration option is not specified in either the configuration file or in an environment variable, InfluxDB (TM) uses its internal default configuration.
+InfluxDB (TM) can be configured via environment variables or using a configuration file (`config.yaml`). If a configuration option is not specified in either the configuration file or in an environment variable, InfluxDB (TM) uses its internal default configuration.
 
 ### Environment variables
 
@@ -218,11 +218,11 @@ Additionally, InfluxDB (TM) can be configured using its internal environment var
 
 ### Configuration file
 
-The configuration can easily be setup by mounting your own configuration file (`influxdb.conf`) on the directory `/opt/bitnami/influxdb/etc/`:
+The configuration can easily be setup by mounting your own configuration file (`config.yaml`) on the directory `/opt/bitnami/influxdb/etc/`:
 
 ```console
 docker run --name influxdb \
-    --volume /path/to/influxdb.conf:/opt/bitnami/influxdb/etc/influxdb.conf:ro \
+    --volume /path/to/config.yaml:/opt/bitnami/influxdb/etc/config.yaml:ro \
     bitnami/influxdb:latest
 ```
 
@@ -235,7 +235,7 @@ services:
   influxdb:
     image: bitnami/influxdb:latest
     volumes:
-      - /path/to/influxdb.conf:/opt/bitnami/influxdb/etc/influxdb.conf:ro
+      - /path/to/config.yaml:/opt/bitnami/influxdb/etc/config.yaml:ro
 ```
 
 ### Initializing a new instance
