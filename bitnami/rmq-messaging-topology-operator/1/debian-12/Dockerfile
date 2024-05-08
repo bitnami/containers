@@ -1,4 +1,4 @@
-# Copyright VMware, Inc.
+# Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 
 FROM docker.io/bitnami/minideb:bookworm as builder
@@ -14,7 +14,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "rmq-messaging-topology-operator-1.13.0-5-linux-${OS_ARCH}-debian-12" \
+      "rmq-messaging-topology-operator-1.14.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -36,13 +36,13 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2024-05-04T22:56:01Z" \
-      org.opencontainers.image.description="Application packaged by VMware, Inc" \
+      org.opencontainers.image.created="2024-05-08T01:28:47Z" \
+      org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.13.0-debian-12-r9" \
+      org.opencontainers.image.ref.name="1.14.0-debian-12-r0" \
       org.opencontainers.image.title="rmq-messaging-topology-operator" \
-      org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.13.0"
+      org.opencontainers.image.vendor="Broadcom, Inc." \
+      org.opencontainers.image.version="1.14.0"
 
 COPY prebuildfs /
 COPY rootfs /
@@ -50,7 +50,7 @@ COPY --from=builder /opt/bitnami/rmq-messaging-topology-operator/bin/manager /ma
 COPY --from=builder /opt/bitnami/rmq-messaging-topology-operator/.spdx-rmq-messaging-topology-operator.spdx /opt/bitnami/rmq-messaging-topology-operator/.spdx-rmq-messaging-topology-operator.spdx
 COPY --from=builder /opt/bitnami/rmq-messaging-topology-operator/licenses /opt/bitnami/rmq-messaging-topology-operator/licenses
 
-ENV APP_VERSION="1.13.0" \
+ENV APP_VERSION="1.14.0" \
     BITNAMI_APP_NAME="rmq-messaging-topology-operator"
 
 USER 1001
