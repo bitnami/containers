@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright VMware, Inc.
+# Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 #
 # Environment configuration for mediawiki
@@ -77,7 +77,6 @@ export MEDIAWIKI_CONF_FILE="${MEDIAWIKI_BASE_DIR}/LocalSettings.php"
 # MediaWiki persistence configuration
 export MEDIAWIKI_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/mediawiki"
 export MEDIAWIKI_DATA_TO_PERSIST="${MEDIAWIKI_DATA_TO_PERSIST:-images extensions skins LocalSettings.php}"
-export MEDIAWIKI_SKIP_CONFIG_VALIDATION="${MEDIAWIKI_SKIP_CONFIG_VALIDATION:-no}"
 
 # MediaWiki site configuration
 export MEDIAWIKI_SKIP_BOOTSTRAP="${MEDIAWIKI_SKIP_BOOTSTRAP:-}" # only used during the first initialization
@@ -116,6 +115,7 @@ export MEDIAWIKI_DATABASE_PORT_NUMBER="${MEDIAWIKI_DATABASE_PORT_NUMBER:-3306}" 
 export MEDIAWIKI_DATABASE_NAME="${MEDIAWIKI_DATABASE_NAME:-bitnami_mediawiki}" # only used during the first initialization
 export MEDIAWIKI_DATABASE_USER="${MEDIAWIKI_DATABASE_USER:-bn_mediawiki}" # only used during the first initialization
 export MEDIAWIKI_DATABASE_PASSWORD="${MEDIAWIKI_DATABASE_PASSWORD:-}" # only used during the first initialization
+export MEDIAWIKI_SKIP_CONFIG_VALIDATION="${MEDIAWIKI_SKIP_CONFIG_VALIDATION:-no}" # only used during the first initialization
 
 # PHP configuration
 export PHP_DEFAULT_MEMORY_LIMIT="256M" # only used at build time
