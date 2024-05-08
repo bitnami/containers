@@ -1,4 +1,4 @@
-# Copyright VMware, Inc.
+# Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 
 FROM docker.io/bitnami/minideb:bookworm
@@ -7,14 +7,14 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-05-04T11:19:36Z" \
-      org.opencontainers.image.description="Application packaged by VMware, Inc" \
+      org.opencontainers.image.created="2024-05-08T15:37:48Z" \
+      org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/openldap/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.6.7-debian-12-r25" \
+      org.opencontainers.image.ref.name="2.6.7-debian-12-r26" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/openldap" \
       org.opencontainers.image.title="openldap" \
-      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.vendor="Broadcom, Inc." \
       org.opencontainers.image.version="2.6.7"
 
 ENV HOME="/" \
