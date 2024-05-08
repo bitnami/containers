@@ -76,7 +76,7 @@ docker run -it --name cypress -v /path/to/app:/app bitnami/cypress
 
 By default, the Cypress image contains the `chromium` browser included in the distro package repositories. In order to include extra browsers, you can extend the image using Cypress as a base. In the example below, we add the Firefox browser to the image:
 
-```
+```dockerfile
 FROM bitnami/cypress:latest
 
 USER 0
