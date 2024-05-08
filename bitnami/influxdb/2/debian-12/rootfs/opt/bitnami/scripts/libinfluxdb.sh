@@ -73,26 +73,6 @@ influxdb_validate() {
 }
 
 ########################
-# Get a property's value from the the influxdb.conf file
-# Globals:
-#   INFLUXDB_*
-# Arguments:
-#   $1 - key
-#   $2 - section
-# Returns:
-#   None
-#########################
-influxdb_conf_get() {
-    local -r key="${1:?missing key}"
-
-    # TODO: Improve logic by using toml-parser (or an alternative)
-    # local -r section="${2:?missing section}"
-    # toml-parser -r "$section" "$key" "$INFLUXDB_CONF_FILE"
-
-    sed -n -e "s/^ *$key *= *//p" "$INFLUXDB_CONF_FILE"
-}
-
-########################
 # Create basic influxdb.conf file using the example provided in the etc/ folder
 # Globals:
 #   INFLUXDB_*
@@ -102,7 +82,7 @@ influxdb_conf_get() {
 #   None
 #########################
 influxdb_create_config() {
-    local config_file="${INFLUXD_CONFIG_PATH}"
+    local config_file="${INFLUXDB_CONF_FILE}"
 
     if [[ -f "${config_file}" ]]; then
         info "Custom configuration ${INFLUXDB_CONF_FILE} detected!"
