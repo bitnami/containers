@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright VMware, Inc.
+# Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 #
 # Bitnami MediaWiki library
@@ -92,6 +92,10 @@ mediawiki_initialize() {
     # Check if mediawiki has already been initialized and persisted in a previous run
     local -r app_name="mediawiki"
     local db_host db_port db_name db_user db_pass
+    local -a update_args=()
+    if is_boolean_yes "$MEDIAWIKI_SKIP_CONFIG_VALIDATION"; then
+        update_args+=( "--skip-config-validation" )
+    fi
     if ! is_app_initialized "$app_name"; then
         # Ensure the MediaWiki base directory exists and has proper permissions
         info "Configuring file permissions for MediaWiki"
@@ -124,10 +128,7 @@ mediawiki_initialize() {
         else
             info "An already initialized MediaWiki database was provided, configuration will be skipped"
             # Perform MediaWiki database schema upgrade
-            local -a update_args=()
-            if is_boolean_yes "$MEDIAWIKI_SKIP_CONFIG_VALIDATION"; then
-                update_args+=( "--skip-config-validation" )
-            fi
+            info "Performing database schema upgrade"
             debug_execute php "${MEDIAWIKI_BASE_DIR}/maintenance/update.php" "${update_args[@]}"
         fi
 
@@ -155,11 +156,7 @@ mediawiki_initialize() {
         db_port="$MEDIAWIKI_DATABASE_PORT_NUMBER"
         mediawiki_wait_for_db_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
         # Perform MediaWiki database schema upgrade
-        info "Performing database schema upgrade if needed"
-        local -a update_args=()
-        if is_boolean_yes "$MEDIAWIKI_SKIP_CONFIG_VALIDATION"; then
-            update_args+=( "--skip-config-validation" )
-        fi
+        info "Performing database schema upgrade"
         debug_execute php "${MEDIAWIKI_BASE_DIR}/maintenance/update.php" "${update_args[@]}"
     fi
 

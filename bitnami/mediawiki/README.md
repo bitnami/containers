@@ -222,7 +222,7 @@ docker run -d --name mediawiki \
 | `MEDIAWIKI_DATABASE_NAME`              | Database name.                                                                                                                                                                     | `bitnami_mediawiki`                         |
 | `MEDIAWIKI_DATABASE_USER`              | Database user name.                                                                                                                                                                | `bn_mediawiki`                              |
 | `MEDIAWIKI_DATABASE_PASSWORD`          | Database user password.                                                                                                                                                            | `nil`                                       |
-| `MEDIAWIKI_SKIP_CONFIG_VALIDATION`     | Skip config validation during startup. Allows the use of deprecated values in MediaWiki configuration file. Valid values: `yes`, `no`.                                                                                                                                                           | `no`                                       |
+| `MEDIAWIKI_SKIP_CONFIG_VALIDATION`     | Skip config validation during startup. Allows the use of deprecated values in MediaWiki configuration file.                                                                        | `no`                                        |
 
 #### Read-only environment variables
 
