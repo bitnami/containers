@@ -219,6 +219,9 @@ gitea_update_conf_file() {
     is_empty_value "$GITEA_SMTP_PASSWORD" || gitea_conf_set "mailer" "PASSWD" "$GITEA_SMTP_PASSWORD"
     is_empty_value "$GITEA_LFS_ROOT_PATH" || gitea_conf_set "lfs" "PATH" "$GITEA_LFS_ROOT_PATH"
 
+    is_empty_value "$GITEA_ENABLE_OPENID_SIGNIN" || gitea_conf_set "openid" "ENABLE_OPENID_SIGNIN" "$GITEA_ENABLE_OPENID_SIGNIN"
+    is_empty_value "$GITEA_ENABLE_OPENID_SIGNUP" || gitea_conf_set "openid" "ENABLE_OPENID_SIGNUP" "$GITEA_ENABLE_OPENID_SIGNUP"
+
 }
 
 ########################
