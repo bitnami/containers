@@ -309,11 +309,11 @@ ghost_initialize() {
             # https://ghost.org/docs/config/#mail
             if ! is_empty_value "$GHOST_SMTP_HOST"; then
                 info "Configuring SMTP settings"
-                ghost_conf_set "mail.from" "$GHOST_EMAIL"
+                ghost_conf_set "mail.from" "$GHOST_SMTP_FROM_ADDRESS"
                 ghost_conf_set "mail.transport" "SMTP"
                 ghost_conf_set "mail.options.host" "$GHOST_SMTP_HOST"
                 ghost_conf_set "mail.options.port" "$GHOST_SMTP_PORT_NUMBER" "int"
-                ghost_conf_set "mail.options.secureConnection" "$([[ "$GHOST_SMTP_PROTOCOL" = "ssl" || "$GHOST_SMTP_PROTOCOL" = "tls" ]] && echo "true" || echo "false")" "bool"
+                ghost_conf_set "mail.options.secure" "$([[ "$GHOST_SMTP_PROTOCOL" = "ssl" || "$GHOST_SMTP_PROTOCOL" = "tls" ]] && echo "true" || echo "false")" "bool"
                 ghost_conf_set "mail.options.auth.user" "$GHOST_SMTP_USER"
                 ghost_conf_set "mail.options.auth.pass" "$GHOST_SMTP_PASSWORD"
             fi

@@ -211,6 +211,7 @@ docker run -d --name ghost \
 | `GHOST_USERNAME`                   | Ghost user name.                                                                                                            | `user`                           |
 | `GHOST_PASSWORD`                   | Ghost user password.                                                                                                        | `bitnami123`                     |
 | `GHOST_EMAIL`                      | Ghost user e-mail address.                                                                                                  | `user@example.com`               |
+| `GHOST_SMTP_FROM_ADDRESS`          | Ghost SMTP from address.                                                                                                    | `nil`                            |
 | `GHOST_SMTP_HOST`                  | Ghost SMTP server host.                                                                                                     | `nil`                            |
 | `GHOST_SMTP_PORT_NUMBER`           | Ghost SMTP server port number.                                                                                              | `nil`                            |
 | `GHOST_SMTP_USER`                  | Ghost SMTP server user.                                                                                                     | `nil`                            |
