@@ -1,0 +1,39 @@
+binaries:
+  - scylla
+  - supervisorctl
+  - supervisord
+  - cqlsh
+  - python
+  - java
+files:
+  - mode: "0755"
+    paths:
+      - /opt/bitnami/scylladb/python3/bin/cqlsh
+directories:
+  - mode: "0775"
+    paths:
+      - /.cassandra
+      - /bitnami/scylladb
+      - /bitnami/scylladb/conf
+      - /opt/bitnami/scylladb/tmp
+      - /opt/bitnami/scylladb/etc
+      - /opt/bitnami/scylladb/logs
+      - /docker-entrypoint-initdb.d
+  - paths:
+      - /opt/bitnami/scylladb/etc.default
+root_dir: /opt/bitnami
+linked_libraries:
+  exclude_paths:
+    # Ignore those included in the unified installer
+    - /opt/bitnami/scylladb/libexec/.*
+    - /opt/bitnami/scylladb/libreloc/.*
+sed_in_place:
+  exclude_paths:
+    # Ignore upstream scripts (non Bitnami-related)
+    - /opt/bitnami/scylladb/share/cassandra/pylib/.*
+    - /opt/bitnami/scylladb/scripts/.*
+    - /opt/bitnami/scylladb/docker/.*
+    - /opt/bitnami/scylladb/supervisor/.*
+version:
+  bin_name: scylla
+  flag: --version
