@@ -233,7 +233,7 @@ airflow_conf_set() {
     local -r value="${3:?value is required}"
     local -r file="${4:-${AIRFLOW_CONF_FILE}}"
 
-    ini-file set --section "$section" --key "$key" --value "$value" "$file"
+    ini-file set "--section=$section" "--key=$key" "--value=$value" -- "$file"
 }
 
 ########################
