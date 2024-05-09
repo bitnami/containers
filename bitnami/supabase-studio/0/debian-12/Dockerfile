@@ -1,4 +1,4 @@
-# Copyright VMware, Inc.
+# Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 
 FROM docker.io/bitnami/minideb:bookworm
@@ -7,14 +7,14 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-05-04T13:18:28Z" \
-      org.opencontainers.image.description="Application packaged by VMware, Inc" \
+      org.opencontainers.image.created="2024-05-09T22:35:30Z" \
+      org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/supabase-studio/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.24.3-debian-12-r4" \
+      org.opencontainers.image.ref.name="0.24.3-debian-12-r5" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/supabase-studio" \
       org.opencontainers.image.title="supabase-studio" \
-      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.vendor="Broadcom, Inc." \
       org.opencontainers.image.version="0.24.3"
 
 ENV HOME="/" \
@@ -29,7 +29,7 @@ RUN install_packages ca-certificates curl libbz2-1.0 libcom-err2 libcrypt1 libff
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "python-3.11.9-8-linux-${OS_ARCH}-debian-12" \
-      "node-20.12.2-1-linux-${OS_ARCH}-debian-12" \
+      "node-20.13.1-0-linux-${OS_ARCH}-debian-12" \
       "supabase-0.24.3-2-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
