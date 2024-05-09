@@ -49,6 +49,8 @@ ghost_env_vars=(
     GHOST_DATABASE_ENABLE_SSL
     GHOST_DATABASE_SSL_CA_FILE
     BLOG_TITLE
+    SMTP_FROM
+    GHOST_EMAIL
     SMTP_HOST
     SMTP_PORT
     GHOST_SMTP_PORT
@@ -107,10 +109,11 @@ export GHOST_PASSWORD="${GHOST_PASSWORD:-bitnami123}" # only used during the fir
 export GHOST_EMAIL="${GHOST_EMAIL:-user@example.com}" # only used during the first initialization
 
 # Ghost SMTP credentials
-GHOST_SMTP_HOST="${GHOST_SMTP_HOST:-"${SMTP_HOST:-}"}"
-export GHOST_SMTP_HOST="${GHOST_SMTP_HOST:-}" # only used during the first initialization
 GHOST_SMTP_FROM_ADDRESS="${GHOST_SMTP_FROM_ADDRESS:-"${SMTP_FROM:-}"}"
 GHOST_SMTP_FROM_ADDRESS="${GHOST_SMTP_FROM_ADDRESS:-"${GHOST_EMAIL:-}"}"
+export GHOST_SMTP_FROM_ADDRESS="${GHOST_SMTP_FROM_ADDRESS:-}" # only used during the first initialization
+GHOST_SMTP_HOST="${GHOST_SMTP_HOST:-"${SMTP_HOST:-}"}"
+export GHOST_SMTP_HOST="${GHOST_SMTP_HOST:-}" # only used during the first initialization
 GHOST_SMTP_PORT_NUMBER="${GHOST_SMTP_PORT_NUMBER:-"${SMTP_PORT:-}"}"
 GHOST_SMTP_PORT_NUMBER="${GHOST_SMTP_PORT_NUMBER:-"${GHOST_SMTP_PORT:-}"}"
 export GHOST_SMTP_PORT_NUMBER="${GHOST_SMTP_PORT_NUMBER:-}" # only used during the first initialization
