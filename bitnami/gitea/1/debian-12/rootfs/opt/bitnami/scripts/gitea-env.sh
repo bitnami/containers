@@ -58,6 +58,8 @@ gitea_env_vars=(
     GITEA_SMTP_FROM
     GITEA_SMTP_USER
     GITEA_SMTP_PASSWORD
+    GITEA_ENABLE_OPENID_SIGNIN
+    GITEA_ENABLE_OPENID_SIGNUP
 )
 for env_var in "${gitea_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -121,6 +123,8 @@ export GITEA_SMTP_PORT="${GITEA_SMTP_PORT:-}"
 export GITEA_SMTP_FROM="${GITEA_SMTP_FROM:-}"
 export GITEA_SMTP_USER="${GITEA_SMTP_USER:-}"
 export GITEA_SMTP_PASSWORD="${GITEA_SMTP_PASSWORD:-}"
+export GITEA_ENABLE_OPENID_SIGNIN="${GITEA_ENABLE_OPENID_SIGNIN:-false}"
+export GITEA_ENABLE_OPENID_SIGNUP="${GITEA_ENABLE_OPENID_SIGNUP:-false}"
 
 # Gitea system parameters
 export GITEA_DAEMON_USER="gitea"

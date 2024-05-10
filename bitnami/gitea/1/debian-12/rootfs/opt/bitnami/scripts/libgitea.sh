@@ -143,6 +143,11 @@ gitea_initialize() {
         # In addition, Gitea overwrites these values after passing the wizard, so we need to set them afterwards anyways
         is_empty_value "$GITEA_LOG_MODE" || gitea_conf_set "log" "MODE" "$GITEA_LOG_MODE"
         is_empty_value "$GITEA_LOG_ROUTER" || gitea_conf_set "log" "ROUTER" "$GITEA_LOG_ROUTER"
+
+        # These OpenID config values are set after passing the wizard, since Gitea overwrites them.
+        is_empty_value "$GITEA_ENABLE_OPENID_SIGNIN" || gitea_conf_set "openid" "ENABLE_OPENID_SIGNIN" "$GITEA_ENABLE_OPENID_SIGNIN"
+        is_empty_value "$GITEA_ENABLE_OPENID_SIGNUP" || gitea_conf_set "openid" "ENABLE_OPENID_SIGNUP" "$GITEA_ENABLE_OPENID_SIGNUP"
+        
         info "Persisting Gitea installation"
         persist_app "$app_name" "$GITEA_DATA_TO_PERSIST"
     else
