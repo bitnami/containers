@@ -3,24 +3,24 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.3.3-3"
+        "version": "3.3.3-4"
     },
     "erlang": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "25.3.2-12-0"
+        "version": "25.3.2-12-1"
     },
     "ini-file": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.4.6-11"
+        "version": "1.4.6-13"
     },
     "wait-for-port": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.7-11"
+        "version": "1.0.7-12"
     }
 }
