@@ -184,6 +184,8 @@ Gitea can be configured via environment variables or using a configuration file 
 | `GITEA_ROOT_URL`             | Overwrite the automatically generated public URL. This is useful if the internal and the external URL don't match | `${GITEA_PROTOCOL}://${GITEA_DOMAIN}:${GITEA_HTTP_PORT}` |
 | `GITEA_PASSWORD_HASH_ALGO`   | The hash algorithm to use [argon2, pbkdf2, scrypt, bcrypt], argon2 will spend more memory than others.            | `pbkdf2`                                                 |
 | `GITEA_LFS_START_SERVER`     | Enables Git LFS support                                                                                           | `false`                                                  |
+| `GITEA_ENABLE_OPENID_SIGNIN` | Enable OpenID sign-in.                                                                                            | `false`                                                  |
+| `GITEA_ENABLE_OPENID_SIGNUP` | Enable OpenID sign-up.                                                                                            | `false`                                                  |
 | `GITEA_DATABASE_TYPE`        | The database type in use [mysql, postgres].                                                                       | `postgres`                                               |
 | `GITEA_DATABASE_HOST`        | Database host address.                                                                                            | `postgresql`                                             |
 | `GITEA_DATABASE_PORT_NUMBER` | Database host port.                                                                                               | `5432`                                                   |
@@ -199,8 +201,6 @@ Gitea can be configured via environment variables or using a configuration file 
 | `GITEA_SMTP_FROM`            | Mail from address, RFC 5322. This can be just an email address, or the "Name" email@example.com format.           | `nil`                                                    |
 | `GITEA_SMTP_USER`            | Username of mailing user (usually the senders e-mail address).                                                    | `nil`                                                    |
 | `GITEA_SMTP_PASSWORD`        | Password of mailing user. Use "your password" for quoting if you use special characters in the password.          | `nil`                                                    |
-| `GITEA_ENABLE_OPENID_SIGNIN` | Enable OpenID sign-in.                                                                                            | `false`                                                  |
-| `GITEA_ENABLE_OPENID_SIGNUP` | Enable OpenID sign-up.                                                                                            | `false`                                                  |
 
 #### Read-only environment variables
 
