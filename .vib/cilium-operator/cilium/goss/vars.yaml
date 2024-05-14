@@ -1,0 +1,8 @@
+binaries:
+   - cilium-operator-aws
+   - cilium-operator-azure
+   - cilium-operator-generic
+root_dir: /opt/bitnami
+directories:
+  - paths:
+      - /opt/bitnami/cilium-operator

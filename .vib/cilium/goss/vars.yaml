@@ -1,0 +1,14 @@
+binaries:
+   - cilium
+   - cilium-agent
+   - cilium-bugtool
+   - cilium-dbg
+   - cilium-health
+   - cilium-health-responder
+   - cilium-mount
+   - cilium-sysctlfix
+   - loopback
+root_dir: /opt/bitnami
+directories:
+  - paths:
+      - /opt/bitnami/cilium
