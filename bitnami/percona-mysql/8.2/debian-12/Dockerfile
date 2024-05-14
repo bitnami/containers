@@ -7,11 +7,11 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-05-07T08:12:28Z" \
+      org.opencontainers.image.created="2024-05-13T23:11:27Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/percona-mysql/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.2.0-1-debian-12-r6" \
+      org.opencontainers.image.ref.name="8.2.0-1-debian-12-r7" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/percona-mysql" \
       org.opencontainers.image.title="percona-mysql" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -28,9 +28,9 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libaio1 libaudit1 libbz2-1.0 libcap-ng0 libcom-err2 libcrypt1 libev4 libgcc-s1 libkeyutils1 libkrb5support0 libnuma-dev libpam0g libssl3 libstdc++6 libudev0 libudev1 libuuid1 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "mysql-shell-8.2.1-0-linux-${OS_ARCH}-debian-12" \
-      "ini-file-1.4.6-11-linux-${OS_ARCH}-debian-12" \
-      "percona-mysql-8.2.0-1-1-linux-${OS_ARCH}-debian-12" \
+      "mysql-shell-8.2.1-1-linux-${OS_ARCH}-debian-12" \
+      "ini-file-1.4.6-13-linux-${OS_ARCH}-debian-12" \
+      "percona-mysql-8.2.0-1-2-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
