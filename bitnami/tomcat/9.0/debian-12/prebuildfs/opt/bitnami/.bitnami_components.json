@@ -3,18 +3,18 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "17.0.11-10-0"
+        "version": "17.0.11-10-1"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.6-12"
+        "version": "1.0.6-13"
     },
     "tomcat": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "9.0.89-0"
+        "version": "9.0.89-2"
     }
 }
