@@ -1,0 +1,12 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+command:
+  check-app-version:
+    exec: cilium-dbg version | grep "$(echo $APP_VERSION | sed -E 's|([0-9]+\.[0-9]+)\.0$|\1|g')"
+    exit-status: 0
+  check-cilium-help:
+    exec: cilium-dbg help
+    exit-status: 0
+    stdout:
+      - "Usage"
