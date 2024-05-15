@@ -1,0 +1,8 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+ 
+version: "2"
+ 
+services:
+  cilium:
+    image: docker.io/bitnami/cilium-operator:1
