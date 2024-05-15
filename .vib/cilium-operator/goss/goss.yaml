@@ -3,7 +3,7 @@
 
 gossfile:
   # Goss tests exclusive to the current container
-  ../../cilium/goss/cilium-operator.yaml: {}
+  ../../cilium-operator/goss/cilium-operator.yaml: {}
   # Load scripts from .vib/common/goss/templates
   ../../common/goss/templates/check-binaries.yaml: {}
   ../../common/goss/templates/check-broken-symlinks.yaml: {}
