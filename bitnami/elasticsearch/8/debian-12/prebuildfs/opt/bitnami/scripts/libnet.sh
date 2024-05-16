@@ -68,7 +68,13 @@ get_machine_ip() {
         error "Could not find any IP address associated to hostname ${hostname}"
         exit 1
     fi
-    echo "${ip_addresses[0]}"
+
+    # Check if the first IP address is IPv6 and add brackets
+    if [[ "${ip_addresses[0]}" =~ : ]]; then
+        echo "[${ip_addresses[0]}]"
+    else
+        echo "${ip_addresses[0]}"
+    fi
 }
 
 ########################
