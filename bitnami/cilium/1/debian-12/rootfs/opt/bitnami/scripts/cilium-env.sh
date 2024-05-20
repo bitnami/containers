@@ -25,6 +25,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # variable will be overridden with the value specified in that file
 cilium_env_vars=(
     HOST_CNI_BIN_DIR
+    HOST_CNI_CONF_DIR
     HUBBLE_SERVER
 )
 for env_var in "${cilium_env_vars[@]}"; do
@@ -51,6 +52,7 @@ export CILIUM_DAEMON_GROUP="cilium"
 
 # Cilium settings
 export HOST_CNI_BIN_DIR="${HOST_CNI_BIN_DIR:-/opt/cni/bin}"
+export HOST_CNI_CONF_DIR="${HOST_CNI_CONF_DIR:-/etc/cni/net.d}"
 export HUBBLE_SERVER="${HUBBLE_SERVER:-unix:///var/run/cilium/hubble.sock}"
 
 # Custom environment variables may be defined below

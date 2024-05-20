@@ -15,6 +15,8 @@ set -o pipefail
 # Load Cilium environment variables
 . /opt/bitnami/scripts/cilium-env.sh
 
-# The statically compiled Go binaries do not depend on system utilities
-# that can be missed on distros installed on the underlying host.
-cilium_install_linux_utils "$1" "$2"
+# Mount cgroup2 filesystem
+mount_cgroup2 "$1" "$2"
+
+# Apply sysctl overwrites
+sysctl_overwrites "$1"

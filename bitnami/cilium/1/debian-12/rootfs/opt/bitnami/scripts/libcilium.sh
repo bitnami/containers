@@ -31,7 +31,7 @@ atomic_copy() {
 # Globals:
 #   CILIUM_BIN_DIR, CILIUM_CNI_BIN_DIR, HOST_CNI_BIN_DIR
 # Arguments:
-#   $1 - Target directory
+#   $1 - Target root directory
 # Returns:
 #   None
 #########################
@@ -48,33 +48,73 @@ cilium_install_cni_plugin() {
 }
 
 ########################
-# Install linux utilities such as "mount" and "sysctlfix" in the provided target root
+# Uninstall Cilium CNI plugin from the provided target root
 # Globals:
-#   CILIUM_BIN_DIR, HOST_CNI_BIN_DIR
+#   HOST_CNI_BIN_DIR, HOST_CNI_CONF_DIR
 # Arguments:
-#   $1 - Target directory
+#   $1 - Target root directory
 # Returns:
 #   None
 #########################
-cilium_install_linux_utils() {
+cilium_uninstall_cni_plugin() {
+    local -r target_root="${1:?target root is missing}"
+
+    local -r target_bin_dir="${target_root}${HOST_CNI_BIN_DIR}"
+    local -r target_conf_dir="${target_root}${HOST_CNI_CONF_DIR}"
+
+    # Remove Cilium CNI plugin binary and configuration files
+    rm -f "${target_bin_dir}/cilium-cni"
+    find "$target_conf_dir" -maxdepth 1 -type f \
+        -name '*cilium*' -and \( \
+        -name '*.conf' -or \
+        -name '*.conflist' \
+    \) -delete
+}
+
+########################
+# Mount cgroup2 filesystem in the provided target root
+# Globals:
+#   CILIUM_BIN_DIR, HOST_CNI_BIN_DIR
+# Arguments:
+#   $1 - Target root directory
+#   $2 - Target root cgroup
+# Returns:
+#   None
+#########################
+mount_cgroup2() {
     local -r target_root="${1:?target root is missing}"
     local -r target_root_cgroup="${2:?target root cgroup is missing}"
 
     local -r target_dir="${target_root}${HOST_CNI_BIN_DIR}"
     ensure_dir_exists "$target_dir"
 
-    local -a nsenterFlags=("--mount=${target_root}/proc/1/ns/mnt")
-
-    # Install cilium-sysctlfix
-    atomic_copy "${CILIUM_BIN_DIR}/cilium-sysctlfix" "${target_dir}/cilium-sysctlfix"
-    nsenter "${nsenterFlags[@]}" "${HOST_CNI_BIN_DIR}/cilium-sysctlfix"
-    rm "${target_dir}/cilium-sysctlfix"
-
-    # Install cilium-mount
+    # The statically compiled Go binaries do not depend on system utilities
+    # that can be missed on distros installed on the underlying host.
     atomic_copy "${CILIUM_BIN_DIR}/cilium-mount" "${target_dir}/cilium-mount"
-    nsenterFlags+=("--cgroup=${target_root}/proc/1/ns/cgroup")
-    nsenter "${nsenterFlags[@]}" "${HOST_CNI_BIN_DIR}/cilium-mount" "$target_root_cgroup"
+    nsenter "--mount=${target_root}/proc/1/ns/mnt" "--cgroup=${target_root}/proc/1/ns/cgroup" "${HOST_CNI_BIN_DIR}/cilium-mount" "$target_root_cgroup"
     rm "${target_dir}/cilium-mount"
+}
+
+########################
+# Apply sysctl overwrites in the provided target root
+# Globals:
+#   CILIUM_BIN_DIR, HOST_CNI_BIN_DIR
+# Arguments:
+#   $1 - Target root directory
+# Returns:
+#   None
+#########################
+sysctl_overwrites() {
+    local -r target_root="${1:?target root is missing}"
+
+    local -r target_dir="${target_root}${HOST_CNI_BIN_DIR}"
+    ensure_dir_exists "$target_dir"
+
+    # The statically compiled Go binaries do not depend on system utilities
+    # that can be missed on distros installed on the underlying host.
+    atomic_copy "${CILIUM_BIN_DIR}/cilium-sysctlfix" "${target_dir}/cilium-sysctlfix"
+    nsenter "--mount=${target_root}/proc/1/ns/mnt" "${HOST_CNI_BIN_DIR}/cilium-sysctlfix"
+    rm "${target_dir}/cilium-sysctlfix"
 }
 
 ########################
