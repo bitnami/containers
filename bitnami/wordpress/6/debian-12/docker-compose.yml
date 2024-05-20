@@ -13,7 +13,7 @@ services:
       - MARIADB_USER=bn_wordpress
       - MARIADB_DATABASE=bitnami_wordpress
   wordpress:
-    image: docker.io/bitnami/wordpress:6
+    build: ./
     ports:
       - '80:8080'
       - '443:8443'

@@ -38,4 +38,4 @@ wordpress_validate
 wordpress_generate_web_server_configuration
 
 # Ensure WordPress is initialized
-wordpress_initialize
+# wordpress_initialize - Should be refactored to bedrock structure

@@ -108,7 +108,7 @@ done
 unset wordpress_env_vars
 
 # Paths
-export WORDPRESS_BASE_DIR="${BITNAMI_ROOT_DIR}/wordpress"
+export WORDPRESS_BASE_DIR="${BITNAMI_ROOT_DIR}/bedrock/web"
 export WORDPRESS_CONF_FILE="${WORDPRESS_BASE_DIR}/wp-config.php"
 export WP_CLI_BASE_DIR="${BITNAMI_ROOT_DIR}/wp-cli"
 export WP_CLI_BIN_DIR="${WP_CLI_BASE_DIR}/bin"

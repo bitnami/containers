@@ -275,10 +275,10 @@ ensure_apache_configuration_exists() {
 #   None
 ########################
 apache_replace_htaccess_files() {
-    local -r app="${1:?missing app}"
+    local -r app="bedrock"
     local -r result_file="${APACHE_HTACCESS_DIR}/${app}-htaccess.conf"
     # Default options
-    local document_root="${BITNAMI_ROOT_DIR}/${app}"
+    local document_root="${BITNAMI_ROOT_DIR}/${app}/web"
     local overwrite="yes"
     local -a htaccess_files
     local htaccess_dir
@@ -368,7 +368,7 @@ EOF
 #   true if the configuration was enabled, false otherwise
 ########################
 ensure_apache_app_configuration_exists() {
-    local -r app="${1:?missing app}"
+    local -r app="bedrock"
     # Default options
     local type=""
     local -a hosts=("127.0.0.1" "_default_")
@@ -385,7 +385,7 @@ ensure_apache_app_configuration_exists() {
     export additional_https_configuration=""
     export before_vhost_configuration=""
     export allow_override="All"
-    export document_root="${BITNAMI_ROOT_DIR}/${app}"
+    export document_root="${BITNAMI_ROOT_DIR}/${app}/web"
     export extra_directory_configuration=""
     export default_http_port="${APACHE_HTTP_PORT_NUMBER:-"$APACHE_DEFAULT_HTTP_PORT_NUMBER"}"
     export default_https_port="${APACHE_HTTPS_PORT_NUMBER:-"$APACHE_DEFAULT_HTTPS_PORT_NUMBER"}"

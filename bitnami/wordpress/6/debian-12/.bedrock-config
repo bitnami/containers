@@ -1,0 +1,28 @@
+DB_NAME='bitnami_wordpress'
+DB_USER='bn_wordpress'
+DB_PASSWORD=''
+
+# Optionally, you can use a data source name (DSN)
+# When using a DSN, you can remove the DB_NAME, DB_USER, DB_PASSWORD, and DB_HOST variables
+# DATABASE_URL='mysql://database_user:database_password@database_host:database_port/database_name'
+
+# Optional database variables
+DB_HOST='mariadb:3306'
+# DB_PREFIX='wp_'
+
+WP_ENV='development'
+WP_HOME='http://localhost'
+WP_SITEURL="${WP_HOME}/wp"
+
+# Specify optional debug.log path
+# WP_DEBUG_LOG='/path/to/debug.log'
+
+# Generate your keys here: https://roots.io/salts.html
+AUTH_KEY='yX&P}RToU2+G5#Dp_vL8^]}iYY)0-Xa4+>3M>1A_I_.gzSc3W8V|X6_7VX$y&DNR'
+SECURE_AUTH_KEY='vadX,w<?[gNbQBr-{4,7PMDG-XvZyIW3XSi6W6m-:k!,H^xK.6`nm4}e%_L[Om[J'
+LOGGED_IN_KEY='CIny+n_!R><7upg8[C}zxRalLN&_SC3yzL4IcXSuI?7-R)uHweJQ/EfrGCa&A|++'
+NONCE_KEY=',Vb$MNmS@#w{;0;kd@bV*!Pv#^($!bcv+4aV<qyzy6A5VWx>#sUJ1m<cSQiiCJ[}'
+AUTH_SALT='b=EOt`y_7>8_=kn<^r0S(P_pNf/mMT7%c$(EEXsri%kagjp3ia-KD=UK)|ZmdY_x'
+SECURE_AUTH_SALT='?!la_BPf<bhWY,yl84{p]]f#VjENTS!1T3vWr<=[Fz}7r@1$(zH<7Dc`3bgM1,*l'
+LOGGED_IN_SALT='3=+rI1tuT>tdX;K{=x?1GX*a}I8gWWP44k-BU&$`FZ3ZV+jlR}6Ic3.U:Ni^#9z4'
+NONCE_SALT='fKCygmTJ0H_69*dyT-RJ!z7AM4IwG(XO2Y?SW_PxN)QEyzYhzjh(G>cK26BB#Ov8'

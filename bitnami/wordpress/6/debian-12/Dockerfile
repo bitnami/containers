@@ -54,12 +54,25 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/apache/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
+
+# Need to update PATH for php binaries before composer install
+ENV  PATH="/opt/bitnami/common/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/wp-cli/bin:$PATH"
+RUN /opt/bitnami/scripts/roots/install-composer.sh
+RUN /opt/bitnami/scripts/roots/install-npm.sh
+RUN /opt/bitnami/scripts/roots/install-bedrock.sh
+RUN /opt/bitnami/scripts/roots/install-acorn.sh
+RUN /opt/bitnami/scripts/roots/install-sage.sh
+RUN /opt/bitnami/scripts/roots/configure-apache.sh
+# Main Bedrock configuration file
+COPY /.bedrock-config ./opt/bitnami/bedrock/.env
+
+
 RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/wordpress/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     APP_VERSION="6.5.3" \
-    BITNAMI_APP_NAME="wordpress" \
+    BITNAMI_APP_NAME="bedrock" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/wp-cli/bin:$PATH"
 
 EXPOSE 8080 8443
