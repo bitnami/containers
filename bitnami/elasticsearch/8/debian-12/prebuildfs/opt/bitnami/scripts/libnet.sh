@@ -8,6 +8,7 @@
 
 # Load Generic Libraries
 . /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libvalidations.sh
 
 # Functions
 
@@ -70,7 +71,7 @@ get_machine_ip() {
     fi
 
     # Check if the first IP address is IPv6 and add brackets
-    if [[ "${ip_addresses[0]}" =~ : ]]; then
+    if validate_ipv6 "${ip_addresses[0]}" ; then
         echo "[${ip_addresses[0]}]"
     else
         echo "${ip_addresses[0]}"
