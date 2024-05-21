@@ -16,4 +16,6 @@ set -o pipefail
 . /opt/bitnami/scripts/cilium-env.sh
 
 # Ensure 'daemon' user exists when running as 'root'
-am_i_root && ensure_user_exists "$CILIUM_DAEMON_USER" --group "$CILIUM_DAEMON_GROUP"
+if am_i_root; then
+    ensure_user_exists "$CILIUM_DAEMON_USER" --group "$CILIUM_DAEMON_GROUP"
+fi
