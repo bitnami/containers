@@ -45,10 +45,6 @@ pear install mail net_smtp
 # Enable default web server configuration for MediaWiki
 info "Creating default web server configuration for MediaWiki"
 web_server_validate
-ensure_web_server_app_configuration_exists "mediawiki" --type php --apache-extra-directory-configuration "
-RewriteEngine On
-RewriteRule ^/?wiki(/.*)?$ %{DOCUMENT_ROOT}/index.php [L]
-"
 
 # Copy all initially generated configuration files to the default directory
 # (this is to avoid breaking when entrypoint is being overridden)
