@@ -137,7 +137,6 @@ mediawiki_initialize() {
         mediawiki_configure_short_urls
         mediawiki_conf_set "\$wgEnableUploads" "true" yes
         which convert >/dev/null && mediawiki_conf_set "\$wgUseImageMagick" "true" yes
-
         mediawiki_configure_host "$MEDIAWIKI_HOST"
         mediawiki_conf_set "\$wgEmergencyContact" "$MEDIAWIKI_EMAIL"
         mediawiki_conf_set "\$wgPasswordSender" "$MEDIAWIKI_EMAIL"
@@ -328,8 +327,8 @@ mediawiki_configure_host() {
         url="https://${host}"
         [[ "$MEDIAWIKI_EXTERNAL_HTTPS_PORT_NUMBER" != "443" ]] && url+=":${MEDIAWIKI_EXTERNAL_HTTPS_PORT_NUMBER}"
     else
-      url="http://${host}"
-      [[ "$MEDIAWIKI_EXTERNAL_HTTP_PORT_NUMBER" != "80" ]] && url+=":${MEDIAWIKI_EXTERNAL_HTTP_PORT_NUMBER}"
+        url="http://${host}"
+        [[ "$MEDIAWIKI_EXTERNAL_HTTP_PORT_NUMBER" != "80" ]] && url+=":${MEDIAWIKI_EXTERNAL_HTTP_PORT_NUMBER}"
     fi
 
     mediawiki_conf_set "\$wgServer" ""
