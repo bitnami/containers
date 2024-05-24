@@ -1,0 +1,6 @@
+binaries:
+   - hubble-relay
+root_dir: /opt/bitnami
+directories:
+  - paths:
+      - /opt/bitnami/hubble-relay
