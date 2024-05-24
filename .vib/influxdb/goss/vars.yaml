@@ -6,9 +6,7 @@ directories:
   - mode: "0775"
     paths:
       - /opt/bitnami/influxdb/etc
-      - /bitnami/influxdb/data
-      - /bitnami/influxdb/wal
-      - /bitnami/influxdb/meta
+      - /bitnami/influxdb
       - /docker-entrypoint-initdb.d
 files:
   - paths:

@@ -9,7 +9,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "7.17.21-2"
+        "version": "7.17.21-4"
     },
     "yq": {
         "arch": "amd64",
