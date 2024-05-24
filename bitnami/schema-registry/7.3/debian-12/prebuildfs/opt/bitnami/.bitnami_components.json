@@ -3,12 +3,12 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "17.0.11-10-1"
+        "version": "17.0.11-12-0"
     },
     "schema-registry": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "7.3.8-1"
+        "version": "7.3.8-2"
     }
 }

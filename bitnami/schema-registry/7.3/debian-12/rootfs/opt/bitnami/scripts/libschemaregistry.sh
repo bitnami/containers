@@ -179,8 +179,8 @@ schema_registry_validate() {
         fi
     fi
     if [[ -n "$SCHEMA_REGISTRY_AVRO_COMPATIBILY_LEVEL" ]]; then
-        if ! [[ "$SCHEMA_REGISTRY_AVRO_COMPATIBILY_LEVEL" =~ ^(none|backward|forward|full)$ ]]; then
-            print_validation_error "The allowed values for SCHEMA_REGISTRY_AVRO_COMPATIBILY_LEVEL are: none, backward, forward or full"
+        if ! [[ "$SCHEMA_REGISTRY_AVRO_COMPATIBILY_LEVEL" =~ ^(none|backward|backward_transitive|forward|forward_transitive|full|full_transitive)$ ]]; then
+            print_validation_error "The allowed values for SCHEMA_REGISTRY_AVRO_COMPATIBILY_LEVEL are: none, backward, backward_transitive, forward, forward_transitive, full or full_transitive"
         fi
     fi
     [[ -n "$SCHEMA_REGISTRY_DEBUG" ]] && check_true_false_value SCHEMA_REGISTRY_DEBUG
@@ -326,7 +326,7 @@ schema_registry_initialize() {
         fi
 
         # Other settings
-        [[ -n "$SCHEMA_REGISTRY_AVRO_COMPATIBILY_LEVEL" ]] && schema_registry_conf_set "avro.compatibility.level" "$SCHEMA_REGISTRY_AVRO_COMPATIBILY_LEVEL"
+        [[ -n "$SCHEMA_REGISTRY_AVRO_COMPATIBILY_LEVEL" ]] && schema_registry_conf_set "schema.compatibility.level" "$SCHEMA_REGISTRY_AVRO_COMPATIBILY_LEVEL"
         [[ -n "$SCHEMA_REGISTRY_DEBUG" ]] && schema_registry_conf_set "debug" "$SCHEMA_REGISTRY_DEBUG"
         schema_registry_conf_set "host.name" "$(schema_registry_hostname)"
     fi
