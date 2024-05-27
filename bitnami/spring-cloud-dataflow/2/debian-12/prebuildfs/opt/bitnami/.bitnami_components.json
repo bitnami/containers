@@ -3,13 +3,13 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "17.0.11-12-0"
+        "version": "21.0.3-12-0"
     },
     "spring-cloud-dataflow": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "2.11.3-0"
+        "version": "2.11.3-1"
     },
     "yq": {
         "arch": "amd64",
