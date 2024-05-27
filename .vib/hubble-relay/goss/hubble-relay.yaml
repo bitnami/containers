@@ -3,7 +3,7 @@
 
 command:
   check-app-version:
-    exec: hubble-relay --version | grep "$(echo $APP_VERSION | sed -E 's|([0-9]+\.[0-9]+)\.0$|\1|g')"
+    exec: hubble-relay version | grep "$(echo $APP_VERSION | sed -E 's|([0-9]+\.[0-9]+)\.0$|\1|g')"
     exit-status: 0
   check-cilium-operator-help:
     exec: hubble-relay help
