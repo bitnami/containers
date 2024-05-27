@@ -8,11 +8,11 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-05-14T05:41:37Z" \
+      org.opencontainers.image.created="2024-05-27T10:21:16Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/tomcat/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="10.1.24-debian-12-r0" \
+      org.opencontainers.image.ref.name="10.1.24-debian-12-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/tomcat" \
       org.opencontainers.image.title="tomcat" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -30,8 +30,8 @@ RUN install_packages ca-certificates curl libssl3 procps xmlstarlet zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "render-template-1.0.6-13-linux-${OS_ARCH}-debian-12" \
-      "java-17.0.11-10-1-linux-${OS_ARCH}-debian-12" \
-      "tomcat-10.1.24-0-linux-${OS_ARCH}-debian-12" \
+      "java-21.0.3-12-0-linux-${OS_ARCH}-debian-12" \
+      "tomcat-10.1.24-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
