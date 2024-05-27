@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "5.82.11-0"
+        "version": "5.82.12-0"
     },
     "mysql-client": {
         "arch": "amd64",
@@ -15,7 +15,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "18.20.2-2"
+        "version": "18.20.3-0"
     },
     "python": {
         "arch": "amd64",
