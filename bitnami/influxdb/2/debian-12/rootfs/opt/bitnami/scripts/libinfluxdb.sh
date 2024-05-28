@@ -53,11 +53,16 @@ influxdb_validate() {
         print_validation_error "Primary config authentication is required. Please, specify a password for the ${INFLUXDB_ADMIN_USER} user by setting the 'INFLUXDB_ADMIN_USER_PASSWORD' or 'INFLUXDB_ADMIN_USER_PASSWORD_FILE' environment variables."
     fi
     if [[ -z "${INFLUXDB_ADMIN_USER_TOKEN:-}" ]]; then
-        print_validation_error "Primary config authentication is required. Please, specify a token for the ${INFLUXDB_ADMIN_USER} user by setting the 'INFLUXDB_ADMIN_USER_TOKEN' or 'INFLUXDB_ADMIN_USER_TOKEN_FILE' environment variables."
+        warn "No admin token provided. Notice some internal features require it, like performing HTTP API requests."
+        warn "A token for the ${INFLUXDB_ADMIN_USER} user can be provided by setting the 'INFLUXDB_ADMIN_USER_TOKEN' or 'INFLUXDB_ADMIN_USER_TOKEN_FILE' environment variables."
     fi
 
     if [[ -n "${INFLUXDB_USER:-}" ]] && [[ -z "${INFLUXDB_USER_PASSWORD:-}" ]]; then
         print_validation_error "User authentication is required. Please, specify a password for the ${INFLUXDB_USER} user by setting the 'INFLUXDB_USER_PASSWORD' or 'INFLUXDB_USER_PASSWORD_FILE' environment variables."
+    fi
+
+    if [[ "${INFLUXDB_INIT_MODE}" = "upgrade" ]] && [[ -n "${INFLUXDB_INIT_V1_DIR:-}" ]] && [[ -z "${INFLUXDB_INIT_V1_CONFIG:-}" ]]; then
+        print_validation_error "InfluxDB 1.x data not found. Please, specify its location by setting the 'INFLUXDB_INIT_V1_DIR' or 'INFLUXDB_INIT_V1_CONFIG' environment variables."
     fi
 
     # InfluxDB port validations
@@ -104,13 +109,62 @@ influxdb_create_config() {
 #   None
 #########################
 influxdb_create_primary_setup() {
-    "${INFLUXDB_BIN_DIR}/influx" setup -f --name "${INFLUXDB_ADMIN_CONFIG_NAME}" \
-        --org "${INFLUXDB_ADMIN_ORG}" \
-        --bucket "${INFLUXDB_ADMIN_BUCKET}" \
-        --username "${INFLUXDB_ADMIN_USER}" \
-        --password "${INFLUXDB_ADMIN_USER_PASSWORD}" \
-        --token "${INFLUXDB_ADMIN_USER_TOKEN}" \
+    local -a args=(
+        --force
+        --name "${INFLUXDB_ADMIN_CONFIG_NAME}"
+        --org "${INFLUXDB_ADMIN_ORG}"
+        --bucket "${INFLUXDB_ADMIN_BUCKET}"
+        --username "${INFLUXDB_ADMIN_USER}"
+        --password "${INFLUXDB_ADMIN_USER_PASSWORD}"
         --retention "${INFLUXDB_ADMIN_RETENTION}"
+    )
+
+    if [ -n "${INFLUXDB_ADMIN_USER_TOKEN}" ]; then
+        args+=('--token' "${INFLUXDB_ADMIN_USER_TOKEN}")
+    fi
+
+    local setup_command=("${INFLUXDB_BIN_DIR}/influx" setup "${args[@]}")
+    am_i_root && setup_command=("run_as_user" "$INFLUXDB_DAEMON_USER" "${setup_command[@]}")
+    debug_execute "${setup_command[@]}"
+}
+
+########################
+# Upgrade V1 data into the V2 format
+# Globals:
+#   INFLUXDB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+influxdb_run_upgrade() {
+    local -a args=(
+        --force
+        --org "${INFLUXDB_ADMIN_ORG}"
+        --bucket "${INFLUXDB_ADMIN_BUCKET}"
+        --username "${INFLUXDB_ADMIN_USER}"
+        --password "${INFLUXDB_ADMIN_USER_PASSWORD}"
+        --retention "${INFLUXDB_ADMIN_RETENTION}"
+        --v2-config-path "${INFLUXDB_CONF_FILE}"
+        --influx-configs-path "${INFLUX_CONFIGS_PATH}"
+        --continuous-query-export-path "${INFLUXDB_CONTINUOUS_QUERY_EXPORT_FILE}"
+        --log-path "${INFLUXDB_UPGRADE_LOG_FILE}"
+        --bolt-path "${INFLUXD_BOLT_PATH}"
+        --engine-path "${INFLUXD_ENGINE_PATH}"
+        --v1-dir "${INFLUXDB_INIT_V1_DIR}"
+    )
+
+    if [ -n "${INFLUXDB_ADMIN_USER_TOKEN}" ]; then
+        args+=('--token' "${INFLUXDB_ADMIN_USER_TOKEN}")
+    fi
+
+    local logLevel="info"
+    is_boolean_yes "${BITNAMI_DEBUG}" && logLevel="debug"
+    args+=('--log-level' "${logLevel}")
+
+    local upgrade_command=("${INFLUXDB_BIN_DIR}/influxd" upgrade "${args[@]}")
+    am_i_root && upgrade_command=("run_as_user" "$INFLUXDB_DAEMON_USER" "${upgrade_command[@]}")
+    debug_execute "${upgrade_command[@]}"
 }
 
 ########################
@@ -366,13 +420,21 @@ influxdb_user_role() {
 #   None
 #########################
 influxdb_initialize() {
-    influxdb_create_config
 
     if [[ ! -f "${INFLUX_CONFIGS_PATH}" ]]; then
-        influxdb_start_bg_noauth
-        info "Deploying InfluxDB from scratch"
-        info "Creating primary setup..."
-        influxdb_create_primary_setup
+        if [[ "${INFLUXDB_INIT_MODE}" = "setup" ]]; then
+            influxdb_create_config
+            influxdb_start_bg_noauth
+            info "Deploying InfluxDB from scratch"
+            info "Creating primary setup..."
+            influxdb_create_primary_setup
+        elif [[ "${INFLUXDB_INIT_MODE}" = "upgrade" ]]; then
+            info "Migrating InfluxDB 1.x data into 2.x format"
+            influxdb_run_upgrade
+        else
+            error "INFLUXDB_INIT_MODE only accepts 'setup' (default) or 'upgrade' values"
+            exit 1
+        fi
 
         if [[ -n "${INFLUXDB_USER_ORG}" ]] && [[ "${INFLUXDB_USER_ORG}" != "${INFLUXDB_ADMIN_ORG}" ]]; then
             info "Creating custom org with id: ${INFLUXDB_USER_ORG}..."
