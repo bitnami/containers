@@ -7,15 +7,15 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-05-13T21:51:37Z" \
+      org.opencontainers.image.created="2024-05-28T17:01:12Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/joomla/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="5.1.0-debian-12-r4" \
+      org.opencontainers.image.ref.name="5.1.1-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/joomla" \
       org.opencontainers.image.title="joomla" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="5.1.0"
+      org.opencontainers.image.version="5.1.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,11 +29,11 @@ RUN install_packages acl ca-certificates curl libaudit1 libbrotli1 libbsd0 libbz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "render-template-1.0.6-13-linux-${OS_ARCH}-debian-12" \
-      "php-8.1.28-6-linux-${OS_ARCH}-debian-12" \
+      "php-8.1.28-7-linux-${OS_ARCH}-debian-12" \
       "apache-2.4.59-2-linux-${OS_ARCH}-debian-12" \
       "mysql-client-11.3.2-3-linux-${OS_ARCH}-debian-12" \
       "libphp-8.1.28-1-linux-${OS_ARCH}-debian-12" \
-      "joomla-5.1.0-1-linux-${OS_ARCH}-debian-12" \
+      "joomla-5.1.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -58,7 +58,7 @@ RUN /opt/bitnami/scripts/joomla/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="5.1.0" \
+    APP_VERSION="5.1.1" \
     BITNAMI_APP_NAME="joomla" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:$PATH"
 
