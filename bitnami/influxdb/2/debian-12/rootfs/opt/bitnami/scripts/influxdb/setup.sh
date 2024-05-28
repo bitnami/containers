@@ -21,7 +21,7 @@ set -o pipefail
 influxdb_validate
 # Ensure InfluxDB user and group exist when running as 'root'
 if am_i_root; then
-    chown -R "$INFLUXDB_DAEMON_USER" "$INFLUXDB_DATA_DIR" "$INFLUXDB_CONF_DIR"
+    chown -R "$INFLUXDB_DAEMON_USER" "$INFLUXDB_VOLUME_DIR" "$INFLUXDB_CONF_DIR"
 fi
 # Ensure InfluxDB is stopped when this script ends.
 trap "influxdb_stop" EXIT
