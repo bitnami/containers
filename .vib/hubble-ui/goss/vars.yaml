@@ -1,0 +1,17 @@
+binaries:
+  - nginx
+  - render-template
+directories:
+  - mode: "0775"
+    paths:
+      - /opt/bitnami/nginx/conf
+      - /opt/bitnami/nginx/conf/bitnami
+      - /opt/bitnami/nginx/conf/server_blocks
+      - /opt/bitnami/nginx/logs
+      - /opt/bitnami/nginx/tmp
+  - paths:
+      - /certs
+      - /opt/bitnami/hubble-ui/public
+ports:
+  http: 8080
+root_dir: /opt/bitnami
