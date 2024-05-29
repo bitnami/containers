@@ -5,7 +5,7 @@ command:
   # This binary doesn't support any 'help' nor 'version' command or flags
   # so we just check that it runs
   check-hubble-ui-backend:
-    exec: backend
-    exit-status: 1
+    exec: timeout --preserve-status 5 backend
+    exit-status: 0
     stderr:
-      - "TLS to hubble-relay is not enabled"
+      - "running ListenAndServe"
