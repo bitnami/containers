@@ -1,0 +1,13 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+gossfile:
+  # Goss tests exclusive to the current container
+  ../../hubble-ui-backend/goss/hubble-ui-backend.yaml: {}
+  # Load scripts from .vib/common/goss/templates
+  ../../common/goss/templates/check-binaries.yaml: {}
+  ../../common/goss/templates/check-broken-symlinks.yaml: {}
+  ../../common/goss/templates/check-ca-certs.yaml: {}
+  ../../common/goss/templates/check-linked-libraries.yaml: {}
+  ../../common/goss/templates/check-sed-in-place.yaml: {}
+  ../../common/goss/templates/check-spdx.yaml: {}

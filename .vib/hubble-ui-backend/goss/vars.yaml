@@ -1,0 +1,6 @@
+binaries:
+   - backend
+root_dir: /opt/bitnami
+directories:
+  - paths:
+      - /opt/bitnami/hubble-ui-backend
