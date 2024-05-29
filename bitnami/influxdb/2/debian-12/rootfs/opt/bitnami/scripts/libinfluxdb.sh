@@ -431,6 +431,7 @@ influxdb_initialize() {
         elif [[ "${INFLUXDB_INIT_MODE}" = "upgrade" ]]; then
             info "Migrating InfluxDB 1.x data into 2.x format"
             influxdb_run_upgrade
+            influxdb_start_bg_noauth
         else
             error "INFLUXDB_INIT_MODE only accepts 'setup' (default) or 'upgrade' values"
             exit 1
