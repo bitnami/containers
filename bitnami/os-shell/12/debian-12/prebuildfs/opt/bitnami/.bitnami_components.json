@@ -3,24 +3,24 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.4.6-12"
+        "version": "1.4.6-13"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.6-12"
+        "version": "1.0.6-13"
     },
     "wait-for-port": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.7-12"
+        "version": "1.0.7-13"
     },
     "yq": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "4.44.1-0"
+        "version": "4.44.1-1"
     }
 }
