@@ -163,42 +163,42 @@ InfluxDB (TM) can be configured via environment variables or using a configurati
 
 #### Customizable environment variables
 
-| Name                                    | Description                                                                            | Default Value                               |
-|-----------------------------------------|----------------------------------------------------------------------------------------|---------------------------------------------|
-| `INFLUXDB_DATA_DIR`                     | InfluxDB directory where data is stored.                                               | `${INFLUXDB_VOLUME_DIR}/data`               |
-| `INFLUXDB_DATA_WAL_DIR`                 | InfluxDB directory where the WAL file is stored.                                       | `${INFLUXDB_VOLUME_DIR}/wal`                |
-| `INFLUXDB_META_DIR`                     | InfluxDB directory where metadata is stored.                                           | `${INFLUXDB_VOLUME_DIR}/meta`               |
-| `INFLUXD_CONFIG_PATH`                   | InfluxDB 2.x alias for configuration file path.                                        | `${INFLUXDB_CONF_DIR}`                      |
-| `INFLUXDB_REPORTING_DISABLED`           | Whether to disable InfluxDB reporting.                                                 | `true`                                      |
-| `INFLUXDB_HTTP_PORT_NUMBER`             | Port number used by InfluxDB HTTP server.                                              | `8086`                                      |
-| `INFLUXDB_HTTP_BIND_ADDRESS`            | InfluxDB HTTP bind address.                                                            | `0.0.0.0:${INFLUXDB_HTTP_PORT_NUMBER}`      |
-| `INFLUXDB_HTTP_READINESS_TIMEOUT`       | InfluxDB HTTP port readiness timeout in seconds.                                       | `60`                                        |
-| `INFLUXDB_PORT_NUMBER`                  | Port number used by InfluxDB.                                                          | `8088`                                      |
-| `INFLUXDB_BIND_ADDRESS`                 | InfluxDB bind address.                                                                 | `0.0.0.0:${INFLUXDB_PORT_NUMBER}`           |
-| `INFLUXDB_PORT_READINESS_TIMEOUT`       | InfluxDB port readiness timeout in seconds.                                            | `30`                                        |
-| `INFLUXDB_INIT_MODE`                    | InfluxDB init mode.                                                                    | `setup`                                     |
-| `INFLUXDB_INIT_V1_DIR`                  | Path to InfluxDB 1.x data to be imported into 2.x format                               | `${BITNAMI_VOLUME_DIR}/v1`                  |
-| `INFLUXDB_INIT_V1_CONFIG`               | Path to InfluxDB 1.x config file                                                       | `${BITNAMI_VOLUME_DIR}/v1/config.yaml`      |
-| `INFLUXDB_UPGRADE_LOG_FILE`             | InfluxDB 1.x to 2.x log file (do not place it into ${INFLUXDB_VOLUME_DIR})             | `${BITNAMI_VOLUME_DIR}/v1/upgrade.log`      |
-| `INFLUXDB_CONTINUOUS_QUERY_EXPORT_FILE` | InfluxDB continuous query file created during 1.x data to 2.x format migration process | `${BITNAMI_VOLUME_DIR}/v1/v1-cq-export.txt` |
-| `INFLUXDB_HTTP_AUTH_ENABLED`            | Whether to enable InfluxDB HTTP auth.                                                  | `true`                                      |
-| `INFLUXDB_ADMIN_USER`                   | InfluxDB admin username.                                                               | `admin`                                     |
-| `INFLUXDB_ADMIN_USER_PASSWORD`          | InfluxDB admin user password.                                                          | `nil`                                       |
-| `INFLUXDB_ADMIN_USER_TOKEN`             | InfluxDB admin user token.                                                             | `nil`                                       |
-| `INFLUXDB_ADMIN_CONFIG_NAME`            | InfluxDB admin user config name.                                                       | `default`                                   |
-| `INFLUXDB_ADMIN_ORG`                    | InfluxDB admin org.                                                                    | `primary`                                   |
-| `INFLUXDB_ADMIN_BUCKET`                 | InfluxDB admin user bucket.                                                            | `primary`                                   |
-| `INFLUXDB_ADMIN_RETENTION`              | InfluxDB admin user retention.                                                         | `0`                                         |
-| `INFLUXDB_USER`                         | Additional InfluxDB username.                                                          | `nil`                                       |
-| `INFLUXDB_USER_PASSWORD`                | Additional InfluxDB user password.                                                     | `nil`                                       |
-| `INFLUXDB_USER_ORG`                     | Additional InfluxDB user org.                                                          | `${INFLUXDB_ADMIN_ORG}`                     |
-| `INFLUXDB_USER_BUCKET`                  | Additional InfluxDB user bucket.                                                       | `nil`                                       |
-| `INFLUXDB_CREATE_USER_TOKEN`            | Whether to create user token for InfluxDB.                                             | `no`                                        |
-| `INFLUXDB_READ_USER`                    | Additional InfluxDB read-only username.                                                | `nil`                                       |
-| `INFLUXDB_READ_USER_PASSWORD`           | Additional InfluxDB read-only user password.                                           | `nil`                                       |
-| `INFLUXDB_WRITE_USER`                   | Additional InfluxDB username with write privileges.                                    | `nil`                                       |
-| `INFLUXDB_WRITE_USER_PASSWORD`          | Additional InfluxDB user with write privileges.                                        | `nil`                                       |
-| `INFLUXDB_DB`                           | InfluxDB database name.                                                                | `nil`                                       |
+| Name                                    | Description                                                                            | Default Value                              |
+|-----------------------------------------|----------------------------------------------------------------------------------------|--------------------------------------------|
+| `INFLUXDB_DATA_DIR`                     | InfluxDB directory where data is stored.                                               | `${INFLUXDB_VOLUME_DIR}/data`              |
+| `INFLUXDB_DATA_WAL_DIR`                 | InfluxDB directory where the WAL file is stored.                                       | `${INFLUXDB_VOLUME_DIR}/wal`               |
+| `INFLUXDB_META_DIR`                     | InfluxDB directory where metadata is stored.                                           | `${INFLUXDB_VOLUME_DIR}/meta`              |
+| `INFLUXD_CONFIG_PATH`                   | InfluxDB 2.x alias for configuration file path.                                        | `${INFLUXDB_CONF_DIR}`                     |
+| `INFLUXDB_REPORTING_DISABLED`           | Whether to disable InfluxDB reporting.                                                 | `true`                                     |
+| `INFLUXDB_HTTP_PORT_NUMBER`             | Port number used by InfluxDB HTTP server.                                              | `8086`                                     |
+| `INFLUXDB_HTTP_BIND_ADDRESS`            | InfluxDB HTTP bind address.                                                            | `0.0.0.0:${INFLUXDB_HTTP_PORT_NUMBER}`     |
+| `INFLUXDB_HTTP_READINESS_TIMEOUT`       | InfluxDB HTTP port readiness timeout in seconds.                                       | `60`                                       |
+| `INFLUXDB_PORT_NUMBER`                  | Port number used by InfluxDB.                                                          | `8088`                                     |
+| `INFLUXDB_BIND_ADDRESS`                 | InfluxDB bind address.                                                                 | `0.0.0.0:${INFLUXDB_PORT_NUMBER}`          |
+| `INFLUXDB_PORT_READINESS_TIMEOUT`       | InfluxDB port readiness timeout in seconds.                                            | `30`                                       |
+| `INFLUXDB_INIT_MODE`                    | InfluxDB init mode.                                                                    | `setup`                                    |
+| `INFLUXDB_INIT_V1_DIR`                  | Path to InfluxDB 1.x data to be imported into 2.x format                               | `${BITNAMI_VOLUME_DIR}/v1`                 |
+| `INFLUXDB_INIT_V1_CONFIG`               | Path to InfluxDB 1.x config file                                                       | `${BITNAMI_VOLUME_DIR}/v1/config.yaml`     |
+| `INFLUXDB_UPGRADE_LOG_FILE`             | InfluxDB 1.x to 2.x log file (do not place it into ${INFLUXDB_VOLUME_DIR})             | `${INFLUXDB_INIT_V1_DIR}/upgrade.log`      |
+| `INFLUXDB_CONTINUOUS_QUERY_EXPORT_FILE` | InfluxDB continuous query file created during 1.x data to 2.x format migration process | `${INFLUXDB_INIT_V1_DIR}/v1-cq-export.txt` |
+| `INFLUXDB_HTTP_AUTH_ENABLED`            | Whether to enable InfluxDB HTTP auth.                                                  | `true`                                     |
+| `INFLUXDB_ADMIN_USER`                   | InfluxDB admin username.                                                               | `admin`                                    |
+| `INFLUXDB_ADMIN_USER_PASSWORD`          | InfluxDB admin user password.                                                          | `nil`                                      |
+| `INFLUXDB_ADMIN_USER_TOKEN`             | InfluxDB admin user token.                                                             | `nil`                                      |
+| `INFLUXDB_ADMIN_CONFIG_NAME`            | InfluxDB admin user config name.                                                       | `default`                                  |
+| `INFLUXDB_ADMIN_ORG`                    | InfluxDB admin org.                                                                    | `primary`                                  |
+| `INFLUXDB_ADMIN_BUCKET`                 | InfluxDB admin user bucket.                                                            | `primary`                                  |
+| `INFLUXDB_ADMIN_RETENTION`              | InfluxDB admin user retention.                                                         | `0`                                        |
+| `INFLUXDB_USER`                         | Additional InfluxDB username.                                                          | `nil`                                      |
+| `INFLUXDB_USER_PASSWORD`                | Additional InfluxDB user password.                                                     | `nil`                                      |
+| `INFLUXDB_USER_ORG`                     | Additional InfluxDB user org.                                                          | `${INFLUXDB_ADMIN_ORG}`                    |
+| `INFLUXDB_USER_BUCKET`                  | Additional InfluxDB user bucket.                                                       | `nil`                                      |
+| `INFLUXDB_CREATE_USER_TOKEN`            | Whether to create user token for InfluxDB.                                             | `no`                                       |
+| `INFLUXDB_READ_USER`                    | Additional InfluxDB read-only username.                                                | `nil`                                      |
+| `INFLUXDB_READ_USER_PASSWORD`           | Additional InfluxDB read-only user password.                                           | `nil`                                      |
+| `INFLUXDB_WRITE_USER`                   | Additional InfluxDB username with write privileges.                                    | `nil`                                      |
+| `INFLUXDB_WRITE_USER_PASSWORD`          | Additional InfluxDB user with write privileges.                                        | `nil`                                      |
+| `INFLUXDB_DB`                           | InfluxDB database name.                                                                | `nil`                                      |
 
 #### Read-only environment variables
 
