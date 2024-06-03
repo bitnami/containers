@@ -1,13 +1,15 @@
-# Bitnami package for Hubble Relay
+# Bitnami package for Hubble
 
 ## What is Hubble Relay?
 
 > Hubble Relay collects eBPF-based visibility data from every running Hubble server in a cluster by connecting to their respective gRPC APIs and providing an unique API that represents all of them.
 
-[Overview of Hubble Relay](https://cilium.io/)
+[Overview of Hubble](https://cilium.io/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
+
+This container is part of the [Hubble chart](https://github.com/bitnami/charts/tree/main/bitnami/hubble) that is primarily intended to be deployed in Kubernetes.
 
 ```console
 docker run --name hubble-relay bitnami/hubble-relay:latest
@@ -23,6 +25,12 @@ docker run --name hubble-relay bitnami/hubble-relay:latest
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use Hubble Relay in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+
+## How to deploy Hubble in Kubernetes?
+
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Hubble Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/harbor).
+
+Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deployment and management of Helm Charts in clusters.
 
 ## Why use a non-root container?
 
@@ -62,13 +70,13 @@ docker build -t bitnami/APP:latest .
 
 ### Running commands
 
-To run commands inside this container you can use `docker run`, for example to execute `hubble-relay-generic help` you can follow the example below:
+To run commands inside this container you can use `docker run`, for example to execute `hubble-relay help` you can follow the example below:
 
 ```console
 docker run --rm --name hubble-relay bitnami/hubble-relay:latest help
 ```
 
-Check the [official Hubble Relay documentation](https://docs.cilium.io/en/stable/internals/hubble/) for more information about configuration options.
+Check the [official Hubble documentation](https://docs.cilium.io/en/stable/internals/hubble/) for more information about configuration options.
 
 ## Contributing
 
