@@ -663,8 +663,8 @@ wordpress_configure_smtp() {
     fi
     wp_execute plugin install wp-mail-smtp "${install_smtp_plugin_args[@]}"
     info "Configuring SMTP settings"
-    wp_execute option patch update wp_mail_smtp mail from_email "$WORDPRESS_SMTP_USER"
-    wp_execute option patch update wp_mail_smtp mail from_name "${WORDPRESS_FIRST_NAME} ${WORDPRESS_LAST_NAME}"
+    wp_execute option patch update wp_mail_smtp mail from_email "$WORDPRESS_SMTP_FROM_EMAIL"
+    wp_execute option patch update wp_mail_smtp mail from_name "$WORDPRESS_SMTP_FROM_NAME"
     wp_execute option patch update wp_mail_smtp mail mailer "smtp"
     wp_execute option patch insert wp_mail_smtp smtp host "$WORDPRESS_SMTP_HOST"
     wp_execute option patch insert wp_mail_smtp smtp port "$WORDPRESS_SMTP_PORT_NUMBER"
