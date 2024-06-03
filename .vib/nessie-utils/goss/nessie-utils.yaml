@@ -1,0 +1,19 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+command:
+  check-cli-present:
+    exec: java -jar /opt/bitnami/nessie-utils/nessie-cli/nessie-cli.jar --help
+    exit-status: 0
+    stdout:
+      - "Statements to execute"
+  check-gc-present:
+    exec: java -jar /opt/bitnami/nessie-utils/nessie-gc/nessie-gc.jar --help
+    exit-status: 0
+    stdout:
+      - "list-deferred"
+  check-admin-tool-present:
+    exec: java -jar /opt/bitnami/nessie-utils/nessie-server-admin-tool/quarkus-run.jar --help
+    exit-status: 0
+    stdout:
+      - "erase-repository"

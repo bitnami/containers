@@ -1,0 +1,15 @@
+binaries:
+  - java
+directories:
+  - mode: "0775"
+    paths:
+      - /.nessie
+  - paths:
+      - /opt/bitnami/nessie-utils/nessie-cli
+      - /opt/bitnami/nessie-utils/nessie-gc
+      - /opt/bitnami/nessie-utils/nessie-server-admin-tool
+root_dir: /opt/bitnami
+# The application does not have a --version flag, but the server logs do show the version
+version:
+  bin_name: java
+  flag: -jar /opt/bitnami/nessie-utils/nessie-cli/nessie-cli.jar --version
