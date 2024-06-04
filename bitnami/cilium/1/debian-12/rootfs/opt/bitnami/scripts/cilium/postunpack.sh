@@ -16,3 +16,8 @@ if [[ "$(get_os_metadata --id)" != "photon" ]]; then
     # Generate bash completion for Cilium & Hubble
     cilium_bash_completion
 fi
+
+# Add symlinks to the default paths to make a similar UX as the upstream Cilium configuration
+# https://github.com/cilium/cilium/blob/main/pkg/defaults/defaults.go
+ln -s "$CILIUM_LIB_DIR" "/var/lib/cilium"
+ln -s "$CILIUM_RUN_DIR" "/var/run/cilium"
