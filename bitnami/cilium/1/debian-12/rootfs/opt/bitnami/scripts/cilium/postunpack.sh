@@ -17,6 +17,11 @@ if [[ "$(get_os_metadata --id)" != "photon" ]]; then
     cilium_bash_completion
 fi
 
+# Ensure non-root user has write permissions on a set of directories
+for dir in "$CILIUM_LIB_DIR" "$CILIUM_RUN_DIR" ; do
+    ensure_dir_exists "$dir"
+    chmod -R g+rwX "$dir"
+done
 # Add symlinks to the default paths to make a similar UX as the upstream Cilium configuration
 # https://github.com/cilium/cilium/blob/main/pkg/defaults/defaults.go
 ln -s "$CILIUM_LIB_DIR" "/var/lib/cilium"

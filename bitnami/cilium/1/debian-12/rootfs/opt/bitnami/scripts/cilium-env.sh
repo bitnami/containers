@@ -44,8 +44,8 @@ unset cilium_env_vars
 # Paths
 export CILIUM_BASE_DIR="${BITNAMI_ROOT_DIR}/cilium"
 export CILIUM_BIN_DIR="${CILIUM_BASE_DIR}/bin"
-export CILIUM_LIB_DIR="${CILIUM_BASE_DIR}/lib"
-export CILIUM_RUN_DIR="${CILIUM_BASE_DIR}/run"
+export CILIUM_LIB_DIR="${CILIUM_BASE_DIR}/var/lib"
+export CILIUM_RUN_DIR="${CILIUM_BASE_DIR}/var/run"
 export CILIUM_CNI_BIN_DIR="${CILIUM_BASE_DIR}/cni/bin"
 
 # System users (when running with a privileged user)
