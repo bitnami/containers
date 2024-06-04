@@ -1,0 +1,75 @@
+{
+  "context": {
+    "resources": {
+      "url": "{SHA_ARCHIVE}",
+      "path": "{VIB_ENV_PATH}"
+    },
+    "runtime_parameters": "Y29tbWFuZDogWyJ0YWlsIiwgIi1mIiwgIi9kZXYvbnVsbCJd"
+  },
+  "phases": {
+    "package": {
+      "actions": [
+        {
+          "action_id": "container-image-package",
+          "params": {
+            "timeout_minutes": 60,
+            "application": {
+              "details": {
+                "name": "{VIB_ENV_CONTAINER}",
+                "tag": "{VIB_ENV_TAG}"
+              }
+            },
+            "architectures": [
+              "linux/amd64",
+              "linux/arm64"
+            ],
+            "timeout_minutes": 50
+          }
+        },
+        {
+          "action_id": "container-image-lint",
+          "params": {
+            "threshold": "error"
+          }
+        }
+      ]
+    },
+    "verify": {
+      "actions": [
+        {
+          "action_id": "goss",
+          "params": {
+            "resources": {
+              "path": "/.vib"
+            },
+            "tests_file": "superset/goss/goss.yaml",
+            "vars_file": "superset/goss/vars.yaml",
+            "remote": {
+              "pod": {
+                "workload": "deploy-superset"
+              }
+            }
+          }
+        },
+        {
+          "action_id": "trivy",
+          "params": {
+            "threshold": "LOW",
+            "vuln_type": [
+              "OS"
+            ]
+          }
+        },
+        {
+          "action_id": "grype",
+          "params": {
+            "threshold": "CRITICAL",
+            "package_type": [
+              "OS"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
