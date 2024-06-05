@@ -72,6 +72,7 @@ odoo_validate() {
     check_yes_no_value "ODOO_SKIP_BOOTSTRAP"
     check_yes_no_value "ODOO_SKIP_MODULES_UPDATE"
     check_yes_no_value "ODOO_LOAD_DEMO_DATA"
+    check_yes_no_value "ODOO_LIST_DB"
     check_valid_port "ODOO_PORT_NUMBER"
     check_valid_port "ODOO_LONGPOLLING_PORT_NUMBER"
     ! is_empty_value "$ODOO_DATABASE_HOST" && check_resolved_hostname "$ODOO_DATABASE_HOST"
@@ -136,7 +137,8 @@ odoo_initialize() {
 
         info "Generating configuration file"
         local template_dir="${BITNAMI_ROOT_DIR}/scripts/odoo/bitnami-templates"
-        render-template "${template_dir}/odoo.conf.tpl" > "$ODOO_CONF_FILE"
+        list_db="$(is_boolean_yes "$ODOO_LIST_DB" && echo 'True' || echo 'False')" \
+            render-template "${template_dir}/odoo.conf.tpl" > "$ODOO_CONF_FILE"
 
         if ! is_empty_value "$ODOO_SMTP_HOST"; then
             info "Configuring SMTP"
