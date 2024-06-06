@@ -32,9 +32,9 @@ mysql_extra_flags() {
 
     if [[ -n "$DB_REPLICATION_MODE" ]]; then
         randNumber="$(head /dev/urandom | tr -dc 0-9 | head -c 3 ; echo '')"
-        dbExtraFlags+=("--server-id=$randNumber" "--binlog-format=ROW" "--log-bin=mysql-bin" "--sync-binlog=1")
+        dbExtraFlags+=("--server-id=$randNumber" "--log-bin=mysql-bin" "--sync-binlog=1")
         if [[ "$DB_REPLICATION_MODE" = "slave" ]]; then
-            dbExtraFlags+=("--relay-log=mysql-relay-bin" "--log-slave-updates=1" "--read-only=1")
+            dbExtraFlags+=("--relay-log=mysql-relay-bin" "--log-replica-updates=1" "--read-only=1")
         elif [[ "$DB_REPLICATION_MODE" = "master" ]]; then
             dbExtraFlags+=("--innodb_flush_log_at_trx_commit=1")
         fi
@@ -210,14 +210,15 @@ mysql_exec_initial_dump() {
     info "Finish import dump databases"
 
     mysql_execute "mysql" <<EOF
-CHANGE MASTER TO MASTER_HOST='$DB_MASTER_HOST',
-MASTER_PORT=$DB_MASTER_PORT_NUMBER,
-MASTER_USER='$DB_REPLICATION_USER',
-MASTER_PASSWORD='$DB_REPLICATION_PASSWORD',
-MASTER_DELAY=$DB_MASTER_DELAY,
-MASTER_LOG_FILE='$MYSQL_FILE',
-MASTER_LOG_POS=$MYSQL_POSITION,
-MASTER_CONNECT_RETRY=10;
+CHANGE REPLICATION SOURCE TO SOURCE_HOST='$DB_MASTER_HOST',
+SOURCE_PORT=$DB_MASTER_PORT_NUMBER,
+SOURCE_USER='$DB_REPLICATION_USER',
+SOURCE_PASSWORD='$DB_REPLICATION_PASSWORD',
+SOURCE_DELAY=$DB_MASTER_DELAY,
+SOURCE_LOG_FILE='$MYSQL_FILE',
+SOURCE_LOG_POS=$MYSQL_POSITION,
+SOURCE_CONNECT_RETRY=10,
+GET_SOURCE_PUBLIC_KEY=1;
 EOF
 
     info "Remove dump file"
@@ -252,12 +253,13 @@ mysql_configure_replication() {
         debug "Replication master ready!"
         debug "Setting the master configuration"
         mysql_execute "mysql" <<EOF
-CHANGE MASTER TO MASTER_HOST='$DB_MASTER_HOST',
-MASTER_PORT=$DB_MASTER_PORT_NUMBER,
-MASTER_USER='$DB_REPLICATION_USER',
-MASTER_PASSWORD='$DB_REPLICATION_PASSWORD',
-MASTER_DELAY=$DB_MASTER_DELAY,
-MASTER_CONNECT_RETRY=10;
+CHANGE REPLICATION SOURCE TO SOURCE_HOST='$DB_MASTER_HOST',
+SOURCE_PORT=$DB_MASTER_PORT_NUMBER,
+SOURCE_USER='$DB_REPLICATION_USER',
+SOURCE_PASSWORD='$DB_REPLICATION_PASSWORD',
+SOURCE_DELAY=$DB_MASTER_DELAY,
+SOURCE_CONNECT_RETRY=10,
+GET_SOURCE_PUBLIC_KEY=1;
 EOF
 
         fi
@@ -284,15 +286,10 @@ mysql_ensure_replication_user_exists() {
     local -r password="${2:-}"
 
     debug "Configure replication user credentials"
-    if [[ "$DB_FLAVOR" = "mariadb" ]]; then
-        mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
-create or replace user '$user'@'%' $([ "$password" != "" ] && echo "identified by \"$password\"");
+    mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
+create user '$user'@'%' $([ "$password" != "" ] && echo "identified by \"$password\"");
 EOF
-    else
-        mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
-create user '$user'@'%' $([ "$password" != "" ] && echo "identified with 'mysql_native_password' by \"$password\"");
-EOF
-    fi
+
     mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
 grant REPLICATION SLAVE on *.* to '$user'@'%' with grant option;
 flush privileges;
@@ -363,7 +360,7 @@ EOF
         if [[ -z "$DB_REPLICATION_MODE" ]] || [[ "$DB_REPLICATION_MODE" = "master" ]]; then
             if [[ "$DB_REPLICATION_MODE" = "master" ]]; then
                 debug "Starting replication"
-                echo "RESET MASTER;" | debug_execute "$DB_BIN_DIR/mysql" --defaults-file="$DB_CONF_FILE" -N -u root
+                echo "RESET BINARY LOGS AND GTIDS;" | debug_execute "$DB_BIN_DIR/mysql" --defaults-file="$DB_CONF_FILE" -N -u root
             fi
             mysql_ensure_root_user_exists "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" "$DB_AUTHENTICATION_PLUGIN"
             mysql_ensure_user_not_exists "" # ensure unknown user does not exist
@@ -464,8 +461,8 @@ mysql_start_bg() {
     # Do not start as root, to avoid permission issues
     am_i_root && flags+=("--user=${DB_DAEMON_USER}")
 
-    # The slave should only start in 'run.sh', elseways user credentials would be needed for any connection
-    flags+=("--skip-slave-start")
+    # The replica should only start in 'run.sh', elseways user credentials would be needed for any connection
+    flags+=("--skip-replica-start")
     flags+=("$@")
 
     is_mysql_running && return
