@@ -18,6 +18,7 @@ if [[ "$(get_os_metadata --id)" != "photon" ]]; then
 fi
 
 # Ensure non-root user has write permissions on a set of directories
+mv "${CILIUM_LIB_DIR}/cilium/bpf" "${CILIUM_LIB_DIR}/bpf" && rmdir "${CILIUM_LIB_DIR}/cilium"
 for dir in "$CILIUM_LIB_DIR" "$CILIUM_RUN_DIR" ; do
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
