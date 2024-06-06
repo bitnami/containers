@@ -32,10 +32,12 @@ fi
 mediawiki_validate
 
 # Update web server configuration with runtime environment (needs to happen before the initialization)
+# Short URL config taken from https://www.mediawiki.org/wiki/Manual:Short_URL/wiki/Page_Title_--_.htaccess
 ensure_web_server_app_configuration_exists "mediawiki" --type php --apache-extra-directory-configuration "
 RewriteEngine On
-RewriteRule ^/?${MEDIAWIKI_WIKI_PREFIX:1}(/.*)?$ %{DOCUMENT_ROOT}/index.php
-RewriteRule ^/?${MEDIAWIKI_SCRIPT_PATH:1}(.*)$ %{DOCUMENT_ROOT}/\$1 [L]
+RewriteRule ^${MEDIAWIKI_WIKI_PREFIX:1}/(.*)$ ${MEDIAWIKI_SCRIPT_PATH:1}/index.php?title=\$1 [PT,L,QSA]
+RewriteRule ^${MEDIAWIKI_WIKI_PREFIX:1}/*$ ${MEDIAWIKI_SCRIPT_PATH:1}/index.php [L,QSA]
+RewriteRule ^${MEDIAWIKI_WIKI_PREFIX:1}$ ${MEDIAWIKI_SCRIPT_PATH:1}/index.php [L,QSA]
 "
 
 web_server_update_app_configuration "mediawiki"
