@@ -95,7 +95,7 @@ services:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
   harbor-nginx:
-    image: docker.io/bitnami/nginx:1.26
+    image: docker.io/bitnami/nginx:1.27
     container_name: nginx
     volumes:
       - ./config/proxy/nginx.conf:/opt/bitnami/nginx/conf/nginx.conf:ro
