@@ -53,6 +53,7 @@ export LDAP_DAEMON_GROUP="slapd"
 export LDAP_PORT_NUMBER="${LDAP_PORT_NUMBER:-1389}"
 export LDAP_LDAPS_PORT_NUMBER="${LDAP_LDAPS_PORT_NUMBER:-1636}"
 export LDAP_ROOT="${LDAP_ROOT:-dc=example,dc=org}"
+export LDAP_SUFFIX="$(if [ -z "${LDAP_SUFFIX+x}" ]; then echo "${LDAP_ROOT}"; else echo "${LDAP_SUFFIX}"; fi)"
 export LDAP_ADMIN_USERNAME="${LDAP_ADMIN_USERNAME:-admin}"
 export LDAP_ADMIN_DN="${LDAP_ADMIN_USERNAME/#/cn=},${LDAP_ROOT}"
 export LDAP_ADMIN_PASSWORD="${LDAP_ADMIN_PASSWORD:-adminpassword}"
@@ -382,7 +383,7 @@ ldap_admin_credentials() {
 dn: olcDatabase={2}mdb,cn=config
 changetype: modify
 replace: olcSuffix
-olcSuffix: $LDAP_ROOT
+olcSuffix: $LDAP_SUFFIX
 
 dn: olcDatabase={2}mdb,cn=config
 changetype: modify
