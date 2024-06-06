@@ -403,24 +403,29 @@ services:
     ports:
       - '9092'
     environment:
+      # KRaft
       - KAFKA_CFG_NODE_ID=0
       - KAFKA_CFG_PROCESS_ROLES=controller,broker
       - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
+      # Listeners
       - KAFKA_CFG_LISTENERS=SASL_SSL://:9092,CONTROLLER://:9093
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
       - KAFKA_CFG_ADVERTISED_LISTENERS=SASL_SSL://:9092
-      - KAFKA_CLIENT_USERS=user
-      - KAFKA_CLIENT_PASSWORDS=password
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=SASL_SSL
+      - KAFKA_CLIENT_LISTENER_NAME=SASL_SSL # Remove this line if consumer/producer.properties are not required
+      # SASL
       - KAFKA_CFG_SASL_MECHANISM_CONTROLLER_PROTOCOL=PLAIN
+      - KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL=PLAIN
       - KAFKA_CONTROLLER_USER=controller_user
       - KAFKA_CONTROLLER_PASSWORD=controller_password
-      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=SASL_SSL
-      - KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL=PLAIN
-      - KAFKA_INTER_BROKER_USER=controller_user
-      - KAFKA_INTER_BROKER_PASSWORD=controller_password
-      - KAFKA_CERTIFICATE_PASSWORD=certificatePassword123
+      - KAFKA_INTER_BROKER_USER=interbroker_user
+      - KAFKA_INTER_BROKER_PASSWORD=interbroker_password
+      - KAFKA_CLIENT_USERS=user
+      - KAFKA_CLIENT_PASSWORDS=password
+      # SSL
       - KAFKA_TLS_TYPE=JKS # or PEM
+      - KAFKA_CERTIFICATE_PASSWORD=certificatePassword123
     volumes:
       # Both .jks and .pem files are supported
       # - './kafka.keystore.pem:/opt/bitnami/kafka/config/certs/kafka.keystore.pem:ro'
