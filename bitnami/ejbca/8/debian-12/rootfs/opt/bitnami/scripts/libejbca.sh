@@ -141,7 +141,7 @@ ejbca_configure_wildfly() {
     # The configuration of Wildfly in EJBCA https://doc.primekey.com/ejbca790/ejbca-installation/application-servers/wildfly-24
     info "Creating data source"
     local -r pluginJar="$(basename "$EJBCA_WILDFLY_DEPLOY_DIR"/mariadb*)"
-    ejbca_wildfly_command "data-source add --name=ejbcads --driver-name=\"${pluginJar}\" --connection-url=\"jdbc:mysql://${EJBCA_DATABASE_HOST}:${EJBCA_DATABASE_PORT}/${EJBCA_DATABASE_NAME}\" --jndi-name=\"java:/EjbcaDS\" --use-ccm=true --driver-class=\"org.mariadb.jdbc.Driver\" --user-name=\"${EJBCA_DATABASE_USERNAME}\" --password=\"${EJBCA_DATABASE_PASSWORD}\" --validate-on-match=true --background-validation=false --prepared-statements-cache-size=50 --share-prepared-statements=true --min-pool-size=5 --max-pool-size=150 --pool-prefill=true --transaction-isolation=TRANSACTION_READ_COMMITTED --check-valid-connection-sql=\"select 1;\""
+    ejbca_wildfly_command "data-source add --name=ejbcads --driver-name=\"${pluginJar}\" --connection-url=\"jdbc:${EJBCA_DATABASE_FLAVOR}://${EJBCA_DATABASE_HOST}:${EJBCA_DATABASE_PORT}/${EJBCA_DATABASE_NAME}\" --jndi-name=\"java:/EjbcaDS\" --use-ccm=true --driver-class=\"org.mariadb.jdbc.Driver\" --user-name=\"${EJBCA_DATABASE_USERNAME}\" --password=\"${EJBCA_DATABASE_PASSWORD}\" --validate-on-match=true --background-validation=false --prepared-statements-cache-size=50 --share-prepared-statements=true --min-pool-size=5 --max-pool-size=150 --pool-prefill=true --transaction-isolation=TRANSACTION_READ_COMMITTED --check-valid-connection-sql=\"select 1;\""
     ejbca_wildfly_command ":reload"
     wait_for_wildfly
 
