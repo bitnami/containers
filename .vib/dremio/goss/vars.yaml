@@ -1,0 +1,20 @@
+binaries:
+  - java
+  - dremio
+  - dremio-admin
+  - dremio-config
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/dremio/secrets
+      - /opt/bitnami/dremio/log
+      - /opt/bitnami/dremio/run
+      - /opt/bitnami/dremio/tmp
+      - /bitnami/dremio/data
+  - paths:
+      - /opt/bitnami/dremio
+root_dir: /opt/bitnami
+# The application does not have a --version flag, but the server logs do show the version
+version:
+  bin_name: timeout
+  flag: --preserve-status 9 bash -c "export DREMIO_LOG_TO_CONSOLE=1; dremio start-fg" || true
