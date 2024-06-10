@@ -9,15 +9,15 @@ ARG WITH_ALL_LOCALES="no"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-06-07T11:19:38Z" \
+      org.opencontainers.image.created="2024-06-10T01:56:03Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/moodle/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.3.4-debian-12-r6" \
+      org.opencontainers.image.ref.name="4.3.5-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/moodle" \
       org.opencontainers.image.title="moodle" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="4.3.4"
+      org.opencontainers.image.version="4.3.5"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-12" \
@@ -35,7 +35,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
       "postgresql-client-13.15.0-2-linux-${OS_ARCH}-debian-12" \
       "mysql-client-11.3.2-3-linux-${OS_ARCH}-debian-12" \
       "libphp-8.1.29-0-linux-${OS_ARCH}-debian-12" \
-      "moodle-4.3.4-1-linux-${OS_ARCH}-debian-12" \
+      "moodle-4.3.5-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -66,7 +66,7 @@ RUN /opt/bitnami/scripts/moodle/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="4.3.4" \
+    APP_VERSION="4.3.5" \
     BITNAMI_APP_NAME="moodle" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
