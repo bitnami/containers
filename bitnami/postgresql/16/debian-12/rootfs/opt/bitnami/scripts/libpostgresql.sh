@@ -364,8 +364,10 @@ postgresql_set_property() {
 #########################
 postgresql_create_replication_user() {
     local -r escaped_password="${POSTGRESQL_REPLICATION_PASSWORD//\'/\'\'}"
+    local -r postgres_password="${POSTGRESQL_POSTGRES_PASSWORD:-$POSTGRESQL_PASSWORD}"
+
     info "Creating replication user $POSTGRESQL_REPLICATION_USER"
-    echo "CREATE ROLE \"$POSTGRESQL_REPLICATION_USER\" REPLICATION LOGIN ENCRYPTED PASSWORD '$escaped_password'" | postgresql_execute
+    echo "CREATE ROLE \"$POSTGRESQL_REPLICATION_USER\" REPLICATION LOGIN ENCRYPTED PASSWORD '$escaped_password'" | postgresql_execute "" "postgres" "$postgres_password"
 }
 
 ########################
@@ -496,17 +498,18 @@ postgresql_alter_postgres_user() {
 #########################
 postgresql_create_admin_user() {
     local -r escaped_password="${POSTGRESQL_PASSWORD//\'/\'\'}"
+    local -r postgres_password="${POSTGRESQL_POSTGRES_PASSWORD:-$POSTGRESQL_PASSWORD}"
     info "Creating user ${POSTGRESQL_USERNAME}"
     local connlimit_string=""
     if [[ -n "$POSTGRESQL_USERNAME_CONNECTION_LIMIT" ]]; then
         connlimit_string="CONNECTION LIMIT ${POSTGRESQL_USERNAME_CONNECTION_LIMIT}"
     fi
-    echo "CREATE ROLE \"${POSTGRESQL_USERNAME}\" WITH LOGIN ${connlimit_string} CREATEDB PASSWORD '${escaped_password}';" | postgresql_execute
+    echo "CREATE ROLE \"${POSTGRESQL_USERNAME}\" WITH LOGIN ${connlimit_string} CREATEDB PASSWORD '${escaped_password}';" | postgresql_execute "" "postgres" "$postgres_password"
     info "Granting access to \"${POSTGRESQL_USERNAME}\" to the database \"${POSTGRESQL_DATABASE}\""
-    echo "GRANT ALL PRIVILEGES ON DATABASE \"${POSTGRESQL_DATABASE}\" TO \"${POSTGRESQL_USERNAME}\"\;" | postgresql_execute "" "postgres" "$POSTGRESQL_PASSWORD"
-    echo "ALTER DATABASE \"${POSTGRESQL_DATABASE}\" OWNER TO \"${POSTGRESQL_USERNAME}\"\;" | postgresql_execute "" "postgres" "$POSTGRESQL_PASSWORD"
+    echo "GRANT ALL PRIVILEGES ON DATABASE \"${POSTGRESQL_DATABASE}\" TO \"${POSTGRESQL_USERNAME}\"\;" | postgresql_execute "" "postgres" "$postgres_password"
+    echo "ALTER DATABASE \"${POSTGRESQL_DATABASE}\" OWNER TO \"${POSTGRESQL_USERNAME}\"\;" | postgresql_execute "" "postgres" "$postgres_password"
     info "Setting ownership for the 'public' schema database \"${POSTGRESQL_DATABASE}\" to \"${POSTGRESQL_USERNAME}\""
-    echo "ALTER SCHEMA public OWNER TO \"${POSTGRESQL_USERNAME}\"\;" | postgresql_execute "$POSTGRESQL_DATABASE" "postgres" "$POSTGRESQL_PASSWORD"
+    echo "ALTER SCHEMA public OWNER TO \"${POSTGRESQL_USERNAME}\"\;" | postgresql_execute "$POSTGRESQL_DATABASE" "postgres" "$postgres_password"
 }
 
 ########################
