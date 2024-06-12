@@ -291,6 +291,16 @@ keycloak_configure_spi_tls() {
 
 }
 
+
+########################
+# Configure FIPS
+########################
+
+keycloak_configure_fips() {
+  keycloak_conf_set "features" "fips"
+  keycloak_conf_set "fips-mode" "strict"
+}
+
 ########################
 # Initialize keycloak installation
 # Globals:
@@ -324,6 +334,7 @@ keycloak_initialize() {
     keycloak_configure_cache
     keycloak_configure_loglevel
     keycloak_configure_proxy
+    keycloak_configure_fips
     is_boolean_yes "$KEYCLOAK_ENABLE_HTTPS" && keycloak_configure_https
     ! is_empty_value "$KEYCLOAK_SPI_TRUSTSTORE_FILE" && keycloak_configure_spi_tls
     true
