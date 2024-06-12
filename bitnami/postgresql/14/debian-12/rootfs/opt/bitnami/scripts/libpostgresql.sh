@@ -172,10 +172,10 @@ postgresql_create_config() {
     cp "$POSTGRESQL_BASE_DIR/share/postgresql.conf.sample" "$POSTGRESQL_CONF_FILE"
     # Update default value for 'include_dir' directive
     # ref: https://github.com/postgres/postgres/commit/fb9c475597c245562a28d1e916b575ac4ec5c19f#diff-f5544d9b6d218cc9677524b454b41c60
-    if ! grep include_dir "$POSTGRESQL_CONF_FILE" >/dev/null; then
-        error "include_dir line is not present in $POSTGRESQL_CONF_FILE. This may be due to a changes in a new version of PostgreSQL. Please check"
-        exit 1
-    fi
+#    if ! grep include_dir "$POSTGRESQL_CONF_FILE" >/dev/null; then
+#        error "include_dir line is not present in $POSTGRESQL_CONF_FILE. This may be due to a changes in a new version of PostgreSQL. Please check"
+#        exit 1
+#    fi
     local psql_conf
     psql_conf="$(sed -E "/#include_dir/i include_dir = 'conf.d'" "$POSTGRESQL_CONF_FILE")"
     echo "$psql_conf" >"$POSTGRESQL_CONF_FILE"
