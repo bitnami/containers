@@ -7,11 +7,11 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-06-12T14:03:17Z" \
+      org.opencontainers.image.created="2024-06-13T06:00:56Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/jmx-exporter/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.20.0-debian-12-r28" \
+      org.opencontainers.image.ref.name="0.20.0-debian-12-r29" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jmx-exporter" \
       org.opencontainers.image.title="jmx-exporter" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -29,7 +29,7 @@ RUN install_packages ca-certificates curl procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "java-17.0.11-12-0-linux-${OS_ARCH}-debian-12" \
-      "jmx-exporter-0.20.0-5-linux-${OS_ARCH}-debian-12" \
+      "jmx-exporter-0.20.0-6-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
