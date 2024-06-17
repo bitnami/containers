@@ -78,9 +78,9 @@ ssl.client.authentication = NONE
 ##
 inter.instance.protocol = http
 
-## The Avro compatibility type
+## The Schema compatibility type
 ##
-avro.compatibility.level = backward
+schema.compatibility.level = backward
 
 ## Enable debug logs
 ##
