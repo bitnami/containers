@@ -19,4 +19,7 @@ files:
   - paths:
       - /opt/bitnami/matomo/piwik.js
       - /opt/bitnami/matomo/piwik.php
+version:
+  bin_name: php /opt/bitnami/matomo/console
+  flag: --version
 root_dir: /opt/bitnami
