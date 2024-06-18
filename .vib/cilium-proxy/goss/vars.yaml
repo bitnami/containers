@@ -1,0 +1,10 @@
+binaries:
+   - cilium-envoy
+   - cilium-envoy-starter
+root_dir: /opt/bitnami
+directories:
+  - paths:
+      - /opt/bitnami/cilium-proxy
+version:
+  bin_name: cilium-envoy
+  flag: --version
