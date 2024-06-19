@@ -22,6 +22,7 @@ set -o pipefail
 cassandra_set_default_host
 # Ensure Cassandra environment variables settings are valid
 cassandra_validate
+cassandra_validate_tls
 # Ensure 'daemon' user exists when running as 'root'
 am_i_root && ensure_user_exists "$DB_DAEMON_USER" --group "$DB_DAEMON_GROUP"
 # Ensure Cassandra is initialized

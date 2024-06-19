@@ -208,36 +208,46 @@ docker-compose up -d
 | `CASSANDRA_KEYSTORE_LOCATION`                      | Cassandra keystore location                                                             | `${DB_VOLUME_DIR}/secrets/keystore`   |
 | `CASSANDRA_TRUSTSTORE_LOCATION`                    | Cassandra truststore location                                                           | `${DB_VOLUME_DIR}/secrets/truststore` |
 | `CASSANDRA_TMP_P12_FILE`                           | Cassandra truststore location                                                           | `${DB_TMP_DIR}/keystore.p12`          |
-| `CASSANDRA_SSL_CERT_FILE`                          | Cassandra SSL certificate location                                                      | `${DB_VOLUME_DIR}/client.cer.pem`     |
+| `CASSANDRA_SSL_CERT_FILE`                          | Cassandra SSL certificate location                                                      | `${DB_VOLUME_DIR}/certs/tls.crt`      |
+| `CASSANDRA_SSL_KEY_FILE`                           | Cassandra SSL keyfile location                                                          | `${DB_VOLUME_DIR}/certs/tls.key`      |
+| `CASSANDRA_SSL_CA_FILE`                            | Cassandra SSL CA location                                                               | `nil`                                 |
 | `CASSANDRA_SSL_VALIDATE`                           | Perform SSL validation on the certificates                                              | `false`                               |
 | `SSL_VERSION`                                      | TLS version to use when connecting.                                                     | `TLSv1_2`                             |
 
 #### Read-only environment variables
 
-| Name                                  | Description                                               | Value                                           |
-|---------------------------------------|-----------------------------------------------------------|-------------------------------------------------|
-| `DB_FLAVOR`                           | Database flavor. Valid values: `cassandra` or `scylladb`. | `cassandra`                                     |
-| `CASSANDRA_BASE_DIR`                  | Cassandra installation directory                          | `/opt/bitnami/cassandra`                        |
-| `CASSANDRA_BIN_DIR`                   | Cassandra executables directory                           | `${DB_BASE_DIR}/bin`                            |
-| `CASSANDRA_CONF_DIR`                  | Cassandra configuration directory                         | `${DB_BASE_DIR}/conf`                           |
-| `CASSANDRA_VOLUME_DIR`                | Persistence base directory                                | `/bitnami/cassandra`                            |
-| `CASSANDRA_DATA_DIR`                  | Cassandra data directory                                  | `${DB_VOLUME_DIR}/data`                         |
-| `CASSANDRA_COMMITLOG_DIR`             | Cassandra commit log directory                            | `${DB_DATA_DIR}/commitlog`                      |
-| `CASSANDRA_DEFAULT_CONF_DIR`          | Cassandra default configuration directory                 | `${DB_BASE_DIR}/conf.default`                   |
-| `CASSANDRA_INITSCRIPTS_DIR`           | Path to the Cassandra container init scripts directory    | `/docker-entrypoint-initdb.d`                   |
-| `CASSANDRA_LOG_DIR`                   | Cassandra logs directory                                  | `${DB_BASE_DIR}/logs`                           |
-| `CASSANDRA_TMP_DIR`                   | Cassandra temporary directory                             | `${DB_BASE_DIR}/tmp`                            |
-| `JAVA_BASE_DIR`                       | Java base directory                                       | `${BITNAMI_ROOT_DIR}/java`                      |
-| `JAVA_BIN_DIR`                        | Java binary directory                                     | `${JAVA_BASE_DIR}/bin`                          |
-| `PYTHON_BASE_DIR`                     | Python base directory                                     | `${BITNAMI_ROOT_DIR}/python`                    |
-| `PYTHON_BIN_DIR`                      | Python binary directory                                   | `${PYTHON_BASE_DIR}/bin`                        |
-| `CASSANDRA_CONF_FILE`                 | Path to Cassandra configuration file                      | `${DB_CONF_DIR}/cassandra.yaml`                 |
-| `CASSANDRA_LOG_FILE`                  | Path to the Cassandra log file                            | `${DB_LOG_DIR}/cassandra.log`                   |
-| `CASSANDRA_FIRST_BOOT_LOG_FILE`       | Path to the Cassandra first boot log file                 | `${DB_LOG_DIR}/cassandra_first_boot.log`        |
-| `CASSANDRA_INITSCRIPTS_BOOT_LOG_FILE` | Path to the Cassandra init scripts log file               | `${DB_LOG_DIR}/cassandra_init_scripts_boot.log` |
-| `CASSANDRA_PID_FILE`                  | Path to the Cassandra pid file                            | `${DB_TMP_DIR}/cassandra.pid`                   |
-| `CASSANDRA_DAEMON_USER`               | Cassandra system user                                     | `cassandra`                                     |
-| `CASSANDRA_DAEMON_GROUP`              | Cassandra system group                                    | `cassandra`                                     |
+| Name                                  | Description                                                                     | Value                                           |
+|---------------------------------------|---------------------------------------------------------------------------------|-------------------------------------------------|
+| `DB_FLAVOR`                           | Database flavor. Valid values: `cassandra` or `scylladb`.                       | `cassandra`                                     |
+| `CASSANDRA_BASE_DIR`                  | Cassandra installation directory                                                | `/opt/bitnami/cassandra`                        |
+| `CASSANDRA_BIN_DIR`                   | Cassandra executables directory                                                 | `${DB_BASE_DIR}/bin`                            |
+| `CASSANDRA_VOLUME_DIR`                | Persistence base directory                                                      | `/bitnami/cassandra`                            |
+| `CASSANDRA_DATA_DIR`                  | Cassandra data directory                                                        | `${DB_VOLUME_DIR}/data`                         |
+| `CASSANDRA_COMMITLOG_DIR`             | Cassandra commit log directory                                                  | `${DB_DATA_DIR}/commitlog`                      |
+| `CASSANDRA_INITSCRIPTS_DIR`           | Path to the Cassandra container init scripts directory                          | `/docker-entrypoint-initdb.d`                   |
+| `CASSANDRA_LOG_DIR`                   | Cassandra logs directory                                                        | `${DB_BASE_DIR}/logs`                           |
+| `CASSANDRA_TMP_DIR`                   | Cassandra temporary directory                                                   | `${DB_BASE_DIR}/tmp`                            |
+| `JAVA_BASE_DIR`                       | Java base directory                                                             | `${BITNAMI_ROOT_DIR}/java`                      |
+| `JAVA_BIN_DIR`                        | Java binary directory                                                           | `${JAVA_BASE_DIR}/bin`                          |
+| `PYTHON_BASE_DIR`                     | Python base directory                                                           | `${BITNAMI_ROOT_DIR}/python`                    |
+| `PYTHON_BIN_DIR`                      | Python binary directory                                                         | `${PYTHON_BASE_DIR}/bin`                        |
+| `CASSANDRA_LOG_FILE`                  | Path to the Cassandra log file                                                  | `${DB_LOG_DIR}/cassandra.log`                   |
+| `CASSANDRA_FIRST_BOOT_LOG_FILE`       | Path to the Cassandra first boot log file                                       | `${DB_LOG_DIR}/cassandra_first_boot.log`        |
+| `CASSANDRA_INITSCRIPTS_BOOT_LOG_FILE` | Path to the Cassandra init scripts log file                                     | `${DB_LOG_DIR}/cassandra_init_scripts_boot.log` |
+| `CASSANDRA_PID_FILE`                  | Path to the Cassandra pid file                                                  | `${DB_TMP_DIR}/cassandra.pid`                   |
+| `CASSANDRA_DAEMON_USER`               | Cassandra system user                                                           | `cassandra`                                     |
+| `CASSANDRA_DAEMON_GROUP`              | Cassandra system group                                                          | `cassandra`                                     |
+| `CASSANDRA_CONF_DIR`                  | Cassandra configuration directory                                               | `${DB_BASE_DIR}/conf`                           |
+| `CASSANDRA_DEFAULT_CONF_DIR`          | Cassandra default configuration directory                                       | `${DB_BASE_DIR}/conf.default`                   |
+| `CASSANDRA_CONF_FILE`                 | Path to Cassandra configuration file                                            | `${DB_CONF_DIR}/cassandra.yaml`                 |
+| `CASSANDRA_RACKDC_FILE`               | Path to Cassandra cassandra-rackdc.properties file                              | `${DB_CONF_DIR}/cassandra-rackdc.properties`    |
+| `CASSANDRA_LOGBACK_FILE`              | Path to Cassandra logback.xml file                                              | `${DB_CONF_DIR}/logback.xml`                    |
+| `CASSANDRA_COMMITLOG_ARCHIVING_FILE`  | Path to Cassandra commitlog_archiving.properties file                           | `${DB_CONF_DIR}/commitlog_archiving.properties` |
+| `CASSANDRA_ENV_FILE`                  | Path to Cassandra cassandra-env.sh file                                         | `${DB_CONF_DIR}/cassandra-env.sh`               |
+| `CASSANDRA_MOUNTED_CONF_PATH`         | Relative path (in mounted volume) to Cassandra configuration file               | `cassandra.yaml`                                |
+| `CASSANDRA_MOUNTED_RACKDC_PATH`       | Relative path (in mounted volume) to Cassandra cassandra-rackdc-properties file | `cassandra-rackdc.properties`                   |
+| `CASSANDRA_MOUNTED_ENV_PATH`          | Relative path (in mounted volume) to Cassandra cassandra-env.sh file            | `cassandra-env.sh`                              |
+| `CASSANDRA_MOUNTED_LOGBACK_PATH`      | Path to Cassandra logback.xml file                                              | `logback.xml`                                   |
 
 Additionally, any environment variable beginning with the following prefix will be mapped to its corresponding Apache Cassandra key in the proper file:
 

@@ -2,7 +2,220 @@
 # Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 #
-# Bitnami Cassandra library
+# Library for Cassandra
+
+cassandra_validate_tls() {
+    info "Validating TLS settings in DB_* env vars.."
+    local error_code=0
+
+    # Auxiliary functions
+    print_validation_error() {
+        error "$1"
+        error_code=1
+    }
+
+    check_empty_value() {
+        if is_empty_value "${!1}"; then
+            print_validation_error "The $1 environment variable is empty or not set."
+        fi
+    }
+
+    check_default_password() {
+        if [[ "${!1}" = "cassandra" ]]; then
+            warn "You set the environment variable $1=cassandra. This is the default value when bootstrapping Cassandra and should not be used in production environments."
+        fi
+    }
+    if is_boolean_yes "$DB_CLIENT_ENCRYPTION" || is_boolean_yes "$DB_INTERNODE_ENCRYPTION"; then
+        check_empty_value DB_KEYSTORE_PASSWORD
+        check_empty_value DB_TRUSTSTORE_PASSWORD
+        check_default_password DB_KEYSTORE_PASSWORD
+        check_default_password DB_TRUSTSTORE_PASSWORD
+    fi
+
+    [[ "$error_code" -eq 0 ]] || exit "$error_code"
+
+}
+
+########################
+# Configure port binding (modifies cassandra.yaml and cassandra-env.sh if not mounted)
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+cassandra_setup_ports() {
+    cassandra_setup_common_ports
+}
+
+########################
+# Generate the client configurartion if ssl is configured in the server
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+cassandra_setup_client_ssl() {
+    info "Configuring client for SSL"
+
+    # The key is store in a jks keystore and needs to be converted to pks12 to be extracted
+    keytool -importkeystore -srckeystore "${DB_KEYSTORE_LOCATION}" \
+        -destkeystore "${DB_TMP_P12_FILE}" \
+        -deststoretype PKCS12 \
+        -srcstorepass "${DB_KEYSTORE_PASSWORD}" \
+        -deststorepass "${DB_KEYSTORE_PASSWORD}"
+
+    openssl pkcs12 -in "${DB_TMP_P12_FILE}" -nokeys \
+        -out "${DB_SSL_CERT_FILE}" -passin pass:"${DB_KEYSTORE_PASSWORD}"
+    rm "${DB_TMP_P12_FILE}"
+}
+
+########################
+# Enable client encryption in configuration
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+cassandra_enable_client_encryption() {
+    local cassandra_config
+    cassandra_config="$(sed -E "/client_encryption_options:.*/ {N;N; s/client_encryption_options:[^\n]*(\n\s+#.*)?(\n\s+enabled:).*/client_encryption_options:\1\2 $DB_CLIENT_ENCRYPTION/g}" "$DB_CONF_FILE")"
+    echo "$cassandra_config" >"$DB_CONF_FILE"
+}
+
+########################
+# Configure TLS certificates in configuration file
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+cassandra_configure_certificates() {
+    cassandra_yaml_set "keystore" "$DB_KEYSTORE_LOCATION"
+    cassandra_yaml_set "keystore_password" "$DB_KEYSTORE_PASSWORD"
+    cassandra_yaml_set "truststore" "$DB_TRUSTSTORE_LOCATION"
+    cassandra_yaml_set "truststore_password" "$DB_TRUSTSTORE_PASSWORD"
+}
+
+########################
+# Configure Cassandra configuration files from environment variables
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+cassandra_setup_from_environment_variables() {
+    # Map environment variables to config properties for cassandra-env.sh
+    for var in "${!CASSANDRA_CFG_ENV_@}"; do
+        # shellcheck disable=SC2001
+        key="$(echo "$var" | sed -e 's/^CASSANDRA_CFG_ENV_//g')"
+        value="${!var}"
+        cassandra_env_conf_set "$key" "$value"
+    done
+    # Map environment variables to config properties for cassandra-rackdc.properties
+    for var in "${!CASSANDRA_CFG_RACKDC_@}"; do
+        key="$(echo "$var" | sed -e 's/^CASSANDRA_CFG_RACKDC_//g' | tr '[:upper:]' '[:lower:]')"
+        value="${!var}"
+        cassandra_rackdc_conf_set "$key" "$value"
+    done
+    # Map environment variables to config properties for commitlog_archiving.properties
+    for var in "${!CASSANDRA_CFG_COMMITLOG_@}"; do
+        key="$(echo "$var" | sed -e 's/^CASSANDRA_CFG_COMMITLOG_//g' | tr '[:upper:]' '[:lower:]')"
+        value="${!var}"
+        cassandra_commitlog_conf_set "$key" "$value"
+    done
+    if ! cassandra_is_file_external "$DB_MOUNTED_CONF_PATH"; then
+        # Map environment variables to config properties for configuration file
+        for var in "${!CASSANDRA_CFG_YAML_@}"; do
+            # shellcheck disable=SC2001
+            key="$(echo "$var" | sed -e 's/^CASSANDRA_CFG_YAML_//g' | tr '[:upper:]' '[:lower:]')"
+            value="${!var}"
+            cassandra_yaml_set "$key" "$value"
+        done
+    else
+        debug "$DB_MOUNTED_CONF_PATH mounted. Skipping data directory configuration"
+    fi
+}
+
+########################
+# Start Cassandra and wait until it is ready
+# Globals:
+#   DB_*
+# Arguments:
+#   $1 - Log file to write (default /dev/stdout)
+#   $2 - Maximum number of retries (default $DB_INIT_MAX_RETRIES)
+#   $3 - Sleep time during retries (default $DB_INIT_SLEEP_TIME)
+# Returns:
+#   None
+#########################
+cassandra_start_bg() {
+    local -r logger="${1:-/dev/stdout}"
+    local -r retries="${2:-$DB_INIT_MAX_RETRIES}"
+    local -r sleep_time="${3:-$DB_INIT_SLEEP_TIME}"
+
+    info "Starting $DB_FLAVOR"
+    local -r cmd=("$DB_BIN_DIR/cassandra")
+    local -r args=("-p" "$DB_PID_FILE" "-R" "-f")
+
+    if am_i_root; then
+        run_as_user "$DB_DAEMON_USER" "${cmd[@]}" "${args[@]}" >"$logger" 2>&1 &
+    else
+        "${cmd[@]}" "${args[@]}" >"$logger" 2>&1 &
+    fi
+
+    # Even though we set the pid, cassandra is not creating the proper file, so we create it manually
+    echo $! >"$DB_PID_FILE"
+
+    info "Checking that it started up correctly"
+
+    if [[ "$logger" != "/dev/stdout" ]]; then
+        am_i_root && chown "$DB_DAEMON_USER":"$DB_DAEMON_GROUP" "$logger"
+        wait_for_cql_log_entry "$logger" "$retries" "$sleep_time"
+    fi
+    wait_for_nodetool_up "$retries" "$sleep_time"
+}
+
+########################
+# Stop Cassandra
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+cassandra_stop() {
+    ! is_cassandra_running && return
+    info "Stopping Cassandra..."
+    stop_cassandra() {
+        # Using legacy RMI URL parsing to avoid URISyntaxException: 'Malformed IPv6 address at index 7: rmi://[127.0.0.1]:7199' error
+        # https://community.datastax.com/questions/13764/java-version-for-cassandra-3113.html
+        nodetool "-Dcom.sun.jndi.rmiURLParsing=legacy" stopdaemon
+        is_cassandra_not_running
+    }
+
+    if ! retry_while "stop_cassandra" "$DB_INIT_MAX_RETRIES" "$DB_INIT_SLEEP_TIME"; then
+        error "Cassandra failed to stop"
+        exit 1
+    fi
+    # Manually remove PID file
+    rm -f "$DB_PID_FILE"
+}
+
+#!/bin/bash
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+#
+# Library for Cassandra common
 
 # shellcheck disable=SC1090,SC1091
 
@@ -120,7 +333,7 @@ cassandra_validate() {
 
     check_default_password() {
         if [[ "${!1}" = "cassandra" ]]; then
-            warn "You set the environment variable $1=cassandra. This is the default value when bootstrapping Cassandra and should not be used in production environments."
+            warn "You set the environment variable $1=cassandra. This is the default value when bootstrapping $DB_FLAVOR and should not be used in production environments."
         fi
     }
 
@@ -197,14 +410,6 @@ cassandra_validate() {
     fi
 
     check_default_password DB_PASSWORD
-
-    if is_boolean_yes "$DB_CLIENT_ENCRYPTION" || is_boolean_yes "$DB_INTERNODE_ENCRYPTION"; then
-        check_empty_value DB_KEYSTORE_PASSWORD
-        check_empty_value DB_TRUSTSTORE_PASSWORD
-        check_default_password DB_KEYSTORE_PASSWORD
-        check_default_password DB_TRUSTSTORE_PASSWORD
-    fi
-
     check_yes_no_value DB_PASSWORD_SEEDER
     check_true_false_value DB_ENABLE_REMOTE_CONNECTIONS
     check_true_false_value DB_CLIENT_ENCRYPTION
@@ -319,7 +524,7 @@ cassandra_copy_default_config() {
 #   None
 #########################
 cassandra_setup_data_dirs() {
-    if ! cassandra_is_file_external "cassandra.yaml"; then
+    if ! cassandra_is_file_external "${DB_MOUNTED_CONF_PATH}"; then
         cassandra_yaml_set_as_array data_file_directories "${DB_DATA_DIR}/data" "$DB_CONF_FILE"
 
         cassandra_yaml_set commitlog_directory "$DB_COMMITLOG_DIR"
@@ -327,7 +532,7 @@ cassandra_setup_data_dirs() {
         cassandra_yaml_set cdc_raw_directory "${DB_DATA_DIR}/cdc_raw"
         cassandra_yaml_set saved_caches_directory "${DB_DATA_DIR}/saved_caches"
     else
-        debug "cassandra.yaml mounted. Skipping data directory configuration"
+        debug "${DB_MOUNTED_CONF_PATH} mounted. Skipping data directory configuration"
     fi
 }
 
@@ -341,7 +546,7 @@ cassandra_setup_data_dirs() {
 #   None
 #########################
 cassandra_enable_auth() {
-    if ! cassandra_is_file_external "cassandra.yaml"; then
+    if ! cassandra_is_file_external "${DB_MOUNTED_CONF_PATH}"; then
         if [[ "$ALLOW_EMPTY_PASSWORD" = "yes" ]] && [[ -z $DB_PASSWORD ]]; then
             cassandra_yaml_set "authenticator" "AllowAllAuthenticator"
             cassandra_yaml_set "authorizer" "AllowAllAuthorizer"
@@ -350,7 +555,7 @@ cassandra_enable_auth() {
             cassandra_yaml_set "authorizer" "${DB_AUTHORIZER}"
         fi
     else
-        debug "cassandra.yaml mounted. Skipping authentication method configuration"
+        debug "${DB_MOUNTED_CONF_PATH} mounted. Skipping authentication method configuration"
     fi
 }
 
@@ -364,13 +569,13 @@ cassandra_enable_auth() {
 #   None
 #########################
 cassandra_setup_logging() {
-    if ! cassandra_is_file_external "logback.xml"; then
-        replace_in_file "${DB_CONF_DIR}/logback.xml" "system[.]log" "cassandra.log"
+    if ! cassandra_is_file_external "${DB_MOUNTED_LOGBACK_PATH}"; then
+        replace_in_file "${DB_LOGBACK_FILE}" "system[.]log" "${DB_FLAVOR}.log"
         if [[ "$BITNAMI_DEBUG" = "false" ]]; then
-            replace_in_file "${DB_CONF_DIR}/logback.xml" "(<appender-ref\s+ref=\"ASYNCDEBUGLOG\"\s+\/>)" "<!-- \1 -->"
+            replace_in_file "${DB_LOGBACK_FILE}" "(<appender-ref\s+ref=\"ASYNCDEBUGLOG\"\s+\/>)" "<!-- \1 -->"
         fi
     else
-        debug "logback.xml mounted. Skipping logging configuration"
+        debug "${DB_MOUNTED_LOGBACK_PATH} mounted. Skipping logging configuration"
     fi
 }
 
@@ -386,14 +591,13 @@ cassandra_setup_logging() {
 cassandra_setup_cluster() {
     local host="127.0.0.1"
     local rpc_address="127.0.0.1"
-    local cassandra_config
 
     if [[ "$DB_ENABLE_REMOTE_CONNECTIONS" = "true" ]]; then
         host="$DB_HOST"
         rpc_address="0.0.0.0"
     fi
     # cassandra.yaml changes
-    if ! cassandra_is_file_external "cassandra.yaml"; then
+    if ! cassandra_is_file_external "${DB_MOUNTED_CONF_PATH}"; then
         cassandra_yaml_set "num_tokens" "$DB_NUM_TOKENS" "no"
         cassandra_yaml_set "cluster_name" "$DB_CLUSTER_NAME"
         cassandra_yaml_set "listen_address" "$host"
@@ -405,10 +609,7 @@ cassandra_setup_cluster() {
         cassandra_yaml_set "broadcast_rpc_address" "$host"
         cassandra_yaml_set "endpoint_snitch" "$DB_ENDPOINT_SNITCH"
         cassandra_yaml_set "internode_encryption" "$DB_INTERNODE_ENCRYPTION"
-        cassandra_yaml_set "keystore" "$DB_KEYSTORE_LOCATION"
-        cassandra_yaml_set "keystore_password" "$DB_KEYSTORE_PASSWORD"
-        cassandra_yaml_set "truststore" "$DB_TRUSTSTORE_LOCATION"
-        cassandra_yaml_set "truststore_password" "$DB_TRUSTSTORE_PASSWORD"
+        cassandra_configure_certificates
         cassandra_yaml_set "auto_snapshot_ttl" "$DB_AUTO_SNAPSHOT_TTL"
 
         if [[ -n "$DB_BROADCAST_ADDRESS" ]]; then
@@ -419,17 +620,16 @@ cassandra_setup_cluster() {
             cassandra_yaml_set "automatic_sstable_upgrade" "$DB_AUTOMATIC_SSTABLE_UPGRADE"
         fi
 
-        cassandra_config="$(sed -E "/client_encryption_options:.*/ {N;N; s/client_encryption_options:[^\n]*(\n\s+#.*)?(\n\s+enabled:).*/client_encryption_options:\1\2 $DB_CLIENT_ENCRYPTION/g}" "$DB_CONF_FILE")"
-        echo "$cassandra_config" >"$DB_CONF_FILE"
+        cassandra_enable_client_encryption
     else
-        debug "cassandra.yaml mounted. Skipping cluster configuration"
+        debug "${DB_MOUNTED_CONF_PATH} mounted. Skipping cluster configuration"
     fi
 
     # cassandra-env.sh changes
-    if ! cassandra_is_file_external "cassandra-env.sh"; then
-        replace_in_file "${DB_CONF_DIR}/cassandra-env.sh" "#\s*JVM_OPTS=\"\$JVM_OPTS -Djava[.]rmi[.]server[.]hostname=[^\"]*" "JVM_OPTS=\"\$JVM_OPTS -Djava.rmi.server.hostname=${host}"
+    if ! cassandra_is_file_external "${DB_MOUNTED_ENV_PATH}"; then
+        replace_in_file "${DB_ENV_FILE}" "#\s*JVM_OPTS=\"\$JVM_OPTS -Djava[.]rmi[.]server[.]hostname=[^\"]*" "JVM_OPTS=\"\$JVM_OPTS -Djava.rmi.server.hostname=${host}"
     else
-        debug "cassandra-env.sh mounted. Skipping setting server hostname"
+        debug "${DB_MOUNTED_ENV_PATH} mounted. Skipping setting server hostname"
     fi
 }
 
@@ -443,10 +643,10 @@ cassandra_setup_cluster() {
 #   None
 #########################
 cassandra_setup_java() {
-    if ! cassandra_is_file_external "cassandra-env.sh"; then
-        replace_in_file "${DB_CONF_DIR}/cassandra-env.sh" "(calculate_heap_sizes\(\))" "\nJAVA_HOME=$JAVA_BASE_DIR\nJAVA=$JAVA_BIN_DIR/java\n\n\1"
+    if ! cassandra_is_file_external "${DB_MOUNTED_ENV_PATH}"; then
+        replace_in_file "${DB_ENV_FILE}" "(calculate_heap_sizes\(\))" "\nJAVA_HOME=$JAVA_BASE_DIR\nJAVA=$JAVA_BIN_DIR/java\n\n\1"
     else
-        debug "cassandra-env.sh mounted. Skipping JAVA_HOME configuration"
+        debug "${DB_MOUNTED_ENV_PATH} mounted. Skipping JAVA_HOME configuration"
     fi
 }
 
@@ -460,14 +660,14 @@ cassandra_setup_java() {
 #   None
 #########################
 cassandra_setup_jemalloc() {
-    if ! cassandra_is_file_external "cassandra-env.sh"; then
+    if ! cassandra_is_file_external "${DB_MOUNTED_ENV_PATH}"; then
         if [[ -n "$(find_jemalloc_lib)" ]]; then
             echo "JVM_OPTS=\"\$JVM_OPTS -Dcassandra.libjemalloc=$(find_jemalloc_lib)\"" >>"${DB_CONF_DIR}/cassandra-env.sh"
         else
             warn "Couldn't find jemalloc installed. Skipping jemalloc configuration."
         fi
     else
-        debug "cassandra-env.sh mounted. Skipping jemalloc configuration."
+        debug "${DB_MOUNTED_ENV_PATH} mounted. Skipping jemalloc configuration."
     fi
 }
 
@@ -529,7 +729,7 @@ cassandra_create_admin_user() {
 }
 
 ########################
-# Configure port binding (modifies cassandra.yaml and cassandra-env.sh if not mounted)
+# Configure common port binding (modifies cassandra.yaml and cassandra-env.sh if not mounted)
 # Globals:
 #   DB_*
 # Arguments:
@@ -537,18 +737,18 @@ cassandra_create_admin_user() {
 # Returns:
 #   None
 #########################
-cassandra_setup_ports() {
-    if ! cassandra_is_file_external "cassandra.yaml"; then
+cassandra_setup_common_ports() {
+    if ! cassandra_is_file_external "${DB_MOUNTED_CONF_PATH}"; then
         cassandra_yaml_set "native_transport_port" "$DB_CQL_PORT_NUMBER" "no"
         cassandra_yaml_set "storage_port" "$DB_TRANSPORT_PORT_NUMBER" "no"
     else
-        debug "cassandra.yaml mounted. Skipping native and storage ports configuration"
+        debug "${DB_MOUNTED_CONF_PATH} mounted. Skipping native and storage ports configuration"
     fi
 
-    if ! cassandra_is_file_external "cassandra-env.sh"; then
-        replace_in_file "${DB_CONF_DIR}/cassandra-env.sh" "JMX_PORT=.*" "JMX_PORT=$DB_JMX_PORT_NUMBER"
+    if ! cassandra_is_file_external "${DB_MOUNTED_ENV_PATH}"; then
+        replace_in_file "${DB_ENV_FILE}" "JMX_PORT=.*" "JMX_PORT=$DB_JMX_PORT_NUMBER"
     else
-        debug "cassandra-env.sh mounted. Skipping JMX port configuration"
+        debug "${DB_MOUNTED_ENV_PATH} mounted. Skipping JMX port configuration"
     fi
 }
 
@@ -562,11 +762,11 @@ cassandra_setup_ports() {
 #   None
 #########################
 cassandra_setup_rack_dc() {
-    if ! cassandra_is_file_external "cassandra-rackdc.properties"; then
-        replace_in_file "${DB_CONF_DIR}/cassandra-rackdc.properties" "dc=.*" "dc=${DB_DATACENTER}"
-        replace_in_file "${DB_CONF_DIR}/cassandra-rackdc.properties" "rack=.*" "rack=${DB_RACK}"
+    if ! cassandra_is_file_external "${DB_MOUNTED_RACKDC_PATH}"; then
+        replace_in_file "${DB_RACKDC_FILE}" "dc=.*" "dc=${DB_DATACENTER}"
+        replace_in_file "${DB_RACKDC_FILE}" "rack=.*" "rack=${DB_RACK}"
     else
-        debug "cassandra-rackdc.properties mounted. Skipping rack and datacenter configuration"
+        debug "${DB_MOUNTED_RACKDC_PATH} mounted. Skipping rack and datacenter configuration"
     fi
 }
 
@@ -588,30 +788,6 @@ cassandra_clean_from_restart() {
 }
 
 ########################
-# Generate the client configurartion if ssl is configured in the server
-# Globals:
-#   DB_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-cassandra_setup_client_ssl() {
-    info "Configuring client for SSL"
-
-    # The key is store in a jks keystore and needs to be converted to pks12 to be extracted
-    keytool -importkeystore -srckeystore "${DB_KEYSTORE_LOCATION}" \
-        -destkeystore "${DB_TMP_P12_FILE}" \
-        -deststoretype PKCS12 \
-        -srcstorepass "${DB_KEYSTORE_PASSWORD}" \
-        -deststorepass "${DB_KEYSTORE_PASSWORD}"
-
-    openssl pkcs12 -in "${DB_TMP_P12_FILE}" -nokeys \
-        -out "${DB_SSL_CERT_FILE}" -passin pass:"${DB_KEYSTORE_PASSWORD}"
-    rm "${DB_TMP_P12_FILE}"
-}
-
-########################
 # Ensure Cassandra is initialized
 # Globals:
 #   DB_*
@@ -621,7 +797,7 @@ cassandra_setup_client_ssl() {
 #   None
 #########################
 cassandra_initialize() {
-    info "Initializing Cassandra database..."
+    info "Initializing $DB_FLAVOR database..."
 
     cassandra_clean_from_restart
     cassandra_copy_mounted_config
@@ -645,9 +821,9 @@ cassandra_initialize() {
     done
 
     if ! is_dir_empty "$DB_DATA_DIR"; then
-        info "Deploying Cassandra with persisted data"
+        info "Deploying $DB_FLAVOR with persisted data"
     else
-        info "Deploying Cassandra from scratch"
+        info "Deploying $DB_FLAVOR from scratch"
         cassandra_start_bg "$DB_FIRST_BOOT_LOG_FILE"
         if is_boolean_yes "$DB_PASSWORD_SEEDER"; then
             info "Password seeder node"
@@ -758,7 +934,7 @@ cassandra_execute() {
     local -r host="${4:-localhost}"
     local -r extra_args="${5:-}"
     local -r port="${DB_CQL_PORT_NUMBER}"
-    local -r cmd=("${DB_BIN_DIR}/cqlsh")
+    local -r cmd=("cqlsh")
     local args=("-u" "$user" "-p" "$pass")
 
     is_boolean_yes "$DB_CLIENT_ENCRYPTION" && args+=("--ssl")
@@ -846,7 +1022,7 @@ wait_for_nodetool_up() {
     check_function_nodetool_node_ip() {
         # Using legacy RMI URL parsing to avoid URISyntaxException: 'Malformed IPv6 address at index 7: rmi://[127.0.0.1]:7199' error
         # https://community.datastax.com/questions/13764/java-version-for-cassandra-3113.html
-        local -r check_cmd=("${DB_BIN_DIR}/nodetool" "-Dcom.sun.jndi.rmiURLParsing=legacy")
+        local -r check_cmd=("nodetool" "-Dcom.sun.jndi.rmiURLParsing=legacy")
         local -r check_args=("status" "--port" "$DB_JMX_PORT_NUMBER")
         local -r machine_ip="$(dns_lookup "${DB_BROADCAST_ADDRESS:-$DB_HOST}" "v4")"
         local -r check_regex="UN\s*(${DB_HOST}|${machine_ip}|127.0.0.1)"
@@ -862,7 +1038,7 @@ wait_for_nodetool_up() {
     check_function_nodetool_node_count() {
         # Using legacy RMI URL parsing to avoid URISyntaxException: 'Malformed IPv6 address at index 7: rmi://[127.0.0.1]:7199' error
         # https://community.datastax.com/questions/13764/java-version-for-cassandra-3113.html
-        local -r check_cmd=("${DB_BIN_DIR}/nodetool" "-Dcom.sun.jndi.rmiURLParsing=legacy")
+        local -r check_cmd=("nodetool" "-Dcom.sun.jndi.rmiURLParsing=legacy")
         local -r check_args=("status" "--port" "$DB_JMX_PORT_NUMBER")
         local -r machine_ip="$(dns_lookup "${DB_BROADCAST_ADDRESS:-$DB_HOST}" "v4")"
         local -r check_regex="UN\s*"
@@ -882,10 +1058,10 @@ wait_for_nodetool_up() {
     }
 
     if retry_while check_function_nodetool_node_ip "$retries" "$sleep_time"; then
-        info "Nodetool reported the successful startup of Cassandra"
+        info "Nodetool reported the successful startup of $DB_FLAVOR"
         true
     else
-        error "Cassandra failed to start up"
+        error "$DB_FLAVOR failed to start up"
         if [[ "$BITNAMI_DEBUG" = "true" ]]; then
             error "Nodetool output"
             "${check_cmd[@]}" "${check_args[@]}"
@@ -942,11 +1118,9 @@ wait_for_cql_log_entry() {
     if retry_while check_function_log_entry "$retries" "$sleep_time"; then
         info "Found CQL startup log line"
     else
-        error "Cassandra failed to start up"
-        if [[ "$BITNAMI_DEBUG" = "true" ]]; then
-            error "Log content"
-            cat "$logger"
-        fi
+        error "$DB_FLAVOR failed to start up"
+        error "Log content"
+        cat "$logger"
         exit 1
     fi
 }
@@ -978,71 +1152,6 @@ wait_for_cql_access() {
         error "Could not access CQL server"
         exit 1
     fi
-}
-
-########################
-# Start Cassandra and wait until it is ready
-# Globals:
-#   DB_*
-# Arguments:
-#   $1 - Log file to write (default /dev/stdout)
-#   $2 - Maximum number of retries (default $DB_INIT_MAX_RETRIES)
-#   $3 - Sleep time during retries (default $DB_INIT_SLEEP_TIME)
-# Returns:
-#   None
-#########################
-cassandra_start_bg() {
-    local -r logger="${1:-/dev/stdout}"
-    local -r retries="${2:-$DB_INIT_MAX_RETRIES}"
-    local -r sleep_time="${3:-$DB_INIT_SLEEP_TIME}"
-
-    info "Starting Cassandra"
-    local -r cmd=("$DB_BIN_DIR/cassandra")
-    local -r args=("-p" "$DB_PID_FILE" "-R" "-f")
-
-    if am_i_root; then
-        run_as_user "$DB_DAEMON_USER" "${cmd[@]}" "${args[@]}" >"$logger" 2>&1 &
-    else
-        "${cmd[@]}" "${args[@]}" >"$logger" 2>&1 &
-    fi
-
-    # Even though we set the pid, cassandra is not creating the proper file, so we create it manually
-    echo $! >"$DB_PID_FILE"
-
-    info "Checking that it started up correctly"
-
-    if [[ "$logger" != "/dev/stdout" ]]; then
-        am_i_root && chown "$DB_DAEMON_USER":"$DB_DAEMON_GROUP" "$logger"
-        wait_for_cql_log_entry "$logger" "$retries" "$sleep_time"
-    fi
-    wait_for_nodetool_up "$retries" "$sleep_time"
-}
-
-########################
-# Stop Cassandra
-# Globals:
-#   DB_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-cassandra_stop() {
-    ! is_cassandra_running && return
-    info "Stopping Cassandra..."
-    stop_cassandra() {
-        # Using legacy RMI URL parsing to avoid URISyntaxException: 'Malformed IPv6 address at index 7: rmi://[127.0.0.1]:7199' error
-        # https://community.datastax.com/questions/13764/java-version-for-cassandra-3113.html
-        "${DB_BIN_DIR}/nodetool" "-Dcom.sun.jndi.rmiURLParsing=legacy" stopdaemon
-        is_cassandra_not_running
-    }
-
-    if ! retry_while "stop_cassandra" "$DB_INIT_MAX_RETRIES" "$DB_INIT_SLEEP_TIME"; then
-        error "Cassandra failed to stop"
-        exit 1
-    fi
-    # Manually remove PID file
-    rm -f "$DB_PID_FILE"
 }
 
 ########################
@@ -1125,7 +1234,7 @@ cassandra_common_conf_set() {
 #   None
 #########################
 cassandra_env_conf_set() {
-    cassandra_common_conf_set "${DB_CONF_DIR}/cassandra-env.sh" "$@"
+    cassandra_common_conf_set "${DB_ENV_FILE}" "$@"
 }
 
 ########################
@@ -1139,7 +1248,7 @@ cassandra_env_conf_set() {
 #   None
 #########################
 cassandra_rackdc_conf_set() {
-    cassandra_common_conf_set "${DB_CONF_DIR}/cassandra-rackdc.properties" "$@"
+    cassandra_common_conf_set "$DB_RACKDC_FILE" "$@"
 }
 
 ########################
@@ -1153,49 +1262,7 @@ cassandra_rackdc_conf_set() {
 #   None
 #########################
 cassandra_commitlog_conf_set() {
-    cassandra_common_conf_set "${DB_CONF_DIR}/commitlog_archiving.properties" "$@"
-}
-
-########################
-# Configure Cassandra configuration files from environment variables
-# Globals:
-#   DB_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-cassandra_setup_from_environment_variables() {
-    # Map environment variables to config properties for cassandra-env.sh
-    for var in "${!DB_CFG_ENV_@}"; do
-        # shellcheck disable=SC2001
-        key="$(echo "$var" | sed -e 's/^DB_CFG_ENV_//g')"
-        value="${!var}"
-        cassandra_env_conf_set "$key" "$value"
-    done
-    # Map environment variables to config properties for cassandra-rackdc.properties
-    for var in "${!DB_CFG_RACKDC_@}"; do
-        key="$(echo "$var" | sed -e 's/^DB_CFG_RACKDC_//g' | tr '[:upper:]' '[:lower:]')"
-        value="${!var}"
-        cassandra_rackdc_conf_set "$key" "$value"
-    done
-    # Map environment variables to config properties for commitlog_archiving.properties
-    for var in "${!DB_CFG_COMMITLOG_@}"; do
-        key="$(echo "$var" | sed -e 's/^DB_CFG_COMMITLOG_//g' | tr '[:upper:]' '[:lower:]')"
-        value="${!var}"
-        cassandra_commitlog_conf_set "$key" "$value"
-    done
-    if ! cassandra_is_file_external "cassandra.yaml"; then
-        # Map environment variables to config properties for cassandra.yaml
-        for var in "${!DB_CFG_YAML_@}"; do
-            # shellcheck disable=SC2001
-            key="$(echo "$var" | sed -e 's/^DB_CFG_YAML_//g' | tr '[:upper:]' '[:lower:]')"
-            value="${!var}"
-            cassandra_yaml_set "$key" "$value"
-        done
-    else
-        debug "cassandra.yaml mounted. Skipping data directory configuration"
-    fi
+    cassandra_common_conf_set "${DB_COMMITLOG_ARCHIVING_FILE}" "$@"
 }
 
 ########################
