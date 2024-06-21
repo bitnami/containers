@@ -7,15 +7,15 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-06-13T16:28:24Z" \
+      org.opencontainers.image.created="2024-06-21T01:57:15Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/drupal/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="10.2.7-debian-12-r3" \
+      org.opencontainers.image.ref.name="10.3.0-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/drupal" \
       org.opencontainers.image.title="drupal" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="10.2.7"
+      org.opencontainers.image.version="10.3.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,11 +29,11 @@ RUN install_packages acl ca-certificates curl gnupg libaudit1 libbrotli1 libbsd0
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "render-template-1.0.6-14-linux-${OS_ARCH}-debian-12" \
-      "php-8.2.20-3-linux-${OS_ARCH}-debian-12" \
+      "php-8.2.20-5-linux-${OS_ARCH}-debian-12" \
       "apache-2.4.59-2-linux-${OS_ARCH}-debian-12" \
       "mysql-client-11.3.2-3-linux-${OS_ARCH}-debian-12" \
       "libphp-8.2.20-0-linux-${OS_ARCH}-debian-12" \
-      "drupal-10.2.7-1-linux-${OS_ARCH}-debian-12" \
+      "drupal-10.3.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -58,7 +58,7 @@ RUN /opt/bitnami/scripts/drupal/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="10.2.7" \
+    APP_VERSION="10.3.0" \
     BITNAMI_APP_NAME="drupal" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/drupal/vendor/bin:$PATH"
 
