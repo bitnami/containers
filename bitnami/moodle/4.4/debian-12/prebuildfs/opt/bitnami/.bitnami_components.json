@@ -27,13 +27,13 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.1.29-4"
+        "version": "8.1.29-5"
     },
     "postgresql-client": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "13.15.0-2"
+        "version": "13.15.0-3"
     },
     "render-template": {
         "arch": "amd64",
