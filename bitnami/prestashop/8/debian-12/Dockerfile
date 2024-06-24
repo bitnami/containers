@@ -7,15 +7,15 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-06-06T11:25:39Z" \
+      org.opencontainers.image.created="2024-06-24T14:06:30Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/prestashop/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.1.6-debian-12-r1" \
+      org.opencontainers.image.ref.name="8.1.7-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/prestashop" \
       org.opencontainers.image.title="prestashop" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="8.1.6"
+      org.opencontainers.image.version="8.1.7"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,11 +29,11 @@ RUN install_packages acl ca-certificates curl libaudit1 libbrotli1 libbsd0 libbz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "render-template-1.0.6-14-linux-${OS_ARCH}-debian-12" \
-      "php-8.1.29-0-linux-${OS_ARCH}-debian-12" \
+      "php-8.1.29-5-linux-${OS_ARCH}-debian-12" \
       "apache-2.4.59-2-linux-${OS_ARCH}-debian-12" \
       "mysql-client-11.3.2-3-linux-${OS_ARCH}-debian-12" \
       "libphp-8.1.29-0-linux-${OS_ARCH}-debian-12" \
-      "prestashop-8.1.6-0-linux-${OS_ARCH}-debian-12" \
+      "prestashop-8.1.7-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -58,7 +58,7 @@ RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/prestashop/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="8.1.6" \
+    APP_VERSION="8.1.7" \
     BITNAMI_APP_NAME="prestashop" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/prestashop/bin:$PATH"
 
