@@ -9,9 +9,9 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "0.4.26-1"
+        "version": "0.4.29-0"
     },
-    "hubble": {
+    "hubble-relay": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",

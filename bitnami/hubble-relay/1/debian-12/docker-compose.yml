@@ -4,6 +4,6 @@
 version: "2"
  
 services:
-  hubble:
+  hubble-relay:
     image: docker.io/bitnami/hubble-relay:1
     container_name: hubble-relay
