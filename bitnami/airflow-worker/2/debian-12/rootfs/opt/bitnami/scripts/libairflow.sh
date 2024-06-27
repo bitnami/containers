@@ -323,13 +323,14 @@ airflow_webserver_conf_set() {
     # Check if the value was set before
     if grep -q "^#*\\s*${key} =.*$" "$file"; then
         local entry
-        is_boolean_yes "$is_literal" && entry="${key} = '${value}'" || entry="${key} = ${value}"
+        local new_value="$value"
+        is_boolean_yes "$is_literal" && new_value="${new_value//\\/\\\\}" && entry="${key} = '${new_value//"'"/\\\'}'" || entry="${key} = ${value}"
         # Update the existing key
         replace_in_file "$file" "^#*\\s*${key} =.*$" "$entry" false
     else
         # Add a new key
         local new_value="$value"
-        is_boolean_yes "$is_literal" && new_value="'${value}'"
+        is_boolean_yes "$is_literal" && new_value="${new_value//\\/\\\\}" && new_value="'${new_value//"'"/\\\'}'"
         printf '\n%s = %s' "$key" "$new_value" >>"$file"
     fi
 }
