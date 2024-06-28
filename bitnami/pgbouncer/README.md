@@ -134,6 +134,7 @@ docker build -t bitnami/APP:latest .
 | `PGBOUNCER_SOCKET_GROUP`              | PgBouncer socket group                                                                                                                                                                     | `nil`                                |
 | `PGBOUNCER_DAEMON_USER`               | PostgreSQL daemon user                                                                                                                                                                     | `pgbouncer`                          |
 | `PGBOUNCER_DAEMON_GROUP`              | PostgreSQL daemon group                                                                                                                                                                    | `pgbouncer`                          |
+| `PGBOUNCER_APPLICATION_NAME_ADD_HOST` | PgBouncer add the client host address and port to the application name setting set on connection start                                                                                     | `nil`                                |
 
 #### Read-only environment variables
 
