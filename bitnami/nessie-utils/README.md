@@ -22,7 +22,7 @@ docker run -it --name nessie-utils bitnami/nessie-utils
 * All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
-Looking to use Nessie Utils in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+Looking to use Nessie Utils in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the commercial edition of the Bitnami catalog.
 
 ## Supported tags and respective `Dockerfile` links
 
@@ -89,16 +89,19 @@ docker run --name nessie-utils bitnami/nessie-utils:latest
 This container contains the nessie-cli, nessie-server-admin-tool and nessie-gc tools. These are the commands for running the different tools:
 
 Running nessie-cli:
+
 ```console
 docker run --rm --name nessie-utils bitnami/nessie-utils:latest -jar /opt/bitnami/nessie-utils/nessie-cli/nessie-cli.jar
 ```
 
 Running nessie-gc:
+
 ```console
 docker run --rm --name nessie-utils bitnami/nessie-utils:latest -jar /opt/bitnami/nessie-utils/nessie-gc/nessie-gc.jar
 ```
 
 Running nessie-server-admin-tool:
+
 ```console
 docker run --rm --name nessie-utils bitnami/nessie-utils:latest -jar /opt/bitnami/nessie-utils/nessie-server-admin-tool/quarkus-run.jar
 ```
