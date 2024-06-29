@@ -9,11 +9,11 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-06-13T16:22:16Z" \
+      org.opencontainers.image.created="2024-06-29T16:33:16Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/logstash/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.17.22-debian-12-r0" \
+      org.opencontainers.image.ref.name="7.17.22-debian-12-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/logstash" \
       org.opencontainers.image.title="logstash" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -30,7 +30,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "yq-4.44.1-2-linux-${OS_ARCH}-debian-12" \
+      "yq-4.44.2-0-linux-${OS_ARCH}-debian-12" \
       "java-17.0.11-12-0-linux-${OS_ARCH}-debian-12" \
       "logstash-7.17.22-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
