@@ -792,7 +792,7 @@ postgresql_start_bg() {
     else
         "${pg_ctl_cmd[@]}" "start" "${pg_ctl_flags[@]}" >/dev/null 2>&1
     fi
-    local pg_isready_args=("-U" "postgres" "-p" "$POSTGRESQL_PORT_NUMBER")
+    local pg_isready_args=("-U" "postgres" "-p" "$POSTGRESQL_PORT_NUMBER" "-h" "127.0.0.1")
     local counter=$POSTGRESQL_INIT_MAX_TIMEOUT
     while ! "$POSTGRESQL_BIN_DIR"/pg_isready "${pg_isready_args[@]}" >/dev/null 2>&1; do
         sleep 1
@@ -1078,7 +1078,7 @@ postgresql_execute_print_output() {
     local opts
     read -r -a opts <<<"${@:4}"
 
-    local args=("-U" "$user" "-p" "${POSTGRESQL_PORT_NUMBER:-5432}")
+    local args=("-U" "$user" "-p" "${POSTGRESQL_PORT_NUMBER:-5432}" "-h" "127.0.0.1")
     [[ -n "$db" ]] && args+=("-d" "$db")
     [[ "${#opts[@]}" -gt 0 ]] && args+=("${opts[@]}")
 
