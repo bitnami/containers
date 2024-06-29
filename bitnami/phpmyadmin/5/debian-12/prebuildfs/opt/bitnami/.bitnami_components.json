@@ -15,13 +15,13 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "10.11.8-0"
+        "version": "10.11.8-1"
     },
     "php": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.2.20-0"
+        "version": "8.2.20-5"
     },
     "phpmyadmin": {
         "arch": "amd64",
