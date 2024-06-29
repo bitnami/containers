@@ -237,8 +237,12 @@ repmgr_get_primary_node() {
                 primary_port="$REPMGR_PRIMARY_PORT"
             fi
         else
-            primary_host="$upstream_host"
-            primary_port="$upstream_port"
+           if  [[ "${upstream_host}:${upstream_port}" = "${REPMGR_NODE_NETWORK_NAME}:${REPMGR_PORT_NUMBER}" ]];  then
+                info "Skip Primary Ip self. Starting PostgreSQL normally..."
+           else
+                primary_host="$upstream_host"
+                primary_port="$upstream_port"
+           fi
         fi
     fi
 
