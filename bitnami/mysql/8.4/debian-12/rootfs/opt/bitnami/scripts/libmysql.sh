@@ -332,23 +332,9 @@ mysql_install_db() {
 #   None
 #########################
 mysql_upgrade() {
-    local -a args=("--defaults-file=${DB_CONF_FILE}" "-u" "$DB_ROOT_USER")
-    local major_version minor_version patch_version
-    major_version="$(get_sematic_version "$(mysql_get_version)" 1)"
-    minor_version="$(get_sematic_version "$(mysql_get_version)" 2)"
-    patch_version="$(get_sematic_version "$(mysql_get_version)" 3)"
     info "Running mysql_upgrade"
-    if [[ "$major_version" -gt "8"
-        || ( "$major_version" -eq "8" && "$minor_version" -gt "0" )
-        || ( "$major_version" -eq "8" && "$minor_version" -eq "0" && "$patch_version" -ge "16" )
-    ]]; then
-        mysql_stop
-        mysql_start_bg "--upgrade=FORCE"
-    else
-        mysql_start_bg
-        is_boolean_yes "${ROOT_AUTH_ENABLED:-false}" && args+=("-p$(get_master_env_var_value ROOT_PASSWORD)")
-        debug_execute "${DB_BIN_DIR}/mysql_upgrade" "${args[@]}" || echo "This installation is already upgraded"
-    fi
+    mysql_stop
+    mysql_start_bg "--upgrade=${DB_UPGRADE}"
 }
 
 ########################
@@ -409,7 +395,7 @@ mysql_initialize() {
         # commands can still be executed until we restart or run 'flush privileges'
         info "Configuring authentication"
         mysql_execute "mysql" <<EOF
-DELETE FROM mysql.user WHERE user not in ('mysql.sys','mariadb.sys');
+DELETE FROM mysql.user WHERE user not in ('mysql.sys','mysql.infoschema','mysql.session','mariadb.sys');
 EOF
         # slaves do not need to configure users
         if [[ -z "$DB_REPLICATION_MODE" ]] || [[ "$DB_REPLICATION_MODE" = "master" ]]; then
