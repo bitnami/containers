@@ -52,6 +52,8 @@ ENV APP_VERSION="2.14.1" \
     BITNAMI_APP_NAME="mlflow" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
+RUN pip install google-cloud-storage
+
 WORKDIR /app
 USER 1001
 ENTRYPOINT [ "python" ]
