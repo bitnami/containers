@@ -22,7 +22,7 @@ http_port = {{ODOO_PORT_NUMBER}}
 ; https://www.odoo.com/forum/help-1/question/cpu-time-limit-exceeded-how-to-solve-it-87922
 limit_time_cpu = 90
 limit_time_real = 150
-; list_db = True
+list_db = {{list_db}}
 ; log_db = False
 ; log_handler = [':INFO']
 ; log_level = info
