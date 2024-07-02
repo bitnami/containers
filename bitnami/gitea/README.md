@@ -201,7 +201,7 @@ Gitea can be configured via environment variables or using a configuration file 
 | `GITEA_SMTP_FROM`            | Mail from address, RFC 5322. This can be just an email address, or the "Name" email@example.com format.           | `nil`                                                    |
 | `GITEA_SMTP_USER`            | Username of mailing user (usually the senders e-mail address).                                                    | `nil`                                                    |
 | `GITEA_SMTP_PASSWORD`        | Password of mailing user. Use "your password" for quoting if you use special characters in the password.          | `nil`                                                    |
-| `GITEA_OAUTH2_CLIENT_AUTO_REGISTRATION` | Enable OAuth2 auto registration. Automatically create user accounts for new oauth2 users.              | `false`                                                  |
+| `GITEA_OAUTH2_CLIENT_AUTO_REGISTRATION_ENABLED` | Enable OAuth2 auto registration. Automatically create user accounts for new oauth2 users.      | `false`                                                  |
 | `GITEA_OAUTH2_CLIENT_USERNAME` | The source of the username for new oauth2 accounts. [userid, nickname, preferred_username, email]               | `nickname`                                               |
 
 #### Read-only environment variables
