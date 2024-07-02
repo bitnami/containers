@@ -197,6 +197,7 @@ docker-compose up -d
 | `MARIADB_COLLATE`                             | MariaDB Galera collation to use.                                                                                          | `nil`                                     |
 | `MARIADB_BIND_ADDRESS`                        | MariaDB Galera bind address.                                                                                              | `nil`                                     |
 | `MARIADB_SQL_MODE`                            | MariaDB Galera Server SQL modes to enable.                                                                                | `nil`                                     |
+| `MARIADB_UPGRADE`                             | MariaDB Galera upgrade option.                                                                                            | `AUTO`                                    |
 | `MARIADB_SKIP_TEST_DB`                        | Whether to skip creating the test database.                                                                               | `no`                                      |
 | `MARIADB_CLIENT_ENABLE_SSL`                   | Whether to force SSL for connections to the MariaDB Galera database.                                                      | `no`                                      |
 | `MARIADB_CLIENT_SSL_CA_FILE`                  | Path to CA certificate to use for SSL connections to the MariaDB Galera database server.                                  | `nil`                                     |
