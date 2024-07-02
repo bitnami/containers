@@ -357,7 +357,7 @@ mysql_initialize() {
         # commands can still be executed until we restart or run 'flush privileges'
         info "Configuring authentication"
         mysql_execute "mysql" <<EOF
-DELETE FROM mysql.user WHERE user not in ('mysql.sys','mariadb.sys');
+DELETE FROM mysql.user WHERE user not in ('mysql.sys','mysql.infoschema','mysql.session','mariadb.sys');
 EOF
         # slaves do not need to configure users
         if [[ -z "$DB_REPLICATION_MODE" ]] || [[ "$DB_REPLICATION_MODE" = "master" ]]; then
@@ -529,6 +529,7 @@ mariadb_upgrade() {
     info "Running mysql_upgrade"
     mysql_start_bg
     is_boolean_yes "${ROOT_AUTH_ENABLED:-false}" && args+=("-p$(get_master_env_var_value ROOT_PASSWORD)")
+    [[ "${DB_UPGRADE}" == "FORCE" ]] && args+=("--force")
     debug_execute "${DB_BIN_DIR}/mysql_upgrade" "${args[@]}" || echo "This installation is already upgraded"
 }
 
