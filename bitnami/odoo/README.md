@@ -195,7 +195,7 @@ docker run -d --name odoo \
 | `ODOO_SKIP_BOOTSTRAP`          | Whether to perform initial bootstrapping for the application.                                                              | `no`                                                   |
 | `ODOO_SKIP_MODULES_UPDATE`     | Whether to perform initial update of the plugins installed.                                                                | `no`                                                   |
 | `ODOO_LOAD_DEMO_DATA`          | Whether to load demo data.                                                                                                 | `no`                                                   |
-| `ODOO_LIST_DB`                 | Whether the database selector is available                                                                                 | `no`                                                   |
+| `ODOO_LIST_DB`                 | Whether the database selector is available.                                                                                | `no`                                                   |
 | `ODOO_EMAIL`                   | Odoo user e-mail address.                                                                                                  | `user@example.com`                                     |
 | `ODOO_PASSWORD`                | Odoo user password.                                                                                                        | `bitnami`                                              |
 | `ODOO_SMTP_HOST`               | Odoo SMTP server host.                                                                                                     | `nil`                                                  |
