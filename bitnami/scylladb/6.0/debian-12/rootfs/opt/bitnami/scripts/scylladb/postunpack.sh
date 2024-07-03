@@ -12,7 +12,7 @@
 . /opt/bitnami/scripts/scylladb-env.sh
 
 
-for dir in "$DB_INITSCRIPTS_DIR" "$DB_TMP_DIR" "$DB_LOG_DIR" "$DB_CONF_DIR" "$DB_MOUNTED_CONF_DIR" "$DB_VOLUME_DIR" "$DB_DEFAULT_CONF_DIR"; do
+for dir in "$DB_INITSCRIPTS_DIR" "$DB_TMP_DIR" "$DB_LOG_DIR" "$DB_CONF_DIR" "$DB_MOUNTED_CONF_DIR" "$DB_VOLUME_DIR" "$DB_DEFAULT_CONF_DIR" "$DB_COMMITLOG_DIR" "$DB_DATA2_DIR" "$DB_HINTS_DIR" "$DB_VIEW_HINTS_DIR"; do
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
 done

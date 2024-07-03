@@ -430,6 +430,7 @@ cassandra_validate() {
     check_positive_value DB_CQL_PORT_NUMBER
     check_positive_value DB_JMX_PORT_NUMBER
     check_positive_value DB_TRANSPORT_PORT_NUMBER
+    check_positive_value DB_SMP
 
     check_conflicting_ports DB_CQL_PORT_NUMBER DB_JMX_PORT_NUMBER DB_TRANSPORT_PORT_NUMBER
 

@@ -164,95 +164,101 @@ docker-compose up -d
 
 #### Customizable environment variables
 
-| Name                                              | Description                                                                             | Default Value                         |
-|---------------------------------------------------|-----------------------------------------------------------------------------------------|---------------------------------------|
-| `SCYLLADB_MOUNTED_CONF_DIR`                       | ScyllaDB directory for mounted configuration files                                      | `${DB_VOLUME_DIR}/conf`               |
-| `SCYLLADB_CLIENT_ENCRYPTION`                      | Enable client encryption                                                                | `false`                               |
-| `SCYLLADB_CLUSTER_NAME`                           | ScyllaDB cluster name                                                                   | `My Cluster`                          |
-| `SCYLLADB_DATACENTER`                             | ScyllaDB datacenter name                                                                | `dc1`                                 |
-| `SCYLLADB_ENABLE_REMOTE_CONNECTIONS`              | Enable connection from remote locations                                                 | `true`                                |
-| `SCYLLADB_ENABLE_RPC`                             | Enable RPC endpoint in ScyllaDB                                                         | `false`                               |
-| `SCYLLADB_ENABLE_USER_DEFINED_FUNCTIONS`          | Enable user defined functions                                                           | `false`                               |
+| Name                                      | Description                                                                             | Default Value                         |
+|-------------------------------------------|-----------------------------------------------------------------------------------------|---------------------------------------|
+| `SCYLLADB_MOUNTED_CONF_DIR`               | ScyllaDB directory for mounted configuration files                                      | `${DB_VOLUME_DIR}/conf`               |
+| `SCYLLADB_CLIENT_ENCRYPTION`              | Enable client encryption                                                                | `false`                               |
+| `SCYLLADB_CLUSTER_NAME`                   | ScyllaDB cluster name                                                                   | `My Cluster`                          |
+| `SCYLLADB_DATACENTER`                     | ScyllaDB datacenter name                                                                | `dc1`                                 |
+| `SCYLLADB_ENABLE_REMOTE_CONNECTIONS`      | Enable connection from remote locations                                                 | `true`                                |
+| `SCYLLADB_ENABLE_RPC`                     | Enable RPC endpoint in ScyllaDB                                                         | `false`                               |
+| `SCYLLADB_ENABLE_USER_DEFINED_FUNCTIONS`  | Enable user defined functions                                                           | `false`                               |
 | `SCYLLADB_ENABLE_SCRIPTED_USER_DEFINED_FUNCTIONS` | Enable scripted user defined functions                                                  | `false`                               |
-| `SCYLLADB_ENDPOINT_SNITCH`                        | Name of the cluster endpoint snitch                                                     | `SimpleSnitch`                        |
-| `SCYLLADB_HOST`                                   | ScyllaDB host name                                                                      | `nil`                                 |
-| `SCYLLADB_INTERNODE_ENCRYPTION`                   | Internode encryption type                                                               | `none`                                |
-| `SCYLLADB_NUM_TOKENS`                             | Number of tokens in cluster connection                                                  | `256`                                 |
-| `SCYLLADB_PASSWORD_SEEDER`                        | Set node as password seeder in the cluster                                              | `no`                                  |
-| `SCYLLADB_SEEDS`                                  | List of cluster seeds                                                                   | `$DB_HOST`                            |
-| `SCYLLADB_PEERS`                                  | List of cluster peers                                                                   | `$DB_SEEDS`                           |
-| `SCYLLADB_NODES`                                  | List of cluster nodes (seeders and non seeders)                                         | `nil`                                 |
-| `SCYLLADB_RACK`                                   | ScyllaDB rack name                                                                      | `rack1`                               |
-| `SCYLLADB_BROADCAST_ADDRESS`                      | Node broadcast address                                                                  | `nil`                                 |
-| `SCYLLADB_AUTOMATIC_SSTABLE_UPGRADE`              | Automatically upgrade sstables after upgrade                                            | `false`                               |
-| `SCYLLADB_STARTUP_CQL`                            | Startup CQL commands to run at boot                                                     | `nil`                                 |
-| `SCYLLADB_IGNORE_INITDB_SCRIPTS`                  | Ignore the execution of init scripts                                                    | `no`                                  |
-| `SCYLLADB_CQL_PORT_NUMBER`                        | CQL port                                                                                | `9042`                                |
-| `SCYLLADB_JMX_PORT_NUMBER`                        | JMX port                                                                                | `7199`                                |
-| `SCYLLADB_TRANSPORT_PORT_NUMBER`                  | Transport port                                                                          | `7000`                                |
-| `SCYLLADB_CQL_MAX_RETRIES`                        | Maximum retries for CQL startup operations                                              | `20`                                  |
-| `SCYLLADB_CQL_SLEEP_TIME`                         | Sleep time for CQL startup operations                                                   | `5`                                   |
-| `SCYLLADB_INIT_MAX_RETRIES`                       | Maximum retries for init startup operations                                             | `100`                                 |
-| `SCYLLADB_INIT_SLEEP_TIME`                        | Sleep time for init startup operations                                                  | `5`                                   |
-| `SCYLLADB_PEER_CQL_MAX_RETRIES`                   | Maximum retries for peer startup operations                                             | `100`                                 |
-| `SCYLLADB_PEER_CQL_SLEEP_TIME`                    | Sleep time for peer startup operations                                                  | `10`                                  |
-| `SCYLLADB_DELAY_START_TIME`                       | Delay ScyllaDB start by the number of provided seconds                                  | `10`                                  |
-| `SCYLLADB_AUTO_SNAPSHOT_TTL`                      | Take an automatic snapshot of the data before truncating a keyspace or dropping a table | `30d`                                 |
-| `ALLOW_EMPTY_PASSWORD`                            | Allow no credentials in the installation.                                               | `no`                                  |
-| `SCYLLADB_AUTHORIZER`                             | ScyllaDB connection authorizer                                                          | `CassandraAuthorizer`                 |
-| `SCYLLADB_AUTHENTICATOR`                          | ScyllaDB connection authenticator                                                       | `PasswordAuthenticator`               |
-| `SCYLLADB_USER`                                   | ScyllaDB username                                                                       | `cassandra`                           |
-| `SCYLLADB_PASSWORD`                               | ScyllaDB password                                                                       | `nil`                                 |
-| `SCYLLADB_KEYSTORE_PASSWORD`                      | ScyllaDB keystore password                                                              | `cassandra`                           |
-| `SCYLLADB_TRUSTSTORE_PASSWORD`                    | ScyllaDB truststore password                                                            | `cassandra`                           |
-| `SCYLLADB_KEYSTORE_LOCATION`                      | ScyllaDB keystore location                                                              | `${DB_VOLUME_DIR}/secrets/keystore`   |
-| `SCYLLADB_TRUSTSTORE_LOCATION`                    | ScyllaDB truststore location                                                            | `${DB_VOLUME_DIR}/secrets/truststore` |
-| `SCYLLADB_TMP_P12_FILE`                           | ScyllaDB truststore location                                                            | `${DB_TMP_DIR}/keystore.p12`          |
-| `SCYLLADB_SSL_CERT_FILE`                          | ScyllaDB SSL certificate location                                                       | `${DB_VOLUME_DIR}/certs/tls.crt`      |
-| `SCYLLADB_SSL_KEY_FILE`                           | ScyllaDB SSL keyfile location                                                           | `${DB_VOLUME_DIR}/certs/tls.key`      |
-| `SCYLLADB_SSL_CA_FILE`                            | ScyllaDB SSL CA location                                                                | `nil`                                 |
-| `SCYLLADB_SSL_VALIDATE`                           | Perform SSL validation on the certificates                                              | `false`                               |
-| `SSL_VERSION`                                     | TLS version to use when connecting.                                                     | `TLSv1_2`                             |
-| `SCYLLADB_CQL_SHARD_PORT_NUMBER`                  | CQL (shard aware) port                                                                  | `19042`                               |
-| `SCYLLADB_API_PORT_NUMBER`                        | REST API port                                                                           | `10000`                               |
-| `SCYLLADB_PROMETHEUS_PORT_NUMBER`                 | Prometheus metrics port                                                                 | `9180`                                |
-| `SCYLLADB_DEVELOPER_MODE`                         | Use ScyllaDB developer mode                                                             | `yes`                                 |
-| `SCYLLADB_RUN_JMX_PROXY`                          | Launch JMX Proxy as a subprocess                                                        | `no`                                  |
+| `SCYLLADB_ENDPOINT_SNITCH`                | Name of the cluster endpoint snitch                                                     | `SimpleSnitch`                        |
+| `SCYLLADB_HOST`                           | ScyllaDB host name                                                                      | `nil`                                 |
+| `SCYLLADB_INTERNODE_ENCRYPTION`           | Internode encryption type                                                               | `none`                                |
+| `SCYLLADB_NUM_TOKENS`                     | Number of tokens in cluster connection                                                  | `256`                                 |
+| `SCYLLADB_PASSWORD_SEEDER`                | Set node as password seeder in the cluster                                              | `no`                                  |
+| `SCYLLADB_SEEDS`                          | List of cluster seeds                                                                   | `$DB_HOST`                            |
+| `SCYLLADB_PEERS`                          | List of cluster peers                                                                   | `$DB_SEEDS`                           |
+| `SCYLLADB_NODES`                          | List of cluster nodes (seeders and non seeders)                                         | `nil`                                 |
+| `SCYLLADB_RACK`                           | ScyllaDB rack name                                                                      | `rack1`                               |
+| `SCYLLADB_BROADCAST_ADDRESS`              | Node broadcast address                                                                  | `nil`                                 |
+| `SCYLLADB_AUTOMATIC_SSTABLE_UPGRADE`      | Automatically upgrade sstables after upgrade                                            | `false`                               |
+| `SCYLLADB_STARTUP_CQL`                    | Startup CQL commands to run at boot                                                     | `nil`                                 |
+| `SCYLLADB_IGNORE_INITDB_SCRIPTS`          | Ignore the execution of init scripts                                                    | `no`                                  |
+| `SCYLLADB_CQL_PORT_NUMBER`                | CQL port                                                                                | `9042`                                |
+| `SCYLLADB_JMX_PORT_NUMBER`                | JMX port                                                                                | `7199`                                |
+| `SCYLLADB_TRANSPORT_PORT_NUMBER`          | Transport port                                                                          | `7000`                                |
+| `SCYLLADB_CQL_MAX_RETRIES`                | Maximum retries for CQL startup operations                                              | `20`                                  |
+| `SCYLLADB_CQL_SLEEP_TIME`                 | Sleep time for CQL startup operations                                                   | `5`                                   |
+| `SCYLLADB_INIT_MAX_RETRIES`               | Maximum retries for init startup operations                                             | `100`                                 |
+| `SCYLLADB_INIT_SLEEP_TIME`                | Sleep time for init startup operations                                                  | `5`                                   |
+| `SCYLLADB_PEER_CQL_MAX_RETRIES`           | Maximum retries for peer startup operations                                             | `100`                                 |
+| `SCYLLADB_PEER_CQL_SLEEP_TIME`            | Sleep time for peer startup operations                                                  | `10`                                  |
+| `SCYLLADB_DELAY_START_TIME`               | Delay ScyllaDB start by the number of provided seconds                                  | `10`                                  |
+| `SCYLLADB_AUTO_SNAPSHOT_TTL`              | Take an automatic snapshot of the data before truncating a keyspace or dropping a table | `30d`                                 |
+| `ALLOW_EMPTY_PASSWORD`                    | Allow no credentials in the installation.                                               | `no`                                  |
+| `SCYLLADB_AUTHORIZER`                     | ScyllaDB connection authorizer                                                          | `CassandraAuthorizer`                 |
+| `SCYLLADB_AUTHENTICATOR`                  | ScyllaDB connection authenticator                                                       | `PasswordAuthenticator`               |
+| `SCYLLADB_USER`                           | ScyllaDB username                                                                       | `cassandra`                           |
+| `SCYLLADB_PASSWORD`                       | ScyllaDB password                                                                       | `nil`                                 |
+| `SCYLLADB_KEYSTORE_PASSWORD`              | ScyllaDB keystore password                                                              | `cassandra`                           |
+| `SCYLLADB_TRUSTSTORE_PASSWORD`            | ScyllaDB truststore password                                                            | `cassandra`                           |
+| `SCYLLADB_KEYSTORE_LOCATION`              | ScyllaDB keystore location                                                              | `${DB_VOLUME_DIR}/secrets/keystore`   |
+| `SCYLLADB_TRUSTSTORE_LOCATION`            | ScyllaDB truststore location                                                            | `${DB_VOLUME_DIR}/secrets/truststore` |
+| `SCYLLADB_TMP_P12_FILE`                   | ScyllaDB truststore location                                                            | `${DB_TMP_DIR}/keystore.p12`          |
+| `SCYLLADB_SSL_CERT_FILE`                  | ScyllaDB SSL certificate location                                                       | `${DB_VOLUME_DIR}/certs/tls.crt`      |
+| `SCYLLADB_SSL_KEY_FILE`                   | ScyllaDB SSL keyfile location                                                           | `${DB_VOLUME_DIR}/certs/tls.key`      |
+| `SCYLLADB_SSL_CA_FILE`                    | ScyllaDB SSL CA location                                                                | `nil`                                 |
+| `SCYLLADB_SSL_VALIDATE`                   | Perform SSL validation on the certificates                                              | `false`                               |
+| `SSL_VERSION`                             | TLS version to use when connecting.                                                     | `TLSv1_2`                             |
+| `SCYLLADB_CQL_SHARD_PORT_NUMBER`          | CQL (shard aware) port                                                                  | `19042`                               |
+| `SCYLLADB_API_PORT_NUMBER`                | REST API port                                                                           | `10000`                               |
+| `SCYLLADB_PROMETHEUS_PORT_NUMBER`         | Prometheus metrics port                                                                 | `9180`                                |
+| `SCYLLADB_DEVELOPER_MODE`                 | Use ScyllaDB developer mode                                                             | `yes`                                 |
+| `SCYLLADB_RUN_JMX_PROXY`                  | Launch JMX Proxy as a subprocess                                                        | `no`                                  |
+| `SCYLLADB_SMP`                            | Restrict the number of CPU in the cluster.                                              | `2`                                   |
+| `SCYLLADB_CPUSET`                         | Restrict the phyical CPU in the cluster.                                                | `nil`                                 |
+| `SCYLLADB_MEMORY`                         | Restrict the memory in the cluster.                                                     | `2G`                                  |
 
 #### Read-only environment variables
 
-| Name                                 | Description                                                                    | Value                                                            |
-|--------------------------------------|--------------------------------------------------------------------------------|------------------------------------------------------------------|
-| `DB_FLAVOR`                          | Database flavor. Valid values: `cassandra` or `scylladb`.                      | `scylladb`                                                       |
-| `SCYLLADB_BASE_DIR`                  | ScyllaDB installation directory                                                | `/opt/bitnami/scylladb`                                          |
-| `SCYLLADB_BIN_DIR`                   | ScyllaDB executables directory                                                 | `${DB_BASE_DIR}/bin`                                             |
-| `SCYLLADB_VOLUME_DIR`                | Persistence base directory                                                     | `/bitnami/scylladb`                                              |
-| `SCYLLADB_DATA_DIR`                  | ScyllaDB data directory                                                        | `${DB_VOLUME_DIR}/data`                                          |
-| `SCYLLADB_COMMITLOG_DIR`             | ScyllaDB commit log directory                                                  | `${DB_DATA_DIR}/commitlog`                                       |
-| `SCYLLADB_INITSCRIPTS_DIR`           | Path to the ScyllaDB container init scripts directory                          | `/docker-entrypoint-initdb.d`                                    |
-| `SCYLLADB_LOG_DIR`                   | ScyllaDB logs directory                                                        | `${DB_BASE_DIR}/logs`                                            |
-| `SCYLLADB_TMP_DIR`                   | ScyllaDB temporary directory                                                   | `${DB_BASE_DIR}/tmp`                                             |
-| `JAVA_BASE_DIR`                      | Java base directory                                                            | `${BITNAMI_ROOT_DIR}/java`                                       |
-| `JAVA_BIN_DIR`                       | Java binary directory                                                          | `${JAVA_BASE_DIR}/bin`                                           |
-| `PYTHON_BASE_DIR`                    | Python base directory                                                          | `${BITNAMI_ROOT_DIR}/python`                                     |
-| `PYTHON_BIN_DIR`                     | Python binary directory                                                        | `${PYTHON_BASE_DIR}/bin`                                         |
-| `SCYLLADB_LOG_FILE`                  | Path to the ScyllaDB log file                                                  | `${DB_LOG_DIR}/scylladb.log`                                     |
-| `SCYLLADB_FIRST_BOOT_LOG_FILE`       | Path to the ScyllaDB first boot log file                                       | `${DB_LOG_DIR}/scylladb_first_boot.log`                          |
-| `SCYLLADB_INITSCRIPTS_BOOT_LOG_FILE` | Path to the ScyllaDB init scripts log file                                     | `${DB_LOG_DIR}/scylladb_init_scripts_boot.log`                   |
-| `SCYLLADB_PID_FILE`                  | Path to the ScyllaDB pid file                                                  | `${DB_TMP_DIR}/scylladb.pid`                                     |
-| `SCYLLADB_DAEMON_USER`               | ScyllaDB system user                                                           | `scylladb`                                                       |
-| `SCYLLADB_DAEMON_GROUP`              | ScyllaDB system group                                                          | `scylladb`                                                       |
-| `SCYLLADB_CONF_DIR`                  | ScyllaDB configuration directory                                               | `${DB_BASE_DIR}/etc`                                             |
-| `SCYLLADB_DEFAULT_CONF_DIR`          | ScyllaDB default configuration directory                                       | `${DB_BASE_DIR}/etc.default`                                     |
-| `SCYLLADB_CONF_FILE`                 | Path to ScyllaDB configuration file                                            | `${DB_CONF_DIR}/scylla/scylla.yaml`                              |
-| `SCYLLADB_RACKDC_FILE`               | Path to ScyllaDB cassandra-rackdc.properties file                              | `${DB_CONF_DIR}/scylla/cassandra-rackdc.properties`              |
-| `SCYLLADB_LOGBACK_FILE`              | Path to ScyllaDB logback.xml file                                              | `${DB_CONF_DIR}/scylla/cassandra/logback.xml`                    |
-| `SCYLLADB_COMMITLOG_ARCHIVING_FILE`  | Path to ScyllaDB commitlog_archiving.properties file                           | `${DB_CONF_DIR}/scylla/cassandra/commitlog_archiving.properties` |
-| `SCYLLADB_ENV_FILE`                  | Path to ScyllaDB cassandra-env.sh file                                         | `${DB_CONF_DIR}/scylla/cassandra/cassandra-env.sh`               |
-| `SCYLLADB_MOUNTED_CONF_PATH`         | Relative path (in mounted volume) to ScyllaDB configuration file               | `scylla/scylla.yaml`                                             |
-| `SCYLLADB_MOUNTED_RACKDC_PATH`       | Relative path (in mounted volume) to ScyllaDB cassandra-rackdc-properties file | `scylla/cassandra-rackdc.properties`                             |
-| `SCYLLADB_MOUNTED_ENV_PATH`          | Relative path (in mounted volume) to ScyllaDB cassandra-env.sh file            | `scylla/cassandra/cassandra-env.sh`                              |
-| `SCYLLADB_MOUNTED_LOGBACK_PATH`      | Path to ScyllaDB logback.xml file                                              | `scylla/cassandra/logback.xml`                                   |
+| Name                                | Description                                                                   | Value                                                            |
+|-------------------------------------|-------------------------------------------------------------------------------|------------------------------------------------------------------|
+| `DB_FLAVOR`                         | Database flavor. Valid values: `cassandra` or `scylladb`.                     | `scylladb`                                                       |
+| `SCYLLADB_BASE_DIR`                 | ScyllaDB installation directory                                               | `/opt/bitnami/scylladb`                                          |
+| `SCYLLADB_BIN_DIR`                  | ScyllaDB executables directory                                                | `${DB_BASE_DIR}/bin`                                             |
+| `SCYLLADB_VOLUME_DIR`               | Persistence base directory                                                    | `/bitnami/scylladb`                                              |
+| `SCYLLADB_DATA_DIR`                 | ScyllaDB data directory                                                       | `${DB_VOLUME_DIR}/data`                                          |
+| `SCYLLADB_COMMITLOG_DIR`            | ScyllaDB commit log directory                                                 | `${DB_DATA_DIR}/commitlog`                                       |
+| `SCYLLADB_DATA2_DIR`                | ScyllaDB data/data directory                                               | `${DB_DATA_DIR}/data`                                            |
+| `SCYLLADB_HINTS_DIR`                | ScyllaDB hints  directory                                                  | `${DB_DATA_DIR}/hints`                                           |
+| `SCYLLADB_VIEW_HINTS_DIR`           | ScyllaDB view hints  directory                                             | `${DB_DATA_DIR}/view_hints`                                      |
+| `SCYLLADB_INITSCRIPTS_DIR`          | Path to the ScyllaDB container init scripts directory                         | `/docker-entrypoint-initdb.d`                                    |
+| `SCYLLADB_LOG_DIR`                  | ScyllaDB logs directory                                                       | `${DB_BASE_DIR}/logs`                                            |
+| `SCYLLADB_TMP_DIR`                  | ScyllaDB temporary directory                                                  | `${DB_BASE_DIR}/tmp`                                             |
+| `JAVA_BASE_DIR`                     | Java base directory                                                           | `${BITNAMI_ROOT_DIR}/java`                                       |
+| `JAVA_BIN_DIR`                      | Java binary directory                                                         | `${JAVA_BASE_DIR}/bin`                                           |
+| `PYTHON_BASE_DIR`                   | Python base directory                                                         | `${BITNAMI_ROOT_DIR}/python`                                     |
+| `PYTHON_BIN_DIR`                    | Python binary directory                                                       | `${PYTHON_BASE_DIR}/bin`                                         |
+| `SCYLLADB_LOG_FILE`                 | Path to the ScyllaDB log file                                                 | `${DB_LOG_DIR}/scylladb.log`                                     |
+| `SCYLLADB_FIRST_BOOT_LOG_FILE`      | Path to the ScyllaDB first boot log file                                      | `${DB_LOG_DIR}/scylladb_first_boot.log`                          |
+| `SCYLLADB_INITSCRIPTS_BOOT_LOG_FILE` | Path to the ScyllaDB init scripts log file                                    | `${DB_LOG_DIR}/scylladb_init_scripts_boot.log`                   |
+| `SCYLLADB_PID_FILE`                 | Path to the ScyllaDB pid file                                                 | `${DB_TMP_DIR}/scylladb.pid`                                     |
+| `SCYLLADB_DAEMON_USER`              | ScyllaDB system user                                                          | `scylladb`                                                       |
+| `SCYLLADB_DAEMON_GROUP`             | ScyllaDB system group                                                         | `scylladb`                                                       |
+| `SCYLLADB_CONF_DIR`                 | ScyllaDB configuration directory                                              | `${DB_BASE_DIR}/etc`                                             |
+| `SCYLLADB_DEFAULT_CONF_DIR`         | ScyllaDB default configuration directory                                      | `${DB_BASE_DIR}/etc.default`                                     |
+| `SCYLLADB_CONF_FILE`                | Path to ScyllaDB configuration file                                           | `${DB_CONF_DIR}/scylla/scylla.yaml`                              |
+| `SCYLLADB_RACKDC_FILE`              | Path to ScyllaDB cassandra-rackdc.properties file                             | `${DB_CONF_DIR}/scylla/cassandra-rackdc.properties`              |
+| `SCYLLADB_LOGBACK_FILE`             | Path to ScyllaDB logback.xml file                                             | `${DB_CONF_DIR}/scylla/cassandra/logback.xml`                    |
+| `SCYLLADB_COMMITLOG_ARCHIVING_FILE` | Path to ScyllaDB commitlog_archiving.properties file                          | `${DB_CONF_DIR}/scylla/cassandra/commitlog_archiving.properties` |
+| `SCYLLADB_ENV_FILE`                 | Path to ScyllaDB cassandra-env.sh file                                        | `${DB_CONF_DIR}/scylla/cassandra/cassandra-env.sh`               |
+| `SCYLLADB_MOUNTED_CONF_PATH`        | Relative path (in mounted volume) to ScyllaDB configuration file              | `scylla/scylla.yaml`                                             |
+| `SCYLLADB_MOUNTED_RACKDC_PATH`      | Relative path (in mounted volume) to ScyllaDB cassandra-rackdc-properties file | `scylla/cassandra-rackdc.properties`                             |
+| `SCYLLADB_MOUNTED_ENV_PATH`         | Relative path (in mounted volume) to ScyllaDB cassandra-env.sh file           | `scylla/cassandra/cassandra-env.sh`                              |
+| `SCYLLADB_MOUNTED_LOGBACK_PATH`     | Path to ScyllaDB logback.xml file                                             | `scylla/cassandra/logback.xml`                                   |
 
 Additionally, any environment variable beginning with the following prefix will be mapped to its corresponding ScyllaDB key in the proper file:
 

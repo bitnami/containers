@@ -24,6 +24,21 @@ if is_boolean_yes "$SCYLLADB_DEVELOPER_MODE"; then
     flags+=("--developer-mode" "true")
 fi
 
+# Add DB_SMP flag if the variable is set
+if [[ -n "${DB_SMP}" ]]; then
+    flags+=("--smp" "$DB_SMP")
+fi
+
+# Add DB_CPUSET flag if the variable is set
+if [[ -n "${DB_CPUSET}" ]]; then
+    flags+=("--cpuset" "$DB_CPUSET")
+fi
+
+# Add DB_MEMORY flag if the variable is set
+if [[ -n "${DB_MEMORY}" ]]; then
+    flags+=("--memory" "$DB_MEMORY")
+fi
+
 # Add flags passed to this script
 flags+=("$@")
 
