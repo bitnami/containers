@@ -140,17 +140,22 @@ docker-compose up -d
 
 #### Customizable environment variables
 
-| Name                                      | Description                                                                                                                                   | Default Value |
-|-------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|---------------|
-| `NEO4J_HOST`                              | Hostname used to configure Neo4j advertised address. It can be either an IP or a domain. If left empty, it will be resolved to the machine IP | `nil`         |
-| `NEO4J_BIND_ADDRESS`                      | Neo4j bind address                                                                                                                            | `0.0.0.0`     |
-| `NEO4J_ALLOW_UPGRADE`                     | Allow automatic schema upgrades                                                                                                               | `true`        |
-| `NEO4J_PASSWORD`                          | Neo4j password.                                                                                                                               | `bitnami1`    |
-| `NEO4J_APOC_IMPORT_FILE_ENABLED`          | Allow importing files using the apoc library                                                                                                  | `true`        |
-| `NEO4J_APOC_IMPORT_FILE_USE_NEO4J_CONFIG` | Use neo4j configuration with the apoc library                                                                                                 | `false`       |
-| `NEO4J_BOLT_PORT_NUMBER`                  | Port used for the bolt protocol.                                                                                                              | `7687`        |
-| `NEO4J_HTTP_PORT_NUMBER`                  | Port used for the http protocol.                                                                                                              | `7474`        |
-| `NEO4J_HTTPS_PORT_NUMBER`                 | Port used for the https protocol.                                                                                                             | `7473`        |
+| Name                                      | Description                                                                                                                                   | Default Value              |
+|-------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|----------------------------|
+| `NEO4J_HOST`                              | Hostname used to configure Neo4j advertised address. It can be either an IP or a domain. If left empty, it will be resolved to the machine IP | `nil`                      |
+| `NEO4J_BIND_ADDRESS`                      | Neo4j bind address                                                                                                                            | `0.0.0.0`                  |
+| `NEO4J_ALLOW_UPGRADE`                     | Allow automatic schema upgrades                                                                                                               | `true`                     |
+| `NEO4J_PASSWORD`                          | Neo4j password.                                                                                                                               | `bitnami1`                 |
+| `NEO4J_APOC_IMPORT_FILE_ENABLED`          | Allow importing files using the apoc library                                                                                                  | `true`                     |
+| `NEO4J_APOC_IMPORT_FILE_USE_NEO4J_CONFIG` | Use neo4j configuration with the apoc library                                                                                                 | `false`                    |
+| `NEO4J_BOLT_PORT_NUMBER`                  | Port used for the bolt protocol.                                                                                                              | `7687`                     |
+| `NEO4J_HTTP_PORT_NUMBER`                  | Port used for the http protocol.                                                                                                              | `7474`                     |
+| `NEO4J_HTTPS_PORT_NUMBER`                 | Port used for the https protocol.                                                                                                             | `7473`                     |
+| `NEO4J_BOLT_ADVERTISED_PORT_NUMBER`       | Advertised port for the bolt protocol.                                                                                                        | `$NEO4J_BOLT_PORT_NUMBER`  |
+| `NEO4J_HTTP_ADVERTISED_PORT_NUMBER`       | Advertised port for the http protocol.                                                                                                        | `$NEO4J_HTTP_PORT_NUMBER`  |
+| `NEO4J_HTTPS_ADVERTISED_PORT_NUMBER`      | Advertised port for the https protocol.                                                                                                       | `$NEO4J_HTTPS_PORT_NUMBER` |
+| `NEO4J_HTTPS_ENABLED`                     | Enables the HTTPS connector.                                                                                                                  | `false`                    |
+| `NEO4J_BOLT_TLS_LEVEL`                    | The encryption level to be used to secure communications with Bolt connector. Allowed values: REQUIRED, OPTIONAL, DISABLED                    | `DISABLED`                 |
 
 #### Read-only environment variables
 
@@ -159,11 +164,12 @@ docker-compose up -d
 | `NEO4J_BASE_DIR`            | Neo4j installation directory.                    | `${BITNAMI_ROOT_DIR}/neo4j`        |
 | `NEO4J_VOLUME_DIR`          | Neo4j volume directory.                          | `/bitnami/neo4j`                   |
 | `NEO4J_DATA_DIR`            | Neo4j volume directory.                          | `$NEO4J_VOLUME_DIR/data`           |
-| `NEO4J_TMP_DIR`             | Neo4j temp directory.                            | `${NEO4J_BASE_DIR}/run`            |
+| `NEO4J_RUN_DIR`             | Neo4j temp directory.                            | `${NEO4J_BASE_DIR}/run`            |
 | `NEO4J_LOGS_DIR`            | Neo4j logs directory.                            | `${NEO4J_BASE_DIR}/logs`           |
 | `NEO4J_LOG_FILE`            | Neo4j log file.                                  | `${NEO4J_LOGS_DIR}/neo4j.log`      |
-| `NEO4J_PID_FILE`            | Neo4j PID file.                                  | `${NEO4J_TMP_DIR}/neo4j.pid`       |
+| `NEO4J_PID_FILE`            | Neo4j PID file.                                  | `${NEO4J_RUN_DIR}/neo4j.pid`       |
 | `NEO4J_CONF_DIR`            | Configuration dir for Neo4j.                     | `${NEO4J_BASE_DIR}/conf`           |
+| `NEO4J_DEFAULT_CONF_DIR`    | Neo4j default configuration directory.           | `${NEO4J_BASE_DIR}/conf.default`   |
 | `NEO4J_PLUGINS_DIR`         | Plugins dir for Neo4j.                           | `${NEO4J_BASE_DIR}/plugins`        |
 | `NEO4J_METRICS_DIR`         | Metrics dir for Neo4j.                           | `${NEO4J_VOLUME_DIR}/metrics`      |
 | `NEO4J_CERTIFICATES_DIR`    | Certificates dir for Neo4j.                      | `${NEO4J_VOLUME_DIR}/certificates` |
