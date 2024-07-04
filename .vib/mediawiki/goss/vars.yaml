@@ -8,3 +8,6 @@ directories:
       - /opt/bitnami/mediawiki/vendor/pear/mail
       - /opt/bitnami/mediawiki/vendor/pear/net_smtp
 root_dir: /opt/bitnami
+sed_in_place:
+  exclude_paths:
+    - /opt/bitnami/mediawiki/vendor
