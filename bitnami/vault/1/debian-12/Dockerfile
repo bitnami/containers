@@ -7,11 +7,11 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-07-04T19:15:21Z" \
+      org.opencontainers.image.created="2024-07-06T12:32:43Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/vault/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.17.1-debian-12-r3" \
+      org.opencontainers.image.ref.name="1.17.1-debian-12-r4" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/vault" \
       org.opencontainers.image.title="vault" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
