@@ -438,69 +438,6 @@ mysql_stop() {
     fi
 }
 
-########################
-# Initialize database data
-# Globals:
-#   BITNAMI_DEBUG
-#   DB_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-mysql_install_db() {
-    local command="${DB_BIN_DIR}/mysql_install_db"
-    local -a args=("--defaults-file=${DB_CONF_FILE}" "--basedir=${DB_BASE_DIR}" "--datadir=${DB_DATA_DIR}")
-
-    # Add flags specified via the 'DB_EXTRA_FLAGS' environment variable
-    read -r -a db_extra_flags <<< "$(mysql_extra_flags)"
-    [[ "${#db_extra_flags[@]}" -gt 0 ]] && args+=("${db_extra_flags[@]}")
-
-    am_i_root && args=("${args[@]}" "--user=$DB_DAEMON_USER")
-    if [[ "$DB_FLAVOR" = "mariadb" ]]; then
-        args+=("--auth-root-authentication-method=normal")
-        # Feature available only in MariaDB 10.5+
-        # ref: https://mariadb.com/kb/en/mysql_install_db/#not-creating-the-test-database-and-anonymous-user
-        if [[ ! "$(mysql_get_version)" =~ ^10\.[01234]\. ]]; then
-            is_boolean_yes "$DB_SKIP_TEST_DB" && args+=("--skip-test-db")
-        fi
-    else
-        command="${DB_BIN_DIR}/mysqld"
-        args+=("--initialize-insecure")
-    fi
-    debug_execute "$command" "${args[@]}"
-}
-
-########################
-# Upgrade Database Schema
-# Globals:
-#   BITNAMI_DEBUG
-#   DB_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-mysql_upgrade() {
-    local -a args=("--defaults-file=${DB_CONF_FILE}" "-u" "$DB_ROOT_USER")
-    local major_version minor_version patch_version
-    major_version="$(get_sematic_version "$(mysql_get_version)" 1)"
-    minor_version="$(get_sematic_version "$(mysql_get_version)" 2)"
-    patch_version="$(get_sematic_version "$(mysql_get_version)" 3)"
-    info "Running mysql_upgrade"
-    if [[ "$DB_FLAVOR" = *"mysql"* ]] && [[
-        "$major_version" -gt "8"
-        || ( "$major_version" -eq "8" && "$minor_version" -gt "0" )
-        || ( "$major_version" -eq "8" && "$minor_version" -eq "0" && "$patch_version" -ge "16" )
-    ]]; then
-        mysql_stop
-        mysql_start_bg "--upgrade=FORCE"
-    else
-        mysql_start_bg
-        is_boolean_yes "${ROOT_AUTH_ENABLED:-false}" && args+=("-p$(get_master_env_var_value ROOT_PASSWORD)")
-        debug_execute "${DB_BIN_DIR}/mysql_upgrade" "${args[@]}" || echo "This installation is already upgraded"
-    fi
-}
 
 ########################
 # Migrate old custom configuration files
@@ -527,98 +464,6 @@ mysql_migrate_old_configuration() {
     else
         warn "Old custom configuration migrated, please manually remove the 'conf' directory from the volume use to persist data"
     fi
-}
-
-########################
-# Ensure a db user exists with the given password for the '%' host
-# Globals:
-#   DB_*
-# Flags:
-#   -p|--password - database password
-#   -u|--user - database user
-#   --auth-plugin - authentication plugin
-#   --use-ldap - authenticate user via LDAP
-#   --host - database host
-#   --port - database host
-# Arguments:
-#   $1 - database user
-# Returns:
-#   None
-#########################
-mysql_ensure_user_exists() {
-    local -r user="${1:?user is required}"
-    local password=""
-    local auth_plugin=""
-    local use_ldap="no"
-    local hosts
-    local auth_string=""
-    # For accessing an external database
-    local db_host=""
-    local db_port=""
-
-    # Validate arguments
-    shift 1
-    while [ "$#" -gt 0 ]; do
-        case "$1" in
-            -p|--password)
-                shift
-                password="${1:?missing database password}"
-                ;;
-            --auth-plugin)
-                shift
-                auth_plugin="${1:?missing authentication plugin}"
-                ;;
-            --use-ldap)
-                use_ldap="yes"
-                ;;
-            --host)
-                shift
-                db_host="${1:?missing database host}"
-                ;;
-            --port)
-                shift
-                db_port="${1:?missing database port}"
-                ;;
-            *)
-                echo "Invalid command line flag $1" >&2
-                return 1
-                ;;
-        esac
-        shift
-    done
-    if is_boolean_yes "$use_ldap"; then
-        auth_string="identified via pam using '$DB_FLAVOR'"
-    elif [[ -n "$password" ]]; then
-        if [[ -n "$auth_plugin" ]]; then
-            auth_string="identified with $auth_plugin by '$password'"
-        else
-            auth_string="identified by '$password'"
-        fi
-    fi
-    debug "creating database user \'$user\'"
-
-    local -a mysql_execute_cmd=("mysql_execute")
-    local -a mysql_execute_print_output_cmd=("mysql_execute_print_output")
-    if [[ -n "$db_host" && -n "$db_port" ]]; then
-        mysql_execute_cmd=("mysql_remote_execute" "$db_host" "$db_port")
-        mysql_execute_print_output_cmd=("mysql_remote_execute_print_output" "$db_host" "$db_port")
-    fi
-
-    local mysql_create_user_cmd
-    [[ "$DB_FLAVOR" = "mariadb" ]] && mysql_create_user_cmd="create or replace user" || mysql_create_user_cmd="create user if not exists"
-    "${mysql_execute_cmd[@]}" "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
-${mysql_create_user_cmd} '${user}'@'%' ${auth_string};
-EOF
-    debug "Removing all other hosts for the user"
-    hosts=$("${mysql_execute_print_output_cmd[@]}" "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
-select Host from user where User='${user}' and Host!='%';
-EOF
-)
-    for host in $hosts; do
-        "${mysql_execute_cmd[@]}" "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
-drop user '$user'@'$host';
-EOF
-    done
 }
 
 ########################
@@ -858,7 +703,7 @@ mysql_ensure_optional_user_exists() {
         flags+=("-p" "$password")
         [[ -n "$auth_plugin" ]] && flags=("${flags[@]}" "--auth-plugin" "$auth_plugin")
     fi
-    mysql_ensure_user_exists "${flags[@]}"
+    "${DB_FLAVOR}"_ensure_user_exists "${flags[@]}"
 }
 
 ########################
