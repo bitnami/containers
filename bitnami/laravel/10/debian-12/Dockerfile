@@ -7,11 +7,11 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-06-29T16:31:49Z" \
+      org.opencontainers.image.created="2024-07-06T08:35:52Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/laravel/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="10.3.3-debian-12-r14" \
+      org.opencontainers.image.ref.name="10.3.3-debian-12-r15" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/laravel" \
       org.opencontainers.image.title="laravel" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -28,8 +28,8 @@ RUN install_packages ca-certificates curl libbrotli1 libbsd0 libbz2-1.0 libcom-e
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "python-3.11.9-11-linux-${OS_ARCH}-debian-12" \
-      "wait-for-port-1.0.7-14-linux-${OS_ARCH}-debian-12" \
-      "php-8.3.8-5-linux-${OS_ARCH}-debian-12" \
+      "wait-for-port-1.0.8-2-linux-${OS_ARCH}-debian-12" \
+      "php-8.3.9-0-linux-${OS_ARCH}-debian-12" \
       "node-20.15.0-0-linux-${OS_ARCH}-debian-12" \
       "laravel-10.3.3-2-linux-${OS_ARCH}-debian-12" \
     ) ; \
