@@ -97,8 +97,7 @@ docker run --name supabase-realtime bitnami/supabase-realtime:latest
 | `API_JWT_SECRET`            | API Secret                      | `nil`                   |
 | `SECRET_KEY_BASE`           | Key Base Secret                 | `nil`                   |
 | `PORT`                      | Service Port                    | `9500`                  |
-| `FLY_APP_NAME`              | App Name                        | `realtime`              |
-| `FLY_ALLOC_ID`              | Alloc ID                        | `realtime`              |
+| `APP_NAME`                  | App Name                        | `realtime`              |
 | `ERL_AFLAGS`                | Flags                           | `-proto_dist inet_tcp`  |
 | `REPLICATION_MODE`          | Replication Mode                | `RLS`                   |
 | `REPLICATION_POLL_INTERVAL` | Replication pool interval       | `100`                   |
