@@ -9,7 +9,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.15.6-3"
+        "version": "1.15.7-0"
     },
     "gops": {
         "arch": "amd64",
