@@ -42,16 +42,9 @@ keycloak_validate() {
             print_validation_error "An invalid port was specified in the environment variable ${port_var}: ${err}."
         fi
     }
-    if is_boolean_yes "$KEYCLOAK_PRODUCTION"; then
-        if [[ "$KEYCLOAK_PROXY" == "edge" ]]; then
-            # https://www.keycloak.org/server/reverseproxy
-            if is_boolean_yes "$KEYCLOAK_ENABLE_HTTPS"; then
-                print_validation_error "TLS and proxy=edge are not compatible. Please set the KEYCLOAK_ENABLE_HTTPS variable to false when using KEYCLOAK_PROXY=edge. Review # https://www.keycloak.org/server/reverseproxy for more information about proxy settings."
-            fi
-        elif ! is_boolean_yes "$KEYCLOAK_ENABLE_HTTPS"; then
-            # keycloak proxy passthrough/reencrypt requires tls
-            print_validation_error "You need to have TLS enabled. Please set the KEYCLOAK_ENABLE_HTTPS variable to true"
-        fi
+
+    if ! is_empty_value "$KEYCLOAK_PROXY_HEADERS" && ! [[ "$KEYCLOAK_PROXY_HEADERS" =~ ^(forwarded|xforwarded)$ ]]; then
+        print_validation_error "The value of KEYCLOAK_PROXY_HEADERS should be either empty, 'forwarded' or 'xforwarded'"
     fi
 
     if is_boolean_yes "$KEYCLOAK_ENABLE_HTTPS"; then
@@ -251,7 +244,7 @@ keycloak_configure_loglevel() {
 #########################
 keycloak_configure_proxy() {
     info "Configuring proxy"
-    keycloak_conf_set "proxy" "${KEYCLOAK_PROXY}"
+    ! is_empty_value "$KEYCLOAK_PROXY_HEADERS" && keycloak_conf_set "proxy-headers" "${KEYCLOAK_PROXY_HEADERS}"
 }
 
 ########################
