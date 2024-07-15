@@ -244,7 +244,7 @@ keycloak_configure_loglevel() {
 #########################
 keycloak_configure_proxy() {
     info "Configuring proxy"
-    ! is_empty_value "$KEYCLOAK_PROXY_HEADERS" && keycloak_conf_set "proxy-headers" "${KEYCLOAK_PROXY_HEADERS}"
+    keycloak_conf_set "proxy-headers" "${KEYCLOAK_PROXY_HEADERS}"
 }
 
 ########################
@@ -316,7 +316,7 @@ keycloak_initialize() {
     keycloak_configure_hostname
     keycloak_configure_cache
     keycloak_configure_loglevel
-    keycloak_configure_proxy
+    ! is_empty_value "$KEYCLOAK_PROXY_HEADERS" && keycloak_configure_proxy
     is_boolean_yes "$KEYCLOAK_ENABLE_HTTPS" && keycloak_configure_https
     ! is_empty_value "$KEYCLOAK_SPI_TRUSTSTORE_FILE" && keycloak_configure_spi_tls
     true
