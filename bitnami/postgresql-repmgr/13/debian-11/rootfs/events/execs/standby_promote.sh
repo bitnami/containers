@@ -13,21 +13,37 @@ set -o pipefail
 . "$REPMGR_EVENTS_DIR/execs/includes/lock_primary.sh"
 . "$REPMGR_EVENTS_DIR/execs/includes/unlock_standby.sh"
 
-# CD change
-debug "[notify pgbouncer] PGBOUNCER_PROMOTE_RELOAD_ENABLED=$PGBOUNCER_PROMOTE_RELOAD_ENABLED, PGBOUNCER_NODES=$PGBOUNCER_NODES, PGBOUNCER_DATABASE_INI=${PGBOUNCER_DATABASE_INI}"
+# CD change notify pgbouncer
+match_first_regex() {
+  local -r regex="${1:?regex is missing}"
+  local -r string="${2:?conninfo is missing}"
+  [[ "$string" =~ $regex ]] && echo "${BASH_REMATCH[1]}"
+}
+
+log_pure() {
+    stderr_print "$(date "+%T.%2N ")${*}"
+}
+
+log_pure "[notify pgbouncer] PGBOUNCER_PROMOTE_RELOAD_ENABLED=$PGBOUNCER_PROMOTE_RELOAD_ENABLED"
+log_pure "[notify pgbouncer] PGBOUNCER_NODES=$PGBOUNCER_NODES"
+log_pure "[notify pgbouncer] PGBOUNCER_DATABASE_INI=${PGBOUNCER_DATABASE_INI}"
+
 if [[ "$PGBOUNCER_PROMOTE_RELOAD_ENABLED" = "true" ]]; then
-  debug "[notify pgbouncer] start"
+  log_pure "[notify pgbouncer] start"
 
   # create pgbouncer database ini
   PGBOUNCER_DATABASE_INI_NEW="/tmp/pgbouncer.database.ini"
 
-  echo -e "[databases]\n" > $PGBOUNCER_DATABASE_INI_NEW
-  PGPASSWORD="${REPMGR_PASSWORD}" psql -d ${REPMGR_DATABASE} -U ${REPMGR_USERNAME} -t -A \
-    -c "SELECT '${POSTGRESQL_DATABASE}= ' || conninfo \
-        FROM repmgr.nodes \
-        WHERE active = TRUE AND type='primary'" >> $PGBOUNCER_DATABASE_INI_NEW
+  query="SELECT conninfo FROM repmgr.nodes WHERE active = TRUE AND type='primary'"
+  conninfo=$(PGPASSWORD="${REPMGR_PASSWORD}" psql -d ${REPMGR_DATABASE} -U ${REPMGR_USERNAME} -A -t -c "${query}")
+  log_pure "[notify pgbouncer] conninfo=$conninfo"
 
-  debug "[notify pgbouncer] new configuration=$(cat $PGBOUNCER_DATABASE_INI_NEW)"
+  echo -e "[databases]\n" > $PGBOUNCER_DATABASE_INI_NEW
+  conninfo_host=$(match_first_regex "(host=[.0-9]+)" "$conninfo")
+  conninfo_port=$(match_first_regex "(port=[0-9]+)" "$conninfo")
+  echo -e "*=$conninfo_host $conninfo_port\n" >> $PGBOUNCER_DATABASE_INI_NEW
+
+  log_pure "[notify pgbouncer] new configuration=$(cat $PGBOUNCER_DATABASE_INI_NEW)"
 
   # propagate file to pgbouncer nodes
   read -r -a NODES <<<"$(tr ',;' ' ' <<<"${PGBOUNCER_NODES}")"
@@ -37,15 +53,15 @@ if [[ "$PGBOUNCER_PROMOTE_RELOAD_ENABLED" = "true" ]]; then
       HOST="$(parse_uri "$NODE" 'host')"
       PORT="$(parse_uri "$NODE" 'port')"
 
-      debug "[notify pgbouncer] rsync configuration to node=${HOST}:${PORT}"
+      log_pure "[notify pgbouncer] rsync configuration to node=${HOST}:${PORT}"
       rsync $PGBOUNCER_DATABASE_INI_NEW $HOST:$PGBOUNCER_DATABASE_INI
 
-      debug "[notify pgbouncer] reload node=${HOST}:${PORT}"
+      log_pure "[notify pgbouncer] reload node=${HOST}:${PORT}"
       PGPASSWORD="${POSTGRESQL_PASSWORD}" psql -tc "reload" -h $HOST -p $PORT -U ${POSTGRESQL_USERNAME} pgbouncer
   done
 
   # clean up generated file
   rm $PGBOUNCER_DATABASE_INI_NEW
 
-  debug "[notify pgbouncer] end"
+  log_pure "[notify pgbouncer] end"
 fi
