@@ -21,7 +21,7 @@ match_first_regex() {
 }
 
 log_pure() {
-    stderr_print "$(date "+%T.%2N ")${*}"
+  stderr_print "$(date "+%T.%2N ")${*}"
 }
 
 log_pure "[notify pgbouncer] PGBOUNCER_PROMOTE_RELOAD_ENABLED=$PGBOUNCER_PROMOTE_RELOAD_ENABLED"
@@ -31,34 +31,33 @@ log_pure "[notify pgbouncer] PGBOUNCER_DATABASE_INI=${PGBOUNCER_DATABASE_INI}"
 if [[ "$PGBOUNCER_PROMOTE_RELOAD_ENABLED" = "true" ]]; then
   log_pure "[notify pgbouncer] start"
 
-  # create pgbouncer database ini
+  # pgbouncer database ini
   PGBOUNCER_DATABASE_INI_NEW="/tmp/pgbouncer.database.ini"
 
   # select conninfo
   query="SELECT conninfo FROM repmgr.nodes WHERE active = TRUE AND type='primary'"
-  conninfo=$(PGPASSWORD="${REPMGR_PASSWORD}" psql -U ${REPMGR_USERNAME} -d ${REPMGR_DATABASE}  -A -t -c "${query}")
+  conninfo=$(PGPASSWORD="${REPMGR_PASSWORD}" psql -U ${REPMGR_USERNAME} -d ${REPMGR_DATABASE} -A -t -c "${query}")
   log_pure "[notify pgbouncer] conninfo=$conninfo"
 
-  echo -e "[databases]\n" > $PGBOUNCER_DATABASE_INI_NEW
-  conninfo_host=$(match_first_regex "(host=[.0-9]+)" "$conninfo")
-  conninfo_port=$(match_first_regex "(port=[0-9]+)" "$conninfo")
-  echo -e "*=$conninfo_host $conninfo_port\n" >> $PGBOUNCER_DATABASE_INI_NEW
+  echo -en "[databases]\n" >$PGBOUNCER_DATABASE_INI_NEW
+  pg_primary_host=$(match_first_regex "(host=[.0-9]+)" "$conninfo")
+  pg_primary_port=$(match_first_regex "(port=[0-9]+)" "$conninfo")
+  echo -en "*=$pg_primary_host $pg_primary_port\n" >> $PGBOUNCER_DATABASE_INI_NEW
 
   log_pure "[notify pgbouncer] new configuration=$(cat $PGBOUNCER_DATABASE_INI_NEW)"
 
   # propagate file to pgbouncer nodes
-  read -r -a NODES <<<"$(tr ',;' ' ' <<<"${PGBOUNCER_NODES}")"
-  for NODE in "${NODES[@]}";
-  do
-      [[ "$NODE" =~ ^(([^:/?#]+):)?// ]] || NODE="tcp://${NODE}"
-      HOST="$(parse_uri "$NODE" 'host')"
-      PORT="$(parse_uri "$NODE" 'port')"
+  read -r -a nodes <<<"$(tr ',;' ' ' <<<"${PGBOUNCER_NODES}")"
+  for node in "${nodes[@]}"; do
+    [[ "$node" =~ ^(([^:/?#]+):)?// ]] || node="tcp://${node}"
+    pgbouncer_host="$(parse_uri "$node" "host")"
+    pgbouncer_port="$(parse_uri "$node" "port")"
 
-      log_pure "[notify pgbouncer] rsync configuration to node=${HOST}:${PORT}"
-      rsync $PGBOUNCER_DATABASE_INI_NEW $HOST:$PGBOUNCER_DATABASE_INI
+    log_pure "[notify pgbouncer] rsync configuration to node=${pgbouncer_host}:${pgbouncer_port}"
+    rsync $PGBOUNCER_DATABASE_INI_NEW $pgbouncer_host:$PGBOUNCER_DATABASE_INI
 
-      log_pure "[notify pgbouncer] reload node=${HOST}:${PORT}"
-      PGPASSWORD="${POSTGRESQL_PASSWORD}" psql -tc "reload" -h $HOST -p $PORT -U ${POSTGRESQL_USERNAME} pgbouncer
+    log_pure "[notify pgbouncer] reload node=${pgbouncer_host}:${pgbouncer_port}"
+    PGPASSWORD="${POSTGRESQL_PASSWORD}" psql -U ${POSTGRESQL_USERNAME} -h $pgbouncer_host -p $pgbouncer_port -d pgbouncer -tc "reload"
   done
 
   # clean up generated file
