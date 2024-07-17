@@ -34,8 +34,9 @@ if [[ "$PGBOUNCER_PROMOTE_RELOAD_ENABLED" = "true" ]]; then
   # create pgbouncer database ini
   PGBOUNCER_DATABASE_INI_NEW="/tmp/pgbouncer.database.ini"
 
+  # select conninfo
   query="SELECT conninfo FROM repmgr.nodes WHERE active = TRUE AND type='primary'"
-  conninfo=$(PGPASSWORD="${REPMGR_PASSWORD}" psql -d ${REPMGR_DATABASE} -U ${REPMGR_USERNAME} -A -t -c "${query}")
+  conninfo=$(PGPASSWORD="${REPMGR_PASSWORD}" psql -U ${REPMGR_USERNAME} -d ${REPMGR_DATABASE}  -A -t -c "${query}")
   log_pure "[notify pgbouncer] conninfo=$conninfo"
 
   echo -e "[databases]\n" > $PGBOUNCER_DATABASE_INI_NEW
