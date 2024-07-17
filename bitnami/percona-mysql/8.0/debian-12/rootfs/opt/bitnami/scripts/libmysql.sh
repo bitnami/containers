@@ -401,7 +401,11 @@ EOF
         if [[ -z "$DB_REPLICATION_MODE" ]] || [[ "$DB_REPLICATION_MODE" = "master" ]]; then
             if [[ "$DB_REPLICATION_MODE" = "master" ]]; then
                 debug "Starting replication"
-                echo "RESET BINARY LOGS AND GTIDS;" | debug_execute "$DB_BIN_DIR/mysql" --defaults-file="$DB_CONF_FILE" -N -u root
+                if [[ "$(mysql_get_version)" =~ ^8\.0\. ]]; then
+                    echo "RESET MASTER;" | debug_execute "$DB_BIN_DIR/mysql" --defaults-file="$DB_CONF_FILE" -N -u root
+                else
+                    echo "RESET BINARY LOGS AND GTIDS;" | debug_execute "$DB_BIN_DIR/mysql" --defaults-file="$DB_CONF_FILE" -N -u root
+                fi
             fi
             mysql_ensure_root_user_exists "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" "$DB_AUTHENTICATION_PLUGIN"
             mysql_ensure_user_not_exists "" # ensure unknown user does not exist
