@@ -50,8 +50,9 @@ if [[ "$PGBOUNCER_PROMOTE_RELOAD_ENABLED" = "true" ]]; then
     pgbouncer_host="$(parse_uri "${node}" "host")"
     pgbouncer_port="$(parse_uri "${node}" "port")"
 
-    log_pure "[notify pgbouncer] rsync configuration to node=${pgbouncer_host}:${pgbouncer_port}, user=${PGBOUNCER_CONTAINER_USERNAME}"
-    sshpass -p "${PGBOUNCER_CONTAINER_PASSWORD}" rsync "${PGBOUNCER_DATABASE_INI_TEMP}" "${PGBOUNCER_CONTAINER_USERNAME}"@"${pgbouncer_host}":"${PGBOUNCER_DATABASE_INI}"
+    log_pure "[notify pgbouncer] rsync configuration to node=${pgbouncer_host}:${PGBOUNCER_CONTAINER_SSH_PORT}, user=${PGBOUNCER_CONTAINER_USERNAME}"
+    rsync -e "sshpass -p ${PGBOUNCER_CONTAINER_PASSWORD} ssh -o StrictHostKeyChecking=no -p ${PGBOUNCER_CONTAINER_SSH_PORT}" "${PGBOUNCER_DATABASE_INI_TEMP}" \
+      "${PGBOUNCER_CONTAINER_USERNAME}"@"${pgbouncer_host}":"${PGBOUNCER_DATABASE_INI}"
 
     log_pure "[notify pgbouncer] reload node=${pgbouncer_host}:${pgbouncer_port}"
     PGPASSWORD="${POSTGRESQL_PASSWORD}" psql -U "${POSTGRESQL_USERNAME}" -h "${pgbouncer_host}" -p "${pgbouncer_port}" -d pgbouncer -tc "reload"
