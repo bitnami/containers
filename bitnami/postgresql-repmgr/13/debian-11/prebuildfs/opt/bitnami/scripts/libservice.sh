@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright VMware, Inc.
+# Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 #
 # Library for managing services
@@ -132,7 +132,7 @@ generate_cron_conf() {
     mkdir -p /etc/cron.d
     if "$clean"; then
         cat > "/etc/cron.d/${service_name}" <<EOF
-# Copyright VMware, Inc.
+# Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 
 ${schedule} ${run_as} ${cmd}
@@ -193,7 +193,7 @@ generate_monit_conf() {
     is_boolean_yes "$disabled" && conf_suffix=".disabled"
     mkdir -p "$monit_conf_dir"
     cat > "${monit_conf_dir}/${service_name}.conf${conf_suffix:-}" <<EOF
-# Copyright VMware, Inc.
+# Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 
 check process ${service_name}
@@ -255,7 +255,7 @@ generate_logrotate_conf() {
 
     mkdir -p "$logrotate_conf_dir"
     cat <<EOF | sed '/^\s*$/d' > "${logrotate_conf_dir}/${service_name}"
-# Copyright VMware, Inc.
+# Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 
 ${log_path} {
@@ -402,7 +402,7 @@ generate_systemd_conf() {
     fi
     # Generate the Systemd unit
     cat > "$service_file" <<EOF
-# Copyright VMware, Inc.
+# Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 
 [Unit]

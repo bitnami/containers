@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright VMware, Inc.
+# Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 #
 # Bitnami PostgreSQL library
@@ -1023,7 +1023,7 @@ postgresql_remove_pghba_lines() {
     done
 }
 
-# Copyright VMware, Inc.
+# Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 
 # shellcheck disable=SC2148

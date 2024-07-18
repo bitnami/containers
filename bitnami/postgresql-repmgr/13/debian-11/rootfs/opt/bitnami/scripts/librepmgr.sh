@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright VMware, Inc.
+# Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 #
 # Bitnami Postgresql Repmgr library
@@ -513,14 +513,14 @@ conninfo='user=${REPMGR_USERNAME} $(repmgr_get_conninfo_password) host=${REPMGR_
 failover='${REPMGR_FAILOVER}'
 promote_command='$(repmgr_get_env_password) repmgr standby promote -f "${REPMGR_CONF_FILE}" --log-level DEBUG --verbose'
 follow_command='$(repmgr_get_env_password) repmgr standby follow -f "${REPMGR_CONF_FILE}" -W --log-level DEBUG --verbose'
-monitoring_history='${REPMGR_MONITORING_HISTORY}'
-monitor_interval_secs='${REPMGR_MONITOR_INTERVAL_SECS}'
 primary_visibility_consensus='${REPMGR_PRIMARY_VISIBILITY_CONSENSUS}'
 reconnect_attempts='${REPMGR_RECONNECT_ATTEMPTS}'
 reconnect_interval='${REPMGR_RECONNECT_INTERVAL}'
 log_level='${REPMGR_LOG_LEVEL}'
 log_status_interval='${REPMGR_LOG_STATUS_INTERVAL}'
 priority='${REPMGR_NODE_PRIORITY}'
+monitoring_history='${REPMGR_MONITORING_HISTORY}'
+monitor_interval_secs='${REPMGR_MONITOR_INTERVAL_SECS}'
 degraded_monitoring_timeout='${REPMGR_DEGRADED_MONITORING_TIMEOUT}'
 data_directory='${POSTGRESQL_DATA_DIR}'
 async_query_timeout='${REPMGR_MASTER_RESPONSE_TIMEOUT}'
@@ -529,7 +529,7 @@ pg_basebackup_options='$waldir_option'
 EOF
 
    if is_boolean_yes "$REPMGR_FENCE_OLD_PRIMARY"; then
-        cat <<EOF >>"${REPMGR_CONF_FILE}.tmp" 
+        cat <<EOF >>"${REPMGR_CONF_FILE}.tmp"
 child_nodes_disconnect_command='/bin/bash -c ". /opt/bitnami/scripts/libpostgresql.sh && . /opt/bitnami/scripts/postgresql-env.sh && postgresql_stop && kill -TERM 1"'
 EOF
         if [[ -v REPMGR_CHILD_NODES_CHECK_INTERVAL ]]; then
@@ -550,7 +550,7 @@ EOF
     fi
 
     if [[ "$REPMGR_FENCE_OLD_PRIMARY" == "true" ]]; then
-        cat <<EOF >>"${REPMGR_CONF_FILE}.tmp" 
+        cat <<EOF >>"${REPMGR_CONF_FILE}.tmp"
 child_nodes_disconnect_command='/bin/bash -c ". /opt/bitnami/scripts/libpostgresql.sh && . /opt/bitnami/scripts/postgresql-env.sh && postgresql_stop && kill -TERM 1"'
 EOF
         if [[ -v REPMGR_CHILD_NODES_CHECK_INTERVAL ]]; then
