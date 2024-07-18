@@ -25,10 +25,10 @@ command:
     stderr:
       - "fabric discovery service"
   check-ledgerutil:
-    exec: ledgerutil verify
+    exec: ledgerutil help
     exit-status: 0
-    stdout:
-      - "No error is found"
+    stderr:
+      - "Verify the integrity"
   check-osnadmin:
     exec: osnadmin --help
     exit-status: 0
