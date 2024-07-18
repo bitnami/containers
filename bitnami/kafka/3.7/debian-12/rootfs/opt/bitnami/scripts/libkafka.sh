@@ -843,7 +843,7 @@ kafka_kraft_storage_initialize() {
         KAFKA_KRAFT_CLUSTER_ID="$("${KAFKA_HOME}/bin/kafka-storage.sh" random-uuid)"
         info "Generated Kafka cluster ID '${KAFKA_KRAFT_CLUSTER_ID}'"
     fi
-    args+=("--cluster-id" "$KAFKA_KRAFT_CLUSTER_ID")
+    args+=("--cluster-id=$KAFKA_KRAFT_CLUSTER_ID")
 
     # SCRAM users are configured during the cluster bootstrapping process and can later be manually updated using kafka-config.sh
     if is_boolean_yes "${KAFKA_KRAFT_BOOTSTRAP_SCRAM_USERS:-}"; then
