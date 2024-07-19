@@ -46,8 +46,8 @@ notify_pgbouncer() {
   read -r -a nodes_ssh <<<"$(tr ',;' ' ' <<<"${PGBOUNCER_NODES_SSH}")"
   for node_ssh in "${nodes_ssh[@]}"; do
     [[ "${node_ssh}" =~ ^(([^:/?#]+):)?// ]] || node_ssh="tcp://${node_ssh}"
-    local -r pgbouncer_ssh_host="$(parse_uri "${node_ssh}" "host")"
-    local -r pgbouncer_ssh_port="$(parse_uri "${node_ssh}" "port")"
+    local pgbouncer_ssh_host="$(parse_uri "${node_ssh}" "host")"
+    local pgbouncer_ssh_port="$(parse_uri "${node_ssh}" "port")"
 
     log_pure "[notify pgbouncer] rsync configuration to node=${pgbouncer_ssh_host}:${pgbouncer_ssh_port}, user=${PGBOUNCER_CONTAINER_USERNAME}"
     rsync -e "sshpass -p ${PGBOUNCER_CONTAINER_PASSWORD} ssh -o StrictHostKeyChecking=no -p ${pgbouncer_ssh_port}" "${PGBOUNCER_DATABASE_INI_TEMP}" \
@@ -58,8 +58,8 @@ notify_pgbouncer() {
   read -r -a nodes_psql <<<"$(tr ',;' ' ' <<<"${PGBOUNCER_NODES_PSQL}")"
   for node_psql in "${nodes_psql[@]}"; do
     [[ "${node_psql}" =~ ^(([^:/?#]+):)?// ]] || node_psql="tcp://${node_psql}"
-    local -r pgbouncer_psql_host="$(parse_uri "${node_psql}" "host")"
-    local -r pgbouncer_psql_port="$(parse_uri "${node_psql}" "port")"
+    local pgbouncer_psql_host="$(parse_uri "${node_psql}" "host")"
+    local pgbouncer_psql_port="$(parse_uri "${node_psql}" "port")"
 
     log_pure "[notify pgbouncer] reload node=${pgbouncer_psql_host}:${pgbouncer_psql_port}"
     PGPASSWORD="${POSTGRESQL_PASSWORD}" psql -U "${POSTGRESQL_USERNAME}" -h "${pgbouncer_psql_host}" -p "${pgbouncer_psql_port}" -d pgbouncer -tc "reload"
