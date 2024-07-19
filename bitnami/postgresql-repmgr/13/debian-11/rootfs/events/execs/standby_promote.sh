@@ -24,42 +24,54 @@ log_pure() {
   stderr_print "$(date "+%T.%2N ")${*}"
 }
 
-log_pure "[notify pgbouncer] PGBOUNCER_PROMOTE_RELOAD_ENABLED=${PGBOUNCER_PROMOTE_RELOAD_ENABLED}"
-
-if [[ "$PGBOUNCER_PROMOTE_RELOAD_ENABLED" = "true" ]]; then
+notify_pgbouncer() {
   log_pure "[notify pgbouncer] start"
-  log_pure "[notify pgbouncer] PGBOUNCER_NODES=${PGBOUNCER_NODES}"
+  log_pure "[notify pgbouncer] PGBOUNCER_NODES_PSQL=${PGBOUNCER_NODES_PSQL}"
+  log_pure "[notify pgbouncer] PGBOUNCER_NODES_SSH=${PGBOUNCER_NODES_SSH}"
   log_pure "[notify pgbouncer] PGBOUNCER_DATABASE_INI=${PGBOUNCER_DATABASE_INI}"
 
   # select conninfo
-  query="SELECT conninfo FROM repmgr.nodes WHERE active = TRUE AND type='primary'"
-  conninfo=$(PGPASSWORD="${REPMGR_PASSWORD}" psql -U "${REPMGR_USERNAME}" -d "${REPMGR_DATABASE}" -A -t -c "${query}")
+  local -r query="SELECT conninfo FROM repmgr.nodes WHERE active = TRUE AND type='primary'"
+  local -r conninfo=$(PGPASSWORD="${REPMGR_PASSWORD}" psql -U "${REPMGR_USERNAME}" -d "${REPMGR_DATABASE}" -A -t -c "${query}")
   log_pure "[notify pgbouncer] conninfo=${conninfo}"
 
   echo -en "[databases]\n" >${PGBOUNCER_DATABASE_INI_TEMP}
-  pg_primary_host=$(match_first_regex "(host=[.0-9]+)" "$conninfo")
-  pg_primary_port=$(match_first_regex "(port=[0-9]+)" "$conninfo")
+  local -r pg_primary_host=$(match_first_regex "(host=[.0-9]+)" "$conninfo")
+  local -r pg_primary_port=$(match_first_regex "(port=[0-9]+)" "$conninfo")
   echo -en "*=${pg_primary_host} ${pg_primary_port}\n" >>${PGBOUNCER_DATABASE_INI_TEMP}
 
   log_pure "[notify pgbouncer] new configuration=$(cat ${PGBOUNCER_DATABASE_INI_TEMP})"
 
-  # propagate file to pgbouncer nodes
-  read -r -a nodes <<<"$(tr ',;' ' ' <<<"${PGBOUNCER_NODES}")"
-  for node in "${nodes[@]}"; do
-    [[ "${node}" =~ ^(([^:/?#]+):)?// ]] || node="tcp://${node}"
-    pgbouncer_host="$(parse_uri "${node}" "host")"
-    pgbouncer_port="$(parse_uri "${node}" "port")"
+  # send file to pgbouncer nodes
+  read -r -a nodes_ssh <<<"$(tr ',;' ' ' <<<"${PGBOUNCER_NODES_SSH}")"
+  for node_ssh in "${nodes_ssh[@]}"; do
+    [[ "${node_ssh}" =~ ^(([^:/?#]+):)?// ]] || node_ssh="tcp://${node_ssh}"
+    local -r pgbouncer_ssh_host="$(parse_uri "${node_ssh}" "host")"
+    local -r pgbouncer_ssh_port="$(parse_uri "${node_ssh}" "port")"
 
-    log_pure "[notify pgbouncer] rsync configuration to node=${pgbouncer_host}:${PGBOUNCER_CONTAINER_SSH_PORT}, user=${PGBOUNCER_CONTAINER_USERNAME}"
-    rsync -e "sshpass -p ${PGBOUNCER_CONTAINER_PASSWORD} ssh -o StrictHostKeyChecking=no -p ${PGBOUNCER_CONTAINER_SSH_PORT}" "${PGBOUNCER_DATABASE_INI_TEMP}" \
-      "${PGBOUNCER_CONTAINER_USERNAME}"@"${pgbouncer_host}":"${PGBOUNCER_DATABASE_INI}"
+    log_pure "[notify pgbouncer] rsync configuration to node=${pgbouncer_ssh_host}:${pgbouncer_ssh_port}, user=${PGBOUNCER_CONTAINER_USERNAME}"
+    rsync -e "sshpass -p ${PGBOUNCER_CONTAINER_PASSWORD} ssh -o StrictHostKeyChecking=no -p ${pgbouncer_ssh_port}" "${PGBOUNCER_DATABASE_INI_TEMP}" \
+      "${PGBOUNCER_CONTAINER_USERNAME}"@"${pgbouncer_ssh_host}":"${PGBOUNCER_DATABASE_INI}"
+  done
 
-    log_pure "[notify pgbouncer] reload node=${pgbouncer_host}:${pgbouncer_port}"
-    PGPASSWORD="${POSTGRESQL_PASSWORD}" psql -U "${POSTGRESQL_USERNAME}" -h "${pgbouncer_host}" -p "${pgbouncer_port}" -d pgbouncer -tc "reload"
+  # reload pgbouncer nodes
+  read -r -a nodes_psql <<<"$(tr ',;' ' ' <<<"${PGBOUNCER_NODES_PSQL}")"
+  for node_psql in "${nodes_psql[@]}"; do
+    [[ "${node_psql}" =~ ^(([^:/?#]+):)?// ]] || node_psql="tcp://${node_psql}"
+    local -r pgbouncer_psql_host="$(parse_uri "${node_psql}" "host")"
+    local -r pgbouncer_psql_port="$(parse_uri "${node_psql}" "port")"
+
+    log_pure "[notify pgbouncer] reload node=${pgbouncer_psql_host}:${pgbouncer_psql_port}"
+    PGPASSWORD="${POSTGRESQL_PASSWORD}" psql -U "${POSTGRESQL_USERNAME}" -h "${pgbouncer_psql_host}" -p "${pgbouncer_psql_port}" -d pgbouncer -tc "reload"
   done
 
   # clean up generated file
   rm ${PGBOUNCER_DATABASE_INI_TEMP}
 
   log_pure "[notify pgbouncer] end"
+}
+
+log_pure "[notify pgbouncer] PGBOUNCER_PROMOTE_RELOAD_ENABLED=${PGBOUNCER_PROMOTE_RELOAD_ENABLED}"
+if [[ "$PGBOUNCER_PROMOTE_RELOAD_ENABLED" = "true" ]]; then
+  notify_pgbouncer
 fi
