@@ -265,7 +265,7 @@ is_kong_not_running() {
 kong_stop() {
     local -r retries=5
     local -r sleep_time=5
-    kong stop -c "$KONG_CONF_FILE" -p "$KONG_PREFIX"
+    kong stop -p "$KONG_PREFIX"
     if ! retry_while is_kong_not_running "$retries" "$sleep_time"; then
         error "Kong failed to shut down"
         exit 1
