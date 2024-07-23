@@ -9,15 +9,15 @@ ARG WITH_ALL_LOCALES="no"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-07-22T05:44:10Z" \
+      org.opencontainers.image.created="2024-07-23T03:36:21Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/supabase-postgres/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="15.1.1-debian-12-r87" \
+      org.opencontainers.image.ref.name="15.6.1-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/supabase-postgres" \
       org.opencontainers.image.title="supabase-postgres" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="15.1.1"
+      org.opencontainers.image.version="15.6.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -31,7 +31,7 @@ RUN install_packages ca-certificates curl libbrotli1 libbsd0 libbz2-1.0 libcom-e
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "java-17.0.12-10-0-linux-${OS_ARCH}-debian-12" \
-      "supabase-postgres-15.1.1-73-linux-${OS_ARCH}-debian-12" \
+      "supabase-postgres-15.6.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -55,7 +55,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/postgresql/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 RUN cp /opt/bitnami/scripts/supabase-postgres/migrate.sh /docker-entrypoint-initdb.d && cp /opt/bitnami/scripts/supabase-postgres/pgsodium_getkey /opt/bitnami/postgresql/share/extension
-ENV APP_VERSION="15.1.1" \
+ENV APP_VERSION="15.6.1" \
     BITNAMI_APP_NAME="supabase-postgres" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
