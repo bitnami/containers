@@ -9,7 +9,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "20.15.1-1"
+        "version": "20.15.1-5"
     },
     "postgresql-client": {
         "arch": "amd64",
