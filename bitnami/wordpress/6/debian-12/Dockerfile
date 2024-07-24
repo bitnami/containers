@@ -7,15 +7,15 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-07-18T16:27:58Z" \
+      org.opencontainers.image.created="2024-07-24T18:01:27Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/wordpress/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="6.6.0-debian-12-r4" \
+      org.opencontainers.image.ref.name="6.6.1-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/wordpress" \
       org.opencontainers.image.title="wordpress" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="6.6.0"
+      org.opencontainers.image.version="6.6.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,11 +29,11 @@ RUN install_packages acl ca-certificates curl less libaudit1 libbrotli1 libbsd0 
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "render-template-1.0.7-2-linux-${OS_ARCH}-debian-12" \
-      "php-8.2.21-0-linux-${OS_ARCH}-debian-12" \
+      "php-8.2.21-2-linux-${OS_ARCH}-debian-12" \
       "apache-2.4.62-0-linux-${OS_ARCH}-debian-12" \
-      "mysql-client-11.3.2-4-linux-${OS_ARCH}-debian-12" \
+      "mysql-client-11.4.2-0-linux-${OS_ARCH}-debian-12" \
       "libphp-8.2.21-2-linux-${OS_ARCH}-debian-12" \
-      "wordpress-6.6.0-4-linux-${OS_ARCH}-debian-12" \
+      "wordpress-6.6.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -58,7 +58,7 @@ RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/wordpress/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="6.6.0" \
+    APP_VERSION="6.6.1" \
     BITNAMI_APP_NAME="wordpress" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/wp-cli/bin:$PATH"
 
