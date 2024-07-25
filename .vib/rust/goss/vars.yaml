@@ -6,5 +6,5 @@ directories:
   - paths:
       - /opt/bitnami/rust
 version:
-bin_name: rustc
+  bin_name: rustc
   flag: --version
