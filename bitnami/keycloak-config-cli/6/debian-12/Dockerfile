@@ -7,15 +7,15 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-07-25T04:07:59Z" \
+      org.opencontainers.image.created="2024-07-26T13:02:04Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/keycloak-config-cli/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="6.1.5-debian-12-r2" \
+      org.opencontainers.image.ref.name="6.1.6-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/keycloak-config-cli" \
       org.opencontainers.image.title="keycloak-config-cli" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="6.1.5"
+      org.opencontainers.image.version="6.1.6"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,7 +29,7 @@ RUN install_packages ca-certificates curl procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "java-21.0.4-9-0-linux-${OS_ARCH}-debian-12" \
-      "keycloak-config-cli-6.1.5-0-linux-${OS_ARCH}-debian-12" \
+      "keycloak-config-cli-6.1.6-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -47,7 +47,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN ln -sf /opt/bitnami/keycloak-config-cli/keycloak-config-cli.jar /opt/keycloak-config-cli.jar
 
-ENV APP_VERSION="6.1.5" \
+ENV APP_VERSION="6.1.6" \
     BITNAMI_APP_NAME="keycloak-config-cli" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
