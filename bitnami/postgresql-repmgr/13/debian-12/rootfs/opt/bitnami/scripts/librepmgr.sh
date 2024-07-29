@@ -721,7 +721,7 @@ repmgr_unregister_standby() {
 #########################
 repmgr_unregister_witness() {
     info "Unregistering witness node..."
-    local -r flags=("-f" "$REPMGR_CONF_FILE" "witness" "unregister" "-h" "$REPMGR_CURRENT_PRIMARY_HOST" "--verbose")
+    local -r flags=("-f" "$REPMGR_CONF_FILE" "witness" "unregister" "-h" "$REPMGR_CURRENT_PRIMARY_HOST" "-p" "$REPMGR_CURRENT_PRIMARY_PORT" "--verbose")
 
     # The command below can fail when the node doesn't exist yet
     if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
@@ -742,7 +742,7 @@ repmgr_unregister_witness() {
 #########################
 repmgr_register_witness() {
     info "Registering witness node..."
-    local -r flags=("-f" "$REPMGR_CONF_FILE" "witness" "register" "-h" "$REPMGR_CURRENT_PRIMARY_HOST" "--force" "--verbose")
+    local -r flags=("-f" "$REPMGR_CONF_FILE" "witness" "register" "-h" "$REPMGR_CURRENT_PRIMARY_HOST" "-p" "$REPMGR_CURRENT_PRIMARY_PORT" "--force" "--verbose")
 
     repmgr_wait_primary_node
 
