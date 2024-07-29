@@ -73,7 +73,8 @@ export LDAP_REQUIRE_TLS="${LDAP_REQUIRE_TLS:-no}"
 export LDAP_ULIMIT_NOFILES="${LDAP_ULIMIT_NOFILES:-1024}"
 export LDAP_ALLOW_ANON_BINDING="${LDAP_ALLOW_ANON_BINDING:-yes}"
 export LDAP_LOGLEVEL="${LDAP_LOGLEVEL:-256}"
-export LDAP_PASSWORD_HASH="${LDAP_PASSWORD_HASH:-{SSHA\}}"
+export LDAP_PASSWORD_HASH="${LDAP_PASSWORD_HASH:-{CRYPT\}}"
+export LDAP_PASSWORD_CRYPT_SALT_FORMAT="${LDAP_PASSWORD_CRYPT_SALT_FORMAT:-\$5\$%.16s}"
 export LDAP_CONFIGURE_PPOLICY="${LDAP_CONFIGURE_PPOLICY:-no}"
 export LDAP_PPOLICY_USE_LOCKOUT="${LDAP_PPOLICY_USE_LOCKOUT:-no}"
 export LDAP_PPOLICY_HASH_CLEARTEXT="${LDAP_PPOLICY_HASH_CLEARTEXT:-no}"
@@ -633,9 +634,7 @@ ldap_initialize() {
             ldap_add_custom_schemas
         fi
         # additional configuration
-        if [[ ! "$LDAP_PASSWORD_HASH" == "{SSHA}" ]]; then
-            ldap_configure_password_hash
-        fi
+        ldap_configure_password_hash
         if is_boolean_yes "$LDAP_CONFIGURE_PPOLICY"; then
             ldap_configure_ppolicy
         fi
@@ -835,10 +834,20 @@ EOF
 ldap_configure_password_hash() {
     info "Configuring LDAP olcPasswordHash"
     cat > "${LDAP_SHARE_DIR}/password_hash.ldif" << EOF
+#
+# Password Hash Configuration
+#
 dn: olcDatabase={-1}frontend,cn=config
 changetype: modify
 add: olcPasswordHash
 olcPasswordHash: $LDAP_PASSWORD_HASH
+
+#
+# Password Crypt Salt Format
+#
+dn: cn=config
+add: olcPasswordCryptSaltFormat
+olcPasswordCryptSaltFormat: $LDAP_PASSWORD_CRYPT_SALT_FORMAT
 EOF
     debug_execute ldapmodify -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/password_hash.ldif"
 }
