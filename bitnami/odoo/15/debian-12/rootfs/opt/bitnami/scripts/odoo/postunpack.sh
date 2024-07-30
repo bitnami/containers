@@ -20,7 +20,7 @@ set -o pipefail
 
 # The 'odoo-bin' tool is really the same as 'odoo', but due to the way it was installed, it appears in the latter form
 # Official Odoo docs refer to 'odoo-bin' so we add a symlink for users to be able to use any form
-ln -s "${ODOO_BIN_DIR}/odoo" "${ODOO_BIN_DIR}/odoo-bin"
+ln -sf "${ODOO_BIN_DIR}/odoo" "${ODOO_BIN_DIR}/odoo-bin"
 
 # Ensure the Odoo base directory exists and has proper permissions
 info "Configuring file permissions for Odoo"
