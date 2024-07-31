@@ -198,7 +198,8 @@ keycloak_configure_health_endpoints() {
 keycloak_configure_hostname() {
     info "Configuring hostname settings"
     ! is_empty_value "$KEYCLOAK_HOSTNAME" && keycloak_conf_set "hostname" "${KEYCLOAK_HOSTNAME}"
-    keycloak_conf_set "hostname-strict" "false"
+    ! is_empty_value "$KEYCLOAK_HOSTNAME_ADMIN" && keycloak_conf_set "hostname-admin" "${KEYCLOAK_HOSTNAME_ADMIN}"
+    keycloak_conf_set "hostname-strict" "${KEYCLOAK_HOSTNAME_STRICT}"
 }
 
 ########################

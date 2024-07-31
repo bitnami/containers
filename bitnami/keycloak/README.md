@@ -81,6 +81,8 @@ docker build -t bitnami/APP:latest .
 | `KEYCLOAK_HTTPS_PORT`                                       | HTTPS port                                                                                            | `8443`                        |
 | `KEYCLOAK_BIND_ADDRESS`                                     | Bind address                                                                                          | `$(hostname --fqdn)`          |
 | `KEYCLOAK_HOSTNAME`                                         | Keycloak hostname                                                                                     | `nil`                         |
+| `KEYCLOAK_HOSTNAME_ADMIN`                                   | Keycloak admin hostname                                                                               | `nil`                         |
+| `KEYCLOAK_HOSTNAME_STRICT`                                  | Disables dynamically resolving the hostname from request headers                                      | `false`                       |
 | `KEYCLOAK_INIT_MAX_RETRIES`                                 | Maximum retries for checking that the database works                                                  | `10`                          |
 | `KEYCLOAK_CACHE_TYPE`                                       | Defines the cache mechanism for high-availability.                                                    | `ispn`                        |
 | `KEYCLOAK_CACHE_STACK`                                      | Apply a specific cache stack                                                                          | `nil`                         |
