@@ -467,6 +467,98 @@ mysql_migrate_old_configuration() {
 }
 
 ########################
+# Ensure a db user exists with the given password for the '%' host
+# Globals:
+#   DB_*
+# Flags:
+#   -p|--password - database password
+#   -u|--user - database user
+#   --auth-plugin - authentication plugin
+#   --use-ldap - authenticate user via LDAP
+#   --host - database host
+#   --port - database host
+# Arguments:
+#   $1 - database user
+# Returns:
+#   None
+#########################
+mysql_ensure_user_exists() {
+    local -r user="${1:?user is required}"
+    local password=""
+    local auth_plugin=""
+    local use_ldap="no"
+    local hosts
+    local auth_string=""
+    # For accessing an external database
+    local db_host=""
+    local db_port=""
+
+    # Validate arguments
+    shift 1
+    while [ "$#" -gt 0 ]; do
+        case "$1" in
+            -p|--password)
+                shift
+                password="${1:?missing database password}"
+                ;;
+            --auth-plugin)
+                shift
+                auth_plugin="${1:?missing authentication plugin}"
+                ;;
+            --use-ldap)
+                use_ldap="yes"
+                ;;
+            --host)
+                shift
+                db_host="${1:?missing database host}"
+                ;;
+            --port)
+                shift
+                db_port="${1:?missing database port}"
+                ;;
+            *)
+                echo "Invalid command line flag $1" >&2
+                return 1
+                ;;
+        esac
+        shift
+    done
+    if is_boolean_yes "$use_ldap"; then
+        auth_string="identified via pam using '$DB_FLAVOR'"
+    elif [[ -n "$password" ]]; then
+        if [[ -n "$auth_plugin" ]]; then
+            auth_string="identified with $auth_plugin by '$password'"
+        else
+            auth_string="identified by '$password'"
+        fi
+    fi
+    debug "creating database user \'$user\'"
+
+    local -a mysql_execute_cmd=("mysql_execute")
+    local -a mysql_execute_print_output_cmd=("mysql_execute_print_output")
+    if [[ -n "$db_host" && -n "$db_port" ]]; then
+        mysql_execute_cmd=("mysql_remote_execute" "$db_host" "$db_port")
+        mysql_execute_print_output_cmd=("mysql_remote_execute_print_output" "$db_host" "$db_port")
+    fi
+
+    local mysql_create_user_cmd
+    [[ "$DB_FLAVOR" = "mariadb" ]] && mysql_create_user_cmd="create or replace user" || mysql_create_user_cmd="create user if not exists"
+    "${mysql_execute_cmd[@]}" "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
+${mysql_create_user_cmd} '${user}'@'%' ${auth_string};
+EOF
+    debug "Removing all other hosts for the user"
+    hosts=$("${mysql_execute_print_output_cmd[@]}" "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
+select Host from user where User='${user}' and Host!='%';
+EOF
+)
+    for host in $hosts; do
+        "${mysql_execute_cmd[@]}" "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
+drop user '$user'@'$host';
+EOF
+    done
+}
+
+########################
 # Ensure a db user does not exist
 # Globals:
 #   DB_*
@@ -703,7 +795,7 @@ mysql_ensure_optional_user_exists() {
         flags+=("-p" "$password")
         [[ -n "$auth_plugin" ]] && flags=("${flags[@]}" "--auth-plugin" "$auth_plugin")
     fi
-    "${DB_FLAVOR}"_ensure_user_exists "${flags[@]}"
+    mysql_ensure_user_exists "${flags[@]}"
 }
 
 ########################
