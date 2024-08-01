@@ -1,5 +1,9 @@
 # Bitnami package for Joomla!
 
+## Deprecation Notice
+
+The Joomla! container will no longer be released in our catalog, but already released container images will still persist in the registries.
+
 ## What is Joomla!?
 
 > Joomla! is an award winning open source CMS platform for building websites and applications. It includes page caching, page compression and Let's Encrypt auto-configuration support.
