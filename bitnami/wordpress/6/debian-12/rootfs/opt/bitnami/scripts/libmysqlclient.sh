@@ -10,6 +10,7 @@
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libvalidations.sh
+. /opt/bitnami/scripts/libversion.sh
 
 ########################
 # Validate settings in MYSQL_CLIENT_* environment variables
@@ -1026,6 +1027,22 @@ mysql_client_extra_opts() {
             value="$(mysql_client_env_value "SSL_${key^^}_FILE")"
             [[ -n "${value}" ]] && opts+=("--ssl-${key}=${value}")
         done
+    else
+        # Skip SSL validation
+        if [[ "$(mysql_client_flavor)" = "mysql" ]]; then
+            opts+=("--ssl-mode=DISABLED")
+        else
+            # SSL connections are enabled by default in MariaDB >=10.11
+            local mysql_version=""
+            local major_version=""
+            local minor_version=""
+            mysql_version="$(mysql_get_version)"
+            major_version="$(get_sematic_version "${mysql_version}" 1)"
+            minor_version="$(get_sematic_version "${mysql_version}" 2)"
+            if [[ "${major_version}" -gt 10 ]] || [[ "${major_version}" -eq 10 && "${minor_version}" -eq 11 ]]; then
+                opts+=("--skip-ssl")
+            fi
+        fi
     fi
     echo "${opts[@]:-}"
 }
