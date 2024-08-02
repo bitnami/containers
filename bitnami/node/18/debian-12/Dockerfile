@@ -24,7 +24,7 @@ ENV OS_ARCH="${TARGETARCH:-amd64}" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages build-essential ca-certificates curl git libbz2-1.0 libcom-err2 libcrypt1 libffi8 libgcc-s1 libgssapi-krb5-2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblzma5 libncursesw6 libnsl2 libreadline8 libsqlite3-0 libsqlite3-dev libssl-dev libssl3 libstdc++6 libtinfo6 libtirpc3 pkg-config procps unzip wget zlib1g
+RUN install_packages build-essential ca-certificates curl git libbz2-1.0 libcom-err2 libcrypt1 libffi8 libgcc-s1 libgssapi-krb5-2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblzma5 libncursesw6 libnsl2 libreadline8 libsqlite3-0 libsqlite3-dev libssl-dev libssl3 libstdc++6 libtinfo6 libtirpc3 pkg-config procps unzip wget zlib1g ffmpeg
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "python-3.11.9-11-linux-${OS_ARCH}-debian-12" \
@@ -52,6 +52,8 @@ RUN /opt/bitnami/scripts/node/postunpack.sh
 ENV APP_VERSION="18.20.4" \
     BITNAMI_APP_NAME="node" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:$PATH"
+
+RUN npm i -g --force yarn pnpm
 
 EXPOSE 3000
 
