@@ -1,4 +1,9 @@
+<!-- markdownlint-disable-next-line MD026 -->
 # Bitnami package for Joomla!
+
+## Deprecation Notice
+
+The Joomla! container will no longer be released in our catalog, but already released container images will still persist in the registries.
 
 ## What is Joomla!?
 
