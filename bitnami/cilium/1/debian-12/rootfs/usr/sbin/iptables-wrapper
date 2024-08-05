@@ -57,18 +57,27 @@ else
     fi
 fi
 
+original_command="$(basename "$0")"
 # Update links to point to the selected binaries
 if [ -x /usr/sbin/alternatives ]; then
     # Fedora/SUSE style alternatives
-    alternatives --set iptables "/usr/sbin/iptables-${mode}" > /dev/null
+    alternatives --set iptables "/usr/sbin/iptables-${mode}" > /dev/null || failed=1
+    if [ "${failed:-0}" = 1 ]; then
+        # Try the multi-binary if alternatives failed
+        exec "/usr/sbin/xtables-${mode}-multi" "$original_command" "$@"
+    fi
 elif [ -x /usr/sbin/update-alternatives ] || [ -x /usr/bin/update-alternatives ]; then
     # Debian style alternatives
-    update-alternatives --set iptables "/usr/sbin/iptables-${mode}" > /dev/null
-    update-alternatives --set ip6tables "/usr/sbin/ip6tables-${mode}" > /dev/null
+    update-alternatives --set iptables "/usr/sbin/iptables-${mode}" > /dev/null || failed=1
+    update-alternatives --set ip6tables "/usr/sbin/ip6tables-${mode}" > /dev/null || failed=1
+    if [ "${failed:-0}" = 1 ]; then
+        # Try the multi-binary if update-alternatives failed
+        exec "/usr/sbin/xtables-${mode}-multi" "$original_command" "$@"
+    fi
 else
-    # fake it, though this will probably also fail
-    exec "/usr/sbin/xtables-${mode}-multi" "$0" "$@"
+    # Try the multi-binary
+    exec "/usr/sbin/xtables-${mode}-multi" "$original_command" "$@"
 fi
 
 # Now re-exec the original command with the newly-selected alternative
-exec "$0" "$@"
+exec "$original_command" "$@"
