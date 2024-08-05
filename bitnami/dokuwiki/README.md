@@ -1,5 +1,9 @@
 # Bitnami package for DokuWiki
 
+## Deprecation Notice
+
+The DokuWiki container will no longer be released in our catalog, but already released container images will still persist in the registries.
+
 ## What is DokuWiki?
 
 > DokuWiki is a standards-compliant wiki optimized for creating documentation. Designed to be simple to use for small organizations, it stores all data in plain text files so no database is required.
