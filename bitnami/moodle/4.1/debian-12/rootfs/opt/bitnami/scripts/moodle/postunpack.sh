@@ -72,3 +72,6 @@ RewriteRule "(\/Gruntfile\.js)" - [F]
 # Copy all initially generated configuration files to the default directory
 # (this is to avoid breaking when entrypoint is being overridden)
 cp -r "/opt/bitnami/$(web_server_type)/conf"/* "/opt/bitnami/$(web_server_type)/conf.default"
+
+# This is necessary for the libpersistence.sh scripts to work when running as non-root
+chmod g+w /opt/bitnami
