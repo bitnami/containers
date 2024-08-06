@@ -1,5 +1,9 @@
 # Bitnami package for phpBB
 
+## Deprecation Notice
+
+The phpBB container will no longer be released in our catalog, but already released container images will still persist in the registries.
+
 ## What is phpBB?
 
 > phpBB is a popular bulletin board that features robust messaging capabilities such as flat message structure, subforums, topic split/merge/lock, user groups, full-text search, and attachments.
