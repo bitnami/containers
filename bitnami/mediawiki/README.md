@@ -1,5 +1,9 @@
 # Bitnami package for MediaWiki
 
+## Deprecation Notice
+
+The MediaWiki container will no longer be released in our catalog, but already released container images will still persist in the registries.
+
 ## What is MediaWiki?
 
 > MediaWiki is the free and open source wiki software that powers Wikipedia. Used by thousands of organizations, it is extremely powerful, scalable software and a feature-rich wiki implementation.
