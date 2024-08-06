@@ -1,5 +1,9 @@
 # Bitnami package for OpenCart
 
+## Deprecation Notice
+
+The OpenCart container will no longer be released in our catalog, but already released container images will still persist in the registries.
+
 ## What is OpenCart?
 
 > OpenCart is free open source ecommerce platform for online merchants. OpenCart provides a professional and reliable foundation from which to build a successful online store.
