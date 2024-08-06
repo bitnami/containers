@@ -14,7 +14,7 @@ services:
       - POSTGRESQL_PASSWORD=bitnami1
       - ALLOW_EMPTY_PASSWORD=yes
   redis:
-    image: docker.io/bitnami/redis:7.0
+    image: docker.io/bitnami/redis:7.2
     volumes:
       - 'redis_data:/bitnami'
     environment:
