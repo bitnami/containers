@@ -631,6 +631,7 @@ repmgr_clone_primary() {
 
     info "Cloning data from primary node..."
     local -r flags=("-f" "$REPMGR_CONF_FILE" "-h" "$REPMGR_CURRENT_PRIMARY_HOST" "-p" "$REPMGR_CURRENT_PRIMARY_PORT" "-U" "$REPMGR_USERNAME" "-d" "dbname=$REPMGR_DATABASE host=$REPMGR_CURRENT_PRIMARY_HOST connect_timeout=$REPMGR_CONNECT_TIMEOUT" "-D" "$POSTGRESQL_DATA_DIR" "standby" "clone" "--fast-checkpoint" "--force")
+
     local repmgr_cmd=()
 
     if am_i_root; then
@@ -638,7 +639,7 @@ repmgr_clone_primary() {
     fi
 
     repmgr_cmd+=("${REPMGR_BIN_DIR}/repmgr")
-
+    
     if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
         PGPASSFILE="$REPMGR_PASSFILE_PATH" debug_execute "${repmgr_cmd[@]}" "${flags[@]}"
     else
