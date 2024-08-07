@@ -864,6 +864,8 @@ repmgr_initialize() {
         else
             debug "Skipping repmgr configuration..."
         fi
+        # Allow running custom start scripts - always run after initialization
+        postgresql_custom_start_scripts
     elif [[ "$REPMGR_ROLE" = "standby" ]]; then
         local -r psql_major_version="$(postgresql_get_major_version)"
 
