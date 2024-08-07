@@ -9,15 +9,15 @@ ARG WITH_ALL_LOCALES="no"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-06-21T10:00:46Z" \
+      org.opencontainers.image.created="2024-08-06T18:02:43Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/supabase-postgres/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="15.1.1-debian-12-r71" \
+      org.opencontainers.image.ref.name="15.6.1-debian-12-r10" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/supabase-postgres" \
       org.opencontainers.image.title="supabase-postgres" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="15.1.1"
+      org.opencontainers.image.version="15.6.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -30,8 +30,8 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libbrotli1 libbsd0 libbz2-1.0 libcom-err2 libcrypt1 libcurl4 libedit2 libevent-2.1-7 libffi8 libgcc-s1 libgmp10 libgnutls30 libgssapi-krb5-2 libhogweed6 libicu72 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.5-0 liblz4-1 liblzma5 libmd0 libmecab2 libmsgpackc2 libncurses6 libnettle8 libnghttp2-14 libnorm1 libp11-kit0 libpcre3 libpgm-5.3-0 libpsl5 libreadline8 librtmp1 libsasl2-2 libsodium23 libsqlite3-0 libssh2-1 libssl3 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 libzmq5 libzstd1 locales procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "java-17.0.11-12-0-linux-${OS_ARCH}-debian-12" \
-      "supabase-postgres-15.1.1-59-linux-${OS_ARCH}-debian-12" \
+      "java-17.0.12-10-0-linux-${OS_ARCH}-debian-12" \
+      "supabase-postgres-15.6.1-8-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -55,7 +55,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/postgresql/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 RUN cp /opt/bitnami/scripts/supabase-postgres/migrate.sh /docker-entrypoint-initdb.d && cp /opt/bitnami/scripts/supabase-postgres/pgsodium_getkey /opt/bitnami/postgresql/share/extension
-ENV APP_VERSION="15.1.1" \
+ENV APP_VERSION="15.6.1" \
     BITNAMI_APP_NAME="supabase-postgres" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \

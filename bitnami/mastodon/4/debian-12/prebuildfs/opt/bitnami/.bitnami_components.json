@@ -3,25 +3,25 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "4.2.9-0"
+        "version": "4.2.10-0"
     },
     "node": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "20.14.0-0"
+        "version": "20.16.0-0"
     },
     "postgresql-client": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "16.3.0-3"
+        "version": "16.3.0-4"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.11.9-10"
+        "version": "3.11.9-11"
     },
     "redis-client": {
         "arch": "amd64",
@@ -39,6 +39,6 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.7-14"
+        "version": "1.0.8-2"
     }
 }

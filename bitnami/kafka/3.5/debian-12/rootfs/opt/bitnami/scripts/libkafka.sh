@@ -422,10 +422,6 @@ kafka_validate() {
     fi
     # Check KRaft mode
     if ! is_empty_value "${KAFKA_CFG_PROCESS_ROLES:-}"; then
-        # Raft
-        if [[ "$(kafka_get_version)" =~ ^3\.2\. ]]; then
-            warn "KRaft mode is not production-ready in Kafka 3.2, for production environments, we recommend upgrading "
-        fi
         # Only allow Zookeeper configuration if migration mode is enabled
         if ! is_empty_value "${KAFKA_CFG_ZOOKEEPER_CONNECT:-}" &&
             { is_empty_value "${KAFKA_CFG_ZOOKEEPER_METADATA_MIGRATION_ENABLE:-}" || ! is_boolean_yes "$KAFKA_CFG_ZOOKEEPER_METADATA_MIGRATION_ENABLE"; }; then
@@ -843,7 +839,7 @@ kafka_kraft_storage_initialize() {
         KAFKA_KRAFT_CLUSTER_ID="$("${KAFKA_HOME}/bin/kafka-storage.sh" random-uuid)"
         info "Generated Kafka cluster ID '${KAFKA_KRAFT_CLUSTER_ID}'"
     fi
-    args+=("--cluster-id" "$KAFKA_KRAFT_CLUSTER_ID")
+    args+=("--cluster-id=$KAFKA_KRAFT_CLUSTER_ID")
 
     # SCRAM users are configured during the cluster bootstrapping process and can later be manually updated using kafka-config.sh
     if is_boolean_yes "${KAFKA_KRAFT_BOOTSTRAP_SCRAM_USERS:-}"; then

@@ -116,8 +116,8 @@ phpmyadmin_initialize() {
     fi
 
     # Configure allow deny order/rules settings
-    ! is_empty_value "$CONFIGURATION_ALLOWDENY_ORDER" && phpmyadmin_conf_set "\$cfg['Servers'][\$i]['AllowDeny']['order']" "$ALLOWDENY_ORDER"
-    ! is_empty_value "$CONFIGURATION_ALLOWDENY_RULES" && phpmyadmin_conf_set "\$cfg['Servers'][\$i]['AllowDeny']['rules']" "array($ALLOWDENY_RULES)" yes
+    ! is_empty_value "$CONFIGURATION_ALLOWDENY_ORDER" && phpmyadmin_conf_set "\$cfg['Servers'][\$i]['AllowDeny']['order']" "$CONFIGURATION_ALLOWDENY_ORDER"
+    ! is_empty_value "$CONFIGURATION_ALLOWDENY_RULES" && phpmyadmin_conf_set "\$cfg['Servers'][\$i]['AllowDeny']['rules']" "array($CONFIGURATION_ALLOWDENY_RULES)" yes
 
     # Configure automatic login with account
     if ! is_empty_value "$DATABASE_USER"; then

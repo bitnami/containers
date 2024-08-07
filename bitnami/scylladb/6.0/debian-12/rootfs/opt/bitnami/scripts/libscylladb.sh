@@ -608,8 +608,14 @@ cassandra_setup_cluster() {
         cassandra_yaml_set "listen_address" "$host"
         cassandra_yaml_set "seeds" "$DB_SEEDS"
         cassandra_yaml_set "start_rpc" "$DB_ENABLE_RPC" "no"
-        cassandra_yaml_set "enable_user_defined_functions" "$DB_ENABLE_USER_DEFINED_FUNCTIONS" "no"
-        cassandra_yaml_set "enable_scripted_user_defined_functions" "$DB_ENABLE_SCRIPTED_USER_DEFINED_FUNCTIONS" "no"
+        if [[ "$DB_FLAVOR" = "scylladb" ]]; then
+            # Ref: https://opensource.docs.scylladb.com/stable/cql/functions.html
+            cassandra_yaml_set "enable_user_defined_functions" "$DB_ENABLE_USER_DEFINED_FUNCTIONS" "no"
+        else
+            # Ref: https://cassandra.apache.org/doc/stable/cassandra/configuration/cass_yaml_file.html#user_defined_functions_enabled
+            cassandra_yaml_set "user_defined_functions_enabled" "$DB_ENABLE_USER_DEFINED_FUNCTIONS" "no"
+            cassandra_yaml_set "scripted_user_defined_functions_enabled" "$DB_ENABLE_SCRIPTED_USER_DEFINED_FUNCTIONS" "no"
+        fi
         cassandra_yaml_set "rpc_address" "$rpc_address"
         cassandra_yaml_set "broadcast_rpc_address" "$host"
         cassandra_yaml_set "endpoint_snitch" "$DB_ENDPOINT_SNITCH"

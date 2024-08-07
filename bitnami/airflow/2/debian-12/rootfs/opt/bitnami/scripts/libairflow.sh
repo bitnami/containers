@@ -323,13 +323,25 @@ airflow_webserver_conf_set() {
     # Check if the value was set before
     if grep -q "^#*\\s*${key} =.*$" "$file"; then
         local entry
-        is_boolean_yes "$is_literal" && entry="${key} = '${value}'" || entry="${key} = ${value}"
+        if is_boolean_yes "$is_literal"; then
+            # Replace every single backslash (\) with two backslashes (\\)
+            local new_value="${value//\\/\\\\}"
+            # Wrap the value in single quotes (') and escape every single quote with a backslash (\)
+            entry="${key} = '${new_value//"'"/\\\'}'"
+        else
+            entry="${key} = ${value}"
+        fi
         # Update the existing key
         replace_in_file "$file" "^#*\\s*${key} =.*$" "$entry" false
     else
         # Add a new key
         local new_value="$value"
-        is_boolean_yes "$is_literal" && new_value="'${value}'"
+        if is_boolean_yes "$is_literal"; then
+            # Replace every single backslash (\) with two backslashes (\\)
+            new_value="${new_value//\\/\\\\}"
+            # Wrap the value in single quotes (') and escape every single quote with a backslash (\)
+            new_value="'${new_value//"'"/\\\'}'"
+        fi
         printf '\n%s = %s' "$key" "$new_value" >>"$file"
     fi
 }

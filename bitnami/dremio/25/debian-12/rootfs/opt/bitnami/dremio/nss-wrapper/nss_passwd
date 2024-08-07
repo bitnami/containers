@@ -1,0 +1,1 @@
+dremio:x:1001:0:dremio:/opt/bitnami/dremio:/bin/false

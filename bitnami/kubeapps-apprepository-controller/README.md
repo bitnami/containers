@@ -21,7 +21,7 @@ docker run --name kubeapps-apprepository-controller bitnami/kubeapps-appreposito
 * All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
-Looking to use Kubeapps AppRepository Controller in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+Looking to use Kubeapps AppRepository Controller in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the commercial edition of the Bitnami catalog.
 
 ## How to deploy Kubeapps AppRepository Controller in Kubernetes?
 

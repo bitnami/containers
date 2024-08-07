@@ -22,7 +22,7 @@ docker run -it --name supabase-realtime bitnami/supabase-realtime
 * All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
-Looking to use Supabase Realtime in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+Looking to use Supabase Realtime in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the commercial edition of the Bitnami catalog.
 
 ## Supported tags and respective `Dockerfile` links
 
@@ -97,8 +97,7 @@ docker run --name supabase-realtime bitnami/supabase-realtime:latest
 | `API_JWT_SECRET`            | API Secret                      | `nil`                   |
 | `SECRET_KEY_BASE`           | Key Base Secret                 | `nil`                   |
 | `PORT`                      | Service Port                    | `9500`                  |
-| `FLY_APP_NAME`              | App Name                        | `realtime`              |
-| `FLY_ALLOC_ID`              | Alloc ID                        | `realtime`              |
+| `APP_NAME`                  | App Name                        | `realtime`              |
 | `ERL_AFLAGS`                | Flags                           | `-proto_dist inet_tcp`  |
 | `REPLICATION_MODE`          | Replication Mode                | `RLS`                   |
 | `REPLICATION_POLL_INTERVAL` | Replication pool interval       | `100`                   |

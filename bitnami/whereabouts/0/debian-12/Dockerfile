@@ -7,15 +7,15 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-06-05T04:34:46Z" \
+      org.opencontainers.image.created="2024-07-25T08:41:59Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/whereabouts/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.7.0-debian-12-r4" \
+      org.opencontainers.image.ref.name="0.8.0-debian-12-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/whereabouts" \
       org.opencontainers.image.title="whereabouts" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="0.7.0"
+      org.opencontainers.image.version="0.8.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,7 +28,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "whereabouts-0.7.0-3-linux-${OS_ARCH}-debian-12" \
+      "whereabouts-0.8.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -46,7 +46,7 @@ RUN useradd -r -u 1001 -g root whereabouts
 RUN ln -sf /opt/bitnami/whereabouts/bin/whereabouts /whereabouts && ln -sf /opt/bitnami/whereabouts/bin/ip-control-loop /ip-control-loop && ln -sf /opt/bitnami/whereabouts/bin/install-cni.sh /install-cni.sh && mkdir -p /bitnami/whereabouts/host && chmod g+rwX -R /bitnami/whereabouts/host && ln -sf /bitnami/whereabouts/host /host
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
-ENV APP_VERSION="0.7.0" \
+ENV APP_VERSION="0.8.0" \
     BITNAMI_APP_NAME="whereabouts" \
     PATH="/opt/bitnami/whereabouts/bin:$PATH"
 

@@ -1,0 +1,14 @@
+binaries:
+  - go
+  - fabric-ca-client
+  - fabric-ca-server
+directories:
+  - mode: "0775"
+    paths:
+      - /opt/bitnami/hyperledger-fabric-ca/etc
+  - paths:
+      - /opt/bitnami/hyperledger-fabric-ca
+root_dir: /opt/bitnami
+version:
+  bin_name: fabric-ca-server
+  flag: version

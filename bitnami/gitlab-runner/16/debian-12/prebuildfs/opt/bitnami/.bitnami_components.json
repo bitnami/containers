@@ -1,8 +1,0 @@
-{
-    "gitlab-runner": {
-        "arch": "amd64",
-        "distro": "debian-12",
-        "type": "NAMI",
-        "version": "16.11.1-5"
-    }
-}

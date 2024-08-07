@@ -7,15 +7,15 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-06-17T17:34:16Z" \
+      org.opencontainers.image.created="2024-07-25T06:14:25Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/mongodb-sharded/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.0.11-debian-12-r1" \
+      org.opencontainers.image.ref.name="7.0.12-debian-12-r4" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mongodb-sharded" \
       org.opencontainers.image.title="mongodb-sharded" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="7.0.11"
+      org.opencontainers.image.version="7.0.12"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,11 +28,11 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libbrotli1 libcom-err2 libcurl4 libffi8 libgcc-s1 libgmp10 libgnutls30 libgssapi-krb5-2 libhogweed6 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.5-0 libnettle8 libnghttp2-14 libp11-kit0 libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl3 libtasn1-6 libunistring2 libzstd1 numactl procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "yq-4.44.2-0-linux-${OS_ARCH}-debian-12" \
-      "wait-for-port-1.0.7-14-linux-${OS_ARCH}-debian-12" \
-      "render-template-1.0.6-14-linux-${OS_ARCH}-debian-12" \
-      "mongodb-shell-2.2.9-0-linux-${OS_ARCH}-debian-12" \
-      "mongodb-7.0.11-1-linux-${OS_ARCH}-debian-12" \
+      "yq-4.44.2-2-linux-${OS_ARCH}-debian-12" \
+      "wait-for-port-1.0.8-2-linux-${OS_ARCH}-debian-12" \
+      "render-template-1.0.7-2-linux-${OS_ARCH}-debian-12" \
+      "mongodb-shell-2.2.12-0-linux-${OS_ARCH}-debian-12" \
+      "mongodb-7.0.12-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -53,7 +53,7 @@ RUN ln -s /opt/bitnami/scripts/mongodb-sharded/run.sh /run.sh
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mongodb-sharded/postunpack.sh
-ENV APP_VERSION="7.0.11" \
+ENV APP_VERSION="7.0.12" \
     BITNAMI_APP_NAME="mongodb-sharded" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mongodb/bin:$PATH"
 
