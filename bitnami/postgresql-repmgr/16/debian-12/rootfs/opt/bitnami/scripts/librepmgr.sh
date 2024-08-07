@@ -625,7 +625,6 @@ repmgr_clone_primary() {
         rm -rf "$waldir" && ensure_dir_exists "$waldir"
     fi
 
-    # Ensure the data directory has the correct permissions
     if am_i_root; then
         chown -R "$POSTGRESQL_DAEMON_USER:$POSTGRESQL_DAEMON_GROUP" "$POSTGRESQL_DATA_DIR"
     fi
@@ -635,10 +634,10 @@ repmgr_clone_primary() {
     local repmgr_cmd=()
 
     if am_i_root; then
-        repmgr_cmd+=("run_as_user" "$POSTGRESQL_DAEMON_USER" "${REPMGR_BIN_DIR}/repmgr")
-    else
-        repmgr_cmd+=("${REPMGR_BIN_DIR}/repmgr")
+        repmgr_cmd+=("run_as_user" "$POSTGRESQL_DAEMON_USER")
     fi
+
+    repmgr_cmd+=("${REPMGR_BIN_DIR}/repmgr")
 
     if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
         PGPASSFILE="$REPMGR_PASSFILE_PATH" debug_execute "${repmgr_cmd[@]}" "${flags[@]}"
@@ -709,9 +708,9 @@ repmgr_register_primary() {
         repmgr_cmd+=("run_as_user" "$POSTGRESQL_DAEMON_USER")
     fi
 
-    repmgr_cmd+=("${REPMGR_BIN_DIR}/repmgr" "${flags[@]}")
+    repmgr_cmd+=("${REPMGR_BIN_DIR}/repmgr")
 
-    debug_execute "${repmgr_cmd[@]}"
+    debug_execute "${repmgr_cmd[@]}" "${flags[@]}"
 }
 
 ########################
@@ -729,11 +728,12 @@ repmgr_unregister_standby() {
     local repmgr_cmd=()
 
     if am_i_root; then
-        repmgr_cmd+=("run_as_user" "$POSTGRESQL_DAEMON_USER" "${REPMGR_BIN_DIR}/repmgr")
-    else
-        repmgr_cmd+=("${REPMGR_BIN_DIR}/repmgr")
+        repmgr_cmd+=("run_as_user" "$POSTGRESQL_DAEMON_USER")
     fi
 
+    repmgr_cmd+=("${REPMGR_BIN_DIR}/repmgr")
+
+    # The command below can fail when the node doesn't exist yet
     debug_execute "${repmgr_cmd[@]}" "${flags[@]}" || true
 }
 
@@ -752,11 +752,12 @@ repmgr_unregister_witness() {
     local repmgr_cmd=()
 
     if am_i_root; then
-        repmgr_cmd+=("run_as_user" "$POSTGRESQL_DAEMON_USER" "${REPMGR_BIN_DIR}/repmgr")
-    else
-        repmgr_cmd+=("${REPMGR_BIN_DIR}/repmgr")
+        repmgr_cmd+=("run_as_user" "$POSTGRESQL_DAEMON_USER")
     fi
 
+    repmgr_cmd+=("${REPMGR_BIN_DIR}/repmgr")
+
+    # The command below can fail when the node doesn't exist yet
     if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
         PGPASSFILE="$REPMGR_PASSFILE_PATH" debug_execute "${repmgr_cmd[@]}" "${flags[@]}" || true
     else
@@ -779,10 +780,10 @@ repmgr_register_witness() {
     local repmgr_cmd=()
 
     if am_i_root; then
-        repmgr_cmd+=("run_as_user" "$POSTGRESQL_DAEMON_USER" "${REPMGR_BIN_DIR}/repmgr")
-    else
-        repmgr_cmd+=("${REPMGR_BIN_DIR}/repmgr")
+        repmgr_cmd+=("run_as_user" "$POSTGRESQL_DAEMON_USER")
     fi
+
+    repmgr_cmd+=("${REPMGR_BIN_DIR}/repmgr")
 
     repmgr_wait_primary_node
 
@@ -808,10 +809,10 @@ repmgr_standby_follow() {
     local repmgr_cmd=()
 
     if am_i_root; then
-        repmgr_cmd+=("run_as_user" "$POSTGRESQL_DAEMON_USER" "${REPMGR_BIN_DIR}/repmgr")
-    else
-        repmgr_cmd+=("${REPMGR_BIN_DIR}/repmgr")
+        repmgr_cmd+=("run_as_user" "$POSTGRESQL_DAEMON_USER")
     fi
+
+    repmgr_cmd+=("${REPMGR_BIN_DIR}/repmgr")
 
     if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
         PGPASSFILE="$REPMGR_PASSFILE_PATH" debug_execute "${repmgr_cmd[@]}" "${flags[@]}"
@@ -835,10 +836,10 @@ repmgr_register_standby() {
     local repmgr_cmd=()
 
     if am_i_root; then
-        repmgr_cmd+=("run_as_user" "$POSTGRESQL_DAEMON_USER" "${REPMGR_BIN_DIR}/repmgr")
-    else
-        repmgr_cmd+=("${REPMGR_BIN_DIR}/repmgr")
+        repmgr_cmd+=("run_as_user" "$POSTGRESQL_DAEMON_USER")
     fi
+
+    repmgr_cmd+=("${REPMGR_BIN_DIR}/repmgr")
 
     debug_execute "${repmgr_cmd[@]}" "${flags[@]}"
 }
