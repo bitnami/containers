@@ -625,15 +625,25 @@ repmgr_clone_primary() {
         rm -rf "$waldir" && ensure_dir_exists "$waldir"
     fi
 
-    info "Cloning data from primary node..."
-    local -r flags=("-f" "$REPMGR_CONF_FILE" "-h" "$REPMGR_CURRENT_PRIMARY_HOST" "-p" "$REPMGR_CURRENT_PRIMARY_PORT" "-U" "$REPMGR_USERNAME" "-d" "$REPMGR_DATABASE" "-D" "$POSTGRESQL_DATA_DIR" "standby" "clone" "--fast-checkpoint" "--force")
-
-    if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
-        PGPASSFILE="$REPMGR_PASSFILE_PATH" debug_execute "${REPMGR_BIN_DIR}/repmgr" "${flags[@]}"
-    else
-        PGPASSWORD="$REPMGR_PASSWORD" debug_execute "${REPMGR_BIN_DIR}/repmgr" "${flags[@]}"
+    if am_i_root; then
+        chown -R "$POSTGRESQL_DAEMON_USER:$POSTGRESQL_DAEMON_GROUP" "$POSTGRESQL_DATA_DIR"
     fi
 
+    info "Cloning data from primary node..."
+    local -r flags=("-f" "$REPMGR_CONF_FILE" "-h" "$REPMGR_CURRENT_PRIMARY_HOST" "-p" "$REPMGR_CURRENT_PRIMARY_PORT" "-U" "$REPMGR_USERNAME" "-d" "$REPMGR_DATABASE" "-D" "$POSTGRESQL_DATA_DIR" "standby" "clone" "--fast-checkpoint" "--force")
+    local repmgr_cmd=()
+
+    if am_i_root; then
+        repmgr_cmd+=("run_as_user" "$POSTGRESQL_DAEMON_USER")
+    fi
+
+    repmgr_cmd+=("${REPMGR_BIN_DIR}/repmgr")
+
+    if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
+        PGPASSFILE="$REPMGR_PASSFILE_PATH" debug_execute "${repmgr_cmd[@]}" "${flags[@]}"
+    else
+        PGPASSWORD="$REPMGR_PASSWORD" debug_execute "${repmgr_cmd[@]}" "${flags[@]}"
+    fi
 }
 
 ########################
@@ -692,8 +702,15 @@ repmgr_rewind() {
 repmgr_register_primary() {
     info "Registering Primary..."
     local -r flags=("-f" "$REPMGR_CONF_FILE" "master" "register" "--force")
+    local repmgr_cmd=()
 
-    debug_execute "${REPMGR_BIN_DIR}/repmgr" "${flags[@]}"
+    if am_i_root; then
+        repmgr_cmd+=("run_as_user" "$POSTGRESQL_DAEMON_USER")
+    fi
+
+    repmgr_cmd+=("${REPMGR_BIN_DIR}/repmgr")
+
+    debug_execute "${repmgr_cmd[@]}" "${flags[@]}"
 }
 
 ########################
@@ -707,11 +724,17 @@ repmgr_register_primary() {
 #########################
 repmgr_unregister_standby() {
     info "Unregistering standby node..."
-
     local -r flags=("standby" "unregister" "-f" "$REPMGR_CONF_FILE" "--node-id=$(repmgr_get_node_id)")
+    local repmgr_cmd=()
+
+    if am_i_root; then
+        repmgr_cmd+=("run_as_user" "$POSTGRESQL_DAEMON_USER")
+    fi
+
+    repmgr_cmd+=("${REPMGR_BIN_DIR}/repmgr")
 
     # The command below can fail when the node doesn't exist yet
-    debug_execute "${REPMGR_BIN_DIR}/repmgr" "${flags[@]}" || true
+    debug_execute "${repmgr_cmd[@]}" "${flags[@]}" || true
 }
 
 ########################
@@ -726,12 +749,19 @@ repmgr_unregister_standby() {
 repmgr_unregister_witness() {
     info "Unregistering witness node..."
     local -r flags=("-f" "$REPMGR_CONF_FILE" "witness" "unregister" "-h" "$REPMGR_CURRENT_PRIMARY_HOST" "-p" "$REPMGR_CURRENT_PRIMARY_PORT" "--verbose")
+    local repmgr_cmd=()
+
+    if am_i_root; then
+        repmgr_cmd+=("run_as_user" "$POSTGRESQL_DAEMON_USER")
+    fi
+
+    repmgr_cmd+=("${REPMGR_BIN_DIR}/repmgr")
 
     # The command below can fail when the node doesn't exist yet
     if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
-        PGPASSFILE="$REPMGR_PASSFILE_PATH" debug_execute "${REPMGR_BIN_DIR}/repmgr" "${flags[@]}" || true
+        PGPASSFILE="$REPMGR_PASSFILE_PATH" debug_execute "${repmgr_cmd[@]}" "${flags[@]}" || true
     else
-        PGPASSWORD="$REPMGR_PASSWORD" debug_execute "${REPMGR_BIN_DIR}/repmgr" "${flags[@]}" || true
+        PGPASSWORD="$REPMGR_PASSWORD" debug_execute "${repmgr_cmd[@]}" "${flags[@]}" || true
     fi
 }
 
@@ -747,13 +777,20 @@ repmgr_unregister_witness() {
 repmgr_register_witness() {
     info "Registering witness node..."
     local -r flags=("-f" "$REPMGR_CONF_FILE" "witness" "register" "-h" "$REPMGR_CURRENT_PRIMARY_HOST" "-p" "$REPMGR_CURRENT_PRIMARY_PORT" "--force" "--verbose")
+    local repmgr_cmd=()
+
+    if am_i_root; then
+        repmgr_cmd+=("run_as_user" "$POSTGRESQL_DAEMON_USER")
+    fi
+
+    repmgr_cmd+=("${REPMGR_BIN_DIR}/repmgr")
 
     repmgr_wait_primary_node
 
     if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
-        PGPASSFILE="$REPMGR_PASSFILE_PATH" debug_execute "${REPMGR_BIN_DIR}/repmgr" "${flags[@]}"
+        PGPASSFILE="$REPMGR_PASSFILE_PATH" debug_execute "${repmgr_cmd[@]}" "${flags[@]}"
     else
-        PGPASSWORD="$REPMGR_PASSWORD" debug_execute "${REPMGR_BIN_DIR}/repmgr" "${flags[@]}"
+        PGPASSWORD="$REPMGR_PASSWORD" debug_execute "${repmgr_cmd[@]}" "${flags[@]}"
     fi
 }
 
@@ -769,13 +806,19 @@ repmgr_register_witness() {
 repmgr_standby_follow() {
     info "Running standby follow..."
     local -r flags=("standby" "follow" "-f" "$REPMGR_CONF_FILE" "-W" "--log-level" "DEBUG" "--verbose")
+    local repmgr_cmd=()
 
-    if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
-        PGPASSFILE="$REPMGR_PASSFILE_PATH" debug_execute "${REPMGR_BIN_DIR}/repmgr" "${flags[@]}"
-    else
-        PGPASSWORD="$REPMGR_PASSWORD" debug_execute "${REPMGR_BIN_DIR}/repmgr" "${flags[@]}"
+    if am_i_root; then
+        repmgr_cmd+=("run_as_user" "$POSTGRESQL_DAEMON_USER")
     fi
 
+    repmgr_cmd+=("${REPMGR_BIN_DIR}/repmgr")
+
+    if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
+        PGPASSFILE="$REPMGR_PASSFILE_PATH" debug_execute "${repmgr_cmd[@]}" "${flags[@]}"
+    else
+        PGPASSWORD="$REPMGR_PASSWORD" debug_execute "${repmgr_cmd[@]}" "${flags[@]}"
+    fi
 }
 
 ########################
@@ -790,8 +833,15 @@ repmgr_standby_follow() {
 repmgr_register_standby() {
     info "Registering Standby node..."
     local -r flags=("standby" "register" "-f" "$REPMGR_CONF_FILE" "--force" "--verbose")
+    local repmgr_cmd=()
 
-    debug_execute "${REPMGR_BIN_DIR}/repmgr" "${flags[@]}"
+    if am_i_root; then
+        repmgr_cmd+=("run_as_user" "$POSTGRESQL_DAEMON_USER")
+    fi
+
+    repmgr_cmd+=("${REPMGR_BIN_DIR}/repmgr")
+
+    debug_execute "${repmgr_cmd[@]}" "${flags[@]}"
 }
 
 ########################
