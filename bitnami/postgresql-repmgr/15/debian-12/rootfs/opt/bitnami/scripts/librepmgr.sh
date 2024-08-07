@@ -708,9 +708,9 @@ repmgr_register_primary() {
         repmgr_cmd+=("run_as_user" "$POSTGRESQL_DAEMON_USER")
     fi
 
-    repmgr_cmd+=("${REPMGR_BIN_DIR}/repmgr" "${flags[@]}")
+    repmgr_cmd+=("${REPMGR_BIN_DIR}/repmgr")
 
-    debug_execute "${repmgr_cmd[@]}"
+    debug_execute "${repmgr_cmd[@]}" "${flags[@]}"
 }
 
 ########################
