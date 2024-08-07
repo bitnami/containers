@@ -1,0 +1,15 @@
+binaries:
+  - peer
+directories:
+  - mode: "0755"
+    paths:
+      - /opt/bitnami/hyperledger-fabric-peer/etc
+  - mode: "0775"
+    paths:
+      - /opt/bitnami/hyperledger-fabric-peer/var
+  - paths:
+      - /opt/bitnami/hyperledger-fabric-peer
+root_dir: /opt/bitnami
+version:
+  bin_name: peer
+  flag: version

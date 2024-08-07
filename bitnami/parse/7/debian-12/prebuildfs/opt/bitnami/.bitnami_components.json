@@ -3,24 +3,24 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "2.2.6-0"
+        "version": "2.2.12-0"
     },
     "node": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "18.20.3-0"
+        "version": "18.20.4-4"
     },
     "parse": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "7.0.0-10"
+        "version": "7.2.0-0"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.11.9-10"
+        "version": "3.11.9-11"
     }
 }

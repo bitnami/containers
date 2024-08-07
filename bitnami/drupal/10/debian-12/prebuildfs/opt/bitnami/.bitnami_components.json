@@ -3,36 +3,36 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "2.4.59-2"
+        "version": "2.4.62-0"
     },
     "drupal": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "10.3.0-0"
+        "version": "10.3.1-3"
     },
     "libphp": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.2.20-0"
+        "version": "8.2.22-0"
     },
     "mysql-client": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "11.3.2-3"
+        "version": "11.4.2-1"
     },
     "php": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.2.20-5"
+        "version": "8.2.22-0"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.6-14"
+        "version": "1.0.7-2"
     }
 }

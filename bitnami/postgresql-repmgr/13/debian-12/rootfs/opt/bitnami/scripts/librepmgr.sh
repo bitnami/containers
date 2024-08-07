@@ -237,8 +237,12 @@ repmgr_get_primary_node() {
                 primary_port="$REPMGR_PRIMARY_PORT"
             fi
         else
-            primary_host="$upstream_host"
-            primary_port="$upstream_port"
+            if  [[ "${upstream_host}:${upstream_port}" = "${REPMGR_NODE_NETWORK_NAME}:${REPMGR_PORT_NUMBER}" ]];  then
+                info "Avoid setting itself as primary. Starting PostgreSQL normally..."
+            else
+                primary_host="$upstream_host"
+                primary_port="$upstream_port"
+            fi
         fi
     fi
 
@@ -721,7 +725,7 @@ repmgr_unregister_standby() {
 #########################
 repmgr_unregister_witness() {
     info "Unregistering witness node..."
-    local -r flags=("-f" "$REPMGR_CONF_FILE" "witness" "unregister" "-h" "$REPMGR_CURRENT_PRIMARY_HOST" "--verbose")
+    local -r flags=("-f" "$REPMGR_CONF_FILE" "witness" "unregister" "-h" "$REPMGR_CURRENT_PRIMARY_HOST" "-p" "$REPMGR_CURRENT_PRIMARY_PORT" "--verbose")
 
     # The command below can fail when the node doesn't exist yet
     if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
@@ -742,7 +746,7 @@ repmgr_unregister_witness() {
 #########################
 repmgr_register_witness() {
     info "Registering witness node..."
-    local -r flags=("-f" "$REPMGR_CONF_FILE" "witness" "register" "-h" "$REPMGR_CURRENT_PRIMARY_HOST" "--force" "--verbose")
+    local -r flags=("-f" "$REPMGR_CONF_FILE" "witness" "register" "-h" "$REPMGR_CURRENT_PRIMARY_HOST" "-p" "$REPMGR_CURRENT_PRIMARY_PORT" "--force" "--verbose")
 
     repmgr_wait_primary_node
 

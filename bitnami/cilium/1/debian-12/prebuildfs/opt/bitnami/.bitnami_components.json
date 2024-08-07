@@ -9,18 +9,18 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.15.6-1"
+        "version": "1.16.0-4"
     },
     "gops": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "0.3.28-2"
+        "version": "0.3.28-5"
     },
     "llvm": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "18.1.7-0"
+        "version": "18.1.8-0"
     }
 }

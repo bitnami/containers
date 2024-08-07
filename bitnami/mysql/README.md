@@ -22,7 +22,7 @@ docker run --name mysql -e ALLOW_EMPTY_PASSWORD=yes bitnami/mysql:latest
 * All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
-Looking to use MySQL in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+Looking to use MySQL in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the commercial edition of the Bitnami catalog.
 
 ## How to deploy MySQL in Kubernetes?
 
@@ -195,6 +195,7 @@ docker-compose up -d
 | `MYSQL_COLLATE`                 | MySQL collation to use.                                                                                                   | `nil`         |
 | `MYSQL_BIND_ADDRESS`            | MySQL bind address.                                                                                                       | `nil`         |
 | `MYSQL_SQL_MODE`                | MySQL Server SQL modes to enable.                                                                                         | `nil`         |
+| `MYSQL_UPGRADE`                 | MySQL upgrade option.                                                                                                     | `AUTO`        |
 | `MYSQL_IS_DEDICATED_SERVER`     | Whether the MySQL Server will run on a dedicated node.                                                                    | `nil`         |
 | `MYSQL_CLIENT_ENABLE_SSL`       | Whether to force SSL for connections to the MySQL database.                                                               | `no`          |
 | `MYSQL_CLIENT_SSL_CA_FILE`      | Path to CA certificate to use for SSL connections to the MySQL database server.                                           | `nil`         |
@@ -673,7 +674,13 @@ or using Docker Compose:
 docker-compose up mysql
 ```
 
+> **Note**: Automatic upgrade behavior at startup can be changed setting the env var `MYSQL_UPGRADE`. More information [here](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_upgrade)
+
 ## Notable Changes
+
+### 8.0.37-debian-12-r6, 8.3.0-debian-12-r15, 8.4.0-debian-12-r7
+
+* Upgrade level can be set by `MYSQL_UPGRADE` env var. By default this variable is set to `AUTO`.
 
 ### 5.7.36-debian-10-r36, 8.0.27-debian-10-r35, 5.7.41-r10-debian-11 and 8.0.32-r10-debian-11
 

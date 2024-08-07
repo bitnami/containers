@@ -126,7 +126,7 @@ rabbitmq_validate() {
     fi
 
     if [[ "$RABBITMQ_NODE_TYPE" = "stats" ]]; then
-        if ! validate_ipv4 "$RABBITMQ_MANAGEMENT_BIND_IP"; then
+        if ! validate_ip "$RABBITMQ_MANAGEMENT_BIND_IP"; then
             print_validation_error "An invalid IP was specified in the environment variable RABBITMQ_MANAGEMENT_BIND_IP."
         fi
         check_allowed_port "RABBITMQ_MANAGEMENT_PORT_NUMBER"

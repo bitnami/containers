@@ -14,7 +14,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "sealed-secrets-0.27.0-0-linux-${OS_ARCH}-debian-12" \
+      "sealed-secrets-0.27.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -36,13 +36,13 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2024-06-20T11:01:42Z" \
+      org.opencontainers.image.created="2024-07-25T07:56:01Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.27.0-debian-12-r0" \
+      org.opencontainers.image.ref.name="0.27.1-debian-12-r2" \
       org.opencontainers.image.title="sealed-secrets" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="0.27.0"
+      org.opencontainers.image.version="0.27.1"
 
 COPY prebuildfs /
 COPY rootfs /
@@ -50,7 +50,7 @@ COPY --from=builder /opt/bitnami/sealed-secrets/bin/controller /controller
 COPY --from=builder /opt/bitnami/sealed-secrets/.spdx-sealed-secrets.spdx /opt/bitnami/sealed-secrets/.spdx-sealed-secrets.spdx
 COPY --from=builder /opt/bitnami/sealed-secrets/licenses /opt/bitnami/sealed-secrets/licenses
 
-ENV APP_VERSION="0.27.0" \
+ENV APP_VERSION="0.27.1" \
     BITNAMI_APP_NAME="sealed-secrets" \
     PATH="/"
 
