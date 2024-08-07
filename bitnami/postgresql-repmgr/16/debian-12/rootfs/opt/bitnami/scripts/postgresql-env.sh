@@ -231,6 +231,7 @@ export POSTGRESQL_TMP_DIR="$POSTGRESQL_BASE_DIR/tmp"
 export POSTGRESQL_PID_FILE="$POSTGRESQL_TMP_DIR/postgresql.pid"
 export POSTGRESQL_BIN_DIR="$POSTGRESQL_BASE_DIR/bin"
 export POSTGRESQL_INITSCRIPTS_DIR="/docker-entrypoint-initdb.d"
+export POSTGRESQL_STARTSCRIPTS_DIR="/docker-entrypoint-startdb.d"
 export POSTGRESQL_PREINITSCRIPTS_DIR="/docker-entrypoint-preinitdb.d"
 export PATH="${POSTGRESQL_BIN_DIR}:${BITNAMI_ROOT_DIR}/common/bin:${PATH}"
 

@@ -706,6 +706,46 @@ postgresql_custom_pre_init_scripts() {
 }
 
 ########################
+# Run custom start scripts
+# Globals:
+#   POSTGRESQL_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+postgresql_custom_start_scripts() {
+    info "Loading custom start scripts..."
+    if [[ -d "$POSTGRESQL_STARTSCRIPTS_DIR" ]] && [[ -n $(find "$POSTGRESQL_STARTSCRIPTS_DIR/" -type f -regex ".*\.\(sh\|sql\|sql.gz\)") ]] ; then
+        info "Loading user's custom files from $POSTGRESQL_STARTSCRIPTS_DIR ..."
+        postgresql_start_bg "false"
+        find "$POSTGRESQL_STARTSCRIPTS_DIR/" -type f -regex ".*\.\(sh\|sql\|sql.gz\)" | sort | while read -r f; do
+            case "$f" in
+            *.sh)
+                if [[ -x "$f" ]]; then
+                    debug "Executing $f"
+                    "$f"
+                else
+                    debug "Sourcing $f"
+                    . "$f"
+                fi
+                ;;
+            *.sql)
+                debug "Executing $f"
+                postgresql_execute "$POSTGRESQL_DATABASE" "$POSTGRESQL_INITSCRIPTS_USERNAME" "$POSTGRESQL_INITSCRIPTS_PASSWORD" <"$f"
+                ;;
+            *.sql.gz)
+                debug "Executing $f"
+                gunzip -c "$f" | postgresql_execute "$POSTGRESQL_DATABASE" "$POSTGRESQL_INITSCRIPTS_USERNAME" "$POSTGRESQL_INITSCRIPTS_PASSWORD"
+                ;;
+            *) debug "Ignoring $f" ;;
+            esac
+        done
+        touch "$POSTGRESQL_VOLUME_DIR"/.user_scripts_initialized
+    fi
+}
+
+########################
 # Run custom initialization scripts
 # Globals:
 #   POSTGRESQL_*
