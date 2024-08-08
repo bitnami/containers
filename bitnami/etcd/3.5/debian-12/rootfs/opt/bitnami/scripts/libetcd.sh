@@ -307,7 +307,11 @@ etcdctl_auth_norbac_flags() {
         authFlags+=("--cert" "${ETCD_DATA_DIR}/fixtures/client/cert.pem" "--key" "${ETCD_DATA_DIR}/fixtures/client/key.pem")
     else
         [[ -f "$ETCD_CERT_FILE" ]] && [[ -f "$ETCD_KEY_FILE" ]] && authFlags+=("--cert" "$ETCD_CERT_FILE" "--key" "$ETCD_KEY_FILE")
-        [[ -f "$ETCD_TRUSTED_CA_FILE" ]] && authFlags+=("--cacert" "$ETCD_TRUSTED_CA_FILE")
+        # we skip tls verify
+        # when startup etcd with one-way tls authentication, there will no CA file
+        # but script run as client, need a CA to verify server certs
+        # so add following flags to skip server certs verification, this also works for two-way tls authentication
+        authFlags+=("--insecure-transport=false --insecure-skip-tls-verify=true")
     fi
     echo "${authFlags[*]}"
 }
