@@ -90,7 +90,7 @@ services:
       - jobservice_data:/var/log/jobs
       - ./config/jobservice/config.yml:/etc/jobservice/config.yml:ro
   redis:
-    image: docker.io/bitnami/redis:7.0
+    image: docker.io/bitnami/redis:7.2
     environment:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
