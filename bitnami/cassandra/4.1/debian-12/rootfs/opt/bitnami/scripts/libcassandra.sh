@@ -68,6 +68,8 @@ cassandra_setup_client_ssl() {
         -srcstorepass "${DB_KEYSTORE_PASSWORD}" \
         -deststorepass "${DB_KEYSTORE_PASSWORD}"
 
+    mkdir -p "$(dirname "${DB_SSL_CERT_FILE}")"
+
     openssl pkcs12 -in "${DB_TMP_P12_FILE}" -nokeys \
         -out "${DB_SSL_CERT_FILE}" -passin pass:"${DB_KEYSTORE_PASSWORD}"
     rm "${DB_TMP_P12_FILE}"
