@@ -97,11 +97,11 @@ phpmyadmin_initialize() {
         local database_ssl_option_env_var
         info "Configuring SSL options"
         phpmyadmin_conf_set "\$cfg['Servers'][\$i]['ssl']" true yes
-        for database_ssl_option in ssl_key ssl_cert ssl_ca ssl_ca_path ssl_ciphers; do
-            database_ssl_option_env_var="DATABASE_${database_ssl_option^^}"
-            is_empty_value "${!database_ssl_option_env_var:-}" && continue
-            phpmyadmin_conf_set "\$cfg['Servers'][\$i]['${database_ssl_option}']" "${!database_ssl_option_env_var}"
-        done
+        [ -f "$DATABASE_SSL_KEY" ] && phpmyadmin_conf_set "\$cfg['Servers'][\$i]['ssl_key']" "$DATABASE_SSL_KEY"
+        [ -f "$DATABASE_SSL_CERT" ] && phpmyadmin_conf_set "\$cfg['Servers'][\$i]['ssl_cert']" "$DATABASE_SSL_CERT"
+        [ -f "$DATABASE_SSL_CA" ] && phpmyadmin_conf_set "\$cfg['Servers'][\$i]['ssl_ca']" "$DATABASE_SSL_CA"
+        ! is_empty_value "$DATABASE_SSL_CA_PATH" && phpmyadmin_conf_set "\$cfg['Servers'][\$i]['ssl_ca_path']" "$DATABASE_SSL_CA_PATH"
+        ! is_empty_value "$DATABASE_SSL_CIPHERS" && phpmyadmin_conf_set "\$cfg['Servers'][\$i]['ssl_ciphers']" "$DATABASE_SSL_CIPHERS"
         ! is_empty_value "$DATABASE_SSL_VERIFY" && phpmyadmin_conf_set "\$cfg['Servers'][\$i]['ssl_verify']" "$(php_convert_to_boolean "$DATABASE_SSL_VERIFY")" yes
     fi
 
