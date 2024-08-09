@@ -8,11 +8,11 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-07-25T07:59:56Z" \
+      org.opencontainers.image.created="2024-08-09T13:34:16Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/sonarqube/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="10.6.0-debian-12-r5" \
+      org.opencontainers.image.ref.name="10.6.0-debian-12-r6" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/sonarqube" \
       org.opencontainers.image.title="sonarqube" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -29,7 +29,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages acl ca-certificates curl libbsd0 libedit2 libffi8 libgcc-s1 libgmp10 libgnutls30 libhogweed6 libicu72 libidn2-0 libldap-2.5-0 liblz4-1 liblzma5 libmd0 libnettle8 libp11-kit0 libsasl2-2 libssl3 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "postgresql-client-16.3.0-4-linux-${OS_ARCH}-debian-12" \
+      "postgresql-client-16.4.0-0-linux-${OS_ARCH}-debian-12" \
       "java-17.0.12-10-0-linux-${OS_ARCH}-debian-12" \
       "sonarqube-10.6.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
