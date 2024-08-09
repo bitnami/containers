@@ -208,7 +208,8 @@ is_ldap_not_running() {
 ########################
 # Start OpenLDAP server in background
 # Arguments:
-#   None
+#   $1 - max retries. Default: 12
+#   $2 - sleep between retries (in seconds). Default: 1
 # Returns:
 #   None
 #########################
