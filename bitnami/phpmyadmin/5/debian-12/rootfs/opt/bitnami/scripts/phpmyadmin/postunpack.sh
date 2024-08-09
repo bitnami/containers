@@ -23,7 +23,7 @@ set -o pipefail
 . /opt/bitnami/scripts/libphp.sh
 . /opt/bitnami/scripts/libphpmyadmin.sh
 
-# Load web server environment and functions (after MediaWiki environment file so MODULE is not set to a wrong value)
+# Load web server environment and functions (after phpMyAdmin environment file so MODULE is not set to a wrong value)
 . "/opt/bitnami/scripts/$(web_server_type)-env.sh"
 
 # Enable phpMyAdmin configuration file
