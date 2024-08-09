@@ -135,7 +135,7 @@ sonarqube_initialize() {
     if [[ "${#additional_properties[@]}" -gt 0 ]]; then
         info "Adding properties provided via SONARQUBE_EXTRA_PROPERTIES to sonar.properties"
         for property in "${additional_properties[@]}"; do
-            sonarqube_conf_set "${property%=*}" "${property#*=}"
+            sonarqube_conf_set "${property%%=*}" "${property#*=}"
         done
     fi
 
