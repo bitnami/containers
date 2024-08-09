@@ -18,10 +18,18 @@ else
     . /opt/bitnami/scripts/liblog.sh
 fi
 
+MARIADB_HOST=${MARIADB_HOST:-$MOODLE_DATABASE_HOST}
+MARIADB_PORT_NUMBER=${MARIADB_PORT_NUMBER:-$MOODLE_DATABASE_PORT_NUMBER}
+MARIADB_ROOT_USER=${MARIADB_ROOT_USER:-$MOODLE_DATABASE_USER}
+MARIADB_DATABASE=${MARIADB_DATABASE:-$MOODLE_DATABASE_NAME}
+if [[ "${ALLOW_EMPTY_PASSWORD:-no}" != "yes" ]]; then
+  MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD:-$MOODLE_DATABASE_PASSWORD}
+fi
+
 mysql_execute() {
     local -r sql_file="${1:?missing file}"
     local failure=0
-    mysql_cmd=("mysql" "-h" "$MARIADB_HOST" "-P" "$MARIADB_PORT_NUMBER" "-u" "$MARIADB_ROOT_USER")
+    mysql_cmd=("mysql" "-h" "$MARIADB_HOST" "-P" "$MARIADB_PORT_NUMBER" "-u" "$MARIADB_ROOT_USER" "-D" "${MARIADB_DATABASE}")
     if [[ "${ALLOW_EMPTY_PASSWORD:-no}" != "yes" ]]; then
         mysql_cmd+=("-p${MARIADB_ROOT_PASSWORD}")
     fi
@@ -32,6 +40,7 @@ mysql_execute() {
     fi
     return "$failure"
 }
+
 
 # Loop through all input files passed via stdin
 read -r -a custom_init_scripts <<< "$@"
