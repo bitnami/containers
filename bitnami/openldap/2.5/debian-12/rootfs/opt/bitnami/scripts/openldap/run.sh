@@ -76,4 +76,5 @@ done
 flags+=("$@")
 
 info "** Starting slapd **"
+debug "Startup cmd: ${command}" "${flags[*]}"
 exec "${command}" "${flags[@]}"
