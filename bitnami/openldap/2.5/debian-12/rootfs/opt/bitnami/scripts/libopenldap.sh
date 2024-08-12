@@ -169,6 +169,12 @@ ldap_validate() {
         print_validation_error "Specify the same number of passwords on LDAP_PASSWORDS as the number of users on LDAP_USERS!"
     fi
 
+    for var in LDAP_PORT_NUMBER LDAP_LDAPS_PORT_NUMBER LDAP_PROXYPROTO_PORT_NUMBER LDAP_PROXYPROTO_LDAPS_PORT_NUMBER; do
+        if ! is_positive_int "${!var}"; then
+            print_validation_error "The value for $var must be positive integer!"
+        fi
+    done
+
     if [[ -n "$LDAP_PORT_NUMBER" ]] && [[ -n "$LDAP_LDAPS_PORT_NUMBER" ]]; then
         if [[ "$LDAP_PORT_NUMBER" -eq "$LDAP_LDAPS_PORT_NUMBER" ]]; then
             print_validation_error "LDAP_PORT_NUMBER and LDAP_LDAPS_PORT_NUMBER are bound to the same port!"
