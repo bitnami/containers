@@ -274,6 +274,20 @@ This new feature is not mutually exclusive, which means it is possible to listen
       ...
     ```
 
+### Run behind load balancer
+
+OpenLDAP supports the HAProxy proxy protocol version 2 to detect real client IP that is masked when server runs behind load balancer. You can enable and configure this feature with the following environment variables:
+
+* `LDAP_ENABLE_PROXYPROTO`: Whether to enable proxy protocol support for traffic or not. Defaults to `no`.
+* `LDAP_PROXYPROTO_PORT_NUMBER`: The port OpenLDAP is listening for requests that is wrapped in proxy protocol. Default: the **LDAP_PORT_NUMBER** value.
+* `LDAP_PROXYPROTO_LDAPS_PORT_NUMBER`: Port used for TLS secure traffic that is wrapped in proxy protocol. Default: the **LDAP_LDAPS_PORT_NUMBER** value.
+
+Enabling this feature will replace regular and TLS ports with proxy protocol capable analogs. To use both port types, set **LDAP_PROXYPROTO_PORT_NUMBER** to some different value than **LDAP_PORT_NUMBER**. The same statement applied to **LDAP_PROXYPROTO_LDAPS_PORT_NUMBER** and **LDAP_LDAPS_PORT_NUMBER** pair.
+
+**Security warning**: To prevent client IP spoofing, it is highly advised to secure the proxy protocol capable ports by firewall that allow traffic only from load balancer hosts.
+
+Check the official page [OpenLDAP, Running slapd, Command-Line Options](https://www.openldap.org/doc/admin26/runningslapd.html#Command-Line%20Options) for additional information.
+
 ### Initializing a new instance
 
 The [Bitnami OpenLDAP](https://github.com/bitnami/containers/blob/main/bitnami/openldap) image allows you to use your custom scripts to initialize a fresh instance.
