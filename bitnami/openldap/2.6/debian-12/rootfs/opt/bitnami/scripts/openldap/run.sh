@@ -21,14 +21,34 @@ command="$(command -v slapd)"
 # https://github.com/docker/docker/issues/8231
 ulimit -n "$LDAP_ULIMIT_NOFILES"
 
-flags=("-h" "ldap://:${LDAP_PORT_NUMBER}/ ldapi:///")
+declare -a flags
+declare -A flags_map
+
+# Drop privileges if we start as root
+am_i_root && flags_map["-u"]="${LDAP_DAEMON_USER}"
+
+# Set config dir
+flags_map["-F"]="${LDAP_CONF_DIR}/slapd.d"
+
+# Enable debug with desired level
+flags_map["-d"]="${LDAP_LOGLEVEL}"
+
+# The LDAP IPC is always on
+flags_map["-h"]+="${flags_map["-h"]:+" "}ldapi:///"
+
+# Add LDAP URI
+flags_map["-h"]+="${flags_map["-h"]:+" "}ldap://:${LDAP_PORT_NUMBER}/"
 
 # Add LDAPS URI when TLS is enabled
-is_boolean_yes "$LDAP_ENABLE_TLS" && flags=("-h" "ldap://:${LDAP_PORT_NUMBER}/ ldaps://:${LDAP_LDAPS_PORT_NUMBER}/ ldapi:///")
+is_boolean_yes "${LDAP_ENABLE_TLS}" && flags_map["-h"]+="${flags_map["-h"]:+" "}ldaps://:${LDAP_LDAPS_PORT_NUMBER}/"
+
+# Build flags list
+for flag in "${!flags_map[@]}"; do
+  flags+=("${flag}" "${flags_map[${flag}]}")
+done
 
 # Add "@" so users can add extra command line flags
-flags+=("-F" "${LDAP_CONF_DIR}/slapd.d" "-d" "$LDAP_LOGLEVEL" "$@")
+flags+=("$@")
 
 info "** Starting slapd **"
-am_i_root && flags=("-u" "$LDAP_DAEMON_USER" "${flags[@]}")
 exec "${command}" "${flags[@]}"
