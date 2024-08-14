@@ -7,15 +7,15 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-08-09T20:03:57Z" \
+      org.opencontainers.image.created="2024-08-14T12:28:53Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/suitecrm/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.6.1-debian-12-r6" \
+      org.opencontainers.image.ref.name="8.6.2-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/suitecrm" \
       org.opencontainers.image.title="suitecrm" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="8.6.1"
+      org.opencontainers.image.version="8.6.2"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-12" \
@@ -30,9 +30,9 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
       "render-template-1.0.7-3-linux-${OS_ARCH}-debian-12" \
       "php-8.1.29-6-linux-${OS_ARCH}-debian-12" \
       "apache-2.4.62-0-linux-${OS_ARCH}-debian-12" \
-      "mysql-client-11.4.2-1-linux-${OS_ARCH}-debian-12" \
+      "mysql-client-11.4.3-0-linux-${OS_ARCH}-debian-12" \
       "libphp-8.1.29-4-linux-${OS_ARCH}-debian-12" \
-      "suitecrm-8.6.1-0-linux-${OS_ARCH}-debian-12" \
+      "suitecrm-8.6.2-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -56,7 +56,7 @@ RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/suitecrm/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="8.6.1" \
+    APP_VERSION="8.6.2" \
     BITNAMI_APP_NAME="suitecrm" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:$PATH"
 
