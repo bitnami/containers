@@ -48,6 +48,8 @@ done
 # We need to remove the broken symlink for chown to succeed
 find "${DISCOURSE_BASE_DIR}/vendor/bundle/ruby" -wholename "*/sprockets-*/test/fixtures/errors/symlink" -type l -exec rm -f {} \;
 
+# Add execution permissions to esbuild and ember binaries
+chmod +x "${DISCOURSE_BASE_DIR}/node_modules/@esbuild/"linux-*"/bin/esbuild" "${DISCOURSE_BASE_DIR}/node_modules/ember-cli/bin/ember"
 # Required for running as non-root users, for persistence logic to work properly
 # Using g+rwx/g+rw instead of explicit 775/664 permissions because Discourse includes executable binaries in different subfolders
 configure_permissions_ownership "$DISCOURSE_BASE_DIR" -d "g+rwx" -f "g+rw" -u "$DISCOURSE_DAEMON_USER" -g "root"
