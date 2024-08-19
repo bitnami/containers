@@ -3,18 +3,18 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "21.0.4-9-0"
+        "version": "21.0.4-9-1"
     },
     "keycloak": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "25.0.2-2"
+        "version": "25.0.3-0"
     },
     "wait-for-port": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.8-2"
+        "version": "1.0.8-3"
     }
 }
