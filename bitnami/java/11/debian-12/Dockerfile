@@ -61,4 +61,5 @@ ENV APP_VERSION="11.0.24-9" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 ENTRYPOINT [ "/opt/bitnami/scripts/java/entrypoint.sh" ]
+WORKDIR /app
 CMD [ "bash" ]
