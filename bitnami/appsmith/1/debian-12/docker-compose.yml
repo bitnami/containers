@@ -29,7 +29,7 @@ services:
       - MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=password123
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
   redis:
-    image: docker.io/bitnami/redis:7.0
+    image: docker.io/bitnami/redis:7.4
     volumes:
       - 'redis_data:/bitnami/redis'
     environment:
