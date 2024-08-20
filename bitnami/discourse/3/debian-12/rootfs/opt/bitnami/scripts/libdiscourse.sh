@@ -187,10 +187,6 @@ discourse_initialize() {
         discourse_rake_execute db:migrate
     fi
 
-    # Set execution permissions to ember's binary (required for assets precompile)
-    # Add symlink to discourse/bin for simplicity
-    chmod +x "${DISCOURSE_BASE_DIR}/app/assets/javascripts/node_modules/ember-cli/bin/ember"
-    ln -sf "${DISCOURSE_BASE_DIR}/app/assets/javascripts/node_modules/ember-cli/bin/ember" "${DISCOURSE_BASE_DIR}/bin/ember"
     if is_boolean_yes "$DISCOURSE_PRECOMPILE_ASSETS"; then
         info "Precompiling assets, this may take some time..."
         discourse_rake_execute assets:precompile
