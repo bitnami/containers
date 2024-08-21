@@ -7,15 +7,15 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-07-25T08:12:03Z" \
+      org.opencontainers.image.created="2024-08-21T10:05:10Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/supabase-postgres-meta/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.83.2-debian-12-r3" \
+      org.opencontainers.image.ref.name="0.84.0-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/supabase-postgres-meta" \
       org.opencontainers.image.title="supabase-postgres-meta" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="0.83.2"
+      org.opencontainers.image.version="0.84.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -30,7 +30,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "python-3.11.9-11-linux-${OS_ARCH}-debian-12" \
       "node-20.16.0-0-linux-${OS_ARCH}-debian-12" \
-      "supabase-postgres-meta-0.83.2-0-linux-${OS_ARCH}-debian-12" \
+      "supabase-postgres-meta-0.84.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -48,7 +48,7 @@ RUN useradd -r -u 1001 -g root supabase-postgres-meta
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
 RUN mkdir /.npm && chmod g+rwX /.npm
-ENV APP_VERSION="0.83.2" \
+ENV APP_VERSION="0.84.0" \
     BITNAMI_APP_NAME="supabase-postgres-meta" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/supabase-postgres-meta/node_modules/.bin/:$PATH"
 
