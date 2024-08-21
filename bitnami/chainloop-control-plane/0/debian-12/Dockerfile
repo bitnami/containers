@@ -14,7 +14,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "chainloop-0.96.1-0-linux-${OS_ARCH}-debian-12" \
+      "chainloop-0.96.2-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -36,13 +36,13 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2024-08-20T11:55:17Z" \
+      org.opencontainers.image.created="2024-08-21T11:48:59Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.96.1-debian-12-r0" \
+      org.opencontainers.image.ref.name="0.96.2-debian-12-r0" \
       org.opencontainers.image.title="chainloop-control-plane" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="0.96.1"
+      org.opencontainers.image.version="0.96.2"
 
 COPY prebuildfs /
 COPY rootfs /
@@ -50,7 +50,7 @@ COPY --from=builder /opt/bitnami/chainloop/bin/control-plane /control-plane
 COPY --from=builder /opt/bitnami/chainloop/.spdx-chainloop.spdx /opt/bitnami/chainloop/.spdx-chainloop.spdx
 COPY --from=builder /opt/bitnami/chainloop/licenses /opt/bitnami/chainloop/licenses
 
-ENV APP_VERSION="0.96.1" \
+ENV APP_VERSION="0.96.2" \
     BITNAMI_APP_NAME="chainloop-control-plane"
 
 USER 1001
