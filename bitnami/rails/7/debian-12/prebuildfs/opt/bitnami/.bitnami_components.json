@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "10.11.8-2"
+        "version": "10.11.9-0"
     },
     "node": {
         "arch": "amd64",
@@ -15,13 +15,13 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.11.9-11"
+        "version": "3.11.9-13"
     },
     "rails": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "7.2.0-0"
+        "version": "7.2.1-0"
     },
     "ruby": {
         "arch": "amd64",
