@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "11.4.2-1"
+        "version": "11.4.3-0"
     },
     "postgresql-client": {
         "arch": "amd64",
