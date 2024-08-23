@@ -79,7 +79,7 @@ Non-root container images add an extra layer of security and are generally recom
 | Name                        | Description                                  | Value                                             |
 |-----------------------------|----------------------------------------------|---------------------------------------------------|
 | `JUPYTERHUB_BASE_DIR`       | JupyterHub installation directory.           | `${BITNAMI_ROOT_DIR}/jupyterhub`                  |
-| `JUPYTERHUB_BIN_DIR`        | JupyterHub directory for binary executables. | `${BITNAMI_ROOT_DIR}/miniconda/bin`               |
+| `JUPYTERHUB_BIN_DIR`        | JupyterHub directory for binary executables. | `${BITNAMI_ROOT_DIR}/miniforge/bin`               |
 | `JUPYTERHUB_PROXY_BIN_DIR`  | JupyterHub directory for binary executables. | `${BITNAMI_ROOT_DIR}/configurable-http-proxy/bin` |
 | `JUPYTERHUB_CONF_DIR`       | JupyterHub configuration directory.          | `${JUPYTERHUB_BASE_DIR}/etc`                      |
 | `JUPYTERHUB_CONF_FILE`      | JupyterHub configuration file.               | `${JUPYTERHUB_CONF_DIR}/jupyterhub_config.py`     |
