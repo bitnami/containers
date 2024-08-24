@@ -584,7 +584,12 @@ mongodb_disable_javascript_conf() {
     local -r conf_file_name="${conf_file_path#"$MONGODB_CONF_DIR"}"
 
     if ! mongodb_is_file_external "$conf_file_name"; then
-        mongodb_config_apply_regex "#?security:" "security:\n  javascriptEnabled: false" "$conf_file_path"
+        if grep -q -E "^[[:space:]]*javascriptEnabled:" "$conf_file_path"; then
+            mongodb_config_apply_regex "javascriptEnabled:.*" "javascriptEnabled: false" "$conf_file_path"
+        else
+            # The 'javascriptEnabled' property will be added to the config file
+            mongodb_config_apply_regex "#?security:" "security:\n  javascriptEnabled: false" "$conf_file_path"
+        fi
     else
         debug "$conf_file_name mounted. Skipping disabling javascript"
     fi
