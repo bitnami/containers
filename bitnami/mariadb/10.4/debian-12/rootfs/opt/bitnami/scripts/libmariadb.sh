@@ -533,96 +533,6 @@ mariadb_upgrade() {
     debug_execute "${DB_BIN_DIR}/mysql_upgrade" "${args[@]}" || echo "This installation is already upgraded"
 }
 
-########################
-# Ensure a db user exists with the given password for the '%' host
-# Globals:
-#   DB_*
-# Flags:
-#   -p|--password - database password
-#   -u|--user - database user
-#   --auth-plugin - authentication plugin
-#   --use-ldap - authenticate user via LDAP
-#   --host - database host
-#   --port - database host
-# Arguments:
-#   $1 - database user
-# Returns:
-#   None
-#########################
-mariadb_ensure_user_exists() {
-    local -r user="${1:?user is required}"
-    local password=""
-    local auth_plugin=""
-    local use_ldap="no"
-    local hosts
-    local auth_string=""
-    # For accessing an external database
-    local db_host=""
-    local db_port=""
-
-    # Validate arguments
-    shift 1
-    while [ "$#" -gt 0 ]; do
-        case "$1" in
-            -p|--password)
-                shift
-                password="${1:?missing database password}"
-                ;;
-            --auth-plugin)
-                shift
-                auth_plugin="${1:?missing authentication plugin}"
-                ;;
-            --use-ldap)
-                use_ldap="yes"
-                ;;
-            --host)
-                shift
-                db_host="${1:?missing database host}"
-                ;;
-            --port)
-                shift
-                db_port="${1:?missing database port}"
-                ;;
-            *)
-                echo "Invalid command line flag $1" >&2
-                return 1
-                ;;
-        esac
-        shift
-    done
-    if is_boolean_yes "$use_ldap"; then
-        auth_string="identified via pam using '$DB_FLAVOR'"
-    elif [[ -n "$password" ]]; then
-        if [[ -n "$auth_plugin" ]]; then
-            auth_string="identified with $auth_plugin by '$password'"
-        else
-            auth_string="identified by '$password'"
-        fi
-    fi
-    debug "creating database user \'$user\'"
-
-    local -a mysql_execute_cmd=("mysql_execute")
-    local -a mysql_execute_print_output_cmd=("mysql_execute_print_output")
-    if [[ -n "$db_host" && -n "$db_port" ]]; then
-        mysql_execute_cmd=("mysql_remote_execute" "$db_host" "$db_port")
-        mysql_execute_print_output_cmd=("mysql_remote_execute_print_output" "$db_host" "$db_port")
-    fi
-
-    "${mysql_execute_cmd[@]}" "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
-create or replace user '${user}'@'%' ${auth_string};
-EOF
-    debug "Removing all other hosts for the user"
-    hosts=$("${mysql_execute_print_output_cmd[@]}" "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
-select Host from user where User='${user}' and Host!='%';
-EOF
-)
-    for host in $hosts; do
-        "${mysql_execute_cmd[@]}" "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
-drop user '$user'@'$host';
-EOF
-    done
-}
-
 #!/bin/bash
 # Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
@@ -939,6 +849,98 @@ mysql_migrate_old_configuration() {
 }
 
 ########################
+# Ensure a db user exists with the given password for the '%' host
+# Globals:
+#   DB_*
+# Flags:
+#   -p|--password - database password
+#   -u|--user - database user
+#   --auth-plugin - authentication plugin
+#   --use-ldap - authenticate user via LDAP
+#   --host - database host
+#   --port - database host
+# Arguments:
+#   $1 - database user
+# Returns:
+#   None
+#########################
+mysql_ensure_user_exists() {
+    local -r user="${1:?user is required}"
+    local password=""
+    local auth_plugin=""
+    local use_ldap="no"
+    local hosts
+    local auth_string=""
+    # For accessing an external database
+    local db_host=""
+    local db_port=""
+
+    # Validate arguments
+    shift 1
+    while [ "$#" -gt 0 ]; do
+        case "$1" in
+            -p|--password)
+                shift
+                password="${1:?missing database password}"
+                ;;
+            --auth-plugin)
+                shift
+                auth_plugin="${1:?missing authentication plugin}"
+                ;;
+            --use-ldap)
+                use_ldap="yes"
+                ;;
+            --host)
+                shift
+                db_host="${1:?missing database host}"
+                ;;
+            --port)
+                shift
+                db_port="${1:?missing database port}"
+                ;;
+            *)
+                echo "Invalid command line flag $1" >&2
+                return 1
+                ;;
+        esac
+        shift
+    done
+    if is_boolean_yes "$use_ldap"; then
+        auth_string="identified via pam using '$DB_FLAVOR'"
+    elif [[ -n "$password" ]]; then
+        if [[ -n "$auth_plugin" ]]; then
+            auth_string="identified with $auth_plugin by '$password'"
+        else
+            auth_string="identified by '$password'"
+        fi
+    fi
+    debug "creating database user \'$user\'"
+
+    local -a mysql_execute_cmd=("mysql_execute")
+    local -a mysql_execute_print_output_cmd=("mysql_execute_print_output")
+    if [[ -n "$db_host" && -n "$db_port" ]]; then
+        mysql_execute_cmd=("mysql_remote_execute" "$db_host" "$db_port")
+        mysql_execute_print_output_cmd=("mysql_remote_execute_print_output" "$db_host" "$db_port")
+    fi
+
+    local mysql_create_user_cmd
+    [[ "$DB_FLAVOR" = "mariadb" ]] && mysql_create_user_cmd="create or replace user" || mysql_create_user_cmd="create user if not exists"
+    "${mysql_execute_cmd[@]}" "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
+${mysql_create_user_cmd} '${user}'@'%' ${auth_string};
+EOF
+    debug "Removing all other hosts for the user"
+    hosts=$("${mysql_execute_print_output_cmd[@]}" "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
+select Host from user where User='${user}' and Host!='%';
+EOF
+)
+    for host in $hosts; do
+        "${mysql_execute_cmd[@]}" "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
+drop user '$user'@'$host';
+EOF
+    done
+}
+
+########################
 # Ensure a db user does not exist
 # Globals:
 #   DB_*
@@ -1175,7 +1177,7 @@ mysql_ensure_optional_user_exists() {
         flags+=("-p" "$password")
         [[ -n "$auth_plugin" ]] && flags=("${flags[@]}" "--auth-plugin" "$auth_plugin")
     fi
-    "${DB_FLAVOR}"_ensure_user_exists "${flags[@]}"
+    mysql_ensure_user_exists "${flags[@]}"
 }
 
 ########################
@@ -1338,14 +1340,14 @@ find_jemalloc_lib() {
 ########################
 # Execute a reliable health check against the current mysql instance
 # Globals:
-#   DB_ROOT_PASSWORD, DB_MASTER_ROOT_PASSWORD
+#   DB_ROOT_USER, DB_ROOT_PASSWORD, DB_MASTER_ROOT_PASSWORD
 # Arguments:
 #   None
 # Returns:
 #   mysqladmin output
 #########################
 mysql_healthcheck() {
-    local args=("-uroot" "-h0.0.0.0")
+    local args=("-u${DB_ROOT_USER}" "-h0.0.0.0")
     local root_password
 
     root_password="$(get_master_env_var_value ROOT_PASSWORD)"
@@ -1406,6 +1408,22 @@ mysql_client_extra_opts() {
             value="$(mysql_client_env_value "SSL_${key^^}_FILE")"
             [[ -n "${value}" ]] && opts+=("--ssl-${key}=${value}")
         done
+    else
+        # Skip SSL validation
+        if [[ "$(mysql_client_flavor)" = "mysql" ]]; then
+            opts+=("--ssl-mode=DISABLED")
+        else
+            # SSL connections are enabled by default in MariaDB >=10.11
+            local mysql_version=""
+            local major_version=""
+            local minor_version=""
+            mysql_version="$(mysql_get_version)"
+            major_version="$(get_sematic_version "${mysql_version}" 1)"
+            minor_version="$(get_sematic_version "${mysql_version}" 2)"
+            if [[ "${major_version}" -gt 10 ]] || [[ "${major_version}" -eq 10 && "${minor_version}" -eq 11 ]]; then
+                opts+=("--skip-ssl")
+            fi
+        fi
     fi
     echo "${opts[@]:-}"
 }
