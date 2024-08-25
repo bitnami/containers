@@ -7,11 +7,11 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-08-09T18:46:24Z" \
+      org.opencontainers.image.created="2024-08-25T12:18:41Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/phpmyadmin/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="5.2.1-debian-12-r38" \
+      org.opencontainers.image.ref.name="5.2.1-debian-12-r39" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/phpmyadmin" \
       org.opencontainers.image.title="phpmyadmin" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -29,9 +29,9 @@ RUN install_packages ca-certificates curl libaudit1 libbrotli1 libbsd0 libbz2-1.
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "render-template-1.0.7-3-linux-${OS_ARCH}-debian-12" \
-      "php-8.2.22-0-linux-${OS_ARCH}-debian-12" \
+      "php-8.2.22-3-linux-${OS_ARCH}-debian-12" \
       "apache-2.4.62-0-linux-${OS_ARCH}-debian-12" \
-      "mysql-client-10.11.8-2-linux-${OS_ARCH}-debian-12" \
+      "mysql-client-10.11.9-0-linux-${OS_ARCH}-debian-12" \
       "libphp-8.2.22-0-linux-${OS_ARCH}-debian-12" \
       "phpmyadmin-5.2.1-5-linux-${OS_ARCH}-debian-12" \
     ) ; \
