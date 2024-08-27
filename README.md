@@ -2,6 +2,7 @@
     <img width="400px" height=auto src="https://bitnami.com/downloads/logos/bitnami-by-vmware.png" />
 </p>
 
+
 <p align="center">
     <a href="https://twitter.com/bitnami"><img src="https://badgen.net/badge/twitter/@bitnami/1DA1F2?icon&label" /></a>
     <a href="https://github.com/bitnami/containers"><img src="https://badgen.net/github/stars/bitnami/containers?icon=github" /></a>
