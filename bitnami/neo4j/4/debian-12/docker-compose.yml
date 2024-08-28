@@ -1,7 +1,6 @@
 # Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 
-version: '2'
 services:
   neo4j:
     image: docker.io/bitnami/neo4j:4
