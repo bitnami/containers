@@ -447,7 +447,7 @@ setup_etcd_active_endpoints() {
         ETCD_ACTIVE_ENDPOINTS=$(echo "${active_endpoints_array[*]}" | tr ' ' ',')
         export ETCD_ACTIVE_ENDPOINTS
     fi
-    echo "${active_endpoints} ${cluster_size} ${ETCD_ACTIVE_ENDPOINTS}"
+    echo "${active_endpoints} ${cluster_size} ${ETCD_ACTIVE_ENDPOINTS} ${host} ${port}"
 }
 
 ########################
@@ -462,7 +462,8 @@ setup_etcd_active_endpoints() {
 is_healthy_etcd_cluster() {
     local return_value=0
     local active_endpoints cluster_size
-    read -r active_endpoints cluster_size ETCD_ACTIVE_ENDPOINTS <<<"$(setup_etcd_active_endpoints)"
+    local host port
+    read -r active_endpoints cluster_size ETCD_ACTIVE_ENDPOINTS host port <<<"$(setup_etcd_active_endpoints)"
     export ETCD_ACTIVE_ENDPOINTS
 
     if is_boolean_yes "$ETCD_DISASTER_RECOVERY"; then
