@@ -38,6 +38,7 @@ openresty_patch_httpoxy_vulnerability() {
 declare -a writable_dirs=(
     "$OPENRESTY_VOLUME_DIR"
     "$OPENRESTY_CONF_DIR"
+    "${OPENRESTY_BASE_DIR}/nginx"
     "$OPENRESTY_SERVER_BLOCKS_DIR"
     "${OPENRESTY_CONF_DIR}/bitnami"
     "${OPENRESTY_CONF_DIR}/bitnami/certs"
@@ -59,8 +60,8 @@ openresty_patch_httpoxy_vulnerability
 openresty_configure_port "$OPENRESTY_DEFAULT_HTTP_PORT_NUMBER"
 
 # Users can mount their html sites at /app
-mv "${OPENRESTY_BASE_DIR}/nginx/html" /app
-ln -sf /app "${OPENRESTY_BASE_DIR}/nginx/html"
+mv "$OPENRESTY_HTDOCS_DIR" /app
+ln -sf /app "$OPENRESTY_HTDOCS_DIR"
 
 # Users can mount their certificates at /certs
 mv "${OPENRESTY_CONF_DIR}/bitnami/certs" /certs
