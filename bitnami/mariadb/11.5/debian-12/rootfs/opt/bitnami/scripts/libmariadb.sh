@@ -1410,9 +1410,7 @@ mysql_client_extra_opts() {
         done
     else
         # Skip SSL validation
-        if [[ "$(mysql_client_flavor)" = "mysql" ]]; then
-            opts+=("--ssl-mode=DISABLED")
-        else
+        if [[ "$(mysql_client_flavor)" = "mariadb" ]]; then
             # SSL connections are enabled by default in MariaDB >=10.11
             local mysql_version=""
             local major_version=""
