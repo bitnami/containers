@@ -3,13 +3,13 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "2.4.62-0"
+        "version": "2.4.62-2"
     },
     "libphp": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.2.22-0"
+        "version": "8.2.23-0"
     },
     "magento": {
         "arch": "amd64",
@@ -27,7 +27,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.2.22-3"
+        "version": "8.2.23-0"
     },
     "render-template": {
         "arch": "amd64",
