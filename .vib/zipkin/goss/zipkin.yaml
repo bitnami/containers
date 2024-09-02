@@ -1,0 +1,16 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+user:
+  zipkin:
+    exists: true
+    uid: 1001
+    gid: 0
+command:
+  run-zipkin:
+    # We need a different port to not collide with the version check
+    exec: export QUERY_PORT=9044; cd /opt/bitnami/zipkin; timeout --preserve-status 12 start-zipkin 2>&1 || true
+    timeout: 15000
+    exit-status: 0
+    stdout:
+      - /Serving HTTP at.*9044/
