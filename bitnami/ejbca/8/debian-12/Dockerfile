@@ -8,11 +8,11 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-09-01T15:52:33Z" \
+      org.opencontainers.image.created="2024-09-02T10:27:28Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/ejbca/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.3.2-debian-12-r1" \
+      org.opencontainers.image.ref.name="8.3.2-debian-12-r2" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/ejbca" \
       org.opencontainers.image.title="ejbca" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -32,7 +32,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
       "java-11.0.24-9-1-linux-${OS_ARCH}-debian-12" \
       "wildfly-26.1.3-20-linux-${OS_ARCH}-debian-12" \
       "mysql-client-10.11.9-0-linux-${OS_ARCH}-debian-12" \
-      "ejbca-8.3.2-0-linux-${OS_ARCH}-debian-12" \
+      "ejbca-8.3.2-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
