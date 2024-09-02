@@ -8,11 +8,11 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-08-23T21:51:53Z" \
+      org.opencontainers.image.created="2024-09-02T18:23:04Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/spark/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.4.3-debian-12-r11" \
+      org.opencontainers.image.ref.name="3.4.3-debian-12-r12" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/spark" \
       org.opencontainers.image.title="spark" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -56,7 +56,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="3.4.3" \
     BITNAMI_APP_NAME="spark" \
     JAVA_HOME="/opt/bitnami/java" \
-    LD_LIBRARY_PATH="/opt/bitnami/python/lib:/opt/bitnami/spark/venv/lib/python3.8/site-packages/numpy.libs:$LD_LIBRARY_PATH" \
+    LD_LIBRARY_PATH="/opt/bitnami/python/lib:/opt/bitnami/spark/venv/lib/python3.12/site-packages/numpy.libs:$LD_LIBRARY_PATH" \
     LIBNSS_WRAPPER_PATH="/opt/bitnami/common/lib/libnss_wrapper.so" \
     NSS_WRAPPER_GROUP="/opt/bitnami/spark/tmp/nss_group" \
     NSS_WRAPPER_PASSWD="/opt/bitnami/spark/tmp/nss_passwd" \
