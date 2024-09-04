@@ -7,11 +7,11 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-08-07T00:41:59Z" \
+      org.opencontainers.image.created="2024-09-04T12:20:07Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/fluxcd-helm-controller/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.0.1-debian-12-r9" \
+      org.opencontainers.image.ref.name="1.0.1-debian-12-r10" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/fluxcd-helm-controller" \
       org.opencontainers.image.title="fluxcd-helm-controller" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
