@@ -44,7 +44,7 @@ flags_map["-h"]+="${flags_map["-h"]:+" "}ldapi:///"
 if ! is_boolean_yes "${LDAP_ENABLE_PROXYPROTO}" \
     || [[ "${LDAP_PORT_NUMBER}" -ne "${LDAP_PROXYPROTO_PORT_NUMBER}" ]]
 then
-  flags_map["-h"]+="${flags_map["-h"]:+" "}ldap://:${LDAP_PORT_NUMBER}/"
+    flags_map["-h"]+="${flags_map["-h"]:+" "}ldap://:${LDAP_PORT_NUMBER}/"
 fi
 
 # Add LDAPS URI when TLS is enabled
@@ -53,23 +53,23 @@ fi
 # * proxy protocol capability is disabled
 # * proxy protocol capability is enabled and proxy protocol tls port differ
 if is_boolean_yes "${LDAP_ENABLE_TLS}" \
-  && { ! is_boolean_yes "${LDAP_ENABLE_PROXYPROTO}" \
-    || [[ "${LDAP_LDAPS_PORT_NUMBER}" -ne "${LDAP_PROXYPROTO_LDAPS_PORT_NUMBER}" ]]; }
+    && { ! is_boolean_yes "${LDAP_ENABLE_PROXYPROTO}" \
+        || [[ "${LDAP_LDAPS_PORT_NUMBER}" -ne "${LDAP_PROXYPROTO_LDAPS_PORT_NUMBER}" ]]; }
 then
-  flags_map["-h"]+="${flags_map["-h"]:+" "}ldaps://:${LDAP_LDAPS_PORT_NUMBER}/"
+    flags_map["-h"]+="${flags_map["-h"]:+" "}ldaps://:${LDAP_LDAPS_PORT_NUMBER}/"
 fi
 
 # Add PLDAP URI when proxy protocol capability is enabled
 if is_boolean_yes "${LDAP_ENABLE_PROXYPROTO}"; then
-  flags_map["-h"]+="${flags_map["-h"]:+" "}pldap://:${LDAP_PROXYPROTO_PORT_NUMBER}/"
-  # Also add PLDAPS URI when TLS is enabled
-  is_boolean_yes "${LDAP_ENABLE_TLS}" \
-    && flags_map["-h"]+="${flags_map["-h"]:+" "}pldaps://:${LDAP_PROXYPROTO_LDAPS_PORT_NUMBER}/"
+    flags_map["-h"]+="${flags_map["-h"]:+" "}pldap://:${LDAP_PROXYPROTO_PORT_NUMBER}/"
+    # Also add PLDAPS URI when TLS is enabled
+    is_boolean_yes "${LDAP_ENABLE_TLS}" \
+        && flags_map["-h"]+="${flags_map["-h"]:+" "}pldaps://:${LDAP_PROXYPROTO_LDAPS_PORT_NUMBER}/"
 fi
 
 # Build flags list
 for flag in "${!flags_map[@]}"; do
-  flags+=("${flag}" "${flags_map[${flag}]}")
+    flags+=("${flag}" "${flags_map[${flag}]}")
 done
 
 # Add "@" so users can add extra command line flags
