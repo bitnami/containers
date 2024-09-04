@@ -7,15 +7,15 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-09-03T06:19:20Z" \
+      org.opencontainers.image.created="2024-09-04T20:38:58Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/cypress/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="13.14.1-debian-12-r1" \
+      org.opencontainers.image.ref.name="13.14.2-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cypress" \
       org.opencontainers.image.title="cypress" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="13.14.1"
+      org.opencontainers.image.version="13.14.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -30,7 +30,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "python-3.12.5-1-linux-${OS_ARCH}-debian-12" \
       "node-18.20.4-5-linux-${OS_ARCH}-debian-12" \
-      "cypress-13.14.1-0-linux-${OS_ARCH}-debian-12" \
+      "cypress-13.14.2-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -49,7 +49,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN mkdir /.local && chmod g+rwX /.local
 
 RUN mkdir /app && chmod g+rwX -R /app /opt/bitnami/node/cypress-cache && ln -s /app /e2e && mkdir -p /usr/local/lib /usr/local/bin && ln -s /opt/bitnami/node/node_modules /usr/local/lib/node_modules && ln -s /usr/local/lib/node_modules/cypress/bin/cypress /usr/local/bin/cypress && mkdir -p /.pki /.local /.config /.cache /.fontconfig && chmod g+rwX -R /.pki /.local /.cache /.config /.fontconfig
-ENV APP_VERSION="13.14.1" \
+ENV APP_VERSION="13.14.2" \
     BITNAMI_APP_NAME="cypress" \
     CYPRESS_CACHE_FOLDER="/opt/bitnami/node/cypress-cache" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/node/lib/node_modules/cypress/bin:$PATH"
