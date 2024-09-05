@@ -8,11 +8,11 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-08-09T20:36:43Z" \
+      org.opencontainers.image.created="2024-09-05T00:42:31Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/java/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="11.0.24-9-debian-12-r4" \
+      org.opencontainers.image.ref.name="11.0.24-9-debian-12-r5" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/java" \
       org.opencontainers.image.title="java" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -60,6 +60,6 @@ ENV APP_VERSION="11.0.24-9" \
     LANGUAGE="en_US:en" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
-ENTRYPOINT [ "/opt/bitnami/scripts/java/entrypoint.sh" ]
 WORKDIR /app
+ENTRYPOINT [ "/opt/bitnami/scripts/java/entrypoint.sh" ]
 CMD [ "bash" ]
