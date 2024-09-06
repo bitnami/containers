@@ -843,7 +843,7 @@ repmgr_initialize() {
 
     ensure_dir_exists "$REPMGR_LOCK_DIR"
     am_i_root && chown "$POSTGRESQL_DAEMON_USER:$POSTGRESQL_DAEMON_GROUP" "$REPMGR_LOCK_DIR"
-    
+
     ensure_dir_exists "$POSTGRESQL_DATA_DIR"
     am_i_root && chown "$POSTGRESQL_DAEMON_USER:$POSTGRESQL_DAEMON_GROUP" "$POSTGRESQL_DATA_DIR"
 
