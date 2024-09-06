@@ -27,12 +27,12 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.7-3"
+        "version": "1.0.7-4"
     },
     "wordpress": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "6.6.1-13"
+        "version": "6.6.1-14"
     }
 }
