@@ -172,41 +172,44 @@ docker-compose up -d
 
 #### Customizable environment variables
 
-| Name                             | Description                                      | Default Value                              |
-|----------------------------------|--------------------------------------------------|--------------------------------------------|
-| `REDIS_DATA_DIR`                 | Redis data directory                             | `${REDIS_VOLUME_DIR}/data`                 |
-| `REDIS_OVERRIDES_FILE`           | Redis config overrides file                      | `${REDIS_MOUNTED_CONF_DIR}/overrides.conf` |
-| `REDIS_DISABLE_COMMANDS`         | Commands to disable in Redis                     | `nil`                                      |
-| `REDIS_DATABASE`                 | Default Redis database                           | `redis`                                    |
-| `REDIS_AOF_ENABLED`              | Enable AOF                                       | `yes`                                      |
-| `REDIS_RDB_POLICY`               | Enable RDB policy persitence                     | `nil`                                      |
-| `REDIS_RDB_POLICY_DISABLED`      | Allows to enable RDB policy persistence          | `no`                                       |
-| `REDIS_MASTER_HOST`              | Redis master host (used by slaves)               | `nil`                                      |
-| `REDIS_MASTER_PORT_NUMBER`       | Redis master host port (used by slaves)          | `6379`                                     |
-| `REDIS_PORT_NUMBER`              | Redis port number                                | `$REDIS_DEFAULT_PORT_NUMBER`               |
-| `REDIS_ALLOW_REMOTE_CONNECTIONS` | Allow remote connection to the service           | `yes`                                      |
-| `REDIS_REPLICATION_MODE`         | Redis replication mode (values: master, slave)   | `nil`                                      |
-| `REDIS_REPLICA_IP`               | The replication announce ip                      | `nil`                                      |
-| `REDIS_REPLICA_PORT`             | The replication announce port                    | `nil`                                      |
-| `REDIS_EXTRA_FLAGS`              | Additional flags pass to 'redis-server' commands | `nil`                                      |
-| `ALLOW_EMPTY_PASSWORD`           | Allow password-less access                       | `no`                                       |
-| `REDIS_PASSWORD`                 | Password for Redis                               | `nil`                                      |
-| `REDIS_MASTER_PASSWORD`          | Redis master node password                       | `nil`                                      |
-| `REDIS_ACLFILE`                  | Redis ACL file                                   | `nil`                                      |
-| `REDIS_IO_THREADS_DO_READS`      | Enable multithreading when reading socket        | `nil`                                      |
-| `REDIS_IO_THREADS`               | Number of threads                                | `nil`                                      |
-| `REDIS_TLS_ENABLED`              | Enable TLS                                       | `no`                                       |
-| `REDIS_TLS_PORT_NUMBER`          | Redis TLS port (requires REDIS_ENABLE_TLS=yes)   | `6379`                                     |
-| `REDIS_TLS_CERT_FILE`            | Redis TLS certificate file                       | `nil`                                      |
-| `REDIS_TLS_CA_DIR`               | Directory containing TLS CA certificates         | `nil`                                      |
-| `REDIS_TLS_KEY_FILE`             | Redis TLS key file                               | `nil`                                      |
-| `REDIS_TLS_KEY_FILE_PASS`        | Redis TLS key file passphrase                    | `nil`                                      |
-| `REDIS_TLS_CA_FILE`              | Redis TLS CA file                                | `nil`                                      |
-| `REDIS_TLS_DH_PARAMS_FILE`       | Redis TLS DH parameter file                      | `nil`                                      |
-| `REDIS_TLS_AUTH_CLIENTS`         | Enable Redis TLS client authentication           | `yes`                                      |
-| `REDIS_SENTINEL_MASTER_NAME`     | Redis Sentinel master name                       | `nil`                                      |
-| `REDIS_SENTINEL_HOST`            | Redis Sentinel host                              | `nil`                                      |
-| `REDIS_SENTINEL_PORT_NUMBER`     | Redis Sentinel host port (used by slaves)        | `26379`                                    |
+| Name                             | Description                                       | Default Value                              |
+|----------------------------------|---------------------------------------------------|--------------------------------------------|
+| `REDIS_DATA_DIR`                 | Redis data directory                              | `${REDIS_VOLUME_DIR}/data`                 |
+| `REDIS_OVERRIDES_FILE`           | Redis config overrides file                       | `${REDIS_MOUNTED_CONF_DIR}/overrides.conf` |
+| `REDIS_DISABLE_COMMANDS`         | Commands to disable in Redis                      | `nil`                                      |
+| `REDIS_DATABASE`                 | Default Redis database                            | `redis`                                    |
+| `REDIS_AOF_ENABLED`              | Enable AOF                                        | `yes`                                      |
+| `REDIS_RDB_POLICY`               | Enable RDB policy persitence                      | `nil`                                      |
+| `REDIS_RDB_POLICY_DISABLED`      | Allows to enable RDB policy persistence           | `no`                                       |
+| `REDIS_MASTER_HOST`              | Redis master host (used by slaves)                | `nil`                                      |
+| `REDIS_MASTER_PORT_NUMBER`       | Redis master host port (used by slaves)           | `6379`                                     |
+| `REDIS_PORT_NUMBER`              | Redis port number                                 | `$REDIS_DEFAULT_PORT_NUMBER`               |
+| `REDIS_ALLOW_REMOTE_CONNECTIONS` | Allow remote connection to the service            | `yes`                                      |
+| `REDIS_REPLICATION_MODE`         | Redis replication mode (values: master, slave)    | `nil`                                      |
+| `REDIS_REPLICA_IP`               | The replication announce ip                       | `nil`                                      |
+| `REDIS_REPLICA_PORT`             | The replication announce port                     | `nil`                                      |
+| `REDIS_EXTRA_FLAGS`              | Additional flags pass to 'redis-server' commands  | `nil`                                      |
+| `ALLOW_EMPTY_PASSWORD`           | Allow password-less access                        | `no`                                       |
+| `REDIS_REQUIREPASS`              | Password for default user                         | `$REDIS_PASSWORD` when `$REDIS_USER` is not explicitly set |
+| `REDIS_USER`                     | User name for Redis ACL                           | `default`                                  |
+| `REDIS_PASSWORD`                 | Password for Redis                                | `nil`                                      |
+| `REDIS_MASTER_USER`              | Redis master node user name, used for replication | `$REDIS_USER`                              |
+| `REDIS_MASTER_PASSWORD`          | Redis master node password, used for replication  | `$REDIS_PASSWORD` when `$REDIS_MASTER_USER` is not explicitly set |
+| `REDIS_ACLFILE`                  | Redis ACL file                                    | `nil`                                      |
+| `REDIS_IO_THREADS_DO_READS`      | Enable multithreading when reading socket         | `nil`                                      |
+| `REDIS_IO_THREADS`               | Number of threads                                 | `nil`                                      |
+| `REDIS_TLS_ENABLED`              | Enable TLS                                        | `no`                                       |
+| `REDIS_TLS_PORT_NUMBER`          | Redis TLS port (requires REDIS_ENABLE_TLS=yes)    | `6379`                                     |
+| `REDIS_TLS_CERT_FILE`            | Redis TLS certificate file                        | `nil`                                      |
+| `REDIS_TLS_CA_DIR`               | Directory containing TLS CA certificates          | `nil`                                      |
+| `REDIS_TLS_KEY_FILE`             | Redis TLS key file                                | `nil`                                      |
+| `REDIS_TLS_KEY_FILE_PASS`        | Redis TLS key file passphrase                     | `nil`                                      |
+| `REDIS_TLS_CA_FILE`              | Redis TLS CA file                                 | `nil`                                      |
+| `REDIS_TLS_DH_PARAMS_FILE`       | Redis TLS DH parameter file                       | `nil`                                      |
+| `REDIS_TLS_AUTH_CLIENTS`         | Enable Redis TLS client authentication            | `yes`                                      |
+| `REDIS_SENTINEL_MASTER_NAME`     | Redis Sentinel master name                        | `nil`                                      |
+| `REDIS_SENTINEL_HOST`            | Redis Sentinel host                               | `nil`                                      |
+| `REDIS_SENTINEL_PORT_NUMBER`     | Redis Sentinel host port (used by slaves)         | `26379`                                    |
 
 #### Read-only environment variables
 
@@ -353,7 +356,7 @@ services:
 
 ### Enabling Access Control List
 
-Redis(R) offers [ACL](https://redis.io/topics/acl) since 6.0 which allows certain connections to be limited in terms of the commands that can be executed and the keys that can be accessed. We strongly recommend enabling ACL in production by specifiying the `REDIS_ACLFILE`.
+Redis(R) offers [ACL](https://redis.io/topics/acl) since 6.0 which allows certain connections to be limited in terms of the commands that can be executed and the keys that can be accessed. We strongly recommend enabling ACL in production by specifiying the `REDIS_ACLFILE`. The ACL system provides a fine-grained user access and security configuration. The environmental variables in this image provide a way to use ACL system and also `requirepass` option with compatibility for older configurations. The ACL file can be created with a Redis instance and then configured to be used. The same ACL file can be copied to each node in a Redis cluster. If ACL file is set to provide a custom administrator user, the `default` user can be disabled.
 
 ```console
 docker run -name redis -e REDIS_ACLFILE=/opt/bitnami/redis/mounted-etc/users.acl -v /path/to/users.acl:/opt/bitnami/redis/mounted-etc/users.acl bitnami/redis:latest
@@ -371,6 +374,10 @@ services:
       - /path/to/users.acl:/opt/bitnami/redis/mounted-etc/users.acl
   ...
 ```
+
+The environmental variable `REDIS_REQUIREPASS` can be used to explicitly set `requirepass` configuration option. Redis service will set a `default` user with the given password to its ACL system. The `REDIS_REQUIREPASS` option inherits the value of `REDIS_PASSWORD` when `REDIS_USER` is not set for compatibilitys sake. When using ACL system, set `REDIS_USER` and `REDIS_PASSWORD` with administrator credentials to allow proper set up of Redis service. Optionally set `REDIS_MASTER_USER` and `REDIS_MASTER_PASSWORD` if you wish to use a different user for cluster replication. The `REDIS_MASTER_PASSWORD` option inherits the value of `REDIS_PASSWORD` when `REDIS_MASTER_USER` is not set for compatibilitys sake.
+
+For more information, see [Redis ACL documentation](https://redis.io/docs/latest/operate/oss_and_stack/management/security/acl/) for reference.
 
 ### Setting up a standalone instance
 
