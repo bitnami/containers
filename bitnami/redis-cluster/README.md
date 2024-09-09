@@ -181,8 +181,11 @@ services:
 | `REDIS_REPLICA_PORT`                    | The replication announce port                                             | `nil`                                      |
 | `REDIS_EXTRA_FLAGS`                     | Additional flags pass to 'redis-server' commands                          | `nil`                                      |
 | `ALLOW_EMPTY_PASSWORD`                  | Allow password-less access                                                | `no`                                       |
+| `REDIS_REQUIREPASS`                     | Password for default user                                                 | `$REDIS_PASSWORD` when `$REDIS_USER` is not explicitly set |
+| `REDIS_USER`                            | User name for Redis ACL                                                   | `default`                                  |
 | `REDIS_PASSWORD`                        | Password for Redis                                                        | `nil`                                      |
-| `REDIS_MASTER_PASSWORD`                 | Redis master node password                                                | `nil`                                      |
+| `REDIS_MASTER_USER`                     | Redis master node user name, used for replication                         | `$REDIS_USER`                              |
+| `REDIS_MASTER_PASSWORD`                 | Redis master node password, used for replication                          | `$REDIS_PASSWORD` when `$REDIS_MASTER_USER` is not explicitly set |
 | `REDIS_ACLFILE`                         | Redis ACL file                                                            | `nil`                                      |
 | `REDIS_IO_THREADS_DO_READS`             | Enable multithreading when reading socket                                 | `nil`                                      |
 | `REDIS_IO_THREADS`                      | Number of threads                                                         | `nil`                                      |
@@ -240,6 +243,14 @@ Where you can add all the `node:port` that you want. The `--cluster-replicas` pa
 
 Depending on the environment you're deploying into, you might run into issues where the cluster initialization is not completing successfully. One of the issue is related to the DNS lookup of the redis nodes performed during cluster initialization. By default, this DNS lookup is performed as soon as all the redis nodes reply to a successful ping.
 However, in some environments such as Kubernetes, it can help to wait some time before performing this DNS lookup in order to prevent getting stale records. To this end, you can increase `REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP` to a value around `30` which has been found to be good in most cases.
+
+### Users and Passwords
+
+It's possible to add client authentication and isolation by using Access Control Lists (ACL) instead of `requirepass` configuration option. The ACL system provides a fine-grained user access and security configuration. Since Redis version 6 the `requirepass` is just a compatibility layer over the new ACL system. The environmental variables in this image provide a way to use ACL system and also `requirepass` option with compatibility for older configurations. The ACL file can be created with a Redis instance and then configured to be used. The same ACL file can be copied to each node in a Redis cluster. If ACL file is set to provide a custom administrator user, the `default` user can be disabled.
+
+The environmental variable `REDIS_REQUIREPASS` can be used to explicitly set `requirepass` configuration option. Redis service will set a `default` user with the given password to its ACL system. The `REDIS_REQUIREPASS` option inherits the value of `REDIS_PASSWORD` when `REDIS_USER` is not set for compatibilitys sake. When using ACL system, set `REDIS_USER` and `REDIS_PASSWORD` with administrator credentials to allow proper set up of Redis service. Optionally set `REDIS_MASTER_USER` and `REDIS_MASTER_PASSWORD` if you wish to use a different user for cluster replication. The `REDIS_MASTER_PASSWORD` option inherits the value of `REDIS_PASSWORD` when `REDIS_MASTER_USER` is not set for compatibilitys sake.
+
+For more information, see [Redis ACL documentation](https://redis.io/docs/latest/operate/oss_and_stack/management/security/acl/) for reference.
 
 ### Securing Redis(R) Cluster traffic
 

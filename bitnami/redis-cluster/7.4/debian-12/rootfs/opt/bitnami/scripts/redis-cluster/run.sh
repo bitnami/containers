@@ -25,10 +25,14 @@ read -ra nodes <<< "$(tr ',;' ' ' <<< "${REDIS_NODES}")"
 ARGS=("--port" "$REDIS_PORT_NUMBER")
 ARGS+=("--include" "${REDIS_BASE_DIR}/etc/redis.conf")
 
-if ! is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
-    ARGS+=("--requirepass" "$REDIS_PASSWORD")
-    ARGS+=("--masterauth" "$REDIS_PASSWORD")
-else
+if [[ -n "$REDIS_MASTER_USER" ]] && [[ -n "$REDIS_MASTER_PASSWORD" ]]; then
+    ARGS+=("--masteruser" "$REDIS_MASTER_USER")
+    ARGS+=("--masterauth" "$REDIS_MASTER_PASSWORD")
+fi
+
+if [[ -n "$REDIS_REQUIREPASS" ]]; then
+    ARGS+=("--requirepass" "$REDIS_REQUIREPASS")
+elif is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
     ARGS+=("--protected-mode" "no")
 fi
 
