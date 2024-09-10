@@ -300,6 +300,7 @@ The set of default standard configuration files may be found [here](https://gith
 | `DISCOURSE_REDIS_PORT_NUMBER`          | Redis(R) server port.                                                                                                           | `6379`                                  |
 | `DISCOURSE_REDIS_PASSWORD`             | Redis(R) user password.                                                                                                         | `nil`                                   |
 | `DISCOURSE_REDIS_USE_SSL`              | Whether to enable SSL for Redis(R).                                                                                             | `no`                                    |
+| `DISCOURSE_REDIS_DB`                   | Redis(R) database number.                                                                                                       | `0`                                     |
 
 #### Read-only environment variables
 
