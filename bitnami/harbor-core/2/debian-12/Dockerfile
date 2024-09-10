@@ -7,11 +7,11 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-09-10T10:47:46Z" \
+      org.opencontainers.image.created="2024-09-10T11:18:08Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/harbor-core/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.11.1-debian-12-r4" \
+      org.opencontainers.image.ref.name="2.11.1-debian-12-r5" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/harbor-core" \
       org.opencontainers.image.title="harbor-core" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -30,7 +30,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "wait-for-port-1.0.8-4-linux-${OS_ARCH}-debian-12" \
       "ini-file-1.4.7-4-linux-${OS_ARCH}-debian-12" \
-      "harbor-core-2.11.1-3-linux-${OS_ARCH}-debian-12" \
+      "harbor-core-2.11.1-4-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
