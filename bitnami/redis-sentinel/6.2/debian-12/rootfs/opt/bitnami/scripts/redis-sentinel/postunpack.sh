@@ -25,7 +25,7 @@ done
 
 # Redis Sentinel defaults
 redis_conf_set "port" "$REDIS_SENTINEL_DEFAULT_PORT_NUMBER"
-redis_conf_set "bind" "0.0.0.0"
+redis_conf_set "bind" "0.0.0.0 ::"
 redis_conf_set "pidfile" "$REDIS_SENTINEL_PID_FILE"
 # Send logs to stdout
 redis_conf_set "daemonize" "no"
