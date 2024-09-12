@@ -29,6 +29,7 @@ nginx_env_vars=(
     NGINX_SKIP_SAMPLE_CERTS
     NGINX_ENABLE_ABSOLUTE_REDIRECT
     NGINX_ENABLE_PORT_IN_REDIRECT
+    NGINX_ENABLE_STREAM
 )
 for env_var in "${nginx_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -78,5 +79,6 @@ export WEB_SERVER_HTTPS_PORT_NUMBER="$NGINX_HTTPS_PORT_NUMBER"
 export NGINX_SKIP_SAMPLE_CERTS="${NGINX_SKIP_SAMPLE_CERTS:-false}"
 export NGINX_ENABLE_ABSOLUTE_REDIRECT="${NGINX_ENABLE_ABSOLUTE_REDIRECT:-no}"
 export NGINX_ENABLE_PORT_IN_REDIRECT="${NGINX_ENABLE_PORT_IN_REDIRECT:-no}"
+export NGINX_ENABLE_STREAM="${NGINX_ENABLE_STREAM:-no}"
 
 # Custom environment variables may be defined below
