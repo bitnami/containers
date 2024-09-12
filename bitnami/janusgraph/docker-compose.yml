@@ -15,7 +15,7 @@ services:
     volumes:
       - "janusgraph_data:/bitnami/janusgraph"
   cassandra:
-    image: docker.io/bitnami/cassandra:4.1
+    image: docker.io/bitnami/cassandra:5.0
     volumes:
       - 'cassandra_data:/bitnami'
     environment:
