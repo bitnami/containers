@@ -117,6 +117,7 @@ Access your web server in the browser by navigating to `http://localhost:9000`.
 ### Adding custom server blocks
 
 The default `nginx.conf` includes server blocks placed in `/opt/bitnami/nginx/conf/server_blocks/`. You can mount a `my_server_block.conf` file containing your custom server block at this location.
+Also `/opt/bitnami/nginx/conf/stream_server_blocks/` available for stream server blocks which can be enabled via NGINX_ENABLE_STREAM.
 
 For example, in order add a server block for `www.example.com`:
 

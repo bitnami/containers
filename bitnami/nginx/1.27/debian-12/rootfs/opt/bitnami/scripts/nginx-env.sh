@@ -29,6 +29,7 @@ nginx_env_vars=(
     NGINX_SKIP_SAMPLE_CERTS
     NGINX_ENABLE_ABSOLUTE_REDIRECT
     NGINX_ENABLE_PORT_IN_REDIRECT
+    NGINX_ENABLE_STREAM
 )
 for env_var in "${nginx_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -54,6 +55,7 @@ export NGINX_HTDOCS_DIR="${NGINX_BASE_DIR}/html"
 export NGINX_TMP_DIR="${NGINX_BASE_DIR}/tmp"
 export NGINX_LOGS_DIR="${NGINX_BASE_DIR}/logs"
 export NGINX_SERVER_BLOCKS_DIR="${NGINX_CONF_DIR}/server_blocks"
+export NGINX_STREAM_SERVER_BLOCKS_DIR="${NGINX_CONF_DIR}/stream_server_blocks"
 export NGINX_INITSCRIPTS_DIR="/docker-entrypoint-initdb.d"
 export NGINX_CONF_FILE="${NGINX_CONF_DIR}/nginx.conf"
 export NGINX_PID_FILE="${NGINX_TMP_DIR}/nginx.pid"
@@ -77,5 +79,6 @@ export WEB_SERVER_HTTPS_PORT_NUMBER="$NGINX_HTTPS_PORT_NUMBER"
 export NGINX_SKIP_SAMPLE_CERTS="${NGINX_SKIP_SAMPLE_CERTS:-false}"
 export NGINX_ENABLE_ABSOLUTE_REDIRECT="${NGINX_ENABLE_ABSOLUTE_REDIRECT:-no}"
 export NGINX_ENABLE_PORT_IN_REDIRECT="${NGINX_ENABLE_PORT_IN_REDIRECT:-no}"
+export NGINX_ENABLE_STREAM="${NGINX_ENABLE_STREAM:-no}"
 
 # Custom environment variables may be defined below
