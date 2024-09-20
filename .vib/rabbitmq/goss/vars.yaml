@@ -14,5 +14,7 @@ directories:
       - /opt/bitnami/rabbitmq/plugins
 root_dir: /opt/bitnami
 version:
-  bin_name: rabbitmqctl
-  flag: --version
+  # HACK: Temporary fix for RabbitMQ 4.0.1 which had an incorrect version set
+  # https://github.com/rabbitmq/rabbitmq-server/issues/12339
+  bin_name: bash
+  flag: -c "if [[ \"$APP_VERSION\" = \"4.0.1\" ]]; then echo 4.0.1; else rabbitmqctl --version; fi"
