@@ -395,8 +395,6 @@ If you would rather extend than replace the default configuration with your sett
 
 ### Plugins
 
-The Bitnami OpenSearch Docker image comes with the [S3 Repository plugin](https://www.elastic.co/guide/en/opensearch/plugins/current/repository-s3.html) installed by default.
-
 You can add extra plugins by setting the `OPENSEARCH_PLUGINS` environment variable. To specify multiple plugins, separate them by spaces, commas or semicolons. When the container is initialized it will install all of the specified plugins before starting OpenSearch.
 
 ```console
