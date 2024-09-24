@@ -7,15 +7,15 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-09-05T23:17:54Z" \
+      org.opencontainers.image.created="2024-09-23T17:47:03Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/hyperledger-fabric-ca/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.5.12-debian-12-r10" \
+      org.opencontainers.image.ref.name="1.5.13-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/hyperledger-fabric-ca" \
       org.opencontainers.image.title="hyperledger-fabric-ca" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.5.12"
+      org.opencontainers.image.version="1.5.13"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,7 +29,7 @@ RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "golang-1.23.1-0-linux-${OS_ARCH}-debian-12" \
-      "hyperledger-fabric-ca-1.5.12-2-linux-${OS_ARCH}-debian-12" \
+      "hyperledger-fabric-ca-1.5.13-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -47,7 +47,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN mkdir -p /opt/bitnami/hyperledger-fabric-ca/etc && chmod g+rw /opt/bitnami/hyperledger-fabric-ca/etc && mkdir /etc/hyperledger && ln -s /opt/bitnami/hyperledger-fabric-ca/etc /etc/hyperledger/fabric-ca-server
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
-ENV APP_VERSION="1.5.12" \
+ENV APP_VERSION="1.5.13" \
     BITNAMI_APP_NAME="hyperledger-fabric-ca" \
     FABRIC_CA_HOME="/opt/bitnami/hyperledger-fabric-ca/etc" \
     PATH="/go/bin:/opt/bitnami/go/bin:/opt/bitnami/hyperledger-fabric-ca/bin:$PATH"
