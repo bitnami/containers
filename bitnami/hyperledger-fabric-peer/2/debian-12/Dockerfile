@@ -7,15 +7,15 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-09-05T23:27:59Z" \
+      org.opencontainers.image.created="2024-09-23T17:40:48Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/hyperledger-fabric-peer/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.5.9-debian-12-r10" \
+      org.opencontainers.image.ref.name="2.5.10-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/hyperledger-fabric-peer" \
       org.opencontainers.image.title="hyperledger-fabric-peer" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="2.5.9"
+      org.opencontainers.image.version="2.5.10"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,7 +28,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "hyperledger-fabric-peer-2.5.9-2-linux-${OS_ARCH}-debian-12" \
+      "hyperledger-fabric-peer-2.5.10-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -46,7 +46,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN mkdir /opt/bitnami/hyperledger-fabric-peer/var && chmod g+rwX /opt/bitnami/hyperledger-fabric-peer/var && ln -s /opt/bitnami/hyperledger-fabric-peer/var /var/hyperledger && mkdir -p /etc/hyperledger && ln -s /opt/bitnami/hyperledger-fabric-peer/etc /etc/hyperledger/fabric && echo "hosts: files dns" > /etc/nsswitch.conf
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
-ENV APP_VERSION="2.5.9" \
+ENV APP_VERSION="2.5.10" \
     BITNAMI_APP_NAME="hyperledger-fabric-peer" \
     FABRIC_CFG_PATH="/opt/bitnami/hyperledger-fabric-peer/etc" \
     PATH="/opt/bitnami/hyperledger-fabric-peer/bin:$PATH"
