@@ -28,24 +28,30 @@ done
 ln -s "$CILIUM_LIB_DIR" "/var/lib/cilium"
 ln -s "$CILIUM_RUN_DIR" "/var/run/cilium"
 
-# Point the iptables binaries to iptables-wrapper
-if [ -x /usr/sbin/alternatives ]; then
+ALTERNATIVES_CMD=update-alternatives
+if [ -x /usr/bin/alternatives ] || [ -x /usr/sbin/alternatives ]; then
     # Fedora/SUSE style alternatives
-    alternatives \
+    ALTERNATIVES_CMD=alternatives
+fi
+
+# Point the iptables binaries to iptables-wrapper
+if "$ALTERNATIVES_CMD" 2>&1 | grep follower; then
+    # New version of command which uses follower
+    "$ALTERNATIVES_CMD" \
         --install /usr/sbin/iptables iptables /usr/sbin/iptables-wrapper 100 \
         --follower /usr/sbin/iptables-restore iptables-restore /usr/sbin/iptables-wrapper \
         --follower /usr/sbin/iptables-save iptables-save /usr/sbin/iptables-wrapper
-    alternatives \
+    "$ALTERNATIVES_CMD" \
         --install /usr/sbin/ip6tables ip6tables /usr/sbin/iptables-wrapper 100 \
         --follower /usr/sbin/ip6tables-restore ip6tables-restore /usr/sbin/iptables-wrapper \
         --follower /usr/sbin/ip6tables-save ip6tables-save /usr/sbin/iptables-wrapper
-elif [ -x /usr/sbin/update-alternatives ] || [ -x /usr/bin/update-alternatives ]; then
-	# Debian style alternatives
-    update-alternatives \
+else
+    # Old version of command, which uses slave
+    "$ALTERNATIVES_CMD" \
         --install /usr/sbin/iptables iptables /usr/sbin/iptables-wrapper 100 \
         --slave /usr/sbin/iptables-restore iptables-restore /usr/sbin/iptables-wrapper \
         --slave /usr/sbin/iptables-save iptables-save /usr/sbin/iptables-wrapper
-	update-alternatives \
+    "$ALTERNATIVES_CMD" \
         --install /usr/sbin/ip6tables ip6tables /usr/sbin/iptables-wrapper 100 \
         --slave /usr/sbin/ip6tables-restore ip6tables-restore /usr/sbin/iptables-wrapper \
         --slave /usr/sbin/ip6tables-save ip6tables-save /usr/sbin/iptables-wrapper
