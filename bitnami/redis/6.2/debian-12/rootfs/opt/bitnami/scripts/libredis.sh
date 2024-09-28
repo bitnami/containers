@@ -419,6 +419,7 @@ redis_configure_default() {
                 redis_conf_set save ""
             fi
         else
+            redis_conf_set save ""
             for i in ${REDIS_RDB_POLICY}; do
                 redis_conf_set save "${i//#/ }"
             done
