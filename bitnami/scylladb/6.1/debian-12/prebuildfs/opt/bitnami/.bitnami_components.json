@@ -9,12 +9,12 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.12.6-6"
+        "version": "3.12.6-7"
     },
     "scylladb": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "6.1.2-0"
+        "version": "6.1.2-1"
     }
 }
