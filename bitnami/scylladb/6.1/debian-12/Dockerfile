@@ -8,11 +8,11 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-09-25T10:19:19Z" \
+      org.opencontainers.image.created="2024-09-30T11:57:34Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/scylladb/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="6.1.2-debian-12-r0" \
+      org.opencontainers.image.ref.name="6.1.2-debian-12-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/scylladb" \
       org.opencontainers.image.title="scylladb" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -29,9 +29,9 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libatomic1 libblkid1 libbrotli1 libbz2-1.0 libcap2 libcom-err2 libcrypt1 libffi8 libgcc-s1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed6 libidn2-0 libjsoncpp25 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblz4-1 liblzma5 libmount1 libmpfr6 libncursesw6 libnettle8 libnsl2 libp11-kit0 libpcre2-8-0 libreadline8 libselinux1 libsmartcols1 libsqlite3-0 libssl3 libstdc++6 libsystemd0 libtasn1-6 libtinfo6 libtirpc3 libudev1 libunistring2 libxxhash0 libzstd1 procps rsyslog zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "python-3.12.6-6-linux-${OS_ARCH}-debian-12" \
+      "python-3.12.6-7-linux-${OS_ARCH}-debian-12" \
       "java-11.0.24-9-1-linux-${OS_ARCH}-debian-12" \
-      "scylladb-6.1.2-0-linux-${OS_ARCH}-debian-12" \
+      "scylladb-6.1.2-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
