@@ -7,15 +7,15 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-09-17T14:15:49Z" \
+      org.opencontainers.image.created="2024-10-01T14:24:49Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/jupyter-base-notebook/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="5.1.0-debian-12-r4" \
+      org.opencontainers.image.ref.name="5.2.0-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jupyter-base-notebook" \
       org.opencontainers.image.title="jupyter-base-notebook" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="5.1.0"
+      org.opencontainers.image.version="5.2.0"
 
 ENV HOME="/opt/bitnami/jupyterhub-singleuser/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,7 +29,7 @@ RUN install_packages ca-certificates curl libgcc-s1 libstdc++6 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "miniforge-24.7.1-0-linux-${OS_ARCH}-debian-12" \
-      "jupyter-base-notebook-5.1.0-4-linux-${OS_ARCH}-debian-12" \
+      "jupyter-base-notebook-5.2.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -47,7 +47,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN mkdir /opt/bitnami/jupyterhub-singleuser/ && chmod g+rwX /opt/bitnami/jupyterhub-singleuser/
 
-ENV APP_VERSION="5.1.0" \
+ENV APP_VERSION="5.2.0" \
     BITNAMI_APP_NAME="jupyter-base-notebook" \
     PATH="/opt/bitnami/miniforge/bin:/opt/bitnami/common/bin:$PATH"
 
