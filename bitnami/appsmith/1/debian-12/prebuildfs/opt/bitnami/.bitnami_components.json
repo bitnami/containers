@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.42.0-0"
+        "version": "1.43.0-0"
     },
     "java": {
         "arch": "amd64",
@@ -33,18 +33,18 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.12.6-6"
+        "version": "3.12.7-0"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.7-4"
+        "version": "1.0.7-5"
     },
     "wait-for-port": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.8-4"
+        "version": "1.0.8-5"
     }
 }
