@@ -7,15 +7,15 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-09-05T07:05:22Z" \
+      org.opencontainers.image.created="2024-10-02T20:53:09Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/redis/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.4.0-debian-12-r4" \
+      org.opencontainers.image.ref.name="7.4.1-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/redis" \
       org.opencontainers.image.title="redis" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="7.4.0"
+      org.opencontainers.image.version="7.4.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,8 +28,8 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libgomp1 libssl3 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "wait-for-port-1.0.8-3-linux-${OS_ARCH}-debian-12" \
-      "redis-7.4.0-0-linux-${OS_ARCH}-debian-12" \
+      "wait-for-port-1.0.8-5-linux-${OS_ARCH}-debian-12" \
+      "redis-7.4.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -50,7 +50,7 @@ RUN ln -s /opt/bitnami/scripts/redis/run.sh /run.sh
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/redis/postunpack.sh
-ENV APP_VERSION="7.4.0" \
+ENV APP_VERSION="7.4.1" \
     BITNAMI_APP_NAME="redis" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/redis/bin:$PATH"
 
