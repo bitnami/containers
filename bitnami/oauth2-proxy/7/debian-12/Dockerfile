@@ -7,15 +7,15 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-10-02T03:59:52Z" \
+      org.opencontainers.image.created="2024-10-02T13:53:21Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/oauth2-proxy/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.6.0-debian-12-r23" \
+      org.opencontainers.image.ref.name="7.7.0-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/oauth2-proxy" \
       org.opencontainers.image.title="oauth2-proxy" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="7.6.0"
+      org.opencontainers.image.version="7.7.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,7 +28,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "oauth2-proxy-7.6.0-12-linux-${OS_ARCH}-debian-12" \
+      "oauth2-proxy-7.7.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -46,7 +46,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN chown -R 1001:1001 /opt/bitnami/oauth2-proxy
 
-ENV APP_VERSION="7.6.0" \
+ENV APP_VERSION="7.7.0" \
     BITNAMI_APP_NAME="oauth2-proxy" \
     PATH="/opt/bitnami/oauth2-proxy/bin:$PATH"
 
