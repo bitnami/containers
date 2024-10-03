@@ -595,8 +595,8 @@ elasticsearch_configure_node_roles() {
 
     if is_boolean_yes "$set_repo_path" && [[ -n "$DB_FS_SNAPSHOT_REPO_PATH" ]]; then
         # Configure path.repo to restore snapshots from system repository
-        # It must be set on every cluster_manager an data node
-        # ref: https://www.elastic.co/guide/en/opensearch/reference/current/snapshots-register-repository.html#snapshots-filesystem-repository
+        # It must be set on every cluster_manager and data node
+        # ref: https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-filesystem-repository.html
         elasticsearch_conf_set path.repo "$DB_FS_SNAPSHOT_REPO_PATH"
     fi
 }
