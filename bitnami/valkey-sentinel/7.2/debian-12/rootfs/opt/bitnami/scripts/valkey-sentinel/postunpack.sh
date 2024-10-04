@@ -30,6 +30,12 @@ valkey_conf_set "pidfile" "$VALKEY_SENTINEL_PID_FILE"
 # Send logs to stdout
 valkey_conf_set "daemonize" "no"
 valkey_conf_set "logfile" ""
+# Starting from version 8.0, the default configuration file sets an incorrect value
+# for the master that is causing the default startup command to fail. We fix it
+# so our tests work as expected. This is likely to be fixed upstream.
+# We reported the issue in the link below
+# https://github.com/valkey-io/valkey/pull/647#issuecomment-2354933622
+replace_in_file "$VALKEY_SENTINEL_CONF_FILE" "myprimary" "mymaster"
 
 # Copy all initially generated configuration files to the default directory
 # (this is to avoid breaking when entrypoint is being overridden)
