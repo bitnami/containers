@@ -144,7 +144,8 @@ schema_registry_validate() {
 
     if [[ -n "$SCHEMA_REGISTRY_KAFKA_BROKERS" ]]; then
         if brokers_auth_protocol="$(schema_registry_brokers_auth_protocol)"; then
-            if [[ "$brokers_auth_protocol" =~ SSL ]]; then
+            # Keystore is not mandatory for SASL_SSL
+            if [[ "$brokers_auth_protocol" =~ SSL ]] && [[ ! "$brokers_auth_protocol" =~ SASL_SSL ]]  && [[ -v "$SCHEMA_REGISTRY_CERTS_DIR" ]]; then
                 if [[ ! -f ${SCHEMA_REGISTRY_CERTS_DIR}/schema-registry.keystore.jks ]] || [[ ! -f ${SCHEMA_REGISTRY_CERTS_DIR}/schema-registry.truststore.jks ]]; then
                     print_validation_error "In order to configure the TLS encryption for communication with Kafka brokers, you must mount your schema-registry.keystore.jks and schema-registry.truststore.jks certificates to the ${SCHEMA_REGISTRY_CERTS_DIR} directory."
                 fi
@@ -302,7 +303,7 @@ schema_registry_initialize() {
             schema_registry_conf_set "kafkastore.sasl.jaas.config" "$aux_string"
         fi
 
-        if [[ "$brokers_auth_protocol" =~ SSL ]]; then
+        if [[ "$brokers_auth_protocol" =~ SSL ]] && [[ -v "$SCHEMA_REGISTRY_CERTS_DIR" ]]; then
             schema_registry_conf_set "kafkastore.ssl.keystore.location" "${SCHEMA_REGISTRY_CERTS_DIR}/schema-registry.keystore.jks"
             [[ -n "$SCHEMA_REGISTRY_KAFKA_KEYSTORE_PASSWORD" ]] && schema_registry_conf_set "kafkastore.ssl.keystore.password" "$SCHEMA_REGISTRY_KAFKA_KEYSTORE_PASSWORD"
             schema_registry_conf_set "kafkastore.ssl.truststore.location" "${SCHEMA_REGISTRY_CERTS_DIR}/schema-registry.truststore.jks"
