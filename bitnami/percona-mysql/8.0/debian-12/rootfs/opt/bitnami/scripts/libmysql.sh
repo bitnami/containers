@@ -185,47 +185,38 @@ EOF
 #   None
 #########################
 mysql_exec_initial_dump() {
+    local -r dump_file="${DB_DATA_DIR}/dump_all_databases.sql"
+
     info "MySQL dump master data start..."
+    debug "Lock master databases for write operations"
+    echo "FLUSH TABLES WITH READ LOCK;" | mysql_remote_execute "$DB_MASTER_HOST" "$DB_MASTER_PORT_NUMBER" "mysql" "$DB_MASTER_ROOT_USER" "$DB_MASTER_ROOT_PASSWORD"
 
-    info "LOCK MASTER DATABASES FOR WRITE OPERATIONS..."
-    mysql -h "$DB_MASTER_HOST" -P "$DB_MASTER_PORT_NUMBER" -u "$DB_MASTER_ROOT_USER" -p"$DB_MASTER_ROOT_PASSWORD" -se 'FLUSH TABLES WITH READ LOCK;'
+    read -r log_file log_position <<< "$(echo "SHOW MASTER STATUS;" | mysql_remote_execute_print_output "$DB_MASTER_HOST" "$DB_MASTER_PORT_NUMBER" "mysql" "$DB_MASTER_ROOT_USER" "$DB_MASTER_ROOT_PASSWORD" | awk 'NR==1 {print $1, $2}')"
+    debug "File: $log_file and Position: $log_position"
 
-    info "SHOW MASTER STATUS..."
-    read -r MYSQL_FILE MYSQL_POSITION <<< "$(mysql -h "$DB_MASTER_HOST" -P "$DB_MASTER_PORT_NUMBER" -u "$DB_MASTER_ROOT_USER" -p"$DB_MASTER_ROOT_PASSWORD" -se 'SHOW MASTER STATUS;' | awk 'NR==1 {print $1, $2}')"
-    info "File: $MYSQL_FILE and Position: $MYSQL_POSITION"
+    debug "Start dump process databases"
+    mysqldump --verbose --all-databases -h "$DB_MASTER_HOST" -P "$DB_MASTER_PORT_NUMBER" -u "$DB_MASTER_ROOT_USER" -p"$DB_MASTER_ROOT_PASSWORD" > "$dump_file"
+    debug "Finish dump databases"
 
-    info "Start dump process databases"
+    debug "Unlock master databases for write operations"
+    echo "UNLOCK TABLES;" | mysql_remote_execute "$DB_MASTER_HOST" "$DB_MASTER_PORT_NUMBER" "mysql" "$DB_MASTER_ROOT_USER" "$DB_MASTER_ROOT_PASSWORD"
 
-    FILE_LOCATION="$DB_DATA_DIR/dump_all_databases.sql"
-
-    mysqldump --verbose --all-databases -h "$DB_MASTER_HOST" -P "$DB_MASTER_PORT_NUMBER" -u "$DB_MASTER_ROOT_USER" -p"$DB_MASTER_ROOT_PASSWORD" > "$FILE_LOCATION"
-
-    info "Finish dump databases"
-
-    info "UNLOCK MASTER DATABASES FOR WRITE OPERATIONS..."
-    mysql -h "$DB_MASTER_HOST" -P "$DB_MASTER_PORT_NUMBER" -u "$DB_MASTER_ROOT_USER" -p"$DB_MASTER_ROOT_PASSWORD" -se 'UNLOCK TABLES;'
-
-    info "Start import dump databases"
-    mysql_execute < "$FILE_LOCATION"
-    info "Finish import dump databases"
-
+    debug "Start import dump databases"
+    mysql_execute < "$dump_file"
     mysql_execute "mysql" <<EOF
 CHANGE REPLICATION SOURCE TO SOURCE_HOST='$DB_MASTER_HOST',
 SOURCE_PORT=$DB_MASTER_PORT_NUMBER,
 SOURCE_USER='$DB_REPLICATION_USER',
 SOURCE_PASSWORD='$DB_REPLICATION_PASSWORD',
 SOURCE_DELAY=$DB_MASTER_DELAY,
-SOURCE_LOG_FILE='$MYSQL_FILE',
-SOURCE_LOG_POS=$MYSQL_POSITION,
+SOURCE_LOG_FILE='$log_file',
+SOURCE_LOG_POS=$log_position,
 SOURCE_CONNECT_RETRY=10,
 GET_SOURCE_PUBLIC_KEY=1;
 EOF
+    debug "Finish import dump databases"
 
-    info "Remove dump file"
-    rm -f "$FILE_LOCATION"
-
-    info "Finish dump process databases"
-
+    rm -f "$dump_file"
     info "MySQL dump master data finish..."
 }
 
@@ -249,10 +240,9 @@ mysql_configure_replication() {
         if [[ "$DB_REPLICATION_SLAVE_DUMP" = "true" ]]; then
             mysql_exec_initial_dump
         else
-
-        debug "Replication master ready!"
-        debug "Setting the master configuration"
-        mysql_execute "mysql" <<EOF
+            debug "Replication master ready!"
+            debug "Setting the master configuration"
+            mysql_execute "mysql" <<EOF
 CHANGE REPLICATION SOURCE TO SOURCE_HOST='$DB_MASTER_HOST',
 SOURCE_PORT=$DB_MASTER_PORT_NUMBER,
 SOURCE_USER='$DB_REPLICATION_USER',
