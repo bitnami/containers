@@ -3,7 +3,7 @@
 
 services:
   mongodb:
-    image: docker.io/bitnami/mongodb:7.0
+    image: docker.io/bitnami/mongodb:8.0
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
   express:
