@@ -138,10 +138,7 @@ odoo_initialize() {
         info "Generating configuration file"
         local template_dir="${BITNAMI_ROOT_DIR}/scripts/odoo/bitnami-templates"
         # Configure polling port parameter depending on Odoo version
-        local event_port_parameter="longpolling_port"
-        if [ "$(odoo_major_version)" -gt 15 ]; then
-            event_port_parameter="gevent_port"
-        fi
+        event_port_parameter="gevent_port"
         list_db="$(is_boolean_yes "$ODOO_LIST_DB" && echo 'True' || echo 'False')" \
             odoo_debug="$(is_boolean_yes "$BITNAMI_DEBUG" && echo 'True' || echo 'False')" \
             event_port_parameter="$event_port_parameter" \
