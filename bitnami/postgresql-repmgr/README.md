@@ -599,8 +599,8 @@ Refer to [issues/27124](https://github.com/bitnami/containers/issues/27124) for 
 | `POSTGRESQL_LOG_HOSTNAME`                  | Log the client host name when accessing                                                          | `nil`                                      |
 | `POSTGRESQL_CLIENT_MIN_MESSAGES`           | Set log level of errors to send to the client                                                    | `error`                                    |
 | `POSTGRESQL_LOG_LINE_PREFIX`               | Set the format of the log lines                                                                  | `nil`                                      |
-| `POSTGRESQL_LOG_TIMEZONE`                  | Set the timezone                                                                                 | `nil`                                      |
-| `POSTGRESQL_TIMEZONE`                      | Set the log timezone                                                                             | `nil`                                      |
+| `POSTGRESQL_LOG_TIMEZONE`                  | Set the log timezone                                                                             | `nil`                                      |
+| `POSTGRESQL_TIMEZONE`                      | Set the timezone                                                                                 | `nil`                                      |
 | `POSTGRESQL_MAX_CONNECTIONS`               | Set the maximum amount of connections                                                            | `nil`                                      |
 | `POSTGRESQL_TCP_KEEPALIVES_IDLE`           | Set the TCP keepalive idle time                                                                  | `nil`                                      |
 | `POSTGRESQL_TCP_KEEPALIVES_INTERVAL`       | Set the TCP keepalive interval time                                                              | `nil`                                      |
