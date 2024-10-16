@@ -3,7 +3,7 @@
 
 services:
   postgresql:
-    image: docker.io/bitnami/postgresql:16
+    image: docker.io/bitnami/postgresql:17
     volumes:
       - 'postgresql_data:/bitnami/postgresql'
     environment:
