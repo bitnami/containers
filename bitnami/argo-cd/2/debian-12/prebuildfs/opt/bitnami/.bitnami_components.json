@@ -3,12 +3,12 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "2.12.4-3"
+        "version": "2.12.5-0"
     },
     "helm": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.16.1-1"
+        "version": "3.16.2-0"
     }
 }
