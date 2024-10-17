@@ -8,7 +8,7 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_DATABASE=myapp
   express:
-    image: docker.io/bitnami/express:4
+    image: docker.io/bitnami/express:5
     ports:
       - '3000:3000'
     environment:
