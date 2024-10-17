@@ -80,16 +80,16 @@ clickhouse_copy_mounted_configuration() {
             info "Copying mounted configuration from $CLICKHOUSE_MOUNTED_CONF_DIR"
             # Copy first the files at the base of the mounted folder to go to ClickHouse
             # base etc folder
-            find "$CLICKHOUSE_MOUNTED_CONF_DIR" -maxdepth 1 \( -type f -o -type l \) -exec cp -L {} "$CLICKHOUSE_CONF_DIR" \;
+            find "$CLICKHOUSE_MOUNTED_CONF_DIR" -maxdepth 1 \( -type f -o -type l \) -exec cp -L -r {} "$CLICKHOUSE_CONF_DIR" \;
 
             # The ClickHouse override directories (etc/conf.d and etc/users.d) do not support subfolders. That means we cannot
             # copy directly with cp -RL because we need all override xml files to have at the root of these subfolders. In the helm
             # chart we want to allow overrides from different ConfigMaps and Secrets so we need to use the find command
             if [[ -d "${CLICKHOUSE_MOUNTED_CONF_DIR}/conf.d" ]]; then
-                find "${CLICKHOUSE_MOUNTED_CONF_DIR}/conf.d" \( -type f -o -type l \) -exec cp -L {} "${CLICKHOUSE_CONF_DIR}/conf.d" \;
+                find "${CLICKHOUSE_MOUNTED_CONF_DIR}/conf.d" \( -type f -o -type l \) -exec cp -L -r {} "${CLICKHOUSE_CONF_DIR}/conf.d" \;
             fi
             if [[ -d "${CLICKHOUSE_MOUNTED_CONF_DIR}/users.d" ]]; then
-                find "${CLICKHOUSE_MOUNTED_CONF_DIR}/users.d" \( -type f -o -type l \) -exec cp -L {} "${CLICKHOUSE_CONF_DIR}/users.d" \;
+                find "${CLICKHOUSE_MOUNTED_CONF_DIR}/users.d" \( -type f -o -type l \) -exec cp -L -r {} "${CLICKHOUSE_CONF_DIR}/users.d" \;
             fi
         fi
     else
@@ -233,7 +233,7 @@ clickhouse_start_bg() {
     is_clickhouse_running && return
     # This function is meant to be called for internal operations like the init scripts
     local -r cmd=("${CLICKHOUSE_BASE_DIR}/bin/clickhouse-server")
-    local -r args=("--config-file=${CLICKHOUSE_CONF_FILE}" "--pid-file=${CLICKHOUSE_PID_FILE}" "--" "--listen_host=127.0.0.1")
+    local -r args=("--config-file=${CLICKHOUSE_CONF_FILE}" "--pid-file=${CLICKHOUSE_PID_FILE}" "--" "--listen_host=0.0.0.0")
     if am_i_root; then
         run_as_user "$CLICKHOUSE_DAEMON_USER" "${cmd[@]}" "${args[@]}" >"$log_file" 2>&1 &
     else
