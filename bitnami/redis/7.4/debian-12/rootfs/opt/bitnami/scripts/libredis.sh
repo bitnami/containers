@@ -88,6 +88,7 @@ redis_conf_unset() {
 #   Redis versoon
 #########################
 redis_version() {
+    # Auth not needed.
     "${REDIS_BASE_DIR}/bin/redis-cli" --version | grep -E -o "[0-9]+.[0-9]+.[0-9]+"
 }
 
@@ -148,22 +149,19 @@ is_redis_not_running() {
 #   None
 #########################
 redis_stop() {
-    local pass
     local port
     local args
 
     ! is_redis_running && return
-    pass="$(redis_conf_get "requirepass")"
     is_boolean_yes "$REDIS_TLS_ENABLED" && port="$(redis_conf_get "tls-port")" || port="$(redis_conf_get "port")"
 
-    [[ -n "$pass" ]] && args+=("-a" "$pass")
     [[ "$port" != "0" ]] && args+=("-p" "$port")
 
     debug "Stopping Redis"
     if am_i_root; then
-        run_as_user "$REDIS_DAEMON_USER" "${REDIS_BASE_DIR}/bin/redis-cli" "${args[@]}" shutdown
+        run_as_user "$REDIS_DAEMON_USER" "${REDIS_BASE_DIR}/bin/redis-cli" $(get_rediscli_auth) "${args[@]}" shutdown
     else
-        "${REDIS_BASE_DIR}/bin/redis-cli" "${args[@]}" shutdown
+        "${REDIS_BASE_DIR}/bin/redis-cli" $(get_rediscli_auth) "${args[@]}" shutdown
     fi
 }
 
@@ -263,12 +261,13 @@ redis_configure_replication() {
         redis_conf_set tls-replication yes
     fi
     if [[ "$REDIS_REPLICATION_MODE" = "master" ]]; then
-        if [[ -n "$REDIS_PASSWORD" ]]; then
-            redis_conf_set masterauth "$REDIS_PASSWORD"
+        if [[ -n $REDIS_MASTER_USER ]] && [[ -n "$REDIS_MASTER_PASSWORD" ]]; then
+            redis_conf_set masteruser "$REDIS_MASTER_USER"
+            redis_conf_set masterauth "$REDIS_MASTER_PASSWORD"
         fi
     elif [[ "$REDIS_REPLICATION_MODE" =~ ^(slave|replica)$ ]]; then
         if [[ -n "$REDIS_SENTINEL_HOST" ]]; then
-            local -a sentinel_info_command=("redis-cli" "-h" "${REDIS_SENTINEL_HOST}" "-p" "${REDIS_SENTINEL_PORT_NUMBER}")
+            local -a sentinel_info_command=("redis-cli" $(get_rediscli_auth) "-h" "${REDIS_SENTINEL_HOST}" "-p" "${REDIS_SENTINEL_PORT_NUMBER}")
             is_boolean_yes "$REDIS_TLS_ENABLED" && sentinel_info_command+=("--tls" "--cert" "${REDIS_TLS_CERT_FILE}" "--key" "${REDIS_TLS_KEY_FILE}")
             # shellcheck disable=SC2015
             is_empty_value "$REDIS_TLS_CA_FILE" && sentinel_info_command+=("--cacertdir" "${REDIS_TLS_CA_DIR}") || sentinel_info_command+=("--cacert" "${REDIS_TLS_CA_FILE}")
@@ -278,12 +277,33 @@ redis_configure_replication() {
             REDIS_MASTER_PORT_NUMBER=${REDIS_SENTINEL_INFO[1]}
         fi
         wait-for-port --host "$REDIS_MASTER_HOST" "$REDIS_MASTER_PORT_NUMBER"
-        [[ -n "$REDIS_MASTER_PASSWORD" ]] && redis_conf_set masterauth "$REDIS_MASTER_PASSWORD"
+        if [[ -n $REDIS_MASTER_USER ]] && [[ -n "$REDIS_MASTER_PASSWORD" ]]; then
+            redis_conf_set masteruser "$REDIS_MASTER_USER"
+            redis_conf_set masterauth "$REDIS_MASTER_PASSWORD"
+        fi
         # Starting with Redis 5, use 'replicaof' instead of 'slaveof'. Maintaining both for backward compatibility
         local parameter="replicaof"
         [[ $(redis_major_version) -lt 5 ]] && parameter="slaveof"
         redis_conf_set "$parameter" "$REDIS_MASTER_HOST $REDIS_MASTER_PORT_NUMBER"
     fi
+}
+
+########################
+# Gets redis-cli authentication parameters.
+# Globals:
+#   REDIS_USER REDIS_PASSWORD REDISCLI_AUTH
+# Returns:
+#   String with a --user and maybe --pass and --no-auth-warning parameters.
+#########################
+get_rediscli_auth() {
+    local str
+    if [[ -n "${REDIS_USER}" ]]  then
+        str+=" --user ${REDIS_USER} "
+    fi
+    if [[ -n "${REDIS_PASSWORD}" ]] && [[ -z "${REDISCLI_AUTH-}" ]]; then
+        str+=" --pass ${REDIS_PASSWORD} --no-auth-warning "
+    fi
+    echo "${str}"
 }
 
 ########################
@@ -447,8 +467,8 @@ redis_configure_default() {
         ! is_empty_value "$REDIS_IO_THREADS_DO_READS" && redis_conf_set "io-threads-do-reads" "$REDIS_IO_THREADS_DO_READS"
         ! is_empty_value "$REDIS_IO_THREADS" && redis_conf_set "io-threads" "$REDIS_IO_THREADS"
 
-        if [[ -n "$REDIS_PASSWORD" ]]; then
-            redis_conf_set requirepass "$REDIS_PASSWORD"
+        if [[ -n "$REDIS_REQUIREPASS" ]]; then
+            redis_conf_set requirepass "$REDIS_REQUIREPASS"
         else
             redis_conf_unset requirepass
         fi
