@@ -85,7 +85,7 @@ valkey_validate() {
     if ! is_boolean_yes "$VALKEY_SENTINEL_TLS_ENABLED" || [[ "$VALKEY_SENTINEL_PORT_NUMBER" != "0" ]]; then
         check_allowed_port VALKEY_SENTINEL_PORT_NUMBER
     fi
-    check_resolved_hostname "$VALKEY_MASTER_HOST"
+    check_resolved_hostname "$VALKEY_PRIMARY_HOST"
 
     if is_boolean_yes "$VALKEY_SENTINEL_TLS_ENABLED"; then
         if [[ "$VALKEY_SENTINEL_PORT_NUMBER" == "$VALKEY_SENTINEL_TLS_PORT_NUMBER" ]] && [[ "$VALKEY_SENTINEL_PORT_NUMBER" != "26379" ]]; then
@@ -213,14 +213,14 @@ valkey_initialize() {
 
         [[ -z "$VALKEY_SENTINEL_PASSWORD" ]] || valkey_conf_set "requirepass" "$VALKEY_SENTINEL_PASSWORD"
 
-        # Master set
+        # Primary set
         # shellcheck disable=SC2153
-        valkey_conf_set "sentinel monitor" "${VALKEY_MASTER_SET} ${VALKEY_MASTER_HOST} ${VALKEY_MASTER_PORT_NUMBER} ${VALKEY_SENTINEL_QUORUM}"
-        valkey_conf_set "sentinel down-after-milliseconds" "${VALKEY_MASTER_SET} ${VALKEY_SENTINEL_DOWN_AFTER_MILLISECONDS}"
-        valkey_conf_set "sentinel failover-timeout" "${VALKEY_MASTER_SET} ${VALKEY_SENTINEL_FAILOVER_TIMEOUT}"
-        valkey_conf_set "sentinel parallel-syncs" "${VALKEY_MASTER_SET} 1"
-        [[ -z "$VALKEY_MASTER_PASSWORD" ]] || valkey_conf_set "sentinel auth-pass" "${VALKEY_MASTER_SET} ${VALKEY_MASTER_PASSWORD}"
-        [[ -z "$VALKEY_MASTER_USER" ]] || valkey_conf_set "sentinel auth-user" "${VALKEY_MASTER_SET} ${VALKEY_MASTER_USER}"
+        valkey_conf_set "sentinel monitor" "${VALKEY_PRIMARY_SET} ${VALKEY_PRIMARY_HOST} ${VALKEY_PRIMARY_PORT_NUMBER} ${VALKEY_SENTINEL_QUORUM}"
+        valkey_conf_set "sentinel down-after-milliseconds" "${VALKEY_PRIMARY_SET} ${VALKEY_SENTINEL_DOWN_AFTER_MILLISECONDS}"
+        valkey_conf_set "sentinel failover-timeout" "${VALKEY_PRIMARY_SET} ${VALKEY_SENTINEL_FAILOVER_TIMEOUT}"
+        valkey_conf_set "sentinel parallel-syncs" "${VALKEY_PRIMARY_SET} 1"
+        [[ -z "$VALKEY_PRIMARY_PASSWORD" ]] || valkey_conf_set "sentinel auth-pass" "${VALKEY_PRIMARY_SET} ${VALKEY_PRIMARY_PASSWORD}"
+        [[ -z "$VALKEY_PRIMARY_USER" ]] || valkey_conf_set "sentinel auth-user" "${VALKEY_PRIMARY_SET} ${VALKEY_PRIMARY_USER}"
         [[ -z "$VALKEY_SENTINEL_ANNOUNCE_IP" ]] || valkey_conf_set "sentinel announce-ip" "${VALKEY_SENTINEL_ANNOUNCE_IP}"
         [[ -z "$VALKEY_SENTINEL_ANNOUNCE_PORT" ]] || valkey_conf_set "sentinel announce-port" "${VALKEY_SENTINEL_ANNOUNCE_PORT}"
         # Sentinel's configuration was refactored for Valkey 6.2 and hostname's support now has to be enabled using a configuration parameter
@@ -229,7 +229,7 @@ valkey_initialize() {
             valkey_conf_set "sentinel announce-hostnames" "${VALKEY_SENTINEL_ANNOUNCE_HOSTNAMES}"
         fi
         # This directive is only available in Valkey 7
-        [[ $(valkey_version --major) -ge 7 ]] && valkey_conf_set "SENTINEL master-reboot-down-after-period" "${VALKEY_MASTER_SET} ${VALKEY_SENTINEL_MASTER_REBOOT_DOWN_AFTER_PERIOD}"
+        [[ $(valkey_version --major) -ge 7 ]] && valkey_conf_set "SENTINEL primary-reboot-down-after-period" "${VALKEY_PRIMARY_SET} ${VALKEY_SENTINEL_PRIMARY_REBOOT_DOWN_AFTER_PERIOD}"
 
         # Sentinel Configuration (maybe overwritten by more specific init blocks like TLS configuration)
         valkey_conf_set port "$VALKEY_SENTINEL_PORT_NUMBER"
