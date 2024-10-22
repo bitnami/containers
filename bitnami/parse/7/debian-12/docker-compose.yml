@@ -3,7 +3,7 @@
 
 services:
   mongodb:
-    image: docker.io/bitnami/mongodb:7.0
+    image: docker.io/bitnami/mongodb:8.0
     volumes:
       - 'mongodb_data:/bitnami/mongodb'
     environment:
