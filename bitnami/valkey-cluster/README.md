@@ -172,17 +172,17 @@ services:
 | `VALKEY_AOF_ENABLED`                     | Enable AOF                                                                | `yes`                                       |
 | `VALKEY_RDB_POLICY`                      | Enable RDB policy persitence                                              | `nil`                                       |
 | `VALKEY_RDB_POLICY_DISABLED`             | Allows to enable RDB policy persistence                                   | `no`                                        |
-| `VALKEY_MASTER_HOST`                     | Valkey master host (used by slaves)                                       | `nil`                                       |
-| `VALKEY_MASTER_PORT_NUMBER`              | Valkey master host port (used by slaves)                                  | `6379`                                      |
+| `VALKEY_PRIMARY_HOST`                    | Valkey primary host (used by replicas)                                    | `nil`                                       |
+| `VALKEY_PRIMARY_PORT_NUMBER`             | Valkey primary host port (used by replicas)                               | `6379`                                      |
 | `VALKEY_PORT_NUMBER`                     | Valkey port number                                                        | `$VALKEY_DEFAULT_PORT_NUMBER`               |
 | `VALKEY_ALLOW_REMOTE_CONNECTIONS`        | Allow remote connection to the service                                    | `yes`                                       |
-| `VALKEY_REPLICATION_MODE`                | Valkey replication mode (values: master, slave)                           | `nil`                                       |
+| `VALKEY_REPLICATION_MODE`                | Valkey replication mode (values: primary, replica)                        | `nil`                                       |
 | `VALKEY_REPLICA_IP`                      | The replication announce ip                                               | `nil`                                       |
 | `VALKEY_REPLICA_PORT`                    | The replication announce port                                             | `nil`                                       |
 | `VALKEY_EXTRA_FLAGS`                     | Additional flags pass to 'valkey-server' commands                         | `nil`                                       |
 | `ALLOW_EMPTY_PASSWORD`                   | Allow password-less access                                                | `no`                                        |
 | `VALKEY_PASSWORD`                        | Password for Valkey                                                       | `nil`                                       |
-| `VALKEY_MASTER_PASSWORD`                 | Valkey master node password                                               | `nil`                                       |
+| `VALKEY_PRIMARY_PASSWORD`                | Valkey primary node password                                              | `nil`                                       |
 | `VALKEY_ACLFILE`                         | Valkey ACL file                                                           | `nil`                                       |
 | `VALKEY_IO_THREADS_DO_READS`             | Enable multithreading when reading socket                                 | `nil`                                       |
 | `VALKEY_IO_THREADS`                      | Number of threads                                                         | `nil`                                       |
@@ -234,7 +234,7 @@ Once all the Valkey nodes are running you need to execute command like the follo
 valkey-cli --cluster create node1:port node2:port --cluster-replicas 1 --cluster-yes
 ```
 
-Where you can add all the `node:port` that you want. The `--cluster-replicas` parameters indicates how many replicas you want to have for every master.
+Where you can add all the `node:port` that you want. The `--cluster-replicas` parameters indicates how many replicas you want to have for every primary.
 
 ### Cluster Initialization Troubleshooting
 
@@ -363,6 +363,12 @@ If you detect any issue in the `docker-compose.yaml` file, feel free to report i
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
+
+## Notable Changes
+
+### Starting October 20, 2024
+
+* All the references have been updated from `master/slave` to `primary/replica` to follow the upstream project strategy. Environment variables previously prefixed as `VALKEY_MASTER` or `VALKEY_SENTINEL_MASTER` use `VALKEY_PRIMARY` and `VALKEY_SENTINEL_PRIMARY` now.
 
 ## Issues
 
