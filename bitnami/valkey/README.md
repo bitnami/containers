@@ -172,41 +172,41 @@ docker-compose up -d
 
 #### Customizable environment variables
 
-| Name                              | Description                                       | Default Value                               |
-|-----------------------------------|---------------------------------------------------|---------------------------------------------|
-| `VALKEY_DATA_DIR`                 | Valkey data directory                             | `${VALKEY_VOLUME_DIR}/data`                 |
-| `VALKEY_OVERRIDES_FILE`           | Valkey config overrides file                      | `${VALKEY_MOUNTED_CONF_DIR}/overrides.conf` |
-| `VALKEY_DISABLE_COMMANDS`         | Commands to disable in Valkey                     | `nil`                                       |
-| `VALKEY_DATABASE`                 | Default Valkey database                           | `valkey`                                    |
-| `VALKEY_AOF_ENABLED`              | Enable AOF                                        | `yes`                                       |
-| `VALKEY_RDB_POLICY`               | Enable RDB policy persitence                      | `nil`                                       |
-| `VALKEY_RDB_POLICY_DISABLED`      | Allows to enable RDB policy persistence           | `no`                                        |
-| `VALKEY_MASTER_HOST`              | Valkey master host (used by slaves)               | `nil`                                       |
-| `VALKEY_MASTER_PORT_NUMBER`       | Valkey master host port (used by slaves)          | `6379`                                      |
-| `VALKEY_PORT_NUMBER`              | Valkey port number                                | `$VALKEY_DEFAULT_PORT_NUMBER`               |
-| `VALKEY_ALLOW_REMOTE_CONNECTIONS` | Allow remote connection to the service            | `yes`                                       |
-| `VALKEY_REPLICATION_MODE`         | Valkey replication mode (values: master, slave)   | `nil`                                       |
-| `VALKEY_REPLICA_IP`               | The replication announce ip                       | `nil`                                       |
-| `VALKEY_REPLICA_PORT`             | The replication announce port                     | `nil`                                       |
-| `VALKEY_EXTRA_FLAGS`              | Additional flags pass to 'valkey-server' commands | `nil`                                       |
-| `ALLOW_EMPTY_PASSWORD`            | Allow password-less access                        | `no`                                        |
-| `VALKEY_PASSWORD`                 | Password for Valkey                               | `nil`                                       |
-| `VALKEY_MASTER_PASSWORD`          | Valkey master node password                       | `nil`                                       |
-| `VALKEY_ACLFILE`                  | Valkey ACL file                                   | `nil`                                       |
-| `VALKEY_IO_THREADS_DO_READS`      | Enable multithreading when reading socket         | `nil`                                       |
-| `VALKEY_IO_THREADS`               | Number of threads                                 | `nil`                                       |
-| `VALKEY_TLS_ENABLED`              | Enable TLS                                        | `no`                                        |
-| `VALKEY_TLS_PORT_NUMBER`          | Valkey TLS port (requires VALKEY_ENABLE_TLS=yes)  | `6379`                                      |
-| `VALKEY_TLS_CERT_FILE`            | Valkey TLS certificate file                       | `nil`                                       |
-| `VALKEY_TLS_CA_DIR`               | Directory containing TLS CA certificates          | `nil`                                       |
-| `VALKEY_TLS_KEY_FILE`             | Valkey TLS key file                               | `nil`                                       |
-| `VALKEY_TLS_KEY_FILE_PASS`        | Valkey TLS key file passphrase                    | `nil`                                       |
-| `VALKEY_TLS_CA_FILE`              | Valkey TLS CA file                                | `nil`                                       |
-| `VALKEY_TLS_DH_PARAMS_FILE`       | Valkey TLS DH parameter file                      | `nil`                                       |
-| `VALKEY_TLS_AUTH_CLIENTS`         | Enable Valkey TLS client authentication           | `yes`                                       |
-| `VALKEY_SENTINEL_MASTER_NAME`     | Valkey Sentinel master name                       | `nil`                                       |
-| `VALKEY_SENTINEL_HOST`            | Valkey Sentinel host                              | `nil`                                       |
-| `VALKEY_SENTINEL_PORT_NUMBER`     | Valkey Sentinel host port (used by slaves)        | `26379`                                     |
+| Name                              | Description                                        | Default Value                               |
+|-----------------------------------|----------------------------------------------------|---------------------------------------------|
+| `VALKEY_DATA_DIR`                 | Valkey data directory                              | `${VALKEY_VOLUME_DIR}/data`                 |
+| `VALKEY_OVERRIDES_FILE`           | Valkey config overrides file                       | `${VALKEY_MOUNTED_CONF_DIR}/overrides.conf` |
+| `VALKEY_DISABLE_COMMANDS`         | Commands to disable in Valkey                      | `nil`                                       |
+| `VALKEY_DATABASE`                 | Default Valkey database                            | `valkey`                                    |
+| `VALKEY_AOF_ENABLED`              | Enable AOF                                         | `yes`                                       |
+| `VALKEY_RDB_POLICY`               | Enable RDB policy persitence                       | `nil`                                       |
+| `VALKEY_RDB_POLICY_DISABLED`      | Allows to enable RDB policy persistence            | `no`                                        |
+| `VALKEY_PRIMARY_HOST`             | Valkey primary host (used by replicas)             | `nil`                                       |
+| `VALKEY_PRIMARY_PORT_NUMBER`      | Valkey primary host port (used by replicas)        | `6379`                                      |
+| `VALKEY_PORT_NUMBER`              | Valkey port number                                 | `$VALKEY_DEFAULT_PORT_NUMBER`               |
+| `VALKEY_ALLOW_REMOTE_CONNECTIONS` | Allow remote connection to the service             | `yes`                                       |
+| `VALKEY_REPLICATION_MODE`         | Valkey replication mode (values: primary, replica) | `nil`                                       |
+| `VALKEY_REPLICA_IP`               | The replication announce ip                        | `nil`                                       |
+| `VALKEY_REPLICA_PORT`             | The replication announce port                      | `nil`                                       |
+| `VALKEY_EXTRA_FLAGS`              | Additional flags pass to 'valkey-server' commands  | `nil`                                       |
+| `ALLOW_EMPTY_PASSWORD`            | Allow password-less access                         | `no`                                        |
+| `VALKEY_PASSWORD`                 | Password for Valkey                                | `nil`                                       |
+| `VALKEY_PRIMARY_PASSWORD`         | Valkey primary node password                       | `nil`                                       |
+| `VALKEY_ACLFILE`                  | Valkey ACL file                                    | `nil`                                       |
+| `VALKEY_IO_THREADS_DO_READS`      | Enable multithreading when reading socket          | `nil`                                       |
+| `VALKEY_IO_THREADS`               | Number of threads                                  | `nil`                                       |
+| `VALKEY_TLS_ENABLED`              | Enable TLS                                         | `no`                                        |
+| `VALKEY_TLS_PORT_NUMBER`          | Valkey TLS port (requires VALKEY_ENABLE_TLS=yes)   | `6379`                                      |
+| `VALKEY_TLS_CERT_FILE`            | Valkey TLS certificate file                        | `nil`                                       |
+| `VALKEY_TLS_CA_DIR`               | Directory containing TLS CA certificates           | `nil`                                       |
+| `VALKEY_TLS_KEY_FILE`             | Valkey TLS key file                                | `nil`                                       |
+| `VALKEY_TLS_KEY_FILE_PASS`        | Valkey TLS key file passphrase                     | `nil`                                       |
+| `VALKEY_TLS_CA_FILE`              | Valkey TLS CA file                                 | `nil`                                       |
+| `VALKEY_TLS_DH_PARAMS_FILE`       | Valkey TLS DH parameter file                       | `nil`                                       |
+| `VALKEY_TLS_AUTH_CLIENTS`         | Enable Valkey TLS client authentication            | `yes`                                       |
+| `VALKEY_SENTINEL_PRIMARY_NAME`    | Valkey Sentinel primary name                       | `nil`                                       |
+| `VALKEY_SENTINEL_HOST`            | Valkey Sentinel host                               | `nil`                                       |
+| `VALKEY_SENTINEL_PORT_NUMBER`     | Valkey Sentinel host port (used by replicas)       | `26379`                                     |
 
 #### Read-only environment variables
 
@@ -364,7 +364,7 @@ services:
 
 ### Setting up a standalone instance
 
-By default, this image is set up to launch Valkey in standalone mode on port 6379. Should you need to change this behavior, setting the `VALKEY_PORT_NUMBER` environment variable will modify the port number. This is not to be confused with `VALKEY_MASTER_PORT_NUMBER` or `VALKEY_REPLICA_PORT` environment variables that are applicable in replication mode.
+By default, this image is set up to launch Valkey in standalone mode on port 6379. Should you need to change this behavior, setting the `VALKEY_PORT_NUMBER` environment variable will modify the port number. This is not to be confused with `VALKEY_PRIMARY_PORT_NUMBER` or `VALKEY_REPLICA_PORT` environment variables that are applicable in replication mode.
 
 ```console
 docker run --name valkey -e VALKEY_PORT_NUMBER=7000 -p 7000:7000 bitnami/valkey:latest
@@ -388,27 +388,27 @@ services:
 
 A replication cluster can easily be setup with the Bitnami Valkey Docker Image using the following environment variables:
 
-* `VALKEY_REPLICATION_MODE`: The replication mode. Possible values `master`/`slave`. No defaults.
+* `VALKEY_REPLICATION_MODE`: The replication mode. Possible values `primary`/`replica`. No defaults.
 * `VALKEY_REPLICA_IP`: The replication announce ip. Defaults to `$(get_machine_ip)` which return the ip of the container.
-* `VALKEY_REPLICA_PORT`: The replication announce port. Defaults to `VALKEY_MASTER_PORT_NUMBER`.
-* `VALKEY_MASTER_HOST`: Hostname/IP of replication master (replica node parameter). No defaults.
-* `VALKEY_MASTER_PORT_NUMBER`: Server port of the replication master (replica node parameter). Defaults to `6379`.
-* `VALKEY_MASTER_PASSWORD`: Password to authenticate with the master (replica node parameter). No defaults. As an alternative, you can mount a file with the password and set the `VALKEY_MASTER_PASSWORD_FILE` variable.
+* `VALKEY_REPLICA_PORT`: The replication announce port. Defaults to `VALKEY_PRIMARY_PORT_NUMBER`.
+* `VALKEY_PRIMARY_HOST`: Hostname/IP of replication primary (replica node parameter). No defaults.
+* `VALKEY_PRIMARY_PORT_NUMBER`: Server port of the replication primaty (replica node parameter). Defaults to `6379`.
+* `VALKEY_PRIMARY_PASSWORD`: Password to authenticate with the primary (replica node parameter). No defaults. As an alternative, you can mount a file with the password and set the `VALKEY_PRIMARY_PASSWORD_FILE` variable.
 
-In a replication cluster you can have one master and zero or more replicas. When replication is enabled the master node is in read-write mode, while the replicas are in read-only mode. For best performance its advisable to limit the reads to the replicas.
+In a replication cluster you can have one primary and zero or more replicas. When replication is enabled the primary node is in read-write mode, while the replicas are in read-only mode. For best performance its advisable to limit the reads to the replicas.
 
-#### Step 1: Create the replication master
+#### Step 1: Create the replication primary
 
-The first step is to start the Valkey master.
+The first step is to start the Valkey primary.
 
 ```console
-docker run --name valkey-master \
-  -e VALKEY_REPLICATION_MODE=master \
-  -e VALKEY_PASSWORD=masterpassword123 \
+docker run --name valkey-primary \
+  -e VALKEY_REPLICATION_MODE=primary \
+  -e VALKEY_PASSWORD=primarypassword123 \
   bitnami/valkey:latest
 ```
 
-In the above command the container is configured as the `master` using the `VALKEY_REPLICATION_MODE` parameter. The `VALKEY_PASSWORD` parameter enables authentication on the Valkey master.
+In the above command the container is configured as the `primary` using the `VALKEY_REPLICATION_MODE` parameter. The `VALKEY_PASSWORD` parameter enables authentication on the Valkey primary.
 
 #### Step 2: Create the replica node
 
@@ -416,40 +416,40 @@ Next we start a Valkey replica container.
 
 ```console
 docker run --name valkey-replica \
-  --link valkey-master:master \
-  -e VALKEY_REPLICATION_MODE=slave \
-  -e VALKEY_MASTER_HOST=master \
-  -e VALKEY_MASTER_PORT_NUMBER=6379 \
-  -e VALKEY_MASTER_PASSWORD=masterpassword123 \
+  --link valkey-primary:primary \
+  -e VALKEY_REPLICATION_MODE=replica \
+  -e VALKEY_PRIMARY_HOST=primary \
+  -e VALKEY_PRIMARY_PORT_NUMBER=6379 \
+  -e VALKEY_PRIMARY_PASSWORD=primarypassword123 \
   -e VALKEY_PASSWORD=password123 \
   bitnami/valkey:latest
 ```
 
-In the above command the container is configured as a `slave` using the `VALKEY_REPLICATION_MODE` parameter. The `VALKEY_MASTER_HOST`, `VALKEY_MASTER_PORT_NUMBER` and `VALKEY_MASTER_PASSWORD` parameters are used connect and authenticate with the Valkey master. The `VALKEY_PASSWORD` parameter enables authentication on the Valkey replica.
+In the above command the container is configured as a `replica` using the `VALKEY_REPLICATION_MODE` parameter. The `VALKEY_PRIMARY_HOST`, `VALKEY_PRIMARY_PORT_NUMBER` and `VALKEY_PRIMARY_PASSWORD` parameters are used connect and authenticate with the Valkey primary. The `VALKEY_PASSWORD` parameter enables authentication on the Valkey replica.
 
-You now have a two node Valkey master/replica replication cluster up and running which can be scaled by adding/removing replicas.
+You now have a two node Valkey primary/replica replication cluster up and running which can be scaled by adding/removing replicas.
 
-If the Valkey master goes down you can reconfigure a replica to become a master using:
+If the Valkey primary goes down you can reconfigure a replica to become a primary using:
 
 ```console
-docker exec valkey-replica valkey-cli -a password123 SLAVEOF NO ONE
+docker exec valkey-replica valkey-cli -a password123 REPLICAOF NO ONE
 ```
 
-> **Note**: The configuration of the other replicas in the cluster needs to be updated so that they are aware of the new master. In our example, this would involve restarting the other replicas with `--link valkey-replica:master`.
+> **Note**: The configuration of the other replicas in the cluster needs to be updated so that they are aware of the new primary. In our example, this would involve restarting the other replicas with `--link valkey-replica:primary`.
 
-With Docker Compose the master/replica mode can be setup using:
+With Docker Compose the primary/replica mode can be setup using:
 
 ```yaml
 version: '2'
 
 services:
-  valkey-master:
+  valkey-primary:
     image: 'bitnami/valkey:latest'
     ports:
       - '6379'
     environment:
-      - VALKEY_REPLICATION_MODE=master
-      - VALKEY_PASSWORD=my_master_password
+      - VALKEY_REPLICATION_MODE=primary
+      - VALKEY_PASSWORD=my_primary_password
     volumes:
       - '/path/to/valkey-persistence:/bitnami'
 
@@ -458,24 +458,24 @@ services:
     ports:
       - '6379'
     depends_on:
-      - valkey-master
+      - valkey-primary
     environment:
-      - VALKEY_REPLICATION_MODE=slave
-      - VALKEY_MASTER_HOST=valkey-master
-      - VALKEY_MASTER_PORT_NUMBER=6379
-      - VALKEY_MASTER_PASSWORD=my_master_password
+      - VALKEY_REPLICATION_MODE=replica
+      - VALKEY_PRIMARY_HOST=valkey-primary
+      - VALKEY_PRIMARY_PORT_NUMBER=6379
+      - VALKEY_PRIMARY_PASSWORD=my_primary_password
       - VALKEY_PASSWORD=my_replica_password
 ```
 
 Scale the number of replicas using:
 
 ```console
-docker-compose up --detach --scale valkey-master=1 --scale valkey-secondary=3
+docker-compose up --detach --scale valkey-primary=1 --scale valkey-replica=3
 ```
 
 The above command scales up the number of replicas to `3`. You can scale down in the same way.
 
-> **Note**: You should not scale up/down the number of master nodes. Always have only one master node running.
+> **Note**: You should not scale up/down the number of primary nodes. Always have only one primary node running.
 
 ### Securing Valkey traffic
 
@@ -688,6 +688,12 @@ If you detect any issue in the `docker-compose.yaml` file, feel free to report i
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
+
+## Notable Changes
+
+### Starting October 20, 2024
+
+* All the references have been updated from `master/slave` to `primary/replica` to follow the upstream project strategy. Environment variables previously prefixed as `VALKEY_MASTER` or `VALKEY_SENTINEL_MASTER` use `VALKEY_PRIMARY` and `VALKEY_SENTINEL_PRIMARY` now.
 
 ## Issues
 
