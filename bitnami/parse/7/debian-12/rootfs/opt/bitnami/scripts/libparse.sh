@@ -135,7 +135,7 @@ parse_initialize() {
         warn "Parse config.json detected in persistence. Persisting configuration files is deprecated"
         cp "$persisted_conf_file" "$PARSE_CONF_FILE"
         info "Trying to connect to the database server"
-        local -r connection_string="$(parse_conf_get "db_host")"
+        local -r connection_string="$(parse_conf_get "databaseURI")"
         parse_wait_for_mongodb_connection "$connection_string"
     fi
 
@@ -190,7 +190,7 @@ parse_conf_set() {
 parse_conf_get() {
     local -r key="${1:?key missing}"
     debug "Getting ${key} from Parse configuration"
-    jq ".${key}" "$PARSE_CONF_FILE"
+    jq -r ".${key}" "$PARSE_CONF_FILE"
 }
 
 ########################
