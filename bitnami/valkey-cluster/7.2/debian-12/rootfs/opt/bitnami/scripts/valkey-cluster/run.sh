@@ -27,7 +27,7 @@ ARGS+=("--include" "${VALKEY_BASE_DIR}/etc/valkey.conf")
 
 if ! is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
     ARGS+=("--requirepass" "$VALKEY_PASSWORD")
-    ARGS+=("--masterauth" "$VALKEY_PASSWORD")
+    ARGS+=("--primaryauth" "$VALKEY_PASSWORD")
 else
     ARGS+=("--protected-mode" "no")
 fi
