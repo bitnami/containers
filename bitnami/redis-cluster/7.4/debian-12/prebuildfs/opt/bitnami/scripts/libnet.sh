@@ -39,8 +39,9 @@ wait_for_dns_lookup() {
     local hostname="${1:?hostname is missing}"
     local retries="${2:-5}"
     local seconds="${3:-1}"
+    local ip_version="${IP_VERSION:-}"
     check_host() {
-        if [[ $(dns_lookup "$hostname") == "" ]]; then
+        if [[ $(dns_lookup "$hostname" "$ip_version") == "" ]]; then
             false
         else
             true
@@ -48,7 +49,7 @@ wait_for_dns_lookup() {
     }
     # Wait for the host to be ready
     retry_while "check_host ${hostname}" "$retries" "$seconds"
-    dns_lookup "$hostname"
+    dns_lookup "$hostname" "$ip_version"
 }
 
 ########################
@@ -61,8 +62,9 @@ wait_for_dns_lookup() {
 get_machine_ip() {
     local -a ip_addresses
     local hostname
+    local ip_version="${IP_VERSION:-}"
     hostname="$(hostname)"
-    read -r -a ip_addresses <<< "$(dns_lookup "$hostname" | xargs echo)"
+    read -r -a ip_addresses <<< "$(dns_lookup "$hostname" "$ip_version"| xargs echo)"
     if [[ "${#ip_addresses[@]}" -gt 1 ]]; then
         warn "Found more than one IP address associated to hostname ${hostname}: ${ip_addresses[*]}, will use ${ip_addresses[0]}"
     elif [[ "${#ip_addresses[@]}" -lt 1 ]]; then
@@ -86,7 +88,8 @@ get_machine_ip() {
 #########################
 is_hostname_resolved() {
     local -r host="${1:?missing value}"
-    if [[ -n "$(dns_lookup "$host")" ]]; then
+    local ip_version="${IP_VERSION:-}"
+    if [[ -n "$(dns_lookup "$host" "$ip_version")" ]]; then
         true
     else
         false
