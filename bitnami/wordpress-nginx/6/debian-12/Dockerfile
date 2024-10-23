@@ -8,11 +8,11 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-10-17T16:17:29Z" \
+      org.opencontainers.image.created="2024-10-23T17:23:59Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/wordpress-nginx/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="6.6.2-debian-12-r10" \
+      org.opencontainers.image.ref.name="6.6.2-debian-12-r11" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/wordpress-nginx" \
       org.opencontainers.image.title="wordpress-nginx" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -30,10 +30,10 @@ RUN install_packages acl ca-certificates curl gettext less libaudit1 libbrotli1 
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "render-template-1.0.7-5-linux-${OS_ARCH}-debian-12" \
-      "php-8.2.24-3-linux-${OS_ARCH}-debian-12" \
+      "php-8.2.25-0-linux-${OS_ARCH}-debian-12" \
       "nginx-1.27.2-0-linux-${OS_ARCH}-debian-12" \
       "mysql-client-11.4.3-0-linux-${OS_ARCH}-debian-12" \
-      "wordpress-nginx-6.6.2-10-linux-${OS_ARCH}-debian-12" \
+      "wordpress-nginx-6.6.2-11-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
