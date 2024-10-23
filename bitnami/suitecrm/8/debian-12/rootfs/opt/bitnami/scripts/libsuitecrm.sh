@@ -188,7 +188,7 @@ suitecrm_initialize() {
     # https://docs.suitecrm.com/blog/scheduler-jobs/
     local -a cron_cmd=("${PHP_BIN_DIR}/php" "${SUITECRM_BASE_DIR}/public/legacy/cron.php")
     if am_i_root; then
-        generate_cron_conf "suitecrm" "${cron_cmd[*]} > /dev/null 2>&1" --run-as "$WEB_SERVER_DAEMON_USER" --schedule "*/1 * * * *"
+        generate_cron_conf "suitecrm" "${cron_cmd[*]} > /dev/null 2>&1" --run-as "$WEB_SERVER_DAEMON_USER" --schedule "* * * * *"
     else
         warn "Skipping cron configuration for SuiteCRM because of running as a non-root user"
     fi
