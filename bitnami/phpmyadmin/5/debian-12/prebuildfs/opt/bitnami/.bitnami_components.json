@@ -3,36 +3,36 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "2.4.62-3"
+        "version": "2.4.62-4"
     },
     "libphp": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.2.24-0"
+        "version": "8.2.25-1"
     },
     "mysql-client": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "10.11.9-0"
+        "version": "10.11.9-1"
     },
     "php": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.2.24-4"
+        "version": "8.2.25-1"
     },
     "phpmyadmin": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "5.2.1-5"
+        "version": "5.2.1-6"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.7-5"
+        "version": "1.0.7-6"
     }
 }
