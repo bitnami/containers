@@ -572,11 +572,12 @@ cassandra_enable_auth() {
             cassandra_yaml_set "authorizer" "AllowAllAuthorizer"
 	else
             if [[ "$DB_FLAVOR" = "cassandra" ]] && [ "$(cassandra_get_major_version)" -ge 5 ]; then
-	            replace_in_file "${DB_CONF_FILE}" "class_name : org.apache.cassandra.auth.AllowAllAuthenticator" "class_name : org.apache.cassandra.auth.${DB_AUTHENTICATOR}"
+	            replace_in_file "${DB_CONF_FILE}" "class_name.* AllowAllAuthenticator" "class_name: ${DB_AUTHENTICATOR}"
+	            replace_in_file "${DB_CONF_FILE}" "class_name.* AllowAllAuthorizer" "class_name: ${DB_AUTHORIZER}"
             else
                 cassandra_yaml_set "authenticator" "${DB_AUTHENTICATOR}"
+                cassandra_yaml_set "authorizer" "${DB_AUTHORIZER}"
             fi
-            cassandra_yaml_set "authorizer" "${DB_AUTHORIZER}"
         fi
     else
         debug "${DB_MOUNTED_CONF_PATH} mounted. Skipping authentication method configuration"
