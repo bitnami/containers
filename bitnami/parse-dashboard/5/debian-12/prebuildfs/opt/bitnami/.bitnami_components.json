@@ -3,18 +3,18 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "18.20.4-5"
+        "version": "18.20.4-6"
     },
     "parse-dashboard": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "5.4.0-1"
+        "version": "5.4.0-2"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.12.7-0"
+        "version": "3.12.7-3"
     }
 }
