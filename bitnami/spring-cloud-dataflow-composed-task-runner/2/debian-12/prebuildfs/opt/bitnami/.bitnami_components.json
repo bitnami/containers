@@ -3,12 +3,12 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "21.0.5-11-0"
+        "version": "21.0.5-11-1"
     },
     "spring-cloud-dataflow-composed-task-runner": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "2.11.5-0"
+        "version": "2.11.5-1"
     }
 }
