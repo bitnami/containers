@@ -8,11 +8,11 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-10-23T07:30:26Z" \
+      org.opencontainers.image.created="2024-10-24T15:34:02Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/jsonnet/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.20.0-debian-12-r26" \
+      org.opencontainers.image.ref.name="0.20.0-debian-12-r27" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jsonnet" \
       org.opencontainers.image.title="jsonnet" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -29,7 +29,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libgcc-s1 libstdc++6 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "jsonnet-0.20.0-3-linux-${OS_ARCH}-debian-12" \
+      "jsonnet-0.20.0-4-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
