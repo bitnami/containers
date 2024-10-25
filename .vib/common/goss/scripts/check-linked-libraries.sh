@@ -12,5 +12,11 @@ for file in "${files[@]}"; do
   if [[ -n $EXCLUDE_PATHS ]] && [[ "$file" =~ $EXCLUDE_PATHS ]]; then
     continue
   fi
-  [[ $(ldd "$file" | grep -c "not found") -eq 0 ]] || exit 1
+  if ldd "$file" 2>&1 | grep -q "not a dynamic executable"; then
+    continue
+  fi
+  if ldd "$file" | grep -c "not found"; then
+    echo "missing linked libraries at $file"
+    exit 1
+  fi
 done
