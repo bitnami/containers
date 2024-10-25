@@ -485,11 +485,13 @@ repmgr_postgresql_configuration() {
     else
         repmgr_inject_postgresql_configuration
     fi
-    if repmgr_is_file_external "pg_hba.conf"; then
-        cp "${REPMGR_MOUNTED_CONF_DIR}/pg_hba.conf" "${POSTGRESQL_MOUNTED_CONF_DIR}/pg_hba.conf"
-    else
-        repmgr_inject_pghba_configuration
-    fi
+    # Modified: Delay custom pg_hba.conf injection
+    # if repmgr_is_file_external "pg_hba.conf"; then
+    #     cp "${REPMGR_MOUNTED_CONF_DIR}/pg_hba.conf" "${POSTGRESQL_MOUNTED_CONF_DIR}/pg_hba.conf"
+    # else
+    #     repmgr_inject_pghba_configuration
+    # fi
+    repmgr_inject_pghba_configuration
     if [[ "$REPMGR_USE_PASSFILE" = "true" ]] && [[ ! -f "${REPMGR_PASSFILE_PATH}" ]]; then
         echo "*:*:*:${REPMGR_USERNAME}:${REPMGR_PASSWORD}" >"${REPMGR_PASSFILE_PATH}"
         chmod 600 "${REPMGR_PASSFILE_PATH}"
@@ -864,6 +866,10 @@ repmgr_initialize() {
     fi
     if ! repmgr_is_file_external "pg_hba.conf"; then
         is_boolean_yes "$REPMGR_PGHBA_TRUST_ALL" || postgresql_restrict_pghba
+    else
+        # Modified: Inject custom pg_hba.conf after PostgreSQL has been initialized
+        cp "${REPMGR_MOUNTED_CONF_DIR}/pg_hba.conf" "${POSTGRESQL_MOUNTED_CONF_DIR}/pg_hba.conf"
+        cp "${REPMGR_MOUNTED_CONF_DIR}/pg_hba.conf" "${POSTGRESQL_CONF_DIR}/pg_hba.conf"
     fi
     if [[ "$REPMGR_ROLE" = "primary" ]]; then
         if is_boolean_yes "$POSTGRESQL_FIRST_BOOT"; then
