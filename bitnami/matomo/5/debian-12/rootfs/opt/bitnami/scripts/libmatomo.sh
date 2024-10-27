@@ -177,6 +177,11 @@ EOF
             ini-file set -s "General" -k "proxy_host_headers[]" -v "$MATOMO_PROXY_HOST_HEADER" "$MATOMO_CONF_FILE"
         fi
 
+        if ! is_empty_value "$MATOMO_PROXY_IP_READ_LAST_IN_LIST"; then
+        info "Configuring Matomo to read the last IP in the list"
+            ini-file set -s "General" -k "proxy_ip_read_last_in_list" -v "$MATOMO_PROXY_IP_READ_LAST_IN_LIST" "$MATOMO_CONF_FILE"
+        fi
+
         # Database SSL
         if is_boolean_yes "$MATOMO_ENABLE_DATABASE_SSL"; then
             info "Enabling database SSL"

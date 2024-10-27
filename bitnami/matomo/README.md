@@ -275,6 +275,7 @@ Bitnami provides up-to-date versions of MariaDB and Matomo, including security p
 | `MATOMO_SKIP_BOOTSTRAP`                | Whether to perform initial bootstrapping for the application.                                                                | `nil`                           |
 | `MATOMO_PROXY_HOST_HEADER`             | Specify the host IP HTTP Header. Usually HTTP_X_FORWARDED_HOST. No defaults.                                                 | `nil`                           |
 | `MATOMO_PROXY_CLIENT_HEADER`           | Specify the client IP HTTP Header. Usually HTTP_X_FORWARDED_FOR.                                                             | `nil`                           |
+| `MATOMO_PROXY_IP_READ_LAST_IN_LIST`    | Specify if the last IP in the `X-FORWARDED-FOR` list should be read.                                                         | `1`                           |
 | `MATOMO_ENABLE_ASSUME_SECURE_PROTOCOL` | Enable assume_secure_protocol in Matomo configuration file.                                                                  | `no`                            |
 | `MATOMO_ENABLE_FORCE_SSL`              | Enable force_ssl in Matomo configuration file.                                                                               | `no`                            |
 | `MATOMO_ENABLE_PROXY_URI_HEADER`       | Enable proxy_uri_header in Matomo configuration file.                                                                        | `no`                            |
