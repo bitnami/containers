@@ -144,12 +144,12 @@ schema_registry_validate() {
 
     if [[ -n "$SCHEMA_REGISTRY_KAFKA_BROKERS" ]]; then
         if brokers_auth_protocol="$(schema_registry_brokers_auth_protocol)"; then
-            if [[ "$brokers_auth_protocol" =~ SSL ]]; then
+            if [[ "$brokers_auth_protocol" =~ SSL ]] && [[ -z "$SCHEMA_REGISTRY_KAFKASTORE_CLIENT_AUTH_DISABLED" ]]; then
                 if [[ ! -f ${SCHEMA_REGISTRY_CERTS_DIR}/schema-registry.keystore.jks ]] || [[ ! -f ${SCHEMA_REGISTRY_CERTS_DIR}/schema-registry.truststore.jks ]]; then
                     print_validation_error "In order to configure the TLS encryption for communication with Kafka brokers, you must mount your schema-registry.keystore.jks and schema-registry.truststore.jks certificates to the ${SCHEMA_REGISTRY_CERTS_DIR} directory."
                 fi
             fi
-            if [[ "$brokers_auth_protocol" =~ SASL ]]; then
+            if [[ "$brokers_auth_protocol" =~ SASL ]] && [[ "$SCHEMA_REGISTRY_KAFKASTORE_SASL_MECHANISM" != "AWS_MSK_IAM" ]]; then
                 if [[ -z "$SCHEMA_REGISTRY_KAFKA_SASL_USERS" ]] || [[ -z "$SCHEMA_REGISTRY_KAFKA_SASL_PASSWORDS" ]]; then
                     print_validation_error "In order to configure SASL authentication for Kafka, you must provide the SASL credentials. Set the environment variables SCHEMA_REGISTRY_KAFKA_SASL_USERS and SCHEMA_REGISTRY_KAFKA_SASL_PASSWORDs"
                 fi
@@ -291,7 +291,7 @@ schema_registry_initialize() {
         brokers_auth_protocol="$(schema_registry_brokers_auth_protocol)"
         [[ -n "$SCHEMA_REGISTRY_KAFKA_BROKERS" ]] && schema_registry_conf_set "kafkastore.bootstrap.servers" "${SCHEMA_REGISTRY_KAFKA_BROKERS/%,/}"
         schema_registry_conf_set "kafkastore.security.protocol" "$brokers_auth_protocol"
-        if [[ "$brokers_auth_protocol" =~ SASL ]]; then
+        if [[ "$brokers_auth_protocol" =~ SASL ]] && [[ "$SCHEMA_REGISTRY_KAFKASTORE_SASL_MECHANISM" != "AWS_MSK_IAM" ]]; then
             read -r -a users <<< "$(tr ',;' ' ' <<< "${SCHEMA_REGISTRY_KAFKA_SASL_USERS}")"
             read -r -a passwords <<< "$(tr ',;' ' ' <<< "${SCHEMA_REGISTRY_KAFKA_SASL_PASSWORDS}")"
             aux_string="org.apache.kafka.common.security.plain.PlainLoginModule required username=\"${users[0]:-}\" password=\"${passwords[0]:-}\";"
@@ -302,14 +302,22 @@ schema_registry_initialize() {
             schema_registry_conf_set "kafkastore.sasl.jaas.config" "$aux_string"
         fi
 
-        if [[ "$brokers_auth_protocol" =~ SSL ]]; then
+        if [[ "$brokers_auth_protocol" =~ SSL ]] && [[ -z "$SCHEMA_REGISTRY_KAFKASTORE_CLIENT_AUTH_DISABLED" ]]; then
             schema_registry_conf_set "kafkastore.ssl.keystore.location" "${SCHEMA_REGISTRY_CERTS_DIR}/schema-registry.keystore.jks"
             [[ -n "$SCHEMA_REGISTRY_KAFKA_KEYSTORE_PASSWORD" ]] && schema_registry_conf_set "kafkastore.ssl.keystore.password" "$SCHEMA_REGISTRY_KAFKA_KEYSTORE_PASSWORD"
             schema_registry_conf_set "kafkastore.ssl.truststore.location" "${SCHEMA_REGISTRY_CERTS_DIR}/schema-registry.truststore.jks"
             [[ -n "$SCHEMA_REGISTRY_KAFKA_KEY_PASSWORD" ]] && schema_registry_conf_set "kafkastore.ssl.key.password" "$SCHEMA_REGISTRY_KAFKA_KEY_PASSWORD"
             [[ -n "$SCHEMA_REGISTRY_KAFKA_TRUSTSTORE_PASSWORD" ]] && schema_registry_conf_set "kafkastore.ssl.truststore.password" "$SCHEMA_REGISTRY_KAFKA_TRUSTSTORE_PASSWORD"
-            [[ -n "$SCHEMA_REGISTRY_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM" ]] && schema_registry_conf_set "kafkastore.ssl.endpoint.identification.algorithm" "$SCHEMA_REGISTRY_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM"
         fi
+
+        if [[ -n "$SCHEMA_REGISTRY_KAFKASTORE_SECURITY_PROTOCOL" ]]; then
+            schema_registry_conf_set "kafkastore.security.protocol" "$SCHEMA_REGISTRY_KAFKASTORE_SECURITY_PROTOCOL"
+            [[ -n "$SCHEMA_REGISTRY_KAFKASTORE_SASL_MECHANISM" ]] && schema_registry_conf_set "kafkastore.sasl.mechanism" "$SCHEMA_REGISTRY_KAFKASTORE_SASL_MECHANISM"
+            [[ -n "$SCHEMA_REGISTRY_KAFKASTORE_SASL_JAAS_CONFIG" ]] && schema_registry_conf_set "kafkastore.sasl.jaas.config" "$SCHEMA_REGISTRY_KAFKASTORE_SASL_JAAS_CONFIG"
+            [[ -n "$SCHEMA_REGISTRY_KAFKASTORE_SASL_CLIENT_CALLBACK_HANDLER_CLASS" ]] && schema_registry_conf_set "kafkastore.sasl.client.callback.handler.class" "$SCHEMA_REGISTRY_KAFKASTORE_SASL_CLIENT_CALLBACK_HANDLER_CLASS"
+        fi
+
+        [[ -n "$SCHEMA_REGISTRY_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM" ]] && schema_registry_conf_set "kafkastore.ssl.endpoint.identification.algorithm" "$SCHEMA_REGISTRY_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM"
 
         # Listeners settings
         if [[ -n "$SCHEMA_REGISTRY_LISTENERS" ]]; then

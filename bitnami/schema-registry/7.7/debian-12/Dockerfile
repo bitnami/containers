@@ -4,6 +4,7 @@
 FROM docker.io/bitnami/minideb:bookworm
 
 ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
+ARG AWS_MSK_IAM_AUTH_VERSION="2.2.0"
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
@@ -42,6 +43,16 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' ; \
       rm -rf "${COMPONENT}".tar.gz{,.sha256} ; \
     done
+
+RUN mkdir -p /tmp/bitnami/aws-msk-iam-auth/ ; cd /tmp/bitnami/aws-msk-iam-auth/ ; \
+    AWS_MSK_IAM_AUTH_DOWNLOAD_URL="https://github.com/aws/aws-msk-iam-auth/releases/download/v${AWS_MSK_IAM_AUTH_VERSION}" ; \
+    AWS_MSK_IAM_AUTH_FILE="aws-msk-iam-auth-${AWS_MSK_IAM_AUTH_VERSION}-all.jar" ; \
+    curl -SsLf "${AWS_MSK_IAM_AUTH_DOWNLOAD_URL}/${AWS_MSK_IAM_AUTH_FILE}" -O ; \
+    curl -SsLf "${AWS_MSK_IAM_AUTH_DOWNLOAD_URL}/${AWS_MSK_IAM_AUTH_FILE}.sha256" -O ; \
+    echo "$(cat ${AWS_MSK_IAM_AUTH_FILE}.sha256)" "${AWS_MSK_IAM_AUTH_FILE}" | sha256sum -c ; \
+    rm -f "${AWS_MSK_IAM_AUTH_DOWNLOAD_URL}.sha256" ; \
+    cp "${AWS_MSK_IAM_AUTH_FILE}" /opt/bitnami/schema-registry/share/java/schema-registry/
+
 RUN apt-get autoremove --purge -y curl && \
     apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
