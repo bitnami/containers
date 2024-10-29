@@ -555,14 +555,11 @@ Refer to [issues/27124](https://github.com/bitnami/containers/issues/27124) for 
 | `POSTGRESQL_INITDB_ARGS`                   | Optional args for PostreSQL initdb operation                                                     | `nil`                                      |
 | `ALLOW_EMPTY_PASSWORD`                     | Allow password-less access                                                                       | `no`                                       |
 | `POSTGRESQL_INITDB_WAL_DIR`                | Optional init db wal directory                                                                   | `nil`                                      |
-| `POSTGRESQL_MASTER_HOST`                   | PostgreSQL master host (used by slaves)                                                          | `nil`                                      |
-| `POSTGRESQL_MASTER_PORT_NUMBER`            | PostgreSQL master host port (used by slaves)                                                     | `5432`                                     |
 | `POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS`      | Number of PostgreSQL replicas that should use synchronous replication                            | `0`                                        |
 | `POSTGRESQL_SYNCHRONOUS_REPLICAS_MODE`     | PostgreSQL synchronous replication mode (values: empty, FIRST, ANY)                              | `nil`                                      |
 | `POSTGRESQL_PORT_NUMBER`                   | PostgreSQL port number                                                                           | `5432`                                     |
 | `POSTGRESQL_ALLOW_REMOTE_CONNECTIONS`      | Modify pg_hba settings so users can access from the outside                                      | `yes`                                      |
 | `POSTGRESQL_REPLICATION_MODE`              | PostgreSQL replication mode (values: master, slave)                                              | `master`                                   |
-| `POSTGRESQL_REPLICATION_USER`              | PostgreSQL replication user                                                                      | `nil`                                      |
 | `POSTGRESQL_SYNCHRONOUS_COMMIT_MODE`       | Enable synchronous replication in slaves (number defined by POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS) | `on`                                       |
 | `POSTGRESQL_FSYNC`                         | Enable fsync in write ahead logs                                                                 | `on`                                       |
 | `POSTGRESQL_USERNAME`                      | PostgreSQL default username                                                                      | `postgres`                                 |
@@ -582,7 +579,6 @@ Refer to [issues/27124](https://github.com/bitnami/containers/issues/27124) for 
 | `POSTGRESQL_INITSCRIPTS_USERNAME`          | Username for the psql scripts included in /docker-entrypoint.initdb                              | `$POSTGRESQL_USERNAME`                     |
 | `POSTGRESQL_PASSWORD`                      | Password for the PostgreSQL created user                                                         | `nil`                                      |
 | `POSTGRESQL_POSTGRES_PASSWORD`             | Password for the PostgreSQL postgres user                                                        | `nil`                                      |
-| `POSTGRESQL_REPLICATION_PASSWORD`          | Password for the PostgreSQL replication user                                                     | `nil`                                      |
 | `POSTGRESQL_INITSCRIPTS_PASSWORD`          | Password for the PostgreSQL init scripts user                                                    | `$POSTGRESQL_PASSWORD`                     |
 | `POSTGRESQL_ENABLE_TLS`                    | Whether to enable TLS for traffic or not                                                         | `no`                                       |
 | `POSTGRESQL_TLS_CERT_FILE`                 | File containing the certificate for the TLS traffic                                              | `nil`                                      |
@@ -656,7 +652,6 @@ Refer to [issues/27124](https://github.com/bitnami/containers/issues/27124) for 
 | `REPMGR_USE_PASSFILE`                      | Use PGPASSFILE instead of PGPASSWORD                                                             | `nil`                                      |
 | `REPMGR_PASSFILE_PATH`                     | Path to store passfile                                                                           | `$REPMGR_CONF_DIR/.pgpass`                 |
 | `PGCONNECT_TIMEOUT`                        | PostgreSQL connection timeout                                                                    | `10`                                       |
-| `POSTGRESQL_REPLICATION_PASSFILE_PATH`     | Path to store passfile                                                                           | `$REPMGR_PASSFILE_PATH`                    |
 
 #### Read-only environment variables
 
@@ -698,11 +693,13 @@ Refer to [issues/27124](https://github.com/bitnami/containers/issues/27124) for 
 | `REPMGR_BIN_DIR`                      | Replication Manager executables directory           | `$REPMGR_BASE_DIR/bin`                        |
 | `REPMGR_CONF_FILE`                    | Replication Manager configuration file              | `$REPMGR_CONF_DIR/repmgr.conf`                |
 | `REPMGR_CURRENT_PRIMARY_PORT`         | Current primary host port                           | `$REPMGR_PRIMARY_PORT`                        |
-| `POSTGRESQL_REPLICATION_USER`         | PostgreSQL connection timeout                       | `$REPMGR_USERNAME`                            |
-| `POSTGRESQL_REPLICATION_PASSWORD`     | PostgreSQL connection timeout                       | `$REPMGR_PASSWORD`                            |
+| `POSTGRESQL_REPLICATION_USER`         | PostgreSQL replication user                         | `$REPMGR_USERNAME`                            |
+| `POSTGRESQL_REPLICATION_PASSWORD`     | Password for the PostgreSQL replication user        | `$REPMGR_PASSWORD`                            |
 | `POSTGRESQL_REPLICATION_USE_PASSFILE` | PostgreSQL use PGPASSFILE instead of PGPASSWORD     | `$REPMGR_USE_PASSFILE`                        |
-| `POSTGRESQL_MASTER_HOST`              | PostgreSQL connection timeout                       | `$REPMGR_PRIMARY_HOST`                        |
-| `POSTGRESQL_MASTER_PORT_NUMBER`       | PostgreSQL connection timeout                       | `$REPMGR_PRIMARY_PORT`                        |
+| `POSTGRESQL_MASTER_HOST`              | PostgreSQL master host (used by slaves)             | `$REPMGR_PRIMARY_HOST`                        |
+| `POSTGRESQL_MASTER_PORT_NUMBER`       | PostgreSQL master host port (used by slaves)        | `$REPMGR_PRIMARY_PORT`                        |
+
+> NOTE: `repmgr` user is also used as PostgreSQL replication user.
 
 ## Logging
 

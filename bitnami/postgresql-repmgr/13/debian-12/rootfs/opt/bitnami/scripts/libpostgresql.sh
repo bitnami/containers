@@ -925,6 +925,23 @@ postgresql_slave_init_db() {
 }
 
 ########################
+# Get postgresql replication user conninfo password method
+# Globals:
+#   POSTGRESQL_*
+# Arguments:
+#   None
+# Returns:
+#   String
+#########################
+postgresql_replication_get_conninfo_password() {
+    if [[ "$POSTGRESQL_REPLICATION_USE_PASSFILE" = "true" ]]; then
+        echo "passfile=${POSTGRESQL_REPLICATION_PASSFILE_PATH}"
+    else
+        echo "password=${POSTGRESQL_REPLICATION_PASSWORD//\&/\\&}"
+    fi
+}
+
+########################
 # Create recovery.conf in slave node
 # Globals:
 #   POSTGRESQL_*
@@ -936,10 +953,9 @@ postgresql_slave_init_db() {
 postgresql_configure_recovery() {
     info "Setting up streaming replication slave..."
 
-    local -r escaped_password="${POSTGRESQL_REPLICATION_PASSWORD//\&/\\&}"
     local -r psql_major_version="$(postgresql_get_major_version)"
     if ((psql_major_version >= 12)); then
-        postgresql_set_property "primary_conninfo" "host=${POSTGRESQL_MASTER_HOST} port=${POSTGRESQL_MASTER_PORT_NUMBER} user=${POSTGRESQL_REPLICATION_USER} password=${escaped_password} application_name=${POSTGRESQL_CLUSTER_APP_NAME}" "$POSTGRESQL_CONF_FILE"
+        postgresql_set_property "primary_conninfo" "host=${POSTGRESQL_MASTER_HOST} port=${POSTGRESQL_MASTER_PORT_NUMBER} user=${POSTGRESQL_REPLICATION_USER} $(postgresql_replication_get_conninfo_password) application_name=${POSTGRESQL_CLUSTER_APP_NAME}" "$POSTGRESQL_CONF_FILE"
         ((psql_major_version < 16)) && postgresql_set_property "promote_trigger_file" "/tmp/postgresql.trigger.${POSTGRESQL_MASTER_PORT_NUMBER}" "$POSTGRESQL_CONF_FILE"
         touch "$POSTGRESQL_DATA_DIR"/standby.signal
     else
@@ -947,7 +963,7 @@ postgresql_configure_recovery() {
         chmod 600 "$POSTGRESQL_RECOVERY_FILE"
         am_i_root && chown "$POSTGRESQL_DAEMON_USER:$POSTGRESQL_DAEMON_GROUP" "$POSTGRESQL_RECOVERY_FILE"
         postgresql_set_property "standby_mode" "on" "$POSTGRESQL_RECOVERY_FILE"
-        postgresql_set_property "primary_conninfo" "host=${POSTGRESQL_MASTER_HOST} port=${POSTGRESQL_MASTER_PORT_NUMBER} user=${POSTGRESQL_REPLICATION_USER} password=${escaped_password} application_name=${POSTGRESQL_CLUSTER_APP_NAME}" "$POSTGRESQL_RECOVERY_FILE"
+        postgresql_set_property "primary_conninfo" "host=${POSTGRESQL_MASTER_HOST} port=${POSTGRESQL_MASTER_PORT_NUMBER} user=${POSTGRESQL_REPLICATION_USER} $(postgresql_replication_get_conninfo_password) application_name=${POSTGRESQL_CLUSTER_APP_NAME}" "$POSTGRESQL_RECOVERY_FILE"
         postgresql_set_property "trigger_file" "/tmp/postgresql.trigger.${POSTGRESQL_MASTER_PORT_NUMBER}" "$POSTGRESQL_RECOVERY_FILE"
     fi
 }
