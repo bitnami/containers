@@ -15,13 +15,6 @@
 . /opt/bitnami/scripts/libvalidations.sh
 . /opt/bitnami/scripts/libpersistence.sh
 
-# Load database library
-if [[ -f /opt/bitnami/scripts/libpostgresqlclient.sh ]]; then
-    . /opt/bitnami/scripts/libpostgresqlclient.sh
-elif [[ -f /opt/bitnami/scripts/libpostgresql.sh ]]; then
-    . /opt/bitnami/scripts/libpostgresql.sh
-fi
-
 # Functions
 
 ########################
@@ -42,56 +35,105 @@ airflow_validate() {
         error_code=1
     }
 
+    check_allowed_port() {
+        local validate_port_args=()
+        ! am_i_root && validate_port_args+=("-unprivileged")
+        validate_port_args+=("${!1}")
+        if ! err=$(validate_port "${validate_port_args[@]}"); then
+            print_validation_error "An invalid port was specified in the environment variable $1: $err"
+        fi
+    }
+
+    check_resolved_hostname() {
+        if ! is_hostname_resolved "$1"; then
+            warn "Hostname $1 could not be resolved. This could lead to connection issues"
+        fi
+    }
+
     check_multi_value() {
         if [[ " ${2} " != *" ${!1} "* ]]; then
             print_validation_error "The allowed values for ${1} are: ${2}"
         fi
     }
 
-    # Check postgresql host
-    [[ -z "$AIRFLOW_DATABASE_HOST" ]] && print_validation_error "Missing AIRFLOW_DATABASE_HOST"
-
-    # Check LDAP parameters
-    if is_boolean_yes "$AIRFLOW_LDAP_ENABLE"; then
-        [[ -z "$AIRFLOW_LDAP_URI" ]] && print_validation_error "Missing AIRFLOW_LDAP_URI"
-        [[ -z "$AIRFLOW_LDAP_SEARCH" ]] && print_validation_error "Missing AIRFLOW_LDAP_SEARCH"
-        [[ -z "$AIRFLOW_LDAP_UID_FIELD" ]] && print_validation_error "Missing AIRFLOW_LDAP_UID_FIELD"
-        [[ -z "$AIRFLOW_LDAP_BIND_USER" ]] && print_validation_error "Missing AIRFLOW_LDAP_BIND_USER"
-        [[ -z "$AIRFLOW_LDAP_BIND_PASSWORD" ]] && print_validation_error "Missing AIRFLOW_LDAP_BIND_PASSWORD"
-        [[ -z "$AIRFLOW_LDAP_ROLES_MAPPING" ]] && print_validation_error "Missing AIRFLOW_LDAP_ROLES_MAPPING"
-        [[ -z "$AIRFLOW_LDAP_ROLES_SYNC_AT_LOGIN" ]] && print_validation_error "Missing AIRFLOW_LDAP_ROLES_SYNC_AT_LOGIN"
-        [[ -z "$AIRFLOW_LDAP_USER_REGISTRATION" ]] && print_validation_error "Missing AIRFLOW_LDAP_USER_REGISTRATION"
-        [[ -z "$AIRFLOW_LDAP_USER_REGISTRATION_ROLE" ]] && print_validation_error "Missing AIRFLOW_LDAP_USER_REGISTRATION_ROLE"
-
-        # Chack boolean env vars contain valid values
-        for var in "AIRFLOW_LDAP_USER_REGISTRATION" "AIRFLOW_LDAP_ROLES_SYNC_AT_LOGIN" "AIRFLOW_LDAP_USE_TLS"; do
-            check_multi_value "$var" "True False"
-        done
-
-        if [[ "$AIRFLOW_LDAP_USE_TLS" == "True" ]]; then
-            [[ -z "$AIRFLOW_LDAP_ALLOW_SELF_SIGNED" ]] && print_validation_error "Missing AIRFLOW_LDAP_ALLOW_SELF_SIGNED"
-            [[ -z "$AIRFLOW_LDAP_TLS_CA_CERTIFICATE" ]] && print_validation_error "Missing AIRFLOW_LDAP_TLS_CA_CERTIFICATE"
+    check_positive_value() {
+        if ! is_positive_int "${!1}"; then
+            print_validation_error "The variable $1 must be positive integer"
         fi
+    }
 
-    fi
+    check_yes_no_value() {
+        if ! is_yes_no_value "${!1}"; then
+            print_validation_error "The allowed values for $1 are [yes, no]"
+        fi
+    }
 
-    # Check pool parameters
-    if [[ -n "$AIRFLOW_POOL_NAME" ]]; then
-        [[ -z "$AIRFLOW_POOL_DESC" ]] && print_validation_error "Provided AIRFLOW_POOL_NAME but missing AIRFLOW_POOL_DESC"
-        [[ -z "$AIRFLOW_POOL_SIZE" ]] && print_validation_error "Provided AIRFLOW_POOL_NAME but missing AIRFLOW_POOL_SIZE"
-    fi
+    check_empty_value() {
+        if is_empty_value "${!1}"; then
+            print_validation_error "The $1 environment variable is empty or not set."
+        fi
+    }
+
+    # Check component type & executor
+    check_empty_value "AIRFLOW_COMPONENT_TYPE"
+    check_multi_value "AIRFLOW_COMPONENT_TYPE" "webserver scheduler worker"
+    check_empty_value "AIRFLOW_EXECUTOR"
 
     # Check cryptography parameters
     if [[ -n "$AIRFLOW_RAW_FERNET_KEY" && -z "$AIRFLOW_FERNET_KEY" ]]; then
-        local fernet_char_count
-        fernet_char_count="$(echo -n "$AIRFLOW_RAW_FERNET_KEY")"
-        if [[ "$fernet_char_count" -lt 32 ]]; then
+        if validate_string "$AIRFLOW_RAW_FERNET_KEY" -min-length 32; then
             print_validation_error "AIRFLOW_RAW_FERNET_KEY must have at least 32 characters"
-        elif [[ "$fernet_char_count" -gt 32 ]]; then
+        elif validate_string "$AIRFLOW_RAW_FERNET_KEY" -max-length 32; then
             warn "AIRFLOW_RAW_FERNET_KEY has more than 32 characters, the rest will be ignored"
         fi
         AIRFLOW_FERNET_KEY="$(echo -n "${AIRFLOW_RAW_FERNET_KEY:0:32}" | base64)"
     fi
+
+    # Check database host and port number
+    check_empty_value "AIRFLOW_DATABASE_HOST"
+    check_resolved_hostname "$AIRFLOW_DATABASE_HOST"
+    check_positive_value AIRFLOW_DATABASE_PORT_NUMBER
+    check_positive_value REDIS_PORT_NUMBER
+    if [[ "$AIRFLOW_EXECUTOR" == "CeleryExecutor" || "$AIRFLOW_EXECUTOR" == "CeleryKubernetesExecutor"  ]]; then
+        check_empty_value "REDIS_HOST"
+        check_resolved_hostname "$REDIS_HOST"
+    fi
+
+    case "$AIRFLOW_COMPONENT_TYPE" in
+    webserver)
+        # Check webserver port number
+        check_allowed_port AIRFLOW_WEBSERVER_PORT_NUMBER
+
+        # Check LDAP parameters
+        check_yes_no_value "AIRFLOW_LDAP_ENABLE"
+        if is_boolean_yes "$AIRFLOW_LDAP_ENABLE"; then
+            for var in "AIRFLOW_LDAP_URI" "AIRFLOW_LDAP_SEARCH" "AIRFLOW_LDAP_UID_FIELD" "AIRFLOW_LDAP_BIND_USER" "AIRFLOW_LDAP_BIND_PASSWORD" "AIRFLOW_LDAP_ROLES_MAPPING" "AIRFLOW_LDAP_ROLES_SYNC_AT_LOGIN" "AIRFLOW_LDAP_USER_REGISTRATION" "AIRFLOW_LDAP_USER_REGISTRATION_ROLE"; do
+                check_empty_value "$var"
+            done
+            for var in "AIRFLOW_LDAP_USER_REGISTRATION" "AIRFLOW_LDAP_ROLES_SYNC_AT_LOGIN" "AIRFLOW_LDAP_USE_TLS"; do
+                check_yes_no_value "$var"
+            done
+            if is_boolean_yes "$AIRFLOW_LDAP_USE_TLS"; then
+                for var in "AIRFLOW_LDAP_ALLOW_SELF_SIGNED" "AIRFLOW_LDAP_TLS_CA_CERTIFICATE"; do
+                    check_empty_value "$var"
+                done
+            fi
+        fi
+
+        # Check pool parameters
+        if [[ -n "$AIRFLOW_POOL_NAME" ]]; then
+            for var in "AIRFLOW_POOL_DESC" "AIRFLOW_POOL_SIZE"; do
+                check_empty_value "$var"
+            done
+        fi
+        ;;
+    scheduler|worker)
+        # Check webserver host and port number
+        check_empty_value "AIRFLOW_WEBSERVER_HOST"
+        check_resolved_hostname "$AIRFLOW_WEBSERVER_HOST"
+        check_positive_value AIRFLOW_WEBSERVER_PORT_NUMBER
+        ;;
+    esac
 
     return "$error_code"
 }
@@ -109,7 +151,7 @@ airflow_initialize() {
     info "Initializing Airflow ..."
 
     # Change permissions if running as root
-    for dir in "$AIRFLOW_TMP_DIR" "$AIRFLOW_LOGS_DIR" "$AIRFLOW_DAGS_DIR"; do
+    for dir in "$AIRFLOW_TMP_DIR" "$AIRFLOW_LOGS_DIR" "$AIRFLOW_SCHEDULER_LOGS_DIR" "$AIRFLOW_DAGS_DIR"; do
         ensure_dir_exists "$dir"
         am_i_root && chown "$AIRFLOW_DAEMON_USER:$AIRFLOW_DAEMON_GROUP" "$dir"
     done
@@ -124,23 +166,37 @@ airflow_initialize() {
 
     info "Trying to connect to the database server"
     airflow_wait_for_postgresql_connection
-    # Check if the Airflow database has been already initialized
-    if ! airflow_execute db check-migrations; then
-        # Delete pid file
-        rm -f "$AIRFLOW_PID_FILE"
 
-        # Initialize database
-        info "Populating database"
-        airflow_execute db init
+    case "$AIRFLOW_COMPONENT_TYPE" in
+    webserver)
+        # Check if the Airflow database has been already initialized
+        if ! airflow_execute db check-migrations; then
+            # Remove pid file if exists to prevent error after WSL restarts
+            if [[ -f "${AIRFLOW_TMP_DIR}/airflow-webserver.pid" ]]; then
+                rm "${AIRFLOW_TMP_DIR}/airflow-webserver.pid"
+            fi
 
-        airflow_create_admin_user
-        airflow_create_pool
-    else
-        # Upgrade database
-        info "Upgrading database schema"
-        airflow_execute db upgrade
-        true # Avoid return false when I am not root
-    fi
+            # Initialize database
+            info "Populating database"
+            airflow_execute db init
+
+            airflow_create_admin_user
+            airflow_create_pool
+        else
+            # Upgrade database
+            info "Upgrading database schema"
+            airflow_execute db upgrade
+            true # Avoid return false when I am not root
+        fi
+        ;;
+    scheduler|worker)
+        info "Waiting for Airflow Webserver to be up"
+        airflow_wait_for_webserver "$AIRFLOW_WEBSERVER_HOST" "$AIRFLOW_WEBSERVER_PORT_NUMBER"
+        if [[ "$AIRFLOW_EXECUTOR" == "CeleryExecutor" || "$AIRFLOW_EXECUTOR" == "CeleryKubernetesExecutor"  ]]; then
+            wait-for-port --host "$REDIS_HOST" "$REDIS_PORT_NUMBER"
+        fi
+        ;;
+    esac
 }
 
 ########################
@@ -184,33 +240,43 @@ airflow_execute() {
 #   None
 #########################
 airflow_generate_config() {
-    # Create Airflow confirguration from default files
-    [[ ! -f "$AIRFLOW_CONF_FILE" ]] && cp "$(find "$AIRFLOW_BASE_DIR" -name default_airflow.cfg)" "$AIRFLOW_CONF_FILE"
-    [[ -n "$AIRFLOW_WEBSERVER_CONF_FILE" ]] && [[ ! -f "$AIRFLOW_WEBSERVER_CONF_FILE" ]] && cp "$(find "$AIRFLOW_BASE_DIR" -name default_webserver_config.py)" "$AIRFLOW_WEBSERVER_CONF_FILE"
-
-    # Setup Airflow base URL
-    airflow_configure_base_url
-    # Configure Airflow Hostname
-    [[ -n "$AIRFLOW_HOSTNAME_CALLABLE" ]] && airflow_conf_set "core" "hostname_callable" "$AIRFLOW_HOSTNAME_CALLABLE"
-    # Configure Airflow webserver authentication
-    airflow_configure_webserver_authentication
-    # Configure Airflow to load examples
-    if is_boolean_yes "$AIRFLOW_LOAD_EXAMPLES"; then
-        airflow_conf_set "core" "load_examples" "True"
-    else
-        airflow_conf_set "core" "load_examples" "False"
-    fi
-    # Configure Airflow database
-    airflow_configure_database
+    case "$AIRFLOW_COMPONENT_TYPE" in
+    webserver)
+        # Create Airflow configuration from default files
+        [[ ! -f "$AIRFLOW_CONF_FILE" ]] && cp "$(find "$AIRFLOW_BASE_DIR" -name default_airflow.cfg)" "$AIRFLOW_CONF_FILE"
+        [[ ! -f "$AIRFLOW_WEBSERVER_CONF_FILE" ]] && cp "$(find "$AIRFLOW_BASE_DIR" -name default_webserver_config.py)" "$AIRFLOW_WEBSERVER_CONF_FILE"
+        # Setup Airflow webserver base URL
+        airflow_configure_webserver_base_url
+        # Configure Airflow webserver authentication
+        airflow_configure_webserver_authentication
+        ;;
+    scheduler|worker)
+        # Generate Airflow default files
+        debug_execute airflow version
+        ;;
+    esac
 
     # Configure the Webserver port
     airflow_conf_set "webserver" "web_server_port" "$AIRFLOW_WEBSERVER_PORT_NUMBER"
+    # Configure Airflow Hostname
+    [[ -n "$AIRFLOW_HOSTNAME_CALLABLE" ]] && airflow_conf_set "core" "hostname_callable" "$AIRFLOW_HOSTNAME_CALLABLE"
+    # Configure Airflow database
+    airflow_configure_database
 
     # Setup the secret keys for database connection and flask application (fernet key and secret key)
     # ref: https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#fernet-key
     # ref: https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#secret-key
     [[ -n "$AIRFLOW_FERNET_KEY" ]] && airflow_conf_set "core" "fernet_key" "$AIRFLOW_FERNET_KEY"
     [[ -n "$AIRFLOW_SECRET_KEY" ]] && airflow_conf_set "webserver" "secret_key" "$AIRFLOW_SECRET_KEY"
+
+    if [[ "$AIRFLOW_COMPONENT_TYPE" != "worker" ]]; then
+        # Configure Airflow to load examples
+        if is_boolean_yes "$AIRFLOW_LOAD_EXAMPLES"; then
+            airflow_conf_set "core" "load_examples" "True"
+        else
+            airflow_conf_set "core" "load_examples" "False"
+        fi
+    fi
 
     # Configure Airflow executor
     airflow_conf_set "core" "executor" "$AIRFLOW_EXECUTOR"
@@ -237,7 +303,7 @@ airflow_conf_set() {
 }
 
 ########################
-# Configure Airflow base url
+# Configure Airflow webserver base url
 # Globals:
 #   AIRFLOW_*
 # Arguments:
@@ -245,11 +311,11 @@ airflow_conf_set() {
 # Returns:
 #   None
 #########################
-airflow_configure_base_url() {
-    if [[ -z "$AIRFLOW_BASE_URL" ]]; then
+airflow_configure_webserver_base_url() {
+    if [[ -z "$AIRFLOW_WEBSERVER_BASE_URL" ]]; then
         airflow_conf_set "webserver" "base_url" "http://${AIRFLOW_WEBSERVER_HOST}:${AIRFLOW_WEBSERVER_PORT_NUMBER}"
     else
-        airflow_conf_set "webserver" "base_url" "$AIRFLOW_BASE_URL"
+        airflow_conf_set "webserver" "base_url" "$AIRFLOW_WEBSERVER_BASE_URL"
     fi
 }
 
@@ -343,6 +409,27 @@ airflow_webserver_conf_set() {
             new_value="'${new_value//"'"/\\\'}'"
         fi
         printf '\n%s = %s' "$key" "$new_value" >>"$file"
+    fi
+}
+
+########################
+# Wait for Airflow Webserver
+# Globals:
+#   AIRFLOW_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+airflow_wait_for_webserver() {
+    local -r webserver_host="${1:?missing database host}"
+    local -r webserver_port="${2:?missing database port}"
+    check_webserver_connection() {
+        wait-for-port --host "$webserver_host" "$webserver_port"
+    }
+    if ! retry_while "check_webserver_connection"; then
+        error "Could not connect to the Airflow webserver"
+        return 1
     fi
 }
 
@@ -470,7 +557,7 @@ airflow_create_pool() {
 ########################
 # Check if Airflow is running
 # Globals:
-#   AIRFLOW_PID_FILE
+#   AIRFLOW_TMP_DIR
 # Arguments:
 #   None
 # Returns:
@@ -478,7 +565,7 @@ airflow_create_pool() {
 ########################
 is_airflow_running() {
     local pid
-    pid="$(get_pid_from_file "$AIRFLOW_PID_FILE")"
+    pid="$(get_pid_from_file "${AIRFLOW_TMP_DIR}/airflow-webserver.pid")"
     if [[ -n "$pid" ]]; then
         is_service_running "$pid"
     else
@@ -489,7 +576,7 @@ is_airflow_running() {
 ########################
 # Check if Airflow is not running
 # Globals:
-#   AIRFLOW_PID_FILE
+#   AIRFLOW_TMP_DIR
 # Arguments:
 #   None
 # Returns:
@@ -502,7 +589,7 @@ is_airflow_not_running() {
 ########################
 # Stop Airflow
 # Globals:
-#   AIRFLOW*
+#   AIRFLOW_TMP_DIR
 # Arguments:
 #   None
 # Returns:
@@ -510,7 +597,7 @@ is_airflow_not_running() {
 #########################
 airflow_stop() {
     info "Stopping Airflow..."
-    stop_service_using_pid "$AIRFLOW_PID_FILE"
+    stop_service_using_pid "${AIRFLOW_TMP_DIR}/airflow-webserver.pid"
 }
 
 ########################
