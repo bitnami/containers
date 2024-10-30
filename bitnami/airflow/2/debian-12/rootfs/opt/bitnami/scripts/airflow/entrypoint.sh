@@ -36,7 +36,6 @@ fi
 
 if [[ "$*" = *"/opt/bitnami/scripts/airflow/run.sh"* || "$*" = *"/run.sh"* ]]; then
     info "** Starting Airflow setup **"
-    /opt/bitnami/scripts/postgresql-client/setup.sh
     /opt/bitnami/scripts/airflow/setup.sh
     info "** Airflow setup finished! **"
 fi
