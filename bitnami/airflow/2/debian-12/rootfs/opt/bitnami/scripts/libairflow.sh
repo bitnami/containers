@@ -76,8 +76,9 @@ airflow_validate() {
 
     # Check component type & executor
     check_empty_value "AIRFLOW_COMPONENT_TYPE"
-    check_multi_value "AIRFLOW_COMPONENT_TYPE" "webserver scheduler worker"
+    check_multi_value "AIRFLOW_COMPONENT_TYPE" "webserver scheduler worker dag-processor"
     check_empty_value "AIRFLOW_EXECUTOR"
+    check_yes_no_value "AIRFLOW_STANDALONE_DAG_PROCESSOR"
 
     # Check cryptography parameters
     if [[ -n "$AIRFLOW_RAW_FERNET_KEY" && -z "$AIRFLOW_FERNET_KEY" ]]; then
@@ -127,7 +128,7 @@ airflow_validate() {
             done
         fi
         ;;
-    scheduler|worker)
+    *)
         # Check webserver host and port number
         check_empty_value "AIRFLOW_WEBSERVER_HOST"
         check_resolved_hostname "$AIRFLOW_WEBSERVER_HOST"
@@ -189,7 +190,7 @@ airflow_initialize() {
             true # Avoid return false when I am not root
         fi
         ;;
-    scheduler|worker)
+    *)
         info "Waiting for Airflow Webserver to be up"
         airflow_wait_for_webserver "$AIRFLOW_WEBSERVER_HOST" "$AIRFLOW_WEBSERVER_PORT_NUMBER"
         if [[ "$AIRFLOW_EXECUTOR" == "CeleryExecutor" || "$AIRFLOW_EXECUTOR" == "CeleryKubernetesExecutor"  ]]; then
@@ -250,7 +251,7 @@ airflow_generate_config() {
         # Configure Airflow webserver authentication
         airflow_configure_webserver_authentication
         ;;
-    scheduler|worker)
+    *)
         # Generate Airflow default files
         debug_execute airflow version
         ;;
@@ -275,6 +276,12 @@ airflow_generate_config() {
             airflow_conf_set "core" "load_examples" "True"
         else
             airflow_conf_set "core" "load_examples" "False"
+        fi
+        # Configure Dag Processor mode
+        if is_boolean_yes "$AIRFLOW_STANDALONE_DAG_PROCESSOR"; then
+            airflow_conf_set "scheduler" "standalone_dag_processor" "True"
+        else
+            airflow_conf_set "scheduler" "standalone_dag_processor" "False"
         fi
     fi
 
