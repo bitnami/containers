@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "5.2.1-3"
+        "version": "5.2.1-4"
     },
     "miniforge": {
         "arch": "amd64",
