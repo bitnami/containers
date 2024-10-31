@@ -229,7 +229,11 @@ valkey_initialize() {
             valkey_conf_set "sentinel announce-hostnames" "${VALKEY_SENTINEL_ANNOUNCE_HOSTNAMES}"
         fi
         # This directive is only available in Valkey 7
-        [[ $(valkey_version --major) -ge 7 ]] && valkey_conf_set "SENTINEL primary-reboot-down-after-period" "${VALKEY_PRIMARY_SET} ${VALKEY_SENTINEL_PRIMARY_REBOOT_DOWN_AFTER_PERIOD}"
+        if { [[ $(valkey_version --major) -eq 7 ]] }; then
+            valkey_conf_set "SENTINEL master-reboot-down-after-period" "${VALKEY_PRIMARY_SET} ${VALKEY_SENTINEL_PRIMARY_REBOOT_DOWN_AFTER_PERIOD}"
+        else
+            valkey_conf_set "SENTINEL primary-reboot-down-after-period" "${VALKEY_PRIMARY_SET} ${VALKEY_SENTINEL_PRIMARY_REBOOT_DOWN_AFTER_PERIOD}"
+        fi
 
         # Sentinel Configuration (maybe overwritten by more specific init blocks like TLS configuration)
         valkey_conf_set port "$VALKEY_SENTINEL_PORT_NUMBER"
