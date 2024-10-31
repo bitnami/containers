@@ -315,8 +315,9 @@ pgpool_healthcheck() {
             IFS="|" read -ra node_info <<< "$node"
             local node_id="${node_info[0]}"
             local node_host="${node_info[1]}"
+            local node_port="${node_info[2]}"
             if [[ $(PGCONNECT_TIMEOUT=3 PGPASSWORD="${PGPOOL_POSTGRES_PASSWORD}" psql -U "${PGPOOL_POSTGRES_USERNAME}" \
-                -d postgres -h "${node_host}" -p "${PGPOOL_PORT_NUMBER}" -tA -c "SELECT 1" || true) == 1 ]]; then
+                -d postgres -h "${node_host}" -p "${node_port}" -tA -c "SELECT 1" || true) == 1 ]]; then
                 # attach backend if it has come back online
                 pgpool_attach_node "${node_id}"
             fi
