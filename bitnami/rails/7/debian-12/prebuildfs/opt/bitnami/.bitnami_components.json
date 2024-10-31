@@ -15,19 +15,19 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.12.7-3"
+        "version": "3.12.7-4"
     },
     "rails": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "7.2.1-2"
+        "version": "7.2.2-0"
     },
     "ruby": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.2.5-3"
+        "version": "3.2.6-0"
     },
     "wait-for-port": {
         "arch": "amd64",
