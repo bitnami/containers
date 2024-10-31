@@ -11,6 +11,10 @@ file:
       - "daemonize no"
       - 'logfile ""'
 command:
+  # Remove if sentinel gets updated: https://github.com/valkey-io/valkey/blob/7.2/sentinel.conf
+  check-primary-master-change:
+    exec: if [ $(grep "SENTINEL \(master-reboot-down-after-period\|primary-reboot-down-after-period\)" /tmp/sentinel.conf | wc -l) -gt 1 ]; then exit 1; fi
+    exit-status: 0
   check-valkey-server:
     exec: timeout --preserve-status 5 valkey-server /opt/bitnami/valkey-sentinel/etc/sentinel.conf --sentinel
     exit-status: 0
