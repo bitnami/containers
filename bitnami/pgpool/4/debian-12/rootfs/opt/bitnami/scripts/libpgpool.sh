@@ -494,7 +494,7 @@ pgpool_create_config() {
     # Streaming Replication Check settings
     # https://www.pgpool.net/docs/latest/en/html/runtime-streaming-replication-check.html
     pgpool_set_property "sr_check_user" "$PGPOOL_SR_CHECK_USER"
-    pgpool_set_property "sr_check_password" "$PGPOOL_SR_CHECK_PASSWORD"
+    pgpool_set_property "sr_check_password" "$(pgpool_encrypt_password ${PGPOOL_SR_CHECK_PASSWORD})"
     pgpool_set_property "sr_check_period" "$PGPOOL_SR_CHECK_PERIOD"
     pgpool_set_property "sr_check_database" "$PGPOOL_SR_CHECK_DATABASE"
     # Healthcheck per node settings
@@ -502,7 +502,7 @@ pgpool_create_config() {
     pgpool_set_property "health_check_period" "$PGPOOL_HEALTH_CHECK_PERIOD"
     pgpool_set_property "health_check_timeout" "$PGPOOL_HEALTH_CHECK_TIMEOUT"
     pgpool_set_property "health_check_user" "$PGPOOL_HEALTH_CHECK_USER"
-    pgpool_set_property "health_check_password" "$PGPOOL_HEALTH_CHECK_PASSWORD"
+    pgpool_set_property "health_check_password" "$(pgpool_encrypt_password ${PGPOOL_HEALTH_CHECK_PASSWORD})"
     pgpool_set_property "health_check_max_retries" "$PGPOOL_HEALTH_CHECK_MAX_RETRIES"
     pgpool_set_property "health_check_retry_delay" "$PGPOOL_HEALTH_CHECK_RETRY_DELAY"
     pgpool_set_property "connect_timeout" "$PGPOOL_CONNECT_TIMEOUT"
@@ -550,6 +550,32 @@ pgpool_create_config() {
 }
 
 ########################
+# Execute postgresql encrypt command
+# Globals:
+#   PGPOOL_*
+# Arguments:
+#   $@ - Command to execute
+# Returns:
+#   String
+#########################
+pgpool_encrypt_execute() {
+    local -a password_encryption_cmd=("pg_md5")
+
+    if [[ "$PGPOOL_AUTHENTICATION_METHOD" = "scram-sha-256" ]]; then
+
+        if is_file_writable "$PGPOOLKEYFILE"; then
+            # Creating a PGPOOLKEYFILE as it is writeable
+            echo "$PGPOOL_AES_KEY" > "$PGPOOLKEYFILE"
+            # Fix permissions for PGPOOLKEYFILE
+            chmod 0600 "$PGPOOLKEYFILE"
+        fi
+        password_encryption_cmd=("pg_enc" "--key-file=${PGPOOLKEYFILE}")
+    fi
+
+    "${password_encryption_cmd[@]}" "$@"
+}
+
+########################
 # Generates a password file for local authentication
 # Globals:
 #   PGPOOL_*
@@ -562,20 +588,7 @@ pgpool_generate_password_file() {
     if is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD"; then
         info "Generating password file for local authentication..."
 
-        local -a password_encryption_cmd=("pg_md5")
-
-        if [[ "$PGPOOL_AUTHENTICATION_METHOD" = "scram-sha-256" ]]; then
-
-            if is_file_writable "$PGPOOLKEYFILE"; then
-                # Creating a PGPOOLKEYFILE as it is writeable
-                echo "$PGPOOL_AES_KEY" > "$PGPOOLKEYFILE"
-                # Fix permissions for PGPOOLKEYFILE
-                chmod 0600 "$PGPOOLKEYFILE"
-            fi
-            password_encryption_cmd=("pg_enc" "--key-file=${PGPOOLKEYFILE}")
-        fi
-
-        debug_execute "${password_encryption_cmd[@]}" -m --config-file="$PGPOOL_CONF_FILE" -u "$PGPOOL_POSTGRES_USERNAME" "$PGPOOL_POSTGRES_PASSWORD"
+        debug_execute pgpool_encrypt_execute -m --config-file="$PGPOOL_CONF_FILE" -u "$PGPOOL_POSTGRES_USERNAME" "$PGPOOL_POSTGRES_PASSWORD"
 
         if [[ -n "${PGPOOL_POSTGRES_CUSTOM_USERS}" ]]; then
             read -r -a custom_users_list <<<"$(tr ',;' ' ' <<<"${PGPOOL_POSTGRES_CUSTOM_USERS}")"
@@ -583,12 +596,31 @@ pgpool_generate_password_file() {
 
             local index=0
             for user in "${custom_users_list[@]}"; do
-                debug_execute "${password_encryption_cmd[@]}" -m --config-file="$PGPOOL_CONF_FILE" -u "$user" "${custom_passwords_list[$index]}"
+                debug_execute pgpool_encrypt_execute -m --config-file="$PGPOOL_CONF_FILE" -u "$user" "${custom_passwords_list[$index]}"
                 ((index += 1))
             done
         fi
     else
         info "Skip generating password file due to PGPOOL_ENABLE_POOL_PASSWD = no"
+    fi
+}
+
+########################
+# Encrypts a password
+# Globals:
+#   PGPOOL_*
+# Arguments:
+#   $1 - password
+# Returns:
+#   String
+#########################
+pgpool_encrypt_password() {
+    local -r password="${1:?missing password}"
+
+    if [[ "$PGPOOL_AUTHENTICATION_METHOD" = "scram-sha-256" ]]; then
+        pgpool_encrypt_execute "$password" | grep -o -E "AES.+" | tr -d '\n'
+    else
+        pgpool_encrypt_execute "$password" | tr -d '\n'
     fi
 }
 
