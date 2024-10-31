@@ -39,7 +39,7 @@ services:
       - REPMGR_USERNAME=repmgr
       - REPMGR_PASSWORD=repmgrpassword
   pgpool:
-    image: docker.io/bitnami/pgpool:4
+    image: david-pgpool
     ports:
       - 5432:5432
     environment:

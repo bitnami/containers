@@ -13,11 +13,12 @@ services:
     volumes:
       - 'mariadb_data:/bitnami/mariadb'
   suitecrm:
-    image: docker.io/bitnami/suitecrm:8
+    image: david-suitecrm
     ports:
       - '80:8080'
       - '443:8443'
     environment:
+      - SUITECRM_ENABLE_HTTPS=true
       - SUITECRM_DATABASE_HOST=mariadb
       - SUITECRM_DATABASE_PORT_NUMBER=3306
       - SUITECRM_DATABASE_USER=bn_suitecrm

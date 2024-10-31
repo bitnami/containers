@@ -144,14 +144,14 @@ suitecrm_initialize() {
                 # Delete configuration file for silent install as it's not needed anymore
                 rm "$SUITECRM_SILENT_INSTALL_CONF_FILE"
             else
+                web_server_start
                 suitecrm_pass_wizard
                 # Configure SMTP via application wizard
                 if ! is_empty_value "$SUITECRM_SMTP_HOST"; then
-                    web_server_start
                     info "Configuring SMTP"
                     suitecrm_pass_smtp_wizard
-                    web_server_stop
                 fi
+                web_server_stop
             fi
 
         else
@@ -358,11 +358,12 @@ suitecrm_pass_smtp_wizard() {
 suitecrm_pass_wizard() {
     local -a install_args
     local url_protocol=http
+    local -r url_port="${APACHE_HTTP_PORT_NUMBER:-"$APACHE_DEFAULT_HTTP_PORT_NUMBER"}"
     info "Running setup wizard"
-    is_boolean_yes "$SUITECRM_ENABLE_HTTPS" && url_protocol=https
+    is_boolean_yes "$SUITECRM_ENABLE_HTTPS" && url_protocol=https url_port="${APACHE_HTTPS_PORT_NUMBER:-"$APACHE_DEFAULT_HTTPS_PORT_NUMBER"}"
 
     install_args=(
-        "--site_host=${url_protocol}://${SUITECRM_HOST}"
+        "--site_host=${url_protocol}://${SUITECRM_HOST}:${url_port}"
         "--site_username=${SUITECRM_USERNAME}"
         "--site_password=${SUITECRM_PASSWORD}"
         "--db_username=${SUITECRM_DATABASE_USER}"
