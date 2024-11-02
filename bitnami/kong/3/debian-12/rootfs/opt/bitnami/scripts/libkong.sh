@@ -42,12 +42,6 @@ kong_validate() {
         fi
     }
 
-    check_password_file() {
-        if [[ -n "${!1:-}" ]] && ! [[ -f "${!1:-}" ]]; then
-            print_validation_error "The variable ${1} is defined but the file ${!1} is not accessible or does not exist"
-        fi
-    }
-
     check_resolved_hostname() {
         if ! is_hostname_resolved "$1"; then
             warn "Hostname ${1} could not be resolved, this could lead to connection issues"
@@ -80,7 +74,6 @@ kong_validate() {
     # Database setting validations
     if [[ "${KONG_DATABASE:-postgres}" = "postgres" ]]; then
         # PostgreSQL is the default database type
-        check_password_file KONG_POSTGRESQL_PASSWORD_FILE
         [[ -n "${KONG_PG_HOST:-}" ]] && check_resolved_hostname "${KONG_PG_HOST:-}"
     elif [[ "${KONG_DATABASE:-}" = "off" ]]; then
         warn "KONG_DATABASE is set to 'off', Kong will run but data will not be persisted"
