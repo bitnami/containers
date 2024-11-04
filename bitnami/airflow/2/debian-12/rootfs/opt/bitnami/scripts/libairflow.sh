@@ -76,7 +76,7 @@ airflow_validate() {
 
     # Check component type & executor
     check_empty_value "AIRFLOW_COMPONENT_TYPE"
-    check_multi_value "AIRFLOW_COMPONENT_TYPE" "webserver scheduler worker dag-processor"
+    check_multi_value "AIRFLOW_COMPONENT_TYPE" "webserver scheduler worker triggerer dag-processor"
     check_empty_value "AIRFLOW_EXECUTOR"
     check_yes_no_value "AIRFLOW_STANDALONE_DAG_PROCESSOR"
 
@@ -270,6 +270,7 @@ airflow_generate_config() {
     [[ -n "$AIRFLOW_FERNET_KEY" ]] && airflow_conf_set "core" "fernet_key" "$AIRFLOW_FERNET_KEY"
     [[ -n "$AIRFLOW_SECRET_KEY" ]] && airflow_conf_set "webserver" "secret_key" "$AIRFLOW_SECRET_KEY"
 
+    [[ "$AIRFLOW_COMPONENT_TYPE" = "triggerer" && -n "$AIRFLOW_TRIGGERER_DEFAULT_CAPACITY" ]] && airflow_conf_set "triggerer" "default_capacity" "$AIRFLOW_TRIGGERER_DEFAULT_CAPACITY"
     if [[ "$AIRFLOW_COMPONENT_TYPE" != "worker" ]]; then
         # Configure Airflow to load examples
         if is_boolean_yes "$AIRFLOW_LOAD_EXAMPLES"; then
