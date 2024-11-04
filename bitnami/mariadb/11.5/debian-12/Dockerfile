@@ -8,11 +8,11 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-10-24T16:35:03Z" \
+      org.opencontainers.image.created="2024-11-04T17:58:30Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/mariadb/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="11.5.2-debian-12-r4" \
+      org.opencontainers.image.ref.name="11.5.2-debian-12-r5" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mariadb" \
       org.opencontainers.image.title="mariadb" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -30,7 +30,7 @@ RUN install_packages ca-certificates curl libaio1 libaudit1 libcap-ng0 libcrypt1
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "ini-file-1.4.7-6-linux-${OS_ARCH}-debian-12" \
-      "mariadb-11.5.2-1-linux-${OS_ARCH}-debian-12" \
+      "mariadb-11.5.2-2-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
