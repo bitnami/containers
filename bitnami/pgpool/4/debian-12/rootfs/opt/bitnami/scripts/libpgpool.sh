@@ -366,8 +366,6 @@ EOF
     cat >>"$PGPOOL_PGHBA_FILE" <<EOF
 ${sr_check_auth_line}
 ${postgres_auth_line}
-host     all             wide               all         trust
-host     all             pop_user           all         trust
 host     all             all                all         ${all_authentication}
 EOF
 }
