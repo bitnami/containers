@@ -485,6 +485,8 @@ repmgr_postgresql_configuration() {
     else
         repmgr_inject_postgresql_configuration
     fi
+    # Inject default pghba configuration
+    # May be override by custom ph_hba.conf later after initialization
     repmgr_inject_pghba_configuration
     if [[ "$REPMGR_USE_PASSFILE" = "true" ]] && [[ ! -f "${REPMGR_PASSFILE_PATH}" ]]; then
         echo "*:*:*:${REPMGR_USERNAME}:${REPMGR_PASSWORD}" >"${REPMGR_PASSFILE_PATH}"
@@ -861,7 +863,6 @@ repmgr_initialize() {
     if ! repmgr_is_file_external "pg_hba.conf"; then
         is_boolean_yes "$REPMGR_PGHBA_TRUST_ALL" || postgresql_restrict_pghba
     else
-        cp "${REPMGR_MOUNTED_CONF_DIR}/pg_hba.conf" "${POSTGRESQL_MOUNTED_CONF_DIR}/pg_hba.conf"
         cp "${REPMGR_MOUNTED_CONF_DIR}/pg_hba.conf" "${POSTGRESQL_CONF_DIR}/pg_hba.conf"
     fi
     if [[ "$REPMGR_ROLE" = "primary" ]]; then
