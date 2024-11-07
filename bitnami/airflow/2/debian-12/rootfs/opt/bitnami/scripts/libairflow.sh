@@ -470,7 +470,7 @@ airflow_configure_database() {
 #   None
 #########################
 airflow_encode_url() {
-    local -r url="${1?Missing url}"
+    local -r url="${1:?Missing url}"
 
     urlencode() {
         old_lc_collate="${LC_COLLATE:-}"
@@ -567,13 +567,15 @@ airflow_create_pool() {
 # Globals:
 #   AIRFLOW_TMP_DIR
 # Arguments:
-#   None
+#   1 - PID file
 # Returns:
 #   Whether Airflow is running
 ########################
 is_airflow_running() {
+    local -r pid_file="${1:?Missing pid file}"
+
     local pid
-    pid="$(get_pid_from_file "${AIRFLOW_TMP_DIR}/airflow-webserver.pid")"
+    pid="$(get_pid_from_file "${AIRFLOW_TMP_DIR}/${pid_file}")"
     if [[ -n "$pid" ]]; then
         is_service_running "$pid"
     else
@@ -586,12 +588,12 @@ is_airflow_running() {
 # Globals:
 #   AIRFLOW_TMP_DIR
 # Arguments:
-#   None
+#   1 - PID file
 # Returns:
 #   Whether Airflow is not running
 ########################
 is_airflow_not_running() {
-    ! is_airflow_running
+    ! is_airflow_running "$@"
 }
 
 ########################
@@ -599,13 +601,15 @@ is_airflow_not_running() {
 # Globals:
 #   AIRFLOW_TMP_DIR
 # Arguments:
-#   None
+#   1 - PID file
 # Returns:
 #   None
 #########################
 airflow_stop() {
+    local -r pid_file="${1:?Missing pid file}"
+
     info "Stopping Airflow..."
-    stop_service_using_pid "${AIRFLOW_TMP_DIR}/airflow-webserver.pid"
+    stop_service_using_pid "${AIRFLOW_TMP_DIR}/${pid_file}"
 }
 
 ########################
