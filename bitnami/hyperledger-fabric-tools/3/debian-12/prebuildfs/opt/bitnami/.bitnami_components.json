@@ -3,12 +3,12 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.23.2-1"
+        "version": "1.23.3-0"
     },
     "hyperledger-fabric-tools": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.0.0-2"
+        "version": "3.0.0-3"
     }
 }
