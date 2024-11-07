@@ -3,24 +3,24 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "7.4.0-2"
+        "version": "7.5.0-0"
     },
     "cilium": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.16.3-1"
+        "version": "1.16.3-2"
     },
     "gops": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "0.3.28-9"
+        "version": "0.3.28-10"
     },
     "llvm": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "18.1.8-0"
+        "version": "18.1.8-1"
     }
 }
