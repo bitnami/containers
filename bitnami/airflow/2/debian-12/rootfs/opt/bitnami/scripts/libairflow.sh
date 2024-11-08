@@ -191,8 +191,8 @@ airflow_initialize() {
         fi
         ;;
     *)
-        info "Waiting for Airflow Webserver to be up"
-        airflow_wait_for_webserver "$AIRFLOW_WEBSERVER_HOST" "$AIRFLOW_WEBSERVER_PORT_NUMBER"
+        info "Waiting for db migrations to be completed"
+        airflow_wait_for_db_migrations
         if [[ "$AIRFLOW_EXECUTOR" == "CeleryExecutor" || "$AIRFLOW_EXECUTOR" == "CeleryKubernetesExecutor"  ]]; then
             wait-for-port --host "$REDIS_HOST" "$REDIS_PORT_NUMBER"
         fi
@@ -417,27 +417,6 @@ airflow_webserver_conf_set() {
             new_value="'${new_value//"'"/\\\'}'"
         fi
         printf '\n%s = %s' "$key" "$new_value" >>"$file"
-    fi
-}
-
-########################
-# Wait for Airflow Webserver
-# Globals:
-#   AIRFLOW_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-airflow_wait_for_webserver() {
-    local -r webserver_host="${1:?missing database host}"
-    local -r webserver_port="${2:?missing database port}"
-    check_webserver_connection() {
-        wait-for-port --host "$webserver_host" "$webserver_port"
-    }
-    if ! retry_while "check_webserver_connection"; then
-        error "Could not connect to the Airflow webserver"
-        return 1
     fi
 }
 
