@@ -166,7 +166,7 @@ airflow_initialize() {
     fi
 
     info "Trying to connect to the database server"
-    airflow_wait_for_postgresql_connection
+    airflow_wait_for_db_connection
 
     case "$AIRFLOW_COMPONENT_TYPE" in
     webserver)
@@ -529,9 +529,25 @@ airflow_configure_celery_executor() {
 # Returns:
 #   true if the database connection succeeded, false otherwise
 #########################
-airflow_wait_for_postgresql_connection() {
+airflow_wait_for_db_connection() {
     if ! retry_while "airflow_execute db check"; then
         error "Could not connect to the database"
+        return 1
+    fi
+}
+
+########################
+# Wait until db migrations are done
+# Globals:
+#   None
+# Arguments:
+#   None
+# Returns:
+#   true if the db migrations are ready, false otherwise
+#########################
+airflow_wait_for_db_migrations() {
+    if ! retry_while "airflow_execute db check-migrations"; then
+        error "DB migrations are not ready yet"
         return 1
     fi
 }
