@@ -3,6 +3,6 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "0.102.0-0"
+        "version": "0.103.0-0"
     }
 }
