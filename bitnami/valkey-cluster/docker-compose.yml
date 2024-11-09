@@ -1,0 +1,74 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  valkey-node-0:
+    image: docker.io/bitnami/valkey-cluster:8.0
+    volumes:
+      - valkey-cluster_data-0:/bitnami/valkey/data
+    environment:
+      - 'VALKEY_PASSWORD=bitnami'
+      - 'VALKEY_NODES=valkey-node-0 valkey-node-1 valkey-node-2 valkey-node-3 valkey-node-4 valkey-node-5'
+
+  valkey-node-1:
+    image: docker.io/bitnami/valkey-cluster:8.0
+    volumes:
+      - valkey-cluster_data-1:/bitnami/valkey/data
+    environment:
+      - 'VALKEY_PASSWORD=bitnami'
+      - 'VALKEY_NODES=valkey-node-0 valkey-node-1 valkey-node-2 valkey-node-3 valkey-node-4 valkey-node-5'
+
+  valkey-node-2:
+    image: docker.io/bitnami/valkey-cluster:8.0
+    volumes:
+      - valkey-cluster_data-2:/bitnami/valkey/data
+    environment:
+      - 'VALKEY_PASSWORD=bitnami'
+      - 'VALKEY_NODES=valkey-node-0 valkey-node-1 valkey-node-2 valkey-node-3 valkey-node-4 valkey-node-5'
+
+  valkey-node-3:
+    image: docker.io/bitnami/valkey-cluster:8.0
+    volumes:
+      - valkey-cluster_data-3:/bitnami/valkey/data
+    environment:
+      - 'VALKEY_PASSWORD=bitnami'
+      - 'VALKEY_NODES=valkey-node-0 valkey-node-1 valkey-node-2 valkey-node-3 valkey-node-4 valkey-node-5'
+
+  valkey-node-4:
+    image: docker.io/bitnami/valkey-cluster:8.0
+    volumes:
+      - valkey-cluster_data-4:/bitnami/valkey/data
+    environment:
+      - 'VALKEY_PASSWORD=bitnami'
+      - 'VALKEY_NODES=valkey-node-0 valkey-node-1 valkey-node-2 valkey-node-3 valkey-node-4 valkey-node-5'
+
+  valkey-node-5:
+    image: docker.io/bitnami/valkey-cluster:8.0
+    volumes:
+      - valkey-cluster_data-5:/bitnami/valkey/data
+    depends_on:
+      - valkey-node-0
+      - valkey-node-1
+      - valkey-node-2
+      - valkey-node-3
+      - valkey-node-4
+    environment:
+      - 'VALKEY_PASSWORD=bitnami'
+      - 'REDISCLI_AUTH=bitnami'
+      - 'VALKEY_CLUSTER_REPLICAS=1'
+      - 'VALKEY_NODES=valkey-node-0 valkey-node-1 valkey-node-2 valkey-node-3 valkey-node-4 valkey-node-5'
+      - 'VALKEY_CLUSTER_CREATOR=yes'
+
+volumes:
+  valkey-cluster_data-0:
+    driver: local
+  valkey-cluster_data-1:
+    driver: local
+  valkey-cluster_data-2:
+    driver: local
+  valkey-cluster_data-3:
+    driver: local
+  valkey-cluster_data-4:
+    driver: local
+  valkey-cluster_data-5:
+    driver: local

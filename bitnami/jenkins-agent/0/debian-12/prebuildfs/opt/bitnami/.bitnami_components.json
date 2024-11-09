@@ -3,12 +3,12 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "17.0.11-12-0"
+        "version": "17.0.13-12-1"
     },
     "jenkins-agent": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "0.3256.0-0"
+        "version": "0.3283.0-0"
     }
 }

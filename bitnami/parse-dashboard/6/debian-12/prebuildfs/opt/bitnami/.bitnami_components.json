@@ -1,0 +1,20 @@
+{
+    "node": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "18.20.4-6"
+    },
+    "parse-dashboard": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "6.0.0-1"
+    },
+    "python": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "3.12.7-3"
+    }
+}

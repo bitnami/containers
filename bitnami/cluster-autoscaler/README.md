@@ -34,7 +34,7 @@ Please note that Cluster Autoscaler a series of permissions/privileges to adjust
 * Provide the K8s worker node which runs the cluster autoscaler with a minimum IAM policy (check [permissions docs](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler/cloudprovider/aws#user-content-permissions) for more information).
 * Create a service account for Cluster Autoscaler's deployment and bind to it some roles and cluster roles that provide the corresponding RBAC privileges.
 
-> NOTE: Find resources to deploy Cluster Autoscaler on AWS in the [aws-examples](./aws-examples) directory.
+> NOTE: Find resources to deploy Cluster Autoscaler on AWS in the [aws-examples](https://github.com/bitnami/containers/tree/main/bitnami/cluster-autoscaler/aws-examples) directory.
 
 ## Why use Bitnami Images?
 

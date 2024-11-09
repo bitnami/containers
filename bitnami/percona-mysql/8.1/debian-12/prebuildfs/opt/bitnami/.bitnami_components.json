@@ -3,18 +3,18 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.4.6-14"
+        "version": "1.4.7-6"
     },
     "mysql-shell": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.1.1-3"
+        "version": "8.1.1-4"
     },
     "percona-mysql": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.1.0-1-5"
+        "version": "8.1.0-1-7"
     }
 }

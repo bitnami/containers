@@ -1,10 +1,9 @@
 # Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 
-version: '2'
 services:
   mongodb:
-    image: docker.io/bitnami/mongodb:7.0
+    image: docker.io/bitnami/mongodb:8.0
     volumes:
       - 'mongodb_data:/bitnami/mongodb'
     environment:
@@ -17,7 +16,7 @@ services:
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
 
   mongodb-secondary:
-    image: docker.io/bitnami/mongodb:7.0
+    image: docker.io/bitnami/mongodb:8.0
     depends_on:
       - mongodb
     volumes:
@@ -29,7 +28,7 @@ services:
       - MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=password123
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
   redis:
-    image: docker.io/bitnami/redis:7.0
+    image: docker.io/bitnami/redis:7.4
     volumes:
       - 'redis_data:/bitnami/redis'
     environment:

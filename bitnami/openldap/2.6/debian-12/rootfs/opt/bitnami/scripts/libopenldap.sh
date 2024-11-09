@@ -52,6 +52,9 @@ export LDAP_DAEMON_GROUP="slapd"
 # Settings
 export LDAP_PORT_NUMBER="${LDAP_PORT_NUMBER:-1389}"
 export LDAP_LDAPS_PORT_NUMBER="${LDAP_LDAPS_PORT_NUMBER:-1636}"
+export LDAP_ENABLE_PROXYPROTO="${LDAP_ENABLE_PROXYPROTO:-no}"
+export LDAP_PROXYPROTO_PORT_NUMBER="${LDAP_PROXYPROTO_PORT_NUMBER:-"${LDAP_PORT_NUMBER}"}"
+export LDAP_PROXYPROTO_LDAPS_PORT_NUMBER="${LDAP_PROXYPROTO_LDAPS_PORT_NUMBER:-"${LDAP_LDAPS_PORT_NUMBER}"}"
 export LDAP_ROOT="${LDAP_ROOT:-dc=example,dc=org}"
 export LDAP_SUFFIX="$(if [ -z "${LDAP_SUFFIX+x}" ]; then echo "${LDAP_ROOT}"; else echo "${LDAP_SUFFIX}"; fi)"
 export LDAP_ADMIN_USERNAME="${LDAP_ADMIN_USERNAME:-admin}"
@@ -136,7 +139,7 @@ ldap_validate() {
         error "$1"
         error_code=1
     }
-    for var in LDAP_SKIP_DEFAULT_TREE LDAP_ENABLE_TLS; do
+    for var in LDAP_SKIP_DEFAULT_TREE LDAP_ENABLE_TLS LDAP_ENABLE_PROXYPROTO; do
         if ! is_yes_no_value "${!var}"; then
             print_validation_error "The allowed values for $var are: yes or no"
         fi
@@ -166,9 +169,21 @@ ldap_validate() {
         print_validation_error "Specify the same number of passwords on LDAP_PASSWORDS as the number of users on LDAP_USERS!"
     fi
 
+    for var in LDAP_PORT_NUMBER LDAP_LDAPS_PORT_NUMBER LDAP_PROXYPROTO_PORT_NUMBER LDAP_PROXYPROTO_LDAPS_PORT_NUMBER; do
+        if ! is_positive_int "${!var}"; then
+            print_validation_error "The value for $var must be positive integer!"
+        fi
+    done
+
     if [[ -n "$LDAP_PORT_NUMBER" ]] && [[ -n "$LDAP_LDAPS_PORT_NUMBER" ]]; then
         if [[ "$LDAP_PORT_NUMBER" -eq "$LDAP_LDAPS_PORT_NUMBER" ]]; then
             print_validation_error "LDAP_PORT_NUMBER and LDAP_LDAPS_PORT_NUMBER are bound to the same port!"
+        fi
+    fi
+
+    if [[ -n "$LDAP_PROXYPROTO_PORT_NUMBER" ]] && [[ -n "$LDAP_PROXYPROTO_LDAPS_PORT_NUMBER" ]]; then
+        if [[ "$LDAP_PROXYPROTO_PORT_NUMBER" -eq "$LDAP_PROXYPROTO_LDAPS_PORT_NUMBER" ]]; then
+            print_validation_error "LDAP_PROXYPROTO_PORT_NUMBER and LDAP_PROXYPROTO_LDAPS_PORT_NUMBER are bound to the same port!"
         fi
     fi
 
@@ -208,7 +223,8 @@ is_ldap_not_running() {
 ########################
 # Start OpenLDAP server in background
 # Arguments:
-#   None
+#   $1 - max retries. Default: 12
+#   $2 - sleep between retries (in seconds). Default: 1
 # Returns:
 #   None
 #########################

@@ -1,0 +1,11 @@
+binaries:
+  - java
+  - start-zipkin
+directories:
+  - paths:
+      - /opt/bitnami/zipkin
+root_dir: /opt/bitnami
+# The application does not have a --version flag, but the server logs do show the version
+version:
+  bin_name: timeout
+  flag: --preserve-status 7 bash -c "cd /opt/bitnami/zipkin; start-zipkin" || true

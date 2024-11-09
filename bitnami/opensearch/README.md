@@ -198,7 +198,7 @@ docker-compose up -d
 | `OPENSEARCH_IS_DEDICATED_NODE`                 | If false, Opensearch will be configured with all the roles, deploy as dedicated node using DB_NODE_ROLES.           | `no`                                        |
 | `OPENSEARCH_MINIMUM_MASTER_NODES`              | Minimum number of master nodes                                                                                      | `nil`                                       |
 | `OPENSEARCH_NODE_NAME`                         | Opensearch node name                                                                                                | `nil`                                       |
-| `OPENSEARCH_FS_SNAPSHOT_REPO_PATH`             | Opensearch node port number                                                                                         | `nil`                                       |
+| `OPENSEARCH_FS_SNAPSHOT_REPO_PATH`             | Opensearch repo path to restore snapshots from system repository                                                    | `nil`                                       |
 | `OPENSEARCH_NODE_ROLES`                        | Comma-separated list of Opensearch roles. If empty, will be deployed as a coordinating-only node.                   | `nil`                                       |
 | `OPENSEARCH_PLUGINS`                           | List of Opensearch plugins to activate                                                                              | `nil`                                       |
 | `OPENSEARCH_TRANSPORT_PORT_NUMBER`             | Opensearch node port number                                                                                         | `9300`                                      |
@@ -394,8 +394,6 @@ Please, note that the whole configuration file will be replaced by the provided,
 If you would rather extend than replace the default configuration with your settings, mount your custom configuration file at `/opt/bitnami/opensearch/config/my_opensearch.yml`.
 
 ### Plugins
-
-The Bitnami OpenSearch Docker image comes with the [S3 Repository plugin](https://www.elastic.co/guide/en/opensearch/plugins/current/repository-s3.html) installed by default.
 
 You can add extra plugins by setting the `OPENSEARCH_PLUGINS` environment variable. To specify multiple plugins, separate them by spaces, commas or semicolons. When the container is initialized it will install all of the specified plugins before starting OpenSearch.
 

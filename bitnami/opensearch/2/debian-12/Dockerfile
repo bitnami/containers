@@ -3,21 +3,22 @@
 
 FROM docker.io/bitnami/minideb:bookworm
 
+ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG OPENSEARCH_PLUGINS
 ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-06-29T17:06:49Z" \
+      org.opencontainers.image.created="2024-11-06T01:39:25Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/opensearch/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.15.0-debian-12-r1" \
+      org.opencontainers.image.ref.name="2.18.0-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/opensearch" \
       org.opencontainers.image.title="opensearch" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="2.15.0"
+      org.opencontainers.image.version="2.18.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -31,14 +32,14 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libgcc-s1 libgomp1 libstdc++6 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "yq-4.44.2-0-linux-${OS_ARCH}-debian-12" \
-      "java-17.0.11-12-0-linux-${OS_ARCH}-debian-12" \
-      "opensearch-2.15.0-0-linux-${OS_ARCH}-debian-12" \
+      "yq-4.44.3-5-linux-${OS_ARCH}-debian-12" \
+      "java-17.0.13-12-1-linux-${OS_ARCH}-debian-12" \
+      "opensearch-2.18.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
-        curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz" -O ; \
-        curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz.sha256" -O ; \
+        curl -SsLf "https://${DOWNLOADS_URL}/${COMPONENT}.tar.gz" -O ; \
+        curl -SsLf "https://${DOWNLOADS_URL}/${COMPONENT}.tar.gz.sha256" -O ; \
       fi ; \
       sha256sum -c "${COMPONENT}.tar.gz.sha256" ; \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' ; \
@@ -52,7 +53,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 COPY rootfs /
 RUN /opt/bitnami/scripts/opensearch/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
-ENV APP_VERSION="2.15.0" \
+ENV APP_VERSION="2.18.0" \
     BITNAMI_APP_NAME="opensearch" \
     JAVA_HOME="/opt/bitnami/java" \
     LD_LIBRARY_PATH="/opt/bitnami/opensearch/jdk/lib:/opt/bitnami/opensearch/jdk/lib/server:/opt/bitnami/opensearch/plugins/opensearch-knn/lib:$LD_LIBRARY_PATH" \

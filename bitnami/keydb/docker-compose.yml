@@ -1,0 +1,18 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  keydb:
+    image: docker.io/bitnami/keydb:6
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      - KEYDB_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    ports:
+      - '6379:6379'
+    volumes:
+      - 'keydb_data:/bitnami/keydb/data'
+
+volumes:
+  keydb_data:
+    driver: local

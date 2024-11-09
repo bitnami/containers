@@ -1,8 +1,6 @@
 # Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 
-version: "2"
-
 services:
   janusgraph:
     image: docker.io/bitnami/janusgraph:1
@@ -17,7 +15,7 @@ services:
     volumes:
       - "janusgraph_data:/bitnami/janusgraph"
   cassandra:
-    image: docker.io/bitnami/cassandra:4.1
+    image: docker.io/bitnami/cassandra:5.0
     volumes:
       - 'cassandra_data:/bitnami'
     environment:

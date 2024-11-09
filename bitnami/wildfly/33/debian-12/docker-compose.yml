@@ -1,0 +1,17 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  wildfly:
+    image: docker.io/bitnami/wildfly:33
+    ports:
+      - '8080:8080'
+      - '9990:9990'
+    volumes:
+      - 'wildfly_data:/bitnami'
+    environment:
+      - WILDFLY_PASSWORD=password
+
+volumes:
+  wildfly_data:
+    driver: local

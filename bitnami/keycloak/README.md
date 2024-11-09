@@ -81,6 +81,8 @@ docker build -t bitnami/APP:latest .
 | `KEYCLOAK_HTTPS_PORT`                                       | HTTPS port                                                                                            | `8443`                        |
 | `KEYCLOAK_BIND_ADDRESS`                                     | Bind address                                                                                          | `$(hostname --fqdn)`          |
 | `KEYCLOAK_HOSTNAME`                                         | Keycloak hostname                                                                                     | `nil`                         |
+| `KEYCLOAK_HOSTNAME_ADMIN`                                   | Keycloak admin hostname                                                                               | `nil`                         |
+| `KEYCLOAK_HOSTNAME_STRICT`                                  | Disables dynamically resolving the hostname from request headers                                      | `false`                       |
 | `KEYCLOAK_INIT_MAX_RETRIES`                                 | Maximum retries for checking that the database works                                                  | `10`                          |
 | `KEYCLOAK_CACHE_TYPE`                                       | Defines the cache mechanism for high-availability.                                                    | `ispn`                        |
 | `KEYCLOAK_CACHE_STACK`                                      | Apply a specific cache stack                                                                          | `nil`                         |
@@ -102,7 +104,7 @@ docker build -t bitnami/APP:latest .
 | `KEYCLOAK_LOG_LEVEL`                                        | Keycloak log level                                                                                    | `info`                        |
 | `KEYCLOAK_LOG_OUTPUT`                                       | Keycloak log output                                                                                   | `default`                     |
 | `KEYCLOAK_ROOT_LOG_LEVEL`                                   | Keycloak root log level                                                                               | `INFO`                        |
-| `KEYCLOAK_PROXY`                                            | Keycloak type proxy                                                                                   | `passthrough`                 |
+| `KEYCLOAK_PROXY_HEADERS`                                    | Keycloak reverse proxy headers                                                                        | `nil`                         |
 | `KEYCLOAK_PRODUCTION`                                       | Run in production mode                                                                                | `false`                       |
 | `KEYCLOAK_EXTRA_ARGS_PREPENDED`                             | Run with flags which are applied directly to keycloak executable                                      | `nil`                         |
 | `KEYCLOAK_DATABASE_VENDOR`                                  | Database vendor                                                                                       | `postgresql`                  |

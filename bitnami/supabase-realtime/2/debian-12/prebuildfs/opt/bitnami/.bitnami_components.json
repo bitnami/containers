@@ -1,8 +1,0 @@
-{
-    "supabase-realtime": {
-        "arch": "amd64",
-        "distro": "debian-12",
-        "type": "NAMI",
-        "version": "2.29.15-0"
-    }
-}

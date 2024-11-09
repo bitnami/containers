@@ -41,7 +41,7 @@ To run this application you need [Docker Engine](https://www.docker.com/products
 
 ## How to use this image
 
-Airflow requires access to a PostgreSQL database to store information. We will use our very own [PostgreSQL image](https://github.com/bitnami/containers/tree/main/bitnami/postgresql) for the database requirements. Additionally, if you pretend to use the `CeleryExecutor`, you will also need an [Airflow Scheduler](https://github.com/bitnami/containers/tree/main/bitnami/airflow-scheduler), one or more [Airflow Workers](https://github.com/bitnami/containers/tree/main/bitnami/airflow-worker) and a [Redis(R) server](https://github.com/bitnami/containers/tree/main/bitnami/redis).
+Airflow requires access to a PostgreSQL database to store information. We will use our very own [PostgreSQL image](https://github.com/bitnami/containers/tree/main/bitnami/postgresql) for the database requirements. Additionally, if you pretend to use the `CeleryExecutor`, you will also need a [Redis(R) server](https://github.com/bitnami/containers/tree/main/bitnami/redis).
 
 ### Using the Docker Command Line
 
@@ -97,6 +97,7 @@ Airflow requires access to a PostgreSQL database to store information. We will u
 
     ```console
     docker run -d --name airflow-scheduler \
+      -e AIRFLOW_COMPONENT_TYPE=scheduler \
       -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
       -e AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08= \
       -e AIRFLOW_EXECUTOR=CeleryExecutor \
@@ -106,13 +107,14 @@ Airflow requires access to a PostgreSQL database to store information. We will u
       -e AIRFLOW_LOAD_EXAMPLES=yes \
       -e AIRFLOW_WEBSERVER_HOST=airflow \
       --net airflow-tier \
-      bitnami/airflow-scheduler:latest
+      bitnami/airflow:latest
     ```
 
 6. Launch the Apache Airflow worker container
 
     ```console
     docker run -d --name airflow-worker \
+      -e AIRFLOW_COMPONENT_TYPE=worker \
       -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
       -e AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08= \
       -e AIRFLOW_EXECUTOR=CeleryExecutor \
@@ -121,7 +123,7 @@ Airflow requires access to a PostgreSQL database to store information. We will u
       -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
       -e AIRFLOW_WEBSERVER_HOST=airflow \
       --net airflow-tier \
-      bitnami/airflow-worker:latest
+      bitnami/airflow:latest
     ```
 
   Access your application at `http://your-ip:8080`
@@ -167,8 +169,9 @@ services:
     volumes:
       - /path/to/redis-persistence:/bitnami
   airflow-worker:
-    image: bitnami/airflow-worker:latest
+    image: bitnami/airflow:latest
     environment:
+      - AIRFLOW_COMPONENT_TYPE=worker
       - AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
       - AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08=
       - AIRFLOW_EXECUTOR=CeleryExecutor
@@ -177,8 +180,9 @@ services:
       - AIRFLOW_DATABASE_PASSWORD=bitnami1
       - AIRFLOW_LOAD_EXAMPLES=yes
   airflow-scheduler:
-    image: bitnami/airflow-scheduler:latest
+    image: bitnami/airflow:latest
     environment:
+      - AIRFLOW_COMPONENT_TYPE=scheduler
       - AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
       - AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08=
       - AIRFLOW_EXECUTOR=CeleryExecutor
@@ -254,6 +258,7 @@ services:
 
     ```console
     docker run -d --name airflow-scheduler \
+      -e AIRFLOW_COMPONENT_TYPE=scheduler \
       -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
       -e AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08= \
       -e AIRFLOW_EXECUTOR=CeleryExecutor \
@@ -263,13 +268,14 @@ services:
       -e AIRFLOW_LOAD_EXAMPLES=yes \
       -e AIRFLOW_WEBSERVER_HOST=airflow \
       --net airflow-tier \
-      bitnami/airflow-scheduler:latest
+      bitnami/airflow:latest
     ```
 
 6. Create the Airflow Worker container
 
     ```console
     docker run -d --name airflow-worker \
+      -e AIRFLOW_COMPONENT_TYPE=worker \
       -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
       -e AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08= \
       -e AIRFLOW_EXECUTOR=CeleryExecutor \
@@ -278,7 +284,7 @@ services:
       -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
       -e AIRFLOW_WEBSERVER_HOST=airflow \
       --net airflow-tier \
-      bitnami/airflow-worker:latest
+      bitnami/airflow:latest
     ```
 
 ## Configuration
@@ -295,69 +301,70 @@ This container supports the installation of additional python modules at start-u
 
 #### Customizable environment variables
 
-| Name                                  | Description                                                           | Default Value        |
-|---------------------------------------|-----------------------------------------------------------------------|----------------------|
-| `AIRFLOW_USERNAME`                    | Airflow username                                                      | `user`               |
-| `AIRFLOW_PASSWORD`                    | Airflow password                                                      | `bitnami`            |
-| `AIRFLOW_FIRSTNAME`                   | Airflow firstname                                                     | `Firstname`          |
-| `AIRFLOW_LASTNAME`                    | Airflow lastname                                                      | `Lastname`           |
-| `AIRFLOW_EMAIL`                       | Airflow email                                                         | `user@example.com`   |
-| `AIRFLOW_EXECUTOR`                    | Airflow executor.                                                     | `SequentialExecutor` |
-| `AIRFLOW_RAW_FERNET_KEY`              | Airflow raw/unencoded Fernet key                                      | `nil`                |
-| `AIRFLOW_FORCE_OVERWRITE_CONF_FILE`   | Force the airflow.cfg config file generation.                         | `no`                 |
-| `AIRFLOW_FERNET_KEY`                  | Airflow Fernet key                                                    | `nil`                |
-| `AIRFLOW_SECRET_KEY`                  | Airflow Secret key                                                    | `nil`                |
-| `AIRFLOW_WEBSERVER_HOST`              | Airflow webserver host                                                | `127.0.0.1`          |
-| `AIRFLOW_WEBSERVER_PORT_NUMBER`       | Airflow webserver port.                                               | `8080`               |
-| `AIRFLOW_LOAD_EXAMPLES`               | To load example tasks into the application.                           | `yes`                |
-| `AIRFLOW_BASE_URL`                    | Airflow webserver base URL.                                           | `nil`                |
-| `AIRFLOW_HOSTNAME_CALLABLE`           | Method to obtain the hostname.                                        | `nil`                |
-| `AIRFLOW_POOL_NAME`                   | Pool name.                                                            | `nil`                |
-| `AIRFLOW_POOL_SIZE`                   | Pool size, required with AIRFLOW_POOL_NAME.                           | `nil`                |
-| `AIRFLOW_POOL_DESC`                   | Pool description, required with AIRFLOW_POOL_NAME.                    | `nil`                |
-| `AIRFLOW_DATABASE_HOST`               | Hostname for PostgreSQL server.                                       | `postgresql`         |
-| `AIRFLOW_DATABASE_PORT_NUMBER`        | Port used by PostgreSQL server.                                       | `5432`               |
-| `AIRFLOW_DATABASE_NAME`               | Database name that Airflow will use to connect with the database.     | `bitnami_airflow`    |
-| `AIRFLOW_DATABASE_USERNAME`           | Database user that Airflow will use to connect with the database.     | `bn_airflow`         |
-| `AIRFLOW_DATABASE_PASSWORD`           | Database password that Airflow will use to connect with the database. | `nil`                |
-| `AIRFLOW_DATABASE_USE_SSL`            | Set to yes if the database is using SSL.                              | `no`                 |
-| `AIRFLOW_REDIS_USE_SSL`               | Set to yes if Redis(R) uses SSL.                                      | `no`                 |
-| `REDIS_HOST`                          | Hostname for Redis(R) server.                                         | `redis`              |
-| `REDIS_PORT_NUMBER`                   | Port used by Redis(R) server.                                         | `6379`               |
-| `REDIS_USER`                          | User that Airflow will use to connect with Redis(R).                  | `nil`                |
-| `REDIS_PASSWORD`                      | Password that Airflow will use to connect with Redis(R).              | `nil`                |
-| `REDIS_DATABASE`                      | Name of the Redis(R) database.                                        | `1`                  |
-| `AIRFLOW_LDAP_ENABLE`                 | Enable LDAP authentication.                                           | `no`                 |
-| `AIRFLOW_LDAP_URI`                    | LDAP server URI.                                                      | `nil`                |
-| `AIRFLOW_LDAP_SEARCH`                 | LDAP search base.                                                     | `nil`                |
-| `AIRFLOW_LDAP_UID_FIELD`              | LDAP field used for uid.                                              | `nil`                |
-| `AIRFLOW_LDAP_BIND_USER`              | LDAP user name.                                                       | `nil`                |
-| `AIRFLOW_LDAP_BIND_PASSWORD`          | LDAP user password.                                                   | `nil`                |
-| `AIRFLOW_LDAP_USER_REGISTRATION`      | User self registration.                                               | `True`               |
-| `AIRFLOW_LDAP_USER_REGISTRATION_ROLE` | Role name to be assign when a user registers himself.                 | `nil`                |
-| `AIRFLOW_LDAP_ROLES_MAPPING`          | Mapping from LDAP DN to a list of Airflow roles.                      | `nil`                |
-| `AIRFLOW_LDAP_ROLES_SYNC_AT_LOGIN`    | Replace ALL the user roles each login, or only on registration.       | `True`               |
-| `AIRFLOW_LDAP_USE_TLS`                | Use LDAP SSL.                                                         | `False`              |
-| `AIRFLOW_LDAP_ALLOW_SELF_SIGNED`      | Allow self signed certicates in LDAP ssl.                             | `True`               |
-| `AIRFLOW_LDAP_TLS_CA_CERTIFICATE`     | File that store the CA for LDAP ssl.                                  | `nil`                |
+| Name                                  | Description                                                                                               | Default Value        |
+|---------------------------------------|-----------------------------------------------------------------------------------------------------------|----------------------|
+| `AIRFLOW_USERNAME`                    | Airflow username                                                                                          | `user`               |
+| `AIRFLOW_PASSWORD`                    | Airflow password                                                                                          | `bitnami`            |
+| `AIRFLOW_FIRSTNAME`                   | Airflow firstname                                                                                         | `Firstname`          |
+| `AIRFLOW_LASTNAME`                    | Airflow lastname                                                                                          | `Lastname`           |
+| `AIRFLOW_EMAIL`                       | Airflow email                                                                                             | `user@example.com`   |
+| `AIRFLOW_COMPONENT_TYPE`              | Airflow component type. Allowed values: *webserver*, *scheduler*, *dag-processor*, *triggerer*, *worker*. | `webserver`          |
+| `AIRFLOW_EXECUTOR`                    | Airflow executor.                                                                                         | `SequentialExecutor` |
+| `AIRFLOW_RAW_FERNET_KEY`              | Airflow raw/unencoded Fernet key                                                                          | `nil`                |
+| `AIRFLOW_FORCE_OVERWRITE_CONF_FILE`   | Force the airflow.cfg config file generation.                                                             | `no`                 |
+| `AIRFLOW_FERNET_KEY`                  | Airflow Fernet key                                                                                        | `nil`                |
+| `AIRFLOW_SECRET_KEY`                  | Airflow Secret key                                                                                        | `nil`                |
+| `AIRFLOW_WEBSERVER_BASE_URL`          | Airflow Webserver base URL.                                                                               | `nil`                |
+| `AIRFLOW_WEBSERVER_HOST`              | Airflow Webserver host                                                                                    | `127.0.0.1`          |
+| `AIRFLOW_WEBSERVER_PORT_NUMBER`       | Airflow Webserver port.                                                                                   | `8080`               |
+| `AIRFLOW_LOAD_EXAMPLES`               | To load example tasks into the application.                                                               | `yes`                |
+| `AIRFLOW_HOSTNAME_CALLABLE`           | Method to obtain the hostname.                                                                            | `nil`                |
+| `AIRFLOW_POOL_NAME`                   | Pool name.                                                                                                | `nil`                |
+| `AIRFLOW_POOL_SIZE`                   | Pool size, required with AIRFLOW_POOL_NAME.                                                               | `nil`                |
+| `AIRFLOW_POOL_DESC`                   | Pool description, required with AIRFLOW_POOL_NAME.                                                        | `nil`                |
+| `AIRFLOW_STANDALONE_DAG_PROCESSOR`    | Enable running Dag Processor in standalone mode                                                           | `no`                 |
+| `AIRFLOW_TRIGGERER_DEFAULT_CAPACITY`  | How many triggers a single Triggerer can run at once.                                                     | `1000`               |
+| `AIRFLOW_WORKER_QUEUE`                | A queue for the worker to pull tasks from.                                                                | `nil`                |
+| `AIRFLOW_DATABASE_HOST`               | Hostname for PostgreSQL server.                                                                           | `postgresql`         |
+| `AIRFLOW_DATABASE_PORT_NUMBER`        | Port used by PostgreSQL server.                                                                           | `5432`               |
+| `AIRFLOW_DATABASE_NAME`               | Database name that Airflow will use to connect with the database.                                         | `bitnami_airflow`    |
+| `AIRFLOW_DATABASE_USERNAME`           | Database user that Airflow will use to connect with the database.                                         | `bn_airflow`         |
+| `AIRFLOW_DATABASE_PASSWORD`           | Database password that Airflow will use to connect with the database.                                     | `nil`                |
+| `AIRFLOW_DATABASE_USE_SSL`            | Set to yes if the database is using SSL.                                                                  | `no`                 |
+| `AIRFLOW_REDIS_USE_SSL`               | Set to yes if Redis(R) uses SSL.                                                                          | `no`                 |
+| `REDIS_HOST`                          | Hostname for Redis(R) server.                                                                             | `redis`              |
+| `REDIS_PORT_NUMBER`                   | Port used by Redis(R) server.                                                                             | `6379`               |
+| `REDIS_USER`                          | User that Airflow will use to connect with Redis(R).                                                      | `nil`                |
+| `REDIS_PASSWORD`                      | Password that Airflow will use to connect with Redis(R).                                                  | `nil`                |
+| `REDIS_DATABASE`                      | Name of the Redis(R) database.                                                                            | `1`                  |
+| `AIRFLOW_LDAP_ENABLE`                 | Enable LDAP authentication.                                                                               | `no`                 |
+| `AIRFLOW_LDAP_URI`                    | LDAP server URI.                                                                                          | `nil`                |
+| `AIRFLOW_LDAP_SEARCH`                 | LDAP search base.                                                                                         | `nil`                |
+| `AIRFLOW_LDAP_UID_FIELD`              | LDAP field used for uid.                                                                                  | `nil`                |
+| `AIRFLOW_LDAP_BIND_USER`              | LDAP user name.                                                                                           | `nil`                |
+| `AIRFLOW_LDAP_BIND_PASSWORD`          | LDAP user password.                                                                                       | `nil`                |
+| `AIRFLOW_LDAP_USER_REGISTRATION`      | User self registration.                                                                                   | `True`               |
+| `AIRFLOW_LDAP_USER_REGISTRATION_ROLE` | Role name to be assign when a user registers himself.                                                     | `nil`                |
+| `AIRFLOW_LDAP_ROLES_MAPPING`          | Mapping from LDAP DN to a list of Airflow roles.                                                          | `nil`                |
+| `AIRFLOW_LDAP_ROLES_SYNC_AT_LOGIN`    | Replace ALL the user roles each login, or only on registration.                                           | `True`               |
+| `AIRFLOW_LDAP_USE_TLS`                | Use LDAP SSL.                                                                                             | `False`              |
+| `AIRFLOW_LDAP_ALLOW_SELF_SIGNED`      | Allow self signed certicates in LDAP ssl.                                                                 | `True`               |
+| `AIRFLOW_LDAP_TLS_CA_CERTIFICATE`     | File that store the CA for LDAP ssl.                                                                      | `nil`                |
 
 #### Read-only environment variables
 
-| Name                          | Description                               | Value                                       |
-|-------------------------------|-------------------------------------------|---------------------------------------------|
-| `AIRFLOW_BASE_DIR`            | Airflow installation directory.           | `${BITNAMI_ROOT_DIR}/airflow`               |
-| `AIRFLOW_HOME`                | Airflow home directory.                   | `${AIRFLOW_BASE_DIR}`                       |
-| `AIRFLOW_BIN_DIR`             | Airflow directory for binary executables. | `${AIRFLOW_BASE_DIR}/venv/bin`              |
-| `AIRFLOW_LOGS_DIR`            | Airflow logs directory.                   | `${AIRFLOW_BASE_DIR}/logs`                  |
-| `AIRFLOW_SCHEDULER_LOGS_DIR`  | Airflow scheduler logs directory.         | `${AIRFLOW_LOGS_DIR}/scheduler`             |
-| `AIRFLOW_LOG_FILE`            | Airflow log file.                         | `${AIRFLOW_LOGS_DIR}/airflow-webserver.log` |
-| `AIRFLOW_CONF_FILE`           | Airflow configuration file.               | `${AIRFLOW_BASE_DIR}/airflow.cfg`           |
-| `AIRFLOW_WEBSERVER_CONF_FILE` | Airflow configuration file.               | `${AIRFLOW_BASE_DIR}/webserver_config.py`   |
-| `AIRFLOW_TMP_DIR`             | Airflow directory temporary files.        | `${AIRFLOW_BASE_DIR}/tmp`                   |
-| `AIRFLOW_PID_FILE`            | Path to the Airflow PID file.             | `${AIRFLOW_TMP_DIR}/airflow-webserver.pid`  |
-| `AIRFLOW_DAGS_DIR`            | Airflow data to be persisted.             | `${AIRFLOW_BASE_DIR}/dags`                  |
-| `AIRFLOW_DAEMON_USER`         | Airflow system user.                      | `airflow`                                   |
-| `AIRFLOW_DAEMON_GROUP`        | Airflow system group.                     | `airflow`                                   |
+| Name                          | Description                               | Value                                     |
+|-------------------------------|-------------------------------------------|-------------------------------------------|
+| `AIRFLOW_BASE_DIR`            | Airflow home/installation directory.      | `${BITNAMI_ROOT_DIR}/airflow`             |
+| `AIRFLOW_BIN_DIR`             | Airflow directory for binary executables. | `${AIRFLOW_BASE_DIR}/venv/bin`            |
+| `AIRFLOW_LOGS_DIR`            | Airflow logs directory.                   | `${AIRFLOW_BASE_DIR}/logs`                |
+| `AIRFLOW_SCHEDULER_LOGS_DIR`  | Airflow scheduler logs directory.         | `${AIRFLOW_LOGS_DIR}/scheduler`           |
+| `AIRFLOW_CONF_FILE`           | Airflow configuration file.               | `${AIRFLOW_BASE_DIR}/airflow.cfg`         |
+| `AIRFLOW_WEBSERVER_CONF_FILE` | Airflow Webserver configuration file.     | `${AIRFLOW_BASE_DIR}/webserver_config.py` |
+| `AIRFLOW_TMP_DIR`             | Airflow directory temporary files.        | `${AIRFLOW_BASE_DIR}/tmp`                 |
+| `AIRFLOW_DAGS_DIR`            | Airflow data to be persisted.             | `${AIRFLOW_BASE_DIR}/dags`                |
+| `AIRFLOW_DAEMON_USER`         | Airflow system user.                      | `airflow`                                 |
+| `AIRFLOW_DAEMON_GROUP`        | Airflow system group.                     | `airflow`                                 |
 
 > In addition to the previous environment variables, all the parameters from the configuration file can be overwritten by using environment variables with this format: `AIRFLOW__{SECTION}__{KEY}`. Note the double underscores.
 
@@ -455,6 +462,11 @@ docker run -d --name airflow -p 8080:8080 \
 ```
 
 ## Notable Changes
+
+### Starting October 30, 2024
+
+* The Airflow container now supports running as a Web server, Scheduler or Worker component, so it's no longer necessary to combine this container image with `bitnami/airflow-scheduler` and `bitnami/airflow-worker` in order to use the `CeleryExecutor`.
+* The `AIRFLOW_COMPONENT_TYPE` environment variable was introduced to specify the component type. Current supported values are `webserver`, `scheduler` and `worker`, although it's planned to add soon support for `dag-processor` and `triggerer` components. The default value is `webserver`.
 
 ### 1.10.15-debian-10-r17 and 2.0.1-debian-10-r50
 

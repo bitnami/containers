@@ -7,6 +7,6 @@ command:
     exec: gradle -v | grep "Gradle $(echo $APP_VERSION | sed -E 's|([0-9]+\.[0-9]+)\.0$|\1|g')"
     exit-status: 0
   create-sample-project:
-    exec: echo | gradle init && gradle build
+    exec: echo | gradle init --overwrite && gradle build
     exit-status: 0
-    timeout: 60000
+    timeout: 180000

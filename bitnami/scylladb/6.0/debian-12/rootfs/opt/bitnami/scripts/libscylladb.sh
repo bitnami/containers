@@ -231,6 +231,22 @@ cassandra_stop() {
 . /opt/bitnami/scripts/libnet.sh
 . /opt/bitnami/scripts/libservice.sh
 . /opt/bitnami/scripts/libvalidations.sh
+. /opt/bitnami/scripts/libversion.sh
+
+########################
+# Returns cassandra major version
+# Globals:
+#   CASSANDRA_BASE_DIR
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+cassandra_get_major_version() {
+    cassandra_version="$("${CASSANDRA_BASE_DIR}/bin/cassandra" -v)"
+    major_version="$(get_sematic_version "$cassandra_version" 1)"
+    echo "${major_version:-0}"
+}
 
 ########################
 # Change a Cassandra configuration yaml file by setting a property
@@ -251,9 +267,9 @@ cassandra_yaml_set() {
     local -r conf_file="${4:-$DB_CONF_FILE}"
 
     if is_boolean_yes "$use_quotes"; then
-        replace_in_file "$conf_file" "^(#\s)?(\s*)(\-\s*)?${property}:.*" "\2\3${property}: '${value}'"
+        replace_in_file "$conf_file" "^(\s*)(#\s*)?(\s*)(\-\s*)?${property}:.*" "\1\3\4${property}: '${value}'"
     else
-        replace_in_file "$conf_file" "^(#\s)?(\s*)(\-\s*)?${property}:.*" "\2\3${property}: ${value}"
+        replace_in_file "$conf_file" "^(\s*)(#\s*)?(\s*)(\-\s*)?${property}:.*" "\1\3\4${property}: ${value}"
     fi
 }
 
@@ -554,11 +570,18 @@ cassandra_setup_data_dirs() {
 cassandra_enable_auth() {
     if ! cassandra_is_file_external "${DB_MOUNTED_CONF_PATH}"; then
         if [[ "$ALLOW_EMPTY_PASSWORD" = "yes" ]] && [[ -z $DB_PASSWORD ]]; then
-            cassandra_yaml_set "authenticator" "AllowAllAuthenticator"
+            if [[ "$DB_FLAVOR" = "scylladb" ]] || [ "$(cassandra_get_major_version)" -lt 5 ]; then
+                cassandra_yaml_set "authenticator" "AllowAllAuthenticator"
+            fi
             cassandra_yaml_set "authorizer" "AllowAllAuthorizer"
-        else
-            cassandra_yaml_set "authenticator" "${DB_AUTHENTICATOR}"
-            cassandra_yaml_set "authorizer" "${DB_AUTHORIZER}"
+	else
+            if [[ "$DB_FLAVOR" = "cassandra" ]] && [ "$(cassandra_get_major_version)" -ge 5 ]; then
+	            replace_in_file "${DB_CONF_FILE}" "class_name.* AllowAllAuthenticator" "class_name: ${DB_AUTHENTICATOR}"
+	            replace_in_file "${DB_CONF_FILE}" "class_name.* AllowAllAuthorizer" "class_name: ${DB_AUTHORIZER}"
+            else
+                cassandra_yaml_set "authenticator" "${DB_AUTHENTICATOR}"
+                cassandra_yaml_set "authorizer" "${DB_AUTHORIZER}"
+            fi
         fi
     else
         debug "${DB_MOUNTED_CONF_PATH} mounted. Skipping authentication method configuration"
@@ -609,8 +632,14 @@ cassandra_setup_cluster() {
         cassandra_yaml_set "listen_address" "$host"
         cassandra_yaml_set "seeds" "$DB_SEEDS"
         cassandra_yaml_set "start_rpc" "$DB_ENABLE_RPC" "no"
-        cassandra_yaml_set "enable_user_defined_functions" "$DB_ENABLE_USER_DEFINED_FUNCTIONS" "no"
-        cassandra_yaml_set "enable_scripted_user_defined_functions" "$DB_ENABLE_SCRIPTED_USER_DEFINED_FUNCTIONS" "no"
+        if [[ "$DB_FLAVOR" = "scylladb" ]]; then
+            # Ref: https://opensource.docs.scylladb.com/stable/cql/functions.html
+            cassandra_yaml_set "enable_user_defined_functions" "$DB_ENABLE_USER_DEFINED_FUNCTIONS" "no"
+        else
+            # Ref: https://cassandra.apache.org/doc/stable/cassandra/configuration/cass_yaml_file.html#user_defined_functions_enabled
+            cassandra_yaml_set "user_defined_functions_enabled" "$DB_ENABLE_USER_DEFINED_FUNCTIONS" "no"
+            cassandra_yaml_set "scripted_user_defined_functions_enabled" "$DB_ENABLE_SCRIPTED_USER_DEFINED_FUNCTIONS" "no"
+        fi
         cassandra_yaml_set "rpc_address" "$rpc_address"
         cassandra_yaml_set "broadcast_rpc_address" "$host"
         cassandra_yaml_set "endpoint_snitch" "$DB_ENDPOINT_SNITCH"

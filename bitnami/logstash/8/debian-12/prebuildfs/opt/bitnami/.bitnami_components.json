@@ -3,18 +3,18 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "17.0.11-12-0"
+        "version": "17.0.13-12-1"
     },
     "logstash": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.14.1-0"
+        "version": "8.15.3-1"
     },
     "yq": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "4.44.2-0"
+        "version": "4.44.3-4"
     }
 }

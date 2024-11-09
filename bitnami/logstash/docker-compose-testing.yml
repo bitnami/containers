@@ -1,0 +1,15 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  logstash:
+    image: docker.io/bitnami/logstash:8
+    ports:
+      - 8080:8080
+    environment:
+      - LOGSTASH_CONF_STRING=input {http { port => 8080 }} output {file {path => "/tmp/logstash_output"}}
+    volumes:
+      - logstash_data:/bitnami/logstash
+volumes:
+  logstash_data:
+    driver: local

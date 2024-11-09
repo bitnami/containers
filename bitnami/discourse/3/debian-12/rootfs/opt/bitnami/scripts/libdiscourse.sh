@@ -91,6 +91,7 @@ discourse_validate() {
     ! is_empty_value "$DISCOURSE_REDIS_HOST" && check_resolved_hostname "$DISCOURSE_REDIS_HOST"
     ! is_empty_value "$DISCOURSE_REDIS_PORT_NUMBER" && check_valid_port "DISCOURSE_REDIS_PORT_NUMBER"
     ! is_empty_value "$DISCOURSE_REDIS_USE_SSL" && check_yes_no_value "DISCOURSE_REDIS_USE_SSL"
+    ! is_empty_value "$DISCOURSE_REDIS_DB" && is_positive_int "$DISCOURSE_REDIS_DB"
     if ! is_file_writable "$DISCOURSE_CONF_FILE"; then
         warn "The Discourse configuration file ${DISCOURSE_CONF_FILE} is not writable. Configurations specified via environment variables will not be applied to this file."
         is_boolean_yes "$DISCOURSE_ENABLE_CONF_PERSISTENCE" && warn "The DISCOURSE_ENABLE_CONF_PERSISTENCE configuration is enabled but the ${DISCOURSE_CONF_FILE} file is not writable. The file will not be persisted."
@@ -187,10 +188,6 @@ discourse_initialize() {
         discourse_rake_execute db:migrate
     fi
 
-    # Set execution permissions to ember's binary (required for assets precompile)
-    # Add symlink to discourse/bin for simplicity
-    chmod +x "${DISCOURSE_BASE_DIR}/app/assets/javascripts/node_modules/ember-cli/bin/ember"
-    ln -sf "${DISCOURSE_BASE_DIR}/app/assets/javascripts/node_modules/ember-cli/bin/ember" "${DISCOURSE_BASE_DIR}/bin/ember"
     if is_boolean_yes "$DISCOURSE_PRECOMPILE_ASSETS"; then
         info "Precompiling assets, this may take some time..."
         discourse_rake_execute assets:precompile
@@ -259,6 +256,7 @@ discourse_create_conf_file() {
     discourse_conf_set "redis_host" "$DISCOURSE_REDIS_HOST"
     discourse_conf_set "redis_port" "$DISCOURSE_REDIS_PORT_NUMBER"
     discourse_conf_set "redis_password" "$DISCOURSE_REDIS_PASSWORD"
+    discourse_conf_set "redis_db" "$DISCOURSE_REDIS_DB"
     is_boolean_yes "$DISCOURSE_REDIS_USE_SSL" && discourse_conf_set "redis_use_ssl" true
     # SMTP credentials
     if ! is_empty_value "$DISCOURSE_SMTP_HOST"; then

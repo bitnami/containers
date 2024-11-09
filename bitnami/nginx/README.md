@@ -1,5 +1,9 @@
 # Bitnami package for NGINX Open Source
 
+## Deprecation Notice
+
+The NGINX Open Source container will no longer be released in our catalog, but already released container images will still persist in the registries.
+
 ## What is NGINX Open Source?
 
 > NGINX Open Source is a web server that can be also used as a reverse proxy, load balancer, and HTTP cache. Recommended for high-demanding sites due to its ability to provide faster content.
@@ -127,7 +131,7 @@ server {
 }
 ```
 
-## Step 2: Mount the configuration as a volume
+## Step 2: Mount the server block as a volume
 
 ```console
 docker run --name nginx \
@@ -143,6 +147,52 @@ services:
   ...
     volumes:
       - /path/to/my_server_block.conf:/opt/bitnami/nginx/conf/server_blocks/my_server_block.conf:ro
+  ...
+```
+
+### Adding custom stream server blocks
+
+Similar to server blocks, you can include server blocks for the [NGINX Stream Core Module](https://nginx.org/en/docs/stream/ngx_stream_core_module.html) mounting them at `/opt/bitnami/nginx/conf/stream_server_blocks/`. In order to do so, it's also necessary to set the `NGINX_ENABLE_STREAM` environment variable to `yes`.
+
+## Step 1: Write your `my_stream_server_block.conf` file with the following content
+
+```nginx
+upstream backend {
+    hash $remote_addr consistent;
+
+    server backend1.example.com:12345 weight=5;
+    server 127.0.0.1:12345            max_fails=3 fail_timeout=30s;
+    server unix:/tmp/backend3;
+}
+
+server {
+    listen 12345;
+    proxy_connect_timeout 1s;
+    proxy_timeout 3s;
+    proxy_pass backend;
+}
+```
+
+## Step 2: Mount the stream server block as a volume
+
+```console
+docker run --name nginx \
+  -e NGINX_ENABLE_STREAM=yes \
+  -v /path/to/my_stream_server_block.conf:/opt/bitnami/nginx/conf/stream_server_blocks/my_stream_server_block.conf:ro \
+  bitnami/nginx:latest
+```
+
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/nginx/docker-compose.yml) file present in this repository:
+
+```yaml
+services:
+  nginx:
+  ...
+    environment:
+      - NGINX_ENABLE_STREAM=yes
+  ...
+    volumes:
+      - /path/to/my_stream_server_block.conf:/opt/bitnami/nginx/conf/stream_server_blocks/my_stream_server_block.conf:ro
   ...
 ```
 

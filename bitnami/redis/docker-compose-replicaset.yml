@@ -1,11 +1,9 @@
 # Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 
-version: '2'
-
 services:
   redis-primary:
-    image: docker.io/bitnami/redis:7.2
+    image: docker.io/bitnami/redis:7.4
     ports:
       - '6379'
     environment:
@@ -16,7 +14,7 @@ services:
       - 'redis_data:/bitnami/redis/data'
 
   redis-secondary:
-    image: docker.io/bitnami/redis:7.2
+    image: docker.io/bitnami/redis:7.4
     ports:
       - '6379'
     depends_on:

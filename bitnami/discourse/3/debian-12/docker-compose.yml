@@ -1,10 +1,9 @@
 # Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 
-version: '2'
 services:
   postgresql:
-    image: docker.io/bitnami/postgresql:16
+    image: docker.io/bitnami/postgresql:17
     volumes:
       - 'postgresql_data:/bitnami/postgresql'
     environment:
@@ -13,7 +12,7 @@ services:
       - POSTGRESQL_USERNAME=bn_discourse
       - POSTGRESQL_DATABASE=bitnami_discourse
   redis:
-    image: docker.io/bitnami/redis:7.0
+    image: docker.io/bitnami/redis:7.4
     environment:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes

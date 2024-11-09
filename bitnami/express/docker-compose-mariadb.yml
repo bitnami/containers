@@ -1,16 +1,14 @@
 # Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 
-version: '2'
-
 services:
   mariadb:
-    image: docker.io/bitnami/mariadb:11.3
+    image: docker.io/bitnami/mariadb:11.4
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_DATABASE=myapp
   express:
-    image: docker.io/bitnami/express:4
+    image: docker.io/bitnami/express:5
     ports:
       - '3000:3000'
     environment:

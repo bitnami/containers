@@ -1,0 +1,42 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+command:
+  check-configtxlator:
+    exec: timeout --preserve-status 9 configtxlator start || true
+    timeout: 15000
+    exit-status: 0
+    stderr:
+      - "Serving HTTP requests"
+  check-configtxgen:
+    exec: configtxgen
+    exit-status: 0
+    stderr:
+      - "Loading configuration"
+  check-cryptogen:
+    exec: cryptogen showtemplate
+    exit-status: 0
+    stdout:
+      - "example.com"
+  # These require a running fabric network
+  check-discover:
+    exec: discover help
+    exit-status: 0
+    stderr:
+      - "fabric discovery service"
+  check-ledgerutil:
+    exec: ledgerutil help
+    exit-status: 0
+    stderr:
+      - "Verify the integrity"
+  check-osnadmin:
+    exec: osnadmin --help
+    exit-status: 0
+    stderr:
+      - "channel join"
+  check-peer:
+    exec: timeout --preserve-status 9 peer node start || true
+    timeout: 15000
+    exit-status: 0
+    stderr:
+      - "Started peer"

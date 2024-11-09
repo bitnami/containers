@@ -1,0 +1,14 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+
+  haproxy:
+    image: docker.io/bitnami/haproxy:3
+    volumes:
+      - ./examples/frontend.cfg:/bitnami/haproxy/conf/haproxy.cfg
+    ports:
+      - 80:8080
+
+  service:
+    image: bitnami/nginx

@@ -3,30 +3,24 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "2.9.2-0"
+        "version": "2.10.3-1"
     },
     "ini-file": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.4.6-14"
-    },
-    "postgresql-client": {
-        "arch": "amd64",
-        "distro": "debian-12",
-        "type": "NAMI",
-        "version": "16.3.0-4"
+        "version": "1.4.7-7"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.11.9-11"
+        "version": "3.12.7-4"
     },
     "wait-for-port": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.7-14"
+        "version": "1.0.8-7"
     }
 }

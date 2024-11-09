@@ -238,26 +238,18 @@ neo4j_initialize() {
         info "Found mounted apoc.conf file in ${NEO4J_MOUNTED_CONF_DIR}/apoc.conf. The APOC plugin configuration will be skipped"
     fi
 
-    local -r app_name="neo4j"
-    if ! is_app_initialized "$app_name"; then
+    if is_mounted_dir_empty "$NEO4J_DATA_DIR"; then
         info "Deploying Neo4j from scratch"
         neo4j_create_admin_user
     else
         info "Deploying Neo4j with persisted data"
     fi
 
-    # When running as 'root' user, ensure the Neo4j user has ownership and minimum permissions are set
+    # When running as 'root' user, ensure the Neo4j user has ownership
     if am_i_root; then
         info "Configuring file permissions for Neo4j"
-        ## Directories that should have read-only permissions
-        for dir in "$NEO4J_IMPORT_DIR" "${NEO4J_BASE_DIR}/lib" "$NEO4J_CERTIFICATES_DIR" "$NEO4J_MOUNTED_CONF_DIR" "$NEO4J_MOUNTED_PLUGINS_DIR" "$NEO4J_INITSCRIPTS_DIR" "$NEO4J_PLUGINS_DIR" "$NEO4J_CONF_DIR"; do
-            ensure_dir_exists "$dir"
-            configure_permissions_ownership "$dir" -u "$NEO4J_DAEMON_USER" -g "$NEO4J_DAEMON_GROUP" -d 500 -f 400
-        done
-        ## Directories that should have write permissions
         for dir in "$NEO4J_LOGS_DIR" "$NEO4J_DATA_DIR" "$NEO4J_RUN_DIR" "$NEO4J_METRICS_DIR"; do
-            ensure_dir_exists "$dir"
-            configure_permissions_ownership "$dir" -u "$NEO4J_DAEMON_USER" -g "$NEO4J_DAEMON_GROUP" -d 700 -f 600
+            configure_permissions_ownership "$dir" -u "$NEO4J_DAEMON_USER" -g "$NEO4J_DAEMON_GROUP" -d 755 -f 644
         done
     fi
 }

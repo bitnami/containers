@@ -1,0 +1,15 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  openldap:
+    image: docker.io/bitnami/openldap:2.6
+    ports:
+      - '1389:1389'
+      - '1636:1636'
+    volumes:
+      - 'openldap_data:/bitnami/openldap'
+
+volumes:
+  openldap_data:
+    driver: local

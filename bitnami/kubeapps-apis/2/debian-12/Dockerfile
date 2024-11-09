@@ -3,19 +3,20 @@
 
 FROM docker.io/bitnami/minideb:bookworm
 
+ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-07-03T01:25:36Z" \
+      org.opencontainers.image.created="2024-11-07T05:48:21Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/kubeapps-apis/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.10.0-debian-12-r8" \
+      org.opencontainers.image.ref.name="2.12.0-debian-12-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kubeapps-apis" \
       org.opencontainers.image.title="kubeapps-apis" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="2.10.0"
+      org.opencontainers.image.version="2.12.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,12 +29,12 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "kubeapps-apis-2.10.0-4-linux-${OS_ARCH}-debian-12" \
+      "kubeapps-apis-2.12.0-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
-        curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz" -O ; \
-        curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz.sha256" -O ; \
+        curl -SsLf "https://${DOWNLOADS_URL}/${COMPONENT}.tar.gz" -O ; \
+        curl -SsLf "https://${DOWNLOADS_URL}/${COMPONENT}.tar.gz.sha256" -O ; \
       fi ; \
       sha256sum -c "${COMPONENT}.tar.gz.sha256" ; \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' ; \
@@ -47,7 +48,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN mkdir -p /opt/bitnami/kubeapps-apis/.kube && chown 1001:1001 /opt/bitnami/kubeapps-apis/.kube
 RUN ln -s /opt/bitnami/kubeapps-apis/plugins /plugins && ln -s /opt/bitnami/kubeapps-apis/bin/kubeapps-apis /kubeapps-apis && ln -s /opt/bitnami/kubeapps-apis/.kube /.kube
 
-ENV APP_VERSION="2.10.0" \
+ENV APP_VERSION="2.12.0" \
     BITNAMI_APP_NAME="kubeapps-apis" \
     PATH="/opt/bitnami/kubeapps-apis/bin:$PATH"
 

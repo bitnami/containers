@@ -1,0 +1,8 @@
+{
+    "openresty": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "1.27.1-1-4"
+    }
+}

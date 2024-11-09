@@ -158,7 +158,7 @@ Available options are 'primary/secondary/arbiter/hidden'"
     fi
 
     check_yes_no_value "MONGODB_ENABLE_MAJORITY_READ"
-    [[ "$(mongodb_get_version)" =~ ^5\..\. ]] && ! is_boolean_yes "$MONGODB_ENABLE_MAJORITY_READ" && warn "MONGODB_ENABLE_MAJORITY_READ=${MONGODB_ENABLE_MAJORITY_READ} Will be ignored in MongoDB 5.0"
+    [[ "$(mongodb_get_major_version)" -eq 5 ]] && ! is_boolean_yes "$MONGODB_ENABLE_MAJORITY_READ" && warn "MONGODB_ENABLE_MAJORITY_READ=${MONGODB_ENABLE_MAJORITY_READ} Will be ignored in MongoDB 5.0"
 
     if [[ -n "$MONGODB_REPLICA_SET_KEY" ]] && ((${#MONGODB_REPLICA_SET_KEY} < 5)); then
         error_message="MONGODB_REPLICA_SET_KEY must be, at least, 5 characters long!"
@@ -489,7 +489,7 @@ mongodb_set_journal_conf() {
 
     if ! mongodb_is_file_external "$conf_file_name"; then
         # Disable journal.enabled since it is not supported from 7.0 on
-        if [[ "$(mongodb_get_version)" =~ ^7\..\. ]]; then
+        if [[ "$(mongodb_get_major_version)" -ge 7 ]]; then
             mongodb_conf="$(sed '/journal:/,/enabled: .*/d' "$conf_file_path")"
             echo "$mongodb_conf" >"$conf_file_path"
         else
@@ -584,7 +584,12 @@ mongodb_disable_javascript_conf() {
     local -r conf_file_name="${conf_file_path#"$MONGODB_CONF_DIR"}"
 
     if ! mongodb_is_file_external "$conf_file_name"; then
-        mongodb_config_apply_regex "#?security:" "security:\n  javascriptEnabled: false" "$conf_file_path"
+        if grep -q -E "^[[:space:]]*javascriptEnabled:" "$conf_file_path"; then
+            mongodb_config_apply_regex "javascriptEnabled:.*" "javascriptEnabled: false" "$conf_file_path"
+        else
+            # The 'javascriptEnabled' property will be added to the config file
+            mongodb_config_apply_regex "#?security:" "security:\n  javascriptEnabled: false" "$conf_file_path"
+        fi
     else
         debug "$conf_file_name mounted. Skipping disabling javascript"
     fi
@@ -664,7 +669,7 @@ mongodb_set_replicasetmode_conf() {
             mongodb_config_apply_regex "replSetName:.*" "replSetName: $MONGODB_REPLICA_SET_NAME" "$conf_file_path"
         fi
         if [[ -n "$MONGODB_ENABLE_MAJORITY_READ" ]]; then
-            mongodb_config_apply_regex "enableMajorityReadConcern:.*" "enableMajorityReadConcern: $({ (is_boolean_yes "$MONGODB_ENABLE_MAJORITY_READ" || [[ "$(mongodb_get_version)" =~ ^5\..\. ]]) && echo 'true'; } || echo 'false')" "$conf_file_path"
+            mongodb_config_apply_regex "enableMajorityReadConcern:.*" "enableMajorityReadConcern: $({ (is_boolean_yes "$MONGODB_ENABLE_MAJORITY_READ" || [[ "$(mongodb_get_major_version)" -eq 5 ]]) && echo 'true'; } || echo 'false')" "$conf_file_path"
         fi
     else
         debug "$conf_file_name mounted. Skipping replicaset mode enabling"
@@ -1517,6 +1522,20 @@ mongodb_is_file_external() {
 #########################
 mongodb_get_version() {
     mongod --version 2>/dev/null | awk -F\" '/"version"/ {print $4}'
+}
+
+########################
+# Get MongoDB major version
+# Globals:
+#   MONGODB_*
+# Arguments:
+#   None
+# Returns:
+#   major version
+#########################
+mongodb_get_major_version() {
+    # shellcheck disable=SC2005
+    echo "$(mongodb_get_version)" | cut --delimiter='.' --fields=1
 }
 
 ########################

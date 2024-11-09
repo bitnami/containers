@@ -1,0 +1,12 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+command:
+  check-server:
+    exec: timeout --preserve-status 9 fabric-ca-server start -b admin:adminpw|| true
+    timeout: 15000
+    exit-status: 0
+    stderr:
+      - "Operation Server Listening"
+      - "Listening on"
+      - "key was successfully stored"

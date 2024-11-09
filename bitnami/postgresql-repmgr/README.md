@@ -599,8 +599,8 @@ Refer to [issues/27124](https://github.com/bitnami/containers/issues/27124) for 
 | `POSTGRESQL_LOG_HOSTNAME`                  | Log the client host name when accessing                                                          | `nil`                                      |
 | `POSTGRESQL_CLIENT_MIN_MESSAGES`           | Set log level of errors to send to the client                                                    | `error`                                    |
 | `POSTGRESQL_LOG_LINE_PREFIX`               | Set the format of the log lines                                                                  | `nil`                                      |
-| `POSTGRESQL_LOG_TIMEZONE`                  | Set the timezone                                                                                 | `nil`                                      |
-| `POSTGRESQL_TIMEZONE`                      | Set the log timezone                                                                             | `nil`                                      |
+| `POSTGRESQL_LOG_TIMEZONE`                  | Set the log timezone                                                                             | `nil`                                      |
+| `POSTGRESQL_TIMEZONE`                      | Set the timezone                                                                                 | `nil`                                      |
 | `POSTGRESQL_MAX_CONNECTIONS`               | Set the maximum amount of connections                                                            | `nil`                                      |
 | `POSTGRESQL_TCP_KEEPALIVES_IDLE`           | Set the TCP keepalive idle time                                                                  | `nil`                                      |
 | `POSTGRESQL_TCP_KEEPALIVES_INTERVAL`       | Set the TCP keepalive interval time                                                              | `nil`                                      |
@@ -637,6 +637,7 @@ Refer to [issues/27124](https://github.com/bitnami/containers/issues/27124) for 
 | `REPMGR_PRIMARY_PORT`                      | Replication Manager cluster primary node port                                                    | `5432`                                     |
 | `REPMGR_USE_REPLICATION_SLOTS`             | Replication Manager replication slots                                                            | `1`                                        |
 | `REPMGR_MASTER_RESPONSE_TIMEOUT`           | Time (in seconds) to wait for the master to reply                                                | `20`                                       |
+| `REPMGR_PRIMARY_VISIBILITY_CONSENSUS`      | Replication Manager flag to enable consult each other to build a quorum                          | `false`                                    |
 | `REPMGR_MONITORING_HISTORY`                | Replication Manager flag to enable monitoring history                                            | `no`                                       |
 | `REPMGR_MONITOR_INTERVAL_SECS`             | Replication Manager interval at which to write monitoring data                                   | `2`                                        |
 | `REPMGR_DEGRADED_MONITORING_TIMEOUT`       | Replication Manager degraded monitoring timeout                                                  | `5`                                        |

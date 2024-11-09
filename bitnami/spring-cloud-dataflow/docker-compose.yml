@@ -1,8 +1,6 @@
 # Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 
-version: '2'
-
 services:
   spring-cloud-dataflow:
     image: docker.io/bitnami/spring-cloud-dataflow:2
@@ -75,7 +73,7 @@ services:
       - MARIADB_DATABASE=test
 
   rabbitmq:
-    image: docker.io/bitnami/rabbitmq:3.13
+    image: docker.io/bitnami/rabbitmq:4.0
     volumes:
       - 'rabbitmq_data:/bitnami'
 

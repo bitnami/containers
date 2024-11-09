@@ -1,8 +1,6 @@
 # Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 
-version: '2'
-
 services:
   postgresql:
     image: docker.io/bitnami/postgresql:15
@@ -10,7 +8,7 @@ services:
       - POSTGRESQL_DATABASE=myapp
       - ALLOW_EMPTY_PASSWORD=yes
   express:
-    image: docker.io/bitnami/express:4
+    image: docker.io/bitnami/express:5
     ports:
       - '3000:3000'
     environment:

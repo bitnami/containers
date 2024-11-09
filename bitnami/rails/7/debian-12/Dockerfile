@@ -3,19 +3,20 @@
 
 FROM docker.io/bitnami/minideb:bookworm
 
+ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-06-29T17:34:10Z" \
+      org.opencontainers.image.created="2024-10-31T10:38:42Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/rails/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.1.3-debian-12-r18" \
+      org.opencontainers.image.ref.name="7.2.2-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/rails" \
       org.opencontainers.image.title="rails" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="7.1.3"
+      org.opencontainers.image.version="7.2.2"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-12" \
@@ -27,17 +28,17 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages build-essential ca-certificates curl git libaudit1 libbz2-1.0 libcap-ng0 libcom-err2 libcrypt1 libffi8 libgcc-s1 libgmp10 libgnutls30 libgssapi-krb5-2 libhogweed6 libicu72 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.5-0 liblzma5 libmariadb3 libncurses6 libncursesw6 libnettle8 libnsl2 libp11-kit0 libpam0g libpq5 libreadline-dev libreadline8 libsasl2-2 libsqlite3-0 libssl-dev libssl3 libstdc++6 libtasn1-6 libtinfo6 libtirpc3 libunistring2 libxml2 libyaml-0-2 libyaml-dev pkg-config procps sqlite3 sudo unzip zlib1g zlib1g-dev
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "python-3.11.9-11-linux-${OS_ARCH}-debian-12" \
-      "wait-for-port-1.0.7-14-linux-${OS_ARCH}-debian-12" \
-      "ruby-3.2.4-10-linux-${OS_ARCH}-debian-12" \
-      "node-18.20.3-0-linux-${OS_ARCH}-debian-12" \
-      "mysql-client-10.11.8-1-linux-${OS_ARCH}-debian-12" \
-      "rails-7.1.3-4-linux-${OS_ARCH}-debian-12" \
+      "python-3.12.7-4-linux-${OS_ARCH}-debian-12" \
+      "wait-for-port-1.0.8-6-linux-${OS_ARCH}-debian-12" \
+      "ruby-3.2.6-0-linux-${OS_ARCH}-debian-12" \
+      "node-18.20.4-6-linux-${OS_ARCH}-debian-12" \
+      "mysql-client-10.11.9-1-linux-${OS_ARCH}-debian-12" \
+      "rails-7.2.2-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
-        curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz" -O ; \
-        curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz.sha256" -O ; \
+        curl -SsLf "https://${DOWNLOADS_URL}/${COMPONENT}.tar.gz" -O ; \
+        curl -SsLf "https://${DOWNLOADS_URL}/${COMPONENT}.tar.gz.sha256" -O ; \
       fi ; \
       sha256sum -c "${COMPONENT}.tar.gz.sha256" ; \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' ; \
@@ -50,7 +51,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/rails/postunpack.sh
-ENV APP_VERSION="7.1.3" \
+ENV APP_VERSION="7.2.2" \
     BITNAMI_APP_NAME="rails" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/ruby/bin:/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:$PATH"
 

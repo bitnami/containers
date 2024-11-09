@@ -1,11 +1,9 @@
 # Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 
-version: '2'
-
 services:
   kafka-0:
-    image: docker.io/bitnami/kafka:3.7
+    image: docker.io/bitnami/kafka:3.8
     environment:
       # KRaft settings
       - KAFKA_CFG_NODE_ID=0
@@ -21,7 +19,7 @@ services:
     volumes:
       - 'kafka0_data:/bitnami/kafka'
   kafka-1:
-    image: docker.io/bitnami/kafka:3.7
+    image: docker.io/bitnami/kafka:3.8
     environment:
       # KRaft settings
       - KAFKA_CFG_NODE_ID=1

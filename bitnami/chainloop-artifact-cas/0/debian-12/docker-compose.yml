@@ -1,0 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  chainloop-artifact-cas:
+    image: docker.io/bitnami/chainloop-artifact-cas:0

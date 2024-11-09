@@ -137,7 +137,11 @@ odoo_initialize() {
 
         info "Generating configuration file"
         local template_dir="${BITNAMI_ROOT_DIR}/scripts/odoo/bitnami-templates"
+        # Configure polling port parameter depending on Odoo version
+        event_port_parameter="gevent_port"
         list_db="$(is_boolean_yes "$ODOO_LIST_DB" && echo 'True' || echo 'False')" \
+            odoo_debug="$(is_boolean_yes "$BITNAMI_DEBUG" && echo 'True' || echo 'False')" \
+            event_port_parameter="$event_port_parameter" \
             render-template "${template_dir}/odoo.conf.tpl" > "$ODOO_CONF_FILE"
 
         if ! is_empty_value "$ODOO_SMTP_HOST"; then
@@ -338,4 +342,17 @@ is_odoo_not_running() {
 odoo_stop() {
     ! is_odoo_running && return
     stop_service_using_pid "$ODOO_PID_FILE"
+}
+
+########################
+# Get Odoo major version
+# Globals:
+#   ODOO_BASE_DIR
+# Arguments:
+#   None
+# Returns:
+#   odoo major version
+#########################
+odoo_major_version() {
+    "${ODOO_BASE_DIR}/bin/odoo" --version 2>/dev/null | grep -E -o "[0-9]+.[0-9]+.[0-9]+" | cut -d'.' -f 1
 }
