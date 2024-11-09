@@ -13,8 +13,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name airflow bitnami/airflow:latest
 ```
 
-**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure d
-eployment.
+**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
 
 ## Why use Bitnami Images?
 
