@@ -8,11 +8,11 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-11-05T09:48:22Z" \
+      org.opencontainers.image.created="2024-11-09T22:42:00Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/odoo/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="18.0.20241105-debian-12-r0" \
+      org.opencontainers.image.ref.name="18.0.20241105-debian-12-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/odoo" \
       org.opencontainers.image.title="odoo" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -29,9 +29,9 @@ RUN install_packages acl ca-certificates curl fontconfig libbsd0 libbz2-1.0 libc
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "python-3.12.7-4-linux-${OS_ARCH}-debian-12" \
-      "render-template-1.0.7-6-linux-${OS_ARCH}-debian-12" \
+      "render-template-1.0.7-7-linux-${OS_ARCH}-debian-12" \
       "postgresql-client-17.0.0-1-linux-${OS_ARCH}-debian-12" \
-      "node-18.20.4-6-linux-${OS_ARCH}-debian-12" \
+      "node-22.11.0-1-linux-${OS_ARCH}-debian-12" \
       "odoo-18.0.20241105-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
