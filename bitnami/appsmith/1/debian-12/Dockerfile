@@ -8,15 +8,15 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-11-10T00:43:57Z" \
+      org.opencontainers.image.created="2024-11-11T10:32:44Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/appsmith/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.47.0-debian-12-r2" \
+      org.opencontainers.image.ref.name="1.48.0-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/appsmith" \
       org.opencontainers.image.title="appsmith" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.47.0"
+      org.opencontainers.image.version="1.48.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -32,11 +32,11 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
       "render-template-1.0.7-7-linux-${OS_ARCH}-debian-12" \
       "python-3.12.7-4-linux-${OS_ARCH}-debian-12" \
       "wait-for-port-1.0.8-7-linux-${OS_ARCH}-debian-12" \
-      "node-22.11.0-1-linux-${OS_ARCH}-debian-12" \
+      "node-20.18.0-2-linux-${OS_ARCH}-debian-12" \
       "nginx-1.27.2-1-linux-${OS_ARCH}-debian-12" \
       "mongodb-shell-2.3.3-0-linux-${OS_ARCH}-debian-12" \
       "java-17.0.13-12-1-linux-${OS_ARCH}-debian-12" \
-      "appsmith-1.47.0-1-linux-${OS_ARCH}-debian-12" \
+      "appsmith-1.48.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -55,7 +55,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 COPY rootfs /
 RUN /opt/bitnami/scripts/nginx/postunpack.sh
 RUN /opt/bitnami/scripts/appsmith/postunpack.sh
-ENV APP_VERSION="1.47.0" \
+ENV APP_VERSION="1.48.0" \
     BITNAMI_APP_NAME="appsmith" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
