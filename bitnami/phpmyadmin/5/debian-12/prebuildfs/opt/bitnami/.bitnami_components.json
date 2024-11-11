@@ -9,7 +9,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.2.25-1"
+        "version": "8.2.25-2"
     },
     "mysql-client": {
         "arch": "amd64",
@@ -21,13 +21,13 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.2.25-2"
+        "version": "8.2.25-3"
     },
     "phpmyadmin": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "5.2.1-6"
+        "version": "5.2.1-7"
     },
     "render-template": {
         "arch": "amd64",
