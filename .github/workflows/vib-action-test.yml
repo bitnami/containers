@@ -18,7 +18,7 @@ jobs:
         with:
           # Full history is not required anymore
           fetch-depth: 1
-      - uses: javierfreire/vmware-image-builder-action@artifact-actions-v4
+      - uses: vmware-labs/vmware-image-builder-action@artifact-actions-v4
         name: Verify
         with:
           pipeline: pgpool/vib-verify.json
