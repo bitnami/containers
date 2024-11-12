@@ -1,5 +1,4 @@
 binaries:
-  - jaeger-agent
   - jaeger-ingester
   - jaeger-query
   - jaeger-all-in-one
