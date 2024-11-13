@@ -7,5 +7,5 @@
 # - None
 ########################
 http:
-  https://bitnami.com:
+  https://google.com:
     status: 200
