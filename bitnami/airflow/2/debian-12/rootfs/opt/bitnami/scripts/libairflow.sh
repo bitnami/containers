@@ -79,6 +79,7 @@ airflow_validate() {
     check_multi_value "AIRFLOW_COMPONENT_TYPE" "webserver scheduler worker triggerer dag-processor"
     check_empty_value "AIRFLOW_EXECUTOR"
     check_yes_no_value "AIRFLOW_STANDALONE_DAG_PROCESSOR"
+    check_yes_no_value "AIRFLOW_SKIP_DB_SETUP"
 
     # Check cryptography parameters
     if [[ -n "$AIRFLOW_RAW_FERNET_KEY" && -z "$AIRFLOW_FERNET_KEY" ]]; then
@@ -170,13 +171,15 @@ airflow_initialize() {
 
     case "$AIRFLOW_COMPONENT_TYPE" in
     webserver)
+        # Remove pid file if exists to prevent error after WSL restarts
+        if [[ -f "${AIRFLOW_TMP_DIR}/airflow-webserver.pid" ]]; then
+            rm "${AIRFLOW_TMP_DIR}/airflow-webserver.pid"
+        fi
+        if is_boolean_yes "$AIRFLOW_SKIP_DB_SETUP"; then
+            info "Skipping database setup, waiting for db migrations to be completed"
+            airflow_wait_for_db_migrations
         # Check if the Airflow database has been already initialized
-        if ! airflow_execute db check-migrations; then
-            # Remove pid file if exists to prevent error after WSL restarts
-            if [[ -f "${AIRFLOW_TMP_DIR}/airflow-webserver.pid" ]]; then
-                rm "${AIRFLOW_TMP_DIR}/airflow-webserver.pid"
-            fi
-
+        elif ! airflow_execute db check-migrations; then
             # Initialize database
             info "Populating database"
             airflow_execute db init

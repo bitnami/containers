@@ -29,7 +29,7 @@ Looking to use Apache Airflow in production? Try [VMware Tanzu Application Catal
 
 ## Supported tags and respective `Dockerfile` links
 
-Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.vmware.com/en/VMware-Tanzu-Application-Catalog/services/tutorials/GUID-understand-rolling-tags-containers-index.html).
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
 You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `bitnami/ASSET/BRANCH/DISTRO/tags-info.yaml`.
 
@@ -325,6 +325,7 @@ This container supports the installation of additional python modules at start-u
 | `AIRFLOW_STANDALONE_DAG_PROCESSOR`    | Enable running Dag Processor in standalone mode                                                           | `no`                 |
 | `AIRFLOW_TRIGGERER_DEFAULT_CAPACITY`  | How many triggers a single Triggerer can run at once.                                                     | `1000`               |
 | `AIRFLOW_WORKER_QUEUE`                | A queue for the worker to pull tasks from.                                                                | `nil`                |
+| `AIRFLOW_SKIP_DB_SETUP`               | Skip db init / db migrate actions during the setup                                                        | `no`                 |
 | `AIRFLOW_DATABASE_HOST`               | Hostname for PostgreSQL server.                                                                           | `postgresql`         |
 | `AIRFLOW_DATABASE_PORT_NUMBER`        | Port used by PostgreSQL server.                                                                           | `5432`               |
 | `AIRFLOW_DATABASE_NAME`               | Database name that Airflow will use to connect with the database.                                         | `bitnami_airflow`    |
