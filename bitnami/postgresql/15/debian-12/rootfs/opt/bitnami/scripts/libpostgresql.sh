@@ -959,18 +959,9 @@ postgresql_configure_recovery() {
     info "Setting up streaming replication slave..."
 
     local -r psql_major_version="$(postgresql_get_major_version)"
-    if ((psql_major_version >= 12)); then
-        postgresql_set_property "primary_conninfo" "host=${POSTGRESQL_MASTER_HOST} port=${POSTGRESQL_MASTER_PORT_NUMBER} user=${POSTGRESQL_REPLICATION_USER} $(postgresql_replication_get_conninfo_password) application_name=${POSTGRESQL_CLUSTER_APP_NAME}" "$POSTGRESQL_CONF_FILE"
-        ((psql_major_version < 16)) && postgresql_set_property "promote_trigger_file" "/tmp/postgresql.trigger.${POSTGRESQL_MASTER_PORT_NUMBER}" "$POSTGRESQL_CONF_FILE"
-        touch "$POSTGRESQL_DATA_DIR"/standby.signal
-    else
-        cp -f "$POSTGRESQL_BASE_DIR/share/recovery.conf.sample" "$POSTGRESQL_RECOVERY_FILE"
-        chmod 600 "$POSTGRESQL_RECOVERY_FILE"
-        am_i_root && chown "$POSTGRESQL_DAEMON_USER:$POSTGRESQL_DAEMON_GROUP" "$POSTGRESQL_RECOVERY_FILE"
-        postgresql_set_property "standby_mode" "on" "$POSTGRESQL_RECOVERY_FILE"
-        postgresql_set_property "primary_conninfo" "host=${POSTGRESQL_MASTER_HOST} port=${POSTGRESQL_MASTER_PORT_NUMBER} user=${POSTGRESQL_REPLICATION_USER} $(postgresql_replication_get_conninfo_password) application_name=${POSTGRESQL_CLUSTER_APP_NAME}" "$POSTGRESQL_RECOVERY_FILE"
-        postgresql_set_property "trigger_file" "/tmp/postgresql.trigger.${POSTGRESQL_MASTER_PORT_NUMBER}" "$POSTGRESQL_RECOVERY_FILE"
-    fi
+    postgresql_set_property "primary_conninfo" "host=${POSTGRESQL_MASTER_HOST} port=${POSTGRESQL_MASTER_PORT_NUMBER} user=${POSTGRESQL_REPLICATION_USER} $(postgresql_replication_get_conninfo_password) application_name=${POSTGRESQL_CLUSTER_APP_NAME}" "$POSTGRESQL_CONF_FILE"
+    ((psql_major_version < 16)) && postgresql_set_property "promote_trigger_file" "/tmp/postgresql.trigger.${POSTGRESQL_MASTER_PORT_NUMBER}" "$POSTGRESQL_CONF_FILE"
+    touch "$POSTGRESQL_DATA_DIR"/standby.signal
 }
 
 ########################
