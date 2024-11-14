@@ -32,8 +32,11 @@ declare -a writable_dirs=(
     "${REDMINE_BASE_DIR}/plugins"
     "${REDMINE_BASE_DIR}/public/plugin_assets"
     # Folders that need to be writable for the app to work
+    "${REDMINE_BASE_DIR}/app/assets"
     "${REDMINE_BASE_DIR}/log"
     "${REDMINE_BASE_DIR}/tmp"
+    # Redmine create assets during db:migrate step
+    "${REDMINE_BASE_DIR}/public/assets"
     # Config needs to be writable for actions to update things like tokens or DB credentials
     "${REDMINE_BASE_DIR}/config"
     # Redmine creates 'db/schema.rb' file after executing migrations
