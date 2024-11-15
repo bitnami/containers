@@ -15,7 +15,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "argo-workflows-3.5.12-1-linux-${OS_ARCH}-debian-12" \
+      "argo-workflows-3.6.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -38,13 +38,13 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2024-11-07T01:40:21Z" \
+      org.opencontainers.image.created="2024-11-15T11:10:37Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.5.12-debian-12-r1" \
+      org.opencontainers.image.ref.name="3.6.0-debian-12-r0" \
       org.opencontainers.image.title="argo-workflow-cli" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="3.5.12"
+      org.opencontainers.image.version="3.6.0"
 
 COPY prebuildfs /
 COPY rootfs /
@@ -54,7 +54,7 @@ COPY --from=builder /opt/bitnami/argo-workflows/hack/ssh_known_hosts /etc/ssh/ss
 COPY --from=builder /opt/bitnami/argo-workflows/.spdx-argo-workflows.spdx /opt/bitnami/argo-workflows/.spdx-argo-workflows.spdx
 COPY --from=builder /opt/bitnami/argo-workflows/licenses /opt/bitnami/argo-workflows/licenses
 
-ENV APP_VERSION="3.5.12" \
+ENV APP_VERSION="3.6.0" \
     BITNAMI_APP_NAME="argo-workflow-cli"
 
 USER 1001
