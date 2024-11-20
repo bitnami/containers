@@ -60,24 +60,30 @@ docker build -t bitnami/APP:latest .
 
 #### Customizable environment variables
 
-| Name                                                    | Description                                                                                                                            | Default Value                       |
-|---------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|
-| `SCHEMA_REGISTRY_MOUNTED_CONF_DIR`                      | Directory for including custom configuration files (that override the default generated ones)                                          | `${SCHEMA_REGISTRY_VOLUME_DIR}/etc` |
-| `SCHEMA_REGISTRY_KAFKA_BROKERS`                         | List of Kafka brokers to connect to.                                                                                                   | `nil`                               |
-| `SCHEMA_REGISTRY_ADVERTISED_HOSTNAME`                   | Advertised hostname in ZooKeeper.                                                                                                      | `nil`                               |
-| `SCHEMA_REGISTRY_KAFKA_KEYSTORE_PASSWORD`               | Password to access the keystore.                                                                                                       | `nil`                               |
-| `SCHEMA_REGISTRY_KAFKA_KEY_PASSWORD`                    | Password to be able to used ssl secured kafka broker with SR                                                                           | `nil`                               |
-| `SCHEMA_REGISTRY_KAFKA_TRUSTSTORE_PASSWORD`             | Password to access the truststore.                                                                                                     | `nil`                               |
-| `SCHEMA_REGISTRY_KAFKA_SASL_USER`                       | SASL user to authenticate with Kafka.                                                                                                  | `nil`                               |
-| `SCHEMA_REGISTRY_KAFKA_SASL_PASSWORD`                   | SASL password to authenticate with Kafka.                                                                                              | `nil`                               |
-| `SCHEMA_REGISTRY_LISTENERS`                             | Comma-separated list of listeners that listen for API requests over either HTTP or HTTPS.                                              | `nil`                               |
-| `SCHEMA_REGISTRY_SSL_KEYSTORE_PASSWORD`                 | Password to access the SSL keystore.                                                                                                   | `nil`                               |
-| `SCHEMA_REGISTRY_SSL_KEY_PASSWORD`                      | Password to access the SSL key.                                                                                                        | `nil`                               |
-| `SCHEMA_REGISTRY_SSL_TRUSTSTORE_PASSWORD`               | Password to access the SSL truststore.                                                                                                 | `nil`                               |
-| `SCHEMA_REGISTRY_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM` | Endpoint identification algorithm to validate the server hostname using the server certificate.                                        | `nil`                               |
-| `SCHEMA_REGISTRY_CLIENT_AUTHENTICATION`                 | Client authentication configuration. Valid options: none, requested, over required.                                                    | `nil`                               |
-| `SCHEMA_REGISTRY_AVRO_COMPATIBILY_LEVEL`                | The Avro compatibility type. Valid options: none, backward, backward_transitive, forward, forward_transitive, full, or full_transitive | `nil`                               |
-| `SCHEMA_REGISTRY_DEBUG`                                 | Enable Schema Registry debug logs. Valid options: true or false                                                                        | `nil`                               |
+| Name                                                            | Description                                                                                                                            | Default Value                       |
+|-----------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|
+| `SCHEMA_REGISTRY_MOUNTED_CONF_DIR`                              | Directory for including custom configuration files (that override the default generated ones)                                          | `${SCHEMA_REGISTRY_VOLUME_DIR}/etc` |
+| `SCHEMA_REGISTRY_KAFKA_BROKERS`                                 | List of Kafka brokers to connect to.                                                                                                   | `nil`                               |
+| `SCHEMA_REGISTRY_ADVERTISED_HOSTNAME`                           | Advertised hostname in ZooKeeper.                                                                                                      | `nil`                               |
+| `SCHEMA_REGISTRY_KAFKA_KEYSTORE_PASSWORD`                       | Password to access the keystore.                                                                                                       | `nil`                               |
+| `SCHEMA_REGISTRY_KAFKA_KEY_PASSWORD`                            | Password to be able to used ssl secured kafka broker with SR                                                                           | `nil`                               |
+| `SCHEMA_REGISTRY_KAFKA_TRUSTSTORE_PASSWORD`                     | Password to access the truststore.                                                                                                     | `nil`                               |
+| `SCHEMA_REGISTRY_KAFKA_SASL_USER`                               | SASL user to authenticate with Kafka.                                                                                                  | `nil`                               |
+| `SCHEMA_REGISTRY_KAFKA_SASL_PASSWORD`                           | SASL password to authenticate with Kafka.                                                                                              | `nil`                               |
+| `SCHEMA_REGISTRY_KAFKASTORE_SECURITY_PROTOCOL`                  | The security protocol for Kafka connections.                                                                                           | `nil`                               |
+| `SCHEMA_REGISTRY_KAFKASTORE_SASL_MECHANISM`                     | The SASL mechanism used for Kafka connections.                                                                                         | `nil`                               |
+| `SCHEMA_REGISTRY_KAFKASTORE_SASL_JAAS_CONFIG`                   | JAAS configuration for Kafka connections.                                                                                              | `nil`                               |
+| `SCHEMA_REGISTRY_KAFKASTORE_SASL_CLIENT_CALLBACK_HANDLER_CLASS` | Callback handlers that obtain username and password from an external source.                                                           | `nil`                               |
+| `SCHEMA_REGISTRY_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM`         | The endpoint identification algorithm used by clients to validate server host name.                                                    | `nil`                               |
+| `SCHEMA_REGISTRY_KAFKASTORE_CLIENT_AUTH_DISABLED`               | To disable TLS client authentication when connecting to Kafka.                                                                         | `nil`                               |
+| `SCHEMA_REGISTRY_LISTENERS`                                     | Comma-separated list of listeners that listen for API requests over either HTTP or HTTPS.                                              | `nil`                               |
+| `SCHEMA_REGISTRY_SSL_KEYSTORE_PASSWORD`                         | Password to access the SSL keystore.                                                                                                   | `nil`                               |
+| `SCHEMA_REGISTRY_SSL_KEY_PASSWORD`                              | Password to access the SSL key.                                                                                                        | `nil`                               |
+| `SCHEMA_REGISTRY_SSL_TRUSTSTORE_PASSWORD`                       | Password to access the SSL truststore.                                                                                                 | `nil`                               |
+| `SCHEMA_REGISTRY_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM`         | Endpoint identification algorithm to validate the server hostname using the server certificate.                                        | `nil`                               |
+| `SCHEMA_REGISTRY_CLIENT_AUTHENTICATION`                         | Client authentication configuration. Valid options: none, requested, over required.                                                    | `nil`                               |
+| `SCHEMA_REGISTRY_AVRO_COMPATIBILY_LEVEL`                        | The Avro compatibility type. Valid options: none, backward, backward_transitive, forward, forward_transitive, full, or full_transitive | `nil`                               |
+| `SCHEMA_REGISTRY_DEBUG`                                         | Enable Schema Registry debug logs. Valid options: true or false                                                                        | `nil`                               |
 
 #### Read-only environment variables
 
@@ -153,6 +159,22 @@ schema-registry:
   volumes:
     - ./keystore.jks:/opt/bitnami/schema-registry/certs/keystore.jks:ro
     - ./truststore.jks:/opt/bitnami/schema-registry/certs/truststore.jks:ro
+```
+
+#### IAM authentication for Amazon MSK
+
+This image allows the use of Simple Authentication and Security Layer (SASL) mechanism called `AWS_MSK_IAM`
+See [`aws-msk-iam-auth`](https://github.com/aws/aws-msk-iam-auth) for more details.
+
+Here is an example of what environment variables need to be set:
+
+```yaml
+SCHEMA_REGISTRY_KAFKA_BROKERS="SASL_SSL://kafka:9098"
+SCHEMA_REGISTRY_KAFKASTORE_SECURITY_PROTOCOL="SASL_SSL"
+SCHEMA_REGISTRY_KAFKASTORE_SASL_MECHANISM="AWS_MSK_IAM"
+SCHEMA_REGISTRY_KAFKASTORE_SASL_JAAS_CONFIG="software.amazon.msk.auth.iam.IAMLoginModule required;"
+SCHEMA_REGISTRY_KAFKASTORE_SASL_CLIENT_CALLBACK_HANDLER_CLASS="software.amazon.msk.auth.iam.IAMClientCallbackHandler"
+SCHEMA_REGISTRY_KAFKASTORE_CLIENT_AUTH_DISABLED="true"
 ```
 
 ## Using `docker-compose.yaml`
