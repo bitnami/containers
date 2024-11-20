@@ -146,12 +146,12 @@ schema_registry_validate() {
         if brokers_auth_protocol="$(schema_registry_brokers_auth_protocol)"; then
             if [[ "$brokers_auth_protocol" =~ SSL ]]; then
                 if [[ ! -f ${SCHEMA_REGISTRY_CERTS_DIR}/schema-registry.keystore.jks ]] || [[ ! -f ${SCHEMA_REGISTRY_CERTS_DIR}/schema-registry.truststore.jks ]]; then
-                    print_validation_error "In order to configure the TLS encryption for communication with Kafka brokers, you must mount your schema-registry.keystore.jks and schema-registry.truststore.jks certificates to the ${SCHEMA_REGISTRY_CERTS_DIR} directory."
+                    warn "In order to configure the TLS encryption for communication with Kafka brokers, most auth protocols require mounting your schema-registry.keystore.jks and schema-registry.truststore.jks certificates to the ${SCHEMA_REGISTRY_CERTS_DIR} directory."
                 fi
             fi
             if [[ "$brokers_auth_protocol" =~ SASL ]]; then
                 if [[ -z "$SCHEMA_REGISTRY_KAFKA_SASL_USERS" ]] || [[ -z "$SCHEMA_REGISTRY_KAFKA_SASL_PASSWORDS" ]]; then
-                    print_validation_error "In order to configure SASL authentication for Kafka, you must provide the SASL credentials. Set the environment variables SCHEMA_REGISTRY_KAFKA_SASL_USERS and SCHEMA_REGISTRY_KAFKA_SASL_PASSWORDs"
+                    warn "In order to configure SASL authentication for Kafka, you may need to provide the SASL credentials by setting the SCHEMA_REGISTRY_KAFKA_SASL_USERS and SCHEMA_REGISTRY_KAFKA_SASL_PASSWORDS environment variables"
                 fi
             fi
         else
@@ -302,14 +302,13 @@ schema_registry_initialize() {
             schema_registry_conf_set "kafkastore.sasl.jaas.config" "$aux_string"
         fi
 
-        if [[ "$brokers_auth_protocol" =~ SSL ]]; then
-            schema_registry_conf_set "kafkastore.ssl.keystore.location" "${SCHEMA_REGISTRY_CERTS_DIR}/schema-registry.keystore.jks"
-            [[ -n "$SCHEMA_REGISTRY_KAFKA_KEYSTORE_PASSWORD" ]] && schema_registry_conf_set "kafkastore.ssl.keystore.password" "$SCHEMA_REGISTRY_KAFKA_KEYSTORE_PASSWORD"
-            schema_registry_conf_set "kafkastore.ssl.truststore.location" "${SCHEMA_REGISTRY_CERTS_DIR}/schema-registry.truststore.jks"
-            [[ -n "$SCHEMA_REGISTRY_KAFKA_KEY_PASSWORD" ]] && schema_registry_conf_set "kafkastore.ssl.key.password" "$SCHEMA_REGISTRY_KAFKA_KEY_PASSWORD"
-            [[ -n "$SCHEMA_REGISTRY_KAFKA_TRUSTSTORE_PASSWORD" ]] && schema_registry_conf_set "kafkastore.ssl.truststore.password" "$SCHEMA_REGISTRY_KAFKA_TRUSTSTORE_PASSWORD"
-            [[ -n "$SCHEMA_REGISTRY_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM" ]] && schema_registry_conf_set "kafkastore.ssl.endpoint.identification.algorithm" "$SCHEMA_REGISTRY_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM"
-        fi
+        # SSL setup
+        [[ -f "${SCHEMA_REGISTRY_CERTS_DIR}/schema-registry.keystore.jks" ]] && schema_registry_conf_set "kafkastore.ssl.keystore.location" "${SCHEMA_REGISTRY_CERTS_DIR}/schema-registry.keystore.jks"
+        [[ -n "$SCHEMA_REGISTRY_KAFKA_KEYSTORE_PASSWORD" ]] && schema_registry_conf_set "kafkastore.ssl.keystore.password" "$SCHEMA_REGISTRY_KAFKA_KEYSTORE_PASSWORD"
+        [[ -f "${SCHEMA_REGISTRY_CERTS_DIR}/schema-registry.truststore.jks" ]] && schema_registry_conf_set "kafkastore.ssl.truststore.location" "${SCHEMA_REGISTRY_CERTS_DIR}/schema-registry.truststore.jks"
+        [[ -n "$SCHEMA_REGISTRY_KAFKA_KEY_PASSWORD" ]] && schema_registry_conf_set "kafkastore.ssl.key.password" "$SCHEMA_REGISTRY_KAFKA_KEY_PASSWORD"
+        [[ -n "$SCHEMA_REGISTRY_KAFKA_TRUSTSTORE_PASSWORD" ]] && schema_registry_conf_set "kafkastore.ssl.truststore.password" "$SCHEMA_REGISTRY_KAFKA_TRUSTSTORE_PASSWORD"
+        [[ -n "$SCHEMA_REGISTRY_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM" ]] && schema_registry_conf_set "kafkastore.ssl.endpoint.identification.algorithm" "$SCHEMA_REGISTRY_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM"
 
         # Listeners settings
         if [[ -n "$SCHEMA_REGISTRY_LISTENERS" ]]; then
