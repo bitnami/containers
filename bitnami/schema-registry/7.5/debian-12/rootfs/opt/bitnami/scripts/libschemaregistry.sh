@@ -151,7 +151,7 @@ schema_registry_validate() {
             fi
             if [[ "$brokers_auth_protocol" =~ SASL ]]; then
                 if [[ -z "$SCHEMA_REGISTRY_KAFKA_SASL_USERS" ]] || [[ -z "$SCHEMA_REGISTRY_KAFKA_SASL_PASSWORDS" ]]; then
-                    warn "In order to configure SASL authentication for Kafka, you may need to provide the SASL credentials by setting the SCHEMA_REGISTRY_KAFKA_SASL_USERS and SCHEMA_REGISTRY_KAFKA_SASL_PASSWORDS environment variables"
+                    warn "In order to configure SASL authentication for Kafka, most auth protocols require providing the SASL credentials. Set the environment variables SCHEMA_REGISTRY_KAFKA_SASL_USERS and SCHEMA_REGISTRY_KAFKA_SASL_PASSWORDS if your auth protocol requires it."
                 fi
             fi
         else
@@ -302,7 +302,7 @@ schema_registry_initialize() {
             schema_registry_conf_set "kafkastore.sasl.jaas.config" "$aux_string"
         fi
 
-        # SSL setup
+        # TLS setup
         [[ -f "${SCHEMA_REGISTRY_CERTS_DIR}/schema-registry.keystore.jks" ]] && schema_registry_conf_set "kafkastore.ssl.keystore.location" "${SCHEMA_REGISTRY_CERTS_DIR}/schema-registry.keystore.jks"
         [[ -n "$SCHEMA_REGISTRY_KAFKA_KEYSTORE_PASSWORD" ]] && schema_registry_conf_set "kafkastore.ssl.keystore.password" "$SCHEMA_REGISTRY_KAFKA_KEYSTORE_PASSWORD"
         [[ -f "${SCHEMA_REGISTRY_CERTS_DIR}/schema-registry.truststore.jks" ]] && schema_registry_conf_set "kafkastore.ssl.truststore.location" "${SCHEMA_REGISTRY_CERTS_DIR}/schema-registry.truststore.jks"
