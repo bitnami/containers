@@ -37,6 +37,7 @@ wildfly_env_vars=(
     WILDFLY_PASSWORD
     JAVA_HOME
     JAVA_OPTS
+    JAVA_TOOL_OPTIONS
 )
 for env_var in "${wildfly_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -97,5 +98,6 @@ export WILDFLY_PASSWORD="${WILDFLY_PASSWORD:-}" # only used during the first ini
 # Java configuration
 export JAVA_HOME="${JAVA_HOME:-${BITNAMI_ROOT_DIR}/java}"
 export JAVA_OPTS="${JAVA_OPTS:-}"
+export JAVA_TOOL_OPTIONS="${JAVA_TOOL_OPTIONS:-}"
 
 # Custom environment variables may be defined below
