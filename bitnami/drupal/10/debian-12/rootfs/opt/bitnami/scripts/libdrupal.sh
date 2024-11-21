@@ -203,7 +203,7 @@ drupal_initialize() {
 drupal_database_conf_get() {
     local -r key="${1:?key missing}"
     debug "Getting ${key} from Drupal database configuration"
-    grep -E "^\s*'${key}' =>" "$DRUPAL_CONF_FILE" | grep -E -o "=> '.*'" | cut -f2 -d\'
+    grep -E "^\s*'${key}' =>" "$DRUPAL_CONF_FILE" | awk -F'=>' '{gsub(/[ ,'\''"]/, "", $2); print $2}'
 }
 
 ########################

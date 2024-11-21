@@ -199,17 +199,17 @@ valkey_validate() {
         [[ -z "$VALKEY_PASSWORD" ]] && empty_password_error VALKEY_PASSWORD
     fi
     if [[ -n "$VALKEY_REPLICATION_MODE" ]]; then
-        if [[ "$VALKEY_REPLICATION_MODE" =~ ^(slave|replica)$ ]]; then
-            if [[ -n "$VALKEY_MASTER_PORT_NUMBER" ]]; then
-                if ! err=$(validate_port "$VALKEY_MASTER_PORT_NUMBER"); then
-                    print_validation_error "An invalid port was specified in the environment variable VALKEY_MASTER_PORT_NUMBER: $err"
+        if [[ "$VALKEY_REPLICATION_MODE" = "replica" ]]; then
+            if [[ -n "$VALKEY_PRIMARY_PORT_NUMBER" ]]; then
+                if ! err=$(validate_port "$VALKEY_PRIMARY_PORT_NUMBER"); then
+                    print_validation_error "An invalid port was specified in the environment variable VALKEY_PRIMARY_PORT_NUMBER: $err"
                 fi
             fi
-            if ! is_boolean_yes "$ALLOW_EMPTY_PASSWORD" && [[ -z "$VALKEY_MASTER_PASSWORD" ]]; then
-                empty_password_error VALKEY_MASTER_PASSWORD
+            if ! is_boolean_yes "$ALLOW_EMPTY_PASSWORD" && [[ -z "$VALKEY_PRIMARY_PASSWORD" ]]; then
+                empty_password_error VALKEY_PRIMARY_PASSWORD
             fi
-        elif [[ "$VALKEY_REPLICATION_MODE" != "master" ]]; then
-            print_validation_error "Invalid replication mode. Available options are 'master/replica'"
+        elif [[ "$VALKEY_REPLICATION_MODE" != "primary" ]]; then
+            print_validation_error "Invalid replication mode. Available options are 'primary/replica'"
         fi
     fi
     if is_boolean_yes "$VALKEY_TLS_ENABLED"; then
@@ -257,32 +257,29 @@ valkey_configure_replication() {
     info "Configuring replication mode"
 
     valkey_conf_set replica-announce-ip "${VALKEY_REPLICA_IP:-$(get_machine_ip)}"
-    valkey_conf_set replica-announce-port "${VALKEY_REPLICA_PORT:-$VALKEY_MASTER_PORT_NUMBER}"
+    valkey_conf_set replica-announce-port "${VALKEY_REPLICA_PORT:-$VALKEY_PRIMARY_PORT_NUMBER}"
     # Use TLS in the replication connections
     if is_boolean_yes "$VALKEY_TLS_ENABLED"; then
         valkey_conf_set tls-replication yes
     fi
-    if [[ "$VALKEY_REPLICATION_MODE" = "master" ]]; then
+    if [[ "$VALKEY_REPLICATION_MODE" = "primary" ]]; then
         if [[ -n "$VALKEY_PASSWORD" ]]; then
-            valkey_conf_set masterauth "$VALKEY_PASSWORD"
+            valkey_conf_set primaryauth "$VALKEY_PASSWORD"
         fi
-    elif [[ "$VALKEY_REPLICATION_MODE" =~ ^(slave|replica)$ ]]; then
+    elif [[ "$VALKEY_REPLICATION_MODE" = "replica" ]]; then
         if [[ -n "$VALKEY_SENTINEL_HOST" ]]; then
             local -a sentinel_info_command=("valkey-cli" "-h" "${VALKEY_SENTINEL_HOST}" "-p" "${VALKEY_SENTINEL_PORT_NUMBER}")
             is_boolean_yes "$VALKEY_TLS_ENABLED" && sentinel_info_command+=("--tls" "--cert" "${VALKEY_TLS_CERT_FILE}" "--key" "${VALKEY_TLS_KEY_FILE}")
             # shellcheck disable=SC2015
             is_empty_value "$VALKEY_TLS_CA_FILE" && sentinel_info_command+=("--cacertdir" "${VALKEY_TLS_CA_DIR}") || sentinel_info_command+=("--cacert" "${VALKEY_TLS_CA_FILE}")
-            sentinel_info_command+=("sentinel" "get-master-addr-by-name" "${VALKEY_SENTINEL_MASTER_NAME}")
+            sentinel_info_command+=("sentinel" "get-master-addr-by-name" "${VALKEY_SENTINEL_PRIMARY_NAME}")
             read -r -a VALKEY_SENTINEL_INFO <<< "$("${sentinel_info_command[@]}" | tr '\n' ' ')"
-            VALKEY_MASTER_HOST=${VALKEY_SENTINEL_INFO[0]}
-            VALKEY_MASTER_PORT_NUMBER=${VALKEY_SENTINEL_INFO[1]}
+            VALKEY_PRIMARY_HOST=${VALKEY_SENTINEL_INFO[0]}
+            VALKEY_PRIMARY_PORT_NUMBER=${VALKEY_SENTINEL_INFO[1]}
         fi
-        wait-for-port --host "$VALKEY_MASTER_HOST" "$VALKEY_MASTER_PORT_NUMBER"
-        [[ -n "$VALKEY_MASTER_PASSWORD" ]] && valkey_conf_set masterauth "$VALKEY_MASTER_PASSWORD"
-        # Starting with Valkey 5, use 'replicaof' instead of 'slaveof'. Maintaining both for backward compatibility
-        local parameter="replicaof"
-        [[ $(valkey_major_version) -lt 5 ]] && parameter="slaveof"
-        valkey_conf_set "$parameter" "$VALKEY_MASTER_HOST $VALKEY_MASTER_PORT_NUMBER"
+        wait-for-port --host "$VALKEY_PRIMARY_HOST" "$VALKEY_PRIMARY_PORT_NUMBER"
+        [[ -n "$VALKEY_PRIMARY_PASSWORD" ]] && valkey_conf_set primaryauth "$VALKEY_PRIMARY_PASSWORD"
+        valkey_conf_set "replicaof" "$VALKEY_PRIMARY_HOST $VALKEY_PRIMARY_PORT_NUMBER"
     fi
 }
 

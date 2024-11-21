@@ -1,5 +1,4 @@
 binaries:
-  - jaeger-agent
   - jaeger-ingester
   - jaeger-query
   - jaeger-all-in-one
@@ -9,5 +8,7 @@ directories:
       - /opt/bitnami/jaeger/cassandra-schema
 root_dir: /opt/bitnami
 version:
-  bin_name: jaeger-all-in-one
-  flag: version
+  # HACK: Temporary fix for Jaeger 2.0.0 which has the version incorrect in some components. This is because
+  # how the scripts check the latest tags (they released 2.0.0 and 1.63.0 at the same time)
+  bin_name: bash
+  flag: -c "if [[ \"$APP_VERSION\" = \"2.0.0\" ]]; then echo 2.0.0; else jaeger-all-in-one version; fi"

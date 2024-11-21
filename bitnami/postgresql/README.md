@@ -34,11 +34,11 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deploy
 
 ## Why use a non-root container?
 
-Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.vmware.com/en/VMware-Tanzu-Application-Catalog/services/tutorials/GUID-work-with-non-root-containers-index.html).
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
 
 ## Supported tags and respective `Dockerfile` links
 
-Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.vmware.com/en/VMware-Tanzu-Application-Catalog/services/tutorials/GUID-understand-rolling-tags-containers-index.html).
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
 You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `bitnami/ASSET/BRANCH/DISTRO/tags-info.yaml`.
 
@@ -187,6 +187,8 @@ docker-compose up -d
 | `POSTGRESQL_ALLOW_REMOTE_CONNECTIONS`      | Modify pg_hba settings so users can access from the outside                                      | `yes`                                      |
 | `POSTGRESQL_REPLICATION_MODE`              | PostgreSQL replication mode (values: master, slave)                                              | `master`                                   |
 | `POSTGRESQL_REPLICATION_USER`              | PostgreSQL replication user                                                                      | `nil`                                      |
+| `POSTGRESQL_REPLICATION_USE_PASSFILE`      | Use PGPASSFILE instead of PGPASSWORD                                                             | `no`                                       |
+| `POSTGRESQL_REPLICATION_PASSFILE_PATH`     | Path to store passfile                                                                           | `${POSTGRESQL_CONF_DIR}/.pgpass`           |
 | `POSTGRESQL_SYNCHRONOUS_COMMIT_MODE`       | Enable synchronous replication in slaves (number defined by POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS) | `on`                                       |
 | `POSTGRESQL_FSYNC`                         | Enable fsync in write ahead logs                                                                 | `on`                                       |
 | `POSTGRESQL_USERNAME`                      | PostgreSQL default username                                                                      | `postgres`                                 |

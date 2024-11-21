@@ -11,6 +11,12 @@
 # Load Cassandra environment variables
 . /opt/bitnami/scripts/cassandra-env.sh
 
+# Starting with version 5.0.2, we found that the Cassandra official configuration
+# was in a file called cassandra_latest.yaml. We copy that file to ensure that it is using
+# the latest settings
+if [[ -f "${DB_DEFAULT_CONF_DIR}/cassandra_latest.yaml" ]]; then
+    cp "${DB_DEFAULT_CONF_DIR}/cassandra_latest.yaml" "${DB_DEFAULT_CONF_DIR}/cassandra.yaml"
+fi
 
 for dir in "$DB_INITSCRIPTS_DIR" "$DB_TMP_DIR" "$DB_LOG_DIR" "$DB_MOUNTED_CONF_DIR" "$DB_VOLUME_DIR"; do
     ensure_dir_exists "$dir"

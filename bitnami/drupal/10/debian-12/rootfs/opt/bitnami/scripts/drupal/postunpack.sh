@@ -44,7 +44,7 @@ for dir in "${DRUPAL_BASE_DIR}/themes" "${DRUPAL_BASE_DIR}/modules" "${DRUPAL_BA
 done
 chown "$WEB_SERVER_DAEMON_USER" "${DRUPAL_BASE_DIR}/sites/default"
 chown "$WEB_SERVER_DAEMON_USER" "$DRUPAL_CONF_FILE"
-for script in "${DRUPAL_BASE_DIR}/vendor/bin/drush" "${DRUPAL_BASE_DIR}/vendor/drush/drush/drush" "${DRUPAL_BASE_DIR}/vendor/drush/drush/drush.launcher" "${DRUPAL_BASE_DIR}/vendor/bin/drush.launcher"; do
+for script in "${DRUPAL_BASE_DIR}/vendor/bin/drush" "${DRUPAL_BASE_DIR}/vendor/drush/drush/drush" "${DRUPAL_BASE_DIR}/vendor/bin/drush.php" "${DRUPAL_BASE_DIR}/vendor/drush/drush/drush.launcher" "${DRUPAL_BASE_DIR}/vendor/bin/drush.launcher"; do
     [[ -f "$script" ]] && chmod +x "$script"
 done
 

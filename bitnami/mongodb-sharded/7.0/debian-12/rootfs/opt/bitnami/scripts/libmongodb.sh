@@ -157,9 +157,6 @@ Available options are 'primary/secondary/arbiter/hidden'"
         fi
     fi
 
-    check_yes_no_value "MONGODB_ENABLE_MAJORITY_READ"
-    [[ "$(mongodb_get_major_version)" -eq 5 ]] && ! is_boolean_yes "$MONGODB_ENABLE_MAJORITY_READ" && warn "MONGODB_ENABLE_MAJORITY_READ=${MONGODB_ENABLE_MAJORITY_READ} Will be ignored in MongoDB 5.0"
-
     if [[ -n "$MONGODB_REPLICA_SET_KEY" ]] && ((${#MONGODB_REPLICA_SET_KEY} < 5)); then
         error_message="MONGODB_REPLICA_SET_KEY must be, at least, 5 characters long!"
         print_validation_error "$error_message"

@@ -10,7 +10,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-docker run --name valkey-sentinel -e VALKEY_MASTER_HOST=valkey bitnami/valkey-sentinel:latest
+docker run --name valkey-sentinel -e VALKEY_PRIMARY_HOST=valkey bitnami/valkey-sentinel:latest
 ```
 
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
@@ -93,7 +93,7 @@ Finally we create a new container instance to launch the Valkey client and conne
 
 ```console
 docker run -it --rm \
-    -e VALKEY_MASTER_HOST=valkey-server \
+    -e VALKEY_PRIMARY_HOST=valkey-server \
     --network app-tier \
     bitnami/valkey-sentinel:latest
 ```
@@ -104,37 +104,37 @@ docker run -it --rm \
 
 #### Customizable environment variables
 
-| Name                                              | Description                                                            | Default Value                          |
-|---------------------------------------------------|------------------------------------------------------------------------|----------------------------------------|
-| `VALKEY_SENTINEL_DATA_DIR`                        | Valkey data directory                                                  | `${VALKEY_SENTINEL_VOLUME_DIR}/data`   |
-| `VALKEY_SENTINEL_DISABLE_COMMANDS`                | Commands to disable in Valkey                                          | `nil`                                  |
-| `VALKEY_SENTINEL_DATABASE`                        | Default Valkey database                                                | `valkey`                               |
-| `VALKEY_SENTINEL_AOF_ENABLED`                     | Enable AOF                                                             | `yes`                                  |
-| `VALKEY_SENTINEL_HOST`                            | Valkey Sentinel host                                                   | `nil`                                  |
-| `VALKEY_SENTINEL_MASTER_NAME`                     | Valkey Sentinel master name                                            | `nil`                                  |
-| `VALKEY_SENTINEL_PORT_NUMBER`                     | Valkey Sentinel host port                                              | `$VALKEY_SENTINEL_DEFAULT_PORT_NUMBER` |
-| `VALKEY_SENTINEL_QUORUM`                          | Minimum number of sentinel nodes in order to reach a failover decision | `2`                                    |
-| `VALKEY_SENTINEL_DOWN_AFTER_MILLISECONDS`         | Time (in milliseconds) to consider a node to be down                   | `60000`                                |
-| `VALKEY_SENTINEL_FAILOVER_TIMEOUT`                | Specifies the failover timeout (in milliseconds)                       | `180000`                               |
-| `VALKEY_SENTINEL_MASTER_REBOOT_DOWN_AFTER_PERIOD` | Specifies the timeout (in milliseconds) for rebooting a master         | `0`                                    |
-| `VALKEY_SENTINEL_RESOLVE_HOSTNAMES`               | Enables hostnames support                                              | `yes`                                  |
-| `VALKEY_SENTINEL_ANNOUNCE_HOSTNAMES`              | Announce hostnames                                                     | `no`                                   |
-| `ALLOW_EMPTY_PASSWORD`                            | Allow password-less access                                             | `no`                                   |
-| `VALKEY_SENTINEL_PASSWORD`                        | Password for Valkey                                                    | `nil`                                  |
-| `VALKEY_MASTER_USER`                              | Valkey master node username                                            | `nil`                                  |
-| `VALKEY_MASTER_PASSWORD`                          | Valkey master node password                                            | `nil`                                  |
-| `VALKEY_SENTINEL_ANNOUNCE_IP`                     | IP address used to gossip its presence                                 | `nil`                                  |
-| `VALKEY_SENTINEL_ANNOUNCE_PORT`                   | Port used to gossip its presence                                       | `nil`                                  |
-| `VALKEY_SENTINEL_TLS_ENABLED`                     | Enable TLS for Valkey authentication                                   | `no`                                   |
-| `VALKEY_SENTINEL_TLS_PORT_NUMBER`                 | Valkey TLS port (requires VALKEY_SENTINEL_ENABLE_TLS=yes)              | `26379`                                |
-| `VALKEY_SENTINEL_TLS_CERT_FILE`                   | Valkey TLS certificate file                                            | `nil`                                  |
-| `VALKEY_SENTINEL_TLS_KEY_FILE`                    | Valkey TLS key file                                                    | `nil`                                  |
-| `VALKEY_SENTINEL_TLS_CA_FILE`                     | Valkey TLS CA file                                                     | `nil`                                  |
-| `VALKEY_SENTINEL_TLS_DH_PARAMS_FILE`              | Valkey TLS DH parameter file                                           | `nil`                                  |
-| `VALKEY_SENTINEL_TLS_AUTH_CLIENTS`                | Enable Valkey TLS client authentication                                | `yes`                                  |
-| `VALKEY_MASTER_HOST`                              | Valkey master host (used by slaves)                                    | `valkey`                               |
-| `VALKEY_MASTER_PORT_NUMBER`                       | Valkey master host port (used by slaves)                               | `6379`                                 |
-| `VALKEY_MASTER_SET`                               | Valkey sentinel master set                                             | `mymaster`                             |
+| Name                                               | Description                                                            | Default Value                          |
+|----------------------------------------------------|------------------------------------------------------------------------|----------------------------------------|
+| `VALKEY_SENTINEL_DATA_DIR`                         | Valkey data directory                                                  | `${VALKEY_SENTINEL_VOLUME_DIR}/data`   |
+| `VALKEY_SENTINEL_DISABLE_COMMANDS`                 | Commands to disable in Valkey                                          | `nil`                                  |
+| `VALKEY_SENTINEL_DATABASE`                         | Default Valkey database                                                | `valkey`                               |
+| `VALKEY_SENTINEL_AOF_ENABLED`                      | Enable AOF                                                             | `yes`                                  |
+| `VALKEY_SENTINEL_HOST`                             | Valkey Sentinel host                                                   | `nil`                                  |
+| `VALKEY_SENTINEL_PRIMARY_NAME`                     | Valkey Sentinel primary name                                           | `nil`                                  |
+| `VALKEY_SENTINEL_PORT_NUMBER`                      | Valkey Sentinel host port                                              | `$VALKEY_SENTINEL_DEFAULT_PORT_NUMBER` |
+| `VALKEY_SENTINEL_QUORUM`                           | Minimum number of sentinel nodes in order to reach a failover decision | `2`                                    |
+| `VALKEY_SENTINEL_DOWN_AFTER_MILLISECONDS`          | Time (in milliseconds) to consider a node to be down                   | `60000`                                |
+| `VALKEY_SENTINEL_FAILOVER_TIMEOUT`                 | Specifies the failover timeout (in milliseconds)                       | `180000`                               |
+| `VALKEY_SENTINEL_PRIMARY_REBOOT_DOWN_AFTER_PERIOD` | Specifies the timeout (in milliseconds) for rebooting a primary        | `0`                                    |
+| `VALKEY_SENTINEL_RESOLVE_HOSTNAMES`                | Enables hostnames support                                              | `yes`                                  |
+| `VALKEY_SENTINEL_ANNOUNCE_HOSTNAMES`               | Announce hostnames                                                     | `no`                                   |
+| `ALLOW_EMPTY_PASSWORD`                             | Allow password-less access                                             | `no`                                   |
+| `VALKEY_SENTINEL_PASSWORD`                         | Password for Valkey                                                    | `nil`                                  |
+| `VALKEY_PRIMARY_USER`                              | Valkey primary node username                                           | `nil`                                  |
+| `VALKEY_PRIMARY_PASSWORD`                          | Valkey primary node password                                           | `nil`                                  |
+| `VALKEY_SENTINEL_ANNOUNCE_IP`                      | IP address used to gossip its presence                                 | `nil`                                  |
+| `VALKEY_SENTINEL_ANNOUNCE_PORT`                    | Port used to gossip its presence                                       | `nil`                                  |
+| `VALKEY_SENTINEL_TLS_ENABLED`                      | Enable TLS for Valkey authentication                                   | `no`                                   |
+| `VALKEY_SENTINEL_TLS_PORT_NUMBER`                  | Valkey TLS port (requires VALKEY_SENTINEL_ENABLE_TLS=yes)              | `26379`                                |
+| `VALKEY_SENTINEL_TLS_CERT_FILE`                    | Valkey TLS certificate file                                            | `nil`                                  |
+| `VALKEY_SENTINEL_TLS_KEY_FILE`                     | Valkey TLS key file                                                    | `nil`                                  |
+| `VALKEY_SENTINEL_TLS_CA_FILE`                      | Valkey TLS CA file                                                     | `nil`                                  |
+| `VALKEY_SENTINEL_TLS_DH_PARAMS_FILE`               | Valkey TLS DH parameter file                                           | `nil`                                  |
+| `VALKEY_SENTINEL_TLS_AUTH_CLIENTS`                 | Enable Valkey TLS client authentication                                | `yes`                                  |
+| `VALKEY_PRIMARY_HOST`                              | Valkey primary host (used by replicas)                                 | `valkey`                               |
+| `VALKEY_PRIMARY_PORT_NUMBER`                       | Valkey primary host port (used by replicas)                            | `6379`                                 |
+| `VALKEY_PRIMARY_SET`                               | Valkey sentinel primary set                                            | `myprimary`                            |
 
 #### Read-only environment variables
 
@@ -166,7 +166,7 @@ When enabling TLS, conventional standard traffic is disabled by default. However
     $ docker run --name valkey-sentinel \
         -v /path/to/certs:/opt/bitnami/valkey/certs \
         -v /path/to/valkey-sentinel/persistence:/bitnami \
-        -e VALKEY_MASTER_HOST=valkey \
+        -e VALKEY_PRIMARY_HOST=valkey \
         -e VALKEY_SENTINEL_TLS_ENABLED=yes \
         -e VALKEY_SENTINEL_TLS_CERT_FILE=/opt/bitnami/valkey/certs/valkey.crt \
         -e VALKEY_SENTINEL_TLS_KEY_FILE=/opt/bitnami/valkey/certs/valkey.key \
@@ -187,7 +187,7 @@ Run the Valkey Sentinel image, mounting a directory from your host.
 
 ```console
 docker run --name valkey-sentinel \
-    -e VALKEY_MASTER_HOST=valkey \
+    -e VALKEY_PRIMARY_HOST=valkey \
     -v /path/to/valkey-sentinel/persistence:/bitnami \
     bitnami/valkey-sentinel:latest
 ```
@@ -261,6 +261,12 @@ docker run --name valkey bitnami/valkey-sentinel:latest
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
+
+## Notable Changes
+
+### Starting October 20, 2024
+
+* All the references have been updated from `master/slave` to `primary/replica` to follow the upstream project strategy. Environment variables previously prefixed as `VALKEY_MASTER` or `VALKEY_SENTINEL_MASTER` use `VALKEY_PRIMARY` and `VALKEY_SENTINEL_PRIMARY` now.
 
 ## Issues
 

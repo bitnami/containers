@@ -1,0 +1,47 @@
+name: '[TEST] Check vmware-image-builder-action@v0.10'
+on: # rebuild any PRs and main branch changes
+  workflow_dispatch:
+permissions: {}
+jobs:
+  vib-verify:
+    runs-on: ubuntu-latest
+    name: VIB Verify
+    permissions:
+      contents: read
+    env:
+      CSP_API_URL: https://console.tanzu.broadcom.com
+      CSP_API_TOKEN: ${{ secrets.CSP_API_TOKEN }}
+      VIB_PUBLIC_URL: https://cp.bromelia.vmware.com
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        name: Checkout Repository
+        with:
+          # Full history is not required anymore
+          fetch-depth: 1
+      - uses: vmware-labs/vmware-image-builder-action@artifact-actions-v4
+        name: Verify
+        with:
+          pipeline: pgpool/vib-verify.json
+        env:
+          # Path with docker resources
+          VIB_ENV_PATH: bitnami/pgpool/4/debian-12
+          # Container name
+          VIB_ENV_CONTAINER: pgpool
+          VIB_ENV_TAG: 4-rc.69158
+  check-artifacts:
+    # Ensure all containers passed the verification
+    runs-on: ubuntu-latest
+    name: Check VIB report
+    needs:
+      - vib-verify
+    steps:
+      - id: download
+        name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: ~/artifacts
+      - id: get-report
+        name: Get report
+        run: |
+          vib_report_file=$(find ~/artifacts -name "report.json" -print -quit)
+          cat "$vib_report_file"

@@ -1,7 +1,6 @@
 binaries:
   - airflow
   - ini-file
-  - psql
   - python
   - wait-for-port
 linked_libraries:
