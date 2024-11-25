@@ -104,6 +104,7 @@ rabbitmq_validate() {
     check_yes_no_value "RABBITMQ_SECURE_PASSWORD"
     check_yes_no_value "RABBITMQ_ENABLE_LDAP"
     check_yes_no_value "RABBITMQ_LDAP_TLS"
+    check_yes_no_value "RABBITMQ_UPDATE_PASSWORD"
     check_conflicting_ports "RABBITMQ_MANAGEMENT_PORT_NUMBER" "RABBITMQ_NODE_PORT_NUMBER" "RABBITMQ_MANAGEMENT_SSL_PORT_NUMBER" "RABBITMQ_NODE_SSL_PORT_NUMBER"
     check_multi_value "RABBITMQ_SSL_VERIFY" "verify_none verify_peer"
     check_multi_value "RABBITMQ_MANAGEMENT_SSL_VERIFY" "verify_none verify_peer"
@@ -836,6 +837,18 @@ rabbitmq_initialize() {
             # ref: https://www.rabbitmq.com/rabbitmqctl.8.html#force_boot
             warn "Forcing node to start..."
             debug_execute "${RABBITMQ_BIN_DIR}/rabbitmqctl" force_boot
+        fi
+        if is_boolean_yes "$RABBITMQ_UPDATE_PASSWORD"; then
+            ! is_rabbitmq_running && rabbitmq_start_bg
+            if is_boolean_yes "$RABBITMQ_LOAD_DEFINITIONS"; then
+                if ! grep -q '"users"' "$RABBITMQ_DEFINITIONS_FILE"; then
+                    info "Updating password"
+                    rabbitmq_change_password "$RABBITMQ_USERNAME" "$RABBITMQ_PASSWORD"
+                fi
+            elif is_boolean_yes "$RABBITMQ_SECURE_PASSWORD"; then
+                info "Updating password"
+                rabbitmq_change_password "$RABBITMQ_USERNAME" "$RABBITMQ_PASSWORD"
+            fi
         fi
     else
         ! is_rabbitmq_running && rabbitmq_start_bg
