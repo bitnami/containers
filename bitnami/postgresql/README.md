@@ -269,7 +269,7 @@ docker-compose up -d
 | `POSTGRESQL_PGBACKREST_LOGS_DIR`    | The pgbackrest logs directory              | `${POSTGRESQL_PGBACKREST_VOLUME_DIR}/logs`    |
 | `POSTGRESQL_PGBACKREST_BACKUPS_DIR` | The pgbackrest backups directory           | `${POSTGRESQL_PGBACKREST_VOLUME_DIR}/backups` |
 | `POSTGRESQL_PGBACKREST_SPOOL_DIR`   | The pgbackrest spool directory             | `${POSTGRESQL_PGBACKREST_VOLUME_DIR}/spool`   |
-| `POSTGRESQL_PGBACKREST_CONF_FILE`   | The pgbackrest spool directory             | `${POSTGRESQL_DATA_DIR}/pgbackrest.conf`      |
+| `POSTGRESQL_PGBACKREST_CONF_FILE`   | The pgbackrest configuration file          | `${POSTGRESQL_DATA_DIR}/pgbackrest.conf`      |
 | `POSTGRESQL_FIRST_BOOT`             | Flag for startup (necessary for repmgr)    | `yes`                                         |
 | `NSS_WRAPPER_LIB`                   | Flag for startup (necessary for repmgr)    | `/opt/bitnami/common/lib/libnss_wrapper.so`   |
 
