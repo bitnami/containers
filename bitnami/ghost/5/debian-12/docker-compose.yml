@@ -3,7 +3,7 @@
 
 services:
   mysql:
-    image: docker.io/bitnami/mysql:8.4
+    image: docker.io/bitnami/mysql:latest
     volumes:
       - 'mysql_data:/bitnami/mysql'
     environment:
