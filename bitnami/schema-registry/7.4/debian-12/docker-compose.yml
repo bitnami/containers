@@ -3,7 +3,7 @@
 
 services:
   kafka-0:
-    image: docker.io/bitnami/kafka:3.9
+    image: docker.io/bitnami/kafka:latest
     environment:
       # KRaft settings
       - KAFKA_CFG_NODE_ID=0
@@ -19,7 +19,7 @@ services:
     volumes:
       - 'kafka0_data:/bitnami/kafka'
   kafka-1:
-    image: docker.io/bitnami/kafka:3.9
+    image: docker.io/bitnami/kafka:latest
     environment:
       # KRaft settings
       - KAFKA_CFG_NODE_ID=1
