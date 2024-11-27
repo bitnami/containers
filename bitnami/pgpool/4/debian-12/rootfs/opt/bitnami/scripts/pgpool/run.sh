@@ -23,6 +23,7 @@ eval "$(ldap_env)"
 
 command="$(command -v pgpool)"
 flags=("-n" "--config-file=${PGPOOL_CONF_FILE}" "--hba-file=${PGPOOL_PGHBA_FILE}")
+is_boolean_yes "$PGPOOL_DISCARD_STATUS" && flags+=("-D")
 [[ -z "${PGPOOL_EXTRA_FLAGS:-}" ]] || flags=("${flags[@]}" "${PGPOOL_EXTRA_FLAGS[@]}")
 
 is_boolean_yes "$PGPOOL_ENABLE_LDAP" && ldap_start_nslcd_bg
