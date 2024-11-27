@@ -21,9 +21,9 @@ command:
       - "Starting ServerApplication"
   check-rts-init:
     exec: cd /opt/appsmith/rts/bundle && node server.js
-    exit-status: 1
-    stderr:
-      - "APPSMITH_API_BASE_URL"
+    exit-status: 0
+    stdout:
+      - "RTS version v{{ .Env.APP_VERSION }} running"
 group:
   appsmith:
     exists: true
