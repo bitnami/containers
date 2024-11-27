@@ -684,7 +684,7 @@ Refer to [issues/27124](https://github.com/bitnami/containers/issues/27124) for 
 | `POSTGRESQL_PGBACKREST_LOGS_DIR`       | The pgbackrest logs directory                       | `${POSTGRESQL_PGBACKREST_VOLUME_DIR}/logs`    |
 | `POSTGRESQL_PGBACKREST_BACKUPS_DIR`    | The pgbackrest backups directory                    | `${POSTGRESQL_PGBACKREST_VOLUME_DIR}/backups` |
 | `POSTGRESQL_PGBACKREST_SPOOL_DIR`      | The pgbackrest spool directory                      | `${POSTGRESQL_PGBACKREST_VOLUME_DIR}/spool`   |
-| `POSTGRESQL_PGBACKREST_CONF_FILE`      | The pgbackrest spool directory                      | `${POSTGRESQL_DATA_DIR}/pgbackrest.conf`      |
+| `POSTGRESQL_PGBACKREST_CONF_FILE`      | The pgbackrest configuration file                   | `${POSTGRESQL_DATA_DIR}/pgbackrest.conf`      |
 | `POSTGRESQL_FIRST_BOOT`                | Flag for startup (necessary for repmgr)             | `yes`                                         |
 | `NSS_WRAPPER_LIB`                      | Flag for startup (necessary for repmgr)             | `/opt/bitnami/common/lib/libnss_wrapper.so`   |
 | `REPMGR_BASE_DIR`                      | Replication Manager installation directory          | `/opt/bitnami/repmgr`                         |
