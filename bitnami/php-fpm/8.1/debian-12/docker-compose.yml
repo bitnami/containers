@@ -4,7 +4,7 @@
 services:
   php:
     tty: true # Enables debugging capabilities when attached to this container.
-    image: docker.io/bitnami/php-fpm:8.1
+    image: docker.io/bitnami/php:8.1
     ports:
       - 9000:9000
     volumes:
