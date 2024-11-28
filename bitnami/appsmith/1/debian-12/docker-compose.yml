@@ -3,7 +3,7 @@
 
 services:
   mongodb:
-    image: docker.io/bitnami/mongodb:8.0
+    image: docker.io/bitnami/mongodb:latest
     volumes:
       - 'mongodb_data:/bitnami/mongodb'
     environment:
@@ -16,7 +16,7 @@ services:
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
 
   mongodb-secondary:
-    image: docker.io/bitnami/mongodb:8.0
+    image: docker.io/bitnami/mongodb:latest
     depends_on:
       - mongodb
     volumes:
@@ -28,7 +28,7 @@ services:
       - MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=password123
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
   redis:
-    image: docker.io/bitnami/redis:7.4
+    image: docker.io/bitnami/redis:latest
     volumes:
       - 'redis_data:/bitnami/redis'
     environment:
