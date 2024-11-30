@@ -17,7 +17,7 @@ set -o pipefail
 # Load keycloak environment variables
 . /opt/bitnami/scripts/keycloak-env.sh
 
-ensure_user_exists "$KC_BOOTSTRAP_ADMIN_USERNAME"
+ensure_user_exists "$KEYCLOAK_ADMIN"
 ensure_user_exists "$KEYCLOAK_DAEMON_USER" --group "$KEYCLOAK_DAEMON_GROUP"
 
 for dir in "$KEYCLOAK_LOG_DIR" "$KEYCLOAK_TMP_DIR" "$KEYCLOAK_VOLUME_DIR" "$KEYCLOAK_CONF_DIR" "$KEYCLOAK_DEFAULT_CONF_DIR" "$KEYCLOAK_INITSCRIPTS_DIR" "${KEYCLOAK_BASE_DIR}/.installation" "${KEYCLOAK_BASE_DIR}/data" "${KEYCLOAK_BASE_DIR}/lib" "$KEYCLOAK_BASE_DIR" "$KEYCLOAK_PROVIDERS_DIR"; do

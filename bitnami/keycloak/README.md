@@ -74,8 +74,10 @@ docker build -t bitnami/APP:latest .
 |-------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|-------------------------------|
 | `KEYCLOAK_MOUNTED_CONF_DIR`                                 | Directory for including custom configuration files (that override the default generated ones)         | `${KEYCLOAK_VOLUME_DIR}/conf` |
 | `KC_RUN_IN_CONTAINER`                                       | Keycloak kc.sh context                                                                                | `true`                        |
-| `KC_BOOTSTRAP_ADMIN_USERNAME`                                            | Keycloak administrator user                                                                           | `user`                        |
-| `KC_BOOTSTRAP_ADMIN_PASSWORD`                                   | Keycloak administrator password                                                                       | `bitnami`                     |
+| `KEYCLOAK_ADMIN`                                            | Keycloak 25 administrator user                                                                           | `user`                        |
+| `KEYCLOAK_ADMIN_PASSWORD`                                   | Keycloak 25 administrator password                                                                       | `bitnami`                     |
+| `KC_BOOTSTRAP_ADMIN_USERNAME`                               | Keycloak 26 administrator user                                                                           | `user`                        |
+| `KC_BOOTSTRAP_ADMIN_PASSWORD`                               | Keycloak 26 administrator password                                                                       | `bitnami`                     |
 | `KEYCLOAK_HTTP_RELATIVE_PATH`                               | Set the path relative to "/" for serving resources.                                                   | `/`                           |
 | `KEYCLOAK_HTTP_PORT`                                        | HTTP port                                                                                             | `8080`                        |
 | `KEYCLOAK_HTTPS_PORT`                                       | HTTPS port                                                                                            | `8443`                        |
