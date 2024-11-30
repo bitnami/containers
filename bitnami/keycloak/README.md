@@ -270,6 +270,12 @@ After that, your changes will be taken into account in the server's behaviour.
 
 ## Notable Changes
 
+### keycloak-26
+
+* KEYCLOAK_ADMIN and KEYCLOAK_ADMIN_PASSWORD environment variables have been renamed to match upstream.
+  * `KEYCLOAK_ADMIN` was renamed as `KC_BOOTSTRAP_ADMIN_USERNAME`.
+  * `KEYCLOAK_ADMIN_PASSWORD` was renamed as `KC_BOOTSTRAP_ADMIN_PASSWORD`.
+
 ### 19-debian-11-r4
 
 * TLS environment variables have been renamed to match upstream.
