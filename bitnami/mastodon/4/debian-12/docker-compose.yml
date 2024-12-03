@@ -3,7 +3,7 @@
 
 services:
   postgresql:
-    image: docker.io/bitnami/postgresql:17
+    image: docker.io/bitnami/postgresql:latest
     volumes:
       - 'postgresql_data:/bitnami/postgresql'
     environment:
@@ -11,13 +11,13 @@ services:
       - POSTGRESQL_USERNAME=bn_mastodon
       - POSTGRESQL_PASSWORD=bitnami1
   redis:
-    image: docker.io/bitnami/redis:7.4
+    image: docker.io/bitnami/redis:latest
     volumes:
       - 'redis_data:/bitnami/redis'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
   elasticsearch:
-    image: docker.io/bitnami/elasticsearch:8
+    image: docker.io/bitnami/elasticsearch:latest
     volumes:
       - 'elasticsearch_data:/bitnami/elasticsearch/data'
     environment:
