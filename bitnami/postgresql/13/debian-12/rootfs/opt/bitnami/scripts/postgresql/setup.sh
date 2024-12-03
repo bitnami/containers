@@ -47,3 +47,9 @@ if ! postgresql_is_file_external "pg_hba.conf" && [[ -n "$POSTGRESQL_PGHBA_REMOV
     info "Removing lines that match these filters: ${POSTGRESQL_PGHBA_REMOVE_FILTERS}"
     postgresql_remove_pghba_lines
 fi
+
+# Set custom pg_hba.conf after initialization to avoid conflicts
+if postgresql_is_file_external "pg_hba.conf"; then
+    info "Applying custom $POSTGRESQL_PGHBA_FILE"
+    cp -f "$POSTGRESQL_MOUNTED_CONF_DIR"/pg_hba.conf "$POSTGRESQL_CONF_DIR"
+fi
