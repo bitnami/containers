@@ -612,7 +612,7 @@ postgresql_initialize() {
         create_conf_file=no
     fi
 
-    if postgresql_is_file_external "pg_hba.conf"; then
+    if postgresql_is_file_external "pg_hba.conf" && is_boolean_yes "$POSTGRESQL_USE_CUSTOM_PGHBA_INITIALIZATION"; then
         info "Custom configuration $POSTGRESQL_PGHBA_FILE detected"
         create_pghba_file=no
     fi
