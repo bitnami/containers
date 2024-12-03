@@ -246,32 +246,33 @@ docker-compose up -d
 
 #### Read-only environment variables
 
-| Name                                | Description                                | Value                                         |
-|-------------------------------------|--------------------------------------------|-----------------------------------------------|
-| `POSTGRESQL_BASE_DIR`               | PostgreSQL installation directory          | `/opt/bitnami/postgresql`                     |
-| `POSTGRESQL_DEFAULT_CONF_DIR`       | PostgreSQL configuration directory         | `$POSTGRESQL_BASE_DIR/conf.default`           |
-| `POSTGRESQL_CONF_DIR`               | PostgreSQL configuration directory         | `$POSTGRESQL_BASE_DIR/conf`                   |
-| `POSTGRESQL_MOUNTED_CONF_DIR`       | PostgreSQL mounted configuration directory | `$POSTGRESQL_VOLUME_DIR/conf`                 |
-| `POSTGRESQL_CONF_FILE`              | PostgreSQL configuration file              | `$POSTGRESQL_CONF_DIR/postgresql.conf`        |
-| `POSTGRESQL_PGHBA_FILE`             | PostgreSQL pg_hba file                     | `$POSTGRESQL_CONF_DIR/pg_hba.conf`            |
-| `POSTGRESQL_RECOVERY_FILE`          | PostgreSQL recovery file                   | `$POSTGRESQL_DATA_DIR/recovery.conf`          |
-| `POSTGRESQL_LOG_DIR`                | PostgreSQL logs directory                  | `$POSTGRESQL_BASE_DIR/logs`                   |
-| `POSTGRESQL_LOG_FILE`               | PostgreSQL log file                        | `$POSTGRESQL_LOG_DIR/postgresql.log`          |
-| `POSTGRESQL_TMP_DIR`                | PostgreSQL temporary directory             | `$POSTGRESQL_BASE_DIR/tmp`                    |
-| `POSTGRESQL_PID_FILE`               | PostgreSQL PID file                        | `$POSTGRESQL_TMP_DIR/postgresql.pid`          |
-| `POSTGRESQL_BIN_DIR`                | PostgreSQL executables directory           | `$POSTGRESQL_BASE_DIR/bin`                    |
-| `POSTGRESQL_INITSCRIPTS_DIR`        | Init scripts directory                     | `/docker-entrypoint-initdb.d`                 |
-| `POSTGRESQL_PREINITSCRIPTS_DIR`     | Pre-init scripts directory                 | `/docker-entrypoint-preinitdb.d`              |
-| `POSTGRESQL_DAEMON_USER`            | PostgreSQL system user                     | `postgres`                                    |
-| `POSTGRESQL_DAEMON_GROUP`           | PostgreSQL system group                    | `postgres`                                    |
-| `POSTGRESQL_AUTOCTL_VOLUME_DIR`     | The pg_autoctl home directory              | `${POSTGRESQL_VOLUME_DIR}/pgautoctl`          |
-| `POSTGRESQL_PGBACKREST_VOLUME_DIR`  | The pgbackrest home directory              | `${POSTGRESQL_VOLUME_DIR}/pgbackrest`         |
-| `POSTGRESQL_PGBACKREST_LOGS_DIR`    | The pgbackrest logs directory              | `${POSTGRESQL_PGBACKREST_VOLUME_DIR}/logs`    |
-| `POSTGRESQL_PGBACKREST_BACKUPS_DIR` | The pgbackrest backups directory           | `${POSTGRESQL_PGBACKREST_VOLUME_DIR}/backups` |
-| `POSTGRESQL_PGBACKREST_SPOOL_DIR`   | The pgbackrest spool directory             | `${POSTGRESQL_PGBACKREST_VOLUME_DIR}/spool`   |
-| `POSTGRESQL_PGBACKREST_CONF_FILE`   | The pgbackrest configuration file          | `${POSTGRESQL_DATA_DIR}/pgbackrest.conf`      |
-| `POSTGRESQL_FIRST_BOOT`             | Flag for startup (necessary for repmgr)    | `yes`                                         |
-| `NSS_WRAPPER_LIB`                   | Flag for startup (necessary for repmgr)    | `/opt/bitnami/common/lib/libnss_wrapper.so`   |
+| Name                                         | Description                                                     | Value                                         |
+|----------------------------------------------|-----------------------------------------------------------------|-----------------------------------------------|
+| `POSTGRESQL_BASE_DIR`                        | PostgreSQL installation directory                               | `/opt/bitnami/postgresql`                     |
+| `POSTGRESQL_DEFAULT_CONF_DIR`                | PostgreSQL configuration directory                              | `$POSTGRESQL_BASE_DIR/conf.default`           |
+| `POSTGRESQL_CONF_DIR`                        | PostgreSQL configuration directory                              | `$POSTGRESQL_BASE_DIR/conf`                   |
+| `POSTGRESQL_MOUNTED_CONF_DIR`                | PostgreSQL mounted configuration directory                      | `$POSTGRESQL_VOLUME_DIR/conf`                 |
+| `POSTGRESQL_CONF_FILE`                       | PostgreSQL configuration file                                   | `$POSTGRESQL_CONF_DIR/postgresql.conf`        |
+| `POSTGRESQL_PGHBA_FILE`                      | PostgreSQL pg_hba file                                          | `$POSTGRESQL_CONF_DIR/pg_hba.conf`            |
+| `POSTGRESQL_RECOVERY_FILE`                   | PostgreSQL recovery file                                        | `$POSTGRESQL_DATA_DIR/recovery.conf`          |
+| `POSTGRESQL_LOG_DIR`                         | PostgreSQL logs directory                                       | `$POSTGRESQL_BASE_DIR/logs`                   |
+| `POSTGRESQL_LOG_FILE`                        | PostgreSQL log file                                             | `$POSTGRESQL_LOG_DIR/postgresql.log`          |
+| `POSTGRESQL_TMP_DIR`                         | PostgreSQL temporary directory                                  | `$POSTGRESQL_BASE_DIR/tmp`                    |
+| `POSTGRESQL_PID_FILE`                        | PostgreSQL PID file                                             | `$POSTGRESQL_TMP_DIR/postgresql.pid`          |
+| `POSTGRESQL_BIN_DIR`                         | PostgreSQL executables directory                                | `$POSTGRESQL_BASE_DIR/bin`                    |
+| `POSTGRESQL_INITSCRIPTS_DIR`                 | Init scripts directory                                          | `/docker-entrypoint-initdb.d`                 |
+| `POSTGRESQL_PREINITSCRIPTS_DIR`              | Pre-init scripts directory                                      | `/docker-entrypoint-preinitdb.d`              |
+| `POSTGRESQL_DAEMON_USER`                     | PostgreSQL system user                                          | `postgres`                                    |
+| `POSTGRESQL_DAEMON_GROUP`                    | PostgreSQL system group                                         | `postgres`                                    |
+| `POSTGRESQL_USE_CUSTOM_PGHBA_INITIALIZATION` | Initialize PostgreSQL with the custom, mounted pg_hba.conf file | `no`                                          |
+| `POSTGRESQL_AUTOCTL_VOLUME_DIR`              | The pg_autoctl home directory                                   | `${POSTGRESQL_VOLUME_DIR}/pgautoctl`          |
+| `POSTGRESQL_PGBACKREST_VOLUME_DIR`           | The pgbackrest home directory                                   | `${POSTGRESQL_VOLUME_DIR}/pgbackrest`         |
+| `POSTGRESQL_PGBACKREST_LOGS_DIR`             | The pgbackrest logs directory                                   | `${POSTGRESQL_PGBACKREST_VOLUME_DIR}/logs`    |
+| `POSTGRESQL_PGBACKREST_BACKUPS_DIR`          | The pgbackrest backups directory                                | `${POSTGRESQL_PGBACKREST_VOLUME_DIR}/backups` |
+| `POSTGRESQL_PGBACKREST_SPOOL_DIR`            | The pgbackrest spool directory                                  | `${POSTGRESQL_PGBACKREST_VOLUME_DIR}/spool`   |
+| `POSTGRESQL_PGBACKREST_CONF_FILE`            | The pgbackrest configuration file                               | `${POSTGRESQL_DATA_DIR}/pgbackrest.conf`      |
+| `POSTGRESQL_FIRST_BOOT`                      | Flag for startup (necessary for repmgr)                         | `yes`                                         |
+| `NSS_WRAPPER_LIB`                            | Flag for startup (necessary for repmgr)                         | `/opt/bitnami/common/lib/libnss_wrapper.so`   |
 
 ### On container start
 
