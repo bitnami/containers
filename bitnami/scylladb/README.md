@@ -253,6 +253,7 @@ docker-compose up -d
 | `SCYLLADB_MOUNTED_RACKDC_PATH`       | Relative path (in mounted volume) to ScyllaDB cassandra-rackdc-properties file | `scylla/cassandra-rackdc.properties`                             |
 | `SCYLLADB_MOUNTED_ENV_PATH`          | Relative path (in mounted volume) to ScyllaDB cassandra-env.sh file            | `scylla/cassandra/cassandra-env.sh`                              |
 | `SCYLLADB_MOUNTED_LOGBACK_PATH`      | Path to ScyllaDB logback.xml file                                              | `scylla/cassandra/logback.xml`                                   |
+| `SCYLLADB_CONF`                      | ScyllaDB configuration directory                                               | `$SCYLLADB_CONF_DIR`                                             |
 
 Additionally, any environment variable beginning with the following prefix will be mapped to its corresponding ScyllaDB key in the proper file:
 
