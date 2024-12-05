@@ -222,7 +222,7 @@ Apart from providing your custom configuration file, you can also modify the ser
 | `ETCD_CONF_DIR`             | etcd configuration directory.                                        | `${ETCD_BASE_DIR}/conf`            |
 | `ETCD_DEFAULT_CONF_DIR`     | etcd default configuration directory.                                | `${ETCD_BASE_DIR}/conf.default`    |
 | `ETCD_TMP_DIR`              | Directory where ETCD temporary files are stored.                     | `${ETCD_BASE_DIR}/tmp`             |
-| `ETCD_CONF_FILE`            | Airflow configuration file.                                          | `${ETCD_CONF_DIR}/etcd.yaml`       |
+| `ETCD_CONF_FILE`            | ETCD configuration file.                                             | `${ETCD_CONF_DIR}/etcd.yaml`       |
 | `ETCD_NEW_MEMBERS_ENV_FILE` | File containining the etcd environment to use after adding a member. | `${ETCD_DATA_DIR}/new_member_envs` |
 | `ETCD_DAEMON_USER`          | etcd system user name.                                               | `etcd`                             |
 | `ETCD_DAEMON_GROUP`         | etcd system user group.                                              | `etcd`                             |
