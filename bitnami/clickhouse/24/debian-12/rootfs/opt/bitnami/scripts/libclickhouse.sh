@@ -243,7 +243,7 @@ clickhouse_start_bg() {
         error "ClickHouse failed to start"
         exit 1
     fi
-    wait_for_log_entry "Application: Ready for connections" "$log_file"
+    wait_for_log_entry "Ready for connections" "$log_file"
     info "ClickHouse started successfully"
 }
 
