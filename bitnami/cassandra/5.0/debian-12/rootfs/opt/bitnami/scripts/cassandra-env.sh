@@ -71,6 +71,7 @@ cassandra_env_vars=(
     CASSANDRA_SSL_CA_FILE
     CASSANDRA_SSL_VALIDATE
     SSL_VERSION
+    JAVA_TOOL_OPTIONS
 )
 for env_var in "${cassandra_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -256,5 +257,8 @@ export CASSANDRA_MOUNTED_ENV_PATH="cassandra-env.sh"
 export DB_MOUNTED_ENV_PATH="$CASSANDRA_MOUNTED_ENV_PATH"
 export CASSANDRA_MOUNTED_LOGBACK_PATH="logback.xml"
 export DB_MOUNTED_LOGBACK_PATH="$CASSANDRA_MOUNTED_LOGBACK_PATH"
+
+# Java settings
+export JAVA_TOOL_OPTIONS="${JAVA_TOOL_OPTIONS:-}"
 
 # Custom environment variables may be defined below

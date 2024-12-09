@@ -213,6 +213,7 @@ docker-compose up -d
 | `CASSANDRA_SSL_CA_FILE`                            | Cassandra SSL CA location                                                               | `nil`                                 |
 | `CASSANDRA_SSL_VALIDATE`                           | Perform SSL validation on the certificates                                              | `false`                               |
 | `SSL_VERSION`                                      | TLS version to use when connecting.                                                     | `TLSv1_2`                             |
+| `JAVA_TOOL_OPTIONS`                                | Java tool options.                                                                      | `nil`                                 |
 
 #### Read-only environment variables
 
