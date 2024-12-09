@@ -794,8 +794,8 @@ cassandra_setup_common_ports() {
 #########################
 cassandra_setup_rack_dc() {
     if ! cassandra_is_file_external "${DB_MOUNTED_RACKDC_PATH}"; then
-        replace_in_file "${DB_RACKDC_FILE}" "dc=.*" "dc=${DB_DATACENTER}"
-        replace_in_file "${DB_RACKDC_FILE}" "rack=.*" "rack=${DB_RACK}"
+        replace_in_file "${DB_RACKDC_FILE}" "^[#\s]*dc=.*" "dc=${DB_DATACENTER}"
+        replace_in_file "${DB_RACKDC_FILE}" "^[#\s]*rack=.*" "rack=${DB_RACK}"
     else
         debug "${DB_MOUNTED_RACKDC_PATH} mounted. Skipping rack and datacenter configuration"
     fi
