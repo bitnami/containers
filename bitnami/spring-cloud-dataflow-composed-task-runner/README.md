@@ -25,7 +25,7 @@ Looking to use SCDF Composed Task Runner in production? Try [VMware Tanzu Applic
 
 ## Supported tags and respective `Dockerfile` links
 
-Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.vmware.com/en/VMware-Tanzu-Application-Catalog/services/tutorials/GUID-understand-rolling-tags-containers-index.html).
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
 You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `bitnami/ASSET/BRANCH/DISTRO/tags-info.yaml`.
 
@@ -59,9 +59,10 @@ docker build -t bitnami/APP:latest .
 
 #### Customizable environment variables
 
-| Name        | Description | Default Value |
-|-------------|-------------|---------------|
-| `JAVA_OPTS` | JVM options | `nil`         |
+| Name                | Description        | Default Value |
+|---------------------|--------------------|---------------|
+| `JAVA_OPTS`         | JVM options        | `nil`         |
+| `JAVA_TOOL_OPTIONS` | Java tool options. | `nil`         |
 
 #### Read-only environment variables
 
