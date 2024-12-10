@@ -16,7 +16,7 @@ services:
     volumes:
       - 'solr_data:/bitnami/solr'
   zk1:
-    image: docker.io/bitnami/zookeeper:3.9
+    image: docker.io/bitnami/zookeeper:latest
     ports:
       - '2181'
     volumes:
