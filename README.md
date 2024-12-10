@@ -68,6 +68,16 @@ As part of the release process, the Bitnami container images are analyzed for vu
 
 This scanning process is triggered via a GH action for every PR affecting the source code of the containers, regardless of its nature or origin.
 
+## Changes in version support and pull-rate limits in Docker Hub for BItnami containers and Helm charts 
+
+Following the release of Bitnami Premium, we are making some changes in the way we distribute our free catalog. These changes enable us to sustain a viable business while also continuing to serve our community, including other open source projects, with free, high-quality software packages. 
+
+Beginning on December 16th, 2024, Bitnami will no longer subsidize unlimited pulls from the free Bitnami catalog in Docker Hub. Bitnami containers and charts will be subject to standard pull-rate limits and pull caps. Users who upgrade to Bitnami Premium will be able to pull without any limitations on pull rate or pulls per time period, regardless of the type of Docker subscription you have.
+
+Also on December 10t,h 2024, only the latest stable branch of any container will receive updates in the free Bitnami catalog. Suppose you use a branch of any Bitnami container other than the latest stable. In that case, you can either migrate to the latest stable branch or upgrade to Bitnami Premium to pull the most up-to-date images of all upstream-supported branches. Previous versions already released will not be deleted. They are still available to pull from DockerHub.
+
+We have partnered with Arrow Electronics as the exclusive vendor of Bitnami Premium. When you purchase a Bitnami Premium subscription through ArrowSphere Marketplace, you will be granted access to the /bitnamiprem and /bitnamichartsprem distribution registries in Docker Hub. To learn more, visit [https://www.arrow.com/globalecs/na/vendors/bitnami](https://www.arrow.com/globalecs/na/vendors/bitnami?utm_source=github&utm_medium=containers).
+
 ## Retention policy
 
 Deprecated assets will be retained in the container registry ([Bitnami DockerHub org](https://hub.docker.com/u/bitnami)) without changes for, at least, 6 months after the deprecation.
