@@ -112,7 +112,7 @@ Arrow will sell Bitnami Premium access through its website. Bitnami users intere
 
 #### Pull limits for free Bitnami content
 
-Beginning December 16th, 2024, the Bitnami Application Catalog will use [standard Docker Hub pull rate limits](https://docs.docker.com/docker-hub/download-rate-limit/) for Bitnami apps. Enterprise customers will be able to access the full Bitnami library in Bitnami Premium, purchased through the Arrow and consumed right in Docker Hub, with no rate limits or restrictions. Note that we are not changing any licenses for our packages, meaning that projects can continue to bundle our Helm charts and containers in their own application packages.
+Beginning December 16th, 2024, the Bitnami Application Catalog will use [standard Docker Hub pull rate limits](https://docs.docker.com/docker-hub/download-rate-limit/) for Bitnami apps. Enterprise customers will be able to access the full Bitnami library in Bitnami Premium, purchased through Arrow and consumed right in Docker Hub, with no rate limits or restrictions. Note that we are not changing any licenses for our packages, meaning that projects can continue to bundle our Helm charts and containers in their own application packages.
 
 #### Long Term Support version updates
 
