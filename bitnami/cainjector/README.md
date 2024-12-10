@@ -16,7 +16,7 @@ docker run --name cainjector -e ALLOW_EMPTY_PASSWORD=yes bitnami/cainjector:late
 
 **Warning**: These quick setups are only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
 
-## Pre-requisites
+## Prerequisites
 
 Kubernetes cluster with `CustomResourceDefinition` or `ThirdPartyResource support`
 
