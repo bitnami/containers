@@ -13,6 +13,11 @@ set -o pipefail
 . /opt/bitnami/scripts/libbitnami.sh
 . /opt/bitnami/scripts/liblog.sh
 
+if [[ "$OS_FLAVOUR" =~ photon && "$APP_VERSION" =~ ^1.8 ]]; then
+  # Option --module-path is not supported by JAVA 1.8 since modules were added in version 1.9
+  unset JAVA_TOOL_OPTIONS
+fi
+
 print_welcome_page
 
 echo ""
