@@ -1,8 +1,0 @@
-{
-    "postgresql-repmgr": {
-        "arch": "amd64",
-        "distro": "debian-12",
-        "type": "NAMI",
-        "version": "14.15.0-1"
-    }
-}
