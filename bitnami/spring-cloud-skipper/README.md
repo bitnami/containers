@@ -29,11 +29,11 @@ Deploying Bitnami applications as Helm Charts is the easiest way to get started 
 
 ## Why use a non-root container?
 
-Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.vmware.com/en/VMware-Tanzu-Application-Catalog/services/tutorials/GUID-work-with-non-root-containers-index.html).
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
 
 ## Supported tags and respective `Dockerfile` links
 
-Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.vmware.com/en/VMware-Tanzu-Application-Catalog/services/tutorials/GUID-understand-rolling-tags-containers-index.html).
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
 You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `bitnami/ASSET/BRANCH/DISTRO/tags-info.yaml`.
 
@@ -75,6 +75,7 @@ docker build -t bitnami/APP:latest .
 | `SPRING_CLOUD_KUBERNETES_CONFIG_NAME`        | Name of the ConfigMap that contains the configuration.                 | `nil`         |
 | `SPRING_CLOUD_KUBERNETES_SECRETS_PATHS`      | Paths where the secrets are going to be mount.                         | `nil`         |
 | `JAVA_OPTS`                                  | JVM options                                                            | `nil`         |
+| `JAVA_TOOL_OPTIONS`                          | Java tool options.                                                     | `nil`         |
 
 #### Read-only environment variables
 
