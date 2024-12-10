@@ -3,7 +3,7 @@
 
 services:
   postgresql:
-    image: docker.io/bitnami/postgresql:17
+    image: docker.io/bitnami/postgresql:latest
     volumes:
       - 'postgresql_data:/bitnami/postgresql'
     environment:
@@ -12,7 +12,7 @@ services:
       - POSTGRESQL_PASSWORD=bitnami1
       - ALLOW_EMPTY_PASSWORD=yes
   redis:
-    image: docker.io/bitnami/redis:7.4
+    image: docker.io/bitnami/redis:latest
     volumes:
       - 'redis_data:/bitnami'
     environment:
