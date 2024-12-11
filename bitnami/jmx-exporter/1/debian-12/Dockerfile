@@ -56,5 +56,5 @@ EXPOSE 5556
 
 WORKDIR /opt/bitnami/jmx-exporter
 USER 1001
-ENTRYPOINT [ "java", "-jar", "jmx_prometheus_httpserver.jar" ]
+ENTRYPOINT [ "java", "-jar", "jmx_prometheus_standalone.jar" ]
 CMD [ "5556", "example_configs/httpserver_sample_config.yml" ]
