@@ -172,7 +172,6 @@ docker-compose up -d
 
 | Name                                              | Description                                                                             | Default Value                         |
 |---------------------------------------------------|-----------------------------------------------------------------------------------------|---------------------------------------|
-| `SCYLLADB_MOUNTED_CONF_DIR`                       | ScyllaDB directory for mounted configuration files                                      | `${DB_VOLUME_DIR}/conf`               |
 | `SCYLLADB_CLIENT_ENCRYPTION`                      | Enable client encryption                                                                | `false`                               |
 | `SCYLLADB_CLUSTER_NAME`                           | ScyllaDB cluster name                                                                   | `My Cluster`                          |
 | `SCYLLADB_DATACENTER`                             | ScyllaDB datacenter name                                                                | `dc1`                                 |
@@ -219,6 +218,7 @@ docker-compose up -d
 | `SCYLLADB_SSL_CA_FILE`                            | ScyllaDB SSL CA location                                                                | `nil`                                 |
 | `SCYLLADB_SSL_VALIDATE`                           | Perform SSL validation on the certificates                                              | `false`                               |
 | `SSL_VERSION`                                     | TLS version to use when connecting.                                                     | `TLSv1_2`                             |
+| `SCYLLADB_MOUNTED_CONF_DIR`                       | ScyllaDB directory for mounted configuration files                                      | `${DB_VOLUME_DIR}/etc`                |
 | `SCYLLADB_CQL_SHARD_PORT_NUMBER`                  | CQL (shard aware) port                                                                  | `19042`                               |
 | `SCYLLADB_API_PORT_NUMBER`                        | REST API port                                                                           | `10000`                               |
 | `SCYLLADB_PROMETHEUS_PORT_NUMBER`                 | Prometheus metrics port                                                                 | `9180`                                |
