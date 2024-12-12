@@ -7,3 +7,8 @@ command:
     exit-status: 0
     stderr:
       - "Server created"
+  check-app-version:
+    exec: jaeger-jaeger -v | sed "s/\-0*/./g"
+    exit-status: 0
+    stdout:
+      - "{{ .Env.APP_VERSION }}"
