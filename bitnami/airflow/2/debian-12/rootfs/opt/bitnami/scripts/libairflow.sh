@@ -443,7 +443,8 @@ airflow_configure_database() {
 }
 
 ########################
-# Return URL encoded string in the airflow conf format
+# Return URL encoded string in the airflow conf format.
+# This function is used to encode users and passwords following airflow format. Please note that Redis user and password can be empty.
 # Globals:
 #   AIRFLOW_*
 # Arguments:
@@ -452,7 +453,7 @@ airflow_configure_database() {
 #   None
 #########################
 airflow_encode_url() {
-    local -r url="${1:?Missing url}"
+    local -r url="${1}"
 
     urlencode() {
         old_lc_collate="${LC_COLLATE:-}"

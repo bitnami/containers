@@ -15,19 +15,19 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "18.20.5-0"
+        "version": "18.20.5-1"
     },
     "postgresql-client": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "17.0.0-1"
+        "version": "17.2.0-0"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.12.7-4"
+        "version": "3.13.0-6"
     },
     "ruby": {
         "arch": "amd64",

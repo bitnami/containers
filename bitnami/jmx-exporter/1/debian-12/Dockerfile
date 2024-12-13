@@ -8,15 +8,15 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-10-24T15:33:43Z" \
+      org.opencontainers.image.created="2024-12-12T11:01:51Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/jmx-exporter/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.0.1-debian-12-r9" \
+      org.opencontainers.image.ref.name="1.1.0-debian-12-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jmx-exporter" \
       org.opencontainers.image.title="jmx-exporter" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.0.1"
+      org.opencontainers.image.version="1.1.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -30,7 +30,7 @@ RUN install_packages ca-certificates curl procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "java-17.0.13-12-1-linux-${OS_ARCH}-debian-12" \
-      "jmx-exporter-1.0.1-2-linux-${OS_ARCH}-debian-12" \
+      "jmx-exporter-1.1.0-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -48,7 +48,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN chown -R 1001:1001 /opt/bitnami/jmx-exporter
 
-ENV APP_VERSION="1.0.1" \
+ENV APP_VERSION="1.1.0" \
     BITNAMI_APP_NAME="jmx-exporter" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
@@ -56,5 +56,5 @@ EXPOSE 5556
 
 WORKDIR /opt/bitnami/jmx-exporter
 USER 1001
-ENTRYPOINT [ "java", "-jar", "jmx_prometheus_httpserver.jar" ]
-CMD [ "5556", "example_configs/httpserver_sample_config.yml" ]
+ENTRYPOINT [ "java", "-jar", "jmx_prometheus_standalone.jar" ]
+CMD [ "5556", "examples/standalone_sample_config.yml" ]

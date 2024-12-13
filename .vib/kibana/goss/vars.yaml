@@ -15,6 +15,10 @@ directories:
 files:
   - paths:
       - /opt/bitnami/kibana/config/node.options
+sed_in_place:
+  exclude_paths:
+    # Ignore upstream code using sed -i
+    - /opt/bitnami/kibana/node_modules/@kbn/observability-onboarding-plugin/public/assets/auto_detect.sh
 linked_libraries:
   timeout: 60000
 root_dir: /opt/bitnami

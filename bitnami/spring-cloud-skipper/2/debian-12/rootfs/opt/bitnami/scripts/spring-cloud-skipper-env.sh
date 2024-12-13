@@ -30,6 +30,7 @@ spring_cloud_skipper_env_vars=(
     SPRING_CLOUD_KUBERNETES_CONFIG_NAME
     SPRING_CLOUD_KUBERNETES_SECRETS_PATHS
     JAVA_OPTS
+    JAVA_TOOL_OPTIONS
 )
 for env_var in "${spring_cloud_skipper_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -64,5 +65,6 @@ export SPRING_CLOUD_KUBERNETES_SECRETS_PATHS="${SPRING_CLOUD_KUBERNETES_SECRETS_
 
 # Java settings
 export JAVA_OPTS="${JAVA_OPTS:-}"
+export JAVA_TOOL_OPTIONS="${JAVA_TOOL_OPTIONS:-}"
 
 # Custom environment variables may be defined below

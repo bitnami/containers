@@ -9,7 +9,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.2.25-2"
+        "version": "8.2.26-0"
     },
     "mysql-client": {
         "arch": "amd64",
@@ -21,18 +21,18 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.2.25-3"
+        "version": "8.2.26-3"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.7-7"
+        "version": "1.0.7-8"
     },
     "wordpress": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "6.7.0-3"
+        "version": "6.7.1-7"
     }
 }

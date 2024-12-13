@@ -3,7 +3,7 @@
 
 services:
   pg-0:
-    image: docker.io/bitnami/postgresql-repmgr:14
+    image: docker.io/bitnami/postgresql-repmgr:latest
     ports:
       - 5432
     volumes:
@@ -21,7 +21,7 @@ services:
       - REPMGR_USERNAME=repmgr
       - REPMGR_PASSWORD=repmgrpassword
   pg-1:
-    image: docker.io/bitnami/postgresql-repmgr:14
+    image: docker.io/bitnami/postgresql-repmgr:4
     ports:
       - 5432
     volumes:

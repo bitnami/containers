@@ -14,7 +14,7 @@ directories:
     paths:
       - /.cassandra
       - /bitnami/scylladb
-      - /bitnami/scylladb/conf
+      - /bitnami/scylladb/etc
       - /opt/bitnami/scylladb/tmp
       - /opt/bitnami/scylladb/etc
       - /opt/bitnami/scylladb/logs

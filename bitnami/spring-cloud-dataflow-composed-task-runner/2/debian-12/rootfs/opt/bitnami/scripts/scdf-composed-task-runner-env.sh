@@ -25,6 +25,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # variable will be overridden with the value specified in that file
 scdf_composed_task_runner_env_vars=(
     JAVA_OPTS
+    JAVA_TOOL_OPTIONS
 )
 for env_var in "${scdf_composed_task_runner_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -49,5 +50,6 @@ export SCDF_COMPOSED_TASK_RUNNER_DAEMON_GROUP="dataflow"
 
 # Java settings
 export JAVA_OPTS="${JAVA_OPTS:-}"
+export JAVA_TOOL_OPTIONS="${JAVA_TOOL_OPTIONS:-}"
 
 # Custom environment variables may be defined below
