@@ -49,6 +49,7 @@ kafka_env_vars=(
     KAFKA_CLIENT_USERS
     KAFKA_CLIENT_PASSWORDS
     KAFKA_HEAP_OPTS
+    JAVA_TOOL_OPTIONS
 )
 for env_var in "${kafka_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -113,5 +114,8 @@ export KAFKA_CLIENT_PASSWORDS="${KAFKA_CLIENT_PASSWORDS:-bitnami}"
 
 # Java settings
 export KAFKA_HEAP_OPTS="${KAFKA_HEAP_OPTS:--Xmx1024m -Xms1024m}"
+
+# Java settings
+export JAVA_TOOL_OPTIONS="${JAVA_TOOL_OPTIONS:-}"
 
 # Custom environment variables may be defined below
