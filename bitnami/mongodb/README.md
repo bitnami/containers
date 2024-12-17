@@ -187,7 +187,6 @@ docker-compose up -d
 | `MONGODB_ADVERTISE_IP`                  | Whether advertised hostname is set to container ip                                                                                             | `false`                             |
 | `MONGODB_ADVERTISED_PORT_NUMBER`        | MongoDB advertised port number. It is recommended to pass this environment variable if you have a proxy port forwarding requests to container. | `nil`                               |
 | `MONGODB_DISABLE_JAVASCRIPT`            | Disable MongoDB server-side javascript execution                                                                                               | `no`                                |
-| `MONGODB_ENABLE_JOURNAL`                | Enable MongoDB journal                                                                                                                         | `nil`                               |
 | `MONGODB_DISABLE_SYSTEM_LOG`            | Disable MongoDB daemon system log                                                                                                              | `nil`                               |
 | `MONGODB_ENABLE_DIRECTORY_PER_DB`       | Use a separate folder for storing each database data                                                                                           | `nil`                               |
 | `MONGODB_ENABLE_IPV6`                   | Use IPv6 for database connections                                                                                                              | `nil`                               |
@@ -345,28 +344,6 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MONGODB_ENABLE_DIRECTORY_PER_DB=yes
-  ...
-```
-
-### Enabling/disabling journaling
-
-Enabling/disabling [journal](https://docs.mongodb.com/manual/reference/configuration-options/#mongodb-setting-storage.journal.enabled) is possible through the following env var:
-
-* `MONGODB_ENABLE_JOURNAL`: Whether to enable/disable journaling on MongoDB&reg;. Default: `true`. Possible values: `[true, false]`
-
-```console
-docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_ENABLE_JOURNAL=true bitnami/mongodb:latest
-```
-
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mongodb/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  mongodb:
-  ...
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MONGODB_ENABLE_JOURNAL=true
   ...
 ```
 
