@@ -20,7 +20,7 @@ services:
       - ./config/registry/:/etc/registry/:ro
       - ./config/registryctl/config.yml:/etc/registryctl/config.yml:ro
   postgresql:
-    image: docker.io/bitnami/postgresql:13
+    image: docker.io/bitnami/postgresql:14
     container_name: harbor-db
     environment:
       - POSTGRESQL_PASSWORD=bitnami
@@ -67,7 +67,7 @@ services:
       - ./config/core/app.conf:/etc/core/app.conf:ro
       - ./config/core/private_key.pem:/etc/core/private_key.pem:ro
   portal:
-    image: docker.io/bitnami/harbor-portal:2
+    image: docker.io/bitnami/harbor:2
     container_name: harbor-portal
     depends_on:
       - core
@@ -88,12 +88,12 @@ services:
       - jobservice_data:/var/log/jobs
       - ./config/jobservice/config.yml:/etc/jobservice/config.yml:ro
   redis:
-    image: docker.io/bitnami/redis:7.4
+    image: docker.io/bitnami/redis:latest
     environment:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
   harbor-nginx:
-    image: docker.io/bitnami/nginx:1.27
+    image: docker.io/bitnami/nginx:latest
     container_name: nginx
     volumes:
       - ./config/proxy/nginx.conf:/opt/bitnami/nginx/conf/nginx.conf:ro
