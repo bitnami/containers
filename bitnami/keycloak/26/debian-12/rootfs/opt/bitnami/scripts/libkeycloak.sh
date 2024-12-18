@@ -27,6 +27,9 @@ keycloak_validate() {
     info "Validating settings in KEYCLOAK_* env vars..."
     local error_code=0
 
+    [[ -n "${KEYCLOAK_ADMIN:-}" || -n "${KEYCLOAK_ADMIN_USER:-}" ]] && warn "The KEYCLOAK_ADMIN environment variable has been removed, please use KC_BOOTSTRAP_ADMIN_USERNAME instead."
+    [[ -n "${KEYCLOAK_ADMIN_PASSWORD:-}" ]] && warn "The KEYCLOAK_ADMIN environment variable has been removed, please use KC_BOOTSTRAP_ADMIN_PASSWORD instead."
+
     # Auxiliary functions
     print_validation_error() {
         error "$1"
