@@ -8,15 +8,15 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-11-25T00:14:47Z" \
+      org.opencontainers.image.created="2024-12-18T18:02:00Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/percona-mysql/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.4.2-2-debian-12-r2" \
+      org.opencontainers.image.ref.name="8.4.3-3-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/percona-mysql" \
       org.opencontainers.image.title="percona-mysql" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="8.4.2-2"
+      org.opencontainers.image.version="8.4.3-3"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -30,8 +30,8 @@ RUN install_packages ca-certificates curl libaio1 libatomic1 libaudit1 libbz2-1.
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "mysql-shell-8.4.3-1-linux-${OS_ARCH}-debian-12" \
-      "ini-file-1.4.7-7-linux-${OS_ARCH}-debian-12" \
-      "percona-mysql-8.4.2-2-0-linux-${OS_ARCH}-debian-12" \
+      "ini-file-1.4.7-8-linux-${OS_ARCH}-debian-12" \
+      "percona-mysql-8.4.3-3-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -51,7 +51,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mysql/postunpack.sh
-ENV APP_VERSION="8.4.2-2" \
+ENV APP_VERSION="8.4.3-3" \
     BITNAMI_APP_NAME="percona-mysql" \
     MYSQL_HOME="/opt/bitnami/mysql/conf" \
     PATH="/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/mysql/sbin:$PATH"
