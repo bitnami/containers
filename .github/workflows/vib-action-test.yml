@@ -4,7 +4,8 @@ on: # rebuild any PRs and main branch changes
 permissions: {}
 jobs:
   vib-verify:
-    runs-on: ubuntu-latest
+    runs-on: -self hosted
+             -macos
     name: VIB Verify
     permissions:
       contents: read
@@ -30,7 +31,7 @@ jobs:
           VIB_ENV_TAG: 4-rc.69158
   check-artifacts:
     # Ensure all containers passed the verification
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     name: Check VIB report
     needs:
       - vib-verify
