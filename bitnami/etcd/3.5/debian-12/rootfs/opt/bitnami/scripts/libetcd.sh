@@ -615,7 +615,11 @@ remove_obsolete_members() {
     local -a extra_flags
     read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
     is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
-    etcdctl member list ${extra_flags[@]} --write-out simple | awk -F ", " '{print $1 "," $3}' > $current
+    debug "Listing members"
+    if ! etcdctl member list ${extra_flags[@]} --write-out simple | awk -F ", " '{print $1 "," $3}' > $current; then
+        debug "Error listing members, is this a new cluster?"
+        return 0
+    fi
     info "Current cluster members are: $(cat $current | awk -F, '{print $2}' | tr -s '\n' ', ' | sed 's/,$//g')"
     
     echo $ETCD_INITIAL_CLUSTER | sed 's/,/\n/g' | awk -F= '{print $1}' > $expected
