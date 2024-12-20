@@ -352,7 +352,14 @@ etcd_configure_rbac() {
 #   Boolean
 ########################
 is_new_etcd_cluster() {
-    [[ "$ETCD_INITIAL_CLUSTER_STATE" = "new" ]] && [[ "$ETCD_INITIAL_CLUSTER" = *"$ETCD_INITIAL_ADVERTISE_PEER_URLS"* ]]
+    local -a extra_flags
+    read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
+    is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
+    if ! etcdctl member list ${extra_flags[@]}; then
+        return 0
+    else
+        return 1
+    fi
 }
 
 ########################
@@ -580,7 +587,7 @@ is_membership_intact() {
     
     while read -r line; do
         echo "$line" # Stream the output
-        if [[ "$line" =~ (established TCP streaming connection with remote peer|the member has been permanently removed from the cluster|ignored streaming request; ID mismatch) ]]; then
+        if [[ "$line" =~ (established TCP streaming connection with remote peer|the member has been permanently removed from the cluster|ignored streaming request; ID mismatch|\"error\":\"cluster ID mismatch\") ]]; then
             kill "$pid"
             wait "$pid" 2>/dev/null
             debug "Stopped etcd"
@@ -589,7 +596,10 @@ is_membership_intact() {
     done < <(tail -f "$tmp_file")
 
     if grep -q "the member has been permanently removed from the cluster\|ignored streaming request; ID mismatch" "$tmp_file"; then
-        info "The member has been permanently removed from the cluster"
+        info "The remote member ID is different from the local member ID"
+        ret=1
+    elif grep -q "\"error\":\"cluster ID mismatch\"" "$tmp_file"; then
+        info "The remote cluster ID is different from the local cluster ID"
         ret=1
     else
         info "The member is still part of the cluster"
