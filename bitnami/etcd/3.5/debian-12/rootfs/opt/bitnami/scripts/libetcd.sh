@@ -609,46 +609,6 @@ is_membership_intact() {
 }
 
 ########################
-# Remove members that are not named in ETCD_INITIAL_CLUSTER
-# Globals:
-#   ETCD_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-remove_obsolete_members() {
-    local -r current=$(mktemp)
-    local -r expected=$(mktemp)
-    local -a differences
-
-    local -a extra_flags
-    read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
-    is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
-    debug "Listing members"
-    if ! etcdctl member list ${extra_flags[@]} --write-out simple | awk -F ", " '{print $1 "," $3}' > $current; then
-        debug "Error listing members, is this a new cluster?"
-        return 0
-    fi
-    info "Current cluster members are: $(cat $current | awk -F, '{print $2}' | tr -s '\n' ', ' | sed 's/,$//g')"
-    
-    echo $ETCD_INITIAL_CLUSTER | sed 's/,/\n/g' | awk -F= '{print $1}' > $expected
-    info "Expected cluster members are: $(cat $expected | tr -s '\n' ', ' | sed 's/,$//g')"
-
-    read -r -a differences <<<"$(comm -23 <(cat $current | awk -F, '{print $2}' | sort) <(sort $expected))"
-    if [ ! -z ${differences+x} ]; then
-        for member in "$differences"; do
-            info "Removing obsolete member $member"
-            etcdctl member remove ${extra_flags[@]} $(cat $current | grep "$member" | awk -F, '{print $1}')
-        done
-    else
-        info "No obsolete member detected"
-    fi
-
-    rm -f $current $expected
-}
-
-########################
 # Ensure etcd is initialized
 # Globals:
 #   ETCD_*
@@ -669,9 +629,6 @@ etcd_initialize() {
     ETCD_INITIAL_CLUSTER="$(get_initial_cluster)"
     export ETCD_INITIAL_CLUSTER
     [[ -f "$ETCD_CONF_FILE" ]] && etcd_conf_write "initial-cluster" "$ETCD_INITIAL_CLUSTER"
-
-    # Remove members not included in ETCD_INITIAL_CLUSTER
-    remove_obsolete_members
 
     read -r -a initial_members <<<"$(tr ',;' ' ' <<<"$ETCD_INITIAL_CLUSTER")"
     if is_mounted_dir_empty "$ETCD_DATA_DIR"; then
