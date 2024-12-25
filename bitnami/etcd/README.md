@@ -204,7 +204,6 @@ Apart from providing your custom configuration file, you can also modify the ser
 | `ETCD_LISTEN_CLIENT_URLS`          | List of URLs to listen on for client traffic.                                                | `http://0.0.0.0:2379`   |
 | `ETCD_ADVERTISE_CLIENT_URLS`       | List of this member client URLs to advertise to the rest of the cluster.                     | `http://127.0.0.1:2379` |
 | `ETCD_INITIAL_CLUSTER`             | Initial list of members to bootstrap a cluster.                                              | `nil`                   |
-| `ETCD_INITIAL_CLUSTER_STATE`       | Initial cluster state. Allowed values: "new" or "existing".                                  | `nil`                   |
 | `ETCD_LISTEN_PEER_URLS`            | List of URLs to listen on for peers traffic.                                                 | `nil`                   |
 | `ETCD_INITIAL_ADVERTISE_PEER_URLS` | List of this member peer URLs to advertise to the rest of the cluster while bootstrapping.   | `nil`                   |
 | `ETCD_INITIAL_CLUSTER_TOKEN`       | Unique initial cluster token used for bootstrapping.                                         | `nil`                   |
@@ -217,19 +216,20 @@ Apart from providing your custom configuration file, you can also modify the ser
 
 #### Read-only environment variables
 
-| Name                        | Description                                                          | Value                              |
-|-----------------------------|----------------------------------------------------------------------|------------------------------------|
-| `ETCD_BASE_DIR`             | etcd installation directory.                                         | `/opt/bitnami/etcd`                |
-| `ETCD_VOLUME_DIR`           | Persistence base directory.                                          | `/bitnami/etcd`                    |
-| `ETCD_BIN_DIR`              | etcd executables directory.                                          | `${ETCD_BASE_DIR}/bin`             |
-| `ETCD_DATA_DIR`             | etcd data directory.                                                 | `${ETCD_VOLUME_DIR}/data`          |
-| `ETCD_CONF_DIR`             | etcd configuration directory.                                        | `${ETCD_BASE_DIR}/conf`            |
-| `ETCD_DEFAULT_CONF_DIR`     | etcd default configuration directory.                                | `${ETCD_BASE_DIR}/conf.default`    |
-| `ETCD_TMP_DIR`              | Directory where ETCD temporary files are stored.                     | `${ETCD_BASE_DIR}/tmp`             |
-| `ETCD_CONF_FILE`            | ETCD configuration file.                                             | `${ETCD_CONF_DIR}/etcd.yaml`       |
-| `ETCD_NEW_MEMBERS_ENV_FILE` | File containining the etcd environment to use after adding a member. | `${ETCD_DATA_DIR}/new_member_envs` |
-| `ETCD_DAEMON_USER`          | etcd system user name.                                               | `etcd`                             |
-| `ETCD_DAEMON_GROUP`         | etcd system user group.                                              | `etcd`                             |
+| Name                         | Description                                                          | Value                              |
+|------------------------------|----------------------------------------------------------------------|------------------------------------|
+| `ETCD_BASE_DIR`              | etcd installation directory.                                         | `/opt/bitnami/etcd`                |
+| `ETCD_VOLUME_DIR`            | Persistence base directory.                                          | `/bitnami/etcd`                    |
+| `ETCD_BIN_DIR`               | etcd executables directory.                                          | `${ETCD_BASE_DIR}/bin`             |
+| `ETCD_DATA_DIR`              | etcd data directory.                                                 | `${ETCD_VOLUME_DIR}/data`          |
+| `ETCD_CONF_DIR`              | etcd configuration directory.                                        | `${ETCD_BASE_DIR}/conf`            |
+| `ETCD_DEFAULT_CONF_DIR`      | etcd default configuration directory.                                | `${ETCD_BASE_DIR}/conf.default`    |
+| `ETCD_TMP_DIR`               | Directory where ETCD temporary files are stored.                     | `${ETCD_BASE_DIR}/tmp`             |
+| `ETCD_CONF_FILE`             | ETCD configuration file.                                             | `${ETCD_CONF_DIR}/etcd.yaml`       |
+| `ETCD_NEW_MEMBERS_ENV_FILE`  | File containining the etcd environment to use after adding a member. | `${ETCD_DATA_DIR}/new_member_envs` |
+| `ETCD_DAEMON_USER`           | etcd system user name.                                               | `etcd`                             |
+| `ETCD_DAEMON_GROUP`          | etcd system user group.                                              | `etcd`                             |
+| `ETCD_INITIAL_CLUSTER_STATE` | Initial cluster state. Either "new" or "existing".                   | `nil`                              |
 
 Additionally, you can configure etcd using the upstream env variables [here](https://etcd.io/docs/v3.4/op-guide/configuration/)
 
