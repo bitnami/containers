@@ -85,7 +85,8 @@ This guide will focus on the `verify` phase section, of which there are some thi
 
 * A container's testing phase will usually include a single `goss` testing action, followed by additional security-related actions.
 
-> NOTE: Some containers with per-branch ARM support use separate per-branch `vib-verify.json` pipelines. Remember to replicate changes performed on the main pipeline definition file to those pipelines.
+> [!NOTE]
+> Some containers with per-branch ARM support use separate per-branch `vib-verify.json` pipelines. Remember to replicate changes performed on the main pipeline definition file to those pipelines.
 
 ## Testing strategy
 
@@ -133,6 +134,7 @@ For your test code PR to be accepted the following criteria must be fulfilled:
 
 For VIB to execute GOSS tests, the following block of code needs to be defined in the corresponding [VIB pipeline definition file](#vib-pipeline-definition-file) (`/.vib/app/vib-verify.json`).
 
+> [!NOTE]
 > Values denoted withing dollar signs (`$$VALUE$$`) should be treated as placeholders
 
 ```json
