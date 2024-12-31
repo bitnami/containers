@@ -73,6 +73,9 @@ pgbouncer_validate() {
         elif [[ ! -f "$PGBOUNCER_AUTH_HBA_FILE" ]]; then
             print_validation_error "The hba file in the specified path ${PGBOUNCER_AUTH_HBA_FILE} does not exist"
         fi
+        if [[ ! -z "$PGBOUNCER_AUTH_IDENT_FILE" ]] && [[ ! -f "$PGBOUNCER_AUTH_IDENT_FILE" ]]; then
+            print_validation_error "The ident map file in the specified path ${PGBOUNCER_AUTH_IDENT_FILE} does not exist"
+        fi
     fi
 
     # TLS Checks (client)
@@ -269,6 +272,7 @@ pgbouncer_initialize() {
             "auth_file:${PGBOUNCER_AUTH_FILE}"
             "auth_type:${PGBOUNCER_AUTH_TYPE}"
             "auth_hba_file:${PGBOUNCER_AUTH_HBA_FILE}"
+            "auth_ident_file:${PGBOUNCER_AUTH_IDENT_FILE}"
             "auth_query:${PGBOUNCER_AUTH_QUERY}"
             "pidfile:${PGBOUNCER_PID_FILE}"
             "logfile:${PGBOUNCER_LOG_FILE}"
