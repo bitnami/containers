@@ -235,6 +235,43 @@ Check the official page [OpenLDAP, Overlays, Access Logging](https://www.openlda
 
 Check the official page [OpenLDAP, Overlays, Sync Provider](https://www.openldap.org/doc/admin26/overlays.html#Sync%20Provider) for detailed configuration information.
 
+#### Dynamic List or Member Of
+
+The overlays `dynlist` and `memberof` require, both, the operational `memberOf` attribute to be present in the loaded schema. To ensure that, a check is done during their initialization for the presence of the attribute and if not, it is created by code.
+
+In the same time, the schema `msuser` declare the same attribute. Then if the schema and at least one of the overlays are required, a conflict may appears according to the order of loads schema first or overlays first.
+In the second case, the process stop loading raising an error `Duplicate attribute`.
+
+In a standard Openldap installation (deb or rpm), its configuration is stored in main file which may include other one. In this case, the order is determined by the order of directives.
+
+For configuration flexibility, the container approach relies on a configuration based on a files' tree instead of a master file with includes. To ensure the order, the file tree must be read in a deterministic one. Fortunately, Linux sort the folder content enumeration using alphanumeric. This allows to declare overlay loading after the schema by using a keyword which is after `schema` in alphanumeric sorting (i.e. `cn=z-module{N}` will be loaded after `cn=schema` as they are both children of `cn=config`). Doing so, the configuration merging `msuser` schema and `dynlist` (or `memberof`) will run fine.
+
+IMPORTANT: The `dynlist` requires the schema `dyngroup`. This can be done by adding it in the list of schemas to load through `LDAP_EXTRA_SCHEMAS`.
+
+This sample shows how to declare the module `dynlist` with the support of dynamic (groupOfUrls) and static (groupOfNames) groups. The `olcDatabase={N}mdb` has to be adjusted to the target configuration.
+
+```
+ldapadd -D "cn=admin,cn=config" -w "configpassword" <<EOF
+dn: cn=z-module,cn=config
+objectClass: olcModuleList
+cn: z-module
+olcModuleLoad: dynlist.so
+olcModulePath: /opt/bitnami/openldap/lib/openldap
+
+dn: olcOverlay=dynlist,olcDatabase={N}mdb,cn=config
+objectClass: olcConfig
+objectClass: olcDynListConfig
+objectClass: olcOverlayConfig
+objectClass: top
+olcOverlay: dynlist
+olcDynListAttrSet: groupOfUrls memberURL member+memberOf@groupOfNames
+EOF
+```
+
+This sample is compliant with the usage or not of `msuser` schema.
+
+Check the official page [OpenLDAP, Overlays, Dynamic Lists](https://www.openldap.org/doc/admin26/overlays.html#Dynamic%20Lists) for detailed configuration information.
+
 ### Securing OpenLDAP traffic
 
 OpenLDAP clients and servers are capable of using the Transport Layer Security (TLS) framework to provide integrity and confidentiality protections and to support LDAP authentication using the SASL EXTERNAL mechanism. Should you desire to enable this optional feature, you may use the following environment variables to configure the application:
