@@ -250,7 +250,7 @@ IMPORTANT: The `dynlist` requires the schema `dyngroup`. This can be done by add
 
 This sample shows how to declare the module `dynlist` with the support of dynamic (groupOfUrls) and static (groupOfNames) groups. The `olcDatabase={N}mdb` has to be adjusted to the target configuration.
 
-```
+```bash
 ldapadd -D "cn=admin,cn=config" -w "configpassword" <<EOF
 dn: cn=z-module,cn=config
 objectClass: olcModuleList
