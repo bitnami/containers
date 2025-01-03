@@ -46,6 +46,7 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP .
 ```
 
+> [!TIP]
 > Remember to replace the `APP`, `VERSION`, and `OPERATING-SYSTEM` placeholders in the example command above with the correct values.
 
 ## Run the application using Docker Compose
@@ -57,6 +58,7 @@ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/APP/
 docker-compose up -d
 ```
 
+> [!TIP]
 > Remember to replace the `APP` placeholder in the example command above with the correct value.
 
 ## Announcing General Availability of Bitnami Premium

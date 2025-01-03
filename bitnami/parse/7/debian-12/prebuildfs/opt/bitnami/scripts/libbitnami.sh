@@ -47,8 +47,7 @@ print_image_welcome_page() {
     info ""
     info "${BOLD}Welcome to the Bitnami ${BITNAMI_APP_NAME} container${RESET}"
     info "Subscribe to project updates by watching ${BOLD}${github_url}${RESET}"
-    info "Submit issues and feature requests at ${BOLD}${github_url}/issues${RESET}"
-    info "Upgrade to Tanzu Application Catalog for production environments to access custom-configured and pre-packaged software components. Gain enhanced features, including Software Bill of Materials (SBOM), CVE scan result reports, and VEX documents. To learn more, visit ${BOLD}https://bitnami.com/enterprise${RESET}"
+    info "Did you know there are enterprise versions of the Bitnami catalog? For enhanced secure software supply chain features, unlimited pulls from Docker, LTS support, or application customization, see Bitnami Premium or Tanzu Application Catalog. See https://www.arrow.com/globalecs/na/vendors/bitnami/ for more information."
     info ""
 }
 

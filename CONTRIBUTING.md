@@ -9,7 +9,8 @@ Any type of contribution is welcome: new features, bug fixes, documentation impr
 1. Fork this repository, develop, and test your changes.
 2. Submit a pull request.
 
-***NOTE***: To make the Pull Requests' (PRs) testing and merging process easier, please submit changes to multiple containers in separate PRs.
+> [!NOTE]
+> To make the Pull Requests' (PRs) testing and merging process easier, please submit changes to multiple containers in separate PRs.
 
 ### Requirements
 
@@ -22,7 +23,7 @@ When submitting a PR make sure that:
 
 #### Sign Your Work
 
-The sign-off is a simple line at the end of the explanation for a commit. All commits needs to be signed. Your signature certifies that you wrote the patch or otherwise have the right to contribute the material. The rules are pretty simple, you only need to certify the guidelines from [developercertificate.org](https://developercertificate.org/).
+The sign-off is a simple line at the end of the explanation for a commit. All commits need to be signed. Your signature certifies that you wrote the patch or otherwise have the right to contribute the material. The rules are pretty simple, you only need to certify the guidelines from [developercertificate.org](https://developercertificate.org/).
 
 Then you just add a line to every git commit message:
 
@@ -49,10 +50,11 @@ Notice the `Author` and `Signed-off-by` lines match. If they don't your PR will 
 
 ### PR Approval and Release Process
 
-1. Changes are manually reviewed by Bitnami team members usually within a business day.
+1. Changes are manually reviewed by Bitnami team members.
 2. The changes are automatically tested using our GitHub CI workflow.
-3. Once the changes are accepted, the PR is tested (if needed) into the internal Bitnami CI pipeline. This may include testing both container and any associated Helm Chart.
+3. Once the changes are accepted, the PR is tested (if needed) in the internal Bitnami CI pipeline. This may include testing both the container and any associated Helm Chart.
 4. The PR is merged by the reviewer(s) in the GitHub `main` branch.
 5. Then our CI/CD system is going to push the container image to the different registries including the recently merged changes.
 
-***NOTE***: Please note that, in terms of time, may be a slight difference between the appearance of the code in GitHub and the image with the changes in the different registries.
+> [!NOTE]
+> Please note that, in terms of time, there may be a slight difference between the appearance of the code in GitHub and the image with the changes in the different registries.
