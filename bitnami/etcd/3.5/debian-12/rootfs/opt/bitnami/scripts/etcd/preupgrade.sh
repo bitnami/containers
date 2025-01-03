@@ -62,28 +62,25 @@ etcdctl_job_endpoints() {
 #   None
 #########################
 remove_members() {
-    local -r current=$(mktemp)
-    local -r expected=$(mktemp)
-
-    local -a extra_flags
+    local -a extra_flags current expected
+    
     read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
     is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_job_endpoints)")
     debug "Listing members"
-    if ! etcdctl member list ${extra_flags[@]} --write-out simple | awk -F ", " '{print $1 "," $3}' > $current; then
+    current="$(etcdctl member list ${extra_flags[@]} --write-out simple | awk -F ", " '{print $1 "," $3}')"
+    if [ $? -ne 0 ]; then
         debug "Error listing members, is this a new cluster?"
         return 0
     fi
-    info "Current cluster members are: $(cat $current | awk -F, '{print $2}' | tr -s '\n' ', ' | sed 's/,$//g')"
-    
-    echo $ETCD_INITIAL_CLUSTER | sed 's/,/\n/g' | awk -F= '{print $1}' > $expected
-    info "Expected cluster members are: $(cat $expected | tr -s '\n' ', ' | sed 's/,$//g')"
+    info "Current cluster members are: $(echo "${current[@]}" | awk -F, '{print $2}' | tr -s '\n' ',' | sed 's/,$//g')"
 
-    for member in $(comm -23 <(cat $current | awk -F, '{print $2}' | sort) <(sort $expected)); do
+    expected="$(echo $ETCD_INITIAL_CLUSTER | sed 's/,/\n/g' | awk -F= '{print $1}')"
+    info "Expected cluster members are: $(IFS= echo "${expected[@]}" | tr -s '\n' ', ' | sed 's/,$//g')"
+
+    for member in $(comm -23 <(echo "${current[@]}" | awk -F, '{print $2}' | sort) <(echo "${expected[@]}" | sort)); do
         info "Removing obsolete member $member"
-        etcdctl member remove ${extra_flags[@]} $(cat $current | grep "$member" | awk -F, '{print $1}')
+        etcdctl member remove ${extra_flags[@]} $(echo "${current[@]}" | grep "$member" | awk -F, '{print $1}')
     done
-
-    rm -f $current $expected
 }
 
 remove_members

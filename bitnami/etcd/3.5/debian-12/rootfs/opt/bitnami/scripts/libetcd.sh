@@ -578,6 +578,7 @@ is_membership_intact() {
     local ret=0
 
     tmp_file=$(mktemp)
+    trap "rm -f $tmp_file" RETURN
 
     am_i_root && start_command=("run_as_user" "$ETCD_DAEMON_USER" "${start_command[@]}")
     [[ -f "$ETCD_CONF_FILE" ]] && start_command+=("--config-file" "$ETCD_CONF_FILE")
@@ -597,15 +598,14 @@ is_membership_intact() {
 
     if grep -q "the member has been permanently removed from the cluster\|ignored streaming request; ID mismatch" "$tmp_file"; then
         info "The remote member ID is different from the local member ID"
-        ret=1
+        return 1
     elif grep -q "\"error\":\"cluster ID mismatch\"" "$tmp_file"; then
         info "The remote cluster ID is different from the local cluster ID"
-        ret=1
-    else
-        info "The member is still part of the cluster"
+        return 1
     fi
-    rm -f "$tmp_file"
-    return $ret
+
+    info "The member is still part of the cluster"
+    return 0
 }
 
 ########################
