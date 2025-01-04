@@ -42,10 +42,10 @@ ENV HOME="/root" \
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2024-12-03T23:58:15Z" \
+      org.opencontainers.image.created="2025-01-03T01:25:18Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.23.2-debian-12-r12" \
+      org.opencontainers.image.ref.name="1.23.2-debian-12-r13" \
       org.opencontainers.image.title="kaniko" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
       org.opencontainers.image.version="1.23.2"

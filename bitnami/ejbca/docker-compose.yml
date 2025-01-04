@@ -13,7 +13,7 @@ services:
       - MARIADB_DATABASE=bitnami_ejbca
       - MARIADB_PASSWORD=Bitnami1234
   ejbca:
-    image: docker.io/bitnami/ejbca:8
+    image: docker.io/bitnami/ejbca:9
     ports:
       - 8080:8080
       - 8443:8443
