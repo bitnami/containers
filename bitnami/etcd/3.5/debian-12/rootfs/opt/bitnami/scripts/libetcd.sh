@@ -227,18 +227,6 @@ etcdctl_get_endpoints() {
     local -a endpoints=()
     local host domain port
 
-    ip_has_valid_hostname() {
-        local ip="${1:?ip is required}"
-        local parent_domain="${1:?parent_domain is required}"
-
-        # 'getent hosts $ip' can return hostnames in 2 different formats:
-        #     POD_NAME.HEADLESS_SVC_DOMAIN.NAMESPACE.svc.cluster.local (using headless service domain)
-        #     10-237-136-79.SVC_DOMAIN.NAMESPACE.svc.cluster.local (using POD's IP and service domain)
-        # We need to discard the latter to avoid issues when TLS verification is enabled.
-        [[ "$(getent hosts "$ip")" = *"$parent_domain"* ]] && return 0
-        return 1
-    }
-
     hostname_has_ips() {
         local hostname="${1:?hostname is required}"
         [[ "$(getent ahosts "$hostname")" != "" ]] && return 0
@@ -449,36 +437,6 @@ is_healthy_etcd_cluster() {
 }
 
 ########################
-# Prints initial cluster nodes
-# Globals:
-#   ETCD_*
-# Arguments:
-#   None
-# Returns:
-#   String
-########################
-get_initial_cluster() {
-    local -a endpoints_array=()
-    local scheme port initial_members
-    read -r -a endpoints_array <<<"$(tr ',;' ' ' <<<"$ETCD_INITIAL_CLUSTER")"
-    if [[ ${#endpoints_array[@]} -gt 0 ]] && ! grep -sqE "://" <<<"$ETCD_INITIAL_CLUSTER"; then
-        # This piece of code assumes this container is used on a VM environment
-        # where ETCD_INITIAL_CLUSTER contains a comma-separated list of hostnames,
-        # and recreates it as follows:
-        #   SCHEME://NODE_NAME:PEER_PORT
-        scheme="$(parse_uri "$ETCD_INITIAL_ADVERTISE_PEER_URLS" "scheme")"
-        port="$(parse_uri "$ETCD_INITIAL_ADVERTISE_PEER_URLS" "port")"
-        for nodePeer in "${endpoints_array[@]}"; do
-            initial_members+=("${nodePeer}=${scheme}://${nodePeer}:$port")
-        done
-        echo "${initial_members[*]}" | tr ' ' ','
-    else
-        # Nothing to do
-        echo "$ETCD_INITIAL_CLUSTER"
-    fi
-}
-
-########################
 # Recalculate initial cluster
 # Globals:
 #   ETCD_*
@@ -626,7 +584,6 @@ etcd_initialize() {
     # Generate user configuration if ETCD_CFG_* variables are provided
     etcd_setup_from_environment_variables
 
-    ETCD_INITIAL_CLUSTER="$(get_initial_cluster)"
     export ETCD_INITIAL_CLUSTER
     [[ -f "$ETCD_CONF_FILE" ]] && etcd_conf_write "initial-cluster" "$ETCD_INITIAL_CLUSTER"
 
