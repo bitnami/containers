@@ -242,7 +242,7 @@ The overlays `dynlist` and `memberof` require, both, the operational `memberOf` 
 In the same time, the schema `msuser` declare the same attribute. Then if the schema and at least one of the overlays are required, a conflict may appears according to the order of loads schema first or overlays first.
 In the second case, the process stop loading raising an error `Duplicate attribute`.
 
-In a standard Openldap installation (deb or rpm), its configuration is stored in main file which may include other one. In this case, the order is determined by the order of directives.
+In a standard OpenLDAP installation (deb or rpm), its configuration is stored in main file which may include other one. In this case, the order is determined by the order of directives.
 
 For configuration flexibility, the container approach relies on a configuration based on a files' tree instead of a master file with includes. To ensure the order, the file tree must be read in a deterministic one. Fortunately, Linux sort the folder content enumeration using alphanumeric. This allows to declare overlay loading after the schema by using a keyword which is after `schema` in alphanumeric sorting (i.e. `cn=z-module{N}` will be loaded after `cn=schema` as they are both children of `cn=config`). Doing so, the configuration merging `msuser` schema and `dynlist` (or `memberof`) will run fine.
 
