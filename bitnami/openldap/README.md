@@ -237,18 +237,17 @@ Check the official page [OpenLDAP, Overlays, Sync Provider](https://www.openldap
 
 #### Dynamic List or Member Of
 
-The overlays `dynlist` and `memberof` require, both, the operational `memberOf` attribute to be present in the loaded schema. To ensure that, a check is done during their initialization for the presence of the attribute and if not, it is created by code.
+The overlays `dynlist` and `memberof` both require the operational `memberOf` attribute to be present in the loaded schema. During initialization, a check is performed for the presence of this attribute; if it is absent, it is created programmatically.
 
-In the same time, the schema `msuser` declare the same attribute. Then if the schema and at least one of the overlays are required, a conflict may appears according to the order of loads schema first or overlays first.
-In the second case, the process stop loading raising an error `Duplicate attribute`.
+At the same time, the `msuser` schema declares the same attribute. If both the schema and at least one of the overlays are required, a conflict may arise depending on the load order, such as whether the schema is loaded before or after the overlays. If the overlays are loaded first, the process stops and raises a `Duplicate attribute` error.
 
-In a standard OpenLDAP installation (deb or rpm), its configuration is stored in main file which may include other one. In this case, the order is determined by the order of directives.
+In a standard {{ .Name }} installation (deb or rpm), its configuration is stored in the main file, which may include another one. In this case, the order is determined by the order of directives.
 
-For configuration flexibility, the container approach relies on a configuration based on a files' tree instead of a master file with includes. To ensure the order, the file tree must be read in a deterministic one. Fortunately, Linux sort the folder content enumeration using alphanumeric. This allows to declare overlay loading after the schema by using a keyword which is after `schema` in alphanumeric sorting (i.e. `cn=z-module{N}` will be loaded after `cn=schema` as they are both children of `cn=config`). Doing so, the configuration merging `msuser` schema and `dynlist` (or `memberof`) will run fine.
+For configuration flexibility, the container-based approach relies on a file tree structure rather than a master file with includes. To ensure the correct order, the file tree must be read deterministically. Fortunately, Linux sorts folder content using alphanumeric order. This allows overlay loading after the schema by using a keyword that is after `schema` in alphanumeric sorting (i.e. `cn=z-module{N}` will be loaded after `cn=schema` as they are both children of `cn=config`). Doing so, the configuration merging `msuser` schema and `dynlist` (or `memberof`) will load without errors.
 
-IMPORTANT: The `dynlist` requires the schema `dyngroup`. This can be done by adding it in the list of schemas to load through `LDAP_EXTRA_SCHEMAS`.
+IMPORTANT: The `dynlist` requires the schema `dyngroup`. This can be done by adding it to the list of schemas to load through `LDAP_EXTRA_SCHEMAS`.
 
-This sample shows how to declare the module `dynlist` with the support of dynamic (groupOfUrls) and static (groupOfNames) groups. The `olcDatabase={N}mdb` has to be adjusted to the target configuration.
+The following example shows how to declare the module `dynlist` with the support of dynamic (groupOfUrls) and static (groupOfNames) groups. The `olcDatabase={N}mdb` has to be adjusted to the target configuration.
 
 ```bash
 ldapadd -D "cn=admin,cn=config" -w "configpassword" <<EOF
@@ -268,7 +267,7 @@ olcDynListAttrSet: groupOfUrls memberURL member+memberOf@groupOfNames
 EOF
 ```
 
-This sample is compliant with the usage or not of `msuser` schema.
+This example is compatible with or without the usage of the `msuser` schema.
 
 Check the official page [OpenLDAP, Overlays, Dynamic Lists](https://www.openldap.org/doc/admin26/overlays.html#Dynamic%20Lists) for detailed configuration information.
 
