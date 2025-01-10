@@ -190,7 +190,7 @@ mysql_exec_initial_dump() {
     info "MySQL dump source data start..."
 
     debug "Start dump process databases"
-    mysqldump --verbose --single-transaction --quick --source-data=2 --all-databases -h "$DB_MASTER_HOST" -P "$DB_MASTER_PORT_NUMBER" -u "$DB_MASTER_ROOT_USER" -p"$DB_MASTER_ROOT_PASSWORD" > "$dump_file"
+    mysqldump --verbose --all-databases -h "$DB_MASTER_HOST" -P "$DB_MASTER_PORT_NUMBER" -u "$DB_MASTER_ROOT_USER" -p"$DB_MASTER_ROOT_PASSWORD" > "$dump_file"
     debug "Finish dump databases"
 
     # Look for the line containing "CHANGE REPLICATION SOURCE"
