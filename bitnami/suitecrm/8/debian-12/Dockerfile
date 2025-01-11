@@ -8,11 +8,11 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2024-12-16T01:03:31Z" \
+      org.opencontainers.image.created="2025-01-11T18:29:14Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/suitecrm/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.7.1-debian-12-r3" \
+      org.opencontainers.image.ref.name="8.7.1-debian-12-r4" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/suitecrm" \
       org.opencontainers.image.title="suitecrm" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -29,7 +29,7 @@ RUN install_packages acl ca-certificates cron curl libaudit1 libbrotli1 libbsd0 
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "render-template-1.0.7-8-linux-${OS_ARCH}-debian-12" \
-      "php-8.1.31-3-linux-${OS_ARCH}-debian-12" \
+      "php-8.1.31-8-linux-${OS_ARCH}-debian-12" \
       "apache-2.4.62-4-linux-${OS_ARCH}-debian-12" \
       "mysql-client-11.4.4-0-linux-${OS_ARCH}-debian-12" \
       "libphp-8.1.31-0-linux-${OS_ARCH}-debian-12" \
