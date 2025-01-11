@@ -217,6 +217,7 @@ docker run -d --name redmine \
 | `REDMINE_SMTP_HOST`                | Redmine SMTP server host.                                                                                                       | `nil`                                                                                                       |
 | `REDMINE_SMTP_PORT_NUMBER`         | Redmine SMTP server port number.                                                                                                | `nil`                                                                                                       |
 | `REDMINE_SMTP_USER`                | Redmine SMTP server user.                                                                                                       | `nil`                                                                                                       |
+| `REDMINE_SMTP_DOMAIN`              | Redmine SMTP domain. USER@ part from SMTP_USER is used when not defined.                                                        | `nil`                                                                                                       |
 | `REDMINE_SMTP_PASSWORD`            | Redmine SMTP server user password.                                                                                              | `nil`                                                                                                       |
 | `REDMINE_SMTP_PROTOCOL`            | Redmine SMTP server protocol to use.                                                                                            | `nil`                                                                                                       |
 | `REDMINE_SMTP_AUTH`                | Redmine SMTP server protocol to use. Allowed values: *login*, *plain*, *cram_md5*.                                              | `login`                                                                                                     |
@@ -465,7 +466,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
+Copyright &copy; 2025 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
