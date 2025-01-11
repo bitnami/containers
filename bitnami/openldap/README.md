@@ -241,7 +241,7 @@ The overlays `dynlist` and `memberof` both require the operational `memberOf` at
 
 At the same time, the `msuser` schema declares the same attribute. If both the schema and at least one of the overlays are required, a conflict may arise depending on the load order, such as whether the schema is loaded before or after the overlays. If the overlays are loaded first, the process stops and raises a `Duplicate attribute` error.
 
-In a standard {{ .Name }} installation (deb or rpm), its configuration is stored in the main file, which may include another one. In this case, the order is determined by the order of directives.
+In a standard OpenLDAP installation (deb or rpm), its configuration is stored in the main file, which may include another one. In this case, the order is determined by the order of directives.
 
 For configuration flexibility, the container-based approach relies on a file tree structure rather than a master file with includes. To ensure the correct order, the file tree must be read deterministically. Fortunately, Linux sorts folder content using alphanumeric order. This allows overlay loading after the schema by using a keyword that is after `schema` in alphanumeric sorting (i.e. `cn=z-module{N}` will be loaded after `cn=schema` as they are both children of `cn=config`). Doing so, the configuration merging `msuser` schema and `dynlist` (or `memberof`) will load without errors.
 
@@ -256,7 +256,6 @@ objectClass: olcModuleList
 cn: z-module
 olcModuleLoad: dynlist.so
 olcModulePath: /opt/bitnami/openldap/lib/openldap
-
 dn: olcOverlay=dynlist,olcDatabase={N}mdb,cn=config
 objectClass: olcConfig
 objectClass: olcDynListConfig
@@ -408,7 +407,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
+Copyright &copy; 2025 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
