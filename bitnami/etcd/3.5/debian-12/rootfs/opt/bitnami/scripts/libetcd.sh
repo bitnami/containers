@@ -343,11 +343,7 @@ is_new_etcd_cluster() {
     local -a extra_flags
     read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
     is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
-    if ! etcdctl endpoint status --cluster ${extra_flags[@]}; then
-        return 0
-    else
-        return 1
-    fi
+    ! debug_execute etcdctl endpoint status --cluster ${extra_flags[@]}
 }
 
 ########################

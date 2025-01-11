@@ -237,7 +237,7 @@ Additionally, you can configure etcd using the upstream env variables [here](htt
 
 ### 3.5.17-debian-12-r3
 
-* Drop support for non-Helm deployment. Upgrading of any kind including increasing replica count must also be done with `helm upgrade` exclusively. CD automation tools that respect Helm hooks such as ArgoCD can also be used.
+* Drop support for non-Helm cluster deployment. Upgrading of any kind including increasing replica count must also be done with `helm upgrade` exclusively. CD automation tools that respect Helm hooks such as ArgoCD can also be used.
 * Remove `prestop.sh` script. Hence, container should no longer define lifecycle prestop hook.
 * Add `preupgrade.sh` script which should be run as a pre-upgrade Helm hook. This replaces the prestop hook as a more reliable mechanism to remove stale members when replica count is decreased.
 * Stop storing member ID in a local file which is unreliable. The container now check the member ID from the data dir instead.
