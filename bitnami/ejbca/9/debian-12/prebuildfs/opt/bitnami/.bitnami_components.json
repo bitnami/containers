@@ -1,0 +1,26 @@
+{
+    "ejbca": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "9.0.0-1"
+    },
+    "java": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "17.0.13-12-1"
+    },
+    "mysql-client": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "10.11.10-0"
+    },
+    "wildfly": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "32.0.1-4"
+    }
+}

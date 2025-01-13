@@ -1,7 +1,6 @@
 # Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 
-version: '2'
 services:
   solrnode1:
     image: docker.io/bitnami/solr:9
@@ -17,7 +16,7 @@ services:
     volumes:
       - 'solr_data:/bitnami/solr'
   zk1:
-    image: docker.io/bitnami/zookeeper:3.9
+    image: docker.io/bitnami/zookeeper:latest
     ports:
       - '2181'
     volumes:

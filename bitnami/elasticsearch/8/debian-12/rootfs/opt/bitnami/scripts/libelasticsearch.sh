@@ -595,8 +595,8 @@ elasticsearch_configure_node_roles() {
 
     if is_boolean_yes "$set_repo_path" && [[ -n "$DB_FS_SNAPSHOT_REPO_PATH" ]]; then
         # Configure path.repo to restore snapshots from system repository
-        # It must be set on every cluster_manager an data node
-        # ref: https://www.elastic.co/guide/en/opensearch/reference/current/snapshots-register-repository.html#snapshots-filesystem-repository
+        # It must be set on every cluster_manager and data node
+        # ref: https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-filesystem-repository.html
         elasticsearch_conf_set path.repo "$DB_FS_SNAPSHOT_REPO_PATH"
     fi
 }
@@ -693,6 +693,20 @@ elasticsearch_initialize() {
         am_i_root && is_mounted_dir_empty "$dir" && chown -R "$DB_DAEMON_USER:$DB_DAEMON_GROUP" "$dir"
     done
 
+    if is_file_writable "${DB_CONF_DIR}/jvm.options" && is_file_writable "${DB_CONF_DIR}/jvm.options.d"; then
+        if is_boolean_yes "$DB_DISABLE_JVM_HEAP_DUMP"; then
+            info "Disabling JVM heap dumps..."
+            replace_in_file "${DB_CONF_DIR}/jvm.options" "-XX:[+]HeapDumpOnOutOfMemoryError" "# -XX:+HeapDumpOnOutOfMemoryError"
+        fi
+        if is_boolean_yes "$DB_DISABLE_GC_LOGS"; then
+            info "Disabling JVM GC logs..."
+            replace_in_file "${DB_CONF_DIR}/jvm.options" "(^.*logs[/]gc.log.*$)" "# \1"
+        fi
+        elasticsearch_set_heap_size
+    else
+        warn "The JVM options configuration files are not writable. Configurations based on environment variables will not be applied"
+    fi
+
     if [[ -f "$DB_CONF_FILE" ]]; then
         info "Custom configuration file detected, using it..."
     else
@@ -742,20 +756,6 @@ elasticsearch_initialize() {
                 elasticsearch_conf_set xpack.ml.enabled "false"
             fi
         fi
-    fi
-
-    if is_file_writable "${DB_CONF_DIR}/jvm.options" && is_file_writable "${DB_CONF_DIR}/jvm.options.d"; then
-        if is_boolean_yes "$DB_DISABLE_JVM_HEAP_DUMP"; then
-            info "Disabling JVM heap dumps..."
-            replace_in_file "${DB_CONF_DIR}/jvm.options" "-XX:[+]HeapDumpOnOutOfMemoryError" "# -XX:+HeapDumpOnOutOfMemoryError"
-        fi
-        if is_boolean_yes "$DB_DISABLE_GC_LOGS"; then
-            info "Disabling JVM GC logs..."
-            replace_in_file "${DB_CONF_DIR}/jvm.options" "(^.*logs[/]gc.log.*$)" "# \1"
-        fi
-        elasticsearch_set_heap_size
-    else
-        warn "The JVM options configuration files are not writable. Configurations based on environment variables will not be applied"
     fi
 }
 

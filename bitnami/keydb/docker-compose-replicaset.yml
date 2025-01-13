@@ -1,0 +1,32 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  keydb-primary:
+    image: docker.io/bitnami/keydb:6
+    ports:
+      - '6379'
+    environment:
+      - KEYDB_REPLICATION_MODE=master
+      - KEYDB_PASSWORD=my_password
+      - KEYDB_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    volumes:
+      - 'keydb_data:/bitnami/keydb/data'
+
+  keydb-secondary:
+    image: docker.io/bitnami/keydb:6
+    ports:
+      - '6379'
+    depends_on:
+      - keydb-primary
+    environment:
+      - KEYDB_REPLICATION_MODE=replica
+      - KEYDB_MASTER_HOSTS=keydb-primary
+      - KEYDB_MASTER_PORT_NUMBER=6379
+      - KEYDB_MASTER_PASSWORD=my_password
+      - KEYDB_PASSWORD=my_password
+      - KEYDB_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+
+volumes:
+  keydb_data:
+    driver: local

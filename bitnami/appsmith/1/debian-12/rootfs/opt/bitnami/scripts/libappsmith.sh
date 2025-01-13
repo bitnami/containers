@@ -323,7 +323,7 @@ appsmith_initialize() {
 
             # These parameters are common between RTS and Backend
             # https://github.com/appsmithorg/appsmith/blob/658e369f4fc2f12445af5b238bc4d4a1a34d9a8b/app/rts/.env.example#L1-L3
-            appsmith_conf_set "APPSMITH_MONGODB_URI" "$connection_string"
+            appsmith_conf_set "APPSMITH_DB_URL" "$connection_string"
             appsmith_conf_set "APPSMITH_API_BASE_URL" "http://${APPSMITH_API_HOST}:${APPSMITH_API_PORT}/api/v1"
 
             if [[ "$APPSMITH_MODE" == "backend" ]]; then
@@ -368,7 +368,13 @@ appsmith_initialize() {
             # any extra script. We just connect to the database
             info "Restoring persisted Appsmith $APPSMITH_MODE installation"
             restore_persisted_app "appsmith" "$APPSMITH_DATA_TO_PERSIST"
-            local -r connection_string="$(appsmith_conf_get APPSMITH_MONGODB_URI)"
+            local connection_string
+            connection_string="$(appsmith_conf_get APPSMITH_DB_URL)"
+            # If APPSMITH_DB_URL is not set, fall back to APPSMITH_MONGODB_URI
+            # https://github.com/appsmithorg/appsmith/commit/7e339d419dfffbb9d0178a9e5c54afb85600976f#diff-0359aa9032b425f4bd7785d82ab0684e159a38fcfb5a6036c31a070e21e5952a
+            if [[ -z "${connection_string}" ]]; then
+                connection_string="$(appsmith_conf_get APPSMITH_MONGODB_URI)"
+            fi
             appsmith_wait_for_mongodb_connection "$connection_string"
         fi
     fi

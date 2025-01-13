@@ -1,10 +1,9 @@
 # Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 
-version: '2'
 services:
   postgresql:
-    image: docker.io/bitnami/postgresql:16
+    image: docker.io/bitnami/postgresql:latest
     volumes:
       - 'postgresql_data:/bitnami/postgresql'
     environment:
@@ -12,7 +11,7 @@ services:
       - POSTGRESQL_USERNAME=bn_redmine
       - POSTGRESQL_DATABASE=bitnami_redmine
   redmine:
-    image: docker.io/bitnami/redmine:5
+    image: docker.io/bitnami/redmine:6
     ports:
       - '80:3000'
     volumes:

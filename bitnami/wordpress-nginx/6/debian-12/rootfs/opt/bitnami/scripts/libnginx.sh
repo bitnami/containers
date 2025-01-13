@@ -208,6 +208,17 @@ nginx_initialize() {
     fi
     nginx_configure "absolute_redirect" "$(is_boolean_yes "$NGINX_ENABLE_ABSOLUTE_REDIRECT" && echo "on" || echo "off" )"
     nginx_configure "port_in_redirect" "$(is_boolean_yes "$NGINX_ENABLE_PORT_IN_REDIRECT" && echo "on" || echo "off" )"
+    # Stream configuration
+    if is_boolean_yes "$NGINX_ENABLE_STREAM" &&
+        is_file_writable "$NGINX_CONF_FILE" &&
+        ! grep -q "include  \"$NGINX_STREAM_SERVER_BLOCKS_DIR" "$NGINX_CONF_FILE"; then
+        cat >> "$NGINX_CONF_FILE" <<EOF
+
+stream {
+    include  "${NGINX_STREAM_SERVER_BLOCKS_DIR}/*.conf";
+}
+EOF
+    fi
 }
 
 ########################

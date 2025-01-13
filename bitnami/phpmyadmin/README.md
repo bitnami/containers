@@ -26,7 +26,7 @@ You can find the default credentials and available configuration options in the 
 * All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
-Looking to use phpMyAdmin in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+Looking to use phpMyAdmin in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the commercial edition of the Bitnami catalog.
 
 ## How to deploy phpMyAdmin in Kubernetes?
 
@@ -34,9 +34,15 @@ Deploying Bitnami applications as Helm Charts is the easiest way to get started 
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deployment and management of Helm Charts in clusters.
 
+## Only latest stable branch maintained in the free Bitnami catalog
+
+Starting December 10th 2024, only the latest stable branch of any container will receive updates in the free Bitnami catalog. To access up-to-date releases for all upstream-supported branches, consider upgrading to Bitnami Premium. Previous versions already released will not be deleted. They are still available to pull from DockerHub.
+
+Please check the Bitnami Premium page in our partner [Arrow Electronics](https://www.arrow.com/globalecs/na/vendors/bitnami?utm_source=GitHub&utm_medium=containers) for more information.
+
 ## Supported tags and respective `Dockerfile` links
 
-Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.vmware.com/en/VMware-Tanzu-Application-Catalog/services/tutorials/GUID-understand-rolling-tags-containers-index.html).
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
 You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `bitnami/ASSET/BRANCH/DISTRO/tags-info.yaml`.
 
@@ -181,9 +187,9 @@ The `bitnami/phpmyadmin:latest` tag always points to the most recent release. To
 | `DATABASE_PORT_NUMBER`                 | Database server port.                                                                                                                                                | `nil`                                          |
 | `DATABASE_ALLOW_NO_PASSWORD`           | Whether to allow logins without a password.                                                                                                                          | `nil`                                          |
 | `DATABASE_ENABLE_SSL`                  | Whether to enable SSL for the connection between phpMyAdmin and the MySQL server to secure the connection.                                                           | `nil`                                          |
-| `DATABASE_SSL_KEY`                     | Path to the client key file when using SSL.                                                                                                                          | `nil`                                          |
-| `DATABASE_SSL_CERT`                    | Path to the client certificate file when using SSL.                                                                                                                  | `nil`                                          |
-| `DATABASE_SSL_CA`                      | Path to the CA file when using SSL.                                                                                                                                  | `nil`                                          |
+| `DATABASE_SSL_KEY`                     | Path to the client key file when using SSL.                                                                                                                          | `${DATABASE_CERTS_DIR}/server_key.pem`         |
+| `DATABASE_SSL_CERT`                    | Path to the client certificate file when using SSL.                                                                                                                  | `${DATABASE_CERTS_DIR}/server_certificate.pem` |
+| `DATABASE_SSL_CA`                      | Path to the CA file when using SSL.                                                                                                                                  | `${DATABASE_CERTS_DIR}/ca_certificate.pem`     |
 | `DATABASE_SSL_CA_PATH`                 | Directory containing trusted SSL CA certificates in PEM format.                                                                                                      | `nil`                                          |
 | `DATABASE_SSL_CIPHERS`                 | List of allowable ciphers for connections when using SSL.                                                                                                            | `nil`                                          |
 | `DATABASE_SSL_VERIFY`                  | Enable SSL certificate validation.                                                                                                                                   | `yes`                                          |
@@ -210,6 +216,7 @@ The `bitnami/phpmyadmin:latest` tag always points to the most recent release. To
 | `DATABASE_DEFAULT_HOST`                       | Default database server host.                                                                                                            | `mariadb`                                 |
 | `DATABASE_DEFAULT_PORT_NUMBER`                | Default database server port.                                                                                                            | `3306`                                    |
 | `DATABASE_DEFAULT_ALLOW_NO_PASSWORD`          | Whether to allow logins without a password.                                                                                              | `yes`                                     |
+| `DATABASE_CERTS_DIR`                          | phpMyAdmin directory for certificates.                                                                                                   | `${PHPMYADMIN_BASE_DIR}/db_certs`         |
 | `PHP_DEFAULT_UPLOAD_MAX_FILESIZE`             | Default max PHP upload file size.                                                                                                        | `80M`                                     |
 | `PHP_DEFAULT_POST_MAX_SIZE`                   | Default max PHP POST size.                                                                                                               | `80M`                                     |
 | `PHP_DEFAULT_MEMORY_LIMIT`                    | Default PHP memory limit.                                                                                                                | `256M`                                    |
@@ -345,7 +352,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
+Copyright &copy; 2025 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

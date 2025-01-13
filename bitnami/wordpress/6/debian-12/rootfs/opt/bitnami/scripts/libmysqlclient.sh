@@ -10,6 +10,7 @@
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libvalidations.sh
+. /opt/bitnami/scripts/libversion.sh
 
 ########################
 # Validate settings in MYSQL_CLIENT_* environment variables
@@ -438,69 +439,6 @@ mysql_stop() {
     fi
 }
 
-########################
-# Initialize database data
-# Globals:
-#   BITNAMI_DEBUG
-#   DB_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-mysql_install_db() {
-    local command="${DB_BIN_DIR}/mysql_install_db"
-    local -a args=("--defaults-file=${DB_CONF_FILE}" "--basedir=${DB_BASE_DIR}" "--datadir=${DB_DATA_DIR}")
-
-    # Add flags specified via the 'DB_EXTRA_FLAGS' environment variable
-    read -r -a db_extra_flags <<< "$(mysql_extra_flags)"
-    [[ "${#db_extra_flags[@]}" -gt 0 ]] && args+=("${db_extra_flags[@]}")
-
-    am_i_root && args=("${args[@]}" "--user=$DB_DAEMON_USER")
-    if [[ "$DB_FLAVOR" = "mariadb" ]]; then
-        args+=("--auth-root-authentication-method=normal")
-        # Feature available only in MariaDB 10.5+
-        # ref: https://mariadb.com/kb/en/mysql_install_db/#not-creating-the-test-database-and-anonymous-user
-        if [[ ! "$(mysql_get_version)" =~ ^10\.[01234]\. ]]; then
-            is_boolean_yes "$DB_SKIP_TEST_DB" && args+=("--skip-test-db")
-        fi
-    else
-        command="${DB_BIN_DIR}/mysqld"
-        args+=("--initialize-insecure")
-    fi
-    debug_execute "$command" "${args[@]}"
-}
-
-########################
-# Upgrade Database Schema
-# Globals:
-#   BITNAMI_DEBUG
-#   DB_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-mysql_upgrade() {
-    local -a args=("--defaults-file=${DB_CONF_FILE}" "-u" "$DB_ROOT_USER")
-    local major_version minor_version patch_version
-    major_version="$(get_sematic_version "$(mysql_get_version)" 1)"
-    minor_version="$(get_sematic_version "$(mysql_get_version)" 2)"
-    patch_version="$(get_sematic_version "$(mysql_get_version)" 3)"
-    info "Running mysql_upgrade"
-    if [[ "$DB_FLAVOR" = *"mysql"* ]] && [[
-        "$major_version" -gt "8"
-        || ( "$major_version" -eq "8" && "$minor_version" -gt "0" )
-        || ( "$major_version" -eq "8" && "$minor_version" -eq "0" && "$patch_version" -ge "16" )
-    ]]; then
-        mysql_stop
-        mysql_start_bg "--upgrade=FORCE"
-    else
-        mysql_start_bg
-        is_boolean_yes "${ROOT_AUTH_ENABLED:-false}" && args+=("-p$(get_master_env_var_value ROOT_PASSWORD)")
-        debug_execute "${DB_BIN_DIR}/mysql_upgrade" "${args[@]}" || echo "This installation is already upgraded"
-    fi
-}
 
 ########################
 # Migrate old custom configuration files
@@ -1021,14 +959,14 @@ find_jemalloc_lib() {
 ########################
 # Execute a reliable health check against the current mysql instance
 # Globals:
-#   DB_ROOT_PASSWORD, DB_MASTER_ROOT_PASSWORD
+#   DB_ROOT_USER, DB_ROOT_PASSWORD, DB_MASTER_ROOT_PASSWORD
 # Arguments:
 #   None
 # Returns:
 #   mysqladmin output
 #########################
 mysql_healthcheck() {
-    local args=("-uroot" "-h0.0.0.0")
+    local args=("-u${DB_ROOT_USER}" "-h0.0.0.0")
     local root_password
 
     root_password="$(get_master_env_var_value ROOT_PASSWORD)"
@@ -1089,6 +1027,20 @@ mysql_client_extra_opts() {
             value="$(mysql_client_env_value "SSL_${key^^}_FILE")"
             [[ -n "${value}" ]] && opts+=("--ssl-${key}=${value}")
         done
+    else
+        # Skip SSL validation
+        if [[ "$(mysql_client_flavor)" = "mariadb" ]]; then
+            # SSL connections are enabled by default in MariaDB >=10.11
+            local mysql_version=""
+            local major_version=""
+            local minor_version=""
+            mysql_version="$(mysql_get_version)"
+            major_version="$(get_sematic_version "${mysql_version}" 1)"
+            minor_version="$(get_sematic_version "${mysql_version}" 2)"
+            if [[ "${major_version}" -gt 10 ]] || [[ "${major_version}" -eq 10 && "${minor_version}" -eq 11 ]]; then
+                opts+=("--skip-ssl")
+            fi
+        fi
     fi
     echo "${opts[@]:-}"
 }

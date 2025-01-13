@@ -1,0 +1,16 @@
+binaries:
+  - keydb-cli
+  - keydb-server
+  - wait-for-port
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami
+      - /bitnami/keydb
+      - /bitnami/keydb/data
+      - /opt/bitnami/keydb
+      - /opt/bitnami/keydb/etc
+root_dir: /opt/bitnami
+version:
+  bin_name: keydb-server
+  flag: --version

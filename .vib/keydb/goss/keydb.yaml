@@ -1,0 +1,31 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+file:
+  /opt/bitnami/keydb/etc/keydb.conf:
+    exists: true
+    mode: "0664"
+    contents:
+      - /port.*6379/
+      - /dir.*/bitnami/keydb/data/
+      - /pidfile.*/opt/bitnami/keydb/tmp/keydb.pid/
+      - "daemonize yes"
+command:
+  check-keydb-server:
+    exec: keydb-server /opt/bitnami/keydb/etc/keydb.conf && sleep 5 && ps aux
+    exit-status: 0
+    timeout: 20000
+    stdout:
+      - /keydb-server.*(127.0.0.1|localhost).*6379/
+  check-keydb-server-ssl:
+    exec: ldd /opt/bitnami/keydb/bin/keydb-server
+    exit-status: 0
+    stdout:
+      - "libcrypto.so"
+      - "libssl.so"
+  check-keydb-cli-ssl:
+    exec: ldd /opt/bitnami/keydb/bin/keydb-cli
+    exit-status: 0
+    stdout:
+      - "libcrypto.so"
+      - "libssl.so"

@@ -1,15 +1,15 @@
-# Bitnami package for Hubble
+# Bitnami package for Hubble Relay
 
 ## What is Hubble Relay?
 
 > Hubble Relay collects eBPF-based visibility data from every running Hubble server in a cluster by connecting to their respective gRPC APIs and providing an unique API that represents all of them.
 
-[Overview of Hubble](https://cilium.io/)
+[Overview of Hubble Relay](https://cilium.io/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
 
-This container is part of the [Hubble chart](https://github.com/bitnami/charts/tree/main/bitnami/hubble) that is primarily intended to be deployed in Kubernetes.
+This container is part of the [Cilium chart](https://github.com/bitnami/charts/tree/main/bitnami/cilium) that is primarily intended to be deployed in Kubernetes.
 
 ```console
 docker run --name hubble-relay bitnami/hubble-relay:latest
@@ -24,21 +24,27 @@ docker run --name hubble-relay bitnami/hubble-relay:latest
 * All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
-Looking to use Hubble Relay in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+Looking to use Hubble Relay in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the commercial edition of the Bitnami catalog.
 
-## How to deploy Hubble in Kubernetes?
+## How to deploy Hubble Relay in Kubernetes?
 
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Hubble Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/harbor).
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Cilium Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/cilium).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deployment and management of Helm Charts in clusters.
 
 ## Why use a non-root container?
 
-Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.vmware.com/en/VMware-Tanzu-Application-Catalog/services/tutorials/GUID-work-with-non-root-containers-index.html).
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
+
+## Only latest stable branch maintained in the free Bitnami catalog
+
+Starting December 10th 2024, only the latest stable branch of any container will receive updates in the free Bitnami catalog. To access up-to-date releases for all upstream-supported branches, consider upgrading to Bitnami Premium. Previous versions already released will not be deleted. They are still available to pull from DockerHub.
+
+Please check the Bitnami Premium page in our partner [Arrow Electronics](https://www.arrow.com/globalecs/na/vendors/bitnami?utm_source=GitHub&utm_medium=containers) for more information.
 
 ## Supported tags and respective `Dockerfile` links
 
-Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.vmware.com/en/VMware-Tanzu-Application-Catalog/services/tutorials/GUID-understand-rolling-tags-containers-index.html).
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
 You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `bitnami/ASSET/BRANCH/DISTRO/tags-info.yaml`.
 
@@ -76,7 +82,7 @@ To run commands inside this container you can use `docker run`, for example to e
 docker run --rm --name hubble-relay bitnami/hubble-relay:latest help
 ```
 
-Check the [official Hubble documentation](https://docs.cilium.io/en/stable/internals/hubble/) for more information about configuration options.
+Check the [official Hubble Relay documentation](https://docs.cilium.io/en/stable/internals/hubble/) for more information about configuration options.
 
 ## Contributing
 

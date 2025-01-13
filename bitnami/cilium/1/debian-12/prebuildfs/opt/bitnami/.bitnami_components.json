@@ -1,8 +1,26 @@
 {
+    "bpftool": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "7.5.0-0"
+    },
     "cilium": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.15.5-2"
+        "version": "1.16.5-1"
+    },
+    "gops": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "0.3.28-11"
+    },
+    "llvm": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "18.1.8-1"
     }
 }

@@ -24,11 +24,11 @@ You can find the default credentials and available configuration options in the 
 * All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
-Looking to use Apache Cassandra in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+Looking to use Apache Cassandra in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the commercial edition of the Bitnami catalog.
 
 ## Why use a non-root container?
 
-Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.vmware.com/en/VMware-Tanzu-Application-Catalog/services/tutorials/GUID-work-with-non-root-containers-index.html).
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
 
 ## How to deploy Apache Cassandra in Kubernetes?
 
@@ -36,9 +36,15 @@ Deploying Bitnami applications as Helm Charts is the easiest way to get started 
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deployment and management of Helm Charts in clusters.
 
+## Only latest stable branch maintained in the free Bitnami catalog
+
+Starting December 10th 2024, only the latest stable branch of any container will receive updates in the free Bitnami catalog. To access up-to-date releases for all upstream-supported branches, consider upgrading to Bitnami Premium. Previous versions already released will not be deleted. They are still available to pull from DockerHub.
+
+Please check the Bitnami Premium page in our partner [Arrow Electronics](https://www.arrow.com/globalecs/na/vendors/bitnami?utm_source=GitHub&utm_medium=containers) for more information.
+
 ## Supported tags and respective `Dockerfile` links
 
-Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.vmware.com/en/VMware-Tanzu-Application-Catalog/services/tutorials/GUID-understand-rolling-tags-containers-index.html).
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
 You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `bitnami/ASSET/BRANCH/DISTRO/tags-info.yaml`.
 
@@ -166,7 +172,6 @@ docker-compose up -d
 
 | Name                                               | Description                                                                             | Default Value                         |
 |----------------------------------------------------|-----------------------------------------------------------------------------------------|---------------------------------------|
-| `CASSANDRA_MOUNTED_CONF_DIR`                       | Cassandra directory for mounted configuration files                                     | `${DB_VOLUME_DIR}/conf`               |
 | `CASSANDRA_CLIENT_ENCRYPTION`                      | Enable client encryption                                                                | `false`                               |
 | `CASSANDRA_CLUSTER_NAME`                           | Cassandra cluster name                                                                  | `My Cluster`                          |
 | `CASSANDRA_DATACENTER`                             | Cassandra datacenter name                                                               | `dc1`                                 |
@@ -208,36 +213,48 @@ docker-compose up -d
 | `CASSANDRA_KEYSTORE_LOCATION`                      | Cassandra keystore location                                                             | `${DB_VOLUME_DIR}/secrets/keystore`   |
 | `CASSANDRA_TRUSTSTORE_LOCATION`                    | Cassandra truststore location                                                           | `${DB_VOLUME_DIR}/secrets/truststore` |
 | `CASSANDRA_TMP_P12_FILE`                           | Cassandra truststore location                                                           | `${DB_TMP_DIR}/keystore.p12`          |
-| `CASSANDRA_SSL_CERT_FILE`                          | Cassandra SSL certificate location                                                      | `${DB_VOLUME_DIR}/client.cer.pem`     |
+| `CASSANDRA_SSL_CERT_FILE`                          | Cassandra SSL certificate location                                                      | `${DB_VOLUME_DIR}/certs/tls.crt`      |
+| `CASSANDRA_SSL_KEY_FILE`                           | Cassandra SSL keyfile location                                                          | `${DB_VOLUME_DIR}/certs/tls.key`      |
+| `CASSANDRA_SSL_CA_FILE`                            | Cassandra SSL CA location                                                               | `nil`                                 |
 | `CASSANDRA_SSL_VALIDATE`                           | Perform SSL validation on the certificates                                              | `false`                               |
 | `SSL_VERSION`                                      | TLS version to use when connecting.                                                     | `TLSv1_2`                             |
+| `CASSANDRA_MOUNTED_CONF_DIR`                       | Cassandra directory for mounted configuration files                                     | `${DB_VOLUME_DIR}/conf`               |
+| `JAVA_TOOL_OPTIONS`                                | Java tool options.                                                                      | `nil`                                 |
 
 #### Read-only environment variables
 
-| Name                                  | Description                                               | Value                                           |
-|---------------------------------------|-----------------------------------------------------------|-------------------------------------------------|
-| `DB_FLAVOR`                           | Database flavor. Valid values: `cassandra` or `scylladb`. | `cassandra`                                     |
-| `CASSANDRA_BASE_DIR`                  | Cassandra installation directory                          | `/opt/bitnami/cassandra`                        |
-| `CASSANDRA_BIN_DIR`                   | Cassandra executables directory                           | `${DB_BASE_DIR}/bin`                            |
-| `CASSANDRA_CONF_DIR`                  | Cassandra configuration directory                         | `${DB_BASE_DIR}/conf`                           |
-| `CASSANDRA_VOLUME_DIR`                | Persistence base directory                                | `/bitnami/cassandra`                            |
-| `CASSANDRA_DATA_DIR`                  | Cassandra data directory                                  | `${DB_VOLUME_DIR}/data`                         |
-| `CASSANDRA_COMMITLOG_DIR`             | Cassandra commit log directory                            | `${DB_DATA_DIR}/commitlog`                      |
-| `CASSANDRA_DEFAULT_CONF_DIR`          | Cassandra default configuration directory                 | `${DB_BASE_DIR}/conf.default`                   |
-| `CASSANDRA_INITSCRIPTS_DIR`           | Path to the Cassandra container init scripts directory    | `/docker-entrypoint-initdb.d`                   |
-| `CASSANDRA_LOG_DIR`                   | Cassandra logs directory                                  | `${DB_BASE_DIR}/logs`                           |
-| `CASSANDRA_TMP_DIR`                   | Cassandra temporary directory                             | `${DB_BASE_DIR}/tmp`                            |
-| `JAVA_BASE_DIR`                       | Java base directory                                       | `${BITNAMI_ROOT_DIR}/java`                      |
-| `JAVA_BIN_DIR`                        | Java binary directory                                     | `${JAVA_BASE_DIR}/bin`                          |
-| `PYTHON_BASE_DIR`                     | Python base directory                                     | `${BITNAMI_ROOT_DIR}/python`                    |
-| `PYTHON_BIN_DIR`                      | Python binary directory                                   | `${PYTHON_BASE_DIR}/bin`                        |
-| `CASSANDRA_CONF_FILE`                 | Path to Cassandra configuration file                      | `${DB_CONF_DIR}/cassandra.yaml`                 |
-| `CASSANDRA_LOG_FILE`                  | Path to the Cassandra log file                            | `${DB_LOG_DIR}/cassandra.log`                   |
-| `CASSANDRA_FIRST_BOOT_LOG_FILE`       | Path to the Cassandra first boot log file                 | `${DB_LOG_DIR}/cassandra_first_boot.log`        |
-| `CASSANDRA_INITSCRIPTS_BOOT_LOG_FILE` | Path to the Cassandra init scripts log file               | `${DB_LOG_DIR}/cassandra_init_scripts_boot.log` |
-| `CASSANDRA_PID_FILE`                  | Path to the Cassandra pid file                            | `${DB_TMP_DIR}/cassandra.pid`                   |
-| `CASSANDRA_DAEMON_USER`               | Cassandra system user                                     | `cassandra`                                     |
-| `CASSANDRA_DAEMON_GROUP`              | Cassandra system group                                    | `cassandra`                                     |
+| Name                                  | Description                                                                     | Value                                           |
+|---------------------------------------|---------------------------------------------------------------------------------|-------------------------------------------------|
+| `DB_FLAVOR`                           | Database flavor. Valid values: `cassandra` or `scylladb`.                       | `cassandra`                                     |
+| `CASSANDRA_BASE_DIR`                  | Cassandra installation directory                                                | `/opt/bitnami/cassandra`                        |
+| `CASSANDRA_BIN_DIR`                   | Cassandra executables directory                                                 | `${DB_BASE_DIR}/bin`                            |
+| `CASSANDRA_VOLUME_DIR`                | Persistence base directory                                                      | `/bitnami/cassandra`                            |
+| `CASSANDRA_DATA_DIR`                  | Cassandra data directory                                                        | `${DB_VOLUME_DIR}/data`                         |
+| `CASSANDRA_COMMITLOG_DIR`             | Cassandra commit log directory                                                  | `${DB_DATA_DIR}/commitlog`                      |
+| `CASSANDRA_INITSCRIPTS_DIR`           | Path to the Cassandra container init scripts directory                          | `/docker-entrypoint-initdb.d`                   |
+| `CASSANDRA_LOG_DIR`                   | Cassandra logs directory                                                        | `${DB_BASE_DIR}/logs`                           |
+| `CASSANDRA_TMP_DIR`                   | Cassandra temporary directory                                                   | `${DB_BASE_DIR}/tmp`                            |
+| `JAVA_BASE_DIR`                       | Java base directory                                                             | `${BITNAMI_ROOT_DIR}/java`                      |
+| `JAVA_BIN_DIR`                        | Java binary directory                                                           | `${JAVA_BASE_DIR}/bin`                          |
+| `PYTHON_BASE_DIR`                     | Python base directory                                                           | `${BITNAMI_ROOT_DIR}/python`                    |
+| `PYTHON_BIN_DIR`                      | Python binary directory                                                         | `${PYTHON_BASE_DIR}/bin`                        |
+| `CASSANDRA_LOG_FILE`                  | Path to the Cassandra log file                                                  | `${DB_LOG_DIR}/cassandra.log`                   |
+| `CASSANDRA_FIRST_BOOT_LOG_FILE`       | Path to the Cassandra first boot log file                                       | `${DB_LOG_DIR}/cassandra_first_boot.log`        |
+| `CASSANDRA_INITSCRIPTS_BOOT_LOG_FILE` | Path to the Cassandra init scripts log file                                     | `${DB_LOG_DIR}/cassandra_init_scripts_boot.log` |
+| `CASSANDRA_PID_FILE`                  | Path to the Cassandra pid file                                                  | `${DB_TMP_DIR}/cassandra.pid`                   |
+| `CASSANDRA_DAEMON_USER`               | Cassandra system user                                                           | `cassandra`                                     |
+| `CASSANDRA_DAEMON_GROUP`              | Cassandra system group                                                          | `cassandra`                                     |
+| `CASSANDRA_CONF_DIR`                  | Cassandra configuration directory                                               | `${DB_BASE_DIR}/conf`                           |
+| `CASSANDRA_DEFAULT_CONF_DIR`          | Cassandra default configuration directory                                       | `${DB_BASE_DIR}/conf.default`                   |
+| `CASSANDRA_CONF_FILE`                 | Path to Cassandra configuration file                                            | `${DB_CONF_DIR}/cassandra.yaml`                 |
+| `CASSANDRA_RACKDC_FILE`               | Path to Cassandra cassandra-rackdc.properties file                              | `${DB_CONF_DIR}/cassandra-rackdc.properties`    |
+| `CASSANDRA_LOGBACK_FILE`              | Path to Cassandra logback.xml file                                              | `${DB_CONF_DIR}/logback.xml`                    |
+| `CASSANDRA_COMMITLOG_ARCHIVING_FILE`  | Path to Cassandra commitlog_archiving.properties file                           | `${DB_CONF_DIR}/commitlog_archiving.properties` |
+| `CASSANDRA_ENV_FILE`                  | Path to Cassandra cassandra-env.sh file                                         | `${DB_CONF_DIR}/cassandra-env.sh`               |
+| `CASSANDRA_MOUNTED_CONF_PATH`         | Relative path (in mounted volume) to Cassandra configuration file               | `cassandra.yaml`                                |
+| `CASSANDRA_MOUNTED_RACKDC_PATH`       | Relative path (in mounted volume) to Cassandra cassandra-rackdc-properties file | `cassandra-rackdc.properties`                   |
+| `CASSANDRA_MOUNTED_ENV_PATH`          | Relative path (in mounted volume) to Cassandra cassandra-env.sh file            | `cassandra-env.sh`                              |
+| `CASSANDRA_MOUNTED_LOGBACK_PATH`      | Path to Cassandra logback.xml file                                              | `logback.xml`                                   |
 
 Additionally, any environment variable beginning with the following prefix will be mapped to its corresponding Apache Cassandra key in the proper file:
 
@@ -543,7 +560,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
+Copyright &copy; 2025 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

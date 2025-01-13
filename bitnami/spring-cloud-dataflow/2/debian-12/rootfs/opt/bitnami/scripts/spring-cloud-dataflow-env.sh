@@ -35,6 +35,7 @@ spring_cloud_dataflow_env_vars=(
     SPRING_CLOUD_SKIPPER_CLIENT_SERVER_URI
     SPRING_CLOUD_DATAFLOW_TASK_COMPOSEDTASKRUNNER_URI
     JAVA_OPTS
+    JAVA_TOOL_OPTIONS
 )
 for env_var in "${spring_cloud_dataflow_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -76,5 +77,6 @@ export SPRING_CLOUD_DATAFLOW_TASK_COMPOSEDTASKRUNNER_URI="${SPRING_CLOUD_DATAFLO
 
 # Java settings
 export JAVA_OPTS="${JAVA_OPTS:-}"
+export JAVA_TOOL_OPTIONS="${JAVA_TOOL_OPTIONS:-}"
 
 # Custom environment variables may be defined below

@@ -1,0 +1,8 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  metallb:
+    image: docker.io/bitnami/metallb:0
+    # Overriding entrypoint so the container does not exit and we can run some basic tests
+    entrypoint: tail -f /dev/null

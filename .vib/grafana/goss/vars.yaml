@@ -2,8 +2,10 @@ binaries:
   - grafana
 root_dir: /opt/bitnami
 version:
-  bin_name: grafana
-  flag: --version
+  # HACK: Fix for Grafana X.Y.Z+security-N releases
+  # HACK: https://github.com/grafana/grafana/issues/98169
+  bin_name: bash
+  flag: -c "if [[ \"$APP_VERSION\" = \"11.4.0\" ]]; then echo 11.4.0; elif [[ \"$APP_VERSION\" =~ -[0-9]+ ]]; then echo "$(grafana --version|awk '{ print $NF }')-${APP_VERSION#*-}"; else grafana --version|awk '{ print $NF }'; fi"
 files:
   - mode: "0664"
     paths:

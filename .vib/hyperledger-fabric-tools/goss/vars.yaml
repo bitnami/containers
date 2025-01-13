@@ -1,0 +1,22 @@
+binaries:
+  - go
+  - configtxgen
+  - configtxlator
+  - cryptogen
+  - discover
+  - ledgerutil
+  - osnadmin
+  - peer
+directories:
+  - mode: "0755"
+    paths:
+      - /opt/bitnami/hyperledger-fabric-tools/etc
+  - mode: "0775"
+    paths:
+      - /opt/bitnami/hyperledger-fabric-tools/var
+  - paths:
+      - /opt/bitnami/hyperledger-fabric-tools
+root_dir: /opt/bitnami
+version:
+  bin_name: configtxlator
+  flag: version

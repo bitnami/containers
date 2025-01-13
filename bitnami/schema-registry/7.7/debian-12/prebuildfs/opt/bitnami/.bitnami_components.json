@@ -1,0 +1,14 @@
+{
+    "java": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "1.8.432-7-1"
+    },
+    "schema-registry": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "7.7.1-1"
+    }
+}

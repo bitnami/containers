@@ -1,0 +1,14 @@
+{
+    "java": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "17.0.13-12-1"
+    },
+    "jmx-exporter": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "1.1.0-1"
+    }
+}

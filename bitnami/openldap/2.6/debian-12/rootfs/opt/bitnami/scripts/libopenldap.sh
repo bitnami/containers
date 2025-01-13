@@ -52,7 +52,11 @@ export LDAP_DAEMON_GROUP="slapd"
 # Settings
 export LDAP_PORT_NUMBER="${LDAP_PORT_NUMBER:-1389}"
 export LDAP_LDAPS_PORT_NUMBER="${LDAP_LDAPS_PORT_NUMBER:-1636}"
+export LDAP_ENABLE_PROXYPROTO="${LDAP_ENABLE_PROXYPROTO:-no}"
+export LDAP_PROXYPROTO_PORT_NUMBER="${LDAP_PROXYPROTO_PORT_NUMBER:-"${LDAP_PORT_NUMBER}"}"
+export LDAP_PROXYPROTO_LDAPS_PORT_NUMBER="${LDAP_PROXYPROTO_LDAPS_PORT_NUMBER:-"${LDAP_LDAPS_PORT_NUMBER}"}"
 export LDAP_ROOT="${LDAP_ROOT:-dc=example,dc=org}"
+export LDAP_SUFFIX="$(if [ -z "${LDAP_SUFFIX+x}" ]; then echo "${LDAP_ROOT}"; else echo "${LDAP_SUFFIX}"; fi)"
 export LDAP_ADMIN_USERNAME="${LDAP_ADMIN_USERNAME:-admin}"
 export LDAP_ADMIN_DN="${LDAP_ADMIN_USERNAME/#/cn=},${LDAP_ROOT}"
 export LDAP_ADMIN_PASSWORD="${LDAP_ADMIN_PASSWORD:-adminpassword}"
@@ -65,7 +69,9 @@ export LDAP_EXTRA_SCHEMAS="${LDAP_EXTRA_SCHEMAS:-cosine,inetorgperson,nis}"
 export LDAP_SKIP_DEFAULT_TREE="${LDAP_SKIP_DEFAULT_TREE:-no}"
 export LDAP_USERS="${LDAP_USERS:-user01,user02}"
 export LDAP_PASSWORDS="${LDAP_PASSWORDS:-bitnami1,bitnami2}"
-export LDAP_USER_DC="${LDAP_USER_DC:-users}"
+export LDAP_USER_DC="${LDAP_USER_DC:-}"
+export LDAP_USER_OU="${LDAP_USER_OU:-${LDAP_USER_DC:-users}}"
+export LDAP_GROUP_OU="${LDAP_GROUP_OU:-${LDAP_USER_DC:-groups}}"
 export LDAP_GROUP="${LDAP_GROUP:-readers}"
 export LDAP_ENABLE_TLS="${LDAP_ENABLE_TLS:-no}"
 export LDAP_REQUIRE_TLS="${LDAP_REQUIRE_TLS:-no}"
@@ -135,7 +141,7 @@ ldap_validate() {
         error "$1"
         error_code=1
     }
-    for var in LDAP_SKIP_DEFAULT_TREE LDAP_ENABLE_TLS; do
+    for var in LDAP_SKIP_DEFAULT_TREE LDAP_ENABLE_TLS LDAP_ENABLE_PROXYPROTO; do
         if ! is_yes_no_value "${!var}"; then
             print_validation_error "The allowed values for $var are: yes or no"
         fi
@@ -165,10 +171,26 @@ ldap_validate() {
         print_validation_error "Specify the same number of passwords on LDAP_PASSWORDS as the number of users on LDAP_USERS!"
     fi
 
+    for var in LDAP_PORT_NUMBER LDAP_LDAPS_PORT_NUMBER LDAP_PROXYPROTO_PORT_NUMBER LDAP_PROXYPROTO_LDAPS_PORT_NUMBER; do
+        if ! is_positive_int "${!var}"; then
+            print_validation_error "The value for $var must be positive integer!"
+        fi
+    done
+
     if [[ -n "$LDAP_PORT_NUMBER" ]] && [[ -n "$LDAP_LDAPS_PORT_NUMBER" ]]; then
         if [[ "$LDAP_PORT_NUMBER" -eq "$LDAP_LDAPS_PORT_NUMBER" ]]; then
             print_validation_error "LDAP_PORT_NUMBER and LDAP_LDAPS_PORT_NUMBER are bound to the same port!"
         fi
+    fi
+
+    if [[ -n "$LDAP_PROXYPROTO_PORT_NUMBER" ]] && [[ -n "$LDAP_PROXYPROTO_LDAPS_PORT_NUMBER" ]]; then
+        if [[ "$LDAP_PROXYPROTO_PORT_NUMBER" -eq "$LDAP_PROXYPROTO_LDAPS_PORT_NUMBER" ]]; then
+            print_validation_error "LDAP_PROXYPROTO_PORT_NUMBER and LDAP_PROXYPROTO_LDAPS_PORT_NUMBER are bound to the same port!"
+        fi
+    fi
+
+    if [[ -n "$LDAP_USER_DC" ]]; then
+        warn "The env variable 'LDAP_USER_DC' has been deprecated and will be removed in a future release. Please use 'LDAP_USER_OU' and 'LDAP_GROUP_OU' instead."
     fi
 
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
@@ -207,7 +229,8 @@ is_ldap_not_running() {
 ########################
 # Start OpenLDAP server in background
 # Arguments:
-#   None
+#   $1 - max retries. Default: 12
+#   $2 - sleep between retries (in seconds). Default: 1
 # Returns:
 #   None
 #########################
@@ -382,7 +405,7 @@ ldap_admin_credentials() {
 dn: olcDatabase={2}mdb,cn=config
 changetype: modify
 replace: olcSuffix
-olcSuffix: $LDAP_ROOT
+olcSuffix: $LDAP_SUFFIX
 
 dn: olcDatabase={2}mdb,cn=config
 changetype: modify
@@ -521,9 +544,13 @@ objectClass: organization
 dc: $dc
 o: $o
 
-dn: ${LDAP_USER_DC/#/ou=},${LDAP_ROOT}
+dn: ${LDAP_USER_OU/#/ou=},${LDAP_ROOT}
 objectClass: organizationalUnit
 ou: users
+
+dn: ${LDAP_GROUP_OU/#/ou=},${LDAP_ROOT}
+objectClass: organizationalUnit
+ou: groups
 
 EOF
     read -r -a users <<< "$(tr ',;' ' ' <<< "${LDAP_USERS}")"
@@ -532,7 +559,7 @@ EOF
     for user in "${users[@]}"; do
         cat >> "${LDAP_SHARE_DIR}/tree.ldif" << EOF
 # User $user creation
-dn: ${user/#/cn=},${LDAP_USER_DC/#/ou=},${LDAP_ROOT}
+dn: ${user/#/cn=},${LDAP_USER_OU/#/ou=},${LDAP_ROOT}
 cn: User$((index + 1 ))
 sn: Bar$((index + 1 ))
 objectClass: inetOrgPerson
@@ -549,7 +576,7 @@ EOF
     done
     cat >> "${LDAP_SHARE_DIR}/tree.ldif" << EOF
 # Group creation
-dn: ${LDAP_GROUP/#/cn=},${LDAP_USER_DC/#/ou=},${LDAP_ROOT}
+dn: ${LDAP_GROUP/#/cn=},${LDAP_USER_OU/#/ou=},${LDAP_ROOT}
 cn: $LDAP_GROUP
 objectClass: groupOfNames
 # User group membership
@@ -557,7 +584,7 @@ EOF
 
     for user in "${users[@]}"; do
         cat >> "${LDAP_SHARE_DIR}/tree.ldif" << EOF
-member: ${user/#/cn=},${LDAP_USER_DC/#/ou=},${LDAP_ROOT}
+member: ${user/#/cn=},${LDAP_USER_OU/#/ou=},${LDAP_ROOT}
 EOF
     done
 
@@ -575,7 +602,7 @@ EOF
 #########################
 ldap_add_custom_ldifs() {
     info "Loading custom LDIF files..."
-    warn "Ignoring LDAP_USERS, LDAP_PASSWORDS, LDAP_USER_DC and LDAP_GROUP environment variables..."
+    warn "Ignoring LDAP_USERS, LDAP_PASSWORDS, LDAP_USER_OU, LDAP_GROUP_OU and LDAP_GROUP environment variables..."
     find "$LDAP_CUSTOM_LDIF_DIR" -maxdepth 1 \( -type f -o -type l \) -iname '*.ldif' -print0 | sort -z | xargs --null -I{} bash -c ". /opt/bitnami/scripts/libos.sh && debug_execute ldapadd -f {} -H 'ldapi:///' -D \"$LDAP_ADMIN_DN\" -w \"$LDAP_ADMIN_PASSWORD\""
 }
 

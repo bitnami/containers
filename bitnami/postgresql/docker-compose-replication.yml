@@ -1,11 +1,9 @@
 # Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 
-version: '2'
-
 services:
   postgresql-master:
-    image: docker.io/bitnami/postgresql:16
+    image: docker.io/bitnami/postgresql:17
     ports:
       - '5432'
     volumes:
@@ -19,7 +17,7 @@ services:
       - POSTGRESQL_DATABASE=my_database
       - ALLOW_EMPTY_PASSWORD=yes
   postgresql-slave:
-    image: docker.io/bitnami/postgresql:16
+    image: docker.io/bitnami/postgresql:17
     ports:
       - '5432'
     depends_on:

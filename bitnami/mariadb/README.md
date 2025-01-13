@@ -24,7 +24,7 @@ docker run --name mariadb -e ALLOW_EMPTY_PASSWORD=yes bitnami/mariadb:latest
 * All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
-Looking to use MariaDB in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+Looking to use MariaDB in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the commercial edition of the Bitnami catalog.
 
 ## How to deploy MariaDB in Kubernetes?
 
@@ -34,11 +34,17 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deploy
 
 ## Why use a non-root container?
 
-Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.vmware.com/en/VMware-Tanzu-Application-Catalog/services/tutorials/GUID-work-with-non-root-containers-index.html).
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
+
+## Only latest stable branch maintained in the free Bitnami catalog
+
+Starting December 10th 2024, only the latest stable branch of any container will receive updates in the free Bitnami catalog. To access up-to-date releases for all upstream-supported branches, consider upgrading to Bitnami Premium. Previous versions already released will not be deleted. They are still available to pull from DockerHub.
+
+Please check the Bitnami Premium page in our partner [Arrow Electronics](https://www.arrow.com/globalecs/na/vendors/bitnami?utm_source=GitHub&utm_medium=containers) for more information.
 
 ## Supported tags and respective `Dockerfile` links
 
-Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.vmware.com/en/VMware-Tanzu-Application-Catalog/services/tutorials/GUID-understand-rolling-tags-containers-index.html).
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
 You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `bitnami/ASSET/BRANCH/DISTRO/tags-info.yaml`.
 
@@ -197,6 +203,7 @@ docker-compose up -d
 | `MARIADB_COLLATE`                 | MariaDB collation to use.                                                                                                 | `nil`         |
 | `MARIADB_BIND_ADDRESS`            | MariaDB bind address.                                                                                                     | `nil`         |
 | `MARIADB_SQL_MODE`                | MariaDB Server SQL modes to enable.                                                                                       | `nil`         |
+| `MARIADB_UPGRADE`                 | MariaDB upgrade option.                                                                                                   | `AUTO`        |
 | `MARIADB_SKIP_TEST_DB`            | Whether to skip creating the test database.                                                                               | `no`          |
 | `MARIADB_CLIENT_ENABLE_SSL`       | Whether to force SSL for connections to the MariaDB database.                                                             | `no`          |
 | `MARIADB_CLIENT_SSL_CA_FILE`      | Path to CA certificate to use for SSL connections to the MariaDB database server.                                         | `nil`         |
@@ -721,6 +728,8 @@ or using Docker Compose:
 docker-compose up mariadb
 ```
 
+> **Note**: Automatic upgrade behavior at startup can be forced setting the env var `MARIADB_UPGRADE` to `FORCE` (that will run `mysql_upgrade --force`)
+
 ## Useful Links
 
 * [Create An AMP Development Environment With Bitnami Containers
@@ -730,7 +739,11 @@ docker-compose up mariadb
 
 ## Notable Changes
 
-### 10.2.41-debian-10-r12, 10.3.32-debian-10-r13, 10.4.22-debian-10-r13, 10.5.13-debian-10-r14, 10.6.5-debian-10-r13, 10.3.38-r5-debian-11, 10.4.28-r5-debian-11, 10.5.19-r5-debian-11, 10.6.12-r5-debian-11, 10.7.8-r5-debian-11, 10.8.7-r5-debian-11, 10.9.5-r5-debian-11 and 10.10.3-r6-debian-11
+### 10.4.34-debian-12-r4, 10.5.25-debian-12-r4, 10.6.18-debian-12-r4, 10.11.8-debian-12-r4, 11.1.5-debian-12-r4, 11.2.4-debian-12-r3, 11.3.2-debian-12-r8
+
+* `mysql_upgrade` can be forced at startup setting the env var `MARIADB_UPGRADE` to `FORCE`.
+
+### 10.2.41-debian-10-r12, 10.3.32-debian-10-r13, 10.4.22-debian-10-r13, 10.5.13-debian-10-r14, 10.6.5-debian-10-r13, 10.3.38-debian-11-r5, 10.4.28-debian-11-r5, 10.5.19-debian-11-r5, 10.6.12-debian-11-r5, 10.7.8-debian-11-r5, 10.8.7-debian-11-r5, 10.9.5-debian-11-r5 and 10.10.3-debian-11-r6
 
 * The command `mysql_upgrade` no longer includes the flag `--force`. Nonetheless, it can be enabled by using the [mysql_upgrade] option group in the MariaDB configuration.
 
@@ -801,7 +814,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
+Copyright &copy; 2025 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

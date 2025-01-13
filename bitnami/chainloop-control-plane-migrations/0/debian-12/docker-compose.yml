@@ -1,0 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  chainloop-control-plane-migrations:
+    image: docker.io/bitnami/chainloop-control-plane-migrations:0

@@ -10,7 +10,7 @@ command:
       - "{{ $module }}"
       {{ end }}
   check-ssl:
-    exec: ruby -rnet/https -e "Net::HTTP.get URI('https://bitnami.com')"
+    exec: ruby -rnet/https -e "Net::HTTP.get URI('https://google.com')"
     exit-status: 0
   {{ range $flag := .Vars.flags }}
   check-{{ $flag }}:

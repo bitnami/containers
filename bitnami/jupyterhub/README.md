@@ -20,11 +20,17 @@ This image is meant to run in a Kubernetes cluster.
 * All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
-Looking to use JupyterHub in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+Looking to use JupyterHub in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the commercial edition of the Bitnami catalog.
+
+## Only latest stable branch maintained in the free Bitnami catalog
+
+Starting December 10th 2024, only the latest stable branch of any container will receive updates in the free Bitnami catalog. To access up-to-date releases for all upstream-supported branches, consider upgrading to Bitnami Premium. Previous versions already released will not be deleted. They are still available to pull from DockerHub.
+
+Please check the Bitnami Premium page in our partner [Arrow Electronics](https://www.arrow.com/globalecs/na/vendors/bitnami?utm_source=GitHub&utm_medium=containers) for more information.
 
 ## Supported tags and respective `Dockerfile` links
 
-Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.vmware.com/en/VMware-Tanzu-Application-Catalog/services/tutorials/GUID-understand-rolling-tags-containers-index.html).
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
 You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `bitnami/ASSET/BRANCH/DISTRO/tags-info.yaml`.
 
@@ -54,7 +60,7 @@ docker build -t bitnami/APP:latest .
 
 ## Why use a non-root container?
 
-Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.vmware.com/en/VMware-Tanzu-Application-Catalog/services/tutorials/GUID-work-with-non-root-containers-index.html).
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
 
 ## Configuration
 
@@ -79,7 +85,7 @@ Non-root container images add an extra layer of security and are generally recom
 | Name                        | Description                                  | Value                                             |
 |-----------------------------|----------------------------------------------|---------------------------------------------------|
 | `JUPYTERHUB_BASE_DIR`       | JupyterHub installation directory.           | `${BITNAMI_ROOT_DIR}/jupyterhub`                  |
-| `JUPYTERHUB_BIN_DIR`        | JupyterHub directory for binary executables. | `${BITNAMI_ROOT_DIR}/miniconda/bin`               |
+| `JUPYTERHUB_BIN_DIR`        | JupyterHub directory for binary executables. | `${BITNAMI_ROOT_DIR}/miniforge/bin`               |
 | `JUPYTERHUB_PROXY_BIN_DIR`  | JupyterHub directory for binary executables. | `${BITNAMI_ROOT_DIR}/configurable-http-proxy/bin` |
 | `JUPYTERHUB_CONF_DIR`       | JupyterHub configuration directory.          | `${JUPYTERHUB_BASE_DIR}/etc`                      |
 | `JUPYTERHUB_CONF_FILE`      | JupyterHub configuration file.               | `${JUPYTERHUB_CONF_DIR}/jupyterhub_config.py`     |
@@ -121,7 +127,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
+Copyright &copy; 2025 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

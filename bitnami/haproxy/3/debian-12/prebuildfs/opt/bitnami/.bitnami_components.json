@@ -1,0 +1,8 @@
+{
+    "haproxy": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "3.1.2-0"
+    }
+}

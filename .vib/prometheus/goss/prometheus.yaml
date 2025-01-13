@@ -12,3 +12,14 @@ command:
     stderr:
       - "Starting Prometheus Server"
       - "Server is ready"
+{{ if regexMatch "^2.+" .Env.APP_VERSION }}
+file:
+  /opt/bitnami/prometheus/conf/consoles:
+    exists: true
+    mode: "0755"
+    filetype: directory
+  /opt/bitnami/prometheus/conf/console_libraries:
+    exists: true
+    mode: "0755"
+    filetype: directory
+{{end}}

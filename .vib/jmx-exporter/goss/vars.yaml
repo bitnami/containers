@@ -3,5 +3,6 @@ binaries:
 files:
   - paths:
       - /opt/bitnami/jmx-exporter/jmx_prometheus_javaagent.jar
-      - /opt/bitnami/jmx-exporter/example_configs/httpserver_sample_config.yml
+      - /opt/bitnami/jmx-exporter/jmx_prometheus_standalone.jar
+      - /opt/bitnami/jmx-exporter/examples/standalone_sample_config.yml
 root_dir: /opt/bitnami

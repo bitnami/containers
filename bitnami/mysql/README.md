@@ -22,7 +22,7 @@ docker run --name mysql -e ALLOW_EMPTY_PASSWORD=yes bitnami/mysql:latest
 * All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
-Looking to use MySQL in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+Looking to use MySQL in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the commercial edition of the Bitnami catalog.
 
 ## How to deploy MySQL in Kubernetes?
 
@@ -32,11 +32,17 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deploy
 
 ## Why use a non-root container?
 
-Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.vmware.com/en/VMware-Tanzu-Application-Catalog/services/tutorials/GUID-work-with-non-root-containers-index.html).
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
+
+## Only latest stable branch maintained in the free Bitnami catalog
+
+Starting December 10th 2024, only the latest stable branch of any container will receive updates in the free Bitnami catalog. To access up-to-date releases for all upstream-supported branches, consider upgrading to Bitnami Premium. Previous versions already released will not be deleted. They are still available to pull from DockerHub.
+
+Please check the Bitnami Premium page in our partner [Arrow Electronics](https://www.arrow.com/globalecs/na/vendors/bitnami?utm_source=GitHub&utm_medium=containers) for more information.
 
 ## Supported tags and respective `Dockerfile` links
 
-Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.vmware.com/en/VMware-Tanzu-Application-Catalog/services/tutorials/GUID-understand-rolling-tags-containers-index.html).
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
 You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `bitnami/ASSET/BRANCH/DISTRO/tags-info.yaml`.
 
@@ -195,6 +201,7 @@ docker-compose up -d
 | `MYSQL_COLLATE`                 | MySQL collation to use.                                                                                                   | `nil`         |
 | `MYSQL_BIND_ADDRESS`            | MySQL bind address.                                                                                                       | `nil`         |
 | `MYSQL_SQL_MODE`                | MySQL Server SQL modes to enable.                                                                                         | `nil`         |
+| `MYSQL_UPGRADE`                 | MySQL upgrade option.                                                                                                     | `AUTO`        |
 | `MYSQL_IS_DEDICATED_SERVER`     | Whether the MySQL Server will run on a dedicated node.                                                                    | `nil`         |
 | `MYSQL_CLIENT_ENABLE_SSL`       | Whether to force SSL for connections to the MySQL database.                                                               | `no`          |
 | `MYSQL_CLIENT_SSL_CA_FILE`      | Path to CA certificate to use for SSL connections to the MySQL database server.                                           | `nil`         |
@@ -673,7 +680,13 @@ or using Docker Compose:
 docker-compose up mysql
 ```
 
+> **Note**: Automatic upgrade behavior at startup can be changed setting the env var `MYSQL_UPGRADE`. More information [here](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_upgrade)
+
 ## Notable Changes
+
+### 8.0.37-debian-12-r6, 8.3.0-debian-12-r15, 8.4.0-debian-12-r7
+
+* Upgrade level can be set by `MYSQL_UPGRADE` env var. By default this variable is set to `AUTO`.
 
 ### 5.7.36-debian-10-r36, 8.0.27-debian-10-r35, 5.7.41-r10-debian-11 and 8.0.32-r10-debian-11
 
@@ -733,7 +746,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
+Copyright &copy; 2025 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

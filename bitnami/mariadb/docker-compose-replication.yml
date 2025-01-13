@@ -1,11 +1,9 @@
 # Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 
-version: '2.1'
-
 services:
   mariadb-master:
-    image: docker.io/bitnami/mariadb:11.3
+    image: docker.io/bitnami/mariadb:11.4
     ports:
       - '3306'
     volumes:
@@ -25,7 +23,7 @@ services:
       retries: 6
 
   mariadb-slave:
-    image: docker.io/bitnami/mariadb:11.3
+    image: docker.io/bitnami/mariadb:11.4
     ports:
       - '3306'
     depends_on:

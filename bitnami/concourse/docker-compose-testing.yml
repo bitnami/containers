@@ -1,0 +1,62 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  postgresql:
+    image: docker.io/bitnami/postgresql:latest
+    environment:
+      - POSTGRESQL_DATABASE=bitnami_concourse
+      - POSTGRESQL_USERNAME=bn_concourse
+      - POSTGRESQL_PASSWORD=bitnami1
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - 'postgresql_data:/bitnami/postgresql'
+  concourse:
+    image: concourse
+    command: concourse web
+    environment:
+      - CONCOURSE_RUNTIME=containerd
+      - CONCOURSE_POSTGRES_DATABASE=bitnami_concourse
+      - CONCOURSE_POSTGRES_USER=bn_concourse
+      - CONCOURSE_POSTGRES_PASSWORD=bitnami1
+      - CONCOURSE_SESSION_SIGNING_KEY=/bitnami/concourse/concourse_keys/session_signing_key
+      - CONCOURSE_TSA_AUTHORIZED_KEYS=/bitnami/concourse/concourse_keys/authorized_worker_keys
+      - CONCOURSE_TSA_HOST_KEY=/bitnami/concourse/concourse_keys/tsa_host_key
+      - CONCOURSE_LOG_LEVEL=debug
+      - CONCOURSE_POSTGRES_HOST=postgresql
+      - CONCOURSE_EXTERNAL_URL=http://localhost:8080
+      - CONCOURSE_ADD_LOCAL_USER=user:bitnami,guest:guest
+      - CONCOURSE_MAIN_TEAM_LOCAL_USER=user
+      - CONCOURSE_CLUSTER_NAME=dev
+      - CONCOURSE_ENABLE_PIPELINE_INSTANCES=true
+      - CONCOURSE_ENABLE_ACROSS_STEP=true
+      - CONCOURSE_ENABLE_CACHE_STREAMED_VOLUMES=true
+    volumes:
+      - 'concourse_web_data:/bitnami/concourse'
+      - './concourse_keys/authorized_worker_keys:/bitnami/concourse/concourse_keys/authorized_worker_keys'
+      - './concourse_keys/tsa_host_key:/bitnami/concourse/concourse_keys/tsa_host_key'
+      - './concourse_keys/session_signing_key:/bitnami/concourse/concourse_keys/session_signing_key'
+  concourse_worker:
+    image: concourse
+    command: concourse worker
+    privileged: true
+    environment:
+      - CONCOURSE_RUNTIME=containerd
+      - CONCOURSE_TSA_PUBLIC_KEY=/bitnami/concourse/concourse_keys/tsa_host_key.pub
+      - CONCOURSE_TSA_WORKER_PRIVATE_KEY=/bitnami/concourse/concourse_keys/worker_key
+      - CONCOURSE_LOG_LEVEL=debug
+      - CONCOURSE_TSA_HOST=concourse:2222
+      - CONCOURSE_BIND_IP=0.0.0.0
+      - CONCOURSE_BAGGAGECLAIM_BIND_IP=0.0.0.0
+      - CONCOURSE_BAGGAGECLAIM_DRIVER=overlay
+      - CONCOURSE_CONTAINERD_DNS_PROXY_ENABLE=true
+      - CONCOURSE_WEB_PUBLIC_DIR=/opt/bitnami/concourse/web/public
+      - CONCOURSE_WORK_DIR=/opt/bitnami/concourse
+    volumes:
+      - './concourse_keys/worker_key:/bitnami/concourse/concourse_keys/worker_key'
+      - './concourse_keys/tsa_host_key.pub:/bitnami/concourse/concourse_keys/tsa_host_key.pub'
+volumes:
+  postgresql_data:
+    driver: local
+  concourse_web_data:
+    driver: local

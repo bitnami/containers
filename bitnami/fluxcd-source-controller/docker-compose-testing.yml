@@ -1,0 +1,8 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  fluxcd-source-controller:
+    image: docker.io/bitnami/fluxcd-source-controller:1
+    # Overriding entrypoint so the container does not exit and we can run some basic tests
+    entrypoint: tail -f /dev/null

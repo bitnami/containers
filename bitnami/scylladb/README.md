@@ -24,7 +24,7 @@ You can find the default credentials and available configuration options in the 
 * All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
-Looking to use ScyllaDB in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+Looking to use ScyllaDB in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the commercial edition of the Bitnami catalog.
 
 ## Why use a non-root container?
 
@@ -35,6 +35,12 @@ Non-root container images add an extra layer of security and are generally recom
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami ScyllaDB Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/scylladb).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deployment and management of Helm Charts in clusters.
+
+## Only latest stable branch maintained in the free Bitnami catalog
+
+Starting December 10th 2024, only the latest stable branch of any container will receive updates in the free Bitnami catalog. To access up-to-date releases for all upstream-supported branches, consider upgrading to Bitnami Premium. Previous versions already released will not be deleted. They are still available to pull from DockerHub.
+
+Please check the Bitnami Premium page in our partner [Arrow Electronics](https://www.arrow.com/globalecs/na/vendors/bitnami?utm_source=GitHub&utm_medium=containers) for more information.
 
 ## Supported tags and respective `Dockerfile` links
 
@@ -166,7 +172,6 @@ docker-compose up -d
 
 | Name                                              | Description                                                                             | Default Value                         |
 |---------------------------------------------------|-----------------------------------------------------------------------------------------|---------------------------------------|
-| `SCYLLADB_MOUNTED_CONF_DIR`                       | ScyllaDB directory for mounted configuration files                                      | `${DB_VOLUME_DIR}/conf`               |
 | `SCYLLADB_CLIENT_ENCRYPTION`                      | Enable client encryption                                                                | `false`                               |
 | `SCYLLADB_CLUSTER_NAME`                           | ScyllaDB cluster name                                                                   | `My Cluster`                          |
 | `SCYLLADB_DATACENTER`                             | ScyllaDB datacenter name                                                                | `dc1`                                 |
@@ -213,6 +218,7 @@ docker-compose up -d
 | `SCYLLADB_SSL_CA_FILE`                            | ScyllaDB SSL CA location                                                                | `nil`                                 |
 | `SCYLLADB_SSL_VALIDATE`                           | Perform SSL validation on the certificates                                              | `false`                               |
 | `SSL_VERSION`                                     | TLS version to use when connecting.                                                     | `TLSv1_2`                             |
+| `SCYLLADB_MOUNTED_CONF_DIR`                       | ScyllaDB directory for mounted configuration files                                      | `${DB_VOLUME_DIR}/etc`                |
 | `SCYLLADB_CQL_SHARD_PORT_NUMBER`                  | CQL (shard aware) port                                                                  | `19042`                               |
 | `SCYLLADB_API_PORT_NUMBER`                        | REST API port                                                                           | `10000`                               |
 | `SCYLLADB_PROMETHEUS_PORT_NUMBER`                 | Prometheus metrics port                                                                 | `9180`                                |
@@ -253,6 +259,7 @@ docker-compose up -d
 | `SCYLLADB_MOUNTED_RACKDC_PATH`       | Relative path (in mounted volume) to ScyllaDB cassandra-rackdc-properties file | `scylla/cassandra-rackdc.properties`                             |
 | `SCYLLADB_MOUNTED_ENV_PATH`          | Relative path (in mounted volume) to ScyllaDB cassandra-env.sh file            | `scylla/cassandra/cassandra-env.sh`                              |
 | `SCYLLADB_MOUNTED_LOGBACK_PATH`      | Path to ScyllaDB logback.xml file                                              | `scylla/cassandra/logback.xml`                                   |
+| `SCYLLADB_CONF`                      | ScyllaDB configuration directory                                               | `$SCYLLADB_CONF_DIR`                                             |
 
 Additionally, any environment variable beginning with the following prefix will be mapped to its corresponding ScyllaDB key in the proper file:
 

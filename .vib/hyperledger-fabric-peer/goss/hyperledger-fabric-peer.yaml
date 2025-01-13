@@ -1,0 +1,10 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+command:
+  check-peer:
+    exec: timeout --preserve-status 9 peer node start || true
+    timeout: 15000
+    exit-status: 0
+    stderr:
+      - "Started peer"

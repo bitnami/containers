@@ -9,6 +9,7 @@ set -o nounset
 set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purposes
 
+. /opt/bitnami/scripts/libfile.sh
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libkong.sh
@@ -33,6 +34,8 @@ kong_conf_set nginx_user "$KONG_DAEMON_USER"
 kong_configure_non_empty_values
 install_opentelemetry
 configure_lua_paths "/opt/bitnami/scripts/kong-env.sh" "/etc/bash.bashrc"
+# Comment out 'resolver_address' setting to force Kong to use values from '/etc/resolv.conf'
+replace_in_file "$KONG_CONF_FILE" "^resolver_address\s*=.*" "# resolver_address ="
 
 # Copy all initially generated configuration files to the default directory
 # (this is to avoid breaking when entrypoint is being overridden)

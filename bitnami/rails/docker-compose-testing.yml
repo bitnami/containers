@@ -1,0 +1,19 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  mariadb:
+    image: docker.io/bitnami/mariadb:latest
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+  myapp:
+    image: docker.io/bitnami/rails:8
+    ports:
+      - '3000:3000'
+    environment:
+      - DATABASE_HOST=mariadb
+      - DATABASE_NAME=my_app_development
+    depends_on:
+      - mariadb
+

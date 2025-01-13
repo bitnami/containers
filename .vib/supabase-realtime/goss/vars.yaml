@@ -1,7 +1,0 @@
-binaries:
-  - server
-  - realtime
-root_dir: /opt/bitnami
-version:
-  bin_name: realtime
-  flag: version

@@ -1,0 +1,8 @@
+{
+    "envoy": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "1.32.3-0"
+    }
+}

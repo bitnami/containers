@@ -209,7 +209,17 @@ minio_configure_reverse_proxy() {
         --type proxy \
         --apache-proxy-address "http://127.0.0.1:${MINIO_CONSOLE_PORT_NUMBER}/" \
         --http-port "$console_http_port" \
-        --https-port "$console_https_port"
+        --https-port "$console_https_port" \
+        --apache-proxy-configuration "# ProxyPass for websockets connections
+# https://github.com/minio/minio/issues/16196
+ProxyPreserveHost On
+RewriteCond %{HTTP:Upgrade} =websocket [NC]
+RewriteRule /(.*)           ws://127.0.0.1:${MINIO_CONSOLE_PORT_NUMBER}/\$1 [P,L]
+RewriteCond %{HTTP:Upgrade} !=websocket [NC]
+RewriteRule /(.*)           http://127.0.0.1:${MINIO_CONSOLE_PORT_NUMBER}/\$1 [P,L]
+ProxyPass /ws ws://127.0.0.1:${MINIO_CONSOLE_PORT_NUMBER}/ws
+ProxyPassReverse /ws ws://127.0.0.1:${MINIO_CONSOLE_PORT_NUMBER}/ws" \
+        --apache-additional-configuration "ProxyRequests off"
 
     # Create Apache vhost for Jaeger Collector
     ensure_web_server_app_configuration_exists "minio-api" \

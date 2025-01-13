@@ -47,6 +47,17 @@ gitea_validate() {
         fi
     }
 
+    check_true_false_value() {
+        if ! is_true_false_value "${!1}"; then
+            print_validation_error "The allowed values for $1 are [true, false]"
+        fi
+    }
+    check_multi_value() {
+        if [[ " ${2} " != *" ${!1} "* ]]; then
+            print_validation_error "The allowed values for ${1} are: ${2}"
+        fi
+    }
+
     ! is_empty_value "$GITEA_HTTP_PORT" && check_valid_port "GITEA_HTTP_PORT"
     ! is_empty_value "$GITEA_SSH_PORT" && check_valid_port "GITEA_SSH_PORT"
     ! is_empty_value "$GITEA_SSH_LISTEN_PORT" && check_valid_port "GITEA_SSH_LISTEN_PORT"
@@ -55,6 +66,9 @@ gitea_validate() {
         check_empty_value "GITEA_SMTP_HOST"
         check_empty_value "GITEA_SMTP_FROM"
     fi
+
+    check_true_false_value 'GITEA_OAUTH2_CLIENT_AUTO_REGISTRATION_ENABLED'
+    check_multi_value 'GITEA_OAUTH2_CLIENT_USERNAME' 'userid nickname preferred_username email'
 
     return "$error_code"
 }
@@ -221,6 +235,9 @@ gitea_update_conf_file() {
     is_empty_value "$GITEA_SMTP_USER" || gitea_conf_set "mailer" "USER" "$GITEA_SMTP_USER"
     is_empty_value "$GITEA_SMTP_PASSWORD" || gitea_conf_set "mailer" "PASSWD" "$GITEA_SMTP_PASSWORD"
     is_empty_value "$GITEA_LFS_ROOT_PATH" || gitea_conf_set "lfs" "PATH" "$GITEA_LFS_ROOT_PATH"
+
+    is_empty_value "$GITEA_OAUTH2_CLIENT_AUTO_REGISTRATION_ENABLED" || gitea_conf_set "oauth2_client" "ENABLE_AUTO_REGISTRATION" "$GITEA_OAUTH2_CLIENT_AUTO_REGISTRATION_ENABLED"
+    is_empty_value "$GITEA_OAUTH2_CLIENT_USERNAME" || gitea_conf_set "oauth2_client" "USERNAME" "$GITEA_OAUTH2_CLIENT_USERNAME"
 }
 
 ########################

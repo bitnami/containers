@@ -3,42 +3,42 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "2.4.59-2"
+        "version": "2.4.62-4"
     },
     "ini-file": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.4.6-13"
+        "version": "1.4.7-8"
     },
     "libphp": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.2.19-1"
+        "version": "8.2.27-0"
     },
     "matomo": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "5.0.3-1"
+        "version": "5.2.1-0"
     },
     "mysql-client": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "10.11.7-4"
+        "version": "10.11.10-0"
     },
     "php": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.2.19-1"
+        "version": "8.2.27-5"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.6-13"
+        "version": "1.0.7-8"
     }
 }

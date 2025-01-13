@@ -22,11 +22,17 @@ docker run -it --name nessie-utils bitnami/nessie-utils
 * All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
-Looking to use Nessie Utils in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+Looking to use Nessie Utils in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the commercial edition of the Bitnami catalog.
+
+## Only latest stable branch maintained in the free Bitnami catalog
+
+Starting December 10th 2024, only the latest stable branch of any container will receive updates in the free Bitnami catalog. To access up-to-date releases for all upstream-supported branches, consider upgrading to Bitnami Premium. Previous versions already released will not be deleted. They are still available to pull from DockerHub.
+
+Please check the Bitnami Premium page in our partner [Arrow Electronics](https://www.arrow.com/globalecs/na/vendors/bitnami?utm_source=GitHub&utm_medium=containers) for more information.
 
 ## Supported tags and respective `Dockerfile` links
 
-Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.vmware.com/en/VMware-Tanzu-Application-Catalog/services/tutorials/GUID-understand-rolling-tags-containers-index.html).
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
 You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `bitnami/ASSET/BRANCH/DISTRO/tags-info.yaml`.
 
@@ -89,16 +95,19 @@ docker run --name nessie-utils bitnami/nessie-utils:latest
 This container contains the nessie-cli, nessie-server-admin-tool and nessie-gc tools. These are the commands for running the different tools:
 
 Running nessie-cli:
+
 ```console
 docker run --rm --name nessie-utils bitnami/nessie-utils:latest -jar /opt/bitnami/nessie-utils/nessie-cli/nessie-cli.jar
 ```
 
 Running nessie-gc:
+
 ```console
 docker run --rm --name nessie-utils bitnami/nessie-utils:latest -jar /opt/bitnami/nessie-utils/nessie-gc/nessie-gc.jar
 ```
 
 Running nessie-server-admin-tool:
+
 ```console
 docker run --rm --name nessie-utils bitnami/nessie-utils:latest -jar /opt/bitnami/nessie-utils/nessie-server-admin-tool/quarkus-run.jar
 ```

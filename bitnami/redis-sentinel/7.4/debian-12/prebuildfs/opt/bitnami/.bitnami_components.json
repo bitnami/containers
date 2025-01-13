@@ -1,0 +1,8 @@
+{
+    "redis-sentinel": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "7.4.2-0"
+    }
+}

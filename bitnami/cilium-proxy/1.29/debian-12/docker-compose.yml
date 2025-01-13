@@ -1,0 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+  
+services:
+  cilium-proxy:
+    image: docker.io/bitnami/cilium-proxy:1.29

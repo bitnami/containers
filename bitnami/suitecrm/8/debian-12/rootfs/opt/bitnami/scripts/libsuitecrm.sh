@@ -107,7 +107,7 @@ suitecrm_validate() {
 #########################
 suitecrm_initialize() {
     # Check if SuiteCRM has already been initialized and persisted in a previous run
-    local db_host db_port db_name db_user db_pass
+    local db_host db_port db_name db_user db_pass cron_script
     local -r app_name="suitecrm"
     if ! is_app_initialized "$app_name"; then
         # Ensure SuiteCRM persisted directories exist (i.e. when a volume has been mounted to /bitnami)
@@ -144,14 +144,14 @@ suitecrm_initialize() {
                 # Delete configuration file for silent install as it's not needed anymore
                 rm "$SUITECRM_SILENT_INSTALL_CONF_FILE"
             else
+                web_server_start
                 suitecrm_pass_wizard
                 # Configure SMTP via application wizard
                 if ! is_empty_value "$SUITECRM_SMTP_HOST"; then
-                    web_server_start
                     info "Configuring SMTP"
                     suitecrm_pass_smtp_wizard
-                    web_server_stop
                 fi
+                web_server_stop
             fi
 
         else
@@ -186,9 +186,11 @@ suitecrm_initialize() {
 
     # Ensure SuiteCRM cron jobs are created when running setup with a root user
     # https://docs.suitecrm.com/blog/scheduler-jobs/
-    local -a cron_cmd=(cd "${SUITECRM_BASE_DIR};" "${PHP_BIN_DIR}/php" "-f" "cron.php")
+    cron_script="${SUITECRM_BASE_DIR}/cron.php"
+    [[ "$(get_sematic_version "$APP_VERSION" 1)" -ge 8 ]] && cron_script="${SUITECRM_BASE_DIR}/public/legacy/cron.php"
+    local -a cron_cmd=("${PHP_BIN_DIR}/php" "$cron_script")
     if am_i_root; then
-        generate_cron_conf "suitecrm" "${cron_cmd[*]} > /dev/null 2>&1" --run-as "$WEB_SERVER_DAEMON_USER" --schedule "*/1 * * * *"
+        generate_cron_conf "suitecrm" "${cron_cmd[*]} > /dev/null 2>&1" --run-as "$WEB_SERVER_DAEMON_USER" --schedule "* * * * *"
     else
         warn "Skipping cron configuration for SuiteCRM because of running as a non-root user"
     fi
@@ -358,11 +360,12 @@ suitecrm_pass_smtp_wizard() {
 suitecrm_pass_wizard() {
     local -a install_args
     local url_protocol=http
+    local -r url_port="${APACHE_HTTP_PORT_NUMBER:-"$APACHE_DEFAULT_HTTP_PORT_NUMBER"}"
     info "Running setup wizard"
-    is_boolean_yes "$SUITECRM_ENABLE_HTTPS" && url_protocol=https
+    is_boolean_yes "$SUITECRM_ENABLE_HTTPS" && url_protocol=https url_port="${APACHE_HTTPS_PORT_NUMBER:-"$APACHE_DEFAULT_HTTPS_PORT_NUMBER"}"
 
     install_args=(
-        "--site_host=${url_protocol}://${SUITECRM_HOST}"
+        "--site_host=${url_protocol}://${SUITECRM_HOST}:${url_port}"
         "--site_username=${SUITECRM_USERNAME}"
         "--site_password=${SUITECRM_PASSWORD}"
         "--db_username=${SUITECRM_DATABASE_USER}"

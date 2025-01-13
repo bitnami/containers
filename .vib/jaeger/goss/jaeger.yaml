@@ -7,3 +7,8 @@ command:
     exit-status: 0
     stderr:
       - "Server created"
+  check-app-version:
+    exec: bash -c "if [[ \"${APP_VERSION}\" == \"1.\"* ]]; then jaeger-all-in-one version | grep -Po \"\d+\.\d+\.\d+\"; else jaeger-jaeger -v | sed \"s/\-0*/./g\"; fi"
+    exit-status: 0
+    stdout:
+      - "{{ .Env.APP_VERSION }}"

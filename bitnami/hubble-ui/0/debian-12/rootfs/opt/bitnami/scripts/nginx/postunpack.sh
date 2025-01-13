@@ -38,7 +38,8 @@ nginx_patch_httpoxy_vulnerability() {
 rm -rf "${BITNAMI_ROOT_DIR}/certs" "${BITNAMI_ROOT_DIR}/server_blocks"
 
 # Ensure non-root user has write permissions on a set of directories
-for dir in "$NGINX_VOLUME_DIR" "$NGINX_CONF_DIR" "$NGINX_INITSCRIPTS_DIR" "$NGINX_SERVER_BLOCKS_DIR" "${NGINX_CONF_DIR}/bitnami" "${NGINX_CONF_DIR}/bitnami/certs" "$NGINX_LOGS_DIR" "$NGINX_TMP_DIR" "$NGINX_DEFAULT_CONF_DIR"; do
+chmod g+w "$NGINX_BASE_DIR"
+for dir in "$NGINX_VOLUME_DIR" "$NGINX_CONF_DIR" "$NGINX_INITSCRIPTS_DIR" "$NGINX_SERVER_BLOCKS_DIR" "$NGINX_STREAM_SERVER_BLOCKS_DIR" "${NGINX_CONF_DIR}/bitnami" "${NGINX_CONF_DIR}/bitnami/certs" "$NGINX_LOGS_DIR" "$NGINX_TMP_DIR" "$NGINX_DEFAULT_CONF_DIR"; do
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
 done

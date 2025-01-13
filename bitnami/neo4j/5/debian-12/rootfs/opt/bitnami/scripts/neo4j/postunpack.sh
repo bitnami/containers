@@ -34,7 +34,7 @@ done
 
 ## Directories that should have write permissions
 ## NOTE: We need the configuration and plugins folder to have write permissions to create or import the configuration file
-for dir in "$NEO4J_CONF_DIR" "$NEO4J_PLUGINS_DIR" "$NEO4J_LOGS_DIR" "$NEO4J_DATA_DIR" "$NEO4J_TMP_DIR" "$NEO4J_METRICS_DIR"; do
+for dir in "$NEO4J_CONF_DIR" "$NEO4J_DEFAULT_CONF_DIR" "$NEO4J_PLUGINS_DIR" "$NEO4J_LOGS_DIR" "$NEO4J_DATA_DIR" "$NEO4J_RUN_DIR" "$NEO4J_METRICS_DIR"; do
     ensure_dir_exists "$dir"
     configure_permissions_ownership "$dir" -u "root" -g "root" -d 775 -f 664
 done
@@ -64,3 +64,7 @@ configure_permissions_ownership "$NEO4J_APOC_CONF_FILE" -u "root" -g "root" -f 6
 ## Create a hidden directory where the cypher-shell executable can write cache and history data
 ensure_dir_exists "$NEO4J_BASE_DIR/.home"
 configure_permissions_ownership "$NEO4J_BASE_DIR/.home" -u "root" -g "root" -d 775
+
+# Copy all initially generated configuration files to the default directory
+# (this is to avoid breaking when entrypoint is being overridden)
+cp -r "$NEO4J_CONF_DIR"/* "$NEO4J_DEFAULT_CONF_DIR"

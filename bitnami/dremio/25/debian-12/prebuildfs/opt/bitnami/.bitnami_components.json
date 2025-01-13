@@ -1,0 +1,14 @@
+{
+    "dremio": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "25.2.0-0"
+    },
+    "java": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "21.0.5-11-1"
+    }
+}

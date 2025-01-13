@@ -1,9 +1,0 @@
-# Copyright Broadcom, Inc. All Rights Reserved.
-# SPDX-License-Identifier: APACHE-2.0
-
-version: '2'
-services:
-  supabase:
-    image: docker.io/bitnami/supabase-studio:1
-    ports:
-      - '80:3000'

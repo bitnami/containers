@@ -1,0 +1,8 @@
+{
+    "gitlab-runner-helper": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "17.7.0-0"
+    }
+}

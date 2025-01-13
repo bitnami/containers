@@ -169,6 +169,32 @@ neo4j_conf_set() {
         echo "$entry" >>"$file"
     fi
 }
+
+########################
+# Set the initial password of the native user 'neo4j'
+# Globals:
+#   NEO4J_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+neo4j_create_admin_user() {
+    ## Set initial password
+    ## Source: https://neo4j.com/docs/operations-manual/current/configuration/set-initial-password/
+    info "Configuring initial password"
+    local -a neo4j_admin_args=("set-initial-password")
+    if [ "$(get_neo4j_major_version)" -ge 5 ]; then
+        neo4j_admin_args=("dbms" "set-initial-password")
+    fi
+
+    if am_i_root; then
+        debug_execute run_as_user "$NEO4J_DAEMON_USER" neo4j-admin "${neo4j_admin_args[@]}" "$NEO4J_PASSWORD"
+    else
+        debug_execute neo4j-admin "${neo4j_admin_args[@]}" "$NEO4J_PASSWORD"
+    fi
+}
+
 #########################
 # Initialize NEO4J
 # Globals:
@@ -183,24 +209,15 @@ neo4j_initialize() {
     ## The logic in this function is based on the sections here https://neo4j.com/docs/operations-manual/current/configuration/
     info "Initializing Neo4j ..."
 
-    find "${NEO4J_TMP_DIR}" -type f -name "neo4j*.pid" -delete
+    find "${NEO4J_RUN_DIR}" -type f -name "neo4j*.pid" -delete
     find "${NEO4J_LOGS_DIR}" -type f -name "neo4j*.log" -delete
 
-    ## Configure permissions for read-write directories
-    ## Source: https://neo4j.com/docs/operations-manual/current/configuration/file-locations/#file-locations-permissions
-    info "Configuring file permissions for Neo4j"
-    if am_i_root; then
-        for dir in "$NEO4J_LOGS_DIR" "$NEO4J_DATA_DIR" "$NEO4J_TMP_DIR" "$NEO4J_METRICS_DIR"; do
-            configure_permissions_ownership "$dir" -u "$NEO4J_DAEMON_USER" -g "$NEO4J_DAEMON_GROUP" -d 755 -f 644
-        done
-    fi
-
-    if ! is_dir_empty "$NEO4J_MOUNTED_CONF_DIR"; then
+    if ! is_mounted_dir_empty "$NEO4J_MOUNTED_CONF_DIR"; then
         info "Copying mounted configuration"
         cp -Lr "${NEO4J_MOUNTED_CONF_DIR}/." "$NEO4J_CONF_DIR"
     fi
 
-    if ! is_dir_empty "$NEO4J_MOUNTED_PLUGINS_DIR"; then
+    if ! is_mounted_dir_empty "$NEO4J_MOUNTED_PLUGINS_DIR"; then
         info "Copying mounted plugins"
         cp -Lr "${NEO4J_MOUNTED_PLUGINS_DIR}/." "$NEO4J_PLUGINS_DIR"
     fi
@@ -221,22 +238,19 @@ neo4j_initialize() {
         info "Found mounted apoc.conf file in ${NEO4J_MOUNTED_CONF_DIR}/apoc.conf. The APOC plugin configuration will be skipped"
     fi
 
-    if is_dir_empty "$NEO4J_DATA_DIR"; then
+    if is_mounted_dir_empty "$NEO4J_DATA_DIR"; then
         info "Deploying Neo4j from scratch"
-        ## Set initial password
-        ## Source: https://neo4j.com/docs/operations-manual/current/configuration/set-initial-password/
-        info "Configuring initial password"
-        local -a neo4j_admin_args=("set-initial-password")
-        if [ "$(get_neo4j_major_version)" -ge 5 ]; then
-            neo4j_admin_args=("dbms" "set-initial-password")
-        fi
-        if am_i_root; then
-            debug_execute run_as_user "$NEO4J_DAEMON_USER" neo4j-admin "${neo4j_admin_args[@]}" "$NEO4J_PASSWORD"
-        else
-            debug_execute neo4j-admin "${neo4j_admin_args[@]}" "$NEO4J_PASSWORD"
-        fi
+        neo4j_create_admin_user
     else
         info "Deploying Neo4j with persisted data"
+    fi
+
+    # When running as 'root' user, ensure the Neo4j user has ownership
+    if am_i_root; then
+        info "Configuring file permissions for Neo4j"
+        for dir in "$NEO4J_LOGS_DIR" "$NEO4J_DATA_DIR" "$NEO4J_RUN_DIR" "$NEO4J_METRICS_DIR"; do
+            configure_permissions_ownership "$dir" -u "$NEO4J_DAEMON_USER" -g "$NEO4J_DAEMON_GROUP" -d 755 -f 644
+        done
     fi
 }
 
@@ -304,20 +318,40 @@ configure_neo4j_connector_settings() {
     if [ "$neo4j_major_version" -eq 4 ]; then
         ## Connector configuration
         ## Source: https://neo4j.com/docs/operations-manual/current/configuration/connectors/
+        # Listen address configuration settings
         neo4j_conf_set "dbms.default_listen_address" "$NEO4J_BIND_ADDRESS"
-        neo4j_conf_set "dbms.connector.bolt.advertised_address" ":${NEO4J_BOLT_PORT_NUMBER}"
-        neo4j_conf_set "dbms.connector.http.advertised_address" ":${NEO4J_HTTP_PORT_NUMBER}"
-        neo4j_conf_set "dbms.connector.https.advertised_address" ":${NEO4J_HTTPS_PORT_NUMBER}"
+        neo4j_conf_set "dbms.connector.bolt.listen_address" ":${NEO4J_BOLT_PORT_NUMBER}"
+        neo4j_conf_set "dbms.connector.http.listen_address" ":${NEO4J_HTTP_PORT_NUMBER}"
+        neo4j_conf_set "dbms.connector.https.listen_address" ":${NEO4J_HTTPS_PORT_NUMBER}"
+        # Advertised address configuration settings
         neo4j_conf_set "dbms.default_advertised_address" "$host"
+        neo4j_conf_set "dbms.connector.bolt.advertised_address" ":${NEO4J_BOLT_ADVERTISED_PORT_NUMBER}"
+        neo4j_conf_set "dbms.connector.http.advertised_address" ":${NEO4J_HTTP_ADVERTISED_PORT_NUMBER}"
+        neo4j_conf_set "dbms.connector.https.advertised_address" ":${NEO4J_HTTPS_ADVERTISED_PORT_NUMBER}"
+        # TLS settings
+        neo4j_conf_set "dbms.connector.bolt.tls_level" "${NEO4J_BOLT_TLS_LEVEL}"
+        [[ "$NEO4J_BOLT_TLS_LEVEL" == "REQUIRED" || "$NEO4J_BOLT_TLS_LEVEL" == "OPTIONAL" ]] && neo4j_conf_set "dbms.ssl.policy.bolt.enabled" "true"
+        neo4j_conf_set "dbms.connector.https.enabled" "${NEO4J_HTTPS_ENABLED}"
+        neo4j_conf_set "dbms.ssl.policy.https.enabled" "${NEO4J_HTTPS_ENABLED}"
         ## Upgrade configuration (This is for allowing automatic schema upgrades)
         ## Source: https://neo4j.com/docs/upgrade-migration-guide/current/upgrade/upgrade-4.3/deployment-upgrading/
         neo4j_conf_set "dbms.allow_upgrade" "$NEO4J_ALLOW_UPGRADE"
     elif [ "$neo4j_major_version" -ge 5 ]; then
+        # Listen address configuration settings
         neo4j_conf_set "server.default_listen_address" "$NEO4J_BIND_ADDRESS"
-        neo4j_conf_set "server.bolt.advertised_address" ":${NEO4J_BOLT_PORT_NUMBER}"
-        neo4j_conf_set "server.http.advertised_address" ":${NEO4J_HTTP_PORT_NUMBER}"
-        neo4j_conf_set "server.https.advertised_address" ":${NEO4J_HTTPS_PORT_NUMBER}"
+        neo4j_conf_set "server.bolt.listen_address" ":${NEO4J_BOLT_PORT_NUMBER}"
+        neo4j_conf_set "server.http.listen_address" ":${NEO4J_HTTP_PORT_NUMBER}"
+        neo4j_conf_set "server.https.listen_address" ":${NEO4J_HTTPS_PORT_NUMBER}"
+        # Advertised address configuration settings
         neo4j_conf_set "server.default_advertised_address" "$host"
+        neo4j_conf_set "server.bolt.advertised_address" ":${NEO4J_BOLT_ADVERTISED_PORT_NUMBER}"
+        neo4j_conf_set "server.http.advertised_address" ":${NEO4J_HTTP_ADVERTISED_PORT_NUMBER}"
+        neo4j_conf_set "server.https.advertised_address" ":${NEO4J_HTTPS_ADVERTISED_PORT_NUMBER}"
+        # TLS settings
+        neo4j_conf_set "server.bolt.tls_level" "${NEO4J_BOLT_TLS_LEVEL}"
+        [[ "$NEO4J_BOLT_TLS_LEVEL" == "REQUIRED" || "$NEO4J_BOLT_TLS_LEVEL" == "OPTIONAL" ]] && neo4j_conf_set "dbms.ssl.policy.bolt.enabled" "true"
+        neo4j_conf_set "server.https.enabled" "${NEO4J_HTTPS_ENABLED}"
+        neo4j_conf_set "dbms.ssl.policy.https.enabled" "${NEO4J_HTTPS_ENABLED}"
     else
         error "Neo4j branch ${neo4j_major_version} not supported"
     fi

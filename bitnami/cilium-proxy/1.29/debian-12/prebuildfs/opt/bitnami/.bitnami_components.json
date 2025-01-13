@@ -1,0 +1,8 @@
+{
+    "cilium-proxy": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "1.29.10-2"
+    }
+}

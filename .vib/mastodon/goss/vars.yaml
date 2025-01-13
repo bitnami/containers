@@ -20,3 +20,4 @@ sed_in_place:
   exclude_paths:
     # Ignore Mastodon node_modules directory (not bitnami-related)
     - \/opt\/bitnami\/mastodon\/node_modules\/.*
+    - \/opt\/bitnami\/mastodon\/vendor\/.*
