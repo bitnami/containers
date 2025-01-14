@@ -229,7 +229,6 @@ Apart from providing your custom configuration file, you can also modify the ser
 | `ETCD_NEW_MEMBERS_ENV_FILE`  | File containining the etcd environment to use after adding a member. | `${ETCD_DATA_DIR}/new_member_envs` |
 | `ETCD_DAEMON_USER`           | etcd system user name.                                               | `etcd`                             |
 | `ETCD_DAEMON_GROUP`          | etcd system user group.                                              | `etcd`                             |
-| `ETCD_INITIAL_CLUSTER_STATE` | Initial cluster state. Either "new" or "existing".                   | `nil`                              |
 
 Additionally, you can configure etcd using the upstream env variables [here](https://etcd.io/docs/v3.4/op-guide/configuration/)
 
