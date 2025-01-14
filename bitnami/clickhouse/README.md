@@ -167,11 +167,11 @@ ClickHouse can be configured via environment variables or using a configuration 
 
 ### Configuration overrides
 
-The configuration can easily be setup by mounting your own configuration overrides on the directory `/bitnami/clickhouse/etc/conf.d` or `/bitnami/clickhouse/etc/users.d`:
+The configuration can easily be setup by mounting your own configuration overrides on the directory `/bitnami/clickhouse/etc/config.d` or `/bitnami/clickhouse/etc/users.d`:
 
 ```console
 docker run --name clickhouse \
-    --volume /path/to/override.xml:/bitnami/clickhouse/etc/conf.d/override.xml:ro \
+    --volume /path/to/override.xml:/bitnami/clickhouse/etc/config.d/override.xml:ro \
     bitnami/clickhouse:latest
 ```
 
@@ -184,7 +184,7 @@ services:
   clickhouse:
     image: bitnami/clickhouse:latest
     volumes:
-      - /path/to/override.xml:/bitnami/clickhouse/etc/conf.d/override.xml:ro
+      - /path/to/override.xml:/bitnami/clickhouse/etc/config.d/override.xml:ro
 ```
 
 Check the [official ClickHouse configuration documentation](https://clickhouse.com/docs/en/operations/configuration-files/) for all the possible overrides and settings.
