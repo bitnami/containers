@@ -68,6 +68,13 @@ ln -s "$CLICKHOUSE_CONF_DIR" "/etc/clickhouse-server"
 ln -s "$CLICKHOUSE_LOG_DIR" "/var/log/clickhouse-server"
 ln -s "$CLICKHOUSE_TMP_DIR" "/var/lib/clickhouse/tmp"
 
+# ClickHouse uses some algorithms that are not FIPS compliant
+# hence we cannot import the FIPS configuration for OpenSSL
+# ref: https://vmw-jira.broadcom.net/browse/TNZ-25623
+if [[ "$(get_os_metadata --id)" == "photon" ]]; then
+    remove_in_file "/etc/ssl/distro.cnf" "\.include \/etc\/ssl\/provider_fips\.cnf"
+fi
+
 ln -s /dev/stdout "$CLICKHOUSE_LOG_FILE"
 ln -s /dev/stderr "$CLICKHOUSE_ERROR_LOG_FILE"
 
