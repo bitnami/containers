@@ -25,8 +25,9 @@ chmod +x "$REPMGR_EVENTS_DIR"/router.sh "$REPMGR_EVENTS_DIR"/execs/*sh "$REPMGR_
 
 # Redirect all logging to stdout
 ln -sf /dev/stdout "$POSTGRESQL_LOG_FILE"
+ln -sf /dev/stdout "$POSTGRESQL_LOG_CSV_FILE"
+ln -sf /dev/stdout "$POSTGRESQL_LOG_JSON_FILE"
 
 # Copy all initially generated configuration files to the default directory
 # (this is to avoid breaking when entrypoint is being overridden)
 cp -r "${POSTGRESQL_CONF_DIR}/"* "$POSTGRESQL_DEFAULT_CONF_DIR"
-
