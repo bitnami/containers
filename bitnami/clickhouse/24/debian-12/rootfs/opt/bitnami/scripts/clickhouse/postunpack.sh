@@ -20,7 +20,7 @@ set -o pipefail
 ensure_user_exists "$CLICKHOUSE_DAEMON_USER" --group "$CLICKHOUSE_DAEMON_GROUP" --system
 
 # Create directories
-for dir in "$CLICKHOUSE_DATA_DIR" "$CLICKHOUSE_CONF_DIR" "${CLICKHOUSE_CONF_DIR}/conf.d" "${CLICKHOUSE_CONF_DIR}/users.d" "$CLICKHOUSE_DEFAULT_CONF_DIR" "$CLICKHOUSE_LOG_DIR" "$CLICKHOUSE_TMP_DIR" "$CLICKHOUSE_MOUNTED_CONF_DIR" "/docker-entrypoint-startdb.d" "/docker-entrypoint-initdb.d"; do
+for dir in "$CLICKHOUSE_DATA_DIR" "$CLICKHOUSE_CONF_DIR" "${CLICKHOUSE_CONF_DIR}/conf.d" "${CLICKHOUSE_CONF_DIR}/config.d" "${CLICKHOUSE_CONF_DIR}/users.d" "$CLICKHOUSE_DEFAULT_CONF_DIR" "$CLICKHOUSE_LOG_DIR" "$CLICKHOUSE_TMP_DIR" "$CLICKHOUSE_MOUNTED_CONF_DIR" "/docker-entrypoint-startdb.d" "/docker-entrypoint-initdb.d"; do
     ensure_dir_exists "$dir"
     configure_permissions_ownership "$dir" -d "775" -f "664" -u "$CLICKHOUSE_DAEMON_USER" -g "root"
 done

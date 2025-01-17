@@ -82,15 +82,15 @@ clickhouse_copy_mounted_configuration() {
             # base etc folder
             find "$CLICKHOUSE_MOUNTED_CONF_DIR" -maxdepth 1 \( -type f -o -type l \) -exec cp -L -r {} "$CLICKHOUSE_CONF_DIR" \;
 
-            # The ClickHouse override directories (etc/conf.d and etc/users.d) do not support subfolders. That means we cannot
+            # The ClickHouse override directories (etc/conf.d, etc/config.d and etc/users.d) do not support subfolders. That means we cannot
             # copy directly with cp -RL because we need all override xml files to have at the root of these subfolders. In the helm
-            # chart we want to allow overrides from different ConfigMaps and Secrets so we need to use the find command
-            if [[ -d "${CLICKHOUSE_MOUNTED_CONF_DIR}/conf.d" ]]; then
-                find "${CLICKHOUSE_MOUNTED_CONF_DIR}/conf.d" \( -type f -o -type l \) -exec cp -L -r {} "${CLICKHOUSE_CONF_DIR}/conf.d" \;
-            fi
-            if [[ -d "${CLICKHOUSE_MOUNTED_CONF_DIR}/users.d" ]]; then
-                find "${CLICKHOUSE_MOUNTED_CONF_DIR}/users.d" \( -type f -o -type l \) -exec cp -L -r {} "${CLICKHOUSE_CONF_DIR}/users.d" \;
-            fi
+            # chart we want to allow overrides from different ConfigMaps and Secrets so we need to use the find command.
+            # etc/conf.d is now obselete but still supported.
+            for dir in conf.d config.d users.d; do
+                if [[ -d "${CLICKHOUSE_MOUNTED_CONF_DIR}/${dir}" ]]; then
+                    find "${CLICKHOUSE_MOUNTED_CONF_DIR}/${dir}" \( -type f -o -type l \) -exec cp -L -r {} "${CLICKHOUSE_CONF_DIR}/${dir}" \;
+                fi
+            done
         fi
     else
         warn "The folder $CLICKHOUSE_CONF_DIR is not writable. This is likely because a read-only filesystem was mounted in that folder. Using $CLICKHOUSE_MOUNTED_DIR is recommended"
