@@ -93,7 +93,7 @@ clickhouse_copy_mounted_configuration() {
             done
         fi
     else
-        warn "The folder $CLICKHOUSE_CONF_DIR is not writable. This is likely because a read-only filesystem was mounted in that folder. Using $CLICKHOUSE_MOUNTED_DIR is recommended"
+        warn "The folder $CLICKHOUSE_CONF_DIR is not writable. This is likely because a read-only filesystem was mounted in that folder. Using $CLICKHOUSE_MOUNTED_CONF_DIR is recommended"
     fi
 }
 
