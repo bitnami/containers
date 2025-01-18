@@ -46,11 +46,12 @@ info "Current cluster members are: $(echo "$current" | awk -F: '{print $1}' | tr
 
 expected="$(echo $ETCD_INITIAL_CLUSTER | tr -s ',' '\n' | awk -F= '{print $1}')"
 info "Expected cluster members are: $(echo "$expected" | tr -s '\n' ',' | sed 's/,$//g')"
-read -r -a obsolete_members <<<"$(comm -23 <(echo "$current" | awk -F: '{print $1}' | sort) <(echo "$expected" | sort))"
+
+read -r -a obsolete_members <<<"$(comm -23 <(echo "$current" | awk -F: '{print $1}' | sort) <(echo "$expected" | sort) | tr -s '\n' ' ')"
 if [ ${#obsolete_members[@]} -eq 0 ]; then
     info "No obsolete members to remove."
 else
-    for member in $obsolete_members; do
+    for member in "${obsolete_members[@]}"; do
         info "Removing obsolete member $member"
         etcdctl member remove ${extra_flags[@]} "$(echo "$current" | grep "$member" | awk -F: '{print $2}')"
     done

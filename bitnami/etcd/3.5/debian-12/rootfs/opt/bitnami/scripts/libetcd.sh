@@ -536,15 +536,12 @@ is_membership_intact() {
 
     am_i_root && start_command=("run_as_user" "$ETCD_DAEMON_USER" "${start_command[@]}")
     [[ -f "$ETCD_CONF_FILE" ]] && start_command+=("--config-file" "$ETCD_CONF_FILE")
-    $start_command > >(tee -a "$tmp_file") 2>&1 &
-    pid=$!
-    debug "Started etcd in background with PID $pid"
+    "${start_command[@]}" > "$tmp_file" 2>&1 &
     
     while read -r line; do
-        echo "$line" # Stream the output
+        debug_execute echo "$line"
         if [[ "$line" =~ (established TCP streaming connection with remote peer|the member has been permanently removed from the cluster|ignored streaming request; ID mismatch|\"error\":\"cluster ID mismatch\") ]]; then
-            kill "$pid"
-            wait "$pid" 2>/dev/null
+            etcd_stop
             debug "Stopped etcd"
             break
         fi
