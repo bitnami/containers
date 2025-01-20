@@ -216,25 +216,25 @@ Apart from providing your custom configuration file, you can also modify the ser
 
 #### Read-only environment variables
 
-| Name                         | Description                                                          | Value                              |
-|------------------------------|----------------------------------------------------------------------|------------------------------------|
-| `ETCD_BASE_DIR`              | etcd installation directory.                                         | `/opt/bitnami/etcd`                |
-| `ETCD_VOLUME_DIR`            | Persistence base directory.                                          | `/bitnami/etcd`                    |
-| `ETCD_BIN_DIR`               | etcd executables directory.                                          | `${ETCD_BASE_DIR}/bin`             |
-| `ETCD_DATA_DIR`              | etcd data directory.                                                 | `${ETCD_VOLUME_DIR}/data`          |
-| `ETCD_CONF_DIR`              | etcd configuration directory.                                        | `${ETCD_BASE_DIR}/conf`            |
-| `ETCD_DEFAULT_CONF_DIR`      | etcd default configuration directory.                                | `${ETCD_BASE_DIR}/conf.default`    |
-| `ETCD_TMP_DIR`               | Directory where ETCD temporary files are stored.                     | `${ETCD_BASE_DIR}/tmp`             |
-| `ETCD_CONF_FILE`             | ETCD configuration file.                                             | `${ETCD_CONF_DIR}/etcd.yaml`       |
-| `ETCD_NEW_MEMBERS_ENV_FILE`  | File containining the etcd environment to use after adding a member. | `${ETCD_DATA_DIR}/new_member_envs` |
-| `ETCD_DAEMON_USER`           | etcd system user name.                                               | `etcd`                             |
-| `ETCD_DAEMON_GROUP`          | etcd system user group.                                              | `etcd`                             |
+| Name                        | Description                                                          | Value                              |
+|-----------------------------|----------------------------------------------------------------------|------------------------------------|
+| `ETCD_BASE_DIR`             | etcd installation directory.                                         | `/opt/bitnami/etcd`                |
+| `ETCD_VOLUME_DIR`           | Persistence base directory.                                          | `/bitnami/etcd`                    |
+| `ETCD_BIN_DIR`              | etcd executables directory.                                          | `${ETCD_BASE_DIR}/bin`             |
+| `ETCD_DATA_DIR`             | etcd data directory.                                                 | `${ETCD_VOLUME_DIR}/data`          |
+| `ETCD_CONF_DIR`             | etcd configuration directory.                                        | `${ETCD_BASE_DIR}/conf`            |
+| `ETCD_DEFAULT_CONF_DIR`     | etcd default configuration directory.                                | `${ETCD_BASE_DIR}/conf.default`    |
+| `ETCD_TMP_DIR`              | Directory where ETCD temporary files are stored.                     | `${ETCD_BASE_DIR}/tmp`             |
+| `ETCD_CONF_FILE`            | ETCD configuration file.                                             | `${ETCD_CONF_DIR}/etcd.yaml`       |
+| `ETCD_NEW_MEMBERS_ENV_FILE` | File containining the etcd environment to use after adding a member. | `${ETCD_DATA_DIR}/new_member_envs` |
+| `ETCD_DAEMON_USER`          | etcd system user name.                                               | `etcd`                             |
+| `ETCD_DAEMON_GROUP`         | etcd system user group.                                              | `etcd`                             |
 
 Additionally, you can configure etcd using the upstream env variables [here](https://etcd.io/docs/v3.4/op-guide/configuration/)
 
 ## Notable Changes
 
-### 3.5.17-debian-12-r3
+### 3.5.17-debian-12-r4
 
 * Drop support for non-Helm cluster deployment. Upgrading of any kind including increasing replica count must also be done with `helm upgrade` exclusively. CD automation tools that respect Helm hooks such as ArgoCD can also be used.
 * Remove `prestop.sh` script. Hence, container should no longer define lifecycle prestop hook.
