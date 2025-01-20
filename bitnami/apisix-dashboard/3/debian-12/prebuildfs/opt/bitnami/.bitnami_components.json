@@ -3,18 +3,6 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.0.1-32"
-    },
-    "render-template": {
-        "arch": "amd64",
-        "distro": "debian-12",
-        "type": "NAMI",
-        "version": "1.0.7-9"
-    },
-    "yq": {
-        "arch": "amd64",
-        "distro": "debian-12",
-        "type": "NAMI",
-        "version": "4.45.1-1"
+        "version": "3.0.1-33"
     }
 }
