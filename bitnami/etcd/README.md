@@ -199,14 +199,11 @@ Apart from providing your custom configuration file, you can also modify the ser
 | `ETCD_ON_K8S`                      | Whether etcd is running on a K8s environment or not.                                         | `no`                    |
 | `ETCD_INIT_SNAPSHOT_FILENAME`      | Existing snapshot filename to start the etcd cluster from.                                   | `nil`                   |
 | `ETCDCTL_API`                      | etcdctl API version.                                                                         | `3`                     |
-| `ETCD_DISABLE_STORE_MEMBER_ID`     | Disable writing the member id in a file.                                                     | `no`                    |
-| `ETCD_DISABLE_PRESTOP`             | Disable running the pre-stop hook.                                                           | `no`                    |
 | `ETCD_NAME`                        | etcd member name.                                                                            | `nil`                   |
 | `ETCD_LOG_LEVEL`                   | etcd log level.                                                                              | `info`                  |
 | `ETCD_LISTEN_CLIENT_URLS`          | List of URLs to listen on for client traffic.                                                | `http://0.0.0.0:2379`   |
 | `ETCD_ADVERTISE_CLIENT_URLS`       | List of this member client URLs to advertise to the rest of the cluster.                     | `http://127.0.0.1:2379` |
 | `ETCD_INITIAL_CLUSTER`             | Initial list of members to bootstrap a cluster.                                              | `nil`                   |
-| `ETCD_INITIAL_CLUSTER_STATE`       | Initial cluster state. Allowed values: "new" or "existing".                                  | `nil`                   |
 | `ETCD_LISTEN_PEER_URLS`            | List of URLs to listen on for peers traffic.                                                 | `nil`                   |
 | `ETCD_INITIAL_ADVERTISE_PEER_URLS` | List of this member peer URLs to advertise to the rest of the cluster while bootstrapping.   | `nil`                   |
 | `ETCD_INITIAL_CLUSTER_TOKEN`       | Unique initial cluster token used for bootstrapping.                                         | `nil`                   |
@@ -219,23 +216,31 @@ Apart from providing your custom configuration file, you can also modify the ser
 
 #### Read-only environment variables
 
-| Name                        | Description                                                          | Value                              |
-|-----------------------------|----------------------------------------------------------------------|------------------------------------|
-| `ETCD_BASE_DIR`             | etcd installation directory.                                         | `/opt/bitnami/etcd`                |
-| `ETCD_VOLUME_DIR`           | Persistence base directory.                                          | `/bitnami/etcd`                    |
-| `ETCD_BIN_DIR`              | etcd executables directory.                                          | `${ETCD_BASE_DIR}/bin`             |
-| `ETCD_DATA_DIR`             | etcd data directory.                                                 | `${ETCD_VOLUME_DIR}/data`          |
-| `ETCD_CONF_DIR`             | etcd configuration directory.                                        | `${ETCD_BASE_DIR}/conf`            |
-| `ETCD_DEFAULT_CONF_DIR`     | etcd default configuration directory.                                | `${ETCD_BASE_DIR}/conf.default`    |
-| `ETCD_TMP_DIR`              | Directory where ETCD temporary files are stored.                     | `${ETCD_BASE_DIR}/tmp`             |
-| `ETCD_CONF_FILE`            | ETCD configuration file.                                             | `${ETCD_CONF_DIR}/etcd.yaml`       |
-| `ETCD_NEW_MEMBERS_ENV_FILE` | File containining the etcd environment to use after adding a member. | `${ETCD_DATA_DIR}/new_member_envs` |
-| `ETCD_DAEMON_USER`          | etcd system user name.                                               | `etcd`                             |
-| `ETCD_DAEMON_GROUP`         | etcd system user group.                                              | `etcd`                             |
+| Name                         | Description                                                          | Value                              |
+|------------------------------|----------------------------------------------------------------------|------------------------------------|
+| `ETCD_BASE_DIR`              | etcd installation directory.                                         | `/opt/bitnami/etcd`                |
+| `ETCD_VOLUME_DIR`            | Persistence base directory.                                          | `/bitnami/etcd`                    |
+| `ETCD_BIN_DIR`               | etcd executables directory.                                          | `${ETCD_BASE_DIR}/bin`             |
+| `ETCD_DATA_DIR`              | etcd data directory.                                                 | `${ETCD_VOLUME_DIR}/data`          |
+| `ETCD_CONF_DIR`              | etcd configuration directory.                                        | `${ETCD_BASE_DIR}/conf`            |
+| `ETCD_DEFAULT_CONF_DIR`      | etcd default configuration directory.                                | `${ETCD_BASE_DIR}/conf.default`    |
+| `ETCD_TMP_DIR`               | Directory where ETCD temporary files are stored.                     | `${ETCD_BASE_DIR}/tmp`             |
+| `ETCD_CONF_FILE`             | ETCD configuration file.                                             | `${ETCD_CONF_DIR}/etcd.yaml`       |
+| `ETCD_NEW_MEMBERS_ENV_FILE`  | File containining the etcd environment to use after adding a member. | `${ETCD_DATA_DIR}/new_member_envs` |
+| `ETCD_DAEMON_USER`           | etcd system user name.                                               | `etcd`                             |
+| `ETCD_DAEMON_GROUP`          | etcd system user group.                                              | `etcd`                             |
 
 Additionally, you can configure etcd using the upstream env variables [here](https://etcd.io/docs/v3.4/op-guide/configuration/)
 
 ## Notable Changes
+
+### 3.5.17-debian-12-r3
+
+* Drop support for non-Helm cluster deployment. Upgrading of any kind including increasing replica count must also be done with `helm upgrade` exclusively. CD automation tools that respect Helm hooks such as ArgoCD can also be used.
+* Remove `prestop.sh` script. Hence, container should no longer define lifecycle prestop hook.
+* Add `preupgrade.sh` script which should be run as a pre-upgrade Helm hook. This replaces the prestop hook as a more reliable mechanism to remove stale members when replica count is decreased.
+* Stop storing member ID in a local file which is unreliable. The container now check the member ID from the data dir instead.
+* Stop storing/checking for member removal from a local file. The container now check with other members in the cluster instead.
 
 ### 3.4.15-debian-10-r7
 

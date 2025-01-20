@@ -227,18 +227,6 @@ etcdctl_get_endpoints() {
     local -a endpoints=()
     local host domain port
 
-    ip_has_valid_hostname() {
-        local ip="${1:?ip is required}"
-        local parent_domain="${1:?parent_domain is required}"
-
-        # 'getent hosts $ip' can return hostnames in 2 different formats:
-        #     POD_NAME.HEADLESS_SVC_DOMAIN.NAMESPACE.svc.cluster.local (using headless service domain)
-        #     10-237-136-79.SVC_DOMAIN.NAMESPACE.svc.cluster.local (using POD's IP and service domain)
-        # We need to discard the latter to avoid issues when TLS verification is enabled.
-        [[ "$(getent hosts "$ip")" = *"$parent_domain"* ]] && return 0
-        return 1
-    }
-
     hostname_has_ips() {
         local hostname="${1:?hostname is required}"
         [[ "$(getent ahosts "$hostname")" != "" ]] && return 0
@@ -313,40 +301,6 @@ etcdctl_auth_norbac_flags() {
 }
 
 ########################
-# Stores etcd member ID in the data directory
-# Globals:
-#   ETCD_*
-# Arguments:
-#   None
-# Returns:
-#   None
-########################
-etcd_store_member_id() {
-    if is_boolean_yes "$ETCD_DISABLE_STORE_MEMBER_ID"; then
-        return 0
-    fi
-    local -a extra_flags
-    local member_id=""
-    info "Obtaining cluster member ID"
-    etcd_start_bg
-    read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
-    is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
-    if retry_while "etcdctl ${extra_flags[*]:-} member list" >/dev/null 2>&1; then
-        while is_empty_value "$member_id"; do
-            read -r -a advertised_array <<<"$(tr ',;' ' ' <<<"$ETCD_ADVERTISE_CLIENT_URLS")"
-            member_id="$(etcdctl "${extra_flags[@]}" member list | grep -w "${advertised_array[0]}" | awk -F "," '{ print $1}' || true)"
-        done
-        # We use 'sync' to ensure memory buffers are flushed to disk
-        # so we reduce the chances that the "member_id" file is empty.
-        # ref: https://man7.org/linux/man-pages/man1/sync.1.html
-        echo "$member_id" >"${ETCD_DATA_DIR}/member_id"
-        sync -d "${ETCD_DATA_DIR}/member_id"
-        info "Stored member ID: $(cat "${ETCD_DATA_DIR}/member_id")"
-    fi
-    etcd_stop
-}
-
-########################
 # Configure etcd RBAC (do not confuse with K8s RBAC)
 # Globals:
 #   ETCD_*
@@ -377,31 +331,6 @@ etcd_configure_rbac() {
 }
 
 ########################
-# Checks if the member was successfully removed from the cluster
-# Globals:
-#   ETCD_*
-# Arguments:
-#   None
-# Returns:
-#   None
-########################
-was_etcd_member_removed() {
-    local return_value=0
-
-    if grep -sqE "^Member[[:space:]]+[a-z0-9]+\s+removed\s+from\s+cluster\s+[a-z0-9]+$" "${ETCD_VOLUME_DIR}/member_removal.log"; then
-        debug "Removal was properly recorded in member_removal.log"
-        rm -rf "${ETCD_DATA_DIR:?}/"*
-    elif [[ ! -d "${ETCD_DATA_DIR}/member/snap" ]] && is_empty_value "$(get_member_id)"; then
-        debug "Missing member data"
-        rm -rf "${ETCD_DATA_DIR:?}/"*
-    else
-        return_value=1
-    fi
-    rm -f "${ETCD_VOLUME_DIR}/member_removal.log"
-    return $return_value
-}
-
-########################
 # Checks if etcd needs to bootstrap a new cluster
 # Globals:
 #   ETCD_*
@@ -411,7 +340,10 @@ was_etcd_member_removed() {
 #   Boolean
 ########################
 is_new_etcd_cluster() {
-    [[ "$ETCD_INITIAL_CLUSTER_STATE" = "new" ]] && [[ "$ETCD_INITIAL_CLUSTER" = *"$ETCD_INITIAL_ADVERTISE_PEER_URLS"* ]]
+    local -a extra_flags
+    read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
+    is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
+    ! debug_execute etcdctl endpoint status --cluster ${extra_flags[@]}
 }
 
 ########################
@@ -501,36 +433,6 @@ is_healthy_etcd_cluster() {
 }
 
 ########################
-# Prints initial cluster nodes
-# Globals:
-#   ETCD_*
-# Arguments:
-#   None
-# Returns:
-#   String
-########################
-get_initial_cluster() {
-    local -a endpoints_array=()
-    local scheme port initial_members
-    read -r -a endpoints_array <<<"$(tr ',;' ' ' <<<"$ETCD_INITIAL_CLUSTER")"
-    if [[ ${#endpoints_array[@]} -gt 0 ]] && ! grep -sqE "://" <<<"$ETCD_INITIAL_CLUSTER"; then
-        # This piece of code assumes this container is used on a VM environment
-        # where ETCD_INITIAL_CLUSTER contains a comma-separated list of hostnames,
-        # and recreates it as follows:
-        #   SCHEME://NODE_NAME:PEER_PORT
-        scheme="$(parse_uri "$ETCD_INITIAL_ADVERTISE_PEER_URLS" "scheme")"
-        port="$(parse_uri "$ETCD_INITIAL_ADVERTISE_PEER_URLS" "port")"
-        for nodePeer in "${endpoints_array[@]}"; do
-            initial_members+=("${nodePeer}=${scheme}://${nodePeer}:$port")
-        done
-        echo "${initial_members[*]}" | tr ' ' ','
-    else
-        # Nothing to do
-        echo "$ETCD_INITIAL_CLUSTER"
-    fi
-}
-
-########################
 # Recalculate initial cluster
 # Globals:
 #   ETCD_*
@@ -573,6 +475,91 @@ recalculate_initial_cluster() {
 }
 
 ########################
+# Remove the old member from the cluster if it exists
+# Globals:
+#   ETCD_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+remove_old_member_if_exist() {
+    local old_member_id
+    old_member_id=$(get_member_id)
+    if ! is_empty_value "$old_member_id"; then
+        info "Removing old member $old_member_id"
+        local -a extra_flags
+        read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
+        is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
+        etcdctl member remove "$old_member_id" "${extra_flags[@]}"
+    fi
+}
+
+########################
+# Add this member as a new member to the cluster
+# Globals:
+#   ETCD_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+add_new_member() {
+    local -a extra_flags
+    info "Adding new member to existing cluster"
+    read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
+    is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
+    extra_flags+=("--peer-urls=$ETCD_INITIAL_ADVERTISE_PEER_URLS")
+    mkdir -p "$(dirname $ETCD_NEW_MEMBERS_ENV_FILE)" || true
+    etcdctl member add "$ETCD_NAME" "${extra_flags[@]}" | grep "^ETCD_" >"$ETCD_NEW_MEMBERS_ENV_FILE"
+    replace_in_file "$ETCD_NEW_MEMBERS_ENV_FILE" "^" "export "
+    sync -d "$ETCD_NEW_MEMBERS_ENV_FILE"
+}
+
+########################
+# Check that this node is still a member of the cluster
+# Globals:
+#   ETCD_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+is_membership_intact() {
+    local tmp_file
+    local start_command=("etcd")
+    local pid
+    local ret=0
+
+    tmp_file=$(mktemp)
+    trap "rm -f $tmp_file" RETURN
+
+    am_i_root && start_command=("run_as_user" "$ETCD_DAEMON_USER" "${start_command[@]}")
+    [[ -f "$ETCD_CONF_FILE" ]] && start_command+=("--config-file" "$ETCD_CONF_FILE")
+    "${start_command[@]}" > "$tmp_file" 2>&1 &
+    
+    while read -r line; do
+        debug_execute echo "$line"
+        if [[ "$line" =~ (established TCP streaming connection with remote peer|the member has been permanently removed from the cluster|ignored streaming request; ID mismatch|\"error\":\"cluster ID mismatch\") ]]; then
+            etcd_stop
+            debug "Stopped etcd"
+            break
+        fi
+    done < <(tail -f "$tmp_file")
+
+    if grep -q "the member has been permanently removed from the cluster\|ignored streaming request; ID mismatch" "$tmp_file"; then
+        info "The remote member ID is different from the local member ID"
+        return 1
+    elif grep -q "\"error\":\"cluster ID mismatch\"" "$tmp_file"; then
+        info "The remote cluster ID is different from the local cluster ID"
+        return 1
+    fi
+
+    info "The member is still part of the cluster"
+    return 0
+}
+
+########################
 # Ensure etcd is initialized
 # Globals:
 #   ETCD_*
@@ -590,7 +577,6 @@ etcd_initialize() {
     # Generate user configuration if ETCD_CFG_* variables are provided
     etcd_setup_from_environment_variables
 
-    ETCD_INITIAL_CLUSTER="$(get_initial_cluster)"
     export ETCD_INITIAL_CLUSTER
     [[ -f "$ETCD_CONF_FILE" ]] && etcd_conf_write "initial-cluster" "$ETCD_INITIAL_CLUSTER"
 
@@ -630,6 +616,8 @@ etcd_initialize() {
                     fi
                 fi
             else
+                # if an old member with the same name is already registered, we want to remove it first
+                remove_old_member_if_exist
                 info "Adding new member to existing cluster"
                 ensure_dir_exists "$ETCD_DATA_DIR"
                 add_self_to_cluster
@@ -659,13 +647,10 @@ etcd_initialize() {
                     )
                 fi
                 debug_execute etcdctl snapshot restore "${ETCD_INIT_SNAPSHOTS_DIR}/${ETCD_INIT_SNAPSHOT_FILENAME}" "${restore_args[@]}"
-                etcd_store_member_id
             else
                 error "There was no snapshot to restore!"
                 exit 1
             fi
-        else
-            etcd_store_member_id
         fi
     else
         info "Detected data from previous deployments"
@@ -675,10 +660,7 @@ etcd_initialize() {
         fi
         if [[ ${#initial_members[@]} -gt 1 ]]; then
             member_id="$(get_member_id)"
-            if is_boolean_yes "$ETCD_DISABLE_PRESTOP"; then
-                info "The member will try to join the cluster by it's own"
-                export ETCD_INITIAL_CLUSTER_STATE=existing
-            elif ! is_healthy_etcd_cluster; then
+            if ! is_healthy_etcd_cluster; then
                 warn "Cluster not responding!"
                 if is_boolean_yes "$ETCD_DISASTER_RECOVERY"; then
                     latest_snapshot_file="$(find /snapshots/ -maxdepth 1 -type f -name 'db-*' | sort | tail -n 1)"
@@ -700,7 +682,6 @@ etcd_initialize() {
                             --initial-cluster "$ETCD_INITIAL_CLUSTER" \
                             --initial-cluster-token "$ETCD_INITIAL_CLUSTER_TOKEN" \
                             --initial-advertise-peer-urls "$ETCD_INITIAL_ADVERTISE_PEER_URLS"
-                        etcd_store_member_id
                     else
                         error "There was no snapshot to restore!"
                         exit 1
@@ -708,33 +689,13 @@ etcd_initialize() {
                 else
                     warn "Disaster recovery is disabled, the cluster will try to recover on it's own"
                 fi
-            elif was_etcd_member_removed; then
-                info "Adding new member to existing cluster"
-                read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
-                is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
-                extra_flags+=("--peer-urls=$ETCD_INITIAL_ADVERTISE_PEER_URLS")
-                etcdctl member add "$ETCD_NAME" "${extra_flags[@]}" | grep "^ETCD_" >"$ETCD_NEW_MEMBERS_ENV_FILE"
-                replace_in_file "$ETCD_NEW_MEMBERS_ENV_FILE" "^" "export "
-                # The value of ETCD_INITIAL_CLUSTER_STATE must be changed for it to be correctly added to the existing cluster
-                # https://etcd.io/docs/v3.5/op-guide/configuration/#--initial-cluster-state
-                export ETCD_INITIAL_CLUSTER_STATE=existing
-                etcd_store_member_id
-            elif ! is_empty_value "$member_id"; then
-                info "Updating member in existing cluster"
-                export ETCD_INITIAL_CLUSTER_STATE=existing
-                [[ -f "$ETCD_CONF_FILE" ]] && etcd_conf_write "initial-cluster-state" "$ETCD_INITIAL_CLUSTER_STATE"
-                read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
-                extra_flags+=("--peer-urls=$ETCD_INITIAL_ADVERTISE_PEER_URLS")
-                if is_boolean_yes "$ETCD_ON_K8S"; then
-                    extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
-                    etcdctl member update "$member_id" "${extra_flags[@]}"
-                else
-                    etcd_start_bg
-                    etcdctl member update "$member_id" "${extra_flags[@]}"
-                    etcd_stop
-                fi
             else
-                info "Member ID wasn't properly stored, the member will try to join the cluster by it's own"
+                info "Cluster is healthy"
+                if ! is_membership_intact; then
+                    rm -rf "$ETCD_DATA_DIR"
+                    remove_old_member_if_exist
+                    add_new_member
+                fi
                 export ETCD_INITIAL_CLUSTER_STATE=existing
                 [[ -f "$ETCD_CONF_FILE" ]] && etcd_conf_write "initial-cluster-state" "$ETCD_INITIAL_CLUSTER_STATE"
             fi
@@ -802,24 +763,11 @@ add_self_to_cluster() {
 #   String
 #########################
 get_member_id() {
-    if ! is_boolean_yes "$ETCD_DISABLE_STORE_MEMBER_ID"; then
-        if [[ ! -s "${ETCD_DATA_DIR}/member_id" ]]; then
-            echo ""
-            return 0
-        fi
-        cat "${ETCD_DATA_DIR}/member_id"
-        return 0
-    fi
     local ret
     local -a extra_flags
 
-    local etcd_active_endpoints=${ETCD_ACTIVE_ENDPOINTS:-}
-    if is_empty_value "${etcd_active_endpoints}"; then
-        setup_etcd_active_endpoints >/dev/null 2>&1
-    fi
-
     read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
-    extra_flags+=("--endpoints=${ETCD_ACTIVE_ENDPOINTS}")
+    is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
     ret=$(etcdctl "${extra_flags[@]}" member list | grep -w "$ETCD_INITIAL_ADVERTISE_PEER_URLS" | awk -F "," '{ print $1 }')
     # if not return zero
     if is_empty_value "$ret"; then
