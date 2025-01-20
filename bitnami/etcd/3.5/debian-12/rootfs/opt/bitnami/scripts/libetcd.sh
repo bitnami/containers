@@ -343,7 +343,7 @@ is_new_etcd_cluster() {
     local -a extra_flags
     read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
     is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
-    ! debug_execute etcdctl endpoint status --cluster ${extra_flags[@]}
+    ! debug_execute etcdctl endpoint status --cluster "${extra_flags[@]}"
 }
 
 ########################
@@ -505,8 +505,8 @@ remove_old_member_if_exist() {
 #   None
 #########################
 add_new_member() {
-    local -a extra_flags
     info "Adding new member to existing cluster"
+    local -a extra_flags
     read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
     is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
     extra_flags+=("--peer-urls=$ETCD_INITIAL_ADVERTISE_PEER_URLS")
@@ -525,14 +525,13 @@ add_new_member() {
 # Returns:
 #   None
 #########################
-is_membership_intact() {
+is_node_still_a_member() {
     local tmp_file
     local start_command=("etcd")
-    local pid
-    local ret=0
 
-    tmp_file=$(mktemp)
-    trap "rm -f $tmp_file" RETURN
+    tmp_file="$(mktemp)"
+    # shellcheck disable=SC2064
+    trap "rm -f ${tmp_file}" RETURN
 
     am_i_root && start_command=("run_as_user" "$ETCD_DAEMON_USER" "${start_command[@]}")
     [[ -f "$ETCD_CONF_FILE" ]] && start_command+=("--config-file" "$ETCD_CONF_FILE")
@@ -542,7 +541,6 @@ is_membership_intact() {
         debug_execute echo "$line"
         if [[ "$line" =~ (established TCP streaming connection with remote peer|the member has been permanently removed from the cluster|ignored streaming request; ID mismatch|\"error\":\"cluster ID mismatch\") ]]; then
             etcd_stop
-            debug "Stopped etcd"
             break
         fi
     done < <(tail -f "$tmp_file")
@@ -691,7 +689,7 @@ etcd_initialize() {
                 fi
             else
                 info "Cluster is healthy"
-                if ! is_membership_intact; then
+                if ! is_node_still_a_member; then
                     rm -rf "$ETCD_DATA_DIR"
                     remove_old_member_if_exist
                     add_new_member
