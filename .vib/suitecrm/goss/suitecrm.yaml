@@ -22,7 +22,7 @@ file:
     filetype: file
     contents:
       - "post_max_size = 60M"
-      - "upload_max_filesize = 128M"
+      - "upload_max_filesize = 60M"
       - "opcache.enable = Off"
   /opt/bitnami/suitecrm/node_modules:
     exists: false
