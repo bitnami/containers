@@ -8,11 +8,11 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-01-23T09:35:14Z" \
+      org.opencontainers.image.created="2025-01-23T15:04:17Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/deepspeed/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.16.3-debian-12-r1" \
+      org.opencontainers.image.ref.name="0.16.3-debian-12-r2" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/deepspeed" \
       org.opencontainers.image.title="deepspeed" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -58,7 +58,7 @@ ENV APP_VERSION="0.16.3" \
     C_INCLUDE_PATH="/opt/bitnami/common/include" \
     LDFLAGS="-Wl,-rpath: /opt/bitnami/python/lib -L/opt/bitnami/python/lib -Wl,-rpath: /opt/bitnami/common/lib -L/opt/bitnami/common/lib" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib:/opt/bitnami/common/lib:${LD_LIBRARY_PATH}" \
-    PATH="/opt/bitnami/python/bin:/opt/common/bin:$PATH" \
+    PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:$PATH" \
     TRITON_CACHE_DIR="/opt/bitnami/deepspeed"
 
 WORKDIR /app
