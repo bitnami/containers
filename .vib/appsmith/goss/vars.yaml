@@ -5,7 +5,6 @@ binaries:
   - node
   - python
   - render-template
-  - wait-for-port
 directories:
   - mode: "0775"
     paths:
