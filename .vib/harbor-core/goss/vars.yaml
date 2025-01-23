@@ -1,7 +1,6 @@
 binaries:
   - harbor_core
   - ini-file
-  - wait-for-port
 directories:
   - paths:
       - /opt/bitnami/harbor-core/views
