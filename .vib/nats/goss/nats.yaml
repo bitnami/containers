@@ -1,15 +1,15 @@
 command:
   check-nats-version:
     exec:
-      - /nats-server
-      - --version
+    - /nats-server
+    - --version
     exit-status: 0
     stdout:
     - "{{ .Env.APP_VERSION }}"
   check-nats-server:
     exec:
-      - /nats-server
-      - --help
+    - /nats-server
+    - --help
     exit-status: 0
     stdout:
     - "Usage: nats-server [options]"
