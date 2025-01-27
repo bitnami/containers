@@ -1,0 +1,18 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+########################
+# Checks asset version via its binary inspecting stderr
+# Uses a format compatible with containers without shell
+# Needed vars:
+#   - .Vars.version.bin_name (String)
+#   - .Vars.version.flag (String)
+########################
+command:
+  check-app-version-no-shell-stderr:
+    exec:
+    - {{ .Vars.version.bin_name }}
+    - {{ .Vars.version.flag }}
+    exit-status: 0
+    stderr:
+    - "{{ .Env.APP_VERSION }}"

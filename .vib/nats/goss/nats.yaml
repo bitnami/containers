@@ -1,0 +1,8 @@
+command:
+  check-nats-server:
+    exec:
+    - /nats-server
+    - --help
+    exit-status: 0
+    stdout:
+    - "Usage: nats-server [options]"
