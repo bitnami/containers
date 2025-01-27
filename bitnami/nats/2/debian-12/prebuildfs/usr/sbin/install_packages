@@ -7,8 +7,6 @@ n=0
 max=2
 export DEBIAN_FRONTEND=noninteractive
 
-echo "some change to be reverted. For CI to detect affected image"
-
 until [ $n -gt $max ]; do
     set +e
     (
