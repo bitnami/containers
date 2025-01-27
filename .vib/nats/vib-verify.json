@@ -40,6 +40,7 @@
               "path": "/.vib"
             },
             "tests_file": "nats/goss/goss.yaml",
+            "vars_file": "nats/goss/vars.yaml",
             "remote": {
               "pod": {
                 "workload": "deploy-nats"
