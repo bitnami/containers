@@ -10,7 +10,13 @@
 ########################
 command:
   check-app-version:
-    exec: {{ .Vars.version.bin_name }} {{ .Vars.version.flag }} 2>&1
+    exec:
+    - {{ .Vars.version.bin_name }}
+    - {{ .Vars.version.flag }}
     exit-status: 0
+    # Allow matching in stdout
     stdout:
-    - "{{ .Env.APP_VERSION }}"
+    - ".*{{ .Env.APP_VERSION }}.*"
+    # Allow matching in stderr
+    stderr:
+    - ".*{{ .Env.APP_VERSION }}.*"
