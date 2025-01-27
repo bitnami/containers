@@ -1,7 +1,7 @@
 files:
-  - mode: "0664"
+  - mode: "0644"
     paths:
       - /opt/bitnami/nats/.spdx-nats.spdx
 version:
-  bin_name: nats-server
+  bin_name: /nats-server
   flag: --version
