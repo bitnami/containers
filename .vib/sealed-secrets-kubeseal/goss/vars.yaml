@@ -1,0 +1,7 @@
+files:
+  - mode: "0644"
+    paths:
+      - /opt/bitnami/sealed-secrets-kubeseal/.spdx-sealed-secrets-kubeseal.spdx
+version:
+  bin_name: /kubeseal
+  flag: --version
