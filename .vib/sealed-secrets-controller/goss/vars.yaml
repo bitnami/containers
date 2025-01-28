@@ -1,0 +1,7 @@
+files:
+  - mode: "0644"
+    paths:
+      - /opt/bitnami/sealed-secrets/.spdx-sealed-secrets.spdx
+version:
+  bin_name: /controller
+  flag: --version
