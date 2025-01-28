@@ -1,0 +1,7 @@
+files:
+  - mode: "0644"
+    paths:
+      - /opt/bitnami/thanos/.spdx-thanos.spdx
+version:
+  bin_name: /bin/thanos
+  flag: --version
