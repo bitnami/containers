@@ -261,6 +261,11 @@ Sometimes it is of interest to run the tests locally, for example during develop
 
     ```bash
     docker run --rm --name app_name -d -it bitnami/app_name bash -c "tail -f /dev/null"
+    ```
+
+    or for a scratch container (e.g. Node.js minimal):
+
+    ```bash
     docker run --rm --name app_name -d -it --entrypoint node bitnami/app_name --eval "setTimeout(() => {}, 3600 * 1000);"
     ```
 
