@@ -260,21 +260,21 @@ Sometimes it is of interest to run the tests locally, for example during develop
 2. Launch the container using some command that ensures it will not exit immediately. Find two examples below:
 
     ```bash
-    $ docker run --rm --name app_name -d -it bitnami/app_name bash -c "tail -f /dev/null"
-    $ docker run --rm --name app_name -d -it --entrypoint node bitnami/app_name --eval "setTimeout(() => {}, 3600 * 1000);"
+    docker run --rm --name app_name -d -it bitnami/app_name bash -c "tail -f /dev/null"
+    docker run --rm --name app_name -d -it --entrypoint node bitnami/app_name --eval "setTimeout(() => {}, 3600 * 1000);"
     ```
 
 3. Add the binary and test files to the tested container as volumes
 
     ```bash
-    $ chmod +x /local/path/to/binary/goss-linux-amd64
-    $ docker cp /local/path/to/binary/goss-linux-amd64 app_name:/usr/local/bin/gossctl
-    $ docker cp /local/path/to/repo/containers/.vib app_name:/vib
+    chmod +x /local/path/to/binary/goss-linux-amd64
+    docker cp /local/path/to/binary/goss-linux-amd64 app_name:/usr/local/bin/gossctl
+    docker cp /local/path/to/repo/containers/.vib app_name:/vib
     ```
 
 4. Launch the tests
 
-    ```bash
+    ```console
     $ docker exec --workdir /vib app_name goss --gossfile /vib/app_name/goss/goss.yaml --vars /vib/app_name/goss/vars.yaml validate
     .........
     Total Duration: 1.203s
