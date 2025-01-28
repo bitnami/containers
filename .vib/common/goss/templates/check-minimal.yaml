@@ -37,9 +37,9 @@ file:
     filetype: file
   /tmp:
     exists: true
-    mode: "0777"
+    mode: "1777"
     filetype: directory
   /var:
     exists: true
-    mode: "0775"
+    mode: "0755"
     filetype: directory

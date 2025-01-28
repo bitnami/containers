@@ -33,7 +33,7 @@ file:
     filetype: symlink
   /usr/lib/ossl-modules/fips.so:
     exists: true
-    mode: "755"
+    mode: "0755"
     owner: root
     group: root
     filetype: file
