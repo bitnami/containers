@@ -5,7 +5,7 @@
         "type": "NAMI",
         "version": "1.58.0-0"
     },
-    "java": {
+    "jre": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
@@ -39,6 +39,6 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.7-9"
+        "version": "1.0.7-10"
     }
 }
