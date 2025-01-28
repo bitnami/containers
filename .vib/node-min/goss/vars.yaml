@@ -1,0 +1,7 @@
+files:
+  - mode: "0644"
+    paths:
+      - /opt/bitnami/node/.spdx-node-min.spdx
+version:
+  bin_name: node
+  flag: --version
