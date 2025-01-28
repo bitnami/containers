@@ -1,15 +1,15 @@
 {
-    "java": {
+    "jre": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "21.0.5-11-1"
+        "version": "21.0.6-10-0"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.7-8"
+        "version": "1.0.7-10"
     },
     "tomcat": {
         "arch": "amd64",
