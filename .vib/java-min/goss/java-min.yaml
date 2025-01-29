@@ -1,0 +1,23 @@
+command:
+  check-java-version:
+    exec:
+    - java
+    - --version
+    exit-status: 0
+    # Replace "-" with "+" in the version string
+    stdout:
+    - {{ .Env.APP_VERSION | replace "-" "+" }}
+  check-hello-world:
+    exec:
+    - java
+    - -jar
+    - /shared/java-min/goss/HelloWorld.jar
+    exit-status: 0
+    stdout:
+    - "Hello World"
+process:
+  jwebserver:
+    running: true
+port:
+  tcp6:8000:
+    listening: true
