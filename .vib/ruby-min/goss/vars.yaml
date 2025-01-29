@@ -1,0 +1,7 @@
+files:
+  - mode: "0644"
+    paths:
+      - /opt/bitnami/ruby/.spdx-ruby-min.spdx
+version:
+  bin_name: ruby
+  flag: --version

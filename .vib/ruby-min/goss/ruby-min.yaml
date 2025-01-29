@@ -1,0 +1,9 @@
+command:
+  check-hello-world:
+    exec:
+    - ruby
+    - -e
+    - puts 'Hello World'
+    exit-status: 0
+    stdout:
+    - "Hello World"
