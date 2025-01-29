@@ -1,7 +1,6 @@
 binaries:
   - minio
   - mc
-  - wait-for-port
 directories:
   - mode: "0775"
     paths:
