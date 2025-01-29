@@ -1,0 +1,6 @@
+process:
+  php-fpm:
+    running: true
+port:
+  tcp6:9000:
+    listening: true

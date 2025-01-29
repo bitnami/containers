@@ -1,0 +1,9 @@
+files:
+  - mode: "0644"
+    paths:
+      - /opt/bitnami/php/.spdx-php-min.spdx
+      - /opt/bitnami/php/tmp/php-fpm.pid
+      - /opt/bitnami/php/etc/php-fpm.conf
+version:
+  bin_name: php-fpm
+  flag: --version
