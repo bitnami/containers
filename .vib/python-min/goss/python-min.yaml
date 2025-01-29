@@ -1,0 +1,9 @@
+command:
+  check-hello-world:
+    exec:
+    - python3
+    - -c
+    - print('Hello World')
+    exit-status: 0
+    stdout:
+    - "Hello World"
