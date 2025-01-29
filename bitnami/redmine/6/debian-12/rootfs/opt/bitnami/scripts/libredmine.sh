@@ -455,11 +455,13 @@ redmine_rake_execute() {
 #   None
 #########################
 redmine_migrate_database() {
-    # Secret tokens need to be generated or the migration will fail
+    #  If not provided, secret token needs to be generated or the migration will fail
     # "Missing `secret_key_base` for 'production' environment, set this string with `rails credentials:edit`"
     # And since we are not persisting that file, they will always need to be generated
-    debug "Generating secret tokens"
-    redmine_rake_execute "generate_secret_token"
+    if is_empty_value "${SECRET_KEY_BASE:-}"; then
+        debug "Generating secret tokens"
+        redmine_rake_execute "generate_secret_token"
+    fi
 
     # Output is too big and password get lost in console
     redmine_rake_execute "db:migrate" >/dev/null 2>&1
