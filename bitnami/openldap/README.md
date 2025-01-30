@@ -207,6 +207,10 @@ You can bootstrap the contents of your database by putting LDIF files in the dir
 
 Check the official [OpenLDAP Configuration Reference](https://www.openldap.org/doc/admin26/guide.html) for more information about how to configure OpenLDAP.
 
+### Data Persistence
+
+To ensure that the OpenLDAP state is retained across container restarts and updates, it is recommended to mount a volume at `/bitnami/openldap`.
+
 ### Overlays
 
 Overlays are dynamic modules that can be added to an OpenLDAP server to extend or modify its functionality.
