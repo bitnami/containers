@@ -1,7 +1,7 @@
 files:
   - mode: "0644"
     paths:
-      - /opt/bitnami/*/.spdx-*-java-min.spdx
+      - /opt/bitnami/os/.spdx-os-java-min.spdx
       - /opt/bitnami/java/.spdx-jre.spdx
   - mode: "0755"
     paths:
