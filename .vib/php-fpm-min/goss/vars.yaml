@@ -1,7 +1,7 @@
 files:
   - mode: "0644"
     paths:
-      - /opt/bitnami/photon/.spdx-photon-php-min.spdx
+      - /opt/bitnami/*/.spdx-*-php-min.spdx
       - /opt/bitnami/php/.spdx-php-min.spdx
       - /opt/bitnami/php/etc/php-fpm.conf
       - /opt/bitnami/php/etc/php.ini
