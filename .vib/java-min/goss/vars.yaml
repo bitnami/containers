@@ -3,10 +3,6 @@ files:
     paths:
       - /opt/bitnami/*/.spdx-*-java-min.spdx
       - /opt/bitnami/java/.spdx-jre.spdx
-      {{- $releaseFile := readFile "/etc/os-release" }}
-      {{- if contains "photon" $releaseFile }}
-      - /opt/bitnami/bc-fips/bc-fips.jar
-      {{- end }}
   - mode: "0755"
     paths:
       - /opt/bitnami/java/bin/java
