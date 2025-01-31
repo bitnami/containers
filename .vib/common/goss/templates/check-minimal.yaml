@@ -43,13 +43,13 @@ file:
     exists: true
     mode: "0755"
     filetype: directory
-  /opt/bitnami/photon/.spdx-photon-static.spdx:
+  /opt/bitnami/*/.spdx-*-static.spdx:
     exists: true
     mode: "0644"
     owner: root
     group: root
     filetype: file
-  /opt/bitnami/photon/.spdx-photon-libgcc.spdx:
+  /opt/bitnami/*/.spdx-*-libgcc.spdx:
     exists: true
     mode: "0644"
     owner: root

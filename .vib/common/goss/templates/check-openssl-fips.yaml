@@ -6,6 +6,8 @@
 # Needed vars:
 # - None
 ########################
+{{- $releaseFile := readFile "/etc/os-release" }}
+{{- if contains "photon" $releaseFile }}
 file:
   /etc/ssl/fipsmodule.cnf:
     exists: true
@@ -37,3 +39,4 @@ file:
     owner: root
     group: root
     filetype: file
+{{- end }}
