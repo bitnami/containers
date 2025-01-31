@@ -1,7 +1,7 @@
 files:
   - mode: "0644"
     paths:
-      - /opt/bitnami/photon/.spdx-photon-ruby-min.spdx
+      - /opt/bitnami/*/.spdx-*-ruby-min.spdx
       - /opt/bitnami/ruby/.spdx-ruby-min.spdx
   - mode: "0755"
     paths:
