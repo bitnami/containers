@@ -1,9 +1,8 @@
 files:
   - mode: "0644"
     paths:
-      - /opt/bitnami/photon/.spdx-photon-java-min.spdx
+      - /opt/bitnami/*/.spdx-*-java-min.spdx
       - /opt/bitnami/java/.spdx-jre.spdx
-      - /opt/bitnami/bc-fips/bc-fips.jar
   - mode: "0755"
     paths:
       - /opt/bitnami/java/bin/java

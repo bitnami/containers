@@ -21,3 +21,13 @@ process:
 port:
   tcp6:8000:
     listening: true
+{{- $releaseFile := readFile "/etc/os-release" }}
+{{- if contains "photon" $releaseFile }}
+file:
+  /opt/bitnami/bc-fips/bc-fips.jar:
+    exists: true
+    mode: "0644"
+    owner: root
+    group: root
+    filetype: file
+{{- end }}
