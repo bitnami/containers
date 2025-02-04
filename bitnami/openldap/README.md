@@ -170,6 +170,12 @@ Launch the containers using:
 docker-compose up -d
 ```
 
+Verify that LDAP service is accessible with:
+
+```console
+ldapsearch -x -H ldap://localhost:1389 -D "cn=admin,dc=example,dc=org" -w adminpassword -b "dc=example,dc=org"
+```
+
 ## Configuration
 
 The Bitnami Docker OpenLDAP can be easily setup with the following environment variables:
