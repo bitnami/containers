@@ -445,7 +445,7 @@ mysql_start_bg() {
     local -a flags=("--defaults-file=${DB_CONF_FILE}" "--basedir=${DB_BASE_DIR}" "--datadir=${DB_DATA_DIR}" "--socket=${DB_SOCKET_FILE}")
 
     # Only allow local connections until MySQL is fully initialized, to avoid apps trying to connect to MySQL before it is fully initialized
-    flags+=("--bind-address=127.0.0.1")
+    flags+=("--skip-networking")
 
     # Add flags specified via the 'DB_EXTRA_FLAGS' environment variable
     read -r -a db_extra_flags <<< "$(mysql_extra_flags)"
