@@ -8,6 +8,5 @@ files:
       - /opt/bitnami/java/bin/java
       - /opt/bitnami/java/bin/jfr
       - /opt/bitnami/java/bin/jrunscript
-      - /opt/bitnami/java/bin/jwebserver
       - /opt/bitnami/java/bin/keytool
       - /opt/bitnami/java/bin/rmiregistry

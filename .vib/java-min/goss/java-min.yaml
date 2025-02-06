@@ -15,12 +15,6 @@ command:
     exit-status: 0
     stdout:
     - "Hello World"
-process:
-  jwebserver:
-    running: true
-port:
-  tcp6:8000:
-    listening: true
 {{- $releaseFile := readFile "/etc/os-release" }}
 {{- if contains "photon" $releaseFile }}
 file:
