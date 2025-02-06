@@ -4,7 +4,7 @@
       "url": "{SHA_ARCHIVE}",
       "path": "{VIB_ENV_PATH}"
     },
-    "runtime_parameters": "Y29tbWFuZDogWyJqd2Vic2VydmVyIiwgIi1iIiwgIjAuMC4wLjAiXQo="
+    "runtime_parameters": "Y29tbWFuZDogWyIvc2hhcmVkL2J1c3lib3giLCAic2xlZXAiLCAiMzAiXQo="
   },
   "phases": {
     "package": {
