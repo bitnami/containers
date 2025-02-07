@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: APACHE-2.0
 
 ########################
-# Test coverage for minimal containers
+# Test coverage for containers using static
 # Needed vars:
 # - None
 ########################
@@ -44,12 +44,6 @@ file:
     mode: "0755"
     filetype: directory
   /opt/bitnami/os/.spdx-os-static.spdx:
-    exists: true
-    mode: "0644"
-    owner: root
-    group: root
-    filetype: file
-  /opt/bitnami/os/.spdx-os-libgcc.spdx:
     exists: true
     mode: "0644"
     owner: root
