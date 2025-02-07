@@ -172,7 +172,6 @@ docker-compose up -d
 
 | Name                                               | Description                                                                             | Default Value                         |
 |----------------------------------------------------|-----------------------------------------------------------------------------------------|---------------------------------------|
-| `CASSANDRA_MOUNTED_CONF_DIR`                       | Cassandra directory for mounted configuration files                                     | `${DB_VOLUME_DIR}/conf`               |
 | `CASSANDRA_CLIENT_ENCRYPTION`                      | Enable client encryption                                                                | `false`                               |
 | `CASSANDRA_CLUSTER_NAME`                           | Cassandra cluster name                                                                  | `My Cluster`                          |
 | `CASSANDRA_DATACENTER`                             | Cassandra datacenter name                                                               | `dc1`                                 |
@@ -219,6 +218,7 @@ docker-compose up -d
 | `CASSANDRA_SSL_CA_FILE`                            | Cassandra SSL CA location                                                               | `nil`                                 |
 | `CASSANDRA_SSL_VALIDATE`                           | Perform SSL validation on the certificates                                              | `false`                               |
 | `SSL_VERSION`                                      | TLS version to use when connecting.                                                     | `TLSv1_2`                             |
+| `CASSANDRA_MOUNTED_CONF_DIR`                       | Cassandra directory for mounted configuration files                                     | `${DB_VOLUME_DIR}/conf`               |
 | `JAVA_TOOL_OPTIONS`                                | Java tool options.                                                                      | `nil`                                 |
 
 #### Read-only environment variables
@@ -560,7 +560,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
+Copyright &copy; 2025 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

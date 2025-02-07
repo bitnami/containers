@@ -218,6 +218,7 @@ rabbitmq_print_ssl_configuration() {
         cacertfile
         certfile
         keyfile
+        password
         depth
         fail_if_no_peer_cert
         verify

@@ -82,6 +82,7 @@ docker build -t bitnami/APP:latest .
 | `PGBOUNCER_AUTH_QUERY`                | PgBouncer authentication query                                                                                                                                                             | `nil`                   |
 | `PGBOUNCER_AUTH_TYPE`                 | PgBouncer authentication type                                                                                                                                                              | `scram-sha-256`         |
 | `PGBOUNCER_AUTH_HBA_FILE`             | HBA configuration file to use                                                                                                                                                              | `nil`                   |
+| `PGBOUNCER_AUTH_IDENT_FILE`           | Ident map file to use                                                                                                                                                                      | `nil`                   |
 | `PGBOUNCER_STATS_USERS`               | PgBouncer comma-separated list of database users that are allowed to connect and run read-only queries.                                                                                    | `nil`                   |
 | `PGBOUNCER_POOL_MODE`                 | PgBouncer pool mode. Allowed values: session (default), transaction and statement.                                                                                                         | `nil`                   |
 | `PGBOUNCER_INIT_SLEEP_TIME`           | PgBouncer initialization sleep time                                                                                                                                                        | `10`                    |
@@ -411,7 +412,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
+Copyright &copy; 2025 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

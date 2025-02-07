@@ -1,14 +1,14 @@
 {
-    "java": {
+    "jre": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "21.0.5-11-1"
+        "version": "21.0.6-10-0"
     },
     "nessie-utils": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "0.101.3-0"
+        "version": "0.102.5-0"
     }
 }

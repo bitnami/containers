@@ -1,0 +1,27 @@
+binaries:
+  - celery
+  - gunicorn
+  - superset
+  - python
+  - pip
+linked_libraries:
+  exclude_paths:
+    # Ignore python venv executable scripts
+    - /opt/bitnami/superset/venv/.*
+directories:
+  - mode: "0775"
+    paths:
+      - /opt/bitnami/superset
+      - /opt/bitnami/superset/superset_home
+      - /opt/bitnami/superset/logs
+      - /opt/bitnami/superset/tmp
+root_dir: /opt/bitnami
+subpackages:
+  - celery
+  - flower
+  - Flask
+  - gunicorn
+  - mysql
+  - mysqlclient
+  - psycopg2
+  - redis

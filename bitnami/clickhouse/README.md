@@ -167,11 +167,11 @@ ClickHouse can be configured via environment variables or using a configuration 
 
 ### Configuration overrides
 
-The configuration can easily be setup by mounting your own configuration overrides on the directory `/bitnami/clickhouse/etc/conf.d` or `/bitnami/clickhouse/etc/users.d`:
+The configuration can easily be setup by mounting your own configuration overrides on the directory `/bitnami/clickhouse/etc/config.d` or `/bitnami/clickhouse/etc/users.d`:
 
 ```console
 docker run --name clickhouse \
-    --volume /path/to/override.xml:/bitnami/clickhouse/etc/conf.d/override.xml:ro \
+    --volume /path/to/override.xml:/bitnami/clickhouse/etc/config.d/override.xml:ro \
     bitnami/clickhouse:latest
 ```
 
@@ -184,7 +184,7 @@ services:
   clickhouse:
     image: bitnami/clickhouse:latest
     volumes:
-      - /path/to/override.xml:/bitnami/clickhouse/etc/conf.d/override.xml:ro
+      - /path/to/override.xml:/bitnami/clickhouse/etc/config.d/override.xml:ro
 ```
 
 Check the [official ClickHouse configuration documentation](https://clickhouse.com/docs/en/operations/configuration-files/) for all the possible overrides and settings.
@@ -194,6 +194,8 @@ Check the [official ClickHouse configuration documentation](https://clickhouse.c
 When the container is executed for the first time, it will execute the files with extensions `.sh` located at `/docker-entrypoint-initdb.d`. For scripts to be executed every time the container starts, use the `/docker-entrypoint-startdb.d` folder.
 
 In order to have your custom files inside the docker image you can mount them as a volume.
+
+> NOTE: If you use JSON format for clickhouse logs and remove the message field of the logs, the application will fail to start if there are init or start scripts in any of those 2 folders.
 
 ### Environment variables
 
@@ -354,7 +356,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
+Copyright &copy; 2025 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -1,0 +1,72 @@
+{
+  "context": {
+    "resources": {
+      "url": "{SHA_ARCHIVE}",
+      "path": "{VIB_ENV_PATH}"
+    }
+  },
+  "phases": {
+    "package": {
+      "actions": [
+        {
+          "action_id": "container-image-package",
+          "params": {
+            "application": {
+              "details": {
+                "name": "{VIB_ENV_CONTAINER}",
+                "tag": "{VIB_ENV_TAG}"
+              }
+            },
+            "architectures": [
+              "linux/amd64",
+              "linux/arm64"
+            ]
+          }
+        },
+        {
+          "action_id": "container-image-lint",
+          "params": {
+            "threshold": "error"
+          }
+        }
+      ]
+    },
+    "verify": {
+      "actions": [
+        {
+          "action_id": "goss",
+          "params": {
+            "resources": {
+              "path": "/.vib"
+            },
+            "tests_file": "php-fpm-min/goss/goss.yaml",
+            "vars_file": "php-fpm-min/goss/vars.yaml",
+            "remote": {
+              "pod": {
+                "workload": "deploy-php-fpm-min"
+              }
+            }
+          }
+        },
+        {
+          "action_id": "trivy",
+          "params": {
+            "threshold": "LOW",
+            "vuln_type": [
+              "OS"
+            ]
+          }
+        },
+        {
+          "action_id": "grype",
+          "params": {
+            "threshold": "CRITICAL",
+            "package_type": [
+              "OS"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

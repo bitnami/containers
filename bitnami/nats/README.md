@@ -102,30 +102,19 @@ docker run -d --name nats-server \
     --publish 4222:4222 \
     --publish 6222:6222 \
     --publish 8222:8222 \
-    bitnami/nats:latest
+    --volume /path/to/nats-server.conf:/etc/nats-server.conf:ro \
+    bitnami/nats:latest -c /etc/nats-server.conf
 ```
 
 #### Step 3: Launch your NATS client instance
 
-You can create a small script which downloads, installs and uses the [NATS Golang client](https://github.com/nats-io/go-nats).
-
-There are some examples available to use that client. For instance, write the script below and save it as *nats-pub.sh* to use the publishing example:
-
-```console
-##!/bin/bash
-
-go get github.com/nats-io/go-nats
-go build /go/src/github.com/nats-io/go-nats/examples/nats-pub.go
-./nats-pub -s nats://nats-server:4222 "$1" "$2"
-```
-
-Then, you can use the script to create a client instance as shown below:
+You can create a NATS client instance as shown below:
 
 ```console
 docker run -it --rm \
     --network app-tier \
     --volume /path/to/your/workspace:/go
-    golang ./nats-pub.sh foo bar
+    bitnami/natscli -s nats://nats-server:4222 <your-nats-command>
 ```
 
 ### Using a Docker Compose file
@@ -148,6 +137,8 @@ services:
       - 8222:8222
     networks:
       - app-tier
+    volumes:
+      - /path/to/nats-server.conf:/etc/nats-server.conf:ro
   myapp:
     image: 'YOUR_APPLICATION_IMAGE'
     networks:
@@ -167,112 +158,25 @@ docker-compose up -d
 
 ## Configuration
 
-### Environment variables
+### Running commands
 
-#### Customizable environment variables
-
-| Name                       | Description                                                                                        | Default Value                            |
-|----------------------------|----------------------------------------------------------------------------------------------------|------------------------------------------|
-| `NATS_BIND_ADDRESS`        | NATS bind address.                                                                                 | `$NATS_DEFAULT_BIND_ADDRESS`             |
-| `NATS_CLIENT_PORT_NUMBER`  | NATS CLIENT port number.                                                                           | `$NATS_DEFAULT_CLIENT_PORT_NUMBER`       |
-| `NATS_HTTP_PORT_NUMBER`    | NATS HTTP port number.                                                                             | `$NATS_DEFAULT_HTTP_PORT_NUMBER`         |
-| `NATS_HTTPS_PORT_NUMBER`   | NATS HTTPS port number.                                                                            | `$NATS_DEFAULT_HTTPS_PORT_NUMBER`        |
-| `NATS_CLUSTER_PORT_NUMBER` | NATS CLUSTER port number.                                                                          | `$NATS_DEFAULT_CLUSTER_PORT_NUMBER`      |
-| `NATS_FILENAME`            | Pefix to use for NATS files (e.g. the PID file would be formed using "${NATS_FILENAME}.pid").      | `nats-server`                            |
-| `NATS_CONF_FILE`           | Path to the NATS conf file.                                                                        | `${NATS_CONF_DIR}/${NATS_FILENAME}.conf` |
-| `NATS_LOG_FILE`            | Path to the NATS log file.                                                                         | `${NATS_LOGS_DIR}/${NATS_FILENAME}.log`  |
-| `NATS_PID_FILE`            | Path to the NATS pid file.                                                                         | `${NATS_TMP_DIR}/${NATS_FILENAME}.pid`   |
-| `NATS_ENABLE_AUTH`         | Enable Authentication.                                                                             | `no`                                     |
-| `NATS_USERNAME`            | Username credential for client connections.                                                        | `nats`                                   |
-| `NATS_PASSWORD`            | Password credential for client connections.                                                        | `nil`                                    |
-| `NATS_TOKEN`               | Auth token for client connections.                                                                 | `nil`                                    |
-| `NATS_ENABLE_TLS`          | Enable TLS.                                                                                        | `no`                                     |
-| `NATS_TLS_CRT_FILENAME`    | TLS certificate filename.                                                                          | `${NATS_FILENAME}.crt`                   |
-| `NATS_TLS_KEY_FILENAME`    | TLS key filename.                                                                                  | `${NATS_FILENAME}.key`                   |
-| `NATS_ENABLE_CLUSTER`      | Enable Cluster configuration.                                                                      | `no`                                     |
-| `NATS_CLUSTER_USERNAME`    | Username credential for route connections.                                                         | `nats`                                   |
-| `NATS_CLUSTER_PASSWORD`    | Password credential for route connections.                                                         | `nil`                                    |
-| `NATS_CLUSTER_TOKEN`       | Auth token for route connections.                                                                  | `nil`                                    |
-| `NATS_CLUSTER_ROUTES`      | Comma-separated list of routes to solicit and connect.                                             | `nil`                                    |
-| `NATS_CLUSTER_SEED_NODE`   | Node to use as seed server for routes announcement.                                                | `nil`                                    |
-| `NATS_EXTRA_ARGS`          | Additional command line arguments passed while starting NATS (e.g., `-js` for enabling JetStream). | `nil`                                    |
-
-#### Read-only environment variables
-
-| Name                               | Description                                                                                    | Value                           |
-|------------------------------------|------------------------------------------------------------------------------------------------|---------------------------------|
-| `NATS_BASE_DIR`                    | NATS installation directory.                                                                   | `${BITNAMI_ROOT_DIR}/nats`      |
-| `NATS_BIN_DIR`                     | NATS directory for binaries.                                                                   | `${NATS_BASE_DIR}/bin`          |
-| `NATS_CONF_DIR`                    | NATS directory for configuration files.                                                        | `${NATS_BASE_DIR}/conf`         |
-| `NATS_DEFAULT_CONF_DIR`            | NATS default directory for configuration files.                                                | `${NATS_BASE_DIR}/conf.default` |
-| `NATS_LOGS_DIR`                    | NATS directory for log files.                                                                  | `${NATS_BASE_DIR}/logs`         |
-| `NATS_TMP_DIR`                     | NATS directory for temporary files.                                                            | `${NATS_BASE_DIR}/tmp`          |
-| `NATS_VOLUME_DIR`                  | NATS persistence base directory.                                                               | `${BITNAMI_VOLUME_DIR}/nats`    |
-| `NATS_DATA_DIR`                    | NATS directory for data.                                                                       | `${NATS_VOLUME_DIR}/data`       |
-| `NATS_MOUNTED_CONF_DIR`            | Directory for including custom configuration files (that override the default generated ones). | `${NATS_VOLUME_DIR}/conf`       |
-| `NATS_INITSCRIPTS_DIR`             | Path to NATS init scripts directory                                                            | `/docker-entrypoint-initdb.d`   |
-| `NATS_DAEMON_USER`                 | NATS system user.                                                                              | `nats`                          |
-| `NATS_DAEMON_GROUP`                | NATS system group.                                                                             | `nats`                          |
-| `NATS_DEFAULT_BIND_ADDRESS`        | Default NATS bind address to enable at build time.                                             | `0.0.0.0`                       |
-| `NATS_DEFAULT_CLIENT_PORT_NUMBER`  | Default NATS CLIENT port number to enable at build time.                                       | `4222`                          |
-| `NATS_DEFAULT_HTTP_PORT_NUMBER`    | Default NATS HTTP port number to enable at build time.                                         | `8222`                          |
-| `NATS_DEFAULT_HTTPS_PORT_NUMBER`   | Default NATS HTTPS port number to enable at build time.                                        | `8443`                          |
-| `NATS_DEFAULT_CLUSTER_PORT_NUMBER` | Default NATS CLUSTER port number to enable at build time.                                      | `6222`                          |
-
-When you start the NATS image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
-
-* For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/nats/docker-compose.yml) file present in this repository:
-
-```yaml
-nats:
-  ...
-  environment:
-    - NATS_ENABLE_AUTH=yes
-    - NATS_PASSWORD=my_password
-  ...
-```
-
-* For manual execution add a `--env` option with each variable and value:
-
-  ```console
-  docker run -d --name nats -p 4222:4222 -p 6222:6222 -p 8222:8222 \
-    --env NATS_ENABLE_AUTH=yes \
-    --env NATS_PASSWORD=my_password \
-    bitnami/nats:latest
-  ```
-
-### Full configuration
-
-The image looks for custom configuration files in the `/bitnami/nats/conf/` directory. Find very simple examples below.
-
-#### Using the Docker Command Line
+To run commands inside this container you can use `docker run`, for example to execute `nats-server -c nats-server.cfg` you can follow the example below:
 
 ```console
-docker run -d --name nats -p 4222:4222 -p 6222:6222 -p 8222:8222 \
-  --volume /path/to/nats-server.conf:/bitnami/nats/conf/nats-server.conf:ro \
-  bitnami/nats:latest
+docker run -d --name nats-server -p 4222:4222 -p 6222:6222 -p 8222:8222 \
+  --volume /path/to/nats-server.conf:/etc/nats-server.conf:ro \
+  bitnami/nats:latest -c /etc/nats-server.conf
 ```
-
-#### Deploying a Docker Compose file
-
-Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/nats/docker-compose.yml) file present in this repository as follows:
-
-```diff
-...
-services:
-  nats:
-    ...
-+   volumes:
-+     - /path/to/nats-server.conf:/bitnami/nats/conf/nats-server.conf:ro
-```
-
-After that, your custom configuration will be taken into account to start the NATS node. Find more information about how to create your own configuration file on this [link](https://nats-io.github.io/docs/nats_server/configuration.html)
 
 ### Further documentation
 
 For further documentation, please check [NATS documentation](https://docs.nats.io/)
 
 ## Notable Changes
+
+### 2.10.24-debian-12-r3
+
+* This image revision dramatically reduces the image given it removes the existing OS distro. Instead, it simply includes the NATS binary on top of a scratch base image.
 
 ### 2.6.4-debian-10-r14
 
@@ -294,7 +198,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
+Copyright &copy; 2025 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

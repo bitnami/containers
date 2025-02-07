@@ -1,0 +1,8 @@
+command:
+  check-thanos:
+    exec:
+    - /bin/thanos
+    - --help
+    exit-status: 0
+    stderr:
+    - "A block storage based long-term storage for Prometheus."

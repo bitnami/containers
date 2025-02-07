@@ -24,7 +24,6 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
 cassandra_env_vars=(
-    CASSANDRA_MOUNTED_CONF_DIR
     CASSANDRA_CLIENT_ENCRYPTION
     CASSANDRA_CLUSTER_NAME
     CASSANDRA_DATACENTER
@@ -71,6 +70,7 @@ cassandra_env_vars=(
     CASSANDRA_SSL_CA_FILE
     CASSANDRA_SSL_VALIDATE
     SSL_VERSION
+    CASSANDRA_MOUNTED_CONF_DIR
     JAVA_TOOL_OPTIONS
 )
 for env_var in "${cassandra_env_vars[@]}"; do
@@ -102,8 +102,6 @@ export CASSANDRA_INITSCRIPTS_DIR="/docker-entrypoint-initdb.d"
 export DB_INITSCRIPTS_DIR="$CASSANDRA_INITSCRIPTS_DIR"
 export CASSANDRA_LOG_DIR="${DB_BASE_DIR}/logs"
 export DB_LOG_DIR="$CASSANDRA_LOG_DIR"
-export CASSANDRA_MOUNTED_CONF_DIR="${CASSANDRA_MOUNTED_CONF_DIR:-${DB_VOLUME_DIR}/conf}"
-export DB_MOUNTED_CONF_DIR="$CASSANDRA_MOUNTED_CONF_DIR"
 export CASSANDRA_TMP_DIR="${DB_BASE_DIR}/tmp"
 export DB_TMP_DIR="$CASSANDRA_TMP_DIR"
 export JAVA_BASE_DIR="${BITNAMI_ROOT_DIR}/java"
@@ -249,6 +247,8 @@ export CASSANDRA_COMMITLOG_ARCHIVING_FILE="${DB_CONF_DIR}/commitlog_archiving.pr
 export DB_COMMITLOG_ARCHIVING_FILE="$CASSANDRA_COMMITLOG_ARCHIVING_FILE"
 export CASSANDRA_ENV_FILE="${DB_CONF_DIR}/cassandra-env.sh"
 export DB_ENV_FILE="$CASSANDRA_ENV_FILE"
+export CASSANDRA_MOUNTED_CONF_DIR="${CASSANDRA_MOUNTED_CONF_DIR:-${DB_VOLUME_DIR}/conf}"
+export DB_MOUNTED_CONF_DIR="$CASSANDRA_MOUNTED_CONF_DIR"
 export CASSANDRA_MOUNTED_CONF_PATH="cassandra.yaml"
 export DB_MOUNTED_CONF_PATH="$CASSANDRA_MOUNTED_CONF_PATH"
 export CASSANDRA_MOUNTED_RACKDC_PATH="cassandra-rackdc.properties"

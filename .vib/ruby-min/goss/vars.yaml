@@ -1,0 +1,17 @@
+files:
+  - mode: "0644"
+    paths:
+      - /opt/bitnami/os/.spdx-os-ruby-min.spdx
+      - /opt/bitnami/ruby/.spdx-ruby-min.spdx
+  - mode: "0755"
+    paths:
+      - /opt/bitnami/ruby/bin/bundle
+      - /opt/bitnami/ruby/bin/bundler
+      - /opt/bitnami/ruby/bin/erb
+      - /opt/bitnami/ruby/bin/gem
+      - /opt/bitnami/ruby/bin/irb
+      - /opt/bitnami/ruby/bin/rake
+      - /opt/bitnami/ruby/bin/ruby
+version:
+  bin_name: ruby
+  flag: --version

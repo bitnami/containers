@@ -1,0 +1,42 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+########################
+# Test coverage for openssl and FIPS
+# Needed vars:
+# - None
+########################
+{{- $releaseFile := readFile "/etc/os-release" }}
+{{- if contains "photon" $releaseFile }}
+file:
+  /etc/ssl/fipsmodule.cnf:
+    exists: true
+    mode: "0644"
+    owner: root
+    group: root
+    filetype: file
+  /etc/ssl/provider_fips.cnf:
+    exists: true
+    mode: "0644"
+    owner: root
+    group: root
+    filetype: file
+  /etc/ssl/openssl.cnf:
+    exists: true
+    mode: "0644"
+    owner: root
+    group: root
+    filetype: file
+  /usr/lib/libcrypto.so:
+    exists: true
+    filetype: symlink
+  /usr/lib/libssl.so:
+    exists: true
+    filetype: symlink
+  /usr/lib/ossl-modules/fips.so:
+    exists: true
+    mode: "0755"
+    owner: root
+    group: root
+    filetype: file
+{{- end }}

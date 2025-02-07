@@ -1,0 +1,12 @@
+files:
+  - mode: "0644"
+    paths:
+      - /opt/bitnami/os/.spdx-os-python-min.spdx
+      - /opt/bitnami/python/.spdx-python-min.spdx
+  - mode: "0755"
+    paths:
+      - /opt/bitnami/python/bin/python3
+      - /opt/bitnami/python/bin/python3-config
+version:
+  bin_name: python3
+  flag: --version

@@ -16,20 +16,16 @@ command:
       - "{{ $module }}"
     {{ end }}
 file:
-  /opt/bitnami/php/etc/php.ini:
-    exists: true
-    filetype: file
-    contents:
-      - "post_max_size = 60M"
-      - "upload_max_filesize = 128M"
-  /opt/bitnami/suitecrm/node_modules:
-    exists: false
   # Disabling opcache to be able to modify parameters using the system setting panel
   /opt/bitnami/php/etc/php.ini:
     exists: true
     filetype: file
     contents:
+      - "post_max_size = 60M"
+      - "upload_max_filesize = 60M"
       - "opcache.enable = Off"
+  /opt/bitnami/suitecrm/node_modules:
+    exists: false
   # HTTP vhost should have been properly rendered
   /opt/bitnami/apache/conf/vhosts/suitecrm-vhost.conf:
     exists: true

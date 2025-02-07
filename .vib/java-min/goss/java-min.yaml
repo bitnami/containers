@@ -1,0 +1,27 @@
+command:
+  check-java-version:
+    exec:
+    - java
+    - --version
+    exit-status: 0
+    # Replace "-" with "+" in the version string
+    stdout:
+    - {{ .Env.APP_VERSION | replace "-" "+" }}
+  check-hello-world:
+    exec:
+    - java
+    - -jar
+    - /shared/java-min/goss/HelloWorld.jar
+    exit-status: 0
+    stdout:
+    - "Hello World"
+{{- $releaseFile := readFile "/etc/os-release" }}
+{{- if contains "photon" $releaseFile }}
+file:
+  /opt/bitnami/bc-fips/bc-fips.jar:
+    exists: true
+    mode: "0644"
+    owner: root
+    group: root
+    filetype: file
+{{- end }}

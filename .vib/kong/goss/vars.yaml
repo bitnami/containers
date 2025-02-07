@@ -1,6 +1,5 @@
 binaries:
   - kong
-  - render-template
 directories:
   - mode: "0775"
     paths:

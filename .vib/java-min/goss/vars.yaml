@@ -1,0 +1,12 @@
+files:
+  - mode: "0644"
+    paths:
+      - /opt/bitnami/os/.spdx-os-java-min.spdx
+      - /opt/bitnami/java/.spdx-jre.spdx
+  - mode: "0755"
+    paths:
+      - /opt/bitnami/java/bin/java
+      - /opt/bitnami/java/bin/jfr
+      - /opt/bitnami/java/bin/jrunscript
+      - /opt/bitnami/java/bin/keytool
+      - /opt/bitnami/java/bin/rmiregistry

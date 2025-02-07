@@ -207,6 +207,10 @@ You can bootstrap the contents of your database by putting LDIF files in the dir
 
 Check the official [OpenLDAP Configuration Reference](https://www.openldap.org/doc/admin26/guide.html) for more information about how to configure OpenLDAP.
 
+### Data Persistence
+
+To ensure that the OpenLDAP state is retained across container restarts and updates, it is recommended to mount a volume at `/bitnami/openldap`.
+
 ### Overlays
 
 Overlays are dynamic modules that can be added to an OpenLDAP server to extend or modify its functionality.
@@ -234,6 +238,41 @@ Check the official page [OpenLDAP, Overlays, Access Logging](https://www.openlda
 * `LDAP_SYNCPROV_SESSIONLOG`: The maximum number of session log entries the session log can record. Will only be applied with `LDAP_ENABLE_SYNCPROV` active. Default: **100**.
 
 Check the official page [OpenLDAP, Overlays, Sync Provider](https://www.openldap.org/doc/admin26/overlays.html#Sync%20Provider) for detailed configuration information.
+
+#### Dynamic List or Member Of
+
+The overlays `dynlist` and `memberof` both require the operational `memberOf` attribute to be present in the loaded schema. During initialization, a check is performed for the presence of this attribute; if it is absent, it is created programmatically.
+
+At the same time, the `msuser` schema declares the same attribute. If both the schema and at least one of the overlays are required, a conflict may arise depending on the load order, such as whether the schema is loaded before or after the overlays. If the overlays are loaded first, the process stops and raises a `Duplicate attribute` error.
+
+In a standard OpenLDAP installation (deb or rpm), its configuration is stored in the main file, which may include another one. In this case, the order is determined by the order of directives.
+
+For configuration flexibility, the container-based approach relies on a file tree structure rather than a master file with includes. To ensure the correct order, the file tree must be read deterministically. Fortunately, Linux sorts folder content using alphanumeric order. This allows overlay loading after the schema by using a keyword that is after `schema` in alphanumeric sorting (i.e. `cn=z-module{N}` will be loaded after `cn=schema` as they are both children of `cn=config`). Doing so, the configuration merging `msuser` schema and `dynlist` (or `memberof`) will load without errors.
+
+IMPORTANT: The `dynlist` requires the schema `dyngroup`. This can be done by adding it to the list of schemas to load through `LDAP_EXTRA_SCHEMAS`.
+
+The following example shows how to declare the module `dynlist` with the support of dynamic (groupOfUrls) and static (groupOfNames) groups. The `olcDatabase={N}mdb` has to be adjusted to the target configuration.
+
+```bash
+ldapadd -D "cn=admin,cn=config" -w "configpassword" <<EOF
+dn: cn=z-module,cn=config
+objectClass: olcModuleList
+cn: z-module
+olcModuleLoad: dynlist.so
+olcModulePath: /opt/bitnami/openldap/lib/openldap
+dn: olcOverlay=dynlist,olcDatabase={N}mdb,cn=config
+objectClass: olcConfig
+objectClass: olcDynListConfig
+objectClass: olcOverlayConfig
+objectClass: top
+olcOverlay: dynlist
+olcDynListAttrSet: groupOfUrls memberURL member+memberOf@groupOfNames
+EOF
+```
+
+This example is compatible with or without the usage of the `msuser` schema.
+
+Check the official page [OpenLDAP, Overlays, Dynamic Lists](https://www.openldap.org/doc/admin26/overlays.html#Dynamic%20Lists) for detailed configuration information.
 
 ### Securing OpenLDAP traffic
 
@@ -372,7 +411,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
+Copyright &copy; 2025 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

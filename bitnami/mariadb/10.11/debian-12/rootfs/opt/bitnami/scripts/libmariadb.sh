@@ -433,7 +433,7 @@ mysql_custom_scripts() {
 }
 
 ########################
-# Starts MySQL/MariaDB in the background and waits until it's ready
+# Starts MariaDB in the background and waits until it's ready
 # Globals:
 #   DB_*
 # Arguments:
@@ -442,20 +442,22 @@ mysql_custom_scripts() {
 #   None
 #########################
 mysql_start_bg() {
-    local -a flags=("--defaults-file=${DB_CONF_FILE}" "--basedir=${DB_BASE_DIR}" "--datadir=${DB_DATA_DIR}" "--socket=${DB_SOCKET_FILE}")
-
-    # Only allow local connections until MySQL is fully initialized, to avoid apps trying to connect to MySQL before it is fully initialized
-    flags+=("--bind-address=127.0.0.1")
-
-    # Add flags specified via the 'DB_EXTRA_FLAGS' environment variable
-    read -r -a db_extra_flags <<< "$(mysql_extra_flags)"
-    [[ "${#db_extra_flags[@]}" -gt 0 ]] && flags+=("${db_extra_flags[@]}")
+    local -a flags=(
+        "--defaults-file=${DB_CONF_FILE}"
+        "--basedir=${DB_BASE_DIR}"
+        "--datadir=${DB_DATA_DIR}"
+        "--socket=${DB_SOCKET_FILE}"
+        # Don't allow connection with TCP/IP until MariaDB is fully initialized, to avoid apps trying to connect to MariaDB before it is fully initialized
+        "--skip-networking"
+        # The slave should only start in 'run.sh', otherwise user credentials would be needed for any connection
+        "--skip-slave-start"
+    )
 
     # Do not start as root, to avoid permission issues
     am_i_root && flags+=("--user=${DB_DAEMON_USER}")
-
-    # The slave should only start in 'run.sh', elseways user credentials would be needed for any connection
-    flags+=("--skip-slave-start")
+    # Add flags specified via the 'DB_EXTRA_FLAGS' environment variable
+    read -r -a db_extra_flags <<< "$(mysql_extra_flags)"
+    [[ "${#db_extra_flags[@]}" -gt 0 ]] && flags+=("${db_extra_flags[@]}")
     flags+=("$@")
 
     is_mysql_running && return
