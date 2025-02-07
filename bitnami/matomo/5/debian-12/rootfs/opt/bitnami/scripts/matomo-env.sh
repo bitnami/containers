@@ -83,7 +83,6 @@ unset matomo_env_vars
 export MATOMO_BASE_DIR="${BITNAMI_ROOT_DIR}/matomo"
 export MATOMO_CONF_DIR="${MATOMO_BASE_DIR}/config"
 export MATOMO_CONF_FILE="${MATOMO_CONF_DIR}/config.ini.php"
-export MATOMO_TRACKER_FILE="${MATOMO_BASE_DIR}/matomo.js"
 
 # Matomo persistence configuration
 export MATOMO_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/matomo"
