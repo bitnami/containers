@@ -1,0 +1,17 @@
+command:
+  check-cloudnative-pg-version:
+    exec:
+    - /manager
+    - version
+    exit-status: 0
+    # Replace "-" with "+" in the version string
+    stdout:
+    - {{ .Env.APP_VERSION | replace "-" "+" }}
+  check-cloudnative-pg-help:
+    exec:
+    - /manager
+    - help
+    exit-status: 0
+    # Replace "-" with "+" in the version string
+    stdout:
+    - pgbouncer management

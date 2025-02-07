@@ -1,0 +1,7 @@
+files:
+  - mode: "0644"
+    paths:
+      - /opt/bitnami/cloudnative-pg/.spdx-cloudnative-pg.spdx
+  - mode: "0755"
+    paths:
+      - /manager
