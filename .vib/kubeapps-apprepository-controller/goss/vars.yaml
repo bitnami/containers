@@ -1,0 +1,10 @@
+files:
+  - mode: "0644"
+    paths:
+      - /opt/bitnami/kubeapps-apprepository-controller/.spdx-kubeapps-apprepository-controller.spdx
+  - mode: "0755"
+    paths:
+      - /apprepository-controller
+version:
+  bin_name: /apprepository-controller
+  flag: --version

@@ -1,0 +1,8 @@
+command:
+  check-oras-help:
+    exec:
+    - /oras
+    - help
+    exit-status: 0
+    stdout:
+    - "oras [command]"
