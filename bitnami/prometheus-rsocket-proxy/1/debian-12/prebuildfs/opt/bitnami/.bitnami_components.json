@@ -1,9 +1,9 @@
 {
-    "java": {
+    "jre": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.8.432-7-1"
+        "version": "1.8.442-7-0"
     },
     "prometheus-rsocket-proxy": {
         "arch": "amd64",
