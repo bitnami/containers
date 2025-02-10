@@ -576,7 +576,7 @@ EOF
     done
     cat >> "${LDAP_SHARE_DIR}/tree.ldif" << EOF
 # Group creation
-dn: ${LDAP_GROUP/#/cn=},${LDAP_USER_OU/#/ou=},${LDAP_ROOT}
+dn: ${LDAP_GROUP/#/cn=},${LDAP_GROUP_OU/#/ou=},${LDAP_ROOT}
 cn: $LDAP_GROUP
 objectClass: groupOfNames
 # User group membership
