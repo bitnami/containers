@@ -14,3 +14,23 @@ directories:
       - /docker-entrypoint-initdb.d
       - /home/openresty
 root_dir: /opt/bitnami
+config_opts:
+  - pcre-jit
+  - compat
+modules:
+  added:
+    - http-dav
+  enabled:
+    - http_stub_status
+    - http_gzip_static
+    - http_realip
+    - http_stub_status
+    - http_v2
+    - http_ssl
+    - mail_ssl
+    - http_gunzip
+    - http_auth_request
+    - http_sub
+    - http_geoip
+    - stream_realip
+    - stream_ssl
