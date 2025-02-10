@@ -3,7 +3,8 @@
     "resources": {
       "url": "{SHA_ARCHIVE}",
       "path": "{VIB_ENV_PATH}"
-    }
+    },
+    "runtime_parameters": "Y29tbWFuZDogWyIvc2hhcmVkL2J1c3lib3giLCAic2xlZXAiLCAiMzYwMCJdCg=="
   },
   "phases": {
     "package": {
@@ -33,6 +34,21 @@
     },
     "verify": {
       "actions": [
+        {
+          "action_id": "goss",
+          "params": {
+            "resources": {
+              "path": "/.vib"
+            },
+            "tests_file": "kaniko/goss/goss.yaml",
+            "vars_file": "kaniko/goss/vars.yaml",
+            "remote": {
+              "pod": {
+                "workload": "deploy-kaniko"
+              }
+            }
+          }
+        },
         {
           "action_id": "trivy",
           "params": {

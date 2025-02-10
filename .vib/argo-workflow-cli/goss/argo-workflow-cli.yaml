@@ -1,0 +1,9 @@
+command:
+  check-argo-help:
+    exec:
+    - /argo
+    - --help
+    exit-status: 0
+    stdout:
+    - "Usage:"
+    - "argo [flags]"

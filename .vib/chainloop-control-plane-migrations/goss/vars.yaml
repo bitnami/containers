@@ -1,0 +1,11 @@
+files:
+  - mode: "0644"
+    paths:
+      - /opt/bitnami/chainloop/.spdx-chainloop-control-plane-migrations.spdx
+  - mode: "0755"
+    paths:
+      - /atlas
+directories:
+  - mode: "0755"
+    paths:
+      - /migrations

@@ -1,0 +1,8 @@
+command:
+  check-control-plane-help:
+    exec:
+    - /control-plane
+    - --help
+    exit-status: 2
+    stderr:
+    - "Usage of /control-plane"

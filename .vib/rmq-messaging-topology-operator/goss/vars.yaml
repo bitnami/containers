@@ -1,0 +1,10 @@
+files:
+  - mode: "0644"
+    paths:
+      - /opt/bitnami/rmq-messaging-topology-operator/.spdx-rmq-messaging-topology-operator.spdx
+  - mode: "0755"
+    paths:
+      - /manager
+version:
+  bin_name: /manager
+  flag: version
