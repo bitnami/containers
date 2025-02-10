@@ -257,30 +257,77 @@ Not every suite will be composed of the same tests, as it will depend on the typ
 Sometimes it is of interest to run the tests locally, for example during development. Though there may be different approaches, you may follow the steps below to execute the tests locally:
 
 1. Download the [GOSS binary for Linux](https://github.com/goss-org/goss/releases/)
-2. Launch the container using some command that ensures it will not exit immediately. Find two examples below:
+2. Launch the container using some command that ensures it will not exit immediately.
 
-    ```bash
-    docker run --rm --name app_name -d -it bitnami/app_name bash -c "tail -f /dev/null"
+    Using a "bash" container, you can use the Docker Compose file below:
+
+    ```yaml
+    services:
+      main:
+        image: bitnami/app_name
+        entrypoint:
+        - bash
+        command:
+        - -c
+        - "tail -f /dev/null"
+        volumes:
+        - /local/path/to/repo/containers/.vib:/shared
     ```
 
-    or for a scratch container (e.g. Node.js minimal):
+    Using a scratch container, you can use the Docker Compose file below:
 
-    ```bash
-    docker run --rm --name app_name -d -it --entrypoint node bitnami/app_name --eval "setTimeout(() => {}, 3600 * 1000);"
+    ```yaml
+    services:
+      copy-busybox:
+        image: us-east1-docker.pkg.dev/bitnami-labs/bitnami-labs/minideb-busybox:latest
+        entrypoint:
+        - bash
+        command:
+        - -ec
+        - |
+          echo "Copying busybox to /tools/busybox"
+          cp /usr/bin/busybox /tools/busybox
+          sync
+          echo "Sleeping for 10 seconds to ensure health check passes"
+          sleep 10
+          echo "Done"
+        healthcheck:
+          test: ["CMD", "test", "-f", "/tools/busybox"]
+          interval: 2s
+          timeout: 1s
+          retries: 10
+        volumes:
+        - shared_tools:/tools
+      main:
+        image: bitnami/app_name
+        entrypoint:
+        - /tools/busybox
+        command:
+        - sleep
+        - "600"
+        volumes:
+        - shared_tools:/tools
+        - /local/path/to/repo/containers/.vib:/shared
+        depends_on:
+          copy-busybox:
+            condition: service_healthy
+
+    volumes:
+      shared_tools:
+        driver: local
     ```
 
-3. Add the binary and test files to the tested container as volumes
+3. Add the Goss binary:
 
     ```bash
     chmod +x /local/path/to/binary/goss-linux-amd64
-    docker cp /local/path/to/binary/goss-linux-amd64 app_name:/usr/local/bin/gossctl
-    docker cp /local/path/to/repo/containers/.vib app_name:/vib
+    docker compose cp /local/path/to/binary/goss-linux-amd64 main:/goss
     ```
 
 4. Launch the tests
 
     ```console
-    $ docker exec --workdir /vib app_name goss --gossfile /vib/app_name/goss/goss.yaml --vars /vib/app_name/goss/vars.yaml validate
+    $ docker compose exec --workdir /shared main /goss --gossfile /shared/app_name/goss/goss.yaml --vars /shared/app_name/goss/vars.yaml validate
     .........
     Total Duration: 1.203s
     Count: 11, Failed: 0, Skipped: 0
