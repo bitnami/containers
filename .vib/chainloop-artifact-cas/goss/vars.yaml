@@ -1,0 +1,7 @@
+files:
+  - mode: "0644"
+    paths:
+      - /opt/bitnami/chainloop/.spdx-chainloop-artifact-cas.spdx
+  - mode: "0755"
+    paths:
+      - /artifact-cas

@@ -1,0 +1,8 @@
+command:
+  check-artifact-cas-help:
+    exec:
+    - /artifact-cas
+    - --help
+    exit-status: 0
+    stderr:
+    - "Usage of /artifact-cas"

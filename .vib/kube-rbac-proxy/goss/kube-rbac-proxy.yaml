@@ -1,0 +1,9 @@
+command:
+  check-kube-rbac-proxy-help:
+    exec:
+    - /kube-rbac-proxy
+    - --help
+    exit-status: 0
+    stdout:
+    - "Usage:"
+    - "kube-rbac-proxy [flags]"

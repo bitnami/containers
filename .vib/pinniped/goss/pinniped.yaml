@@ -1,0 +1,18 @@
+command:
+  check-pinniped-concierge-help:
+    exec:
+    - /pinniped-concierge
+    - --help
+    exit-status: 0
+    stdout:
+    - "Usage:"
+    - "pinniped-concierge [flags]"
+file:
+  /pinniped-concierge:
+    exists: true
+    filetype: symlink
+    linked-to: pinniped-server
+  /pinniped-supervisor:
+    exists: true
+    filetype: symlink
+    linked-to: pinniped-server

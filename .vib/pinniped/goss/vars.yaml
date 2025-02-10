@@ -1,0 +1,11 @@
+files:
+  - mode: "0644"
+    paths:
+      - /opt/bitnami/pinniped/.spdx-pinniped.spdx
+  - mode: "0755"
+    paths:
+      - /pinniped-concierge-kube-cert-agent
+      - /pinniped-server
+version:
+  bin_name: /pinniped-concierge
+  flag: --help

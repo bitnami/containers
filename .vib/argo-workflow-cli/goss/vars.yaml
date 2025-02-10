@@ -1,0 +1,10 @@
+files:
+  - mode: "0644"
+    paths:
+      - /opt/bitnami/argo-workflows/.spdx-argo-workflows.spdx
+  - mode: "0755"
+    paths:
+      - /argo
+version:
+  bin_name: /argo
+  flag: version
