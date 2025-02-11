@@ -8,11 +8,11 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-02-04T22:50:29Z" \
+      org.opencontainers.image.created="2025-02-11T13:37:59Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/kiam/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.2.0-debian-12-r50" \
+      org.opencontainers.image.ref.name="4.2.0-debian-12-r51" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kiam" \
       org.opencontainers.image.title="kiam" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
