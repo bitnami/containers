@@ -219,10 +219,10 @@ EOF
         info "Persisted Matomo installation detected"
         info "Updating Matomo files in persisted data"
         rsync_args=("-a" "$MATOMO_BASE_DIR"/* "$MATOMO_VOLUME_DIR" "--exclude" "$(realpath --relative-to="$MATOMO_BASE_DIR" "$MATOMO_CONF_FILE")")
-        if [[ -n "$MATOMO_EXCLUDE_DATA_FROM_PERSIST" ]]; then
-            for file in $MATOMO_EXCLUDE_DATA_FROM_PERSIST; do
+        if [[ -n "$MATOMO_EXCLUDED_DATA_FROM_UPDATE" ]]; then
+            for file in $MATOMO_EXCLUDED_DATA_FROM_UPDATE; do
                 rsync_args+=("--exclude")
-                rsync_args+=("$file")
+                rsync_args+=("$(realpath --relative-to="$MATOMO_BASE_DIR" "$file")")
             done
         fi
         rsync "${rsync_args[@]}"        
