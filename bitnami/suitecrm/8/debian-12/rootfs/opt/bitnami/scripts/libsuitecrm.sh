@@ -184,6 +184,16 @@ suitecrm_initialize() {
         suitecrm_wait_for_db_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
     fi
 
+    # Logs directory must be owned by the web server daemon user, the PHP code doesn't
+    # check for write permissions but ownership
+    if am_i_root; then
+        for log_file in "${SUITECRM_VOLUME_DIR}/logs/legacy/suitecrm.log" "${SUITECRM_VOLUME_DIR}/logs/prod/prod.log"; do
+            ensure_dir_exists "$(dirname "$log_file")"
+            touch "$log_file"
+        done
+        configure_permissions_ownership "${SUITECRM_VOLUME_DIR}/logs" -d "775" -f "664" -u "$WEB_SERVER_DAEMON_USER" -g "$WEB_SERVER_DAEMON_GROUP"
+    fi
+
     # Ensure SuiteCRM cron jobs are created when running setup with a root user
     # https://docs.suitecrm.com/blog/scheduler-jobs/
     cron_script="${SUITECRM_BASE_DIR}/cron.php"

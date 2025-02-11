@@ -1,0 +1,7 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+gossfile:
+  # Load scripts from .vib/common/goss/templates
+  ../../common/goss/templates/check-ca-certs.yaml: {}
+  ../../common/goss/templates/check-static.yaml: {}

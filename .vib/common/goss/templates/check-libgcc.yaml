@@ -1,0 +1,15 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+########################
+# Test coverage for containers using libgcc
+# Needed vars:
+# - None
+########################
+file:
+  /opt/bitnami/os/.spdx-os-libgcc.spdx:
+    exists: true
+    mode: "0644"
+    owner: root
+    group: root
+    filetype: file

@@ -1,0 +1,10 @@
+files:
+  - mode: "0644"
+    paths:
+      - /opt/bitnami/charts-syncer/.spdx-charts-syncer.spdx
+  - mode: "0755"
+    paths:
+      - /charts-syncer
+version:
+  bin_name: /charts-syncer
+  flag: version

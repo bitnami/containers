@@ -1,0 +1,10 @@
+files:
+  - mode: "0644"
+    paths:
+      - /opt/bitnami/argo-workflow-controller/.spdx-argo-workflow-controller.spdx
+  - mode: "0755"
+    paths:
+      - /workflow-controller
+version:
+  bin_name: /workflow-controller
+  flag: version

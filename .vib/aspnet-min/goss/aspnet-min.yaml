@@ -1,0 +1,8 @@
+command:
+  check-dotnet-help:
+    exec:
+    - dotnet
+    - --help
+    exit-status: 129
+    stdout:
+    - "Usage: dotnet [host-options] [path-to-application]"

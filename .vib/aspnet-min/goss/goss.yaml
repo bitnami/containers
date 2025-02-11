@@ -1,0 +1,13 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+gossfile:
+  # Goss tests exclusive to the current container
+  ../../aspnet-min/goss/aspnet-min.yaml: {}
+  # Load scripts from .vib/common/goss/templates
+  ../../common/goss/templates/check-app-version-no-shell-stdout.yaml: {}
+  ../../common/goss/templates/check-ca-certs.yaml: {}
+  ../../common/goss/templates/check-files.yaml: {}
+  ../../common/goss/templates/check-static.yaml: {}
+  ../../common/goss/templates/check-libgcc.yaml: {}
+  ../../common/goss/templates/check-openssl-fips.yaml: {}

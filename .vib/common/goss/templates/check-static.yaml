@@ -1,0 +1,51 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+########################
+# Test coverage for containers using static
+# Needed vars:
+# - None
+########################
+file:
+  /etc/group:
+    exists: true
+    mode: "0644"
+    owner: root
+    group: root
+    filetype: file
+  /etc/passwd:
+    exists: true
+    mode: "0644"
+    owner: root
+    group: root
+    filetype: file
+  /home/nonroot:
+    exists: true
+    mode: "0755"
+    owner: nonroot
+    group: nonroot
+    filetype: directory
+  /etc/os-release:
+    exists: true
+    filetype: symlink
+    linked-to: /usr/lib/os-release
+  /usr/lib/os-release:
+    exists: true
+    mode: "0644"
+    owner: root
+    group: root
+    filetype: file
+  /tmp:
+    exists: true
+    mode: "1777"
+    filetype: directory
+  /var:
+    exists: true
+    mode: "0755"
+    filetype: directory
+  /opt/bitnami/os/.spdx-os-static.spdx:
+    exists: true
+    mode: "0644"
+    owner: root
+    group: root
+    filetype: file

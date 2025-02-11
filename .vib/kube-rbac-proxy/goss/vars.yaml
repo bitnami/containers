@@ -1,0 +1,10 @@
+files:
+  - mode: "0644"
+    paths:
+      - /opt/bitnami/kube-rbac-proxy/.spdx-kube-rbac-proxy.spdx
+  - mode: "0755"
+    paths:
+      - /kube-rbac-proxy
+version:
+  bin_name: /kube-rbac-proxy
+  flag: --version
