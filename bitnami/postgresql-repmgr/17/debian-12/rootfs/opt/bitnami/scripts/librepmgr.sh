@@ -852,7 +852,8 @@ repmgr_initialize() {
         repmgr_wait_primary_node || exit 1
         repmgr_rewind
     fi
-    postgresql_initialize
+    # Run postgresql initialization skipping replication config
+    postgresql_initialize true
     if ! repmgr_is_file_external "postgresql.conf"; then
         # Allow remote connections, required to register primary and standby nodes
         postgresql_enable_remote_connections
