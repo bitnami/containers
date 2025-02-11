@@ -121,7 +121,7 @@ relativize() {
 }
 
 ########################
-# Configure permisions and ownership recursively
+# Configure permissions and ownership recursively
 # Globals:
 #   None
 # Arguments:
