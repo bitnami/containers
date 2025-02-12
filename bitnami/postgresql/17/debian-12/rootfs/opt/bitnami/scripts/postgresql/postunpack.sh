@@ -6,6 +6,7 @@
 
 # Load libraries
 . /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libpostgresql.sh
 
 # Load PostgreSQL environment variables
@@ -30,3 +31,7 @@ cp -r "${POSTGRESQL_CONF_DIR}/"* "$POSTGRESQL_DEFAULT_CONF_DIR"
 ln -sf /dev/stdout "$POSTGRESQL_LOG_DIR/postgresql.log"
 ln -sf /dev/stdout "$POSTGRESQL_LOG_DIR/postgresql.csv"
 ln -sf /dev/stdout "$POSTGRESQL_LOG_DIR/postgresql.json"
+
+# Add extra non-root user for compatibility with cloudnative-pg
+# https://github.com/cloudnative-pg/cloudnative-pg/blob/v1.25.0/api/v1/cluster_types.go#L91
+ensure_user_exists postgres --group root --uid 26 --system
