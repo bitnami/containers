@@ -25,6 +25,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # variable will be overridden with the value specified in that file
 matomo_env_vars=(
     MATOMO_DATA_TO_PERSIST
+    MATOMO_EXCLUDED_DATA_FROM_UPDATE
     MATOMO_SKIP_BOOTSTRAP
     MATOMO_PROXY_HOST_HEADER
     MATOMO_PROXY_CLIENT_HEADER
@@ -86,6 +87,8 @@ export MATOMO_CONF_FILE="${MATOMO_CONF_DIR}/config.ini.php"
 # Matomo persistence configuration
 export MATOMO_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/matomo"
 export MATOMO_DATA_TO_PERSIST="${MATOMO_DATA_TO_PERSIST:-$MATOMO_BASE_DIR}"
+export MATOMO_EXCLUDED_DATA_FROM_UPDATE="${MATOMO_EXCLUDED_DATA_FROM_UPDATE:-}"
+
 
 # Matomo configuration
 export MATOMO_SKIP_BOOTSTRAP="${MATOMO_SKIP_BOOTSTRAP:-}" # only used during the first initialization
