@@ -30,7 +30,6 @@ stderr_print() {
         printf "%b\\n" "${*}" >&2
     fi
 }
-
 ########################
 # Log message
 # Arguments:
