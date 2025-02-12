@@ -26,8 +26,9 @@ stderr_print() {
     local bool="${BITNAMI_QUIET:-false}"
     # comparison is performed without regard to the case of alphabetic characters
     shopt -s nocasematch
-    ! [[ "$bool" = 1 || "$bool" =~ ^(yes|true)$ ]] && printf "%b\\n" "${*}" >&2
-
+    if ! [[ "$bool" = 1 || "$bool" =~ ^(yes|true)$ ]]; then
+        printf "%b\\n" "${*}" >&2
+    fi
 }
 
 ########################
@@ -39,15 +40,13 @@ stderr_print() {
 #########################
 log() {
     local prefix=""
-    local suffix=""
     local color_bool="${BITNAMI_COLOR:-true}"
     if [[ "$color_bool" = 1 || "$color_bool" =~ ^(yes|true)$ ]]; then
         prefix="${CYAN}${MODULE:-} ${MAGENTA}$(date "+%T.%2N ")${RESET}"
-        suffix="${RESET}"
     else
         prefix="${MODULE:-} $(date "+%T.%2N ")"
     fi
-    stderr_print "${prefix}${*}${suffix}"
+    stderr_print "${prefix}${*}${RESET}"
 }
 ########################
 # Log an 'info' message
@@ -58,10 +57,11 @@ log() {
 #########################
 info() {
     local msg_color=""
-    local reset_color="$RESET"
     local color_bool="${BITNAMI_COLOR:-true}"
-    [[ "$color_bool" = 1 || "$color_bool" =~ ^(yes|true)$ ]] && msg_color="$GREEN"
-    log "${msg_color}INFO ${reset_color} ==> ${*}"
+    if [[ "$color_bool" = 1 || "$color_bool" =~ ^(yes|true)$ ]];then
+        msg_color="$GREEN"
+    fi
+    log "${msg_color}INFO ${RESET} ==> ${*}"
 }
 ########################
 # Log message
@@ -72,10 +72,11 @@ info() {
 #########################
 warn() {
     local msg_color=""
-    local reset_color="$RESET"
     local color_bool="${BITNAMI_COLOR:-true}"
-    [[ "$color_bool" = 1 || "$color_bool" =~ ^(yes|true)$ ]] && msg_color="$YELLOW"
-    log "${msg_color}WARN ${reset_color} ==> ${*}"
+    if [[ "$color_bool" = 1 || "$color_bool" =~ ^(yes|true)$ ]];then
+        msg_color="$YELLOW"
+    fi
+    log "${msg_color}WARN ${RESET} ==> ${*}"
 }
 ########################
 # Log an 'error' message
@@ -86,10 +87,11 @@ warn() {
 #########################
 error() {
     local msg_color=""
-    local reset_color="$RESET"
     local color_bool="${BITNAMI_COLOR:-true}"
-    [[ "$color_bool" = 1 || "$color_bool" =~ ^(yes|true)$ ]] && msg_color="$RED"
-    log "${msg_color}ERROR${reset_color} ==> ${*}"
+    if [[ "$color_bool" = 1 || "$color_bool" =~ ^(yes|true)$ ]];then
+        msg_color="$RED"
+    fi
+    log "${msg_color}ERROR${RESET} ==> ${*}"
 }
 ########################
 # Log an "error" message and exit with non-zero value
@@ -100,10 +102,11 @@ error() {
 #########################
 errorX() {
     local msg_color=""
-    local reset_color="$RESET"
     local color_bool="${BITNAMI_COLOR:-true}"
-    [[ "$color_bool" = 1 || "$color_bool" =~ ^(yes|true)$ ]] && msg_color="$RED"
-    log "${msg_color}ERROR${reset_color} ==> ${*}"
+    if [[ "$color_bool" = 1 || "$color_bool" =~ ^(yes|true)$ ]] ;then
+        msg_color="$RED"
+    fi
+    log "${msg_color}ERROR${RESET} ==> ${*}"
     exit 1
 }
 ########################
@@ -117,14 +120,15 @@ errorX() {
 #########################
 debug() {
     local msg_color=""
-    local reset_color="$RESET"
     local color_bool="${BITNAMI_COLOR:-true}"
-    [[ "$color_bool" = 1 || "$color_bool" =~ ^(yes|true)$ ]] && msg_color="$MAGENTA"
+    if [[ "$color_bool" = 1 || "$color_bool" =~ ^(yes|true)$ ]] ;then
+        msg_color="$MAGENTA"
+    fi
     # comparison is performed without regard to the case of alphabetic characters
     shopt -s nocasematch
     local debug_bool="${BITNAMI_DEBUG:-false}"
     if [[ "$debug_bool" = 1 || "$debug_bool" =~ ^(yes|true)$ ]]; then
-        log "${msg_color}DEBUG${reset_color} ==> ${*}"
+        log "${msg_color}DEBUG${RESET} ==> ${*}"
     fi
 }
 ########################
