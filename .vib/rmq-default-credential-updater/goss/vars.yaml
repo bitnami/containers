@@ -5,6 +5,3 @@ files:
   - mode: "0755"
     paths:
       - /default-user-credential-updater
-version:
-  bin_name: /default-user-credential-updater
-  flag: version

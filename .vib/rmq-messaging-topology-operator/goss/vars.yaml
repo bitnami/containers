@@ -5,6 +5,3 @@ files:
   - mode: "0755"
     paths:
       - /manager
-version:
-  bin_name: /manager
-  flag: version
