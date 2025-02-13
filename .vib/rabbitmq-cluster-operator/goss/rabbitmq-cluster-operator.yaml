@@ -5,5 +5,4 @@ command:
     - --help
     exit-status: 0
     stdout:
-    - "Usage:"
-    - "manager [flags]"
+    - "Usage of /manager"
