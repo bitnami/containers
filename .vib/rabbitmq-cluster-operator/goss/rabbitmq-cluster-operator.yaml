@@ -4,5 +4,5 @@ command:
     - /manager
     - --help
     exit-status: 0
-    stdout:
+    stderr:
     - "Usage of /manager"
