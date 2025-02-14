@@ -576,7 +576,7 @@ postgresql_clean_from_restart() {
     )
 
     # Enable recovery only when POSTGRESQL_PERFORM_RESTORE feature flag is set
-    if [[ -z "${POSTGRESQL_PERFORM_RESTORE:-}" ]]; then
+    if ! is_boolean_yes "$POSTGRESQL_PERFORM_RESTORE" ; then
         files+=("$POSTGRESQL_DATA_DIR"/recovery.signal)
     fi
 
