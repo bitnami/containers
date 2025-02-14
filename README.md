@@ -71,6 +71,7 @@ Enterprises that love Bitnami can now purchase a Bitnami Premium subscription fr
 * All LTS branches of all Bitnami application packages maintained up-to-date
 * Unlimited pulls of all Bitnami Premium containers and Helm charts from Docker Hub
 * Secure software supply chain metadata including Software Bills of Material (SBOMs), SLSA 3 pipeline validation with in-toto attestations, Notation and Cosign signatures, Build-time CVE and anti-virus scan reports, and more.
+* Minimal application runtimes (Node.js, Python, Ruby, Java, ASP.NET, PHP) with comparable and often smaller size than distroless alternatives.
 
 Alongside the launch of Bitnami Premium, we are making some changes to how we deliver the Bitnami Application Catalog:
 
@@ -101,6 +102,10 @@ Bitnami Premium differs from Tanzu Application Catalog in that, just like our fr
 * **App-specific customization**: With TAC, you can inject your own customizations such as user settings, certificates, or plugins into our SLSA 3 pipeline, so the artifacts you receive are truly promotable to production environments.
 * **Software knowledge graph**: This keeps track of all your software dependencies at the individual package level. It continuously scans them for vulnerabilities, and organizes them into a searchable graph database so you can see in real-time which versions of which apps are affected and patched. It also includes useful information such as open source licenses, package management ecosystem data, and more.
 * **UI and API**: TAC includes access to a user interface where you can add and remove applications from your catalog, and interact with the software knowledge graph to see at-a-glance details about your software. The [TAC API](https://developer.broadcom.com/xapis/application-catalog/latest/) enables you to build information from the software knowledge graph into your pipelines to ensure you are keeping your applications up-to-date with the latest patched applications.
+
+#### Minimal application runtimes
+
+Both Bitnami Premium and TAC ship include a set of minimal application runtimes built with only minimal set of dependencies required to run applications in different programming languages. Bitnami Premium minimal application runtimes are based on Debian 12, whereas TAC includes Debian 12 and Photon OS based container images for all the supported programming languages (.NET, Node.js, Java, PHP, Python and Ruby). A scratch-like static container image which is only 3Mb in size and a glibc based container image complete both of this products giving your teams options to run both dynamically and statically compiled applications built in languages like C/C++, Golang or Rust, amongst others. These minimal application runtimes are much smaller in size than their traditional alternatives, have much fewer CVEs and have a smoother maintenance lifecycle due to the minimal dependencies. There are more details about the topic in [this announcement](https://blogs.vmware.com/tanzu/introducing-minimal-application-runtimes-in-tanzu-application-catalog-and-bitnami-premium/).
 
 ### Continuing our long tradition of partnerships
 
