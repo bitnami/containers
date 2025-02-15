@@ -137,7 +137,7 @@ networks:
     driver: bridge
 services:
   openldap:
-    image: bitnami/openldap:2
+    image: bitnami/openldap:2.6
     ports:
       - '1389:1389'
       - '1636:1636'
