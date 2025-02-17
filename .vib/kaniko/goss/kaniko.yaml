@@ -1,0 +1,17 @@
+command:
+  check-executor-help:
+    exec:
+    - /kaniko/executor
+    - --help
+    exit-status: 0
+    stdout:
+    - "Usage:"
+    - "executor [command]"
+  check-warmer-help:
+    exec:
+    - /kaniko/warmer
+    - --help
+    exit-status: 0
+    stdout:
+    - "Usage:"
+    - "cache warmer [flags]"

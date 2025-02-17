@@ -4,5 +4,5 @@
 services:
   golang:
     tty: true # Enables debugging capabilities when attached to this container.
-    image: docker.io/bitnami/golang:1.23
+    image: docker.io/bitnami/golang:1.24
     command: ["sleep", "infinity"] # To keep the container running

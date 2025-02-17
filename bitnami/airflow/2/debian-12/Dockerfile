@@ -8,15 +8,15 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-02-09T00:21:59Z" \
+      org.opencontainers.image.created="2025-02-11T12:14:45Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/airflow/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.10.4-debian-12-r7" \
+      org.opencontainers.image.ref.name="2.10.5-debian-12-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/airflow" \
       org.opencontainers.image.title="airflow" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="2.10.4"
+      org.opencontainers.image.version="2.10.5"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -32,7 +32,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
       "wait-for-port-1.0.8-11-linux-${OS_ARCH}-debian-12" \
       "python-3.12.9-1-linux-${OS_ARCH}-debian-12" \
       "ini-file-1.4.7-11-linux-${OS_ARCH}-debian-12" \
-      "airflow-2.10.4-3-linux-${OS_ARCH}-debian-12" \
+      "airflow-2.10.5-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -58,7 +58,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/airflow/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV AIRFLOW_HOME="/opt/bitnami/airflow" \
-    APP_VERSION="2.10.4" \
+    APP_VERSION="2.10.5" \
     BITNAMI_APP_NAME="airflow" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \

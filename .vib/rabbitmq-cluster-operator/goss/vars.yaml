@@ -1,0 +1,7 @@
+files:
+  - mode: "0644"
+    paths:
+      - /opt/bitnami/rabbitmq-cluster-operator/.spdx-rabbitmq-cluster-operator.spdx
+  - mode: "0755"
+    paths:
+      - /manager

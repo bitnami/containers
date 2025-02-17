@@ -1,0 +1,9 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+gossfile:
+  # Goss tests exclusive to the current container
+  ../../rabbitmq-cluster-operator/goss/rabbitmq-cluster-operator.yaml: {}
+  # Load scripts from .vib/common/goss/templates
+  ../../common/goss/templates/check-ca-certs.yaml: {}
+  ../../common/goss/templates/check-files.yaml: {}

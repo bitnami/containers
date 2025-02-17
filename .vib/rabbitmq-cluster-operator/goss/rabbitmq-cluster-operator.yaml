@@ -1,0 +1,8 @@
+command:
+  check-manager-help:
+    exec:
+    - /manager
+    - --help
+    exit-status: 0
+    stderr:
+    - "Usage of /manager"

@@ -232,6 +232,14 @@ RUN opm get openresty/lua-resty-lock
 
 Additionally, you can install your custom Lua modules using [your custom init scripts](#initializing-a-new-instance).
 
+#### NGINX HTTP DAV module
+
+The [module ngx_http_dav_module](https://nginx.org/en/docs/http/ngx_http_dav_module.html) is intended for file management automation via the WebDAV protocol. In current Bitnami images, this module is built as a dynamic module located under the `/opt/bitnami/openresty/nginx/modules` directory. You will need to load it in your configuration for you to be able to use its directives.
+
+```
+load_module /opt/bitnami/openresty/nginx/modules/ngx_http_dav_module.so;
+```
+
 ## Reverse proxy to other containers
 
 OpenResty can be used to reverse proxy to other containers using Docker's linking system. This is particularly useful if you want to serve dynamic content through an OpenResty frontend. To do so, [add a server block](#adding-custom-server-blocks) like the following in the `/opt/bitnami/openresty/nginx/conf/server_blocks/` folder:
@@ -353,6 +361,10 @@ docker run --name nginx bitnami/openresty:latest
 ```
 
 ## Notable Changes
+
+### Starting February 10, 2025
+
+* The [module ngx_http_dav_module](http://nginx.org/en/docs/http/ngx_http_dav_module.html), WebDAV protocol, has been converted into a dynamic module.
 
 ### Starting January 16, 2024
 

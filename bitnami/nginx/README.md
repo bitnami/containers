@@ -496,6 +496,14 @@ volumes:
     driver: local
 ```
 
+#### NGINX HTTP DAV module
+
+The [module ngx_http_dav_module](https://nginx.org/en/docs/http/ngx_http_dav_module.html) is intended for file management automation via the WebDAV protocol. In current Bitnami images, this module is built as a dynamic module located under the `/opt/bitnami/nginx/modules` directory. You will need to load it in your NGINX configuration for you to be able to use its directives.
+
+```text
+load_module /opt/bitnami/nginx/modules/ngx_http_dav_module.so;
+```
+
 #### Adding custom NGINX modules
 
 To add a custom NGINX module, it is necessary to compile NGINX with that module and copy over the appropriate files to the Bitnami image.
@@ -604,6 +612,10 @@ docker-compose up nginx
 * [Create An EMP Development Environment With Bitnami Containers](https://docs.bitnami.com/containers/how-to/create-emp-environment-containers/)
 
 ## Notable Changes
+
+### Starting February 10, 2025
+
+* The [module ngx_http_dav_module](http://nginx.org/en/docs/http/ngx_http_dav_module.html), WebDAV protocol, has been converted into a dynamic module.
 
 ### 1.24.0-debian-11-r142 and 1.25.2-debian-11-r33
 

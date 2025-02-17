@@ -1,0 +1,14 @@
+files:
+  - mode: "0644"
+    paths:
+      - /opt/bitnami/kaniko/.spdx-kaniko.spdx
+  - mode: "0755"
+    paths:
+      - /kaniko/docker-credential-acr-env
+      - /kaniko/docker-credential-ecr-login
+      - /kaniko/docker-credential-gcr
+      - /kaniko/executor
+      - /kaniko/warmer
+version:
+  bin_name: /kaniko/executor
+  flag: version

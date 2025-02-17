@@ -2,19 +2,20 @@ command:
   check-java-version:
     exec:
     - java
-    {{- if regexMatch "^1.8.+" .Env.APP_VERSION }}
+  {{- if regexMatch "^1.8.+" .Env.APP_VERSION }}
     - -version
     exit-status: 0
-    # Replace "-" with "_" in the version string
-    stdout:
-    - {{ .Env.APP_VERSION | replace "-" "_" }}
-    {{- else }}
+    # APP_VERSION follows format 1.8.XXX-Y
+    # while stdout shows 1.8.0_XXX
+    stderr:
+      - /openjdk version "{{ (semver .Env.APP_VERSION).Major }}.{{ (semver .Env.APP_VERSION).Minor }}.*_{{ (semver .Env.APP_VERSION).Patch }}"/
+  {{- else }}
     - --version
     exit-status: 0
     # Replace "-" with "+" in the version string
     stdout:
     - {{ .Env.APP_VERSION | replace "-" "+" }}
-    {{- end }}
+  {{- end }}
   check-hello-world:
     exec:
     - java

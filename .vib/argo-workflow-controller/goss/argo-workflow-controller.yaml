@@ -1,0 +1,9 @@
+command:
+  check-workflow-controller-help:
+    exec:
+    - /workflow-controller
+    - --help
+    exit-status: 0
+    stdout:
+    - "Usage:"
+    - "workflow-controller [flags]"

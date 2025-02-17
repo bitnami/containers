@@ -1,0 +1,8 @@
+command:
+  check-atlas-help:
+    exec:
+    - /atlas
+    - --help
+    exit-status: 0
+    stdout:
+    - "atlas [command]"
