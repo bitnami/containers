@@ -9,12 +9,12 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "17.2.0-0"
+        "version": "17.3.0-0"
     },
     "wait-for-port": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.8-11"
+        "version": "1.0.8-12"
     }
 }
