@@ -9,18 +9,18 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "25.3.2-16-0"
+        "version": "25.3.2-17-0"
     },
     "ini-file": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.4.7-11"
+        "version": "1.4.7-12"
     },
     "wait-for-port": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.8-11"
+        "version": "1.0.8-12"
     }
 }
