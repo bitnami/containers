@@ -8,11 +8,11 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-02-14T14:40:05Z" \
+      org.opencontainers.image.created="2025-02-18T14:35:55Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/discourse/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.4.0-debian-12-r1" \
+      org.opencontainers.image.ref.name="3.4.0-debian-12-r2" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/discourse" \
       org.opencontainers.image.title="discourse" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -30,11 +30,11 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "python-3.12.9-2-linux-${OS_ARCH}-debian-12" \
       "wait-for-port-1.0.8-12-linux-${OS_ARCH}-debian-12" \
-      "ruby-3.2.7-0-linux-${OS_ARCH}-debian-12" \
+      "ruby-3.4.2-0-linux-${OS_ARCH}-debian-12" \
       "postgresql-client-17.3.0-0-linux-${OS_ARCH}-debian-12" \
       "node-18.20.6-1-linux-${OS_ARCH}-debian-12" \
       "brotli-1.1.0-4-linux-${OS_ARCH}-debian-12" \
-      "discourse-3.4.0-1-linux-${OS_ARCH}-debian-12" \
+      "discourse-3.4.0-2-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
