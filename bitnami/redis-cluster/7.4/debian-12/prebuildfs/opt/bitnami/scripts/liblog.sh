@@ -93,22 +93,6 @@ error() {
     log "${msg_color}ERROR${RESET} ==> ${*}"
 }
 ########################
-# Log an "error" message and exit with non-zero value
-# Arguments:
-#   Message to log
-# Returns:
-#   None
-#########################
-errorX() {
-    local msg_color=""
-    local color_bool="${BITNAMI_COLOR:-true}"
-    if [[ "$color_bool" = 1 || "$color_bool" =~ ^(yes|true)$ ]] ;then
-        msg_color="$RED"
-    fi
-    log "${msg_color}ERROR${RESET} ==> ${*}"
-    exit 1
-}
-########################
 # Log a 'debug' message
 # Globals:
 #   BITNAMI_DEBUG
