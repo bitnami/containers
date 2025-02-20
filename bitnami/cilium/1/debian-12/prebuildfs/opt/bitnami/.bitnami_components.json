@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "7.5.0-0"
+        "version": "7.5.0-1"
     },
     "cilium": {
         "arch": "amd64",
@@ -15,12 +15,12 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "0.3.28-15"
+        "version": "0.3.28-16"
     },
     "llvm": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "18.1.8-1"
+        "version": "18.1.8-2"
     }
 }
