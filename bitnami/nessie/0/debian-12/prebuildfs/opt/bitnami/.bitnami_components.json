@@ -3,12 +3,12 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "21.0.6-10-0"
+        "version": "21.0.6-10-1"
     },
     "nessie": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "0.102.5-0"
+        "version": "0.103.0-0"
     }
 }
