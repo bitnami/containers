@@ -3,13 +3,13 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "0.3.28-15"
+        "version": "0.3.28-16"
     },
     "grpc-health-probe": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "0.4.37-3"
+        "version": "0.4.37-4"
     },
     "hubble-relay": {
         "arch": "amd64",
