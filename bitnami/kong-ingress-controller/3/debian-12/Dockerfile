@@ -8,11 +8,11 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-02-19T19:11:27Z" \
+      org.opencontainers.image.created="2025-02-20T14:07:03Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/kong-ingress-controller/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.4.2-debian-12-r1" \
+      org.opencontainers.image.ref.name="3.4.2-debian-12-r2" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kong-ingress-controller" \
       org.opencontainers.image.title="kong-ingress-controller" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -29,7 +29,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "wait-for-port-1.0.8-12-linux-${OS_ARCH}-debian-12" \
+      "wait-for-port-1.0.8-13-linux-${OS_ARCH}-debian-12" \
       "kong-ingress-controller-3.4.2-2-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
