@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "11.4.5-1"
+        "version": "11.4.5-2"
     },
     "nginx": {
         "arch": "amd64",
@@ -15,7 +15,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.2.27-8"
+        "version": "8.2.27-9"
     },
     "render-template": {
         "arch": "amd64",
@@ -27,6 +27,6 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "6.7.2-1"
+        "version": "6.7.2-2"
     }
 }
