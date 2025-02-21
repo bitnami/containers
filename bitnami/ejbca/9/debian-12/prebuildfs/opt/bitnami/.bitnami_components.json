@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "9.0.0-1"
+        "version": "9.0.0-2"
     },
     "java": {
         "arch": "amd64",
@@ -21,12 +21,12 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "10.11.11-1"
+        "version": "10.11.11-2"
     },
     "wildfly": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "32.0.1-7"
+        "version": "32.0.1-8"
     }
 }

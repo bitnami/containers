@@ -9,11 +9,11 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-02-20T18:30:39Z" \
+      org.opencontainers.image.created="2025-02-21T17:17:21Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/ejbca/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="9.0.0-debian-12-r5" \
+      org.opencontainers.image.ref.name="9.0.0-debian-12-r6" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/ejbca" \
       org.opencontainers.image.title="ejbca" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -27,14 +27,14 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages acl ca-certificates curl libaudit1 libcap-ng0 libgcc-s1 libicu72 liblzma5 libncurses6 libpam0g libssl3 libstdc++6 libtinfo6 libxml2 procps zlib1g
+RUN install_packages acl ca-certificates curl libaio1 libaudit1 libcap-ng0 libgcc-s1 libicu72 liblzma5 libncurses6 libpam0g libssl3 libstdc++6 libtinfo6 libxml2 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "jre-21.0.6-10-1-linux-${OS_ARCH}-debian-12" \
-      "wildfly-32.0.1-7-linux-${OS_ARCH}-debian-12" \
-      "mysql-client-10.11.11-1-linux-${OS_ARCH}-debian-12" \
+      "wildfly-32.0.1-8-linux-${OS_ARCH}-debian-12" \
+      "mysql-client-10.11.11-2-linux-${OS_ARCH}-debian-12" \
       "java-17.0.14-10-1-linux-${OS_ARCH}-debian-12" \
-      "ejbca-9.0.0-1-linux-${OS_ARCH}-debian-12" \
+      "ejbca-9.0.0-2-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
