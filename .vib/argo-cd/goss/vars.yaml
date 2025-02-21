@@ -10,7 +10,6 @@ directories:
     - /bitnami/argocd
     mode: "0775"
   - paths:
-    - /opt/bitnami/argo-cd/app
     - /opt/bitnami/argo-cd/bin
 root_dir: /opt/bitnami
 sed_in_place:
