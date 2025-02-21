@@ -1,0 +1,11 @@
+binaries:
+  - arangodb_operator
+  - envoy
+root_dir: /opt/bitnami
+directories:
+  - paths:
+      - /opt/bitnami/kube-arangodb
+      - /opt/bitnami/envoy
+version:
+  bin_name: arangodb_operator
+  flag: version

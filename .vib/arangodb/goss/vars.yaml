@@ -1,0 +1,16 @@
+binaries:
+  - arangod
+  - arangobench
+  - arangodump
+  - arangoexport
+  - arangoimport
+  - arangorestore
+  - arangosh
+  - arangovpack
+root_dir: /opt/bitnami
+directories:
+  - paths:
+      - /opt/bitnami/arangodb
+version:
+  bin_name: arangod
+  flag: --version
