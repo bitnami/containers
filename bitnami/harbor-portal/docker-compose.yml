@@ -67,7 +67,7 @@ services:
       - ./config/core/app.conf:/etc/core/app.conf:ro
       - ./config/core/private_key.pem:/etc/core/private_key.pem:ro
   portal:
-    image: docker.io/bitnami/harbor:2
+    image: docker.io/bitnami/harbor-portal:2
     container_name: harbor-portal
     depends_on:
       - core
