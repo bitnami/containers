@@ -30,7 +30,6 @@ stderr_print() {
         printf "%b\\n" "${*}" >&2
     fi
 }
-
 ########################
 # Log message
 # Arguments:
@@ -39,7 +38,14 @@ stderr_print() {
 #   None
 #########################
 log() {
-    stderr_print "${CYAN}${MODULE:-} ${MAGENTA}$(date "+%T.%2N ")${RESET}${*}"
+    local prefix=""
+    local color_bool="${BITNAMI_COLOR:-true}"
+    if [[ "$color_bool" = 1 || "$color_bool" =~ ^(yes|true)$ ]]; then
+        prefix="${CYAN}${MODULE:-} ${MAGENTA}$(date "+%T.%2N ")${RESET}"
+    else
+        prefix="${MODULE:-} $(date "+%T.%2N ")"
+    fi
+    stderr_print "${prefix}${*}${RESET}"
 }
 ########################
 # Log an 'info' message
@@ -49,7 +55,12 @@ log() {
 #   None
 #########################
 info() {
-    log "${GREEN}INFO ${RESET} ==> ${*}"
+    local msg_color=""
+    local color_bool="${BITNAMI_COLOR:-true}"
+    if [[ "$color_bool" = 1 || "$color_bool" =~ ^(yes|true)$ ]];then
+        msg_color="$GREEN"
+    fi
+    log "${msg_color}INFO ${RESET} ==> ${*}"
 }
 ########################
 # Log message
@@ -59,7 +70,12 @@ info() {
 #   None
 #########################
 warn() {
-    log "${YELLOW}WARN ${RESET} ==> ${*}"
+    local msg_color=""
+    local color_bool="${BITNAMI_COLOR:-true}"
+    if [[ "$color_bool" = 1 || "$color_bool" =~ ^(yes|true)$ ]];then
+        msg_color="$YELLOW"
+    fi
+    log "${msg_color}WARN ${RESET} ==> ${*}"
 }
 ########################
 # Log an 'error' message
@@ -69,7 +85,12 @@ warn() {
 #   None
 #########################
 error() {
-    log "${RED}ERROR${RESET} ==> ${*}"
+    local msg_color=""
+    local color_bool="${BITNAMI_COLOR:-true}"
+    if [[ "$color_bool" = 1 || "$color_bool" =~ ^(yes|true)$ ]];then
+        msg_color="$RED"
+    fi
+    log "${msg_color}ERROR${RESET} ==> ${*}"
 }
 ########################
 # Log a 'debug' message
@@ -81,15 +102,18 @@ error() {
 #   None
 #########################
 debug() {
-    # 'is_boolean_yes' is defined in libvalidations.sh, but depends on this file so we cannot source it
-    local bool="${BITNAMI_DEBUG:-false}"
+    local msg_color=""
+    local color_bool="${BITNAMI_COLOR:-true}"
+    if [[ "$color_bool" = 1 || "$color_bool" =~ ^(yes|true)$ ]] ;then
+        msg_color="$MAGENTA"
+    fi
     # comparison is performed without regard to the case of alphabetic characters
     shopt -s nocasematch
-    if [[ "$bool" = 1 || "$bool" =~ ^(yes|true)$ ]]; then
-        log "${MAGENTA}DEBUG${RESET} ==> ${*}"
+    local debug_bool="${BITNAMI_DEBUG:-false}"
+    if [[ "$debug_bool" = 1 || "$debug_bool" =~ ^(yes|true)$ ]]; then
+        log "${msg_color}DEBUG${RESET} ==> ${*}"
     fi
 }
-
 ########################
 # Indent a string
 # Arguments:
