@@ -11,7 +11,7 @@
 This container is part of the [Harbor solution](https://github.com/bitnami/charts/tree/main/bitnami/harbor) that is primarily intended to be deployed in Kubernetes.
 
 ```console
-docker run --name harbor bitnami/harbor:latest
+docker run --name harbor bitnami/harbor-protal:latest
 ```
 
 ## Why use Bitnami Images?
