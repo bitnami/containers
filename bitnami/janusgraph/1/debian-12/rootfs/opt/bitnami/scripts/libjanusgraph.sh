@@ -79,6 +79,10 @@ janusgraph_properties_configure_from_environment_variables() {
         value="${!var}"
         janusgraph_properties_conf_set "$key" "$value"
     done
+
+    [[ -n "$JANUSGRAPH_STORAGE_PASSWORD" ]] && janusgraph_properties_conf_set "storage.password" "$JANUSGRAPH_STORAGE_PASSWORD"
+
+    true
 }
 
 ########################

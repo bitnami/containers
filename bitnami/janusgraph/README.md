@@ -73,6 +73,7 @@ docker build -t bitnami/APP:latest .
 | `JANUSGRAPH_PROPERTIES`          | Path to JanusGraph properties file                                                              | `${JANUSGRAPH_CONF_DIR}/janusgraph.properties` |
 | `JANUSGRAPH_HOST`                | The name of the host to bind the JanusGraph server to.                                          | `0.0.0.0`                                      |
 | `JANUSGRAPH_PORT_NUMBER`         | The port to bind the JanusGraph server to.                                                      | `8182`                                         |
+| `JANUSGRAPH_STORAGE_PASSWORD`    | Password for the Janusgraph storage                                                             | `nil`                                          |
 | `GREMLIN_REMOTE_HOSTS`           | Comma-separated list of Gremlin remote hosts                                                    | `localhost`                                    |
 | `GREMLIN_REMOTE_PORT`            | Comma-separated list of Gremlin remote port                                                     | `$JANUSGRAPH_PORT_NUMBER`                      |
 | `GREMLIN_AUTOCONFIGURE_POOL`     | If set to true, the gremlinPool will be determined by Runtime.availableProcessors().            | `false`                                        |
