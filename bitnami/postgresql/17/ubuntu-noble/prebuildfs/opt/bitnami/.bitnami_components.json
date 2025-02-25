@@ -1,0 +1,8 @@
+{
+    "postgresql": {
+        "arch": "amd64",
+        "distro": "ubuntu-noble",
+        "type": "NAMI",
+        "version": "17.4.0-2"
+    }
+}
