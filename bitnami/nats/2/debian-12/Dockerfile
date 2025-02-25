@@ -15,7 +15,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "nats-2.10.25-4-linux-${OS_ARCH}-debian-12" \
+      "nats-2.10.26-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -38,20 +38,20 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-02-20T22:59:06Z" \
+      org.opencontainers.image.created="2025-02-25T19:33:54Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.10.25-debian-12-r3" \
+      org.opencontainers.image.ref.name="2.10.26-debian-12-r0" \
       org.opencontainers.image.title="nats" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="2.10.25"
+      org.opencontainers.image.version="2.10.26"
 
 COPY rootfs /
 COPY --from=builder /opt/bitnami/nats/bin/nats-server /nats-server
 COPY --from=builder /opt/bitnami/nats/.spdx-nats.spdx /opt/bitnami/nats/.spdx-nats.spdx
 COPY --from=builder /opt/bitnami/nats/licenses /opt/bitnami/nats/licenses
 
-ENV APP_VERSION="2.10.25" \
+ENV APP_VERSION="2.10.26" \
     BITNAMI_APP_NAME="nats"
 
 EXPOSE 4222 6222 8222
