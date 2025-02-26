@@ -4,6 +4,7 @@
 command:
   check-app-version:
     exec: echo "SECRET_KEY='123456789abcdef'" > /tmp/superset_config.py && SUPERSET_CONFIG_PATH="/tmp/superset_config.py" superset version
+    timeout: 30000
     exit-status: 0
     stdout:
     - "{{ .Env.APP_VERSION }}"
