@@ -48,6 +48,7 @@ solr_env_vars=(
     SOLR_ZK_CHROOT
     SOLR_ZK_HOSTS
     SOLR_COLLECTION
+    SOLR_ZK_CONNECTION_ATTEMPT_TIMEOUT
 )
 for env_var in "${solr_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -109,5 +110,6 @@ export SOLR_ZK_MAX_RETRIES="${SOLR_ZK_MAX_RETRIES:-5}"
 export SOLR_ZK_SLEEP_TIME="${SOLR_ZK_SLEEP_TIME:-5}"
 export SOLR_ZK_CHROOT="${SOLR_ZK_CHROOT:-/solr}"
 export SOLR_ZK_HOSTS="${SOLR_ZK_HOSTS:-}"
+export SOLR_ZK_CONNECTION_ATTEMPT_TIMEOUT="${SOLR_ZK_CONNECTION_ATTEMPT_TIMEOUT:-10}"
 
 # Custom environment variables may be defined below
