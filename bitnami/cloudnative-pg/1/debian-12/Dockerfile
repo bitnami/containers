@@ -15,7 +15,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "cloudnative-pg-1.25.0-2-linux-${OS_ARCH}-debian-12" \
+      "cloudnative-pg-1.25.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -38,13 +38,13 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-02-26T09:35:10Z" \
+      org.opencontainers.image.created="2025-02-28T20:54:55Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.25.0-debian-12-r4" \
+      org.opencontainers.image.ref.name="1.25.1-debian-12-r0" \
       org.opencontainers.image.title="cloudnative-pg" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.25.0"
+      org.opencontainers.image.version="1.25.1"
 
 COPY rootfs /
 COPY --from=builder /opt/bitnami/cloudnative-pg/bin /bin
@@ -52,7 +52,7 @@ COPY --from=builder /opt/bitnami/cloudnative-pg/manager /manager
 COPY --from=builder /opt/bitnami/cloudnative-pg/.spdx-cloudnative-pg.spdx /opt/bitnami/cloudnative-pg/.spdx-cloudnative-pg.spdx
 COPY --from=builder /opt/bitnami/cloudnative-pg/licenses /opt/bitnami/cloudnative-pg/licenses
 
-ENV APP_VERSION="1.25.0" \
+ENV APP_VERSION="1.25.1" \
     BITNAMI_APP_NAME="cloudnative-pg"
 
 USER 1001
