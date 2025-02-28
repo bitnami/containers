@@ -8,15 +8,15 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-02-20T15:23:48Z" \
+      org.opencontainers.image.created="2025-02-28T02:35:36Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/pgpool/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.5.5-debian-12-r6" \
+      org.opencontainers.image.ref.name="4.6.0-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/pgpool" \
       org.opencontainers.image.title="pgpool" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="4.5.5"
+      org.opencontainers.image.version="4.6.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -30,8 +30,8 @@ RUN install_packages ca-certificates curl ldap-utils libaudit1 libbsd0 libcap-ng
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "wait-for-port-1.0.8-13-linux-${OS_ARCH}-debian-12" \
-      "postgresql-client-17.3.0-1-linux-${OS_ARCH}-debian-12" \
-      "pgpool-4.5.5-1-linux-${OS_ARCH}-debian-12" \
+      "postgresql-client-17.4.0-0-linux-${OS_ARCH}-debian-12" \
+      "pgpool-4.6.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -50,7 +50,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/pgpool/postunpack.sh
-ENV APP_VERSION="4.5.5" \
+ENV APP_VERSION="4.6.0" \
     BITNAMI_APP_NAME="pgpool" \
     LD_LIBRARY_PATH="/opt/bitnami/common/lib:/opt/bitnami/common/lib64:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/common/sbin:/opt/bitnami/pgpool/bin:$PATH"
