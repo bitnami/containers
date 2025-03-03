@@ -43,8 +43,8 @@ jobs:
           if [[ "$non_readme_files" -le "0" ]]; then
             # The only changes are .md files -> SKIP
             echo "result=skip" >> $GITHUB_OUTPUT
-          elif [[ "${#assets[@]}" -ne "1" ]]; then
-            echo "Changes should affect to only one asset. You are currently modifying: ${assets[@]}"
+          elif [[ "${#assets[@]}" -ge "5" ]]; then
+            echo "Maximun number of assets reached. You are currently modifying: ${assets[@]}"
             echo "result=skip" >> $GITHUB_OUTPUT
           else
             containers_json=$(printf "%s\n" "${flavors[@]}" | jq -R . | jq -cs .)
