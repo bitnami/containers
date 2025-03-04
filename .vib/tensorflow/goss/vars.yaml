@@ -8,3 +8,4 @@ directories:
 version:
   bin_name: python
   flag: "-c 'import tensorflow; print(tensorflow.__version__)'"
+  timeout: 60000
