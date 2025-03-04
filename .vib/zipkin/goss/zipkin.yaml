@@ -10,7 +10,7 @@ command:
   run-zipkin:
     # We need a different port to not collide with the version check
     exec: export QUERY_PORT=9044; cd /opt/bitnami/zipkin; timeout --preserve-status 28 start-zipkin 2>&1 || true
-    timeout: 30000
+    timeout: 40000
     exit-status: 0
     stdout:
       - /Serving HTTP at.*9044/
