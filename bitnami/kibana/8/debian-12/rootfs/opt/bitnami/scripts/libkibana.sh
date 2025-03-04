@@ -17,6 +17,23 @@
 # Functions
 
 ########################
+# Set Elasticsearch keystore values
+# Globals:
+#   ELASTICSEARCH_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+kibana_set_key_value() {
+    local key="${1:?missing key}"
+    local value="${2:?missing value}"
+
+    debug "Storing key: ${key}"
+    kibana-keystore add --stdin --force "$key" <<<"$value"
+}
+
+########################
 # Waits for Elasticsearch to be available and creates the user 'kibana_user', if it doesn't exists
 # Globals:
 #   KIBANA_*
