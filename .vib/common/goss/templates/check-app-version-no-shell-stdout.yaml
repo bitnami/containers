@@ -14,5 +14,8 @@ command:
     - {{ .Vars.version.bin_name }}
     - {{ .Vars.version.flag }}
     exit-status: 0
+    {{- if contains "timeout" (.Vars.version | toString) }}
+    timeout: {{ .Vars.version.timeout }}
+    {{- end }}
     stdout:
     - "{{ .Env.APP_VERSION }}"

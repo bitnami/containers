@@ -12,5 +12,8 @@ command:
   check-app-version:
     exec: {{ .Vars.version.bin_name }} {{ .Vars.version.flag }} 2>&1
     exit-status: 0
+    {{- if contains "timeout" (.Vars.version | toString) }}
+    timeout: {{ .Vars.version.timeout }}
+    {{- end }}
     stdout:
     - "{{ .Env.APP_VERSION }}"
