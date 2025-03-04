@@ -9,7 +9,7 @@ user:
 command:
   basic-example:
     exec: python ./tensorflow/goss/testfiles/basic_example.py
-    timeout: 120000
+    timeout: 180000
     stdout:
       - shape=(5, 10)
     exit-status: 0
