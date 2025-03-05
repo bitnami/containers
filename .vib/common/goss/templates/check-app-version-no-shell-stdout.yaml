@@ -14,7 +14,7 @@ command:
     - {{ .Vars.version.bin_name }}
     - {{ .Vars.version.flag }}
     exit-status: 0
-    {{- if contains "timeout" (.Vars.version | toString) }}
+    {{- if hasKey .Vars.version "timeout" }}
     timeout: {{ .Vars.version.timeout }}
     {{- end }}
     stdout:
