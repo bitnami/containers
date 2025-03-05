@@ -38,22 +38,23 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-03-04T21:51:16Z" \
+      org.opencontainers.image.created="2025-03-05T11:58:00Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.25.1-debian-12-r1" \
+      org.opencontainers.image.ref.name="1.25.1-debian-12-r2" \
       org.opencontainers.image.title="cloudnative-pg" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
       org.opencontainers.image.version="1.25.1"
 
 COPY rootfs /
-COPY --from=builder /opt/bitnami/cloudnative-pg/bin /bin
 COPY --from=builder /opt/bitnami/cloudnative-pg/manager /manager
+COPY --from=builder /opt/bitnami/cloudnative-pg/bin /operator
 COPY --from=builder /opt/bitnami/cloudnative-pg/.spdx-cloudnative-pg.spdx /opt/bitnami/cloudnative-pg/.spdx-cloudnative-pg.spdx
 COPY --from=builder /opt/bitnami/cloudnative-pg/licenses /opt/bitnami/cloudnative-pg/licenses
 
 ENV APP_VERSION="1.25.1" \
-    BITNAMI_APP_NAME="cloudnative-pg"
+    BITNAMI_APP_NAME="cloudnative-pg" \
+    PATH="/operator:$PATH"
 
 USER 1001
 
