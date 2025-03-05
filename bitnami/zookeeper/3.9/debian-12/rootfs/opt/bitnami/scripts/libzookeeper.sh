@@ -597,7 +597,7 @@ zookeeper_healthcheck() {
     local args=()
     local port="$ZOO_PORT_NUMBER"
 
-    if [[ "$ZOO_TLS_CLIENT_ENABLE" = true ]]; then
+    if [[ "$ZOO_TLS_CLIENT_ENABLE" = true ]] && is_boolean_yes "$ZOOKEEPER_ENABLE_AUTH"; then
         port="$ZOO_TLS_PORT_NUMBER"
         command="openssl"
         args+=("s_client" "-quiet" "-crlf" "-connect" "localhost:${port}")
