@@ -82,7 +82,7 @@ matomo_validate() {
         is_empty_value "$MATOMO_SMTP_PORT_NUMBER" && print_validation_error "The MATOMO_SMTP_PORT_NUMBER environment variable is empty or not set."
         ! is_empty_value "$MATOMO_SMTP_PORT_NUMBER" && check_valid_port "MATOMO_SMTP_PORT_NUMBER"
         ! is_empty_value "$MATOMO_SMTP_PROTOCOL" && check_multi_value "MATOMO_SMTP_PROTOCOL" "ssl tls none"
-        ! is_empty_value "$MATOMO_SMTP_AUTH" && check_multi_value "MATOMO_SMTP_AUTH" "Plain Login Crammd5"
+        ! is_empty_value "$MATOMO_SMTP_AUTH" && check_multi_value "MATOMO_SMTP_AUTH" "Plain Login Cram-md5"
     fi
 
     # Check that the web server is properly set up
