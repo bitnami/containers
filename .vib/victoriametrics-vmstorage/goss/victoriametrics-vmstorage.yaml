@@ -1,0 +1,17 @@
+command:
+  check-victoriametrics-vmstorage-version:
+    exec:
+    - /opt/bitnami/victoriametrics/bin/vmstorage
+    - --version
+    exit-status: 0
+    # Replace "-" with "+" in the version string
+    stdout:
+    - {{ .Env.APP_VERSION | replace "-" "+" }}
+  check-victoriametrics-vmstorage-help:
+    exec:
+    - /opt/bitnami/victoriametrics/bin/vmstorage
+    - --help
+    exit-status: 0
+    # Replace "-" with "+" in the version string
+    stdout:
+    - vmstorage stores time

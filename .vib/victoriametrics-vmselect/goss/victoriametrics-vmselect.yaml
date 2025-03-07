@@ -1,0 +1,17 @@
+command:
+  check-victoriametrics-vmselect-version:
+    exec:
+    - /opt/bitnami/victoriametrics/bin/vmselect
+    - --version
+    exit-status: 0
+    # Replace "-" with "+" in the version string
+    stdout:
+    - {{ .Env.APP_VERSION | replace "-" "+" }}
+  check-victoriametrics-vmselect-help:
+    exec:
+    - /opt/bitnami/victoriametrics/bin/vmselect
+    - --help
+    exit-status: 0
+    # Replace "-" with "+" in the version string
+    stdout:
+    - vmselect processes incoming

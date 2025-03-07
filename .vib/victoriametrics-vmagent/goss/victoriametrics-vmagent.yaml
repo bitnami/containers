@@ -1,0 +1,17 @@
+command:
+  check-victoriametrics-vmagent-version:
+    exec:
+    - /opt/bitnami/victoriametrics/bin/vmagent
+    - --version
+    exit-status: 0
+    # Replace "-" with "+" in the version string
+    stdout:
+    - {{ .Env.APP_VERSION | replace "-" "+" }}
+  check-victoriametrics-vmagent-help:
+    exec:
+    - /opt/bitnami/victoriametrics/bin/vmagent
+    - --help
+    exit-status: 0
+    # Replace "-" with "+" in the version string
+    stdout:
+    - vmagent collects metrics
