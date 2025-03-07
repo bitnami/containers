@@ -4,9 +4,11 @@
 command:
   check-pytorch-version:
     exec: python -c 'import torch; print(torch.__version__)'
+    timeout: 30000
     exit-status: 0
     stdout:
       - "{{ .Env.APP_VERSION }}"
   check-torchvision-version:
     exec: python -c 'import torchvision; print(torchvision.__version__)'
+    timeout: 30000
     exit-status: 0
