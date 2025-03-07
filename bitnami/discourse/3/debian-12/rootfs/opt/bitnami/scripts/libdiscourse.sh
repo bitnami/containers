@@ -270,6 +270,13 @@ discourse_create_conf_file() {
         ! is_empty_value "$DISCOURSE_SMTP_OPEN_TIMEOUT" && discourse_conf_set "smtp_open_timeout" "$DISCOURSE_SMTP_OPEN_TIMEOUT"
         ! is_empty_value "$DISCOURSE_SMTP_READ_TIMEOUT" && discourse_conf_set "smtp_read_timeout" "$DISCOURSE_SMTP_READ_TIMEOUT"
     fi
+
+    # Set relative URL root if provided
+    if ! is_empty_value "$DISCOURSE_RELATIVE_URL_ROOT"; then
+        info "Setting relative URL root to ${DISCOURSE_RELATIVE_URL_ROOT}"
+        discourse_conf_set "relative_url_root" "$DISCOURSE_RELATIVE_URL_ROOT"
+    fi
+
     # Extra configuration
     ! is_empty_value "$DISCOURSE_EXTRA_CONF_CONTENT" && echo "$DISCOURSE_EXTRA_CONF_CONTENT" >> "$DISCOURSE_CONF_FILE"
 }
