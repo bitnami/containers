@@ -32,6 +32,10 @@ else
     ARGS+=("--protected-mode" "no")
 fi
 
+# Add flags specified via the 'REDIS_EXTRA_FLAGS' environment variable
+read -r -a extra_flags <<< "$REDIS_EXTRA_FLAGS"
+[[ "${#extra_flags[@]}" -gt 0 ]] && ARGS+=("${extra_flags[@]}")
+
 ARGS+=("$@")
 
 if is_boolean_yes "$REDIS_CLUSTER_CREATOR" && ! [[ -f "${REDIS_DATA_DIR}/nodes.conf" ]]; then
