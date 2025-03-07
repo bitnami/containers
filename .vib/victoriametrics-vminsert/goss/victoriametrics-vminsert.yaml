@@ -1,0 +1,17 @@
+command:
+  check-victoriametrics-vminsert-version:
+    exec:
+    - /opt/bitnami/victoriametrics/bin/vminsert
+    - --version
+    exit-status: 0
+    # Replace "-" with "+" in the version string
+    stdout:
+    - {{ .Env.APP_VERSION | replace "-" "+" }}
+  check-victoriametrics-vminsert-help:
+    exec:
+    - /opt/bitnami/victoriametrics/bin/vminsert
+    - --help
+    exit-status: 0
+    # Replace "-" with "+" in the version string
+    stdout:
+    - vminsert accepts data

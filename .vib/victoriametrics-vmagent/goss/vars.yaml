@@ -1,0 +1,7 @@
+files:
+  - mode: "0644"
+    paths:
+      - /opt/bitnami/victoriametrics/.spdx-victoriametrics-vmagent.spdx
+  - mode: "0755"
+    paths:
+      - /opt/bitnami/victoriametrics/bin/vmagent

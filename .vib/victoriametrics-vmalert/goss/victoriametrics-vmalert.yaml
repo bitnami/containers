@@ -1,0 +1,17 @@
+command:
+  check-victoriametrics-vmalert-version:
+    exec:
+    - /opt/bitnami/victoriametrics/bin/vmalert
+    - --version
+    exit-status: 0
+    # Replace "-" with "+" in the version string
+    stdout:
+    - {{ .Env.APP_VERSION | replace "-" "+" }}
+  check-victoriametrics-vmalert-help:
+    exec:
+    - /opt/bitnami/victoriametrics/bin/vmalert
+    - --help
+    exit-status: 0
+    # Replace "-" with "+" in the version string
+    stdout:
+    - vmalert processes alerts
