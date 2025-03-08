@@ -254,7 +254,7 @@ schema_registry_for_kafka_brokers() {
             if [[ "$b" =~ [_a-zA-Z]*://(.*):([0-9]*) ]]; then
                 host="${BASH_REMATCH[1]}"
                 port="${BASH_REMATCH[2]}"
-                if ! retry_while "debug_execute nc -z ${host} ${port}" 10 10; then
+                if ! retry_while "debug_execute nc -w $SCHEMA_REGISTRY_CONNECTION_ATTEMPT_TIMEOUT -z ${host} ${port}" 10 10; then
                     error "Failed to connect to the broker at $host:$port"
                     return 1
                 fi

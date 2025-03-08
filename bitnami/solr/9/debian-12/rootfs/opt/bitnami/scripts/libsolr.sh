@@ -162,7 +162,7 @@ solr_wait_for_zookeeper() {
             host="${BASH_REMATCH[1]}"
             port="${BASH_REMATCH[2]}"
             debug "Trying: $host:$port"
-            if ! retry_while "debug_execute nc -z ${host} ${port}" "$SOLR_ZK_MAX_RETRIES" "$SOLR_ZK_SLEEP_TIME"; then
+            if ! retry_while "debug_execute nc -w $SOLR_ZK_CONNECTION_ATTEMPT_TIMEOUT -z ${host} ${port}" "$SOLR_ZK_MAX_RETRIES" "$SOLR_ZK_SLEEP_TIME"; then
                 error "Failed to connect to the zookeeper node at ${host}:${port}"
                 return 1
             fi
