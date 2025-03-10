@@ -40,11 +40,11 @@
             "resources": {
               "path": "/.vib"
             },
-            "tests_file": "victoriametrics-vmselect/goss/goss.yaml",
-            "vars_file": "victoriametrics-vmselect/goss/vars.yaml",
+            "tests_file": "victoriametrics-vmagent/goss/goss.yaml",
+            "vars_file": "victoriametrics-vmagent/goss/vars.yaml",
             "remote": {
               "pod": {
-                "workload": "deploy-victoriametrics-vmselect"
+                "workload": "deploy-victoriametrics-vmagent"
               }
             }
           }
