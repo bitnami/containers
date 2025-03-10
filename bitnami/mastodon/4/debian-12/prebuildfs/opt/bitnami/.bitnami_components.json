@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "4.3.4-0"
+        "version": "4.3.5-0"
     },
     "node": {
         "arch": "amd64",
@@ -21,7 +21,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.13.2-5"
+        "version": "3.13.2-8"
     },
     "redis-client": {
         "arch": "amd64",
@@ -39,6 +39,6 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.8-13"
+        "version": "1.0.8-14"
     }
 }
