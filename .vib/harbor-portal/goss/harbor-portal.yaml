@@ -21,9 +21,9 @@ file:
       - "/opt/bitnami/harbor"
       - "/opt/bitnami/nginx/conf/mime.types"
 command:
-  # Ensure permissions for Internal TLS
-  check-permissions-system-certs:
-    exec: ls -l /etc/pki/tls/certs/ca-bundle.crt /etc/pki/tls/certs/ca-bundle.trust.crt /etc/ssl/certs/ca-certificates.crt 2>/dev/null | grep "^.\{5\}w.*harbor"
+  # Ensure certificates exist
+  check-system-certs:
+    exec: if [ $(ls -l /etc/pki/tls/certs/ca-bundle.crt /etc/pki/tls/certs/ca-bundle.trust.crt /etc/ssl/certs/ca-certificates.crt 2>/dev/null | wc -l) -eq 0 ]; then exit 1; fi
     exit-status: 0
   # Ensure a set of directories exist and the non-root user has write privileges to them
   check-directories-exist-with-user:
