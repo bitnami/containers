@@ -15,8 +15,8 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "atlas-0.31.0-2-linux-${OS_ARCH}-debian-12" \
-      "chainloop-control-plane-migrations-0.178.0-0-linux-${OS_ARCH}-debian-12" \
+      "atlas-0.32.0-0-linux-${OS_ARCH}-debian-12" \
+      "chainloop-control-plane-migrations-0.179.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -39,13 +39,13 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-03-05T12:32:51Z" \
+      org.opencontainers.image.created="2025-03-11T15:17:20Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.178.0-debian-12-r0" \
+      org.opencontainers.image.ref.name="0.179.0-debian-12-r0" \
       org.opencontainers.image.title="chainloop-control-plane-migrations" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="0.178.0"
+      org.opencontainers.image.version="0.179.0"
 
 COPY rootfs /
 COPY --from=builder /opt/bitnami/atlas/bin/atlas /atlas
@@ -55,7 +55,7 @@ COPY --from=builder /opt/bitnami/atlas/licenses /opt/bitnami/atlas/licenses
 COPY --from=builder /opt/bitnami/chainloop/.spdx-chainloop-control-plane-migrations.spdx /opt/bitnami/chainloop/.spdx-chainloop-control-plane-migrations.spdx
 COPY --from=builder /opt/bitnami/chainloop/licenses /opt/bitnami/chainloop/licenses
 
-ENV APP_VERSION="0.178.0" \
+ENV APP_VERSION="0.179.0" \
     BITNAMI_APP_NAME="chainloop-control-plane-migrations" \
     PATH="/opt/bitnami/atlas/bin:$PATH"
 
