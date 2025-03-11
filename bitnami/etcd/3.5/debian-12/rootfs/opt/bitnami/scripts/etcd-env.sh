@@ -49,6 +49,7 @@ etcd_env_vars=(
     ETCD_TRUSTED_CA_FILE
     ETCD_CLIENT_CERT_AUTH
     ETCD_PEER_AUTO_TLS
+    ETCD_EXTRA_AUTH_FLAGS
 )
 for env_var in "${etcd_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -107,5 +108,6 @@ export ETCD_KEY_FILE="${ETCD_KEY_FILE:-}"
 export ETCD_TRUSTED_CA_FILE="${ETCD_TRUSTED_CA_FILE:-}"
 export ETCD_CLIENT_CERT_AUTH="${ETCD_CLIENT_CERT_AUTH:-false}"
 export ETCD_PEER_AUTO_TLS="${ETCD_PEER_AUTO_TLS:-false}"
+export ETCD_EXTRA_AUTH_FLAGS="${ETCD_EXTRA_AUTH_FLAGS:-}"
 
 # Custom environment variables may be defined below

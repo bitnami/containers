@@ -213,6 +213,7 @@ Apart from providing your custom configuration file, you can also modify the ser
 | `ETCD_TRUSTED_CA_FILE`             | Path to the client server TLS trusted CA cert file.                                          | `nil`                   |
 | `ETCD_CLIENT_CERT_AUTH`            | Enable client cert authentication                                                            | `false`                 |
 | `ETCD_PEER_AUTO_TLS`               | Use generated certificates for TLS communications with peers.                                | `false`                 |
+| `ETCD_EXTRA_AUTH_FLAGS`            | Comma separated list of authentication flags to append to etcdctl                            | `nil`                   |
 
 #### Read-only environment variables
 
