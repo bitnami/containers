@@ -297,6 +297,11 @@ etcdctl_auth_norbac_flags() {
         [[ -f "$ETCD_CERT_FILE" ]] && [[ -f "$ETCD_KEY_FILE" ]] && authFlags+=("--cert" "$ETCD_CERT_FILE" "--key" "$ETCD_KEY_FILE")
         [[ -f "$ETCD_TRUSTED_CA_FILE" ]] && authFlags+=("--cacert" "$ETCD_TRUSTED_CA_FILE")
     fi
+    if [[ -n "$ETCD_EXTRA_AUTH_FLAGS" ]]; then
+        read -r -a extraAuthFlags <<< "$(tr ',;' ' ' <<< "$ETCD_EXTRA_AUTH_FLAGS")"
+        authFlags+=("${extraAuthFlags[@]}")
+    fi
+
     echo "${authFlags[*]}"
 }
 
