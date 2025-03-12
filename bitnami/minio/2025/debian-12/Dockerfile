@@ -8,15 +8,15 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-03-05T02:19:22Z" \
+      org.opencontainers.image.created="2025-03-12T19:46:21Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/minio/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2025.2.28-debian-12-r1" \
+      org.opencontainers.image.ref.name="2025.3.12-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/minio" \
       org.opencontainers.image.title="minio" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="2025.2.28"
+      org.opencontainers.image.version="2025.3.12"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,8 +29,8 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl jq procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "minio-client-2025.2.21-1-linux-${OS_ARCH}-debian-12" \
-      "minio-2025.2.28-1-linux-${OS_ARCH}-debian-12" \
+      "minio-client-2025.3.12-0-linux-${OS_ARCH}-debian-12" \
+      "minio-2025.3.12-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -49,7 +49,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 COPY rootfs /
 RUN /opt/bitnami/scripts/minio-client/postunpack.sh
 RUN /opt/bitnami/scripts/minio/postunpack.sh
-ENV APP_VERSION="2025.2.28" \
+ENV APP_VERSION="2025.3.12" \
     BITNAMI_APP_NAME="minio" \
     PATH="/opt/bitnami/minio-client/bin:/opt/bitnami/minio/bin:$PATH"
 
