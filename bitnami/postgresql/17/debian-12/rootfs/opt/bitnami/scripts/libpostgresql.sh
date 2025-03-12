@@ -569,11 +569,16 @@ postgresql_is_file_external() {
 #   None
 #########################
 postgresql_clean_from_restart() {
-    local -r -a files=(
+
+    local -a files=(
         "$POSTGRESQL_DATA_DIR"/postmaster.pid
         "$POSTGRESQL_DATA_DIR"/standby.signal
-        "$POSTGRESQL_DATA_DIR"/recovery.signal
     )
+
+    # Enable recovery only when POSTGRESQL_PERFORM_RESTORE feature flag is set
+    if ! is_boolean_yes "$POSTGRESQL_PERFORM_RESTORE" ; then
+        files+=("$POSTGRESQL_DATA_DIR"/recovery.signal)
+    fi
 
     for file in "${files[@]}"; do
         if [[ -f "$file" ]]; then
