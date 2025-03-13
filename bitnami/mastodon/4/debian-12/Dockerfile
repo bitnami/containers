@@ -8,15 +8,15 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-03-10T13:20:16Z" \
+      org.opencontainers.image.created="2025-03-13T16:14:31Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/mastodon/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.3.5-debian-12-r0" \
+      org.opencontainers.image.ref.name="4.3.6-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mastodon" \
       org.opencontainers.image.title="mastodon" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="4.3.5"
+      org.opencontainers.image.version="4.3.6"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -31,11 +31,11 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "python-3.13.2-8-linux-${OS_ARCH}-debian-12" \
       "wait-for-port-1.0.8-14-linux-${OS_ARCH}-debian-12" \
-      "ruby-3.4.2-2-linux-${OS_ARCH}-debian-12" \
+      "ruby-3.4.2-3-linux-${OS_ARCH}-debian-12" \
       "redis-client-7.4.2-1-linux-${OS_ARCH}-debian-12" \
       "postgresql-client-17.4.0-0-linux-${OS_ARCH}-debian-12" \
       "node-22.14.0-2-linux-${OS_ARCH}-debian-12" \
-      "mastodon-4.3.5-0-linux-${OS_ARCH}-debian-12" \
+      "mastodon-4.3.6-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -53,7 +53,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mastodon/postunpack.sh
-ENV APP_VERSION="4.3.5" \
+ENV APP_VERSION="4.3.6" \
     BITNAMI_APP_NAME="mastodon" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/ruby/bin:/opt/bitnami/redis/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/mastodon/bin:$PATH"
 
