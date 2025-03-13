@@ -9,11 +9,11 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-02-24T13:20:28Z" \
+      org.opencontainers.image.created="2025-03-13T09:08:54Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/ejbca/README.md" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="9.0.0-debian-12-r8" \
+      org.opencontainers.image.ref.name="9.0.0-debian-12-r9" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/ejbca" \
       org.opencontainers.image.title="ejbca" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -30,10 +30,9 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages acl ca-certificates curl libaio1 libaudit1 libcap-ng0 libgcc-s1 libicu72 liblzma5 libncurses6 libpam0g libssl3 libstdc++6 libtinfo6 libxml2 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "jre-21.0.6-10-1-linux-${OS_ARCH}-debian-12" \
       "wildfly-32.0.1-8-linux-${OS_ARCH}-debian-12" \
+      "jre-21.0.6-10-1-linux-${OS_ARCH}-debian-12" \
       "mysql-client-10.11.11-2-linux-${OS_ARCH}-debian-12" \
-      "java-17.0.14-10-1-linux-${OS_ARCH}-debian-12" \
       "ejbca-9.0.0-3-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -57,7 +56,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="9.0.0" \
     BITNAMI_APP_NAME="ejbca" \
     JAVA_HOME="/opt/bitnami/java" \
-    PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:/opt/bitnami/mysql/bin:/opt/bitnami/ejbca/bin:$PATH"
+    PATH="/opt/bitnami/wildfly/bin:/opt/bitnami/java/bin:/opt/bitnami/mysql/bin:/opt/bitnami/ejbca/bin:$PATH"
 
 EXPOSE 8009 8080 9990
 
