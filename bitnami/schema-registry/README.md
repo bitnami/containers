@@ -84,6 +84,7 @@ docker build -t bitnami/APP:latest .
 | `SCHEMA_REGISTRY_CLIENT_AUTHENTICATION`                 | Client authentication configuration. Valid options: none, requested, over required.                                                    | `nil`                               |
 | `SCHEMA_REGISTRY_AVRO_COMPATIBILY_LEVEL`                | The Avro compatibility type. Valid options: none, backward, backward_transitive, forward, forward_transitive, full, or full_transitive | `nil`                               |
 | `SCHEMA_REGISTRY_DEBUG`                                 | Enable Schema Registry debug logs. Valid options: true or false                                                                        | `nil`                               |
+| `SCHEMA_REGISTRY_CONNECTION_ATTEMPT_TIMEOUT`            | Timeout for connection attempts in seconds.                                                                                            | `10`                                |
 
 #### Read-only environment variables
 

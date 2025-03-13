@@ -150,31 +150,32 @@ docker-compose up -d
 
 #### Customizable environment variables
 
-| Name                            | Description                                                                   | Default Value                                      |
-|---------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------|
-| `SOLR_ENABLE_CLOUD_MODE`        | Starts solr in cloud mode                                                     | `no`                                               |
-| `SOLR_NUMBER_OF_NODES`          | Number of nodes of the solr cloud cluster                                     | `1`                                                |
-| `SOLR_HOST`                     | Solr Host name                                                                | `nil`                                              |
-| `SOLR_JETTY_HOST`               | Configuration to listen on a specific IP address or host name                 | `0.0.0.0`                                          |
-| `SOLR_HEAP`                     | Solr Heap                                                                     | `nil`                                              |
-| `SOLR_SECURITY_MANAGER_ENABLED` | Solr Java security manager                                                    | `false`                                            |
-| `SOLR_JAVA_MEM`                 | Solr JVM memory                                                               | `-Xms512m -Xmx512m`                                |
-| `SOLR_PORT_NUMBER`              | Solr port number                                                              | `8983`                                             |
-| `SOLR_CORES`                    | Solr CORE name                                                                | `nil`                                              |
-| `SOLR_COLLECTION`               | Solr COLLECTION name                                                          | `nil`                                              |
-| `SOLR_COLLECTION_REPLICAS`      | Solar collection replicas                                                     | `1`                                                |
-| `SOLR_COLLECTION_SHARDS`        | Solar collection shards                                                       | `1`                                                |
-| `SOLR_ENABLE_AUTHENTICATION`    | Enables authentication                                                        | `no`                                               |
-| `SOLR_ADMIN_USERNAME`           | Administrator Username                                                        | `admin`                                            |
-| `SOLR_ADMIN_PASSWORD`           | Administrator password                                                        | `bitnami`                                          |
-| `SOLR_CLOUD_BOOTSTRAP`          | Indicates if this node is the one that performs the boostraping               | `no`                                               |
-| `SOLR_CORE_CONF_DIR`            | Solar CORE configuration directory                                            | `${SOLR_SERVER_DIR}/solr/configsets/_default/conf` |
-| `SOLR_SSL_ENABLED`              | Indicates if Solr starts with SSL enabled                                     | `no`                                               |
-| `SOLR_SSL_CHECK_PEER_NAME`      | Indicates if Solr should check the peer names                                 | `false`                                            |
-| `SOLR_ZK_MAX_RETRIES`           | Maximum retries when waiting for zookeeper configuration operations to finish | `5`                                                |
-| `SOLR_ZK_SLEEP_TIME`            | Sleep time when waiting for zookeeper configuration operations to finish      | `5`                                                |
-| `SOLR_ZK_CHROOT`                | ZooKeeper ZNode chroot where to store solr data. Default: /solr               | `/solr`                                            |
-| `SOLR_ZK_HOSTS`                 | ZooKeeper nodes (comma-separated list of `host:port`\)                        | `nil`                                              |
+| Name                                 | Description                                                                   | Default Value                                      |
+|--------------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------|
+| `SOLR_ENABLE_CLOUD_MODE`             | Starts solr in cloud mode                                                     | `no`                                               |
+| `SOLR_NUMBER_OF_NODES`               | Number of nodes of the solr cloud cluster                                     | `1`                                                |
+| `SOLR_HOST`                          | Solr Host name                                                                | `nil`                                              |
+| `SOLR_JETTY_HOST`                    | Configuration to listen on a specific IP address or host name                 | `0.0.0.0`                                          |
+| `SOLR_HEAP`                          | Solr Heap                                                                     | `nil`                                              |
+| `SOLR_SECURITY_MANAGER_ENABLED`      | Solr Java security manager                                                    | `false`                                            |
+| `SOLR_JAVA_MEM`                      | Solr JVM memory                                                               | `-Xms512m -Xmx512m`                                |
+| `SOLR_PORT_NUMBER`                   | Solr port number                                                              | `8983`                                             |
+| `SOLR_CORES`                         | Solr CORE name                                                                | `nil`                                              |
+| `SOLR_COLLECTION`                    | Solr COLLECTION name                                                          | `nil`                                              |
+| `SOLR_COLLECTION_REPLICAS`           | Solar collection replicas                                                     | `1`                                                |
+| `SOLR_COLLECTION_SHARDS`             | Solar collection shards                                                       | `1`                                                |
+| `SOLR_ENABLE_AUTHENTICATION`         | Enables authentication                                                        | `no`                                               |
+| `SOLR_ADMIN_USERNAME`                | Administrator Username                                                        | `admin`                                            |
+| `SOLR_ADMIN_PASSWORD`                | Administrator password                                                        | `bitnami`                                          |
+| `SOLR_CLOUD_BOOTSTRAP`               | Indicates if this node is the one that performs the boostraping               | `no`                                               |
+| `SOLR_CORE_CONF_DIR`                 | Solar CORE configuration directory                                            | `${SOLR_SERVER_DIR}/solr/configsets/_default/conf` |
+| `SOLR_SSL_ENABLED`                   | Indicates if Solr starts with SSL enabled                                     | `no`                                               |
+| `SOLR_SSL_CHECK_PEER_NAME`           | Indicates if Solr should check the peer names                                 | `false`                                            |
+| `SOLR_ZK_MAX_RETRIES`                | Maximum retries when waiting for zookeeper configuration operations to finish | `5`                                                |
+| `SOLR_ZK_SLEEP_TIME`                 | Sleep time when waiting for zookeeper configuration operations to finish      | `5`                                                |
+| `SOLR_ZK_CHROOT`                     | ZooKeeper ZNode chroot where to store solr data. Default: /solr               | `/solr`                                            |
+| `SOLR_ZK_HOSTS`                      | ZooKeeper nodes (comma-separated list of `host:port`\)                        | `nil`                                              |
+| `SOLR_ZK_CONNECTION_ATTEMPT_TIMEOUT` | ZooKeeper connection attempt timeout in seconds                               | `10`                                               |
 
 #### Read-only environment variables
 
