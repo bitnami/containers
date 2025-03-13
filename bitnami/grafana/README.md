@@ -117,6 +117,7 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 | `GF_INSTALL_PLUGINS`          | Grafana plugins to install                                                           | `nil`                                   |
 | `GF_INSTALL_PLUGINS_SKIP_TLS` | Whether to skip TLS certificate verification when installing plugins                 | `yes`                                   |
 | `GF_FEATURE_TOGGLES`          | Comma-separated list of Grafana feature toggles.                                     | `nil`                                   |
+| `GF_SECURITY_ADMIN_PASSWORD`  | Grafana admin password.                                                              | `nil`                                   |
 | `GRAFANA_MIGRATION_LOCK`      | Enable the migration lock mechanism to avoid issues caused by concurrent migrations. | `false`                                 |
 | `GRAFANA_SLEEP_TIME`          | Sleep time between migration status check attempts.                                  | `10`                                    |
 | `GRAFANA_RETRY_ATTEMPTS`      | Number of retries to check migration status.                                         | `12`                                    |
