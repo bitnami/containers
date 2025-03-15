@@ -171,20 +171,12 @@ kibana_initialize() {
                 kibana_conf_set "server.ssl.certificate" "$SERVER_CERT_LOCATION"
                 kibana_conf_set "server.ssl.key" "$SERVER_KEY_LOCATION"
                 if ! is_empty_value "$SERVER_KEY_PASSWORD"; then
-                    if [[ "$SERVER_FLAVOR" = "opensearch-dashboards" ]]; then
-                        kibana_conf_set "server.ssl.keyPassphrase" "$SERVER_KEY_PASSWORD"
-                    else
-                        kibana_set_key_value "server.ssl.keyPassphrase" "$SERVER_KEY_PASSWORD"
-                    fi
+                    kibana_conf_set "server.ssl.keyPassphrase" "$SERVER_KEY_PASSWORD"
                 fi
             else
                 kibana_conf_set "server.ssl.keystore.path" "$SERVER_KEYSTORE_LOCATION"
                 if ! is_empty_value "$SERVER_KEYSTORE_PASSWORD"; then
-                    if [[ "$SERVER_FLAVOR" = "opensearch-dashboards" ]]; then
-                        kibana_conf_set "server.ssl.keystore.password" "$SERVER_KEY_PASSWORD"
-                    else
-                        kibana_set_key_value "server.ssl.keystore.password" "$SERVER_KEY_PASSWORD"
-                    fi
+                    kibana_conf_set "server.ssl.keystore.password" "$SERVER_KEYSTORE_PASSWORD"
                 fi
             fi
         fi
@@ -198,11 +190,7 @@ kibana_initialize() {
                 else
                     kibana_conf_set "${dbFlavor}.ssl.truststore.path" "$SERVER_DB_TRUSTSTORE_LOCATION"
                     if ! is_empty_value "$SERVER_DB_TRUSTSTORE_PASSWORD"; then
-                        if [[ "$SERVER_FLAVOR" = "opensearch-dashboards" ]]; then
-                            kibana_conf_set "${dbFlavor}.ssl.truststore.password" "$SERVER_DB_TRUSTSTORE_PASSWORD"
-                        else
-                            kibana_set_key_value "${dbFlavor}.ssl.truststore.password" "$SERVER_DB_TRUSTSTORE_PASSWORD"
-                        fi
+                        kibana_conf_set "${dbFlavor}.ssl.truststore.password" "$SERVER_DB_TRUSTSTORE_PASSWORD"
                     fi
                 fi
             fi
