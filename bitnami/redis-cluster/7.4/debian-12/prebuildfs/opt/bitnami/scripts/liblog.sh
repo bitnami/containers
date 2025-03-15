@@ -30,6 +30,7 @@ stderr_print() {
         printf "%b\\n" "${*}" >&2
     fi
 }
+
 ########################
 # Log message
 # Arguments:
@@ -38,14 +39,14 @@ stderr_print() {
 #   None
 #########################
 log() {
-    local prefix=""
     local color_bool="${BITNAMI_COLOR:-true}"
+    # comparison is performed without regard to the case of alphabetic characters
+    shopt -s nocasematch
     if [[ "$color_bool" = 1 || "$color_bool" =~ ^(yes|true)$ ]]; then
-        prefix="${CYAN}${MODULE:-} ${MAGENTA}$(date "+%T.%2N ")${RESET}"
+        stderr_print "${CYAN}${MODULE:-} ${MAGENTA}$(date "+%T.%2N ")${RESET}${*}"
     else
-        prefix="${MODULE:-} $(date "+%T.%2N ")"
+        stderr_print "${MODULE:-} $(date "+%T.%2N ")${*}"
     fi
-    stderr_print "${prefix}${*}${RESET}"
 }
 ########################
 # Log an 'info' message
@@ -57,6 +58,8 @@ log() {
 info() {
     local msg_color=""
     local color_bool="${BITNAMI_COLOR:-true}"
+    # comparison is performed without regard to the case of alphabetic characters
+    shopt -s nocasematch
     if [[ "$color_bool" = 1 || "$color_bool" =~ ^(yes|true)$ ]];then
         msg_color="$GREEN"
     fi
@@ -72,6 +75,8 @@ info() {
 warn() {
     local msg_color=""
     local color_bool="${BITNAMI_COLOR:-true}"
+    # comparison is performed without regard to the case of alphabetic characters
+    shopt -s nocasematch
     if [[ "$color_bool" = 1 || "$color_bool" =~ ^(yes|true)$ ]];then
         msg_color="$YELLOW"
     fi
@@ -87,6 +92,8 @@ warn() {
 error() {
     local msg_color=""
     local color_bool="${BITNAMI_COLOR:-true}"
+    # comparison is performed without regard to the case of alphabetic characters
+    shopt -s nocasematch
     if [[ "$color_bool" = 1 || "$color_bool" =~ ^(yes|true)$ ]];then
         msg_color="$RED"
     fi
@@ -104,16 +111,17 @@ error() {
 debug() {
     local msg_color=""
     local color_bool="${BITNAMI_COLOR:-true}"
+    # comparison is performed without regard to the case of alphabetic characters
+    shopt -s nocasematch
     if [[ "$color_bool" = 1 || "$color_bool" =~ ^(yes|true)$ ]] ;then
         msg_color="$MAGENTA"
     fi
-    # comparison is performed without regard to the case of alphabetic characters
-    shopt -s nocasematch
     local debug_bool="${BITNAMI_DEBUG:-false}"
     if [[ "$debug_bool" = 1 || "$debug_bool" =~ ^(yes|true)$ ]]; then
         log "${msg_color}DEBUG${RESET} ==> ${*}"
     fi
 }
+
 ########################
 # Indent a string
 # Arguments:
