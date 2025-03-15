@@ -15,12 +15,12 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.4.7-13"
+        "version": "1.4.7-14"
     },
     "wait-for-port": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.8-13"
+        "version": "1.0.8-14"
     }
 }
