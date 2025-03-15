@@ -173,7 +173,7 @@ docker-compose up -d
 #### Customizable environment variables
 
 | Name                                       | Description                                                                                      | Default Value                              |
-| ------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------ |
+|--------------------------------------------|--------------------------------------------------------------------------------------------------|--------------------------------------------|
 | `POSTGRESQL_VOLUME_DIR`                    | Persistence base directory                                                                       | `/bitnami/postgresql`                      |
 | `POSTGRESQL_DATA_DIR`                      | PostgreSQL data directory                                                                        | `${POSTGRESQL_VOLUME_DIR}/data`            |
 | `POSTGRESQL_EXTRA_FLAGS`                   | Extra flags for PostgreSQL initialization                                                        | `nil`                                      |
@@ -245,16 +245,16 @@ docker-compose up -d
 | `POSTGRESQL_DEFAULT_TOAST_COMPRESSION`     | Set the postgres default compression                                                             | `nil`                                      |
 | `POSTGRESQL_PASSWORD_ENCRYPTION`           | Set the passwords encryption method                                                              | `nil`                                      |
 | `POSTGRESQL_DEFAULT_TRANSACTION_ISOLATION` | Set transaction isolation                                                                        | `nil`                                      |
+| `POSTGRESQL_PERFORM_RESTORE`               | Flag to skip deletion of `recovery.signal` file to enable native recovery. e.g by using `wal-g`  | `no`                                       |
 | `POSTGRESQL_AUTOCTL_CONF_DIR`              | Path to the configuration dir for the pg_autoctl command                                         | `${POSTGRESQL_AUTOCTL_VOLUME_DIR}/.config` |
 | `POSTGRESQL_AUTOCTL_MODE`                  | pgAutoFailover node type, valid values [monitor, postgres]                                       | `postgres`                                 |
 | `POSTGRESQL_AUTOCTL_MONITOR_HOST`          | Hostname for the monitor component                                                               | `monitor`                                  |
 | `POSTGRESQL_AUTOCTL_HOSTNAME`              | Hostname by which postgres is reachable                                                          | `$(hostname --fqdn)`                       |
-| `POSTGRESQL_PERFORM_RESTORE`               | Flag to skip deletion of `recovery.signal` file to enable native recovery. e.g by using `wal-g`  | `false`                                    |
 
 #### Read-only environment variables
 
 | Name                                         | Description                                                     | Value                                         |
-| -------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------- |
+|----------------------------------------------|-----------------------------------------------------------------|-----------------------------------------------|
 | `POSTGRESQL_BASE_DIR`                        | PostgreSQL installation directory                               | `/opt/bitnami/postgresql`                     |
 | `POSTGRESQL_DEFAULT_CONF_DIR`                | PostgreSQL configuration directory                              | `$POSTGRESQL_BASE_DIR/conf.default`           |
 | `POSTGRESQL_CONF_DIR`                        | PostgreSQL configuration directory                              | `$POSTGRESQL_BASE_DIR/conf`                   |
@@ -576,7 +576,7 @@ postgres=# select application_name as server, state,
 postgres-#       sync_priority as priority, sync_state
 postgres-#       from pg_stat_replication;
 | server      | state     | priority | sync_state |
-| ----------- | --------- | -------- | ---------- |
+|-------------|-----------|----------|------------|
 | walreceiver | streaming | 0        | sync       |
 | walreceiver | streaming | 0        | async      |
 ```
@@ -804,7 +804,7 @@ docker build --build-arg EXTRA_LOCALES="es_ES.UTF-8 UTF-8" ...
 The Bitnami PostgreSQL container allows two different sets of environment variables. Please see the list of environment variable aliases in the next table:
 
 | Environment Variable                 | Alias                              |
-| :----------------------------------- | :--------------------------------- |
+|:-------------------------------------|:-----------------------------------|
 | POSTGRESQL_USERNAME                  | POSTGRES_USER                      |
 | POSTGRESQL_DATABASE                  | POSTGRES_DB                        |
 | POSTGRESQL_PASSWORD                  | POSTGRES_PASSWORD                  |
@@ -835,7 +835,7 @@ alter database POSTGRES_DATABASE owner to POSTGRES_USER;
 It is possible to change the user that PostgreSQL will use to execute the init scripts. To do so, use the following environment variables:
 
 | Environment variable            | Description                                                       |
-| ------------------------------- | ----------------------------------------------------------------- |
+|---------------------------------|-------------------------------------------------------------------|
 | POSTGRESQL_INITSCRIPTS_USERNAME | User that will be used to execute the init scripts                |
 | POSTGRESQL_INITSCRIPTS_PASSWORD | Password for the user specified in POSTGRESQL_INITSCRIPT_USERNAME |
 
