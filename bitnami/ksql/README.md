@@ -63,15 +63,14 @@ docker build -t bitnami/APP:latest .
 
 ### Customizable environment variables
 
-| Name                              | Description                                                                                   | Default Value            |
-|-----------------------------------|-----------------------------------------------------------------------------------------------|--------------------------|
-| `KSQL_MOUNTED_CONF_DIR`           | Directory for including custom configuration files (that override the default generated ones) | `${KSQL_VOLUME_DIR}/etc` |
-| `KSQL_LISTENERS`                  | Comma-separated list of listeners that listen for API requests over either HTTP or HTTPS.     | `nil`                    |
-| `KSQL_SSL_KEYSTORE_PASSWORD`      | Password to access the SSL keystore.                                                          | `nil`                    |
-| `KSQL_SSL_TRUSTSTORE_PASSWORD`    | Password to access the SSL truststore.                                                        | `nil`                    |
-| `KSQL_CLIENT_AUTHENTICATION`      | Client authentication configuration. Valid options: none, requested, over required.           | `nil`                    |
-| `KSQL_BOOTSTRAP_SERVERS`          | The set of Kafka brokers to bootstrap Kafka cluster information from.                         | `nil`                    |
-| `KSQL_CONNECTION_ATTEMPT_TIMEOUT` | Timeout in seconds for connection attempts.                                                   | `10`                     |
+| Name                           | Description                                                                                   | Default Value            |
+|--------------------------------|-----------------------------------------------------------------------------------------------|--------------------------|
+| `KSQL_MOUNTED_CONF_DIR`        | Directory for including custom configuration files (that override the default generated ones) | `${KSQL_VOLUME_DIR}/etc` |
+| `KSQL_LISTENERS`               | Comma-separated list of listeners that listen for API requests over either HTTP or HTTPS.     | `nil`                    |
+| `KSQL_SSL_KEYSTORE_PASSWORD`   | Password to access the SSL keystore.                                                          | `nil`                    |
+| `KSQL_SSL_TRUSTSTORE_PASSWORD` | Password to access the SSL truststore.                                                        | `nil`                    |
+| `KSQL_CLIENT_AUTHENTICATION`   | Client authentication configuration. Valid options: none, requested, over required.           | `nil`                    |
+| `KSQL_BOOTSTRAP_SERVERS`       | The set of Kafka brokers to bootstrap Kafka cluster information from.                         | `nil`                    |
 
 ### Read-only environment variables
 
@@ -85,6 +84,7 @@ docker build -t bitnami/APP:latest .
 | `KSQL_LOGS_DIR`                  | KSQL logs directory.                                                                      | `${KSQL_BASE_DIR}/logs`                   |
 | `KSQL_CONF_FILE`                 | Main KSQL configuration file.                                                             | `${KSQL_CONF_DIR}/ksql-server.properties` |
 | `KSQL_CERTS_DIR`                 | KSQL certificates directory.                                                              | `${KSQL_BASE_DIR}/certs`                  |
+| `KSQL_CONNECTION_TIMEOUT`        | KSQL connection attempt timeout.                                                          | `10`                                      |
 | `KSQL_DAEMON_USER`               | Users that will execute the KSQL Server process.                                          | `ksql`                                    |
 | `KSQL_DAEMON_GROUP`              | Group that will execute the KSQL Server process.                                          | `ksql`                                    |
 | `KSQL_DEFAULT_LISTENERS`         | Comma-separated list of listeners that listen for API requests over either HTTP or HTTPS. | `http://0.0.0.0:8088`                     |

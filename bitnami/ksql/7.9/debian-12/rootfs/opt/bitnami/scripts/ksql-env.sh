@@ -54,6 +54,7 @@ export KSQL_LOGS_DIR="${KSQL_BASE_DIR}/logs"
 export KSQL_CONF_FILE="${KSQL_CONF_DIR}/ksql-server.properties"
 export KSQL_MOUNTED_CONF_DIR="${KSQL_MOUNTED_CONF_DIR:-${KSQL_VOLUME_DIR}/etc}"
 export KSQL_CERTS_DIR="${KSQL_BASE_DIR}/certs"
+export KSQL_CONNECTION_TIMEOUT="10"
 
 # System users (when running with a privileged user)
 export KSQL_DAEMON_USER="ksql"
