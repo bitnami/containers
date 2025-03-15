@@ -569,8 +569,7 @@ postgresql_is_file_external() {
 #   None
 #########################
 postgresql_clean_from_restart() {
-
-    local -a files=(
+    local -r -a files=(
         "$POSTGRESQL_DATA_DIR"/postmaster.pid
         "$POSTGRESQL_DATA_DIR"/standby.signal
     )
