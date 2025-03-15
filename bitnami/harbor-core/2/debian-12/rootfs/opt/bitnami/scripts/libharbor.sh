@@ -54,10 +54,10 @@ get_system_cert_paths() {
 configure_permissions_system_certs() {
     local -r owner="${1:-}"
     # Debian
-    set_permissions_ownership "/etc/pki/tls/certs/ca-bundle.crt" "$owner"
-    # Photon
-    set_permissions_ownership "/etc/pki/tls/certs/ca-bundle.trust.crt" "$owner"
     set_permissions_ownership "/etc/ssl/certs/ca-certificates.crt" "$owner"
+    # Photon
+    set_permissions_ownership "/etc/pki/tls/certs/ca-bundle.crt" "$owner"
+    set_permissions_ownership "/etc/pki/tls/certs/ca-bundle.trust.crt" "$owner"
 }
 
 ########################
