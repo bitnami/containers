@@ -1,7 +1,7 @@
-binaries:
-  - trivy
-  - wire
-root_dir: /opt/bitnami
+files:
+  - mode: "0644"
+    paths:
+      - /opt/bitnami/trivy/.spdx-trivy.spdx
 version:
   bin_name: trivy
   flag: -v
