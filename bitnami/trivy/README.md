@@ -78,6 +78,10 @@ Check the [official Trivy documentation](https://github.com/aquasecurity/trivy#u
 
 ## Notable Changes
 
+### 0.60.0-debian-12-r2
+
+* This image revision dramatically reduces the image given it removes the existing OS distro. Instead, it simply includes the NATS binary on top of a scratch base image.
+
 ### Starting January 16, 2024
 
 * The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
