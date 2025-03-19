@@ -3,5 +3,5 @@ files:
     paths:
       - /opt/bitnami/trivy/.spdx-trivy.spdx
 version:
-  bin_name: /trivy
+  bin_name: trivy
   flag: -v
