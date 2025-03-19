@@ -3,7 +3,10 @@
 
 command:
   trivy-scanner:
-    exec: trivy image docker.io/bitnami/minideb:buster-snapshot-20201101T210343Z
+    exec:
+      - trivy
+      - image
+      - docker.io/bitnami/minideb:buster-snapshot-20201101T210343Z
     timeout: 60000
     exit-status: 0
     stdout:
