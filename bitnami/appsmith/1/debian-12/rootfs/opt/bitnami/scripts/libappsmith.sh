@@ -347,9 +347,10 @@ appsmith_initialize() {
                 # Taken from inspecting Appsmith wizard
                 # https://github.com/appsmithorg/appsmith/blob/release/app/server/appsmith-server/src/main/java/com/appsmith/server/dtos/UserSignupRequestDTO.java#L26
                 # Necessary for the installer to succeed
-                local -r -a create_user_args=("-L" "http://localhost:${APPSMITH_API_PORT}/api/v1/users/super"
+                local -r -a create_user_args=("--fail" "-L" "http://localhost:${APPSMITH_API_PORT}/api/v1/users/super"
                     "-H" "Origin: http://localhost:${APPSMITH_API_PORT}"
                     "-H" "Content-Type: application/x-www-form-urlencoded"
+                    "-H" "X-Requested-By: Appsmith"
                     "--data-urlencode" "name=${APPSMITH_USERNAME}"
                     "--data-urlencode" "email=${APPSMITH_EMAIL}"
                     "--data-urlencode" "password=${APPSMITH_PASSWORD}"
@@ -418,7 +419,12 @@ appsmith_backend_start_bg() {
 
     echo "$!" >"$APPSMITH_PID_FILE"
 
-    wait_for_log_entry "License verification completed with status: valid" "$log_file" 30 10
+    if ! retry_while "debug_execute curl --silent --fail http://localhost:${APPSMITH_API_PORT}/api/v1/health" "30" "10"; then
+        error "Timed out waiting for Appsmith healthcheck. Check logs for more information..."
+        cat "$log_file"
+        return 1
+    fi
+
     info "Appsmith started successfully"
 }
 
