@@ -14,7 +14,7 @@ command:
     exit-status: 0
     # Replace "-" with "+" in the version string
     stdout:
-    - {{ .Env.APP_VERSION | replace "-" "+" }}
+    - {{ .Env.APP_VERSION | replace "-" "+" | replace ".0.0+" "+" }}
   {{- end }}
   check-hello-world:
     exec:
