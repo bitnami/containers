@@ -1,0 +1,16 @@
+command:
+  check-kes-version:
+    exec:
+    - /kes
+    - --version
+    exit-status: 0
+    stdout:
+    - {{ .Env.APP_VERSION }}
+  check-kes-help:
+    exec:
+    - /kes
+    - --help
+    exit-status: 0
+    # Replace "-" with "+" in the version string
+    stderr:
+    - Start a KES server
