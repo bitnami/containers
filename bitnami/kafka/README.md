@@ -182,34 +182,35 @@ docker-compose up -d
 
 #### Customizable environment variables
 
-| Name                                      | Description                                                                                                                                                                            | Default Value                       |
-|-------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|
-| `KAFKA_MOUNTED_CONF_DIR`                  | Kafka directory for mounted configuration files.                                                                                                                                       | `${KAFKA_VOLUME_DIR}/config`        |
-| `KAFKA_INTER_BROKER_USER`                 | Kafka inter broker communication user.                                                                                                                                                 | `user`                              |
-| `KAFKA_INTER_BROKER_PASSWORD`             | Kafka inter broker communication password.                                                                                                                                             | `bitnami`                           |
-| `KAFKA_CONTROLLER_USER`                   | Kafka control plane communication user.                                                                                                                                                | `controller_user`                   |
-| `KAFKA_CONTROLLER_PASSWORD`               | Kafka control plane communication password.                                                                                                                                            | `bitnami`                           |
-| `KAFKA_CERTIFICATE_PASSWORD`              | Password for certificates.                                                                                                                                                             | `nil`                               |
-| `KAFKA_TLS_TRUSTSTORE_FILE`               | Kafka truststore file location.                                                                                                                                                        | `nil`                               |
-| `KAFKA_TLS_TYPE`                          | Choose the TLS certificate format to use.                                                                                                                                              | `JKS`                               |
-| `KAFKA_TLS_CLIENT_AUTH`                   | Configures kafka broker to request client authentication.                                                                                                                              | `required`                          |
-| `KAFKA_OPTS`                              | Kafka deployment options.                                                                                                                                                              | `nil`                               |
-| `KAFKA_CFG_SASL_ENABLED_MECHANISMS`       | Kafka `sasl.enabled.mechanisms` configuration override.                                                                                                                                | `PLAIN,SCRAM-SHA-256,SCRAM-SHA-512` |
-| `KAFKA_KRAFT_CLUSTER_ID`                  | Kafka cluster ID when using Kafka Raft mode (KRaft).                                                                                                                                   | `nil`                               |
-| `KAFKA_SKIP_KRAFT_STORAGE_INIT`           | If set to true, skip Kraft storage initialization when process.roles are configured.                                                                                                   | `false`                             |
-| `KAFKA_CLIENT_LISTENER_NAME`              | Name of the listener intended to be used by clients, if set, configures the producer/consumer accordingly.                                                                             | `nil`                               |
-| `KAFKA_ZOOKEEPER_PROTOCOL`                | Authentication protocol for Zookeeper connections. Allowed protocols: `PLAINTEXT`, `SASL, SSL`, and `SASL_SSL`.                                                                        | `PLAINTEXT`                         |
-| `KAFKA_ZOOKEEPER_PASSWORD`                | Kafka Zookeeper user password for SASL authentication.                                                                                                                                 | `nil`                               |
-| `KAFKA_ZOOKEEPER_USER`                    | Kafka Zookeeper user for SASL authentication.                                                                                                                                          | `nil`                               |
-| `KAFKA_ZOOKEEPER_TLS_KEYSTORE_PASSWORD`   | Kafka Zookeeper keystore file password and key password.                                                                                                                               | `nil`                               |
-| `KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD` | Kafka Zookeeper truststore file password.                                                                                                                                              | `nil`                               |
-| `KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_FILE`     | Kafka Zookeeper truststore file location.                                                                                                                                              | `nil`                               |
-| `KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME`     | Verify Zookeeper hostname on TLS certificates.                                                                                                                                         | `true`                              |
-| `KAFKA_ZOOKEEPER_TLS_TYPE`                | Choose the TLS certificate format to use. Allowed values: `JKS`, `PEM`.                                                                                                                | `JKS`                               |
-| `KAFKA_CLIENT_USERS`                      | List of additional users to `KAFKA_CLIENT_USER` that will be created into Zookeeper when using `SASL_SCRAM` for client communications. Separated by commas, semicolons or whitespaces. | `user`                              |
-| `KAFKA_CLIENT_PASSWORDS`                  | Passwords for the users specified at `KAFKA_CLIENT_USERS`. Separated by commas, semicolons or whitespaces.                                                                             | `bitnami`                           |
-| `KAFKA_HEAP_OPTS`                         | Kafka heap options for Java.                                                                                                                                                           | `-Xmx1024m -Xms1024m`               |
-| `JAVA_TOOL_OPTIONS`                       | Java tool options.                                                                                                                                                                     | `nil`                               |
+| Name                                      | Description                                                                                                                           | Default Value                       |
+|-------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|
+| `KAFKA_MOUNTED_CONF_DIR`                  | Kafka directory for mounted configuration files.                                                                                      | `${KAFKA_VOLUME_DIR}/config`        |
+| `KAFKA_CLUSTER_ID`                        | Kafka cluster ID.                                                                                                                     | `nil`                               |
+| `KAFKA_INITIAL_CONTROLLERS`               | List of Kafka cluster initial controllers.                                                                                            | `nil`                               |
+| `KAFKA_SKIP_KRAFT_STORAGE_INIT`           | If set to true, skip Kraft storage initialization when process.roles are configured.                                                  | `false`                             |
+| `KAFKA_CFG_SASL_ENABLED_MECHANISMS`       | Kafka `sasl.enabled.mechanisms` configuration override.                                                                               | `PLAIN,SCRAM-SHA-256,SCRAM-SHA-512` |
+| `KAFKA_CLIENT_LISTENER_NAME`              | Name of the listener intended to be used by clients, if set, configures the producer/consumer accordingly.                            | `nil`                               |
+| `KAFKA_OPTS`                              | Kafka deployment options.                                                                                                             | `nil`                               |
+| `KAFKA_ZOOKEEPER_PROTOCOL`                | Authentication protocol for Zookeeper connections. Allowed protocols: `PLAINTEXT`, `SASL, SSL`, and `SASL_SSL`.                       | `PLAINTEXT`                         |
+| `KAFKA_ZOOKEEPER_PASSWORD`                | Kafka Zookeeper user password for SASL authentication.                                                                                | `nil`                               |
+| `KAFKA_ZOOKEEPER_USER`                    | Kafka Zookeeper user for SASL authentication.                                                                                         | `nil`                               |
+| `KAFKA_ZOOKEEPER_TLS_KEYSTORE_PASSWORD`   | Kafka Zookeeper keystore file password and key password.                                                                              | `nil`                               |
+| `KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD` | Kafka Zookeeper truststore file password.                                                                                             | `nil`                               |
+| `KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_FILE`     | Kafka Zookeeper truststore file location.                                                                                             | `nil`                               |
+| `KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME`     | Verify Zookeeper hostname on TLS certificates.                                                                                        | `true`                              |
+| `KAFKA_ZOOKEEPER_TLS_TYPE`                | Choose the TLS certificate format to use. Allowed values: `JKS`, `PEM`.                                                               | `JKS`                               |
+| `KAFKA_INTER_BROKER_USER`                 | Kafka inter broker communication user.                                                                                                | `user`                              |
+| `KAFKA_INTER_BROKER_PASSWORD`             | Kafka inter broker communication password.                                                                                            | `bitnami`                           |
+| `KAFKA_CONTROLLER_USER`                   | Kafka control plane communication user.                                                                                               | `controller_user`                   |
+| `KAFKA_CONTROLLER_PASSWORD`               | Kafka control plane communication password.                                                                                           | `bitnami`                           |
+| `KAFKA_CERTIFICATE_PASSWORD`              | Password for certificates.                                                                                                            | `nil`                               |
+| `KAFKA_TLS_TRUSTSTORE_FILE`               | Kafka truststore file location.                                                                                                       | `nil`                               |
+| `KAFKA_TLS_TYPE`                          | Choose the TLS certificate format to use.                                                                                             | `JKS`                               |
+| `KAFKA_TLS_CLIENT_AUTH`                   | Configures kafka broker to request client authentication.                                                                             | `required`                          |
+| `KAFKA_CLIENT_USERS`                      | List of users that will be created when using `SASL_SCRAM` for client communications. Separated by commas, semicolons or whitespaces. | `user`                              |
+| `KAFKA_CLIENT_PASSWORDS`                  | Passwords for the users specified at `KAFKA_CLIENT_USERS`. Separated by commas, semicolons or whitespaces.                            | `bitnami`                           |
+| `KAFKA_HEAP_OPTS`                         | Kafka heap options for Java.                                                                                                          | `-Xmx1024m -Xms1024m`               |
+| `JAVA_TOOL_OPTIONS`                       | Java tool options.                                                                                                                    | `nil`                               |
 
 #### Read-only environment variables
 
@@ -267,47 +268,6 @@ To deploy it, run the following command in the directory where the `docker-compo
 
 ```console
 docker-compose up -d
-```
-
-### Kafka with Zookeeper
-
-Apache Kafka Raft (KRaft) makes use of a new quorum controller service in Kafka which replaces the previous controller and makes use of an event-based variant of the Raft consensus protocol.
-This greatly simplifies Kafka’s architecture by consolidating responsibility for metadata into Kafka itself, rather than splitting it between two different systems: ZooKeeper and Kafka.
-
-More Info can be found here: <https://developer.confluent.io/learn/kraft/>
-
-> **NOTE:** According to [KIP-833](https://cwiki.apache.org/confluence/display/KAFKA/KIP-833%3A+Mark+KRaft+as+Production+Ready), KRaft is now in a production-ready state.
-
-However, if you want to keep using ZooKeeper, you can use the following configuration:
-
-```yaml
-version: "2"
-
-services:
-  zookeeper:
-    image: docker.io/bitnami/zookeeper:3.9
-    ports:
-      - "2181:2181"
-    volumes:
-      - "zookeeper_data:/bitnami"
-    environment:
-      - ALLOW_ANONYMOUS_LOGIN=yes
-  kafka:
-    image: docker.io/bitnami/kafka:3.4
-    ports:
-      - "9092:9092"
-    volumes:
-      - "kafka_data:/bitnami"
-    environment:
-      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
-    depends_on:
-      - zookeeper
-
-volumes:
-  zookeeper_data:
-    driver: local
-  kafka_data:
-    driver: local
 ```
 
 ### Accessing Apache Kafka with internal and external clients
@@ -398,7 +358,7 @@ Keep in mind the following notes:
   * As an alternative, you can disable host name verification setting the environment variable `KAFKA_CFG_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM` to an empty string.
 * When setting up a Apache Kafka Cluster (check the "Setting up an Apache Kafka Cluster") for more information), each Apache Kafka broker and logical client needs its own keystore. You will have to repeat the process for each of the brokers in the cluster.
 
-The following docker-compose file is an example showing how to mount your JKS certificates protected by the password `certificatePassword123`. Additionally it is specifying the Apache Kafka container hostname and the credentials for the client and zookeeper users.
+The following docker-compose file is an example showing how to mount your JKS certificates protected by the password `certificatePassword123`. Additionally it is specifying the Apache Kafka container hostname and the credentials for the client user.
 
 ```yaml
 version: '2'
@@ -517,7 +477,7 @@ In order to configure Apache Kafka controller communications with `SSL`, you sho
 * `KAFKA_TLS_TYPE`: Choose the TLS certificate format to use. Allowed values: `JKS`, `PEM`. Defaults: **JKS**.
 * Valid keystore and truststore are mounted at `/opt/bitnami/kafka/config/certs/kafka.keystore.jks` and `/opt/bitnami/kafka/config/certs/kafka.truststore.jks`.
 
-In order to authenticate Apache Kafka against a Zookeeper server with `SASL_SSL`, you should provide the environment variables below:
+In order to authenticate Apache Kafka controller communications with `SASL_SSL`, you should provide the environment variables below:
 
 * `KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP`: Should include `CONTROLLER:SASL_SSL`.
 * `KAFKA_CFG_SASL_MECHANISM_CONTROLLER_PROTOCOL`: SASL mechanism to use for controllers communications. NOTE: KRaft mode does not yet support SCRAM mechanisms, so the only supported SASL mechanism in KRaft mode would be `PLAIN`.
@@ -528,46 +488,6 @@ In order to authenticate Apache Kafka against a Zookeeper server with `SASL_SSL`
 * Valid keystore and truststore are mounted at `/opt/bitnami/kafka/config/certs/kafka.keystore.jks` and `/opt/bitnami/kafka/config/certs/kafka.truststore.jks`.
 
 > Note: SSL settings are shared by all listeners configured using `SSL` or `SASL_SSL` protocols. Setting different certificates per listener is not yet supported.
-
-#### Apache Kafka ZooKeeper mode configuration
-
-Zookeeper mode can be enabled by providing the following values:
-
-* `KAFKA_CFG_ZOOKEEPER_CONNECT`: Comma-separated list of Zookeeper connection strings. E.g `<zk_host1>:<zk_port1>,<zk_host2>:<zk_port2>`
-* `KAFKA_CFG_BROKER_ID`: **Optional** ID of the Kafka broker. If not set, a random ID will be automatically generated.
-
-There are different options of configuration to connect a Zookeeper server.
-
-In order to connect a Zookeeper server without authentication, you should provide the environment variables below:
-
-* `KAFKA_ZOOKEEPER_PROTOCOL`: **PLAINTEXT**.
-
-In order to authenticate Apache Kafka against a Zookeeper server with `SASL`, you should provide the environment variables below:
-
-* `KAFKA_ZOOKEEPER_PROTOCOL`: **SASL**.
-* `KAFKA_ZOOKEEPER_USER`: Apache Kafka Zookeeper user for SASL authentication. No defaults.
-* `KAFKA_ZOOKEEPER_PASSWORD`: Apache Kafka Zookeeper user password for SASL authentication. No defaults.
-
-In order to authenticate Apache Kafka against a Zookeeper server with `SSL`, you should provide the environment variables below:
-
-* `KAFKA_ZOOKEEPER_PROTOCOL`: **SSL**.
-* `KAFKA_ZOOKEEPER_TLS_KEYSTORE_PASSWORD`: Apache Kafka Zookeeper keystore file password and key password. No defaults.
-* `KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD`: Apache Kafka Zookeeper truststore file password. No defaults.
-* `KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME`: Verify Zookeeper hostname on TLS certificates. Defaults: **true**.
-* `KAFKA_ZOOKEEPER_TLS_TYPE`: Choose the TLS certificate format to use. Allowed values: `JKS`, `PEM`. Defaults: **JKS**.
-
-In order to authenticate Apache Kafka against a Zookeeper server with `SASL_SSL`, you should provide the environment variables below:
-
-* `KAFKA_ZOOKEEPER_PROTOCOL`: **SASL_SSL**.
-* `KAFKA_ZOOKEEPER_USER`: Apache Kafka Zookeeper user for SASL authentication. No defaults.
-* `KAFKA_ZOOKEEPER_PASSWORD`: Apache Kafka Zookeeper user password for SASL authentication. No defaults.
-* `KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_FILE`: Apache Kafka Zookeeper truststore file location. Set it if the mount location is different from `/bitnami/kafka/conf/certs/zookeeper.truststore.pem`, `/bitnami/kafka/conf/certs/zookeeper.truststore.jks`, `/opt/bitnami/kafka/config/certs/zookeeper.truststore.jks` or `/opt/bitnami/kafka/conf/certs/zookeeper.truststore.pem` No defaults.
-* `KAFKA_ZOOKEEPER_TLS_KEYSTORE_PASSWORD`: Apache Kafka Zookeeper keystore file password and key password. No defaults.
-* `KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD`: Apache Kafka Zookeeper truststore file password. No defaults.
-* `KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME`: Verify Zookeeper hostname on TLS certificates. Defaults: **true**.
-* `KAFKA_ZOOKEEPER_TLS_TYPE`: Choose the TLS certificate format to use. Allowed values: `JKS`, `PEM`. Defaults: **JKS**.
-
-> Note: You **must** also use your own certificates for SSL. You can mount your Java Key Stores (`zookeeper.keystore.jks` and `zookeeper.truststore.jks`) or PEM files (`zookeeper.keystore.pem`, `zookeeper.keystore.key` and `zookeeper.truststore.pem`) into `/opt/bitnami/kafka/conf/certs`. If client authentication is `none` or `want` in Zookeeper, the cert files are optional.
 
 ### Setting up a Apache Kafka cluster
 
@@ -712,7 +632,7 @@ volumes:
 
 ### Full configuration
 
-The image looks for configuration files (server.properties, log4j.properties, etc.) in the `/bitnami/kafka/config/`, this can be changed by setting the KAFKA_MOUNTED_CONF_DIR environment variable.
+The image looks for configuration files (server.properties, log4j2.yaml, etc.) in the `/bitnami/kafka/config/`, this can be changed by setting the KAFKA_MOUNTED_CONF_DIR environment variable.
 
 ```console
 docker run --name kafka -v /path/to/server.properties:/bitnami/kafka/config/server.properties bitnami/kafka:latest
@@ -871,11 +791,11 @@ docker-compose up kafka
 
 ## Migrating from Zookeeper mode to KRaft mode
 
-This guide covers how to execute the Kafka migration from Zookeeper mode to KRaft mode as explained in the [upstream documentation](https://docs.confluent.io/platform/current/installation/migrate-zk-kraft.html) when using the `bitnami/kafka` container.
+This guide covers how to execute the Kafka migration from Zookeeper mode to KRaft mode as explained in the [upstream documentation](https://docs.confluent.io/platform/current/installation/migrate-zk-kraft.html) when using the `bitnami/kafka:3` container.
 
 1. Retrieve the cluster ID from Zookeeper
 
-2. Configure Controller quorum by adding the following env variables in the nodes you'd like to configure as controller-elegible nodes:
+2. Configure Controller quorum by adding the following env variables in the nodes you'd like to configure as controller-eligible nodes:
 
     ```console
     KAFKA_CFG_PROCESS_ROLES=controller
@@ -921,9 +841,13 @@ This guide covers how to execute the Kafka migration from Zookeeper mode to KRaf
 
 ## Notable Changes
 
+### 4.0.0-debian-12-r0
+
+This version implies a significant milestone given now Kafka operates operate entirely without Apache ZooKeeper, running in KRaft mode by default. As a consequence, **ZooKeeper-related parameters have been removed.**.
+
 ### Branches rename
 
-Branch 2 has been renamed to 2.8 and branch 3 has been splited into branches 3.0 and 3.1 mirroing the upstream [Apache Kafka's naming policy](https://kafka.apache.org/downloads)
+Branch 2 has been renamed to 2.8 and branch 3 has been split into branches 3.0 and 3.1 mirroring the upstream [Apache Kafka's naming policy](https://kafka.apache.org/downloads)
 
 ### 3.5.1-debian-11-r4, 3.4.1-debian-11-r50, 3.3.2-debian-11-r176 and 3.2.3-debian-11-r161
 
