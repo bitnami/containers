@@ -1,16 +1,20 @@
+{{- /* We need to convert the version in semver to a valid date, as KES uses a date as the version */}}
+{{- /* Step 1: Convert . to - */}}
+{{- $version := .Env.APP_VERSION | replace "." "-" }}
+{{- /* Step 2: Convert days to two digits */}}
+{{- $version = regexReplaceAll "([0-9]+)-([0-9]+)-([0-9]$)" $version "$1-$2-0$3" }}
+{{- /* Step 3: Convert month to two digits */}}
+{{- $version = regexReplaceAll "([0-9]+)-([0-9])-([0-9]+)" $version "$1-0$2-$3" }}
 command:
   check-kes-version:
-    exec:
-    - /kes
-    - --version
+    exec: kes --version
     exit-status: 0
     stdout:
-    - {{ .Env.APP_VERSION }}
+      # We need to add Version because using the variable alone converts it to a Date
+      # object, causing issues in the stdout matching
+      - /Version.*{{$version}}/
   check-kes-help:
-    exec:
-    - /kes
-    - --help
-    exit-status: 0
-    # Replace "-" with "+" in the version string
+    exec: kes --help
+    exit-status: 2
     stderr:
-    - Start a KES server
+      - Start a KES server
