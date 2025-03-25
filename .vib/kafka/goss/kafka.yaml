@@ -27,3 +27,9 @@ file:
     filetype: file
     contents:
       - "![-]loggc"
+{{ if not (regexMatch "^4.+" .Env.APP_VERSION) }}
+command:
+  check-wait-for-port-binary:
+    exec: which wait-for-port
+    exit-status: 0
+{{ end }}

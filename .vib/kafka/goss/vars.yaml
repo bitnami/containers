@@ -1,7 +1,6 @@
 binaries:
   - java
   - kafka-server-start.sh
-  - wait-for-port
 directories:
   - mode: "0775"
     paths:
