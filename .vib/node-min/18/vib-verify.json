@@ -4,7 +4,7 @@
       "url": "{SHA_ARCHIVE}",
       "path": "{VIB_ENV_PATH}"
     },
-    "runtime_parameters": "Y29tbWFuZDogWyJweXRob24zIiwgIi1jIiwgImltcG9ydCB0aW1lOyB0aW1lLnNsZWVwKDM2MDApIl0K"
+    "runtime_parameters": "Y29tbWFuZDogWyJub2RlIiwgIi0tZXZhbCIsICJzZXRUaW1lb3V0KCgpID0+IHt9LCAzNjAwICogMTAwMCk7Il0K"
   },
   "phases": {
     "package": {
@@ -24,7 +24,7 @@
             ],
             "size_thresholds": [
               {
-                "size": "20MB",
+                "size": "40MB",
                 "kind": "COMPRESSED"
               }
             ]
@@ -46,11 +46,11 @@
             "resources": {
               "path": "/.vib"
             },
-            "tests_file": "python-min/goss/goss.yaml",
-            "vars_file": "python-min/goss/vars.yaml",
+            "tests_file": "node-min/goss/goss.yaml",
+            "vars_file": "node-min/goss/vars.yaml",
             "remote": {
               "pod": {
-                "workload": "deploy-python-min"
+                "workload": "deploy-node-min"
               }
             }
           }

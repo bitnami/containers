@@ -20,6 +20,12 @@
             "architectures": [
               "linux/amd64",
               "linux/arm64"
+            ],
+            "size_thresholds": [
+              {
+                "size": "45MB",
+                "kind": "COMPRESSED"
+              }
             ]
           }
         },
