@@ -22,4 +22,10 @@ if [[ "$*" = *"/opt/bitnami/scripts/minio/run.sh"* ]]; then
 fi
 
 echo ""
-exec "$@"
+
+# Necessary for compatibility for minio-operator, if the first argument is "server" then prepend "minio"
+if [[ "$1" = "server" ]]; then
+    exec minio "$@"
+else
+    exec "$@"
+fi
