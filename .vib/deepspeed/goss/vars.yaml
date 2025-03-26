@@ -9,3 +9,4 @@ directories:
 version:
   bin_name: python
   flag: "-c 'import deepspeed; print(deepspeed.__version__)'"
+  timeout: 60000
