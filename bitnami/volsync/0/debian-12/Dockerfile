@@ -8,14 +8,14 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-03-15T18:42:06Z" \
+      org.opencontainers.image.created="2025-03-26T18:00:55Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/volsync/README.md" \
-      org.opencontainers.image.ref.name="0.12.0-debian-12-r3" \
+      org.opencontainers.image.ref.name="0.12.1-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/volsync" \
       org.opencontainers.image.title="volsync" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="0.12.0"
+      org.opencontainers.image.version="0.12.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,9 +26,9 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl openssh-client openssh-server openssl perl procps rsync stunnel4
-RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
+RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "volsync-0.12.0-2-linux-${OS_ARCH}-debian-12" \
+      "volsync-0.12.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -36,7 +36,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
         curl -SsLf "https://${DOWNLOADS_URL}/${COMPONENT}.tar.gz.sha256" -O ; \
       fi ; \
       sha256sum -c "${COMPONENT}.tar.gz.sha256" ; \
-      tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' ; \
+      tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner ; \
       rm -rf "${COMPONENT}".tar.gz{,.sha256} ; \
     done
 RUN apt-get autoremove --purge -y curl && \
@@ -60,7 +60,7 @@ RUN sed -ir 's|^[#\s]*\(.*/etc/ssh/ssh_host_ecdsa_key\)$|#\1|' /etc/ssh/sshd_con
     chmod +r /mover-restic/* /mover-rsync/* /mover-rsync-tls/* /mover-rclone/* /mover-syncthing/* && \
     chmod +x /mover-restic/*.sh /mover-rsync/*.sh /mover-rsync-tls/*.sh /mover-rclone/*.sh /mover-syncthing/*.sh
 
-ENV APP_VERSION="0.12.0" \
+ENV APP_VERSION="0.12.1" \
     BITNAMI_APP_NAME="volsync" \
     PATH="/opt/bitnami/diskrsync/bin:/opt/bitnami/rclone/bin:/opt/bitnami/syncthing/bin:/opt/bitnami/volsync/bin:$PATH"
 
