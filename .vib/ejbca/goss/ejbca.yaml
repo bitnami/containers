@@ -5,6 +5,7 @@ command:
   check-ejbca-help:
     exec: ejbca.sh --help
     exit-status: 0
+    timeout: 20000
 group:
   wildfly:
     exists: true
