@@ -61,6 +61,7 @@ grafana_plugin_list=(
     "marcuscalidus-svg-panel"
     "snuids-trafficlights-panel"
 )
+cd ${GRAFANA_BASE_DIR} || exit 1
 for plugin in "${grafana_plugin_list[@]}"; do
     info "Installing ${plugin} plugin"
     grafana cli --pluginsDir "$(grafana_env_var_value PATHS_PLUGINS)" plugins install "$plugin"
