@@ -24,7 +24,7 @@
             ],
             "size_thresholds": [
               {
-                "size": "45MB",
+                "size": "47MB",
                 "kind": "COMPRESSED"
               }
             ]
