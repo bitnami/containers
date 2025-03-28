@@ -3,12 +3,12 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.33.0-1"
+        "version": "1.33.2-0"
     },
     "kube-arangodb": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.2.46-1"
+        "version": "1.2.47-0"
     }
 }
