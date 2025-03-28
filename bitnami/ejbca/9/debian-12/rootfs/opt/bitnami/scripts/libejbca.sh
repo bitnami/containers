@@ -180,7 +180,7 @@ ejbca_configure_wildfly() {
     ejbca_wildfly_command '/subsystem=undertow/server=default-server/host=default-host/location="\/":remove()'
     ejbca_wildfly_command '/subsystem=undertow/configuration=handler/file=welcome-content:remove()'
     ejbca_wildfly_command ':reload'
-    ejbca_wildfly_command '/subsystem=undertow/configuration=filter/rewrite=redirect-to-app:add(redirect=true,target="/ejbca/")'
+    ejbca_wildfly_command '/subsystem=undertow/configuration=filter/rewrite=redirect-to-app:add(redirect=true,target="/ejbca/adminweb/")'
     ejbca_wildfly_command "/subsystem=undertow/server=default-server/host=default-host/filter-ref=redirect-to-app:add(predicate=\"method(GET) and not path-prefix('/ejbca/','/crls','/certificates','/.well-known/') and not equals({%{LOCAL_PORT}, 4447})\")"
     ejbca_wildfly_command ':reload'
     wait_for_wildfly
