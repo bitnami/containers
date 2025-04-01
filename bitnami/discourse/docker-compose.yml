@@ -64,5 +64,3 @@ volumes:
     driver: local
   discourse_data:
     driver: local
-  sidekiq_data:
-    driver: local
