@@ -86,6 +86,7 @@ docker build -t bitnami/APP:latest .
 | `KEYCLOAK_HTTP_PORT`                                        | HTTP port                                                                                             | `8080`                        |
 | `KEYCLOAK_HTTPS_PORT`                                       | HTTPS port                                                                                            | `8443`                        |
 | `KEYCLOAK_BIND_ADDRESS`                                     | Bind address                                                                                          | `$(hostname --fqdn)`          |
+| `KEYCLOAK_BOOTSTRAP_ADMIN_PASSWORD`                         | Keycloak initial admin password                                                                       | `nil`                         |
 | `KEYCLOAK_HOSTNAME`                                         | Keycloak hostname                                                                                     | `nil`                         |
 | `KEYCLOAK_HOSTNAME_ADMIN`                                   | Keycloak admin hostname                                                                               | `nil`                         |
 | `KEYCLOAK_HOSTNAME_STRICT`                                  | Disables dynamically resolving the hostname from request headers                                      | `false`                       |
