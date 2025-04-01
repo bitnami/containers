@@ -356,7 +356,7 @@ appsmith_initialize() {
                     "--data-urlencode" "password=${APPSMITH_PASSWORD}"
                     "--data-urlencode" "allowCollectingAnnonymousData=false"
                     "--data-urlencode" "signupForNewsletter=false"
-                    "--data-urlencode" "proficiency=advanced"
+                    "--data-urlencode" "proficiency=Advanced"
                     "--data-urlencode" "useCase='personal project'")
                 if ! debug_execute "${create_user_cmd[@]}" "${create_user_args[@]}"; then
                     error "Installation failed. User ${APPSMITH_USERNAME} could not be created"
