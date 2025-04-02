@@ -18,6 +18,11 @@ set -o pipefail
 
 print_welcome_page
 
+# Load SUPERSET_SECRET_KEY from a file when provided
+if [[ -n "${SUPERSET_SECRET_KEY_FILE:-}" ]]; then
+  export SUPERSET_SECRET_KEY="$(< "${SUPERSET_SECRET_KEY_FILE}")"
+fi
+
 # Install custom python package if requirements.txt is present
 if [[ -f "/bitnami/python/requirements.txt" ]]; then
     . /opt/bitnami/superset/venv/bin/activate
