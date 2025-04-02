@@ -119,6 +119,7 @@ couchdb_update_conf_file() {
     couchdb_conf_set "chttpd" "require_valid_user" "true"
     couchdb_conf_set "couch_httpd_auth" "require_valid_user" "true"
     couchdb_conf_set "httpd" "WWW-Authenticate" 'Basic realm="administrator"'
+    is_empty_value "$COUCHDB_SECRET" || couchdb_conf_set "chttpd_auth" "secret" "$COUCHDB_SECRET"
     is_empty_value "$COUCHDB_SECRET" || couchdb_conf_set "couch_httpd_auth" "secret" "$COUCHDB_SECRET"
 }
 
