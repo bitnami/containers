@@ -1,0 +1,7 @@
+files:
+  - mode: "0644"
+    paths:
+      - /opt/bitnami/clickhouse-operator-metrics-exporter/.spdx-clickhouse-operator-metrics-exporter.spdx
+version:
+  bin_name: metrics-exporter
+  flag: --version

@@ -1,0 +1,7 @@
+files:
+  - mode: "0644"
+    paths:
+      - /opt/bitnami/clickhouse-operator/.spdx-clickhouse-operator.spdx
+version:
+  bin_name: clickhouse-operator
+  flag: --version
