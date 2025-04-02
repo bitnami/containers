@@ -1,0 +1,7 @@
+binaries:
+  - python
+  - initializer-entrypoint
+root_dir: /opt/bitnami
+directories:
+  - paths:
+      - /opt/bitnami/python
