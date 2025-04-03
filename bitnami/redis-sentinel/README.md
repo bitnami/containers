@@ -136,6 +136,7 @@ docker run -it --rm \
 | `REDIS_SENTINEL_TLS_CERT_FILE`                   | Redis TLS certificate file                                             | `nil`                                 |
 | `REDIS_SENTINEL_TLS_KEY_FILE`                    | Redis TLS key file                                                     | `nil`                                 |
 | `REDIS_SENTINEL_TLS_CA_FILE`                     | Redis TLS CA file                                                      | `nil`                                 |
+| `REDIS_SENTINEL_TLS_CA_DIR`                      | Directory containing TLS CA certificates                               | `nil`                                 |
 | `REDIS_SENTINEL_TLS_DH_PARAMS_FILE`              | Redis TLS DH parameter file                                            | `nil`                                 |
 | `REDIS_SENTINEL_TLS_AUTH_CLIENTS`                | Enable Redis TLS client authentication                                 | `yes`                                 |
 | `REDIS_MASTER_HOST`                              | Redis master host (used by slaves)                                     | `redis`                               |
