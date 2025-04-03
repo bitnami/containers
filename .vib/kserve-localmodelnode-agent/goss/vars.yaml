@@ -1,7 +1,7 @@
 files:
   - mode: "0644"
     paths:
-      - /opt/bitnami/kserve/.spdx-kserve-localmodel-controller.spdx
+      - /opt/bitnami/kserve/.spdx-kserve-localmodelnode-agent.spdx
   - mode: "0755"
     paths:
       - /opt/bitnami/kserve/bin/manager

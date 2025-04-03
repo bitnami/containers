@@ -4,6 +4,6 @@ command:
     exec:
       - /opt/bitnami/kserve/bin/manager
       - --help
-    exit-status: 2
+    exit-status: 0
     stderr:
       - Production Mode defaults

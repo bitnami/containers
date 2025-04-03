@@ -3,7 +3,7 @@
 
 gossfile:
   # Goss tests exclusive to the current container
-  ../../kserve-localmodel-controller/goss/kserve-localmodel-controller.yaml: {}
+  ../../kserve-localmodelnode-agent/goss/kserve-localmodelnode-agent.yaml: {}
   # Load scripts from .vib/common/goss/templates
   ../../common/goss/templates/check-ca-certs.yaml: {}
   ../../common/goss/templates/check-files.yaml: {}
