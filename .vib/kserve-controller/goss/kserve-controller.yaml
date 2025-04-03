@@ -4,6 +4,6 @@ command:
     exec:
       - /opt/bitnami/kserve/bin/manager
       - --help
-    exit-status: 0
-    stdout:
+    exit-status: 2
+    stderr:
       - kserve controller manager

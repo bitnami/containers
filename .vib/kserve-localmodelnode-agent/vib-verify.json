@@ -40,11 +40,11 @@
             "resources": {
               "path": "/.vib"
             },
-            "tests_file": "kserve-localmodel-controller/goss/goss.yaml",
-            "vars_file": "kserve-localmodel-controller/goss/vars.yaml",
+            "tests_file": "kserve-localmodelnode-agent/goss/goss.yaml",
+            "vars_file": "kserve-localmodelnode-agent/goss/vars.yaml",
             "remote": {
               "pod": {
-                "workload": "deploy-kserve-localmodel-controller"
+                "workload": "deploy-kserve-localmodelnode-agent"
               }
             }
           }

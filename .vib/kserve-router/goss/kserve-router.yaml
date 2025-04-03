@@ -4,6 +4,6 @@ command:
     exec:
       - /opt/bitnami/kserve/bin/router
       - --help
-    exit-status: 0
-    stdout:
+    exit-status: 2
+    stderr:
       - serialized json graph
