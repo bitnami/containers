@@ -2,7 +2,7 @@
 command:
   check-help:
     exec:
-      - manager
+      - /opt/bitnami/kserve/bin/manager
       - --help
     exit-status: 0
     stdout:

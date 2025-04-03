@@ -40,11 +40,11 @@
             "resources": {
               "path": "/.vib"
             },
-            "tests_file": "jax/goss/goss.yaml",
-            "vars_file": "jax/goss/vars.yaml",
+            "tests_file": "kserve-storage-initializer/goss/goss.yaml",
+            "vars_file": "kserve-storage-initializer/goss/vars.yaml",
             "remote": {
               "pod": {
-                "workload": "deploy-jax"
+                "workload": "deploy-kserve-storage-initializer"
               }
             }
           }

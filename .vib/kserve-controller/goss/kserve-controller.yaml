@@ -2,8 +2,8 @@
 command:
   check-help:
     exec:
-      - router
+      - /opt/bitnami/kserve/bin/manager
       - --help
     exit-status: 0
     stdout:
-      - serialized json graph
+      - kserve controller manager

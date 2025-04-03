@@ -2,7 +2,7 @@
 command:
   check-help:
     exec:
-      - agent
+      - /opt/bitnami/kserve/bin/agent
       - --help
     exit-status: 0
     stdout:
