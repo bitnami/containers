@@ -126,6 +126,8 @@ docker-compose up mastodon
 | `MASTODON_AUTHORIZED_FETCH`          | Use secure mode.                                                      | `false`                                                                        |
 | `MASTODON_LIMITED_FEDERATION_MODE`   | Use an allow-list for federating with other servers.                  | `false`                                                                        |
 | `MASTODON_STREAMING_API_BASE_URL`    | Mastodon public api base url.                                         | `ws://localhost:${MASTODON_STREAMING_PORT_NUMBER}`                             |
+| `MASTODON_SMTP_LOGIN`                | SMTP server authentication username.                                  | `5432`                                                                         |
+| `MASTODON_SMTP_PASSWORD`             | SMTP server authentication password.                                  | `bitnami_mastodon`                                                             |
 | `RAILS_SERVE_STATIC_FILES`           | Have puma server the static files in the public/ folder               | `true`                                                                         |
 | `MASTODON_BIND_ADDRESS`              | Address to listen for interfaces                                      | `0.0.0.0`                                                                      |
 | `MASTODON_DATA_TO_PERSIST`           | Data to persist from installations.                                   | `$MASTODON_ASSETS_DIR $MASTODON_SYSTEM_DIR`                                    |
