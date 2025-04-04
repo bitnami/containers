@@ -16,6 +16,11 @@ set -o pipefail
 
 print_welcome_page
 
+# Load REDIS_PASSWORD from a file when provided
+if [[ -n "${REDIS_PASSWORD_FILE:-}" ]]; then
+  export REDIS_PASSWORD="$(< "${REDIS_PASSWORD_FILE}")"
+fi
+
 # Set nss_wrapper vars only when running as non-root
 # Configure libnss_wrapper based on the UID/GID used to run the container
 # This container supports arbitrary UIDs, therefore we have do it dynamically
