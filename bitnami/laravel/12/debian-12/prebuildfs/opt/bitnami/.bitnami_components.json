@@ -9,13 +9,13 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "22.14.0-2"
+        "version": "22.14.0-3"
     },
     "php": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.4.5-0"
+        "version": "8.4.5-3"
     },
     "python": {
         "arch": "amd64",
@@ -27,6 +27,6 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.8-14"
+        "version": "1.0.8-15"
     }
 }
