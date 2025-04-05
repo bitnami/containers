@@ -3,6 +3,6 @@
 
 services:
   fluent-bit:
-    image: docker.io/bitnami/fluent-bit:3
+    image: docker.io/bitnami/fluent-bit:4
     ports:
       - '2020:2020'
