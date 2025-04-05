@@ -188,18 +188,18 @@ mysql_exec_initial_dump() {
     local -r dump_file="${DB_DATA_DIR}/dump_all_databases.sql"
 
     info "MySQL dump master data start..."
-    debug "Lock master databases for write operations"
-    echo "FLUSH TABLES WITH READ LOCK;" | mysql_remote_execute "$DB_MASTER_HOST" "$DB_MASTER_PORT_NUMBER" "mysql" "$DB_MASTER_ROOT_USER" "$DB_MASTER_ROOT_PASSWORD"
-
-    read -r log_file log_position <<< "$(echo "SHOW MASTER STATUS;" | mysql_remote_execute_print_output "$DB_MASTER_HOST" "$DB_MASTER_PORT_NUMBER" "mysql" "$DB_MASTER_ROOT_USER" "$DB_MASTER_ROOT_PASSWORD" | awk 'NR==1 {print $1, $2}')"
-    debug "File: $log_file and Position: $log_position"
-
-    debug "Start dump process databases"
-    mysqldump --verbose --all-databases -h "$DB_MASTER_HOST" -P "$DB_MASTER_PORT_NUMBER" -u "$DB_MASTER_ROOT_USER" -p"$DB_MASTER_ROOT_PASSWORD" > "$dump_file"
+    mysqldump --verbose --single-transaction --quick --source-data=2 --all-databases -h "$DB_MASTER_HOST" -P "$DB_MASTER_PORT_NUMBER" -u "$DB_MASTER_ROOT_USER" -p"$DB_MASTER_ROOT_PASSWORD" > "$dump_file"
     debug "Finish dump databases"
 
-    debug "Unlock master databases for write operations"
-    echo "UNLOCK TABLES;" | mysql_remote_execute "$DB_MASTER_HOST" "$DB_MASTER_PORT_NUMBER" "mysql" "$DB_MASTER_ROOT_USER" "$DB_MASTER_ROOT_PASSWORD"
+    # Look for the line containing "CHANGE REPLICATION SOURCE"
+    while IFS= read -r line; do
+      if [[ "$line" =~ CHANGE\ REPLICATION\ SOURCE\ TO\ SOURCE_LOG_FILE=\'([^\']+)\'\,\ SOURCE_LOG_POS=([0-9]+)\; ]]; then
+        log_file="${BASH_REMATCH[1]}"
+        log_position="${BASH_REMATCH[2]}"
+        break
+      fi
+    done < "$dump_file"
+    debug "File: $log_file and Position: $log_position"
 
     debug "Start import dump databases"
     mysql_execute < "$dump_file"
