@@ -187,9 +187,7 @@ EOF
 mysql_exec_initial_dump() {
     local -r dump_file="${DB_DATA_DIR}/dump_all_databases.sql"
 
-    info "MySQL dump source data start..."
-
-    debug "Start dump process databases"
+    info "MySQL dump master data start..."
     mysqldump --verbose --single-transaction --quick --source-data=2 --all-databases -h "$DB_MASTER_HOST" -P "$DB_MASTER_PORT_NUMBER" -u "$DB_MASTER_ROOT_USER" -p"$DB_MASTER_ROOT_PASSWORD" > "$dump_file"
     debug "Finish dump databases"
 
