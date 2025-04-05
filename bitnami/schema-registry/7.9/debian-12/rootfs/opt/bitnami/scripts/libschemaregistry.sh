@@ -150,8 +150,8 @@ schema_registry_validate() {
                 fi
             fi
             if [[ "$brokers_auth_protocol" =~ SASL ]]; then
-                if [[ -z "$SCHEMA_REGISTRY_KAFKA_SASL_USERS" ]] || [[ -z "$SCHEMA_REGISTRY_KAFKA_SASL_PASSWORDS" ]]; then
-                    warn "In order to configure SASL authentication for Kafka, most auth protocols require providing the SASL credentials. Set the environment variables SCHEMA_REGISTRY_KAFKA_SASL_USERS and SCHEMA_REGISTRY_KAFKA_SASL_PASSWORDS if your auth protocol requires it."
+                if [[ -z "$SCHEMA_REGISTRY_KAFKA_SASL_USER" ]] || [[ -z "$SCHEMA_REGISTRY_KAFKA_SASL_PASSWORD" ]]; then
+                    warn "In order to configure SASL authentication for Kafka, most auth protocols require providing the SASL credentials. Set the environment variables SCHEMA_REGISTRY_KAFKA_SASL_USER and SCHEMA_REGISTRY_KAFKA_SASL_PASSWORD if your auth protocol requires it."
                 fi
             fi
         else
@@ -292,8 +292,8 @@ schema_registry_initialize() {
         [[ -n "$SCHEMA_REGISTRY_KAFKA_BROKERS" ]] && schema_registry_conf_set "kafkastore.bootstrap.servers" "${SCHEMA_REGISTRY_KAFKA_BROKERS/%,/}"
         schema_registry_conf_set "kafkastore.security.protocol" "$brokers_auth_protocol"
         if [[ "$brokers_auth_protocol" =~ SASL ]]; then
-            read -r -a users <<< "$(tr ',;' ' ' <<< "${SCHEMA_REGISTRY_KAFKA_SASL_USERS}")"
-            read -r -a passwords <<< "$(tr ',;' ' ' <<< "${SCHEMA_REGISTRY_KAFKA_SASL_PASSWORDS}")"
+            read -r -a users <<< "$(tr ',;' ' ' <<< "${SCHEMA_REGISTRY_KAFKA_SASL_USER}")"
+            read -r -a passwords <<< "$(tr ',;' ' ' <<< "${SCHEMA_REGISTRY_KAFKA_SASL_PASSWORD}")"
             aux_string="org.apache.kafka.common.security.plain.PlainLoginModule required username=\"${users[0]:-}\" password=\"${passwords[0]:-}\";"
             if [[ "${SCHEMA_REGISTRY_KAFKA_SASL_MECHANISM:-}" =~ SCRAM  ]]; then
                 schema_registry_conf_set "kafkastore.sasl.mechanism" "${SCHEMA_REGISTRY_KAFKA_SASL_MECHANISM}"
