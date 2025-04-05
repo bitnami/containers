@@ -8,10 +8,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-04-04T03:58:36Z" \
+      org.opencontainers.image.created="2025-04-05T20:02:43Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/parse/README.md" \
-      org.opencontainers.image.ref.name="8.1.0-debian-12-r0" \
+      org.opencontainers.image.ref.name="8.1.0-debian-12-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/parse" \
       org.opencontainers.image.title="parse" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -29,7 +29,7 @@ RUN install_packages ca-certificates curl jq libbz2-1.0 libffi8 libgcc-s1 liblzm
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "python-3.13.2-11-linux-${OS_ARCH}-debian-12" \
-      "node-22.14.0-2-linux-${OS_ARCH}-debian-12" \
+      "node-22.14.0-3-linux-${OS_ARCH}-debian-12" \
       "mongodb-shell-2.4.2-0-linux-${OS_ARCH}-debian-12" \
       "parse-8.1.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
