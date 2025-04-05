@@ -103,6 +103,13 @@ kafka_get_version() {
 
 ########################
 # Returns true if ZooKeeper is supported as metadata storage
+# Globals:
+#   None
+# Arguments:
+#   None
+# Returns:
+#   true/false
+#########################
 kafka_is_zookeeper_supported() {
     major_version="$(get_sematic_version "$(kafka_get_version)" 1)"
     if [[ "$major_version" -lt "4" ]]; then
@@ -943,7 +950,9 @@ kafka_initialize() {
         cp -Lr "$KAFKA_MOUNTED_CONF_DIR"/* "$KAFKA_CONF_DIR"
     fi
     # Copy truststore to cert directory
-    for cert_var in KAFKA_TLS_TRUSTSTORE_FILE KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_FILE; do
+    local -a certs_vars=("KAFKA_TLS_TRUSTSTORE_FILE")
+    kafka_is_zookeeper_supported && certs_vars+=("KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_FILE")
+    for cert_var in "${certs_vars[@]}"; do
         # Only copy if the file exists and it is in a different location than KAFKA_CERTS_DIR (to avoid copying to the same location)
         if [[ -f "${!cert_var}" ]] && ! [[ "${!cert_var}" =~ $KAFKA_CERTS_DIR ]]; then
             info "Copying truststore ${!cert_var} to ${KAFKA_CERTS_DIR}"
@@ -995,41 +1004,43 @@ kafka_initialize() {
             kafka_server_conf_set sasl.enabled.mechanisms "$KAFKA_CFG_SASL_ENABLED_MECHANISMS"
         fi
         # Settings for each Kafka Listener are configured individually
-        read -r -a protocol_maps <<<"$(tr ',' ' ' <<<"$KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP")"
-        for protocol_map in "${protocol_maps[@]}"; do
-            read -r -a map <<<"$(tr ':' ' ' <<<"$protocol_map")"
-            # Obtain the listener and protocol from protocol map string, e.g. CONTROLLER:PLAINTEXT
-            listener="${map[0]}"
-            protocol="${map[1]}"
-            listener_lower="$(echo "$listener" | tr '[:upper:]' '[:lower:]')"
+        if ! is_empty_value "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}"; then
+            read -r -a protocol_maps <<<"$(tr ',' ' ' <<<"$KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP")"
+            for protocol_map in "${protocol_maps[@]}"; do
+                read -r -a map <<<"$(tr ':' ' ' <<<"$protocol_map")"
+                # Obtain the listener and protocol from protocol map string, e.g. CONTROLLER:PLAINTEXT
+                listener="${map[0]}"
+                protocol="${map[1]}"
+                listener_lower="$(echo "$listener" | tr '[:upper:]' '[:lower:]')"
 
-            if [[ "$protocol" = "SSL" || "$protocol" = "SASL_SSL" ]]; then
-                listener_upper="$(echo "$listener" | tr '[:lower:]' '[:upper:]')"
-                env_name="KAFKA_TLS_${listener_upper}_CLIENT_AUTH"
-                [[ -n "${!env_name:-}" ]] && kafka_server_conf_set "listener.name.${listener_lower}.ssl.client.auth" "${!env_name}"
-            fi
-            if [[ "$protocol" = "SASL_PLAINTEXT" || "$protocol" = "SASL_SSL" ]]; then
-                local role=""
-                if [[ "$listener" = "${KAFKA_CFG_INTER_BROKER_LISTENER_NAME:-INTERNAL}" ]]; then
-                    kafka_server_conf_set sasl.mechanism.inter.broker.protocol "$KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL"
-                    role="inter-broker"
-                elif [[ "${KAFKA_CFG_CONTROLLER_LISTENER_NAMES:-CONTROLLER}" =~ $listener ]]; then
-                    kafka_server_conf_set sasl.mechanism.controller.protocol "$KAFKA_CFG_SASL_MECHANISM_CONTROLLER_PROTOCOL"
-                    kafka_server_conf_set "listener.name.${listener_lower}.sasl.enabled.mechanisms" "$KAFKA_CFG_SASL_MECHANISM_CONTROLLER_PROTOCOL"
-                    role="controller"
+                if [[ "$protocol" = "SSL" || "$protocol" = "SASL_SSL" ]]; then
+                    listener_upper="$(echo "$listener" | tr '[:lower:]' '[:upper:]')"
+                    env_name="KAFKA_TLS_${listener_upper}_CLIENT_AUTH"
+                    [[ -n "${!env_name:-}" ]] && kafka_server_conf_set "listener.name.${listener_lower}.ssl.client.auth" "${!env_name}"
                 fi
-                # If KAFKA_CLIENT_LISTENER_NAME is found in the listeners list, configure the producer/consumer accordingly
-                if [[ "$listener" = "${KAFKA_CLIENT_LISTENER_NAME:-CLIENT}" ]]; then
-                    kafka_configure_consumer_producer_jaas
-                    kafka_producer_consumer_conf_set security.protocol "$protocol"
-                    kafka_producer_consumer_conf_set sasl.mechanism "${KAFKA_CLIENT_SASL_MECHANISM:-$(kafka_client_sasl_mechanism)}"
+                if [[ "$protocol" = "SASL_PLAINTEXT" || "$protocol" = "SASL_SSL" ]]; then
+                    local role=""
+                    if [[ "$listener" = "${KAFKA_CFG_INTER_BROKER_LISTENER_NAME:-INTERNAL}" ]]; then
+                        kafka_server_conf_set sasl.mechanism.inter.broker.protocol "$KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL"
+                        role="inter-broker"
+                    elif [[ "${KAFKA_CFG_CONTROLLER_LISTENER_NAMES:-CONTROLLER}" =~ $listener ]]; then
+                        kafka_server_conf_set sasl.mechanism.controller.protocol "$KAFKA_CFG_SASL_MECHANISM_CONTROLLER_PROTOCOL"
+                        kafka_server_conf_set "listener.name.${listener_lower}.sasl.enabled.mechanisms" "$KAFKA_CFG_SASL_MECHANISM_CONTROLLER_PROTOCOL"
+                        role="controller"
+                    fi
+                    # If KAFKA_CLIENT_LISTENER_NAME is found in the listeners list, configure the producer/consumer accordingly
+                    if [[ "$listener" = "${KAFKA_CLIENT_LISTENER_NAME:-CLIENT}" ]]; then
+                        kafka_configure_consumer_producer_jaas
+                        kafka_producer_consumer_conf_set security.protocol "$protocol"
+                        kafka_producer_consumer_conf_set sasl.mechanism "${KAFKA_CLIENT_SASL_MECHANISM:-$(kafka_client_sasl_mechanism)}"
+                    fi
+                    # Configure inline listener jaas configuration, omitted if mounted JAAS conf file detected
+                    if [[ ! -f "${KAFKA_CONF_DIR}/kafka_jaas.conf" ]]; then
+                        kafka_configure_server_jaas "$listener_lower" "${role:-}"
+                    fi
                 fi
-                # Configure inline listener jaas configuration, omitted if mounted JAAS conf file detected
-                if [[ ! -f "${KAFKA_CONF_DIR}/kafka_jaas.conf" ]]; then
-                    kafka_configure_server_jaas "$listener_lower" "${role:-}"
-                fi
-            fi
-        done
+            done
+        fi
         # Configure Kafka using environment variables
         # This is executed at the end, to allow users to override properties set by the initialization logic
         kafka_configure_from_environment_variables
