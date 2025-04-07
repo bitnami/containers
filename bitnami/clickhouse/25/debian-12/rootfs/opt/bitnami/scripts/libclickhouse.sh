@@ -54,10 +54,12 @@ clickhouse_validate() {
     ! is_empty_value "$CLICKHOUSE_INTERSERVER_HTTP_PORT" && check_valid_port "CLICKHOUSE_INTERSERVER_HTTP_PORT"
 
     # Validate credentials
-    if is_boolean_yes "${ALLOW_EMPTY_PASSWORD:-}"; then
-        warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD:-}. For safety reasons, do not use this flag in a production environment."
-    elif is_empty_value "$CLICKHOUSE_ADMIN_PASSWORD"; then
-        print_validation_error "The CLICKHOUSE_ADMIN_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow a blank password. This is only recommended for development environments."
+    if ! is_boolean_yes "$CLICKHOUSE_SKIP_USER_SETUP"; then
+        if is_boolean_yes "${ALLOW_EMPTY_PASSWORD:-}"; then
+            warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD:-}. For safety reasons, do not use this flag in a production environment."
+        elif is_empty_value "$CLICKHOUSE_ADMIN_PASSWORD"; then
+            print_validation_error "The CLICKHOUSE_ADMIN_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow a blank password. This is only recommended for development environments."
+        fi
     fi
 
     return "$error_code"
@@ -191,7 +193,9 @@ clickhouse_initialize() {
     rm -f "$CLICKHOUSE_PID_FILE"
 
     clickhouse_copy_mounted_configuration
-    if [[ "$CLICKHOUSE_ADMIN_USER" != "default" ]]; then
+    if is_boolean_yes "$CLICKHOUSE_SKIP_USER_SETUP"; then
+        info "Skipping user setup"
+    elif [[ "$CLICKHOUSE_ADMIN_USER" != "default" ]]; then
         # If we need to set an admin user different from default, we create a configuration override
         local -r admin_user_override="${CLICKHOUSE_CONF_DIR}/users.d/__bitnami_default_user.xml"
         cat <<EOF >"${admin_user_override}"
