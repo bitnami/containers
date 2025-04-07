@@ -24,6 +24,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
 clickhouse_keeper_env_vars=(
+    CLICKHOUSE_KEEPER_SKIP_SETUP
     CLICKHOUSE_KEEPER_SERVER_ID
     CLICKHOUSE_KEEPER_TCP_PORT
     CLICKHOUSE_KEEPER_RAFT_PORT
@@ -56,6 +57,7 @@ export CLICKHOUSE_KEEPER_TMP_DIR="${CLICKHOUSE_KEEPER_BASE_DIR}/tmp"
 export CLICKHOUSE_KEEPER_PID_FILE="${CLICKHOUSE_KEEPER_TMP_DIR}/clickhouse-keeper.pid"
 
 # ClickHouse Keeper configuration parameters
+export CLICKHOUSE_KEEPER_SKIP_SETUP="${CLICKHOUSE_KEEPER_SKIP_SETUP:-no}"
 export CLICKHOUSE_KEEPER_SERVER_ID="${CLICKHOUSE_KEEPER_SERVER_ID:-}"
 export CLICKHOUSE_KEEPER_TCP_PORT="${CLICKHOUSE_KEEPER_TCP_PORT:-9181}"
 export CLICKHOUSE_KEEPER_RAFT_PORT="${CLICKHOUSE_KEEPER_RAFT_PORT:-9234}"

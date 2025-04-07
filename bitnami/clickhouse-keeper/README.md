@@ -186,11 +186,12 @@ Check the [official ClickHouse Keeper configuration documentation](https://click
 
 #### Customizable environment variables
 
-| Name                          | Description                  | Default Value |
-|-------------------------------|------------------------------|---------------|
-| `CLICKHOUSE_KEEPER_SERVER_ID` | ClickHouse Keeper server ID. | `nil`         |
-| `CLICKHOUSE_KEEPER_TCP_PORT`  | ClickHouse Keeper TCP port.  | `9181`        |
-| `CLICKHOUSE_KEEPER_RAFT_PORT` | ClickHouse Keeper Raft port. | `9234`        |
+| Name                           | Description                   | Default Value |
+|--------------------------------|-------------------------------|---------------|
+| `CLICKHOUSE_KEEPER_SKIP_SETUP` | Skip ClickHouse Keeper setup. | `no`          |
+| `CLICKHOUSE_KEEPER_SERVER_ID`  | ClickHouse Keeper server ID.  | `nil`         |
+| `CLICKHOUSE_KEEPER_TCP_PORT`   | ClickHouse Keeper TCP port.   | `9181`        |
+| `CLICKHOUSE_KEEPER_RAFT_PORT`  | ClickHouse Keeper Raft port.  | `9234`        |
 
 #### Read-only environment variables
 
