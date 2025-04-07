@@ -3,19 +3,19 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "10.11.11-2"
+        "version": "11.4.5-2"
     },
     "node": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "22.14.0-2"
+        "version": "22.14.0-3"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.13.2-8"
+        "version": "3.13.2-11"
     },
     "rails": {
         "arch": "amd64",
@@ -27,12 +27,12 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.2.7-4"
+        "version": "3.2.8-0"
     },
     "wait-for-port": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.8-14"
+        "version": "1.0.8-15"
     }
 }
