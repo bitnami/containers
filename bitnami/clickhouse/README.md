@@ -201,16 +201,17 @@ In order to have your custom files inside the docker image you can mount them as
 
 #### Customizable environment variables
 
-| Name                               | Description                   | Default Value |
-|------------------------------------|-------------------------------|---------------|
-| `ALLOW_EMPTY_PASSWORD`             | Allow an empty password.      | `no`          |
-| `CLICKHOUSE_ADMIN_USER`            | ClickHouse admin username.    | `default`     |
-| `CLICKHOUSE_ADMIN_PASSWORD`        | ClickHouse admin password.    | `nil`         |
-| `CLICKHOUSE_HTTP_PORT`             | ClickHouse HTTP port.         | `8123`        |
-| `CLICKHOUSE_TCP_PORT`              | ClickHouse TCP port.          | `9000`        |
-| `CLICKHOUSE_MYSQL_PORT`            | ClickHouse MySQL port.        | `9004`        |
-| `CLICKHOUSE_POSTGRESQL_PORT`       | ClickHouse PostgreSQL port.   | `9005`        |
-| `CLICKHOUSE_INTERSERVER_HTTP_PORT` | ClickHouse Inter-server port. | `9009`        |
+| Name                               | Description                       | Default Value |
+|------------------------------------|-----------------------------------|---------------|
+| `ALLOW_EMPTY_PASSWORD`             | Allow an empty password.          | `no`          |
+| `CLICKHOUSE_SKIP_USER_SETUP`       | Skip ClickHouse admin user setup. | `no`          |
+| `CLICKHOUSE_ADMIN_USER`            | ClickHouse admin username.        | `default`     |
+| `CLICKHOUSE_ADMIN_PASSWORD`        | ClickHouse admin password.        | `nil`         |
+| `CLICKHOUSE_HTTP_PORT`             | ClickHouse HTTP port.             | `8123`        |
+| `CLICKHOUSE_TCP_PORT`              | ClickHouse TCP port.              | `9000`        |
+| `CLICKHOUSE_MYSQL_PORT`            | ClickHouse MySQL port.            | `9004`        |
+| `CLICKHOUSE_POSTGRESQL_PORT`       | ClickHouse PostgreSQL port.       | `9005`        |
+| `CLICKHOUSE_INTERSERVER_HTTP_PORT` | ClickHouse Inter-server port.     | `9009`        |
 
 #### Read-only environment variables
 
