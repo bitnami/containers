@@ -17,7 +17,13 @@ set -o pipefail
 . /opt/bitnami/scripts/clickhouse-keeper-env.sh
 
 declare -a cmd=("${CLICKHOUSE_KEEPER_BASE_DIR}/bin/clickhouse-keeper")
-declare -a args=("--config-file=${CLICKHOUSE_KEEPER_CONF_FILE}" "--pid-file=${CLICKHOUSE_KEEPER_PID_FILE}")
+declare -a args=("--pid-file=${CLICKHOUSE_KEEPER_PID_FILE}")
+# For compatibility with upstream image
+if [[ -f "$CLICKHOUSE_KEEPER_CONF_FILE" ]]; then
+    args+=("--config-file=${CLICKHOUSE_KEEPER_CONF_FILE}")
+else
+    args+=("--log-file=${CLICKHOUSE_KEEPER_LOG_FILE}" "--errorlog-file=${CLICKHOUSE_KEEPER_ERROR_LOG_FILE}")
+fi
 args+=("$@")
 
 info "** Starting ClickHouse Keeper **"
