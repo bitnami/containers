@@ -19,7 +19,7 @@ set -o pipefail
 ensure_user_exists "$CLICKHOUSE_DAEMON_USER" --group "$CLICKHOUSE_DAEMON_GROUP" --system
 
 # Create directories
-for dir in "$CLICKHOUSE_KEEPER_DATA_DIR" "$CLICKHOUSE_KEEPER_COORD_LOGS_DIR" "$CLICKHOUSE_KEEPER_COORD_SNAPSHOTS_DIR" "$CLICKHOUSE_KEEPER_CONF_DIR" "$CLICKHOUSE_KEEPER_LOG_DIR" "$CLICKHOUSE_KEEPER_TMP_DIR" "/var/lib/clickhouse/coordination"; do
+for dir in "$CLICKHOUSE_KEEPER_VOLUME_DIR" "$CLICKHOUSE_KEEPER_DATA_DIR" "$CLICKHOUSE_KEEPER_COORD_LOGS_DIR" "$CLICKHOUSE_KEEPER_COORD_SNAPSHOTS_DIR" "$CLICKHOUSE_KEEPER_CONF_DIR" "$CLICKHOUSE_KEEPER_LOG_DIR" "$CLICKHOUSE_KEEPER_TMP_DIR"; do
     ensure_dir_exists "$dir"
     configure_permissions_ownership "$dir" -d "775" -f "664" -u "$CLICKHOUSE_DAEMON_USER" -g "root"
 done
@@ -45,8 +45,7 @@ xmlstarlet ed -L --insert "/clickhouse/keeper_server/raft_configuration/server/p
 
 # Add symlinks to the default paths to make a similar UX as the upstream ClickHouse Keeper configuration
 # https://github.com/ClickHouse/ClickHouse/blob/master/programs/keeper/keeper_config.xml
-ln -s "$CLICKHOUSE_KEEPER_COORD_LOGS_DIR" "/var/lib/clickhouse/coordination/logs"
-ln -s "$CLICKHOUSE_KEEPER_COORD_SNAPSHOTS_DIR" "/var/lib/clickhouse/coordination/snapshots"
+ln -s "$CLICKHOUSE_KEEPER_VOLUME_DIR" "/var/lib/clickhouse-keeper"
 ln -s "$CLICKHOUSE_KEEPER_CONF_DIR" "/etc/clickhouse-keeper"
 ln -s "$CLICKHOUSE_KEEPER_LOG_DIR" "/var/log/clickhouse-keeper"
 
