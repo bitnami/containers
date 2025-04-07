@@ -16,6 +16,7 @@ command:
   check-server-init:
     exec: java -jar /opt/bitnami/appsmith/backend/server.jar
     exit-status: 1
+    timeout: 30000
     stdout:
       - "{{ .Env.APP_VERSION }}"
       - "Starting ServerApplication"
