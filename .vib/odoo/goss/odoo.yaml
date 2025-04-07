@@ -5,6 +5,7 @@ command:
   check-virtualenv:
     exec: bash -c '. /opt/bitnami/odoo/venv/bin/activate; pip install tool; pip uninstall -y tool'
     exit-status: 0
+    timeout: 30000
     stdout:
       - /Successfully installed.* tool-/
 group:
