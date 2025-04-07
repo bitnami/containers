@@ -38,9 +38,9 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-04-02T00:46:13Z" \
+      org.opencontainers.image.created="2025-04-07T14:49:09Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.ref.name="2.12.1-debian-12-r7" \
+      org.opencontainers.image.ref.name="2.12.1-debian-12-r8" \
       org.opencontainers.image.title="rabbitmq-cluster-operator" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
       org.opencontainers.image.version="2.12.1"
