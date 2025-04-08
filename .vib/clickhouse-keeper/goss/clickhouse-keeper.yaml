@@ -17,7 +17,7 @@ file:
     exists: true
     filetype: symlink
     linked-to: /dev/stderr
-  /opt/bitnami/clickhouse-keeper/etc/keeper_config.xml.original:
+  /opt/bitnami/clickhouse-keeper/etc.default/keeper_config.xml:
     exists: true
     filetype: file
     contents:
