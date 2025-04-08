@@ -8,8 +8,8 @@ user:
     gid: 0
 command:
   mlflow-serve:
-    exec: cd /app && timeout --signal 2 --preserve-status 10 mlflow server
-    timeout: 15000
+    exec: cd /app && timeout --signal 2 --preserve-status 20 mlflow server
+    timeout: 30000
     exit-status: 1
     stderr:
       - "Listening at"
