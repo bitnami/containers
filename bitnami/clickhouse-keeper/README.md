@@ -160,11 +160,11 @@ ClickHouse Keeper can be configured via environment variables or using a configu
 
 ### Configuration overrides
 
-The configuration can easily be setup by mounting your own configuration overrides at `/opt/bitnami/clickhouse-keeper/etc/keeper_config.xml`:
+The configuration can easily be setup by mounting your own configuration overrides on the directory `/bitnami/clickhouse-keeper/etc/config.d` or `/bitnami/clickhouse-keeper/etc/users.d`:
 
 ```console
 docker run --name clickhouse-keeper \
-    --volume /path/to/override.xml:/opt/bitnami/clickhouse-keeper/etc/keeper_config.xml:ro \
+    --volume /path/to/override.xml:/bitnami/clickhouse-keeper/etc/config.d/override.xml:ro \
     bitnami/clickhouse-keeper:latest
 ```
 
@@ -177,7 +177,7 @@ services:
   clickhouse-keeper:
     image: bitnami/clickhouse-keeper:latest
     volumes:
-      - /path/to/override.xml:/opt/bitnami/clickhouse-keeper/etc/keeper_config.xml:ro
+      - /path/to/override.xml:/bitnami/clickhouse-keeper/etc/config.d/override.xml:ro
 ```
 
 Check the [official ClickHouse Keeper configuration documentation](https://clickhouse.com/docs/guides/sre/keeper/clickhouse-keeper) for all the possible overrides and settings.
@@ -200,6 +200,8 @@ Check the [official ClickHouse Keeper configuration documentation](https://click
 | `CLICKHOUSE_KEEPER_BASE_DIR`            | ClickHouse Keeper installation directory.           | `${BITNAMI_ROOT_DIR}/clickhouse-keeper`                  |
 | `CLICKHOUSE_KEEPER_VOLUME_DIR`          | ClickHouse Keeper volume directory.                 | `/bitnami/clickhouse-keeper`                             |
 | `CLICKHOUSE_KEEPER_CONF_DIR`            | ClickHouse Keeper configuration directory.          | `${CLICKHOUSE_KEEPER_BASE_DIR}/etc`                      |
+| `CLICKHOUSE_KEEPER_DEFAULT_CONF_DIR`    | ClickHouse Keeper default configuration directory.  | `${CLICKHOUSE_KEEPER_BASE_DIR}/etc.default`              |
+| `CLICKHOUSE_KEEPER_MOUNTED_CONF_DIR`    | ClickHouse Keeper mounted configuration directory.  | `${CLICKHOUSE_KEEPER_VOLUME_DIR}/etc`                    |
 | `CLICKHOUSE_KEEPER_CONF_FILE`           | ClickHouse Keeper configuration file.               | `${CLICKHOUSE_KEEPER_CONF_DIR}/keeper_config.xml`        |
 | `CLICKHOUSE_KEEPER_DATA_DIR`            | ClickHouse Keeper data directory.                   | `${CLICKHOUSE_KEEPER_VOLUME_DIR}/coordination`           |
 | `CLICKHOUSE_KEEPER_COORD_LOGS_DIR`      | ClickHouse Keeper coordination logs directory.      | `${CLICKHOUSE_KEEPER_DATA_DIR}/logs`                     |
