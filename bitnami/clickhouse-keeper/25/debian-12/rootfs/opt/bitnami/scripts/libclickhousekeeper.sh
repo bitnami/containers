@@ -93,22 +93,58 @@ keeper_conf_set() {
 }
 
 ########################
+# Copy configuration from the mounted folder to the etc folder
+# In charts mounting directly in the configuration folder would not
+# allow the use of multiple ConfigMaps and Secrets
+# Globals:
+#   CLICKHOUSE_KEEPER_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+keeper_copy_mounted_configuration() {
+    if ! is_mounted_dir_empty "$CLICKHOUSE_KEEPER_MOUNTED_CONF_DIR"; then
+        info "Copying mounted configuration from $CLICKHOUSE_KEEPER_MOUNTED_CONF_DIR"
+        # Copy first the files at the base of the mounted folder to go to ClickHouse
+        # base etc folder
+        find "$CLICKHOUSE_KEEPER_MOUNTED_CONF_DIR" -maxdepth 1 \( -type f -o -type l \) -exec cp -L -r {} "$CLICKHOUSE_KEEPER_CONF_DIR" \;
+
+        # The ClickHouse override directories (etc/conf.d, etc/config.d and etc/users.d) do not support subfolders. That means we cannot
+        # copy directly with cp -RL because we need all override xml files to have at the root of these subfolders. In the Helm
+        # chart we want to allow overrides from different ConfigMaps and Secrets so we need to use the find command.
+        for dir in conf.d config.d users.d; do
+            if [[ -d "${CLICKHOUSE_KEEPER_MOUNTED_CONF_DIR}/${dir}" ]]; then
+                find "${CLICKHOUSE_KEEPER_MOUNTED_CONF_DIR}/${dir}" \( -type f -o -type l \) -exec cp -L -r {} "${CLICKHOUSE_KEEPER_CONF_DIR}/${dir}" \;
+            fi
+        done
+    fi
+}
+
+########################
 # Initialize ClickHouse Keeper
+# Globals:
+#   CLICKHOUSE_KEEPER_*
 # Arguments:
 #   None
 # Returns:
 #   None
 #########################
 keeper_initialize() {
-    info "No injected configuration files found, creating default config files"
-    # Restore original keeper_config.xml
-    cp "${CLICKHOUSE_KEEPER_CONF_DIR}/keeper_config.xml.original" "$CLICKHOUSE_KEEPER_CONF_FILE"
+    # This fixes an issue where the trap would kill the entrypoint.sh, if a PID was left over from a previous run
+    # Exec replaces the process without creating a new one, and when the container is restarted it may have the same PID
+    rm -f "$CLICKHOUSE_KEEPER_PID_FILE"
 
-    # Logic based on the upstream ClickHouse Keeper container
-    # For the container itself we keep the logic simple. In the helm chart we rely on the mounting of configuration files with overrides
-    # ref: https://github.com/ClickHouse/ClickHouse/blob/master/docker/keeper/entrypoint.sh
-    keeper_conf_set "/clickhouse/keeper_server/server_id" "$CLICKHOUSE_KEEPER_SERVER_ID"
-    is_boolean_yes "${BITNAMI_DEBUG}" && keeper_conf_set "/clickhouse/logger/level" "debug"
+    keeper_copy_mounted_configuration
+    if is_boolean_yes "$CLICKHOUSE_KEEPER_SKIP_SETUP"; then
+        info "Skipping ClickHouse Keeper setup"
+    else
+        # Logic based on the upstream ClickHouse Keeper container
+        # For the container itself we keep the logic simple. In the helm chart we rely on the mounting of configuration files with overrides
+        # ref: https://github.com/ClickHouse/ClickHouse/blob/master/docker/keeper/entrypoint.sh
+        keeper_conf_set "/clickhouse/keeper_server/server_id" "$CLICKHOUSE_KEEPER_SERVER_ID"
+        is_boolean_yes "${BITNAMI_DEBUG}" && keeper_conf_set "/clickhouse/logger/level" "debug"
+    fi
 
     # Avoid exit code of previous commands to affect the result of this function
     true

@@ -19,7 +19,7 @@ set -o pipefail
 ensure_user_exists "$CLICKHOUSE_DAEMON_USER" --group "$CLICKHOUSE_DAEMON_GROUP" --system
 
 # Create directories
-for dir in "$CLICKHOUSE_KEEPER_VOLUME_DIR" "$CLICKHOUSE_KEEPER_DATA_DIR" "$CLICKHOUSE_KEEPER_COORD_LOGS_DIR" "$CLICKHOUSE_KEEPER_COORD_SNAPSHOTS_DIR" "$CLICKHOUSE_KEEPER_CONF_DIR" "$CLICKHOUSE_KEEPER_LOG_DIR" "$CLICKHOUSE_KEEPER_TMP_DIR"; do
+for dir in "$CLICKHOUSE_KEEPER_VOLUME_DIR" "$CLICKHOUSE_KEEPER_DATA_DIR" "$CLICKHOUSE_KEEPER_COORD_LOGS_DIR" "$CLICKHOUSE_KEEPER_COORD_SNAPSHOTS_DIR" "$CLICKHOUSE_KEEPER_CONF_DIR" "$CLICKHOUSE_KEEPER_DEFAULT_CONF_DIR" "$CLICKHOUSE_KEEPER_LOG_DIR" "$CLICKHOUSE_KEEPER_TMP_DIR"; do
     ensure_dir_exists "$dir"
     configure_permissions_ownership "$dir" -d "775" -f "664" -u "$CLICKHOUSE_DAEMON_USER" -g "root"
 done
@@ -69,6 +69,6 @@ xmlstarlet ed -L -d "/clickhouse/logger/errorlog" "$CLICKHOUSE_KEEPER_CONF_FILE"
 keeper_conf_set "/clickhouse/logger/console" "1"
 keeper_conf_set "/clickhouse/logger/level" "information"
 
-# Move the original keeper_config.xml, so users can skip initialization logic by mounting
-# their own keeper_config.xml directly
-mv "$CLICKHOUSE_KEEPER_CONF_FILE" "${CLICKHOUSE_KEEPER_CONF_DIR}/keeper_config.xml.original"
+# Move all initially generated configuration files to the default directory
+# so users can skip initialization logic by mounting their own configuration directly
+mv "${CLICKHOUSE_KEEPER_CONF_DIR}"/* "$CLICKHOUSE_KEEPER_DEFAULT_CONF_DIR"/
