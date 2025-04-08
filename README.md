@@ -145,9 +145,9 @@ As part of the release process, the Bitnami container images are analyzed for vu
 
 This scanning process is triggered via a GH action for every PR affecting the source code of the containers, regardless of its nature or origin.
 
-## Changes in version support and pull-rate limits in Docker Hub for BItnami containers and Helm charts 
+## Changes in version support and pull-rate limits in Docker Hub for BItnami containers and Helm charts
 
-Following the release of Bitnami Premium, we are making some changes in the way we distribute our free catalog. These changes enable us to sustain a viable business while also continuing to serve our community, including other open source projects, with free, high-quality software packages. 
+Following the release of Bitnami Premium, we are making some changes in the way we distribute our free catalog. These changes enable us to sustain a viable business while also continuing to serve our community, including other open source projects, with free, high-quality software packages.
 
 Beginning on December 16th, 2024, Bitnami will no longer subsidize unlimited pulls from the free Bitnami catalog in Docker Hub. Bitnami containers and charts will be subject to standard pull-rate limits and pull caps. Users who upgrade to Bitnami Premium will be able to pull without any limitations on pull rate or pulls per time period, regardless of the type of Docker subscription you have.
 
