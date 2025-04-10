@@ -9,6 +9,10 @@ set -o nounset
 set -o pipefail
 #set -o xtrace
 
+# updating PYTHONPATH with all the python libraries provided by Apache Spark. This is required
+# for PySpark to work. Currently, pyspark and py4j in "${SPARK_HOME}"/python/lib
+export PYTHONPATH=$(ZIPS=("${SPARK_HOME}"/python/lib/*.zip); IFS=:; echo "${ZIPS[*]}"):${PYTHONPATH:-}
+
 # Load libraries
 . /opt/bitnami/scripts/libbitnami.sh
 . /opt/bitnami/scripts/libspark.sh
