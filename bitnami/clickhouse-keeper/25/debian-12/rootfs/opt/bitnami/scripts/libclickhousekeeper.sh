@@ -110,11 +110,12 @@ keeper_copy_mounted_configuration() {
         # base etc folder
         find "$CLICKHOUSE_KEEPER_MOUNTED_CONF_DIR" -maxdepth 1 \( -type f -o -type l \) -exec cp -L -r {} "$CLICKHOUSE_KEEPER_CONF_DIR" \;
 
-        # The ClickHouse override directories (etc/conf.d, etc/config.d and etc/users.d) do not support subfolders. That means we cannot
+        # The ClickHouse override directories (etc/conf.d, etc/keeper_config.d and etc/users.d) do not support subfolders. That means we cannot
         # copy directly with cp -RL because we need all override xml files to have at the root of these subfolders. In the Helm
         # chart we want to allow overrides from different ConfigMaps and Secrets so we need to use the find command.
-        for dir in conf.d config.d users.d; do
+        for dir in conf.d keeper_config.d users.d; do
             if [[ -d "${CLICKHOUSE_KEEPER_MOUNTED_CONF_DIR}/${dir}" ]]; then
+                mkdir -p "${CLICKHOUSE_KEEPER_CONF_DIR}/${dir}"
                 find "${CLICKHOUSE_KEEPER_MOUNTED_CONF_DIR}/${dir}" \( -type f -o -type l \) -exec cp -L -r {} "${CLICKHOUSE_KEEPER_CONF_DIR}/${dir}" \;
             fi
         done
@@ -143,6 +144,7 @@ keeper_initialize() {
         # For the container itself we keep the logic simple. In the helm chart we rely on the mounting of configuration files with overrides
         # ref: https://github.com/ClickHouse/ClickHouse/blob/master/docker/keeper/entrypoint.sh
         keeper_conf_set "/clickhouse/keeper_server/server_id" "$CLICKHOUSE_KEEPER_SERVER_ID"
+        keeper_conf_set "/clickhouse/keeper_server/raft_configuration/server/id" "$CLICKHOUSE_KEEPER_SERVER_ID"
         is_boolean_yes "${BITNAMI_DEBUG}" && keeper_conf_set "/clickhouse/logger/level" "debug"
     fi
 
