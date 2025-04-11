@@ -379,7 +379,7 @@ elasticsearch_validate() {
     am_i_root && ensure_user_exists "$DB_DAEMON_USER" --group "$DB_DAEMON_GROUP"
     for dir in "$DB_TMP_DIR" "$DB_LOGS_DIR" "$DB_PLUGINS_DIR" "$DB_BASE_DIR/modules" "$DB_CONF_DIR"; do
         ensure_dir_exists "$dir"
-        am_i_root && chown -R "$DB_DAEMON_USER:$DB_DAEMON_GROUP" "$dir"
+        am_i_root && chown -R "$DB_DAEMON_USER:$DB_DAEMON_GROUP" "$dir" || true
     done
 
     debug "Validating settings in DB_* env vars..."
@@ -686,7 +686,7 @@ elasticsearch_initialize() {
     debug "Ensuring expected directories/files exist..."
     for dir in "$DB_TMP_DIR" "$DB_LOGS_DIR" "$DB_PLUGINS_DIR" "$DB_BASE_DIR/modules" "$DB_CONF_DIR"; do
         ensure_dir_exists "$dir"
-        am_i_root && chown -R "$DB_DAEMON_USER:$DB_DAEMON_GROUP" "$dir"
+        am_i_root && chown -R "$DB_DAEMON_USER:$DB_DAEMON_GROUP" "$dir" || true
     done
     for dir in "${data_dirs_list[@]}"; do
         ensure_dir_exists "$dir"
