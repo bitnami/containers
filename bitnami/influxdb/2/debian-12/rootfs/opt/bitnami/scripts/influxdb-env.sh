@@ -81,8 +81,19 @@ export INFLUXDB_DATA_WAL_DIR="${INFLUXDB_DATA_WAL_DIR:-${INFLUXDB_VOLUME_DIR}/wa
 export INFLUXDB_META_DIR="${INFLUXDB_META_DIR:-${INFLUXDB_VOLUME_DIR}/meta}"
 export INFLUXDB_CONF_DIR="${INFLUXDB_BASE_DIR}/etc"
 export INFLUXDB_DEFAULT_CONF_DIR="${INFLUXDB_BASE_DIR}/etc.default"
-export INFLUXDB_CONF_FILE="${INFLUXDB_CONF_DIR}/config.yaml"
+export INFLUXDB_CONF_FILE_FORMAT="${INFLUXDB_CONF_FILE_FORMAT:-"yaml"}"
+export INFLUXDB_CONF_FILE="${INFLUXDB_CONF_DIR}/config.${INFLUXDB_CONF_FILE_FORMAT}"
 export INFLUXDB_INITSCRIPTS_DIR="/docker-entrypoint-initdb.d"
+
+case "${INFLUXDB_CONF_FILE_FORMAT}" in
+    yaml|yml|toml|json)
+        # Legal format
+        ;;
+    *)
+        error "Unsupported config file format: ${INFLUXDB_CONF_FILE_FORMAT}"
+        exit 1
+        ;;
+esac
 
 # InfluxDB 2.x aliases
 export INFLUXD_ENGINE_PATH="${INFLUXDB_VOLUME_DIR}"
