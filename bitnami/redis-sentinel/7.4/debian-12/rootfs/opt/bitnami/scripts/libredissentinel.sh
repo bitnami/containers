@@ -103,7 +103,11 @@ redis_validate() {
             print_validation_error "The private key file in the specified path ${REDIS_SENTINEL_TLS_KEY_FILE} does not exist"
         fi
         if [[ -z "$REDIS_SENTINEL_TLS_CA_FILE" ]]; then
-            print_validation_error "You must provide a CA X.509 certificate in order to use TLS"
+            if [[ -z "$REDIS_SENTINEL_TLS_CA_DIR" ]]; then
+                print_validation_error "You must provide either a CA X.509 certificate or a CA certificates directory in order to use TLS"
+            elif [[ ! -d "$REDIS_SENTINEL_TLS_CA_DIR" ]]; then
+                print_validation_error "The CA certificates directory specified by path ${REDIS_SENTINEL_TLS_CA_DIR} does not exist"
+            fi
         elif [[ ! -f "$REDIS_SENTINEL_TLS_CA_FILE" ]]; then
             print_validation_error "The CA X.509 certificate file in the specified path ${REDIS_SENTINEL_TLS_CA_FILE} does not exist"
         fi
@@ -247,7 +251,12 @@ redis_initialize() {
             fi
             redis_conf_set tls-cert-file "$REDIS_SENTINEL_TLS_CERT_FILE"
             redis_conf_set tls-key-file "$REDIS_SENTINEL_TLS_KEY_FILE"
-            redis_conf_set tls-ca-cert-file "$REDIS_SENTINEL_TLS_CA_FILE"
+            if is_empty_value "$REDIS_SENTINEL_TLS_CA_FILE"; then
+                redis_conf_set tls-ca-cert-dir "$REDIS_SENTINEL_TLS_CA_DIR"
+            else
+                redis_conf_set tls-ca-cert-file "$REDIS_SENTINEL_TLS_CA_FILE"
+            fi
+
             [[ -n "$REDIS_SENTINEL_TLS_DH_PARAMS_FILE" ]] && redis_conf_set tls-dh-params-file "$REDIS_SENTINEL_TLS_DH_PARAMS_FILE"
             redis_conf_set tls-auth-clients "$REDIS_SENTINEL_TLS_AUTH_CLIENTS"
             redis_conf_set tls-replication yes
