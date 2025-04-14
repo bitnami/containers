@@ -74,6 +74,16 @@ influxdb_validate() {
     done
     check_conflicting_ports "${ports_envs[@]}"
 
+    # Validate INFLUXDB_CONF_FILE_FORMAT if set
+    if [[ -n "${INFLUXDB_CONF_FILE_FORMAT:-}" ]]; then
+        case "${INFLUXDB_CONF_FILE_FORMAT,,}" in
+            yaml|json|yml|toml) ;;
+            *)
+                print_validation_error "The allowed values for INFLUXDB_CONF_FILE_FORMAT are [yaml, json, yml, toml]"
+                ;;
+        esac
+    fi
+
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
