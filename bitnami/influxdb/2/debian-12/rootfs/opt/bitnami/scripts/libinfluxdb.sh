@@ -76,7 +76,7 @@ influxdb_validate() {
 
     # Validate INFLUXDB_CONF_FILE_FORMAT if set
     if [[ -n "${INFLUXDB_CONF_FILE_FORMAT:-}" ]]; then
-        case "${INFLUXDB_CONF_FILE_FORMAT,,}" in
+        case "${INFLUXDB_CONF_FILE_FORMAT}" in
             yaml|json|yml|toml) ;;
             *)
                 print_validation_error "The allowed values for INFLUXDB_CONF_FILE_FORMAT are [yaml, json, yml, toml]"
