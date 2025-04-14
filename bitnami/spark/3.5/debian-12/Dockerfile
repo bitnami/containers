@@ -18,11 +18,14 @@ LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3dae
       org.opencontainers.image.vendor="Broadcom, Inc." \
       org.opencontainers.image.version="3.5.5"
 
+ENV JAVA_HOME="/opt/bitnami/java"
+ENV SPARK_HOME="/opt/bitnami/spark"
+
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-12" \
     OS_NAME="linux" \
-    PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/spark/bin:/opt/bitnami/spark/sbin:$PATH"
+    PATH="/opt/bitnami/python/bin:${JAVA_HOME}/bin:${SPARK_HOME}/bin:${SPARK_HOME}/sbin:$PATH"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
@@ -55,16 +58,16 @@ RUN /opt/bitnami/scripts/spark/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="3.5.5" \
     BITNAMI_APP_NAME="spark" \
-    JAVA_HOME="/opt/bitnami/java" \
-    LD_LIBRARY_PATH="/opt/bitnami/python/lib:/opt/bitnami/spark/venv/lib/python3.12/site-packages/numpy.libs:$LD_LIBRARY_PATH" \
+    LD_LIBRARY_PATH="/opt/bitnami/python/lib:${SPARK_HOME}/venv/lib/python3.12/site-packages/numpy.libs:$LD_LIBRARY_PATH" \
     LIBNSS_WRAPPER_PATH="/opt/bitnami/common/lib/libnss_wrapper.so" \
-    NSS_WRAPPER_GROUP="/opt/bitnami/spark/tmp/nss_group" \
-    NSS_WRAPPER_PASSWD="/opt/bitnami/spark/tmp/nss_passwd" \
-    PYTHONPATH="/opt/bitnami/spark/python/:$PYTHONPATH" \
-    SPARK_HOME="/opt/bitnami/spark" \
+    NSS_WRAPPER_GROUP="${SPARK_HOME}/tmp/nss_group" \
+    NSS_WRAPPER_PASSWD="${SPARK_HOME}/tmp/nss_passwd" \
+    # Note: setting PYTHONPATH in "/opt/bitnami/scripts/spark/entrypoint.sh" file as this involves dynamically
+    # finding py4j and pyspark libraries
     SPARK_USER="spark"
 
-WORKDIR /opt/bitnami/spark
+WORKDIR ${SPARK_HOME}
+
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/scripts/spark/entrypoint.sh" ]
 CMD [ "/opt/bitnami/scripts/spark/run.sh" ]
