@@ -205,6 +205,7 @@ InfluxDB (TM) can be configured via environment variables or using a configurati
 | `INFLUXDB_WRITE_USER`                   | Additional InfluxDB username with write privileges.                                    | `nil`                                      |
 | `INFLUXDB_WRITE_USER_PASSWORD`          | Additional InfluxDB user with write privileges.                                        | `nil`                                      |
 | `INFLUXDB_DB`                           | InfluxDB database name.                                                                | `nil`                                      |
+| `INFLUXDB_CONF_FILE_FORMAT`             | InfluxDB configuration file format, supported formats: yaml, yml, toml, json           | `yaml`                                     |
 
 #### Read-only environment variables
 
