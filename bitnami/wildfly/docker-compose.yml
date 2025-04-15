@@ -3,7 +3,7 @@
 
 services:
   wildfly:
-    image: docker.io/bitnami/wildfly:35
+    image: docker.io/bitnami/wildfly:36
     ports:
       - '8080:8080'
       - '9990:9990'
