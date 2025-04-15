@@ -256,7 +256,6 @@ redis_initialize() {
             else
                 redis_conf_set tls-ca-cert-file "$REDIS_SENTINEL_TLS_CA_FILE"
             fi
-
             [[ -n "$REDIS_SENTINEL_TLS_DH_PARAMS_FILE" ]] && redis_conf_set tls-dh-params-file "$REDIS_SENTINEL_TLS_DH_PARAMS_FILE"
             redis_conf_set tls-auth-clients "$REDIS_SENTINEL_TLS_AUTH_CLIENTS"
             redis_conf_set tls-replication yes
