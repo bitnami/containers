@@ -1,0 +1,9 @@
+binaries:
+  - envoy-gateway
+root_dir: /opt/bitnami
+directories:
+  - paths:
+      - /opt/bitnami/envoy-gateway
+version:
+  bin_name: envoy-gateway
+  flag: version
