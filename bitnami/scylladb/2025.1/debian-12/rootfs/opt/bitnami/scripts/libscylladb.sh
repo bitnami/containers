@@ -59,13 +59,15 @@ cassandra_enable_client_encryption() {
 #   None
 #########################
 cassandra_setup_from_environment_variables() {
-    # Map environment variables to config properties for cassandra-env.sh
-    for var in "${!SCYLLADB_CFG_ENV_@}"; do
-        # shellcheck disable=SC2001
-        key="$(echo "$var" | sed -e 's/^SCYLLADB_CFG_ENV_//g')"
-        value="${!var}"
-        cassandra_env_conf_set "$key" "$value"
-    done
+    if [[ "$(scylla_get_major_version)" -le 6 ]]; then
+      # Map environment variables to config properties for cassandra-env.sh
+      for var in "${!SCYLLADB_CFG_ENV_@}"; do
+          # shellcheck disable=SC2001
+          key="$(echo "$var" | sed -e 's/^SCYLLADB_CFG_ENV_//g')"
+          value="${!var}"
+          cassandra_env_conf_set "$key" "$value"
+      done
+    fi
     # Map environment variables to config properties for cassandra-rackdc.properties
     for var in "${!SCYLLADB_CFG_RACKDC_@}"; do
         key="$(echo "$var" | sed -e 's/^SCYLLADB_CFG_RACKDC_//g' | tr '[:upper:]' '[:lower:]')"
@@ -245,6 +247,21 @@ cassandra_stop() {
 cassandra_get_major_version() {
     cassandra_version="$("${CASSANDRA_BASE_DIR}/bin/cassandra" -v)"
     major_version="$(get_sematic_version "$cassandra_version" 1)"
+    echo "${major_version:-0}"
+}
+
+########################
+# Returns scylla major version
+# Globals:
+#   DB_BIN_DIR
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+scylla_get_major_version() {
+    scylla_version="$("${DB_BIN_DIR}/scylla" --version)"
+    major_version="$(get_sematic_version "$scylla_version" 1)"
     echo "${major_version:-0}"
 }
 
@@ -569,12 +586,12 @@ cassandra_setup_data_dirs() {
 cassandra_enable_auth() {
     if ! cassandra_is_file_external "${DB_MOUNTED_CONF_PATH}"; then
         if [[ "$ALLOW_EMPTY_PASSWORD" = "yes" ]] && [[ -z $DB_PASSWORD ]]; then
-            if [[ "$DB_FLAVOR" = "scylladb" ]] || [ "$(cassandra_get_major_version)" -lt 5 ]; then
+            if [[ "$DB_FLAVOR" = "scylladb" ]] || [[ "$(cassandra_get_major_version)" -lt 5 ]]; then
                 cassandra_yaml_set "authenticator" "AllowAllAuthenticator"
             fi
             cassandra_yaml_set "authorizer" "AllowAllAuthorizer"
 	else
-            if [[ "$DB_FLAVOR" = "cassandra" ]] && [ "$(cassandra_get_major_version)" -ge 5 ]; then
+            if [[ "$DB_FLAVOR" = "cassandra" ]] && [[ "$(cassandra_get_major_version)" -ge 5 ]]; then
 	            replace_in_file "${DB_CONF_FILE}" "class_name.* AllowAllAuthenticator" "class_name: ${DB_AUTHENTICATOR}"
 	            replace_in_file "${DB_CONF_FILE}" "class_name.* AllowAllAuthorizer" "class_name: ${DB_AUTHORIZER}"
             else
@@ -659,11 +676,13 @@ cassandra_setup_cluster() {
         debug "${DB_MOUNTED_CONF_PATH} mounted. Skipping cluster configuration"
     fi
 
-    # cassandra-env.sh changes
-    if ! cassandra_is_file_external "${DB_MOUNTED_ENV_PATH}"; then
-        replace_in_file "${DB_ENV_FILE}" "#\s*JVM_OPTS=\"\$JVM_OPTS -Djava[.]rmi[.]server[.]hostname=[^\"]*" "JVM_OPTS=\"\$JVM_OPTS -Djava.rmi.server.hostname=${host}"
-    else
-        debug "${DB_MOUNTED_ENV_PATH} mounted. Skipping setting server hostname"
+    if [[ "$DB_FLAVOR" = "cassandra" ]] || [[ "$(scylla_get_major_version)" -le 6 ]]; then
+      # cassandra-env.sh changes
+      if ! cassandra_is_file_external "${DB_MOUNTED_ENV_PATH}"; then
+          replace_in_file "${DB_ENV_FILE}" "#\s*JVM_OPTS=\"\$JVM_OPTS -Djava[.]rmi[.]server[.]hostname=[^\"]*" "JVM_OPTS=\"\$JVM_OPTS -Djava.rmi.server.hostname=${host}"
+      else
+          debug "${DB_MOUNTED_ENV_PATH} mounted. Skipping setting server hostname"
+      fi
     fi
 }
 
@@ -779,10 +798,12 @@ cassandra_setup_common_ports() {
         debug "${DB_MOUNTED_CONF_PATH} mounted. Skipping native and storage ports configuration"
     fi
 
-    if ! cassandra_is_file_external "${DB_MOUNTED_ENV_PATH}"; then
-        replace_in_file "${DB_ENV_FILE}" "JMX_PORT=.*" "JMX_PORT=$DB_JMX_PORT_NUMBER"
-    else
-        debug "${DB_MOUNTED_ENV_PATH} mounted. Skipping JMX port configuration"
+    if [[ "$DB_FLAVOR" = "cassandra" ]] || [[ "$(scylla_get_major_version)" -le 6 ]]; then
+      if ! cassandra_is_file_external "${DB_MOUNTED_ENV_PATH}"; then
+          replace_in_file "${DB_ENV_FILE}" "JMX_PORT=.*" "JMX_PORT=$DB_JMX_PORT_NUMBER"
+      else
+          debug "${DB_MOUNTED_ENV_PATH} mounted. Skipping JMX port configuration"
+      fi
     fi
 }
 
@@ -837,9 +858,11 @@ cassandra_initialize() {
     cassandra_copy_mounted_config
     cassandra_copy_default_config
     cassandra_enable_auth
-    cassandra_setup_java
     cassandra_setup_jemalloc
-    cassandra_setup_logging
+    if [[ "$DB_FLAVOR" = "cassandra" ]] || [[ "$(scylla_get_major_version)" -le 6 ]]; then
+       cassandra_setup_java
+       cassandra_setup_logging
+    fi
     cassandra_setup_ports
     cassandra_setup_rack_dc
     cassandra_setup_data_dirs
