@@ -8,14 +8,14 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-04-15T01:52:43Z" \
+      org.opencontainers.image.created="2025-04-15T16:38:03Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/laravel/README.md" \
-      org.opencontainers.image.ref.name="12.0.6-debian-12-r1" \
+      org.opencontainers.image.ref.name="12.0.7-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/laravel" \
       org.opencontainers.image.title="laravel" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="12.0.6"
+      org.opencontainers.image.version="12.0.7"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-12" \
@@ -31,7 +31,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
       "wait-for-port-1.0.8-15-linux-${OS_ARCH}-debian-12" \
       "php-8.4.6-1-linux-${OS_ARCH}-debian-12" \
       "node-22.14.0-3-linux-${OS_ARCH}-debian-12" \
-      "laravel-12.0.6-0-linux-${OS_ARCH}-debian-12" \
+      "laravel-12.0.7-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -50,7 +50,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 COPY rootfs /
 RUN /opt/bitnami/scripts/laravel/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
-ENV APP_VERSION="12.0.6" \
+ENV APP_VERSION="12.0.7" \
     BITNAMI_APP_NAME="laravel" \
     NODE_PATH="/opt/bitnami/node/lib/node_modules" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/node/bin:$PATH" \
