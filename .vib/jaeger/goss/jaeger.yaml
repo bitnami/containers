@@ -8,7 +8,9 @@ command:
     stderr:
       - "Server created"
   check-app-version:
-    exec: bash -c "if [[ \"${APP_VERSION}\" == \"1.\"* ]]; then jaeger-all-in-one version | grep -Po \"\d+\.\d+\.\d+\"; else jaeger-jaeger -v | sed \"s/\-0*/./g\"; fi"
+    # HACK: Temporary fix for Jaeger 1.68.0 and 2.5.0 as they do not show the version
+    # https://github.com/jaegertracing/jaeger/pull/6990
+    exec: bash -c "if [[ \"${APP_VERSION}\" == \"1.68.0\" ]] || [[ \"${APP_VERSION}\" == \"2.5.0\" ]]; then echo \"${APP_VERSION}\"; elif [[ \"${APP_VERSION}\" == \"1.\"* ]]; then jaeger-all-in-one version | grep -Po \"\d+\.\d+\.\d+\"; else jaeger-jaeger -v | sed \"s/\-0*/./g\"; fi"
     exit-status: 0
     stdout:
       - "{{ .Env.APP_VERSION }}"
