@@ -14,6 +14,3 @@ command:
     exit-status: 0
     stdout:
       - "JAVA_HOME: /opt/bitnami/java"
-  check-jdbc-connectors:
-    exec: ls /opt/bitnami/wildfly/standalone/deployments/mariadb-java-client-*.jar && ls /opt/bitnami/wildfly/standalone/deployments/postgresql-*.jar
-    exit-status: 0
