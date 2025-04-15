@@ -1,0 +1,14 @@
+{
+    "jupyterhub": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "4.1.6-6"
+    },
+    "miniforge": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "24.11.3-1"
+    }
+}
