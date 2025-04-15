@@ -1,0 +1,8 @@
+{
+    "valkey-sentinel": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "8.0.2-1"
+    }
+}
