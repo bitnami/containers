@@ -10,6 +10,7 @@
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libvalidations.sh
+. /opt/bitnami/scripts/libversion.sh
 
 # Load database library
 if [[ -f /opt/bitnami/scripts/libmysqlclient.sh ]]; then
@@ -384,4 +385,20 @@ grafana_stop() {
 
     info "Stopping Grafana"
     stop_service_using_pid "$GRAFANA_PID_FILE"
+}
+
+########################
+# Returns grafana major version
+# Globals:
+#   GRAFANA_BIN_DIR
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+get_grafana_major_version() {
+    grafana_version="$("${GRAFANA_BIN_DIR}/grafana" -v)"
+    grafana_version="${grafana_version#"grafana version "}"
+    major_version="$(get_sematic_version "$grafana_version" 1)"
+    echo "${major_version:-0}"
 }
