@@ -463,7 +463,8 @@ redmine_migrate_database() {
         redmine_rake_execute "generate_secret_token"
     fi
 
-    # Output is too big and password get lost in console
-    redmine_rake_execute "db:migrate" >/dev/null 2>&1
-    redmine_rake_execute "redmine:plugins:migrate" >/dev/null 2>&1
+    debug "Migrating database"
+    redmine_rake_execute "db:migrate"
+    debug "Migrating plugins"
+    redmine_rake_execute "redmine:plugins:migrate"
 }

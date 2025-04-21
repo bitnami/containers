@@ -353,6 +353,36 @@ docker-compose logs redmine
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
+## Customize this image
+
+The Bitnami Redmine Docker image is designed to be extended.
+
+### Extend this image
+
+Before extending this image, please note there are certain configuration settings you can modify using the original image:
+
+* Settings that can be adapted using environment variables. For instance, you can change the port used by Redmine by setting the environment variable `REDMINE_PORT_NUMBER`.
+* You can mount your custom scripts under `/docker-entrypoint-init.d` directory. These scripts will be executed in alphabetical order when the container during the 1st container bootstrap.
+
+If your desired customizations cannot be covered using the methods mentioned above, extend the image. To do so, create your own image using a Dockerfile with the format below:
+
+```Dockerfile
+FROM bitnami/redmine
+### Put your customizations below
+...
+```
+
+Here is an example of extending to install custom plugins:
+
+```Dockerfile
+FROM bitnami/redmine
+
+### Install custom plugins
+RUN cd /opt/bitnami/redmine && \
+    git clone https://github.com/user_name/name_of_the_plugin.git plugins/name_of_the_plugin && \
+    bundle config set frozen false && bundle install && bundle config set frozen true
+```
+
 ## Maintenance
 
 ### Backing up your container
