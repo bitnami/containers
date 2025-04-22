@@ -42,4 +42,4 @@ redis_conf_set save ""
 cp -r "${REDIS_CONF_DIR}/"* "$REDIS_DEFAULT_CONF_DIR"
 
 # Allow others writing in the writable dirs so it works with gid 1001
-chmod o+w "$REDIS_CONF_DIR" "${REDIS_BASE_DIR}/tmp" "${REDIS_LOG_DIR}"
+chmod o+w -R "$REDIS_CONF_DIR" "${REDIS_BASE_DIR}/tmp" "${REDIS_LOG_DIR}"
