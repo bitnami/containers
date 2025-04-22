@@ -36,4 +36,4 @@ redis_conf_set "logfile" ""
 cp -r "${REDIS_SENTINEL_CONF_DIR}/"* "$REDIS_SENTINEL_DEFAULT_CONF_DIR"
 
 # Allow others writing in the writable dirs so it works with gid 1001
-chmod o+w "$REDIS_SENTINEL_CONF_DIR" "$REDIS_SENTINEL_LOG_DIR" "$REDIS_SENTINEL_TMP_DIR"
+chmod o+w -R "$REDIS_SENTINEL_CONF_DIR" "$REDIS_SENTINEL_LOG_DIR" "$REDIS_SENTINEL_TMP_DIR"
