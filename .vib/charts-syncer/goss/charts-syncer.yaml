@@ -1,7 +1,7 @@
 command:
   check-charts-syncer-help:
     exec:
-    - /charts-syncer
+    - charts-syncer
     - --help
     exit-status: 0
     stdout:

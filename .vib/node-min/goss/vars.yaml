@@ -2,6 +2,9 @@ files:
   - mode: "0644"
     paths:
       - /opt/bitnami/node/.spdx-node-min.spdx
+  - mode: "0755"
+    paths:
+      - /opt/bitnami/node/bin/node
 version:
   bin_name: node
   flag: --version

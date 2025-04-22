@@ -2,6 +2,9 @@ files:
   - mode: "0644"
     paths:
       - /opt/bitnami/trivy/.spdx-trivy.spdx
+  - mode: "0755"
+    paths:
+      - /opt/bitnami/trivy/bin/trivy
 version:
   bin_name: trivy
   flag: -v

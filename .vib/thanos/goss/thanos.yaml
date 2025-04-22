@@ -1,7 +1,7 @@
 command:
   check-thanos:
     exec:
-    - /bin/thanos
+    - thanos
     - --help
     exit-status: 0
     stderr:
