@@ -38,6 +38,3 @@ cp -r "$WILDFLY_DOMAIN_DIR"/* "$WILDFLY_DEFAULT_DOMAIN_DIR"
 # a set of files writable by "other", as by default are owned by wildfly:root
 chmod o+rX -R "${WILDFLY_DEFAULT_STANDALONE_DIR}"/*
 chmod o+rX -R "${WILDFLY_DEFAULT_DOMAIN_DIR}"/*
-
-# Remove unnecessary jdbc-drivers
-rm -rf "${WILDFLY_BASE_DIR}/jdbc-drivers"
