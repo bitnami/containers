@@ -4,7 +4,7 @@
 file:
   /opt/bitnami/redis/etc/redis.conf:
     exists: true
-    mode: "0664"
+    mode: "0666"
     contents:
       - /port.*6379/
       - /dir.*/bitnami/redis/data/
