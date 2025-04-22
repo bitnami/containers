@@ -34,3 +34,6 @@ redis_conf_set "logfile" ""
 # Copy all initially generated configuration files to the default directory
 # (this is to avoid breaking when entrypoint is being overridden)
 cp -r "${REDIS_SENTINEL_CONF_DIR}/"* "$REDIS_SENTINEL_DEFAULT_CONF_DIR"
+
+# Allow others writing in the writable dirs so it works with gid 1001
+chmod o+w "$REDIS_SENTINEL_CONF_DIR" "$REDIS_SENTINEL_LOG_DIR" "$REDIS_SENTINEL_TMP_DIR"
