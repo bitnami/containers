@@ -1,5 +1,9 @@
 binaries:
   - memcached_exporter
+files:
+  - mode: "0644"
+    paths:
+      - /opt/bitnami/memcached-exporter/.spdx-memcached-exporter.spdx
 root_dir: /opt/bitnami
 version:
   bin_name: memcached_exporter
