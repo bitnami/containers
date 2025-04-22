@@ -16,7 +16,7 @@ set -o pipefail
 . /opt/bitnami/scripts/libredis.sh
 . /opt/bitnami/scripts/libfs.sh
 
-for dir in "$REDIS_VOLUME_DIR" "$REDIS_DATA_DIR" "$REDIS_BASE_DIR" "$REDIS_CONF_DIR" "$REDIS_DEFAULT_CONF_DIR"; do
+for dir in "$REDIS_VOLUME_DIR" "$REDIS_DATA_DIR" "$REDIS_BASE_DIR" "$REDIS_CONF_DIR" "$REDIS_DEFAULT_CONF_DIR" "${REDIS_BASE_DIR}/tmp" "${REDIS_LOG_DIR}"; do
     ensure_dir_exists "$dir"
 done
 chmod -R g+rwX /bitnami "$REDIS_VOLUME_DIR" "$REDIS_BASE_DIR"
@@ -40,3 +40,6 @@ redis_conf_set save ""
 # Copy all initially generated configuration files to the default directory
 # (this is to avoid breaking when entrypoint is being overridden)
 cp -r "${REDIS_CONF_DIR}/"* "$REDIS_DEFAULT_CONF_DIR"
+
+# Allow others writing in the writable dirs so it works with gid 1001
+chmod o+w "$REDIS_CONF_DIR" "${REDIS_BASE_DIR}/tmp" "${REDIS_LOG_DIR}"
