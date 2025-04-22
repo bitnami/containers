@@ -668,7 +668,7 @@ etcd_initialize() {
                 if is_boolean_yes "$ETCD_DISASTER_RECOVERY"; then
                     latest_snapshot_file="$(find /snapshots/ -maxdepth 1 -type f -name 'db-*' | sort | tail -n 1)"
                     if [[ "${latest_snapshot_file}" != "" ]]; then
-                        info "Restoring etcd cluster from snapshot"
+                        info "Restoring etcd cluster from snapshot ${latest_snapshot_file}"
                         rm -rf "$ETCD_DATA_DIR"
                         #
                         # Only recalculate the initial cluster config if it hasn't
