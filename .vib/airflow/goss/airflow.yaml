@@ -2,12 +2,18 @@
 # SPDX-License-Identifier: APACHE-2.0
 
 command:
-  check-scheduler:
+  check-airflow-home:
     timeout: 30000
-    exec: airflow users list
+    exec: airflow info | grep airflow_home
     exit-status: 0
     stdout:
-      - "No data found"
+      - {{ .Env.AIRFLOW_HOME }}
+  check-airflow-on-path:
+    timeout: 30000
+    exec: airflow info | grep airflow_on_path
+    exit-status: 0
+    stdout:
+      - "True"
   check-subpackages:
     # Check python packages that should have been installed
     exec: . /opt/bitnami/airflow/venv/bin/activate && pip list
