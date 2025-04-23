@@ -848,6 +848,11 @@ repmgr_initialize() {
     ensure_dir_exists "$POSTGRESQL_DATA_DIR"
     am_i_root && chown "$POSTGRESQL_DAEMON_USER:$POSTGRESQL_DAEMON_GROUP" "$POSTGRESQL_DATA_DIR"
 
+    # remove old pid file if it exists
+    if [[ -f "/tmp/repmgr.pid" ]]; then
+        rm /tmp/repmgr.pid
+    fi
+
     if [[ "$REPMGR_ROLE" = "standby" ]]; then
         repmgr_wait_primary_node || exit 1
         repmgr_rewind
