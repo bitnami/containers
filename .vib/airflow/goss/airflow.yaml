@@ -7,7 +7,7 @@ command:
     exec: airflow info | grep airflow_home
     exit-status: 0
     stdout:
-      - /opt/bitnami/airflow
+      - {{ .Env.AIRFLOW_HOME }}
   check-airflow-on-path:
     timeout: 30000
     exec: airflow info | grep airflow_on_path
