@@ -146,6 +146,10 @@ docker run --name memcached-exporter bitnami/memcached-exporter:latest
 
 ## Notable Changes
 
+### Starting April 22, 2025
+
+* The `bitnami/memcached-exporter` is now based on scratch, meaning that the container image only contains the memcached_exporter binary and its license files.
+
 ### Starting January 16, 2024
 
 * The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
