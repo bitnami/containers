@@ -3,6 +3,6 @@
 
 gossfile:
   # Load scripts from .vib/common/goss/templates
-  ../../common/goss/templates/check-app-version-no-shell-stdout.yaml: {}
+  ../../common/goss/templates/check-app-version-no-shell-stderr.yaml: {}
   ../../common/goss/templates/check-ca-certs.yaml: {}
   ../../common/goss/templates/check-files.yaml: {}
