@@ -1,7 +1,7 @@
 command:
   check-workflow-controller-help:
     exec:
-    - /workflow-controller
+    - workflow-controller
     - --help
     exit-status: 0
     stdout:

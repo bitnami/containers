@@ -1,7 +1,7 @@
 command:
   check-apprepository-controller-help:
     exec:
-    - /apprepository-controller
+    - apprepository-controller
     - --help
     exit-status: 0
     stdout:

@@ -4,7 +4,7 @@ files:
       - /opt/bitnami/oras/.spdx-oras.spdx
   - mode: "0755"
     paths:
-      - /oras
+      - /opt/bitnami/oras/bin/oras
 version:
-  bin_name: /oras
+  bin_name: oras
   flag: version

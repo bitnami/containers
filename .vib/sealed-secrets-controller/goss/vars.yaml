@@ -4,7 +4,7 @@ files:
       - /opt/bitnami/sealed-secrets/.spdx-sealed-secrets.spdx
   - mode: "0755"
     paths:
-      - /controller
+      - /opt/bitnami/sealed-secrets/bin/controller
 version:
-  bin_name: /controller
+  bin_name: controller
   flag: --version

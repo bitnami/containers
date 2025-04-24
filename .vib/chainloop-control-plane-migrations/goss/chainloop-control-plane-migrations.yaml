@@ -1,7 +1,7 @@
 command:
   check-atlas-help:
     exec:
-    - /atlas
+    - atlas
     - --help
     exit-status: 0
     stdout:

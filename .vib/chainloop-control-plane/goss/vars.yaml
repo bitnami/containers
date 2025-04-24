@@ -4,4 +4,4 @@ files:
       - /opt/bitnami/chainloop/.spdx-chainloop.spdx
   - mode: "0755"
     paths:
-      - /control-plane
+      - /opt/bitnami/chainloop/bin/control-plane

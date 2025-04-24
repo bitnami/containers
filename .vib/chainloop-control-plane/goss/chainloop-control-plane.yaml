@@ -1,8 +1,8 @@
 command:
   check-control-plane-help:
     exec:
-    - /control-plane
+    - control-plane
     - --help
     exit-status: 2
     stderr:
-    - "Usage of /control-plane"
+    - "Usage of control-plane"

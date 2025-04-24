@@ -4,7 +4,7 @@ files:
       - /opt/bitnami/kube-rbac-proxy/.spdx-kube-rbac-proxy.spdx
   - mode: "0755"
     paths:
-      - /kube-rbac-proxy
+      - /opt/bitnami/kube-rbac-proxy/bin/kube-rbac-proxy
 version:
-  bin_name: /kube-rbac-proxy
+  bin_name: kube-rbac-proxy
   flag: --version

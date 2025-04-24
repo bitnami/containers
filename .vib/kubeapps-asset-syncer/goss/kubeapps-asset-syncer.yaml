@@ -1,7 +1,7 @@
 command:
   check-asset-syncer-help:
     exec:
-    - /asset-syncer
+    - asset-syncer
     - --help
     exit-status: 0
     stdout:

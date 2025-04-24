@@ -2,7 +2,7 @@
 command:
   check-help:
     exec:
-      - /opt/bitnami/kserve/bin/router
+      - router
       - --help
     exit-status: 2
     stderr:

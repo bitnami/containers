@@ -1,7 +1,7 @@
 command:
   check-nats-server:
     exec:
-    - /nats-server
+    - nats-server
     - --help
     exit-status: 0
     stdout:

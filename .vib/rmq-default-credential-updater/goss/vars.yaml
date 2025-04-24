@@ -4,4 +4,4 @@ files:
       - /opt/bitnami/rmq-default-credential-updater/.spdx-rmq-default-credential-updater.spdx
   - mode: "0755"
     paths:
-      - /default-user-credential-updater
+      - /opt/bitnami/rmq-default-credential-updater/bin/default-user-credential-updater

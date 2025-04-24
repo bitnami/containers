@@ -1,7 +1,7 @@
 command:
   check-kube-rbac-proxy-help:
     exec:
-    - /kube-rbac-proxy
+    - kube-rbac-proxy
     - --help
     exit-status: 0
     stdout:

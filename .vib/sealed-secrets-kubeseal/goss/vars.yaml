@@ -4,7 +4,7 @@ files:
       - /opt/bitnami/sealed-secrets-kubeseal/.spdx-sealed-secrets-kubeseal.spdx
   - mode: "0755"
     paths:
-      - /kubeseal
+      - /opt/bitnami/sealed-secrets-kubeseal/bin/kubeseal
 version:
-  bin_name: /kubeseal
+  bin_name: kubeseal
   flag: --version

@@ -4,7 +4,7 @@ files:
       - /opt/bitnami/kubeapps-asset-syncer/.spdx-kubeapps-asset-syncer.spdx
   - mode: "0755"
     paths:
-      - /asset-syncer
+      - /opt/bitnami/kubeapps-asset-syncer/bin/asset-syncer
 version:
-  bin_name: /asset-syncer
+  bin_name: asset-syncer
   flag: --version
