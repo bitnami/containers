@@ -38,21 +38,22 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-04-22T12:37:34Z" \
+      org.opencontainers.image.created="2025-04-24T06:32:07Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.ref.name="2.1.1-debian-12-r0" \
+      org.opencontainers.image.ref.name="2.1.1-debian-12-r1" \
       org.opencontainers.image.title="charts-syncer" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
       org.opencontainers.image.version="2.1.1"
 
 COPY rootfs /
-COPY --from=builder /opt/bitnami/charts-syncer/bin/charts-syncer /charts-syncer
 COPY --from=builder /opt/bitnami/charts-syncer/.spdx-charts-syncer.spdx /opt/bitnami/charts-syncer/.spdx-charts-syncer.spdx
+COPY --from=builder /opt/bitnami/charts-syncer/bin/charts-syncer /opt/bitnami/charts-syncer/bin/charts-syncer
 COPY --from=builder /opt/bitnami/charts-syncer/licenses /opt/bitnami/charts-syncer/licenses
 
 ENV APP_VERSION="2.1.1" \
-    BITNAMI_APP_NAME="charts-syncer"
+    BITNAMI_APP_NAME="charts-syncer" \
+    PATH="/opt/bitnami/charts-syncer/bin:$PATH"
 
 USER 1001
 
-CMD [ "/charts-syncer" ]
+CMD [ "charts-syncer" ]
