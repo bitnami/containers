@@ -38,21 +38,22 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-04-07T12:33:47Z" \
+      org.opencontainers.image.created="2025-04-24T06:26:45Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.ref.name="0.189.0-debian-12-r2" \
+      org.opencontainers.image.ref.name="0.189.0-debian-12-r3" \
       org.opencontainers.image.title="chainloop-control-plane" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
       org.opencontainers.image.version="0.189.0"
 
 COPY rootfs /
-COPY --from=builder /opt/bitnami/chainloop/bin/control-plane /control-plane
 COPY --from=builder /opt/bitnami/chainloop/.spdx-chainloop.spdx /opt/bitnami/chainloop/.spdx-chainloop.spdx
+COPY --from=builder /opt/bitnami/chainloop/bin/control-plane /opt/bitnami/chainloop/bin/control-plane
 COPY --from=builder /opt/bitnami/chainloop/licenses /opt/bitnami/chainloop/licenses
 
 ENV APP_VERSION="0.189.0" \
-    BITNAMI_APP_NAME="chainloop-control-plane"
+    BITNAMI_APP_NAME="chainloop-control-plane" \
+    PATH="/opt/bitnami/chainloop/bin:$PATH"
 
 USER 1001
 
-CMD [ "/control-plane", "--conf", "/data/conf" ]
+CMD [ "control-plane", "--conf", "/data/conf" ]
