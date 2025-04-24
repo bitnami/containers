@@ -38,21 +38,22 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-04-07T12:33:30Z" \
+      org.opencontainers.image.created="2025-04-24T06:26:37Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.ref.name="0.189.0-debian-12-r2" \
+      org.opencontainers.image.ref.name="0.189.0-debian-12-r3" \
       org.opencontainers.image.title="chainloop-artifact-cas" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
       org.opencontainers.image.version="0.189.0"
 
 COPY rootfs /
-COPY --from=builder /opt/bitnami/chainloop/bin/artifact-cas /artifact-cas
 COPY --from=builder /opt/bitnami/chainloop/.spdx-chainloop-artifact-cas.spdx /opt/bitnami/chainloop/.spdx-chainloop-artifact-cas.spdx
+COPY --from=builder /opt/bitnami/chainloop/bin/artifact-cas /opt/bitnami/chainloop/bin/artifact-cas
 COPY --from=builder /opt/bitnami/chainloop/licenses /opt/bitnami/chainloop/licenses
 
 ENV APP_VERSION="0.189.0" \
-    BITNAMI_APP_NAME="chainloop-artifact-cas"
+    BITNAMI_APP_NAME="chainloop-artifact-cas" \
+    PATH="/opt/bitnami/chainloop/bin:$PATH"
 
 USER 1001
 
-CMD [ "/artifact-cas" ]
+CMD [ "artifact-cas" ]
