@@ -76,7 +76,7 @@ Flags:
 kubescape_oss_assessment() {
 
   local cmd="kubescape"
-  local scan_args=("scan" "--format=json")
+  local scan_args=("scan" "--format=json" "--controls-config=${KUBESCAPE_ARTIFACTS_DIR}/controls-inputs-bn.json")
   local scan_image_args=("scan" "image" "--format=json")
   local silent="false"
   local output=""
@@ -84,7 +84,7 @@ kubescape_oss_assessment() {
 
   # By default, Kubescape only runs NSA and MITRE frameworks
   # We want to extend that to also include SOC2 and CIS frameworks
-  readarray -t frameworks < <(${cmd} list frameworks --format=json | jq '.[]' | grep -Ei "nsa|mitre|soc2|cis-v" | sed 's/"//g')
+  readarray -t frameworks < <(${cmd} list frameworks --format=json | jq '.[]' | grep -Ei "nsa|mitre|soc2|cis-v.*-t" | sed 's/"//g')
   if [[ "${#frameworks[@]}" -gt 0 ]]; then
     info  "OSS Assessment scan will use the following frameworks: ${frameworks[*]}"
     scan_args+=("framework" "$(tr ' ' ',' <<< "${frameworks[*]}")")

@@ -26,4 +26,6 @@ done
 # Download kubescape artifacts
 # Also ensure permissions are properly configured
 kubescape download artifacts
+# Create an inputs file that avoids PASSWORD_FILE and other *_FILE env variable false positives
+jq '.sensitiveKeyNamesAllowed += ["_FILE"]' "${KUBESCAPE_ARTIFACTS_DIR}/controls-inputs.json" > "${KUBESCAPE_ARTIFACTS_DIR}/controls-inputs-bn.json"
 configure_permissions_ownership "$KUBESCAPE_ARTIFACTS_DIR" -g "root" -d "775" -f "664"
