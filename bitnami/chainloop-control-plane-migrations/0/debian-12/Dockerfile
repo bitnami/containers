@@ -15,7 +15,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "atlas-0.32.0-1-linux-${OS_ARCH}-debian-12" \
+      "atlas-0.32.1-0-linux-${OS_ARCH}-debian-12" \
       "chainloop-control-plane-migrations-0.189.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -39,17 +39,17 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-04-07T12:34:06Z" \
+      org.opencontainers.image.created="2025-04-24T06:26:38Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.ref.name="0.189.0-debian-12-r1" \
+      org.opencontainers.image.ref.name="0.189.0-debian-12-r2" \
       org.opencontainers.image.title="chainloop-control-plane-migrations" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
       org.opencontainers.image.version="0.189.0"
 
 COPY rootfs /
-COPY --from=builder /opt/bitnami/atlas/bin/atlas /atlas
 COPY --from=builder /opt/bitnami/chainloop/migrations /migrations
 COPY --from=builder /opt/bitnami/atlas/.spdx-atlas.spdx /opt/bitnami/atlas/.spdx-atlas.spdx
+COPY --from=builder /opt/bitnami/atlas/bin/atlas /opt/bitnami/atlas/bin/atlas
 COPY --from=builder /opt/bitnami/atlas/licenses /opt/bitnami/atlas/licenses
 COPY --from=builder /opt/bitnami/chainloop/.spdx-chainloop-control-plane-migrations.spdx /opt/bitnami/chainloop/.spdx-chainloop-control-plane-migrations.spdx
 COPY --from=builder /opt/bitnami/chainloop/licenses /opt/bitnami/chainloop/licenses
@@ -60,4 +60,4 @@ ENV APP_VERSION="0.189.0" \
 
 USER 1001
 
-CMD [ "/atlas" ]
+CMD [ "atlas" ]
