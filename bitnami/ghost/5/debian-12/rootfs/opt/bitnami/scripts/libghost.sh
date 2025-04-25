@@ -316,7 +316,12 @@ ghost_initialize() {
                 ghost_conf_set "mail.options.secure" "$([[ "$GHOST_SMTP_PROTOCOL" = "ssl" || "$GHOST_SMTP_PROTOCOL" = "tls" ]] && echo "true" || echo "false")" "bool"
                 ghost_conf_set "mail.options.auth.user" "$GHOST_SMTP_USER"
                 ghost_conf_set "mail.options.auth.pass" "$GHOST_SMTP_PASSWORD"
+            else
+                # Disable device verification for staff members (we don't configure SMTP by default)
+                # https://ghost.org/docs/config/#security
+                ghost_conf_set "security.staffDeviceVerification" "false" "bool"
             fi
+
             # Configure Admin account
             ghost_pass_wizard
             mv "$GHOST_LOG_FILE" "${GHOST_BASE_DIR}/content/logs/ghost.setup.log"
