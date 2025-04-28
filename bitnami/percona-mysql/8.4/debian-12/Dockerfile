@@ -8,10 +8,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-04-15T02:18:28Z" \
+      org.opencontainers.image.created="2025-04-28T06:26:03Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/percona-mysql/README.md" \
-      org.opencontainers.image.ref.name="8.4.4-4-debian-12-r4" \
+      org.opencontainers.image.ref.name="8.4.4-4-debian-12-r5" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/percona-mysql" \
       org.opencontainers.image.title="percona-mysql" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -28,7 +28,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libaio1 libatomic1 libaudit1 libbz2-1.0 libcap-ng0 libcom-err2 libcrypt1 libev4 libffi8 libgcc-s1 libgmp10 libgnutls30 libgssapi-krb5-2 libhogweed6 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.5-0 libnettle8 libnuma-dev libp11-kit0 libpam0g libsasl2-2 libssl3 libstdc++6 libtasn1-6 libtirpc3 libudev0 libudev1 libunistring2 libuuid1 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "mysql-shell-8.4.4-2-linux-${OS_ARCH}-debian-12" \
+      "mysql-shell-8.4.5-0-linux-${OS_ARCH}-debian-12" \
       "ini-file-1.4.7-15-linux-${OS_ARCH}-debian-12" \
       "percona-mysql-8.4.4-4-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
