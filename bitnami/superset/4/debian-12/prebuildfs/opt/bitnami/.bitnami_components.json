@@ -3,12 +3,12 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.10.17-1"
+        "version": "3.10.17-5"
     },
     "superset": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "4.1.2-0"
+        "version": "4.1.2-1"
     }
 }
