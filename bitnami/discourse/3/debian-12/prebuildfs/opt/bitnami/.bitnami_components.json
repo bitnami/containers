@@ -15,7 +15,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "20.19.0-1"
+        "version": "20.19.1-0"
     },
     "postgresql-client": {
         "arch": "amd64",
@@ -27,7 +27,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.12.10-2"
+        "version": "3.12.10-5"
     },
     "ruby": {
         "arch": "amd64",
