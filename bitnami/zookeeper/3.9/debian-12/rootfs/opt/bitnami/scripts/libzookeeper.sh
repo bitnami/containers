@@ -165,7 +165,7 @@ zookeeper_initialize() {
         info "User injected custom configuration detected!"
     fi
 
-    if is_dir_empty "$ZOO_DATA_DIR"; then
+    if is_mounted_dir_empty "$ZOO_DATA_DIR"; then
         info "Deploying ZooKeeper from scratch..."
         echo "$ZOO_SERVER_ID" >"${ZOO_DATA_DIR}/myid"
 
