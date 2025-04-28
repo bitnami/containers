@@ -89,6 +89,12 @@ phpmyadmin_initialize() {
     # Support reverse proxy
     ! is_empty_value "$PHPMYADMIN_ABSOLUTE_URI" && info "Setting PmaAbsoluteUri option" && phpmyadmin_conf_set "\$cfg['PmaAbsoluteUri']" "$PHPMYADMIN_ABSOLUTE_URI"
 
+    # Setting MaxExecLimit option
+    ! is_empty_value "$PHPMYADMIN_EXEC_TIME_LIMIT" && info "Setting MaxExecLimit option" && phpmyadmin_conf_set "\$cfg['MaxExecLimit']" "$PHPMYADMIN_EXEC_TIME_LIMIT"
+
+    # Setting MemoryLimit option
+    ! is_empty_value "$PHPMYADMIN_MEMORY_LIMIT" && info "Setting MemoryLimit option" && phpmyadmin_conf_set "\$cfg['MemoryLimit']" "$PHPMYADMIN_MEMORY_LIMIT"
+
     # Configure database settings
     ! is_empty_value "$DATABASE_HOST" && info "Setting database host option" && phpmyadmin_conf_set "\$cfg['Servers'][\$i]['host']" "$DATABASE_HOST"
     ! is_empty_value "$DATABASE_PORT_NUMBER" && info "Setting database port number option" && phpmyadmin_conf_set "\$cfg['Servers'][\$i]['port']" "$DATABASE_PORT_NUMBER"
