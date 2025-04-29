@@ -21,5 +21,6 @@ set -o pipefail
 airflow_validate
 # Ensure Airflow daemon user exists when running as root
 am_i_root && ensure_user_exists "$AIRFLOW_DAEMON_USER" --group "$AIRFLOW_DAEMON_GROUP"
+
 # Ensure Airflow is initialized
 airflow_initialize

@@ -184,6 +184,12 @@ airflow_initialize() {
     info "Trying to connect to the database server"
     airflow_wait_for_db_connection
 
+    local db_init_command="migrate"
+    local db_upgrade_command="migrate"
+    if [[ $(airflow_major_version) -eq 2 ]]; then
+        db_init_command="init"
+        db_upgrade_command="upgrade"
+    fi
     case "$AIRFLOW_COMPONENT_TYPE" in
     webserver|api-server)
         # Remove pid file if exists to prevent error after WSL restarts
@@ -195,28 +201,32 @@ airflow_initialize() {
             airflow_wait_for_db_migrations
         # Check if the Airflow database has been already initialized
         elif ! airflow_execute db check-migrations; then
-            local db_init_command="migrate"
-            local db_upgrade_command="migrate"
-            if [[ $(airflow_major_version) -eq 2 ]]; then
-                db_init_command="init"
-                db_upgrade_command="upgrade"
-            fi
             # Initialize database
             info "Populating database"
             airflow_execute db "${db_init_command}"
 
             airflow_create_admin_user
             airflow_create_pool
+
+            info "Synchronizing internal metadata"
+            airflow_execute sync-perm --include-dags
         else
             # Upgrade database
             info "Upgrading database schema"
             airflow_execute db "${db_upgrade_command}"
+            if ! is_airflow_admin_created; then
+                airflow_create_admin_user
+            fi
+            info "Synchronizing internal metadata"
+            airflow_execute sync-perm --include-dags
             true # Avoid return false when I am not root
         fi
         ;;
     *)
         info "Waiting for db migrations to be completed"
         airflow_wait_for_db_migrations
+        info "Waiting for admin user to be created"
+        airflow_wait_for_admin_user
         if [[ "$AIRFLOW_EXECUTOR" == "CeleryExecutor" || "$AIRFLOW_EXECUTOR" == "CeleryKubernetesExecutor"  ]]; then
             wait-for-port --host "$REDIS_HOST" "$REDIS_PORT_NUMBER"
         fi
@@ -270,8 +280,8 @@ airflow_generate_config() {
         # Create Airflow configuration from default files
         [[ ! -f "$AIRFLOW_CONF_FILE" ]] && cp "$(find "$AIRFLOW_BASE_DIR" -name default_airflow.cfg)" "$AIRFLOW_CONF_FILE"
         [[ ! -f "$AIRFLOW_WEBSERVER_CONF_FILE" ]] && cp "$(find "$AIRFLOW_BASE_DIR" -name default_webserver_config.py)" "$AIRFLOW_WEBSERVER_CONF_FILE"
-        # Setup Airflow webserver base URL
-        airflow_configure_webserver_base_url
+        # Setup Airflow base URL
+        airflow_configure_base_url
         # Configure Airflow webserver authentication
         airflow_configure_webserver_authentication
         ;;
@@ -287,10 +297,9 @@ airflow_generate_config() {
 
     if [[ $(airflow_major_version) -eq 2 ]]; then
         # Configure the web server
-        airflow_conf_set "webserver" "web_server_port" "$AIRFLOW_WEBSERVER_PORT_NUMBER"
+        airflow_conf_set "webserver" "web_server_port" "$AIRFLOW_APISERVER_PORT_NUMBER"
     else
         # Configure the api server
-        airflow_conf_set "api" "base_url" "http://${AIRFLOW_APISERVER_HOST}:${AIRFLOW_APISERVER_PORT_NUMBER}"
         airflow_conf_set "api" "port" "$AIRFLOW_APISERVER_PORT_NUMBER"
     fi
     # Configure Airflow Hostname
@@ -363,11 +372,17 @@ airflow_conf_set() {
 # Returns:
 #   None
 #########################
-airflow_configure_webserver_base_url() {
+airflow_configure_base_url() {
     if [[ -z "$AIRFLOW_APISERVER_BASE_URL" ]]; then
         airflow_conf_set "webserver" "base_url" "http://${AIRFLOW_APISERVER_HOST}:${AIRFLOW_APISERVER_PORT_NUMBER}"
+        if [[ $(airflow_major_version) -eq 3 ]]; then
+            airflow_conf_set "api" "base_url" "http://${AIRFLOW_APISERVER_HOST}:${AIRFLOW_APISERVER_PORT_NUMBER}"
+        fi
     else
         airflow_conf_set "webserver" "base_url" "$AIRFLOW_APISERVER_BASE_URL"
+        if [[ $(airflow_major_version) -eq 3 ]]; then
+            airflow_conf_set "api" "base_url" "$AIRFLOW_APISERVER_BASE_URL"
+        fi
     fi
 }
 
@@ -714,6 +729,64 @@ airflow_exporter_stop() {
 #   airflow major version
 #########################
 airflow_major_version() {
-    local -r raw_version="$("${AIRFLOW_BASE_DIR}/venv/bin/airflow" version | grep -v "WARNING" 2>/dev/null)"
+    local -r raw_version="$("${AIRFLOW_BASE_DIR}/venv/bin/airflow" version | grep -v "WARNING\|DEBUG" 2>/dev/null)"
     get_sematic_version "$raw_version" 1
+}
+
+########################
+# Generate a secret key for Airflow
+# Arguments:
+#   None
+# Returns:
+#   Random secret key
+#########################
+airflow_generate_secret_key() {
+    generate_random_string --type alphanumeric --count 128 | base64 | head -c "32"
+}
+
+########################
+# Regenerate Airflow secret keys in airflow.cfg file
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+airflow_update_secret_keys() {
+    local -r webserver_key="$(airflow_generate_secret_key)"
+    airflow_conf_set "webserver" "secret_key" "${webserver_key}"
+
+    if [[ $(airflow_major_version) -eq 3 ]]; then
+        local -r apiserver_key="$(airflow_generate_secret_key)"
+        airflow_conf_set "api_auth" "jwt_secret" "${apiserver_key}"
+    fi
+}
+
+########################
+# Waits until the Airflow admin user is created
+# Globals:
+#   None
+# Returns:
+#   Whether the admin user has been created or not
+#########################
+airflow_wait_for_admin_user() {
+    if ! retry_while "is_airflow_admin_created"; then
+        error "Admin user is not created"
+        return 1
+    fi
+}
+
+########################
+# Check if Airflow admin user has been created
+# Globals:
+#   AIRFLOW_USERNAME
+# Returns:
+#   Whether the admin user exists or not
+#########################
+is_airflow_admin_created() {
+    local return_code=1
+    local airflow_users="$(airflow users list --output plain | grep -v DEBUG)"
+    if echo "${airflow_users}" | grep "${AIRFLOW_USERNAME}"; then
+        return_code=0
+    fi
+    return "${return_code}"
 }
