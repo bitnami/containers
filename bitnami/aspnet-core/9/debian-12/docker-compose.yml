@@ -1,0 +1,12 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  aspnet-core:
+    image: docker.io/bitnami/aspnet-core:9
+    command: ["tail", "-f", "/dev/null"] # To keep the container running
+    volumes:
+      - aspnet-core_data:/app
+volumes:
+  aspnet-core_data:
+    driver: local
