@@ -16,3 +16,9 @@ command:
     timeout: 60000
     stdout:
       - "\"security\":"
+file:
+  /opt/bitnami/kubescape/.kubescape/controls-inputs-bn.json:
+    exists: true
+    filetype: file
+    contents:
+      - "_FILE"
