@@ -26,6 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner ; \
       rm -rf "${COMPONENT}".tar.gz{,.sha256} ; \
     done
+RUN mkdir -p /rootfs/tmp && chmod g+rwX /rootfs/tmp
 
 ######
 
@@ -38,9 +39,9 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-04-30T07:54:51Z" \
+      org.opencontainers.image.created="2025-04-30T14:29:08Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.ref.name="2.1.1-debian-12-r2" \
+      org.opencontainers.image.ref.name="2.1.1-debian-12-r3" \
       org.opencontainers.image.title="charts-syncer" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
       org.opencontainers.image.version="2.1.1"
@@ -49,6 +50,7 @@ COPY rootfs /
 COPY --from=builder /opt/bitnami/charts-syncer/.spdx-charts-syncer.spdx /opt/bitnami/charts-syncer/.spdx-charts-syncer.spdx
 COPY --from=builder /opt/bitnami/charts-syncer/bin/charts-syncer /opt/bitnami/charts-syncer/bin/charts-syncer
 COPY --from=builder /opt/bitnami/charts-syncer/licenses /opt/bitnami/charts-syncer/licenses
+COPY --from=builder /rootfs /
 
 ENV APP_VERSION="2.1.1" \
     BITNAMI_APP_NAME="charts-syncer" \
