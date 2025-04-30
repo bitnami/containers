@@ -32,6 +32,10 @@ else
     ARGS+=("--protected-mode" "no")
 fi
 
+ # Add flags specified via the 'VALKEY_EXTRA_FLAGS' environment variable
+ read -r -a extra_flags <<< "$VALKEY_EXTRA_FLAGS"
+ [[ "${#extra_flags[@]}" -gt 0 ]] && ARGS+=("${extra_flags[@]}")
+
 ARGS+=("$@")
 
 if is_boolean_yes "$VALKEY_CLUSTER_CREATOR" && ! [[ -f "${VALKEY_DATA_DIR}/nodes.conf" ]]; then
