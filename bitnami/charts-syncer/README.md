@@ -76,6 +76,16 @@ docker run --rm --name charts-syncer bitnami/charts-syncer:latest help
 
 Check the [official charts-syncer documentation](https://github.com/bitnami/charts-syncer?tab=readme-ov-file#configuration/) for more information about configuration options.
 
+## Notable Changes
+
+### 2.1.1-debian-12-r2
+
+Switched the container instructions from `CMD` to `ENTRYPOINT`. The reason for this change is for ease of use, to be aligned with the previous image and documentation was intended for the usage of `ENTRYPOINT` not `CMD`.
+
+### 2.1.1-debian-12-r1
+
+We moved the binary from `/charts-syncer` to `/opt/bitnami/charts-syncer/bin/charts-syncer`, and added the `PATH` environment variable, so usage no longer requires adding the `/` prefix.
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
