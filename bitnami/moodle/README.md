@@ -262,6 +262,51 @@ moodle:
     bitnami/moodle:latest
   ```
 
+## Connecting to a Non-Containerized Database
+
+**Bitnami does not provide support for database engines that are not fully compatible with MySQL**, including Amazon Aurora MySQL.
+
+These engines may accept SQL syntax but differ subtly in behavior or feature support. A common failure scenario involves the `ROW_FORMAT=DYNAMIC` setting used by default in Bitnami's `docker-compose.yml` for Moodle.
+
+### Technical Explanation: `ROW_FORMAT=DYNAMIC` Compatibility Issues
+
+Bitnami's Moodle container initializes the database with a `ROW_FORMAT=DYNAMIC` directive in table definitions. This setting is important because:
+
+* Moodle relies on tables that may contain large `TEXT` or `LONGTEXT` fields.
+* `ROW_FORMAT=DYNAMIC` allows these fields to be stored outside the main row, avoiding the [row size limit](https://dev.mysql.com/doc/refman/8.0/en/innodb-row-format.html) (usually 8126 bytes in InnoDB).
+
+However, not all MySQL-compatible engines support `ROW_FORMAT=DYNAMIC` correctly:
+
+* **Aurora MySQL (especially older versions)** may silently ignore or misapply the setting, leading to `Row size too large` errors during table creation or upgrade.
+
+This leads to issues such as:
+
+* Incomplete database schema creation
+* Installation or upgrade failures
+* Unexpected data truncation or performance degradation
+
+### Recommended Permissions for the Moodle Database User
+
+To avoid permission-related errors during setup or runtime, configure the database and user as follows (based on [Moodle documentation](https://moodledev.io/docs/installation/database/mysql)):
+
+```sql
+-- Create the Moodle database
+CREATE DATABASE moodle_db DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+-- Create the Moodle database user
+CREATE USER 'moodle_user'@'%' IDENTIFIED BY 'password_test';
+
+-- Grant the necessary permissions
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, CREATE TEMPORARY TABLES, DROP, INDEX, ALTER 
+ON moodle_db.* TO 'moodle_user'@'%';
+
+FLUSH PRIVILEGES;
+```
+
+🔒 Note: Replace 'password_test' with a secure password in production environments.
+
+To ensure full compatibility with Moodle and Bitnami´s Docker setup, it is strongly recommended to use a vanilla MySQL 8+ instance with InnoDB and full support for ROW_FORMAT=DYNAMIC. Avoid using Aurora MySQL or MariaDB unless you have validated their compatibility and behavior in your environment.
+
 ### Examples
 
 This would be an example of SMTP configuration using a Gmail account:
