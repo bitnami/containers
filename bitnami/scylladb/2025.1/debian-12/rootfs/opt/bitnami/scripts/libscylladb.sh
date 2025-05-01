@@ -245,7 +245,9 @@ cassandra_stop() {
 #   None
 #########################
 cassandra_get_major_version() {
-    cassandra_version="$("${CASSANDRA_BASE_DIR}/bin/cassandra" -v)"
+    # HACK: Adding HEAP_NEWSIZE as an empty variable because right now it is throwing
+    # a warning that makes the get_semantic_version extract the incorrect version
+    cassandra_version="$(HEAP_NEWSIZE="" "${CASSANDRA_BASE_DIR}/bin/cassandra" -v)"
     major_version="$(get_sematic_version "$cassandra_version" 1)"
     echo "${major_version:-0}"
 }
