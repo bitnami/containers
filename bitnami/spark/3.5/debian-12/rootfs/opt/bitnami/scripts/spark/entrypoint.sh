@@ -27,7 +27,7 @@ cp -nr "$SPARK_DEFAULT_CONF_DIR"/. "$SPARK_CONF_DIR"
 if [ ! $EUID -eq 0 ] && [ -e "$LIBNSS_WRAPPER_PATH" ]; then
     echo "spark:x:$(id -u):$(id -g):Spark:$SPARK_HOME:/bin/false" > "$NSS_WRAPPER_PASSWD"
     echo "spark:x:$(id -g):" > "$NSS_WRAPPER_GROUP"
-    echo "LD_PRELOAD=$LIBNSS_WRAPPER_PATH" >> "$SPARK_CONF_DIR/spark-env.sh"
+    export LD_PRELOAD="$LIBNSS_WRAPPER_PATH"
 fi
 
 if [[ "$1" = "/opt/bitnami/scripts/spark/run.sh" ]]; then
