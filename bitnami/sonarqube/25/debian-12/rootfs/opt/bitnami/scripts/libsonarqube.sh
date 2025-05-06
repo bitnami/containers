@@ -82,6 +82,9 @@ sonarqube_validate() {
         for empty_env_var in "SONARQUBE_DATABASE_PASSWORD" "SONARQUBE_PASSWORD"; do
             is_empty_value "${!empty_env_var}" && print_validation_error "The ${empty_env_var} environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow a blank password. This is only recommended for development environments."
         done
+        if ! validate_string "$SONARQUBE_PASSWORD" -min-length 12; then
+            print_validation_error "SONARQUBE_PASSWORD must have at least 12 characters"
+        fi
     fi
 
     # Validate SMTP credentials
