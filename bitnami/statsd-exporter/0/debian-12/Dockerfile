@@ -54,4 +54,4 @@ EXPOSE 9102 9125
 WORKDIR /opt/bitnami/statsd-exporter
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/statsd-exporter/bin/statsd_exporter" ]
-CMD [ "help" ]
+CMD [ "--help" ]
