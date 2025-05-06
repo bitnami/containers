@@ -3,13 +3,13 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.4.3-0"
+        "version": "3.5.0-0"
     },
     "erlang": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "25.3.2-19-0"
+        "version": "25.3.2-20-1"
     },
     "ini-file": {
         "arch": "amd64",
