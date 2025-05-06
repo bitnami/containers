@@ -3,18 +3,18 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "17.0.14-10-1"
+        "version": "17.0.15-10-0"
     },
     "opensearch": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "2.19.1-0"
+        "version": "2.19.2-0"
     },
     "yq": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "4.45.1-8"
+        "version": "4.45.2-0"
     }
 }
