@@ -3,19 +3,19 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.23.7-0"
+        "version": "1.23.7-1"
     },
     "ini-file": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.4.7-15"
+        "version": "1.4.7-16"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.7-15"
+        "version": "1.0.7-16"
     },
     "wait-for-port": {
         "arch": "amd64",
