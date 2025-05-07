@@ -3,18 +3,18 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "2.13.0-1"
+        "version": "2.13.0-2"
     },
     "harbor-registryctl": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "2.13.0-2"
+        "version": "2.13.0-3"
     },
     "yq": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "4.45.1-8"
+        "version": "4.45.2-0"
     }
 }
