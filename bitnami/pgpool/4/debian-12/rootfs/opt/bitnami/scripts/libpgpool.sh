@@ -159,11 +159,12 @@ pgpool_validate() {
     if [[ -z "$PGPOOL_ADMIN_USERNAME" ]] || [[ -z "$PGPOOL_ADMIN_PASSWORD" ]]; then
         print_validation_error "The Pgpool administrator user's credentials are mandatory. Set the environment variables PGPOOL_ADMIN_USERNAME and PGPOOL_ADMIN_PASSWORD with the Pgpool administrator user's credentials."
     fi
+
     if [[ "$PGPOOL_SR_CHECK_PERIOD" -gt 0 ]] && { [[ -z "$PGPOOL_SR_CHECK_USER" ]] || [[ -z "$PGPOOL_SR_CHECK_PASSWORD" ]]; }; then
-        print_validation_error "The PostrgreSQL replication credentials are mandatory. Set the environment variables PGPOOL_SR_CHECK_USER and PGPOOL_SR_CHECK_PASSWORD with the PostrgreSQL replication credentials."
+        print_validation_error "The Streaming Replication Check credentials are mandatory. Set the environment variables PGPOOL_SR_CHECK_USER and PGPOOL_SR_CHECK_PASSWORD with the Streaming Replication Check credentials."
     fi
     if [[ -z "$PGPOOL_HEALTH_CHECK_USER" ]] || [[ -z "$PGPOOL_HEALTH_CHECK_PASSWORD" ]]; then
-        print_validation_error "The PostrgreSQL health check credentials are mandatory. Set the environment variables PGPOOL_HEALTH_CHECK_USER and PGPOOL_HEALTH_CHECK_PASSWORD with the PostrgreSQL health check credentials."
+        print_validation_error "The PostgreSQL health check credentials are mandatory. Set the environment variables PGPOOL_HEALTH_CHECK_USER and PGPOOL_HEALTH_CHECK_PASSWORD with the PostgreSQL health check credentials."
     fi
     if is_boolean_yes "$PGPOOL_ENABLE_LDAP" && { [[ -z "${LDAP_URI}" ]] || [[ -z "${LDAP_BASE}" ]] || [[ -z "${LDAP_BIND_DN}" ]] || [[ -z "${LDAP_BIND_PASSWORD}" ]]; }; then
         print_validation_error "The LDAP configuration is required when LDAP authentication is enabled. Set the environment variables LDAP_URI, LDAP_BASE, LDAP_BIND_DN and LDAP_BIND_PASSWORD with the LDAP configuration."
@@ -340,17 +341,16 @@ pgpool_healthcheck() {
 #########################
 pgpool_create_pghba() {
     local all_authentication="$PGPOOL_AUTHENTICATION_METHOD"
-    local postgres_authentication="$all_authentication"
     is_boolean_yes "$PGPOOL_ENABLE_LDAP" && all_authentication="pam pamservice=pgpool"
     local postgres_auth_line=""
     local sr_check_auth_line=""
     info "Generating pg_hba.conf file..."
 
     if is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD"; then
-        postgres_auth_line="host     all             ${PGPOOL_POSTGRES_USERNAME}       all         ${postgres_authentication}"
+        postgres_auth_line="host     all             ${PGPOOL_POSTGRES_USERNAME}       all        ${PGPOOL_AUTHENTICATION_METHOD}"
     fi
     if [[ -n "$PGPOOL_SR_CHECK_USER" ]]; then
-        sr_check_auth_line="host     all             ${PGPOOL_SR_CHECK_USER}       all         trust"
+        sr_check_auth_line="host     all             ${PGPOOL_SR_CHECK_USER}            all        ${PGPOOL_AUTHENTICATION_METHOD}"
     fi
 
     cat >>"$PGPOOL_PGHBA_FILE" <<EOF
@@ -427,7 +427,7 @@ EOF
 }
 
 ########################
-#  Create basic pgpool.conf file using the example provided in the etc/ folder
+# Create basic pgpool.conf file using the example provided in the etc/ folder
 # Globals:
 #   PGPOOL_*
 # Arguments:
@@ -588,6 +588,9 @@ pgpool_generate_password_file() {
         info "Generating password file for local authentication..."
 
         debug_execute pgpool_encrypt_execute -m --config-file="$PGPOOL_CONF_FILE" -u "$PGPOOL_POSTGRES_USERNAME" "$PGPOOL_POSTGRES_PASSWORD"
+        if [[ -n "$PGPOOL_SR_CHECK_USER" ]]; then
+            debug_execute pgpool_encrypt_execute -m --config-file="$PGPOOL_CONF_FILE" -u "$PGPOOL_SR_CHECK_USER" "$PGPOOL_SR_CHECK_PASSWORD"
+        fi
 
         if [[ -n "${PGPOOL_POSTGRES_CUSTOM_USERS}" ]]; then
             read -r -a custom_users_list <<<"$(tr ',;' ' ' <<<"${PGPOOL_POSTGRES_CUSTOM_USERS}")"
