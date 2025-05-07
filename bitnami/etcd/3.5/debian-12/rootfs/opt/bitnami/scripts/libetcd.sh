@@ -541,7 +541,7 @@ is_node_still_a_member() {
     am_i_root && start_command=("run_as_user" "$ETCD_DAEMON_USER" "${start_command[@]}")
     [[ -f "$ETCD_CONF_FILE" ]] && start_command+=("--config-file" "$ETCD_CONF_FILE")
     "${start_command[@]}" > "$tmp_file" 2>&1 &
-    
+
     while read -r line; do
         debug_execute echo "$line"
         if [[ "$line" =~ (established TCP streaming connection with remote peer|the member has been permanently removed from the cluster|ignored streaming request; ID mismatch|\"error\":\"cluster ID mismatch\") ]]; then
