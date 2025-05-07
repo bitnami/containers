@@ -34,10 +34,5 @@ repmgr_postgresql_configuration
 # Prepare repmgr configuration
 repmgr_generate_repmgr_config
 # Initialize PostgreSQL & repmgr
+export POSTGRESQL_USE_CUSTOM_PGHBA_INITIALIZATION="yes"
 repmgr_initialize
-
-# Set custom pg_hba.conf after initialization to avoid conflicts
-if postgresql_is_file_external "pg_hba.conf"; then
-    info "Applying custom $POSTGRESQL_PGHBA_FILE"
-    cp -f "$POSTGRESQL_MOUNTED_CONF_DIR"/pg_hba.conf "$POSTGRESQL_CONF_DIR"
-fi

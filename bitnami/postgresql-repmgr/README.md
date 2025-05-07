@@ -571,6 +571,9 @@ Refer to [issues/27124](https://github.com/bitnami/containers/issues/27124) for 
 | `POSTGRESQL_REPLICATION_USER`              | PostgreSQL replication user                                                                      | `nil`                                      |
 | `POSTGRESQL_REPLICATION_USE_PASSFILE`      | Use PGPASSFILE instead of PGPASSWORD                                                             | `no`                                       |
 | `POSTGRESQL_REPLICATION_PASSFILE_PATH`     | Path to store passfile                                                                           | `${POSTGRESQL_CONF_DIR}/.pgpass`           |
+| `POSTGRESQL_SR_CHECK`                      | Create user on PostgreSQL for Stream Replication Check                                           | `no`                                       |
+| `POSTGRESQL_SR_CHECK_USERNAME`             | Stream Replication Check user                                                                    | `sr_check_user`                            |
+| `POSTGRESQL_SR_CHECK_DATABASE`             | Stream Replication Check database                                                                | `postgres`                                 |
 | `POSTGRESQL_SYNCHRONOUS_COMMIT_MODE`       | Enable synchronous replication in slaves (number defined by POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS) | `on`                                       |
 | `POSTGRESQL_FSYNC`                         | Enable fsync in write ahead logs                                                                 | `on`                                       |
 | `POSTGRESQL_USERNAME`                      | PostgreSQL default username                                                                      | `postgres`                                 |
@@ -591,6 +594,7 @@ Refer to [issues/27124](https://github.com/bitnami/containers/issues/27124) for 
 | `POSTGRESQL_PASSWORD`                      | Password for the PostgreSQL created user                                                         | `nil`                                      |
 | `POSTGRESQL_POSTGRES_PASSWORD`             | Password for the PostgreSQL postgres user                                                        | `nil`                                      |
 | `POSTGRESQL_REPLICATION_PASSWORD`          | Password for the PostgreSQL replication user                                                     | `nil`                                      |
+| `POSTGRESQL_SR_CHECK_PASSWORD`             | Password for the Stream Replication Check user                                                   | `nil`                                      |
 | `POSTGRESQL_INITSCRIPTS_PASSWORD`          | Password for the PostgreSQL init scripts user                                                    | `$POSTGRESQL_PASSWORD`                     |
 | `POSTGRESQL_ENABLE_TLS`                    | Whether to enable TLS for traffic or not                                                         | `no`                                       |
 | `POSTGRESQL_TLS_CERT_FILE`                 | File containing the certificate for the TLS traffic                                              | `nil`                                      |
@@ -652,10 +656,10 @@ Refer to [issues/27124](https://github.com/bitnami/containers/issues/27124) for 
 | `REPMGR_DEGRADED_MONITORING_TIMEOUT`       | Replication Manager degraded monitoring timeout                                                  | `5`                                        |
 | `REPMGR_UPGRADE_EXTENSION`                 | Replication Manager upgrade extension                                                            | `no`                                       |
 | `REPMGR_FENCE_OLD_PRIMARY`                 | Replication Manager fence old primary                                                            | `no`                                       |
-| `REPMGR_FAILOVER`                          | Replicatication failover mode                                                                    | `automatic`                                |
+| `REPMGR_FAILOVER`                          | Replication failover mode                                                                        | `automatic`                                |
 | `REPMGR_CHILD_NODES_CHECK_INTERVAL`        | Replication Manager time interval to check nodes                                                 | `5`                                        |
 | `REPMGR_CHILD_NODES_CONNECTED_MIN_COUNT`   | Replication Manager minimal connected nodes                                                      | `1`                                        |
-| `REPMGR_CHILD_NODES_DISCONNECT_TIMEOUT`    | Replication Manager disconnected nodes tiemout                                                   | `30`                                       |
+| `REPMGR_CHILD_NODES_DISCONNECT_TIMEOUT`    | Replication Manager disconnected nodes timeout                                                   | `30`                                       |
 | `REPMGR_SWITCH_ROLE`                       | Flag to switch current node role                                                                 | `no`                                       |
 | `REPMGR_CURRENT_PRIMARY_HOST`              | Current primary host                                                                             | `nil`                                      |
 | `REPMGR_USERNAME`                          | Replication manager username                                                                     | `repmgr`                                   |
@@ -707,12 +711,12 @@ Refer to [issues/27124](https://github.com/bitnami/containers/issues/27124) for 
 | `REPMGR_BIN_DIR`                             | Replication Manager executables directory                       | `$REPMGR_BASE_DIR/bin`                        |
 | `REPMGR_CONF_FILE`                           | Replication Manager configuration file                          | `$REPMGR_CONF_DIR/repmgr.conf`                |
 | `REPMGR_CURRENT_PRIMARY_PORT`                | Current primary host port                                       | `$REPMGR_PRIMARY_PORT`                        |
-| `POSTGRESQL_REPLICATION_USER`                | PostgreSQL connection timeout                                   | `$REPMGR_USERNAME`                            |
-| `POSTGRESQL_REPLICATION_PASSWORD`            | PostgreSQL connection timeout                                   | `$REPMGR_PASSWORD`                            |
-| `POSTGRESQL_REPLICATION_USE_PASSFILE`        | PostgreSQL use PGPASSFILE instead of PGPASSWORD                 | `$REPMGR_USE_PASSFILE`                        |
+| `POSTGRESQL_REPLICATION_USER`                | PostgreSQL replication user                                     | `$REPMGR_USERNAME`                            |
+| `POSTGRESQL_REPLICATION_PASSWORD`            | Password for the PostgreSQL replication user                    | `$REPMGR_PASSWORD`                            |
+| `POSTGRESQL_REPLICATION_USE_PASSFILE`        | Use PGPASSFILE instead of PGPASSWORD                            | `$REPMGR_USE_PASSFILE`                        |
 | `POSTGRESQL_REPLICATION_PASSFILE_PATH`       | Path to store passfile                                          | `$REPMGR_PASSFILE_PATH`                       |
-| `POSTGRESQL_MASTER_HOST`                     | PostgreSQL connection timeout                                   | `$REPMGR_PRIMARY_HOST`                        |
-| `POSTGRESQL_MASTER_PORT_NUMBER`              | PostgreSQL connection timeout                                   | `$REPMGR_PRIMARY_PORT`                        |
+| `POSTGRESQL_MASTER_HOST`                     | PostgreSQL master host                                          | `$REPMGR_PRIMARY_HOST`                        |
+| `POSTGRESQL_MASTER_PORT_NUMBER`              | PostgreSQL master host port                                     | `$REPMGR_PRIMARY_PORT`                        |
 
 ## Logging
 
