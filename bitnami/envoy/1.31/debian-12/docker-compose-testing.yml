@@ -1,0 +1,16 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+
+  envoy:
+    image: docker.io/bitnami/envoy:1.31
+    volumes:
+      - ./examples/frontend.yaml:/opt/bitnami/envoy/conf/envoy.yaml
+
+  service1:
+    image: bitnami/nginx
+
+  service2:
+    image: bitnami/apache
+
