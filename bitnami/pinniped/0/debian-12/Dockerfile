@@ -15,7 +15,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "pinniped-0.38.0-2-linux-${OS_ARCH}-debian-12" \
+      "pinniped-0.38.0-3-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -38,22 +38,22 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-04-22T12:58:21Z" \
+      org.opencontainers.image.created="2025-05-07T07:13:52Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.ref.name="0.38.0-debian-12-r3" \
+      org.opencontainers.image.ref.name="0.38.0-debian-12-r4" \
       org.opencontainers.image.title="pinniped" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
       org.opencontainers.image.version="0.38.0"
 
 COPY rootfs /
-COPY --from=builder /opt/bitnami/pinniped/bin /
 COPY --from=builder /opt/bitnami/pinniped/.spdx-pinniped.spdx /opt/bitnami/pinniped/.spdx-pinniped.spdx
+COPY --from=builder /opt/bitnami/pinniped/bin /opt/bitnami/pinniped/bin
 COPY --from=builder /opt/bitnami/pinniped/licenses /opt/bitnami/pinniped/licenses
 
 ENV APP_VERSION="0.38.0" \
     BITNAMI_APP_NAME="pinniped" \
-    PATH="/"
+    PATH="/opt/bitnami/pinniped/bin:$PATH"
 
 USER 1001
 
-ENTRYPOINT [ "/pinniped-concierge" ]
+ENTRYPOINT [ "pinniped-concierge" ]
