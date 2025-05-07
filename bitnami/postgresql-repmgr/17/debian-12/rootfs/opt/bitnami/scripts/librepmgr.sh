@@ -425,23 +425,30 @@ repmgr_inject_postgresql_configuration() {
 #########################
 repmgr_inject_pghba_configuration() {
     debug "Injecting a new pg_hba.conf file..."
-    local tls_auth="#"
-    if is_boolean_yes "$POSTGRESQL_ENABLE_TLS" && [[ -n $POSTGRESQL_TLS_CA_FILE ]]; then
-        tls_auth=""
-    fi
 
     cat >"${POSTGRESQL_MOUNTED_CONF_DIR}/pg_hba.conf" <<EOF
-host     all            $REPMGR_USERNAME    0.0.0.0/0    trust
-host     $REPMGR_DATABASE         $REPMGR_USERNAME    0.0.0.0/0    trust
-host     $REPMGR_DATABASE         $REPMGR_USERNAME    ::/0    trust
-host     replication      $REPMGR_USERNAME    0.0.0.0/0    trust
-host     replication      $REPMGR_USERNAME    ::/0    trust
-${tls_auth}hostssl     all             all             0.0.0.0/0               cert
-${tls_auth}hostssl     all             all             ::/0                    cert
-host     all              all       0.0.0.0/0    trust
-host     all              all       ::/0         trust
-local    all              all                    trust
+local    all             all                         trust
+host     all             all            127.0.0.1/32 trust
+host     all             all            ::1/128      trust
+host     all             all            0.0.0.0/0    md5
+host     all             all            ::/0         md5
+host     $REPMGR_DATABASE          $REPMGR_USERNAME         0.0.0.0/0    md5
+host     $REPMGR_DATABASE          $REPMGR_USERNAME         ::/0         md5
+host     replication     all            0.0.0.0/0    md5
+host     replication     all            ::/0         md5
 EOF
+    if is_boolean_yes "$POSTGRESQL_SR_CHECK"; then
+        cat >>"${POSTGRESQL_MOUNTED_CONF_DIR}/pg_hba.conf" <<EOF
+host     $POSTGRESQL_SR_CHECK_DATABASE        $POSTGRESQL_SR_CHECK_USERNAME  0.0.0.0/0    md5
+host     $POSTGRESQL_SR_CHECK_DATABASE        $POSTGRESQL_SR_CHECK_USERNAME  ::/0         md5
+EOF
+    fi
+    if is_boolean_yes "$POSTGRESQL_ENABLE_TLS" && [[ -n $POSTGRESQL_TLS_CA_FILE ]]; then
+        cat >>"${POSTGRESQL_MOUNTED_CONF_DIR}/pg_hba.conf" <<EOF
+hostssl     all            all                  0.0.0.0/0               cert
+hostssl     all            all                  ::/0                    cert
+EOF
+    fi
 }
 
 ########################
