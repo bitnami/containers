@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.70.0-0"
+        "version": "1.71.0-0"
     },
     "jre": {
         "arch": "amd64",
@@ -33,12 +33,12 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.13.3-5"
+        "version": "3.13.3-7"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.7-15"
+        "version": "1.0.7-16"
     }
 }
