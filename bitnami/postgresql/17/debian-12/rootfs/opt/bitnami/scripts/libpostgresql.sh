@@ -83,6 +83,9 @@ postgresql_validate() {
         if [[ -n "$POSTGRESQL_USERNAME" ]] && [[ "$POSTGRESQL_USERNAME" != "postgres" ]] && [[ -n "$POSTGRESQL_PASSWORD" ]] && [[ -z "$POSTGRESQL_DATABASE" ]]; then
             print_validation_error "In order to use a custom PostgreSQL user you need to set the environment variable POSTGRESQL_DATABASE as well"
         fi
+        if is_boolean_yes "$POSTGRESQL_SR_CHECK" && [[ -z "$POSTGRESQL_SR_CHECK_PASSWORD" ]]; then
+            empty_password_error "POSTGRESQL_SR_CHECK_PASSWORD"
+        fi
     fi
     if [[ -n "$POSTGRESQL_REPLICATION_MODE" ]]; then
         if [[ "$POSTGRESQL_REPLICATION_MODE" = "master" ]]; then
@@ -122,6 +125,12 @@ postgresql_validate() {
 
     if is_boolean_yes "$POSTGRESQL_ENABLE_LDAP" && [[ -n "$POSTGRESQL_LDAP_URL" ]] && [[ -n "$POSTGRESQL_LDAP_SERVER" ]]; then
         empty_password_error "You can not set POSTGRESQL_LDAP_URL and POSTGRESQL_LDAP_SERVER at the same time. Check your LDAP configuration."
+    fi
+
+    if ! is_yes_no_value "$POSTGRESQL_SR_CHECK"; then
+        print_validation_error "The values allowed for POSTGRESQL_SR_CHECK are: yes or no"
+    elif is_boolean_yes "$POSTGRESQL_SR_CHECK" && [[ -z "$POSTGRESQL_SR_CHECK_USERNAME" || -z "$POSTGRESQL_SR_CHECK_DATABASE" ]]; then
+        print_validation_error "The environment variables POSTGRESQL_SR_CHECK_USERNAME and POSTGRESQL_SR_CHECK_DATABASE are required when using the SR_CHECK feature"
     fi
 
     if ! is_yes_no_value "$POSTGRESQL_ENABLE_TLS"; then
@@ -311,7 +320,7 @@ postgresql_restrict_pghba() {
 }
 
 ########################
-# Change pg_hba.conf so it allows access from replication users
+# Change pg_hba.conf so it allows access from replication user
 # Globals:
 #   POSTGRESQL_*
 # Arguments:
@@ -327,6 +336,26 @@ postgresql_add_replication_to_pghba() {
     cat <<EOF >>"$POSTGRESQL_PGHBA_FILE"
 host      replication     all             0.0.0.0/0               ${replication_auth}
 host      replication     all             ::/0                    ${replication_auth}
+EOF
+}
+
+########################
+# Change pg_hba.conf so it allows access from sr_check user
+# Globals:
+#   POSTGRESQL_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+postgresql_add_sr_check_user_to_pghba() {
+    local sr_check_auth="trust"
+    if [[ -n "$POSTGRESQL_SR_CHECK_PASSWORD" ]]; then
+        sr_check_auth="md5"
+    fi
+    cat <<EOF >>"$POSTGRESQL_PGHBA_FILE"
+host      $POSTGRESQL_SR_CHECK_DATABASE     $POSTGRESQL_SR_CHECK_USERNAME      0.0.0.0/0               ${sr_check_auth}
+host      $POSTGRESQL_SR_CHECK_DATABASE     $POSTGRESQL_SR_CHECK_USERNAME      ::/0                    ${sr_check_auth}
 EOF
 }
 
@@ -354,7 +383,7 @@ postgresql_set_property() {
 }
 
 ########################
-# Create a user for master-slave replication
+# Create a user for primary-replica replication
 # Globals:
 #   POSTGRESQL_*
 # Arguments:
@@ -368,6 +397,29 @@ postgresql_create_replication_user() {
 
     info "Creating replication user $POSTGRESQL_REPLICATION_USER"
     echo "CREATE ROLE \"$POSTGRESQL_REPLICATION_USER\" REPLICATION LOGIN ENCRYPTED PASSWORD '$escaped_password'" | postgresql_execute "" "postgres" "$postgres_password"
+}
+
+########################
+# Create a user for Stream Replication checks
+# Globals:
+#   POSTGRESQL_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+postgresql_create_sr_check_user() {
+    local -r escaped_password="${POSTGRESQL_SR_CHECK_PASSWORD//\'/\'\'}"
+    local -r postgres_password="${POSTGRESQL_POSTGRES_PASSWORD:-$POSTGRESQL_PASSWORD}"
+
+    if [[ -n "$POSTGRESQL_REPLICATION_USER" ]] && [[ "$POSTGRESQL_SR_CHECK_USERNAME" == "$POSTGRESQL_REPLICATION_USER" ]]; then
+        debug "The SR_CHECK username is the same as the replication user, skipping creation"
+    else
+        info "Creating sr-check user $POSTGRESQL_SR_CHECK_USERNAME"
+        echo "CREATE ROLE \"${POSTGRESQL_SR_CHECK_USERNAME}\" WITH LOGIN PASSWORD '${escaped_password}';" | postgresql_execute "" "postgres" "$postgres_password"
+    fi
+    info "Granting access to \"${POSTGRESQL_SR_CHECK_USERNAME}\" to the database \"${POSTGRESQL_SR_CHECK_DATABASE}\""
+    echo "GRANT CONNECT ON DATABASE \"${POSTGRESQL_SR_CHECK_DATABASE}\" TO \"${POSTGRESQL_SR_CHECK_USERNAME}\"\;" | postgresql_execute "" "postgres" "$postgres_password"
 }
 
 ########################
@@ -522,12 +574,13 @@ postgresql_create_admin_user() {
 # Globals:
 #   POSTGRESQL_*
 # Arguments:
-#   None
+#   $1 - Database name
 # Returns:
 #   None
 #########################
 postgresql_create_custom_database() {
-    echo "CREATE DATABASE \"$POSTGRESQL_DATABASE\"" | postgresql_execute "" "postgres" ""
+    local -r db_name="${1:?missing database}"
+    echo "CREATE DATABASE \"$db_name\"" | postgresql_execute "" "postgres" ""
 }
 
 ########################
@@ -650,7 +703,8 @@ postgresql_initialize() {
         if [[ "$POSTGRESQL_REPLICATION_MODE" = "master" ]]; then
             postgresql_master_init_db
             postgresql_start_bg "false"
-            [[ -n "${POSTGRESQL_DATABASE}" ]] && [[ "$POSTGRESQL_DATABASE" != "postgres" ]] && postgresql_create_custom_database
+            [[ -n "$POSTGRESQL_DATABASE" ]] && [[ "$POSTGRESQL_DATABASE" != "postgres" ]] && postgresql_create_custom_database "$POSTGRESQL_DATABASE"
+            is_boolean_yes "$POSTGRESQL_SR_CHECK" && [[ "$POSTGRESQL_SR_CHECK_DATABASE" != "postgres" ]] && postgresql_create_custom_database "$POSTGRESQL_SR_CHECK_DATABASE"
             if [[ "$POSTGRESQL_USERNAME" = "postgres" ]]; then
                 postgresql_alter_postgres_user "$POSTGRESQL_PASSWORD"
             else
@@ -660,16 +714,17 @@ postgresql_initialize() {
                 postgresql_create_admin_user
             fi
             is_boolean_yes "$create_pghba_file" && postgresql_restrict_pghba
+            is_boolean_yes "$POSTGRESQL_SR_CHECK" && postgresql_create_sr_check_user
             [[ -n "$POSTGRESQL_REPLICATION_USER" ]] && ! $skip_replication && postgresql_create_replication_user
             is_boolean_yes "$create_conf_file" && ! $skip_replication && postgresql_configure_replication_parameters
-            is_boolean_yes "$create_pghba_file" && ! $skip_replication &&  postgresql_configure_synchronous_replication
+            is_boolean_yes "$create_pghba_file" && ! $skip_replication && postgresql_configure_synchronous_replication
             is_boolean_yes "$create_conf_file" && postgresql_configure_fsync
             is_boolean_yes "$create_conf_file" && is_boolean_yes "$POSTGRESQL_ENABLE_TLS" && postgresql_configure_tls
             [[ -n "$POSTGRESQL_REPLICATION_USER" ]] && is_boolean_yes "$create_pghba_file" && ! $skip_replication &&  postgresql_add_replication_to_pghba
         else
             postgresql_slave_init_db
             is_boolean_yes "$create_pghba_file" && postgresql_restrict_pghba
-            is_boolean_yes "$create_conf_file" && ! $skip_replication &&  postgresql_configure_replication_parameters
+            is_boolean_yes "$create_conf_file" && ! $skip_replication && postgresql_configure_replication_parameters
             is_boolean_yes "$create_conf_file" && postgresql_configure_fsync
             is_boolean_yes "$create_conf_file" && is_boolean_yes "$POSTGRESQL_ENABLE_TLS" && postgresql_configure_tls
             ! $skip_replication && postgresql_configure_recovery
@@ -677,6 +732,8 @@ postgresql_initialize() {
     fi
     # TLS Modifications on pghba need to be performed after properly configuring postgresql.conf file
     is_boolean_yes "$create_pghba_file" && is_boolean_yes "$POSTGRESQL_ENABLE_TLS" && [[ -n $POSTGRESQL_TLS_CA_FILE ]] && postgresql_tls_auth_configuration
+    # Allow access from sr_check user
+    is_boolean_yes "$create_pghba_file" && is_boolean_yes "$POSTGRESQL_SR_CHECK" && postgresql_add_sr_check_user_to_pghba
 
     is_boolean_yes "$create_conf_file" && [[ -n "$POSTGRESQL_SHARED_PRELOAD_LIBRARIES" ]] && postgresql_set_property "shared_preload_libraries" "$POSTGRESQL_SHARED_PRELOAD_LIBRARIES"
     is_boolean_yes "$create_conf_file" && postgresql_configure_logging

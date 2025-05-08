@@ -74,7 +74,7 @@ autoctl_configure_auth() {
 
         if [[ "${POSTGRESQL_AUTOCTL_MODE}" = "postgres" ]]; then
             info "Adding users auth configurations..."
-            [[ -n "${POSTGRESQL_DATABASE}" ]] && [[ "$POSTGRESQL_DATABASE" != "postgres" ]] && postgresql_create_custom_database
+            [[ -n "$POSTGRESQL_DATABASE" ]] && [[ "$POSTGRESQL_DATABASE" != "postgres" ]] && postgresql_create_custom_database "$POSTGRESQL_DATABASE"
             if [[ "$POSTGRESQL_USERNAME" = "postgres" ]]; then
                 postgresql_alter_postgres_user "$POSTGRESQL_PASSWORD"
             else
