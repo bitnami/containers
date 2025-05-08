@@ -281,7 +281,7 @@ airflow_generate_config() {
         [[ ! -f "$AIRFLOW_CONF_FILE" ]] && cp "$(find "$AIRFLOW_BASE_DIR" -name default_airflow.cfg)" "$AIRFLOW_CONF_FILE"
         [[ ! -f "$AIRFLOW_WEBSERVER_CONF_FILE" ]] && cp "$(find "$AIRFLOW_BASE_DIR" -name default_webserver_config.py)" "$AIRFLOW_WEBSERVER_CONF_FILE"
         # Setup Airflow base URL
-        airflow_configure_base_url
+        airflow_configure_host "${AIRFLOW_APISERVER_HOST}"
         # Configure Airflow webserver authentication
         airflow_configure_webserver_authentication
         ;;
@@ -364,21 +364,48 @@ airflow_conf_set() {
 }
 
 ########################
-# Configure Airflow webserver base url
+# Return Airflow webserver base url
 # Globals:
 #   AIRFLOW_*
 # Arguments:
-#   None
+#   $1 - host
+# Returns:
+#   String
+#########################
+airflow_base_url() {
+    local host="${1:?missing host}"
+    local scheme="http"
+
+    if is_boolean_yes "$AIRFLOW_ENABLE_HTTPS"; then
+        scheme="https"
+    fi
+    if [[ "$AIRFLOW_APISERVER_PORT_NUMBER" != "80" ]] && [[ "$AIRFLOW_APISERVER_PORT_NUMBER" != "443" ]]; then
+        host+=":${AIRFLOW_APISERVER_PORT_NUMBER}"
+    fi
+    echo "${scheme}://${host}"
+}
+########################
+# Configure Airflow webserver host
+# Globals:
+#   AIRFLOW_*
+# Arguments:
+#   $1 - host
 # Returns:
 #   None
 #########################
-airflow_configure_base_url() {
+airflow_configure_host() {
+    local -r host="${1:?missing host}"
+    local base_url
+
     if [[ -z "$AIRFLOW_APISERVER_BASE_URL" ]]; then
-        airflow_conf_set "webserver" "base_url" "http://${AIRFLOW_APISERVER_HOST}:${AIRFLOW_APISERVER_PORT_NUMBER}"
+        base_url="$(airflow_base_url "$host")"
+        info "Configuring Airflow URL to ${base_url}"
+        airflow_conf_set "webserver" "base_url" "${base_url}"
         if [[ $(airflow_major_version) -eq 3 ]]; then
-            airflow_conf_set "api" "base_url" "http://${AIRFLOW_APISERVER_HOST}:${AIRFLOW_APISERVER_PORT_NUMBER}"
+            airflow_conf_set "api" "base_url" "${base_url}"
         fi
     else
+        info "Configuring Airflow URL to ${AIRFLOW_APISERVER_BASE_URL}"
         airflow_conf_set "webserver" "base_url" "$AIRFLOW_APISERVER_BASE_URL"
         if [[ $(airflow_major_version) -eq 3 ]]; then
             airflow_conf_set "api" "base_url" "$AIRFLOW_APISERVER_BASE_URL"
@@ -784,7 +811,7 @@ airflow_wait_for_admin_user() {
 #########################
 is_airflow_admin_created() {
     local return_code=1
-    local airflow_users="$(airflow users list --output plain | grep -v DEBUG)"
+    local airflow_users="$(airflow users list --output plain | grep -v DEBUG 2>/dev/null)"
     if echo "${airflow_users}" | grep "${AIRFLOW_USERNAME}"; then
         return_code=0
     fi
