@@ -1,8 +1,0 @@
-{
-    "chainloop-artifact-cas": {
-        "arch": "amd64",
-        "distro": "debian-12",
-        "type": "NAMI",
-        "version": "0.189.0-2"
-    }
-}
