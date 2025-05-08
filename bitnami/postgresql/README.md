@@ -195,6 +195,9 @@ docker-compose up -d
 | `POSTGRESQL_REPLICATION_USER`              | PostgreSQL replication user                                                                      | `nil`                                      |
 | `POSTGRESQL_REPLICATION_USE_PASSFILE`      | Use PGPASSFILE instead of PGPASSWORD                                                             | `no`                                       |
 | `POSTGRESQL_REPLICATION_PASSFILE_PATH`     | Path to store passfile                                                                           | `${POSTGRESQL_CONF_DIR}/.pgpass`           |
+| `POSTGRESQL_SR_CHECK`                      | Create user on PostgreSQL for Stream Replication Check                                           | `no`                                       |
+| `POSTGRESQL_SR_CHECK_USERNAME`             | Stream Replication Check user                                                                    | `sr_check_user`                            |
+| `POSTGRESQL_SR_CHECK_DATABASE`             | Stream Replication Check database                                                                | `postgres`                                 |
 | `POSTGRESQL_SYNCHRONOUS_COMMIT_MODE`       | Enable synchronous replication in slaves (number defined by POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS) | `on`                                       |
 | `POSTGRESQL_FSYNC`                         | Enable fsync in write ahead logs                                                                 | `on`                                       |
 | `POSTGRESQL_USERNAME`                      | PostgreSQL default username                                                                      | `postgres`                                 |
@@ -215,6 +218,7 @@ docker-compose up -d
 | `POSTGRESQL_PASSWORD`                      | Password for the PostgreSQL created user                                                         | `nil`                                      |
 | `POSTGRESQL_POSTGRES_PASSWORD`             | Password for the PostgreSQL postgres user                                                        | `nil`                                      |
 | `POSTGRESQL_REPLICATION_PASSWORD`          | Password for the PostgreSQL replication user                                                     | `nil`                                      |
+| `POSTGRESQL_SR_CHECK_PASSWORD`             | Password for the Stream Replication Check user                                                   | `nil`                                      |
 | `POSTGRESQL_INITSCRIPTS_PASSWORD`          | Password for the PostgreSQL init scripts user                                                    | `$POSTGRESQL_PASSWORD`                     |
 | `POSTGRESQL_ENABLE_TLS`                    | Whether to enable TLS for traffic or not                                                         | `no`                                       |
 | `POSTGRESQL_TLS_CERT_FILE`                 | File containing the certificate for the TLS traffic                                              | `nil`                                      |
