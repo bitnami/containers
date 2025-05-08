@@ -8,14 +8,14 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-05-07T11:00:35Z" \
+      org.opencontainers.image.created="2025-05-08T11:39:34Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/kube-arangodb/README.md" \
-      org.opencontainers.image.ref.name="1.2.47-debian-12-r5" \
+      org.opencontainers.image.ref.name="1.2.48-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kube-arangodb" \
       org.opencontainers.image.title="kube-arangodb" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.2.47"
+      org.opencontainers.image.version="1.2.48"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-12" \
@@ -27,8 +27,8 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "envoy-1.34.0-0-linux-${OS_ARCH}-debian-12" \
-      "kube-arangodb-1.2.47-2-linux-${OS_ARCH}-debian-12" \
+      "envoy-1.34.1-0-linux-${OS_ARCH}-debian-12" \
+      "kube-arangodb-1.2.48-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -44,7 +44,7 @@ RUN apt-get autoremove --purge -y curl && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
-ENV APP_VERSION="1.2.47" \
+ENV APP_VERSION="1.2.48" \
     BITNAMI_APP_NAME="kube-arangodb" \
     PATH="/opt/bitnami/envoy/bin:/opt/bitnami/kube-arangodb/bin:$PATH"
 
