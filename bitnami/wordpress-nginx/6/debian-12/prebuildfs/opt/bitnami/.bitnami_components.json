@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "11.4.5-2"
+        "version": "11.4.6-0"
     },
     "nginx": {
         "arch": "amd64",
@@ -15,18 +15,18 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.2.28-5"
+        "version": "8.2.28-6"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.7-15"
+        "version": "1.0.7-16"
     },
     "wordpress-nginx": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "6.8.1-0"
+        "version": "6.8.1-1"
     }
 }
