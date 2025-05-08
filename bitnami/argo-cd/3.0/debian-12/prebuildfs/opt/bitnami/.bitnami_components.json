@@ -1,0 +1,14 @@
+{
+    "argo-cd": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "3.0.0-0"
+    },
+    "helm": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "3.17.3-4"
+    }
+}
