@@ -8,14 +8,14 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-04-15T02:00:13Z" \
+      org.opencontainers.image.created="2025-05-08T08:41:31Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/mariadb/README.md" \
-      org.opencontainers.image.ref.name="11.4.5-debian-12-r12" \
+      org.opencontainers.image.ref.name="11.4.6-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mariadb" \
       org.opencontainers.image.title="mariadb" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="11.4.5"
+      org.opencontainers.image.version="11.4.6"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,8 +28,8 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libaio1 libaudit1 libcap-ng0 libcrypt1 libgcc-s1 libicu72 liblzma5 libncurses6 libpam0g libssl3 libstdc++6 libtinfo6 libxml2 procps psmisc zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "ini-file-1.4.7-15-linux-${OS_ARCH}-debian-12" \
-      "mariadb-11.4.5-2-linux-${OS_ARCH}-debian-12" \
+      "ini-file-1.4.7-16-linux-${OS_ARCH}-debian-12" \
+      "mariadb-11.4.6-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -49,7 +49,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mariadb/postunpack.sh
-ENV APP_VERSION="11.4.5" \
+ENV APP_VERSION="11.4.6" \
     BITNAMI_APP_NAME="mariadb" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/common/sbin:/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
 
