@@ -7,6 +7,10 @@ linked_libraries:
   exclude_paths:
     # Ignore python venv executable scripts
     - /opt/bitnami/airflow/venv/.*
+sed_in_place:
+  exclude_paths:
+    # Ignore python venv executable scripts
+    - /opt/bitnami/airflow/venv/.*
 directories:
   - mode: "0775"
     paths:
