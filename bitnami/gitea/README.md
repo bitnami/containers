@@ -28,8 +28,6 @@ Looking to use Gitea in production? Try [VMware Tanzu Application Catalog](https
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Gitea Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/gitea).
 
-Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deployment and management of Helm Charts in clusters.
-
 ## Only the latest stable branch maintained in the free Bitnami catalog
 
 Starting December 10th, 2024, only the latest stable branch of each container image will receive updates in the free Bitnami catalog. To access up-to-date releases for all upstream-supported branches (e.g., LTS), consider upgrading to Bitnami Premium. Previously released versions will not be deleted and will remain available for pulling from DockerHub.

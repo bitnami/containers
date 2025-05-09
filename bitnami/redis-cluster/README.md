@@ -28,8 +28,6 @@ Looking to use Redis&reg; Cluster in production? Try [VMware Tanzu Application C
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Redis(R) Cluster Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/redis-cluster).
 
-Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deployment and management of Helm Charts in clusters.
-
 ## Only the latest stable branch maintained in the free Bitnami catalog
 
 Starting December 10th, 2024, only the latest stable branch of each container image will receive updates in the free Bitnami catalog. To access up-to-date releases for all upstream-supported branches (e.g., LTS), consider upgrading to Bitnami Premium. Previously released versions will not be deleted and will remain available for pulling from DockerHub.
