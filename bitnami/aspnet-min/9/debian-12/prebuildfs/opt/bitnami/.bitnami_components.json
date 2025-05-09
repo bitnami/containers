@@ -1,0 +1,8 @@
+{
+    "aspnet-min": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "9.0.4-1"
+    }
+}
