@@ -1,8 +1,0 @@
-command:
-  check-apprepository-controller-help:
-    exec:
-    - apprepository-controller
-    - --help
-    exit-status: 0
-    stdout:
-    - "apprepository-controller [flags]"

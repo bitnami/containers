@@ -1,9 +1,0 @@
-# Copyright Broadcom, Inc. All Rights Reserved.
-# SPDX-License-Identifier: APACHE-2.0
-
-services:
-  kubeapps:
-    image: docker.io/bitnami/kubeapps:2
-    ports:
-      - '80:80'
-      - '443:443'
