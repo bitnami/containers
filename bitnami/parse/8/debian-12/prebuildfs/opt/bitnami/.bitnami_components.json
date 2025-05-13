@@ -9,18 +9,18 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "24.0.0-0"
+        "version": "24.0.1-1"
     },
     "parse": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.2.0-1"
+        "version": "8.2.0-2"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.13.3-7"
+        "version": "3.13.3-9"
     }
 }
