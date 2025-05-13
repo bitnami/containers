@@ -3,30 +3,30 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "12.0.7-0"
+        "version": "12.0.8-0"
     },
     "node": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "22.14.0-3"
+        "version": "24.0.1-1"
     },
     "php": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.4.6-1"
+        "version": "8.4.7-2"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.13.3-2"
+        "version": "3.13.3-9"
     },
     "wait-for-port": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.8-15"
+        "version": "1.0.8-16"
     }
 }
