@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.8.442-7-1"
+        "version": "1.8.452-11-0"
     },
     "prometheus-rsocket-proxy": {
         "arch": "amd64",
