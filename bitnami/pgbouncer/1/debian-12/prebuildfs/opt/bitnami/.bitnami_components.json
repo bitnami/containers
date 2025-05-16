@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.4.7-15"
+        "version": "1.4.7-16"
     },
     "pgbouncer": {
         "arch": "amd64",
@@ -15,12 +15,12 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "14.17.0-0"
+        "version": "14.18.0-0"
     },
     "wait-for-port": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.8-15"
+        "version": "1.0.8-16"
     }
 }
