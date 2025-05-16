@@ -46,7 +46,6 @@ xmlstarlet ed -L --insert "/clickhouse/keeper_server/raft_configuration/server/p
 # Add symlinks to the default paths to make a similar UX as the upstream ClickHouse Keeper configuration
 # https://github.com/ClickHouse/ClickHouse/blob/master/programs/keeper/keeper_config.xml
 ln -s "$CLICKHOUSE_KEEPER_VOLUME_DIR" "/var/lib/clickhouse-keeper"
-ln -s "$CLICKHOUSE_KEEPER_CONF_DIR" "/etc/clickhouse-keeper"
 ln -s "$CLICKHOUSE_KEEPER_LOG_DIR" "/var/log/clickhouse-keeper"
 
 # ClickHouse Keeper uses some algorithms that are not FIPS compliant

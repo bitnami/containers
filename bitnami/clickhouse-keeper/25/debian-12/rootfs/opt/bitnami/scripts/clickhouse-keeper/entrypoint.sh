@@ -11,6 +11,7 @@ set -o pipefail
 
 # Load libraries
 . /opt/bitnami/scripts/libbitnami.sh
+. /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/liblog.sh
 
 # Load ClickHouse Keeper environment variables
@@ -28,6 +29,13 @@ else
     error "The folder $CLICKHOUSE_KEEPER_CONF_DIR is not writable. This is likely because a read-only filesystem is used, please ensure you mount a writable volume on this path."
     exit 1
 fi
+# For compatibility with running the image via Altiny's Operator, we need to
+# ensure the specific config files mounted at /etc/clickhouse-keeper
+# are copied to Bitnami's config directory
+[[ -f "/etc/clickhouse-keeper/keeper_config.xml" ]] && cp "/etc/clickhouse-keeper/keeper_config.xml" "$CLICKHOUSE_KEEPER_CONF_FILE"
+for dir in "conf.d" "keeper_config.d" "users.d"; do
+  ! is_mounted_dir_empty "/etc/clickhouse-keeper/${dir}" && cp -r "/etc/clickhouse-keeper/${dir}" "$CLICKHOUSE_KEEPER_CONF_DIR"
+done
 
 if [[ "$1" = "/opt/bitnami/scripts/clickhouse-keeper/run.sh" ]]; then
     info "** Starting ClickHouse Keeper setup **"
