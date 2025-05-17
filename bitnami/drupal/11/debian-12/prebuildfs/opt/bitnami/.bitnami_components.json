@@ -15,19 +15,19 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.3.20-2"
+        "version": "8.3.21-1"
     },
     "mysql-client": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "11.4.5-2"
+        "version": "11.4.6-0"
     },
     "php": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.3.20-4"
+        "version": "8.3.21-4"
     },
     "render-template": {
         "arch": "amd64",
