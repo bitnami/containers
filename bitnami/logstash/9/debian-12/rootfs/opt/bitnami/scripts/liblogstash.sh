@@ -97,7 +97,7 @@ logstash_create_sample_pipeline_config_file() {
     # Parse inputs
     if is_boolean_yes "$LOGSTASH_ENABLE_BEATS_INPUT"; then
         # Newer versions of the logstash-input-beats use ssl_enabled instead of ssl
-        if [[ "$APP_VERSION" =~ ^7\. ]]; then
+        if [[ $(logstash_major_version) -eq 7 ]]; then
             inputs+=$'\n'"beats {
   ssl => false
   host => \"${LOGSTASH_BIND_ADDRESS}\"
@@ -119,7 +119,7 @@ logstash_create_sample_pipeline_config_file() {
     fi
     if is_boolean_yes "$LOGSTASH_ENABLE_HTTP_INPUT"; then
         # Newer versions of the logstash-input-http use ssl_enabled instead of ssl
-        if [[ "$APP_VERSION" =~ ^7\. ]]; then
+        if [[ $(logstash_major_version) -eq 7 ]]; then
             inputs+=$'\n'"http {
   ssl => false
   host => \"${LOGSTASH_BIND_ADDRESS}\"
@@ -394,4 +394,18 @@ logstash_install_plugins() {
             logstash-plugin install "$plugin" >/dev/null 2>&1
         fi
     done
+}
+
+########################
+# Get Logstash major version
+# Globals:
+#   LOGSTASH_BASE_DIR
+# Arguments:
+#   None
+# Returns:
+#   logstash major version
+#########################
+logstash_major_version() {
+    local -r raw_version="$("${LOGSTASH_BASE_DIR}/bin/logstash" --version | grep -oE [0-9\.]+)"
+    get_sematic_version "$raw_version" 1
 }
