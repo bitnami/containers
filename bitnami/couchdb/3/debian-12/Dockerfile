@@ -8,10 +8,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-05-05T23:54:47Z" \
+      org.opencontainers.image.created="2025-05-17T19:11:30Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/couchdb/README.md" \
-      org.opencontainers.image.ref.name="3.5.0-debian-12-r0" \
+      org.opencontainers.image.ref.name="3.5.0-debian-12-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/couchdb" \
       org.opencontainers.image.title="couchdb" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -28,9 +28,9 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libgcc-s1 libicu72 libssl3 libstdc++6 libtinfo6 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "wait-for-port-1.0.8-15-linux-${OS_ARCH}-debian-12" \
-      "ini-file-1.4.7-15-linux-${OS_ARCH}-debian-12" \
-      "erlang-25.3.2-20-1-linux-${OS_ARCH}-debian-12" \
+      "wait-for-port-1.0.8-16-linux-${OS_ARCH}-debian-12" \
+      "ini-file-1.4.7-16-linux-${OS_ARCH}-debian-12" \
+      "erlang-25.3.2-21-0-linux-${OS_ARCH}-debian-12" \
       "couchdb-3.5.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
