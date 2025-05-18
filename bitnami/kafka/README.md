@@ -508,7 +508,7 @@ docker run --name kafka-0 \
   -e KAFKA_CFG_OFFSETS_TOPIC_REPLICATION_FACTOR=3 \
   -e KAFKA_CFG_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=3 \
   -e KAFKA_CFG_TRANSACTION_STATE_LOG_MIN_ISR=2 \
-  -e KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv \
+  -e KAFKA_CLUSTER_ID=abcdefghijklmnopqrstuv \
   -p :9092 \
   -p :9093 \
   bitnami/kafka:latest
@@ -529,7 +529,7 @@ docker run --name kafka-1 \
   -e KAFKA_CFG_OFFSETS_TOPIC_REPLICATION_FACTOR=3 \
   -e KAFKA_CFG_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=3 \
   -e KAFKA_CFG_TRANSACTION_STATE_LOG_MIN_ISR=2 \
-  -e KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv \
+  -e KAFKA_CLUSTER_ID=abcdefghijklmnopqrstuv \
   -p :9092 \
   -p :9093 \
   bitnami/kafka:latest
@@ -550,7 +550,7 @@ docker run --name kafka-3 \
   -e KAFKA_CFG_OFFSETS_TOPIC_REPLICATION_FACTOR=3 \
   -e KAFKA_CFG_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=3 \
   -e KAFKA_CFG_TRANSACTION_STATE_LOG_MIN_ISR=2 \
-  -e KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv \
+  -e KAFKA_CLUSTER_ID=abcdefghijklmnopqrstuv \
   -p :9092 \
   -p :9093 \
   bitnami/kafka:latest
@@ -595,7 +595,7 @@ services:
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
       - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
-      - KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv
+      - KAFKA_CLUSTER_ID=abcdefghijklmnopqrstuv
     volumes:
       - kafka_0_data:/bitnami/kafka
   kafka-controller:
@@ -607,7 +607,7 @@ services:
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT
       - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
-      - KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv
+      - KAFKA_CLUSTER_ID=abcdefghijklmnopqrstuv
     volumes:
       - kafka_1_data:/bitnami/kafka
   kafka-broker:
@@ -803,7 +803,7 @@ This guide covers how to execute the Kafka migration from Zookeeper mode to KRaf
     KAFKA_CFG_LISTENERS=CONTROLLER://:9093
     KAFKA_CFG_ZOOKEEPER_METADATA_MIGRATION_ENABLE=true
     KAFKA_CFG_ZOOKEEPER_CONNECT=<zk_host>:<zk_port>
-    KAFKA_KRAFT_CLUSTER_ID=<cluster_id_step1>
+    KAFKA_CLUSTER_ID=<cluster_id_step1>
     ```
 
 3. Configure brokers with migration settings:
@@ -834,7 +834,7 @@ This guide covers how to execute the Kafka migration from Zookeeper mode to KRaf
     KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=<controller1_node_id>@<controller1_host>:9093,<controller2_node_id>@<controller2_host>:9093,...
     KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
     KAFKA_CFG_LISTENERS=CONTROLLER://:9093
-    KAFKA_KRAFT_CLUSTER_ID=<cluster_id_step1>
+    KAFKA_CLUSTER_ID=<cluster_id_step1>
     ```
 
 ## Notable Changes
