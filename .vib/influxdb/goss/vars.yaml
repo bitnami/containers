@@ -1,25 +1,8 @@
 binaries:
-  {{ if regexMatch "^2.+" .Env.APP_VERSION }}
-  - influx
-  - influxd
-  {{ else }}
-  - influxdb3
-  {{ end }}
   - wait-for-port
 directories:
   - mode: "0775"
     paths:
-      {{ if regexMatch "^2.+" .Env.APP_VERSION }}
-      - /opt/bitnami/influxdb/etc
-      {{ end }}
       - /bitnami/influxdb
       - /docker-entrypoint-initdb.d
-files:
-  {{ if regexMatch "^2.+" .Env.APP_VERSION }}
-  - paths:
-      - /.influx_history
-  {{ end }}
 root_dir: /opt/bitnami
-version:
-  bin_name: {{ if regexMatch "^2.+" .Env.APP_VERSION }}influxd{{ else }}influxdb3{{ end }}
-  flag: {{ if regexMatch "^2.+" .Env.APP_VERSION }}version{{ else }}--version{{ end }}
