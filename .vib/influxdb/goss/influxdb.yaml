@@ -16,7 +16,7 @@ command:
 file:
   /.influx_history:
     exists: true
-    mode: "0644"
+    mode: "0664"
     filetype: file
   /opt/bitnami/influxdb/etc:
     exists: true
