@@ -8,6 +8,7 @@
 
 # Load Generic Libraries
 . /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libservice.sh
 . /opt/bitnami/scripts/libvalidations.sh
@@ -445,8 +446,6 @@ influxdb3_create_admin_token() {
     info "Creating admin token..."
     "${create_command[@]}" | jq -r ".token" > "$token_file"
     chmod 600 "$token_file"
-    INFLUXDB_ADMIN_TOKEN="$(<"$token_file")"
-    export INFLUXDB_ADMIN_TOKEN
     warn "Auto-generated admin token saved in ${token_file} for later use. Please, ensure you use it to regenerate it and remove the file afterwards."
 }
 
@@ -461,10 +460,20 @@ influxdb3_create_admin_token() {
 #   None
 #########################
 influxdb3_create_databases() {
+    local admin_token
     local -r binary_fullpath="$(influxdb_binary)"
 
+    if [[ -n "${INFLUXDB_ADMIN_TOKEN:-}" ]]; then
+        admin_token="$INFLUXDB_ADMIN_TOKEN"
+    elif [[ -f "${INFLUXDB_VOLUME_DIR}/.token" ]]; then
+        admin_token="$(<"${INFLUXDB_VOLUME_DIR}/.token")"
+    else
+        error "No admin token found"
+        return 1
+    fi
+
     read -r -a dbs <<< "$(tr ',;' ' ' <<< "$INFLUXDB_DATABASES")"
-    read -r -a existingDbs <<< "$($binary_fullpath show databases --host "http://127.0.0.1:${INFLUXDB_HTTP_PORT_NUMBER}" --token "$INFLUXDB_ADMIN_TOKEN" --format json | jq -r '.[]."iox::database"' | tr -s '\n' ' ')"
+    read -r -a existingDbs <<< "$($binary_fullpath show databases --host "http://127.0.0.1:${INFLUXDB_HTTP_PORT_NUMBER}" --token "$admin_token" --format json | jq -r '.[]."iox::database"' | tr -s '\n' ' ')"
     info "Creating databases: ${dbs[*]}..."
     for db in "${dbs[@]}"; do
         if [[ "${existingDbs[*]}" =~ $db ]]; then
@@ -472,7 +481,7 @@ influxdb3_create_databases() {
             continue
         fi
         debug "Creating database \"${db}\"..."
-        "$binary_fullpath" create database "$db" --host "http://127.0.0.1:${INFLUXDB_HTTP_PORT_NUMBER}" --token "$INFLUXDB_ADMIN_TOKEN" || true
+        "$binary_fullpath" create database "$db" --host "http://127.0.0.1:${INFLUXDB_HTTP_PORT_NUMBER}" --token "$admin_token" || true
     done
 }
 
@@ -487,20 +496,19 @@ influxdb3_create_databases() {
 #########################
 influxdb_initialize() {
     if is_influxdb_3; then
-        local init_required="no"
+        local create_admin="no"
         if is_boolean_yes "$INFLUXDB_CREATE_ADMIN_TOKEN" && [[ "$INFLUXDB_OBJECT_STORE" = "file" ]] && ! is_dir_empty "$INFLUXDB_DATA_DIR"; then
             warn "InfluxDB data directory is not empty, admin token creation will be skipped"
+        elif is_boolean_yes "$INFLUXDB_CREATE_ADMIN_TOKEN" && [[ -f "${INFLUXDB_VOLUME_DIR}/.token" ]]; then
+            warn "Admin token file found, admin token creation will be skipped"
         elif is_boolean_yes "$INFLUXDB_CREATE_ADMIN_TOKEN"; then
-            init_required="yes"
+            create_admin="yes"
         fi
         # We create the databases regardless there's existing data or not
-        [[ -n "${INFLUXDB_DATABASES:-}" ]] && init_required="yes"
-        # We can't initialize if the object store is memory-based
-        [[ "$INFLUXDB_OBJECT_STORE" =~ memory ]] && init_required="no"
-        if is_boolean_yes "$init_required"; then
+        if (is_boolean_yes "$create_admin" || [[ -n "${INFLUXDB_DATABASES:-}" ]]) && [[ ! "$INFLUXDB_OBJECT_STORE" =~ memory ]]; then
             info "Initializing..."
             influxdb_start_bg
-            is_boolean_yes "$INFLUXDB_CREATE_ADMIN_TOKEN" && is_dir_empty "$INFLUXDB_DATA_DIR" && influxdb3_create_admin_token
+            is_boolean_yes "$create_admin" && influxdb3_create_admin_token
             [[ -n "${INFLUXDB_DATABASES:-}" ]] && influxdb3_create_databases
         else
             info "Skipping initialization..."
