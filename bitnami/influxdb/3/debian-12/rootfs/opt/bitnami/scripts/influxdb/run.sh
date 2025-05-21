@@ -21,6 +21,7 @@ info "** Starting InfluxDB **"
 start_command=("$(influxdb_binary)")
 if is_influxdb_3; then
     start_command+=("serve" "--node-id" "$INFLUXDB_NODE_ID" "--object-store" "$INFLUXDB_OBJECT_STORE")
+    ! is_boolean_yes "$INFLUXDB_HTTP_AUTH_ENABLED" && start_command+=("--without-auth")
 else
     export HOME="/bitnami/influxdb"
 fi
