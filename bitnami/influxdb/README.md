@@ -173,9 +173,11 @@ InfluxDB&trade; Core can be configured via environment variables or using CLI fl
 | `INFLUXDB_DATA_WAL_DIR`                 | InfluxDB directory where the WAL file is stored.                                       | `${INFLUXDB_VOLUME_DIR}/wal`               |
 | `INFLUXDB_META_DIR`                     | InfluxDB directory where metadata is stored.                                           | `${INFLUXDB_VOLUME_DIR}/meta`              |
 | `INFLUXDB_CONF_FILE_FORMAT`             | InfluxDB configuration file format, supported formats: yaml, yml, toml, json           | `yaml`                                     |
+| `INFLUXDB_AUTOGEN_ADMIN_TOKEN_FILE`     | File where to store auto-generated admin token.                                        | `${INFLUXDB_VOLUME_DIR}/.token`            |
 | `INFLUXD_CONFIG_PATH`                   | InfluxDB 2.x alias for configuration file path.                                        | `${INFLUXDB_CONF_DIR}`                     |
 | `INFLUXDB_HTTP_PORT_NUMBER`             | Port number used by InfluxDB HTTP server.                                              | `8181`                                     |
 | `INFLUXDB_HTTP_BIND_ADDRESS`            | InfluxDB HTTP bind address.                                                            | `0.0.0.0:${INFLUXDB_HTTP_PORT_NUMBER}`     |
+| `INFLUXDB_HTTP_AUTH_ENABLED`            | Whether to enable InfluxDB HTTP auth.                                                  | `true`                                     |
 | `INFLUXDB_REPORTING_DISABLED`           | Whether to disable InfluxDB reporting.                                                 | `true`                                     |
 | `INFLUXDB_PORT_NUMBER`                  | Port number used by InfluxDB.                                                          | `8088`                                     |
 | `INFLUXDB_BIND_ADDRESS`                 | InfluxDB bind address.                                                                 | `0.0.0.0:${INFLUXDB_PORT_NUMBER}`          |
@@ -188,7 +190,6 @@ InfluxDB&trade; Core can be configured via environment variables or using CLI fl
 | `INFLUXDB_INIT_V1_CONFIG`               | Path to InfluxDB 1.x config file                                                       | `${BITNAMI_VOLUME_DIR}/v1/config.yaml`     |
 | `INFLUXDB_UPGRADE_LOG_FILE`             | InfluxDB 1.x to 2.x log file (do not place it into ${INFLUXDB_VOLUME_DIR})             | `${INFLUXDB_INIT_V1_DIR}/upgrade.log`      |
 | `INFLUXDB_CONTINUOUS_QUERY_EXPORT_FILE` | InfluxDB continuous query file created during 1.x data to 2.x format migration process | `${INFLUXDB_INIT_V1_DIR}/v1-cq-export.txt` |
-| `INFLUXDB_HTTP_AUTH_ENABLED`            | Whether to enable InfluxDB HTTP auth.                                                  | `true`                                     |
 | `INFLUXDB_ADMIN_USER`                   | InfluxDB admin username.                                                               | `admin`                                    |
 | `INFLUXDB_ADMIN_USER_PASSWORD`          | InfluxDB admin user password.                                                          | `nil`                                      |
 | `INFLUXDB_ADMIN_USER_TOKEN`             | InfluxDB admin user token.                                                             | `nil`                                      |

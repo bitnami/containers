@@ -126,17 +126,17 @@ influxdb_validate() {
             print_validation_error "Object store is required. Please, specify it by setting the 'INFLUXDB_OBJECT_STORE' environment variable."
         fi
         # InfluxDB 3.x authentication validations
-        if is_boolean_yes "$INFLUXDB_CREATE_ADMIN_TOKEN"; then
+        if is_boolean_yes "$INFLUXDB_HTTP_AUTH_ENABLED" && is_boolean_yes "$INFLUXDB_CREATE_ADMIN_TOKEN"; then
             if [[ -n "${INFLUXDB_ADMIN_TOKEN:-}" ]]; then
                print_validation_error "The 'INFLUXDB_ADMIN_TOKEN' environment variable is not needed when 'INFLUXDB_CREATE_ADMIN_TOKEN' is set to 'yes'."
             elif [[ "$INFLUXDB_OBJECT_STORE" =~ memory ]]; then
                 print_validation_error "No admin token can be created during initialization when using memory object store. Please, ensure 'INFLUXDB_CREATE_ADMIN_TOKEN' is set to 'no'."
             fi
-        elif [[ "$INFLUXDB_OBJECT_STORE" =~ memory ]] && [[ -n "${INFLUXDB_DATABASES:-}" ]]; then
+        elif is_boolean_yes "$INFLUXDB_HTTP_AUTH_ENABLED" && [[ "$INFLUXDB_OBJECT_STORE" =~ memory ]] && [[ -n "${INFLUXDB_DATABASES:-}" ]]; then
             print_validation_error "No databases can be created during initialization when using memory object store. Please, ensure 'INFLUXDB_DATABASES' is not set."
-        elif [[ -z "${INFLUXDB_ADMIN_TOKEN:-}" ]] && [[ -n "${INFLUXDB_DATABASES:-}" ]]; then
+        elif is_boolean_yes "$INFLUXDB_HTTP_AUTH_ENABLED" && [[ -z "${INFLUXDB_ADMIN_TOKEN:-}" ]] && [[ -n "${INFLUXDB_DATABASES:-}" ]]; then
             print_validation_error "No admin token to be created during initialization nor provided, hence, no databases can be created. Please, specify the token by setting the 'INFLUXDB_ADMIN_TOKEN' or 'INFLUXDB_ADMIN_TOKEN_FILE' environment variables."
-        else
+        elif is_boolean_yes "$INFLUXDB_HTTP_AUTH_ENABLED" && [[ -z "${INFLUXDB_ADMIN_TOKEN:-}" ]]; then
             warn "No admin token to be created during initialization, manually creating it will be required to interact with the InfluxDB API."
         fi
     else
@@ -359,6 +359,7 @@ influxdb_start_bg() {
 
     if is_influxdb_3; then
         start_command+=("serve" "--node-id" "$INFLUXDB_NODE_ID" "--object-store" "$INFLUXDB_OBJECT_STORE" "--http-bind" "127.0.0.1:${INFLUXDB_HTTP_PORT_NUMBER}")
+        ! is_boolean_yes "$INFLUXDB_HTTP_AUTH_ENABLED" && start_command+=("--without-auth")
         debug_execute "${start_command[@]}" &
         wait-for-port "$INFLUXDB_HTTP_PORT_NUMBER"
     else
@@ -442,11 +443,10 @@ influxdb_stop() {
 influxdb3_create_admin_token() {
     local create_command=("$(influxdb_binary)" "create" "token" "--admin" "--host" "http://127.0.0.1:${INFLUXDB_HTTP_PORT_NUMBER}" "--format" "json")
 
-    local token_file="${INFLUXDB_VOLUME_DIR}/.token"
     info "Creating admin token..."
-    "${create_command[@]}" | jq -r ".token" > "$token_file"
-    chmod 600 "$token_file"
-    warn "Auto-generated admin token saved in ${token_file} for later use. Please, ensure you use it to regenerate it and remove the file afterwards."
+    "${create_command[@]}" | jq -r ".token" > "$INFLUXDB_AUTOGEN_ADMIN_TOKEN_FILE"
+    chmod 600 "$INFLUXDB_AUTOGEN_ADMIN_TOKEN_FILE"
+    warn "Auto-generated admin token saved in ${INFLUXDB_AUTOGEN_ADMIN_TOKEN_FILE} for later use. Please, ensure you use it to regenerate it and remove the file afterwards."
 }
 
 ########################
@@ -465,8 +465,8 @@ influxdb3_create_databases() {
 
     if [[ -n "${INFLUXDB_ADMIN_TOKEN:-}" ]]; then
         admin_token="$INFLUXDB_ADMIN_TOKEN"
-    elif [[ -f "${INFLUXDB_VOLUME_DIR}/.token" ]]; then
-        admin_token="$(<"${INFLUXDB_VOLUME_DIR}/.token")"
+    elif [[ -f "$INFLUXDB_AUTOGEN_ADMIN_TOKEN_FILE}" ]]; then
+        admin_token="$(<"${INFLUXDB_AUTOGEN_ADMIN_TOKEN_FILE}")"
     else
         error "No admin token found"
         return 1
@@ -497,11 +497,11 @@ influxdb3_create_databases() {
 influxdb_initialize() {
     if is_influxdb_3; then
         local create_admin="no"
-        if is_boolean_yes "$INFLUXDB_CREATE_ADMIN_TOKEN" && [[ "$INFLUXDB_OBJECT_STORE" = "file" ]] && ! is_dir_empty "$INFLUXDB_DATA_DIR"; then
+        if is_boolean_yes "$INFLUXDB_HTTP_AUTH_ENABLED" && is_boolean_yes "$INFLUXDB_CREATE_ADMIN_TOKEN" && [[ "$INFLUXDB_OBJECT_STORE" = "file" ]] && ! is_dir_empty "$INFLUXDB_DATA_DIR"; then
             warn "InfluxDB data directory is not empty, admin token creation will be skipped"
-        elif is_boolean_yes "$INFLUXDB_CREATE_ADMIN_TOKEN" && [[ -f "${INFLUXDB_VOLUME_DIR}/.token" ]]; then
+        elif is_boolean_yes "$INFLUXDB_HTTP_AUTH_ENABLED" && is_boolean_yes "$INFLUXDB_CREATE_ADMIN_TOKEN" && [[ -f "$INFLUXDB_AUTOGEN_ADMIN_TOKEN_FILE" ]]; then
             warn "Admin token file found, admin token creation will be skipped"
-        elif is_boolean_yes "$INFLUXDB_CREATE_ADMIN_TOKEN"; then
+        elif is_boolean_yes "$INFLUXDB_HTTP_AUTH_ENABLED" && is_boolean_yes "$INFLUXDB_CREATE_ADMIN_TOKEN"; then
             create_admin="yes"
         fi
         # We create the databases regardless there's existing data or not
