@@ -26,6 +26,7 @@
 #   true/false
 #########################
 is_influxdb_3() {
+    [[ -z "${APP_VERSION:-}" ]] && return 0
     local -r major_version="$(get_sematic_version "$APP_VERSION" 1)"
     if [[ "$major_version" -eq 3 ]]; then
         return 0
@@ -114,11 +115,10 @@ influxdb_validate() {
     }
 
     # Boolean validations
-    for var in "INFLUXDB_CREATE_USER_TOKEN" "INFLUXDB_CREATE_ADMIN_TOKEN" "INFLUXDB_REPORTING_DISABLED" "INFLUXDB_HTTP_AUTH_ENABLED"; do
-        check_yes_no_value "$var"
-    done
+    check_yes_no_value "INFLUXDB_HTTP_AUTH_ENABLED"
 
     if is_influxdb_3; then
+        check_yes_no_value "INFLUXDB_CREATE_ADMIN_TOKEN"
         if [[ -z "$INFLUXDB_NODE_ID" ]]; then
             print_validation_error "Node ID is required. Please, specify it by setting the 'INFLUXDB_NODE_ID' environment variable."
         fi
@@ -141,6 +141,7 @@ influxdb_validate() {
         fi
     else
         # InfluxDB 2.x authentication validations
+        check_yes_no_value "INFLUXDB_CREATE_USER_TOKEN" "INFLUXDB_REPORTING_DISABLED"
         if [[ -z "${INFLUXDB_ADMIN_USER_PASSWORD:-}" ]]; then
             print_validation_error "Admin authentication is required. Please, specify a password for the ${INFLUXDB_ADMIN_USER} user by setting the 'INFLUXDB_ADMIN_USER_PASSWORD' or 'INFLUXDB_ADMIN_USER_PASSWORD_FILE' environment variables."
         fi
