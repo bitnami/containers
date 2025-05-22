@@ -1,0 +1,9 @@
+binaries:
+  - alloy
+root_dir: /opt/bitnami
+directories:
+  - paths:
+      - /opt/bitnami/grafana-alloy
+version:
+  bin_name: alloy
+  flag: version
