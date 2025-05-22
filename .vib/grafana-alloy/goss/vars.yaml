@@ -6,4 +6,4 @@ directories:
       - /opt/bitnami/grafana-alloy
 version:
   bin_name: alloy
-  flag: version
+  flag: --version
