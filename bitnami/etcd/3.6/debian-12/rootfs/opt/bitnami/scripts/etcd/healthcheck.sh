@@ -23,7 +23,7 @@ read -r -a extra_flags <<< "$(etcdctl_auth_flags)"
 extra_flags+=("--endpoints=${host}:${port}")
 
 # if ETCD_AUTO_TLS true or CA file not exists, just skip server cert verification
-if [[ $ETCD_AUTO_TLS = true ]] || [[ ! -f "$ETCD_TRUSTED_CA_FILE" ]]; then
+if [[ $ETCD_AUTO_TLS = true ]] || ( [ -n "$ETCD_CERT_FILE" ] && [[ ! -f "$ETCD_TRUSTED_CA_FILE" ]] ); then
      extra_flags+=("--insecure-skip-tls-verify")
 fi
 
