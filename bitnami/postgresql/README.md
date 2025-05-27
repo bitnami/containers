@@ -4,7 +4,7 @@
 
 > PostgreSQL (Postgres) is an open source object-relational database known for reliability and data integrity. ACID-compliant, it supports foreign keys, joins, views, triggers and stored procedures.
 
-[Overview of PostgreSQL](http://www.postgresql.org)
+[Overview of PostgreSQL](https://www.postgresql.org)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
@@ -411,7 +411,7 @@ It is possible to modify the list of libraries that PostgreSQL will preload at b
 
 ### Setting up a streaming replication
 
-A [Streaming replication](http://www.postgresql.org/docs/9.4/static/warm-standby.html#STREAMING-REPLICATION) cluster can easily be setup with the Bitnami PostgreSQL Docker Image using the following environment variables:
+A [Streaming replication](https://www.postgresql.org/docs/9.4/static/warm-standby.html#STREAMING-REPLICATION) cluster can easily be setup with the Bitnami PostgreSQL Docker Image using the following environment variables:
 
 * `POSTGRESQL_REPLICATION_MODE`: Replication mode. Possible values `master`/`slave`. No defaults.
 * `POSTGRESQL_REPLICATION_USER`: The replication user created on the master on first run. No defaults.
@@ -719,7 +719,7 @@ or using Docker Compose:
 docker-compose restart postgresql
 ```
 
-Refer to the [server configuration](http://www.postgresql.org/docs/9.4/static/runtime-config.html) manual for the complete list of configuration options.
+Refer to the [server configuration](https://www.postgresql.org/docs/9.4/static/runtime-config.html) manual for the complete list of configuration options.
 
 #### Allow settings to be loaded from files other than the default `postgresql.conf`
 
