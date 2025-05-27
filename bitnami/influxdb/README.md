@@ -210,6 +210,10 @@ InfluxDB&trade; Core can be configured via environment variables or using CLI fl
 | `INFLUXDB_CREATE_ADMIN_TOKEN`           | Whether to create admin token during initialization.                                   | `no`                                       |
 | `INFLUXDB_ADMIN_TOKEN`                  | InfluxDB admin token.                                                                  | `nil`                                      |
 | `INFLUXDB_DATABASES`                    | Comma or semicolon separated list of databases to be created during initialization.    | `nil`                                      |
+| `AWS_ACCESS_KEY_ID`                     | AWS S3 access key id.                                                                  | `nil`                                      |
+| `AWS_SECRET_ACCESS_KEY`                 | AWS S3 secret access key.                                                              | `nil`                                      |
+| `GOOGLE_SERVICE_ACCOUNT`                | Google Cloud service account key.                                                      | `nil`                                      |
+| `AZURE_STORAGE_ACCESS_KEY`              | Microsoft Azure access key.                                                            | `nil`                                      |
 
 #### Read-only environment variables
 
@@ -222,6 +226,7 @@ InfluxDB&trade; Core can be configured via environment variables or using CLI fl
 | `INFLUXDB_DEFAULT_CONF_DIR` | InfluxDB default configuration directory.                    | `${INFLUXDB_BASE_DIR}/etc.default`                         |
 | `INFLUXDB_CONF_FILE`        | InfluxDB configuration file.                                 | `${INFLUXDB_CONF_DIR}/config.${INFLUXDB_CONF_FILE_FORMAT}` |
 | `INFLUXDB_INITSCRIPTS_DIR`  | Directory where to look for InfluxDB init scripts.           | `/docker-entrypoint-initdb.d`                              |
+| `LD_LIBRARY_PATH`           | Add search path for the linker.                              | `${BITNAMI_ROOT_DIR}/python/lib`                           |
 | `INFLUXD_ENGINE_PATH`       | InfluxDB 2.x alias for engine path.                          | `${INFLUXDB_VOLUME_DIR}`                                   |
 | `INFLUXD_BOLT_PATH`         | InfluxDB 2.x alias for bolt path.                            | `${INFLUXDB_VOLUME_DIR}/influxd.bolt`                      |
 | `INFLUX_CONFIGS_PATH`       | InfluxDB 2.x alias for paths to extra configuration folders. | `${INFLUXDB_VOLUME_DIR}/configs`                           |
