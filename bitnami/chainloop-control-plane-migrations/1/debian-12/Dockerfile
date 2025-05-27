@@ -16,7 +16,7 @@ RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "atlas-0.33.1-0-linux-${OS_ARCH}-debian-12" \
-      "chainloop-control-plane-migrations-1.4.4-0-linux-${OS_ARCH}-debian-12" \
+      "chainloop-control-plane-migrations-1.4.5-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -39,12 +39,12 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-05-27T09:55:33Z" \
+      org.opencontainers.image.created="2025-05-27T10:31:39Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.ref.name="1.4.4-debian-12-r0" \
+      org.opencontainers.image.ref.name="1.4.5-debian-12-r0" \
       org.opencontainers.image.title="chainloop-control-plane-migrations" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.4.4"
+      org.opencontainers.image.version="1.4.5"
 
 COPY rootfs /
 COPY --from=builder /opt/bitnami/chainloop/migrations /migrations
@@ -54,7 +54,7 @@ COPY --from=builder /opt/bitnami/atlas/licenses /opt/bitnami/atlas/licenses
 COPY --from=builder /opt/bitnami/chainloop/.spdx-chainloop-control-plane-migrations.spdx /opt/bitnami/chainloop/.spdx-chainloop-control-plane-migrations.spdx
 COPY --from=builder /opt/bitnami/chainloop/licenses /opt/bitnami/chainloop/licenses
 
-ENV APP_VERSION="1.4.4" \
+ENV APP_VERSION="1.4.5" \
     BITNAMI_APP_NAME="chainloop-control-plane-migrations" \
     PATH="/opt/bitnami/atlas/bin:$PATH"
 
