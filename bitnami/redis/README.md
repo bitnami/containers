@@ -4,7 +4,7 @@
 
 > Redis&reg; is an open source, advanced key-value store. It is often referred to as a data structure server since keys can contain strings, hashes, lists, sets and sorted sets.
 
-[Overview of Redis&reg;](http://redis.io)
+[Overview of Redis&reg;](https://redis.io)
 Disclaimer: Redis is a registered trademark of Redis Ltd. Any rights therein are reserved to Redis Ltd. Any use by Bitnami is for referential purposes only and does not indicate any sponsorship, endorsement, or affiliation between Redis Ltd.
 
 ## TL;DR
@@ -400,7 +400,7 @@ services:
 
 ### Setting up replication
 
-A [replication](http://redis.io/topics/replication) cluster can easily be setup with the Bitnami Redis(R) Docker Image using the following environment variables:
+A [replication](https://redis.io/topics/replication) cluster can easily be setup with the Bitnami Redis(R) Docker Image using the following environment variables:
 
 * `REDIS_REPLICATION_MODE`: The replication mode. Possible values `master`/`slave`. No defaults.
 * `REDIS_REPLICA_IP`: The replication announce ip. Defaults to `$(get_machine_ip)` which return the ip of the container.
@@ -565,7 +565,7 @@ services:
   ...
 ```
 
-Refer to the [Redis(R) configuration](http://redis.io/topics/config) manual for the complete list of configuration options.
+Refer to the [Redis(R) configuration](https://redis.io/topics/config) manual for the complete list of configuration options.
 
 ### Overriding configuration
 
