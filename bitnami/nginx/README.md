@@ -4,7 +4,7 @@
 
 > NGINX Open Source is a web server that can be also used as a reverse proxy, load balancer, and HTTP cache. Recommended for high-demanding sites due to its ability to provide faster content.
 
-[Overview of NGINX Open Source](http://nginx.org)
+[Overview of NGINX Open Source](https://nginx.org)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
@@ -525,8 +525,8 @@ RUN install_packages dirmngr gpg gpg-agent curl build-essential libpcre3-dev zli
 RUN gpg --keyserver pgp.mit.edu --recv-key 520A9993A1C052F8
 ## Download NGINX, verify integrity and extract
 RUN cd /tmp && \
-    curl -O http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz && \
-    curl -O http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz.asc && \
+    curl -O https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz && \
+    curl -O https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz.asc && \
     gpg --verify nginx-${NGINX_VERSION}.tar.gz.asc nginx-${NGINX_VERSION}.tar.gz && \
     tar xzf nginx-${NGINX_VERSION}.tar.gz
 ## Compile NGINX with desired module
