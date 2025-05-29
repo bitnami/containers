@@ -16,7 +16,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "kaniko-1.24.0-0-linux-${OS_ARCH}-debian-12" \
+      "kaniko-1.24.0-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -42,9 +42,9 @@ ENV HOME="/root" \
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-05-23T16:41:12Z" \
+      org.opencontainers.image.created="2025-05-29T07:45:43Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.ref.name="1.24.0-debian-12-r0" \
+      org.opencontainers.image.ref.name="1.24.0-debian-12-r1" \
       org.opencontainers.image.title="kaniko" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
       org.opencontainers.image.version="1.24.0"
