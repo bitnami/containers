@@ -8,10 +8,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-05-17T20:27:13Z" \
+      org.opencontainers.image.created="2025-05-30T15:31:00Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/notation/README.md" \
-      org.opencontainers.image.ref.name="1.3.2-debian-12-r3" \
+      org.opencontainers.image.ref.name="1.3.2-debian-12-r4" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/notation" \
       org.opencontainers.image.title="notation" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
