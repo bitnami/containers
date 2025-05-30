@@ -8,10 +8,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-05-17T19:23:44Z" \
+      org.opencontainers.image.created="2025-05-30T14:19:52Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/cassandra-exporter/README.md" \
-      org.opencontainers.image.ref.name="2.3.8-debian-12-r47" \
+      org.opencontainers.image.ref.name="2.3.8-debian-12-r48" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cassandra-exporter" \
       org.opencontainers.image.title="cassandra-exporter" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
