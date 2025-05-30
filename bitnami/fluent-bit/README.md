@@ -4,7 +4,7 @@
 
 > Fluent Bit is a Fast and Lightweight Log Processor and Forwarder. It has been made with a strong focus on performance to allow the collection of events from different sources without complexity.
 
-[Overview of Fluent Bit](http://fluentbit.io/)
+[Overview of Fluent Bit](https://fluentbit.io/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
@@ -127,13 +127,13 @@ docker-compose up -d
 
 Fluent Bit is flexible enough to be configured either from the command line or through a configuration file. For production environments, Fluent Bit strongly recommends to use the configuration file approach.
 
-[Configuration reference](http://fluentbit.io/documentation/)
+[Configuration reference](https://fluentbit.io/documentation/)
 
 ## Plugins
 
 Fluent Bit supports multiple extensions via plugins.
 
-[Plugins reference](http://fluentbit.io/documentation/)
+[Plugins reference](https://fluentbit.io/documentation/)
 
 ## Logging
 
