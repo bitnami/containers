@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.12.10-12"
+        "version": "3.12.10-15"
     },
     "pytorch": {
         "arch": "amd64",
