@@ -9,10 +9,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-05-17T19:11:41Z" \
+      org.opencontainers.image.created="2025-05-30T14:53:47Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/java/README.md" \
-      org.opencontainers.image.ref.name="24.0.1-11-debian-12-r3" \
+      org.opencontainers.image.ref.name="24.0.1-11-debian-12-r4" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/java" \
       org.opencontainers.image.title="java" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -41,17 +41,19 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     done
 RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
-RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
-    DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
-RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
+    DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales && \
+    echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/^PASS_MIN_DAYS.*/PASS_MIN_DAYS    0/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
 COPY rootfs /
-RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
+RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
+    DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales && \
+    echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen
+RUN /opt/bitnami/scripts/locales/generate-locales.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="24.0.1-11" \
     BITNAMI_APP_NAME="java" \
