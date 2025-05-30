@@ -4,7 +4,7 @@
 
 > WordPress with NGINX combines the most popular blogging application with the power of the NGINX web server.
 
-[Overview of WordPress with NGINX](http://www.wordpress.org)
+[Overview of WordPress with NGINX](https://wordpress.org)
 
 ## TL;DR
 
