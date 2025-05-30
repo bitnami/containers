@@ -10,10 +10,10 @@ ARG WITH_ALL_LOCALES="no"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-05-17T20:15:58Z" \
+      org.opencontainers.image.created="2025-05-30T15:23:39Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/moodle/README.md" \
-      org.opencontainers.image.ref.name="5.0.0-debian-12-r3" \
+      org.opencontainers.image.ref.name="5.0.0-debian-12-r4" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/moodle" \
       org.opencontainers.image.title="moodle" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -31,10 +31,10 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "render-template-1.0.7-16-linux-${OS_ARCH}-debian-12" \
       "php-8.2.28-8-linux-${OS_ARCH}-debian-12" \
-      "apache-2.4.63-2-linux-${OS_ARCH}-debian-12" \
+      "apache-2.4.63-4-linux-${OS_ARCH}-debian-12" \
       "postgresql-client-13.21.0-0-linux-${OS_ARCH}-debian-12" \
-      "mysql-client-11.4.6-0-linux-${OS_ARCH}-debian-12" \
-      "libphp-8.2.28-0-linux-${OS_ARCH}-debian-12" \
+      "mysql-client-11.4.7-0-linux-${OS_ARCH}-debian-12" \
+      "libphp-8.2.28-2-linux-${OS_ARCH}-debian-12" \
       "moodle-5.0.0-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -48,16 +48,19 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     done
 RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
-RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN sed -i -e '/pam_loginuid.so/ s/^#*/#/' /etc/pam.d/cron
 RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
-    DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
-RUN echo 'en_AU.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
-RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
+    DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales && \
+    echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen
+RUN echo 'en_AU.UTF-8 UTF-8' >> /etc/locale.gen
 
 COPY rootfs /
-RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
+RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
+    DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales && \
+    echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen
+RUN echo 'en_AU.UTF-8 UTF-8' >> /etc/locale.gen
+RUN /opt/bitnami/scripts/locales/generate-locales.sh
 RUN /opt/bitnami/scripts/apache/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
