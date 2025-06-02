@@ -15,7 +15,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "rmq-messaging-topology-operator-1.17.0-1-linux-${OS_ARCH}-debian-12" \
+      "rmq-messaging-topology-operator-1.17.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -38,19 +38,19 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-05-07T09:13:59Z" \
+      org.opencontainers.image.created="2025-06-02T15:30:04Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.ref.name="1.17.0-debian-12-r1" \
+      org.opencontainers.image.ref.name="1.17.1-debian-12-r0" \
       org.opencontainers.image.title="rmq-messaging-topology-operator" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.17.0"
+      org.opencontainers.image.version="1.17.1"
 
 COPY rootfs /
 COPY --from=builder /opt/bitnami/rmq-messaging-topology-operator/.spdx-rmq-messaging-topology-operator.spdx /opt/bitnami/rmq-messaging-topology-operator/.spdx-rmq-messaging-topology-operator.spdx
 COPY --from=builder /opt/bitnami/rmq-messaging-topology-operator/bin/manager /opt/bitnami/rmq-messaging-topology-operator/bin/manager
 COPY --from=builder /opt/bitnami/rmq-messaging-topology-operator/licenses /opt/bitnami/rmq-messaging-topology-operator/licenses
 
-ENV APP_VERSION="1.17.0" \
+ENV APP_VERSION="1.17.1" \
     BITNAMI_APP_NAME="rmq-messaging-topology-operator" \
     PATH="/opt/bitnami/rmq-messaging-topology-operator/bin:$PATH"
 
