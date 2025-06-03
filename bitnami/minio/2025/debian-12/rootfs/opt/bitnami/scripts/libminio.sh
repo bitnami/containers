@@ -140,9 +140,12 @@ wait_for_minio() {
 #########################
 minio_start_bg() {
     local -r exec=$(command -v minio)
-    local -a args=("server" "--certs-dir" "${MINIO_CERTS_DIR}" "--console-address" ":${MINIO_CONSOLE_PORT_NUMBER}" "--address" ":${MINIO_API_PORT_NUMBER}")
+    local -a args=("server" "--certs-dir" "${MINIO_CERTS_DIR}" "--address" ":${MINIO_API_PORT_NUMBER}")
     local -a nodes
+    local browser
 
+    browser="$(echo "$MINIO_BROWSER" | tr '[:upper:]' '[:lower:]')"
+    [[ "$browser" = "on" ]] && args+=("--console-address" ":${MINIO_CONSOLE_PORT_NUMBER}")
     if is_boolean_yes "$MINIO_DISTRIBUTED_MODE_ENABLED"; then
         read -r -a nodes <<<"$(tr ',;' ' ' <<<"${MINIO_DISTRIBUTED_NODES}")"
         for node in "${nodes[@]}"; do
@@ -282,13 +285,6 @@ minio_validate() {
         if [[ -n "${MINIO_DISTRIBUTED_NODES:-}" ]]; then
             warn "Distributed mode is not enabled. The nodes set at the environment variable MINIO_DISTRIBUTED_NODES will be ignored."
         fi
-    fi
-    if [[ -n "${MINIO_BROWSER:-}" ]]; then
-        shopt -s nocasematch
-        if [[ "$MINIO_BROWSER" = "off" ]]; then
-            warn "Access to MinIO web UI is disabled!! More information at: https://github.com/minio/minio/tree/master/docs/config/#browser"
-        fi
-        shopt -u nocasematch
     fi
     if [[ -n "${MINIO_HTTP_TRACE:-}" ]]; then
         if [[ -w "$MINIO_HTTP_TRACE" ]]; then

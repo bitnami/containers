@@ -215,7 +215,8 @@ docker-compose up -d
 |------------------------------------------|----------------------------------------------------------------------------|----------------------------------------------------|
 | `MINIO_DATA_DIR`                         | MinIO directory for data.                                                  | `/bitnami/minio/data`                              |
 | `MINIO_API_PORT_NUMBER`                  | MinIO API port number.                                                     | `9000`                                             |
-| `MINIO_CONSOLE_PORT_NUMBER`              | MinIO RMI port number.                                                     | `9001`                                             |
+| `MINIO_BROWSER`                          | Enable / disable the embedded MinIO Console.                               | `off`                                              |
+| `MINIO_CONSOLE_PORT_NUMBER`              | MinIO Console port number.                                                 | `9001`                                             |
 | `MINIO_SCHEME`                           | MinIO web scheme.                                                          | `http`                                             |
 | `MINIO_SKIP_CLIENT`                      | Skip MinIO client configuration.                                           | `no`                                               |
 | `MINIO_DISTRIBUTED_MODE_ENABLED`         | Enable MinIO distributed mode.                                             | `no`                                               |
