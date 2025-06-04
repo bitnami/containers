@@ -1,0 +1,8 @@
+command:
+  check-plugin-barman-cloud-help:
+    exec:
+    - manager
+    - --help
+    exit-status: 0
+    stdout:
+    - BarmanObjectStore
