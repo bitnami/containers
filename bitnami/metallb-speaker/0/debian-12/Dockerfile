@@ -8,14 +8,14 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-06-03T13:34:57Z" \
+      org.opencontainers.image.created="2025-06-04T16:59:41Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/metallb-speaker/README.md" \
-      org.opencontainers.image.ref.name="0.15.0-debian-12-r0" \
+      org.opencontainers.image.ref.name="0.15.2-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/metallb-speaker" \
       org.opencontainers.image.title="metallb-speaker" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="0.15.0"
+      org.opencontainers.image.version="0.15.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,7 +28,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps tcpdump
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "metallb-speaker-0.15.0-0-linux-${OS_ARCH}-debian-12" \
+      "metallb-speaker-0.15.2-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -57,7 +57,7 @@ RUN curl -sLO "https://deb.frrouting.org/frr/pool/frr-9.1/f/frr/frr_9.1.3-0~deb1
     install_packages "./frr_9.1.3-0~deb12u1_${OS_ARCH}.deb" "./frr-pythontools_9.1.3-0~deb12u1_all.deb" "./libyang2_2.1.128-2~deb12u1_${OS_ARCH}.deb" && \
     rm frr_9.1.3-0~deb12u1_${OS_ARCH}.deb frr-pythontools_9.1.3-0~deb12u1_all.deb libyang2_2.1.128-2~deb12u1_${OS_ARCH}.deb
 
-ENV APP_VERSION="0.15.0" \
+ENV APP_VERSION="0.15.2" \
     BITNAMI_APP_NAME="metallb-speaker" \
     PATH="/opt/bitnami/metallb-speaker/bin:$PATH"
 
