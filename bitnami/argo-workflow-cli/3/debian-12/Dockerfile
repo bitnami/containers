@@ -15,7 +15,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "argo-workflows-3.6.9-0-linux-${OS_ARCH}-debian-12" \
+      "argo-workflows-3.6.10-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -26,6 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner ; \
       rm -rf "${COMPONENT}".tar.gz{,.sha256} ; \
     done
+RUN uninstall_packages curl
 
 ######
 
@@ -38,12 +39,12 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-06-03T15:42:33Z" \
+      org.opencontainers.image.created="2025-06-04T17:39:20Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.ref.name="3.6.9-debian-12-r0" \
+      org.opencontainers.image.ref.name="3.6.10-debian-12-r0" \
       org.opencontainers.image.title="argo-workflow-cli" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="3.6.9"
+      org.opencontainers.image.version="3.6.10"
 
 COPY rootfs /
 COPY --from=builder /opt/bitnami/argo-workflows/hack/nsswitch.conf  /etc/nsswitch.conf
@@ -52,7 +53,7 @@ COPY --from=builder /opt/bitnami/argo-workflows/.spdx-argo-workflows.spdx /opt/b
 COPY --from=builder /opt/bitnami/argo-workflows/bin/argo /opt/bitnami/argo-workflows/bin/argo
 COPY --from=builder /opt/bitnami/argo-workflows/licenses /opt/bitnami/argo-workflows/licenses
 
-ENV APP_VERSION="3.6.9" \
+ENV APP_VERSION="3.6.10" \
     BITNAMI_APP_NAME="argo-workflow-cli" \
     PATH="/opt/bitnami/argo-workflows/bin:$PATH"
 
