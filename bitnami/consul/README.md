@@ -136,12 +136,12 @@ services:
     networks:
       - consul-network
     ports:
-      - '8300:8300'
-      - '8301:8301'
-      - '8301:8301/udp'
-      - '8500:8500'
-      - '8600:8600'
-      - '8600:8600/udp'
+      - 8300:8300
+      - 8301:8301
+      - 8301:8301/udp
+      - 8500:8500
+      - 8600:8600
+      - 8600:8600/udp
 ```
 
 Then, launch the containers using:
@@ -163,21 +163,21 @@ version: '2'
 
 services:
   consul-node1:
-    image: bitnami/consul
+    image: bitnami/consul:latest
     environment:
       - CONSUL_BOOTSTRAP_EXPECT=3
       - CONSUL_CLIENT_LAN_ADDRESS=0.0.0.0
       - CONSUL_DISABLE_KEYRING_FILE=true
       - CONSUL_RETRY_JOIN_ADDRESS=consul-node1
     ports:
-      - '8300:8300'
-      - '8301:8301'
-      - '8301:8301/udp'
-      - '8500:8500'
-      - '8600:8600'
-      - '8600:8600/udp'
+      - 8300:8300
+      - 8301:8301
+      - 8301:8301/udp
+      - 8500:8500
+      - 8600:8600
+      - 8600:8600/udp
     volumes:
-      - 'consul-node1_data:/bitnami'
+      - consul-node1_data:/bitnami
 ```
 
 > **Note:** The value of the **CONSUL_BOOTSTRAP_EXPECT** should reflect the total number of nodes the cluster will have.
@@ -188,7 +188,7 @@ Update the definitions for nodes you want your HashiCorp Consul node cluster wit
 
 ```yaml
 consul-node2:
-  image: bitnami/consul
+  image: bitnami/consul:latest
   environment:
     - CONSUL_BOOTSTRAP_EXPECT=3
     - CONSUL_CLIENT_LAN_ADDRESS=0.0.0.0
@@ -196,10 +196,10 @@ consul-node2:
     - CONSUL_RETRY_JOIN_ADDRESS=consul-node1
     - CONSUL_ENABLE_UI=false
   volumes:
-    - 'consul-node2_data:/bitnami'
+    - consul-node2_data:/bitnami
 
 consul-node3:
-  image: bitnami/consul
+  image: bitnami/consul:latest
   environment:
     - CONSUL_BOOTSTRAP_EXPECT=3
     - CONSUL_CLIENT_LAN_ADDRESS=0.0.0.0
@@ -207,7 +207,7 @@ consul-node3:
     - CONSUL_RETRY_JOIN_ADDRESS=consul-node1
     - CONSUL_ENABLE_UI=false
   volumes:
-    - 'consul-node3_data:/bitnami'
+    - consul-node3_data:/bitnami
 ```
 
 ### Step 3: Add the volume description
@@ -229,24 +229,24 @@ version: '2'
 
 services:
   consul-node1:
-    image: bitnami/consul
+    image: bitnami/consul:latest
     environment:
       - CONSUL_BOOTSTRAP_EXPECT=3
       - CONSUL_CLIENT_LAN_ADDRESS=0.0.0.0
       - CONSUL_DISABLE_KEYRING_FILE=true
       - CONSUL_RETRY_JOIN_ADDRESS=consul-node1
     ports:
-      - '8300:8300'
-      - '8301:8301'
-      - '8301:8301/udp'
-      - '8500:8500'
-      - '8600:8600'
-      - '8600:8600/udp'
+      - 8300:8300
+      - 8301:8301
+      - 8301:8301/udp
+      - 8500:8500
+      - 8600:8600
+      - 8600:8600/udp
     volumes:
-      - 'consul-node1_data:/bitnami'
+      - consul-node1_data:/bitnami
 
   consul-node2:
-    image: bitnami/consul
+    image: bitnami/consul:latest
     environment:
       - CONSUL_BOOTSTRAP_EXPECT=3
       - CONSUL_CLIENT_LAN_ADDRESS=0.0.0.0
@@ -254,10 +254,10 @@ services:
       - CONSUL_RETRY_JOIN_ADDRESS=consul-node1
       - CONSUL_ENABLE_UI=false
     volumes:
-      - 'consul-node2_data:/bitnami'
+      - consul-node2_data:/bitnami
 
   consul-node3:
-    image: bitnami/consul
+    image: bitnami/consul:latest
     environment:
       - CONSUL_BOOTSTRAP_EXPECT=3
       - CONSUL_CLIENT_LAN_ADDRESS=0.0.0.0
@@ -265,7 +265,7 @@ services:
       - CONSUL_RETRY_JOIN_ADDRESS=consul-node1
       - CONSUL_ENABLE_UI=false
     volumes:
-      - 'consul-node3_data:/bitnami'
+      - consul-node3_data:/bitnami
 
 volumes:
   consul-node1_data:
@@ -418,7 +418,7 @@ docker run -e CONSUL_GOSSIP_ENCRYPTION_KEY=YOUR_GENERATED_KEY --name consul bitn
 consul:
   image: bitnami/consul:latest
   volumes:
-    - '/local/path/to/your/confDir:/opt/bitnami/consul/conf'
+    - /local/path/to/your/confDir:/opt/bitnami/consul/conf
 ```
 
 The container has a HashiCorp Consul configuration directory set up at /consul/config and the agent will load any configuration files placed here by binding a volume or by composing a new image and adding files. Alternatively, configuration can be added by passing the configuration JSON via environment variable CONSUL_LOCAL_CONFIG. If this is bind mounted then ownership will be changed to the consul user when the container starts.
