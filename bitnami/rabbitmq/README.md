@@ -133,11 +133,11 @@ networks:
 
 services:
   rabbitmq:
-    image: 'bitnami/rabbitmq:latest'
+    image: bitnami/rabbitmq:latest
     networks:
       - app-tier
   myapp:
-    image: 'YOUR_APPLICATION_IMAGE'
+    image: YOUR_APPLICATION_IMAGE
     networks:
       - app-tier
 ```
@@ -259,15 +259,15 @@ version: '2'
 
 services:
   stats:
-    image: bitnami/rabbitmq
+    image: bitnami/rabbitmq:latest
     environment:
       - RABBITMQ_NODE_TYPE=stats
       - RABBITMQ_NODE_NAME=rabbit@stats
       - RABBITMQ_ERL_COOKIE=s3cr3tc00ki3
     ports:
-      - '15672:15672'
+      - 15672:15672
     volumes:
-      - 'rabbitmqstats_data:/bitnami/rabbitmq/mnesia'
+      - rabbitmqstats_data:/bitnami/rabbitmq/mnesia
 ```
 
 > **Note:** The name of the service (**stats**) is important so that a node could resolve the hostname to cluster with. (Note that the node name is `rabbit@stats`)
@@ -278,14 +278,14 @@ Update the definitions for nodes you want your RabbitMQ stats node cluster with.
 
 ```yaml
   queue-disc1:
-    image: bitnami/rabbitmq
+    image: bitnami/rabbitmq:latest
     environment:
       - RABBITMQ_NODE_TYPE=queue-disc
       - RABBITMQ_NODE_NAME=rabbit@queue-disc1
       - RABBITMQ_CLUSTER_NODE_NAME=rabbit@stats
       - RABBITMQ_ERL_COOKIE=s3cr3tc00ki3
     volumes:
-      - 'rabbitmqdisc1_data:/bitnami/rabbitmq/mnesia'
+      - rabbitmqdisc1_data:/bitnami/rabbitmq/mnesia
 ```
 
 > **Note:** Again, the name of the service (**queue-disc1**) is important so that each node could resolve the hostname of this one.
@@ -294,14 +294,14 @@ We are going to add a ram node too:
 
 ```yaml
   queue-ram1:
-    image: bitnami/rabbitmq
+    image: bitnami/rabbitmq:latest
     environment:
       - RABBITMQ_NODE_TYPE=queue-ram
       - RABBITMQ_NODE_NAME=rabbit@queue-ram1
       - RABBITMQ_CLUSTER_NODE_NAME=rabbit@stats
       - RABBITMQ_ERL_COOKIE=s3cr3tc00ki3
     volumes:
-      - 'rabbitmqram1_data:/bitnami/rabbitmq/mnesia'
+      - rabbitmqram1_data:/bitnami/rabbitmq/mnesia
 ```
 
 ##### Step 3: Add the volume description
@@ -323,33 +323,33 @@ version: '2'
 
 services:
   stats:
-    image: bitnami/rabbitmq
+    image: bitnami/rabbitmq:latest
     environment:
       - RABBITMQ_NODE_TYPE=stats
       - RABBITMQ_NODE_NAME=rabbit@stats
       - RABBITMQ_ERL_COOKIE=s3cr3tc00ki3
     ports:
-      - '15672:15672'
+      - 15672:15672
     volumes:
-      - 'rabbitmqstats_data:/bitnami/rabbitmq/mnesia'
+      - rabbitmqstats_data:/bitnami/rabbitmq/mnesia
   queue-disc1:
-    image: bitnami/rabbitmq
+    image: bitnami/rabbitmq:latest
     environment:
       - RABBITMQ_NODE_TYPE=queue-disc
       - RABBITMQ_NODE_NAME=rabbit@queue-disc1
       - RABBITMQ_CLUSTER_NODE_NAME=rabbit@stats
       - RABBITMQ_ERL_COOKIE=s3cr3tc00ki3
     volumes:
-      - 'rabbitmqdisc1_data:/bitnami/rabbitmq/mnesia'
+      - rabbitmqdisc1_data:/bitnami/rabbitmq/mnesia
   queue-ram1:
-    image: bitnami/rabbitmq
+    image: bitnami/rabbitmq:latest
     environment:
       - RABBITMQ_NODE_TYPE=queue-ram
       - RABBITMQ_NODE_NAME=rabbit@queue-ram1
       - RABBITMQ_CLUSTER_NODE_NAME=rabbit@stats
       - RABBITMQ_ERL_COOKIE=s3cr3tc00ki3
     volumes:
-      - 'rabbitmqram1_data:/bitnami/rabbitmq/mnesia'
+      - rabbitmqram1_data:/bitnami/rabbitmq/mnesia
 
 volumes:
   rabbitmqstats_data:
