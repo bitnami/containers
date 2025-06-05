@@ -130,7 +130,7 @@ networks:
 
 services:
   Etcd:
-    image: 'bitnami/etcd:latest'
+    image: bitnami/etcd:latest
     environment:
       - ALLOW_NONE_AUTHENTICATION=yes
       - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
@@ -140,7 +140,7 @@ services:
     networks:
       - app-tier
   myapp:
-    image: 'YOUR_APPLICATION_IMAGE'
+    image: YOUR_APPLICATION_IMAGE
     networks:
       - app-tier
 ```
