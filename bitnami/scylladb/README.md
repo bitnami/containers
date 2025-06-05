@@ -142,11 +142,11 @@ networks:
 
 services:
   scylladb:
-    image: 'bitnami/scylladb:latest'
+    image: bitnami/scylladb:latest
     networks:
       - app-tier
   myapp:
-    image: 'YOUR_APPLICATION_IMAGE'
+    image: YOUR_APPLICATION_IMAGE
     networks:
       - app-tier
 ```
