@@ -272,7 +272,7 @@ version: '2'
 
 services:
   mongos:
-    image: 'bitnami/mongodb-sharded:latest'
+    image: bitnami/mongodb-sharded:latest
     environment:
       - MONGODB_SHARDING_MODE=mongos
       - MONGODB_CFG_PRIMARY_HOST=mongodb-cfg
@@ -280,10 +280,10 @@ services:
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
       - MONGODB_ROOT_PASSWORD=password123
     ports:
-      - "27017:27017"
+      - 27017:27017
 
   mongodb-shard0-primary:
-    image: 'bitnami/mongodb-sharded:latest'
+    image: bitnami/mongodb-sharded:latest
     environment:
       - MONGODB_SHARDING_MODE=shardsvr
       - MONGODB_MONGOS_HOST=mongos
@@ -292,10 +292,10 @@ services:
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
       - MONGODB_REPLICA_SET_NAME=shard0
     volumes:
-      - 'shard0_data:/bitnami'
+      - shard0_data:/bitnami
 
   mongodb-configsvr-primary:
-    image: 'bitnami/mongodb-sharded:latest'
+    image: bitnami/mongodb-sharded:latest
     environment:
       - MONGODB_SHARDING_MODE=configsvr
       - MONGODB_ROOT_PASSWORD=password123
@@ -303,7 +303,7 @@ services:
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
       - MONGODB_REPLICA_SET_NAME=config-replicaset
     volumes:
-      - 'cfg_data:/bitnami'
+      - cfg_data:/bitnami
 
 volumes:
   shard0_data:
