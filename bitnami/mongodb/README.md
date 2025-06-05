@@ -88,7 +88,7 @@ or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers
    mongodb:
      ...
      volumes:
--      - 'mongodb_data:/bitnami/mongodb'
+-      - mongodb_data:/bitnami/mongodb
 +      - /path/to/mongodb-persistence:/bitnami/mongodb
    ...
 ```
@@ -144,11 +144,11 @@ networks:
 
 services:
   mongodb:
-    image: 'bitnami/mongodb:latest'
+    image: bitnami/mongodb:latest
     networks:
       - app-tier
   myapp:
-    image: 'YOUR_APPLICATION_IMAGE'
+    image: YOUR_APPLICATION_IMAGE
     networks:
       - app-tier
 ```
@@ -515,7 +515,7 @@ version: '2'
 
 services:
   mongodb-primary:
-    image: 'bitnami/mongodb:latest'
+    image: bitnami/mongodb:latest
     environment:
       - MONGODB_ADVERTISED_HOSTNAME=mongodb-primary
       - MONGODB_REPLICA_SET_MODE=primary
@@ -523,10 +523,10 @@ services:
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
 
     volumes:
-      - 'mongodb_master_data:/bitnami'
+      - mongodb_master_data:/bitnami
 
   mongodb-secondary:
-    image: 'bitnami/mongodb:latest'
+    image: bitnami/mongodb:latest
     depends_on:
       - mongodb-primary
     environment:
@@ -538,7 +538,7 @@ services:
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
 
   mongodb-arbiter:
-    image: 'bitnami/mongodb:latest'
+    image: bitnami/mongodb:latest
     depends_on:
       - mongodb-primary
     environment:
@@ -567,7 +567,7 @@ version: '2'
 
 services:
   mongodb-primary:
-    image: 'bitnami/mongodb:latest'
+    image: bitnami/mongodb:latest
     environment:
       - MONGODB_ADVERTISED_HOSTNAME=mongodb-primary
       - MONGODB_REPLICA_SET_MODE=primary
@@ -575,10 +575,10 @@ services:
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
 
     volumes:
-      - 'mongodb_master_data:/bitnami'
+      - mongodb_master_data:/bitnami
 
   mongodb-secondary:
-    image: 'bitnami/mongodb:latest'
+    image: bitnami/mongodb:latest
     depends_on:
       - mongodb-primary
     environment:
@@ -589,7 +589,7 @@ services:
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
 
   mongodb-arbiter:
-    image: 'bitnami/mongodb:latest'
+    image: bitnami/mongodb:latest
     depends_on:
       - mongodb-primary
     environment:
@@ -755,7 +755,7 @@ or using Docker Compose:
    mongodb:
      ...
      volumes:
-       - 'mongodb_data:/bitnami/mongodb'
+       - mongodb_data:/bitnami/mongodb
 +      - /path/to/mongodb-configuration-persistence:/bitnami/mongodb/conf
    ...
 ```
