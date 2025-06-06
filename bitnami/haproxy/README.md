@@ -87,7 +87,7 @@ version: '2'
 services:
 
   haproxy:
-    image: bitnami/haproxy
+    image: bitnami/haproxy:latest
     volumes:
       - /path/to/haproxy.cfg:/bitnami/haproxy/conf/haproxy.cfg
 ```
