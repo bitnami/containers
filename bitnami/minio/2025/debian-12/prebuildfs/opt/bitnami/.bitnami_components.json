@@ -3,12 +3,12 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "2025.5.24-1"
+        "version": "2025.5.24-2"
     },
     "minio-client": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "2025.5.21-0"
+        "version": "2025.5.21-1"
     }
 }
