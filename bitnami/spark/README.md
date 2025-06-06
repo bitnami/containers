@@ -225,7 +225,7 @@ In a similar way that in the previous section, you may want to use a different v
 Go to <https://spark.apache.org/downloads.html> and copy the download url bundling the Hadoop version you want and matching the Apache Spark version of the container. Extend the Bitnami container image as below:
 
 ```Dockerfile
-FROM bitnami/spark:3.5.0
+FROM bitnami/spark:latest
 USER root
 RUN install_packages curl
 USER 1001
