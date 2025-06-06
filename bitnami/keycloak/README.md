@@ -114,15 +114,19 @@ docker build -t bitnami/APP:latest .
 | `KEYCLOAK_PROXY_HEADERS`                                    | Keycloak reverse proxy headers                                                                        | `nil`                         |
 | `KEYCLOAK_PRODUCTION`                                       | Run in production mode                                                                                | `false`                       |
 | `KEYCLOAK_EXTRA_ARGS_PREPENDED`                             | Run with flags which are applied directly to keycloak executable                                      | `nil`                         |
-| `KEYCLOAK_DATABASE_VENDOR`                                  | Database vendor                                                                                       | `postgresql`                  |
-| `KEYCLOAK_DATABASE_HOST`                                    | Database backend hostname                                                                             | `postgresql`                  |
-| `KEYCLOAK_DATABASE_PORT`                                    | Database backend port                                                                                 | `5432`                        |
-| `KEYCLOAK_DATABASE_USER`                                    | Database backend username                                                                             | `bn_keycloak`                 |
-| `KEYCLOAK_DATABASE_NAME`                                    | Database name                                                                                         | `bitnami_keycloak`            |
-| `KEYCLOAK_DATABASE_PASSWORD`                                | Database backend password                                                                             | `nil`                         |
-| `KEYCLOAK_DATABASE_SCHEMA`                                  | PostgreSQL database schema                                                                            | `public`                      |
-| `KEYCLOAK_JDBC_PARAMS`                                      | Extra JDBC connection parameters for the database (e.g.: `sslmode=verify-full&connectTimeout=30000`\) | `nil`                         |
-| `KEYCLOAK_JDBC_DRIVER`                                      | JDBC driver to set in the connection string for the database                                          | `postgresql`                  |
+| `KEYCLOAK_DATABASE_VENDOR` \| `KC_DB`                       | Database vendor                                                                                       | `postgresql`                  |
+| `KEYCLOAK_DATABASE_HOST` \| `KC_DB_URL_HOST`                | Database backend hostname                                                                             | `postgresql`                  |
+| `KEYCLOAK_DATABASE_PORT` \| `KC_DB_URL_PORT`                | Database backend port                                                                                 | `5432`                        |
+| `KEYCLOAK_DATABASE_USER` \| `KC_DB_USERNAME`                | Database backend username                                                                             | `bn_keycloak`                 |
+| `KEYCLOAK_DATABASE_NAME` \| `KC_DB_URL_DATABASE`            | Database name                                                                                         | `bitnami_keycloak`            |
+| `KEYCLOAK_DATABASE_PASSWORD` \| `KC_DB_PASSWORD`            | Database backend password                                                                             | `nil`                         |
+| `KEYCLOAK_DATABASE_SCHEMA` \| `KC_DB_SCHEMA`                | PostgreSQL database schema                                                                            | `public`                      |
+| `KEYCLOAK_JDBC_PARAMS` \| `KC_DB_URL_PROPERTIES`            | Extra JDBC connection parameters for the database (e.g.: `sslmode=verify-full&connectTimeout=30000`\) | `nil`                         |
+| `KEYCLOAK_JDBC_DRIVER` \| `KC_DB_DRIVER`                    | JDBC driver to set in the connection string for the database                                          | `postgresql`                  |
+| `KC_DB_POOL_INITIAL_SIZE`                                   | Iinitial size of the connection pool                                                                  | `nil`                         |
+| `KC_DB_POOL_MAX_SIZE`                                       | Maximum size of the connection pool                                                                   | `nil`                         |
+| `KC_DB_POOL_MIN_SIZE`                                       | Minimal size of the connection pool                                                                   | `nil`                         |
+| `KC_DB_URL`                                                 | Full database JDBC URL. If not provided, a default URL is set based on the selected database vendor   | `nil`                         |
 | `KEYCLOAK_DAEMON_USER`                                      | Keycloak daemon user when running as root                                                             | `keycloak`                    |
 | `KEYCLOAK_DAEMON_GROUP`                                     | Keycloak daemon group when running as root                                                            | `keycloak`                    |
 
