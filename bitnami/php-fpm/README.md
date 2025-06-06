@@ -140,7 +140,7 @@ or using Docker Compose:
 ```yaml
 services:
   phpfpm:
-    image: 'bitnami/php-fpm:latest'
+    image: bitnami/php-fpm:latest
     networks:
       - app-tier
     volumes:
@@ -161,14 +161,14 @@ or using Docker Compose:
 ```yaml
 services:
   nginx:
-    image: 'bitnami/nginx:latest'
+    image: bitnami/nginx:latest
     depends_on:
       - phpfpm
     networks:
       - app-tier
     ports:
-      - '80:80'
-      - '443:443'
+      - 80:80
+      - 443:443
     volumes:
       - /path/to/server_block.conf:/opt/bitnami/nginx/conf/server_blocks/yourapp.conf
 ```
