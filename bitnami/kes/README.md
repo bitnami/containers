@@ -1,10 +1,10 @@
-# Bitnami Key Managament for Object Storage based on KES&reg;
+# Bitnami Key Managament based on KES&reg;
 
-## What is Bitnami Key Managament for Object Storage based on KES&reg;?
+## What is Bitnami Key Managament based on KES&reg;?
 
 > KES is a cloud-native distributed key management and encryption server designed to secure modern applications at scale.
 
-[Overview of Bitnami Key Managament for Object Storage based on KES&reg;](https://min.io/)
+[Overview of Bitnami Key Managament based on KES&reg;](https://min.io/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
@@ -22,7 +22,7 @@ docker run --name kes bitnami/kes:latest
 * All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
-Looking to use Bitnami Key Managament for Object Storage based on KES&reg; in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the commercial edition of the Bitnami catalog.
+Looking to use Bitnami Key Managament based on KES&reg; in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the commercial edition of the Bitnami catalog.
 
 ## Only the latest stable branch maintained in the free Bitnami catalog
 
@@ -40,7 +40,7 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 
 ## Get this image
 
-The recommended way to get the Bitnami Bitnami Key Managament for Object Storage based on KES&reg; Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/kes).
+The recommended way to get the Bitnami Bitnami Key Managament based on KES&reg; Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/kes).
 
 ```console
 docker pull bitnami/kes:latest
@@ -74,7 +74,7 @@ To run commands inside this container you can use `docker run`, for example to e
 docker run --rm --name kes bitnami/kes:latest --  --help
 ```
 
-Check the [official Bitnami Key Managament for Object Storage based on KES&reg; documentation](https://min.io/) for more information.
+Check the [official Bitnami Key Managament based on KES&reg; documentation](https://min.io/) for more information.
 
 ## Contributing
 
