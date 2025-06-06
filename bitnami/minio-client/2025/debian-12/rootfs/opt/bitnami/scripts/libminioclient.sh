@@ -90,9 +90,11 @@ EOF
 #   Series of exports to be used as 'eval' arguments
 #########################
 minio_client_configure_server() {
+    local scheme
     if [[ -n "$MINIO_SERVER_HOST" ]] && [[ -n "$MINIO_SERVER_ROOT_USER" ]] && [[ -n "$MINIO_SERVER_ROOT_PASSWORD" ]]; then
+        scheme="$(echo "$MINIO_SERVER_SCHEME" | tr '[:upper:]' '[:lower:]')"
         info "Adding Minio host to 'mc' configuration..."
-        minio_client_execute config host add minio "${MINIO_SERVER_SCHEME}://${MINIO_SERVER_HOST}:${MINIO_SERVER_PORT_NUMBER}" "${MINIO_SERVER_ROOT_USER}" "${MINIO_SERVER_ROOT_PASSWORD}"
+        minio_client_execute alias set minio "${scheme}://${MINIO_SERVER_HOST}:${MINIO_SERVER_PORT_NUMBER}" "$MINIO_SERVER_ROOT_USER" "$MINIO_SERVER_ROOT_PASSWORD"
     fi
 }
 
@@ -104,6 +106,8 @@ minio_client_configure_server() {
 #   Series of exports to be used as 'eval' arguments
 #########################
 minio_client_configure_local() {
+    local scheme
+    scheme="$(echo "$MINIO_SERVER_SCHEME" | tr '[:upper:]' '[:lower:]')"
     info "Adding local Minio host to 'mc' configuration..."
-    minio_client_execute config host add local "${MINIO_SERVER_SCHEME}://localhost:${MINIO_SERVER_PORT_NUMBER}" "${MINIO_SERVER_ROOT_USER}" "${MINIO_SERVER_ROOT_PASSWORD}" >/dev/null 2>&1
+    minio_client_execute alias set local "${scheme}://localhost:${MINIO_SERVER_PORT_NUMBER}" "$MINIO_SERVER_ROOT_USER" "$MINIO_SERVER_ROOT_PASSWORD" >/dev/null 2>&1
 }
