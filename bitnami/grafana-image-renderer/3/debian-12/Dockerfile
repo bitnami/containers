@@ -8,10 +8,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-05-30T06:17:20Z" \
+      org.opencontainers.image.created="2025-06-06T12:52:45Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/grafana-image-renderer/README.md" \
-      org.opencontainers.image.ref.name="3.12.6-debian-12-r1" \
+      org.opencontainers.image.ref.name="3.12.6-debian-12-r2" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/grafana-image-renderer" \
       org.opencontainers.image.title="grafana-image-renderer" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -28,7 +28,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates chromium curl fonts-freefont-ttf fonts-ipafont-gothic fonts-kacst fonts-thai-tlwg fonts-wqy-zenhei gnupg jq libbz2-1.0 libffi8 libgcc-s1 liblzma5 libncursesw6 libreadline8 libsqlite3-0 libssl3 libstdc++6 libtinfo6 libx11-xcb1 libxcb-dri3-0 libxshmfence1 libxss1 libxtst6 procps wget zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "python-3.13.3-13-linux-${OS_ARCH}-debian-12" \
+      "python-3.13.4-0-linux-${OS_ARCH}-debian-12" \
       "node-22.16.0-0-linux-${OS_ARCH}-debian-12" \
       "grafana-image-renderer-3.12.6-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
@@ -45,6 +45,7 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
+RUN uninstall_packages curl
 
 ENV APP_VERSION="3.12.6" \
     BITNAMI_APP_NAME="grafana-image-renderer" \
