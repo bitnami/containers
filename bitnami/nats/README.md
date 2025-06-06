@@ -128,7 +128,7 @@ networks:
 
 services:
   nats:
-    image: 'bitnami/nats:latest'
+    image: bitnami/nats:latest
     ports:
       - 4222:4222
       - 6222:6222
@@ -138,7 +138,7 @@ services:
     volumes:
       - /path/to/nats-server.conf:/etc/nats-server.conf:ro
   myapp:
-    image: 'YOUR_APPLICATION_IMAGE'
+    image: YOUR_APPLICATION_IMAGE
     networks:
       - app-tier
 ```
