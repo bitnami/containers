@@ -175,17 +175,17 @@ networks:
 
 services:
   minio:
-    image: 'bitnami/minio:latest'
+    image: bitnami/minio:latest
     ports:
-      - '9000:9000'
-      - '9001:9001'
+      - 9000:9000
+      - 9001:9001
     environment:
       - MINIO_ROOT_USER=minio-root-user
       - MINIO_ROOT_PASSWORD=minio-root-password
     networks:
       - app-tier
   myapp:
-    image: 'YOUR_APPLICATION_IMAGE'
+    image: YOUR_APPLICATION_IMAGE
     networks:
       - app-tier
     environment:
@@ -332,7 +332,7 @@ version: '2'
 
 services:
   minio1:
-    image: 'bitnami/minio:latest'
+    image: bitnami/minio:latest
     environment:
       - MINIO_ROOT_USER=minio-root-user
       - MINIO_ROOT_PASSWORD=minio-root-password
@@ -340,7 +340,7 @@ services:
       - MINIO_DISTRIBUTED_NODES=minio1,minio2,minio3,minio4
       - MINIO_SKIP_CLIENT=yes
   minio2:
-    image: 'bitnami/minio:latest'
+    image: bitnami/minio:latest
     environment:
       - MINIO_ROOT_USER=minio-root-user
       - MINIO_ROOT_PASSWORD=minio-root-password
@@ -348,7 +348,7 @@ services:
       - MINIO_DISTRIBUTED_NODES=minio1,minio2,minio3,minio4
       - MINIO_SKIP_CLIENT=yes
   minio3:
-    image: 'bitnami/minio:latest'
+    image: bitnami/minio:latest
     environment:
       - MINIO_ROOT_USER=minio-root-user
       - MINIO_ROOT_PASSWORD=minio-root-password
@@ -356,7 +356,7 @@ services:
       - MINIO_DISTRIBUTED_NODES=minio1,minio2,minio3,minio4
       - MINIO_SKIP_CLIENT=yes
   minio4:
-    image: 'bitnami/minio:latest'
+    image: bitnami/minio:latest
     environment:
       - MINIO_ROOT_USER=minio-root-user
       - MINIO_ROOT_PASSWORD=minio-root-password
@@ -371,20 +371,20 @@ MinIO(R) also supports ellipsis syntax (`{1..n}`) to list the MinIO(R) node host
 version: '2'
 services:
   minio-0:
-    image: 'bitnami/minio:latest'
+    image: bitnami/minio:latest
     volumes:
-      - 'minio_0_data_0:/bitnami/minio/data-0'
-      - 'minio_0_data_1:/bitnami/minio/data-1'
+      - minio_0_data_0:/bitnami/minio/data-0
+      - minio_0_data_1:/bitnami/minio/data-1
     environment:
       - MINIO_ROOT_USER=minio
       - MINIO_ROOT_PASSWORD=miniosecret
       - MINIO_DISTRIBUTED_MODE_ENABLED=yes
       - MINIO_DISTRIBUTED_NODES=minio-{0...1}/bitnami/minio/data-{0...1}
   minio-1:
-    image: 'bitnami/minio:latest'
+    image: bitnami/minio:latest
     volumes:
-      - 'minio_1_data_0:/bitnami/minio/data-0'
-      - 'minio_1_data_1:/bitnami/minio/data-1'
+      - minio_1_data_0:/bitnami/minio/data-0
+      - minio_1_data_1:/bitnami/minio/data-1
     environment:
       - MINIO_ROOT_USER=minio
       - MINIO_ROOT_PASSWORD=miniosecret
