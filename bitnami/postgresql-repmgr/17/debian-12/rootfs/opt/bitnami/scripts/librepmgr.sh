@@ -111,6 +111,11 @@ repmgr_validate() {
         error_code=1
     }
 
+    if [[ -n "$REPMGR_REPLICATION_NODES" ]]; then
+        if [[ ! "$REPMGR_REPLICATION_NODES" =~ ^([^,]+-[0-9]+)(,([^,]+-[0-9]+))*$ ]]; then
+            print_validation_error "REPMGR_REPLICATION_NODES must be a comma separated list of valid node names. Valid format: ^([^,]+-[0-9]+)(,([^,]+-[0-9]+))*$"
+        fi
+    fi
     if [[ -z "$REPMGR_PARTNER_NODES" ]]; then
         print_validation_error "The list of partner nodes cannot be empty. Set the environment variable REPMGR_PARTNER_NODES with a comma separated list of partner nodes."
     fi
@@ -885,6 +890,7 @@ repmgr_initialize() {
             # Allow running custom initialization scripts
             postgresql_custom_init_scripts
             # Set synchronous replication
+
             POSTGRESQL_CLUSTER_APP_NAME="$REPMGR_PARTNER_NODES"
             export POSTGRESQL_CLUSTER_APP_NAME
             postgresql_configure_synchronous_replication
