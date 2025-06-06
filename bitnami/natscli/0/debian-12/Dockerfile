@@ -8,10 +8,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-05-30T15:24:56Z" \
+      org.opencontainers.image.created="2025-06-06T03:38:33Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/natscli/README.md" \
-      org.opencontainers.image.ref.name="0.2.3-debian-12-r2" \
+      org.opencontainers.image.ref.name="0.2.3-debian-12-r3" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/natscli" \
       org.opencontainers.image.title="natscli" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -28,7 +28,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "natscli-0.2.3-0-linux-${OS_ARCH}-debian-12" \
+      "natscli-0.2.3-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -43,6 +43,7 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN useradd -r -u 1001 -g root natscli
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
+RUN uninstall_packages curl
 
 ENV APP_VERSION="0.2.3" \
     BITNAMI_APP_NAME="natscli" \
