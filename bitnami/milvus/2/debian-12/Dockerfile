@@ -8,10 +8,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-06-04T05:34:21Z" \
+      org.opencontainers.image.created="2025-06-06T02:54:11Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/milvus/README.md" \
-      org.opencontainers.image.ref.name="2.5.13-debian-12-r0" \
+      org.opencontainers.image.ref.name="2.5.13-debian-12-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/milvus" \
       org.opencontainers.image.title="milvus" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -28,7 +28,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libaio1 libgcc-s1 libgfortran5 libgomp1 libopenblas0-pthread libquadmath0 libstdc++6 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "milvus-2.5.13-0-linux-${OS_ARCH}-debian-12" \
+      "milvus-2.5.13-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -44,6 +44,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN useradd -r -u 1001 -g root milvus
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN mkdir -p /opt/bitnami/milvus/tmp && chmod g+rwX /opt/bitnami/milvus/tmp && ln -s /opt/bitnami/milvus/tmp /run/milvus && mkdir -p /bitnami/milvus/data && chmod g+rwX /bitnami/milvus/data && ln -s /bitnami/milvus/data /var/lib/milvus && ln -s /opt/bitnami/milvus /milvus
+RUN uninstall_packages curl
 
 ENV APP_VERSION="2.5.13" \
     BITNAMI_APP_NAME="milvus" \
