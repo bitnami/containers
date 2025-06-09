@@ -138,12 +138,12 @@ services:
   mariadb:
   ...
     volumes:
-      - '/path/to/mariadb-persistence:/bitnami'
+      - /path/to/mariadb-persistence:/bitnami
   ...
   matomo:
   ...
     volumes:
-      - '/path/to/matomo-persistence:/bitnami'
+      - /path/to/matomo-persistence:/bitnami
   ...
 ```
 
@@ -465,13 +465,13 @@ Based on the extended image, you can use a Docker Compose file like the one belo
 version: '2'
 services:
   mariadb:
-    image: 'bitnami/mariadb:10.11'
+    image: bitnami/mariadb:latest
     environment:
       - MARIADB_USER=bn_matomo
       - MARIADB_DATABASE=bitnami_matomo
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - 'mariadb_data:/bitnami'
+      - mariadb_data:/bitnami
   matomo:
     build: .
     environment:
@@ -481,12 +481,12 @@ services:
       - MATOMO_DATABASE_NAME=bitnami_matomo
       - ALLOW_EMPTY_PASSWORD=yes
     ports:
-      - '80:8181'
-      - '443:8143'
+      - 80:8181
+      - 443:8143
     depends_on:
       - mariadb
     volumes:
-      - 'matomo_data:/bitnami'
+      - matomo_data:/bitnami
 volumes:
   mariadb_data:
     driver: local
@@ -514,10 +514,10 @@ To upgrade a previous Bitnami Matomo container image, which did not support non-
        - ALLOW_EMPTY_PASSWORD=yes
 +    user: root
      ports:
--      - '80:80'
--      - '443:443'
-+      - '80:8080'
-+      - '443:8443'
+-      - 80:80
+-      - 443:443
++      - 80:8080
++      - 443:8443
      volumes:
 ```
 
