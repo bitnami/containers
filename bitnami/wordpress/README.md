@@ -141,13 +141,13 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
    mariadb:
      ...
      volumes:
--      - 'mariadb_data:/bitnami/mariadb'
+-      - mariadb_data:/bitnami/mariadb
 +      - /path/to/mariadb-persistence:/bitnami/mariadb
    ...
    wordpress:
      ...
      volumes:
--      - 'wordpress_data:/bitnami/wordpress'
+-      - wordpress_data:/bitnami/wordpress
 +      - /path/to/wordpress-persistence:/bitnami/wordpress
    ...
 -volumes:
@@ -556,10 +556,10 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
 -    image: bitnami/wordpress:latest
 +    build: .
      ports:
--      - '80:8080'
--      - '443:8443'
-+      - '80:8181'
-+      - '443:8143'
+-      - 80:8080
+-      - 443:8443
++      - 80:8181
++      - 443:8143
      environment:
 +      - PHP_MEMORY_LIMIT=512m
      ...
