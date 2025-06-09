@@ -106,7 +106,7 @@ docker cp /path/to/app.war tomcat:/app
 In case you want to create a custom image that already contains your application war file, you need to add it to the `/opt/bitnami/tomcat/webapps` folder. In the example below we create a forked image with an extra `.war` file.
 
 ```Dockerfile
-FROM bitnami/tomcat:9.0
+FROM bitnami/tomcat:latest
 COPY sample.war /opt/bitnami/tomcat/webapps
 ```
 
