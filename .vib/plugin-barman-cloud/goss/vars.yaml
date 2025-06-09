@@ -4,4 +4,4 @@ files:
       - /opt/bitnami/plugin-barman-cloud/.spdx-plugin-barman-cloud.spdx
   - mode: "0755"
     paths:
-      - /plugin-barman-cloud
+      - /opt/bitnami/plugin-barman-cloud/bin/manager
