@@ -1,0 +1,11 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+command:
+  check-configurable-http-proxy-run:
+    exec: timeout --preserve-status 5 configurable-http-proxy
+    timeout: 8000
+    exit-status: 2
+    stdout:
+      - "Proxying"
+      - "Proxy API at"
