@@ -129,9 +129,9 @@ services:
     networks:
       - neo4j-network
     ports:
-      - '7474:7474'
-      - '7473:7473'
-      - '7687:7687'
+      - 7474:7474
+      - 7473:7473
+      - 7687:7687
 ```
 
 Then, launch the containers using:
@@ -223,7 +223,7 @@ Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/mai
 neo4j:
   ...
   volumes:
-    - '/local/path/to/your/confDir:/bitnami/neo4j/conf'
+    - /local/path/to/your/confDir:/bitnami/neo4j/conf
   ...
 ```
 
@@ -239,7 +239,7 @@ Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/mai
 neo4j:
   ...
   volumes:
-    - '/local/path/to/your/plugins:/bitnami/neo4j/plugins'
+    - /local/path/to/your/plugins:/bitnami/neo4j/plugins
   ...
 ```
 
