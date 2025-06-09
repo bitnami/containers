@@ -40,11 +40,11 @@
             "resources": {
               "path": "/.vib"
             },
-            "tests_file": "configurable-http-proxy/goss/goss.yaml",
-            "vars_file": "configurable-http-proxy/goss/vars.yaml",
+            "tests_file": "custom-configurable-http-proxy/goss/goss.yaml",
+            "vars_file": "custom-configurable-http-proxy/goss/vars.yaml",
             "remote": {
               "pod": {
-                "workload": "deploy-configurable-http-proxy"
+                "workload": "deploy-custom-configurable-http-proxy"
               }
             }
           }

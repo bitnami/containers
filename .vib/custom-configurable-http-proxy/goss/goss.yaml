@@ -3,7 +3,7 @@
 
 gossfile:
   # Goss tests exclusive to the current container
-  ../../configurable-http-proxy/goss/configurable-http-proxy.yaml: {}
+  ../../custom-configurable-http-proxy/goss/custom-configurable-http-proxy.yaml: {}
   # Load scripts from .vib/common/goss/templates
   ../../common/goss/templates/check-app-version.yaml: {}
   ../../common/goss/templates/check-binaries.yaml: {}
