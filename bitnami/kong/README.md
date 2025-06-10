@@ -156,10 +156,10 @@ version: '2'
 
 services:
   kong:
-    image: 'bitnami/kong:latest'
+    image: bitnami/kong:latest
     ports:
-      - '8000:8000'
-      - '8443:8443'
+      - 8000:8000
+      - 8443:8443
     environment:
       # Assume we don't want data persistence for simplicity purposes
       - KONG_DATABASE=off
@@ -238,8 +238,8 @@ services:
   kong:
     build: .
     ports:
-      - '80:8080'
-      - '443:8443'
+      - 80:8080
+      - 443:8443
     volumes:
       - ./config/kong.conf:/opt/bitnami/kong/conf/kong.conf
     environment:
