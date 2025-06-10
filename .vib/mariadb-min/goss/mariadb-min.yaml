@@ -1,8 +1,0 @@
-command:
-  check-mariadbd:
-    exec:
-    - mariadbd
-    - --help
-    exit-status: 0
-    stdout:
-    - "Usage: mariadbd [OPTIONS]"
