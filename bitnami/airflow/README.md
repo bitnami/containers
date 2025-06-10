@@ -161,7 +161,7 @@ The following `docker-compose.yml` template demonstrates the use of host directo
 version: '2'
 services:
   postgresql:
-    image: 'bitnami/postgresql:latest'
+    image: bitnami/postgresql:latest
     environment:
       - POSTGRESQL_DATABASE=bitnami_airflow
       - POSTGRESQL_USERNAME=bn_airflow
@@ -169,7 +169,7 @@ services:
     volumes:
       - /path/to/postgresql-persistence:/bitnami/postgresql
   redis:
-    image: 'bitnami/redis:latest'
+    image: bitnami/redis:latest
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
@@ -209,7 +209,7 @@ services:
       - AIRFLOW_USERNAME=user
       - AIRFLOW_EMAIL=user@example.com
     ports:
-      - '8080:8080'
+      - 8080:8080
 ```
 
 #### Mount host directories as data volumes using the Docker command line
@@ -450,7 +450,7 @@ This would be an example of SMTP configuration using a GMail account:
       - AIRFLOW__SMTP__SMTP_PASSWORD=your_password
       - AIRFLOW__SMTP__SMTP_PORT=587
     ports:
-      - '8080:8080'
+      - 8080:8080
 ```
 
 * For manual execution:
