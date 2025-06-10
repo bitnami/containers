@@ -136,13 +136,13 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
    postgresql:
      ...
      volumes:
--      - 'postgresql_data:/bitnami/postgresql'
+-      - postgresql_data:/bitnami/postgresql
 +      - /path/to/postgresql-persistence:/bitnami/postgresql
    ...
    odoo:
      ...
      volumes:
--      - 'odoo_data:/bitnami/odoo'
+-      - odoo_data:/bitnami/odoo
 +      - /path/to/odoo-persistence:/bitnami/odoo
    ...
 -volumes:
@@ -223,7 +223,7 @@ docker run -d --name odoo \
 | `ODOO_CONF_DIR`              | Odoo directory for configuration files.         | `${ODOO_BASE_DIR}/conf`                       |
 | `ODOO_CONF_FILE`             | Configuration file for Odoo.                    | `${ODOO_CONF_DIR}/odoo.conf`                  |
 | `ODOO_DATA_DIR`              | Odoo directory for data files.                  | `${ODOO_BASE_DIR}/data`                       |
-| `ODOO_ADDONS_DIR`            | Odoo directory for addons.                      | `${ODOO_ADDONS_DIR:-${ODOO_BASE_DIR}/addons}` |
+| `ODOO_ADDONS_DIR`            | Odoo directory for extra addons.                | `${ODOO_ADDONS_DIR:-${ODOO_BASE_DIR}/addons}` |
 | `ODOO_TMP_DIR`               | Odoo directory for temporary files.             | `${ODOO_BASE_DIR}/tmp`                        |
 | `ODOO_PID_FILE`              | PID file for Odoo.                              | `${ODOO_TMP_DIR}/odoo.pid`                    |
 | `ODOO_LOGS_DIR`              | Odoo directory for log files.                   | `${ODOO_BASE_DIR}/log`                        |

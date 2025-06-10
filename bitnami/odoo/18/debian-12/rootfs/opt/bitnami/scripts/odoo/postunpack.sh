@@ -34,10 +34,6 @@ done
 # Use daemon user ownership for compatibility when running as a non-root user
 chown "$ODOO_DAEMON_USER" "$ODOO_BASE_DIR"
 
-# Create folders that existed in previous versions of this image with proper permissions/ownership
-# TODO: Remove this block in a future release
-ensure_dir_exists "${ODOO_BASE_DIR}/odoo"
-ln -s "$ODOO_BASE_DIR"/lib/odoo-*.egg/odoo/addons "${ODOO_BASE_DIR}/odoo/addons"
 # Intentionally avoid symlink since it would point to the parent folder, with potential to cause problems
 ensure_dir_exists "${ODOO_TMP_DIR}/pids"
 configure_permissions_ownership "${ODOO_TMP_DIR}/pids" -d "775" -f "664" -u "$ODOO_DAEMON_USER" -g "root"
