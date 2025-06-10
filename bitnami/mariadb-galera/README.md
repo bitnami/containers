@@ -148,13 +148,13 @@ networks:
 
 services:
   mariadb-galera:
-    image: 'bitnami/mariadb-galera:latest'
+    image: bitnami/mariadb-galera:latest
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     networks:
       - app-tier
   myapp:
-    image: 'YOUR_APPLICATION_IMAGE'
+    image: YOUR_APPLICATION_IMAGE
     networks:
       - app-tier
 ```
@@ -672,7 +672,7 @@ services:
   mariadb:
     build: .
     ports:
-      - '3306:3307'
+      - 3306:3307
     volumes:
       - /path/to/my_custom.cnf:/opt/bitnami/mariadb-galera/conf/my_custom.cnf:ro
       - data:/bitnami/mariadb-galera/data
