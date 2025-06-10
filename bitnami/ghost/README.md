@@ -143,13 +143,13 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
    mysql:
      ...
      volumes:
--      - 'mysql_data:/bitnami/mysql'
+-      - mysql_data:/bitnami/mysql
 +      - /path/to/mysql-persistence:/bitnami/mysql
    ...
    ghost:
      ...
      volumes:
--      - 'ghost_data:/bitnami/ghost'
+-      - ghost_data:/bitnami/ghost
 +      - /path/to/ghost-persistence:/bitnami/ghost
    ...
 -volumes:
