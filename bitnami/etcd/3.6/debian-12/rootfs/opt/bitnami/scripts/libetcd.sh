@@ -629,27 +629,25 @@ etcd_initialize() {
         if is_boolean_yes "$ETCD_START_FROM_SNAPSHOT"; then
             if [[ -f "${ETCD_INIT_SNAPSHOTS_DIR}/${ETCD_INIT_SNAPSHOT_FILENAME}" ]]; then
                 info "Restoring snapshot before initializing etcd cluster"
-                local -a restore_args=("--data-dir" "$ETCD_DATA_DIR")
-                if [[ ${#initial_members[@]} -gt 1 ]]; then
-                    #
-                    # Only recalculate the initial cluster config if it hasn't
-                    # been provided.
-                    #
-                    if is_empty_value "$ETCD_INITIAL_CLUSTER"; then
-                      ETCD_INITIAL_CLUSTER="$(recalculate_initial_cluster)"
-                      export ETCD_INITIAL_CLUSTER
-                    fi
-
-                    [[ -f "$ETCD_CONF_FILE" ]] && etcd_conf_write "initial-cluster" "$ETCD_INITIAL_CLUSTER"
-
-                    restore_args+=(
-                        "--name" "$ETCD_NAME"
-                        "--initial-cluster" "$ETCD_INITIAL_CLUSTER"
-                        "--initial-cluster-token" "$ETCD_INITIAL_CLUSTER_TOKEN"
-                        "--initial-advertise-peer-urls" "$ETCD_INITIAL_ADVERTISE_PEER_URLS"
-                    )
+                #
+                # Only recalculate the initial cluster config if it hasn't
+                # been provided.
+                #
+                if is_empty_value "$ETCD_INITIAL_CLUSTER"; then
+                  ETCD_INITIAL_CLUSTER="$(recalculate_initial_cluster)"
+                  export ETCD_INITIAL_CLUSTER
                 fi
-                debug_execute etcdctl snapshot restore "${ETCD_INIT_SNAPSHOTS_DIR}/${ETCD_INIT_SNAPSHOT_FILENAME}" "${restore_args[@]}"
+
+                [[ -f "$ETCD_CONF_FILE" ]] && etcd_conf_write "initial-cluster" "$ETCD_INITIAL_CLUSTER"
+
+                local -a restore_args=(
+                    "--data-dir" "$ETCD_DATA_DIR"
+    	            "--name" "$ETCD_NAME"
+                    "--initial-cluster" "$ETCD_INITIAL_CLUSTER"
+                    "--initial-cluster-token" "$ETCD_INITIAL_CLUSTER_TOKEN"
+                    "--initial-advertise-peer-urls" "$ETCD_INITIAL_ADVERTISE_PEER_URLS"
+                )
+                debug_execute etcdutl snapshot restore "${ETCD_INIT_SNAPSHOTS_DIR}/${ETCD_INIT_SNAPSHOT_FILENAME}" "${restore_args[@]}"
             else
                 error "There was no snapshot to restore!"
                 exit 1
