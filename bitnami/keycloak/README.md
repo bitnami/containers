@@ -227,17 +227,17 @@ services:
       - POSTGRESQL_USERNAME=bn_keycloak
       - POSTGRESQL_DATABASE=bitnami_keycloak
     volumes:
-      - 'postgresql_data:/bitnami/postgresql'
+      - postgresql_data:/bitnami/postgresql
   keycloak:
     image: docker.io/bitnami/keycloak:latest
     ports:
-      - "80:8080"
+      - 80:8080
     environment:
       - KEYCLOAK_CREATE_ADMIN_USER=true
     depends_on:
       - postgresql
     volumes:
-      - './mynewtheme:/opt/bitnami/keycloak/themes/mynewtheme'
+      - ./mynewtheme:/opt/bitnami/keycloak/themes/mynewtheme
 volumes:
   postgresql_data:
     driver: local
