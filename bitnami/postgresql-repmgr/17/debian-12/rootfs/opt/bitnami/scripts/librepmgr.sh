@@ -890,7 +890,6 @@ repmgr_initialize() {
             # Allow running custom initialization scripts
             postgresql_custom_init_scripts
             # Set synchronous replication
-
             POSTGRESQL_CLUSTER_APP_NAME="$REPMGR_PARTNER_NODES"
             export POSTGRESQL_CLUSTER_APP_NAME
             postgresql_configure_synchronous_replication
