@@ -148,13 +148,13 @@ networks:
 
 services:
   valkey:
-    image: 'bitnami/valkey:latest'
+    image: bitnami/valkey:latest
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     networks:
       - app-tier
   myapp:
-    image: 'YOUR_APPLICATION_IMAGE'
+    image: YOUR_APPLICATION_IMAGE
     networks:
       - app-tier
 ```
@@ -384,7 +384,7 @@ services:
       - VALKEY_PORT_NUMBER=7000
     ...
     ports:
-      - '7000:7000'
+      - 7000:7000
   ....
 ```
 
@@ -448,19 +448,19 @@ version: '2'
 
 services:
   valkey-primary:
-    image: 'bitnami/valkey:latest'
+    image: bitnami/valkey:latest
     ports:
-      - '6379'
+      - 6379
     environment:
       - VALKEY_REPLICATION_MODE=primary
       - VALKEY_PASSWORD=my_primary_password
     volumes:
-      - '/path/to/valkey-persistence:/bitnami'
+      - /path/to/valkey-persistence:/bitnami
 
   valkey-replica:
-    image: 'bitnami/valkey:latest'
+    image: bitnami/valkey:latest
     ports:
-      - '6379'
+      - 6379
     depends_on:
       - valkey-primary
     environment:
