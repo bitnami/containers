@@ -148,13 +148,13 @@ networks:
 
 services:
   mariadb:
-    image: 'bitnami/mariadb:latest'
+    image: bitnami/mariadb:latest
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     networks:
       - app-tier
   myapp:
-    image: 'YOUR_APPLICATION_IMAGE'
+    image: YOUR_APPLICATION_IMAGE
     networks:
       - app-tier
 ```
@@ -492,9 +492,9 @@ version: '2'
 
 services:
   mariadb-master:
-    image: 'bitnami/mariadb:latest'
+    image: bitnami/mariadb:latest
     ports:
-      - '3306'
+      - 3306
     volumes:
       - /path/to/mariadb-persistence:/bitnami/mariadb
     environment:
@@ -506,9 +506,9 @@ services:
       - MARIADB_PASSWORD=my_password
       - MARIADB_DATABASE=my_database
   mariadb-slave:
-    image: 'bitnami/mariadb:latest'
+    image: bitnami/mariadb:latest
     ports:
-      - '3306'
+      - 3306
     depends_on:
       - mariadb-master
     environment:
@@ -636,7 +636,7 @@ services:
   mariadb:
     build: .
     ports:
-      - '3306:3307'
+      - 3306:3307
     volumes:
       - /path/to/my_custom.cnf:/opt/bitnami/mariadb/conf/my_custom.cnf:ro
       - data:/bitnami/mariadb/data

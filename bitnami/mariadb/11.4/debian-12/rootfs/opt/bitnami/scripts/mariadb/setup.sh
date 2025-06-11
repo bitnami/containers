@@ -17,10 +17,11 @@ set -o pipefail
 # Load MariaDB environment variables
 . /opt/bitnami/scripts/mariadb-env.sh
 
-# Ensure mysql unix socket file does not exist
-rm -rf "${DB_SOCKET_FILE}.lock"
 # Ensure MariaDB environment variables settings are valid
-mysql_validate
+mariadb_validate
+# Ensure MariaDB unix socket and PID files does not exist if leftovers are present
+# This fixes an issue where the trap would kill the entrypoint.sh
+rm -f "${DB_SOCKET_FILE}.lock" "$DB_PID_FILE"
 # Ensure MariaDB is stopped when this script ends.
 trap "mysql_stop" EXIT
 if am_i_root; then
@@ -30,11 +31,11 @@ if am_i_root; then
     chmod o+w "$(readlink /dev/stdout)"
 fi
 # Ensure MariaDB is initialized
-mysql_initialize
+mariadb_initialize
 # Allow running custom initialization scripts
-mysql_custom_scripts 'init'
+mariadb_custom_scripts 'init'
 # Allow running custom start scripts
-mysql_custom_scripts 'start'
+mariadb_custom_scripts 'start'
 # Stop MariaDB before flagging it as fully initialized.
 # Relying only on the trap defined above could produce a race condition.
 mysql_stop

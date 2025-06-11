@@ -24,11 +24,9 @@
 # Returns:
 #   Array with extra flags to use
 #########################
-mysql_extra_flags() {
+mariadb_extra_flags() {
     local randNumber
     local -a dbExtraFlags=()
-    # shellcheck disable=SC2153
-    read -r -a userExtraFlags <<< "$DB_EXTRA_FLAGS"
 
     if [[ -n "$DB_REPLICATION_MODE" ]]; then
         randNumber="$(head /dev/urandom | tr -dc 0-9 | head -c 3 ; echo '')"
@@ -40,13 +38,15 @@ mysql_extra_flags() {
         fi
     fi
 
+    # shellcheck disable=SC2153
+    read -r -a userExtraFlags <<< "$DB_EXTRA_FLAGS"
     [[ "${#userExtraFlags[@]}" -eq 0 ]] || dbExtraFlags+=("${userExtraFlags[@]}")
 
     echo "${dbExtraFlags[@]:-}"
 }
 
 ########################
-# Validate settings in MYSQL_*/MARIADB_* environment variables
+# Validate settings in MARIADB_* environment variables
 # Globals:
 #   DB_*
 # Arguments:
@@ -54,8 +54,8 @@ mysql_extra_flags() {
 # Returns:
 #   None
 #########################
-mysql_validate() {
-    info "Validating settings in MYSQL_*/MARIADB_* env vars"
+mariadb_validate() {
+    info "Validating settings in MARIADB_* env vars"
     local error_code=0
 
     # Auxiliary functions
@@ -63,7 +63,6 @@ mysql_validate() {
         error "$1"
         error_code=1
     }
-
     empty_password_enabled_warn() {
         warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD}. For safety reasons, do not use this flag in a production environment."
     }
@@ -80,21 +79,21 @@ mysql_validate() {
                 empty_password_enabled_warn
             else
                 if [[ -n "$DB_REPLICATION_USER" ]] && [[ -z "$DB_REPLICATION_PASSWORD" ]]; then
-                    empty_password_error "$(get_env_var REPLICATION_PASSWORD)"
+                    empty_password_error "MARIADB_REPLICATION_PASSWORD"
                 fi
                 if [[ -z "$DB_ROOT_PASSWORD" ]]; then
-                    empty_password_error "$(get_env_var ROOT_PASSWORD)"
+                    empty_password_error "MARIADB_ROOT_PASSWORD"
                 fi
                 if (( ${#DB_ROOT_PASSWORD} > 32 )); then
-                    print_validation_error "The password can not be longer than 32 characters. Set the environment variable $(get_env_var ROOT_PASSWORD) with a shorter value (currently ${#DB_ROOT_PASSWORD} characters)"
+                    print_validation_error "The password can not be longer than 32 characters. Set the environment variable MARIADB_ROOT_PASSWORD with a shorter value (currently ${#DB_ROOT_PASSWORD} characters)"
                 fi
                 if [[ -n "$DB_USER" ]] && [[ -z "$DB_PASSWORD" ]]; then
-                    empty_password_error "$(get_env_var PASSWORD)"
+                    empty_password_error "MARIADB_PASSWORD"
                 fi
             fi
         elif [[ "$DB_REPLICATION_MODE" = "slave" ]]; then
             if [[ -z "$DB_MASTER_HOST" ]]; then
-                print_validation_error "Slave replication mode chosen without setting the environment variable $(get_env_var MASTER_HOST). Use it to indicate where the Master node is running"
+                print_validation_error "Slave replication mode chosen without setting the environment variable MARIADB_MASTER_HOST. Use it to indicate where the Master node is running"
             fi
         else
             print_validation_error "Invalid replication mode. Available options are 'master/slave'"
@@ -104,34 +103,33 @@ mysql_validate() {
             empty_password_enabled_warn
         else
             if [[ -z "$DB_ROOT_PASSWORD" ]]; then
-                empty_password_error "$(get_env_var ROOT_PASSWORD)"
+                empty_password_error "MARIADB_ROOT_PASSWORD"
             fi
             if [[ -n "$DB_USER" ]] && [[ -z "$DB_PASSWORD" ]]; then
-                empty_password_error "$(get_env_var PASSWORD)"
+                empty_password_error "MARIADB_PASSWORD"
             fi
         fi
     fi
     if [[ "${DB_ROOT_PASSWORD:-}" = *\\* ]]; then
-        backslash_password_error "$(get_env_var ROOT_PASSWORD)"
+        backslash_password_error "MARIADB_ROOT_PASSWORD"
     fi
     if [[ -n "$DB_USER" ]] && [[ "$DB_USER" = "root" ]]; then
         print_validation_error "root user is already created in the database and you can't use it as username for user creation."
     fi
     if [[ "${DB_PASSWORD:-}" = *\\* ]]; then
-        backslash_password_error "$(get_env_var PASSWORD)"
+        backslash_password_error "MARIADB_PASSWORD"
     fi
     if [[ "${DB_REPLICATION_PASSWORD:-}" = *\\* ]]; then
-        backslash_password_error "$(get_env_var REPLICATION_PASSWORD)"
+        backslash_password_error "MARIADB_REPLICATION_PASSWORD"
     fi
 
-    collation_env_var="$(get_env_var COLLATION)"
-    is_empty_value "${!collation_env_var:-}" || warn "The usage of '$(get_env_var COLLATION)' is deprecated and will soon be removed. Use '$(get_env_var COLLATE)' instead."
+    is_empty_value "${MARIADB_COLLATION:-}" || warn "The usage of 'MARIADB_COLLATION' is deprecated and will soon be removed. Use 'MARIADB_COLLATE' instead."
 
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
 ########################
-# Creates MySQL/MariaDB configuration file
+# Creates MariaDB configuration file
 # Globals:
 #   DB_*
 # Arguments:
@@ -139,7 +137,7 @@ mysql_validate() {
 # Returns:
 #   None
 #########################
-mysql_create_default_config() {
+mariadb_create_default_config() {
     debug "Creating main configuration file"
     cat > "$DB_CONF_FILE" <<EOF
 [mysqladmin]
@@ -184,11 +182,11 @@ EOF
 # Returns:
 #   None
 #########################
-mysql_exec_initial_dump() {
+mariadb_exec_initial_dump() {
     local -r dump_file="${DB_DATA_DIR}/dump_all_databases.sql"
 
     info "MariaDB dump master data start..."
-    mysqldump --verbose --single-transaction --quick --source-data=2 --all-databases -h "$DB_MASTER_HOST" -P "$DB_MASTER_PORT_NUMBER" -u "$DB_MASTER_ROOT_USER" -p"$DB_MASTER_ROOT_PASSWORD" > "$dump_file"
+    mariadb-dump --verbose --single-transaction --quick --source-data=2 --all-databases -h "$DB_MASTER_HOST" -P "$DB_MASTER_PORT_NUMBER" -u "$DB_MASTER_ROOT_USER" -p"$DB_MASTER_ROOT_PASSWORD" > "$dump_file"
     debug "Finish dump databases"
 
     # Look for the line containing "CHANGE REPLICATION SOURCE"
@@ -228,7 +226,7 @@ EOF
 # Returns:
 #   None
 #########################
-mysql_configure_replication() {
+mariadb_configure_replication() {
     if [[ "$DB_REPLICATION_MODE" = "slave" ]]; then
         info "Configuring replication in slave node"
         debug "Checking if replication master is ready to accept connection"
@@ -237,7 +235,7 @@ mysql_configure_replication() {
         done
 
         if [[ "$DB_REPLICATION_SLAVE_DUMP" = "true" ]]; then
-            mysql_exec_initial_dump
+            mariadb_exec_initial_dump
         else
             debug "Replication master ready!"
             debug "Setting the master configuration"
@@ -254,7 +252,7 @@ EOF
     elif [[ "$DB_REPLICATION_MODE" = "master" ]]; then
         info "Configuring replication in master node"
         if [[ -n "$DB_REPLICATION_USER" ]]; then
-            mysql_ensure_replication_user_exists "$DB_REPLICATION_USER" "$DB_REPLICATION_PASSWORD"
+            mariadb_ensure_replication_user_exists "$DB_REPLICATION_USER" "$DB_REPLICATION_PASSWORD"
         fi
     fi
 }
@@ -269,20 +267,14 @@ EOF
 # Returns:
 #   None
 #########################
-mysql_ensure_replication_user_exists() {
+mariadb_ensure_replication_user_exists() {
     local -r user="${1:?user is required}"
     local -r password="${2:-}"
 
     debug "Configure replication user credentials"
-    if [[ "$DB_FLAVOR" = "mariadb" ]]; then
-        mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
+    mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
 create or replace user '$user'@'%' $([ "$password" != "" ] && echo "identified by \"$password\"");
 EOF
-    else
-        mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
-create user '$user'@'%' $([ "$password" != "" ] && echo "identified with 'mysql_native_password' by \"$password\"");
-EOF
-    fi
     mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
 grant REPLICATION SLAVE on *.* to '$user'@'%' with grant option;
 flush privileges;
@@ -290,7 +282,7 @@ EOF
 }
 
 ########################
-# Ensure MySQL/MariaDB is initialized
+# Create configuration file for mariadb-admin
 # Globals:
 #   DB_*
 # Arguments:
@@ -298,12 +290,24 @@ EOF
 # Returns:
 #   None
 #########################
-mysql_initialize() {
-    info "Initializing $DB_FLAVOR database"
+mariadb_create_admin_config() {
+    cat > "${DB_CONF_DIR}/admin.cnf" <<EOF
+[mariadb-admin]
+password=$(get_master_env_var_value ROOT_PASSWORD)
+EOF
+}
 
-    # This fixes an issue where the trap would kill the entrypoint.sh, if a PID was left over from a previous run
-    # Exec replaces the process without creating a new one, and when the container is restarted it may have the same PID
-    rm -f "$DB_PID_FILE"
+########################
+# Ensure MariaDB is initialized
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+mariadb_initialize() {
+    info "Initializing MariaDB database"
 
     debug "Ensuring expected directories/files exist"
     for dir in "$DB_DATA_DIR" "$DB_TMP_DIR" "$DB_LOGS_DIR"; do
@@ -332,7 +336,7 @@ mysql_initialize() {
 
     if [[ -e "$DB_DATA_DIR/mysql" ]]; then
         info "Using persisted data"
-        # mysql_upgrade requires the server to be running
+        # mariadb-upgrade requires the server to be running
         [[ -n "$(get_master_env_var_value ROOT_PASSWORD)" ]] && export ROOT_AUTH_ENABLED="yes"
         # https://dev.mysql.com/doc/refman/8.0/en/replication-upgrade.html
         mariadb_upgrade
@@ -341,7 +345,7 @@ mysql_initialize() {
         rm -rf "${DB_DATA_DIR:?}"/*
         info "Installing database"
         mariadb_install_db
-        mysql_start_bg
+        mariadb_start_bg
         wait_for_mysql_access
         # we delete existing users and create new ones with stricter access
         # commands can still be executed until we restart or run 'flush privileges'
@@ -353,7 +357,7 @@ EOF
         if [[ -z "$DB_REPLICATION_MODE" ]] || [[ "$DB_REPLICATION_MODE" = "master" ]]; then
             if [[ "$DB_REPLICATION_MODE" = "master" ]]; then
                 debug "Starting replication"
-                echo "RESET MASTER;" | debug_execute "$DB_BIN_DIR/mysql" --defaults-file="$DB_CONF_FILE" -N -u root
+                echo "RESET MASTER;" | debug_execute "${DB_BIN_DIR}/mariadb" --defaults-file="$DB_CONF_FILE" -N -u root
             fi
             mysql_ensure_root_user_exists "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" "$DB_AUTHENTICATION_PLUGIN"
             mysql_ensure_user_not_exists "" # ensure unknown user does not exist
@@ -372,10 +376,15 @@ EOF
             fi
             [[ -n "$DB_ROOT_PASSWORD" ]] && export ROOT_AUTH_ENABLED="yes"
         fi
-        [[ -n "$DB_REPLICATION_MODE" ]] && mysql_configure_replication
-        # we run mysql_upgrade in order to recreate necessary database users and flush privileges
+        [[ -n "$DB_REPLICATION_MODE" ]] && mariadb_configure_replication
+        # we run mariadb_upgrade in order to recreate necessary database users and flush privileges
         mariadb_upgrade
     fi
+    # Create the configuration file for mariadb-admin
+    mariadb_create_admin_config
+
+    # Avoid exit code of previous commands to affect the result of this function
+    true
 }
 
 ########################
@@ -383,12 +392,14 @@ EOF
 # Globals:
 #   DB_*
 # Arguments:
-#   $1 - 'init' or 'start' ('init' runs on first container start, 'start' runs everytime the container starts)
+#   $1 - 'init' or 'start' ('init' runs on first container start, 'start' runs every time the container starts)
 # Returns:
 #   None
 #########################
-mysql_custom_scripts() {
-    if [[ -n $(find /docker-entrypoint-"$1"db.d/ -type f -regex ".*\.\(sh\|sql\|sql.gz\)") ]] && { [[ ! -f "$DB_DATA_DIR/.user_scripts_initialized" ]] || [[ $1 == start ]]; } then
+mariadb_custom_scripts() {
+    local -r init_semaphore="${DB_DATA_DIR}/.user_scripts_initialized"
+
+    if [[ -d "/docker-entrypoint-${1}db.d" ]] && [[ -n $(find /docker-entrypoint-"$1"db.d/ -type f -regex ".*\.\(sh\|sql\|sql.gz\)") ]] && { [[ ! -f "$init_semaphore" ]] || [[ $1 == start ]]; } then
         info "Loading user's custom files from /docker-entrypoint-$1db.d";
         for f in /docker-entrypoint-"$1"db.d/*; do
             debug "Executing $f"
@@ -428,7 +439,7 @@ mysql_custom_scripts() {
                     ;;
             esac
         done
-        touch "$DB_DATA_DIR"/.user_scripts_initialized
+        touch "$init_semaphore"
     fi
 }
 
@@ -441,7 +452,9 @@ mysql_custom_scripts() {
 # Returns:
 #   None
 #########################
-mysql_start_bg() {
+mariadb_start_bg() {
+    is_mysql_running && return
+
     local -a flags=(
         "--defaults-file=${DB_CONF_FILE}"
         "--basedir=${DB_BASE_DIR}"
@@ -455,17 +468,16 @@ mysql_start_bg() {
 
     # Do not start as root, to avoid permission issues
     am_i_root && flags+=("--user=${DB_DAEMON_USER}")
+    ! is_boolean_yes "${BITNAMI_DEBUG:-false}" && flags+=("--log-error=/dev/null")
     # Add flags specified via the 'DB_EXTRA_FLAGS' environment variable
-    read -r -a db_extra_flags <<< "$(mysql_extra_flags)"
+    read -r -a db_extra_flags <<< "$(mariadb_extra_flags)"
     [[ "${#db_extra_flags[@]}" -gt 0 ]] && flags+=("${db_extra_flags[@]}")
     flags+=("$@")
 
-    is_mysql_running && return
+    info "Starting MariaDB in background"
+    debug_execute "${DB_SBIN_DIR}/mariadbd" "${flags[@]}" &
 
-    info "Starting $DB_FLAVOR in background"
-    debug_execute "${DB_SBIN_DIR}/mysqld" "${flags[@]}" &
-
-    # we cannot use wait_for_mysql_access here as mysql_upgrade for MySQL >=8 depends on this command
+    # we cannot use wait_for_mysql_access here as mariadb_upgrade depends on this command
     # users are not configured on slave nodes during initialization due to --skip-slave-start
     wait_for_mysql
 
@@ -488,18 +500,22 @@ mysql_start_bg() {
 #   None
 #########################
 mariadb_install_db() {
-    local command="${DB_BIN_DIR}/mysql_install_db"
+    local mariadb_version major_version minor_version
+    local command="${DB_BIN_DIR}/mariadb-install-db"
     local -a args=("--defaults-file=${DB_CONF_FILE}" "--basedir=${DB_BASE_DIR}" "--datadir=${DB_DATA_DIR}")
 
     # Add flags specified via the 'DB_EXTRA_FLAGS' environment variable
-    read -r -a db_extra_flags <<< "$(mysql_extra_flags)"
+    read -r -a db_extra_flags <<< "$(mariadb_extra_flags)"
     [[ "${#db_extra_flags[@]}" -gt 0 ]] && args+=("${db_extra_flags[@]}")
 
     am_i_root && args=("${args[@]}" "--user=$DB_DAEMON_USER")
     args+=("--auth-root-authentication-method=normal")
     # Feature available only in MariaDB 10.5+
     # ref: https://mariadb.com/kb/en/mysql_install_db/#not-creating-the-test-database-and-anonymous-user
-    if [[ ! "$(mysql_get_version)" =~ ^10\.[01234]\. ]]; then
+    mariadb_version="$(mysql_get_version)"
+    major_version="$(get_sematic_version "${mariadb_version}" 1)"
+    minor_version="$(get_sematic_version "${mariadb_version}" 2)"
+    if [[ "${major_version}" -gt 10 ]] || [[ "${major_version}" -eq 10 && "${minor_version}" -ge 5 ]]; then
         is_boolean_yes "$DB_SKIP_TEST_DB" && args+=("--skip-test-db")
     fi
 
@@ -518,11 +534,11 @@ mariadb_install_db() {
 #########################
 mariadb_upgrade() {
     local -a args=("--defaults-file=${DB_CONF_FILE}" "-u" "$DB_ROOT_USER")
-    info "Running mysql_upgrade"
-    mysql_start_bg
+    info "Running mariadb_upgrade"
+    mariadb_start_bg
     is_boolean_yes "${ROOT_AUTH_ENABLED:-false}" && args+=("-p$(get_master_env_var_value ROOT_PASSWORD)")
     [[ "${DB_UPGRADE}" == "FORCE" ]] && args+=("--force")
-    debug_execute "${DB_BIN_DIR}/mysql_upgrade" "${args[@]}" || echo "This installation is already upgraded"
+    debug_execute "${DB_BIN_DIR}/mariadb_upgrade" "${args[@]}" || info "This installation is already upgraded"
 }
 
 #!/bin/bash
@@ -530,6 +546,23 @@ mariadb_upgrade() {
 # SPDX-License-Identifier: APACHE-2.0
 #
 # Library for mysql common
+
+########################
+# Returns the path to the MySQL/MariaDB binary
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   Path to the MySQL/MariaDB binary
+#########################
+mysql_binary() {
+    if [[ "${DB_FLAVOR:-mysql}" = "mariadb" ]]; then
+        echo "${DB_BIN_DIR}/mariadb"
+    else
+        echo "${DB_BIN_DIR}/mysql"
+    fi
+}
 
 ########################
 # Extract mysql version from version string
@@ -544,7 +577,7 @@ mysql_get_version() {
     local ver_string
     local -a ver_split
 
-    ver_string=$("${DB_BIN_DIR}/mysql" "--version")
+    ver_string=$("$(mysql_binary)" "--version")
     read -r -a ver_split <<< "$ver_string"
 
     if [[ "$ver_string" = *" Distrib "* ]]; then
@@ -628,11 +661,11 @@ mysql_execute_print_output() {
         local mysql_cmd
         mysql_cmd="$(</dev/stdin)"
         debug "Executing SQL command:\n$mysql_cmd"
-        "$DB_BIN_DIR/mysql" "${args[@]}" <<<"$mysql_cmd"
+        "$(mysql_binary)" "${args[@]}" <<<"$mysql_cmd"
     else
         # Do not store the command(s) as a variable, to avoid issues when importing large files
         # https://github.com/bitnami/bitnami-docker-mariadb/issues/251
-        "$DB_BIN_DIR/mysql" "${args[@]}"
+        "$(mysql_binary)" "${args[@]}"
     fi
 }
 
