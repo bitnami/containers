@@ -463,6 +463,7 @@ postgresql_configure_synchronous_replication() {
     local replication_nodes=""
     local synchronous_standby_names=""
     info "Configuring synchronous_replication"
+    
     # Check if user provided list of replication nodes, else - read and transform from POSTGRESQL_CLUSTER_APP_NAME
     if [[ -n $REPMGR_REPLICATION_NODES ]]; then
             replication_nodes="\"${REPMGR_REPLICATION_NODES}\""
