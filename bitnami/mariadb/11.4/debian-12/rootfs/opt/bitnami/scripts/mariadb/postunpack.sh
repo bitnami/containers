@@ -19,14 +19,14 @@ set -o pipefail
 # Configure MariaDB options based on build-time defaults
 info "Configuring default MariaDB options"
 ensure_dir_exists "$DB_CONF_DIR"
-mysql_create_default_config
+mariadb_create_default_config
 
 for dir in "$DB_TMP_DIR" "$DB_LOGS_DIR" "$DB_CONF_DIR" "$DB_DEFAULT_CONF_DIR" "${DB_CONF_DIR}/bitnami" "$DB_VOLUME_DIR" "$DB_DATA_DIR"; do
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
 done
 
-# Fix to avoid issues detecting plugins in mysql_install_db
+# Fix to avoid issues detecting plugins in mariadb-install-db
 ln -sf "$DB_BASE_DIR/plugin" "$DB_BASE_DIR/lib/plugin"
 
 # Redirect all logging to stdout
