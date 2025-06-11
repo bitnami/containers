@@ -338,6 +338,12 @@ pgbouncer_initialize() {
     # Configuring permissions for tmp and logs folders
     am_i_root && configure_permissions_ownership "$PGBOUNCER_TMP_DIR $PGBOUNCER_LOG_DIR" -u "$PGBOUNCER_DAEMON_USER" -g "$PGBOUNCER_DAEMON_GROUP"
 
+    # Configure ownership and permissions for the socket directory if PGBOUNCER_SOCKET_DIR is set.
+    # This ensures the directory is usable by PGBOUNCER_DAEMON_USER, especially if it's a root-owned mount point.
+    if ! is_empty_value "$PGBOUNCER_SOCKET_DIR"; then
+        am_i_root && configure_permissions_ownership "$PGBOUNCER_SOCKET_DIR" -u "$PGBOUNCER_DAEMON_USER" -g "$PGBOUNCER_DAEMON_GROUP" --dir-mode "0755"
+    fi
+
     # Avoid exit code of previous commands to affect the result of this function
     true
 }
