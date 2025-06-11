@@ -125,7 +125,7 @@ Finally we create a new container instance to launch the PostgreSQL client and c
 ```console
 docker run -it --rm \
   --network my-network \
-  bitnami/postgresql:10 \
+  bitnami/postgresql:latest \
   psql -h pg-0 -U postgres
 ```
 
@@ -142,7 +142,7 @@ networks:
 
 services:
   pg-0:
-    image: 'bitnami/postgresql-repmgr:latest'
+    image: bitnami/postgresql-repmgr:latest
     networks:
       - my-network
     environment:
@@ -153,7 +153,7 @@ services:
       - REPMGR_NODE_NAME=pg-0
       - REPMGR_PARTNER_NODES=pg-0
   myapp:
-    image: 'YOUR_APPLICATION_IMAGE'
+    image: YOUR_APPLICATION_IMAGE
     networks:
       - my-network
 ```
@@ -385,13 +385,13 @@ services:
   pg-0:
     image: bitnami/postgresql-repmgr:latest
     ports:
-      - '5432:5432'
+      - 5432:5432
     volumes:
       - /path/to/custom-conf/:/bitnami/repmgr/conf/
   pg-1:
     image: bitnami/postgresql-repmgr:latest
     ports:
-      - '5432:5432'
+      - 5432:5432
     volumes:
       - /path/to/custom-conf/:/bitnami/repmgr/conf/
 ```
@@ -473,14 +473,14 @@ services:
   pg-0:
     image: bitnami/postgresql-repmgr:latest
     ports:
-      - '5432:5432'
+      - 5432:5432
     volumes:
       - /path/to/extra-custom-conf/:/bitnami/postgresql/conf/conf.d/
       - /path/to/custom-conf/:/bitnami/repmgr/conf/
   pg-1:
     image: bitnami/postgresql-repmgr:latest
     ports:
-      - '5432:5432'
+      - 5432:5432
     volumes:
       - /path/to/extra-custom-conf/:/bitnami/postgresql/conf/conf.d/
       - /path/to/custom-conf/:/bitnami/repmgr/conf/
