@@ -629,10 +629,8 @@ etcd_initialize() {
         if is_boolean_yes "$ETCD_START_FROM_SNAPSHOT"; then
             if [[ -f "${ETCD_INIT_SNAPSHOTS_DIR}/${ETCD_INIT_SNAPSHOT_FILENAME}" ]]; then
                 info "Restoring snapshot before initializing etcd cluster"
-                #
                 # Only recalculate the initial cluster config if it hasn't
                 # been provided.
-                #
                 if is_empty_value "$ETCD_INITIAL_CLUSTER"; then
                   ETCD_INITIAL_CLUSTER="$(recalculate_initial_cluster)"
                   export ETCD_INITIAL_CLUSTER
@@ -642,7 +640,7 @@ etcd_initialize() {
 
                 local -a restore_args=(
                     "--data-dir" "$ETCD_DATA_DIR"
-    	            "--name" "$ETCD_NAME"
+                    "--name" "$ETCD_NAME"
                     "--initial-cluster" "$ETCD_INITIAL_CLUSTER"
                     "--initial-cluster-token" "$ETCD_INITIAL_CLUSTER_TOKEN"
                     "--initial-advertise-peer-urls" "$ETCD_INITIAL_ADVERTISE_PEER_URLS"
