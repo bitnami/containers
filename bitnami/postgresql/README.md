@@ -144,11 +144,11 @@ networks:
 
 services:
   postgresql:
-    image: 'bitnami/postgresql:latest'
+    image: bitnami/postgresql:latest
     networks:
       - app-tier
   myapp:
-    image: 'YOUR_APPLICATION_IMAGE'
+    image: YOUR_APPLICATION_IMAGE
     networks:
       - app-tier
 ```
@@ -475,11 +475,11 @@ version: '2'
 
 services:
   postgresql-master:
-    image: 'bitnami/postgresql:latest'
+    image: bitnami/postgresql:latest
     ports:
-      - '5432'
+      - 5432
     volumes:
-      - 'postgresql_master_data:/bitnami/postgresql'
+      - postgresql_master_data:/bitnami/postgresql
     environment:
       - POSTGRESQL_REPLICATION_MODE=master
       - POSTGRESQL_REPLICATION_USER=repl_user
@@ -488,9 +488,9 @@ services:
       - POSTGRESQL_PASSWORD=my_password
       - POSTGRESQL_DATABASE=my_database
   postgresql-slave:
-    image: 'bitnami/postgresql:latest'
+    image: bitnami/postgresql:latest
     ports:
-      - '5432'
+      - 5432
     depends_on:
       - postgresql-master
     environment:
@@ -529,11 +529,11 @@ version: '2'
 
 services:
   postgresql-master:
-    image: 'bitnami/postgresql:latest'
+    image: bitnami/postgresql:latest
     ports:
-      - '5432'
+      - 5432
     volumes:
-      - 'postgresql_master_data:/bitnami/postgresql'
+      - postgresql_master_data:/bitnami/postgresql
     environment:
       - POSTGRESQL_REPLICATION_MODE=master
       - POSTGRESQL_REPLICATION_USER=repl_user
@@ -544,11 +544,11 @@ services:
       - POSTGRESQL_SYNCHRONOUS_COMMIT_MODE=on
       - POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS=1
     volumes:
-      - '/path/to/postgresql-persistence:/bitnami/postgresql'
+      - /path/to/postgresql-persistence:/bitnami/postgresql
   postgresql-slave:
-    image: 'bitnami/postgresql:latest'
+    image: bitnami/postgresql:latest
     ports:
-      - '5432'
+      - 5432
     depends_on:
       - postgresql-master
     environment:
@@ -558,9 +558,9 @@ services:
       - POSTGRESQL_MASTER_HOST=postgresql-master
       - POSTGRESQL_MASTER_PORT_NUMBER=5432
   postgresql-slave2:
-    image: 'bitnami/postgresql:latest'
+    image: bitnami/postgresql:latest
     ports:
-      - '5432'
+      - 5432
     depends_on:
       - postgresql-master
     environment:
@@ -690,9 +690,9 @@ version: '2'
 
 services:
   postgresql:
-    image: 'bitnami/postgresql:latest'
+    image: bitnami/postgresql:latest
     ports:
-      - '5432:5432'
+      - 5432:5432
     volumes:
       - /path/to/postgresql-persistence/conf/:/bitnami/postgresql/conf/
 ```
