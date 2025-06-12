@@ -40,7 +40,6 @@ touch "${PHP_CONF_DIR}/common.conf"
 
 # Log to stdout/stderr for easy debugging
 ln -sf "/dev/stdout" "$PHP_FPM_LOG_FILE"
-php_conf_set "error_log" "/dev/stderr"
 
 # Copy all initially generated configuration files to the default directory
 # (this is to avoid breaking when entrypoint is being overridden)
