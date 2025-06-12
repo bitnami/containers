@@ -165,25 +165,25 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
    postgresql:
      ...
      volumes:
--      - 'postgresql_data:/bitnami/postgresql'
+-      - postgresql_data:/bitnami/postgresql
 +      - /path/to/postgresql-persistence:/bitnami/postgresql
    ...
    redis:
      ...
      volumes:
--      - 'redis_data:/bitnami/redis'
+-      - redis_data:/bitnami/redis
 +      - /path/to/redis-persistence:/bitnami/redis
    ...
    discourse:
      ...
      volumes:
--      - 'discourse_data:/bitnami/discourse'
+-      - discourse_data:/bitnami/discourse
 +      - /path/to/discourse-persistence:/bitnami/discourse
    ...
    sidekiq:
      ...
      volumes:
--      - 'discourse_data:/bitnami/discourse'
+-      - discourse_data:/bitnami/discourse
 +      - /path/to/discourse-persistence:/bitnami/discourse
    ...
 -volumes:
