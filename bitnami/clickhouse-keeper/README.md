@@ -138,7 +138,7 @@ services:
     networks:
       - my-network
   myapp:
-    image: 'YOUR_APPLICATION_IMAGE'
+    image: YOUR_APPLICATION_IMAGE
     networks:
       - my-network
 ```
