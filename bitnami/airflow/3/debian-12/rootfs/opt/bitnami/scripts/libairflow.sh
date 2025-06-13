@@ -311,7 +311,12 @@ airflow_generate_config() {
     # ref: https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#fernet-key
     # ref: https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#secret-key
     [[ -n "$AIRFLOW_FERNET_KEY" ]] && airflow_conf_set "core" "fernet_key" "$AIRFLOW_FERNET_KEY"
-    airflow_conf_set "webserver" "secret_key" "${AIRFLOW_WEBSERVER_SECRET_KEY}"
+
+    # Configure the web server secret key parameter
+    secret_key_section="api"
+    [[ $(airflow_major_version) -eq 2 ]] && secret_key_section="webserver"
+    airflow_conf_set "${secret_key_section}" "secret_key" "${AIRFLOW_WEBSERVER_SECRET_KEY}"
+
     [[ $(airflow_major_version) -ne 2 ]] && airflow_conf_set "api_auth" "jwt_secret" "$AIRFLOW_APISERVER_SECRET_KEY"
 
     local capacity_key="capacity"
