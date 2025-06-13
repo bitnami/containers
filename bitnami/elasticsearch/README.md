@@ -157,11 +157,11 @@ networks:
 
 services:
   elasticsearch:
-    image: 'bitnami/elasticsearch:latest'
+    image: bitnami/elasticsearch:latest
     networks:
       - app-tier
   myapp:
-    image: 'YOUR_APPLICATION_IMAGE'
+    image: YOUR_APPLICATION_IMAGE
     networks:
       - app-tier
 ```
