@@ -15,7 +15,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "clickhouse-operator-metrics-exporter-0.25.0-2-linux-${OS_ARCH}-debian-12" \
+      "clickhouse-operator-metrics-exporter-0.25.0-4-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -39,9 +39,9 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-06-06T16:44:51Z" \
+      org.opencontainers.image.created="2025-06-13T10:11:35Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.ref.name="0.25.0-debian-12-r1" \
+      org.opencontainers.image.ref.name="0.25.0-debian-12-r2" \
       org.opencontainers.image.title="clickhouse-operator-metrics-exporter" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
       org.opencontainers.image.version="0.25.0"
