@@ -159,6 +159,23 @@ EOF
 # Library for mysql common
 
 ########################
+# Returns the path to the MySQL/MariaDB binary
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   Path to the MySQL/MariaDB binary
+#########################
+mysql_binary() {
+    if [[ "${DB_FLAVOR:-mysql}" = "mariadb" ]]; then
+        echo "${DB_BIN_DIR}/mariadb"
+    else
+        echo "${DB_BIN_DIR}/mysql"
+    fi
+}
+
+########################
 # Extract mysql version from version string
 # Globals:
 #   DB_*
@@ -171,7 +188,7 @@ mysql_get_version() {
     local ver_string
     local -a ver_split
 
-    ver_string=$("${DB_BIN_DIR}/mysql" "--version")
+    ver_string=$("$(mysql_binary)" "--version")
     read -r -a ver_split <<< "$ver_string"
 
     if [[ "$ver_string" = *" Distrib "* ]]; then
@@ -255,11 +272,11 @@ mysql_execute_print_output() {
         local mysql_cmd
         mysql_cmd="$(</dev/stdin)"
         debug "Executing SQL command:\n$mysql_cmd"
-        "$DB_BIN_DIR/mysql" "${args[@]}" <<<"$mysql_cmd"
+        "$(mysql_binary)" "${args[@]}" <<<"$mysql_cmd"
     else
         # Do not store the command(s) as a variable, to avoid issues when importing large files
         # https://github.com/bitnami/bitnami-docker-mariadb/issues/251
-        "$DB_BIN_DIR/mysql" "${args[@]}"
+        "$(mysql_binary)" "${args[@]}"
     fi
 }
 
