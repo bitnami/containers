@@ -49,7 +49,7 @@ web_server_validate
 # Not moving .htaccess because SuiteCRM generates some of them during installation
 # Backward compatibility with SuiteCRM 7
 if [[ -d "${SUITECRM_BASE_DIR}/public" ]]; then
-    ensure_web_server_app_configuration_exists "suitecrm" --type php --apache-move-htaccess "no" --document-root "${BITNAMI_ROOT_DIR}/suitecrm/public"
+    ensure_web_server_app_configuration_exists "suitecrm" --type php  --document-root "${BITNAMI_ROOT_DIR}/suitecrm/public"
 else
-    ensure_web_server_app_configuration_exists "suitecrm" --type php --apache-move-htaccess "no"
+    ensure_web_server_app_configuration_exists "suitecrm" --type php 
 fi

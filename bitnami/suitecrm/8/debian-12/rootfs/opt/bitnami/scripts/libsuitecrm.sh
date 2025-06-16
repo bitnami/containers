@@ -425,6 +425,22 @@ suitecrm_7_pass_wizard() {
     return "$wizard_exit_code"
 }
 
+
+urlencode() {
+  local string="${1}"
+  local length="${#string}"
+  local encoded=""
+  for (( i = 0; i < length; i++ )); do
+    local c="${string:$i:1}"
+    case "$c" in
+      [a-zA-Z0-9.~_-]) encoded+="$c" ;;
+      *) printf -v encoded '%s%%%02X' "$encoded" "'$c" ;;
+    esac
+  done
+  echo "$encoded"
+}
+
+
 ########################
 # Rebuild SuiteCRM's configuration file
 # Globals:
@@ -435,17 +451,46 @@ suitecrm_7_pass_wizard() {
 #   true if succeded, false otherwise
 #########################
 suitecrm_rebuild_files() {
+
+
+    encoded_user=$(urlencode "$SUITECRM_DATABASE_USER")
+    encoded_pass=$(urlencode "$SUITECRM_DATABASE_PASSWORD")
+    # Build host:port if port is given
+    if [[ -n "$SUITECRM_DATABASE_PORT_NUMBER" ]]; then
+        host_string="$SUITECRM_DATABASE_HOST:$SUITECRM_DATABASE_PORT_NUMBER"
+    else
+        host_string="$SUITECRM_DATABASE_HOST"
+    fi
+
+    if [[ -n "$SUITECRM_APP_SECRET" ]]; then
+        app_secret=$(openssl rand -hex 16)
+    else
+        app_secret="$SUITECRM_APP_SECRET"
+    fi
+
+    # Build content
+    info "Generating .env.local..."
+    content="DATABASE_URL=\"mysql://$encoded_user:$encoded_pass@$host_string/$db_name\"\n"
+    content+="APP_SECRET=$app_secret\n"
+
+    # Write to .env.local
+    echo -e "$content" > "$SUITECRM_BASE_DIR/.env.local"
+
+    info "Generating legacy config ..."
+
     # The below script executes the code from "Repair > Rebuild Config File" to regenerate the configuration file
     # We prefer to run a script rather than via cURL requests because it would require to login, and could cause
     # issues with SUITECRM_SKIP_BOOTSTRAP
     php_execute <<EOF
-chdir('$SUITECRM_BASE_DIR');
+chdir('$SUITECRM_BASE_DIR/public/legacy');
 define('sugarEntry', true);
 require_once('include/utils.php');
 
 // Based on 'install.php' includes
 require_once('include/SugarLogger/LoggerManager.php');
 require_once('sugar_version.php');
+#require_once('install/install_utils.php');
+#require_once('install/install_defaults.php');
 require_once('suitecrm_version.php');
 require_once('include/TimeDate.php');
 require_once('include/Localization/Localization.php');
@@ -460,6 +505,9 @@ require_once('include/utils/file_utils.php');
 // Rebuild the configuration file
 // Based on the RebuildConfig action in the admin panel
 \$clean_config = loadCleanConfig();
+\$clean_config['unique_key']=empty('$SUITECRM_APP_SECRET') ? md5(create_guid()) : '$SUITECRM_APP_SECRET';
+\$clean_config['default_theme']='suite8';
+\$clean_config['cron']['allowed_cron_users'] = array(0 => 'daemon');
 rebuildConfigFile(\$clean_config, \$sugar_version);
 
 // Rebuild the .htaccess file
