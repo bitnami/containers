@@ -21,7 +21,7 @@ set -o nounset
 # based on "initial-cluster" flag value
 # ref: https://etcd.io/docs/latest/op-guide/clustering/#static
 # Globals:
-#   ETCD_INITIAL_CLUSTER 
+#   ETCD_INITIAL_CLUSTER
 # Arguments:
 #   None
 # Returns:
@@ -37,6 +37,11 @@ endpoints_as_host_port() {
 
 read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
 is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(endpoints_as_host_port)")
+
+if [[ -n "$ETCD_PREUPGRADE_START_DELAY" ]]; then
+    info "Waiting for $ETCD_PREUPGRADE_START_DELAY seconds before starting pre-upgrade checks"
+    sleep "$ETCD_PREUPGRADE_START_DELAY"
+fi
 debug "Listing members"
 if ! current="$(etcdctl member list "${extra_flags[@]}" --write-out simple | awk -F ", " '{print $3 ":" $1}')"; then
     error "Unable to list members, are all members healthy?"
