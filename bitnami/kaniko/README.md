@@ -4,7 +4,7 @@
 
 > Kaniko is a tool that builds and pushes container images directly in userspace. This allows securely building container images in environments like a standard Kubernetes cluster.
 
-[Overview of Kaniko](https://github.com/GoogleContainerTools/kaniko)
+[Overview of Kaniko](https://github.com/chainguard-dev/kaniko)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
@@ -96,7 +96,7 @@ To run commands inside this container you can use `docker run`, for example to e
 docker run --rm --name kaniko bitnami/kaniko:latest --help
 ```
 
-Check the [official Kaniko documentation](https://github.com/GoogleContainerTools/kanikodocs/) for more information about how to use Kaniko.
+Check the [official Kaniko documentation](https://github.com/chainguard-dev/kanikodocs/) for more information about how to use Kaniko.
 
 ## Notable Changes
 
