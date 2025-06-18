@@ -143,10 +143,10 @@ Here is a `docker-compose.yml` example that exposes a TLS listener on port `8082
 
 ```yaml
 schema-registry:
-  image: bitnami/schema-registry
+  image: bitnami/schema-registry:latest
   ports:
-    - "8081:8081"
-    - "8082:8082"
+    - 8081:8081
+    - 8082:8082
   depends_on:
     - kafka
   environment:
