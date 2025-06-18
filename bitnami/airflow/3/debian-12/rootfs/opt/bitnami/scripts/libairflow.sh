@@ -284,6 +284,7 @@ airflow_generate_config() {
         airflow_configure_host "${AIRFLOW_APISERVER_HOST}"
         # Configure Airflow webserver authentication
         airflow_configure_webserver_authentication
+        airflow_configure_webserver_hashing
         ;;
     *)
         # Generate Airflow default files
@@ -468,6 +469,23 @@ airflow_configure_webserver_authentication() {
         fi
     fi
 }
+
+########################
+# Configure Airflow webserver hashing method
+# Globals:
+#   AIRFLOW_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+airflow_configure_webserver_hashing() {
+    if [[ $(airflow_major_version) -eq 3 ]]; then
+        info "Configuring Airflow webserver hashing method"
+        airflow_webserver_conf_set "FAB_PASSWORD_HASH_METHOD" "pbkdf2:sha256" "yes"
+    fi
+}
+
 
 ########################
 # Set properties in Airflow's webserver_config.py
