@@ -306,20 +306,20 @@ Based on the extended image, you can use a Docker Compose file like the one belo
 version: '2'
 services:
   mariadb:
-    image: 'bitnami/mariadb:10.11'
+    image: bitnami/mariadb:latest
     environment:
       - MARIADB_ROOT_PASSWORD=bitnami
     volumes:
-      - 'mariadb_data:/bitnami/mariadb'
+      - mariadb_data:/bitnami/mariadb
   phpmyadmin:
     build: .
     ports:
-      - '80:8181'
-      - '443:8143'
+      - 80:8181
+      - 443:8143
     depends_on:
       - mariadb
     volumes:
-      - 'phpmyadmin_data:/bitnami/mariadb'
+      - phpmyadmin_data:/bitnami/mariadb
 volumes:
   mariadb_data:
     driver: local
