@@ -138,13 +138,13 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
    mariadb:
      ...
      volumes:
--      - 'mariadb_data:/bitnami/mariadb'
+-      - ariadb_data:/bitnami/mariadb
 +      - /path/to/mariadb-persistence:/bitnami/mariadb
    ...
    redmine:
      ...
      volumes:
--      - 'redmine_data:/bitnami/redmine'
+-      - redmine_data:/bitnami/redmine
 +      - /path/to/redmine-persistence:/bitnami/redmine
    ...
 -volumes:
