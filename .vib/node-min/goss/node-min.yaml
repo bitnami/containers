@@ -1,9 +1,0 @@
-command:
-  check-hello-world:
-    exec:
-    - node
-    - --eval
-    - console.log('Hello World');
-    exit-status: 0
-    stdout:
-    - "Hello World"
