@@ -5,7 +5,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thank you for reporting an issue. Before you open the bug report please review the README file present in the root of this repository.
+        Thank you for reporting an issue. Before you open the bug report, please review the README file present in the root of this repository.
 
         Please fill in as much of the following form as you're able.
   - type: input
@@ -15,13 +15,6 @@ body:
       placeholder: bitnami/wordpress:1.2.3
     validations:
       required: true
-  - type: dropdown
-    attributes:
-      label: What architecture are you using?
-      description: Choose the architecture of the host where the containers are executed
-      options:
-        - amd64
-        - arm64
   - type: textarea
     attributes:
       label: What steps will reproduce the bug?
@@ -36,11 +29,11 @@ body:
   - type: textarea
     attributes:
       label: What is the expected behavior?
-      description: If possible please provide textual output instead of screenshots.
+      description: If possible, please provide textual output instead of screenshots.
   - type: textarea
     attributes:
       label: What do you see instead?
-      description: If possible please provide textual output instead of screenshots.
+      description: If possible, please provide textual output instead of screenshots.
     validations:
       required: true
   - type: textarea
