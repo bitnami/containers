@@ -15,15 +15,15 @@ ensure_user_exists "$INFLUXDB_DAEMON_USER" --group "$INFLUXDB_DAEMON_GROUP"
 
 # Ensure directories used by InfluxDB exist and have proper ownership and permissions
 dirs_to_exist=("$INFLUXDB_VOLUME_DIR" "$INFLUXDB_INITSCRIPTS_DIR")
-! is_influxdb_3 && dirs_to_exist+=("$INFLUXDB_CONF_DIR" "$INFLUXDB_DEFAULT_CONF_DIR")
+[[ ! -f "${INFLUXDB_BIN_DIR}/influxdb3" ]] && dirs_to_exist+=("$INFLUXDB_CONF_DIR" "$INFLUXDB_DEFAULT_CONF_DIR")
 for dir in "${dirs_to_exist[@]}"; do
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
     chown -R "${INFLUXDB_DAEMON_USER}:root" "$dir"
 done
 
-if ! is_influxdb_3; then
-    touch "$HOME/.influx_history" && chmod g+rwX "$HOME/.influx_history"
+if [[ ! -f "${INFLUXDB_BIN_DIR}/influxdb3" ]]; then
+    touch "/.influx_history" && chmod g+rwX "/.influx_history"
     if ! is_dir_empty "$INFLUXDB_CONF_DIR"; then
         # Copy all initially generated configuration files to the default directory
         # (this is to avoid breaking when entrypoint is being overridden)

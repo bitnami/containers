@@ -8,14 +8,14 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-05-30T14:49:59Z" \
+      org.opencontainers.image.created="2025-06-24T15:00:17Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/influxdb/README.md" \
-      org.opencontainers.image.ref.name="3.1.0-debian-12-r1" \
+      org.opencontainers.image.ref.name="3.2.0-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/influxdb" \
       org.opencontainers.image.title="influxdb" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="3.1.0"
+      org.opencontainers.image.version="3.2.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,11 +26,13 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl jq libbz2-1.0 libcom-err2 libcrypt1 libffi8 libgcc-s1 libgssapi-krb5-2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblzma5 libncursesw6 libnsl2 libreadline8 libsqlite3-0 libssl3 libtinfo6 libtirpc3 procps zlib1g
-RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
+RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
+    DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
+    mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "python-3.12.10-15-linux-${OS_ARCH}-debian-12" \
-      "influxdb-3.1.0-0-linux-${OS_ARCH}-debian-12" \
-      "wait-for-port-1.0.8-16-linux-${OS_ARCH}-debian-12" \
+      "python-3.12.11-3-linux-${OS_ARCH}-debian-12" \
+      "influxdb-3.2.0-0-linux-${OS_ARCH}-debian-12" \
+      "wait-for-port-1.0.9-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -48,7 +50,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/influxdb/postunpack.sh
-ENV APP_VERSION="3.1.0" \
+ENV APP_VERSION="3.2.0" \
     BITNAMI_APP_NAME="influxdb" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/influxdb/bin:/opt/bitnami/common/bin:$PATH"
