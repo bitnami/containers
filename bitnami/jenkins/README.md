@@ -110,7 +110,7 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
     jenkins:
     ...
     volumes:
--     - 'jenkins_data:/bitnami/jenkins
+-     - jenkins_data:/bitnami/jenkins
 +     - /path/to/jenkins-persistence:/bitnami/jenkins
 - volumes:
 -   jenkins_data:
