@@ -147,7 +147,7 @@ networks:
 
 services:
   kafka:
-    image: 'bitnami/kafka:latest'
+    image: bitnami/kafka:latest
     networks:
       - app-tier
     environment:
@@ -158,7 +158,7 @@ services:
       - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
   myapp:
-    image: 'YOUR_APPLICATION_IMAGE'
+    image: YOUR_APPLICATION_IMAGE
     networks:
       - app-tier
 ```
@@ -250,9 +250,9 @@ To use Apache Kafka in a development setup, create the following `docker-compose
 version: "3"
 services:
   kafka:
-    image: 'bitnami/kafka:latest'
+    image: bitnami/kafka:latest
     ports:
-      - '9092:9092'
+      - 9092:9092
     environment:
       - KAFKA_CFG_NODE_ID=0
       - KAFKA_CFG_PROCESS_ROLES=controller,broker
@@ -291,8 +291,8 @@ And expose the external port:
 
 ```diff
     ports:
--     - '9092:9092'
-+     - '9094:9094'
+-     - 9092:9092
++     - 9094:9094
 ```
 
 **Note**: To connect from an external machine, change `localhost` above to your host's external IP/hostname and include `EXTERNAL://0.0.0.0:9094` in `KAFKA_CFG_LISTENERS` to allow for remote connections.
@@ -363,10 +363,10 @@ version: '2'
 
 services:
   kafka:
-    image: 'bitnami/kafka:latest'
+    image: bitnami/kafka:latest
     hostname: kafka.example.com
     ports:
-      - '9092'
+      - 9092
     environment:
       # KRaft
       - KAFKA_CFG_NODE_ID=0
@@ -393,11 +393,11 @@ services:
       - KAFKA_CERTIFICATE_PASSWORD=certificatePassword123
     volumes:
       # Both .jks and .pem files are supported
-      # - './kafka.keystore.pem:/opt/bitnami/kafka/config/certs/kafka.keystore.pem:ro'
-      # - './kafka.keystore.key:/opt/bitnami/kafka/config/certs/kafka.keystore.key:ro'
-      # - './kafka.truststore.pem:/opt/bitnami/kafka/config/certs/kafka.truststore.pem:ro'
-      - './kafka.keystore.jks:/opt/bitnami/kafka/config/certs/kafka.keystore.jks:ro'
-      - './kafka.truststore.jks:/opt/bitnami/kafka/config/certs/kafka.truststore.jks:ro'
+      # - ./kafka.keystore.pem:/opt/bitnami/kafka/config/certs/kafka.keystore.pem:ro
+      # - ./kafka.keystore.key:/opt/bitnami/kafka/config/certs/kafka.keystore.key:ro
+      # - ./kafka.truststore.pem:/opt/bitnami/kafka/config/certs/kafka.truststore.pem:ro
+      - ./kafka.keystore.jks:/opt/bitnami/kafka/config/certs/kafka.keystore.jks:ro
+      - ./kafka.truststore.jks:/opt/bitnami/kafka/config/certs/kafka.truststore.jks:ro
 ```
 
 In order to get the required credentials to consume and produce messages you need to provide the credentials in the client. If your Apache Kafka client allows it, use the credentials you've provided.
@@ -587,7 +587,7 @@ services:
   kafka-combined:
     image: docker.io/bitnami/kafka:latest
     ports:
-      - "9092:9092"
+      - 9092:9092
     environment:
       - KAFKA_CFG_NODE_ID=0
       - KAFKA_CFG_PROCESS_ROLES=controller,broker
@@ -650,7 +650,7 @@ services:
   kafka:
     ...
     volumes:
-      - 'kafka_data:/bitnami'
+      - kafka_data:/bitnami
 +     - /path/to/server.properties:/bitnami/kafka/config/server.properties
 ```
 
