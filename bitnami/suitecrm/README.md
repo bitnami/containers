@@ -134,13 +134,13 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
    mariadb:
      ...
      volumes:
--      - 'mariadb_data:/bitnami/mariadb'
+-      - mariadb_data:/bitnami/mariadb
 +      - /path/to/mariadb-persistence:/bitnami/mariadb
    ...
    suitecrm:
      ...
      volumes:
--      - 'suitecrm_data:/bitnami/suitecrm'
+-      - suitecrm_data:/bitnami/suitecrm
 +      - /path/to/suitecrm-persistence:/bitnami/suitecrm
    ...
 -volumes:
@@ -451,10 +451,10 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
 -    image: bitnami/suitecrm:latest
 +    build: .
      ports:
--      - '80:8080'
--      - '443:8443'
-+      - '80:8181'
-+      - '443:8143'
+-      - 80:8080
+-      - 443:8443
++      - 80:8181
++      - 443:8143
      environment:
 +      - PHP_MEMORY_LIMIT=512m
      ...
@@ -488,10 +488,10 @@ To upgrade a deployment with the previous Bitnami SuiteCRM container image, whic
        - ALLOW_EMPTY_PASSWORD=yes
 +    user: root
      ports:
--      - '80:80'
--      - '443:443'
-+      - '80:8080'
-+      - '443:8443'
+-      - 80:80
+-      - 443:443
++      - 80:8080
++      - 443:8443
      volumes:
 ```
 
