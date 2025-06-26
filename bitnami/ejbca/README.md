@@ -139,7 +139,7 @@ You can also do this with a minor change to the [`docker-compose.yml`](https://g
    ejbca:
      ...
      volumes:
--      - 'wildfly_data:/bitnami/wildfly'
+-      - wildfly_data:/bitnami/wildfly
 +      - /path/to/ejbca-persistence:/bitnami/wildfly
    ...
 -volumes:
