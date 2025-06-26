@@ -144,11 +144,11 @@ networks:
 
 services:
   zookeeper:
-    image: 'bitnami/zookeeper:latest'
+    image: bitnami/zookeeper:latest
     networks:
       - app-tier
   myapp:
-    image: 'YOUR_APPLICATION_IMAGE'
+    image: YOUR_APPLICATION_IMAGE
     networks:
       - app-tier
 ```
@@ -283,9 +283,9 @@ version: '2'
 
 services:
   zookeeper:
-    image: 'bitnami/zookeeper:latest'
+    image: bitnami/zookeeper:latest
     ports:
-      - '2181:2181'
+      - 2181:2181
     volumes:
       - /path/to/zoo.cfg:/opt/bitnami/zookeeper/conf/zoo.cfg
 ```
@@ -421,33 +421,33 @@ version: '2'
 
 services:
   zookeeper1:
-    image: 'bitnami/zookeeper:latest'
+    image: bitnami/zookeeper:latest
     ports:
-      - '2181'
-      - '2888'
-      - '3888'
+      - 2181
+      - 2888
+      - 3888
     volumes:
       - /path/to/zookeeper-persistence:/bitnami/zookeeper
     environment:
       - ZOO_SERVER_ID=1
       - ZOO_SERVERS=0.0.0.0:2888:3888,zookeeper2:2888:3888,zookeeper3:2888:3888
   zookeeper2:
-    image: 'bitnami/zookeeper:latest'
+    image: bitnami/zookeeper:latest
     ports:
-      - '2181'
-      - '2888'
-      - '3888'
+      - 2181
+      - 2888
+      - 3888
     volumes:
       - /path/to/zookeeper-persistence:/bitnami/zookeeper
     environment:
       - ZOO_SERVER_ID=2
       - ZOO_SERVERS=zookeeper1:2888:3888,0.0.0.0:2888:3888,zookeeper3:2888:3888
   zookeeper3:
-    image: 'bitnami/zookeeper:latest'
+    image: bitnami/zookeeper:latest
     ports:
-      - '2181'
-      - '2888'
-      - '3888'
+      - 2181
+      - 2888
+      - 3888
     volumes:
       - /path/to/zookeeper-persistence:/bitnami/zookeeper
     environment:
@@ -533,9 +533,9 @@ version: '2'
 
 services:
   zookeeper:
-    image: 'bitnami/zookeeper:latest'
+    image: bitnami/zookeeper:latest
     ports:
-      - '2181:2181'
+      - 2181:2181
     volumes:
       - /path/to/zookeeper-backups/latest:/bitnami/zookeeper
 ```
