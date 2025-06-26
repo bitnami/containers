@@ -85,10 +85,10 @@ version: '2'
 
 services:
   apache:
-    image: 'bitnami/apache:latest'
+    image: bitnami/apache:latest
     ports:
-      - '80:8080'
-      - '443:8443'
+      - 80:8080
+      - 443:8443
     volumes:
       - /path/to/app:/app
 ```
@@ -161,10 +161,10 @@ version: '2'
 
 services:
   apache:
-    image: 'bitnami/apache:latest'
+    image: bitnami/apache:latest
     ports:
-      - '80:8081'
-      - '443:8443'
+      - 80:8081
+      - 443:8443
     environment:
       - APACHE_HTTP_PORT_NUMBER=8081
 ```
@@ -213,10 +213,10 @@ version: '2'
 
 services:
   apache:
-    image: 'bitnami/apache:latest'
+    image: bitnami/apache:latest
     ports:
-      - '80:8080'
-      - '443:8443'
+      - 80:8080
+      - 443:8443
     volumes:
       - /path/to/my_vhost.conf:/vhosts/my_vhost.conf:ro
 ```
@@ -254,10 +254,10 @@ version: '2'
 
 services:
   apache:
-    image: 'bitnami/apache:latest'
+    image: bitnami/apache:latest
     ports:
-      - '80:8080'
-      - '443:8443'
+      - 80:8080
+      - 443:8443
     volumes:
       - /path/to/apache-certs:/certs
 ```
@@ -279,10 +279,10 @@ version: '2'
 
 services:
   apache:
-    image: 'bitnami/apache:latest'
+    image: bitnami/apache:latest
     ports:
-      - '80:8080'
-      - '443:8443'
+      - 80:8080
+      - 443:8443
     volumes:
       - /path/to/httpd.conf:/opt/bitnami/apache/conf/httpd.conf
 ```
@@ -374,8 +374,8 @@ services:
   apache:
     build: .
     ports:
-      - '80:8181'
-      - '443:8443'
+      - 80:8181
+      - 443:8443
     depends_on:
       - cloner
     volumes:
@@ -383,7 +383,7 @@ services:
       - ./certs:/certs
       - data:/app
   cloner:
-    image: 'bitnami/git:latest'
+    image: bitnami/git:latest
     command:
       - clone
       - https://github.com/cloudacademy/static-website-example
