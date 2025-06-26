@@ -8,10 +8,9 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-05-30T14:19:33Z" \
+      org.opencontainers.image.created="2025-06-26T14:14:54Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/apisix/README.md" \
-      org.opencontainers.image.ref.name="3.12.0-debian-12-r6" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/apisix" \
       org.opencontainers.image.title="apisix" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -26,7 +25,9 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl libcrypt1 libgcc-s1 libpcre3 libstdc++6 libyaml-0-2 procps zlib1g
-RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
+RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
+    DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
+    mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "apisix-3.12.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
@@ -44,6 +45,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN useradd -r -u 1001 -g root apisix
 RUN chmod g+rwX /opt/bitnami/apisix/conf && mkdir -p /usr/local/apisix/logs && chmod -R g+rwX /usr/local/apisix && ln -s /opt/bitnami/apisix/conf /usr/local/apisix && ln -s /opt/bitnami/apisix/deps /usr/local/apisix && ln -s /opt/bitnami/apisix/openresty/luajit/share/lua/*/apisix /usr/local/apisix
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
+RUN uninstall_packages curl
 
 ENV APP_VERSION="3.12.0" \
     BITNAMI_APP_NAME="apisix" \
