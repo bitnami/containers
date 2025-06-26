@@ -5,11 +5,11 @@
         "type": "NAMI",
         "version": "3.2.0-0"
     },
-    "python": {
+    "libpython": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.12.11-3"
+        "version": "3.12.11-0"
     },
     "wait-for-port": {
         "arch": "amd64",
