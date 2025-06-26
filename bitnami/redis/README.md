@@ -148,13 +148,13 @@ networks:
 
 services:
   redis:
-    image: 'bitnami/redis:latest'
+    image: bitnami/redis:latest
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     networks:
       - app-tier
   myapp:
-    image: 'YOUR_APPLICATION_IMAGE'
+    image: YOUR_APPLICATION_IMAGE
     networks:
       - app-tier
 ```
@@ -394,7 +394,7 @@ services:
       - REDIS_PORT_NUMBER=7000
     ...
     ports:
-      - '7000:7000'
+      - 7000:7000
   ....
 ```
 
@@ -458,19 +458,19 @@ version: '2'
 
 services:
   redis-master:
-    image: 'bitnami/redis:latest'
+    image: bitnami/redis:latest
     ports:
-      - '6379'
+      - 6379
     environment:
       - REDIS_REPLICATION_MODE=master
       - REDIS_PASSWORD=my_master_password
     volumes:
-      - '/path/to/redis-persistence:/bitnami'
+      - /path/to/redis-persistence:/bitnami
 
   redis-replica:
-    image: 'bitnami/redis:latest'
+    image: bitnami/redis:latest
     ports:
-      - '6379'
+      - 6379
     depends_on:
       - redis-master
     environment:
