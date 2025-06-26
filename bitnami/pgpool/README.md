@@ -144,7 +144,7 @@ Finally we create a new container instance to launch the PostgreSQL client and c
 ```console
 docker run -it --rm \
   --network my-network \
-  bitnami/postgresql:10 \
+  bitnami/postgresql:latest \
   psql -h pgpool -U customuser -d customdatabase
 ```
 
@@ -160,7 +160,7 @@ networks:
     driver: bridge
 services:
   pg-0:
-    image: bitnami/postgresql-repmgr:14
+    image: bitnami/postgresql-repmgr:latest
     ports:
       - 5432
     volumes:
@@ -176,7 +176,7 @@ services:
       - REPMGR_NODE_NAME=pg-0
       - REPMGR_NODE_NETWORK_NAME=pg-0
   pg-1:
-    image: bitnami/postgresql-repmgr:14
+    image: bitnami/postgresql-repmgr:latest
     ports:
       - 5432
     volumes:
@@ -192,7 +192,7 @@ services:
       - REPMGR_NODE_NAME=pg-1
       - REPMGR_NODE_NETWORK_NAME=pg-1
   pgpool:
-    image: bitnami/pgpool:4
+    image: bitnami/pgpool:latest
     ports:
       - 5432:5432
     environment:
@@ -210,7 +210,7 @@ services:
       timeout: 5s
       retries: 5
   myapp:
-    image: 'YOUR_APPLICATION_IMAGE'
+    image: YOUR_APPLICATION_IMAGE
     networks:
       - my-network
 volumes:
@@ -381,7 +381,7 @@ docker-compose up -d
 In order to have your custom files inside the docker image you can mount them as a volume. With docker-compose:
 
 ```diff
-     image: bitnami/pgpool:4
+     image: bitnami/pgpool:latest
      ports:
        - 5432:5432
 +    volumes:
@@ -452,7 +452,7 @@ max_pool='300'
 Run the Pgpool image, mounting a directory from your host and setting `PGPOOL_USER_CONF_FILE` and `PGPOOL_USER_HBA_FILE`. Using Docker Compose:
 
 ```diff
-     image: bitnami/pgpool:4
+     image: bitnami/pgpool:latest
      ports:
        - 5432:5432
 +    volumes:
