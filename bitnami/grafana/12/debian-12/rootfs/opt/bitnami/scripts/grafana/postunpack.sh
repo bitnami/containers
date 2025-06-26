@@ -52,24 +52,6 @@ grafana_plugin_list=(
     "scadavis-synoptic-panel"
 )
 
-# Plugins deprecated in version 11 but still valid in version 10
-grafana_10_plugin_list=(
-    "grafana-piechart-panel"
-    "michaeldmoore-annunciator-panel"
-    "briangann-datatable-panel"
-    "natel-discrete-panel"
-    "digiapulssi-organisations-panel"
-    "neocat-cal-heatmap-panel"
-    "agenty-flowcharting-panel"
-    "michaeldmoore-multistat-panel"
-    "marcuscalidus-svg-panel"
-    "snuids-trafficlights-panel"
-)
-
-if [[ "$(get_grafana_major_version)" -le 10 ]]; then
-    grafana_plugin_list+=( "${grafana_10_plugin_list[@]}" )
-fi
-
 cd ${GRAFANA_BASE_DIR} || exit 1
 for plugin in "${grafana_plugin_list[@]}"; do
     info "Installing ${plugin} plugin"

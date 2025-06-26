@@ -172,7 +172,7 @@ grafana:
 You can customize this image and include the plugins you desire editing the list of plugins avilable in the script (see the variable "grafana_plugin_list") and build your own image as shown below:
 
 ```console
-cd 10/debian-12
+cd 12/debian-12
 docker build -t your-custom-grafana .
 ```
 
