@@ -138,13 +138,13 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
    postgresql:
      ...
      volumes:
--      - 'postgresql_data:/bitnami/postgresql'
+-      - postgresql_data:/bitnami/postgresql
 +      - /path/to/postgresql-persistence:/bitnami/postgresql
    ...
    sonarqube:
      ...
      volumes:
--      - 'sonarqube_data:/bitnami/sonarqube'
+-      - sonarqube_data:/bitnami/sonarqube
 +      - /path/to/sonarqube-persistence:/bitnami/sonarqube
    ...
 -volumes:
