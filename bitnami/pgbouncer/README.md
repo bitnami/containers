@@ -292,9 +292,9 @@ version: '2'
 
 services:
   pgbouncer:
-    image: 'bitnami/pgbouncer:latest'
+    image: bitnami/pgbouncer:latest
     ports:
-      - '6432:6432'
+      - 6432:6432
     volumes:
       - /path/to/pgbouncer-persistence/conf/:/bitnami/pgbouncer/conf/
 ```
@@ -331,35 +331,35 @@ The PgBouncer initialization process requires one PostgreSQL backend to be confi
 
 ```yaml
   pg1:
-    image: docker.io/bitnami/postgresql:14
+    image: docker.io/bitnami/postgresql:latest
     volumes:
-      - 'pg1_data:/bitnami/postgresql'
+      - pg1_data:/bitnami/postgresql
     environment:
       - POSTGRESQL_PASSWORD=password1
       - POSTGRESQL_DATABASE=db1
 
   pg2:
-    image: docker.io/bitnami/postgresql:15
+    image: docker.io/bitnami/postgresql:latest
     volumes:
-      - 'pg2_data:/bitnami/postgresql'
+      - pg2_data:/bitnami/postgresql
     environment:
       - POSTGRESQL_PASSWORD=password2
       - POSTGRESQL_DATABASE=db2
 
   pg3:
-    image: docker.io/bitnami/postgresql:14
+    image: docker.io/bitnami/postgresql:latest
     volumes:
-      - 'pg3_data:/bitnami/postgresql'
+      - pg3_data:/bitnami/postgresql
     environment:
       - POSTGRESQL_PASSWORD=password3
       - POSTGRESQL_DATABASE=db3
 
   pgbouncer:
-    image: docker.io/bitnami/pgbouncer:1
+    image: docker.io/bitnami/pgbouncer:latest
     ports:
       - 6432:6432
     volumes:
-      - './userlists.txt:/bitnami/userlists.txt'
+      - ./userlists.txt:/bitnami/userlists.txt
     environment:
       - POSTGRESQL_HOST=pg1
       - POSTGRESQL_PASSWORD=password1
