@@ -1,0 +1,12 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  dotnet-sdk:
+    image: docker.io/bitnami/dotnet-sdk:8
+    command: ["tail", "-f", "/dev/null"] # To keep the container running
+    volumes:
+      - dotnet_data:/app
+volumes:
+  dotnet_data:
+    driver: local
