@@ -1,0 +1,45 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  postgresql:
+    image: docker.io/bitnami/postgresql:latest
+    ports:
+      - '5432'
+    volumes:
+      - 'postgresql_data:/bitnami/postgresql'
+    environment:
+      - POSTGRESQL_USERNAME=kong
+      - POSTGRESQL_PASSWORD=bitnami
+      - POSTGRESQL_DATABASE=kong
+      - ALLOW_EMPTY_PASSWORD=yes
+  kong:
+    image: docker.io/bitnami/kong:3
+    ports:
+      - 18000:8000
+      - 18443:8443
+    environment:
+      - KONG_MIGRATE=yes
+      - KONG_DATABASE=postgres
+      - KONG_PG_HOST=postgresql
+      - KONG_PG_USER=kong
+      - KONG_PG_PASSWORD=bitnami
+      # See NGINX worker_processes setting at http://nginx.org/en/docs/ngx_core_module.html#worker_processes
+      # If in doubt, set to the amount of CPU cores divided by the number of Kong/PostgreSQL nodes in the machine
+      - KONG_NGINX_WORKER_PROCESSES=2
+  kong2:
+    image: docker.io/bitnami/kong:3
+    ports:
+      - 28000:8000
+      - 28443:8443
+    environment:
+      - KONG_DATABASE=postgres
+      - KONG_PG_HOST=postgresql
+      - KONG_PG_USER=kong
+      - KONG_PG_PASSWORD=bitnami
+      # See NGINX worker_processes setting at http://nginx.org/en/docs/ngx_core_module.html#worker_processes
+      # If in doubt, set to the amount of CPU cores divided by the number of Kong/PostgreSQL nodes in the machine
+      - KONG_NGINX_WORKER_PROCESSES=2
+volumes:
+  postgresql_data:
+    driver: local
