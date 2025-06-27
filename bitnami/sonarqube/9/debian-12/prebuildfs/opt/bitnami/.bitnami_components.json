@@ -1,0 +1,20 @@
+{
+    "jre": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "17.0.15-10-0"
+    },
+    "postgresql-client": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "17.5.0-1"
+    },
+    "sonarqube": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "9.9.8-2"
+    }
+}
