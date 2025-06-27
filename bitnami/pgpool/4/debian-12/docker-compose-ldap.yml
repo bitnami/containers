@@ -1,0 +1,84 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  pg-0:
+    image: docker.io/bitnami/postgresql-repmgr:latest
+    ports:
+      - 5432
+    volumes:
+      - pg_0_data:/bitnami/postgresql
+    environment:
+      - POSTGRESQL_POSTGRES_PASSWORD=adminpassword
+      - POSTGRESQL_USERNAME=customuser
+      - POSTGRESQL_PASSWORD=custompassword
+      - POSTGRESQL_DATABASE=customdatabase
+      - REPMGR_PRIMARY_HOST=pg-0
+      - REPMGR_PARTNER_NODES=pg-0,pg-1
+      - REPMGR_NODE_NAME=pg-0
+      - REPMGR_NODE_NETWORK_NAME=pg-0
+      - REPMGR_PGHBA_TRUST_ALL=yes
+      - REPMGR_USERNAME=repmgr
+      - REPMGR_PASSWORD=repmgrpassword
+  pg-1:
+    image: docker.io/bitnami/postgresql-repmgr:4
+    ports:
+      - 5432
+    volumes:
+      - pg_1_data:/bitnami/postgresql
+    environment:
+      - POSTGRESQL_POSTGRES_PASSWORD=adminpassword
+      - POSTGRESQL_USERNAME=customuser
+      - POSTGRESQL_PASSWORD=custompassword
+      - POSTGRESQL_DATABASE=customdatabase
+      - REPMGR_PRIMARY_HOST=pg-0
+      - REPMGR_PARTNER_NODES=pg-0,pg-1
+      - REPMGR_NODE_NAME=pg-1
+      - REPMGR_NODE_NETWORK_NAME=pg-1
+      - REPMGR_PGHBA_TRUST_ALL=yes
+      - REPMGR_USERNAME=repmgr
+      - REPMGR_PASSWORD=repmgrpassword
+  pgpool:
+    image: docker.io/bitnami/pgpool:4
+    ports:
+      - 5432:5432
+    environment:
+      - PGPOOL_BACKEND_NODES=0:pg-0:5432,1:pg-1:5432
+      - PGPOOL_SR_CHECK_USER=repmgr
+      - PGPOOL_SR_CHECK_PASSWORD=repmgrpassword
+      - PGPOOL_POSTGRES_USERNAME=postgres
+      - PGPOOL_POSTGRES_PASSWORD=adminpassword
+      - PGPOOL_ADMIN_USERNAME=admin
+      - PGPOOL_ADMIN_PASSWORD=adminpassword
+      - PGPOOL_ENABLE_LOAD_BALANCING=yes
+      - PGPOOL_ENABLE_LDAP=yes
+      - LDAP_URI=ldap://openldap:1389
+      - LDAP_BASE=dc=example,dc=org
+      - LDAP_BIND_DN=cn=admin,dc=example,dc=org
+      - LDAP_BIND_PASSWORD=adminpassword
+      - PGPOOL_POSTGRES_CUSTOM_USERS=customuser
+      - PGPOOL_POSTGRES_CUSTOM_PASSWORDS=custompassword
+    healthcheck:
+      test: ["CMD", "/opt/bitnami/scripts/pgpool/healthcheck.sh"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  openldap:
+    image: 'docker.io/bitnami/openldap:latest'
+    ports:
+      - '1389:1389'
+    environment:
+      - LDAP_ADMIN_USERNAME=admin
+      - LDAP_ADMIN_PASSWORD=adminpassword
+      - LDAP_USERS=customuser
+      - LDAP_PASSWORDS=custompassword
+    volumes:
+      - 'openldap_data:/bitnami/openldap'
+
+volumes:
+  pg_0_data:
+    driver: local
+  pg_1_data:
+    driver: local
+  openldap_data:
+    driver: local
