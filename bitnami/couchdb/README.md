@@ -281,8 +281,8 @@ services:
     environment:
       - COUCHDB_PASSWORD=couchdb
     ports:
-      - '1234:1234'
-      - '4369:4369'
+      - 1234:1234
+      - 4369:4369
     volumes:
       - couchdb_data:/bitnami/couchdb
       - /path/to/config/file/10-custom.ini:/opt/bitnami/couchdb/etc/local.d/10-custom.ini
