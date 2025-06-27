@@ -1,0 +1,47 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  mariadb-galera:
+    image: docker.io/bitnami/mariadb-galera:11.4
+    ports:
+      - '3306:3306'
+      - '4444:4444'
+      - '4567:4567'
+      - '4568:4568'
+    volumes:
+      - 'mariadb_galera_data:/bitnami/mariadb'
+    environment:
+      - MARIADB_ROOT_PASSWORD=root-password
+      - MARIADB_GALERA_MARIABACKUP_PASSWORD=backup-password
+      - MARIADB_USER=user01
+      - MARIADB_DATABASE=my_database
+      - MARIADB_GALERA_CLUSTER_ADDRESS=gcomm://
+      - MARIADB_ENABLE_LDAP=yes
+      - LDAP_URI=ldap://openldap:1389
+      - LDAP_BASE=dc=example,dc=org
+      - LDAP_BIND_DN=cn=admin,dc=example,dc=org
+      - LDAP_BIND_PASSWORD=adminpassword
+    healthcheck:
+      test: ['CMD', '/opt/bitnami/scripts/mariadb-galera/healthcheck.sh']
+      interval: 15s
+      timeout: 5s
+      retries: 6
+
+  openldap:
+    image: 'docker.io/bitnami/openldap:latest'
+    ports:
+      - '1389:1389'
+    environment:
+      - LDAP_ADMIN_USERNAME=admin
+      - LDAP_ADMIN_PASSWORD=adminpassword
+      - LDAP_USERS=user01
+      - LDAP_PASSWORDS=password1
+    volumes:
+      - 'openldap_data:/bitnami/openldap'
+
+volumes:
+  mariadb_galera_data:
+    driver: local
+  openldap_data:
+    driver: local
