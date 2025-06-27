@@ -1,0 +1,15 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  grafana:
+    image: docker.io/bitnami/grafana:11
+    ports:
+      - '3000:3000'
+    environment:
+      - 'GF_SECURITY_ADMIN_PASSWORD=bitnami'
+    volumes:
+      - grafana_data:/opt/bitnami/grafana/data
+volumes:
+  grafana_data:
+    driver: local
