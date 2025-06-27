@@ -3,25 +3,25 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.0.10-2"
+        "version": "8.0.11-0"
     },
     "mongodb-shell": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "2.5.2-1"
+        "version": "2.5.3-0"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.7-18"
+        "version": "1.0.8-0"
     },
     "wait-for-port": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.8-18"
+        "version": "1.0.9-0"
     },
     "yq": {
         "arch": "amd64",
