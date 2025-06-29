@@ -166,11 +166,11 @@ networks:
 
 services:
   tensorflow-serving:
-    image: 'bitnami/tensorflow-serving:latest'
+    image: bitnami/tensorflow-serving:latest
     networks:
       - app-tier
   myapp:
-    image: 'YOUR_APPLICATION_IMAGE'
+    image: YOUR_APPLICATION_IMAGE
     networks:
       - app-tier
 ```
