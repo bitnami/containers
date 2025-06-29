@@ -103,11 +103,11 @@ networks:
 
 services:
   fluent-bit:
-    image: 'bitnami/fluent-bit:latest'
+    image: bitnami/fluent-bit:latest
     networks:
       - app-tier
   myapp:
-    image: 'YOUR_APPLICATION_IMAGE'
+    image: YOUR_APPLICATION_IMAGE
     networks:
       - app-tier
 ```
