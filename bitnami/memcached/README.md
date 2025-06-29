@@ -118,11 +118,11 @@ networks:
 
 services:
   memcached:
-    image: 'bitnami/memcached:latest'
+    image: bitnami/memcached:latest
     networks:
       - app-tier
   myapp:
-    image: 'YOUR_APPLICATION_IMAGE'
+    image: YOUR_APPLICATION_IMAGE
     networks:
       - app-tier
 ```
