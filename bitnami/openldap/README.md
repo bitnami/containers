@@ -137,10 +137,10 @@ networks:
     driver: bridge
 services:
   openldap:
-    image: bitnami/openldap:2
+    image: bitnami/openldap:latest
     ports:
-      - '1389:1389'
-      - '1636:1636'
+      - 1389:1389
+      - 1636:1636
     environment:
       - LDAP_ADMIN_USERNAME=admin
       - LDAP_ADMIN_PASSWORD=adminpassword
@@ -149,9 +149,9 @@ services:
     networks:
       - my-network
     volumes:
-      - 'openldap_data:/bitnami/openldap'
+      - openldap_data:/bitnami/openldap
   myapp:
-    image: 'YOUR_APPLICATION_IMAGE'
+    image: YOUR_APPLICATION_IMAGE
     networks:
       - my-network
 volumes:
