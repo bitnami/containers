@@ -146,13 +146,13 @@ networks:
 
 services:
   mysql:
-    image: 'bitnami/mysql:latest'
+    image: bitnami/mysql:latest
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     networks:
       - app-tier
   myapp:
-    image: 'YOUR_APPLICATION_IMAGE'
+    image: YOUR_APPLICATION_IMAGE
     networks:
       - app-tier
 ```
@@ -410,9 +410,9 @@ version: '2'
 
 services:
   mysql-master:
-    image: 'bitnami/mysql:latest'
+    image: bitnami/mysql:latest
     ports:
-      - '3306'
+      - 3306
     volumes:
       - /path/to/mysql-persistence:/bitnami/mysql/data
     environment:
@@ -424,9 +424,9 @@ services:
       - MYSQL_PASSWORD=my_password
       - MYSQL_DATABASE=my_database
   mysql-slave:
-    image: 'bitnami/mysql:latest'
+    image: bitnami/mysql:latest
     ports:
-      - '3306'
+      - 3306
     depends_on:
       - mysql-master
     environment:
@@ -558,7 +558,7 @@ services:
   mysql:
     build: .
     ports:
-      - '3306:3307'
+      - 3306:3307
     volumes:
       - /path/to/my_custom.cnf:/opt/bitnami/mysql/conf/my_custom.cnf:ro
       - data:/bitnami/mysql/data
