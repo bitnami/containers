@@ -35,6 +35,9 @@ RUN mkdir -p /out/kaniko/.docker /out/etc && cp /opt/bitnami/kaniko/bin/* /out/k
 
 ######
 
+FROM busybox:musl AS busybox
+
+
 FROM scratch
 
 ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
@@ -55,12 +58,17 @@ COPY rootfs /
 COPY --from=builder /opt/bitnami/kaniko/.spdx-kaniko.spdx /opt/bitnami/kaniko/.spdx-kaniko.spdx
 COPY --from=builder /opt/bitnami/kaniko/licenses /opt/bitnami/kaniko/licenses
 COPY --from=builder /out /
+COPY --from=busybox /bin /busybox
+# Declare /busybox as a volume to get it automatically in the path to ignore
+VOLUME /busybox
+RUN ["/busybox/mkdir", "-p", "/bin"]
+RUN ["/busybox/ln", "-s", "/busybox/sh", "/bin/sh"]
 
 ENV APP_VERSION="1.25.0" \
     BITNAMI_APP_NAME="kaniko" \
     DOCKER_CONFIG="/kaniko/.docker" \
     DOCKER_CREDENTIAL_GCR_CONFIG="/kaniko/.config/gcloud/docker_credential_gcr_config.json" \
-    PATH="/kaniko" \
+    PATH="/usr/local/bin:/kaniko" \
     SSL_CERT_DIR="/etc/ssl/certs/" \
     USER="root"
 
