@@ -144,13 +144,13 @@ networks:
 
 services:
   keydb:
-    image: 'bitnami/keydb:latest'
+    image: bitnami/keydb:latest
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     networks:
       - app-tier
   myapp:
-    image: 'YOUR_APPLICATION_IMAGE'
+    image: YOUR_APPLICATION_IMAGE
     networks:
       - app-tier
 ```
@@ -376,7 +376,7 @@ services:
       - KEYDB_PORT_NUMBER=7000
     ...
     ports:
-      - '7000:7000'
+      - 7000:7000
   ....
 ```
 
@@ -445,19 +445,19 @@ version: '2'
 
 services:
   keydb-master:
-    image: 'bitnami/keydb:latest'
+    image: bitnami/keydb:latest
     ports:
-      - '6379'
+      - 6379
     environment:
       - KEYDB_REPLICATION_MODE=master
       - KEYDB_PASSWORD=my_master_password
     volumes:
-      - '/path/to/keydb-persistence:/bitnami'
+      - /path/to/keydb-persistence:/bitnami
 
   keydb-replica:
-    image: 'bitnami/keydb:latest'
+    image: bitnami/keydb:latest
     ports:
-      - '6379'
+      - 6379
     depends_on:
       - keydb-master
     environment:
