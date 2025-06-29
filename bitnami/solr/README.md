@@ -129,13 +129,13 @@ services:
     networks:
       - solr-network
     ports:
-      - '8983:8983'
+      - 8983:8983
   solr-node2:
     image: bitnami/solr:latest
     networks:
       - solr-network
     ports:
-      - '8984:8984'
+      - 8984:8984
 ```
 
 Then, launch the containers using:
@@ -231,7 +231,7 @@ solr:
   environment:
     - SOLR_CORE_CONF_DIR=/container/path/to/your/confDir
   volumes:
-    - '/local/path/to/your/confDir:/container/path/to/your/confDir'
+    - /local/path/to/your/confDir:/container/path/to/your/confDir
   ...
 ```
 
