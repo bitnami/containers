@@ -156,8 +156,8 @@ express_initialize() {
         if [[ ! -f Dockerfile ]]; then
             info "Adding Dockerfile"
             cp /dist/Dockerfile.tpl Dockerfile
-            sed -i 's/{{APP_VERSION}}/'"$APP_VERSION"'/g' Dockerfile
-            [[ ! -f bower.json ]] && sed -i '/^RUN bower install/d' Dockerfile
+            replace_in_file Dockerfile '{{APP_VERSION}}' "$APP_VERSION"
+            [[ ! -f bower.json ]] && replace_in_file Dockerfile '^RUN bower install' ''
 
             if [[ ! -f .dockerignore ]]; then
                 cp /dist/.dockerignore .
