@@ -142,11 +142,11 @@ networks:
 
 services:
   cassandra:
-    image: 'bitnami/cassandra:latest'
+    image: bitnami/cassandra:latest
     networks:
       - app-tier
   myapp:
-    image: 'YOUR_APPLICATION_IMAGE'
+    image: YOUR_APPLICATION_IMAGE
     networks:
       - app-tier
 ```
