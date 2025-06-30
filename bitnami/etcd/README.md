@@ -195,6 +195,7 @@ Apart from providing your custom configuration file, you can also modify the ser
 | `ETCD_START_FROM_SNAPSHOT`         | Whether etcd should start from an existing snapshot or not.                                  | `no`                    |
 | `ETCD_DISASTER_RECOVERY`           | Whether etcd should try or not to recover from snapshots when the cluste disastrously fails. | `no`                    |
 | `ETCD_ON_K8S`                      | Whether etcd is running on a K8s environment or not.                                         | `no`                    |
+| `ETCD_PREUPGRADE_START_DELAY`      | Optional delay before starting the pre-upgrade hook (in seconds).                            | `nil`                   |
 | `ETCD_INIT_SNAPSHOT_FILENAME`      | Existing snapshot filename to start the etcd cluster from.                                   | `nil`                   |
 | `ETCD_NAME`                        | etcd member name.                                                                            | `nil`                   |
 | `ETCD_LOG_LEVEL`                   | etcd log level.                                                                              | `info`                  |
