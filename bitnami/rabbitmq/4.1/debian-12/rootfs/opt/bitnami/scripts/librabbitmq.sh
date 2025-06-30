@@ -392,7 +392,7 @@ default_permissions.write = .*
 log.console = true
 EOF
         # Check if the default_queue_type for the node is set
-        if [[ ! -z "${RABBITMQ_NODE_DEFAULT_QUEUE_TYPE}" ]]; then
+        if ! is_empty_value "$RABBITMQ_NODE_DEFAULT_QUEUE_TYPE"; then
             cat <<EOF
 default_queue_type = ${RABBITMQ_NODE_DEFAULT_QUEUE_TYPE}
 EOF
