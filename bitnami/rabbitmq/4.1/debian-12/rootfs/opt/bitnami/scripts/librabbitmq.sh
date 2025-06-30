@@ -391,6 +391,12 @@ default_permissions.read = .*
 default_permissions.write = .*
 log.console = true
 EOF
+        # Check if the default_queue_type for the node is set
+        if [[ ! -z "${RABBITMQ_NODE_DEFAULT_QUEUE_TYPE}" ]]; then
+            cat <<EOF
+default_queue_type = ${RABBITMQ_NODE_DEFAULT_QUEUE_TYPE}
+EOF
+	fi
 
         # When loading definitions, default vhost and user/pass won't be created: https://www.rabbitmq.com/definitions.html#import-on-boot
         if ! is_boolean_yes "$RABBITMQ_LOAD_DEFINITIONS"; then
