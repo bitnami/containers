@@ -756,13 +756,22 @@ rabbitmq_join_cluster() {
 #   None
 #########################
 rabbitmq_declare_vhost() {
-    local name="${1:?name is required}"
+    local vhost="${1:?name is required}"
+    IFS=':' read -r name default_queue_type <<< "$vhost"
     debug "Declaring vhost '${name}'..."
 
-    if ! debug_execute "${RABBITMQ_BIN_DIR}/rabbitmqctl" add_vhost -- "${name}"; then
-        error "Couldn't declared vhost '${name}'."
-        return 1
+    if [[ -n "$default_queue_type" ]]; then
+      if ! debug_execute "${RABBITMQ_BIN_DIR}/rabbitmqctl" add_vhost --default-queue-type "${default_queue_type}" -- "${name}"; then
+          error "Couldn't declared vhost '${name}'."
+          return 1
+      fi
+    else
+      if ! debug_execute "${RABBITMQ_BIN_DIR}/rabbitmqctl" add_vhost -- "${name}"; then
+          error "Couldn't declared vhost '${name}'."
+          return 1
+      fi
     fi
+
 }
 
 ########################
@@ -866,7 +875,8 @@ rabbitmq_initialize() {
             for vhost in ${RABBITMQ_VHOSTS}; do
                 rabbitmq_declare_vhost "${vhost}"
                 if [[ -n "${RABBITMQ_USERNAME}" ]]; then
-                    rabbitmq_set_user_vhost_permission "${RABBITMQ_USERNAME}" "${vhost}"
+                    IFS=':' read -r vhost_name default_queue_type <<< "$vhost"
+                    rabbitmq_set_user_vhost_permission "${RABBITMQ_USERNAME}" "${vhost_name}"
                 fi
             done
         fi
