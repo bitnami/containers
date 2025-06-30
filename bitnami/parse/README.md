@@ -115,12 +115,12 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
   mongodb:
   ...
     volumes:
-      - '/path/to/your/local/mongodb_data:/bitnami'
+      - /path/to/your/local/mongodb_data:/bitnami
   ...
   parse:
   ...
     volumes:
-      - '/path/to/parse-persistence:/bitnami'
+      - /path/to/parse-persistence:/bitnami
   ...
 ```
 
@@ -269,26 +269,26 @@ EOF
 version: '2'
 services:
   mongodb:
-    image: 'bitnami/mongodb:latest'
+    image: bitnami/mongodb:latest
     volumes:
-      - 'mongodb_data:/bitnami'
+      - mongodb_data:/bitnami
   parse:
-    image: 'bitnami/parse:latest'
+    image: bitnami/parse:latest
     ports:
-      - '1337:1337'
+      - 1337:1337
     environment:
       - PARSE_ENABLE_CLOUD_CODE=yes
     volumes:
-      - 'parse_data:/bitnami'
-      - '/path/to/home/directory/cloud:/opt/bitnami/parse/cloud'
+      - parse_data:/bitnami
+      - /path/to/home/directory/cloud:/opt/bitnami/parse/cloud
     depends_on:
       - mongodb
   parse-dashboard:
-    image: 'bitnami/parse-dashboard:latest'
+    image: bitnami/parse-dashboard:latest
     ports:
-      - '80:4040'
+      - 80:4040
     volumes:
-      - 'parse_dashboard_data:/bitnami'
+      - parse_dashboard_data:/bitnami
     depends_on:
       - parse
 volumes:
