@@ -8,10 +8,9 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-06-01T16:47:15Z" \
+      org.opencontainers.image.created="2025-06-30T10:01:43Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/parse-dashboard/README.md" \
-      org.opencontainers.image.ref.name="7.2.0-debian-12-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/parse-dashboard" \
       org.opencontainers.image.title="parse-dashboard" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -26,10 +25,12 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl jq libbz2-1.0 libffi8 libgcc-s1 liblzma5 libncursesw6 libreadline8 libsqlite3-0 libssl3 libstdc++6 libtinfo6 procps zlib1g
-RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
+RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
+    DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
+    mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "python-3.13.3-13-linux-${OS_ARCH}-debian-12" \
-      "node-24.1.0-1-linux-${OS_ARCH}-debian-12" \
+      "python-3.13.5-1-linux-${OS_ARCH}-debian-12" \
+      "node-24.3.0-0-linux-${OS_ARCH}-debian-12" \
       "parse-dashboard-7.2.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
