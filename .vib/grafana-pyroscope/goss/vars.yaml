@@ -1,0 +1,8 @@
+files:
+  - mode: "0644"
+    paths:
+      - /opt/bitnami/grafana-pyroscope/.spdx-grafana-pyroscope.spdx
+  - mode: "0755"
+    paths:
+      - /opt/bitnami/grafana-pyroscope/bin/pyroscope
+      - /opt/bitnami/grafana-pyroscope/bin/profilecli
