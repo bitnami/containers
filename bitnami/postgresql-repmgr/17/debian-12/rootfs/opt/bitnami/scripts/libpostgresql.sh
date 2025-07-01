@@ -164,6 +164,12 @@ postgresql_validate() {
         check_multi_value "POSTGRESQL_SYNCHRONOUS_REPLICAS_MODE" "FIRST ANY"
     fi
 
+    if [[ -n "$POSTGRESQL_REPLICATION_NODES" ]]; then
+        if [[ ! "$POSTGRESQL_REPLICATION_NODES" =~ ^([^,]+-[0-9]+)(,([^,]+-[0-9]+))*$ ]]; then
+            print_validation_error "POSTGRESQL_REPLICATION_NODES must be a comma separated list of valid node names. Valid format: ^([^,]+-[0-9]+)(,([^,]+-[0-9]+))*$"
+        fi
+    fi
+
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
@@ -464,10 +470,13 @@ postgresql_configure_synchronous_replication() {
     local synchronous_standby_names=""
     info "Configuring synchronous_replication"
 
+    # Check if user provided list of replication nodes, else - read and transform from POSTGRESQL_CLUSTER_APP_NAME
+    if [[ -n $POSTGRESQL_REPLICATION_NODES ]]; then
+            replication_nodes="\"${POSTGRESQL_REPLICATION_NODES}\""
     # Check for comma separate values
     # When using repmgr, POSTGRESQL_CLUSTER_APP_NAME will contain the list of nodes to be synchronous
     # This list need to cleaned from other things but node names.
-    if [[ "$POSTGRESQL_CLUSTER_APP_NAME" == *","* ]]; then
+    elif [[ "$POSTGRESQL_CLUSTER_APP_NAME" == *","* ]]; then
         read -r -a nodes <<<"$(tr ',;' ' ' <<<"${POSTGRESQL_CLUSTER_APP_NAME}")"
         for node in "${nodes[@]}"; do
             [[ "$node" =~ ^(([^:/?#]+):)?// ]] || node="tcp://${node}"
