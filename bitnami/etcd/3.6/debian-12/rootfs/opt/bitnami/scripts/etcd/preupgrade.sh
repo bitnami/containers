@@ -21,7 +21,7 @@ set -o nounset
 # based on "initial-cluster" flag value
 # ref: https://etcd.io/docs/latest/op-guide/clustering/#static
 # Globals:
-#   ETCD_INITIAL_CLUSTER
+#   ETCD_INITIAL_CLUSTER 
 # Arguments:
 #   None
 # Returns:
