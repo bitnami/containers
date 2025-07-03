@@ -176,11 +176,12 @@ docker-compose up -d
 | `RABBITMQ_MANAGEMENT_PORT_NUMBER`              | RabbitMQ management server port number.                                                                                                                                                          | `15672`                              |
 | `RABBITMQ_MANAGEMENT_ALLOW_WEB_ACCESS`         | Allow web access to RabbitMQ management portal for RABBITMQ_USERNAME                                                                                                                             | `false`                              |
 | `RABBITMQ_NODE_NAME`                           | RabbitMQ node name.                                                                                                                                                                              | `rabbit@localhost`                   |
+| `RABBITMQ_NODE_DEFAULT_QUEUE_TYPE`             | RabbitMQ default queue type node-wide.                                                                                                                                                           | `nil`                                |
 | `RABBITMQ_USE_LONGNAME`                        | Whether to use fully qualified names to identify nodes                                                                                                                                           | `false`                              |
 | `RABBITMQ_NODE_PORT_NUMBER`                    | RabbitMQ node port number.                                                                                                                                                                       | `5672`                               |
 | `RABBITMQ_NODE_TYPE`                           | RabbitMQ node type.                                                                                                                                                                              | `stats`                              |
 | `RABBITMQ_VHOST`                               | RabbitMQ vhost.                                                                                                                                                                                  | `/`                                  |
-| `RABBITMQ_VHOSTS`                              | List of additional virtual host (vhost).                                                                                                                                                         | `nil`                                |
+| `RABBITMQ_VHOSTS`                              | List of additional virtual host (vhost). Default queue type can be set using colon separator (RABBITMQ_VHOSTS=queue_name_0 queue_name_1:quorum)                                                  | `nil`                                |
 | `RABBITMQ_CLUSTER_REBALANCE`                   | Rebalance the RabbitMQ Cluster.                                                                                                                                                                  | `false`                              |
 | `RABBITMQ_CLUSTER_REBALANCE_ATTEMPTS`          | Max attempts for the rebalance check to run                                                                                                                                                      | `100`                                |
 | `RABBITMQ_USERNAME`                            | RabbitMQ user name.                                                                                                                                                                              | `user`                               |
@@ -523,6 +524,11 @@ docker-compose up rabbitmq
 ```
 
 ## Notable changes
+
+### 4.1.1-debian-12-r3
+
+* The environment variable `RABBITMQ_VHOSTS` can be used to set the default queue type for each virtual host using `:` separator: `RABBITMQ_VHOSTS=queue_name_0 queue_name_1:quorum`
+* New enviroment variable `RABBITMQ_NODE_DEFAULT_QUEUE_TYPE` to set default queue type node-wide.
 
 ### 3.8.16-debian-10-r28
 

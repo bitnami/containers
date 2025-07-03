@@ -396,7 +396,7 @@ EOF
             cat <<EOF
 default_queue_type = ${RABBITMQ_NODE_DEFAULT_QUEUE_TYPE}
 EOF
-	fi
+        fi
 
         # When loading definitions, default vhost and user/pass won't be created: https://www.rabbitmq.com/definitions.html#import-on-boot
         if ! is_boolean_yes "$RABBITMQ_LOAD_DEFINITIONS"; then
