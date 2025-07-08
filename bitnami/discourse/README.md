@@ -307,6 +307,9 @@ The set of default standard configuration files may be found [here](https://gith
 | `DISCOURSE_REDIS_PASSWORD`             | Redis(R) user password.                                                                                                         | `nil`                                   |
 | `DISCOURSE_REDIS_USE_SSL`              | Whether to enable SSL for Redis(R).                                                                                             | `no`                                    |
 | `DISCOURSE_REDIS_DB`                   | Redis(R) database number.                                                                                                       | `0`                                     |
+| `POSTGRESQL_DATABASE`                  | PostgreSQL database name.                                                                                                       | `nil`/set in compose file               |
+| `POSTGRESQL_USERNAME`                  | PostgreSQL database user.                                                                                                       | `nil`/set in compose file               |
+| `POSTGRESQL_PASSWORD`                  | PostgreSQL database user's password.                                                                                            | `nil`/set in compose file               |
 
 #### Read-only environment variables
 
