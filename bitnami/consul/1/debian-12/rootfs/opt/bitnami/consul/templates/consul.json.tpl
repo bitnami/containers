@@ -4,7 +4,9 @@
     "domain": "{{CONSUL_DOMAIN}}",
     "data_dir": "{{CONSUL_DATA_DIR}}",
     "pid_file": "{{CONSUL_PID_FILE}}",
-    "ui": {{CONSUL_ENABLE_UI}},
+    "ui_config": {
+        "enabled": {{CONSUL_ENABLE_UI}}
+    },
     "bootstrap_expect": {{CONSUL_BOOTSTRAP_EXPECT}},
     "performance": {
       "raft_multiplier": {{CONSUL_RAFT_MULTIPLIER}}
