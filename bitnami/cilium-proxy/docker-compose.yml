@@ -3,4 +3,4 @@
   
 services:
   cilium-proxy:
-    image: docker.io/bitnami/cilium-proxy:1.29
+    image: docker.io/bitnami/cilium-proxy:1.32
