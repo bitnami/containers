@@ -42,6 +42,7 @@ if [[ -n "$ETCD_PREUPGRADE_START_DELAY" ]]; then
     info "Waiting for $ETCD_PREUPGRADE_START_DELAY seconds before starting pre-upgrade checks"
     sleep "$ETCD_PREUPGRADE_START_DELAY"
 fi
+
 debug "Listing members"
 if ! current="$(etcdctl member list "${extra_flags[@]}" --write-out simple | awk -F ", " '{print $3 ":" $1}')"; then
     error "Unable to list members, are all members healthy?"
