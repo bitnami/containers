@@ -428,6 +428,7 @@ export REPMGR_STANDBY_ROLE_LOCK_FILE_NAME="$REPMGR_LOCK_DIR/standby.lock"
 export REPMGR_BIN_DIR="$REPMGR_BASE_DIR/bin"
 export REPMGR_CONF_FILE="$REPMGR_CONF_DIR/repmgr.conf"
 export REPMGR_DATA_DIR="${REPMGR_DATA_DIR:-${REPMGR_VOLUME_DIR}/repmgr/data}"
+export REPMGR_PID_FILE="${REPMGR_TMP_DIR}/repmgr.pid"
 
 # Settings (Replication Manager)
 export REPMGR_NODE_ID="${REPMGR_NODE_ID:-}"
