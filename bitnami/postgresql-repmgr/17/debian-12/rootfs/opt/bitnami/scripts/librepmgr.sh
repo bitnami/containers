@@ -547,6 +547,7 @@ async_query_timeout='${REPMGR_MASTER_RESPONSE_TIMEOUT}'
 primary_visibility_consensus=${REPMGR_PRIMARY_VISIBILITY_CONSENSUS}
 pg_ctl_options='-o "--config-file=\"${POSTGRESQL_CONF_FILE}\" --external_pid_file=\"${POSTGRESQL_PID_FILE}\" --hba_file=\"${POSTGRESQL_PGHBA_FILE}\""'
 pg_basebackup_options='$waldir_option'
+repmgrd_pid_file='${REPMGR_PID_FILE}'
 EOF
 
    if is_boolean_yes "$REPMGR_FENCE_OLD_PRIMARY"; then
@@ -854,6 +855,10 @@ repmgr_initialize() {
 
     ensure_dir_exists "$POSTGRESQL_DATA_DIR"
     am_i_root && chown "$POSTGRESQL_DAEMON_USER:$POSTGRESQL_DAEMON_GROUP" "$POSTGRESQL_DATA_DIR"
+
+    # This fixes an issue where the trap would kill the entrypoint.sh, if a PID was left over from a previous run
+    # Exec replaces the process without creating a new one, and when the container is restarted it may have the same PID
+    rm -f "$REPMGR_PID_FILE"
 
     if [[ "$REPMGR_ROLE" = "standby" ]]; then
         repmgr_wait_primary_node || exit 1

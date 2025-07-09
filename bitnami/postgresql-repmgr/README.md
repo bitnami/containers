@@ -709,6 +709,7 @@ Refer to [issues/27124](https://github.com/bitnami/containers/issues/27124) for 
 | `REPMGR_STANDBY_ROLE_LOCK_FILE_NAME`         | Replication Manager lock file for the standby node              | `$REPMGR_LOCK_DIR/standby.lock`               |
 | `REPMGR_BIN_DIR`                             | Replication Manager executables directory                       | `$REPMGR_BASE_DIR/bin`                        |
 | `REPMGR_CONF_FILE`                           | Replication Manager configuration file                          | `$REPMGR_CONF_DIR/repmgr.conf`                |
+| `REPMGR_PID_FILE`                            | Replication Manager PID file.                                   | `${REPMGR_TMP_DIR}/repmgr.pid`                |
 | `REPMGR_CURRENT_PRIMARY_PORT`                | Current primary host port                                       | `$REPMGR_PRIMARY_PORT`                        |
 | `POSTGRESQL_REPLICATION_USER`                | PostgreSQL replication user                                     | `$REPMGR_USERNAME`                            |
 | `POSTGRESQL_REPLICATION_PASSWORD`            | Password for the PostgreSQL replication user                    | `$REPMGR_PASSWORD`                            |
