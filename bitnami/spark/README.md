@@ -358,13 +358,17 @@ docker-compose up spark
 
 ## Notable Changes
 
+### 4.0.0-debian-10-r2
+
+* The container image was updated to use `hadoop-aws` `3.4.x` and `aws-java-sdk` was removed. If you want to use a different version, please read [Using a different version of Hadoop jars](#using-a-different-version-of-hadoop-jars).
+
 ### 3.0.0-debian-10-r44
 
-* The container image was updated to use Hadoop `3.2.x`. If you want to use a different version, please read [Using a different version of Hadoop jars](#using-a-different-version-of-hadoop-jars).
+* The container image was updated to use `hadoop-aws` `3.2.x`. If you want to use a different version, please read [Using a different version of Hadoop jars](#using-a-different-version-of-hadoop-jars).
 
 ### 2.4.5-debian-10-r49
 
-* This image now has an aws-cli and two jars: hadoop-aws and aws-java-sdk for provide an easier way to use AWS.
+* This image now has an aws-cli and two jars: `hadoop-aws` and `aws-java-sdk` for provide an easier way to use AWS.
 
 ## Using `docker-compose.yaml`
 
