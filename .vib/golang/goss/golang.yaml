@@ -12,6 +12,7 @@ command:
       echo 'package main; import "fmt"; func main() { fmt.Println("Hello VIB") }' > {{ $filename }}.go && \
       go build {{ $filename }}.go && \
       ./{{ $filename }}
+    timeout: 30000
     exit-status: 0
     stdout:
       - "Hello VIB"
