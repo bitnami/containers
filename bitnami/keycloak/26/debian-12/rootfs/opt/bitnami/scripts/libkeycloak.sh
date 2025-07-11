@@ -308,6 +308,9 @@ keycloak_initialize() {
 
         if ! is_dir_empty "$KEYCLOAK_MOUNTED_CONF_DIR"; then
             cp -Lr "$KEYCLOAK_MOUNTED_CONF_DIR"/* "$KEYCLOAK_CONF_DIR"
+            # Add new line to the end of the file to avoid issues when mounting
+            # config files with no new line at the end
+            echo >> "${KEYCLOAK_CONF_DIR}/${KEYCLOAK_CONF_FILE}"
         fi
     fi
     keycloak_configure_database
