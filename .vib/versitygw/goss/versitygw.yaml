@@ -1,0 +1,9 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+command:
+  check-versitygw-help:
+    exec: versitygw --help
+    exit-status: 0
+    stdout:
+      - "posix filesystem"
