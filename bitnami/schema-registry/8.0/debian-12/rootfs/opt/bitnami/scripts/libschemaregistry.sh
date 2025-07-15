@@ -327,6 +327,7 @@ schema_registry_initialize() {
         # Other settings
         [[ -n "$SCHEMA_REGISTRY_AVRO_COMPATIBILY_LEVEL" ]] && schema_registry_conf_set "schema.compatibility.level" "$SCHEMA_REGISTRY_AVRO_COMPATIBILY_LEVEL"
         [[ -n "$SCHEMA_REGISTRY_DEBUG" ]] && schema_registry_conf_set "debug" "$SCHEMA_REGISTRY_DEBUG"
+        [[ -n "$SCHEMA_REGISTRY_KAFKASTORE_INIT_TIMEOUT_MS" ]] && schema_registry_conf_set "kafkastore.init.timeout.ms" "$SCHEMA_REGISTRY_KAFKASTORE_INIT_TIMEOUT_MS"
         schema_registry_conf_set "host.name" "$(schema_registry_hostname)"
     fi
     schema_registry_for_kafka_brokers
