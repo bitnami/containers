@@ -486,7 +486,6 @@ airflow_configure_webserver_hashing() {
     fi
 }
 
-
 ########################
 # Set properties in Airflow's webserver_config.py
 # Globals:
