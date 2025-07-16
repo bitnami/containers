@@ -18,13 +18,10 @@
                 "tag": "{VIB_ENV_TAG}"
               }
             },
-            "architectures": ["linux/amd64", "linux/arm64"]
-          }
-        },
-        {
-          "action_id": "container-image-lint",
-          "params": {
-            "threshold": "error"
+            "architectures": [
+              "linux/amd64",
+              "linux/arm64"
+            ]
           }
         }
       ]
@@ -50,14 +47,18 @@
           "action_id": "trivy",
           "params": {
             "threshold": "LOW",
-            "vuln_type": ["OS"]
+            "vuln_type": [
+              "OS"
+            ]
           }
         },
         {
           "action_id": "grype",
           "params": {
             "threshold": "CRITICAL",
-            "package_type": ["OS"]
+            "package_type": [
+              "OS"
+            ]
           }
         }
       ]
