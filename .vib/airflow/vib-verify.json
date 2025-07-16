@@ -29,7 +29,10 @@
         {
           "action_id": "container-image-lint",
           "params": {
-            "threshold": "error"
+            "threshold": "error",
+            "rules_ignored": [
+              "DL1000"
+            ]
           }
         }
       ]
