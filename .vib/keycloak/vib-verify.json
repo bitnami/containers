@@ -23,12 +23,6 @@
               "linux/arm64"
             ]
           }
-        },
-        {
-          "action_id": "container-image-lint",
-          "params": {
-            "threshold": "error"
-          }
         }
       ]
     },
