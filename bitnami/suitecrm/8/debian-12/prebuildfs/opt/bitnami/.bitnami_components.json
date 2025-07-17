@@ -3,13 +3,13 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "2.4.63-7"
+        "version": "2.4.64-0"
     },
     "libphp": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.1.33-0"
+        "version": "8.1.33-1"
     },
     "mysql-client": {
         "arch": "amd64",
@@ -21,13 +21,13 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.1.33-0"
+        "version": "8.1.33-3"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.8-0"
+        "version": "1.0.8-1"
     },
     "suitecrm": {
         "arch": "amd64",
