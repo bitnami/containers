@@ -620,6 +620,10 @@ docker-compose up nginx
 
 - The [module ngx_http_dav_module](http://nginx.org/en/docs/http/ngx_http_dav_module.html), WebDAV protocol, has been converted into a dynamic module.
 
+### 1.29.0-debian-12-r4
+
+- This image updates TLS-related files: certificates and keys are now `tls.crt`/`tls.key` (from `server.crt`/`server.key`), and the certificate signing request is now `tls.csr` (from `server.csr`). This change aligns better with the kubernetes.io/tls secret type, enhancing consistency.
+
 ### 1.24.0-debian-11-r142 and 1.25.2-debian-11-r33
 
 - Added support for [Module ngx_http_dav_module](http://nginx.org/en/docs/http/ngx_http_dav_module.html), WebDAV protocol.
