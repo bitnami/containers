@@ -13,14 +13,25 @@ Disclaimer: The respective trademarks mentioned in the offering are owned by the
 docker run --name mongodb bitnami/mongodb-sharded:latest
 ```
 
+## ⚠️ Important Notice: Upcoming changes to the Bitnami Catalog
+
+Beginning August 28th, 2025, Bitnami will evolve its public catalog to offer a curated set of hardened, security-focused images under the new [Bitnami Secure Images initiative](https://news.broadcom.com/app-dev/broadcom-introduces-bitnami-secure-images-for-production-ready-containerized-applications). As part of this transition:
+
+- Granting community users access for the first time to security-optimized versions of popular container images.
+- Bitnami will begin deprecating support for non-hardened, Debian-based software images in its free tier and will gradually remove non-latest tags from the public catalog. As a result, community users will have access to a reduced number of hardened images. These images are published only under the “latest” tag and are intended for development purposes
+- Starting August 28th, over two weeks, all existing container images, including older or versioned tags (e.g., 2.50.0, 10.6), will be migrated from the public catalog (docker.io/bitnami) to the “Bitnami Legacy” repository (docker.io/bitnamilegacy), where they will no longer receive updates.
+- For production workloads and long-term support, users are encouraged to adopt Bitnami Secure Images, which include hardened containers, smaller attack surfaces, CVE transparency (via VEX/KEV), SBOMs, and enterprise support.
+
+These changes aim to improve the security posture of all Bitnami users by promoting best practices for software supply chain integrity and up-to-date deployments. For more details, visit the [Bitnami Secure Images announcement](https://github.com/bitnami/containers/issues/83267).
+
 ## Why use Bitnami Images?
 
-* Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
-* With Bitnami images the latest bug fixes and features are available as soon as possible.
-* Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
-* Bitnami container images are released on a regular basis with the latest distribution packages available.
+- Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
+- With Bitnami images the latest bug fixes and features are available as soon as possible.
+- Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
+- All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
+- All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
+- Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use MongoDB&reg; Sharded in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the commercial edition of the Bitnami catalog.
 
@@ -31,12 +42,6 @@ Deploying Bitnami applications as Helm Charts is the easiest way to get started 
 ## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
-
-## Only the latest stable branch maintained in the free Bitnami catalog
-
-Starting December 10th, 2024, only the latest stable branch of each container image will receive updates in the free Bitnami catalog. To access up-to-date releases for all upstream-supported branches (e.g., LTS), consider upgrading to Bitnami Premium. Previously released versions will not be deleted and will remain available for pulling from DockerHub.
-
-Please check the Bitnami Premium page in our partner [Arrow Electronics](https://www.arrow.com/globalecs/na/vendors/bitnami?utm_source=GitHub&utm_medium=containers) for more information.
 
 ## Supported tags and respective `Dockerfile` links
 
@@ -82,7 +87,7 @@ docker run \
 
 or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mongodb-sharded/docker-compose.yml) file present in this repository:
 
-* Create directories to hold the persistence data. At minimum you will need one directory for each mongo instance running in the sharded cluster. For example, that means one directory for mongos, mongocfg and mongoshard. You need to assign read write permission to UID 1001 (ie. mkdir [directory] && chown 1001:1001 [directory] && chmod 777 [directory]) to all directories.
+- Create directories to hold the persistence data. At minimum you will need one directory for each mongo instance running in the sharded cluster. For example, that means one directory for mongos, mongocfg and mongoshard. You need to assign read write permission to UID 1001 (ie. mkdir [directory] && chown 1001:1001 [directory] && chmod 777 [directory]) to all directories.
 
 ```yaml
 services:
@@ -195,21 +200,21 @@ services:
 
 In a sharded cluster, there are [three components](https://docs.mongodb.com/manual/sharding/#sharded-cluster):
 
-* Mongos: Interface between the applications and the sharded database.
-* Config Servers: Stores metadata and configuration settings for the sharded database.
-* Shards: Contains a subset of the data.
+- Mongos: Interface between the applications and the sharded database.
+- Config Servers: Stores metadata and configuration settings for the sharded database.
+- Shards: Contains a subset of the data.
 
 A [sharded cluster](https://docs.mongodb.com/manual/sharding/#sharded-cluster) can easily be setup with the Bitnami MongoDB&reg; Sharded Docker Image using the following environment variables:
 
-* `MONGODB_SHARDING_MODE`: The sharding mode. Possible values: `mongos`/`configsvr`/`shardsvr`. No defaults.
-* `MONGODB_REPLICA_SET_NAME`: MongoDB&reg; replica set name. In a sharded cluster we will have multiple replica sets. Default: **replicaset**
-* `MONGODB_MONGOS_HOST`: MongoDB&reg; mongos instance host. No defaults.
-* `MONGODB_CFG_REPLICA_SET_NAME`: MongoDB&reg; config server replica set name. In a sharded cluster we will have multiple replica sets. Default: **replicaset**
-* `MONGODB_CFG_PRIMARY_HOST`: MongoDB&reg; config server primary host. No defaults.
-* `MONGODB_ADVERTISED_HOSTNAME`: MongoDB&reg; advertised hostname. No defaults. It is recommended to pass this environment variable if you experience issues with ephemeral IPs. Setting this env var makes the nodes of the replica set to be configured with a hostname instead of the machine IP.
-* `MONGODB_REPLICA_SET_KEY`: MongoDB&reg; replica set key. Length should be greater than 5 characters and should not contain any special characters. Required for all nodes in the sharded cluster. No default.
-* `MONGODB_ROOT_PASSWORD`: MongoDB&reg; root password. No defaults.
-* `MONGODB_REPLICA_SET_MODE`: The replication mode. Possible values `primary`/`secondary`/`arbiter`. No defaults.
+- `MONGODB_SHARDING_MODE`: The sharding mode. Possible values: `mongos`/`configsvr`/`shardsvr`. No defaults.
+- `MONGODB_REPLICA_SET_NAME`: MongoDB&reg; replica set name. In a sharded cluster we will have multiple replica sets. Default: **replicaset**
+- `MONGODB_MONGOS_HOST`: MongoDB&reg; mongos instance host. No defaults.
+- `MONGODB_CFG_REPLICA_SET_NAME`: MongoDB&reg; config server replica set name. In a sharded cluster we will have multiple replica sets. Default: **replicaset**
+- `MONGODB_CFG_PRIMARY_HOST`: MongoDB&reg; config server primary host. No defaults.
+- `MONGODB_ADVERTISED_HOSTNAME`: MongoDB&reg; advertised hostname. No defaults. It is recommended to pass this environment variable if you experience issues with ephemeral IPs. Setting this env var makes the nodes of the replica set to be configured with a hostname instead of the machine IP.
+- `MONGODB_REPLICA_SET_KEY`: MongoDB&reg; replica set key. Length should be greater than 5 characters and should not contain any special characters. Required for all nodes in the sharded cluster. No default.
+- `MONGODB_ROOT_PASSWORD`: MongoDB&reg; root password. No defaults.
+- `MONGODB_REPLICA_SET_MODE`: The replication mode. Possible values `primary`/`secondary`/`arbiter`. No defaults.
 
 #### Step 1: Create the config server replica set
 
@@ -398,12 +403,12 @@ docker-compose up mongodb-sharded
 
 ### 4.4.8-debian-10-r32, and 5.0.2-debian-10-r0
 
-* From now on, "Default Write Concern" need to be set before adding new members (secondary, arbiter or hidden) to the cluster. In order to maintain the safest default configuration, `{"setDefaultRWConcern" : 1, "defaultWriteConcern" : {"w" : "majority"}}` is configured before adding new members. See <https://docs.mongodb.com/manual/reference/command/setDefaultRWConcern/> and <https://docs.mongodb.com/v5.0/reference/mongodb-defaults/#default-write-concern>
+- From now on, "Default Write Concern" need to be set before adding new members (secondary, arbiter or hidden) to the cluster. In order to maintain the safest default configuration, `{"setDefaultRWConcern" : 1, "defaultWriteConcern" : {"w" : "majority"}}` is configured before adding new members. See <https://docs.mongodb.com/manual/reference/command/setDefaultRWConcern/> and <https://docs.mongodb.com/v5.0/reference/mongodb-defaults/#default-write-concern>
 
 ### 3.6.16-centos-7-r49, 4.0.14-centos-7-r29, and 4.2.2-centos-7-r41
 
-* `3.6.16-centos-7-r49`, `4.0.14-centos-7-r29`, and `4.2.2-centos-7-r41` are considered the latest images based on CentOS.
-* Standard supported distros: Debian & OEL.
+- `3.6.16-centos-7-r49`, `4.0.14-centos-7-r29`, and `4.2.2-centos-7-r41` are considered the latest images based on CentOS.
+- Standard supported distros: Debian & OEL.
 
 ## Using `docker-compose.yaml`
 

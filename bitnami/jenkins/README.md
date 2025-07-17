@@ -15,14 +15,25 @@ docker run --name jenkins bitnami/jenkins:latest
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
 
+## ⚠️ Important Notice: Upcoming changes to the Bitnami Catalog
+
+Beginning August 28th, 2025, Bitnami will evolve its public catalog to offer a curated set of hardened, security-focused images under the new [Bitnami Secure Images initiative](https://news.broadcom.com/app-dev/broadcom-introduces-bitnami-secure-images-for-production-ready-containerized-applications). As part of this transition:
+
+- Granting community users access for the first time to security-optimized versions of popular container images.
+- Bitnami will begin deprecating support for non-hardened, Debian-based software images in its free tier and will gradually remove non-latest tags from the public catalog. As a result, community users will have access to a reduced number of hardened images. These images are published only under the “latest” tag and are intended for development purposes
+- Starting August 28th, over two weeks, all existing container images, including older or versioned tags (e.g., 2.50.0, 10.6), will be migrated from the public catalog (docker.io/bitnami) to the “Bitnami Legacy” repository (docker.io/bitnamilegacy), where they will no longer receive updates.
+- For production workloads and long-term support, users are encouraged to adopt Bitnami Secure Images, which include hardened containers, smaller attack surfaces, CVE transparency (via VEX/KEV), SBOMs, and enterprise support.
+
+These changes aim to improve the security posture of all Bitnami users by promoting best practices for software supply chain integrity and up-to-date deployments. For more details, visit the [Bitnami Secure Images announcement](https://github.com/bitnami/containers/issues/83267).
+
 ## Why use Bitnami Images?
 
-* Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
-* With Bitnami images the latest bug fixes and features are available as soon as possible.
-* Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
-* Bitnami container images are released on a regular basis with the latest distribution packages available.
+- Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
+- With Bitnami images the latest bug fixes and features are available as soon as possible.
+- Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
+- All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
+- All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
+- Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use Jenkins in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the commercial edition of the Bitnami catalog.
 
@@ -33,12 +44,6 @@ Deploying Bitnami applications as Helm Charts is the easiest way to get started 
 ## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
-
-## Only the latest stable branch maintained in the free Bitnami catalog
-
-Starting December 10th, 2024, only the latest stable branch of each container image will receive updates in the free Bitnami catalog. To access up-to-date releases for all upstream-supported branches (e.g., LTS), consider upgrading to Bitnami Premium. Previously released versions will not be deleted and will remain available for pulling from DockerHub.
-
-Please check the Bitnami Premium page in our partner [Arrow Electronics](https://www.arrow.com/globalecs/na/vendors/bitnami?utm_source=GitHub&utm_medium=containers) for more information.
 
 ## Supported tags and respective `Dockerfile` links
 
@@ -206,7 +211,7 @@ If you detect any issue in the `docker-compose.yaml` file, feel free to report i
 
 When you start the Jenkins image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
-* For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/jenkins/docker-compose.yml) file present in this repository:
+- For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/jenkins/docker-compose.yml) file present in this repository:
 
     ```yaml
     jenkins:
@@ -216,7 +221,7 @@ When you start the Jenkins image, you can adjust the configuration of the instan
       ...
     ```
 
-* For manual execution add a `--env` option with each variable and value:
+- For manual execution add a `--env` option with each variable and value:
 
     ```console
     $ docker run -d -p 80:8080 --name jenkins \
@@ -250,8 +255,8 @@ To backup your data, configuration and logs, follow these simple steps:
 
 #### Step 1: Stop the currently running container
 
-* For docker-compose: `$ docker-compose stop jenkins`
-* For manual execution: `$ docker stop jenkins`
+- For docker-compose: `$ docker-compose stop jenkins`
+- For manual execution: `$ docker stop jenkins`
 
 #### Step 2: Run the backup command
 
@@ -286,8 +291,8 @@ docker pull bitnami/jenkins:latest
 
 ### Step 2. Stop your container
 
-* For docker-compose: `$ docker-compose stop jenkins`
-* For manual execution: `$ docker stop jenkins`
+- For docker-compose: `$ docker-compose stop jenkins`
+- For manual execution: `$ docker stop jenkins`
 
 ### Step 3. Take a snapshot of the application state
 
@@ -295,13 +300,13 @@ Follow the steps in [Backing up your container](#backing-up-your-container) to t
 
 ### Step 4. Remove the stopped container
 
-* For docker-compose: `$ docker-compose rm -v jenkins`
-* For manual execution: `$ docker rm -v jenkins`
+- For docker-compose: `$ docker-compose rm -v jenkins`
+- For manual execution: `$ docker rm -v jenkins`
 
 ### Step 5. Run the new image
 
-* For docker-compose: `$ docker-compose up jenkins`
-* For manual execution (mount the directories if needed): `docker run --name jenkins bitnami/jenkins:latest`
+- For docker-compose: `$ docker-compose up jenkins`
+- For manual execution (mount the directories if needed): `docker run --name jenkins bitnami/jenkins:latest`
 
 ## Customize this image
 
@@ -319,7 +324,7 @@ FROM bitnami/jenkins
 
 Here is an example of extending the image with the following modifications:
 
-* Install the `vim` editor
+- Install the `vim` editor
 
 ```Dockerfile
 FROM bitnami/jenkins
@@ -336,15 +341,15 @@ USER 1001
 
 To download and install a set of plugins and their dependencies, use the [Plugin Installation Manager tool](https://github.com/jenkinsci/plugin-installation-manager-tool). You can find information about how to use this tool in the guide below:
 
-* [Getting Started with Plugin Installation Manager tool](https://github.com/jenkinsci/plugin-installation-manager-tool#getting-started)
+- [Getting Started with Plugin Installation Manager tool](https://github.com/jenkinsci/plugin-installation-manager-tool#getting-started)
 
 Alternatively, it is possible to install plugins using the following env variables:
 
-* `JENKINS_PLUGINS`: Comma-separated list of Jenkins plugins to be installed during the first boot.
-* `JENKINS_PLUGINS_LATEST`: If set to false, install the minimum required version of the plugins in `JENKINS_PLUGINS`. Default: **true**
-* `JENKINS_PLUGINS_LATEST_SPECIFIED`: If set to true, install the latest dependencies of any plugin that is requested to have the latest version. Default: **false**
-* `JENKINS_OVERRIDE_PLUGINS`: If set to true, existing plugins in the persisted volume will be removed and will force plugins to be reinstalled. Default: **false**
-* `JENKINS_SKIP_IMAGE_PLUGINS`: If set to true, skip the installation of image built-in plugins. Default: **false**
+- `JENKINS_PLUGINS`: Comma-separated list of Jenkins plugins to be installed during the first boot.
+- `JENKINS_PLUGINS_LATEST`: If set to false, install the minimum required version of the plugins in `JENKINS_PLUGINS`. Default: **true**
+- `JENKINS_PLUGINS_LATEST_SPECIFIED`: If set to true, install the latest dependencies of any plugin that is requested to have the latest version. Default: **false**
+- `JENKINS_OVERRIDE_PLUGINS`: If set to true, existing plugins in the persisted volume will be removed and will force plugins to be reinstalled. Default: **false**
+- `JENKINS_SKIP_IMAGE_PLUGINS`: If set to true, skip the installation of image built-in plugins. Default: **false**
 
 ### Passing JVM parameters
 
@@ -370,8 +375,8 @@ docker run -d --name jenkins -p 8080:8080 \
 
 By default, when running this image, Bitnami implement some logic in order to configure it for working out of the box. This initialization consists of creating the user and password, preparing data to persist, configuring permissions, creating the `JENKINS_HOME`, etc. You can skip it in two ways:
 
-* Setting the `JENKINS_SKIP_BOOTSTRAP` environment variable to `yes`.
-* Attaching a volume with a custom `JENKINS_HOME` that contains a functional Jenkins installation.
+- Setting the `JENKINS_SKIP_BOOTSTRAP` environment variable to `yes`.
+- Attaching a volume with a custom `JENKINS_HOME` that contains a functional Jenkins installation.
 
 ### Adding files/directories to the image
 
@@ -417,45 +422,45 @@ docker run -d -p 80:8080 --name jenkins \
 
 ### 2.346.3-debian-11-r3
 
-* The preinstalled plugins were removed.
+- The preinstalled plugins were removed.
 
 ### 2.332.2-debian-10-r21
 
-* HTTPS and HTTP support are enabled by default.
-* `JENKINS_ENABLE_HTTPS` has been renamed to `JENKINS_FORCE_HTTPS`.
+- HTTPS and HTTP support are enabled by default.
+- `JENKINS_ENABLE_HTTPS` has been renamed to `JENKINS_FORCE_HTTPS`.
 
 ### 2.277.4-debian-10-r19
 
-* The size of the container image has been decreased.
-* The configuration logic is now based on Bash scripts in the *rootfs/* folder.
-* Only the Jenkins Home directory is persisted.
-* The `install-plugins.sh` script has been deprecated. Instead use the Plugin Installation Manager Tool as explained in the [Installing Plugins](#installing-plugins) section.
-* The `DISABLE_JENKINS_INITIALIZATION` environment variable was renamed to `JENKINS_SKIP_BOOTSTRAP`.
+- The size of the container image has been decreased.
+- The configuration logic is now based on Bash scripts in the *rootfs/* folder.
+- Only the Jenkins Home directory is persisted.
+- The `install-plugins.sh` script has been deprecated. Instead use the Plugin Installation Manager Tool as explained in the [Installing Plugins](#installing-plugins) section.
+- The `DISABLE_JENKINS_INITIALIZATION` environment variable was renamed to `JENKINS_SKIP_BOOTSTRAP`.
 
 ### 2.263.3-debian-10-rXX
 
-* The deprecated plugins below are not included in the image by default anymore:
-  * [GitHub Organization Folder](https://plugins.jenkins.io/github-organization-folder).
-  * [Pipeline: Declarative Agent API](https://plugins.jenkins.io/pipeline-model-declarative-agent).
+- The deprecated plugins below are not included in the image by default anymore:
+  - [GitHub Organization Folder](https://plugins.jenkins.io/github-organization-folder).
+  - [Pipeline: Declarative Agent API](https://plugins.jenkins.io/pipeline-model-declarative-agent).
 
 ### 2.222.1-debian-10-r17
 
-* Java distribution has been migrated from AdoptOpenJDK to OpenJDK Liberica. As part of VMware, we have an agreement with Bell Software to distribute the Liberica distribution of OpenJDK. That way, we can provide support & the latest versions and security releases for Java.
+- Java distribution has been migrated from AdoptOpenJDK to OpenJDK Liberica. As part of VMware, we have an agreement with Bell Software to distribute the Liberica distribution of OpenJDK. That way, we can provide support & the latest versions and security releases for Java.
 
 ### 2.204.4-debian-10-r3
 
-* The Jenkins container has been migrated to a "non-root" user approach. Previously the container ran as the `root` user and the Jenkins service was started as the `jenkins` user. From now on, both the container and the Jenkins service run as user `jenkins` (`uid=1001`). You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
-* Consequences:
-  * Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating your Jenkins data ensuring the `jenkins` user has the appropriate permissions.
-  * No "privileged" actions are allowed anymore.
+- The Jenkins container has been migrated to a "non-root" user approach. Previously the container ran as the `root` user and the Jenkins service was started as the `jenkins` user. From now on, both the container and the Jenkins service run as user `jenkins` (`uid=1001`). You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
+- Consequences:
+  - Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating your Jenkins data ensuring the `jenkins` user has the appropriate permissions.
+  - No "privileged" actions are allowed anymore.
 
 ### 2.121.2-ol-7-r14 / 2.121.2-debian-9-r18
 
-* Use Jetty instead of Tomcat as web server.
+- Use Jetty instead of Tomcat as web server.
 
 ### 2.107.1-r0
 
-* The Jenkins container has been migrated to the LTS version. From now on, this repository will only track long term support releases from [Jenkins](https://jenkins.io/changelog-stable/).
+- The Jenkins container has been migrated to the LTS version. From now on, this repository will only track long term support releases from [Jenkins](https://jenkins.io/changelog-stable/).
 
 ## Contributing
 

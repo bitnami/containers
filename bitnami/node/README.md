@@ -13,22 +13,27 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run -it --name node bitnami/node:latest
 ```
 
+## ⚠️ Important Notice: Upcoming changes to the Bitnami Catalog
+
+Beginning August 28th, 2025, Bitnami will evolve its public catalog to offer a curated set of hardened, security-focused images under the new [Bitnami Secure Images initiative](https://news.broadcom.com/app-dev/broadcom-introduces-bitnami-secure-images-for-production-ready-containerized-applications). As part of this transition:
+
+- Granting community users access for the first time to security-optimized versions of popular container images.
+- Bitnami will begin deprecating support for non-hardened, Debian-based software images in its free tier and will gradually remove non-latest tags from the public catalog. As a result, community users will have access to a reduced number of hardened images. These images are published only under the “latest” tag and are intended for development purposes
+- Starting August 28th, over two weeks, all existing container images, including older or versioned tags (e.g., 2.50.0, 10.6), will be migrated from the public catalog (docker.io/bitnami) to the “Bitnami Legacy” repository (docker.io/bitnamilegacy), where they will no longer receive updates.
+- For production workloads and long-term support, users are encouraged to adopt Bitnami Secure Images, which include hardened containers, smaller attack surfaces, CVE transparency (via VEX/KEV), SBOMs, and enterprise support.
+
+These changes aim to improve the security posture of all Bitnami users by promoting best practices for software supply chain integrity and up-to-date deployments. For more details, visit the [Bitnami Secure Images announcement](https://github.com/bitnami/containers/issues/83267).
+
 ## Why use Bitnami Images?
 
-* Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
-* With Bitnami images the latest bug fixes and features are available as soon as possible.
-* Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
-* Bitnami container images are released on a regular basis with the latest distribution packages available.
+- Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
+- With Bitnami images the latest bug fixes and features are available as soon as possible.
+- Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
+- All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
+- All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
+- Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use Node.js in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the commercial edition of the Bitnami catalog.
-
-## Only the latest stable branch maintained in the free Bitnami catalog
-
-Starting December 10th, 2024, only the latest stable branch of each container image will receive updates in the free Bitnami catalog. To access up-to-date releases for all upstream-supported branches (e.g., LTS), consider upgrading to Bitnami Premium. Previously released versions will not be deleted and will remain available for pulling from DockerHub.
-
-Please check the Bitnami Premium page in our partner [Arrow Electronics](https://www.arrow.com/globalecs/na/vendors/bitnami?utm_source=GitHub&utm_medium=containers) for more information.
 
 ## Supported tags and respective `Dockerfile` links
 
@@ -70,7 +75,7 @@ docker run -it --name node bitnami/node
 
 **Further Reading:**
 
-* [nodejs.org/api/repl.html](https://nodejs.org/api/repl.html)
+- [nodejs.org/api/repl.html](https://nodejs.org/api/repl.html)
 
 ## Configuration
 
@@ -105,8 +110,8 @@ node:
 
 **Further Reading:**
 
-* [package.json documentation](https://docs.npmjs.com/files/package.json)
-* [npm start script](https://docs.npmjs.com/misc/scripts#default-values)
+- [package.json documentation](https://docs.npmjs.com/files/package.json)
+- [npm start script](https://docs.npmjs.com/misc/scripts#default-values)
 
 ## Working with private npm modules
 
@@ -114,13 +119,13 @@ To work with npm private modules, it is necessary to be logged into npm. npm CLI
 
 If you are working in a Docker environment, you can inject the token at build time in your Dockerfile by using the ARG parameter as follows:
 
-* Create a `npmrc` file within the project. It contains the instructions for the `npm` command to authenticate against npmjs.org registry. The `NPM_TOKEN` will be taken at build time. The file should look like this:
+- Create a `npmrc` file within the project. It contains the instructions for the `npm` command to authenticate against npmjs.org registry. The `NPM_TOKEN` will be taken at build time. The file should look like this:
 
 ```console
 //registry.npmjs.org/:_authToken=${NPM_TOKEN}
 ```
 
-* Add some new lines to the Dockerfile in order to copy the `npmrc` file, add the expected `NPM_TOKEN` by using the ARG parameter, and remove the `npmrc` file once the npm install is completed.
+- Add some new lines to the Dockerfile in order to copy the `npmrc` file, add the expected `NPM_TOKEN` by using the ARG parameter, and remove the `npmrc` file once the npm install is completed.
 
 You can find the Dockerfile below:
 
@@ -138,7 +143,7 @@ RUN npm install
 CMD node app.js
 ```
 
-* Now you can build the image using the above Dockerfile and the token. Run the `docker build` command as follows:
+- Now you can build the image using the above Dockerfile and the token. Run the `docker build` command as follows:
 
 ```console
 docker build --build-arg NPM_TOKEN=${NPM_TOKEN} .
@@ -150,7 +155,7 @@ Congratulations! You are now logged into the npm repo.
 
 ### Further reading
 
-* [npm official documentation](https://docs.npmjs.com/private-modules/docker-and-private-modules).
+- [npm official documentation](https://docs.npmjs.com/private-modules/docker-and-private-modules).
 
 ## Accessing a Node.js app running a web server
 
@@ -282,19 +287,19 @@ docker run --name node bitnami/node:latest
 
 ### Starting January 16, 2024
 
-* The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
+- The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
 ### 6.2.0-r0 (2016-05-11)
 
-* Commands are now executed as the `root` user. Use the `--user` argument to switch to another user or change to the required user using `sudo` to launch applications. Alternatively, as of Docker 1.10 User Namespaces are supported by the docker daemon. Refer to the [daemon user namespace options](https://docs.docker.com/engine/security/userns-remap/) for more details.
+- Commands are now executed as the `root` user. Use the `--user` argument to switch to another user or change to the required user using `sudo` to launch applications. Alternatively, as of Docker 1.10 User Namespaces are supported by the docker daemon. Refer to the [daemon user namespace options](https://docs.docker.com/engine/security/userns-remap/) for more details.
 
 ### 4.1.2-0 (2015-10-12)
 
-* Permissions fixed so `bitnami` user can install global npm modules without needing `sudo`.
+- Permissions fixed so `bitnami` user can install global npm modules without needing `sudo`.
 
 ### 4.1.1-0-r01 (2015-10-07)
 
-* `/app` directory is no longer exported as a volume. This caused problems when building on top of the image, since changes in the volume are not persisted between Dockerfile `RUN` instructions. To keep the previous behavior (so that you can mount the volume in another container), create the container with the `-v /app` option.
+- `/app` directory is no longer exported as a volume. This caused problems when building on top of the image, since changes in the volume are not persisted between Dockerfile `RUN` instructions. To keep the previous behavior (so that you can mount the volume in another container), create the container with the `-v /app` option.
 
 ## Contributing
 

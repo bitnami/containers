@@ -1,8 +1,8 @@
 # Deploy Cluster Autoscaler on AWS
 
 > NOTE: If you are pulling from a private containers registry, replace the image name with the full URL to the docker image. E.g.
-> 
-> ```
+>
+> ```yaml
 > containers:
 >   - image: 'your-registry/cluster-autoscaler:your-version'
 > ```
@@ -15,7 +15,7 @@ kubectl apply -f rbac-requirements.yaml
 
 The following K8s resources will be created:
 
-- A **serviceAccount** with name cluster-autoscaler in the `kube-system` namespace. 
+- A **serviceAccount** with name cluster-autoscaler in the `kube-system` namespace.
 - A **role** in the `kube-system` namespace.
 - A **roleBinding** which binds the serviceAccount created with the corresponding role.
 - A **clusterRole**.
