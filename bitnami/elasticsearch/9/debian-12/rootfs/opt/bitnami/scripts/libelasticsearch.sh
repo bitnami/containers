@@ -359,7 +359,8 @@ elasticsearch_validate() {
         if [ -n "$DB_NODE_ROLES" ]; then
             read -r -a roles_list <<<"$(get_elasticsearch_roles)"
             local master_role="master"
-            [[ "$DB_FLAVOR" = "opensearch" && "$APP_VERSION" =~ ^2\. ]] && master_role="cluster_manager"
+            local major_version="$(get_sematic_version "$(elasticsearch_get_version)" 1)"
+            [[ "$DB_FLAVOR" = "opensearch" && "$major_version" -eq 2 ]] && master_role="cluster_manager"
             if [[ "${#roles_list[@]}" -le 0 ]]; then
                 warn "Setting ${DB_FLAVOR^^}_NODE_ROLES is empty and ${DB_FLAVOR^^}_IS_DEDICATED_NODE is set to true, ${DB_FLAVOR^} will be configured as coordinating-only node."
             fi
@@ -461,10 +462,12 @@ get_elasticsearch_hostname() {
 #   Array of node roles
 #########################
 get_elasticsearch_roles() {
+    local major_version="$(get_sematic_version "$(elasticsearch_get_version)" 1)"
+
     read -r -a roles_list_tmp <<<"$(tr ',;' ' ' <<<"$DB_NODE_ROLES")"
     roles_list=("${roles_list_tmp[@]}")
     for i in "${!roles_list[@]}"; do
-        if [[ ${roles_list[$i]} == "master" ]] && [[ "$DB_FLAVOR" = "opensearch" && "$APP_VERSION" =~ ^2\. ]]; then
+        if [[ ${roles_list[$i]} == "master" ]] && [[ "$DB_FLAVOR" = "opensearch" && "$major_version" -eq 2 ]]; then
             roles_list[i]="cluster_manager"
         fi
     done
@@ -524,7 +527,8 @@ elasticsearch_cluster_configuration() {
         fi
         elasticsearch_conf_set discovery.seed_hosts "${host_list[@]}"
         if is_node_master; then
-            if [[ "$DB_FLAVOR" = "opensearch" && "$APP_VERSION" =~ ^2\. ]]; then
+            local major_version="$(get_sematic_version "$(elasticsearch_get_version)" 1)"
+            if [[ "$DB_FLAVOR" = "opensearch" && "$major_version" -eq 2 ]]; then
                 elasticsearch_conf_set cluster.initial_cluster_manager_nodes "${master_list[@]}"
             else
                 elasticsearch_conf_set cluster.initial_master_nodes "${master_list[@]}"
@@ -929,4 +933,27 @@ elasticsearch_healthcheck() {
         rm "$output"
         return 1
     fi
+}
+
+########################
+# Extract opensearch version from version string
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   Version string
+#########################
+elasticsearch_get_version() {
+    local ver_string
+    local -a ver_split
+
+    if [[ "$DB_FLAVOR" = "opensearch" ]]; then
+        ver_string=$("${DB_BIN_DIR}/opensearch" "--version" 2>/dev/null)
+    else
+        ver_string=$("${DB_BIN_DIR}/elasticsearch" "--version" 2>/dev/null)
+    fi
+
+    read -r -a ver_split <<< "$ver_string"
+    echo "${ver_split[1]::-1}"
 }
