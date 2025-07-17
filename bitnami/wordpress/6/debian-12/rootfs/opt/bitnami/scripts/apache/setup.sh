@@ -31,11 +31,11 @@ if ! is_dir_empty "$APACHE_DEFAULT_CONF_DIR"; then
 fi
 # Generate SSL certs (without a passphrase)
 ensure_dir_exists "${APACHE_CONF_DIR}/bitnami/certs"
-if [[ ! -f "${APACHE_CONF_DIR}/bitnami/certs/server.crt" ]]; then
+if [[ ! -f "${APACHE_CONF_DIR}/bitnami/certs/tls.crt" ]]; then
     info "Generating sample certificates"
-    SSL_KEY_FILE="${APACHE_CONF_DIR}/bitnami/certs/server.key"
-    SSL_CERT_FILE="${APACHE_CONF_DIR}/bitnami/certs/server.crt"
-    SSL_CSR_FILE="${APACHE_CONF_DIR}/bitnami/certs/server.csr"
+    SSL_KEY_FILE="${APACHE_CONF_DIR}/bitnami/certs/tls.key"
+    SSL_CERT_FILE="${APACHE_CONF_DIR}/bitnami/certs/tls.crt"
+    SSL_CSR_FILE="${APACHE_CONF_DIR}/bitnami/certs/tls.csr"
     SSL_SUBJ="/CN=example.com"
     SSL_EXT="subjectAltName=DNS:example.com,DNS:www.example.com,IP:127.0.0.1"
     rm -f "$SSL_KEY_FILE" "$SSL_CERT_FILE"
