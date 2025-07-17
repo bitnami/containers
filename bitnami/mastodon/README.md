@@ -136,6 +136,7 @@ docker-compose up mastodon
 | `RAILS_SERVE_STATIC_FILES`           | Have puma server the static files in the public/ folder               | `true`                                                                         |
 | `MASTODON_BIND_ADDRESS`              | Address to listen for interfaces                                      | `0.0.0.0`                                                                      |
 | `MASTODON_DATA_TO_PERSIST`           | Data to persist from installations.                                   | `$MASTODON_ASSETS_DIR $MASTODON_SYSTEM_DIR`                                    |
+| `MASTODON_USE_LIBVIPS`               | Use libvips for image processing instead of ImageMagick.              | `true`                                                                         |
 | `MASTODON_MIGRATE_DATABASE`          | Run rake db:migrate job.                                              | `true`                                                                         |
 | `MASTODON_DATABASE_HOST`             | Database server host.                                                 | `postgresql`                                                                   |
 | `MASTODON_DATABASE_PORT_NUMBER`      | Database server port.                                                 | `5432`                                                                         |

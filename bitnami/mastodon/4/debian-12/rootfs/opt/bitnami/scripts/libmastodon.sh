@@ -419,6 +419,8 @@ mastodon_initialize() {
         local -r psql_connection_string="postgresql://${MASTODON_DATABASE_USERNAME}:${MASTODON_DATABASE_PASSWORD}@${MASTODON_DATABASE_HOST}:${MASTODON_DATABASE_PORT_NUMBER}/${MASTODON_DATABASE_NAME}"
         mastodon_wait_for_postgresql_connection "$psql_connection_string"
         if is_boolean_yes "$MASTODON_MIGRATE_DATABASE"; then
+            info "Preparing database"
+            mastodon_rake_execute db:prepare
             info "Migrating database"
             mastodon_rake_execute db:migrate
         fi
