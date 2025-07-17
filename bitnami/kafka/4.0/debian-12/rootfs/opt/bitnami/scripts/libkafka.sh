@@ -752,7 +752,8 @@ kafka_configure_ssl() {
             for file in "${files[@]}"; do
                 if grep -q "^[#\\s]*$key\s*=.*" "$file"; then
                     # Delete all lines from the certificate beginning to its end
-                    sed -i "/^[#\\s]*$key\s*=.*-----BEGIN/,/-----END/d" "$file"
+                    content="$(sed "/^[#\\s]*$key\s*=.*-----BEGIN/,/-----END/d" "$file")"
+                    echo "$content" > "$file"
                 fi
             done
         }
@@ -1082,23 +1083,28 @@ kafka_client_sasl_mechanism() {
 #   None
 ########################
 kafka_server_unify_conf() {
-    local -r remove_regexps=(
+    # Setting patterns to be commented
+    local -r remove_settings=(
         #Zookeeper
-        "s/^zookeeper\./#zookeeper./g"
-        "s/^group\.initial/#group.initial/g"
-        "s/^broker\./#broker./g"
-        "s/^node\./#node./g"
-        "s/^process\./#process./g"
-        "s/^listeners=/#listeners=/g"
-        "s/^listener\./#listener./g"
-        "s/^controller\./#controller./g"
-        "s/^inter\.broker/#inter.broker/g"
-        "s/^advertised\.listeners/#advertised.listeners/g"
+        "^zookeeper\."
+        "^group\.initial"
+        "^broker\."
+        "^node\."
+        "^process\."
+        "^listeners="
+        "^listener\."
+        "^controller\."
+        "^inter\.broker"
+        "^advertised\.listeners"
     )
 
     # Map environment variables to config properties
-    for regex in "${remove_regexps[@]}"; do
-        sed -i "${regex}" "$KAFKA_CONF_FILE"
+    for match_pattern in "${remove_settings[@]}"; do
+        # Replace beginning of line with comment
+        sub_pattern="${match_pattern/^/#}"
+        # Replace \. with .
+        sub_pattern="${sub_pattern/\\./.}"
+        replace_in_file "$KAFKA_CONF_FILE" "$match_pattern" "$sub_pattern"
     done
 }
 
