@@ -241,7 +241,7 @@ Additionally, you can install your custom Lua modules using [your custom init sc
 
 The [module ngx_http_dav_module](https://nginx.org/en/docs/http/ngx_http_dav_module.html) is intended for file management automation via the WebDAV protocol. In current Bitnami images, this module is built as a dynamic module located under the `/opt/bitnami/openresty/nginx/modules` directory. You will need to load it in your configuration for you to be able to use its directives.
 
-```
+```text
 load_module /opt/bitnami/openresty/nginx/modules/ngx_http_dav_module.so;
 ```
 

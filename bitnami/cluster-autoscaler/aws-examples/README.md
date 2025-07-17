@@ -2,7 +2,7 @@
 
 > NOTE: If you are pulling from a private containers registry, replace the image name with the full URL to the docker image. E.g.
 >
-> ```
+> ```yaml
 > containers:
 >   - image: 'your-registry/cluster-autoscaler:your-version'
 > ```
