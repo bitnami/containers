@@ -17,10 +17,6 @@ set -o pipefail
 # Load environment
 . /opt/bitnami/scripts/opensearch-env.sh
 
-if [[ "$APP_VERSION" =~ ^1\. ]]; then
-  export OPENSEARCH_SECURITY_CONF_DIR="${OPENSEARCH_SECURITY_DIR}/securityconfig"
-fi
-
 # Ensure Opensearch environment variables settings are valid
 elasticsearch_validate
 # Ensure Opensearch is stopped when this script ends
