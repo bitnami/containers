@@ -202,12 +202,12 @@ services:
 
 #### Step 1: Prepare your certificate files
 
-In your local computer, create a folder called `certs` and put your certificates files. Make sure you rename both files to `server.crt` and `server.key` respectively:
+In your local computer, create a folder called `certs` and put your certificates files. Make sure you rename both files to `tls.crt` and `tls.key` respectively:
 
 ```console
 mkdir -p /path/to/nginx-persistence/certs
-cp /path/to/certfile.crt /path/to/nginx-persistence/certs/server.crt
-cp /path/to/keyfile.key  /path/to/nginx-persistence/certs/server.key
+cp /path/to/certfile.crt /path/to/nginx-persistence/certs/tls.crt
+cp /path/to/keyfile.key  /path/to/nginx-persistence/certs/tls.key
 ```
 
 #### Step 2: Provide a custom Server Block for SSL connections
@@ -218,8 +218,8 @@ Write your `my_server_block.conf` file with the SSL configuration and the relati
   server {
     listen       8443 ssl;
 
-    ssl_certificate      bitnami/certs/server.crt;
-    ssl_certificate_key  bitnami/certs/server.key;
+    ssl_certificate      bitnami/certs/tls.crt;
+    ssl_certificate_key  bitnami/certs/tls.key;
 
     ssl_session_cache    shared:SSL:1m;
     ssl_session_timeout  5m;
