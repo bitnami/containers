@@ -18,6 +18,7 @@ docker run --name postgresql bitnami/postgresql:latest
 ## ⚠️ Important Notice: Upcoming changes to the Bitnami Catalog
 
 Beginning August 28th, 2025, Bitnami will evolve its public catalog to offer a curated set of hardened, security-focused images under the new [Bitnami Secure Images initiative](https://news.broadcom.com/app-dev/broadcom-introduces-bitnami-secure-images-for-production-ready-containerized-applications). As part of this transition:
+
 - Granting community users access for the first time to security-optimized versions of popular container images.
 - Bitnami will begin deprecating support for non-hardened, Debian-based software images in its free tier and will gradually remove non-latest tags from the public catalog. As a result, community users will have access to a reduced number of hardened images. These images are published only under the “latest” tag and are intended for development purposes
 - Starting August 28th, over two weeks, all existing container images, including older or versioned tags (e.g., 2.50.0, 10.6), will be migrated from the public catalog (docker.io/bitnami) to the “Bitnami Legacy” repository (docker.io/bitnamilegacy), where they will no longer receive updates.
@@ -27,12 +28,12 @@ These changes aim to improve the security posture of all Bitnami users by promot
 
 ## Why use Bitnami Images?
 
-* Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
-* With Bitnami images the latest bug fixes and features are available as soon as possible.
-* Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
-* Bitnami container images are released on a regular basis with the latest distribution packages available.
+- Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
+- With Bitnami images the latest bug fixes and features are available as soon as possible.
+- Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
+- All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
+- All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
+- Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use PostgreSQL in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the commercial edition of the Bitnami catalog.
 
@@ -298,7 +299,7 @@ In order to have your custom files inside the docker image you can mount them as
 
 Passing extra command-line flags to the postgresql service command is possible through the following env var:
 
-* `POSTGRESQL_EXTRA_FLAGS`: Flags to be appended to the `postgres` startup command. No defaults
+- `POSTGRESQL_EXTRA_FLAGS`: Flags to be appended to the `postgres` startup command. No defaults
 
 ### Initializing a new instance
 
@@ -377,38 +378,38 @@ When `POSTGRESQL_USERNAME` is specified, the `postgres` user is not assigned a p
 
 The Bitnami PostgreSQL Image comes with the pgAudit module enabled by default. Thanks to this, audit information can be enabled in the container with these environment variables:
 
-* `POSTGRESQL_PGAUDIT_LOG`: Comma-separated list with different operations to audit. Find in the [official pgAudit documentation](https://github.com/pgaudit/pgaudit#configuration) the list of possible values. No defaults.
-* `POSTGRESQL_PGAUDIT_LOG_CATALOG`: Session logging enabled in the case where all relations in a statement are in pg_catalog. No defaults.
-* `POSTGRESQL_LOG_CONNECTIONS`: Add log entry for logins. No defaults.
-* `POSTGRESQL_LOG_DISCONNECTIONS`: Add log entry for logouts. No defaults.
-* `POSTGRESQL_LOG_HOSTNAME`: Log the client hostname. No defaults.
-* `POSTGRESQL_LOG_LINE_PREFIX`: Define the format of the log entry lines. Find in the [official PostgreSQL documentation](https://www.postgresql.org/docs/current/runtime-config-logging.html) the string parameters. No defaults.
-* `POSTGRESQL_LOG_TIMEZONE`: Set the timezone for the log entry timestamp. No defaults.
+- `POSTGRESQL_PGAUDIT_LOG`: Comma-separated list with different operations to audit. Find in the [official pgAudit documentation](https://github.com/pgaudit/pgaudit#configuration) the list of possible values. No defaults.
+- `POSTGRESQL_PGAUDIT_LOG_CATALOG`: Session logging enabled in the case where all relations in a statement are in pg_catalog. No defaults.
+- `POSTGRESQL_LOG_CONNECTIONS`: Add log entry for logins. No defaults.
+- `POSTGRESQL_LOG_DISCONNECTIONS`: Add log entry for logouts. No defaults.
+- `POSTGRESQL_LOG_HOSTNAME`: Log the client hostname. No defaults.
+- `POSTGRESQL_LOG_LINE_PREFIX`: Define the format of the log entry lines. Find in the [official PostgreSQL documentation](https://www.postgresql.org/docs/current/runtime-config-logging.html) the string parameters. No defaults.
+- `POSTGRESQL_LOG_TIMEZONE`: Set the timezone for the log entry timestamp. No defaults.
 
 ### Session settings
 
 The Bitnami PostgreSQL Image allows configuring several parameters for the connection and session management:
 
-* `POSTGRESQL_USERNAME_CONNECTION_LIMIT`: If a user different from `postgres` is created, set the connection limit. No defaults.
-* `POSTGRESQL_POSTGRES_CONNECTION_LIMIT`: Set the connection limit for the `postgres` user. No defaults.
-* `POSTGRESQL_STATEMENT_TIMEOUT`: Set the statement timeout. No defaults.
-* `POSTGRESQL_TCP_KEEPALIVES_INTERVAL`: TCP keepalive interval. No defaults.
-* `POSTGRESQL_TCP_KEEPALIVES_IDLE`: TCP keepalive idle time. No defaults.
-* `POSTGRESQL_TCP_KEEPALIVES_COUNT`: TCP keepalive count. No defaults.
+- `POSTGRESQL_USERNAME_CONNECTION_LIMIT`: If a user different from `postgres` is created, set the connection limit. No defaults.
+- `POSTGRESQL_POSTGRES_CONNECTION_LIMIT`: Set the connection limit for the `postgres` user. No defaults.
+- `POSTGRESQL_STATEMENT_TIMEOUT`: Set the statement timeout. No defaults.
+- `POSTGRESQL_TCP_KEEPALIVES_INTERVAL`: TCP keepalive interval. No defaults.
+- `POSTGRESQL_TCP_KEEPALIVES_IDLE`: TCP keepalive idle time. No defaults.
+- `POSTGRESQL_TCP_KEEPALIVES_COUNT`: TCP keepalive count. No defaults.
 
 ### Configuring time zone
 
 The Bitnami PostgreSQL Image allows configuring the time zone for PostgreSQL with the following environment variables:
 
-* `POSTGRESQL_TIMEZONE`: Sets the time zone for displaying and interpreting time stamps.
-* `POSTGRESQL_LOG_TIMEZONE`: Sets the time zone used for timestamps written in the server log.
+- `POSTGRESQL_TIMEZONE`: Sets the time zone for displaying and interpreting time stamps.
+- `POSTGRESQL_LOG_TIMEZONE`: Sets the time zone used for timestamps written in the server log.
 
 ### Modify pg_hba.conf
 
 By default, the Bitnami PostgreSQL Image generates `local` and `md5` entries in the pg_hba.conf file. In order to adapt to any other requirements or standards, it is possible to change the pg_hba.conf file by:
 
-* Mounting your own pg_hba.conf file in `/bitnami/postgresql/conf`
-* Using the `POSTGRESQL_PGHBA_REMOVE_FILTERS` with a comma-separated list of patterns. All lines that match any of the patterns will be removed. For example, if we want to remove all `local` and `md5` authentication (in favour of hostssl only connections, for example), set `POSTGRESQL_PGHBA_REMOVE_FILTERS=local, md5`.
+- Mounting your own pg_hba.conf file in `/bitnami/postgresql/conf`
+- Using the `POSTGRESQL_PGHBA_REMOVE_FILTERS` with a comma-separated list of patterns. All lines that match any of the patterns will be removed. For example, if we want to remove all `local` and `md5` authentication (in favour of hostssl only connections, for example), set `POSTGRESQL_PGHBA_REMOVE_FILTERS=local, md5`.
 
 ### Preloading shared libraries
 
@@ -418,12 +419,12 @@ It is possible to modify the list of libraries that PostgreSQL will preload at b
 
 A [Streaming replication](https://www.postgresql.org/docs/9.4/static/warm-standby.html#STREAMING-REPLICATION) cluster can easily be setup with the Bitnami PostgreSQL Docker Image using the following environment variables:
 
-* `POSTGRESQL_REPLICATION_MODE`: Replication mode. Possible values `master`/`slave`. No defaults.
-* `POSTGRESQL_REPLICATION_USER`: The replication user created on the master on first run. No defaults.
-* `POSTGRESQL_REPLICATION_PASSWORD`: The replication users password. No defaults.
-* `POSTGRESQL_REPLICATION_PASSWORD_FILE`: Path to a file that contains the replication users password. This will override the value specified in `POSTGRESQL_REPLICATION_PASSWORD`. No defaults.
-* `POSTGRESQL_MASTER_HOST`: Hostname/IP of replication master (slave parameter). No defaults.
-* `POSTGRESQL_MASTER_PORT_NUMBER`: Server port of the replication master (slave parameter). Defaults to `5432`.
+- `POSTGRESQL_REPLICATION_MODE`: Replication mode. Possible values `master`/`slave`. No defaults.
+- `POSTGRESQL_REPLICATION_USER`: The replication user created on the master on first run. No defaults.
+- `POSTGRESQL_REPLICATION_PASSWORD`: The replication users password. No defaults.
+- `POSTGRESQL_REPLICATION_PASSWORD_FILE`: Path to a file that contains the replication users password. This will override the value specified in `POSTGRESQL_REPLICATION_PASSWORD`. No defaults.
+- `POSTGRESQL_MASTER_HOST`: Hostname/IP of replication master (slave parameter). No defaults.
+- `POSTGRESQL_MASTER_PORT_NUMBER`: Server port of the replication master (slave parameter). Defaults to `5432`.
 
 In a replication cluster you can have one master and zero or more slaves. When replication is enabled the master node is in read-write mode, while the slaves are in read-only mode. For best performance its advisable to limit the reads to the slaves.
 
@@ -524,8 +525,8 @@ The above command scales up the number of slaves to `3`. You can scale down in t
 
 By default, the slave instances are configured with asynchronous replication. In order to guarantee more data stability (at the cost of some performance), it is possible to set synchronous commits (i.e. a transaction commit will not return success to the client until it has been written in a set of replicas) using the following environment variables.
 
-* `POSTGRESQL_SYNCHRONOUS_COMMIT_MODE`: Establishes the type of synchronous commit. The available options are: `on`, `remote_apply`, `remote_write`, `local` and `off`. The default value is `on`. For more information, check the [official PostgreSQL documentation](https://www.postgresql.org/docs/9.6/runtime-config-wal.html#GUC-SYNCHRONOUS-COMMIT).
-* `POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS`: Establishes the number of replicas that will enable synchronous replication. This number must not be above the number of slaves that you configure in the cluster.
+- `POSTGRESQL_SYNCHRONOUS_COMMIT_MODE`: Establishes the type of synchronous commit. The available options are: `on`, `remote_apply`, `remote_write`, `local` and `off`. The default value is `on`. For more information, check the [official PostgreSQL documentation](https://www.postgresql.org/docs/9.6/runtime-config-wal.html#GUC-SYNCHRONOUS-COMMIT).
+- `POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS`: Establishes the number of replicas that will enable synchronous replication. This number must not be above the number of slaves that you configure in the cluster.
 
 With Docker Compose the master-slave replication with synchronous commits can be setup as follows:
 
@@ -596,23 +597,23 @@ In order to use LDAP authentication you need to enable it setting the environmen
 
 There are two ways of setting up the LDAP configuration:
 
-* By configuring `POSTGRESQL_LDAP_URL`, where you can configure all the associated parameters in the URL.
-* Setting up the parameters `POSTGRESQL_LDAP_xxxx` independently.
+- By configuring `POSTGRESQL_LDAP_URL`, where you can configure all the associated parameters in the URL.
+- Setting up the parameters `POSTGRESQL_LDAP_xxxx` independently.
 
 The LDAP related parameters are:
 
-* `POSTGRESQL_LDAP_SERVER`: IP addresses or names of the LDAP servers to connect to. Separated by spaces.
-* `POSTGRESQL_LDAP_PORT`: Port number on the LDAP server to connect to
-* `POSTGRESQL_LDAP_SCHEME`: Set to `ldaps` to use LDAPS. Default to none.
-* `POSTGRESQL_LDAP_TLS`: Set to `1` to use TLS encryption. Default to none.
-* `POSTGRESQL_LDAP_PREFIX`: String to prepend to the user name when forming the DN to bind. Default to none.
-* `POSTGRESQL_LDAP_SUFFIX`:  String to append to the user name when forming the DN to bind. Default to none.
-* `POSTGRESQL_LDAP_BASE_DN`: Root DN to begin the search for the user in. Default to none.
-* `POSTGRESQL_LDAP_BIND_DN`: DN of user to bind to LDAP. Default to none.
-* `POSTGRESQL_LDAP_BIND_PASSWORD`: Password for the user to bind to LDAP. Default to none.
-* `POSTGRESQL_LDAP_SEARCH_ATTR`: Attribute to match against the user name in the search. Default to none.
-* `POSTGRESQL_LDAP_SEARCH_FILTER`: The search filter to use when doing search+bind authentication. Default to none.
-* `POSTGRESQL_LDAP_URL`: URL to connect to, in the format: `ldap[s]://host[:port]/basedn[?[attribute][?[scope][?[filter]]]]` .
+- `POSTGRESQL_LDAP_SERVER`: IP addresses or names of the LDAP servers to connect to. Separated by spaces.
+- `POSTGRESQL_LDAP_PORT`: Port number on the LDAP server to connect to
+- `POSTGRESQL_LDAP_SCHEME`: Set to `ldaps` to use LDAPS. Default to none.
+- `POSTGRESQL_LDAP_TLS`: Set to `1` to use TLS encryption. Default to none.
+- `POSTGRESQL_LDAP_PREFIX`: String to prepend to the user name when forming the DN to bind. Default to none.
+- `POSTGRESQL_LDAP_SUFFIX`:  String to append to the user name when forming the DN to bind. Default to none.
+- `POSTGRESQL_LDAP_BASE_DN`: Root DN to begin the search for the user in. Default to none.
+- `POSTGRESQL_LDAP_BIND_DN`: DN of user to bind to LDAP. Default to none.
+- `POSTGRESQL_LDAP_BIND_PASSWORD`: Password for the user to bind to LDAP. Default to none.
+- `POSTGRESQL_LDAP_SEARCH_ATTR`: Attribute to match against the user name in the search. Default to none.
+- `POSTGRESQL_LDAP_SEARCH_FILTER`: The search filter to use when doing search+bind authentication. Default to none.
+- `POSTGRESQL_LDAP_URL`: URL to connect to, in the format: `ldap[s]://host[:port]/basedn[?[attribute][?[scope][?[filter]]]]` .
 
 For more information refer to [Postgresql LDAP auth configuration documentation](https://www.postgresql.org/docs/12/auth-ldap.html).
 
@@ -620,12 +621,12 @@ For more information refer to [Postgresql LDAP auth configuration documentation]
 
 PostgreSQL supports the encryption of connections using the SSL/TLS protocol. Should you desire to enable this optional feature, you may use the following environment variables to configure the application:
 
-* `POSTGRESQL_ENABLE_TLS`: Whether to enable TLS for traffic or not. Defaults to `no`.
-* `POSTGRESQL_TLS_CERT_FILE`: File containing the certificate file for the TLS traffic. No defaults.
-* `POSTGRESQL_TLS_KEY_FILE`: File containing the key for certificate. No defaults.
-* `POSTGRESQL_TLS_CA_FILE`: File containing the CA of the certificate. If provided, PostgreSQL will authenticate TLS/SSL clients by requesting them a certificate (see [ref](https://www.postgresql.org/docs/9.6/auth-methods.html)). No defaults.
-* `POSTGRESQL_TLS_CRL_FILE`: File containing a Certificate Revocation List. No defaults.
-* `POSTGRESQL_TLS_PREFER_SERVER_CIPHERS`: Whether to use the server's TLS cipher preferences rather than the client's. Defaults to `yes`.
+- `POSTGRESQL_ENABLE_TLS`: Whether to enable TLS for traffic or not. Defaults to `no`.
+- `POSTGRESQL_TLS_CERT_FILE`: File containing the certificate file for the TLS traffic. No defaults.
+- `POSTGRESQL_TLS_KEY_FILE`: File containing the key for certificate. No defaults.
+- `POSTGRESQL_TLS_CA_FILE`: File containing the CA of the certificate. If provided, PostgreSQL will authenticate TLS/SSL clients by requesting them a certificate (see [ref](https://www.postgresql.org/docs/9.6/auth-methods.html)). No defaults.
+- `POSTGRESQL_TLS_CRL_FILE`: File containing a Certificate Revocation List. No defaults.
+- `POSTGRESQL_TLS_PREFER_SERVER_CIPHERS`: Whether to use the server's TLS cipher preferences rather than the client's. Defaults to `yes`.
 
 When enabling TLS, PostgreSQL will support both standard and encrypted traffic by default, but prefer the latter. Below there are some examples on how to quickly set up TLS traffic:
 
@@ -764,8 +765,8 @@ If you are using your custom `postgresql.conf`, you should create (or uncomment)
 
 Specifying extra initdb arguments can easily be done using the following environment variables:
 
-* `POSTGRESQL_INITDB_ARGS`: Specifies extra arguments for the initdb command. No defaults.
-* `POSTGRESQL_INITDB_WAL_DIR`: Defines a custom location for the transaction log. No defaults.
+- `POSTGRESQL_INITDB_ARGS`: Specifies extra arguments for the initdb command. No defaults.
+- `POSTGRESQL_INITDB_WAL_DIR`: Defines a custom location for the transaction log. No defaults.
 
 ```console
 docker run --name postgresql \
@@ -790,15 +791,15 @@ services:
 
 You can control the parameters used to stop postgresql in the initialization process by using:
 
-* `POSTGRESQL_PGCTLTIMEOUT` that will set the timeout for the `pg_ctl` command.
-* `POSTGRESQL_SHUTDOWN_MODE` that will indicate the [shutdown mode](https://www.postgresql.org/docs/11/app-pg-ctl.html) used.
+- `POSTGRESQL_PGCTLTIMEOUT` that will set the timeout for the `pg_ctl` command.
+- `POSTGRESQL_SHUTDOWN_MODE` that will indicate the [shutdown mode](https://www.postgresql.org/docs/11/app-pg-ctl.html) used.
 
 ### Installing extra locales
 
 The Dockerfile provides two arguments to configure extra locales at build time:
 
-* `WITH_ALL_LOCALES`: Enable all supported locales. Default: no
-* `EXTRA_LOCALES`: Comma separated list of extra locales to enable. No defaults
+- `WITH_ALL_LOCALES`: Enable all supported locales. Default: no
+- `EXTRA_LOCALES`: Comma separated list of extra locales to enable. No defaults
 
 For example, to build an image with support for the `es_ES.UTF-8 UTF-8` locale, you can add the following argument to your build command:
 
@@ -930,46 +931,46 @@ docker-compose up postgresql
 
 ### 9.6.16-centos-7-r71, 10.11.0-centos-7-r72, 11.6.0-centos-7-r71, and 12.1.0-centos-7-r72
 
-* `9.6.16-centos-7-r71`, `10.11.0-centos-7-r72`, `11.6.0-centos-7-r71`, and `12.1.0-centos-7-r72` are considered the latest images based on CentOS.
-* Standard supported distros: Debian & OEL.
+- `9.6.16-centos-7-r71`, `10.11.0-centos-7-r72`, `11.6.0-centos-7-r71`, and `12.1.0-centos-7-r72` are considered the latest images based on CentOS.
+- Standard supported distros: Debian & OEL.
 
 ### 9.6.15-r93, 9.6.15-ol-7-r108, 9.6.15-centos-7-r107, 10.10.0-r923, 10.10.0-ol-7-r106, 10.10.0-centos-7-r107, 11.5.0-r89, 11.5.0-centos-7-r103, 11.5.0-ol-7-r108, 12.0.0-r21, 12.0.0-centos-7-r34 and 12.0.0-ol-7-r32
 
-* Adds LDAP authentication support
+- Adds LDAP authentication support
 
 ### 9.6.15-r82, 9.6.15-ol-7-r92, 9.6.15-centos-7-r91, 10.10.0-r82, 10.10.0-ol-7-r90, 10.10.0-centos-7-r91, 11.5.0-r80, 11.5.0-centos-7-r87, 11.5.0-ol-7-r92, 12.0.0-r11, 12.0.0-centos-7-r17 and 12.0.0-ol-7-r17
 
-* Adds Postgis extension to postgresql, version 2.3.x to Postgresiql 9.6 and version 2.5 to 10, 11 and 12.
+- Adds Postgis extension to postgresql, version 2.3.x to Postgresiql 9.6 and version 2.5 to 10, 11 and 12.
 
 ### 9.6.12-r70, 9.6.12-ol-7-r72, 10.7.0-r69, 10.7.0-ol-7-r71, 11.2.0-r69 and 11.2.0-ol-7-r71
 
-* Decrease the size of the container. It is not necessary Node.js anymore. PostgreSQL configuration moved to bash scripts in the rootfs/ folder.
-* This container is backwards compatible with the previous versions, as the mount folders remain unchanged.
-* The `POSTGRESQL_PASSWORD` variable must be passed to the slaves so they generate the proper `pg_hba.conf` admission rules.
+- Decrease the size of the container. It is not necessary Node.js anymore. PostgreSQL configuration moved to bash scripts in the rootfs/ folder.
+- This container is backwards compatible with the previous versions, as the mount folders remain unchanged.
+- The `POSTGRESQL_PASSWORD` variable must be passed to the slaves so they generate the proper `pg_hba.conf` admission rules.
 
 ### 9.6.11-r66, 9.6.11-ol-7-r83, 10.6.0-r68, 10.6.0-ol-7-r83, 11.1.0-r62 and 11.1.0-ol-7-r79
 
-* The PostgreSQL container can be configured using two sets of environment variables. For more information, check [Environment variables aliases](#environment-variables-aliases)
+- The PostgreSQL container can be configured using two sets of environment variables. For more information, check [Environment variables aliases](#environment-variables-aliases)
 
 ### 9.6.11-r38, 10.6.0-r39 and 11.1.0-r34
 
-* The PostgreSQL container now contains options to easily configure synchronous commits between slaves. This provides more data stability, but must be configured with caution as it also has a cost in performance. For more information, check [Synchronous Commits](#synchronous-commits).
+- The PostgreSQL container now contains options to easily configure synchronous commits between slaves. This provides more data stability, but must be configured with caution as it also has a cost in performance. For more information, check [Synchronous Commits](#synchronous-commits).
 
 ### 9.6.9-r19 and 10.4.0-r19
 
-* The PostgreSQL container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the PostgreSQL daemon was started as the `postgres` user. From now on, both the container and the PostgreSQL daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
+- The PostgreSQL container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the PostgreSQL daemon was started as the `postgres` user. From now on, both the container and the PostgreSQL daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
 ### 9.5.3-r5
 
-* The `POSTGRES_` prefix on environment variables is now replaced by `POSTGRESQL_`
-* `POSTGRES_USER` parameter has been renamed to `POSTGRESQL_USERNAME`.
-* `POSTGRES_DB` parameter has been renamed to `POSTGRESQL_DATABASE`.
-* `POSTGRES_MODE` parameter has been renamed to `POSTGRESQL_REPLICATION_MODE`.
+- The `POSTGRES_` prefix on environment variables is now replaced by `POSTGRESQL_`
+- `POSTGRES_USER` parameter has been renamed to `POSTGRESQL_USERNAME`.
+- `POSTGRES_DB` parameter has been renamed to `POSTGRESQL_DATABASE`.
+- `POSTGRES_MODE` parameter has been renamed to `POSTGRESQL_REPLICATION_MODE`.
 
 ### 9.5.3-r0
 
-* All volumes have been merged at `/bitnami/postgresql`. Now you only need to mount a single volume at `/bitnami/postgresql` for persistence.
-* The logs are always sent to the `stdout` and are no longer collected in the volume.
+- All volumes have been merged at `/bitnami/postgresql`. Now you only need to mount a single volume at `/bitnami/postgresql` for persistence.
+- The logs are always sent to the `stdout` and are no longer collected in the volume.
 
 ## Using `docker-compose.yaml`
 

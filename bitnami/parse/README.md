@@ -18,6 +18,7 @@ You can find the default credentials and available configuration options in the 
 ## ⚠️ Important Notice: Upcoming changes to the Bitnami Catalog
 
 Beginning August 28th, 2025, Bitnami will evolve its public catalog to offer a curated set of hardened, security-focused images under the new [Bitnami Secure Images initiative](https://news.broadcom.com/app-dev/broadcom-introduces-bitnami-secure-images-for-production-ready-containerized-applications). As part of this transition:
+
 - Granting community users access for the first time to security-optimized versions of popular container images.
 - Bitnami will begin deprecating support for non-hardened, Debian-based software images in its free tier and will gradually remove non-latest tags from the public catalog. As a result, community users will have access to a reduced number of hardened images. These images are published only under the “latest” tag and are intended for development purposes
 - Starting August 28th, over two weeks, all existing container images, including older or versioned tags (e.g., 2.50.0, 10.6), will be migrated from the public catalog (docker.io/bitnami) to the “Bitnami Legacy” repository (docker.io/bitnamilegacy), where they will no longer receive updates.
@@ -27,12 +28,12 @@ These changes aim to improve the security posture of all Bitnami users by promot
 
 ## Why use Bitnami Images?
 
-* Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
-* With Bitnami images the latest bug fixes and features are available as soon as possible.
-* Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
-* Bitnami container images are released on a regular basis with the latest distribution packages available.
+- Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
+- With Bitnami images the latest bug fixes and features are available as soon as possible.
+- Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
+- All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
+- All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
+- Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use Parse Server in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the commercial edition of the Bitnami catalog.
 
@@ -170,8 +171,8 @@ Bitnami provides up-to-date versions of Mongodb and Parse, including security pa
 
 2. Stop your container
 
-    * For docker-compose: `$ docker-compose stop parse`
-    * For manual execution: `$ docker stop parse`
+    - For docker-compose: `$ docker-compose stop parse`
+    - For manual execution: `$ docker stop parse`
 
 3. Take a snapshot of the application state
 
@@ -185,13 +186,13 @@ Bitnami provides up-to-date versions of Mongodb and Parse, including security pa
 
 4. Remove the currently running container
 
-    * For docker-compose: `$ docker-compose rm parse`
-    * For manual execution: `$ docker rm parse`
+    - For docker-compose: `$ docker-compose rm parse`
+    - For manual execution: `$ docker rm parse`
 
 5. Run the new image
 
-    * For docker-compose: `$ docker-compose up parse`
-    * For manual execution (mount the directories if needed): `docker run --name parse bitnami/parse:latest`
+    - For docker-compose: `$ docker-compose up parse`
+    - For manual execution (mount the directories if needed): `docker run --name parse bitnami/parse:latest`
 
 ## Configuration
 
@@ -234,7 +235,7 @@ Bitnami provides up-to-date versions of Mongodb and Parse, including security pa
 
 When you start the parse image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
-* For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/parse/docker-compose.yml) file present in this repository:
+- For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/parse/docker-compose.yml) file present in this repository:
 
 ```yaml
 parse:
@@ -244,7 +245,7 @@ parse:
   ...
 ```
 
-* For manual execution add a `-e` option with each variable and value:
+- For manual execution add a `-e` option with each variable and value:
 
 ```console
  docker run -d -e PARSE_HOST=my_host -p 1337:1337 --name parse -v /your/local/path/bitnami/parse:/bitnami --network=parse_network bitnami/parse
@@ -254,7 +255,7 @@ parse:
 
 You can use Cloud Code to run a piece of code in your Parse Server instead of the user's mobile devices. To run your Cloud functions using this image, follow the steps below:
 
-* Create a directory on your host machine and put your Cloud functions on it. In the example below, a simple "Hello world!" function is used:
+- Create a directory on your host machine and put your Cloud functions on it. In the example below, a simple "Hello world!" function is used:
 
 ```console
 $ mkdir ~/cloud
@@ -265,7 +266,7 @@ Parse.Cloud.define("sayHelloWorld", function(request, response) {
 EOF
 ```
 
-* Mount the directory as a data volume at the `/opt/bitnami/parse/cloud` path on your Parse Container and set the environment variable `PARSE_ENABLE_CLOUD_CODE` to `yes`. You can use the `docker-compose.yml` below:
+- Mount the directory as a data volume at the `/opt/bitnami/parse/cloud` path on your Parse Container and set the environment variable `PARSE_ENABLE_CLOUD_CODE` to `yes`. You can use the `docker-compose.yml` below:
 
 > NOTE: In the example below, Parse Dashboard is also deployed.
 
@@ -304,15 +305,15 @@ volumes:
     driver: local
 ```
 
-* Use the `docker-compose` tool to deploy Parse and Parse Dashboard:
+- Use the `docker-compose` tool to deploy Parse and Parse Dashboard:
 
 ```console
 docker-compose up -d
 ```
 
-* Once both Parse and Parse Dashboard are running, access Parse Dashboard and browse to 'My Dashboard -> API Console'.
-* Then, send a 'test query' of type 'POST' using 'functions/sayHelloWorld' as endpoint. Ensure you activate the 'Master Key' parameter.
-* Everything should be working now and you should receive a 'Hello World' message in the results.
+- Once both Parse and Parse Dashboard are running, access Parse Dashboard and browse to 'My Dashboard -> API Console'.
+- Then, send a 'test query' of type 'POST' using 'functions/sayHelloWorld' as endpoint. Ensure you activate the 'Master Key' parameter.
+- Everything should be working now and you should receive a 'Hello World' message in the results.
 
 Find more information about Cloud Code and Cloud functions in the [official documentation](https://docs.parseplatform.org/cloudcode/guide/).
 
@@ -320,16 +321,16 @@ Find more information about Cloud Code and Cloud functions in the [official docu
 
 ### 4.9.3
 
-* This version was released from an incorrect version tag from the upstream Parse repositories. Parse developers have reported issues in some functionalities, though no concerns in regards to privacy, security, or legality were found. As such, we strongly recommend updating this version as soon as possible. You can find more information in [Parse 4.10.0 Release Notes](https://github.com/parse-community/parse-server/releases/tag/4.10.0)
+- This version was released from an incorrect version tag from the upstream Parse repositories. Parse developers have reported issues in some functionalities, though no concerns in regards to privacy, security, or legality were found. As such, we strongly recommend updating this version as soon as possible. You can find more information in [Parse 4.10.0 Release Notes](https://github.com/parse-community/parse-server/releases/tag/4.10.0)
 
 ### 4.9.3-debian-10-r161
 
-* The size of the container image has been decreased.
-* The configuration logic is now based on Bash scripts in the *rootfs/* folder.
+- The size of the container image has been decreased.
+- The configuration logic is now based on Bash scripts in the *rootfs/* folder.
 
 ### 3.1.2-r14
 
-* The Parse container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Parse daemon was started as the `parse` user. From now on, both the container and the Parse daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
+- The Parse container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Parse daemon was started as the `parse` user. From now on, both the container and the Parse daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
 ## Contributing
 

@@ -20,6 +20,7 @@ You can find the default credentials and available configuration options in the 
 ## ⚠️ Important Notice: Upcoming changes to the Bitnami Catalog
 
 Beginning August 28th, 2025, Bitnami will evolve its public catalog to offer a curated set of hardened, security-focused images under the new [Bitnami Secure Images initiative](https://news.broadcom.com/app-dev/broadcom-introduces-bitnami-secure-images-for-production-ready-containerized-applications). As part of this transition:
+
 - Granting community users access for the first time to security-optimized versions of popular container images.
 - Bitnami will begin deprecating support for non-hardened, Debian-based software images in its free tier and will gradually remove non-latest tags from the public catalog. As a result, community users will have access to a reduced number of hardened images. These images are published only under the “latest” tag and are intended for development purposes
 - Starting August 28th, over two weeks, all existing container images, including older or versioned tags (e.g., 2.50.0, 10.6), will be migrated from the public catalog (docker.io/bitnami) to the “Bitnami Legacy” repository (docker.io/bitnamilegacy), where they will no longer receive updates.
@@ -29,12 +30,12 @@ These changes aim to improve the security posture of all Bitnami users by promot
 
 ## Why use Bitnami Images?
 
-* Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
-* With Bitnami images the latest bug fixes and features are available as soon as possible.
-* Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
-* Bitnami container images are released on a regular basis with the latest distribution packages available.
+- Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
+- With Bitnami images the latest bug fixes and features are available as soon as possible.
+- Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
+- All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
+- All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
+- Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use Pgpool-II in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the commercial edition of the Bitnami catalog.
 
@@ -243,69 +244,69 @@ A HA PostgreSQL cluster with Pgpool, [Streaming replication](https://www.postgre
 
 Pgpool configuration:
 
-* `PGPOOL_PASSWORD_FILE`: Path to a file that contains the password for the custom user set in the `PGPOOL_USERNAME` environment variable. This will override the value specified in `PGPOOL_PASSWORD`. No defaults.
-* `PGPOOL_SR_CHECK_PERIOD`: Specifies the time interval in seconds to check the streaming replication delay. Defaults to `30`.
-* `PGPOOL_SR_CHECK_USER`: Username to use to perform streaming checks. This is the user that is used to check that streaming replication is working. Typically, this is the user owner of the 'repmgr' database. No defaults.
-* `PGPOOL_SR_CHECK_PASSWORD`: Password to use to perform streaming checks. No defaults.
-* `PGPOOL_SR_CHECK_PASSWORD_FILE`: Path to a file that contains the password to use to perform streaming checks. This will override the value specified in `PGPOOL_SR_CHECK_PASSWORD`. No defaults.
-* `PGPOOL_SR_CHECK_DATABASE`: Database to use to perform streaming checks. Defaults to `postgres`.
-* `PGPOOL_BACKEND_NODES`: Comma separated list of backend nodes in the cluster. No defaults.
-* `PGPOOL_ENABLE_LDAP`: Whether to enable LDAP authentication. Defaults to `no`.
-* `PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE`: Specify load balance behavior after write queries appear ('off', 'transaction', 'trans_transaction', 'always'). Defaults to 'transaction'
-* `PGPOOL_ENABLE_LOAD_BALANCING`: Whether to enable Load-Balancing mode. Defaults to `yes`.
-* `PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING`:  Whether to decide the load balancing node for each read query. Defaults to `no`.
-* `PGPOOL_ENABLE_POOL_HBA`: Whether to use the pool_hba.conf authentication. Defaults to `yes`.
-* `PGPOOL_ENABLE_POOL_PASSWD`: Whether to use a password file specified by `PGPOOL_PASSWD_FILE` for authentication. Defaults to `yes`.
-* `PGPOOL_PASSWD_FILE`: The password file for authentication. Defaults to `pool_passwd`.
-* `PGPOOL_NUM_INIT_CHILDREN`: The number of preforked Pgpool-II server processes. It is also the concurrent connections limit to Pgpool-II from clients. Defaults to `32`.
-* `PGPOOL_RESERVED_CONNECTIONS`: When this parameter is set to 1 or greater, incoming connections from clients are not accepted with error message "Sorry, too many clients already", rather than blocked if the number of current connections from clients is more than (num_init_children - reserved_connections). Defaults to `0`.
-* `PGPOOL_MAX_POOL`: The maximum number of cached connections in each child process. Defaults to `15`.
-* `PGPOOL_CHILD_MAX_CONNECTIONS`: Specifies the lifetime of a Pgpool-II child process in terms of the number of client connections it can receive. Pgpool-II will terminate the child process after it has served child_max_connections client connections and will immediately spawn a new child process to take its place. Defaults to `0` which turns off the feature.
-* `PGPOOL_CHILD_LIFE_TIME`: The time in seconds to terminate a Pgpool-II child process if it remains idle. Defaults to `300`.
-* `PGPOOL_CLIENT_IDLE_LIMIT`: The time in seconds to disconnect a client if it remains idle since the last query. Defaults to `0` which turns off the feature.
-* `PGPOOL_CONNECTION_LIFE_TIME`: The time in seconds to terminate the cached connections to the PostgreSQL backend. Defaults to `0` which turns off the feature.
-* `PGPOOL_ENABLE_LOG_PER_NODE_STATEMENT`: Log every SQL statement for each DB node separately. Defaults to `no`.
-* `PGPOOL_ENABLE_LOG_CONNECTIONS`: Log all client connections. Defaults to `no`.
-* `PGPOOL_ENABLE_LOG_HOSTNAME`: Log the client hostname instead of IP address. Defaults to `no`.
-* `PGPOOL_LOG_LINE_PREFIX`: Define the format of the log entry lines. Find in the [official Pgpool documentation](https://www.pgpool.net/docs/latest/en/html/runtime-config-logging.html) the string parameters. No defaults.
-* `PGPOOL_CLIENT_MIN_MESSAGES`: Set the minimum message levels are sent to the client. Find in the [official Pgpool documentation](https://www.pgpool.net/docs/latest/en/html/runtime-config-logging.html) the supported values. Defaults to `notice`.
-* `PGPOOL_POSTGRES_USERNAME`: Postgres administrator user name, this will be use to allow postgres admin authentication through Pgpool.
-* `PGPOOL_POSTGRES_PASSWORD`: Password for the user set in `PGPOOL_POSTGRES_USERNAME` environment variable. No defaults.
-* `PGPOOL_ADMIN_USERNAME`: Username for the pgpool administrator. No defaults.
-* `PGPOOL_ADMIN_PASSWORD`: Password for the user set in `PGPOOL_ADMIN_USERNAME` environment variable. No defaults.
-* `PGPOOL_HEALTH_CHECK_USER`: Specifies the PostgreSQL user name to perform health check. Defaults to value set in `PGPOOL_SR_CHECK_USER`.
-* `PGPOOL_HEALTH_CHECK_PASSWORD`: Specifies the PostgreSQL user password to perform health check. Defaults to value set in `PGPOOL_SR_CHECK_PASSWORD`.
-* `PGPOOL_HEALTH_CHECK_PERIOD`: Specifies the interval between the health checks in seconds. Defaults to `30`.
-* `PGPOOL_HEALTH_CHECK_TIMEOUT`: Specifies the timeout in seconds to give up connecting to the backend PostgreSQL if the TCP connect does not succeed within this time. Defaults to `10`.
-* `PGPOOL_HEALTH_CHECK_MAX_RETRIES`: Specifies the maximum number of retries to do before giving up and initiating failover when health check fails. Defaults to `5`.
-* `PGPOOL_HEALTH_CHECK_RETRY_DELAY`: Specifies the amount of time in seconds to sleep between failed health check retries. Defaults to `5`.
-* `PGPOOL_CONNECT_TIMEOUT`: Specifies the amount of time in milliseconds before giving up connecting to backend using `connect()` system call. Default is `10000`.
-* `PGPOOL_HEALTH_CHECK_PSQL_TIMEOUT`: Specifies the maximum amount of time in seconds function `pgpool_healthcheck()` waits for result of `show pool_nodes` command. It is set to `PGCONNECT_TIMEOUT` of respective `psql` execution. Default is `15`.
-* `PGPOOL_USER_CONF_FILE`: Configuration file to be added to the generated config file. This allow to override configuration set by the initializacion process. No defaults.
-* `PGPOOL_USER_HBA_FILE`: Configuration file to be added to the generated hba file. This allow to override configuration set by the initialization process. No defaults.
-* `PGPOOL_POSTGRES_CUSTOM_USERS`: List of comma or semicolon separeted list of postgres usernames. This will create entries in `pgpool_passwd`. No defaults.
-* `PGPOOL_POSTGRES_CUSTOM_PASSWORDS`: List of comma or semicolon separated list for postgresql user passwords. These are the corresponding passwords for the users in `PGPOOL_POSTGRES_CUSTOM_USERS`. No defaults.
-* `PGPOOL_AUTO_FAILBACK`: Enables pgpool `[auto_failback](https://www.pgpool.net/docs/latest/en/html/runtime-config-failover.html)`. Default to `no`.
-* `PGPOOL_BACKEND_APPLICATION_NAMES`: Comma separated list of backend nodes `application_name`. No defaults.
-* `PGPOOL_AUTHENTICATION_METHOD`: Specifies the authentication method('md5', 'scram-sha-256'). Defaults to `scram-sha-256`.
-* `PGPOOL_AES_KEY`: Specifies the AES encryption key used for 'scram-sha-256' passwords. Defaults to `random string`.
+- `PGPOOL_PASSWORD_FILE`: Path to a file that contains the password for the custom user set in the `PGPOOL_USERNAME` environment variable. This will override the value specified in `PGPOOL_PASSWORD`. No defaults.
+- `PGPOOL_SR_CHECK_PERIOD`: Specifies the time interval in seconds to check the streaming replication delay. Defaults to `30`.
+- `PGPOOL_SR_CHECK_USER`: Username to use to perform streaming checks. This is the user that is used to check that streaming replication is working. Typically, this is the user owner of the 'repmgr' database. No defaults.
+- `PGPOOL_SR_CHECK_PASSWORD`: Password to use to perform streaming checks. No defaults.
+- `PGPOOL_SR_CHECK_PASSWORD_FILE`: Path to a file that contains the password to use to perform streaming checks. This will override the value specified in `PGPOOL_SR_CHECK_PASSWORD`. No defaults.
+- `PGPOOL_SR_CHECK_DATABASE`: Database to use to perform streaming checks. Defaults to `postgres`.
+- `PGPOOL_BACKEND_NODES`: Comma separated list of backend nodes in the cluster. No defaults.
+- `PGPOOL_ENABLE_LDAP`: Whether to enable LDAP authentication. Defaults to `no`.
+- `PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE`: Specify load balance behavior after write queries appear ('off', 'transaction', 'trans_transaction', 'always'). Defaults to 'transaction'
+- `PGPOOL_ENABLE_LOAD_BALANCING`: Whether to enable Load-Balancing mode. Defaults to `yes`.
+- `PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING`:  Whether to decide the load balancing node for each read query. Defaults to `no`.
+- `PGPOOL_ENABLE_POOL_HBA`: Whether to use the pool_hba.conf authentication. Defaults to `yes`.
+- `PGPOOL_ENABLE_POOL_PASSWD`: Whether to use a password file specified by `PGPOOL_PASSWD_FILE` for authentication. Defaults to `yes`.
+- `PGPOOL_PASSWD_FILE`: The password file for authentication. Defaults to `pool_passwd`.
+- `PGPOOL_NUM_INIT_CHILDREN`: The number of preforked Pgpool-II server processes. It is also the concurrent connections limit to Pgpool-II from clients. Defaults to `32`.
+- `PGPOOL_RESERVED_CONNECTIONS`: When this parameter is set to 1 or greater, incoming connections from clients are not accepted with error message "Sorry, too many clients already", rather than blocked if the number of current connections from clients is more than (num_init_children - reserved_connections). Defaults to `0`.
+- `PGPOOL_MAX_POOL`: The maximum number of cached connections in each child process. Defaults to `15`.
+- `PGPOOL_CHILD_MAX_CONNECTIONS`: Specifies the lifetime of a Pgpool-II child process in terms of the number of client connections it can receive. Pgpool-II will terminate the child process after it has served child_max_connections client connections and will immediately spawn a new child process to take its place. Defaults to `0` which turns off the feature.
+- `PGPOOL_CHILD_LIFE_TIME`: The time in seconds to terminate a Pgpool-II child process if it remains idle. Defaults to `300`.
+- `PGPOOL_CLIENT_IDLE_LIMIT`: The time in seconds to disconnect a client if it remains idle since the last query. Defaults to `0` which turns off the feature.
+- `PGPOOL_CONNECTION_LIFE_TIME`: The time in seconds to terminate the cached connections to the PostgreSQL backend. Defaults to `0` which turns off the feature.
+- `PGPOOL_ENABLE_LOG_PER_NODE_STATEMENT`: Log every SQL statement for each DB node separately. Defaults to `no`.
+- `PGPOOL_ENABLE_LOG_CONNECTIONS`: Log all client connections. Defaults to `no`.
+- `PGPOOL_ENABLE_LOG_HOSTNAME`: Log the client hostname instead of IP address. Defaults to `no`.
+- `PGPOOL_LOG_LINE_PREFIX`: Define the format of the log entry lines. Find in the [official Pgpool documentation](https://www.pgpool.net/docs/latest/en/html/runtime-config-logging.html) the string parameters. No defaults.
+- `PGPOOL_CLIENT_MIN_MESSAGES`: Set the minimum message levels are sent to the client. Find in the [official Pgpool documentation](https://www.pgpool.net/docs/latest/en/html/runtime-config-logging.html) the supported values. Defaults to `notice`.
+- `PGPOOL_POSTGRES_USERNAME`: Postgres administrator user name, this will be use to allow postgres admin authentication through Pgpool.
+- `PGPOOL_POSTGRES_PASSWORD`: Password for the user set in `PGPOOL_POSTGRES_USERNAME` environment variable. No defaults.
+- `PGPOOL_ADMIN_USERNAME`: Username for the pgpool administrator. No defaults.
+- `PGPOOL_ADMIN_PASSWORD`: Password for the user set in `PGPOOL_ADMIN_USERNAME` environment variable. No defaults.
+- `PGPOOL_HEALTH_CHECK_USER`: Specifies the PostgreSQL user name to perform health check. Defaults to value set in `PGPOOL_SR_CHECK_USER`.
+- `PGPOOL_HEALTH_CHECK_PASSWORD`: Specifies the PostgreSQL user password to perform health check. Defaults to value set in `PGPOOL_SR_CHECK_PASSWORD`.
+- `PGPOOL_HEALTH_CHECK_PERIOD`: Specifies the interval between the health checks in seconds. Defaults to `30`.
+- `PGPOOL_HEALTH_CHECK_TIMEOUT`: Specifies the timeout in seconds to give up connecting to the backend PostgreSQL if the TCP connect does not succeed within this time. Defaults to `10`.
+- `PGPOOL_HEALTH_CHECK_MAX_RETRIES`: Specifies the maximum number of retries to do before giving up and initiating failover when health check fails. Defaults to `5`.
+- `PGPOOL_HEALTH_CHECK_RETRY_DELAY`: Specifies the amount of time in seconds to sleep between failed health check retries. Defaults to `5`.
+- `PGPOOL_CONNECT_TIMEOUT`: Specifies the amount of time in milliseconds before giving up connecting to backend using `connect()` system call. Default is `10000`.
+- `PGPOOL_HEALTH_CHECK_PSQL_TIMEOUT`: Specifies the maximum amount of time in seconds function `pgpool_healthcheck()` waits for result of `show pool_nodes` command. It is set to `PGCONNECT_TIMEOUT` of respective `psql` execution. Default is `15`.
+- `PGPOOL_USER_CONF_FILE`: Configuration file to be added to the generated config file. This allow to override configuration set by the initializacion process. No defaults.
+- `PGPOOL_USER_HBA_FILE`: Configuration file to be added to the generated hba file. This allow to override configuration set by the initialization process. No defaults.
+- `PGPOOL_POSTGRES_CUSTOM_USERS`: List of comma or semicolon separeted list of postgres usernames. This will create entries in `pgpool_passwd`. No defaults.
+- `PGPOOL_POSTGRES_CUSTOM_PASSWORDS`: List of comma or semicolon separated list for postgresql user passwords. These are the corresponding passwords for the users in `PGPOOL_POSTGRES_CUSTOM_USERS`. No defaults.
+- `PGPOOL_AUTO_FAILBACK`: Enables pgpool `[auto_failback](https://www.pgpool.net/docs/latest/en/html/runtime-config-failover.html)`. Default to `no`.
+- `PGPOOL_BACKEND_APPLICATION_NAMES`: Comma separated list of backend nodes `application_name`. No defaults.
+- `PGPOOL_AUTHENTICATION_METHOD`: Specifies the authentication method('md5', 'scram-sha-256'). Defaults to `scram-sha-256`.
+- `PGPOOL_AES_KEY`: Specifies the AES encryption key used for 'scram-sha-256' passwords. Defaults to `random string`.
 
 PostgreSQL with Replication Manager:
 
-* `POSTGRESQL_POSTGRES_PASSWORD`: Password for `postgres` user. No defaults.
-* `POSTGRESQL_POSTGRES_PASSWORD_FILE`: Path to a file that contains the `postgres` user password. This will override the value specified in `POSTGRESQL_POSTGRES_PASSWORD`. No defaults.
-* `POSTGRESQL_USERNAME`: Custom user to access the database. No defaults.
-* `POSTGRESQL_DATABASE`: Custom database to be created on first run. No defaults.
-* `POSTGRESQL_PASSWORD`: Password for the custom user set in the `POSTGRESQL_USERNAME` environment variable. No defaults.
-* `POSTGRESQL_PASSWORD_FILE`: Path to a file that contains the password for the custom user set in the `POSTGRESQL_USERNAME` environment variable. This will override the value specified in `POSTGRESQL_PASSWORD`. No defaults.
-* `REPMGR_USERNAME`: Username for `repmgr` user. Defaults to `repmgr`.
-* `REPMGR_PASSWORD_FILE`: Path to a file that contains the `repmgr` user password. This will override the value specified in `REPMGR_PASSWORD`. No defaults.
-* `REPMGR_PASSWORD`: Password for `repmgr` user. No defaults.
-* `REPMGR_PRIMARY_HOST`: Hostname of the initial primary node. No defaults.
-* `REPMGR_PARTNER_NODES`: Comma separated list of partner nodes in the cluster.  No defaults.
-* `REPMGR_NODE_NAME`: Node name. No defaults.
-* `REPMGR_NODE_NETWORK_NAME`: Node hostname. No defaults.
-* `POSTGRESQL_CLUSTER_APP_NAME`: Node `application_name`. In the case you are enabling auto_failback, each node needs a different name. Defaults to `walreceiver`.
+- `POSTGRESQL_POSTGRES_PASSWORD`: Password for `postgres` user. No defaults.
+- `POSTGRESQL_POSTGRES_PASSWORD_FILE`: Path to a file that contains the `postgres` user password. This will override the value specified in `POSTGRESQL_POSTGRES_PASSWORD`. No defaults.
+- `POSTGRESQL_USERNAME`: Custom user to access the database. No defaults.
+- `POSTGRESQL_DATABASE`: Custom database to be created on first run. No defaults.
+- `POSTGRESQL_PASSWORD`: Password for the custom user set in the `POSTGRESQL_USERNAME` environment variable. No defaults.
+- `POSTGRESQL_PASSWORD_FILE`: Path to a file that contains the password for the custom user set in the `POSTGRESQL_USERNAME` environment variable. This will override the value specified in `POSTGRESQL_PASSWORD`. No defaults.
+- `REPMGR_USERNAME`: Username for `repmgr` user. Defaults to `repmgr`.
+- `REPMGR_PASSWORD_FILE`: Path to a file that contains the `repmgr` user password. This will override the value specified in `REPMGR_PASSWORD`. No defaults.
+- `REPMGR_PASSWORD`: Password for `repmgr` user. No defaults.
+- `REPMGR_PRIMARY_HOST`: Hostname of the initial primary node. No defaults.
+- `REPMGR_PARTNER_NODES`: Comma separated list of partner nodes in the cluster.  No defaults.
+- `REPMGR_NODE_NAME`: Node name. No defaults.
+- `REPMGR_NODE_NETWORK_NAME`: Node hostname. No defaults.
+- `POSTGRESQL_CLUSTER_APP_NAME`: Node `application_name`. In the case you are enabling auto_failback, each node needs a different name. Defaults to `walreceiver`.
 
 In a HA PostgreSQL cluster you can have one primary and zero or more standby nodes. The primary node is in read-write mode, while the standby nodes are in read-only mode. For best performance its advisable to limit the reads to the standby nodes.
 
@@ -399,11 +400,11 @@ In order to have your custom files inside the docker image you can mount them as
 
 Pgpool supports the encryption of connections using the SSL/TLS protocol. Should you desire to enable this optional feature, you may use the following environment variables to configure the application:
 
-* `PGPOOL_ENABLE_TLS`: Whether to enable TLS for traffic or not. Defaults to `no`.
-* `PGPOOL_TLS_CERT_FILE`: File containing the certificate file for the TLS traffic. No defaults.
-* `PGPOOL_TLS_KEY_FILE`: File containing the key for certificate. No defaults.
-* `PGPOOL_TLS_CA_FILE`: File containing the CA of the certificate. If provided, Pgpool will authenticate TLS/SSL clients by requesting them a certificate (see [ref](https://www.pgpool.net/docs/latest/en/html/runtime-ssl.html)). No defaults.
-* `PGPOOL_TLS_PREFER_SERVER_CIPHERS`: Whether to use the server's TLS cipher preferences rather than the client's. Defaults to `yes`.
+- `PGPOOL_ENABLE_TLS`: Whether to enable TLS for traffic or not. Defaults to `no`.
+- `PGPOOL_TLS_CERT_FILE`: File containing the certificate file for the TLS traffic. No defaults.
+- `PGPOOL_TLS_KEY_FILE`: File containing the key for certificate. No defaults.
+- `PGPOOL_TLS_CA_FILE`: File containing the CA of the certificate. If provided, Pgpool will authenticate TLS/SSL clients by requesting them a certificate (see [ref](https://www.pgpool.net/docs/latest/en/html/runtime-ssl.html)). No defaults.
+- `PGPOOL_TLS_PREFER_SERVER_CIPHERS`: Whether to use the server's TLS cipher preferences rather than the client's. Defaults to `yes`.
 
 When enabling TLS, Pgpool will support both standard and encrypted traffic by default, but prefer the latter. Below there are some examples on how to quickly set up TLS traffic:
 
@@ -598,18 +599,18 @@ docker-compose up pgpool
 
 ### 4.3.1-debian-10-r67
 
-* The ENV `PGPOOL_AUTHENTICATION_METHOD` default value has been changed from `md5` to `scram-sha-256` as our `bitnami/postgresql-repmgr:latest` image now uses PSQL v14, which has `scram-sha-256` as the default auth method.
+- The ENV `PGPOOL_AUTHENTICATION_METHOD` default value has been changed from `md5` to `scram-sha-256` as our `bitnami/postgresql-repmgr:latest` image now uses PSQL v14, which has `scram-sha-256` as the default auth method.
 
 ### 4.1.1-debian-10-r35
 
-* The Pgpool container has been migrated to a "non-root" user approach. Previously the container ran as the `root` user and the Pgpool daemon was started as the `pgpool` user. From now on, both the container and the Pgpool daemon run as user `1001`. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
-* No backwards compatibility issues are expected.
-* Environment variables related to LDAP configuration were renamed removing the `PGPOOL_` prefix. For instance, to indicate the LDAP URI to use, you must set `LDAP_URI` instead of `PGPOOL_LDAP_URI`.
+- The Pgpool container has been migrated to a "non-root" user approach. Previously the container ran as the `root` user and the Pgpool daemon was started as the `pgpool` user. From now on, both the container and the Pgpool daemon run as user `1001`. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
+- No backwards compatibility issues are expected.
+- Environment variables related to LDAP configuration were renamed removing the `PGPOOL_` prefix. For instance, to indicate the LDAP URI to use, you must set `LDAP_URI` instead of `PGPOOL_LDAP_URI`.
 
 ### 4.1.0-centos-7-r8
 
-* `4.1.0-centos-7-r8` is considered the latest image based on CentOS.
-* Standard supported distros: Debian & OEL.
+- `4.1.0-centos-7-r8` is considered the latest image based on CentOS.
+- Standard supported distros: Debian & OEL.
 
 ## Using `docker-compose.yaml`
 

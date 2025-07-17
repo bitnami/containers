@@ -18,6 +18,7 @@ docker run --name keycloak bitnami/keycloak:latest
 ## ⚠️ Important Notice: Upcoming changes to the Bitnami Catalog
 
 Beginning August 28th, 2025, Bitnami will evolve its public catalog to offer a curated set of hardened, security-focused images under the new [Bitnami Secure Images initiative](https://news.broadcom.com/app-dev/broadcom-introduces-bitnami-secure-images-for-production-ready-containerized-applications). As part of this transition:
+
 - Granting community users access for the first time to security-optimized versions of popular container images.
 - Bitnami will begin deprecating support for non-hardened, Debian-based software images in its free tier and will gradually remove non-latest tags from the public catalog. As a result, community users will have access to a reduced number of hardened images. These images are published only under the “latest” tag and are intended for development purposes
 - Starting August 28th, over two weeks, all existing container images, including older or versioned tags (e.g., 2.50.0, 10.6), will be migrated from the public catalog (docker.io/bitnami) to the “Bitnami Legacy” repository (docker.io/bitnamilegacy), where they will no longer receive updates.
@@ -27,12 +28,12 @@ These changes aim to improve the security posture of all Bitnami users by promot
 
 ## Why use Bitnami Images?
 
-* Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
-* With Bitnami images the latest bug fixes and features are available as soon as possible.
-* Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
-* Bitnami container images are released on a regular basis with the latest distribution packages available.
+- Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
+- With Bitnami images the latest bug fixes and features are available as soon as possible.
+- Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
+- All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
+- All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
+- Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use Keycloak in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the commercial edition of the Bitnami catalog.
 
@@ -193,29 +194,29 @@ keycloak:
 
 The Bitnami Keycloak Docker image allows configuring HTTPS/TLS encription. This is done by mounting in `/opt/bitnami/keycloak/certs` two files:
 
-* `keystore`: File with the server keystore
-* `truststore`: File with the server truststore
+- `keystore`: File with the server keystore
+- `truststore`: File with the server truststore
 
 > Note: find more information about how to create these files at the [Keycloak documentation](https://www.keycloak.org/server/keycloak-truststore).
 
 Apart from that, the following environment variables must be set:
 
-* `KEYCLOAK_ENABLE_HTTPS`: Enable TLS encryption using the keystore. Default: **false**.
-* `KEYCLOAK_HTTPS_KEY_STORE_FILE`: Path to the keystore file (e.g. `/opt/bitnami/keycloak/certs/keystore.jks`). No defaults.
-* `KEYCLOAK_HTTPS_TRUST_STORE_FILE`: Path to the truststore file (e.g. `/opt/bitnami/keycloak/certs/truststore.jks`). No defaults.
-* `KEYCLOAK_HTTPS_KEY_STORE_PASSWORD`: Password for accessing the keystore. No defaults.
-* `KEYCLOAK_HTTPS_TRUST_STORE_PASSWORD`: Password for accessing the truststore. No defaults.
-* `KEYCLOAK_HTTPS_USE_PEM`: Set to true to configure HTTPS using PEM certificates'. Default: **false**.
-* `KEYCLOAK_HTTPS_CERTIFICATE_FILE`: Path to the PEM certificate file (e.g. `/opt/bitnami/keycloak/certs/tls.crt`). No defaults.
-* `KEYCLOAK_HTTPS_CERTIFICATE_KEY_FILE`: Path to the PEM key file (e.g. `/opt/bitnami/keycloak/certs/tls.key`). No defaults.
+- `KEYCLOAK_ENABLE_HTTPS`: Enable TLS encryption using the keystore. Default: **false**.
+- `KEYCLOAK_HTTPS_KEY_STORE_FILE`: Path to the keystore file (e.g. `/opt/bitnami/keycloak/certs/keystore.jks`). No defaults.
+- `KEYCLOAK_HTTPS_TRUST_STORE_FILE`: Path to the truststore file (e.g. `/opt/bitnami/keycloak/certs/truststore.jks`). No defaults.
+- `KEYCLOAK_HTTPS_KEY_STORE_PASSWORD`: Password for accessing the keystore. No defaults.
+- `KEYCLOAK_HTTPS_TRUST_STORE_PASSWORD`: Password for accessing the truststore. No defaults.
+- `KEYCLOAK_HTTPS_USE_PEM`: Set to true to configure HTTPS using PEM certificates'. Default: **false**.
+- `KEYCLOAK_HTTPS_CERTIFICATE_FILE`: Path to the PEM certificate file (e.g. `/opt/bitnami/keycloak/certs/tls.crt`). No defaults.
+- `KEYCLOAK_HTTPS_CERTIFICATE_KEY_FILE`: Path to the PEM key file (e.g. `/opt/bitnami/keycloak/certs/tls.key`). No defaults.
 
 ### SPI TLS truststore
 
 The Bitnami Keycloak Docker image supports configuring a truststore for HTTP/TLS connection with Keycloak SPIs.
 
-* `KEYCLOAK_SPI_TRUSTSTORE_FILE`: Path to the Keycloak SPI truststore file (e.g. `/opt/bitnami/keycloak/certs-spi/truststore.jks`). No defaults.
-* `KEYCLOAK_SPI_TRUSTSTORE_PASSWORD`: Password for decrypting the SPI truststore file. No defaults.
-* `KEYCLOAK_SPI_TRUSTSTORE_FILE_HOSTNAME_VERIFICATION_POLICY`: Hostname verification policy for SPI connection over HTTPS/TLS
+- `KEYCLOAK_SPI_TRUSTSTORE_FILE`: Path to the Keycloak SPI truststore file (e.g. `/opt/bitnami/keycloak/certs-spi/truststore.jks`). No defaults.
+- `KEYCLOAK_SPI_TRUSTSTORE_PASSWORD`: Password for decrypting the SPI truststore file. No defaults.
+- `KEYCLOAK_SPI_TRUSTSTORE_FILE_HOSTNAME_VERIFICATION_POLICY`: Hostname verification policy for SPI connection over HTTPS/TLS
 
 ### Adding custom themes
 
@@ -281,14 +282,14 @@ After that, your changes will be taken into account in the server's behaviour.
 
 ### 19-debian-11-r4
 
-* TLS environment variables have been renamed to match upstream.
-  * `KEYCLOAK_ENABLE_TLS` was renamed as `KEYCLOAK_ENABLE_HTTPS`.
-  * `KEYCLOAK_TLS_KEYSTORE_FILE` was renamed as `KEYCLOAK_TLS_KEY_STORE_FILE`.
-  * `KEYCLOAK_TLS_TRUSTSTORE_FILE` was renamed as `KEYCLOAK_TLS_TRUST_STORE_FILE`.
-  * `KEYCLOAK_TLS_KEYSTORE_PASSWORD` was renamed as `KEYCLOAK_TLS_KEY_STORE_PASSWORD`.
-  * `KEYCLOAK_TLS_TRUSTSTORE_PASSWORD` was renamed as `KEYCLOAK_TLS_TRUST_STORE_PASSWORD`.
-* HTTPS/TLS can now be configured using PEM certificates.
-* Added support to add SPI truststore file.
+- TLS environment variables have been renamed to match upstream.
+  - `KEYCLOAK_ENABLE_TLS` was renamed as `KEYCLOAK_ENABLE_HTTPS`.
+  - `KEYCLOAK_TLS_KEYSTORE_FILE` was renamed as `KEYCLOAK_TLS_KEY_STORE_FILE`.
+  - `KEYCLOAK_TLS_TRUSTSTORE_FILE` was renamed as `KEYCLOAK_TLS_TRUST_STORE_FILE`.
+  - `KEYCLOAK_TLS_KEYSTORE_PASSWORD` was renamed as `KEYCLOAK_TLS_KEY_STORE_PASSWORD`.
+  - `KEYCLOAK_TLS_TRUSTSTORE_PASSWORD` was renamed as `KEYCLOAK_TLS_TRUST_STORE_PASSWORD`.
+- HTTPS/TLS can now be configured using PEM certificates.
+- Added support to add SPI truststore file.
 
 ### 17-debian-10
 

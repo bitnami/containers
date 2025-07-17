@@ -16,6 +16,7 @@ docker run --name couchdb bitnami/couchdb:latest
 ## ⚠️ Important Notice: Upcoming changes to the Bitnami Catalog
 
 Beginning August 28th, 2025, Bitnami will evolve its public catalog to offer a curated set of hardened, security-focused images under the new [Bitnami Secure Images initiative](https://news.broadcom.com/app-dev/broadcom-introduces-bitnami-secure-images-for-production-ready-containerized-applications). As part of this transition:
+
 - Granting community users access for the first time to security-optimized versions of popular container images.
 - Bitnami will begin deprecating support for non-hardened, Debian-based software images in its free tier and will gradually remove non-latest tags from the public catalog. As a result, community users will have access to a reduced number of hardened images. These images are published only under the “latest” tag and are intended for development purposes
 - Starting August 28th, over two weeks, all existing container images, including older or versioned tags (e.g., 2.50.0, 10.6), will be migrated from the public catalog (docker.io/bitnami) to the “Bitnami Legacy” repository (docker.io/bitnamilegacy), where they will no longer receive updates.
@@ -25,12 +26,12 @@ These changes aim to improve the security posture of all Bitnami users by promot
 
 ## Why use Bitnami Images?
 
-* Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
-* With Bitnami images the latest bug fixes and features are available as soon as possible.
-* Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
-* Bitnami container images are released on a regular basis with the latest distribution packages available.
+- Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
+- With Bitnami images the latest bug fixes and features are available as soon as possible.
+- Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
+- All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
+- All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
+- Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use CouchDB in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the commercial edition of the Bitnami catalog.
 
@@ -216,9 +217,9 @@ docker-compose restart couchdb
 
 In order to configure CouchDB as a cluster of nodes, please make sure you set proper values for the following environment variables:
 
-* `COUCHDB_NODENAME`. A server alias. It should be different on each container.
-* `COUCHDB_CLUSTER_PORT_NUMBER`: Port for cluster communication. Default: **9100**
-* `COUCHDB_CREATE_DATABASES`: Whether to create the system databases or not. You should only set it to yes in one of the nodes. Default: **yes**
+- `COUCHDB_NODENAME`. A server alias. It should be different on each container.
+- `COUCHDB_CLUSTER_PORT_NUMBER`: Port for cluster communication. Default: **9100**
+- `COUCHDB_CREATE_DATABASES`: Whether to create the system databases or not. You should only set it to yes in one of the nodes. Default: **yes**
 
 ## Logging
 
@@ -238,8 +239,8 @@ The Bitnami CouchDB Docker image is designed to be extended so it can be used as
 
 Before extending this image, please note there are certain configuration settings you can modify using the original image:
 
-* Settings that can be adapted using environment variables. For instance, you can change the port used by CouchDB by setting the environment variable `COUCHDB_PORT_NUMBER`.
-* [Replacing or adding your own configuration files](#mounting-your-own-configuration-files).
+- Settings that can be adapted using environment variables. For instance, you can change the port used by CouchDB by setting the environment variable `COUCHDB_PORT_NUMBER`.
+- [Replacing or adding your own configuration files](#mounting-your-own-configuration-files).
 
 If your desired customizations cannot be covered using the methods mentioned above, extend the image. To do so, create your own image using a Dockerfile with the format below:
 
@@ -251,9 +252,9 @@ FROM bitnami/couchdb
 
 Here is an example of extending the image with the following modifications:
 
-* Install the `vim` editor
-* Modify the port used by CouchDB
-* Change the user that runs the container
+- Install the `vim` editor
+- Modify the port used by CouchDB
+- Change the user that runs the container
 
 ```Dockerfile
 FROM bitnami/couchdb
@@ -275,7 +276,7 @@ USER 1002
 
 Based on the extended image, you can use a Docker Compose file like the one below to add other features:
 
-* Add a custom configuration file
+- Add a custom configuration file
 
 ```yaml
 version: '2'
@@ -333,7 +334,7 @@ docker run --name couchdb bitnami/couchdb:latest
 
 ### 3.0.0-0-debian-10-r0
 
-* The usage of 'ALLOW_ANONYMOUS_LOGIN' is now deprecated. Please, specify a password for the admin user (defaults to "admin") by setting the 'COUCHDB_PASSWORD' environment variable.
+- The usage of 'ALLOW_ANONYMOUS_LOGIN' is now deprecated. Please, specify a password for the admin user (defaults to "admin") by setting the 'COUCHDB_PASSWORD' environment variable.
 
 ## Using `docker-compose.yaml`
 

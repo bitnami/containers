@@ -19,6 +19,7 @@ eployment.
 ## ⚠️ Important Notice: Upcoming changes to the Bitnami Catalog
 
 Beginning August 28th, 2025, Bitnami will evolve its public catalog to offer a curated set of hardened, security-focused images under the new [Bitnami Secure Images initiative](https://news.broadcom.com/app-dev/broadcom-introduces-bitnami-secure-images-for-production-ready-containerized-applications). As part of this transition:
+
 - Granting community users access for the first time to security-optimized versions of popular container images.
 - Bitnami will begin deprecating support for non-hardened, Debian-based software images in its free tier and will gradually remove non-latest tags from the public catalog. As a result, community users will have access to a reduced number of hardened images. These images are published only under the “latest” tag and are intended for development purposes
 - Starting August 28th, over two weeks, all existing container images, including older or versioned tags (e.g., 2.50.0, 10.6), will be migrated from the public catalog (docker.io/bitnami) to the “Bitnami Legacy” repository (docker.io/bitnamilegacy), where they will no longer receive updates.
@@ -28,12 +29,12 @@ These changes aim to improve the security posture of all Bitnami users by promot
 
 ## Why use Bitnami Images?
 
-* Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
-* With Bitnami images the latest bug fixes and features are available as soon as possible.
-* Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
-* Bitnami container images are released on a regular basis with the latest distribution packages available.
+- Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
+- With Bitnami images the latest bug fixes and features are available as soon as possible.
+- Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
+- All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
+- All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
+- Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use Apache Airflow in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the commercial edition of the Bitnami catalog.
 
@@ -424,17 +425,17 @@ docker run -d --name airflow -p 8080:8080 \
 
 To configure Airflow to send email using SMTP you can set the following environment variables:
 
-* `AIRFLOW__SMTP__SMTP_HOST`: Host for outgoing SMTP email. Default: **localhost**
-* `AIRFLOW__SMTP__SMTP_PORT`: Port for outgoing SMTP email. Default: **25**
-* `AIRFLOW__SMTP__SMTP_STARTTLS`: To use TLS communication. Default: **True**
-* `AIRFLOW__SMTP__SMTP_SSL`: To use SSL communication. Default: **False**
-* `AIRFLOW__SMTP__SMTP_USER`: User of SMTP used for authentication (likely email). No defaults.
-* `AIRFLOW__SMTP__SMTP_PASSWORD`: Password for SMTP. No defaults.
-* `AIRFLOW__SMTP__SMTP_MAIL_FROM`: To modify the "from email address". Default: **<airflow@example.com>**
+- `AIRFLOW__SMTP__SMTP_HOST`: Host for outgoing SMTP email. Default: **localhost**
+- `AIRFLOW__SMTP__SMTP_PORT`: Port for outgoing SMTP email. Default: **25**
+- `AIRFLOW__SMTP__SMTP_STARTTLS`: To use TLS communication. Default: **True**
+- `AIRFLOW__SMTP__SMTP_SSL`: To use SSL communication. Default: **False**
+- `AIRFLOW__SMTP__SMTP_USER`: User of SMTP used for authentication (likely email). No defaults.
+- `AIRFLOW__SMTP__SMTP_PASSWORD`: Password for SMTP. No defaults.
+- `AIRFLOW__SMTP__SMTP_MAIL_FROM`: To modify the "from email address". Default: **<airflow@example.com>**
 
 This would be an example of SMTP configuration using a GMail account:
 
-* docker-compose (application part):
+- docker-compose (application part):
 
 ```yaml
   airflow:
@@ -457,7 +458,7 @@ This would be an example of SMTP configuration using a GMail account:
       - 8080:8080
 ```
 
-* For manual execution:
+- For manual execution:
 
 ```console
 docker run -d --name airflow -p 8080:8080 \
@@ -481,13 +482,13 @@ docker run -d --name airflow -p 8080:8080 \
 
 ### Starting October 30, 2024
 
-* The Airflow container now supports running as a Web server, Scheduler or Worker component, so it's no longer necessary to combine this container image with `bitnami/airflow-scheduler` and `bitnami/airflow-worker` in order to use the `CeleryExecutor`.
-* The `AIRFLOW_COMPONENT_TYPE` environment variable was introduced to specify the component type. Current supported values are `webserver`, `scheduler` and `worker`, although it's planned to add soon support for `dag-processor` and `triggerer` components. The default value is `webserver`.
+- The Airflow container now supports running as a Web server, Scheduler or Worker component, so it's no longer necessary to combine this container image with `bitnami/airflow-scheduler` and `bitnami/airflow-worker` in order to use the `CeleryExecutor`.
+- The `AIRFLOW_COMPONENT_TYPE` environment variable was introduced to specify the component type. Current supported values are `webserver`, `scheduler` and `worker`, although it's planned to add soon support for `dag-processor` and `triggerer` components. The default value is `webserver`.
 
 ### 1.10.15-debian-10-r17 and 2.0.1-debian-10-r50
 
-* The size of the container image has been decreased.
-* The configuration logic is now based on Bash scripts in the *rootfs/* folder.
+- The size of the container image has been decreased.
+- The configuration logic is now based on Bash scripts in the *rootfs/* folder.
 
 ## Contributing
 

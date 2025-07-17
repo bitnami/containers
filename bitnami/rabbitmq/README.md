@@ -18,6 +18,7 @@ You can find the default credentials and available configuration options in the 
 ## ⚠️ Important Notice: Upcoming changes to the Bitnami Catalog
 
 Beginning August 28th, 2025, Bitnami will evolve its public catalog to offer a curated set of hardened, security-focused images under the new [Bitnami Secure Images initiative](https://news.broadcom.com/app-dev/broadcom-introduces-bitnami-secure-images-for-production-ready-containerized-applications). As part of this transition:
+
 - Granting community users access for the first time to security-optimized versions of popular container images.
 - Bitnami will begin deprecating support for non-hardened, Debian-based software images in its free tier and will gradually remove non-latest tags from the public catalog. As a result, community users will have access to a reduced number of hardened images. These images are published only under the “latest” tag and are intended for development purposes
 - Starting August 28th, over two weeks, all existing container images, including older or versioned tags (e.g., 2.50.0, 10.6), will be migrated from the public catalog (docker.io/bitnami) to the “Bitnami Legacy” repository (docker.io/bitnamilegacy), where they will no longer receive updates.
@@ -27,12 +28,12 @@ These changes aim to improve the security posture of all Bitnami users by promot
 
 ## Why use Bitnami Images?
 
-* Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
-* With Bitnami images the latest bug fixes and features are available as soon as possible.
-* Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
-* Bitnami container images are released on a regular basis with the latest distribution packages available.
+- Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
+- With Bitnami images the latest bug fixes and features are available as soon as possible.
+- Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
+- All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
+- All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
+- Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use RabbitMQ in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the commercial edition of the Bitnami catalog.
 
@@ -237,7 +238,7 @@ docker-compose up -d
 
 When you start the rabbitmq image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
-* For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/rabbitmq/docker-compose.yml) file present in this repository: :
+- For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/rabbitmq/docker-compose.yml) file present in this repository: :
 
 ```yaml
 rabbitmq:
@@ -247,7 +248,7 @@ rabbitmq:
   ...
 ```
 
-* For manual execution add a `-e` option with each variable and value.
+- For manual execution add a `-e` option with each variable and value.
 
 ### Setting up a cluster
 
@@ -400,11 +401,11 @@ sudo chmod 400 <your cert/key files>
 
 LDAP configuration parameters must be specified if you wish to enable LDAP support for RabbitMQ. The following environment variables are available to configure LDAP support:
 
-* `RABBITMQ_ENABLE_LDAP`: Enable the LDAP configuration. Defaults to `no`.
-* `RABBITMQ_LDAP_TLS`: Enable secure LDAP configuration. Defaults to `no`.
-* `RABBITMQ_LDAP_SERVERS`: Comma, semi-colon or space separated list of LDAP server hostnames. No defaults.
-* `RABBITMQ_LDAP_SERVERS_PORT`: LDAP servers port. Defaults: **389**
-* `RABBITMQ_LDAP_USER_DN_PATTERN`: DN used to bind to LDAP in the form `cn=$${username},dc=example,dc=org`.No defaults.
+- `RABBITMQ_ENABLE_LDAP`: Enable the LDAP configuration. Defaults to `no`.
+- `RABBITMQ_LDAP_TLS`: Enable secure LDAP configuration. Defaults to `no`.
+- `RABBITMQ_LDAP_SERVERS`: Comma, semi-colon or space separated list of LDAP server hostnames. No defaults.
+- `RABBITMQ_LDAP_SERVERS_PORT`: LDAP servers port. Defaults: **389**
+- `RABBITMQ_LDAP_USER_DN_PATTERN`: DN used to bind to LDAP in the form `cn=$${username},dc=example,dc=org`.No defaults.
 
 > Note: To escape `$` in `RABBITMQ_LDAP_USER_DN_PATTERN` you need to use `$$`.
 
@@ -531,54 +532,54 @@ docker-compose up rabbitmq
 
 ### 4.1.1-debian-12-r3
 
-* The environment variable `RABBITMQ_VHOSTS` can be used to set the default queue type for each virtual host using `:` separator: `RABBITMQ_VHOSTS=queue_name_0 queue_name_1:quorum`
-* New enviroment variable `RABBITMQ_NODE_DEFAULT_QUEUE_TYPE` to set default queue type node-wide.
+- The environment variable `RABBITMQ_VHOSTS` can be used to set the default queue type for each virtual host using `:` separator: `RABBITMQ_VHOSTS=queue_name_0 queue_name_1:quorum`
+- New enviroment variable `RABBITMQ_NODE_DEFAULT_QUEUE_TYPE` to set default queue type node-wide.
 
 ### 3.8.16-debian-10-r28
 
-* Added several minor changes to make the container compatible with the [RabbitMQ Cluster Operator](https://github.com/rabbitmq/cluster-operator/):
-  * Add `/etc/rabbitmq`, `/var/log/rabbitmq` and `/var/lib/rabbitmq` as symlinks to the corresponding folders in `/opt/bitnami/rabbitmq`.
-  * Set the `RABBITMQ_SECURE_PASSWORD` password to `no` by default. This does not affect the Bitnami RabbitMQ helm as it sets that variable to `yes` by default.
-  * Enable the `rabbitmq-prometheus` plugin by default.
+- Added several minor changes to make the container compatible with the [RabbitMQ Cluster Operator](https://github.com/rabbitmq/cluster-operator/):
+  - Add `/etc/rabbitmq`, `/var/log/rabbitmq` and `/var/lib/rabbitmq` as symlinks to the corresponding folders in `/opt/bitnami/rabbitmq`.
+  - Set the `RABBITMQ_SECURE_PASSWORD` password to `no` by default. This does not affect the Bitnami RabbitMQ helm as it sets that variable to `yes` by default.
+  - Enable the `rabbitmq-prometheus` plugin by default.
 
 ### 3.8.9-debian-10-r82
 
-* Add script to be used as preStop hook on K8s environments. It waits until queues have synchronised
+- Add script to be used as preStop hook on K8s environments. It waits until queues have synchronised
   mirror before shutting down.
 
 ### 3.8.9-debian-10-r42
 
-* The environment variable `RABBITMQ_HASHED_PASSWORD` has not been used for some time. It is now
+- The environment variable `RABBITMQ_HASHED_PASSWORD` has not been used for some time. It is now
   removed from documentation and validation.
-* New boolean environment variable `RABBITMQ_LOAD_DEFINITIONS` to get behavior compatible with using
+- New boolean environment variable `RABBITMQ_LOAD_DEFINITIONS` to get behavior compatible with using
   the `load_definitions` configuration. Initially this means that the password of
   `RABBITMQ_USERNAME` is not changed using `rabbitmqctl change_password`.
 
 ### 3.8.3-debian-10-r109
 
-* The default configuration file is created following the "sysctl" or "ini-like" format instead of using Erlang terms. Check [Official documentation](https://www.rabbitmq.com/configure.html#config-file-formats) for more information about supported formats.
-* Migrating data/configuration from unsupported locations is not performed anymore.
-* New environment variable `RABBITMQ_FORCE_BOOT` to force a node to start even if it was not the last to shut down.
-* New environment variable `RABBITMQ_PLUGINS` to indicate a list of plugins to enable during the initialization.
-* Add healthcheck scripts to be used on K8s environments.
+- The default configuration file is created following the "sysctl" or "ini-like" format instead of using Erlang terms. Check [Official documentation](https://www.rabbitmq.com/configure.html#config-file-formats) for more information about supported formats.
+- Migrating data/configuration from unsupported locations is not performed anymore.
+- New environment variable `RABBITMQ_FORCE_BOOT` to force a node to start even if it was not the last to shut down.
+- New environment variable `RABBITMQ_PLUGINS` to indicate a list of plugins to enable during the initialization.
+- Add healthcheck scripts to be used on K8s environments.
 
 ### 3.8.0-r17, 3.8.0-ol-7-r26
 
-* LDAP authentication
+- LDAP authentication
 
 ### 3.7.15-r18, 3.7.15-ol-7-r19
 
-* Decrease the size of the container. Node.js is not needed anymore. RabbitMQ configuration logic has been moved to bash scripts in the `rootfs` folder.
-* Configuration is not persisted anymore.
+- Decrease the size of the container. Node.js is not needed anymore. RabbitMQ configuration logic has been moved to bash scripts in the `rootfs` folder.
+- Configuration is not persisted anymore.
 
 ### 3.7.7-r35
 
-* The RabbitMQ container includes a new environment variable `RABBITMQ_HASHED_PASSWORD` that allows setting password via SHA256 hash (consult [official documentation](https://www.rabbitmq.com/passwords.html) for more information about password hashes).
-* Please note that password hashes must be generated following the [official algorithm](https://www.rabbitmq.com/passwords.html#computing-password-hash). You can use [this Python script](https://gist.githubusercontent.com/anapsix/4c3e8a8685ce5a3f0d7599c9902fd0d5/raw/1203a480fcec1982084b3528415c3cad26541b82/rmq_passwd_hash.py) to generate them.
+- The RabbitMQ container includes a new environment variable `RABBITMQ_HASHED_PASSWORD` that allows setting password via SHA256 hash (consult [official documentation](https://www.rabbitmq.com/passwords.html) for more information about password hashes).
+- Please note that password hashes must be generated following the [official algorithm](https://www.rabbitmq.com/passwords.html#computing-password-hash). You can use [this Python script](https://gist.githubusercontent.com/anapsix/4c3e8a8685ce5a3f0d7599c9902fd0d5/raw/1203a480fcec1982084b3528415c3cad26541b82/rmq_passwd_hash.py) to generate them.
 
 ### 3.7.7-r19
 
-* The RabbitMQ container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the RabbitMQ daemon was started as the `rabbitmq` user. From now on, both the container and the RabbitMQ daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
+- The RabbitMQ container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the RabbitMQ daemon was started as the `rabbitmq` user. From now on, both the container and the RabbitMQ daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
 ### 3.6.5-r2
 

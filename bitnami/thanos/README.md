@@ -16,6 +16,7 @@ docker run --name thanos bitnami/thanos:latest
 ## ⚠️ Important Notice: Upcoming changes to the Bitnami Catalog
 
 Beginning August 28th, 2025, Bitnami will evolve its public catalog to offer a curated set of hardened, security-focused images under the new [Bitnami Secure Images initiative](https://news.broadcom.com/app-dev/broadcom-introduces-bitnami-secure-images-for-production-ready-containerized-applications). As part of this transition:
+
 - Granting community users access for the first time to security-optimized versions of popular container images.
 - Bitnami will begin deprecating support for non-hardened, Debian-based software images in its free tier and will gradually remove non-latest tags from the public catalog. As a result, community users will have access to a reduced number of hardened images. These images are published only under the “latest” tag and are intended for development purposes
 - Starting August 28th, over two weeks, all existing container images, including older or versioned tags (e.g., 2.50.0, 10.6), will be migrated from the public catalog (docker.io/bitnami) to the “Bitnami Legacy” repository (docker.io/bitnamilegacy), where they will no longer receive updates.
@@ -25,12 +26,12 @@ These changes aim to improve the security posture of all Bitnami users by promot
 
 ## Why use Bitnami Images?
 
-* Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
-* With Bitnami images the latest bug fixes and features are available as soon as possible.
-* Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
-* Bitnami container images are released on a regular basis with the latest distribution packages available.
+- Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
+- With Bitnami images the latest bug fixes and features are available as soon as possible.
+- Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
+- All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
+- All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
+- Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use Thanos in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the commercial edition of the Bitnami catalog.
 
@@ -90,8 +91,8 @@ scrape_configs:
 
 Use the `docker run` command to launch the Prometheus containers using the arguments below:
 
-* `--network <network>` argument to attach the container to the `thanos-network` network.
-* `--volume [host-src:]container-dest[:<options>]` argument to mount the configuration file for Prometheus and a data volume to avoid loss of data. As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
+- `--network <network>` argument to attach the container to the `thanos-network` network.
+- `--volume [host-src:]container-dest[:<options>]` argument to mount the configuration file for Prometheus and a data volume to avoid loss of data. As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 ```console
 docker run -d --name "prometheus" \
@@ -105,8 +106,8 @@ docker run -d --name "prometheus" \
 
 Use the `docker run` command to launch the Thanos sidecar container using the argument below and overwriting the default command:
 
-* `--network <network>` argument to attach the container to the `thanos-network` network.
-* `--volume [host-src:]container-dest[:<options>]` argument to mount the Prometheus data volume.
+- `--network <network>` argument to attach the container to the `thanos-network` network.
+- `--volume [host-src:]container-dest[:<options>]` argument to mount the Prometheus data volume.
 
 ```console
 docker run -d --name "thanos-sidecar" \
@@ -119,8 +120,8 @@ docker run -d --name "thanos-sidecar" \
 
 Use the `docker run` command to launch the Thanos Query container using the argument below and overwriting the default command:
 
-* `--network <network>` argument to attach the container to the `thanos-network` network.
-* `--expose [hostPort:containerPort]` argument to expose the port `9090`.
+- `--network <network>` argument to attach the container to the `thanos-network` network.
+- `--expose [hostPort:containerPort]` argument to expose the port `9090`.
 
 ```console
 docker run -d --name "thanos-query" \
@@ -166,12 +167,12 @@ docker-compose up -d
 
 Thanos can be configured via command-line flags and, depending on them, the same container image can be used to create components with differentes roles:
 
-* Sidecar: connects to Prometheus, reads its data for query and/or uploads it to cloud storage.
-* Store Gateway: serves metrics inside of a cloud storage bucket.
-* Compactor: compacts, downsamples and applies retention on the data stored in cloud storage bucket.
-* Receiver: receives data from Prometheus’ remote-write WAL, exposes it and/or upload it to cloud storage.
-* Ruler/Rule: evaluates recording and alerting rules against data in Thanos for exposition and/or upload.
-* Querier/Query: implements Prometheus' v1 API to aggregate data from the underlying components.
+- Sidecar: connects to Prometheus, reads its data for query and/or uploads it to cloud storage.
+- Store Gateway: serves metrics inside of a cloud storage bucket.
+- Compactor: compacts, downsamples and applies retention on the data stored in cloud storage bucket.
+- Receiver: receives data from Prometheus’ remote-write WAL, exposes it and/or upload it to cloud storage.
+- Ruler/Rule: evaluates recording and alerting rules against data in Thanos for exposition and/or upload.
+- Querier/Query: implements Prometheus' v1 API to aggregate data from the underlying components.
 
 For further documentation, please check [Thanos documentation](https://github.com/thanos-io/thanos/tree/master/docs).
 

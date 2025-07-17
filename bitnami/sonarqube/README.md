@@ -18,6 +18,7 @@ docker run --name sonarqube bitnami/sonarqube:latest
 ## ⚠️ Important Notice: Upcoming changes to the Bitnami Catalog
 
 Beginning August 28th, 2025, Bitnami will evolve its public catalog to offer a curated set of hardened, security-focused images under the new [Bitnami Secure Images initiative](https://news.broadcom.com/app-dev/broadcom-introduces-bitnami-secure-images-for-production-ready-containerized-applications). As part of this transition:
+
 - Granting community users access for the first time to security-optimized versions of popular container images.
 - Bitnami will begin deprecating support for non-hardened, Debian-based software images in its free tier and will gradually remove non-latest tags from the public catalog. As a result, community users will have access to a reduced number of hardened images. These images are published only under the “latest” tag and are intended for development purposes
 - Starting August 28th, over two weeks, all existing container images, including older or versioned tags (e.g., 2.50.0, 10.6), will be migrated from the public catalog (docker.io/bitnami) to the “Bitnami Legacy” repository (docker.io/bitnamilegacy), where they will no longer receive updates.
@@ -27,12 +28,12 @@ These changes aim to improve the security posture of all Bitnami users by promot
 
 ## Why use Bitnami Images?
 
-* Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
-* With Bitnami images the latest bug fixes and features are available as soon as possible.
-* Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
-* All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
-* Bitnami container images are released on a regular basis with the latest distribution packages available.
+- Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
+- With Bitnami images the latest bug fixes and features are available as soon as possible.
+- Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
+- All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
+- All Bitnami images available in Docker Hub are signed with [Notation](https://notaryproject.dev/). [Check this post](https://blog.bitnami.com/2024/03/bitnami-packaged-containers-and-helm.html) to know how to verify the integrity of the images.
+- Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 Looking to use SonarQube&trade; in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the commercial edition of the Bitnami catalog.
 
@@ -253,7 +254,7 @@ docker run -d --name sonarqube \
 
 When you start the SonarQube&trade; image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
-* For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/sonarqube/docker-compose.yml) file present in this repository:
+- For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/sonarqube/docker-compose.yml) file present in this repository:
 
     ```yaml
     sonarqube:
@@ -263,7 +264,7 @@ When you start the SonarQube&trade; image, you can adjust the configuration of t
       ...
     ```
 
-* For manual execution add a `--env` option with each variable and value:
+- For manual execution add a `--env` option with each variable and value:
 
     ```console
     $ docker run -d --name sonarqube -p 80:8080 -p 443:8443 \
@@ -279,7 +280,7 @@ When you start the SonarQube&trade; image, you can adjust the configuration of t
 
 This would be an example of SMTP configuration using a Gmail account:
 
-* Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/sonarqube/docker-compose.yml) file present in this repository:
+- Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/sonarqube/docker-compose.yml) file present in this repository:
 
     ```yaml
       sonarqube:
@@ -295,7 +296,7 @@ This would be an example of SMTP configuration using a Gmail account:
       ...
     ```
 
-* For manual execution:
+- For manual execution:
 
     ```console
     $ docker run -d --name sonarqube -p 80:8080 -p 443:8443 \
@@ -314,7 +315,7 @@ This would be an example of SMTP configuration using a Gmail account:
 
 The Bitnami SonarQube&trade; container supports connecting the SonarQube&trade; application to an external database. This would be an example of using an external database for SonarQube&trade;.
 
-* Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/sonarqube/docker-compose.yml) file present in this repository:
+- Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/sonarqube/docker-compose.yml) file present in this repository:
 
     ```diff
        sonarqube:
@@ -330,7 +331,7 @@ The Bitnami SonarQube&trade; container supports connecting the SonarQube&trade; 
          ...
     ```
 
-* For manual execution:
+- For manual execution:
 
     ```console
     $ docker run -d --name sonarqube\
@@ -458,10 +459,10 @@ docker-compose up -d
 
 ### 9.0.0-debian-10-r0
 
-* The size of the container image has been decreased.
-* The configuration logic is now based on Bash scripts in the *rootfs/* folder.
-* The SonarQube&trade; container image has been migrated to a "non-root" user approach. Previously the container ran as the `root` user and the SonarQube&trade; daemon was started as the `sonarqube` user. From now on, both the container and the SonarQube&trade; daemon run as user `1001`. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile, or `user: root` in `docker-compose.yml`. Consequences:
-  * Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating the SonarQube&trade; site by exporting its content, and importing it on a new SonarQube&trade; container. Follow the steps in [Backing up your container](#backing-up-your-container) and [Restoring a backup](#restoring-a-backup) to migrate the data between the old and new container.
+- The size of the container image has been decreased.
+- The configuration logic is now based on Bash scripts in the *rootfs/* folder.
+- The SonarQube&trade; container image has been migrated to a "non-root" user approach. Previously the container ran as the `root` user and the SonarQube&trade; daemon was started as the `sonarqube` user. From now on, both the container and the SonarQube&trade; daemon run as user `1001`. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile, or `user: root` in `docker-compose.yml`. Consequences:
+  - Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating the SonarQube&trade; site by exporting its content, and importing it on a new SonarQube&trade; container. Follow the steps in [Backing up your container](#backing-up-your-container) and [Restoring a backup](#restoring-a-backup) to migrate the data between the old and new container.
 
 ## Contributing
 
