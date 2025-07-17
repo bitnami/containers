@@ -465,8 +465,7 @@ docker-compose up apache
 
 ## Useful Links
 
-- [Create An AMP Development Environment With Bitnami Containers
-](https://docs.bitnami.com/containers/how-to/create-amp-environment-containers/)
+- [Create An AMP Development Environment With Bitnami Containers](https://docs.bitnami.com/containers/how-to/create-amp-environment-containers/)
 
 ## Notable Changes
 
