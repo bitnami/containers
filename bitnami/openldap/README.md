@@ -239,10 +239,12 @@ The **memberOf** overlay is widely used in OpenLDAP to automatically populate th
 This short example demonstrates how to add the overlay during Bitnami OpenLDAP container bootstrap using `slapadd`, with correct LDIF formatting and troubleshooting tips.
 
 1. **Determine the next available module DN:**
-   - Run:  
+   - Run:
+
      ```sh
      slapcat -F /opt/bitnami/openldap/etc/slapd.d -b cn=config | grep "^dn: cn=module"
      ```
+     
    - If you see `cn=module{0},cn=config`, use `cn=module{1},cn=config` for your new module. {2} if you see existing {1} etc.
 
 2. **Create the LDIF file:**
@@ -268,6 +270,7 @@ olcMemberOfMemberOfAD: memberOf
 ```
 
 Finally a script should be placed or mounted to /docker-entrypoint-initdb.d/. Note: we are using slapadd, not ldapadd here as mentioned above.
+
 ```bash
 #!/bin/bash
 # Script to enable memberOf overlay in OpenLDAP
