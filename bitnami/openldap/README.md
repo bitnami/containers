@@ -244,7 +244,7 @@ This short example demonstrates how to add the overlay during Bitnami OpenLDAP c
      ```sh
      slapcat -F /opt/bitnami/openldap/etc/slapd.d -b cn=config | grep "^dn: cn=module"
      ```
-     
+
    - If you see `cn=module{0},cn=config`, use `cn=module{1},cn=config` for your new module. {2} if you see existing {1} etc.
 
 2. **Create the LDIF file:**
