@@ -208,9 +208,162 @@ The Bitnami Docker OpenLDAP can be easily setup with the following environment v
 - `LDAP_PPOLICY_USE_LOCKOUT`: Whether bind attempts to locked accounts will always return an error. Will only be applied with `LDAP_CONFIGURE_PPOLICY` active. Default: **no**.
 - `LDAP_PPOLICY_HASH_CLEARTEXT`: Whether plaintext passwords should be hashed automatically. Will only be applied with `LDAP_CONFIGURE_PPOLICY` active. Default: **no**.
 
-You can bootstrap the contents of your database by putting LDIF files in the directory `/ldifs` (or the one you define in `LDAP_CUSTOM_LDIF_DIR`). Those may only contain content underneath your base DN (set by `LDAP_ROOT`). You can **not** set configuration for e.g. `cn=config` in those files.
+### Bootstrapping
+
+User side bootstrapping happens in two primary phases:
+
+Note: Image level modifications, like modules and tools might require a custom Dockerfile that uses the bitnami-openldap as it's base if you need to modify image paths as root, some stuff might be doable in /docker-entrypoint-initdb.d/
+
+1. /docker-entrypoint-initdb.d/ - Targets: Place ldifs or executable .sh scripts here to be run prior to slap.d (To be used with slapadd not ldapadd). Good place to load and configure overlays.
+2. /ldifs - Place ldifs here that target the base dn of your root db that would be loaded after cn=config. Good place to load org units and groups etc.
 
 Check the official [OpenLDAP Configuration Reference](https://www.openldap.org/doc/admin26/guide.html) for more information about how to configure OpenLDAP.
+
+#### 1. /docker-entrypoint-initdb.d/
+
+Some key concepts:
+
+- slapd is not running during this phase of the bootstrapping
+- you should expect to use slapadd and slapcat against `-F /opt/bitnami/openldap/etc/slapd.d -b cn=config`
+- ldapadd won't work here `ldapadd -Q -Y EXTERNAL -H "ldapi:///" -f /ldifs/01-enable-memberof-overlay.ldif`. Many doc sources suggest using ldapadd but slapd isn't running yet.
+- slapadd ldifs are different then ldapadd specifically the `changetype: modify` directives required by ldapadd.
+- scripts are executed in alpha-numeric order so to control order use 01-myscript.sh 02-otherscript.sh is recommended.
+
+##### Example: Enable the MemberOf Overlay in Bitnami OpenLDAP
+
+Note: bitnami has some custom module pathing. Specifically the slapd module load path is set to `/opt/bitnami/openldap/libexec/openldap/` but some of the base openldap modules are installed at `/opt/bitnami/openldap/lib/openldap/`. If you need to load the memberof.so overlay you will need to symlink, or cp it. exapmle `cp /opt/bitnami/openldap/lib/openldap/memberof.so /opt/bitnami/openldap/lib/openldap/memberof.so`. This could be done in a Dockerfile, a mount overlay or if running as root in a script in /docker-entrypoint-initdb.d/. The Dockerfile is likely the best and safest solution to ensure your module is **always** avialable at run time.
+
+Here is an example of loading the memberof overlay with an /entrypoint-initdb.d/ script
+
+The **memberOf** overlay is widely used in OpenLDAP to automatically populate the `memberOf` attribute on user entries based on group membership.  
+This short example demonstrates how to add the overlay during Bitnami OpenLDAP container bootstrap using `slapadd`, with correct LDIF formatting and troubleshooting tips.
+
+1. **Determine the next available module DN:**
+   - Run:
+
+     ```sh
+     slapcat -F /opt/bitnami/openldap/etc/slapd.d -b cn=config | grep "^dn: cn=module"
+     ```
+
+   - If you see `cn=module{0},cn=config`, use `cn=module{1},cn=config` for your new module. {2} if you see existing {1} etc.
+
+2. **Create the LDIF file:**
+
+In the default container image has 1 existing loaded module at cn=module{0} so we will use cn=module{1}. Be sure to also bump the index on `cn: module{1}` to match cn=module{1}
+
+```ldif
+dn: cn=module{1},cn=config
+objectClass: olcModuleList
+cn: module{1}
+olcModulePath: /opt/bitnami/openldap/libexec/openldap
+olcModuleLoad: memberof.so
+
+dn: olcOverlay=memberof,olcDatabase={2}mdb,cn=config
+objectClass: olcOverlayConfig
+objectClass: olcMemberOf
+olcOverlay: memberof
+olcMemberOfDangling: ignore
+olcMemberOfRefInt: TRUE
+olcMemberOfGroupOC: groupOfNames
+olcMemberOfMemberAD: member
+olcMemberOfMemberOfAD: memberOf
+```
+
+Finally a script should be placed or mounted to /docker-entrypoint-initdb.d/. Note: we are using slapadd, not ldapadd here as mentioned above.
+
+```bash
+#!/bin/bash
+# Script to enable memberOf overlay in OpenLDAP
+set -e
+
+# Note: cn=module{1},cn=config assumes that the module will be loaded as the second module. cn=module{0} being the first.
+# Additionally, olcDatabase={2}mdb assumes that the database is the second one configured in OpenLDAP. Adjust as necessary.
+
+# Create a temporary LDIF file
+# ensure cn=module{N},cn=config and cn: module{N} match eachother and do not conflict with existing modules. Run `slapcat -F /opt/bitnami/openldap/etc/slapd.d -b cn=config | grep 'cn=module'` to check existing modules.
+cat > /tmp/memberof-overlay.ldif << 'EOF'
+dn: cn=module{1},cn=config
+objectClass: olcModuleList
+cn: module{1}
+olcModuleLoad: memberof
+
+dn: olcOverlay=memberof,olcDatabase={2}mdb,cn=config
+objectClass: olcOverlayConfig
+objectClass: olcMemberOf
+olcOverlay: memberof
+olcMemberOfDangling: ignore
+olcMemberOfRefInt: TRUE
+olcMemberOfGroupOC: groupOfNames
+olcMemberOfMemberAD: member
+olcMemberOfMemberOfAD: memberOf
+EOF
+
+# Apply the LDIF to enable memberOf overlay
+echo "Enabling memberOf overlay in OpenLDAP configuration..."
+echo "Loading memberOf overlay with slapadd..."
+
+if slapcat -F /opt/bitnami/openldap/etc/slapd.d -b cn=config | grep -q memberof
+then
+    echo "MemberOf overlay is already configured."
+    exit 0
+else
+    slapadd -F /opt/bitnami/openldap/etc/slapd.d -b cn=config -l /tmp/memberof-overlay.ldif || {
+        echo "NOTICE: slapadd failed to load memberOf overlay. Check the cn=module{N} with \"slapcat -F /opt/bitnami/openldap/etc/slapd.d -b cn=config |grep 'cn=module'\""
+        exit 1
+    }
+fi
+
+echo "MemberOf overlay has been configured."
+```
+
+#### 2. Bootstrap your ldap DB in /ldifs
+
+You can bootstrap the contents of **your** database by putting LDIF files in the directory `/ldifs` (or the one you define in `LDAP_CUSTOM_LDIF_DIR`). Those may only contain content underneath your base DN (set by `LDAP_ROOT`). You can **not** set configuration for e.g. `cn=config` in those files.
+
+Some key concepts:
+
+- you can **not** set configuration for e.g. `cn=config` here, use the /docker-entrypoint-initdb.d/ method!
+- ldifs are loaded in alpha-numeric order so you can load things in 01-mygroups.ldif, 02-myusers.ldif etc.
+- this only runs on first init of the container.
+
+##### Example: Loading base groups and org schemas in /ldifs/01-example-org.ldif (or equiv)
+
+Place or mount your ldif files in /ldifs... That's basically it! Verify with ldapsearch or in your healthchecks etc. once the container has loaded.
+
+```ldif
+# Base domain entries - converting AD-style DN to OpenLDAP format
+dn: dc=your,dc=example,dc=com
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+dc: your
+o: Your Organization
+
+# Organizational Units
+dn: ou=Users,dc=your,dc=example,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Users
+
+dn: ou=Groups,dc=your,dc=example,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Groups
+
+# Admin group
+dn: cn=some_admins,ou=Groups,dc=your,dc=example,dc=com
+objectClass: top
+objectClass: groupOfNames
+cn: some_admins
+description: An administrators group
+
+# Tester group
+dn: cn=testers,ou=Groups,dc=your,dc=example,dc=com
+objectClass: top
+objectClass: groupOfNames
+cn: testers
+description: Example group of testers
+```
 
 ### Data Persistence
 
@@ -218,7 +371,7 @@ To ensure that the OpenLDAP state is retained across container restarts and upda
 
 ### Overlays
 
-Overlays are dynamic modules that can be added to an OpenLDAP server to extend or modify its functionality.
+Overlays are dynamic modules that can be added to an OpenLDAP server to extend or modify its functionality. See section on Bootstrapping for an example on adding the memberOf or other overlays not directly provided as an overlay flag.
 
 #### Access Logging
 
