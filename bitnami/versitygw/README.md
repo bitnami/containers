@@ -79,7 +79,7 @@ To run commands inside this container, you can use `docker run`, for example to 
 docker run --rm --name versitygw bitnami/versitygw:latest -- --help
 ```
 
-Check the [official Versity S3 Gateway documentation](<https://www.versity.com/products/versitygw/> for more information.
+Check the [official Versity S3 Gateway documentation](https://www.versity.com/products/versitygw/ for more information.
 
 ## Contributing
 
