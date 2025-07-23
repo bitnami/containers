@@ -230,7 +230,7 @@ services:
 
 *NOTE:* The steps below assume that you are using a custom domain name and that you have already configured the custom domain name to point to your server.
 
-This container comes with SSL support already pre-configured and with a dummy certificate in place (`server.crt` and `server.key` files in `/certs`). If you want to use your own certificate (`.crt`) and certificate key (`.key`) files, follow the steps below:
+This container comes with SSL support already pre-configured and with a dummy certificate in place (`tls.crt` and `tls.key` files in `/certs`). If you want to use your own certificate (`.crt`) and certificate key (`.key`) files, follow the steps below:
 
 #### Step 1: Prepare your certificate files
 
@@ -468,6 +468,10 @@ docker-compose up apache
 - [Create An AMP Development Environment With Bitnami Containers](https://docs.bitnami.com/containers/how-to/create-amp-environment-containers/)
 
 ## Notable Changes
+
+### 2.4.64-debian-12-r2
+
+- This image updates TLS-related files: certificates and keys are now `tls.crt`/`tls.key` (from `server.crt`/`server.key`), and the certificate signing request is now `tls.csr` (from `server.csr`). This change aligns better with the kubernetes.io/tls secret type, enhancing consistency.
 
 ### 2.4.54-debian-11-r22
 

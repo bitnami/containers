@@ -15,8 +15,8 @@ SSLSessionCacheTimeout  300
 <VirtualHost _default_:443>
   DocumentRoot "{{APACHE_BASE_DIR}}/htdocs"
   SSLEngine on
-  SSLCertificateFile "{{APACHE_CONF_DIR}}/bitnami/certs/server.crt"
-  SSLCertificateKeyFile "{{APACHE_CONF_DIR}}/bitnami/certs/server.key"
+  SSLCertificateFile "{{APACHE_CONF_DIR}}/bitnami/certs/tls.crt"
+  SSLCertificateKeyFile "{{APACHE_CONF_DIR}}/bitnami/certs/tls.key"
 
   <Directory "{{APACHE_BASE_DIR}}/htdocs">
     Options Indexes FollowSymLinks
