@@ -31,7 +31,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "render-template-1.0.8-1-linux-${OS_ARCH}-debian-12" \
-      "jre-17.0.16-12-0-linux-${OS_ARCH}-debian-12" \
+      "jre-21.0.8-12-0-linux-${OS_ARCH}-debian-12" \
       "jenkins-2.516.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
