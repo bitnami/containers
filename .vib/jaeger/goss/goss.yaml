@@ -5,7 +5,8 @@ gossfile:
   # Goss tests exclusive to the current container
   ../../jaeger/goss/jaeger.yaml: {}
   # Load scripts from .vib/common/goss/templates
-  ../../common/goss/templates/check-binaries.yaml: {}
+  # check-binaries tests moved to jaeger.yaml until v1 is deprecated
+  # ../../common/goss/templates/check-binaries.yaml: {}
   ../../common/goss/templates/check-broken-symlinks.yaml: {}
   ../../common/goss/templates/check-ca-certs.yaml: {}
   ../../common/goss/templates/check-directories.yaml: {}
