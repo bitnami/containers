@@ -7,10 +7,20 @@ command:
     exit-status: 0
     stderr:
       - "Server created"
+  # HACK: Temporary fix for Jaeger v1 and v2 binaries
+  # Once v1 is deprecated, use regular check-app-version.yaml and check-binaries.yaml tests
   check-app-version:
-    # HACK: Temporary fix for Jaeger 1.68.0 and 2.5.0 as they do not show the version
-    # https://github.com/jaegertracing/jaeger/pull/6990
-    exec: bash -c "if [[ \"${APP_VERSION}\" == \"1.68.0\" ]] || [[ \"${APP_VERSION}\" == \"2.5.0\" ]]; then echo \"${APP_VERSION}\"; elif [[ \"${APP_VERSION}\" == \"1.\"* ]]; then jaeger-all-in-one version | grep -Po \"\d+\.\d+\.\d+\"; else jaeger-jaeger -v | sed \"s/\-0*/./g\"; fi"
+    exec: bash -c "if [[ \"${APP_VERSION}\" == \"1.\"* ]]; then jaeger-all-in-one version; else jaeger-jaeger version; fi"
     exit-status: 0
     stdout:
       - "{{ .Env.APP_VERSION }}"
+  # Jaeger v1
+  {{- range $binary := .Vars.binaries }} 
+  check-{{ $binary }}-binary-v1:
+    exec: bash -c "if [[ \"${APP_VERSION}\" == \"1.\"* ]]; then which {{ $binary }}; else exit 0; fi"
+    exit-status: 0
+  {{- end }}
+  # Jaeger v2
+  check-jaeger-binary:
+    exec: bash -c "if [[ \"${APP_VERSION}\" != \"1.\"* ]]; then which jaeger; else exit 0; fi"
+    exit-status: 0
