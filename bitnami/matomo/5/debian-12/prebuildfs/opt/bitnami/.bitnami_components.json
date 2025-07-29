@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "2.4.64-0"
+        "version": "2.4.65-0"
     },
     "ini-file": {
         "arch": "amd64",
@@ -15,7 +15,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.2.29-2"
+        "version": "8.2.29-4"
     },
     "matomo": {
         "arch": "amd64",
@@ -33,7 +33,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.2.29-2"
+        "version": "8.2.29-3"
     },
     "render-template": {
         "arch": "amd64",
