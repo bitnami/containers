@@ -4,8 +4,8 @@ protocol: "http"
 
 #Config certification if use 'https' protocol
 #https_config:
-#  cert: "server.crt"
-#  key: "server.key"
+#  cert: "tls.crt"
+#  key: "tls.key"
 
 #Server listening port
 port: 8080

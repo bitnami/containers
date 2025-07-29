@@ -5,5 +5,5 @@ log_level: "INFO"
 registry_config: "/etc/registry/config.yml"
 
 #https_config:
-#  cert: "server.crt"
-#  key: "server.key"
+#  cert: "tls.crt"
+#  key: "tls.key"
