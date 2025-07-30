@@ -159,9 +159,9 @@ services:
 
 The default `nginx.conf` supports custom configuration files organized by NGINX context. You can mount configuration files into the appropriate context directories:
 
-- `/opt/bitnami/nginx/conf/by_context/main/` - For main context directives (e.g., module loading, worker processes)
-- `/opt/bitnami/nginx/conf/by_context/events/` - For events context directives (e.g., worker_connections)
-- `/opt/bitnami/nginx/conf/by_context/http/` - For http context directives (equivalent to server_blocks)
+- `/opt/bitnami/nginx/conf/context.d/main/` - For main context directives (e.g., module loading, worker processes)
+- `/opt/bitnami/nginx/conf/context.d/events/` - For events context directives (e.g., worker_connections)
+- `/opt/bitnami/nginx/conf/context.d/http/` - For http context directives (equivalent to server_blocks)
 
 For example, to enable the WebDAV module, create a `webdav.conf` file with the following content:
 
@@ -173,7 +173,7 @@ Mount it to the main context directory:
 
 ```console
 docker run --name nginx \
-  -v /path/to/webdav.conf:/opt/bitnami/nginx/conf/by_context/main/webdav.conf:ro \
+  -v /path/to/webdav.conf:/opt/bitnami/nginx/conf/context.d/main/webdav.conf:ro \
   bitnami/nginx:latest
 ```
 
@@ -184,7 +184,7 @@ services:
   nginx:
   ...
     volumes:
-      - /path/to/webdav.conf:/opt/bitnami/nginx/conf/by_context/main/webdav.conf:ro
+      - /path/to/webdav.conf:/opt/bitnami/nginx/conf/context.d/main/webdav.conf:ro
   ...
 ```
 
@@ -192,7 +192,7 @@ Similarly, you can add custom server blocks to the http context:
 
 ```console
 docker run --name nginx \
-  -v /path/to/my_server_block.conf:/opt/bitnami/nginx/conf/by_context/http/my_server_block.conf:ro \
+  -v /path/to/my_server_block.conf:/opt/bitnami/nginx/conf/context.d/http/my_server_block.conf:ro \
   bitnami/nginx:latest
 ```
 

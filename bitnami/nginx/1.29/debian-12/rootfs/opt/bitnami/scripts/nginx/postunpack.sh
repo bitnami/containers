@@ -51,12 +51,12 @@ for dir in "$NGINX_VOLUME_DIR" "$NGINX_CONF_DIR" "$NGINX_INITSCRIPTS_DIR" "$NGIN
     chmod -R g+rwX "$dir"
 done
 
-# Create by_context directory and context include directories
-ensure_dir_exists "${NGINX_CONF_DIR}/by_context"
-chmod -R g+rwX "${NGINX_CONF_DIR}/by_context"
+# Create context.d directory and context include directories
+ensure_dir_exists "${NGINX_CONF_DIR}/context.d"
+chmod -R g+rwX "${NGINX_CONF_DIR}/context.d"
 for context in "${NGINX_CONTEXT_INCLUDES[@]}"; do
-    ensure_dir_exists "${NGINX_CONF_DIR}/by_context/${context}"
-    chmod -R g+rwX "${NGINX_CONF_DIR}/by_context/${context}"
+    ensure_dir_exists "${NGINX_CONF_DIR}/context.d/${context}"
+    chmod -R g+rwX "${NGINX_CONF_DIR}/context.d/${context}"
 done
 
 # Unset HTTP_PROXY header to protect vs HTTPPOXY vulnerability
