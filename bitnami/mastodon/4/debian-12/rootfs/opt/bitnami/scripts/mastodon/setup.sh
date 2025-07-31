@@ -20,5 +20,5 @@ set -o pipefail
 mastodon_validate
 # Ensure 'mastodon' user exists when running as 'root'
 am_i_root && ensure_user_exists "$MASTODON_DAEMON_USER" --group "$MASTODON_DAEMON_GROUP"
-
+# Ensure Mastodon is initialized
 mastodon_initialize
