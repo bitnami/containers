@@ -155,6 +155,47 @@ services:
   ...
 ```
 
+### Adding custom configuration by context
+
+The default `nginx.conf` supports custom configuration files organized by NGINX context. You can mount configuration files into the appropriate context directories:
+
+- `/opt/bitnami/nginx/conf/context.d/main/` - For main context directives (e.g., module loading, worker processes)
+- `/opt/bitnami/nginx/conf/context.d/events/` - For events context directives (e.g., worker_connections)
+- `/opt/bitnami/nginx/conf/context.d/http/` - For http context directives (equivalent to server_blocks)
+
+For example, to enable the WebDAV module, create a `webdav.conf` file with the following content:
+
+```nginx
+load_module /opt/bitnami/nginx/modules/ngx_http_dav_module.so;
+```
+
+Mount it to the main context directory:
+
+```console
+docker run --name nginx \
+  -v /path/to/webdav.conf:/opt/bitnami/nginx/conf/context.d/main/webdav.conf:ro \
+  bitnami/nginx:latest
+```
+
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/nginx/docker-compose.yml) file:
+
+```yaml
+services:
+  nginx:
+  ...
+    volumes:
+      - /path/to/webdav.conf:/opt/bitnami/nginx/conf/context.d/main/webdav.conf:ro
+  ...
+```
+
+Similarly, you can add custom server blocks to the http context:
+
+```console
+docker run --name nginx \
+  -v /path/to/my_server_block.conf:/opt/bitnami/nginx/conf/context.d/http/my_server_block.conf:ro \
+  bitnami/nginx:latest
+```
+
 ### Adding custom stream server blocks
 
 Similar to server blocks, you can include server blocks for the [NGINX Stream Core Module](https://nginx.org/en/docs/stream/ngx_stream_core_module.html) mounting them at `/opt/bitnami/nginx/conf/stream_server_blocks/`. In order to do so, it's also necessary to set the `NGINX_ENABLE_STREAM` environment variable to `yes`.
