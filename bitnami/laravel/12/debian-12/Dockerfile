@@ -8,7 +8,7 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-07-22T16:53:18Z" \
+      org.opencontainers.image.created="2025-07-31T18:49:23Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/laravel/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/laravel" \
@@ -30,7 +30,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     COMPONENTS=( \
       "python-3.13.5-3-linux-${OS_ARCH}-debian-12" \
       "wait-for-port-1.0.9-1-linux-${OS_ARCH}-debian-12" \
-      "php-8.4.10-2-linux-${OS_ARCH}-debian-12" \
+      "php-8.4.10-3-linux-${OS_ARCH}-debian-12" \
       "node-24.4.1-0-linux-${OS_ARCH}-debian-12" \
       "laravel-12.2.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
