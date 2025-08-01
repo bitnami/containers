@@ -178,12 +178,6 @@ schema_registry_validate() {
             print_validation_error "The allowed values for SCHEMA_REGISTRY_CLIENT_AUTHENTICATION are: NONE, REQUESTED, or REQUIRED."
         fi
     fi
-    if [[ -n "$SCHEMA_REGISTRY_AVRO_COMPATIBILY_LEVEL" ]]; then
-        if ! [[ "$SCHEMA_REGISTRY_AVRO_COMPATIBILY_LEVEL" =~ ^(none|backward|backward_transitive|forward|forward_transitive|full|full_transitive)$ ]]; then
-            print_validation_error "The allowed values for SCHEMA_REGISTRY_AVRO_COMPATIBILY_LEVEL are: none, backward, backward_transitive, forward, forward_transitive, full or full_transitive"
-        fi
-    fi
-    [[ -n "$SCHEMA_REGISTRY_DEBUG" ]] && check_true_false_value SCHEMA_REGISTRY_DEBUG
 
     [[ "$error_code" -eq 0 ]] || return "$error_code"
 }
@@ -264,6 +258,25 @@ schema_registry_for_kafka_brokers() {
 }
 
 ########################
+# Configure Schema registry from environment variables
+# Globals:
+#   SCHEMA_REGISTRY_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+schema_registry_setup_from_environment_variables() {
+    # Map environment variables to config properties
+    for var in "${!SCHEMA_REGISTRY_CFG_@}"; do
+        # Double underscores (__) will be replaced with dashes (-), while single underscores (_) will be replaced with dots (.)
+        key="$(echo "$var" | sed -e 's/^SCHEMA_REGISTRY_CFG_//g' -e 's/__/\-/g' -e 's/_/\./g' | tr '[:upper:]' '[:lower:]')"
+        value="${!var}"
+        schema_registry_conf_set "$key" "$value"
+    done
+}
+
+########################
 # Initialize Schema Registry
 # Globals:
 #   SCHEMA_REGISTRY_*
@@ -286,6 +299,9 @@ schema_registry_initialize() {
     else
         info "No injected configuration files found, creating config file based on SCHEMA_REGISTRY_* env vars"
         mv "${SCHEMA_REGISTRY_CONF_DIR}/schema-registry/schema-registry.properties.default" "$SCHEMA_REGISTRY_CONF_FILE"
+
+        # Hostname
+        schema_registry_conf_set "host.name" "$(schema_registry_hostname)"
 
         # Authentication Settings
         brokers_auth_protocol="$(schema_registry_brokers_auth_protocol)"
@@ -324,10 +340,8 @@ schema_registry_initialize() {
             [[ -n "$SCHEMA_REGISTRY_CLIENT_AUTHENTICATION" ]] && schema_registry_conf_set "ssl.client.authentication" "$SCHEMA_REGISTRY_CLIENT_AUTHENTICATION"
         fi
 
-        # Other settings
-        [[ -n "$SCHEMA_REGISTRY_AVRO_COMPATIBILY_LEVEL" ]] && schema_registry_conf_set "schema.compatibility.level" "$SCHEMA_REGISTRY_AVRO_COMPATIBILY_LEVEL"
-        [[ -n "$SCHEMA_REGISTRY_DEBUG" ]] && schema_registry_conf_set "debug" "$SCHEMA_REGISTRY_DEBUG"
-        schema_registry_conf_set "host.name" "$(schema_registry_hostname)"
+        # Configure Schema registry using SCHEMA_REGISTRY_CFG_* enviroment variables if provided
+        schema_registry_setup_from_environment_variables
     fi
     schema_registry_for_kafka_brokers
 }
