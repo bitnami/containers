@@ -17,7 +17,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "victoriametrics-1.122.0-0-linux-${OS_ARCH}-debian-12" \
+      "victoriametrics-1.123.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -41,16 +41,16 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-07-21T10:36:18Z" \
+      org.opencontainers.image.created="2025-08-04T15:31:52Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="victoriametrics-vmselect" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.122.0"
+      org.opencontainers.image.version="1.123.0"
 
 COPY rootfs /
 COPY --from=builder /opt/bitnami/victoriametrics /opt/bitnami/victoriametrics
 
-ENV APP_VERSION="1.122.0" \
+ENV APP_VERSION="1.123.0" \
     BITNAMI_APP_NAME="victoriametrics-vmselect" \
     PATH="/opt/bitnami/victoriametrics/bin:$PATH"
 
