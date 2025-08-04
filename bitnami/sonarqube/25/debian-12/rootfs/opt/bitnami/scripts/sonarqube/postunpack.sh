@@ -26,7 +26,6 @@ replace_in_file "${SONARQUBE_BIN_DIR}/sonar.sh" "PIDFILE=\".*" "PIDFILE=\"/opt/b
 # Based on https://github.com/SonarSource/docker-sonarqube/blob/master/9/community/Dockerfile#L129
 info "Configuring file permissions for SonarQube"
 
-
 ensure_group_exists "$SONARQUBE_DAEMON_GROUP" --gid "$SONARQUBE_DAEMON_GROUP_ID"
 ensure_user_exists "$SONARQUBE_DAEMON_USER" --system --uid "$SONARQUBE_DAEMON_USER_ID" --group "$SONARQUBE_DAEMON_GROUP" --append-groups "root"
 for dir in "$SONARQUBE_DATA_DIR" "$SONARQUBE_EXTENSIONS_DIR" "$SONARQUBE_LOGS_DIR" "$SONARQUBE_TMP_DIR" "$SONARQUBE_MOUNTED_PROVISIONING_DIR" "${SONARQUBE_BASE_DIR}/pids" "$SONARQUBE_VOLUME_DIR"; do
