@@ -1,0 +1,48 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+
+    bitnami-mysql:
+        image: docker.io/bitnami/mysql:latest
+        networks:
+            - bitnami-test-net
+        ports:
+            - "3306:3306"
+        environment:
+            # ALLOW_EMPTY_PASSWORD is recommended only for development, applies only to root password. Still, MARIADB_PASSWORD for MARIADB_USER must have a value.
+            - ALLOW_EMPTY_PASSWORD=yes
+            - MYSQL_USER=bn_keycloak
+            - MYSQL_PASSWORD=pwd1234
+            - MYSQL_DATABASE=bitnami_keycloak
+        volumes:
+            - 'mysql_persistence:/bitnami/mysql'
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "--host=localhost", "--user=bn_keycloak", "--password=pwd1234"]
+            interval: 15s
+            timeout: 5s
+            retries: 5
+            start_period: 30s
+
+    bitnami-keycloak:
+        image: docker.io/bitnami/keycloak:26
+        networks:
+            - bitnami-test-net
+        ports:
+            - "8080:8080"
+        environment:
+            KEYCLOAK_DATABASE_VENDOR: mysql
+            KEYCLOAK_DATABASE_USER: bn_keycloak
+            KEYCLOAK_DATABASE_PASSWORD: pwd1234
+            KEYCLOAK_JDBC_URL: "jdbc:mysql://bitnami-mysql:3306/bitnami_keycloak?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&useServerPrepStmts=true&cachePrepStmts=true"
+        depends_on:
+            bitnami-mysql:
+                condition: service_healthy
+
+volumes:
+    mysql_persistence:
+        driver: local
+
+networks:
+    bitnami-test-net:
+        name: bitnami-test-net

@@ -1,0 +1,43 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+
+    bitnami-postgresql:
+        image: docker.io/bitnami/postgresql:latest
+        networks:
+            - bitnami-test-net
+        ports:
+            - "5432:5432"
+        environment:
+            # ALLOW_EMPTY_PASSWORD is recommended only for development.
+            - ALLOW_EMPTY_PASSWORD=yes
+            - POSTGRESQL_USERNAME=bn_keycloak
+            - POSTGRESQL_DATABASE=bitnami_keycloak
+        volumes:
+            - 'postgres_persistence:/bitnami/postgresql'
+
+    bitnami-keycloak:
+        image: docker.io/bitnami/keycloak:26
+        networks:
+            - bitnami-test-net
+        ports:
+            - "80:8080"
+        environment:
+            KEYCLOAK_DATABASE_VENDOR: postgres
+            KEYCLOAK_DATABASE_HOST: bitnami-postgresql
+            KEYCLOAK_DATABASE_PORT: 5432
+            KEYCLOAK_DATABASE_NAME: bitnami_keycloak
+            KEYCLOAK_DATABASE_USER: bn_keycloak
+            KEYCLOAK_DATABASE_SCHEMA: public
+            KEYCLOAK_JDBC_PARAMS: "useUnicode=true&characterEncoding=UTF-8&sslmode=prefer&useSSL=true&assumeMinServerVersion=9:4&tcpKeepAlive=true"
+        depends_on:
+            - bitnami-postgresql
+
+volumes:
+    postgres_persistence:
+        driver: local
+
+networks:
+    bitnami-test-net:
+        name: bitnami-test-net

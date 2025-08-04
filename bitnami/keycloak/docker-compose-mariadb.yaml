@@ -1,0 +1,53 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+
+    bitnami-mariadb:
+        image: docker.io/bitnami/mariadb:latest
+        networks:
+            - bitnami-test-net
+        ports:
+            - "3306:3306"
+        environment:
+            # ALLOW_EMPTY_PASSWORD is recommended only for development, applies only to root password. Still, MARIADB_PASSWORD for MARIADB_USER must have a value.
+            - ALLOW_EMPTY_PASSWORD=yes
+            - MARIADB_USER=bn_keycloak
+            - MARIADB_PASSWORD=pwd1234
+            - MARIADB_DATABASE=bitnami_keycloak
+            # A workaround for Liquibase table name case sensitivity issue on MariaDB
+            - MARIADB_EXTRA_FLAGS=--lower_case_table_names=1
+        volumes:
+            - 'mariadb_persistence:/bitnami/mariadb'
+        healthcheck:
+            test: ["CMD", "mariadb-admin", "ping", "--host=localhost", "--user=bn_keycloak", "--password=pwd1234"]
+            interval: 15s
+            timeout: 5s
+            retries: 5
+            start_period: 30s
+
+    bitnami-keycloak:
+        image: docker.io/bitnami/keycloak:26
+        networks:
+            - bitnami-test-net
+        ports:
+            - "80:8080"
+        environment:
+            KEYCLOAK_DATABASE_VENDOR: mariadb
+            KEYCLOAK_DATABASE_HOST: bitnami-mariadb
+            KEYCLOAK_DATABASE_PORT: 3306
+            KEYCLOAK_DATABASE_NAME: bitnami_keycloak
+            KEYCLOAK_DATABASE_USER: bn_keycloak
+            KEYCLOAK_DATABASE_PASSWORD: pwd1234
+            KEYCLOAK_JDBC_PARAMS: "useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&useServerPrepStmts=true&cachePrepStmts=true"
+        depends_on:
+            bitnami-mariadb:
+                condition: service_healthy
+
+volumes:
+    mariadb_persistence:
+        driver: local
+
+networks:
+    bitnami-test-net:
+        name: bitnami-test-net

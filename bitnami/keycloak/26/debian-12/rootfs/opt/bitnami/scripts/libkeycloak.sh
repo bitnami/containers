@@ -128,18 +128,50 @@ keycloak_conf_set() {
 #   None
 #########################
 keycloak_configure_database() {
-    local jdbc_params
-    jdbc_params="$(echo "$KEYCLOAK_JDBC_PARAMS" | sed -E '/^$|^\&.+$/!s/^/\&/;s/\&/\\&/g')"
-
     info "Configuring database settings"
-    if [[ "${KEYCLOAK_DATABASE_VENDOR}" == "postgresql" ]]; then
-        keycloak_conf_set "db" "postgres"
-        keycloak_conf_set "db-username" "$KEYCLOAK_DATABASE_USER"
-        keycloak_conf_set "db-password" "$KEYCLOAK_DATABASE_PASSWORD"
-        keycloak_conf_set "db-url" "jdbc:${KEYCLOAK_JDBC_DRIVER}://${KEYCLOAK_DATABASE_HOST}:${KEYCLOAK_DATABASE_PORT}/${KEYCLOAK_DATABASE_NAME}?currentSchema=${KEYCLOAK_DATABASE_SCHEMA}${jdbc_params}"
-    else
-        keycloak_conf_set "db" "$KEYCLOAK_DATABASE_VENDOR"
+
+    keycloak_conf_set "db" "$KEYCLOAK_DATABASE_VENDOR"
+    keycloak_conf_set "db-url-host" "$KEYCLOAK_DATABASE_HOST"
+    keycloak_conf_set "db-url-port" "$KEYCLOAK_DATABASE_PORT"
+    keycloak_conf_set "db-url-database" "$KEYCLOAK_DATABASE_NAME"
+    keycloak_conf_set "db-username" "$KEYCLOAK_DATABASE_USER"
+    keycloak_conf_set "db-password" "$KEYCLOAK_DATABASE_PASSWORD"
+
+    if [[ ! -z "$KEYCLOAK_DATABASE_SCHEMA" ]]; then
+      keycloak_conf_set "db-schema" "$KEYCLOAK_DATABASE_SCHEMA"
     fi
+
+    if [[ ! -z "$KEYCLOAK_JDBC_DRIVER" ]]; then
+      keycloak_conf_set "db-driver" "$KEYCLOAK_JDBC_DRIVER"
+    fi
+
+    if [[ ! -z "$KEYCLOAK_JDBC_URL" ]]; then
+      keycloak_conf_set "db-url" "$KEYCLOAK_JDBC_URL"
+    fi
+
+    if [[ ! -z "$KEYCLOAK_JDBC_PARAMS" ]]; then
+      # Step 1: Remove leading '&' if it exists
+      jdbc_params=$(echo "$KEYCLOAK_JDBC_PARAMS" | sed 's/^&//')
+
+      # Step 2: Prepend '?' if it doesn't already start with '?'
+      jdbc_params=$(echo "$jdbc_params" | sed '/^?/! s/^/?/')
+
+      keycloak_conf_set "db-url-properties" "$jdbc_params"
+    fi
+
+    if [[ ! -z "$KEYCLOAK_JDBC_DB_POOL_INITIAL_SIZE" ]]; then
+      keycloak_conf_set "db-pool-initial-size" "$KEYCLOAK_JDBC_DB_POOL_INITIAL_SIZE"
+    fi
+
+    if [[ ! -z "$KEYCLOAK_JDBC_DB_POOL_MIN_SIZE" ]]; then
+      keycloak_conf_set "db-pool-min-size" "$KEYCLOAK_JDBC_DB_POOL_MIN_SIZE"
+    fi
+
+    if [[ ! -z "$KEYCLOAK_JDBC_DB_POOL_MAX_SIZE" ]]; then
+      keycloak_conf_set "db-pool-max-size" "$KEYCLOAK_JDBC_DB_POOL_MAX_SIZE"
+    fi
+
+    keycloak_conf_set "transaction-xa-enabled" "$KEYCLOAK_JDBC_TRXN_XA_ENABLED"
 }
 
 ########################
@@ -313,6 +345,7 @@ keycloak_initialize() {
             echo >> "${KEYCLOAK_CONF_DIR}/${KEYCLOAK_CONF_FILE}"
         fi
     fi
+
     keycloak_configure_database
     keycloak_configure_metrics
     keycloak_configure_health_endpoints
