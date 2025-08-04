@@ -69,9 +69,11 @@ export PGPOOL_ENABLE_LDAP="${PGPOOL_ENABLE_LDAP:-no}"
 export PGPOOL_TIMEOUT="360"
 export PGPOOL_ENABLE_LOG_CONNECTIONS="${PGPOOL_ENABLE_LOG_CONNECTIONS:-no}"
 export PGPOOL_ENABLE_LOG_HOSTNAME="${PGPOOL_ENABLE_LOG_HOSTNAME:-no}"
+export PGPOOL_ENABLE_LOG_PCP_PROCESSES="${PGPOOL_ENABLE_LOG_PCP_PROCESSES:-yes}"
 export PGPOOL_ENABLE_LOG_PER_NODE_STATEMENT="${PGPOOL_ENABLE_LOG_PER_NODE_STATEMENT:-no}"
 export PGPOOL_ENABLE_LOAD_BALANCING="${PGPOOL_ENABLE_LOAD_BALANCING:-yes}"
 export PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING="${PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING:-no}"
+export PGPOOL_ENABLE_CONNECTION_CACHE="${PGPOOL_ENABLE_CONNECTION_CACHE:-yes}"
 export PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE="${PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE:-transaction}"
 export PGPOOL_MAX_POOL="${PGPOOL_MAX_POOL:-15}"
 export PGPOOL_HEALTH_CHECK_USER="${PGPOOL_HEALTH_CHECK_USER:-$PGPOOL_SR_CHECK_USER}"
@@ -213,7 +215,7 @@ pgpool_validate() {
         print_validation_error "The provided PGPOOL_USER_HBA_FILE: ${PGPOOL_USER_HBA_FILE} must exist."
     fi
 
-    local yes_no_values=("PGPOOL_ENABLE_POOL_HBA" "PGPOOL_ENABLE_POOL_PASSWD" "PGPOOL_ENABLE_LOAD_BALANCING" "PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING" "PGPOOL_ENABLE_LOG_CONNECTIONS" "PGPOOL_ENABLE_LOG_HOSTNAME" "PGPOOL_ENABLE_LOG_PER_NODE_STATEMENT" "PGPOOL_AUTO_FAILBACK")
+    local yes_no_values=("PGPOOL_ENABLE_POOL_HBA" "PGPOOL_ENABLE_POOL_PASSWD" "PGPOOL_ENABLE_LOAD_BALANCING" "PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING" "PGPOOL_ENABLE_CONNECTION_CACHE" "PGPOOL_ENABLE_LOG_CONNECTIONS" "PGPOOL_ENABLE_LOG_HOSTNAME" "PGPOOL_ENABLE_LOG_PCP_PROCESSES" "PGPOOL_ENABLE_LOG_PER_NODE_STATEMENT" "PGPOOL_AUTO_FAILBACK")
     for yn in "${yes_no_values[@]}"; do
         if ! is_yes_no_value "${!yn}"; then
             print_validation_error "The values allowed for $yn are: yes or no"
@@ -279,6 +281,22 @@ pgpool_validate() {
 }
 
 ########################
+# Returns backend nodes info using PCP
+# Globals:
+#   PGPOOL_*
+# Returns:
+#   String with backend nodes info
+#########################
+pgpool_nodes_info() {
+    PCPPASSFILE=$(mktemp /tmp/pcppass-XXXXX)
+    export PCPPASSFILE
+    echo "localhost:9898:${PGPOOL_ADMIN_USERNAME}:${PGPOOL_ADMIN_PASSWORD}" >"${PCPPASSFILE}"
+    pcp_node_info -h localhost -U "${PGPOOL_ADMIN_USERNAME}" -p 9898 -a -w 2> /dev/null
+    rm -rf "$PCPPASSFILE"
+    unset PCPPASSFILE
+}
+
+########################
 # Attach a backend node to Pgpool-II
 # Globals:
 #   PGPOOL_*
@@ -290,12 +308,13 @@ pgpool_validate() {
 pgpool_attach_node() {
     local -r node_id=${1:?node id is missing}
 
-    info "Attaching backend node..."
+    echo "Attaching backend node..."
     PCPPASSFILE=$(mktemp /tmp/pcppass-XXXXX)
     export PCPPASSFILE
     echo "localhost:9898:${PGPOOL_ADMIN_USERNAME}:${PGPOOL_ADMIN_PASSWORD}" >"${PCPPASSFILE}"
     pcp_attach_node -h localhost -U "${PGPOOL_ADMIN_USERNAME}" -p 9898 -n "${node_id}" -w
-    rm -rf "${PCPPASSFILE}"
+    rm -rf "$PCPPASSFILE"
+    unset PCPPASSFILE
 }
 
 ########################
@@ -309,31 +328,23 @@ pgpool_attach_node() {
 #   1 when unhealthy
 #########################
 pgpool_healthcheck() {
-    info "Checking Pgpool-II health..."
     local backends node_id node_host node_port
 
-    # Timeout should be in sync with liveness probe timeout and number of nodes which could be down together
-    # Only nodes marked UP in Pgpool-II are tested. Each failed standby backend consumes up to PGPOOL_CONNECT_TIMEOUT
-    # to test. Network split is worst-case scenario.
-    # NOTE: command blocks indefinitely if primary node is marked UP in Pgpool-II but is DOWN in reality and connection
-    # times-out. Example is again network-split.
-    if backends="$(PGCONNECT_TIMEOUT=$PGPOOL_HEALTH_CHECK_PSQL_TIMEOUT PGPASSWORD="$PGPOOL_POSTGRES_PASSWORD" \
-        psql -U "$PGPOOL_POSTGRES_USERNAME" -d postgres -h "$PGPOOL_TMP_DIR" -p "$PGPOOL_PORT_NUMBER" \
-        -tA -c "SHOW pool_nodes;" 2> /dev/null)"; then
+    # Check backend nodes
+    if backends="$(pgpool_nodes_info)"; then
         # We're not interested in nodes marked as down|down
-        backends="$(grep -v "down|down" <<< "$backends")"
+        backends="$(grep -v "down down" <<< "$backends")"
         # We should also check whether there are discrepancies between Pgpool-II and the actual primary node
-        if grep -e "standby|primary" -e "primary|standby" <<< "$backends" > /dev/null; then
-            error "Found inconsistencies in pgpool_status"
+        if grep -e "standby primary" -e "primary standby" <<< "$backends" > /dev/null; then
+            echo "Found inconsistencies in pgpool_status"
             return 1
         fi
         # Look up backends that are marked offline but being up
-        read -r -a nodes_to_attach <<< "$(grep "down|up" <<< "$backends" | tr -d ' ' | tr '\n' ' ')"
+        read -r -a nodes_to_attach <<< "$(grep "down up" <<< "$backends" | awk '{print $1,$2}' | tr ' ' '|' | tr '\n' ' ')"
         for node in "${nodes_to_attach[@]}"; do
-            IFS="|" read -ra node_info <<< "$node"
-            node_id="${node_info[0]}"
-            node_host="${node_info[1]}"
-            node_port="${node_info[2]}"
+            node_host=$(echo "$node" | awk -F '|' '{print $1}')
+            node_port=$(echo "$node" | awk -F '|' '{print $2}')
+            node_id=$(grep "$node_host" "$PGPOOL_CONF_FILE" | awk '{print $1}' | sed 's/^backend_hostname//')
             if [[ $(PGCONNECT_TIMEOUT=3 PGPASSWORD="${PGPOOL_POSTGRES_PASSWORD}" psql -U "${PGPOOL_POSTGRES_USERNAME}" \
                 -d postgres -h "${node_host}" -p "${node_port}" -tA -c "SELECT 1" || true) == 1 ]]; then
                 # Attach backend if it has come back online
@@ -341,9 +352,14 @@ pgpool_healthcheck() {
             fi
         done
     else
-        error "unable to list pool nodes"
+        echo "unable to list pool nodes"
         return 1
     fi
+
+    # Check if Pgpool-II responds to simple queries
+    PGCONNECT_TIMEOUT=$PGPOOL_HEALTH_CHECK_PSQL_TIMEOUT PGPASSWORD="$PGPOOL_POSTGRES_PASSWORD" \
+        psql -U "$PGPOOL_POSTGRES_USERNAME" -d postgres -h "$PGPOOL_TMP_DIR" -p "$PGPOOL_PORT_NUMBER" \
+        -tA -c "SELECT 1" 2> /dev/null
 }
 
 ########################
@@ -481,12 +497,14 @@ pgpool_create_config() {
     pgpool_set_property "max_pool" "$PGPOOL_MAX_POOL"
     [[ -n "${PGPOOL_CHILD_MAX_CONNECTIONS:-}" ]] && pgpool_set_property "child_max_connections" "$PGPOOL_CHILD_MAX_CONNECTIONS"
     [[ -n "${PGPOOL_CHILD_LIFE_TIME:-}" ]] && pgpool_set_property "child_life_time" "$PGPOOL_CHILD_LIFE_TIME"
+    pgpool_set_property "connection_cache" "$(is_boolean_yes "$PGPOOL_ENABLE_CONNECTION_CACHE" && echo "on" || echo "off")"
     [[ -n "${PGPOOL_CONNECTION_LIFE_TIME:-}" ]] && pgpool_set_property "connection_life_time" "$PGPOOL_CONNECTION_LIFE_TIME"
     [[ -n "${PGPOOL_CLIENT_IDLE_LIMIT-}" ]] && pgpool_set_property "client_idle_limit" "$PGPOOL_CLIENT_IDLE_LIMIT"
     # Logging settings
     # https://www.pgpool.net/docs/latest/en/html/runtime-config-logging.html
     pgpool_set_property "log_connections" "$(is_boolean_yes "$PGPOOL_ENABLE_LOG_CONNECTIONS" && echo "on" || echo "off")"
     pgpool_set_property "log_hostname" "$(is_boolean_yes "$PGPOOL_ENABLE_LOG_HOSTNAME" && echo "on" || echo "off")"
+    pgpool_set_property "log_pcp_processes" "$(is_boolean_yes "$PGPOOL_ENABLE_LOG_PCP_PROCESSES" && echo "on" || echo "off")"
     pgpool_set_property "log_per_node_statement" "$(is_boolean_yes "$PGPOOL_ENABLE_LOG_PER_NODE_STATEMENT" && echo "on" || echo "off")"
     [[ -n "${PGPOOL_LOG_LINE_PREFIX:-}" ]] && pgpool_set_property "log_line_prefix" "$PGPOOL_LOG_LINE_PREFIX"
     [[ -n "${PGPOOL_CLIENT_MIN_MESSAGES:-}" ]] && pgpool_set_property "client_min_messages" "$PGPOOL_CLIENT_MIN_MESSAGES"
