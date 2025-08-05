@@ -9,13 +9,13 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "11.2.2-2"
+        "version": "11.2.2-3"
     },
     "libphp": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.3.23-3"
+        "version": "8.3.24-0"
     },
     "mysql-client": {
         "arch": "amd64",
@@ -27,7 +27,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.3.23-4"
+        "version": "8.3.24-0"
     },
     "render-template": {
         "arch": "amd64",
