@@ -111,7 +111,7 @@ airflow_validate() {
     check_resolved_hostname "$AIRFLOW_DATABASE_HOST"
     check_positive_value AIRFLOW_DATABASE_PORT_NUMBER
     check_positive_value REDIS_PORT_NUMBER
-    if [[ "$AIRFLOW_EXECUTOR" == "CeleryExecutor" || "$AIRFLOW_EXECUTOR" == "CeleryKubernetesExecutor"  ]]; then
+    if [[ "$AIRFLOW_EXECUTOR" =~ "CeleryExecutor" || "$AIRFLOW_EXECUTOR" == "CeleryKubernetesExecutor"  ]]; then
         check_empty_value "REDIS_HOST"
         check_resolved_hostname "$REDIS_HOST"
     fi
@@ -227,7 +227,7 @@ airflow_initialize() {
         airflow_wait_for_db_migrations
         info "Waiting for admin user to be created"
         airflow_wait_for_admin_user
-        if [[ "$AIRFLOW_EXECUTOR" == "CeleryExecutor" || "$AIRFLOW_EXECUTOR" == "CeleryKubernetesExecutor"  ]]; then
+        if [[ "$AIRFLOW_EXECUTOR" =~ "CeleryExecutor" || "$AIRFLOW_EXECUTOR" == "CeleryKubernetesExecutor"  ]]; then
             wait-for-port --host "$REDIS_HOST" "$REDIS_PORT_NUMBER"
         fi
         ;;
@@ -347,7 +347,7 @@ airflow_generate_config() {
 
     # Configure Airflow executor
     airflow_conf_set "core" "executor" "$AIRFLOW_EXECUTOR"
-    [[ "$AIRFLOW_EXECUTOR" == "CeleryExecutor" || "$AIRFLOW_EXECUTOR" == "CeleryKubernetesExecutor" ]] && airflow_configure_celery_executor
+    [[ "$AIRFLOW_EXECUTOR" =~ "CeleryExecutor" || "$AIRFLOW_EXECUTOR" == "CeleryKubernetesExecutor" ]] && airflow_configure_celery_executor
     true # Avoid the function to fail due to the check above
 }
 
