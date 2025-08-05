@@ -8,13 +8,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-08-05T04:49:58Z" \
+      org.opencontainers.image.created="2025-08-05T11:18:00Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/milvus/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/milvus" \
       org.opencontainers.image.title="milvus" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="2.5.16"
+      org.opencontainers.image.version="2.6.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -24,12 +24,12 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libaio1 libgcc-s1 libgfortran5 libgomp1 libopenblas0-pthread libquadmath0 libstdc++6 procps
+RUN install_packages ca-certificates curl libaio1 libatomic1 libgcc-s1 libgfortran5 libgomp1 libopenblas0-pthread libquadmath0 libstdc++6 procps
 RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "milvus-2.5.16-0-linux-${OS_ARCH}-debian-12" \
+      "milvus-2.6.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -47,7 +47,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN mkdir -p /opt/bitnami/milvus/tmp && chmod g+rwX /opt/bitnami/milvus/tmp && ln -s /opt/bitnami/milvus/tmp /run/milvus && mkdir -p /bitnami/milvus/data && chmod g+rwX /bitnami/milvus/data && ln -s /bitnami/milvus/data /var/lib/milvus && ln -s /opt/bitnami/milvus /milvus
 RUN uninstall_packages curl
 
-ENV APP_VERSION="2.5.16" \
+ENV APP_VERSION="2.6.0" \
     BITNAMI_APP_NAME="milvus" \
     LD_LIBRARY_PATH="/opt/bitnami/milvus/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/milvus/bin:$PATH"
