@@ -79,7 +79,7 @@ To run commands inside this container you can use `docker run`, for example to e
 docker run --rm --name grafana-alloy bitnami/grafana-alloy:latest --  --help
 ```
 
-Check the [official Grafana Alloy documentation](<https://grafana.com/oss/alloy-opentelemetry-collector/> for more information.
+Check the [official Grafana Alloy documentation](https://grafana.com/oss/alloy-opentelemetry-collector/) for more information.
 
 ## Contributing
 
