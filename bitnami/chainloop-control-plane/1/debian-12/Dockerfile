@@ -17,7 +17,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "chainloop-1.38.2-0-linux-${OS_ARCH}-debian-12" \
+      "chainloop-1.38.3-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -41,18 +41,18 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-08-05T14:42:26Z" \
+      org.opencontainers.image.created="2025-08-06T15:50:17Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="chainloop-control-plane" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.38.2"
+      org.opencontainers.image.version="1.38.3"
 
 COPY rootfs /
 COPY --from=builder /opt/bitnami/chainloop/.spdx-chainloop.spdx /opt/bitnami/chainloop/.spdx-chainloop.spdx
 COPY --from=builder /opt/bitnami/chainloop/bin/control-plane /opt/bitnami/chainloop/bin/control-plane
 COPY --from=builder /opt/bitnami/chainloop/licenses /opt/bitnami/chainloop/licenses
 
-ENV APP_VERSION="1.38.2" \
+ENV APP_VERSION="1.38.3" \
     BITNAMI_APP_NAME="chainloop-control-plane" \
     PATH="/opt/bitnami/chainloop/bin:$PATH"
 
