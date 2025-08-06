@@ -17,7 +17,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "chainloop-artifact-cas-1.38.2-0-linux-${OS_ARCH}-debian-12" \
+      "chainloop-artifact-cas-1.38.3-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -41,18 +41,18 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-08-05T14:42:15Z" \
+      org.opencontainers.image.created="2025-08-06T15:47:10Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="chainloop-artifact-cas" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.38.2"
+      org.opencontainers.image.version="1.38.3"
 
 COPY rootfs /
 COPY --from=builder /opt/bitnami/chainloop/.spdx-chainloop-artifact-cas.spdx /opt/bitnami/chainloop/.spdx-chainloop-artifact-cas.spdx
 COPY --from=builder /opt/bitnami/chainloop/bin/artifact-cas /opt/bitnami/chainloop/bin/artifact-cas
 COPY --from=builder /opt/bitnami/chainloop/licenses /opt/bitnami/chainloop/licenses
 
-ENV APP_VERSION="1.38.2" \
+ENV APP_VERSION="1.38.3" \
     BITNAMI_APP_NAME="chainloop-artifact-cas" \
     PATH="/opt/bitnami/chainloop/bin:$PATH"
 
