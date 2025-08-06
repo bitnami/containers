@@ -79,7 +79,7 @@ To run commands inside this container you can use `docker run`, for example to e
 docker run --rm --name grafana-k6-operator bitnami/grafana-k6-operator:latest --  --help
 ```
 
-Check the [official Grafana k6 Operator documentation](<https://k6.io/> for more information.
+Check the [official Grafana k6 Operator documentation](https://k6.io/) for more information.
 
 ## Contributing
 
