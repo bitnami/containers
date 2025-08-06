@@ -16,6 +16,10 @@ docker run --name cert-manager-webhook -e ALLOW_EMPTY_PASSWORD=yes bitnami/cert-
 
 **Warning**: These quick setups are only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
 
+## Prerequisites
+
+Kubernetes cluster with `CustomResourceDefinition` or `ThirdPartyResource support`
+
 ## ⚠️ Important Notice: Upcoming changes to the Bitnami Catalog
 
 Beginning August 28th, 2025, Bitnami will evolve its public catalog to offer a curated set of hardened, security-focused images under the new [Bitnami Secure Images initiative](https://news.broadcom.com/app-dev/broadcom-introduces-bitnami-secure-images-for-production-ready-containerized-applications). As part of this transition:
@@ -26,10 +30,6 @@ Beginning August 28th, 2025, Bitnami will evolve its public catalog to offer a c
 - For production workloads and long-term support, users are encouraged to adopt Bitnami Secure Images, which include hardened containers, smaller attack surfaces, CVE transparency (via VEX/KEV), SBOMs, and enterprise support.
 
 These changes aim to improve the security posture of all Bitnami users by promoting best practices for software supply chain integrity and up-to-date deployments. For more details, visit the [Bitnami Secure Images announcement](https://github.com/bitnami/containers/issues/83267).
-
-## Prerequisites
-
-Kubernetes cluster with `CustomResourceDefinition` or `ThirdPartyResource support`
 
 ## Why use Bitnami Secure Images?
 
