@@ -15,18 +15,18 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.8-1"
+        "version": "1.0.8-2"
     },
     "wait-for-port": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.9-1"
+        "version": "1.0.9-2"
     },
     "yq": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "4.47.1-0"
+        "version": "4.47.1-1"
     }
 }
