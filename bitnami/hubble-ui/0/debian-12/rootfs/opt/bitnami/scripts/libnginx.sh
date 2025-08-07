@@ -660,12 +660,12 @@ nginx_custom_init_scripts() {
 nginx_generate_sample_certs() {
     local certs_dir="${NGINX_CONF_DIR}/bitnami/certs"
 
-    if ! is_boolean_yes "$NGINX_SKIP_SAMPLE_CERTS" && [[ ! -f "${certs_dir}/server.crt" ]]; then
+    if ! is_boolean_yes "$NGINX_SKIP_SAMPLE_CERTS" && [[ ! -f "${certs_dir}/tls.crt" ]]; then
         # Check certificates directory exists and is writable
         if [[ -d "$certs_dir" && -w "$certs_dir" ]]; then
-            SSL_KEY_FILE="${certs_dir}/server.key"
-            SSL_CERT_FILE="${certs_dir}/server.crt"
-            SSL_CSR_FILE="${certs_dir}/server.csr"
+            SSL_KEY_FILE="${certs_dir}/tls.key"
+            SSL_CERT_FILE="${certs_dir}/tls.crt"
+            SSL_CSR_FILE="${certs_dir}/tls.csr"
             SSL_SUBJ="/CN=example.com"
             SSL_EXT="subjectAltName=DNS:example.com,DNS:www.example.com,IP:127.0.0.1"
             rm -f "$SSL_KEY_FILE" "$SSL_CERT_FILE"
