@@ -8,7 +8,7 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-08-07T06:59:51Z" \
+      org.opencontainers.image.created="2025-08-07T12:57:11Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/jax/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jax" \
