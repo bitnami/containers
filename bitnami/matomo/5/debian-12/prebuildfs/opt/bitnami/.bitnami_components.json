@@ -3,19 +3,19 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "2.4.65-0"
+        "version": "2.4.65-1"
     },
     "ini-file": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.4.8-1"
+        "version": "1.4.8-2"
     },
     "libphp": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.2.29-4"
+        "version": "8.2.29-5"
     },
     "matomo": {
         "arch": "amd64",
@@ -33,12 +33,12 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "8.2.29-3"
+        "version": "8.2.29-4"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.8-1"
+        "version": "1.0.8-2"
     }
 }
