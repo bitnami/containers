@@ -79,7 +79,7 @@ To run commands inside this container you can use `docker run`, for example to e
 docker run --rm --name kserve-localmodel-controller bitnami/kserve-localmodel-controller:latest --  --help
 ```
 
-Check the [official KServe Local Model Node Agent documentation](<https://kserve.github.io/website> for more information.
+Check the [official KServe Local Model Node Agent documentation](https://kserve.github.io/website) for more information.
 
 ## Contributing
 
