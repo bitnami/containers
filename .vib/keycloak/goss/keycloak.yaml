@@ -5,8 +5,6 @@ group:
   keycloak:
     exists: true
 user:
-  user:
-    exists: true
   keycloak:
     exists: true
 file:
