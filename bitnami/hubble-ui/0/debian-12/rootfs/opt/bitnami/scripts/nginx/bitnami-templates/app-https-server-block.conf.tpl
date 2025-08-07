@@ -8,8 +8,8 @@ server {
 
     {{server_name_configuration}}
 
-    ssl_certificate      bitnami/certs/server.crt;
-    ssl_certificate_key  bitnami/certs/server.key;
+    ssl_certificate      bitnami/certs/tls.crt;
+    ssl_certificate_key  bitnami/certs/tls.key;
 
     {{acl_configuration}}
 
