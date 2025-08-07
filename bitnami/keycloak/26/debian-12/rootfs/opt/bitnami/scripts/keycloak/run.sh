@@ -10,35 +10,25 @@ set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
-. /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libkeycloak.sh
-. /opt/bitnami/scripts/libos.sh
 
-# Load keycloak environment variables
+# Load Keycloak environment variables
 . /opt/bitnami/scripts/keycloak-env.sh
 
-info "** Starting keycloak **"
-# Use only basename
-conf_file="${KEYCLOAK_CONF_DIR}/${KEYCLOAK_CONF_FILE}"
-
-is_boolean_yes "$KEYCLOAK_PRODUCTION" && start_param="start" || start_param="start-dev"
-
-start_command=("${KEYCLOAK_BIN_DIR}/kc.sh" "-cf" "$conf_file")
-
+start_command=("${KEYCLOAK_BIN_DIR}/kc.sh" "-cf" "${KEYCLOAK_CONF_DIR}/${KEYCLOAK_CONF_FILE}")
 # Prepend extra args
 if [[ -n "$KEYCLOAK_EXTRA_ARGS_PREPENDED" ]]; then
     read -r -a extra_args_prepended <<<"$KEYCLOAK_EXTRA_ARGS_PREPENDED"
     start_command+=("${extra_args_prepended[@]}")
 fi
-
-start_command+=("$start_param")
-
-# Add extra args
+is_boolean_yes "$KEYCLOAK_PRODUCTION" && start_command+=("start") || start_command+=("start-dev")
+# Append extra args
 if [[ -n "$KEYCLOAK_EXTRA_ARGS" ]]; then
     read -r -a extra_args <<<"$KEYCLOAK_EXTRA_ARGS"
     start_command+=("${extra_args[@]}")
 fi
 
+info "** Starting Keycloak **"
 if am_i_root; then
     exec_as_user "$KEYCLOAK_DAEMON_USER" /bin/bash -c "${start_command[*]}"
 else

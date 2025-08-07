@@ -11,17 +11,16 @@ set -o pipefail
 
 # Load libraries
 . /opt/bitnami/scripts/libbitnami.sh
-. /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libkeycloak.sh
 
-# Load keycloak environment variables
+# Load Keycloak environment variables
 . /opt/bitnami/scripts/keycloak-env.sh
 
 print_welcome_page
 
 # We add the copy from default config in the entrypoint to not break users
 # bypassing the setup.sh logic. If the file already exists do not overwrite (in
-# case someone mounts a configuration file in /opt/bitnami/postgresql/conf)
+# case someone mounts a configuration file in /opt/bitnami/keycloak/conf)
 debug "Copying files from $KEYCLOAK_DEFAULT_CONF_DIR to $KEYCLOAK_CONF_DIR"
 cp -nr "$KEYCLOAK_DEFAULT_CONF_DIR"/. "$KEYCLOAK_CONF_DIR"
 
