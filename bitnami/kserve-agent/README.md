@@ -79,7 +79,7 @@ To run commands inside this container you can use `docker run`, for example to e
 docker run --rm --name kserve-agent bitnami/kserve-agent:latest --  --help
 ```
 
-Check the [official KServe Agent documentation](<https://kserve.github.io/website> for more information.
+Check the [official KServe Agent documentation](https://kserve.github.io/website) for more information.
 
 ## Contributing
 
