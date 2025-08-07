@@ -21,12 +21,12 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "3.3.8-3"
+        "version": "3.3.9-0"
     },
     "yq": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "4.46.1-0"
+        "version": "4.47.1-1"
     }
 }
