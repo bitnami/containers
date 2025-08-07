@@ -279,10 +279,8 @@ redis_configure_replication() {
         fi
         wait-for-port --host "$REDIS_MASTER_HOST" "$REDIS_MASTER_PORT_NUMBER"
         [[ -n "$REDIS_MASTER_PASSWORD" ]] && redis_conf_set masterauth "$REDIS_MASTER_PASSWORD"
-        # Starting with Redis 5, use 'replicaof' instead of 'slaveof'. Maintaining both for backward compatibility
-        local parameter="replicaof"
-        [[ $(redis_major_version) -lt 5 ]] && parameter="slaveof"
-        redis_conf_set "$parameter" "$REDIS_MASTER_HOST $REDIS_MASTER_PORT_NUMBER"
+        # Use 'replicaof' (Redis 5+)
+        redis_conf_set "replicaof" "$REDIS_MASTER_HOST $REDIS_MASTER_PORT_NUMBER"
     fi
 }
 
