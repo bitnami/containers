@@ -12,17 +12,17 @@ set -o pipefail
 # Load libraries
 . /opt/bitnami/scripts/libkeycloak.sh
 
-# Load keycloak environment variables
+# Load Keycloak environment variables
 . /opt/bitnami/scripts/keycloak-env.sh
 
-# Ensure keycloak environment variables are valid
+# Ensure Keycloak environment variables are valid
 keycloak_validate
 
 # Ensure 'daemon' user exists when running as 'root'
 am_i_root && ensure_user_exists "$KEYCLOAK_DAEMON_USER" --group "$KEYCLOAK_DAEMON_GROUP"
 
-# Ensure keycloak is initialized
+# Ensure Keycloak is initialized
 keycloak_initialize
 
-# keycloak init scripts
+# Keycloak init scripts
 keycloak_custom_init_scripts
