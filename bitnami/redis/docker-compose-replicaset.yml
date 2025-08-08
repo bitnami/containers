@@ -3,7 +3,7 @@
 
 services:
   redis-primary:
-    image: docker.io/bitnami/redis:8.0
+    image: docker.io/bitnami/redis:8.2
     ports:
       - '6379'
     environment:
@@ -14,7 +14,7 @@ services:
       - 'redis_data:/bitnami/redis/data'
 
   redis-secondary:
-    image: docker.io/bitnami/redis:8.0
+    image: docker.io/bitnami/redis:8.2
     ports:
       - '6379'
     depends_on:
