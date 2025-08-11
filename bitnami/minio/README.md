@@ -243,10 +243,8 @@ docker-compose up -d
 | `MINIO_BASE_DIR`     | MinIO installation directory.         | `${BITNAMI_ROOT_DIR}/minio`   |
 | `MINIO_BIN_DIR`      | MinIO directory for binaries.         | `${MINIO_BASE_DIR}/bin`       |
 | `MINIO_CERTS_DIR`    | MinIO directory for TLS certificates. | `/certs`                      |
-| `MINIO_LOGS_DIR`     | MinIO directory for log files.        | `${MINIO_BASE_DIR}/log`       |
 | `MINIO_TMP_DIR`      | MinIO directory for log files.        | `${MINIO_BASE_DIR}/tmp`       |
 | `MINIO_SECRETS_DIR`  | MinIO directory for credentials.      | `${MINIO_BASE_DIR}/secrets`   |
-| `MINIO_LOG_FILE`     | MinIO log file.                       | `${MINIO_LOGS_DIR}/minio.log` |
 | `MINIO_PID_FILE`     | MinIO PID file.                       | `${MINIO_TMP_DIR}/minio.pid`  |
 | `MINIO_DAEMON_USER`  | MinIO system user.                    | `minio`                       |
 | `MINIO_DAEMON_GROUP` | MinIO system group.                   | `minio`                       |
@@ -440,31 +438,6 @@ docker-compose logs minio
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
-
-### HTTP log trace
-
-To enable HTTP log trace, you can set the environment variable `MINIO_HTTP_TRACE` to redirect the logs to a specific file as detailed at [MinIO(R) documentation](https://docs.min.io/docs/minio-server-configuration-guide.html).
-
-When setting this environment variable to `/opt/bitnami/minio/log/minio.log`, the logs will be sent to the `stdout`.
-
-```console
-docker run --name minio \
-    --publish 9000:9000 \
-    --publish 9001:9001 \
-    --env MINIO_HTTP_TRACE=/opt/bitnami/minio/log/minio.log \
-    bitnami/minio:latest
-```
-
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/minio/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  minio:
-  ...
-    environment:
-      - MINIO_HTTP_TRACE=/opt/bitnami/minio/log/minio.log
-  ...
-```
 
 ## Maintenance
 
