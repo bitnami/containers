@@ -1,0 +1,14 @@
+{
+    "jre": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "21.0.8-12-0"
+    },
+    "wildfly": {
+        "arch": "amd64",
+        "distro": "debian-12",
+        "type": "NAMI",
+        "version": "37.0.0-0"
+    }
+}
