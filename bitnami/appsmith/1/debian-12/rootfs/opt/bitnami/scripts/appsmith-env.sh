@@ -81,6 +81,7 @@ export APPSMITH_DEFAULT_CONF_DIR="${APPSMITH_BASE_DIR}/conf.default"
 export APPSMITH_CONF_FILE="${APPSMITH_CONF_DIR}/docker.env"
 export APPSMITH_TMP_DIR="${APPSMITH_BASE_DIR}/tmp"
 export APPSMITH_PID_FILE="${APPSMITH_TMP_DIR}/appsmith.pid"
+export APPSMITH_GIT_ROOT="${APPSMITH_BASE_DIR}/git-storage"
 
 # Appsmith configuration parameters
 export ALLOW_EMPTY_PASSWORD="${ALLOW_EMPTY_PASSWORD:-no}"
