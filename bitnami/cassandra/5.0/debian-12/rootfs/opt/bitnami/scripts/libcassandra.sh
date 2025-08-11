@@ -797,7 +797,7 @@ cassandra_setup_common_ports() {
 
     if [[ "$DB_FLAVOR" = "cassandra" ]] || [[ "$(scylla_get_major_version)" -le 6 ]]; then
       if ! cassandra_is_file_external "${DB_MOUNTED_ENV_PATH}"; then
-          replace_in_file "${DB_ENV_FILE}" "JMX_PORT=.*" "JMX_PORT=$DB_JMX_PORT_NUMBER"
+          replace_in_file "${DB_ENV_FILE}" "JMX_PORT=.*" "JMX_PORT=\"$DB_JMX_PORT_NUMBER\""
       else
           debug "${DB_MOUNTED_ENV_PATH} mounted. Skipping JMX port configuration"
       fi
