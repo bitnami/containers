@@ -12,8 +12,11 @@ permissions: {}
 # This job won't trigger any additional event. All actions are performed with GITHUB_TOKEN
 jobs:
   stale:
+    # SCT modification to disable this job in our fork
+    if: false 
+
     runs-on: ubuntu-latest
-    if: ${{ github.repository_owner == 'bitnami' }}
+    # if: ${{ github.repository_owner == 'bitnami' }}
     permissions:
       issues: write
       pull-requests: write
