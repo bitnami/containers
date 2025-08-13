@@ -1,3 +1,9 @@
+# ⚠️ This repository is a fork; the below does not apply
+
+SCT has forked this repository from <https://github.com/bitnami/containers>. We leave the text below to keep as much of the upstream intact, but SCT makes no guarantees about process or approach, as this fork is intended for our use alone.
+
+____
+
 # Contributor Code of Conduct
 
 As contributors and maintainers of this project, we pledge to respect everyone who contributes by posting issues, updating documentation, submitting pull requests, providing feedback in comments, and any other activities.

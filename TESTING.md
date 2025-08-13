@@ -1,3 +1,9 @@
+# ⚠️ This repository is a fork; the below does not apply
+
+SCT has forked this repository from <https://github.com/bitnami/containers>. We leave the text below to keep as much of the upstream intact, but SCT makes no guarantees about process or approach, as this fork is intended for our use alone.
+
+____
+
 # Testing information
 
 At Bitnami, we are committed to ensuring the quality of the apps we deliver, and as such, tests play a fundamental role in the `bitnami/containers` repository. Bear in mind that every contribution to our containers is ultimately published to our container registries, where it is made available for the rest of the community to benefit from. Before this happens, different checks are required to succeed. More precisely, tests are run when a new contribution (regardless of its author) is made through a GitHub Pull Request.

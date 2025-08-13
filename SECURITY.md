@@ -1,3 +1,9 @@
+# ⚠️ This repository is a fork; the below does not apply
+
+SCT has forked this repository from <https://github.com/bitnami/containers>. We leave the text below to keep as much of the upstream intact, but SCT makes no guarantees about process or approach, as this fork is intended for our use alone.
+
+____
+
 # Security Release Process
 
 The community has adopted this security disclosure and response policy to ensure we responsibly handle critical issues.
