@@ -135,9 +135,8 @@ appsmith_conf_set() {
         # It exists, so replace the line
         replace_in_file "$APPSMITH_CONF_FILE" "$sanitized_pattern" "$entry"
     else
-        # The Appsmith configuration file includes all supported keys, but because of its format,
-        # we cannot append contents to the end.
-        warn "Could not set the Appsmith '${key}' configuration. Check that the file has not been modified externally."
+        # It doesn't exist, so append to the end of the file
+        cat >> "$APPSMITH_CONF_FILE" <<< "$entry"
     fi
 }
 
@@ -335,6 +334,7 @@ appsmith_initialize() {
                 appsmith_conf_set "APPSMITH_REDIS_URL" "redis://:${APPSMITH_REDIS_PASSWORD}@${APPSMITH_REDIS_HOST}:${APPSMITH_REDIS_PORT_NUMBER}"
                 appsmith_conf_set "APPSMITH_ENCRYPTION_PASSWORD" "$APPSMITH_ENCRYPTION_PASSWORD"
                 appsmith_conf_set "APPSMITH_ENCRYPTION_SALT" "$APPSMITH_ENCRYPTION_SALT"
+                appsmith_conf_set "APPSMITH_GIT_ROOT" "$APPSMITH_GIT_ROOT"
                 info "Ensuring Appsmith directories exist"
                 ensure_dir_exists "$APPSMITH_VOLUME_DIR"
                 info "Persisting Appsmith installation"
