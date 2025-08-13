@@ -8,7 +8,7 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-08-07T10:19:56Z" \
+      org.opencontainers.image.created="2025-08-13T13:23:40Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/cilium/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cilium" \
@@ -33,7 +33,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
       "llvm-18.1.8-2-linux-${OS_ARCH}-debian-12" \
       "gops-0.3.28-23-linux-${OS_ARCH}-debian-12" \
       "bpftool-7.6.0-0-linux-${OS_ARCH}-debian-12" \
-      "cilium-1.18.0-1-linux-${OS_ARCH}-debian-12" \
+      "cilium-1.18.0-2-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
