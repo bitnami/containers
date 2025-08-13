@@ -16,6 +16,9 @@ concurrency:
   group: card-movement-${{ github.event.issue.number }}
 jobs:
   call-comments-workflow:
-    if: ${{ github.repository_owner == 'bitnami' }}
+    # SCT modification to disable this job in our fork
+    if: false 
+
+    # if: ${{ github.repository_owner == 'bitnami' }}
     uses: bitnami/support/.github/workflows/comment-created.yml@main
     secrets: inherit

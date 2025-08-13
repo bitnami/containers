@@ -14,6 +14,9 @@ on:
 permissions: {}
 jobs:
   pr-info:
+    # SCT modification to disable this job in our fork
+    if: false 
+
     runs-on: ubuntu-latest
     permissions:
       pull-requests: read
@@ -24,7 +27,7 @@ jobs:
       review_state: ${{ steps.get-info.outputs.review_state }}
       labels: ${{ steps.get-info.outputs.labels }}
       resource_url: ${{ steps.get-info.outputs.resource_url }}
-    if: ${{ github.repository_owner == 'bitnami' && github.event.workflow_run.conclusion == 'success' }}
+    # if: ${{ github.repository_owner == 'bitnami' && github.event.workflow_run.conclusion == 'success' }}
     steps:
       - id: get-info
         env:
@@ -50,6 +53,9 @@ jobs:
           echo "labels=${labels}" >> $GITHUB_OUTPUT
           echo "resource_url=${resource_url}" >> $GITHUB_OUTPUT
   call-pr-review-comment:
+    # SCT modification to disable this job in our fork
+    if: false 
+
     uses: bitnami/support/.github/workflows/pr-review-comment.yml@main
     needs: pr-info
     permissions:
