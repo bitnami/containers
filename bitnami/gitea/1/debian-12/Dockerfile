@@ -8,13 +8,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-08-07T11:28:31Z" \
+      org.opencontainers.image.created="2025-08-13T18:33:52Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/gitea/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/gitea" \
       org.opencontainers.image.title="gitea" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.24.4"
+      org.opencontainers.image.version="1.24.5"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,10 +29,10 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "wait-for-port-1.0.9-2-linux-${OS_ARCH}-debian-12" \
-      "render-template-1.0.8-2-linux-${OS_ARCH}-debian-12" \
-      "ini-file-1.4.8-2-linux-${OS_ARCH}-debian-12" \
-      "gitea-1.24.4-1-linux-${OS_ARCH}-debian-12" \
+      "wait-for-port-1.0.10-0-linux-${OS_ARCH}-debian-12" \
+      "render-template-1.0.9-7-linux-${OS_ARCH}-debian-12" \
+      "ini-file-1.4.9-0-linux-${OS_ARCH}-debian-12" \
+      "gitea-1.24.5-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -50,7 +50,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/gitea/postunpack.sh
-ENV APP_VERSION="1.24.4" \
+ENV APP_VERSION="1.24.5" \
     BITNAMI_APP_NAME="gitea" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/gitea/bin:$PATH"
