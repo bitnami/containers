@@ -10,6 +10,9 @@ on:
 permissions: {}
 jobs:
   assign-label:
+    # SCT modification to disable this job in our fork
+    if: false 
+
     name: Assign label
     runs-on: ubuntu-latest
     permissions:
