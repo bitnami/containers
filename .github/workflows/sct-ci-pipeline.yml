@@ -1,0 +1,19 @@
+name: '[CI/CD] SCT CI Pipeline'
+on:
+  schedule: 
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions: {}
+   
+jobs:
+  buid-containers-we-care-about:
+    runs-on: ubuntu-latest
+    name: Build containers relevant to SCT
+    strategy:
+      max-parallel: 2
+      matrix:
+        container: ["bitnami/os-shell", "bitnami/postgresql", "bitnami/postgres-exporter", "bitnami/redis-cluster", "bitnami/redis-exporter", "bitnami/minio", "bitnami/minio-client", "bitnami/minio-object-browser"]
+    steps:
+      - name: Announce Container
+        run: echo "Building container ${{ matrix.container }}"
