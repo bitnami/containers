@@ -3,12 +3,12 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "0.3.28-23"
+        "version": "0.3.28-25"
     },
     "hubble-ui-backend": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "0.13.2-8"
+        "version": "0.13.2-9"
     }
 }
