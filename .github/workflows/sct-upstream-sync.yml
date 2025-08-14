@@ -1,0 +1,191 @@
+name: 'SCT Sync Upstream'
+
+on:
+  schedule:
+    # Run daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    # Allow manual triggering
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync-upstream:
+    runs-on: ubuntu-latest
+    name: Sync with upstream repository
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+      
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+      
+      - name: Add upstream remote
+        run: |
+          git remote add upstream https://github.com/bitnami/containers.git || true
+          git fetch upstream
+      
+      - name: Check for upstream changes
+        id: check-changes
+        run: |
+          # Get the latest commit from upstream main
+          UPSTREAM_SHA=$(git rev-parse upstream/main)
+          CURRENT_SHA=$(git rev-parse HEAD)
+          
+          echo "upstream-sha=$UPSTREAM_SHA" >> $GITHUB_OUTPUT
+          echo "current-sha=$CURRENT_SHA" >> $GITHUB_OUTPUT
+          
+          if [ "$UPSTREAM_SHA" = "$CURRENT_SHA" ]; then
+            echo "has-changes=false" >> $GITHUB_OUTPUT
+            echo "No new changes in upstream repository"
+          else
+            echo "has-changes=true" >> $GITHUB_OUTPUT
+            echo "New changes detected in upstream repository"
+          fi
+      
+      - name: Attempt merge
+        if: steps.check-changes.outputs.has-changes == 'true'
+        id: merge
+        run: |
+          echo "Attempting to merge upstream changes..."
+          
+          # Try to merge upstream/main into current branch
+          if git merge upstream/main --no-edit; then
+            echo "merge-success=true" >> $GITHUB_OUTPUT
+            echo "✅ Successfully merged upstream changes"
+            
+            # Get merge details for summary
+            MERGE_COMMITS=$(git log --oneline ${{ steps.check-changes.outputs.current-sha }}..${{ steps.check-changes.outputs.upstream-sha }} | wc -l)
+            echo "merge-commits=$MERGE_COMMITS" >> $GITHUB_OUTPUT
+            
+            # Create summary of changes
+            echo "## Upstream Sync Summary" >> $GITHUB_STEP_SUMMARY
+            echo "- **Status**: ✅ Success" >> $GITHUB_STEP_SUMMARY
+            echo "- **Commits merged**: $MERGE_COMMITS" >> $GITHUB_STEP_SUMMARY
+            echo "- **Upstream SHA**: ${{ steps.check-changes.outputs.upstream-sha }}" >> $GITHUB_STEP_SUMMARY
+            echo "- **Previous SHA**: ${{ steps.check-changes.outputs.current-sha }}" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "merge-success=false" >> $GITHUB_OUTPUT
+            echo "❌ Merge failed due to conflicts"
+            
+            # Reset to clean state
+            git merge --abort
+            
+            # Create failure summary
+            echo "## Upstream Sync Summary" >> $GITHUB_STEP_SUMMARY
+            echo "- **Status**: ❌ Failed" >> $GITHUB_STEP_SUMMARY
+            echo "- **Reason**: Merge conflicts detected" >> $GITHUB_STEP_SUMMARY
+            echo "- **Action required**: Manual intervention needed" >> $GITHUB_STEP_SUMMARY
+            echo "- **Upstream SHA**: ${{ steps.check-changes.outputs.upstream-sha }}" >> $GITHUB_STEP_SUMMARY
+            
+            exit 1
+          fi
+      
+      - name: Push changes
+        if: steps.check-changes.outputs.has-changes == 'true' && steps.merge.outputs.merge-success == 'true'
+        run: |
+          echo "Pushing merged changes to main branch..."
+          git push origin main
+          echo "✅ Successfully pushed changes to main branch"
+      
+      - name: Create issue on conflict
+        if: failure() && steps.merge.outputs.merge-success == 'false'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = 'Upstream sync failed due to merge conflicts';
+            const body = `## Upstream Sync Conflict
+            
+            The automated upstream sync failed due to merge conflicts.
+            
+            **Details:**
+            - Upstream SHA: \`${{ steps.check-changes.outputs.upstream-sha }}\`
+            - Current SHA: \`${{ steps.check-changes.outputs.current-sha }}\`
+            - Workflow run: [#${{ github.run_number }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            
+            **Action Required:**
+            Manual intervention is needed to resolve the conflicts and merge the upstream changes.
+            
+            **Steps to resolve:**
+            1. Clone the repository locally
+            2. Add upstream remote: \`git remote add upstream https://github.com/bitnami/containers.git\`
+            3. Fetch upstream: \`git fetch upstream\`
+            4. Merge upstream: \`git merge upstream/main\`
+            5. Resolve conflicts manually
+            6. Commit and push the changes
+            
+            This issue will be automatically closed when the next successful sync occurs.`;
+            
+            // Check if an issue already exists
+            const existingIssues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ['upstream-sync-conflict'],
+              state: 'open'
+            });
+            
+            if (existingIssues.data.length === 0) {
+              // Create new issue
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: title,
+                body: body,
+                labels: ['upstream-sync-conflict', 'automated']
+              });
+              console.log('Created new issue for upstream sync conflict');
+            } else {
+              // Update existing issue
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existingIssues.data[0].number,
+                body: `## New Conflict Detected\n\n${body}`
+              });
+              console.log('Updated existing issue with new conflict details');
+            }
+      
+      - name: Close resolved issues
+        if: steps.check-changes.outputs.has-changes == 'true' && steps.merge.outputs.merge-success == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Close any open upstream sync conflict issues
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ['upstream-sync-conflict'],
+              state: 'open'
+            });
+            
+            for (const issue of issues.data) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                state: 'closed'
+              });
+              
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: '✅ Upstream sync conflicts have been resolved. This issue is now closed.'
+              });
+            }
+      
+      - name: Summary
+        if: steps.check-changes.outputs.has-changes == 'false'
+        run: |
+          echo "## Upstream Sync Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- **Status**: ✅ Up to date" >> $GITHUB_STEP_SUMMARY
+          echo "- **Result**: No changes to sync from upstream" >> $GITHUB_STEP_SUMMARY
+          echo "- **Current SHA**: ${{ steps.check-changes.outputs.current-sha }}" >> $GITHUB_STEP_SUMMARY

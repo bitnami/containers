@@ -1,0 +1,110 @@
+name: 'SCT CI Pipeline'
+
+env:
+  REGISTRY: ghcr.io
+on:
+  schedule: 
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+    # Allow manual triggering
+  pull_request:
+    branches:
+      - main
+permissions:
+  contents: read
+  packages: write
+   
+jobs:
+  build-containers-we-care-about:
+    runs-on: ubuntu-latest
+    name: SCT Build
+    strategy:
+      max-parallel: 3
+      matrix:
+        container: ["os-shell", "postgresql", "postgres-exporter", "redis-cluster", "redis-exporter", "minio", "minio-client", "minio-object-browser"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Find Dockerfiles
+        id: find-dockerfiles
+        run: |
+          cd "${{ github.workspace }}/bitnami/${{ matrix.container }}"
+          
+          # Find all Dockerfile paths recursively
+          dockerfiles=$(find . -name "Dockerfile" -type f)
+          
+          if [ -z "$dockerfiles" ]; then
+            echo "No Dockerfiles found for ${{ matrix.container }}"
+            exit 1
+          fi
+          
+          echo "Found Dockerfiles:"
+          echo "$dockerfiles"
+          
+          # Save dockerfiles list to output for next step
+          echo "dockerfiles<<EOF" >> $GITHUB_OUTPUT
+          echo "$dockerfiles" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+      
+      - name: Check Existing Images and Build if Needed
+        run: |
+          cd "${{ github.workspace }}/bitnami/${{ matrix.container }}"
+          
+          dockerfiles="${{ steps.find-dockerfiles.outputs.dockerfiles }}"
+          
+          # Check each Dockerfile and build only if needed
+          for dockerfile in $dockerfiles; do
+            dockerfile_dir=$(dirname "$dockerfile")
+            echo "Processing Dockerfile: $dockerfile in directory: $dockerfile_dir"
+            
+            cd "${{ github.workspace }}/bitnami/${{ matrix.container }}/$dockerfile_dir"
+            
+            # Extract version from Dockerfile to check if it exists in registry
+            version=$(grep 'org.opencontainers.image.version=' Dockerfile | sed 's/.*org.opencontainers.image.version="\([^"]*\)".*/\1/')
+            
+            if [ -z "$version" ]; then
+              echo "Warning: Could not extract version from Dockerfile, using 'latest'"
+              version="latest"
+            fi
+            
+            echo "Found version: $version"
+            
+            # Check if image already exists in registry
+            registry_tag="${{ env.REGISTRY }}/${{ github.repository_owner }}/bitnami-${{ matrix.container }}:$version"
+            echo "Checking if $registry_tag already exists..."
+            
+            # Try to pull the image manifest (this is faster than pulling the full image)
+            if docker manifest inspect "$registry_tag" > /dev/null 2>&1; then
+              echo "✅ Image $registry_tag already exists in registry, skipping build"
+              continue
+            else
+              echo "🔨 Image $registry_tag not found, building..."
+            fi
+            
+            # Build the container with temporary tag
+            temp_tag="temp-bitnami-${{ matrix.container }}-$(basename "$dockerfile_dir")-$(date +%s)"
+            echo "Building with temporary tag: $temp_tag"
+            docker build -t "$temp_tag" .
+            echo "Build completed for $temp_tag"
+            
+            # Tag with proper version and registry tags
+            final_tag="bitnami-${{ matrix.container }}:$version"
+            echo "Tagging $temp_tag as $final_tag and $registry_tag"
+            docker tag "$temp_tag" "$final_tag"
+            docker tag "$temp_tag" "$registry_tag"
+            docker rmi "$temp_tag"
+            
+            echo "Successfully created $final_tag and $registry_tag"
+            
+            # Push to registry immediately after building
+            echo "Pushing $registry_tag to registry"
+            docker push "$registry_tag"
+            echo "Successfully pushed $registry_tag"
+          done
