@@ -8,13 +8,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-08-13T13:16:00Z" \
+      org.opencontainers.image.created="2025-08-15T17:30:34Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/contour/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/contour" \
       org.opencontainers.image.title="contour" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.32.0"
+      org.opencontainers.image.version="1.32.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,7 +29,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "contour-1.32.0-6-linux-${OS_ARCH}-debian-12" \
+      "contour-1.32.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -47,7 +47,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN ln -s /opt/bitnami/contour/bin/contour /bin/contour
 RUN uninstall_packages curl
 
-ENV APP_VERSION="1.32.0" \
+ENV APP_VERSION="1.32.1" \
     BITNAMI_APP_NAME="contour" \
     PATH="/opt/bitnami/contour/bin:$PATH"
 
