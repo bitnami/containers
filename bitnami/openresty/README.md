@@ -173,7 +173,7 @@ docker run --name openresty \
 
 #### Step 1: Prepare your certificate files
 
-In your local computer, create a folder called `certs` and put your certificates files. Make sure you rename both files to `server.crt` and `server.key` respectively:
+In your local computer, create a folder called `certs` and put your certificates files. Make sure you rename both files to `tls.crt` and `tls.key` respectively:
 
 ```console
 mkdir -p /path/to/openresty-persistence/certs
