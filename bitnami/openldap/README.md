@@ -235,7 +235,7 @@ Note: bitnami has some custom module pathing. Specifically the slapd module load
 
 Here is an example of loading the memberof overlay with an /entrypoint-initdb.d/ script
 
-The **memberOf** overlay is widely used in OpenLDAP to automatically populate the `memberOf` attribute on user entries based on group membership.  
+The **memberOf** overlay is widely used in OpenLDAP to automatically populate the `memberOf` attribute on user entries based on group membership.
 This short example demonstrates how to add the overlay during Bitnami OpenLDAP container bootstrap using `slapadd`, with correct LDIF formatting and troubleshooting tips.
 
 1. **Determine the next available module DN:**
@@ -257,7 +257,6 @@ objectClass: olcModuleList
 cn: module{1}
 olcModulePath: /opt/bitnami/openldap/libexec/openldap
 olcModuleLoad: memberof.so
-
 dn: olcOverlay=memberof,olcDatabase={2}mdb,cn=config
 objectClass: olcOverlayConfig
 objectClass: olcMemberOf
@@ -275,10 +274,8 @@ Finally a script should be placed or mounted to /docker-entrypoint-initdb.d/. No
 #!/bin/bash
 # Script to enable memberOf overlay in OpenLDAP
 set -e
-
 # Note: cn=module{1},cn=config assumes that the module will be loaded as the second module. cn=module{0} being the first.
 # Additionally, olcDatabase={2}mdb assumes that the database is the second one configured in OpenLDAP. Adjust as necessary.
-
 # Create a temporary LDIF file
 # ensure cn=module{N},cn=config and cn: module{N} match eachother and do not conflict with existing modules. Run `slapcat -F /opt/bitnami/openldap/etc/slapd.d -b cn=config | grep 'cn=module'` to check existing modules.
 cat > /tmp/memberof-overlay.ldif << 'EOF'
@@ -338,25 +335,21 @@ objectClass: dcObject
 objectClass: organization
 dc: your
 o: Your Organization
-
 # Organizational Units
 dn: ou=Users,dc=your,dc=example,dc=com
 objectClass: top
 objectClass: organizationalUnit
 ou: Users
-
 dn: ou=Groups,dc=your,dc=example,dc=com
 objectClass: top
 objectClass: organizationalUnit
 ou: Groups
-
 # Admin group
 dn: cn=some_admins,ou=Groups,dc=your,dc=example,dc=com
 objectClass: top
 objectClass: groupOfNames
 cn: some_admins
 description: An administrators group
-
 # Tester group
 dn: cn=testers,ou=Groups,dc=your,dc=example,dc=com
 objectClass: top
