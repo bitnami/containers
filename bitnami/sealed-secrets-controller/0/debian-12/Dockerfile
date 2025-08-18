@@ -17,7 +17,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "sealed-secrets-0.30.0-4-linux-${OS_ARCH}-debian-12" \
+      "sealed-secrets-0.31.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -41,18 +41,18 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-08-14T15:15:11Z" \
+      org.opencontainers.image.created="2025-08-18T07:46:49Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="sealed-secrets-controller" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="0.30.0"
+      org.opencontainers.image.version="0.31.0"
 
 COPY rootfs /
 COPY --from=builder /opt/bitnami/sealed-secrets/.spdx-sealed-secrets.spdx /opt/bitnami/sealed-secrets/.spdx-sealed-secrets.spdx
 COPY --from=builder /opt/bitnami/sealed-secrets/bin/controller /opt/bitnami/sealed-secrets/bin/controller
 COPY --from=builder /opt/bitnami/sealed-secrets/licenses /opt/bitnami/sealed-secrets/licenses
 
-ENV APP_VERSION="0.30.0" \
+ENV APP_VERSION="0.31.0" \
     BITNAMI_APP_NAME="sealed-secrets-controller" \
     PATH="/opt/bitnami/sealed-secrets/bin:$PATH"
 

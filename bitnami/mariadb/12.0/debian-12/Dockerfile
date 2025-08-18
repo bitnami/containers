@@ -8,13 +8,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-08-08T09:17:11Z" \
+      org.opencontainers.image.created="2025-08-18T12:02:22Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/mariadb-galera/README.md" \
-      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mariadb-galera" \
-      org.opencontainers.image.title="mariadb-galera" \
+      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/mariadb/README.md" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mariadb" \
+      org.opencontainers.image.title="mariadb" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="11.8.3"
+      org.opencontainers.image.version="12.0.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -24,13 +24,13 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl iproute2 ldap-utils libaio1 libaudit1 libcap-ng0 libcrypt1 libgcc-s1 libicu72 libldap-common liblzma5 libncurses6 libpam-ldapd libpam0g libssl3 libstdc++6 libtinfo6 libxml2 nslcd procps psmisc rsync socat zlib1g
+RUN install_packages ca-certificates curl libaio1 libaudit1 libcap-ng0 libcrypt1 libgcc-s1 libicu72 liblzma5 libncurses6 libpam0g libssl3 libstdc++6 libtinfo6 libxml2 procps psmisc zlib1g
 RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "ini-file-1.4.8-2-linux-${OS_ARCH}-debian-12" \
-      "mariadb-galera-11.8.3-0-linux-${OS_ARCH}-debian-12" \
+      "ini-file-1.4.9-0-linux-${OS_ARCH}-debian-12" \
+      "mariadb-12.0.2-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -49,13 +49,13 @@ RUN mkdir /docker-entrypoint-initdb.d
 RUN uninstall_packages curl
 
 COPY rootfs /
-RUN /opt/bitnami/scripts/mariadb-galera/postunpack.sh
-ENV APP_VERSION="11.8.3" \
-    BITNAMI_APP_NAME="mariadb-galera" \
+RUN /opt/bitnami/scripts/mariadb/postunpack.sh
+ENV APP_VERSION="12.0.2" \
+    BITNAMI_APP_NAME="mariadb" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/common/sbin:/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
 
-EXPOSE 3306 4444 4567 4568
+EXPOSE 3306
 
 USER 1001
-ENTRYPOINT [ "/opt/bitnami/scripts/mariadb-galera/entrypoint.sh" ]
-CMD [ "/opt/bitnami/scripts/mariadb-galera/run.sh" ]
+ENTRYPOINT [ "/opt/bitnami/scripts/mariadb/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/mariadb/run.sh" ]

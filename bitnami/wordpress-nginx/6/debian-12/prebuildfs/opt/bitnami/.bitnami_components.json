@@ -3,13 +3,13 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "11.8.2-0"
+        "version": "12.0.2-0"
     },
     "nginx": {
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.29.0-0"
+        "version": "1.29.1-0"
     },
     "php": {
         "arch": "amd64",
@@ -21,7 +21,7 @@
         "arch": "amd64",
         "distro": "debian-12",
         "type": "NAMI",
-        "version": "1.0.8-2"
+        "version": "1.0.9-155"
     },
     "wordpress-nginx": {
         "arch": "amd64",
