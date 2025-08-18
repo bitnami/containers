@@ -72,18 +72,52 @@ jobs:
             # Extract version from Dockerfile
             version=$(grep 'org.opencontainers.image.version=' Dockerfile | sed 's/.*org.opencontainers.image.version="\([^"]*\)".*/\1/')
             
+            # Extract OS flavour from ENV OS_FLAVOUR line (preferred method)
+            os_flavour=$(grep '^ENV.*OS_FLAVOUR=' Dockerfile | sed 's/.*OS_FLAVOUR="\([^"]*\)".*/\1/' | head -1)
+            
+            # Extract image revision from IMAGE_REVISION line (can be ENV or standalone)
+            image_revision=$(grep 'IMAGE_REVISION=' Dockerfile | sed 's/.*IMAGE_REVISION="\([^"]*\)".*/\1/' | head -1)
+            
             if [ -z "$version" ]; then
               echo "Warning: Could not extract version from Dockerfile, using 'latest'"
               version="latest"
             fi
             
+            # Debug: Show what we extracted
             echo "Found version: $version"
+            echo "Found OS flavour: $os_flavour"
+            echo "Found image revision: $image_revision"
+            
+            # Build the full tag in Bitnami format: version-os_flavour-rRevision
+            full_tag="$version"
+            
+            # Add OS flavour
+            if [ -n "$os_flavour" ]; then
+              full_tag="${full_tag}-${os_flavour}"
+            else
+              # Fallback to extracting from directory path
+              distro=$(echo "$dockerfile_dir" | grep -o '[a-z]*-[0-9]*' | head -1 || echo "")
+              if [ -n "$distro" ]; then
+                full_tag="${full_tag}-${distro}"
+                os_flavour="$distro"
+              fi
+            fi
+            
+            # Add revision with "r" prefix
+            if [ -n "$image_revision" ]; then
+              full_tag="${full_tag}-r${image_revision}"
+              echo "Added revision: r${image_revision}"
+            else
+              echo "Warning: No IMAGE_REVISION found in Dockerfile"
+            fi
+            
+            echo "Final full tag: $full_tag"
             
             # Store build info for later steps
             if [ -n "$build_info" ]; then
               build_info="${build_info}|"
             fi
-            build_info="${build_info}${dockerfile_dir}:${version}"
+            build_info="${build_info}${dockerfile_dir}:${full_tag}:${version}"
           done
           
           echo "build-info=$build_info" >> $GITHUB_OUTPUT
@@ -101,9 +135,10 @@ jobs:
           for build in "${BUILDS[@]}"; do
             IFS=':' read -ra BUILD_PARTS <<< "$build"
             dockerfile_dir="${BUILD_PARTS[0]}"
-            version="${BUILD_PARTS[1]}"
+            full_tag="${BUILD_PARTS[1]}"
+            base_version="${BUILD_PARTS[2]}"
             
-            registry_tag="${{ env.REGISTRY }}/${{ github.repository_owner }}/bitnami-${{ matrix.container }}:$version"
+            registry_tag="${{ env.REGISTRY }}/${{ github.repository_owner }}/bitnami-${{ matrix.container }}:$full_tag"
             echo "Checking if $registry_tag already exists..."
             
             if docker manifest inspect "$registry_tag" > /dev/null 2>&1; then
@@ -113,7 +148,7 @@ jobs:
               if [ -n "$images_to_build" ]; then
                 images_to_build="${images_to_build}|"
               fi
-              images_to_build="${images_to_build}${dockerfile_dir}:${version}"
+              images_to_build="${images_to_build}${dockerfile_dir}:${full_tag}:${base_version}"
             fi
           done
           
@@ -131,9 +166,10 @@ jobs:
           for build in "${BUILDS[@]}"; do
             IFS=':' read -ra BUILD_PARTS <<< "$build"
             dockerfile_dir="${BUILD_PARTS[0]}"
-            version="${BUILD_PARTS[1]}"
+            full_tag="${BUILD_PARTS[1]}"
+            base_version="${BUILD_PARTS[2]}"
             
-            echo "Building image for $dockerfile_dir with version $version"
+            echo "Building image for $dockerfile_dir with full tag $full_tag"
             cd "${{ github.workspace }}/bitnami/${{ matrix.container }}/$dockerfile_dir"
             
             # Build the container with temporary tag
@@ -142,16 +178,25 @@ jobs:
             docker build -t "$temp_tag" .
             echo "Build completed for $temp_tag"
             
-            # Tag with proper version and registry tags
-            final_tag="bitnami-${{ matrix.container }}:$version"
-            registry_tag="${{ env.REGISTRY }}/${{ github.repository_owner }}/bitnami-${{ matrix.container }}:$version"
+            # Tag with both full tag and base version, plus registry tags
+            final_tag_full="bitnami-${{ matrix.container }}:$full_tag"
+            final_tag_base="bitnami-${{ matrix.container }}:$base_version"
+            registry_tag_full="${{ env.REGISTRY }}/${{ github.repository_owner }}/bitnami-${{ matrix.container }}:$full_tag"
+            registry_tag_base="${{ env.REGISTRY }}/${{ github.repository_owner }}/bitnami-${{ matrix.container }}:$base_version"
             
-            echo "Tagging $temp_tag as $final_tag and $registry_tag"
-            docker tag "$temp_tag" "$final_tag"
-            docker tag "$temp_tag" "$registry_tag"
+            echo "Tagging $temp_tag with multiple tags:"
+            echo "  - $final_tag_full"
+            echo "  - $final_tag_base"
+            echo "  - $registry_tag_full"
+            echo "  - $registry_tag_base"
+            
+            docker tag "$temp_tag" "$final_tag_full"
+            docker tag "$temp_tag" "$final_tag_base"
+            docker tag "$temp_tag" "$registry_tag_full"
+            docker tag "$temp_tag" "$registry_tag_base"
             docker rmi "$temp_tag"
             
-            echo "Successfully created $final_tag and $registry_tag"
+            echo "Successfully created all tags for $dockerfile_dir"
           done
 
       - name: Push Images to Registry
@@ -165,12 +210,19 @@ jobs:
           for build in "${BUILDS[@]}"; do
             IFS=':' read -ra BUILD_PARTS <<< "$build"
             dockerfile_dir="${BUILD_PARTS[0]}"
-            version="${BUILD_PARTS[1]}"
+            full_tag="${BUILD_PARTS[1]}"
+            base_version="${BUILD_PARTS[2]}"
             
-            registry_tag="${{ env.REGISTRY }}/${{ github.repository_owner }}/bitnami-${{ matrix.container }}:$version"
-            echo "Pushing $registry_tag to registry"
-            docker push "$registry_tag"
-            echo "Successfully pushed $registry_tag"
+            registry_tag_full="${{ env.REGISTRY }}/${{ github.repository_owner }}/bitnami-${{ matrix.container }}:$full_tag"
+            registry_tag_base="${{ env.REGISTRY }}/${{ github.repository_owner }}/bitnami-${{ matrix.container }}:$base_version"
+            
+            echo "Pushing $registry_tag_full to registry"
+            docker push "$registry_tag_full"
+            echo "Successfully pushed $registry_tag_full"
+            
+            echo "Pushing $registry_tag_base to registry"
+            docker push "$registry_tag_base"
+            echo "Successfully pushed $registry_tag_base"
           done
 
       - name: Skip Push (Not Main Branch)
@@ -180,11 +232,18 @@ jobs:
           echo "Images built but not pushed:"
           
           images_to_build="${{ steps.check-images.outputs.images-to-build }}"
+          
           IFS='|' read -ra BUILDS <<< "$images_to_build"
           for build in "${BUILDS[@]}"; do
             IFS=':' read -ra BUILD_PARTS <<< "$build"
             dockerfile_dir="${BUILD_PARTS[0]}"
-            version="${BUILD_PARTS[1]}"
-            registry_tag="${{ env.REGISTRY }}/${{ github.repository_owner }}/bitnami-${{ matrix.container }}:$version"
-            echo "  - $registry_tag"
+            full_tag="${BUILD_PARTS[1]}"
+            base_version="${BUILD_PARTS[2]}"
+            
+            registry_tag_full="${{ env.REGISTRY }}/${{ github.repository_owner }}/bitnami-${{ matrix.container }}:$full_tag"
+            registry_tag_base="${{ env.REGISTRY }}/${{ github.repository_owner }}/bitnami-${{ matrix.container }}:$base_version"
+            
+            echo "  - Full tag: $registry_tag_full"
+            echo "  - Base tag: $registry_tag_base"
+            echo ""
           done
