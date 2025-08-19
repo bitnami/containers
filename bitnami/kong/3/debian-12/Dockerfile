@@ -8,7 +8,7 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-08-13T19:12:45Z" \
+      org.opencontainers.image.created="2025-08-19T18:18:07Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/kong/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kong" \
@@ -49,6 +49,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/kong/postunpack.sh
 ENV APP_VERSION="3.9.1" \
     BITNAMI_APP_NAME="kong" \
+    IMAGE_REVISION="9" \
     PATH="/opt/bitnami/kong/bin:/opt/bitnami/kong/luarocks/bin:/opt/bitnami/kong/openresty/bin:/opt/bitnami/kong/openresty/luajit/bin:/opt/bitnami/kong/openresty/nginx/sbin:$PATH"
 
 EXPOSE 8000 8001 8443 8444
