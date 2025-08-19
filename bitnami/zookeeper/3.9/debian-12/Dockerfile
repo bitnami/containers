@@ -8,7 +8,7 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-08-07T21:55:18Z" \
+      org.opencontainers.image.created="2025-08-19T18:54:13Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/zookeeper/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/zookeeper" \
@@ -30,7 +30,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "wait-for-port-1.0.9-2-linux-${OS_ARCH}-debian-12" \
+      "wait-for-port-1.0.10-0-linux-${OS_ARCH}-debian-12" \
       "jre-11.0.28-12-0-linux-${OS_ARCH}-debian-12" \
       "zookeeper-3.9.3-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
@@ -53,7 +53,8 @@ RUN ln -s /opt/bitnami/scripts/zookeeper/run.sh /run.sh
 COPY rootfs /
 RUN /opt/bitnami/scripts/zookeeper/postunpack.sh
 ENV APP_VERSION="3.9.3" \
-    BITNAMI_APP_NAME="zookeeper"
+    BITNAMI_APP_NAME="zookeeper" \
+    IMAGE_REVISION="22"
 
 EXPOSE 2181 2888 3888 8080
 
