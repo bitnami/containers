@@ -41,7 +41,7 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-08-14T14:17:47Z" \
+      org.opencontainers.image.created="2025-08-19T08:08:51Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="minio-object-browser" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -54,6 +54,7 @@ COPY --from=builder /opt/bitnami/minio-object-browser/licenses /opt/bitnami/mini
 
 ENV APP_VERSION="2.0.2" \
     BITNAMI_APP_NAME="minio-object-browser" \
+    IMAGE_REVISION="4" \
     PATH="/opt/bitnami/minio-object-browser/bin:$PATH"
 
 EXPOSE 9090
