@@ -15,6 +15,27 @@
 . /opt/bitnami/scripts/libnet.sh
 
 ########################
+# Execute repmgr command and print the output
+# Globals:
+#   REPMGR_*
+#   POSTGRESQL_DAEMON_USER
+# Arguments:
+#   $@ - Additional arguments to pass to the repmgr command
+# Returns:
+#   None
+########################
+repmgr_execute_print_output() {
+    local repmgr_cmd=()
+    if am_i_root; then
+        repmgr_cmd=("run_as_user" "$POSTGRESQL_DAEMON_USER" "${REPMGR_BIN_DIR}/repmgr")
+    else
+        repmgr_cmd=("${REPMGR_BIN_DIR}/repmgr")
+    fi
+
+    "${repmgr_cmd[@]}" "$@" 2>&1
+}
+
+########################
 # Execute repmgr command
 # Globals:
 #   REPMGR_*
@@ -25,15 +46,7 @@
 #   None
 ########################
 repmgr_execute() {
-    local repmgr_cmd=()
-
-    if am_i_root; then
-        repmgr_cmd=("run_as_user" "$POSTGRESQL_DAEMON_USER" "${REPMGR_BIN_DIR}/repmgr")
-    else
-        repmgr_cmd=("${REPMGR_BIN_DIR}/repmgr")
-    fi
-
-    debug_execute "${repmgr_cmd[@]}" "$@"
+    debug_execute "repmgr_execute_print_output" "$@"
 }
 
 ########################
@@ -181,7 +194,7 @@ repmgr_get_upstream_node() {
         info "Querying all partner nodes for common upstream node..."
         read -r -a nodes <<<"$(tr ',;' ' ' <<<"${REPMGR_PARTNER_NODES}")"
         for node in "${nodes[@]}"; do
-            # intentionally accept inncorect address (without [schema:]// )
+            # intentionally accept incorrect address (without [schema:]// )
             [[ "$node" =~ ^(([^:/?#]+):)?// ]] || node="tcp://${node}"
             host="$(parse_uri "$node" 'host')"
             port="$(parse_uri "$node" 'port')"
@@ -925,4 +938,32 @@ repmgr_initialize() {
         repmgr_unregister_witness
         repmgr_register_witness
     fi
+}
+
+########################
+# Checks repmgr status trying to detect split-brain scenarios
+# Globals:
+#   REPMGR_*
+# Arguments:
+#   $1 - property
+#   $2 - value
+#   $3 - Path to configuration file (default: $REPMGR_CONF_FILE)
+# Returns:
+#   None
+#########################
+repmgr_check_status() {
+    local -r flags=("-f" "$REPMGR_CONF_FILE")
+
+    repmgr_role=$(repmgr_execute_print_output "${flags[@]}" node check --role --nagios | awk '{print $NF}')
+    if [[ "$repmgr_role" = "primary" ]]; then
+        # Split-brain case: this node considers himself a primary but
+        # there's another primary node in the cluster
+        repmgr_status=$(repmgr_execute_print_output "${flags[@]}" daemon status)
+        if grep -q "registered as standby but running as primary" <<< "$repmgr_status"; then
+            echo "inconsistent repmgr status"
+            return 1
+        fi
+    fi
+
+    return 0
 }
