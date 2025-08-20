@@ -752,7 +752,6 @@ elasticsearch_initialize() {
         is_boolean_yes "$DB_LOCK_ALL_MEMORY" && elasticsearch_conf_set bootstrap.memory_lock "true"
         elasticsearch_cluster_configuration
         elasticsearch_configure_node_roles
-
         if [[ "$DB_FLAVOR" = "opensearch" ]]; then
             if is_boolean_yes "$DB_ENABLE_SECURITY"; then
                 info "Configuring ${DB_FLAVOR^} security NODES_DN and ADMIN_DN"
@@ -769,7 +768,6 @@ elasticsearch_initialize() {
         if [[ "$DB_FLAVOR" = "opensearch" ]]; then
             if is_boolean_yes "$DB_ENABLE_SECURITY"; then
                 info "Configuring ${DB_FLAVOR^} security plugin"
-
                 is_boolean_yes "$DB_ENABLE_REST_TLS" && opensearch_http_tls_configuration
                 ! is_boolean_yes "$DB_SKIP_TRANSPORT_TLS" && opensearch_transport_tls_configuration
 
