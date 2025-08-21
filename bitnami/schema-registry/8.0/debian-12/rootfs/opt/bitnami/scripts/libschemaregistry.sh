@@ -340,6 +340,8 @@ schema_registry_initialize() {
             [[ -n "$SCHEMA_REGISTRY_CLIENT_AUTHENTICATION" ]] && schema_registry_conf_set "ssl.client.authentication" "$SCHEMA_REGISTRY_CLIENT_AUTHENTICATION"
         fi
 
+        [[ -n "$SCHEMA_REGISTRY_AVRO_COMPATIBILY_LEVEL" ]] && export SCHEMA_REGISTRY_CFG_SCHEMA_COMPATIBILITY_LEVEL="${SCHEMA_REGISTRY_CFG_SCHEMA_COMPATIBILITY_LEVEL:-"${SCHEMA_REGISTRY_AVRO_COMPATIBILY_LEVEL}"}"
+        [[ -n "$SCHEMA_REGISTRY_DEBUG" ]] && export SCHEMA_REGISTRY_CFG_DEBUG="${SCHEMA_REGISTRY_CFG_DEBUG:-"${SCHEMA_REGISTRY_DEBUG}"}"
         # Configure Schema registry using SCHEMA_REGISTRY_CFG_* enviroment variables if provided
         schema_registry_setup_from_environment_variables
     fi
