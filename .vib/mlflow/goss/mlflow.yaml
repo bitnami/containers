@@ -12,4 +12,5 @@ command:
     timeout: 30000
     exit-status: 1
     stderr:
-      - "Listening at"
+      - "running on"
+      - "Application startup complete"
