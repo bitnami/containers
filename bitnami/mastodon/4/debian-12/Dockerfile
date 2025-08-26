@@ -8,7 +8,7 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-08-19T18:18:58Z" \
+      org.opencontainers.image.created="2025-08-26T12:17:07Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/mastodon/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mastodon" \
@@ -55,9 +55,9 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/mastodon/postunpack.sh
 ENV APP_VERSION="4.4.3" \
     BITNAMI_APP_NAME="mastodon" \
-    IMAGE_REVISION="10" \
+    IMAGE_REVISION="11" \
     LD_LIBRARY_PATH="/opt/bitnami/common/lib:$LD_LIBRARY_PATH" \
-    PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/ruby/bin:/opt/bitnami/redis/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/mastodon/bin:/opt/bitnami/common/bin:$PATH"
+    PATH="/opt/bitnami/mastodon/bin:/opt/bitnami/node/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/python/bin:/opt/bitnami/redis/bin:/opt/bitnami/ruby/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 3000
 
