@@ -7,9 +7,8 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
-LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
-      org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-08-07T20:34:23Z" \
+LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
+      org.opencontainers.image.created="2025-08-28T21:54:46Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/spark/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/spark" \
@@ -31,9 +30,9 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "python-3.12.11-8-linux-${OS_ARCH}-debian-12" \
+      "python-3.12.11-9-linux-${OS_ARCH}-debian-12" \
       "jre-17.0.16-12-0-linux-${OS_ARCH}-debian-12" \
-      "spark-4.0.0-1-linux-${OS_ARCH}-debian-12" \
+      "spark-4.0.0-2-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -56,6 +55,7 @@ RUN /opt/bitnami/scripts/spark/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="4.0.0" \
     BITNAMI_APP_NAME="spark" \
+    IMAGE_REVISION="21" \
     JAVA_HOME="/opt/bitnami/java" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib:/opt/bitnami/spark/venv/lib/python3.12/site-packages/numpy.libs:$LD_LIBRARY_PATH" \
     LIBNSS_WRAPPER_PATH="/opt/bitnami/common/lib/libnss_wrapper.so" \
