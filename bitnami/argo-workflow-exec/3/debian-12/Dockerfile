@@ -6,9 +6,8 @@ FROM docker.io/bitnami/minideb:bookworm
 ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
-LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
-      org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-08-13T17:11:38Z" \
+LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
+      org.opencontainers.image.created="2025-08-28T07:20:28Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/argo-workflow-exec/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/argo-workflow-exec" \
@@ -29,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "yq-4.47.1-2-linux-${OS_ARCH}-debian-12" \
-      "kubectl-1.33.3-2-linux-${OS_ARCH}-debian-12" \
+      "kubectl-1.34.0-0-linux-${OS_ARCH}-debian-12" \
       "argo-workflow-exec-3.7.1-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -50,6 +49,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/argo-workflow-exec/postunpack.sh
 ENV APP_VERSION="3.7.1" \
     BITNAMI_APP_NAME="argo-workflow-exec" \
+    IMAGE_REVISION="2" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/kubectl/bin:/opt/bitnami/argo-workflow-exec/bin:/opt/bitnami/argo-workflow-exec/hack:$PATH"
 
 USER 1001
