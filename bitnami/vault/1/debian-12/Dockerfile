@@ -6,15 +6,14 @@ FROM docker.io/bitnami/minideb:bookworm
 ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
-LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
-      org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-08-13T18:07:07Z" \
+LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
+      org.opencontainers.image.created="2025-08-28T20:10:44Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/vault/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/vault" \
       org.opencontainers.image.title="vault" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.20.2"
+      org.opencontainers.image.version="1.20.3"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "vault-1.20.2-2-linux-${OS_ARCH}-debian-12" \
+      "vault-1.20.3-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -45,8 +44,9 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN useradd -r -u 1001 -g root vault
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
-ENV APP_VERSION="1.20.2" \
+ENV APP_VERSION="1.20.3" \
     BITNAMI_APP_NAME="vault" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/vault/bin:$PATH"
 
 USER 1001
