@@ -722,15 +722,22 @@ elasticsearch_initialize() {
         is_boolean_yes "$DB_LOCK_ALL_MEMORY" && elasticsearch_conf_set bootstrap.memory_lock "true"
         elasticsearch_cluster_configuration
         elasticsearch_configure_node_roles
-        elasticsearch_custom_configuration
         if [[ "$DB_FLAVOR" = "opensearch" ]]; then
             if is_boolean_yes "$DB_ENABLE_SECURITY"; then
-                info "Configuring ${DB_FLAVOR^} security plugin"
+                info "Configuring ${DB_FLAVOR^} security NODES_DN and ADMIN_DN"
                 read -r -a nodes_dn <<<"$(tr ';' ' ' <<<"$OPENSEARCH_SECURITY_NODES_DN")"
                 read -r -a admin_dn <<<"$(tr ';' ' ' <<<"$OPENSEARCH_SECURITY_ADMIN_DN")"
                 elasticsearch_conf_set plugins.security.nodes_dn "${nodes_dn[@]}"
                 elasticsearch_conf_set plugins.security.authcz.admin_dn "${admin_dn[@]}"
+            fi
+        fi
 
+        # Moved here to be able to overwrite nodes_dn and admin_dn from custom configuration
+        elasticsearch_custom_configuration
+
+        if [[ "$DB_FLAVOR" = "opensearch" ]]; then
+            if is_boolean_yes "$DB_ENABLE_SECURITY"; then
+                info "Configuring ${DB_FLAVOR^} security plugin"
                 is_boolean_yes "$DB_ENABLE_REST_TLS" && opensearch_http_tls_configuration
                 ! is_boolean_yes "$DB_SKIP_TRANSPORT_TLS" && opensearch_transport_tls_configuration
 
