@@ -6,9 +6,8 @@ FROM docker.io/bitnami/minideb:bookworm
 ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
-LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
-      org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-08-21T01:03:02Z" \
+LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
+      org.opencontainers.image.created="2025-08-28T06:18:41Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/airflow/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/airflow" \
@@ -62,7 +61,7 @@ RUN /opt/bitnami/scripts/locales/generate-locales.sh
 ENV AIRFLOW_HOME="/opt/bitnami/airflow" \
     APP_VERSION="3.0.5" \
     BITNAMI_APP_NAME="airflow" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     LD_LIBRARY_PATH="/opt/bitnami/airflow/venv/lib/python3.12/site-packages/numpy.libs:/opt/bitnami/python/lib:$LD_LIBRARY_PATH" \
@@ -70,7 +69,7 @@ ENV AIRFLOW_HOME="/opt/bitnami/airflow" \
     LNAME="airflow" \
     NSS_WRAPPER_GROUP="/opt/bitnami/airflow/nss-wrapper/nss_group" \
     NSS_WRAPPER_PASSWD="/opt/bitnami/airflow/nss-wrapper/nss_passwd" \
-    PATH="/opt/bitnami/common/bin:/opt/bitnami/airflow/venv/bin:/opt/bitnami/python/bin:$PATH"
+    PATH="/opt/bitnami/airflow/venv/bin:/opt/bitnami/common/bin:/opt/bitnami/python/bin:$PATH"
 
 EXPOSE 8080 8125 8793 8794
 

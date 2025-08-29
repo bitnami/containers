@@ -5,20 +5,6 @@ file:
   /opt/bitnami/sonarqube/bin/linux-x86-64/sonar.sh:
     exists: true
     filetype: file
-    contents:
-    {{ if regexMatch "^8.+" .Env.APP_VERSION }}
-      - "PIDDIR=\"../../pids\""
-    {{ else if regexMatch "^9.+" .Env.APP_VERSION }}
-      - "PIDFILE=\"/opt/bitnami/sonarqube/pids/$APP_NAME.pid\""
-    {{ end }}
-  # Test specific for branch@8
-  {{ if regexMatch "^8.+" .Env.APP_VERSION }}
-  /opt/bitnami/sonarqube/conf/wrapper.conf:
-    exists: true
-    filetype: file
-    contents:
-      - "wrapper.logfile.rollmode=NONE"
-  {{ end }}
 group:
   sonarqube:
     exists: true
