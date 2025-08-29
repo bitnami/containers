@@ -1,8 +1,0 @@
-{
-    "nginx-ingress-controller": {
-        "arch": "amd64",
-        "distro": "debian-12",
-        "type": "NAMI",
-        "version": "1.13.1-1"
-    }
-}
