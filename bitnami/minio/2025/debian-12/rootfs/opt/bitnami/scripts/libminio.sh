@@ -286,13 +286,6 @@ minio_validate() {
             warn "Distributed mode is not enabled. The nodes set at the environment variable MINIO_DISTRIBUTED_NODES will be ignored."
         fi
     fi
-    if [[ -n "${MINIO_HTTP_TRACE:-}" ]]; then
-        if [[ -w "$MINIO_HTTP_TRACE" ]]; then
-            info "HTTP log trace enabled. Find the HTTP logs at: $MINIO_HTTP_TRACE"
-        else
-            print_validation_error "The HTTP log file specified at the environment variable MINIO_HTTP_TRACE is not writtable by current user \"$(id -u)\""
-        fi
-    fi
     shopt -s nocasematch
     if ! is_dir_empty "${MINIO_CERTS_DIR}" && [[ "${MINIO_SCHEME}" == "http" ]] && [[ "${MINIO_SERVER_URL}" == "http://"* ]]; then
         warn "Certificates provided but 'http' scheme in use. Please set MINIO_SCHEME and/or MINIO_SERVER_URL variables"
