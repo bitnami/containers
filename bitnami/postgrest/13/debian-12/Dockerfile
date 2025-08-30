@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-08-28T11:12:56Z" \
+      org.opencontainers.image.created="2025-08-30T20:57:34Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/postgrest/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/postgrest" \
       org.opencontainers.image.title="postgrest" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="13.0.5"
+      org.opencontainers.image.version="13.0.6"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "postgrest-13.0.5-0-linux-${OS_ARCH}-debian-12" \
+      "postgrest-13.0.6-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -45,7 +45,7 @@ RUN useradd -r -u 1001 -g root postgrest
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN uninstall_packages curl
 
-ENV APP_VERSION="13.0.5" \
+ENV APP_VERSION="13.0.6" \
     BITNAMI_APP_NAME="postgrest" \
     IMAGE_REVISION="0" \
     PATH="/opt/bitnami/postgrest/bin:$PATH"
