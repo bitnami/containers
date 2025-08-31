@@ -1,0 +1,262 @@
+name: Docker
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  REGISTRY: ghcr.io
+
+concurrency:
+  group: docker-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  discover:
+    name: Discover build matrix
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      any: ${{ steps.set-matrix.outputs.any }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Compute candidate contexts
+        id: candidates
+        shell: bash
+        run: |
+          # Build records: {"app","os","context","version"}; version read from Dockerfile label
+          mapfile -t files < <(find bitnami -type f -name Dockerfile | sort)
+          for f in "${files[@]}"; do
+            ctx="$(dirname "$f")"
+            app="$(echo "$ctx" | awk -F/ '{print $2}')"
+            os="$( echo "$ctx" | awk -F/ '{print $4}')"
+            ver="$(grep -Eo 'org.opencontainers.image.version[[:space:]]*=[[:space:]]*\"?[0-9]+\.[0-9]+\.[0-9]+\"?' "$f" \
+                    | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')" || ver=""
+
+            if [[ -z "$ver" ]]; then
+              ver="$(grep -Eo 'org.opencontainers.image.version[[:space:]]*=[[:space:]]*\"?[0-9]+\"?' "$f" \
+                    | grep -Eo '[0-9]+')" || ver=""
+            fi
+
+            if [[ -z "$ver" ]]; then
+              echo "::warning::No version label in $f; skipping"
+              continue
+            fi
+
+            jq -nc --arg app "$app" --arg os "$os" --arg ctx "$ctx" --arg ver "$ver" \
+              '{app:$app, os:$os, context:$ctx, version:$ver}' >> /tmp/all.json
+          done
+          
+          jq -cs '.' /tmp/all.json > /tmp/all_array.json
+          echo "all=$(cat /tmp/all_array.json)" >> "$GITHUB_OUTPUT"
+
+      - name: Compute changed contexts (non-cron)
+        id: changed
+        if: github.event_name != 'schedule'
+        shell: bash
+        run: |
+          # Determine diff range:
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            base_sha="${{ github.event.pull_request.base.sha }}"
+            head_sha="${{ github.event.pull_request.head.sha }}"
+          else
+            # push to main: compare with previous commit
+            base_sha="${{ github.event.before }}"
+            head_sha="${{ github.sha }}"
+          fi
+
+          # Get changed files and map to contexts under bitnami/*/*/*
+          changed_files="$(git diff --name-only "$base_sha" "$head_sha")"
+
+          # Build a set of candidate contexts
+          all='${{ steps.candidates.outputs.all }}'
+          all_with_context="$(
+            jq '(
+              INDEX(.context)
+            )' <<<"$all"
+          )"
+
+          changed_contexts="$(
+            awk -F/ '/^bitnami\// && NF>=4 { print $1"/"$2"/"$3"/"$4 }' <<<"$changed_files" \
+              | sort -u \
+              | jq -R -s --argjson dict "$all_with_context" '
+                  split("\n")
+                  | map(select(length>0))
+                  | map($dict[.] // empty)   # fetch each object; drop non-matches
+                '
+          )"
+
+          echo "changed=$changed_contexts" >> $GITHUB_OUTPUT
+      
+      - name: Compute tags
+        id: tags
+        shell: bash
+        run: |
+          all='${{ steps.candidates.outputs.all }}'
+          annotated="$(
+            jq 'map(
+              (.version
+                | capture("^(?<major>\\d+)(?:\\.(?<minor>\\d+))?(?:\\.(?<patch>\\d+))?$")
+              ) as $v
+              | . + {
+                major:($v.major | tonumber),
+                minor:(if $v.minor then ($v.minor | tonumber) else null end),
+                patch:(if $v.patch then ($v.patch | tonumber) else null end),
+                key: (.app + "|" + .os + "|" + ($v.major|tostring))
+              }
+            )' <<<"$all"
+          )"
+
+          winners="$(
+            jq '
+              ( group_by(.key)
+              | map( max_by([(.minor // -1), (.patch // -1), .os]) )
+              | INDEX(.key)
+              )' <<<"$annotated"
+          )"
+
+          with_tags="$(
+            jq --argjson winners "$winners" '
+              map(
+                . as $it
+                | .is_major_latest = ($winners[$it.key].context == $it.context)
+                | .tags =
+                    (
+                      [ $it.version ]
+                      + (if $it.minor != null
+                        then [ ($it.major|tostring) + "." + ($it.minor|tostring) ]
+                        else [] end)                    
+                      + ( if .is_major_latest then [ ($it.major|tostring) ] else [] end )
+                      | unique
+                    )
+                | del(.key)
+              )
+            ' <<<"$annotated"
+          )"
+
+          echo "all_with_tags=$with_tags" >> $GITHUB_OUTPUT
+
+      - name: Finalize matrix
+        id: finalize-matrix
+        shell: bash
+        run: |
+          all_with_tags='${{ steps.candidates.outputs.all_with_tags }}'
+          if [[ "${{ github.event_name }}" == "schedule" ]]; then
+            set="$all_with_tags"
+          else
+            changed='${{ steps.changed.outputs.changed }}'
+            set="$(
+              jq -n --argjson all "$all_with_tags" --argjson changed "$changed" '
+                ($all | INDEX(.context)) as $idx
+                | [ $changed[] | ($idx[.context]) ]   # pull enriched objects
+              '
+            )"
+          fi
+
+          echo "matrix=$(jq -c '{include: .}' <<<"$set")" >> $GITHUB_OUTPUT
+          echo "any=$(jq 'length>0' <<<"$set")" >> $GITHUB_OUTPUT
+
+  build:
+    name: Build ${{ matrix.app }} (${{ matrix.context }})
+    needs: discover
+    if: needs.discover.outputs.any == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      # This is used to complete the identity challenge
+      # with sigstore/fulcio when running outside of PRs.
+      id-token: write    
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.discover.outputs.matrix) }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Install the cosign tool except on PR
+      # https://github.com/sigstore/cosign-installer
+      - name: Install cosign
+        if: github.event_name != 'pull_request'
+        uses: sigstore/cosign-installer@59acb6260d9c0ba8f4a2f9d9b48431a222b68e20 #v3.5.0
+        with:
+          cosign-release: 'v2.2.4'
+
+      # Set up BuildKit Docker container builder to be able to build
+      # multi-platform images and export cache
+      # https://github.com/docker/setup-buildx-action
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@f95db51fddba0c2d1ec667646a06c2ce06100226 # v3.0.0
+
+      - name: Compute image with tags
+        id: image_with_tags
+        shell: bash
+        run: |
+          image_base="${{ env.REGISTRY }}/${{ github.repository }}/${{ matrix.app }}"
+          mapfile -t tags < <(jq -r '.[]' <<< '${{ toJson(matrix.tags) }}')
+          if [[ ${#tags[@]} -eq 0 ]]; then
+            echo "::error::No tags provided by matrix for ${{ matrix.context }}"
+            exit 1
+          fi
+          image_with_tags=$(printf "%s\n" "${tags[@]}" | awk -v base="$image_base" '{print base ":" $0}' | paste -sd, -)
+          echo "image_base=$image_base" >> $GITHUB_OUTPUT
+          echo "tags=$image_with_tags" >> $GITHUB_OUTPUT
+
+      # Login against a Docker registry except on PR
+      # https://github.com/docker/login-action
+      - name: Log into registry ${{ env.REGISTRY }}
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3.0.0
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # # Extract metadata (tags, labels) for Docker
+      # # https://github.com/docker/metadata-action
+      # - name: Extract Docker metadata
+      #   id: meta
+      #   uses: docker/metadata-action@96383f45573cb7f253c731d3b3ab81c87ef81934 # v5.0.0
+      #   with:
+      #     images: ${{ steps.names.outputs.image_base }}
+
+      # Build and push Docker image with Buildx (don't push on PR)
+      # https://github.com/docker/build-push-action
+      - name: Build and push Docker image
+        id: build-and-push
+        uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
+        with:
+          context: ${{ matrix.context }}
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.image_with_tags.outputs.tags }}
+          labels: ${{ steps.image_with_tags.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      # Sign the resulting Docker image digest except on PRs.
+      # This will only write to the public Rekor transparency log when the Docker
+      # repository is public to avoid leaking data.  If you would like to publish
+      # transparency data even for private images, pass --force to cosign below.
+      # https://github.com/sigstore/cosign
+      - name: Sign the published Docker image
+        if: ${{ github.event_name != 'pull_request' }}
+        env:
+          # https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-an-intermediate-environment-variable
+          TAGS: ${{ steps.image_with_tags.outputs.tags }}
+          DIGEST: ${{ steps.build-and-push.outputs.digest }}
+        # This step uses the identity token to provision an ephemeral certificate
+        # against the sigstore community Fulcio instance.
+        run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
