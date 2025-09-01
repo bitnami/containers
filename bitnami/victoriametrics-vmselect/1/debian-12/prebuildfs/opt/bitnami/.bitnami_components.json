@@ -1,8 +1,0 @@
-{
-    "victoriametrics": {
-        "arch": "amd64",
-        "distro": "debian-12",
-        "type": "NAMI",
-        "version": "1.124.0-0"
-    }
-}
