@@ -1,8 +1,0 @@
-{
-    "apache-exporter": {
-        "arch": "amd64",
-        "distro": "debian-12",
-        "type": "NAMI",
-        "version": "1.0.10-62"
-    }
-}
