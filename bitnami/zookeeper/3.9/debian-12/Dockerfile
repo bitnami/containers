@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-08-29T22:37:50Z" \
+      org.opencontainers.image.created="2025-09-04T09:34:59Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/zookeeper/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/zookeeper" \
@@ -29,7 +29,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "wait-for-port-1.0.10-0-linux-${OS_ARCH}-debian-12" \
+      "wait-for-port-1.0.10-1-linux-${OS_ARCH}-debian-12" \
       "jre-11.0.28-12-0-linux-${OS_ARCH}-debian-12" \
       "zookeeper-3.9.4-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
@@ -53,7 +53,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/zookeeper/postunpack.sh
 ENV APP_VERSION="3.9.4" \
     BITNAMI_APP_NAME="zookeeper" \
-    IMAGE_REVISION="0"
+    IMAGE_REVISION="1"
 
 EXPOSE 2181 2888 3888 8080
 

@@ -201,22 +201,26 @@ docker-compose up -d
 | `ZOO_PRE_ALLOC_SIZE`                 | Block size for transaction log file.                                                                                                                                                                                 | `65536`       |
 | `ZOO_SNAPCOUNT`                      | The number of transactions recorded in the transaction log before a snapshot can be taken (and the transaction log rolled).                                                                                          | `100000`      |
 | `ZOO_HC_TIMEOUT`                     | Timeout for the Zookeeper healthcheck script (in seconds).                                                                                                                                                           | `5`           |
+| `ZOO_FIPS_MODE`                      | Enable FIPS compatibility mode in ZooKeeper                                                                                                                                                                          | `yes`         |
 | `ZOO_TLS_CLIENT_ENABLE`              | Enable TLS for client communication.                                                                                                                                                                                 | `false`       |
 | `ZOO_TLS_PORT_NUMBER`                | Zookeeper TLS port.                                                                                                                                                                                                  | `3181`        |
 | `ZOO_TLS_CLIENT_KEYSTORE_FILE`       | KeyStore file.                                                                                                                                                                                                       | `nil`         |
+| `ZOO_TLS_CLIENT_KEYSTORE_TYPE`       | KeyStore file type.                                                                                                                                                                                                  | `nil`         |
 | `ZOO_TLS_CLIENT_KEYSTORE_PASSWORD`   | KeyStore file password.                                                                                                                                                                                              | `nil`         |
 | `ZOO_TLS_CLIENT_TRUSTSTORE_FILE`     | TrustStore file.                                                                                                                                                                                                     | `nil`         |
+| `ZOO_TLS_CLIENT_TRUSTSTORE_TYPE`     | TrustStore file type.                                                                                                                                                                                                | `nil`         |
 | `ZOO_TLS_CLIENT_TRUSTSTORE_PASSWORD` | TrustStore file password.                                                                                                                                                                                            | `nil`         |
 | `ZOO_TLS_CLIENT_AUTH`                | Specifies options to authenticate TLS connections from clients. Available values are: `none`, `want`, `need`.                                                                                                        | `need`        |
 | `ZOO_TLS_QUORUM_ENABLE`              | Enable TLS for quorum communication.                                                                                                                                                                                 | `false`       |
 | `ZOO_TLS_QUORUM_KEYSTORE_FILE`       | KeyStore file.                                                                                                                                                                                                       | `nil`         |
+| `ZOO_TLS_QUORUM_KEYSTORE_TYPE`       | KeyStore file type.                                                                                                                                                                                                  | `nil`         |
 | `ZOO_TLS_QUORUM_KEYSTORE_PASSWORD`   | KeyStore file password.                                                                                                                                                                                              | `nil`         |
 | `ZOO_TLS_QUORUM_TRUSTSTORE_FILE`     | TrustStore file.                                                                                                                                                                                                     | `nil`         |
+| `ZOO_TLS_QUORUM_TRUSTSTORE_TYPE`     | TrustStore file type.                                                                                                                                                                                                | `nil`         |
 | `ZOO_TLS_QUORUM_TRUSTSTORE_PASSWORD` | TrustStore file password.                                                                                                                                                                                            | `nil`         |
 | `ZOO_TLS_QUORUM_CLIENT_AUTH`         | Specifies options to authenticate TLS connections from clients. Available values are: `none`, `want`, `need`.                                                                                                        | `need`        |
 | `JVMFLAGS`                           | Default JVMFLAGS for the ZooKeeper process.                                                                                                                                                                          | `nil`         |
 | `ZOO_HEAP_SIZE`                      | Size in MB for the Java Heap options (Xmx and XMs). This env var is ignored if Xmx an Xms are configured via `JVMFLAGS`.                                                                                             | `1024`        |
-| `ALLOW_ANONYMOUS_LOGIN`              | If set to true, Allow to accept connections from unauthenticated users                                                                                                                                               | `no`          |
 | `ZOO_ENABLE_AUTH`                    | Enable ZooKeeper auth. It uses SASL/Digest-MD5.                                                                                                                                                                      | `no`          |
 | `ZOO_CLIENT_USER`                    | User that will use ZooKeeper clients to auth.                                                                                                                                                                        | `nil`         |
 | `ZOO_SERVER_USERS`                   | Comma, semicolon or whitespace separated list of user to be created.                                                                                                                                                 | `nil`         |
@@ -326,12 +330,17 @@ be able to login.
 > Note: Authentication is enabled using the CLI tool `zkCli.sh`. Therefore, it's necessary to set
 `ZOO_CLIENT_USER` and `ZOO_CLIENT_PASSWORD` environment variables too.
 
+As SASL/Digest-MD5 is not compatible with FIPS, it's mandatory to disable "fips-mode" in Apache ZooKeeper.
+
+> Note: If fips-mode is required in your environment, you should deploy Apache ZooKeeper using a different auth mechanism like TLS.
+
 ```console
 docker run -it -e ZOO_ENABLE_AUTH=yes \
                -e ZOO_SERVER_USERS=user1,user2 \
                -e ZOO_SERVER_PASSWORDS=pass4user1,pass4user2 \
                -e ZOO_CLIENT_USER=user1 \
                -e ZOO_CLIENT_PASSWORD=pass4user1 \
+               -e ZOO_FIPS_MODE=no \
                bitnami/zookeeper
 ```
 
@@ -347,7 +356,20 @@ services:
       - ZOO_SERVER_PASSWORDS=pass4user1,pass4user2
       - ZOO_CLIENT_USER=user1
       - ZOO_CLIENT_PASSWORD=pass4user1
+      - ZOO_FIPS_MODE=no
   ...
+```
+
+### Start Apache ZooKeeper with TLS
+
+```console
+docker run --name zookeeper \
+  -v /path/to/zookeeper.keystore.jks:/bitnami/zookeeper/certs/zookeeper.keystore.jks:ro
+  -v /path/to/zookeeper.truststore.jks:/bitnami/zookeeper/certs/zookeeper.truststore.jks:ro
+  -e ZOO_TLS_CLIENT_ENABLE=yes \
+  -e ZOO_TLS_CLIENT_KEYSTORE_FILE=/bitnami/zookeeper/certs/zookeeper.keystore.jks \
+  -e ZOO_TLS_CLIENT_TRUSTSTORE_FILE=/bitnami/zookeeper/certs/zookeeper.truststore.jks \
+  bitnami/zookeeper:latest
 ```
 
 ### Setting up an Apache ZooKeeper ensemble
@@ -458,19 +480,6 @@ services:
     environment:
       - ZOO_SERVER_ID=3
       - ZOO_SERVERS=zookeeper1:2888:3888,zookeeper2:2888:3888,0.0.0.0:2888:3888
-```
-
-### Start Apache ZooKeeper with TLS
-
-```console
-docker run --name zookeeper \
-  -v /path/to/domain.key:/bitnami/zookeeper/certs/domain.key:ro
-  -v /path/to/domain.crs:/bitnami/zookeeper/certs/domain.crs:ro
-  -e ALLOW_EMPTY_PASSWORD=yes \
-  -e ZOO_TLS_CLIENT_ENABLE=yes \
-  -e ZOO_TLS_CLIENT_KEYSTORE_FILE=/bitnami/zookeeper/certs/domain.key\
-  -e ZOO_TLS_CLIENT_TRUSTSTORE_FILE=/bitnami/zookeeper/certs/domain.crs\
-  bitnami/zookeeper:latest
 ```
 
 ## Logging
