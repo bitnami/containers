@@ -17,7 +17,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "memcached-exporter-0.15.3-5-linux-${OS_ARCH}-debian-12" \
+      "memcached-exporter-0.15.3-6-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -39,9 +39,8 @@ ARG TARGETARCH
 
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
-LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
-      org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-08-14T11:40:04Z" \
+LABEL org.opencontainers.image.base.name="scratch" \
+      org.opencontainers.image.created="2025-09-04T01:19:32Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="memcached-exporter" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -54,6 +53,7 @@ COPY --from=builder /opt/bitnami/memcached-exporter/licenses /opt/bitnami/memcac
 
 ENV APP_VERSION="0.15.3" \
     BITNAMI_APP_NAME="memcached-exporter" \
+    IMAGE_REVISION="6" \
     PATH="/opt/bitnami/memcached-exporter/bin:$PATH"
 
 EXPOSE 9150
