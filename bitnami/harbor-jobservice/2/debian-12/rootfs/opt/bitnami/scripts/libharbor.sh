@@ -176,16 +176,12 @@ install_custom_certs() {
 harbor_generate_env_file_contents() {
     local -r envvars_string="${1:-}"
     [[ -z "$envvars_string" ]] && return
-    # For systemd, we will load it via EnvironmentFile=, so the shebang is not needed
-    [[ "$BITNAMI_SERVICE_MANAGER" != "systemd" ]] && echo "#!/bin/bash"
     while IFS= read -r ENV_VAR_LINE; do
         if [[ ! "$ENV_VAR_LINE" =~ ^[A-Z_] ]]; then
             continue
         fi
         ENV_VAR_NAME="${ENV_VAR_LINE/=*}"
         ENV_VAR_VALUE="${ENV_VAR_LINE#*=}"
-        # For systemd, we will load it via EnvironmentFile=, which does not allow 'export'
-        [[ "$BITNAMI_SERVICE_MANAGER" != "systemd" ]] && echo -n 'export '
         # Use single quotes to avoid shell expansion, and escape to be parsed properly (even if it contains quotes)
         # Escape the value, so it can be parsed as a variable even with quotes set
         echo "${ENV_VAR_NAME}='${ENV_VAR_VALUE//\'/\'\\\'\'}'"

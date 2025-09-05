@@ -1,10 +1,11 @@
-# Jaeger packaged by Bitnami
+# Bitnami package for Jaeger
 
-## What is jaeger?
+## What is Jaeger?
 
-> Jaeger is a Distributed Tracing System
+> Jaeger is a distributed tracing system. It is used for monitoring and troubleshooting microservices-based distributed systems.
 
-[Overview of jaeger](https://www.jaegertracing.io/)
+[Overview of Jaeger](https://jaegertracing.io/)
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
 
@@ -88,16 +89,24 @@ Non-root container images add an extra layer of security and are generally recom
 | `JAEGER_COLLECTOR_HTTP_PORT_NUMBER`         | Jaeger Collector HTTP port. Accept jaeger.thrift directly from clients     | `14268`                                           |
 | `JAEGER_COLLECTOR_GRPC_PORT_NUMBER`         | Jaeger Collector GRPC port. Accept jaeger.thrift directly from clients     | `14250`                                           |
 | `JAEGER_ADMIN_HTTP_PORT_NUMBER`             | Jaeger Admin port.                                                         | `14269`                                           |
-| `JAEGER_AGENT_ZIPKIN_UDP_HOST`              | Jaeger Agent UDP host. Accept zipkin.thrift over compact thrift protocol   | `nil`                                             |
-| `JAEGER_AGENT_COMPACT_UDP_HOST`             | Jaeger Agent UDP host. Accept jaeger.thrift over compact thrift protocol   | `nil`                                             |
-| `JAEGER_AGENT_BINARY_UDP_HOST`              | Jaeger Agent UDP host. Accept jaeger.thrift over binary thrift protocol    | `nil`                                             |
-| `JAEGER_AGENT_HTTP_HOST`                    | Jaeger Agent HTTP host. Serve configs.                                     | `nil`                                             |
-| `JAEGER_QUERY_HTTP_HOST`                    | Jaeger Query HTTP host.                                                    | `nil`                                             |
-| `JAEGER_QUERY_GRPC_HOST`                    | Jaeger Query GRPC host.                                                    | `nil`                                             |
-| `JAEGER_COLLECTOR_HTTP_HOST`                | Jaeger Collector Zipkin compatible host.                                   | `nil`                                             |
-| `JAEGER_COLLECTOR_GRPC_HOST`                | Jaeger Collector HTTP host. Accept jaeger.thrift directly from clients     | `nil`                                             |
-| `JAEGER_ADMIN_HTTP_HOST`                    | Jaeger Collector GRPC host. Accept jaeger.thrift directly from clients     | `nil`                                             |
-| `JAEGER_COLLECTOR_ZIPKIN_HOST`              | Jaeger Admin host.                                                         | `nil`                                             |
+| `JAEGER_METRICS_PORT_NUMBER`                | Jaeger prometheus metrics port.                                            | `8888`                                            |
+| `JAEGER_HEALTHCHECK_PORT_NUMBER`            | Jaeger healthcheck port.                                                   | `13133`                                           |
+| `JAEGER_COLLECTOR_OTLP_GRPC_PORT_NUMBER`    | Jaeger Collector OpenTelemetry gRPC port.                                  | `4317`                                            |
+| `JAEGER_COLLECTOR_OTLP_HTTP_PORT_NUMBER`    | Jaeger Collector OpenTelemetry HTTP port.                                  | `4318`                                            |
+| `JAEGER_AGENT_ZIPKIN_UDP_HOST`              | Jaeger Agent UDP host. Accept zipkin.thrift over compact thrift protocol   | `0.0.0.0`                                         |
+| `JAEGER_AGENT_COMPACT_UDP_HOST`             | Jaeger Agent UDP host. Accept jaeger.thrift over compact thrift protocol   | `0.0.0.0`                                         |
+| `JAEGER_AGENT_BINARY_UDP_HOST`              | Jaeger Agent UDP host. Accept jaeger.thrift over binary thrift protocol    | `0.0.0.0`                                         |
+| `JAEGER_AGENT_HTTP_HOST`                    | Jaeger Agent HTTP host. Serve configs.                                     | `0.0.0.0`                                         |
+| `JAEGER_QUERY_HTTP_HOST`                    | Jaeger Query HTTP host.                                                    | `0.0.0.0`                                         |
+| `JAEGER_QUERY_GRPC_HOST`                    | Jaeger Query GRPC host.                                                    | `0.0.0.0`                                         |
+| `JAEGER_COLLECTOR_HTTP_HOST`                | Jaeger Collector Zipkin compatible host.                                   | `0.0.0.0`                                         |
+| `JAEGER_COLLECTOR_GRPC_HOST`                | Jaeger Collector HTTP host. Accept jaeger.thrift directly from clients     | `0.0.0.0`                                         |
+| `JAEGER_ADMIN_HTTP_HOST`                    | Jaeger Collector GRPC host. Accept jaeger.thrift directly from clients     | `0.0.0.0`                                         |
+| `JAEGER_COLLECTOR_ZIPKIN_HOST`              | Jaeger Admin host.                                                         | `0.0.0.0`                                         |
+| `JAEGER_METRICS_HOST`                       | Jaeger prometheus metrics host.                                            | `0.0.0.0`                                         |
+| `JAEGER_HEALTHCHECK_HOST`                   | Jaeger healthcheck host.                                                   | `0.0.0.0`                                         |
+| `JAEGER_COLLECTOR_OTLP_GRPC_HOST`           | Jaeger Collector OpenTelemetry gRPC host.                                  | `0.0.0.0`                                         |
+| `JAEGER_COLLECTOR_OTLP_HTTP_HOST`           | Jaeger Collector OpenTelemetry HTTP host.                                  | `0.0.0.0`                                         |
 | `JAEGER_APACHE_QUERY_HTTP_PORT_NUMBER`      | Jaeger Query UI HTTP port, exposed via Apache with basic authentication.   | `nil`                                             |
 | `JAEGER_APACHE_QUERY_HTTPS_PORT_NUMBER`     | Jaeger Query UI HTTPS port, exposed via Apache with basic authentication.  | `nil`                                             |
 | `JAEGER_APACHE_COLLECTOR_HTTP_PORT_NUMBER`  | Jaeger Collector HTTP port, exposed via Apache with basic authentication.  | `14270`                                           |
@@ -128,13 +137,13 @@ Non-root container images add an extra layer of security and are generally recom
 
 ### Running commands
 
-To run commands inside this container you can use `docker run`, for example to execute `jaeger-all-in-one --help` you can follow the example below:
+To run commands inside this container you can use `docker run`, for example to execute `jaeger --help` you can follow the example below:
 
 ```console
 docker run --rm --name jaeger bitnami/jaeger:latest --help
 ```
 
-Check the [official jaeger documentation](https://www.jaegertracing.io//docs) for more information.
+Check the [official Jaeger documentation](https://jaegertracing.io//docs) for more information.
 
 ## Using `docker-compose.yaml`
 

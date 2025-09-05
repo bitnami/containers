@@ -1,8 +1,0 @@
-{
-    "notation": {
-        "arch": "amd64",
-        "distro": "debian-12",
-        "type": "NAMI",
-        "version": "1.3.2-7"
-    }
-}

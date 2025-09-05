@@ -1,8 +1,0 @@
-{
-    "plugin-barman-cloud": {
-        "arch": "amd64",
-        "distro": "debian-12",
-        "type": "NAMI",
-        "version": "0.6.0-0"
-    }
-}
