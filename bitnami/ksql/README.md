@@ -1,10 +1,11 @@
-# KSQL DB packaged by Bitnami
+# Bitnami package for Confluent KSQL DB
 
-## What is ksql?
+## What is Confluent KSQL DB?
 
-> Confluent KSQL DB is an event streaming database that helps you build stream processing apps
+> ksqlDB is a database for building stream processing applications on top of Apache Kafka. It is distributed, scalable, reliable, and real-time.
 
-[Overview of ksql](https://www.confluent.io/)
+[Overview of Confluent KSQL DB](https://www.confluent.io)
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
 
