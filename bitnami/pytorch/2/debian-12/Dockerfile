@@ -6,9 +6,8 @@ FROM docker.io/bitnami/minideb:bookworm
 ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
-LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
-      org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-08-07T18:47:01Z" \
+LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
+      org.opencontainers.image.created="2025-09-06T20:05:08Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/pytorch/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/pytorch" \
@@ -29,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "python-3.12.11-8-linux-${OS_ARCH}-debian-12" \
+      "python-3.12.11-9-linux-${OS_ARCH}-debian-12" \
       "pytorch-2.8.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -52,6 +51,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/pytorch/postunpack.sh
 ENV APP_VERSION="2.8.0" \
     BITNAMI_APP_NAME="pytorch" \
+    IMAGE_REVISION="3" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 WORKDIR /app
