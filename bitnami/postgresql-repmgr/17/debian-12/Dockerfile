@@ -6,9 +6,8 @@ FROM docker.io/bitnami/minideb:bookworm
 ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
-LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
-      org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-08-26T12:08:16Z" \
+LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
+      org.opencontainers.image.created="2025-09-05T02:30:54Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/postgresql-repmgr/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/postgresql-repmgr" \
@@ -29,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "postgresql-repmgr-17.6.0-1-linux-${OS_ARCH}-debian-12" \
+      "postgresql-repmgr-17.6.0-2-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -59,11 +58,11 @@ RUN echo 'en_GB.UTF-8 UTF-8' >> /etc/locale.gen
 RUN /opt/bitnami/scripts/locales/generate-locales.sh
 ENV APP_VERSION="17.6.0" \
     BITNAMI_APP_NAME="postgresql-repmgr" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="3" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
-    PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/repmgr/bin:$PATH"
+    PATH="/opt/bitnami/repmgr/bin:/opt/bitnami/postgresql/bin:$PATH"
 
 EXPOSE 5432
 
