@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-04T01:40:07Z" \
+      org.opencontainers.image.created="2025-09-07T01:30:49Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/kubescape/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kubescape" \
@@ -49,7 +49,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/kubescape/postunpack.sh
 ENV APP_VERSION="3.0.40" \
     BITNAMI_APP_NAME="kubescape" \
-    IMAGE_REVISION="1"
+    IMAGE_REVISION="2"
 
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/scripts/kubescape/entrypoint.sh" ]

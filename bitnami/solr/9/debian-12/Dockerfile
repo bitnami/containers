@@ -7,9 +7,8 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
-LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
-      org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-08-07T20:01:57Z" \
+LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
+      org.opencontainers.image.created="2025-09-06T20:51:52Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/solr/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/solr" \
@@ -52,8 +51,9 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/solr/postunpack.sh
 ENV APP_VERSION="9.9.0" \
     BITNAMI_APP_NAME="solr" \
+    IMAGE_REVISION="2" \
     JAVA_HOME="/opt/bitnami/java" \
-    PATH="/opt/bitnami/java/bin:/opt/bitnami/solr/bin:/opt/bitnami/solr/contrib/prometheus-exporter/bin:/opt/bitnami/solr/prometheus-exporter/bin:$PATH"
+    PATH="/opt/bitnami/java/bin:/opt/bitnami/solr/bin:/opt/bitnami/solr/prometheus-exporter/bin:/opt/bitnami/solr/contrib/prometheus-exporter/bin:$PATH"
 
 EXPOSE 8983
 

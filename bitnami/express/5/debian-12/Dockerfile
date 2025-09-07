@@ -6,9 +6,8 @@ FROM docker.io/bitnami/minideb:bookworm
 ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
-LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
-      org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-08-07T11:22:49Z" \
+LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
+      org.opencontainers.image.created="2025-09-06T11:48:18Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/express/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/express" \
@@ -28,9 +27,9 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "python-3.13.6-0-linux-${OS_ARCH}-debian-12" \
-      "wait-for-port-1.0.9-2-linux-${OS_ARCH}-debian-12" \
-      "node-24.5.0-0-linux-${OS_ARCH}-debian-12" \
+      "python-3.13.7-0-linux-${OS_ARCH}-debian-12" \
+      "wait-for-port-1.0.10-1-linux-${OS_ARCH}-debian-12" \
+      "node-24.7.0-0-linux-${OS_ARCH}-debian-12" \
       "express-5.1.0-2-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -51,6 +50,7 @@ RUN mkdir -p /dist /app /.npm /.config /.cache /.local && chmod g+rwX /dist /app
 RUN /opt/bitnami/scripts/express/postunpack.sh
 ENV APP_VERSION="5.1.0" \
     BITNAMI_APP_NAME="express" \
+    IMAGE_REVISION="30" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/node/bin:/opt/bitnami/express/bin:$PATH"
 
 EXPOSE 3000
