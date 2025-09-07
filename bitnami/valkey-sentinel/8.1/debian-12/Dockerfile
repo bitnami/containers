@@ -6,9 +6,8 @@ FROM docker.io/bitnami/minideb:bookworm
 ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
-LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
-      org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-08-16T13:35:32Z" \
+LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
+      org.opencontainers.image.created="2025-09-07T02:49:41Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/valkey-sentinel/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/valkey-sentinel" \
@@ -50,7 +49,8 @@ RUN uninstall_packages curl
 COPY rootfs /
 RUN /opt/bitnami/scripts/valkey-sentinel/postunpack.sh
 ENV APP_VERSION="8.1.3" \
-    BITNAMI_APP_NAME="valkey-sentinel"
+    BITNAMI_APP_NAME="valkey-sentinel" \
+    IMAGE_REVISION="4"
 
 EXPOSE 26379
 
