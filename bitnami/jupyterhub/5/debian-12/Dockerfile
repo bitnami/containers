@@ -6,9 +6,8 @@ FROM docker.io/bitnami/minideb:bookworm
 ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
-LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
-      org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-08-19T12:16:32Z" \
+LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
+      org.opencontainers.image.created="2025-09-07T01:22:14Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/jupyterhub/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jupyterhub" \
@@ -49,7 +48,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="5.3.0" \
     BITNAMI_APP_NAME="jupyterhub" \
-    IMAGE_REVISION="16" \
+    IMAGE_REVISION="17" \
     PATH="/opt/bitnami/miniforge/bin:/opt/bitnami/miniforge/bin/:$PATH"
 
 USER 1001
