@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-08-27T23:10:49Z" \
+      org.opencontainers.image.created="2025-09-07T02:01:49Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/node/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/node" \
@@ -51,8 +51,8 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/node/postunpack.sh
 ENV APP_VERSION="24.7.0" \
     BITNAMI_APP_NAME="node" \
-    IMAGE_REVISION="0" \
-    PATH="/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH"
+    IMAGE_REVISION="1" \
+    PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:$PATH"
 
 EXPOSE 3000
 
