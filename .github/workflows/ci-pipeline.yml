@@ -60,6 +60,9 @@ jobs:
       contents: read
       pull-requests: write
     needs: get-containers
+    if: |
+      needs.get-containers.outputs.result == 'ok' &&
+      github.event.pull_request.user.login != 'bitnami-bot'
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
         name: Checkout Repository
