@@ -3,7 +3,7 @@
 
 services:
   elasticsearch-node1:
-    image: docker.io/bitnami/elasticsearch:9
+    image: docker.io/bitnami/elasticsearch:9.1
     environment:
       - ELASTICSEARCH_CLUSTER_NAME=elasticsearch-cluster
       - ELASTICSEARCH_CLUSTER_HOSTS=elasticsearch-node1,elasticsearch-node2,elasticsearch-node3
@@ -16,7 +16,7 @@ services:
       - 'elasticsearch_node1_data:/bitnami'
 
   elasticsearch-node2:
-    image: docker.io/bitnami/elasticsearch:9
+    image: docker.io/bitnami/elasticsearch:9.1
     environment:
       - ELASTICSEARCH_CLUSTER_NAME=elasticsearch-cluster
       - ELASTICSEARCH_CLUSTER_HOSTS=elasticsearch-node1,elasticsearch-node2,elasticsearch-node3
@@ -26,7 +26,7 @@ services:
       - 'elasticsearch_node2_data:/bitnami'
 
   elasticsearch-node3:
-    image: docker.io/bitnami/elasticsearch:9
+    image: docker.io/bitnami/elasticsearch:9.1
     environment:
       - ELASTICSEARCH_CLUSTER_NAME=elasticsearch-cluster
       - ELASTICSEARCH_CLUSTER_HOSTS=elasticsearch-node1,elasticsearch-node2,elasticsearch-node3
