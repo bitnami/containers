@@ -6,9 +6,8 @@ FROM docker.io/bitnami/minideb:bookworm
 ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
-LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
-      org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-08-26T12:17:07Z" \
+LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
+      org.opencontainers.image.created="2025-09-07T01:39:47Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/mastodon/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mastodon" \
@@ -30,11 +29,11 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "python-3.13.7-0-linux-${OS_ARCH}-debian-12" \
-      "wait-for-port-1.0.10-0-linux-${OS_ARCH}-debian-12" \
+      "wait-for-port-1.0.10-1-linux-${OS_ARCH}-debian-12" \
       "ruby-3.4.5-1-linux-${OS_ARCH}-debian-12" \
       "redis-client-8.2.1-0-linux-${OS_ARCH}-debian-12" \
       "postgresql-client-17.6.0-0-linux-${OS_ARCH}-debian-12" \
-      "node-22.18.0-0-linux-${OS_ARCH}-debian-12" \
+      "node-22.19.0-0-linux-${OS_ARCH}-debian-12" \
       "mastodon-4.4.3-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -55,9 +54,9 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/mastodon/postunpack.sh
 ENV APP_VERSION="4.4.3" \
     BITNAMI_APP_NAME="mastodon" \
-    IMAGE_REVISION="11" \
+    IMAGE_REVISION="12" \
     LD_LIBRARY_PATH="/opt/bitnami/common/lib:$LD_LIBRARY_PATH" \
-    PATH="/opt/bitnami/mastodon/bin:/opt/bitnami/node/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/python/bin:/opt/bitnami/redis/bin:/opt/bitnami/ruby/bin:/opt/bitnami/common/bin:$PATH"
+    PATH="/opt/bitnami/common/bin:/opt/bitnami/python/bin:/opt/bitnami/ruby/bin:/opt/bitnami/redis/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/mastodon/bin:$PATH"
 
 EXPOSE 3000
 

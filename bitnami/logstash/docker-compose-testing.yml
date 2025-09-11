@@ -3,7 +3,7 @@
 
 services:
   logstash:
-    image: docker.io/bitnami/logstash:9
+    image: docker.io/bitnami/logstash:9.1
     ports:
       - 8080:8080
     environment:
