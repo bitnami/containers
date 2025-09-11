@@ -1,10 +1,11 @@
-# Barman Cloud Plugin Sidecar for CloudNativePG packaged by Bitnami
+# Bitnami package for Barman Cloud Plugin Sidecar for CloudNativePG
 
 ## What is Barman Cloud Plugin Sidecar for CloudNativePG?
 
-> Barman Cloud CNPG-I plugin enables PostgreSQL backups and recovery in cloud storage, integrating with CloudNativePG for seamless data protection
+> Barman Cloud CNPG-I plugin enables PostgreSQL backups and recovery in cloud storage, integrating with CloudNativePG for seamless data protection.
 
 [Overview of Barman Cloud Plugin Sidecar for CloudNativePG](https://cloudnative-pg.io/plugin-barman-cloud/)
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
 

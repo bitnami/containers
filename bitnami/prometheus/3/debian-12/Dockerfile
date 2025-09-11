@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-04T03:09:53Z" \
+      org.opencontainers.image.created="2025-09-07T02:26:19Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/prometheus/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/prometheus" \
@@ -51,7 +51,7 @@ RUN uninstall_packages curl
 RUN mkdir -p /opt/bitnami/prometheus/data/ && chmod g+rwX /opt/bitnami/prometheus/data/
 ENV APP_VERSION="3.5.0" \
     BITNAMI_APP_NAME="prometheus" \
-    IMAGE_REVISION="4" \
+    IMAGE_REVISION="5" \
     PATH="/opt/bitnami/prometheus/bin:$PATH"
 
 EXPOSE 9090
