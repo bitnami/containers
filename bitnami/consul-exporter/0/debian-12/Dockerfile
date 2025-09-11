@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-03T20:59:55Z" \
+      org.opencontainers.image.created="2025-09-07T00:26:58Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/consul-exporter/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/consul-exporter" \
@@ -48,7 +48,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="0.13.0" \
     BITNAMI_APP_NAME="consul-exporter" \
-    IMAGE_REVISION="30" \
+    IMAGE_REVISION="31" \
     PATH="/opt/bitnami/consul-exporter/bin:$PATH"
 
 EXPOSE 9107

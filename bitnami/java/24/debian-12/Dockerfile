@@ -7,9 +7,8 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
-LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
-      org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-08-16T01:59:50Z" \
+LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
+      org.opencontainers.image.created="2025-09-07T01:21:08Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/java/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/java" \
@@ -58,6 +57,7 @@ RUN /opt/bitnami/scripts/locales/generate-locales.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="24.0.2-12" \
     BITNAMI_APP_NAME="java" \
+    IMAGE_REVISION="3" \
     JAVA_HOME="/opt/bitnami/java" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \

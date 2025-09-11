@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-02T16:43:08Z" \
+      org.opencontainers.image.created="2025-09-07T02:30:00Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/rabbitmq/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/rabbitmq" \
@@ -57,7 +57,7 @@ RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
 RUN /opt/bitnami/scripts/locales/generate-locales.sh
 ENV APP_VERSION="4.1.4" \
     BITNAMI_APP_NAME="rabbitmq" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en"
 
