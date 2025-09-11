@@ -6,9 +6,8 @@ FROM docker.io/bitnami/minideb:bookworm
 ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
-LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
-      org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-08-21T00:18:52Z" \
+LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
+      org.opencontainers.image.created="2025-09-07T00:26:45Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/deepspeed/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/deepspeed" \
@@ -56,10 +55,10 @@ ENV APP_VERSION="0.17.5" \
     CPLUS_INCLUDE_PATH="/opt/bitnami/common/include" \
     CPPFLAGS="-I/opt/bitnami/python/include -I/opt/bitnami/common/include" \
     C_INCLUDE_PATH="/opt/bitnami/common/include" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     LDFLAGS="-Wl,-rpath: /opt/bitnami/python/lib -L/opt/bitnami/python/lib -Wl,-rpath: /opt/bitnami/common/lib -L/opt/bitnami/common/lib" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib:/opt/bitnami/common/lib:${LD_LIBRARY_PATH}" \
-    PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:$PATH" \
+    PATH="/opt/bitnami/common/bin:/opt/bitnami/python/bin:$PATH" \
     TRITON_CACHE_DIR="/opt/bitnami/deepspeed"
 
 WORKDIR /app
