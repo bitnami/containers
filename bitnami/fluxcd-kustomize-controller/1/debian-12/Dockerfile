@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-03T21:51:50Z" \
+      org.opencontainers.image.created="2025-09-07T00:50:52Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/fluxcd-kustomize-controller/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/fluxcd-kustomize-controller" \
@@ -47,7 +47,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="1.6.1" \
     BITNAMI_APP_NAME="fluxcd-kustomize-controller" \
-    IMAGE_REVISION="6" \
+    IMAGE_REVISION="7" \
     PATH="/opt/bitnami/fluxcd-kustomize-controller/bin:$PATH"
 
 USER 1001

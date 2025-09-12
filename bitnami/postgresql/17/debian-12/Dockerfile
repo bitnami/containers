@@ -9,7 +9,7 @@ ARG TARGETARCH
 ARG WITH_ALL_LOCALES="no"
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-07T02:20:20Z" \
+      org.opencontainers.image.created="2025-09-11T12:09:10Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/postgresql/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/postgresql" \
@@ -30,7 +30,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "postgresql-17.6.0-3-linux-${OS_ARCH}-debian-12" \
+      "postgresql-17.6.0-5-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -58,7 +58,7 @@ RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
 RUN /opt/bitnami/scripts/locales/generate-locales.sh
 ENV APP_VERSION="17.6.0" \
     BITNAMI_APP_NAME="postgresql" \
-    IMAGE_REVISION="6" \
+    IMAGE_REVISION="8" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \

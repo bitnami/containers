@@ -3,7 +3,7 @@
 
 services:
   elasticsearch:
-    image: docker.io/bitnami/elasticsearch:9
+    image: docker.io/bitnami/elasticsearch:9.1
     ports:
       - '9200:9200'
       - '9300:9300'
