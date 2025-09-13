@@ -95,14 +95,14 @@ docker build -t bitnami/APP:latest .
 | `KC_BOOTSTRAP_ADMIN_PASSWORD`   | Bootstrap admin password                                                                           | `nil`                         |
 | `KC_HTTP_PORT`                  | HTTP port                                                                                          | `8080`                        |
 | `KC_HTTPS_PORT`                 | HTTPS port                                                                                         | `8443`                        |
-| `KC_HTTP_RELATIVE_PATH`         | Set the path relative to "/" for serving resources.                                                | `nil`                         |
+| `KC_HTTP_RELATIVE_PATH`         | Set the path relative to "/" for serving resources.                                                | `/`                           |
 | `KC_LOG_LEVEL`                  | Keycloak log level                                                                                 | `info`                        |
 | `KC_LOG_CONSOLE_OUTPUT`         | Keycloak log output                                                                                | `default`                     |
 | `KC_METRICS_ENABLED`            | Enable metrics.                                                                                    | `false`                       |
 | `KC_HEALTH_ENABLED`             | Enable health check endpoints.                                                                     | `false`                       |
-| `KC_CACHE`                      | Cache mechanism for high-availability.                                                             | `nil`                         |
+| `KC_CACHE`                      | Cache mechanism for high-availability.                                                             | `ispn`                        |
 | `KC_CACHE_STACK`                | Default stack to use for cluster communication and node discovery.                                 | `nil`                         |
-| `KC_CACHE_CONFIG_FILE`          | Path to the file from which cache configuration should be loaded from.                             | `nil`                         |
+| `KC_CACHE_CONFIG_FILE`          | Path to the file from which cache configuration should be loaded from.                             | `cache-ispn.xml`              |
 | `KC_HOSTNAME`                   | Keycloak hostname                                                                                  | `nil`                         |
 | `KC_HOSTNAME_ADMIN`             | Keycloak admin hostname                                                                            | `nil`                         |
 | `KC_HOSTNAME_STRICT`            | Disables dynamically resolving the hostname from request headers                                   | `false`                       |

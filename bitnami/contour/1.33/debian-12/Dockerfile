@@ -4,17 +4,16 @@
 FROM docker.io/bitnami/minideb:bookworm
 
 ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
-ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-12T15:12:31Z" \
+      org.opencontainers.image.created="2025-09-12T15:11:54Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/keycloak/README.md" \
-      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/keycloak" \
-      org.opencontainers.image.title="keycloak" \
+      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/contour/README.md" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/contour" \
+      org.opencontainers.image.title="contour" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="26.3.4"
+      org.opencontainers.image.version="1.33.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -24,14 +23,12 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl krb5-user libaio1 procps zlib1g
+RUN install_packages ca-certificates curl procps
 RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "wait-for-port-1.0.10-1-linux-${OS_ARCH}-debian-12" \
-      "jre-21.0.8-12-0-linux-${OS_ARCH}-debian-12" \
-      "keycloak-26.3.4-0-linux-${OS_ARCH}-debian-12" \
+      "contour-1.33.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -46,18 +43,13 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
+RUN ln -s /opt/bitnami/contour/bin/contour /bin/contour
+RUN uninstall_packages curl
 
-COPY rootfs /
-RUN /opt/bitnami/scripts/java/postunpack.sh
-RUN /opt/bitnami/scripts/keycloak/postunpack.sh
-ENV APP_VERSION="26.3.4" \
-    BITNAMI_APP_NAME="keycloak" \
+ENV APP_VERSION="1.33.0" \
+    BITNAMI_APP_NAME="contour" \
     IMAGE_REVISION="0" \
-    JAVA_HOME="/opt/bitnami/java" \
-    PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:/opt/bitnami/keycloak/bin:$PATH"
-
-EXPOSE 8080 8443 9000
+    PATH="/opt/bitnami/contour/bin:$PATH"
 
 USER 1001
-ENTRYPOINT [ "/opt/bitnami/scripts/keycloak/entrypoint.sh" ]
-CMD [ "/opt/bitnami/scripts/keycloak/run.sh" ]
+ENTRYPOINT [ "contour" ]

@@ -44,7 +44,7 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
-RUN mkdir /docker-entrypoint-initdb.d
+RUN mkdir /docker-entrypoint-initdb.d /docker-entrypoint-startdb.d
 RUN uninstall_packages curl
 
 COPY rootfs /

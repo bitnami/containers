@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-07T02:36:06Z" \
+      org.opencontainers.image.created="2025-09-13T00:24:51Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/redmine/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/redmine" \
@@ -27,7 +27,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "yq-4.47.1-3-linux-${OS_ARCH}-debian-12" \
+      "yq-4.47.2-0-linux-${OS_ARCH}-debian-12" \
       "ruby-3.3.9-2-linux-${OS_ARCH}-debian-12" \
       "postgresql-client-17.6.0-0-linux-${OS_ARCH}-debian-12" \
       "mysql-client-12.0.2-0-linux-${OS_ARCH}-debian-12" \
@@ -52,7 +52,7 @@ RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/redmine/postunpack.sh
 ENV APP_VERSION="6.0.6" \
     BITNAMI_APP_NAME="redmine" \
-    IMAGE_REVISION="8" \
+    IMAGE_REVISION="9" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:$PATH"
 
 EXPOSE 3000
