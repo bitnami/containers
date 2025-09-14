@@ -292,6 +292,7 @@ ghost_initialize() {
             local -a setup_flags=(
                 "--no-setup-ssl" "--no-setup-nginx" "--no-setup-mysql"
                 "--no-setup-systemd" "--no-setup-linux-user"
+                "--no-check-mem"
                 "--url" "$base_url"
                 "--ip" "0.0.0.0"
                 "--port" "$port"
