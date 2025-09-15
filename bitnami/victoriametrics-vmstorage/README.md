@@ -79,7 +79,7 @@ To run commands inside this container you can use `docker run`, for example to e
 docker run --rm --name victoriametrics-vmstorage bitnami/victoriametrics-vmstorage:latest --  --help
 ```
 
-Check the [official VictoriaMetrics Storage documentation](<https://victoriametrics.com/> for more information.
+Check the [official VictoriaMetrics Storage documentation](https://victoriametrics.com/) for more information.
 
 ## Contributing
 
