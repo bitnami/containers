@@ -18,7 +18,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "kaniko-1.25.1-3-linux-${OS_ARCH}-debian-12" \
+      "kaniko-1.25.2-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -44,22 +44,22 @@ ENV HOME="/root" \
     OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-09-03T23:45:12Z" \
+      org.opencontainers.image.created="2025-09-16T21:49:35Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="kaniko" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.25.1"
+      org.opencontainers.image.version="1.25.2"
 
 COPY rootfs /
 COPY --from=builder /opt/bitnami/kaniko/.spdx-kaniko.spdx /opt/bitnami/kaniko/.spdx-kaniko.spdx
 COPY --from=builder /opt/bitnami/kaniko/licenses /opt/bitnami/kaniko/licenses
 COPY --from=builder /out /
 
-ENV APP_VERSION="1.25.1" \
+ENV APP_VERSION="1.25.2" \
     BITNAMI_APP_NAME="kaniko" \
     DOCKER_CONFIG="/kaniko/.docker" \
     DOCKER_CREDENTIAL_GCR_CONFIG="/kaniko/.config/gcloud/docker_credential_gcr_config.json" \
-    IMAGE_REVISION="3" \
+    IMAGE_REVISION="0" \
     PATH="/kaniko" \
     SSL_CERT_DIR="/etc/ssl/certs/" \
     USER="root"
