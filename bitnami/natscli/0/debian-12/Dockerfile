@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-07T01:54:59Z" \
+      org.opencontainers.image.created="2025-09-22T14:36:33Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/natscli/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/natscli" \
       org.opencontainers.image.title="natscli" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="0.2.4"
+      org.opencontainers.image.version="0.3.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "natscli-0.2.4-3-linux-${OS_ARCH}-debian-12" \
+      "natscli-0.3.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -45,9 +45,9 @@ RUN useradd -r -u 1001 -g root natscli
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN uninstall_packages curl
 
-ENV APP_VERSION="0.2.4" \
+ENV APP_VERSION="0.3.0" \
     BITNAMI_APP_NAME="natscli" \
-    IMAGE_REVISION="4" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/natscli/bin:$PATH"
 
 USER 1001
