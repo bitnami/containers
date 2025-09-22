@@ -191,7 +191,7 @@ repmgr_get_upstream_node() {
     local suggested_primary_port=""
 
     if [[ -n "$REPMGR_PARTNER_NODES" ]]; then
-        info "Querying all partner nodes for common upstream node..."
+        debug "Querying all partner nodes for common upstream node..."
         read -r -a nodes <<<"$(tr ',;' ' ' <<<"${REPMGR_PARTNER_NODES}")"
         for node in "${nodes[@]}"; do
             # intentionally accept incorrect address (without [schema:]// )
@@ -254,12 +254,13 @@ repmgr_get_primary_node() {
     [[ -n "$upstream_host" ]] && info "Auto-detected primary node: '${upstream_host}:${upstream_port}'"
 
     if [[ -f "$REPMGR_PRIMARY_ROLE_LOCK_FILE_NAME" ]]; then
-        info "This node was acting as a primary before restart!"
+        info "This node was acting as a primary!"
 
         if [[ -z "$upstream_host" ]] || [[ "${upstream_host}:${upstream_port}" = "${REPMGR_NODE_NETWORK_NAME}:${REPMGR_PORT_NUMBER}" ]]; then
-            info "Can not find new primary. Starting PostgreSQL normally..."
+            info "Can not find new primary"
         else
-            info "Current master is '${upstream_host}:${upstream_port}'. Cloning/rewinding it and acting as a standby node..."
+            info "Current master is '${upstream_host}:${upstream_port}'"
+            [[ "${MODULE:-}" != "pre-stop-hook" ]] && info "Cloning/rewinding it and acting as a standby node..."
             rm -f "$REPMGR_PRIMARY_ROLE_LOCK_FILE_NAME"
             export REPMGR_SWITCH_ROLE="yes"
             primary_host="$upstream_host"
@@ -272,8 +273,8 @@ repmgr_get_primary_node() {
                 primary_port="$REPMGR_PRIMARY_PORT"
             fi
         else
-            if  [[ "${upstream_host}:${upstream_port}" = "${REPMGR_NODE_NETWORK_NAME}:${REPMGR_PORT_NUMBER}" ]];  then
-                info "Avoid setting itself as primary. Starting PostgreSQL normally..."
+            if [[ "${upstream_host}:${upstream_port}" = "${REPMGR_NODE_NETWORK_NAME}:${REPMGR_PORT_NUMBER}" ]];  then
+                info "Dismissing auto-detected info given it points to itself"
             else
                 primary_host="$upstream_host"
                 primary_port="$upstream_port"
@@ -281,7 +282,7 @@ repmgr_get_primary_node() {
         fi
     fi
 
-    [[ -n "$primary_host" ]] && debug "Primary node: '${primary_host}:${primary_port}'"
+    [[ -n "$primary_host" ]] && info "Primary node: '${primary_host}:${primary_port}'"
     echo "$primary_host"
     echo "$primary_port"
 }

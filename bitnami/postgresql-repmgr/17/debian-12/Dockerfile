@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-21T15:22:52Z" \
+      org.opencontainers.image.created="2025-09-22T14:51:15Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/postgresql-repmgr/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/postgresql-repmgr" \
@@ -58,7 +58,7 @@ RUN echo 'en_GB.UTF-8 UTF-8' >> /etc/locale.gen
 RUN /opt/bitnami/scripts/locales/generate-locales.sh
 ENV APP_VERSION="17.6.0" \
     BITNAMI_APP_NAME="postgresql-repmgr" \
-    IMAGE_REVISION="7" \
+    IMAGE_REVISION="8" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
