@@ -31,7 +31,6 @@ net:
 # replica set options
 #replication:
   #replSetName: {{MONGODB_DEFAULT_REPLICA_SET_NAME}}
-  #enableMajorityReadConcern: {{MONGODB_DEFAULT_ENABLE_MAJORITY_READ}}
 
 # sharding options
 #sharding:

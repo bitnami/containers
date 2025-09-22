@@ -661,12 +661,8 @@ mongodb_set_replicasetmode_conf() {
     if ! mongodb_is_file_external "$conf_file_name"; then
         mongodb_config_apply_regex "#?replication:.*" "replication:" "$conf_file_path"
         mongodb_config_apply_regex "#?replSetName:" "replSetName:" "$conf_file_path"
-        mongodb_config_apply_regex "#?enableMajorityReadConcern:.*" "enableMajorityReadConcern:" "$conf_file_path"
         if [[ -n "$MONGODB_REPLICA_SET_NAME" ]]; then
             mongodb_config_apply_regex "replSetName:.*" "replSetName: $MONGODB_REPLICA_SET_NAME" "$conf_file_path"
-        fi
-        if [[ -n "$MONGODB_ENABLE_MAJORITY_READ" ]]; then
-            mongodb_config_apply_regex "enableMajorityReadConcern:.*" "enableMajorityReadConcern: $({ (is_boolean_yes "$MONGODB_ENABLE_MAJORITY_READ" || [[ "$(mongodb_get_major_version)" -eq 5 ]]) && echo 'true'; } || echo 'false')" "$conf_file_path"
         fi
     else
         debug "$conf_file_name mounted. Skipping replicaset mode enabling"
