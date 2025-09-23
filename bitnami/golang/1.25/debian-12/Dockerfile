@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-07T00:52:21Z" \
+      org.opencontainers.image.created="2025-09-23T18:48:44Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/golang/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/golang" \
@@ -47,7 +47,7 @@ ENV APP_VERSION="1.25.1" \
     BITNAMI_APP_NAME="golang" \
     GOCACHE="/go/.cache" \
     GOPATH="/go" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="2" \
     PATH="/go/bin:/opt/bitnami/go/bin:$PATH"
 
 WORKDIR $GOPATH
