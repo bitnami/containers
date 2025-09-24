@@ -259,6 +259,8 @@ generate_systemd_conf() {
     local success_exit_status=""
     local custom_service_content=""
     local working_directory=""
+    local timeout_start_sec="2min"
+    local timeout_stop_sec="30s"
     # Parse CLI flags
     shift
     while [[ "$#" -gt 0 ]]; do
@@ -277,6 +279,8 @@ generate_systemd_conf() {
             | --success-exit-status \
             | --custom-service-content \
             | --working-directory \
+            | --timeout-start-sec \
+            | --timeout-stop-sec \
             )
                 var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
                 shift
@@ -402,8 +406,8 @@ EOF
     fi
     cat >> "$service_file" <<EOF
 # Optimizations
-TimeoutStartSec=2min
-TimeoutStopSec=30s
+TimeoutStartSec=${timeout_start_sec}
+TimeoutStopSec=${timeout_stop_sec}
 IgnoreSIGPIPE=no
 KillMode=mixed
 EOF
