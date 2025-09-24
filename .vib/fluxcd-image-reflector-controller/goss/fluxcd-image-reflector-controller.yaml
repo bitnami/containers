@@ -4,6 +4,6 @@
 command:
   check-image-reflector-controller-binary:
     exec: image-reflector-controller --help
-    exit-status: 2
+    exit-status: 0
     stderr:
       - "Usage of image-reflector-controller"
