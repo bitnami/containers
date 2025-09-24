@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-08T15:46:53Z" \
+      org.opencontainers.image.created="2025-09-24T06:19:29Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/percona-mysql/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/percona-mysql" \
@@ -45,14 +45,14 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
-RUN mkdir /docker-entrypoint-initdb.d
+RUN mkdir /docker-entrypoint-initdb.d /docker-entrypoint-startdb.d
 RUN uninstall_packages curl
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mysql/postunpack.sh
 ENV APP_VERSION="8.4.6-6" \
     BITNAMI_APP_NAME="percona-mysql" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     MYSQL_HOME="/opt/bitnami/mysql/conf" \
     PATH="/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/mysql/sbin:$PATH"
 
