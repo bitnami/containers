@@ -100,6 +100,12 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 USER 1001
 ```
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Cypress Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Maintenance
 
 ### Upgrade this image
