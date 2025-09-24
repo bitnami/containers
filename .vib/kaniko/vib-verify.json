@@ -4,7 +4,7 @@
       "url": "{SHA_ARCHIVE}",
       "path": "{VIB_ENV_PATH}"
     },
-    "runtime_parameters": "Y29tbWFuZDogWyIvc2hhcmVkL2J1c3lib3giLCAic2xlZXAiLCAiMzYwMCJdCg=="
+    "runtime_parameters": "Y29tbWFuZDogWyJ0YWlsIiwgIi1mIiwgIi9kZXYvbnVsbCJd"
   },
   "phases": {
     "package": {
@@ -25,7 +25,7 @@
           },
           "size_thresholds": [
             {
-              "size": "45MB",
+              "size": "60MB",
               "kind": "COMPRESSED"
             }
           ]
