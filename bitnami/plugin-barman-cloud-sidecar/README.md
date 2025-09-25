@@ -81,6 +81,12 @@ docker run --rm --name plugin-barman-cloud-sidecar bitnami/plugin-barman-cloud-s
 
 Check the [official Barman Cloud Plugin Sidecar for CloudNativePG documentation](https://cloudnative-pg.io/plugin-barman-cloud/) for more information.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Barman Cloud Plugin Sidecar for CloudNativePG Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
