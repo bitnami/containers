@@ -103,6 +103,12 @@ docker run --rm --name fluxcd-kustomize-controller bitnami/fluxcd-kustomize-cont
 
 Check the [official Flux Kustomize Controller documentation](https://github.com/fluxcd/kustomize-controller) for more information about how to use Flux Kustomize Controller.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Flux Kustomize Controller Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### Starting January 16, 2024
