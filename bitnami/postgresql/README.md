@@ -755,7 +755,7 @@ If you are using your custom `postgresql.conf`, you should create (or uncomment)
 ```console
 /path/to/postgresql-persistence/conf/
 ├── conf.d
-│   └── extended.conf
+│   └── extended.conf
 └── postgresql.conf
 
 1 directory, 2 files
@@ -850,6 +850,12 @@ It is possible to change the user that PostgreSQL will use to execute the init s
 ### Default toast compression
 
 The default toast compression is `pglz`, but you can modify it by setting the environment variable `POSTGRES_DEFAULT_COMPRESSION` with the desired value. For example: `POSTGRES_DEFAULT_COMPRESSION='lz4'`.
+
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami PostgreSQL Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
 ## Logging
 

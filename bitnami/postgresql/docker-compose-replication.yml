@@ -3,7 +3,7 @@
 
 services:
   postgresql-master:
-    image: docker.io/bitnami/postgresql:17
+    image: docker.io/bitnami/postgresql:18
     ports:
       - '5432'
     volumes:
@@ -17,7 +17,7 @@ services:
       - POSTGRESQL_DATABASE=my_database
       - ALLOW_EMPTY_PASSWORD=yes
   postgresql-slave:
-    image: docker.io/bitnami/postgresql:17
+    image: docker.io/bitnami/postgresql:18
     ports:
       - '5432'
     depends_on:
