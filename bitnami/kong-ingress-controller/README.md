@@ -77,6 +77,12 @@ docker run --rm --name kong-ingress-controller bitnami/kong-ingress-controller:l
 
 Consult the [kong-ingress-controller Reference Documentation](https://docs.konghq.com/kubernetes-ingress-controller/)
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Kong Ingress Controller Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### Starting January 16, 2024

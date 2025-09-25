@@ -105,6 +105,10 @@ Check the [official Kaniko documentation](https://github.com/chainguard-dev/kani
 
 ## Notable Changes
 
+### Starting September 23, 2025
+
+* The `bitnami/kaniko` is now based on minimal Linux distribution instead of scratch. This change means the container now includes a shell and basic utilities, allowing you to easily debug and troubleshoot within the container.
+
 ### Starting January 16, 2024
 
 - The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.

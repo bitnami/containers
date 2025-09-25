@@ -1,14 +1,14 @@
+root_dir: /opt/bitnami
 files:
   - mode: "0644"
     paths:
       - /opt/bitnami/kaniko/.spdx-kaniko.spdx
-  - mode: "0755"
-    paths:
-      - /kaniko/docker-credential-acr-env
-      - /kaniko/docker-credential-ecr-login
-      - /kaniko/docker-credential-gcr
-      - /kaniko/executor
-      - /kaniko/warmer
+binaries:
+  - docker-credential-acr-env
+  - docker-credential-ecr-login
+  - docker-credential-gcr
+  - executor
+  - warmer
 version:
   bin_name: /kaniko/executor
   flag: version
