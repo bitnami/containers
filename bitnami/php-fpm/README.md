@@ -315,6 +315,12 @@ In order to override the default `max_file_uploads` settings you can do the foll
 
     You should see that PHP is using the new specified value for the `max_file_uploads` setting.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami PHP-FPM Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Logging
 
 The Bitnami PHP-FPM Docker Image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/reference/run/#logging-drivers-log-driver) using the `--log-driver` option. By defauly the `json-file` driver is used.
