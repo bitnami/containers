@@ -251,6 +251,12 @@ The Bitnami Mastodon container supports connecting the Mastodon application to a
       bitnami/mastodon:latest
     ```
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Mastodon Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Logging
 
 The Bitnami Mastodon Docker image sends the container logs to `stdout`. To view the logs:
