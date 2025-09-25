@@ -81,6 +81,12 @@ docker run --rm --name configurable-http-proxy bitnami/configurable-http-proxy:l
 
 Check the [official Configurable HTTP Proxy documentation](https://github.com/jupyterhub/configurable-http-proxy#command-line-options) for a list of the available parameters.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Configurable HTTP Proxy Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### Starting January 16, 2024
