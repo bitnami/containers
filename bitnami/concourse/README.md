@@ -128,6 +128,12 @@ Find how to configure Concourse in its [official documentation](https://concours
 
 #### Read-only environment variables
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Concourse Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Logging
 
 The Bitnami concourse Docker image sends the container logs to `stdout`. To view the logs:
