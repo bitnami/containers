@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-24T12:58:11Z" \
+      org.opencontainers.image.created="2025-09-25T16:50:08Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/clickhouse-keeper/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/clickhouse-keeper" \
       org.opencontainers.image.title="clickhouse-keeper" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="25.8.6"
+      org.opencontainers.image.version="25.8.7"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "clickhouse-keeper-25.8.6-0-linux-${OS_ARCH}-debian-12" \
+      "clickhouse-keeper-25.8.7-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -47,7 +47,7 @@ RUN uninstall_packages curl
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/clickhouse-keeper/postunpack.sh
-ENV APP_VERSION="25.8.6" \
+ENV APP_VERSION="25.8.7" \
     BITNAMI_APP_NAME="clickhouse-keeper" \
     IMAGE_REVISION="0" \
     PATH="/opt/bitnami/clickhouse-keeper/bin:/opt/bitnami/common/bin:$PATH" \

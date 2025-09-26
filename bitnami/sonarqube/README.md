@@ -348,6 +348,12 @@ The Bitnami SonarQube&trade; container supports connecting the SonarQube&trade; 
 
 In case the database already contains data from a previous SonarQube&trade; installation, you need to set the variable `SONARQUBE_SKIP_BOOTSTRAP` to `yes`. Otherwise, the container would execute the installation wizard and could modify the existing data in the database. Note that, when setting `SONARQUBE_SKIP_BOOTSTRAP` to `yes`, values for environment variables such as `SONARQUBE_USERNAME`, `SONARQUBE_PASSWORD` or `SONARQUBE_EMAIL` will be ignored.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami SonarQube&trade; Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Logging
 
 The Bitnami SonarQube&trade; Docker image sends the container logs to `stdout`. To view the logs:

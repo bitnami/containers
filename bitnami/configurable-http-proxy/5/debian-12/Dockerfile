@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-07T00:26:54Z" \
+      org.opencontainers.image.created="2025-09-25T18:42:25Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/configurable-http-proxy/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/configurable-http-proxy" \
       org.opencontainers.image.title="configurable-http-proxy" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="5.0.1"
+      org.opencontainers.image.version="5.1.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,9 +28,9 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "python-3.13.7-0-linux-${OS_ARCH}-debian-12" \
-      "node-24.7.0-0-linux-${OS_ARCH}-debian-12" \
-      "configurable-http-proxy-5.0.1-1-linux-${OS_ARCH}-debian-12" \
+      "python-3.13.7-2-linux-${OS_ARCH}-debian-12" \
+      "node-24.8.0-1-linux-${OS_ARCH}-debian-12" \
+      "configurable-http-proxy-5.1.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -47,9 +47,9 @@ RUN chmod g+rwX /opt/bitnami
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN uninstall_packages curl
 
-ENV APP_VERSION="5.0.1" \
+ENV APP_VERSION="5.1.0" \
     BITNAMI_APP_NAME="configurable-http-proxy" \
-    IMAGE_REVISION="23" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/configurable-http-proxy/bin:$PATH"
 
 EXPOSE 3000

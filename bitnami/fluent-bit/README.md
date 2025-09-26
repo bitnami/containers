@@ -134,6 +134,12 @@ Fluent Bit is flexible enough to be configured either from the command line or t
 
 [Configuration reference](https://fluentbit.io/documentation/)
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Fluent Bit Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Plugins
 
 Fluent Bit supports multiple extensions via plugins.

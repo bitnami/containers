@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-07T02:50:21Z" \
+      org.opencontainers.image.created="2025-09-25T10:06:08Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/vault/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/vault" \
       org.opencontainers.image.title="vault" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.20.3"
+      org.opencontainers.image.version="1.20.4"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "vault-1.20.3-1-linux-${OS_ARCH}-debian-12" \
+      "vault-1.20.4-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -44,9 +44,9 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN useradd -r -u 1001 -g root vault
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
-ENV APP_VERSION="1.20.3" \
+ENV APP_VERSION="1.20.4" \
     BITNAMI_APP_NAME="vault" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/vault/bin:$PATH"
 
 USER 1001
