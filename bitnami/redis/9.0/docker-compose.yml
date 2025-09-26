@@ -1,0 +1,35 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  # Primary Redis service using Bitnami image
+  redis:
+    image: bitnami/redis:8.2
+    profiles: ["bitnami"]
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    ports:
+      - '6379:6379'
+    volumes:
+      - 'redis_data:/bitnami/redis/data'
+    restart: unless-stopped
+
+  # Fallback Redis service using superset-redis image
+  redis-fallback:
+    image: felipemoreira1/superset-redis:1.0
+    profiles: ["fallback"]
+    environment:
+      # Redis configuration for fallback service
+      - REDIS_ARGS=--requirepass ""
+    ports:
+      - '6379:6379'
+    volumes:
+      - 'redis_data:/data'
+    restart: unless-stopped
+    command: ["/opt/bitnami/scripts/redis/run.sh"]
+
+volumes:
+  redis_data:
+    driver: local

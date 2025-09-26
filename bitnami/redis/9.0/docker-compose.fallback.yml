@@ -1,0 +1,14 @@
+# Docker Compose override for fallback Redis
+# Use this file when the Bitnami image is not available
+# Usage: docker compose -f docker-compose.yml -f docker-compose.fallback.yml up -d
+
+services:
+  redis:
+    image: felipemoreira1/superset-redis:1.0
+    profiles: ["default"]  # Override the profile to make it default
+    environment:
+      # Override environment for superset-redis
+      - REDIS_ARGS=--requirepass ""
+    volumes:
+      - 'redis_data:/data'  # Different mount point for superset-redis
+    command: ["/opt/bitnami/scripts/redis/run.sh"]
