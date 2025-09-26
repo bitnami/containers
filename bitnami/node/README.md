@@ -113,6 +113,12 @@ node:
 - [package.json documentation](https://docs.npmjs.com/files/package.json)
 - [npm start script](https://docs.npmjs.com/misc/scripts#default-values)
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Node.js Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Working with private npm modules
 
 To work with npm private modules, it is necessary to be logged into npm. npm CLI uses *auth tokens* for authentication. Check the official [npm documentation](https://www.npmjs.com/package/get-npm-token) for further information about how to obtain the token.
