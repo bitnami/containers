@@ -317,6 +317,12 @@ docker-compose up -d
 
 Find more information about Cloud Code and Cloud functions in the [official documentation](https://docs.parseplatform.org/cloudcode/guide/).
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Parse Server Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### 4.9.3
