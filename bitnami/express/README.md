@@ -110,6 +110,12 @@ In addition to the Express Development Container, the [docker-compose.yml](https
 
 ### Read-only environment variables
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Express Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Executing commands
 
 Commands can be launched inside the `myapp` Express Development Container with `docker-compose` using the [exec](https://docs.docker.com/compose/reference/exec/) command.
