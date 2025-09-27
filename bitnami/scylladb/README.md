@@ -443,6 +443,12 @@ docker-compose restart scylladb
 
 Refer to the [configuration](http://docs.datastax.com/en/scylladb/3.x/scylladb/configuration/configTOC.html) manual for the complete list of configuration options.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami ScyllaDB Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## TLS Encryption
 
 The Bitnami ScyllaDB Docker image allows configuring TLS encryption between nodes and between server-client. This is done by mounting in `/bitnami/scylladb/secrets` two files:
