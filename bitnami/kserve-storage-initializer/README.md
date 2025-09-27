@@ -81,6 +81,12 @@ docker run --rm --name kserve-storage-initializer bitnami/kserve-storage-initial
 
 Check the [official KServe Storage Initializer documentation](https://kserve.github.io/website) for more information.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami KServe Storage Initializer Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
