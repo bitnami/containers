@@ -17,7 +17,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "clickhouse-operator-0.25.3-2-linux-${OS_ARCH}-debian-12" \
+      "clickhouse-operator-0.25.4-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -40,18 +40,18 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-09-03T20:45:16Z" \
+      org.opencontainers.image.created="2025-09-26T15:43:34Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="clickhouse-operator" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="0.25.3"
+      org.opencontainers.image.version="0.25.4"
 
 COPY rootfs /
 COPY --from=builder /opt/bitnami/clickhouse-operator /opt/bitnami/clickhouse-operator
 
-ENV APP_VERSION="0.25.3" \
+ENV APP_VERSION="0.25.4" \
     BITNAMI_APP_NAME="clickhouse-operator" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/clickhouse-operator/bin:$PATH"
 
 USER 1001

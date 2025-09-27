@@ -113,6 +113,14 @@ docker run --name dotnet-node1 --network dotnet-network bitnami/dotnet:latest
 
 We can launch another containers using the same flag (`--network.NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
 
+## Configuration
+
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami .NET Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Logging
 
 The Bitnami Dotnet Docker image sends the container logs to `stdout`. To view the logs:
