@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-26T12:15:43Z" \
+      org.opencontainers.image.created="2025-09-28T00:28:04Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/cypress/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cypress" \
@@ -52,7 +52,7 @@ RUN mkdir /app && chmod g+rwX -R /app /opt/bitnami/node/cypress-cache && ln -s /
 ENV APP_VERSION="15.3.0" \
     BITNAMI_APP_NAME="cypress" \
     CYPRESS_CACHE_FOLDER="/opt/bitnami/node/cypress-cache" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="5" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/node/lib/node_modules/cypress/bin:$PATH"
 
 EXPOSE 3000

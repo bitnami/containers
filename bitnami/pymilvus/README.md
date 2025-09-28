@@ -101,6 +101,12 @@ docker run -it --name pymilvus -v /path/to/app:/app bitnami/pymilvus \
 
 - [pymilvus documentation](https://github.com/milvus-io/pymilvusdocs/)
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami PyMilvus Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Maintenance
 
 ### Upgrade this image

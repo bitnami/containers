@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-25T22:36:32Z" \
+      org.opencontainers.image.created="2025-09-28T00:22:00Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/airflow/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/airflow" \
@@ -49,19 +49,16 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
     DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales && \
     echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen
+RUN /opt/bitnami/scripts/locales/generate-locales.sh
 RUN mkdir /.local && chmod g+rwX /.local
 RUN uninstall_packages curl
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/airflow/postunpack.sh
-RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
-    DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales && \
-    echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen
-RUN /opt/bitnami/scripts/locales/generate-locales.sh
 ENV AIRFLOW_HOME="/opt/bitnami/airflow" \
     APP_VERSION="3.1.0" \
     BITNAMI_APP_NAME="airflow" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="4" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib:/opt/bitnami/airflow/venv/lib/python3.12/site-packages/numpy.libs:$LD_LIBRARY_PATH" \
