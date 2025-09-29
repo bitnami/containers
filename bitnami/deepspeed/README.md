@@ -103,6 +103,12 @@ docker run --rm --name deepspeed bitnami/deepspeed:latest --help
 
 Check the [official DeepSpeed documentation](https://www.deepspeed.ai/docs/) for more information about how to use DeepSpeed.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami DeepSpeed Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### Starting January 16, 2024
