@@ -3,7 +3,7 @@
 
 services:
   mongodb-primary:
-    image: docker.io/bitnami/mongodb:8.0
+    image: docker.io/bitnami/mongodb:8.2
     environment:
       - MONGODB_ADVERTISED_HOSTNAME=mongodb-primary
       - MONGODB_REPLICA_SET_MODE=primary
@@ -13,7 +13,7 @@ services:
       - 'mongodb_master_data:/bitnami/mongodb'
 
   mongodb-secondary:
-    image: docker.io/bitnami/mongodb:8.0
+    image: docker.io/bitnami/mongodb:8.2
     depends_on:
       - mongodb-primary
     environment:
@@ -24,7 +24,7 @@ services:
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
 
   mongodb-arbiter:
-    image: docker.io/bitnami/mongodb:8.0
+    image: docker.io/bitnami/mongodb:8.2
     depends_on:
       - mongodb-primary
     environment:

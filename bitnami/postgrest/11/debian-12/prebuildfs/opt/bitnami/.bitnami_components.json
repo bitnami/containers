@@ -1,8 +1,0 @@
-{
-    "postgrest": {
-        "arch": "amd64",
-        "distro": "debian-12",
-        "type": "NAMI",
-        "version": "11.2.2-7"
-    }
-}

@@ -21,7 +21,13 @@
             "architectures": [
               "linux/amd64"
             ]
-          }
+          },
+          "size_thresholds": [
+            {
+              "size": "525MB",
+              "kind": "COMPRESSED"
+            }
+          ]
         }
       ]
     },

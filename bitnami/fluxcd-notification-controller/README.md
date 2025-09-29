@@ -104,6 +104,12 @@ docker run --rm --name fluxcd-notification-controller bitnami/fluxcd-notificatio
 
 Check the [official Flux Notification Controller documentation](https://github.com/fluxcd/notification-controller) for more information about how to use Flux Notification Controller.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Flux Notification Controller Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### Starting January 16, 2024

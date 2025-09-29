@@ -18,7 +18,13 @@
                 "tag": "{VIB_ENV_TAG}"
               }
             }
-          }
+          },
+          "size_thresholds": [
+            {
+              "size": "410MB",
+              "kind": "COMPRESSED"
+            }
+          ]
         }
       ]
     },

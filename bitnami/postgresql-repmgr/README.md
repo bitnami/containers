@@ -723,6 +723,12 @@ Refer to [issues/27124](https://github.com/bitnami/containers/issues/27124) for 
 | `POSTGRESQL_MASTER_HOST`                     | PostgreSQL master host                                          | `$REPMGR_PRIMARY_HOST`                        |
 | `POSTGRESQL_MASTER_PORT_NUMBER`              | PostgreSQL master host port                                     | `$REPMGR_PRIMARY_PORT`                        |
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami PostgreSQL HA Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Logging
 
 The Bitnami PostgreSQL HA Docker image sends the container logs to `stdout`. To view the logs:

@@ -79,7 +79,7 @@ To run commands inside this container you can use `docker run`, for example to e
 docker run --rm --name victoriametrics-vmauth bitnami/victoriametrics-vmauth:latest --  --help
 ```
 
-Check the [official VictoriaMetrics Auth documentation](<https://victoriametrics.com/> for more information.
+Check the [official VictoriaMetrics Auth documentation](https://victoriametrics.com/) for more information.
 
 ## Contributing
 

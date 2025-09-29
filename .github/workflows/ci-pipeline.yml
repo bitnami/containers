@@ -60,6 +60,8 @@ jobs:
       contents: read
       pull-requests: write
     needs: get-containers
+    if: |
+      needs.get-containers.outputs.result == 'ok'
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
         name: Checkout Repository
@@ -166,7 +168,7 @@ jobs:
     steps:
       - id: get-status
         name: Check Status
-        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd
         with:
           result-encoding: string
           script: |
@@ -216,7 +218,7 @@ jobs:
       # Approve the CI's PR automatically, as it has been tested in our internal pipeline already
       # Approved by the 'github-actions' user; a PR can't be approved by its author
       - name: PR Approval
-        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd
         with:
           result-encoding: string
           retries: 3
@@ -229,7 +231,7 @@ jobs:
             });
       - name: Merge
         id: merge
-        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd
         with:
           result-encoding: string
           retries: 3
@@ -246,7 +248,7 @@ jobs:
       # post a comment on the PR and assign a maintainer agent to review it
       - name: Manual review required
         if: ${{ always() && steps.merge.outcome != 'success' }}
-        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd
         env:
           BODY: |
             There has been an error during the automated release process. Manual revision is now required.

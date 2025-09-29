@@ -85,6 +85,12 @@ It's possible to load your own configuration, which is useful if you want to con
 docker run --rm --name google-cloud-sdk -v /path/to/your/gcloud/config:/.config/gcloud/configurations/config_default bitnami/google-cloud-sdk:latest
 ```
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Google Cloud SDK Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### Starting January 16, 2024

@@ -123,6 +123,12 @@ Check the [official Nessie Utils documentation](https://projectnessie.org/) for 
 
 This container supports the upstream Nessie Utils environment variables. Check the [official Nessie Utils documentation](https://projectnessie.org//nessie-utils-latest/configuration/) for the possible environment variables.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Nessie Utils Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Contributing
 
 We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.

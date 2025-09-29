@@ -6,15 +6,14 @@ FROM docker.io/bitnami/minideb:bookworm
 ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
-LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
-      org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-08-13T17:11:38Z" \
+LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
+      org.opencontainers.image.created="2025-09-11T17:58:21Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/argo-workflow-exec/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/argo-workflow-exec" \
       org.opencontainers.image.title="argo-workflow-exec" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="3.7.1"
+      org.opencontainers.image.version="3.7.2"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-12" \
@@ -28,9 +27,9 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "yq-4.47.1-2-linux-${OS_ARCH}-debian-12" \
-      "kubectl-1.33.3-2-linux-${OS_ARCH}-debian-12" \
-      "argo-workflow-exec-3.7.1-1-linux-${OS_ARCH}-debian-12" \
+      "yq-4.47.2-0-linux-${OS_ARCH}-debian-12" \
+      "kubectl-1.34.1-0-linux-${OS_ARCH}-debian-12" \
+      "argo-workflow-exec-3.7.2-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -48,8 +47,9 @@ RUN uninstall_packages curl
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/argo-workflow-exec/postunpack.sh
-ENV APP_VERSION="3.7.1" \
+ENV APP_VERSION="3.7.2" \
     BITNAMI_APP_NAME="argo-workflow-exec" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/kubectl/bin:/opt/bitnami/argo-workflow-exec/bin:/opt/bitnami/argo-workflow-exec/hack:$PATH"
 
 USER 1001

@@ -22,7 +22,13 @@
               "linux/amd64",
               "linux/arm64"
             ]
-          }
+          },
+          "size_thresholds": [
+            {
+              "size": "810MB",
+              "kind": "COMPRESSED"
+            }
+          ]
         }
       ]
     },

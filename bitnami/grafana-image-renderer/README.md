@@ -175,6 +175,12 @@ After changing the configuration, restart your Grafana Image Renderer container 
 
 After that, your configuration will be taken into account in the server's behaviour.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Grafana Image Renderer Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Logging
 
 The Bitnami Grafana Image Renderer Docker image sends the container logs to the `stdout`. To view the logs:

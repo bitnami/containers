@@ -71,10 +71,8 @@ zookeeper_validate() {
     is_boolean_yes "$ZOO_ENABLE_ADMIN_SERVER" && check_conflicting_ports ZOO_PORT_NUMBER ZOO_PROMETHEUS_METRICS_PORT_NUMBER ZOO_ADMIN_SERVER_PORT_NUMBER
 
     # ZooKeeper client-server authentication validations
-    if is_boolean_yes "$ALLOW_ANONYMOUS_LOGIN"; then
-        warn "You have set the environment variable ALLOW_ANONYMOUS_LOGIN=${ALLOW_ANONYMOUS_LOGIN}. For safety reasons, do not use this flag in a production environment."
-    elif ! is_boolean_yes "$ZOO_ENABLE_AUTH"; then
-        print_validation_error "The ZOO_ENABLE_AUTH environment variable does not configure authentication. Set the environment variable ALLOW_ANONYMOUS_LOGIN=yes to allow unauthenticated users to connect to ZooKeeper."
+    if is_boolean_yes "$ZOO_ENABLE_AUTH" && is_boolean_yes $ZOO_FIPS_MODE; then
+        print_validation_error "The ZOO_ENABLE_AUTH environment variable configures authentication using SASL/Digest-MD5 which is incompatible with FIPS. Set the environment variable ZOO_FIPS_MODE=no to disable FIPS in ZooKeeper."
     fi
 
     # ZooKeeper server-server authentication validations
@@ -211,6 +209,7 @@ zookeeper_generate_conf() {
     zookeeper_conf_set "$ZOO_CONF_FILE" autopurge.snapRetainCount "$ZOO_AUTOPURGE_RETAIN_COUNT"
     zookeeper_conf_set "$ZOO_CONF_FILE" 4lw.commands.whitelist "$ZOO_4LW_COMMANDS_WHITELIST"
     zookeeper_conf_set "$ZOO_CONF_FILE" maxSessionTimeout "$ZOO_MAX_SESSION_TIMEOUT"
+    zookeeper_export_jvmflags "-Dzookeeper.fips-mode=$(is_boolean_yes "$ZOO_FIPS_MODE" && echo true || echo false)"
     # Set log level
     if [ -f "${ZOO_CONF_DIR}/logback.xml" ]; then
       # Zookeeper 3.8+
@@ -253,16 +252,20 @@ zookeeper_generate_conf() {
         zookeeper_conf_set "$ZOO_CONF_FILE" serverCnxnFactory org.apache.zookeeper.server.NettyServerCnxnFactory
         [[ -n "$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD" ]] && zookeeper_conf_set "$ZOO_CONF_FILE" ssl.keyStore.password "$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD"
         zookeeper_conf_set "$ZOO_CONF_FILE" ssl.keyStore.location "$ZOO_TLS_CLIENT_KEYSTORE_FILE"
+        [[ -n "$ZOO_TLS_CLIENT_KEYSTORE_TYPE" ]] && zookeeper_conf_set "$ZOO_CONF_FILE" ssl.keyStore.type "$ZOO_TLS_CLIENT_KEYSTORE_TYPE"
         [[ -n "$ZOO_TLS_CLIENT_TRUSTSTORE_PASSWORD" ]] && zookeeper_conf_set "$ZOO_CONF_FILE" ssl.trustStore.password "$ZOO_TLS_CLIENT_TRUSTSTORE_PASSWORD"
         zookeeper_conf_set "$ZOO_CONF_FILE" ssl.trustStore.location "$ZOO_TLS_CLIENT_TRUSTSTORE_FILE"
+        [[ -n "$ZOO_TLS_CLIENT_TRUSTSTORE_TYPE" ]] && zookeeper_conf_set "$ZOO_CONF_FILE" ssl.trustStore.type "$ZOO_TLS_CLIENT_TRUSTSTORE_TYPE"
     fi
     if is_boolean_yes "$ZOO_TLS_QUORUM_ENABLE"; then
         zookeeper_conf_set "$ZOO_CONF_FILE" sslQuorum true
         zookeeper_conf_set "$ZOO_CONF_FILE" ssl.quorum.clientAuth "$ZOO_TLS_QUORUM_CLIENT_AUTH"
         zookeeper_conf_set "$ZOO_CONF_FILE" serverCnxnFactory org.apache.zookeeper.server.NettyServerCnxnFactory
         zookeeper_conf_set "$ZOO_CONF_FILE" ssl.quorum.keyStore.location "$ZOO_TLS_QUORUM_KEYSTORE_FILE"
+        [[ -n "$ZOO_TLS_QUORUM_KEYSTORE_TYPE" ]] && zookeeper_conf_set "$ZOO_CONF_FILE" ssl.quorum.keyStore.type "$ZOO_TLS_QUORUM_KEYSTORE_TYPE"
         [[ -n "$ZOO_TLS_QUORUM_KEYSTORE_PASSWORD" ]] && zookeeper_conf_set "$ZOO_CONF_FILE" ssl.quorum.keyStore.password "$ZOO_TLS_QUORUM_KEYSTORE_PASSWORD"
         zookeeper_conf_set "$ZOO_CONF_FILE" ssl.quorum.trustStore.location "$ZOO_TLS_QUORUM_TRUSTSTORE_FILE"
+        [[ -n "$ZOO_TLS_QUORUM_TRUSTSTORE_TYPE" ]] && zookeeper_conf_set "$ZOO_CONF_FILE" ssl.quorum.trustStore.type "$ZOO_TLS_QUORUM_TRUSTSTORE_TYPE"
         [[ -n "$ZOO_TLS_QUORUM_TRUSTSTORE_PASSWORD" ]] && zookeeper_conf_set "$ZOO_CONF_FILE" ssl.quorum.trustStore.password "$ZOO_TLS_QUORUM_TRUSTSTORE_PASSWORD"
     fi
     zookeeper_configure_from_environment_variables

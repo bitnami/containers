@@ -101,6 +101,12 @@ docker run -it --name tensorflow -v /path/to/app:/app bitnami/tensorflow \
 
 - [tensorflow documentation](https://tensorflow.orgdocs/)
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Tensorflow Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Maintenance
 
 ### Upgrade this image

@@ -478,6 +478,12 @@ docker run -d --name airflow -p 8080:8080 \
     bitnami/airflow:latest
 ```
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Apache Airflow Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### Starting October 30, 2024

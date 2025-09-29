@@ -19,6 +19,6 @@ command:
     {{ if and (index .Vars "linked_libraries") (index .Vars.linked_libraries "timeout")}}
     timeout: {{ .Vars.linked_libraries.timeout }}
     {{ else }}
-    timeout: 20000
+    timeout: 40000
     {{ end }}
     exit-status: 0

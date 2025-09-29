@@ -347,6 +347,12 @@ The Bitnami Ghost container supports connecting the Ghost application to an exte
 
 In case the database already contains data from a previous Ghost installation, you need to set the variable `GHOST_SKIP_BOOTSTRAP` to `yes`. Otherwise, the container would execute the installation wizard and could modify the existing data in the database. Note that, when setting `GHOST_SKIP_BOOTSTRAP` to `yes`, values for environment variables such as `GHOST_USERNAME`, `GHOST_PASSWORD` or `GHOST_EMAIL` will be ignored.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Ghost Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Logging
 
 The Bitnami Ghost Docker image sends the container logs to `stdout`. To view the logs:
