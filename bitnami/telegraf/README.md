@@ -77,6 +77,12 @@ docker run --rm --name telegraf bitnami/telegraf:latest -- telegraf --version
 
 Check the [official Telegraf documentation](https://docs.influxdata.com/telegraf) for a list of the available parameters.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Telegraf &trade; Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### Starting January 16, 2024
