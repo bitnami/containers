@@ -46,11 +46,12 @@ kibana_create_system_user() {
     local -r retries="60"
     local -r sleep_time="5"
     local url
-    url=$(kibana_sanitize_elasticsearch_hosts "${KIBANA_ELASTICSEARCH_URL}" "${KIBANA_ELASTICSEARCH_PORT_NUMBER}")
+    # Connecting to the first host to create system user
+    url=$(kibana_sanitize_elasticsearch_hosts "${KIBANA_ELASTICSEARCH_URL%%,*}" "${KIBANA_ELASTICSEARCH_PORT_NUMBER}")
     check_elasticsearch() {
         local status_code="000"
         status_code=$(curl -L -s -k -o /dev/null "${url}" -w "%{http_code}")
-        debug "Attempted to connect with Elasticserach. Status code: $status_code"
+        debug "Attempted to connect with Elasticsearch. Url: '${url}'. Status code: $status_code"
         # Any status code different to 000 will be considered valid
         [[ "$status_code" != "000" ]]
     }
