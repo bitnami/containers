@@ -8,7 +8,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-28T01:09:11Z" \
+      org.opencontainers.image.created="2025-09-29T01:04:02Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/spark/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/spark" \
@@ -55,7 +55,7 @@ RUN /opt/bitnami/scripts/spark/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="4.0.1" \
     BITNAMI_APP_NAME="spark" \
-    IMAGE_REVISION="4" \
+    IMAGE_REVISION="8" \
     JAVA_HOME="/opt/bitnami/java" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib:/opt/bitnami/spark/venv/lib/python3.12/site-packages/numpy.libs:$LD_LIBRARY_PATH" \
     LIBNSS_WRAPPER_PATH="/opt/bitnami/common/lib/libnss_wrapper.so" \

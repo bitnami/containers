@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-28T01:25:36Z" \
+      org.opencontainers.image.created="2025-09-29T00:34:07Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/google-cloud-sdk/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/google-cloud-sdk" \
@@ -50,7 +50,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="0.540.0" \
     BITNAMI_APP_NAME="google-cloud-sdk" \
-    IMAGE_REVISION="4" \
+    IMAGE_REVISION="8" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/google-cloud-sdk/bin:$PATH"
 
 USER 1001

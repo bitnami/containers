@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-27T12:54:57Z" \
+      org.opencontainers.image.created="2025-09-28T18:57:59Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/pytorch/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/pytorch" \
@@ -51,7 +51,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/pytorch/postunpack.sh
 ENV APP_VERSION="2.8.0" \
     BITNAMI_APP_NAME="pytorch" \
-    IMAGE_REVISION="5" \
+    IMAGE_REVISION="9" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 WORKDIR /app
