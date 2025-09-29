@@ -46,8 +46,8 @@ kibana_create_system_user() {
     local -r retries="60"
     local -r sleep_time="5"
     local url
-    local first_elastic_node="${KIBANA_ELASTICSEARCH_URL%%,*}"
-    url=$(kibana_sanitize_elasticsearch_hosts "${first_elastic_node}" "${KIBANA_ELASTICSEARCH_PORT_NUMBER}")
+    # Connecting to the first host to create system user
+    url=$(kibana_sanitize_elasticsearch_hosts "${KIBANA_ELASTICSEARCH_URL%%,*}" "${KIBANA_ELASTICSEARCH_PORT_NUMBER}")
     check_elasticsearch() {
         local status_code="000"
         status_code=$(curl -L -s -k -o /dev/null "${url}" -w "%{http_code}")
