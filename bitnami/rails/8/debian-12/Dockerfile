@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-09T09:55:57Z" \
+      org.opencontainers.image.created="2025-09-29T10:29:50Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/rails/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/rails" \
@@ -27,10 +27,10 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "python-3.13.7-0-linux-${OS_ARCH}-debian-12" \
+      "python-3.13.7-2-linux-${OS_ARCH}-debian-12" \
       "wait-for-port-1.0.10-1-linux-${OS_ARCH}-debian-12" \
-      "ruby-3.2.9-1-linux-${OS_ARCH}-debian-12" \
-      "node-24.7.0-0-linux-${OS_ARCH}-debian-12" \
+      "ruby-3.2.9-2-linux-${OS_ARCH}-debian-12" \
+      "node-24.9.0-0-linux-${OS_ARCH}-debian-12" \
       "mysql-client-12.0.2-0-linux-${OS_ARCH}-debian-12" \
       "rails-8.0.2-1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
@@ -52,7 +52,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/rails/postunpack.sh
 ENV APP_VERSION="8.0.2-1" \
     BITNAMI_APP_NAME="rails" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/ruby/bin:/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:$PATH"
 
 EXPOSE 3000
