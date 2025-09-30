@@ -96,6 +96,12 @@ docker build -t bitnami/APP:latest .
 | `KSQL_DEFAULT_LISTENERS`         | Comma-separated list of listeners that listen for API requests over either HTTP or HTTPS. | `http://0.0.0.0:8088`                     |
 | `KSQL_DEFAULT_BOOTSTRAP_SERVERS` | List of Kafka brokers to bootstrap Kafka cluster information from.                        | `localhost:9092`                          |
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Confluent KSQL DB Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### Starting January 16, 2024
