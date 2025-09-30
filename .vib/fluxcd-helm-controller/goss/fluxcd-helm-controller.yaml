@@ -4,6 +4,6 @@
 command:
   check-helm-controller-help:
     exec: helm-controller --help
-    exit-status: 2
+    exit-status: 0
     stderr:
       - "Usage of helm-controller:"
