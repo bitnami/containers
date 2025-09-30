@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-29T18:59:35Z" \
+      org.opencontainers.image.created="2025-09-30T16:14:01Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/drupal/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/drupal" \
@@ -33,7 +33,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
       "mysql-client-12.0.2-0-linux-${OS_ARCH}-debian-12" \
       "libphp-8.3.26-0-linux-${OS_ARCH}-debian-12" \
       "apache-2.4.65-1-linux-${OS_ARCH}-debian-12" \
-      "drupal-11.2.4-1-linux-${OS_ARCH}-debian-12" \
+      "drupal-11.2.4-2-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -60,7 +60,7 @@ ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     APP_VERSION="11.2.4" \
     BITNAMI_APP_NAME="drupal" \
-    IMAGE_REVISION="3" \
+    IMAGE_REVISION="4" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/apache/bin:/opt/bitnami/drupal/vendor/bin:$PATH"
 
 EXPOSE 8080 8443
