@@ -401,6 +401,12 @@ $ docker exec -it -u root debian-12-pgbouncer-1 psql -p 6432 -U postgres pg2 -c 
   (1 row)
 ```
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami PgBouncer Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Using `docker-compose.yaml`
 
 Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes.
