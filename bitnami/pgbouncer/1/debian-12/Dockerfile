@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-30T09:17:21Z" \
+      org.opencontainers.image.created="2025-09-30T11:33:15Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/pgbouncer/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/pgbouncer" \
@@ -28,6 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
+      "nss-wrapper-1.1.16-0-linux-${OS_ARCH}-debian-12" \
       "wait-for-port-1.0.10-1-linux-${OS_ARCH}-debian-12" \
       "postgresql-client-14.19.0-0-linux-${OS_ARCH}-debian-12" \
       "ini-file-1.4.9-1-linux-${OS_ARCH}-debian-12" \
@@ -56,7 +57,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/pgbouncer/postunpack.sh
 ENV APP_VERSION="1.24.1" \
     BITNAMI_APP_NAME="pgbouncer" \
-    IMAGE_REVISION="12" \
+    IMAGE_REVISION="13" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
