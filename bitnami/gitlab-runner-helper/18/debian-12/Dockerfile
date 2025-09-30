@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-30T08:57:12Z" \
+      org.opencontainers.image.created="2025-09-30T11:16:53Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/gitlab-runner-helper/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/gitlab-runner-helper" \
@@ -28,6 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
+      "nss-wrapper-1.1.16-0-linux-${OS_ARCH}-debian-12" \
       "gitlab-runner-helper-18.4.0-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -53,8 +54,8 @@ RUN mkdir /home/gitlab-runner && \
     ln -s /opt/bitnami/gitlab-runner-helper/bin/gitlab-runner-helper /usr/bin/gitlab-runner-helper
 ENV APP_VERSION="18.4.0" \
     BITNAMI_APP_NAME="gitlab-runner-helper" \
-    IMAGE_REVISION="1" \
-    PATH="/opt/bitnami/gitlab-runner-helper/bin:/opt/bitnami/common/bin:$PATH"
+    IMAGE_REVISION="2" \
+    PATH="/opt/bitnami/common/bin:/opt/bitnami/gitlab-runner-helper/bin:$PATH"
 
 USER 1001
 ENTRYPOINT [ "/usr/bin/dumb-init", "/opt/bitnami/scripts/gitlab-runner-helper/entrypoint.sh" ]
