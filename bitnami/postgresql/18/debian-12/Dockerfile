@@ -9,7 +9,7 @@ ARG TARGETARCH
 ARG WITH_ALL_LOCALES="no"
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-25T18:59:31Z" \
+      org.opencontainers.image.created="2025-09-29T19:30:23Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/postgresql/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/postgresql" \
@@ -30,7 +30,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "postgresql-18.0.0-0-linux-${OS_ARCH}-debian-12" \
+      "postgresql-18.0.0-2-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -48,17 +48,14 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
     DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales && \
     echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen
+RUN /opt/bitnami/scripts/locales/generate-locales.sh
 RUN uninstall_packages curl
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/postgresql/postunpack.sh
-RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
-    DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales && \
-    echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen
-RUN /opt/bitnami/scripts/locales/generate-locales.sh
 ENV APP_VERSION="18.0.0" \
     BITNAMI_APP_NAME="postgresql" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="2" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \

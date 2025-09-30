@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-29T00:24:56Z" \
+      org.opencontainers.image.created="2025-09-30T00:29:32Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/ghost/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/ghost" \
       org.opencontainers.image.title="ghost" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="6.0.10"
+      org.opencontainers.image.version="6.1.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -31,7 +31,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
       "python-3.12.11-10-linux-${OS_ARCH}-debian-12" \
       "node-22.20.0-0-linux-${OS_ARCH}-debian-12" \
       "mysql-client-12.0.2-0-linux-${OS_ARCH}-debian-12" \
-      "ghost-6.0.10-0-linux-${OS_ARCH}-debian-12" \
+      "ghost-6.1.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -50,9 +50,9 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 COPY rootfs /
 RUN /opt/bitnami/scripts/ghost/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
-ENV APP_VERSION="6.0.10" \
+ENV APP_VERSION="6.1.0" \
     BITNAMI_APP_NAME="ghost" \
-    IMAGE_REVISION="8" \
+    IMAGE_REVISION="2" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:/opt/bitnami/ghost/bin:$PATH"
 
 EXPOSE 2368 3000
