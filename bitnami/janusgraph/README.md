@@ -111,6 +111,12 @@ The image looks for configuration files (janusgraph.properties, gremlin-server.y
 docker run --name janusgraph -v /path/to/janusgraph.properties:/bitnami/janusgraph/conf/janusgraph.properties -v /path/to/gremlin-server.yaml:/bitnami/janusgraph/conf/gremlin-server.yaml  bitnami/janusgraph:latest
 ```
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami JanusGraph Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ## Contributing
