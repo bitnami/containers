@@ -75,6 +75,12 @@ To run commands inside this container you can use `docker run`, for example to e
 docker run --name git bitnami/git:latest git --version
 ```
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Git Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### Starting January 16, 2024
