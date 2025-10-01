@@ -103,6 +103,12 @@ docker run --rm --name argo-cd bitnami/argo-cd:latest --help
 
 Check the [official Argo CD documentation](https://argo-cd.readthedocs.io/en/stable/operator-manual/server-commands/argocd-server/) for the list of the available parameters.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Argo CD Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### Starting January 16, 2024

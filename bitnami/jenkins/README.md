@@ -231,6 +231,12 @@ When you start the Jenkins image, you can adjust the configuration of the instan
       bitnami/jenkins:latest
     ```
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Jenkins Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Logging
 
 The Bitnami Jenkins Docker image sends the container logs to `stdout`. To view the logs:

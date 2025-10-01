@@ -8,7 +8,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-06T13:38:04Z" \
+      org.opencontainers.image.created="2025-09-30T11:25:13Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/janusgraph/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/janusgraph" \
@@ -30,9 +30,10 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "yq-4.47.1-3-linux-${OS_ARCH}-debian-12" \
-      "jre-11.0.28-12-0-linux-${OS_ARCH}-debian-12" \
-      "janusgraph-1.1.0-2-linux-${OS_ARCH}-debian-12" \
+      "nss-wrapper-1.1.16-0-linux-${OS_ARCH}-debian-12" \
+      "yq-4.47.2-0-linux-${OS_ARCH}-debian-12" \
+      "jre-11.0.28-12-1-linux-${OS_ARCH}-debian-12" \
+      "janusgraph-1.1.0-3-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -54,7 +55,7 @@ RUN /opt/bitnami/scripts/janusgraph/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="1.1.0" \
     BITNAMI_APP_NAME="janusgraph" \
-    IMAGE_REVISION="22" \
+    IMAGE_REVISION="24" \
     JAVA_HOME="/opt/bitnami/java"
 
 USER 1001

@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-30T01:27:11Z" \
+      org.opencontainers.image.created="2025-09-30T12:49:41Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/mlflow/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mlflow" \
@@ -50,7 +50,7 @@ RUN uninstall_packages curl
 RUN mkdir -p /app/mlruns /app/mlartifacts /bitnami/mlflow && chmod g+rwX /app /app/mlruns /app/mlartifacts /bitnami/mlflow && ln -s /opt/bitnami/python/lib/*/site-packages/mlflow/server/auth/ /bitnami/mlflow-basic-auth
 ENV APP_VERSION="3.4.0" \
     BITNAMI_APP_NAME="mlflow" \
-    IMAGE_REVISION="11" \
+    IMAGE_REVISION="13" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 WORKDIR /app

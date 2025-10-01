@@ -105,6 +105,12 @@ docker run --rm --name gitlab-runner-helper bitnami/gitlab-runner–helper:lates
 
 Check the [official Gitlab Runner Helper documentation](https://docs.gitlab.com/runner/configuration/advanced-configuration.html#helper-image) for the list of the available parameters.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Gitlab Runner Helper Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### Starting January 16, 2024
