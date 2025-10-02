@@ -145,6 +145,12 @@ docker run --rm --name jaeger bitnami/jaeger:latest --help
 
 Check the [official Jaeger documentation](https://jaegertracing.io//docs) for more information.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Jaeger Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Using `docker-compose.yaml`
 
 Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/jaeger).
