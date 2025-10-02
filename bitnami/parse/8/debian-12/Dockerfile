@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-30T16:20:19Z" \
+      org.opencontainers.image.created="2025-10-02T15:36:18Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/parse/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/parse" \
       org.opencontainers.image.title="parse" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="8.2.4"
+      org.opencontainers.image.version="8.2.5"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -31,7 +31,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
       "python-3.13.7-2-linux-${OS_ARCH}-debian-12" \
       "node-24.9.0-0-linux-${OS_ARCH}-debian-12" \
       "mongodb-shell-2.5.8-0-linux-${OS_ARCH}-debian-12" \
-      "parse-8.2.4-0-linux-${OS_ARCH}-debian-12" \
+      "parse-8.2.5-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -50,9 +50,9 @@ RUN uninstall_packages curl
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/parse/postunpack.sh
-ENV APP_VERSION="8.2.4" \
+ENV APP_VERSION="8.2.5" \
     BITNAMI_APP_NAME="parse" \
-    IMAGE_REVISION="14" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/parse/bin:$PATH"
 
 EXPOSE 1337 3000
