@@ -611,6 +611,12 @@ When the value of `VALKEY_RDB_POLICY_DISABLED` is `no` (default value) the Valke
       ...
     ```
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Valkey Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Logging
 
 The Bitnami Valkey Docker image sends the container logs to the `stdout`. To view the logs:
