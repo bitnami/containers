@@ -222,6 +222,12 @@ docker restart redis
 
 Refer to the [Redis(R) configuration](https://redis.io/topics/config) manual for the complete list of configuration options.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Redis&reg; Sentinel Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Logging
 
 The Bitnami Redis(R) Sentinel Docker Image sends the container logs to the `stdout`. To view the logs:
