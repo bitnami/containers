@@ -40,7 +40,7 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-09-03T20:46:50Z" \
+      org.opencontainers.image.created="2025-10-03T21:23:19Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="cloudnative-pg" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -54,7 +54,7 @@ COPY --from=builder /opt/bitnami/cloudnative-pg/licenses /opt/bitnami/cloudnativ
 
 ENV APP_VERSION="1.27.0" \
     BITNAMI_APP_NAME="cloudnative-pg" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="3" \
     PATH="/operator:$PATH"
 
 USER 1001
