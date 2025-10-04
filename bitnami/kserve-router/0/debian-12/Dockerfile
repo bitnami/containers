@@ -40,7 +40,7 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-09-04T00:06:38Z" \
+      org.opencontainers.image.created="2025-10-04T00:44:57Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="kserve-router" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -51,7 +51,7 @@ COPY --from=builder /opt/bitnami/kserve /opt/bitnami/kserve
 
 ENV APP_VERSION="0.15.2" \
     BITNAMI_APP_NAME="kserve-router" \
-    IMAGE_REVISION="7" \
+    IMAGE_REVISION="8" \
     PATH="/opt/bitnami/kserve/bin:$PATH"
 
 USER 1001
