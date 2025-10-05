@@ -40,7 +40,7 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-09-04T02:55:15Z" \
+      org.opencontainers.image.created="2025-10-04T03:28:20Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="pinniped" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -53,7 +53,7 @@ COPY --from=builder /opt/bitnami/pinniped/licenses /opt/bitnami/pinniped/license
 
 ENV APP_VERSION="0.41.0" \
     BITNAMI_APP_NAME="pinniped" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="2" \
     PATH="/opt/bitnami/pinniped/bin:$PATH"
 
 USER 1001
