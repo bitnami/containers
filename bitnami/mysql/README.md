@@ -505,6 +505,12 @@ It is also possible to use your custom `my.cnf` and overwrite the main configura
 docker run --name mysql -v /path/to/my.cnf:/opt/bitnami/mysql/conf/my.cnf:ro bitnami/mysql:latest
 ```
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami MySQL Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Customize this image
 
 The Bitnami MySQL Docker image is designed to be extended so it can be used as the base image for your custom configuration.
