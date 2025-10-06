@@ -619,6 +619,12 @@ docker run --name mariadb \
   bitnami/mariadb-galera:latest
 ```
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami MariaDB Galera Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Customize this image
 
 The Bitnami MariaDB Galera Docker image is designed to be extended so it can be used as the base image for your custom configuration.
