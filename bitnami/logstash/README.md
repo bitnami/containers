@@ -249,6 +249,12 @@ docker build --build-arg LOGSTASH_PLUGINS=<plugin1,plugin2,...> -t bitnami/logst
 
 The command above will build the image providing this GitHub repository as build context, and will pass the list of plugins to install to the build logic.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Logstash Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Logging
 
 The Bitnami Logstash Docker image sends the container logs to `stdout`. To view the logs:
