@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-07T01:14:15Z" \
+      org.opencontainers.image.created="2025-10-07T01:32:24Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/hyperledger-fabric-tools/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/hyperledger-fabric-tools" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "golang-1.25.1-0-linux-${OS_ARCH}-debian-12" \
+      "golang-1.25.1-1-linux-${OS_ARCH}-debian-12" \
       "hyperledger-fabric-tools-3.1.1-7-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -49,7 +49,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="3.1.1" \
     BITNAMI_APP_NAME="hyperledger-fabric-tools" \
-    IMAGE_REVISION="13" \
+    IMAGE_REVISION="14" \
     PATH="/go/bin:/opt/bitnami/go/bin:/opt/bitnami/hyperledger-fabric-tools/bin:$PATH"
 
 USER 1001
