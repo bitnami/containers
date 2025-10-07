@@ -103,6 +103,12 @@ docker run --rm --name pinniped-cli bitnami/pinniped-cli:latest --help
 
 Check the [official Pinniped CLI documentation](https://pinniped.dev/docs/) for more information about how to use Pinniped CLI.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Pinniped CLI Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### Starting January 16, 2024
