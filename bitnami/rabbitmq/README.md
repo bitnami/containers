@@ -388,6 +388,12 @@ docker run -d --name rabbitmq-server \
 
 After that, your changes will be taken into account in the server's behaviour.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami RabbitMQ Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Permission of SSL/TLS certificate and key files
 
 If you bind mount the certificate and key files from your local host to the container, make sure to set proper ownership and permissions of those files:

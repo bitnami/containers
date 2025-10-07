@@ -103,6 +103,12 @@ docker run --rm --name apisix-dashboard bitnami/apisix-dashboard:latest --help
 
 Check the [official Apache APISIX Dashboard documentation](https://apisix.apache.org/docs/) for more information about how to use Apache APISIX Dashboard.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Apache APISIX Dashboard Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### Starting January 16, 2024

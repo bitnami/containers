@@ -81,6 +81,12 @@ docker run --rm --name statsd-exporter bitnami/statsd-exporter:latest help
 
 Check the [official StatsD exporter documentation](https://github.com/prometheus/statsd_exporter?tab=readme-ov-file#metric-mapping-and-configuration) for more information about configuration options.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami StatsD exporter Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.

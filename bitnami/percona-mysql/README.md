@@ -130,6 +130,12 @@ docker build -t bitnami/APP:latest .
 | `MYSQL_DEFAULT_BIND_ADDRESS`  | Default Percona Server for MySQL bind address.                                | `0.0.0.0`                     |
 | `MYSQL_HOME`                  | Path to the MYSQL home                                                        | `$DB_CONF_DIR`                |
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Percona Server for MySQL Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Using `docker-compose.yaml`
 
 Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes..

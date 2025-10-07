@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-07T02:47:45Z" \
+      org.opencontainers.image.created="2025-10-07T03:10:03Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/tensorflow-resnet/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/tensorflow-resnet" \
@@ -48,7 +48,7 @@ RUN mkdir /.local && chmod g+rwX /.local
 COPY rootfs /
 ENV APP_VERSION="2.19.1" \
     BITNAMI_APP_NAME="tensorflow-resnet" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="2" \
     PATH="/opt/bitnami/tensorflow-resnet/bin:$PATH"
 
 USER 1001

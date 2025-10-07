@@ -65,6 +65,12 @@ Configuration is done via a YAML file, when run in Kubernetes, it's in ConfigMap
 
 For further documentation, please check [Kubernetes Event Exporter documentation](https://github.com/resmoio/kubernetes-event-exporter#configuration).
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Kubernetes Event Exporter Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Logging
 
 The Bitnami Kubernetes Event Exporter Docker image sends the container logs to the `stdout`. To view the logs:

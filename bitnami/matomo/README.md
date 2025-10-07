@@ -415,6 +415,12 @@ This would be an example of SMTP configuration using a Gmail account:
     bitnami/matomo:latest
 ```
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Matomo Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Customize this image
 
 The Bitnami Matomo Docker image is designed to be extended so it can be used as the base image for your custom web applications.

@@ -163,6 +163,12 @@ docker run -it --name ruby -p 8080:3000 bitnami/ruby:latest
 
 Access your web server in the browser by navigating to `http://localhost:8080`.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Ruby Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Connecting to other containers
 
 If you want to connect to your Ruby web server inside another container, you can use docker networking to create a network and attach all the containers to that network.

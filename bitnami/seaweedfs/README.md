@@ -81,6 +81,12 @@ docker run --rm --name seaweedfs bitnami/seaweedfs:latest help
 
 Check the [official SeaweedFS documentation](https://seaweedfs.github.io) for more information.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami SeaweedFS Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ## Contributing

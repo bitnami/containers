@@ -81,6 +81,12 @@ docker run --name gradle -v /path/to/app:/app bitnami/gradle \
 - [gradle documentation](https://docs.gradle.org/)
 - [gradle command-line interface](https://docs.gradle.org/current/userguide/command_line_interface.html)
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Gradle Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Maintenance
 
 ### Upgrade this image

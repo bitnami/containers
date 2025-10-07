@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-07T00:26:57Z" \
+      org.opencontainers.image.created="2025-10-07T01:48:21Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/couchdb/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/couchdb" \
@@ -30,7 +30,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     COMPONENTS=( \
       "wait-for-port-1.0.10-1-linux-${OS_ARCH}-debian-12" \
       "ini-file-1.4.9-1-linux-${OS_ARCH}-debian-12" \
-      "erlang-28.0.2-0-linux-${OS_ARCH}-debian-12" \
+      "erlang-28.1.0-0-linux-${OS_ARCH}-debian-12" \
       "couchdb-3.5.0-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -51,7 +51,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/couchdb/postunpack.sh
 ENV APP_VERSION="3.5.0" \
     BITNAMI_APP_NAME="couchdb" \
-    IMAGE_REVISION="8" \
+    IMAGE_REVISION="9" \
     LD_LIBRARY_PATH="/opt/bitnami/common/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/erlang/bin:/opt/bitnami/couchdb/bin:$PATH"
 

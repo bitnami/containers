@@ -292,6 +292,12 @@ services:
       - /path/to/httpd.conf:/opt/bitnami/apache/conf/httpd.conf
 ```
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Apache Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Reverse proxy to other containers
 
 Apache can be used to reverse proxy to other containers using Docker's linking system. This is particularly useful if you want to serve dynamic content through an Apache frontend.

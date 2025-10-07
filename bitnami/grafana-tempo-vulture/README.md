@@ -81,6 +81,12 @@ docker run --rm --name grafana-tempo-vulture bitnami/grafana-tempo-vulture:lates
 
 Check the [official Grafana Tempo documentation](https://grafana.com/docs/tempo/latest/configuration/) to understand the possible configurations.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Grafana Tempo Vulture Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### Starting January 16, 2024

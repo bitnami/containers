@@ -73,6 +73,12 @@ docker build -t bitnami/APP:latest .
 
 For further documentation, please check [here](https://github.com/micrometer-metrics/prometheus-rsocket-proxy).
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Prometheus RSocket Proxy Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### Starting January 16, 2024

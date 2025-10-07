@@ -124,6 +124,12 @@ docker run --rm --name fluxcd-source-controller bitnami/fluxcd-source-controller
 
 Check the [official Flux documentation](https://github.com/fluxcd/source-controller) for more information about how to use Flux.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Flux Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Contributing
 
 We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.

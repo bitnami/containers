@@ -210,6 +210,12 @@ registry.my-network:5000/<image-name>@sha256:073b75987e95b89f187a89809f08a320339
 
 Check the [official Notation documentation](https://notaryproject.dev/docs/quickstart-guides/quickstart/) for more information about how to use Notation.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Notation Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### Starting January 16, 2024

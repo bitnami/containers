@@ -125,7 +125,7 @@ The default `nginx.conf` includes server blocks placed in `/opt/bitnami/nginx/co
 
 For example, in order add a server block for `www.example.com`:
 
-## Step 1: Write your `my_server_block.conf` file with the following content
+#### Step 1: Write your `my_server_block.conf` file with the following content
 
 ```nginx
 server {
@@ -136,7 +136,7 @@ server {
 }
 ```
 
-## Step 2: Mount the server block as a volume
+#### Step 2: Mount the server block as a volume
 
 ```console
 docker run --name nginx \
@@ -200,7 +200,7 @@ docker run --name nginx \
 
 Similar to server blocks, you can include server blocks for the [NGINX Stream Core Module](https://nginx.org/en/docs/stream/ngx_stream_core_module.html) mounting them at `/opt/bitnami/nginx/conf/stream_server_blocks/`. In order to do so, it's also necessary to set the `NGINX_ENABLE_STREAM` environment variable to `yes`.
 
-## Step 1: Write your `my_stream_server_block.conf` file with the following content
+#### Step 1: Write your `my_stream_server_block.conf` file with the following content
 
 ```nginx
 upstream backend {
@@ -219,7 +219,7 @@ server {
 }
 ```
 
-## Step 2: Mount the stream server block as a volume
+#### Step 2: Mount the stream server block as a volume
 
 ```console
 docker run --name nginx \
@@ -413,6 +413,12 @@ services:
       - /path/to/your_nginx.conf:/opt/bitnami/nginx/conf/nginx.conf:ro
   ...
 ```
+
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami NGINX Open Source Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
 ## Reverse proxy to other containers
 

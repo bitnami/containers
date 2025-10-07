@@ -14,6 +14,7 @@
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/libnet.sh
 . /opt/bitnami/scripts/libservice.sh
+. /opt/bitnami/scripts/libversion.sh
 
 ########################
 # Validate settings in Logstash environment variables
