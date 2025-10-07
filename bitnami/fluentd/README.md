@@ -141,6 +141,12 @@ Environment variable below are configurable to control how to execute fluentd pr
 - `FLUENTD_DAEMON_USER`: The user that will run the `fluentd` process when the container is run as root.
 - `FLUENTD_DAEMON_GROUP`: The group of the user that will run the `fluentd` process when the container is run as root.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Fluentd Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Logging
 
 The Bitnami fluentd Docker image sends the container logs to the `stdout`. To view the logs:
