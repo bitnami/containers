@@ -103,6 +103,12 @@ docker run --rm --name vault-k8s bitnami/vault-k8s:latest --help
 
 Check the [official HashiCorp Vault K8s Integration documentation](https://github.com/hashicorp/vault-k8s) for more information about how to use HashiCorp Vault K8s Integration.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami HashiCorp Vault K8s Integration Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### Starting January 16, 2024
