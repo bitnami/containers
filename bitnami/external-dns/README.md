@@ -57,6 +57,12 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 
 For further documentation, please check [here](https://github.com/kubernetes-incubator/external-dns).
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami ExternalDNS Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### Starting January 16, 2024
