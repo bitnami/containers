@@ -103,6 +103,12 @@ docker run --rm --name dex bitnami/dex:latest --help
 
 Check the [official Dex documentation](https://dexidp.io/docs/) for more information about how to use Dex.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Dex Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### Starting January 16, 2024
