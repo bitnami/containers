@@ -230,6 +230,12 @@ You can also do this with a minor change to the [`docker-compose.yml`](https://g
 | `JBOSS_PIDFILE`                          | Wildfly PID file                                 | `${EJBCA_WILDFLY_PID_FILE}`                                                                                                                                                                  |
 | `EJBCA_WILDFLY_DATA_TO_PERSIST`          | EJBCA data to persist.                           | `${EJBCA_WILDFLY_CONF_DIR},${EJBCA_WILDFLY_ADMIN_PASSWORD_FILE},${EJBCA_WILDFLY_BASE_DIR}/standalone/data,${EJBCA_WILDFLY_KEYSTORE_PASSWORD_FILE},${EJBCA_WILDFLY_TRUSTSTORE_PASSWORD_FILE}` |
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami EJBCA Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Logging
 
 The Bitnami EJBCA Docker image sends the container logs to `stdout`. To view the logs:
