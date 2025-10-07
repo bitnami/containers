@@ -87,6 +87,12 @@ docker run --rm --name hubble-relay bitnami/hubble-relay:latest help
 
 Check the [official Hubble Relay documentation](https://docs.cilium.io/en/stable/internals/hubble/) for more information about configuration options.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Hubble Relay Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
