@@ -154,6 +154,12 @@ docker run --rm --name gotrue bitnami/gotrue:latest --help
 
 Check the [official GoTrue documentation](https://github.com/netlify/gotrue) for more information about how to use GoTrue.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami GoTrue Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### Starting January 16, 2024
