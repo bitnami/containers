@@ -77,6 +77,12 @@ docker run --rm --name metallb-controller bitnami/metallb-controller:latest -- -
 
 Consult the [metallb Reference Documentation](https://metallb.universe.tf/configuration/) to find the available configuration parameters. Note that this container is expected to be used in a Kubernetes cluster.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami MetalLB Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### Starting January 16, 2024
