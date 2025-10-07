@@ -77,7 +77,11 @@ docker run --rm --name kubescape bitnami/kubescape:latest version
 
 Consult the [Kubescape Reference Documentation](https://github.com/kubescape/kubescape/blob/master/docs/getting-started.md#usage) to find the completed list of commands available.
 
-### Running
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Kubescape Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
 ## Notable Changes
 
