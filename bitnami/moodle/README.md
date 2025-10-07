@@ -405,6 +405,12 @@ RUN echo "es_ES.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen
 
 Bear in mind that in the example above `es_ES.UTF-8 UTF-8` is the locale needed for the desired Language Pack to install. You may change this value to the locale corresponding to your pack.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Bitnami LMS powered by Moodle&trade; LMS Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Logging
 
 The Bitnami Docker image for Moodle&trade; sends the container logs to `stdout`. To view the logs:
