@@ -104,6 +104,12 @@ docker run --rm --entrypoint /opt/bitnami/multus-cni/bin/multus-daemon --name mu
 
 Check the [official Multus CNI documentation](https://github.com/k8snetworkplumbingwg/multus-cni) for more information about how to use Multus CNI.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Multus CNI Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### Starting January 16, 2024
