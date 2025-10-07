@@ -8,7 +8,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-30T16:50:41Z" \
+      org.opencontainers.image.created="2025-10-07T14:05:03Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/scylladb/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/scylladb" \
@@ -53,7 +53,7 @@ RUN /opt/bitnami/scripts/scylladb/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="2025.3.1" \
     BITNAMI_APP_NAME="scylladb" \
-    IMAGE_REVISION="13" \
+    IMAGE_REVISION="14" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/scylladb/bin:/opt/bitnami/scylladb/sbin:/opt/bitnami/scylladb/python3/bin:/opt/bitnami/supervisor/bin:/opt/bitnami/scylladb/share/cassandra/bin:$PATH"
 
