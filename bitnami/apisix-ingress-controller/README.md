@@ -103,6 +103,12 @@ docker run --rm --name apisix-ingress-controller bitnami/apisix-ingress-controll
 
 Check the [official Apache APISIX Ingress Controller documentation](https://github.com/apache/apisix-ingress-controllerdocs/) for more information about how to use Apache APISIX Ingress Controller.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Apache APISIX Ingress Controller Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### Starting January 16, 2024
