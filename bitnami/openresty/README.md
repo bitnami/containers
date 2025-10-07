@@ -245,6 +245,12 @@ The [module ngx_http_dav_module](https://nginx.org/en/docs/http/ngx_http_dav_mod
 load_module /opt/bitnami/openresty/nginx/modules/ngx_http_dav_module.so;
 ```
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami OpenResty Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Reverse proxy to other containers
 
 OpenResty can be used to reverse proxy to other containers using Docker's linking system. This is particularly useful if you want to serve dynamic content through an OpenResty frontend. To do so, [add a server block](#adding-custom-server-blocks) like the following in the `/opt/bitnami/openresty/nginx/conf/server_blocks/` folder:
