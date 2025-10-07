@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-07T02:30:00Z" \
+      org.opencontainers.image.created="2025-10-07T02:51:03Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/rabbitmq/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/rabbitmq" \
@@ -48,16 +48,13 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
     DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales && \
     echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen
+RUN /opt/bitnami/scripts/locales/generate-locales.sh
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/rabbitmq/postunpack.sh
-RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
-    DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales && \
-    echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen
-RUN /opt/bitnami/scripts/locales/generate-locales.sh
 ENV APP_VERSION="4.1.4" \
     BITNAMI_APP_NAME="rabbitmq" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="2" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en"
 
