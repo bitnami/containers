@@ -157,6 +157,12 @@ docker run --rm --name opensearch-dashboards bitnami/opensearch-dashboards:lates
 
 Check the [official OpenSearch Dashboards documentation](https://opensearch.org/docs/) for more information about how to use OpenSearch Dashboards.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami OpenSearch Dashboards Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### Starting January 16, 2024
