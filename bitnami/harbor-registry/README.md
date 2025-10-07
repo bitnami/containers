@@ -71,6 +71,12 @@ For further information about the specific component itself, please refer to the
 | `HARBOR_REGISTRY_DAEMON_USER`  | harbor-registry system user.            | `harbor`                              |
 | `HARBOR_REGISTRY_DAEMON_GROUP` | harbor-registry system group.           | `harbor`                              |
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Harbor Registry Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### Starting January 16, 2024
