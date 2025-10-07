@@ -107,6 +107,12 @@ docker run --rm --name argo-workflow-exec bitnami/argo-workflow-exec:latest --he
 
 Check the [official Argo Workflows Executor documentation](https://argoproj.github.io/argo-workflows/workflow-executors/) for the list of the available parameters.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Argo Workflow Executor Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### Starting January 16, 2024
