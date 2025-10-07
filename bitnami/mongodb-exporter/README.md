@@ -99,6 +99,12 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 
 Find all the configuration options in the [MongoDB Prometheus Exporter documentation](https://github.com/percona/mongodb_exporter#flags).
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami MongoDB Exporter Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Logging
 
 The Bitnami MongoDB Exporter Docker image sends the container logs to `stdout`. To view the logs:
