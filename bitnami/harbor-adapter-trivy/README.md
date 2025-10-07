@@ -133,6 +133,12 @@ For further information about the specific component itself, please refer to the
 | `SCANNER_TRIVY_DAEMON_USER`  | harbor-adapter-trivy system user.            | `trivy-scanner`                            |
 | `SCANNER_TRIVY_DAEMON_GROUP` | harbor-adapter-trivy system group.           | `trivy-scanner`                            |
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Harbor Adapter Trivy Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Logging
 
 The Bitnami Harbor-Adapter-Trivy Docker image sends the container logs to `stdout`. To view the logs:
