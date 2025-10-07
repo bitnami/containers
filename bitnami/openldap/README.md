@@ -494,6 +494,12 @@ The allowed script extension is `.sh`, all scripts are executed in alphabetical 
 
 Scripts are executed are after the initilization and before the startup of the OpenLDAP service.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami OpenLDAP Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Logging
 
 The Bitnami OpenLDAP Docker image sends the container logs to `stdout`. To view the logs:
