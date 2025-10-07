@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-09-30T12:45:52Z" \
+      org.opencontainers.image.created="2025-10-07T13:00:54Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/kserve-storage-initializer/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kserve-storage-initializer" \
@@ -49,7 +49,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="0.15.2" \
     BITNAMI_APP_NAME="kserve-storage-initializer" \
-    IMAGE_REVISION="35" \
+    IMAGE_REVISION="36" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/python/scripts:$PATH"
 
 USER 1001
