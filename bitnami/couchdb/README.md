@@ -221,6 +221,12 @@ In order to configure CouchDB as a cluster of nodes, please make sure you set pr
 - `COUCHDB_CLUSTER_PORT_NUMBER`: Port for cluster communication. Default: **9100**
 - `COUCHDB_CREATE_DATABASES`: Whether to create the system databases or not. You should only set it to yes in one of the nodes. Default: **yes**
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami CouchDB Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Logging
 
 The Bitnami CouchDB Docker image sends the container logs to `stdout`. To view the logs:
