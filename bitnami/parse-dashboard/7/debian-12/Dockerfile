@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-02T15:15:05Z" \
+      org.opencontainers.image.created="2025-10-08T10:50:45Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/parse-dashboard/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/parse-dashboard" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "python-3.13.7-2-linux-${OS_ARCH}-debian-12" \
+      "python-3.14.0-0-linux-${OS_ARCH}-debian-12" \
       "node-24.9.0-0-linux-${OS_ARCH}-debian-12" \
       "parse-dashboard-7.5.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
@@ -51,7 +51,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/parse-dashboard/postunpack.sh
 ENV APP_VERSION="7.5.0" \
     BITNAMI_APP_NAME="parse-dashboard" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/parse-dashboard/bin:$PATH"
 
 EXPOSE 3000 4040
