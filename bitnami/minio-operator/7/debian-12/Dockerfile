@@ -17,7 +17,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "minio-operator-7.1.1-7-linux-${OS_ARCH}-debian-12" \
+      "minio-operator-7.1.1-8-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -40,7 +40,7 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-10-04T02:10:06Z" \
+      org.opencontainers.image.created="2025-10-08T02:03:14Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="minio-operator" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -53,7 +53,7 @@ COPY --from=builder /opt/bitnami/minio-operator/licenses /opt/bitnami/minio-oper
 
 ENV APP_VERSION="7.1.1" \
     BITNAMI_APP_NAME="minio-operator" \
-    IMAGE_REVISION="9" \
+    IMAGE_REVISION="10" \
     PATH="/"
 
 USER 1001
