@@ -1,6 +1,0 @@
-binaries:
-  - external-dns
-root_dir: /opt/bitnami
-version:
-  bin_name: external-dns
-  flag: --version

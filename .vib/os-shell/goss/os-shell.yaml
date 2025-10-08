@@ -1,7 +1,0 @@
-# Copyright Broadcom, Inc. All Rights Reserved.
-# SPDX-License-Identifier: APACHE-2.0
-
-command:
-  check-distro-version:
-    exec: grep VERSION_ID /etc/os-release | grep "$(echo "$APP_VERSION" | sed -E 's|^([0-9]+).*$|\1|g')"
-    exit-status: 0

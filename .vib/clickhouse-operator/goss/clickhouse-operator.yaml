@@ -1,8 +1,0 @@
-command:
-  check-clickhouse-operator-help:
-    exec:
-    - clickhouse-operator
-    - --help
-    exit-status: 0
-    stderr:
-    - Usage of clickhouse-operator

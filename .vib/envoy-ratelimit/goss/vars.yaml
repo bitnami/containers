@@ -1,6 +1,0 @@
-binaries:
-  - ratelimit
-root_dir: /opt/bitnami
-directories:
-  - paths:
-      - /opt/bitnami/envoy-ratelimit

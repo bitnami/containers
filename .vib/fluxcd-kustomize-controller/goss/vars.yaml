@@ -1,3 +1,0 @@
-binaries:
-  - kustomize-controller
-root_dir: /opt/bitnami

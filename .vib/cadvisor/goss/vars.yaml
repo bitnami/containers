@@ -1,9 +1,0 @@
-binaries:
-  - cadvisor
-root_dir: /opt/bitnami
-directories:
-  - paths:
-      - /opt/bitnami/cadvisor
-version:
-  bin_name: cadvisor
-  flag: -version

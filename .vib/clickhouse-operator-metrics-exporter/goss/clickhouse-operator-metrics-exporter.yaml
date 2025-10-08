@@ -1,8 +1,0 @@
-command:
-  check-metrics-exporter-help:
-    exec:
-    - metrics-exporter
-    - --help
-    exit-status: 0
-    stderr:
-    - Usage of metrics-exporter

@@ -1,8 +1,0 @@
-command:
-  check-console:
-    exec:
-    - console
-    - --help
-    exit-status: 0
-    stdout:
-    - "console - MinIO Console Server"
