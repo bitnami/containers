@@ -87,6 +87,12 @@ docker run --rm --name grafana-tempo-query -v /path/to/tempo-query.yaml:/bitnami
 
 Check the [official Grafana Tempo Query documentation](https://grafana.com/docs/tempo/latest/configuration/) and the [Jaeger Query documentation](https://www.jaegertracing.io/docs/1.23/deployment/#query-service--ui) to understand the possible configurations.
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Grafana Tempo Query Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### Starting January 16, 2024
