@@ -7,28 +7,27 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-07T21:57:23Z" \
+      org.opencontainers.image.created="2025-10-08T21:47:38Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/cosign/README.md" \
-      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cosign" \
-      org.opencontainers.image.title="cosign" \
+      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/python/README.md" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/python" \
+      org.opencontainers.image.title="python" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="2.6.1"
+      org.opencontainers.image.version="3.14.0"
 
-ENV HOME="/" \
-    OS_ARCH="${TARGETARCH:-amd64}" \
+ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-12" \
     OS_NAME="linux"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl procps
+RUN install_packages build-essential ca-certificates curl git libbz2-1.0 libffi8 liblzma5 libncursesw6 libreadline8 libsqlite3-0 libsqlite3-dev libssl-dev libssl3 libtinfo6 pkg-config procps unzip wget zlib1g
 RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "cosign-2.6.1-1-linux-${OS_ARCH}-debian-12" \
+      "python-3.14.0-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -41,19 +40,17 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     done
 RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
-RUN chmod g+rwX /opt/bitnami
-RUN mkdir -p "/cosign-keys" && chmod -R 777 "/cosign-keys"
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
-RUN mkdir "/.docker" && chmod g+rwX "/.docker"
-RUN mkdir "/.sigstore" && chmod g+rwX "/.sigstore"
-RUN uninstall_packages curl
+RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
+    sed -i 's/^PASS_MIN_DAYS.*/PASS_MIN_DAYS    0/' /etc/login.defs && \
+    sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
-ENV APP_VERSION="2.6.1" \
-    BITNAMI_APP_NAME="cosign" \
+ENV APP_VERSION="3.14.0" \
+    BITNAMI_APP_NAME="python" \
     IMAGE_REVISION="1" \
-    PATH="/opt/bitnami/cosign/bin:$PATH"
+    PATH="/opt/bitnami/python/bin:$PATH"
 
-WORKDIR /cosign-keys
-USER 1001
-ENTRYPOINT [ "cosign" ]
-CMD [ "--help" ]
+EXPOSE 8000
+
+WORKDIR /app
+CMD [ "python" ]
