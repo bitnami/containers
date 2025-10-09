@@ -1,7 +1,0 @@
-files:
-  - mode: "0644"
-    paths:
-      - /opt/bitnami/plugin-barman-cloud/.spdx-plugin-barman-cloud.spdx
-  - mode: "0755"
-    paths:
-      - /opt/bitnami/plugin-barman-cloud/bin/manager

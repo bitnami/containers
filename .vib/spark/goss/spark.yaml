@@ -1,9 +1,0 @@
-# Copyright Broadcom, Inc. All Rights Reserved.
-# SPDX-License-Identifier: APACHE-2.0
-
-command:
-  {{- range $module:= .Vars.python.modules }}
-  check-python-{{ $module }}:
-    exec: /opt/bitnami/spark/venv/bin/python -c 'import {{ $module }}'
-    exit-status: 0
-  {{- end }}

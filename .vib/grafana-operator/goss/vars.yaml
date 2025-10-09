@@ -1,3 +1,0 @@
-binaries:
-  - grafana-operator
-root_dir: /opt/bitnami

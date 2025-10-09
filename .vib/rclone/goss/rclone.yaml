@@ -1,8 +1,0 @@
-# Copyright Broadcom, Inc. All Rights Reserved.
-# SPDX-License-Identifier: APACHE-2.0
-
-command:
-  check-rclone-sync:
-    {{- $rnd_folder := printf "folder_%s" (randAlpha 5) }}
-    exec: rclone sync /opt/bitnami/rclone/bin /tmp/{{ $rnd_folder }} && [ -f /tmp/{{ $rnd_folder }}/rclone ]
-    exit-status: 0

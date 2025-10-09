@@ -1,3 +1,0 @@
-binaries:
-  - resnet_client_cc
-root_dir: /opt/bitnami
