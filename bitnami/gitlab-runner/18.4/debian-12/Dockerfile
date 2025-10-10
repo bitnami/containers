@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-10T13:09:41Z" \
+      org.opencontainers.image.created="2025-10-10T15:06:27Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/gitlab-runner/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/gitlab-runner" \
@@ -49,7 +49,7 @@ COPY rootfs /
 RUN mkdir /home/gitlab-runner && chmod -R g+rwX /home/gitlab-runner && ln -s /opt/bitnami/common/bin/dumb-init /usr/bin/dumb-init && ln -s /opt/bitnami/scripts/gitlab-runner/entrypoint.sh /entrypoint
 ENV APP_VERSION="18.4.0" \
     BITNAMI_APP_NAME="gitlab-runner" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="5" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/gitlab-runner/bin:$PATH"
 
 USER 1001
