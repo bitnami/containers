@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-07T20:10:46Z" \
+      org.opencontainers.image.created="2025-10-09T09:34:41Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/acmesolver/README.md" \
-      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/acmesolver" \
-      org.opencontainers.image.title="acmesolver" \
+      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/cosign/README.md" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cosign" \
+      org.opencontainers.image.title="cosign" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.18.2"
+      org.opencontainers.image.version="3.0.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "acmesolver-1.18.2-7-linux-${OS_ARCH}-debian-12" \
+      "cosign-3.0.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -42,14 +42,18 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
 RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
+RUN mkdir -p "/cosign-keys" && chmod -R 777 "/cosign-keys"
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
+RUN mkdir "/.docker" && chmod g+rwX "/.docker"
+RUN mkdir "/.sigstore" && chmod g+rwX "/.sigstore"
 RUN uninstall_packages curl
 
-ENV APP_VERSION="1.18.2" \
-    BITNAMI_APP_NAME="acmesolver" \
-    IMAGE_REVISION="9" \
-    PATH="/opt/bitnami/acmesolver/bin:$PATH"
+ENV APP_VERSION="3.0.1" \
+    BITNAMI_APP_NAME="cosign" \
+    IMAGE_REVISION="0" \
+    PATH="/opt/bitnami/cosign/bin:$PATH"
 
-WORKDIR /opt/bitnami/acmesolver
+WORKDIR /cosign-keys
 USER 1001
-ENTRYPOINT [ "/opt/bitnami/acmesolver/bin/acmesolver" ]
+ENTRYPOINT [ "cosign" ]
+CMD [ "--help" ]

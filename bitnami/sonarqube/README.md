@@ -213,9 +213,7 @@ docker run -d --name sonarqube \
 | `SONARQUBE_WEB_CONTEXT`                 | SonarQube prefix used to access to the application.                                                                                                    | `/`                                                 |
 | `SONARQUBE_MAX_HEAP_SIZE`               | Maximum heap size for SonarQube services (CE, Search and Web).                                                                                         | `nil`                                               |
 | `SONARQUBE_MIN_HEAP_SIZE`               | Minimum heap size for SonarQube services (CE, Search and Web).                                                                                         | `nil`                                               |
-| `SONARQUBE_CE_JAVA_ADD_OPTS`            | Additional Java options for Compute Engine.                                                                                                            | `nil`                                               |
 | `SONARQUBE_ELASTICSEARCH_JAVA_ADD_OPTS` | Additional Java options for Elasticsearch.                                                                                                             | `nil`                                               |
-| `SONARQUBE_WEB_JAVA_ADD_OPTS`           | Additional Java options for Web.                                                                                                                       | `nil`                                               |
 | `SONARQUBE_EXTRA_PROPERTIES`            | Comma separated list of properties to be set in the sonar.properties file, e.g. `my.sonar.property1=property_value,my.sonar.property2=property_value`. | `nil`                                               |
 | `SONARQUBE_USERNAME`                    | SonarQube user name.                                                                                                                                   | `admin`                                             |
 | `SONARQUBE_PASSWORD`                    | SonarQube user password.                                                                                                                               | `bitnami`                                           |
@@ -233,24 +231,26 @@ docker run -d --name sonarqube \
 
 #### Read-only environment variables
 
-| Name                              | Description                                          | Value                                      |
-|-----------------------------------|------------------------------------------------------|--------------------------------------------|
-| `SONARQUBE_BASE_DIR`              | SonarQube installation directory.                    | `${BITNAMI_ROOT_DIR}/sonarqube`            |
-| `SONARQUBE_DATA_DIR`              | Directory for SonarQube data files.                  | `${SONARQUBE_BASE_DIR}/data`               |
-| `SONARQUBE_EXTENSIONS_DIR`        | Directory for SonarQube extensions.                  | `${SONARQUBE_BASE_DIR}/extensions`         |
-| `SONARQUBE_CONF_DIR`              | Directory for SonarQube configuration files.         | `${SONARQUBE_BASE_DIR}/conf`               |
-| `SONARQUBE_CONF_FILE`             | Configuration file for SonarQube.                    | `${SONARQUBE_CONF_DIR}/sonar.properties`   |
-| `SONARQUBE_LOGS_DIR`              | Directory for SonarQube log files.                   | `${SONARQUBE_BASE_DIR}/logs`               |
-| `SONARQUBE_LOG_FILE`              | SonarQube log file.                                  | `${SONARQUBE_LOGS_DIR}/sonar.log`          |
-| `SONARQUBE_TMP_DIR`               | Directory for SonarQube temporary files.             | `${SONARQUBE_BASE_DIR}/temp`               |
-| `SONARQUBE_PID_FILE`              | SonarQube PID file.                                  | `${SONARQUBE_BASE_DIR}/pids/SonarQube.pid` |
-| `SONARQUBE_BIN_DIR`               | SonarQube directory for binary executables.          | `${SONARQUBE_BASE_DIR}/bin/linux-x86-64`   |
-| `SONARQUBE_VOLUME_DIR`            | SonarQube directory for mounted configuration files. | `${BITNAMI_VOLUME_DIR}/sonarqube`          |
-| `SONARQUBE_DAEMON_USER`           | SonarQube system user.                               | `sonarqube`                                |
-| `SONARQUBE_DAEMON_USER_ID`        | SonarQube system user ID.                            | `1001`                                     |
-| `SONARQUBE_DAEMON_GROUP`          | SonarQube system group.                              | `sonarqube`                                |
-| `SONARQUBE_DAEMON_GROUP_ID`       | SonarQube system group.                              | `1001`                                     |
-| `SONARQUBE_DEFAULT_DATABASE_HOST` | Default database server host.                        | `postgresql`                               |
+| Name                              | Description                                          | Value                                                     |
+|-----------------------------------|------------------------------------------------------|-----------------------------------------------------------|
+| `SONARQUBE_BASE_DIR`              | SonarQube installation directory.                    | `${BITNAMI_ROOT_DIR}/sonarqube`                           |
+| `SONARQUBE_DATA_DIR`              | Directory for SonarQube data files.                  | `${SONARQUBE_BASE_DIR}/data`                              |
+| `SONARQUBE_EXTENSIONS_DIR`        | Directory for SonarQube extensions.                  | `${SONARQUBE_BASE_DIR}/extensions`                        |
+| `SONARQUBE_CONF_DIR`              | Directory for SonarQube configuration files.         | `${SONARQUBE_BASE_DIR}/conf`                              |
+| `SONARQUBE_CONF_FILE`             | Configuration file for SonarQube.                    | `${SONARQUBE_CONF_DIR}/sonar.properties`                  |
+| `SONARQUBE_LOGS_DIR`              | Directory for SonarQube log files.                   | `${SONARQUBE_BASE_DIR}/logs`                              |
+| `SONARQUBE_LOG_FILE`              | SonarQube log file.                                  | `${SONARQUBE_LOGS_DIR}/sonar.log`                         |
+| `SONARQUBE_TMP_DIR`               | Directory for SonarQube temporary files.             | `${SONARQUBE_BASE_DIR}/temp`                              |
+| `SONARQUBE_PID_FILE`              | SonarQube PID file.                                  | `${SONARQUBE_BASE_DIR}/pids/SonarQube.pid`                |
+| `SONARQUBE_BIN_DIR`               | SonarQube directory for binary executables.          | `${SONARQUBE_BASE_DIR}/bin/linux-x86-64`                  |
+| `SONARQUBE_VOLUME_DIR`            | SonarQube directory for mounted configuration files. | `${BITNAMI_VOLUME_DIR}/sonarqube`                         |
+| `SONARQUBE_DAEMON_USER`           | SonarQube system user.                               | `sonarqube`                                               |
+| `SONARQUBE_DAEMON_USER_ID`        | SonarQube system user ID.                            | `1001`                                                    |
+| `SONARQUBE_DAEMON_GROUP`          | SonarQube system group.                              | `sonarqube`                                               |
+| `SONARQUBE_DAEMON_GROUP_ID`       | SonarQube system group.                              | `1001`                                                    |
+| `SONARQUBE_CE_JAVA_ADD_OPTS`      | Additional Java options for Compute Engine.          | `${SONARQUBE_CE_JAVA_ADD_OPTS:-} ${JAVA_TOOL_OPTIONS:-}`  |
+| `SONARQUBE_WEB_JAVA_ADD_OPTS`     | Additional Java options for Web.                     | `${SONARQUBE_WEB_JAVA_ADD_OPTS:-} ${JAVA_TOOL_OPTIONS:-}` |
+| `SONARQUBE_DEFAULT_DATABASE_HOST` | Default database server host.                        | `postgresql`                                              |
 
 When you start the SonarQube&trade; image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 

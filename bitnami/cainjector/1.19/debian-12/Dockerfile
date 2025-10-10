@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-07T20:38:48Z" \
+      org.opencontainers.image.created="2025-10-09T07:43:59Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/cert-manager-webhook/README.md" \
-      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cert-manager-webhook" \
-      org.opencontainers.image.title="cert-manager-webhook" \
+      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/cainjector/README.md" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cainjector" \
+      org.opencontainers.image.title="cainjector" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.18.2"
+      org.opencontainers.image.version="1.19.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "cert-manager-webhook-1.18.2-5-linux-${OS_ARCH}-debian-12" \
+      "cainjector-1.19.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -45,11 +45,11 @@ RUN chmod g+rwX /opt/bitnami
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN uninstall_packages curl
 
-ENV APP_VERSION="1.18.2" \
-    BITNAMI_APP_NAME="cert-manager-webhook" \
-    IMAGE_REVISION="9" \
-    PATH="/opt/bitnami/cert-manager-webhook/bin:$PATH"
+ENV APP_VERSION="1.19.0" \
+    BITNAMI_APP_NAME="cainjector" \
+    IMAGE_REVISION="0" \
+    PATH="/opt/bitnami/cainjector/bin:$PATH"
 
-WORKDIR /opt/bitnami/cert-manager-webhook
+WORKDIR /opt/bitnami/cainjector
 USER 1001
-ENTRYPOINT [ "/opt/bitnami/cert-manager-webhook/bin/cert-manager-webhook" ]
+ENTRYPOINT [ "/opt/bitnami/cainjector/bin/cainjector" ]
