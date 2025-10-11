@@ -4,6 +4,6 @@
 command:
   check-image-automation-controller-binary:
     exec: image-automation-controller --help
-    exit-status: 2
+    exit-status: 0
     stderr:
       - "Usage of image-automation-controller"

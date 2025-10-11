@@ -7,27 +7,29 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-07T15:43:47Z" \
+      org.opencontainers.image.created="2025-10-10T15:05:56Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/python/README.md" \
-      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/python" \
-      org.opencontainers.image.title="python" \
+      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/gitlab-runner-helper/README.md" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/gitlab-runner-helper" \
+      org.opencontainers.image.title="gitlab-runner-helper" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="3.13.8"
+      org.opencontainers.image.version="18.4.0"
 
-ENV OS_ARCH="${TARGETARCH:-amd64}" \
+ENV HOME="/" \
+    OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-12" \
     OS_NAME="linux"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages build-essential ca-certificates curl git libbz2-1.0 libffi8 liblzma5 libncursesw6 libreadline8 libsqlite3-0 libsqlite3-dev libssl-dev libssl3 libtinfo6 pkg-config procps unzip wget zlib1g
+RUN install_packages ca-certificates curl git git-lfs openssh-client procps
 RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "python-3.13.8-0-linux-${OS_ARCH}-debian-12" \
+      "nss-wrapper-1.1.16-0-linux-${OS_ARCH}-debian-12" \
+      "gitlab-runner-helper-18.4.0-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -40,17 +42,21 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     done
 RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
+RUN chmod g+rwX /opt/bitnami
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
-RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
-    sed -i 's/^PASS_MIN_DAYS.*/PASS_MIN_DAYS    0/' /etc/login.defs && \
-    sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
-ENV APP_VERSION="3.13.8" \
-    BITNAMI_APP_NAME="python" \
-    IMAGE_REVISION="0" \
-    PATH="/opt/bitnami/python/bin:$PATH"
+COPY rootfs /
+RUN mkdir /home/gitlab-runner && \
+    chmod +x /opt/bitnami/gitlab-runner-helper/bin/* && \
+    chmod -R g+rwX /home/gitlab-runner && \
+    ln -s /opt/bitnami/common/bin/dumb-init /usr/bin/dumb-init && \
+    ln -s /opt/bitnami/scripts/gitlab-runner-helper/entrypoint.sh /entrypoint && \
+    ln -s /opt/bitnami/gitlab-runner-helper/bin/gitlab-runner-helper /usr/bin/gitlab-runner-helper
+ENV APP_VERSION="18.4.0" \
+    BITNAMI_APP_NAME="gitlab-runner-helper" \
+    IMAGE_REVISION="5" \
+    PATH="/opt/bitnami/common/bin:/opt/bitnami/gitlab-runner-helper/bin:$PATH"
 
-EXPOSE 8000
-
-WORKDIR /app
-CMD [ "python" ]
+USER 1001
+ENTRYPOINT [ "/usr/bin/dumb-init", "/opt/bitnami/scripts/gitlab-runner-helper/entrypoint.sh" ]
+CMD [ "sh" ]

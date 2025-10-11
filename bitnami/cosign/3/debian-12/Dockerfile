@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-09T09:34:41Z" \
+      org.opencontainers.image.created="2025-10-10T19:40:56Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/cosign/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cosign" \
       org.opencontainers.image.title="cosign" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="3.0.1"
+      org.opencontainers.image.version="3.0.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "cosign-3.0.1-0-linux-${OS_ARCH}-debian-12" \
+      "cosign-3.0.2-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -48,7 +48,7 @@ RUN mkdir "/.docker" && chmod g+rwX "/.docker"
 RUN mkdir "/.sigstore" && chmod g+rwX "/.sigstore"
 RUN uninstall_packages curl
 
-ENV APP_VERSION="3.0.1" \
+ENV APP_VERSION="3.0.2" \
     BITNAMI_APP_NAME="cosign" \
     IMAGE_REVISION="0" \
     PATH="/opt/bitnami/cosign/bin:$PATH"
