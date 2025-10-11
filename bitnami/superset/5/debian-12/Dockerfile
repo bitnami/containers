@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-07T14:15:19Z" \
+      org.opencontainers.image.created="2025-10-11T13:00:31Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/superset/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/superset" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "python-3.10.18-10-linux-${OS_ARCH}-debian-12" \
+      "python-3.10.19-3-linux-${OS_ARCH}-debian-12" \
       "superset-5.0.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -50,7 +50,7 @@ RUN /opt/bitnami/scripts/superset/postunpack.sh
 ENV APP_VERSION="5.0.0" \
     BITNAMI_APP_NAME="superset" \
     FLASK_APP="superset.app:create_app()" \
-    IMAGE_REVISION="86" \
+    IMAGE_REVISION="87" \
     PATH="/opt/bitnami/superset/venv/bin:/opt/bitnami/python/bin:$PATH" \
     SUPERSET_HOME="/opt/bitnami/superset/superset_home"
 
