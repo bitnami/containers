@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-10T09:26:06Z" \
+      org.opencontainers.image.created="2025-10-11T12:29:57Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/mastodon/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mastodon" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "python-3.14.0-2-linux-${OS_ARCH}-debian-12" \
+      "python-3.14.0-4-linux-${OS_ARCH}-debian-12" \
       "wait-for-port-1.0.10-2-linux-${OS_ARCH}-debian-12" \
       "ruby-3.4.7-0-linux-${OS_ARCH}-debian-12" \
       "redis-client-8.2.2-0-linux-${OS_ARCH}-debian-12" \
@@ -54,7 +54,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/mastodon/postunpack.sh
 ENV APP_VERSION="4.4.5" \
     BITNAMI_APP_NAME="mastodon" \
-    IMAGE_REVISION="18" \
+    IMAGE_REVISION="19" \
     LD_LIBRARY_PATH="/opt/bitnami/common/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/python/bin:/opt/bitnami/ruby/bin:/opt/bitnami/redis/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/mastodon/bin:$PATH"
 
