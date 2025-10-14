@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-08T00:12:44Z" \
+      org.opencontainers.image.created="2025-10-14T02:56:24Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/hyperledger-fabric-ca/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/hyperledger-fabric-ca" \
@@ -28,8 +28,8 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "golang-1.25.2-0-linux-${OS_ARCH}-debian-12" \
-      "hyperledger-fabric-ca-1.5.15-11-linux-${OS_ARCH}-debian-12" \
+      "golang-1.25.3-0-linux-${OS_ARCH}-debian-12" \
+      "hyperledger-fabric-ca-1.5.15-12-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -50,7 +50,7 @@ RUN uninstall_packages curl
 ENV APP_VERSION="1.5.15" \
     BITNAMI_APP_NAME="hyperledger-fabric-ca" \
     FABRIC_CA_HOME="/opt/bitnami/hyperledger-fabric-ca/etc" \
-    IMAGE_REVISION="25" \
+    IMAGE_REVISION="26" \
     PATH="/go/bin:/opt/bitnami/go/bin:/opt/bitnami/hyperledger-fabric-ca/bin:$PATH"
 
 USER 1001
