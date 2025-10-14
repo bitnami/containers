@@ -2,7 +2,7 @@
 # Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 #
-# Bitnami Pgpool healthcheck
+# Bitnami Pgpool-II healthcheck
 
 # shellcheck disable=SC1091
 
