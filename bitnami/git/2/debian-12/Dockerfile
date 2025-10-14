@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-07T22:45:29Z" \
+      org.opencontainers.image.created="2025-10-14T01:26:23Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/git/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/git" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "nss-wrapper-1.1.16-0-linux-${OS_ARCH}-debian-12" \
-      "git-2.51.0-3-linux-${OS_ARCH}-debian-12" \
+      "git-2.51.0-4-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -48,7 +48,7 @@ RUN rm -f /etc/ssh/ssh_host_* > /dev/null 2>&1 && \
     chmod g+w /etc/ssh
 ENV APP_VERSION="2.51.0" \
     BITNAMI_APP_NAME="git" \
-    IMAGE_REVISION="6" \
+    IMAGE_REVISION="7" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/git/bin:$PATH"
 
