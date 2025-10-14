@@ -2,7 +2,7 @@
 # Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 #
-# Bitnami Pgpool library
+# Bitnami Pgpool-II library
 
 # shellcheck disable=SC1090,SC1091
 
@@ -134,11 +134,13 @@ pgpool_validate() {
     fi
 
     # Check for Authentication method
-    if ! [[ "$PGPOOL_AUTHENTICATION_METHOD" =~ ^(md5|scram-sha-256)$ ]]; then
-        print_validation_error "The values allowed for PGPOOL_AUTHENTICATION_METHOD: md5,scram-sha-256"
+    if ! [[ "$PGPOOL_AUTHENTICATION_METHOD" =~ ^(md5|scram-sha-256|trust)$ ]]; then
+        print_validation_error "The values allowed for PGPOOL_AUTHENTICATION_METHOD: md5,scram-sha-256,trust"
+    elif [[ "$PGPOOL_AUTHENTICATION_METHOD" = "trust" ]]; then
+        warn "You set 'trust' as authentication method. For safety reasons, do not use this method in production environments."
     fi
 
-    # check for required environment variables for scram-sha-256 based authentication
+    # Check for required environment variables for scram-sha-256 based authentication
     if [[ "$PGPOOL_AUTHENTICATION_METHOD" = "scram-sha-256" ]]; then
         # If scram-sha-256 is enabled, pg_pool_password cannot be disabled
         if ! is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD"; then
@@ -250,18 +252,21 @@ pgpool_healthcheck() {
 pgpool_create_pghba() {
     local all_authentication="$PGPOOL_AUTHENTICATION_METHOD"
     is_boolean_yes "$PGPOOL_ENABLE_LDAP" && all_authentication="pam pamservice=pgpool"
-    local postgres_auth_line=""
-    local sr_check_auth_line=""
+    local postgres_authentication="scram-sha-256"
+    # We avoid using 'trust' for the postgres user even if PGPOOL_AUTHENTICATION_METHOD is set to 'trust'
+    [[ "$PGPOOL_AUTHENTICATION_METHOD" = "md5" ]] && postgres_authentication="md5"
+
     info "Generating pg_hba.conf file..."
-
+    local postgres_auth_line=""
     if is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD"; then
-        postgres_auth_line="host     all             ${PGPOOL_POSTGRES_USERNAME}       all        ${PGPOOL_AUTHENTICATION_METHOD}"
+        postgres_auth_line="host     all             ${PGPOOL_POSTGRES_USERNAME}       all        ${postgres_authentication}"
     fi
+    local sr_check_auth_line=""
     if [[ -n "$PGPOOL_SR_CHECK_USER" ]]; then
-        sr_check_auth_line="host     all             ${PGPOOL_SR_CHECK_USER}            all        ${PGPOOL_AUTHENTICATION_METHOD}"
+        sr_check_auth_line="host     all             ${PGPOOL_SR_CHECK_USER}            all        ${postgres_authentication}"
     fi
 
-    cat >>"$PGPOOL_PGHBA_FILE" <<EOF
+    cat >"$PGPOOL_PGHBA_FILE" <<EOF
 local    all             all                            trust
 EOF
 
@@ -387,9 +392,12 @@ pgpool_create_config() {
     # Authentication settings
     # ref: http://www.pgpool.net/docs/latest/en/html/runtime-config-connection.html#RUNTIME-CONFIG-AUTHENTICATION-SETTINGS
     pgpool_set_property "enable_pool_hba" "$(is_boolean_yes "$PGPOOL_ENABLE_POOL_HBA" && echo "on" || echo "off")"
-    # allow_clear_text_frontend_auth only works when enable_pool_hba is not enabled
     # ref: https://www.pgpool.net/docs/latest/en/html/runtime-config-connection.html#GUC-ALLOW-CLEAR-TEXT-FRONTEND-AUTH
-    pgpool_set_property "allow_clear_text_frontend_auth" "$(is_boolean_yes "$PGPOOL_ENABLE_POOL_HBA" && echo "off" || echo "on")"
+    if ! is_boolean_yes "$PGPOOL_ENABLE_POOL_HBA" || [[ "$PGPOOL_AUTHENTICATION_METHOD" = "trust" ]]; then
+        pgpool_set_property "allow_clear_text_frontend_auth" "on"
+    else
+        pgpool_set_property "allow_clear_text_frontend_auth" "off"
+    fi
     pgpool_set_property "pool_passwd" "$pool_passwd"
     pgpool_set_property "authentication_timeout" "30"
     # File Locations settings
@@ -470,8 +478,9 @@ pgpool_create_config() {
 pgpool_encrypt_execute() {
     local -a password_encryption_cmd=("pg_md5")
 
-    if [[ "$PGPOOL_AUTHENTICATION_METHOD" = "scram-sha-256" ]]; then
-
+    # If authentication method for 'all' users is 'trust', we still use
+    # pg_enc to generate encrypted passwords for 'postgres' and 'sr_check' users
+    if [[ "$PGPOOL_AUTHENTICATION_METHOD" =~ ^(scram-sha-256|trust)$ ]]; then
         if is_file_writable "$PGPOOLKEYFILE"; then
             # Creating a PGPOOLKEYFILE as it is writeable
             echo "$PGPOOL_AES_KEY" > "$PGPOOLKEYFILE"
@@ -529,7 +538,7 @@ pgpool_generate_password_file() {
 pgpool_encrypt_password() {
     local -r password="${1:?missing password}"
 
-    if [[ "$PGPOOL_AUTHENTICATION_METHOD" = "scram-sha-256" ]]; then
+    if [[ "$PGPOOL_AUTHENTICATION_METHOD" =~ ^(scram-sha-256|trust)$ ]]; then
         pgpool_encrypt_execute "$password" | grep -o -E "AES.+" | tr -d '\n'
     else
         pgpool_encrypt_execute "$password" | tr -d '\n'
