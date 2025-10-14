@@ -45,7 +45,12 @@ php_conf_set extension "pgsql"
 # Enable default web server configuration for Moodle
 info "Creating default web server configuration for Moodle"
 web_server_validate
-ensure_web_server_app_configuration_exists "moodle" --type php --apache-additional-configuration '
+root_dir="${MOODLE_BASE_DIR}"
+#  Moodle 5.1 introduces a new "/public" directory.
+if [[ -d "${MOODLE_BASE_DIR}/public" ]]; then
+    root_dir="${MOODLE_BASE_DIR}/public"
+fi
+ensure_web_server_app_configuration_exists "moodle" --type php --document-root "${root_dir}" --apache-additional-configuration '
 RewriteEngine On
 
 RewriteRule ^/phpmyadmin - [L,NC]
