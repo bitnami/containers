@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-08T00:10:22Z" \
+      org.opencontainers.image.created="2025-10-14T02:50:15Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/hubble-ui-backend/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/hubble-ui-backend" \
@@ -28,8 +28,8 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "gops-0.3.28-27-linux-${OS_ARCH}-debian-12" \
-      "hubble-ui-backend-0.13.3-2-linux-${OS_ARCH}-debian-12" \
+      "gops-0.3.28-28-linux-${OS_ARCH}-debian-12" \
+      "hubble-ui-backend-0.13.3-3-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -48,7 +48,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="0.13.3" \
     BITNAMI_APP_NAME="hubble-ui-backend" \
-    IMAGE_REVISION="4" \
+    IMAGE_REVISION="5" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/hubble-ui-backend/bin:$PATH"
 
 EXPOSE 8090
