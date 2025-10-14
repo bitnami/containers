@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-08T02:18:58Z" \
+      org.opencontainers.image.created="2025-10-14T04:57:19Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/multus-cni/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/multus-cni" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "multus-cni-4.2.2-4-linux-${OS_ARCH}-debian-12" \
+      "multus-cni-4.2.2-5-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -48,7 +48,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="4.2.2" \
     BITNAMI_APP_NAME="multus-cni" \
-    IMAGE_REVISION="6" \
+    IMAGE_REVISION="7" \
     PATH="/opt/bitnami/multus-cni/bin:$PATH"
 
 USER 1001
