@@ -16,8 +16,8 @@ set -o pipefail
 . /opt/bitnami/scripts/libldapclient.sh
 . /opt/bitnami/scripts/libpgpool.sh
 
-# Load Pgpool env. variables
-eval "$(pgpool_env)"
+# Load Pgpool-II environment
+. /opt/bitnami/scripts/pgpool-env.sh
 # Load LDAP environment variables
 eval "$(ldap_env)"
 
