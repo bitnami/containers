@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-08T02:06:39Z" \
+      org.opencontainers.image.created="2025-10-14T04:34:23Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/gitea/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/gitea" \
@@ -29,10 +29,10 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "nss-wrapper-1.1.16-0-linux-${OS_ARCH}-debian-12" \
-      "wait-for-port-1.0.10-2-linux-${OS_ARCH}-debian-12" \
-      "render-template-1.0.9-157-linux-${OS_ARCH}-debian-12" \
-      "ini-file-1.4.9-2-linux-${OS_ARCH}-debian-12" \
-      "gitea-1.24.6-2-linux-${OS_ARCH}-debian-12" \
+      "wait-for-port-1.0.10-3-linux-${OS_ARCH}-debian-12" \
+      "render-template-1.0.9-158-linux-${OS_ARCH}-debian-12" \
+      "ini-file-1.4.9-3-linux-${OS_ARCH}-debian-12" \
+      "gitea-1.24.6-3-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -52,7 +52,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/gitea/postunpack.sh
 ENV APP_VERSION="1.24.6" \
     BITNAMI_APP_NAME="gitea" \
-    IMAGE_REVISION="4" \
+    IMAGE_REVISION="5" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/gitea/bin:$PATH"
 
