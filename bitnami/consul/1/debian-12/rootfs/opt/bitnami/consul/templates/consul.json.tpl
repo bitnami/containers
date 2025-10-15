@@ -12,12 +12,14 @@
       "raft_multiplier": {{CONSUL_RAFT_MULTIPLIER}}
     },
     "addresses": {
-        "http": "{{CONSUL_CLIENT_LAN_ADDRESS}}"
+        "http": "{{CONSUL_CLIENT_LAN_ADDRESS}}",
+        "https": "{{CONSUL_CLIENT_LAN_ADDRESS}}"
     },
     "retry_join": ["{{CONSUL_RETRY_JOIN_ADDRESS}}"],
     "retry_join_wan": ["{{CONSUL_RETRY_JOIN_WAN_ADDRESS}}"],
     "ports": {
         "http": {{CONSUL_HTTP_PORT_NUMBER}},
+        "https": {{CONSUL_HTTPS_PORT_NUMBER}},
         "dns": {{CONSUL_DNS_PORT_NUMBER}},
         "serf_lan": {{CONSUL_SERF_LAN_PORT_NUMBER}},
         "server": {{CONSUL_RPC_PORT_NUMBER}}
