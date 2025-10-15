@@ -155,7 +155,7 @@ docker run -it --rm \
 
 ### Using a Docker Compose file
 
-When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `my-network`. In this example we assume that you want to connect to the Pgpool server from your own custom application image which is identified in the following snippet by the service name `myapp`.
+When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `my-network`. In this example we assume that you want to connect to the Pgpool-II server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
 ```yaml
 version: '2'
@@ -238,76 +238,9 @@ docker-compose up -d
 
 ## Configuration
 
-### Setting up a HA PostgreSQL cluster with pgpool, streaming replication and repmgr
+### Setting up a HA PostgreSQL cluster with Pgpool-II, streaming replication and repmgr
 
-A HA PostgreSQL cluster with Pgpool, [Streaming replication](https://www.postgresql.org/docs/10/warm-standby.html#STREAMING-REPLICATION) and [repmgr](https://repmgr.org) can easily be setup with the Bitnami PostgreSQL with Replication Manager and Pgpool Docker Images using the following environment variables:
-
-Pgpool configuration:
-
-- `PGPOOL_PASSWORD_FILE`: Path to a file that contains the password for the custom user set in the `PGPOOL_USERNAME` environment variable. This will override the value specified in `PGPOOL_PASSWORD`. No defaults.
-- `PGPOOL_SR_CHECK_PERIOD`: Specifies the time interval in seconds to check the streaming replication delay. Defaults to `30`.
-- `PGPOOL_SR_CHECK_USER`: Username to use to perform streaming checks. This is the user that is used to check that streaming replication is working. Typically, this is the user owner of the 'repmgr' database. No defaults.
-- `PGPOOL_SR_CHECK_PASSWORD`: Password to use to perform streaming checks. No defaults.
-- `PGPOOL_SR_CHECK_PASSWORD_FILE`: Path to a file that contains the password to use to perform streaming checks. This will override the value specified in `PGPOOL_SR_CHECK_PASSWORD`. No defaults.
-- `PGPOOL_SR_CHECK_DATABASE`: Database to use to perform streaming checks. Defaults to `postgres`.
-- `PGPOOL_BACKEND_NODES`: Comma separated list of backend nodes in the cluster. No defaults.
-- `PGPOOL_ENABLE_LDAP`: Whether to enable LDAP authentication. Defaults to `no`.
-- `PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE`: Specify load balance behavior after write queries appear ('off', 'transaction', 'trans_transaction', 'always'). Defaults to 'transaction'
-- `PGPOOL_ENABLE_LOAD_BALANCING`: Whether to enable Load-Balancing mode. Defaults to `yes`.
-- `PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING`:  Whether to decide the load balancing node for each read query. Defaults to `no`.
-- `PGPOOL_ENABLE_POOL_HBA`: Whether to use the pool_hba.conf authentication. Defaults to `yes`.
-- `PGPOOL_ENABLE_POOL_PASSWD`: Whether to use a password file specified by `PGPOOL_PASSWD_FILE` for authentication. Defaults to `yes`.
-- `PGPOOL_PASSWD_FILE`: The password file for authentication. Defaults to `pool_passwd`.
-- `PGPOOL_NUM_INIT_CHILDREN`: The number of preforked Pgpool-II server processes. It is also the concurrent connections limit to Pgpool-II from clients. Defaults to `32`.
-- `PGPOOL_RESERVED_CONNECTIONS`: When this parameter is set to 1 or greater, incoming connections from clients are not accepted with error message "Sorry, too many clients already", rather than blocked if the number of current connections from clients is more than (num_init_children - reserved_connections). Defaults to `0`.
-- `PGPOOL_MAX_POOL`: The maximum number of cached connections in each child process. Defaults to `15`.
-- `PGPOOL_CHILD_MAX_CONNECTIONS`: Specifies the lifetime of a Pgpool-II child process in terms of the number of client connections it can receive. Pgpool-II will terminate the child process after it has served child_max_connections client connections and will immediately spawn a new child process to take its place. Defaults to `0` which turns off the feature.
-- `PGPOOL_CHILD_LIFE_TIME`: The time in seconds to terminate a Pgpool-II child process if it remains idle. Defaults to `300`.
-- `PGPOOL_CLIENT_IDLE_LIMIT`: The time in seconds to disconnect a client if it remains idle since the last query. Defaults to `0` which turns off the feature.
-- `PGPOOL_CONNECTION_LIFE_TIME`: The time in seconds to terminate the cached connections to the PostgreSQL backend. Defaults to `0` which turns off the feature.
-- `PGPOOL_ENABLE_LOG_PER_NODE_STATEMENT`: Log every SQL statement for each DB node separately. Defaults to `no`.
-- `PGPOOL_ENABLE_LOG_CONNECTIONS`: Log all client connections. Defaults to `no`.
-- `PGPOOL_ENABLE_LOG_HOSTNAME`: Log the client hostname instead of IP address. Defaults to `no`.
-- `PGPOOL_LOG_LINE_PREFIX`: Define the format of the log entry lines. Find in the [official Pgpool documentation](https://www.pgpool.net/docs/latest/en/html/runtime-config-logging.html) the string parameters. No defaults.
-- `PGPOOL_CLIENT_MIN_MESSAGES`: Set the minimum message levels are sent to the client. Find in the [official Pgpool documentation](https://www.pgpool.net/docs/latest/en/html/runtime-config-logging.html) the supported values. Defaults to `notice`.
-- `PGPOOL_POSTGRES_USERNAME`: Postgres administrator user name, this will be use to allow postgres admin authentication through Pgpool.
-- `PGPOOL_POSTGRES_PASSWORD`: Password for the user set in `PGPOOL_POSTGRES_USERNAME` environment variable. No defaults.
-- `PGPOOL_ADMIN_USERNAME`: Username for the pgpool administrator. No defaults.
-- `PGPOOL_ADMIN_PASSWORD`: Password for the user set in `PGPOOL_ADMIN_USERNAME` environment variable. No defaults.
-- `PGPOOL_HEALTH_CHECK_USER`: Specifies the PostgreSQL user name to perform health check. Defaults to value set in `PGPOOL_SR_CHECK_USER`.
-- `PGPOOL_HEALTH_CHECK_PASSWORD`: Specifies the PostgreSQL user password to perform health check. Defaults to value set in `PGPOOL_SR_CHECK_PASSWORD`.
-- `PGPOOL_HEALTH_CHECK_PERIOD`: Specifies the interval between the health checks in seconds. Defaults to `30`.
-- `PGPOOL_HEALTH_CHECK_TIMEOUT`: Specifies the timeout in seconds to give up connecting to the backend PostgreSQL if the TCP connect does not succeed within this time. Defaults to `10`.
-- `PGPOOL_HEALTH_CHECK_MAX_RETRIES`: Specifies the maximum number of retries to do before giving up and initiating failover when health check fails. Defaults to `5`.
-- `PGPOOL_HEALTH_CHECK_RETRY_DELAY`: Specifies the amount of time in seconds to sleep between failed health check retries. Defaults to `5`.
-- `PGPOOL_CONNECT_TIMEOUT`: Specifies the amount of time in milliseconds before giving up connecting to backend using `connect()` system call. Default is `10000`.
-- `PGPOOL_HEALTH_CHECK_PSQL_TIMEOUT`: Specifies the maximum amount of time in seconds function `pgpool_healthcheck()` waits for result of `show pool_nodes` command. It is set to `PGCONNECT_TIMEOUT` of respective `psql` execution. Default is `15`.
-- `PGPOOL_USER_CONF_FILE`: Configuration file to be added to the generated config file. This allow to override configuration set by the initializacion process. No defaults.
-- `PGPOOL_USER_HBA_FILE`: Configuration file to be added to the generated hba file. This allow to override configuration set by the initialization process. No defaults.
-- `PGPOOL_POSTGRES_CUSTOM_USERS`: List of comma or semicolon separeted list of postgres usernames. This will create entries in `pgpool_passwd`. No defaults.
-- `PGPOOL_POSTGRES_CUSTOM_PASSWORDS`: List of comma or semicolon separated list for postgresql user passwords. These are the corresponding passwords for the users in `PGPOOL_POSTGRES_CUSTOM_USERS`. No defaults.
-- `PGPOOL_AUTO_FAILBACK`: Enables pgpool `[auto_failback](https://www.pgpool.net/docs/latest/en/html/runtime-config-failover.html)`. Default to `no`.
-- `PGPOOL_BACKEND_APPLICATION_NAMES`: Comma separated list of backend nodes `application_name`. No defaults.
-- `PGPOOL_AUTHENTICATION_METHOD`: Specifies the authentication method('md5', 'scram-sha-256'). Defaults to `scram-sha-256`.
-- `PGPOOL_AES_KEY`: Specifies the AES encryption key used for 'scram-sha-256' passwords. Defaults to `random string`.
-
-PostgreSQL with Replication Manager:
-
-- `POSTGRESQL_POSTGRES_PASSWORD`: Password for `postgres` user. No defaults.
-- `POSTGRESQL_POSTGRES_PASSWORD_FILE`: Path to a file that contains the `postgres` user password. This will override the value specified in `POSTGRESQL_POSTGRES_PASSWORD`. No defaults.
-- `POSTGRESQL_USERNAME`: Custom user to access the database. No defaults.
-- `POSTGRESQL_DATABASE`: Custom database to be created on first run. No defaults.
-- `POSTGRESQL_PASSWORD`: Password for the custom user set in the `POSTGRESQL_USERNAME` environment variable. No defaults.
-- `POSTGRESQL_PASSWORD_FILE`: Path to a file that contains the password for the custom user set in the `POSTGRESQL_USERNAME` environment variable. This will override the value specified in `POSTGRESQL_PASSWORD`. No defaults.
-- `REPMGR_USERNAME`: Username for `repmgr` user. Defaults to `repmgr`.
-- `REPMGR_PASSWORD_FILE`: Path to a file that contains the `repmgr` user password. This will override the value specified in `REPMGR_PASSWORD`. No defaults.
-- `REPMGR_PASSWORD`: Password for `repmgr` user. No defaults.
-- `REPMGR_PRIMARY_HOST`: Hostname of the initial primary node. No defaults.
-- `REPMGR_PARTNER_NODES`: Comma separated list of partner nodes in the cluster.  No defaults.
-- `REPMGR_NODE_NAME`: Node name. No defaults.
-- `REPMGR_NODE_NETWORK_NAME`: Node hostname. No defaults.
-- `POSTGRESQL_CLUSTER_APP_NAME`: Node `application_name`. In the case you are enabling auto_failback, each node needs a different name. Defaults to `walreceiver`.
-
+A HA PostgreSQL cluster with Pgpool-II, [Streaming replication](https://www.postgresql.org/docs/10/warm-standby.html#STREAMING-REPLICATION) and [repmgr](https://repmgr.org) can easily be setup with the Bitnami PostgreSQL with Replication Manager and Pgpool-II container images.
 In a HA PostgreSQL cluster you can have one primary and zero or more standby nodes. The primary node is in read-write mode, while the standby nodes are in read-only mode. For best performance its advisable to limit the reads to the standby nodes.
 
 #### Step 1: Create a network and the initial primary node
@@ -364,7 +297,7 @@ docker run --detach --rm --name pgpool \
   bitnami/pgpool:latest
 ```
 
-With these three commands you now have a two node PostgreSQL primary-standby streaming replication cluster using Pgpool as proxy up and running. You can scale the cluster by adding/removing standby nodes without incurring any downtime.
+With these three commands you now have a two node PostgreSQL primary-standby streaming replication cluster using Pgpool-II as proxy up and running. You can scale the cluster by adding/removing standby nodes without incurring any downtime.
 
 > **Note**: The cluster replicates the primary in its entirety, which includes all users and databases.
 
@@ -381,7 +314,7 @@ docker-compose up -d
 
 ### Initializing with custom scripts
 
-**Everytime the container is started**, it will execute the files with extension `.sh` located at `/docker-entrypoint-initdb.d` after initializing Pgpool.
+**Everytime the container is started**, it will execute the files with extension `.sh` located at `/docker-entrypoint-initdb.d` after initializing Pgpool-II.
 
 In order to have your custom files inside the docker image you can mount them as a volume. With docker-compose:
 
@@ -396,17 +329,17 @@ In order to have your custom files inside the docker image you can mount them as
        - PGPOOL_SR_CHECK_USER=customuser
 ```
 
-### Securing Pgpool traffic
+### Securing Pgpool-II traffic
 
-Pgpool supports the encryption of connections using the SSL/TLS protocol. Should you desire to enable this optional feature, you may use the following environment variables to configure the application:
+Pgpool-II supports the encryption of connections using the SSL/TLS protocol. Should you desire to enable this optional feature, you may use the following environment variables to configure the application:
 
 - `PGPOOL_ENABLE_TLS`: Whether to enable TLS for traffic or not. Defaults to `no`.
 - `PGPOOL_TLS_CERT_FILE`: File containing the certificate file for the TLS traffic. No defaults.
 - `PGPOOL_TLS_KEY_FILE`: File containing the key for certificate. No defaults.
-- `PGPOOL_TLS_CA_FILE`: File containing the CA of the certificate. If provided, Pgpool will authenticate TLS/SSL clients by requesting them a certificate (see [ref](https://www.pgpool.net/docs/latest/en/html/runtime-ssl.html)). No defaults.
+- `PGPOOL_TLS_CA_FILE`: File containing the CA of the certificate. If provided, Pgpool-II will authenticate TLS/SSL clients by requesting them a certificate (see [ref](https://www.pgpool.net/docs/latest/en/html/runtime-ssl.html)). No defaults.
 - `PGPOOL_TLS_PREFER_SERVER_CIPHERS`: Whether to use the server's TLS cipher preferences rather than the client's. Defaults to `yes`.
 
-When enabling TLS, Pgpool will support both standard and encrypted traffic by default, but prefer the latter. Below there are some examples on how to quickly set up TLS traffic:
+When enabling TLS, Pgpool-II will support both standard and encrypted traffic by default, but prefer the latter. Below there are some examples on how to quickly set up TLS traffic:
 
 1. Using `docker run`
 
@@ -452,9 +385,9 @@ $ cat myconf.conf
 max_pool='300'
 ```
 
-#### Step 2: Run the Pgpool image
+#### Step 2: Run the Pgpool-II image
 
-Run the Pgpool image, mounting a directory from your host and setting `PGPOOL_USER_CONF_FILE` and `PGPOOL_USER_HBA_FILE`. Using Docker Compose:
+Run the Pgpool-II image, mounting a directory from your host and setting `PGPOOL_USER_CONF_FILE` and `PGPOOL_USER_HBA_FILE`. Using Docker Compose:
 
 ```diff
      image: bitnami/pgpool:latest
@@ -470,9 +403,9 @@ Run the Pgpool image, mounting a directory from your host and setting `PGPOOL_US
        - PGPOOL_SR_CHECK_USER=customuser
 ```
 
-#### Step 3: Start Pgpool
+#### Step 3: Start Pgpool-II
 
-Start your Pgpool container for changes to take effect.
+Start your Pgpool-II container for changes to take effect.
 
 ```console
 docker restart pgpool
@@ -488,7 +421,7 @@ Refer to the [server configuration](http://www.pgpool.net/docs/latest/en/html/ru
 
 ### Re-attaching nodes
 
-Pgpool does not reattach nodes automatically, to reattach a node you have to get the `id` of the node and then run the attach command manually.
+Pgpool-II does not reattach nodes automatically, to reattach a node you have to get the `id` of the node and then run the attach command manually.
 
 #### Step 1: Get the node id
 
@@ -525,31 +458,81 @@ This command will prompt for a password, this password is the one set in the env
 
 ### Environment variables
 
-Please see the list of environment variables available in the Bitnami Pgpool container in the next table:
+#### Customizable environment variables
 
-| Environment Variable                | Default value |
-|:------------------------------------|:--------------|
-| PGPOOL_BACKEND_NODES                | `nil`         |
-| PGPOOL_PORT_NUMBER                  | `5432`        |
-| PGPOOL_SR_CHECK_USER                | `nil`         |
-| PGPOOL_SR_CHECK_PASSWORD            | `nil`         |
-| PGPOOL_SR_CHECK_PASSWORD_FILE       | `nil`         |
-| PGPOOL_POSTGRES_USERNAME            | `nil`         |
-| PGPOOL_POSTGRES_PASSWORD            | `nil`         |
-| PGPOOL_PASSWORD_FILE                | `nil`         |
-| PGPOOL_TIMEOUT                      | `360`         |
-| PGPOOL_ENABLE_LDAP                  | `no`          |
-| PGPOOL_ADMIN_USERNAME=admin         | `nil`         |
-| PGPOOL_ADMIN_PASSWORD=adminpassword | `nil`         |
-| PGPOOL_ENABLE_LOAD_BALANCING        | `yes`         |
-| PGPOOL_ENABLE_POOL_HBA              | `yes`         |
-| PGPOOL_ENABLE_POOL_PASSWD           | `yes`         |
-| PGPOOL_PASSWD_FILE                  | `pool_passwd` |
-| PGPOOL_MAX_POOL                     | `15`          |
-| PGPOOL_NUM_INIT_CHILDREN            | `32`          |
-| PGPOOL_RESERVED_CONNECTIONS         | `0`           |
-| PGPOOL_POSTGRES_CUSTOM_USERS        | nil           |
-| PGPOOL_POSTGRES_CUSTOM_PASSWORDS    | nil           |
+| Name                                     | Description                                                                                                                        | Default Value                       |
+|------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|
+| `PGPOOL_USER_CONF_FILE`                  | Custom Pgpool-II configuration file to be appended at Pgpool-II configuration file.                                                | `nil`                               |
+| `PGPOOL_USER_HBA_FILE`                   | Custom Pgpool-II host-based authentication configuration to be appended to Pgpool-II host-based authentication configuration file. | `nil`                               |
+| `PGPOOL_PASSWD_FILE`                     | Pgpool-II pool password file.                                                                                                      | `pool_passwd`                       |
+| `PGPOOL_PORT_NUMBER`                     | Pgpool-II port number.                                                                                                             | `5432`                              |
+| `PGPOOL_ENABLE_POOL_HBA`                 | Enable Pgpool-II host-based authentication.                                                                                        | `yes`                               |
+| `PGPOOL_ENABLE_POOL_PASSWD`              | Enable Pgpool-II pool password.                                                                                                    | `yes`                               |
+| `PGPOOL_ENABLE_LOAD_BALANCING`           | Enable Load-Balancing.                                                                                                             | `yes`                               |
+| `PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING` | Enable Statement Load-Balancing.                                                                                                   | `no`                                |
+| `PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE`   | Disable Load-Balancing on write queries.                                                                                           | `transaction`                       |
+| `PGPOOL_ENABLE_CONNECTION_CACHE`         | Enable Pgpool-II connection cache.                                                                                                 | `yes`                               |
+| `PGPOOL_TIMEOUT`                         | Pgpool-II timeout (in seconds).                                                                                                    | `360`                               |
+| `PGPOOL_CONNECT_TIMEOUT`                 | Pgpool-II connection timeout (in milliseconds).                                                                                    | `10000`                             |
+| `PGPOOL_MAX_POOL`                        | Pgpool-II maximum number of cached connections.                                                                                    | `15`                                |
+| `PGPOOL_HEALTH_CHECK_PERIOD`             | Pgpool-II Health Check period (in seconds).                                                                                        | `30`                                |
+| `PGPOOL_HEALTH_CHECK_TIMEOUT`            | Pgpool-II Health Check timeout (in seconds).                                                                                       | `10`                                |
+| `PGPOOL_HEALTH_CHECK_MAX_RETRIES`        | Pgpool-II Health Check max retries.                                                                                                | `5`                                 |
+| `PGPOOL_HEALTH_CHECK_RETRY_DELAY`        | Pgpool-II Health Check retry delay (in seconds).                                                                                   | `5`                                 |
+| `PGPOOL_HEALTH_CHECK_PSQL_TIMEOUT`       | Pgpool-II Health Check psql timeout (in seconds).                                                                                  | `15`                                |
+| `PGPOOL_AUTO_FAILBACK`                   | Enable Pgpool-II auto_failback on false primaries detection.                                                                       | `no`                                |
+| `PGPOOL_DISCARD_STATUS`                  | Discard Pgpool-II status file on restarts.                                                                                         | `yes`                               |
+| `PGPOOL_SR_CHECK_USER`                   | Pgpool-II Streaming Replication Check username.                                                                                    | `nil`                               |
+| `PGPOOL_SR_CHECK_PASSWORD`               | Pgpool-II Streaming Replication Check password.                                                                                    | `nil`                               |
+| `PGPOOL_SR_CHECK_DATABASE`               | Pgpool-II Streaming Replication Check database.                                                                                    | `postgres`                          |
+| `PGPOOL_SR_CHECK_PERIOD`                 | Pgpool-II Streaming Replication Check period (in seconds).                                                                         | `30`                                |
+| `PGPOOL_HEALTH_CHECK_USER`               | Pgpool-II Health Check username.                                                                                                   | `$PGPOOL_SR_CHECK_USER`             |
+| `PGPOOL_HEALTH_CHECK_PASSWORD`           | Pgpool-II Health Check password.                                                                                                   | `$PGPOOL_SR_CHECK_PASSWORD`         |
+| `PGPOOL_ADMIN_USERNAME`                  | Pgpool-II Admin username.                                                                                                          | `nil`                               |
+| `PGPOOL_ADMIN_PASSWORD`                  | Pgpool-II Admin password.                                                                                                          | `nil`                               |
+| `PGPOOL_POSTGRES_USERNAME`               | PostgreSQL backend admin username.                                                                                                 | `postgres`                          |
+| `PGPOOL_POSTGRES_PASSWORD`               | PostgreSQL backend admin password.                                                                                                 | `nil`                               |
+| `PGPOOL_POSTGRES_CUSTOM_USERS`           | Comma, semi-colon or space separated list of custom users to create.                                                               | `nil`                               |
+| `PGPOOL_POSTGRES_CUSTOM_PASSWORDS`       | Comma, semi-colon or space separated list of passwords for the custom users to create.                                             | `nil`                               |
+| `PGPOOL_ENABLE_LDAP`                     | Enable LDAP on Pgpool-II.                                                                                                          | `no`                                |
+| `PGPOOL_AUTHENTICATION_METHOD`           | Pgpool-II authentication method.                                                                                                   | `scram-sha-256`                     |
+| `PGPOOL_AES_KEY`                         | Pgpool-II AES key.                                                                                                                 | `head -c 20 /dev/urandom \| base64` |
+| `PGPOOL_ENABLE_TLS`                      | Enable TLS on Pgpool-II.                                                                                                           | `no`                                |
+| `PGPOOL_TLS_CA_FILE`                     | Pgpool-II TLS authentication CA file.                                                                                              | `nil`                               |
+| `PGPOOL_TLS_CERT_FILE`                   | Pgpool-II TLS authentication cert file.                                                                                            | `nil`                               |
+| `PGPOOL_TLS_KEY_FILE`                    | Pgpool-II TLS authentication key file.                                                                                             | `nil`                               |
+| `PGPOOL_TLS_PREFER_SERVER_CIPHERS`       | Prefer server TLS authentication ciphers.                                                                                          | `yes`                               |
+| `PGPOOL_ENABLE_LOG_CONNECTIONS`          | Enable Pgpool-II log connections                                                                                                   | `no`                                |
+| `PGPOOL_ENABLE_LOG_HOSTNAME`             | Show clients hostnames on Pgpool-II connections logs.                                                                              | `no`                                |
+| `PGPOOL_ENABLE_LOG_PCP_PROCESSES`        | Enable PCP processes logging.                                                                                                      | `yes`                               |
+| `PGPOOL_ENABLE_LOG_PER_NODE_STATEMENT`   | Enable logging every SQL statement for each DB node separately.                                                                    | `no`                                |
+| `PGPOOL_BACKEND_NODES`                   | Comma, semi-colon or space separated list of PostgreSQL backend nodes.                                                             | `nil`                               |
+| `PGPOOL_BACKEND_APPLICATION_NAMES`       | Comma, semi-colon or space separated list of PostgreSQL backend application names.                                                 | `nil`                               |
+| `PGPOOL_FAILOVER_ON_BACKEND_SHUTDOWN`    | Enable failover recovery on backend shutdown.                                                                                      | `on`                                |
+| `PGPOOL_FAILOVER_ON_BACKEND_ERROR`       | Enable failover recovery on backend error.                                                                                         | `off`                               |
+| `PGPOOL_DAEMON_USER`                     | Pgpool-II daemon user                                                                                                              | `pgpool`                            |
+| `PGPOOL_DAEMON_GROUP`                    | Pgpool-II daemon group                                                                                                             | `pgpool`                            |
+
+#### Read-only environment variables
+
+| Name                      | Description                                             | Value                              |
+|---------------------------|---------------------------------------------------------|------------------------------------|
+| `PGPOOL_BASE_DIR`         | Pgpool-II installation directory.                       | `${BITNAMI_ROOT_DIR}/pgpool`       |
+| `PGPOOL_BIN_DIR`          | Pgpool-II binaries directory.                           | `${PGPOOL_BASE_DIR}/bin`           |
+| `PGPOOL_DATA_DIR`         | Pgpool-II data directory.                               | `${PGPOOL_BASE_DIR}/data`          |
+| `PGPOOL_DEFAULT_CONF_DIR` | Pgpool-II default configuration directory.              | `${PGPOOL_BASE_DIR}/conf.default`  |
+| `PGPOOL_CONF_DIR`         | Pgpool-II configuration directory.                      | `${PGPOOL_BASE_DIR}/conf`          |
+| `PGPOOL_DEFAULT_ETC_DIR`  | Pgpool-II default etc directory.                        | `${PGPOOL_BASE_DIR}/etc.default`   |
+| `PGPOOL_ETC_DIR`          | Pgpool-II etc directory.                                | `${PGPOOL_BASE_DIR}/etc`           |
+| `PGPOOL_LOG_DIR`          | Pgpool-II logs directory.                               | `${PGPOOL_BASE_DIR}/logs`          |
+| `PGPOOL_TMP_DIR`          | Pgpool-II temporary directory.                          | `${PGPOOL_BASE_DIR}/tmp`           |
+| `PGPOOL_INITSCRIPTS_DIR`  | Pgpool-II init scripts directory.                       | `/docker-entrypoint-initdb.d`      |
+| `PGPOOL_CONF_FILE`        | Pgpool-II configuration file.                           | `${PGPOOL_CONF_DIR}/pgpool.conf`   |
+| `PGPOOL_PCP_CONF_FILE`    | Performance Co-Pilot (PCP) configuration file.          | `${PGPOOL_ETC_DIR}/pcp.conf`       |
+| `PGPOOL_PGHBA_FILE`       | Pgpool-II host-based authentication configuration file. | `${PGPOOL_CONF_DIR}/pool_hba.conf` |
+| `PGPOOL_LOG_FILE`         | Pgpool-II log file.                                     | `${PGPOOL_LOG_DIR}/pgpool.log`     |
+| `PGPOOL_PID_FILE`         | Pgpool-II pid file.                                     | `${PGPOOL_TMP_DIR}/pgpool.pid`     |
+| `PGPOOLKEYFILE`           | Pgpool-II pool key file.                                | `${PGPOOL_CONF_DIR}/.pgpoolkey`    |
 
 ### FIPS configuration in Bitnami Secure Images
 

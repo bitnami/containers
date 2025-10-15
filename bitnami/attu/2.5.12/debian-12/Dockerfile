@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-08T10:50:59Z" \
+      org.opencontainers.image.created="2025-10-15T00:22:02Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/attu/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/attu" \
@@ -28,8 +28,8 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "python-3.14.0-0-linux-${OS_ARCH}-debian-12" \
-      "node-24.9.0-0-linux-${OS_ARCH}-debian-12" \
+      "python-3.14.0-4-linux-${OS_ARCH}-debian-12" \
+      "node-24.10.0-0-linux-${OS_ARCH}-debian-12" \
       "attu-2.5.12-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -50,7 +50,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="2.5.12" \
     BITNAMI_APP_NAME="attu" \
-    IMAGE_REVISION="29" \
+    IMAGE_REVISION="30" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:$PATH"
 
 EXPOSE 3000

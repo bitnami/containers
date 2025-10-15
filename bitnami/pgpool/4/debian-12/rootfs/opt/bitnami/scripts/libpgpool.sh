@@ -2,7 +2,7 @@
 # Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 #
-# Bitnami Pgpool library
+# Bitnami Pgpool-II library
 
 # shellcheck disable=SC1090,SC1091
 
@@ -14,130 +14,6 @@
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libservice.sh
 . /opt/bitnami/scripts/libvalidations.sh
-
-########################
-# Loads global variables used on pgpool configuration.
-# Globals:
-#   PGPOOL_*
-# Arguments:
-#   None
-# Returns:
-#   Series of exports to be used as 'eval' arguments
-#########################
-pgpool_env() {
-    cat <<"EOF"
-# Format log messages
-MODULE=pgpool
-
-# Paths
-export PGPOOL_BASE_DIR="/opt/bitnami/pgpool"
-export PGPOOL_DATA_DIR="${PGPOOL_BASE_DIR}/data"
-export PGPOOL_CONF_DIR="${PGPOOL_BASE_DIR}/conf"
-export PGPOOL_ETC_DIR="${PGPOOL_BASE_DIR}/etc"
-export PGPOOL_DEFAULT_CONF_DIR="${PGPOOL_BASE_DIR}/conf.default"
-export PGPOOL_DEFAULT_ETC_DIR="${PGPOOL_BASE_DIR}/etc.default"
-export PGPOOL_LOG_DIR="${PGPOOL_BASE_DIR}/logs"
-export PGPOOL_TMP_DIR="${PGPOOL_BASE_DIR}/tmp"
-export PGPOOL_BIN_DIR="${PGPOOL_BASE_DIR}/bin"
-export PGPOOL_INITSCRIPTS_DIR=/docker-entrypoint-initdb.d
-export PGPOOL_CONF_FILE="${PGPOOL_CONF_DIR}/pgpool.conf"
-export PGPOOL_PCP_CONF_FILE="${PGPOOL_ETC_DIR}/pcp.conf"
-export PGPOOL_PGHBA_FILE="${PGPOOL_CONF_DIR}/pool_hba.conf"
-export PGPOOL_PID_FILE="${PGPOOL_TMP_DIR}/pgpool.pid"
-export PGPOOL_LOG_FILE="${PGPOOL_LOG_DIR}/pgpool.log"
-export PGPOOLKEYFILE="${PGPOOL_CONF_DIR}/.pgpoolkey"
-export PGPOOL_ENABLE_POOL_HBA="${PGPOOL_ENABLE_POOL_HBA:-yes}"
-export PGPOOL_ENABLE_POOL_PASSWD="${PGPOOL_ENABLE_POOL_PASSWD:-yes}"
-export PGPOOL_USER_CONF_FILE="${PGPOOL_USER_CONF_FILE:-}"
-export PGPOOL_USER_HBA_FILE="${PGPOOL_USER_HBA_FILE:-}"
-export PGPOOL_PASSWD_FILE="${PGPOOL_PASSWD_FILE:-pool_passwd}"
-export PATH="${PGPOOL_BIN_DIR}:$PATH"
-
-# Users
-export PGPOOL_DAEMON_USER="pgpool"
-export PGPOOL_DAEMON_GROUP="pgpool"
-
-# Settings
-export PGPOOL_PORT_NUMBER="${PGPOOL_PORT_NUMBER:-5432}"
-export PGPOOL_BACKEND_NODES="${PGPOOL_BACKEND_NODES:-}"
-export PGPOOL_SR_CHECK_USER="${PGPOOL_SR_CHECK_USER:-}"
-export PGPOOL_SR_CHECK_PERIOD="${PGPOOL_SR_CHECK_PERIOD:-30}"
-export PGPOOL_SR_CHECK_DATABASE="${PGPOOL_SR_CHECK_DATABASE:-postgres}"
-export PGPOOL_POSTGRES_USERNAME="${PGPOOL_POSTGRES_USERNAME:-postgres}"
-export PGPOOL_ADMIN_USERNAME="${PGPOOL_ADMIN_USERNAME:-}"
-export PGPOOL_ENABLE_LDAP="${PGPOOL_ENABLE_LDAP:-no}"
-export PGPOOL_TIMEOUT="360"
-export PGPOOL_ENABLE_LOG_CONNECTIONS="${PGPOOL_ENABLE_LOG_CONNECTIONS:-no}"
-export PGPOOL_ENABLE_LOG_HOSTNAME="${PGPOOL_ENABLE_LOG_HOSTNAME:-no}"
-export PGPOOL_ENABLE_LOG_PCP_PROCESSES="${PGPOOL_ENABLE_LOG_PCP_PROCESSES:-yes}"
-export PGPOOL_ENABLE_LOG_PER_NODE_STATEMENT="${PGPOOL_ENABLE_LOG_PER_NODE_STATEMENT:-no}"
-export PGPOOL_ENABLE_LOAD_BALANCING="${PGPOOL_ENABLE_LOAD_BALANCING:-yes}"
-export PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING="${PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING:-no}"
-export PGPOOL_ENABLE_CONNECTION_CACHE="${PGPOOL_ENABLE_CONNECTION_CACHE:-yes}"
-export PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE="${PGPOOL_DISABLE_LOAD_BALANCE_ON_WRITE:-transaction}"
-export PGPOOL_MAX_POOL="${PGPOOL_MAX_POOL:-15}"
-export PGPOOL_HEALTH_CHECK_USER="${PGPOOL_HEALTH_CHECK_USER:-$PGPOOL_SR_CHECK_USER}"
-export PGPOOL_HEALTH_CHECK_PERIOD="${PGPOOL_HEALTH_CHECK_PERIOD:-30}"
-export PGPOOL_HEALTH_CHECK_TIMEOUT="${PGPOOL_HEALTH_CHECK_TIMEOUT:-10}"
-export PGPOOL_HEALTH_CHECK_MAX_RETRIES="${PGPOOL_HEALTH_CHECK_MAX_RETRIES:-5}"
-export PGPOOL_HEALTH_CHECK_RETRY_DELAY="${PGPOOL_HEALTH_CHECK_RETRY_DELAY:-5}"
-export PGPOOL_CONNECT_TIMEOUT="${PGPOOL_CONNECT_TIMEOUT:-10000}"
-export PGPOOL_HEALTH_CHECK_PSQL_TIMEOUT="${PGPOOL_HEALTH_CHECK_PSQL_TIMEOUT:-15}"
-export PGPOOL_POSTGRES_CUSTOM_USERS="${PGPOOL_POSTGRES_CUSTOM_USERS:-}"
-export PGPOOL_POSTGRES_CUSTOM_PASSWORDS="${PGPOOL_POSTGRES_CUSTOM_PASSWORDS:-}"
-export PGPOOL_AUTO_FAILBACK="${PGPOOL_AUTO_FAILBACK:-no}"
-export PGPOOL_BACKEND_APPLICATION_NAMES="${PGPOOL_BACKEND_APPLICATION_NAMES:-}"
-export PGPOOL_AUTHENTICATION_METHOD="${PGPOOL_AUTHENTICATION_METHOD:-scram-sha-256}"
-export PGPOOL_AES_KEY="${PGPOOL_AES_KEY:-$(head -c 20 /dev/urandom | base64)}"
-export PGPOOL_FAILOVER_ON_BACKEND_SHUTDOWN="${PGPOOL_FAILOVER_ON_BACKEND_SHUTDOWN:-on}"
-export PGPOOL_FAILOVER_ON_BACKEND_ERROR="${PGPOOL_FAILOVER_ON_BACKEND_ERROR:-off}"
-export PGPOOL_DISCARD_STATUS="${PGPOOL_DISCARD_STATUS:-yes}"
-
-# SSL
-export PGPOOL_ENABLE_TLS="${PGPOOL_ENABLE_TLS:-no}"
-export PGPOOL_TLS_CERT_FILE="${PGPOOL_TLS_CERT_FILE:-}"
-export PGPOOL_TLS_KEY_FILE="${PGPOOL_TLS_KEY_FILE:-}"
-export PGPOOL_TLS_CA_FILE="${PGPOOL_TLS_CA_FILE:-}"
-export PGPOOL_TLS_PREFER_SERVER_CIPHERS="${PGPOOL_TLS_PREFER_SERVER_CIPHERS:-yes}"
-
-EOF
-    if [[ -f "${PGPOOL_ADMIN_PASSWORD_FILE:-}" ]]; then
-        cat <<"EOF"
-export PGPOOL_ADMIN_PASSWORD="$(< "${PGPOOL_ADMIN_PASSWORD_FILE}")"
-EOF
-    else
-        cat <<"EOF"
-export PGPOOL_ADMIN_PASSWORD="${PGPOOL_ADMIN_PASSWORD:-}"
-EOF
-    fi
-    if [[ -f "${PGPOOL_POSTGRES_PASSWORD_FILE:-}" ]]; then
-        cat <<"EOF"
-export PGPOOL_POSTGRES_PASSWORD="$(< "${PGPOOL_POSTGRES_PASSWORD_FILE}")"
-EOF
-    else
-        cat <<"EOF"
-export PGPOOL_POSTGRES_PASSWORD="${PGPOOL_POSTGRES_PASSWORD:-}"
-EOF
-    fi
-    if [[ -f "${PGPOOL_SR_CHECK_PASSWORD_FILE:-}" ]]; then
-        cat <<"EOF"
-export PGPOOL_SR_CHECK_PASSWORD="$(< "${PGPOOL_SR_CHECK_PASSWORD_FILE}")"
-EOF
-    else
-        cat <<"EOF"
-export PGPOOL_SR_CHECK_PASSWORD="${PGPOOL_SR_CHECK_PASSWORD:-}"
-EOF
-    fi
-    if [[ -f "${PGPOOL_HEALTH_CHECK_PASSWORD_FILE:-}" ]]; then
-        cat <<"EOF"
-export PGPOOL_HEALTH_CHECK_PASSWORD="$(< "${PGPOOL_HEALTH_CHECK_PASSWORD_FILE}")"
-EOF
-    else
-        cat <<"EOF"
-export PGPOOL_HEALTH_CHECK_PASSWORD="${PGPOOL_HEALTH_CHECK_PASSWORD:-$PGPOOL_SR_CHECK_PASSWORD}"
-EOF
-    fi
-}
 
 ########################
 # Validate settings in PGPOOL_* env. variables
@@ -258,11 +134,13 @@ pgpool_validate() {
     fi
 
     # Check for Authentication method
-    if ! [[ "$PGPOOL_AUTHENTICATION_METHOD" =~ ^(md5|scram-sha-256)$ ]]; then
-        print_validation_error "The values allowed for PGPOOL_AUTHENTICATION_METHOD: md5,scram-sha-256"
+    if ! [[ "$PGPOOL_AUTHENTICATION_METHOD" =~ ^(md5|scram-sha-256|trust)$ ]]; then
+        print_validation_error "The values allowed for PGPOOL_AUTHENTICATION_METHOD: md5,scram-sha-256,trust"
+    elif [[ "$PGPOOL_AUTHENTICATION_METHOD" = "trust" ]]; then
+        warn "You set 'trust' as authentication method. For safety reasons, do not use this method in production environments."
     fi
 
-    # check for required environment variables for scram-sha-256 based authentication
+    # Check for required environment variables for scram-sha-256 based authentication
     if [[ "$PGPOOL_AUTHENTICATION_METHOD" = "scram-sha-256" ]]; then
         # If scram-sha-256 is enabled, pg_pool_password cannot be disabled
         if ! is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD"; then
@@ -374,18 +252,21 @@ pgpool_healthcheck() {
 pgpool_create_pghba() {
     local all_authentication="$PGPOOL_AUTHENTICATION_METHOD"
     is_boolean_yes "$PGPOOL_ENABLE_LDAP" && all_authentication="pam pamservice=pgpool"
-    local postgres_auth_line=""
-    local sr_check_auth_line=""
+    local postgres_authentication="scram-sha-256"
+    # We avoid using 'trust' for the postgres user even if PGPOOL_AUTHENTICATION_METHOD is set to 'trust'
+    [[ "$PGPOOL_AUTHENTICATION_METHOD" = "md5" ]] && postgres_authentication="md5"
+
     info "Generating pg_hba.conf file..."
-
+    local postgres_auth_line=""
     if is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD"; then
-        postgres_auth_line="host     all             ${PGPOOL_POSTGRES_USERNAME}       all        ${PGPOOL_AUTHENTICATION_METHOD}"
+        postgres_auth_line="host     all             ${PGPOOL_POSTGRES_USERNAME}       all        ${postgres_authentication}"
     fi
+    local sr_check_auth_line=""
     if [[ -n "$PGPOOL_SR_CHECK_USER" ]]; then
-        sr_check_auth_line="host     all             ${PGPOOL_SR_CHECK_USER}            all        ${PGPOOL_AUTHENTICATION_METHOD}"
+        sr_check_auth_line="host     all             ${PGPOOL_SR_CHECK_USER}            all        ${postgres_authentication}"
     fi
 
-    cat >>"$PGPOOL_PGHBA_FILE" <<EOF
+    cat >"$PGPOOL_PGHBA_FILE" <<EOF
 local    all             all                            trust
 EOF
 
@@ -511,9 +392,12 @@ pgpool_create_config() {
     # Authentication settings
     # ref: http://www.pgpool.net/docs/latest/en/html/runtime-config-connection.html#RUNTIME-CONFIG-AUTHENTICATION-SETTINGS
     pgpool_set_property "enable_pool_hba" "$(is_boolean_yes "$PGPOOL_ENABLE_POOL_HBA" && echo "on" || echo "off")"
-    # allow_clear_text_frontend_auth only works when enable_pool_hba is not enabled
     # ref: https://www.pgpool.net/docs/latest/en/html/runtime-config-connection.html#GUC-ALLOW-CLEAR-TEXT-FRONTEND-AUTH
-    pgpool_set_property "allow_clear_text_frontend_auth" "$(is_boolean_yes "$PGPOOL_ENABLE_POOL_HBA" && echo "off" || echo "on")"
+    if ! is_boolean_yes "$PGPOOL_ENABLE_POOL_HBA" || [[ "$PGPOOL_AUTHENTICATION_METHOD" = "trust" ]]; then
+        pgpool_set_property "allow_clear_text_frontend_auth" "on"
+    else
+        pgpool_set_property "allow_clear_text_frontend_auth" "off"
+    fi
     pgpool_set_property "pool_passwd" "$pool_passwd"
     pgpool_set_property "authentication_timeout" "30"
     # File Locations settings
@@ -594,8 +478,9 @@ pgpool_create_config() {
 pgpool_encrypt_execute() {
     local -a password_encryption_cmd=("pg_md5")
 
-    if [[ "$PGPOOL_AUTHENTICATION_METHOD" = "scram-sha-256" ]]; then
-
+    # If authentication method for 'all' users is 'trust', we still use
+    # pg_enc to generate encrypted passwords for 'postgres' and 'sr_check' users
+    if [[ "$PGPOOL_AUTHENTICATION_METHOD" =~ ^(scram-sha-256|trust)$ ]]; then
         if is_file_writable "$PGPOOLKEYFILE"; then
             # Creating a PGPOOLKEYFILE as it is writeable
             echo "$PGPOOL_AES_KEY" > "$PGPOOLKEYFILE"
@@ -653,7 +538,7 @@ pgpool_generate_password_file() {
 pgpool_encrypt_password() {
     local -r password="${1:?missing password}"
 
-    if [[ "$PGPOOL_AUTHENTICATION_METHOD" = "scram-sha-256" ]]; then
+    if [[ "$PGPOOL_AUTHENTICATION_METHOD" =~ ^(scram-sha-256|trust)$ ]]; then
         pgpool_encrypt_execute "$password" | grep -o -E "AES.+" | tr -d '\n'
     else
         pgpool_encrypt_execute "$password" | tr -d '\n'

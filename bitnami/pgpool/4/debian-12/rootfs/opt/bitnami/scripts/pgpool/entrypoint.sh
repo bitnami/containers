@@ -2,7 +2,7 @@
 # Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 #
-# Bitnami Pgpool entrypoint
+# Bitnami Pgpool-II entrypoint
 
 # shellcheck disable=SC1091
 
@@ -17,8 +17,8 @@ set -o pipefail
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/libpgpool.sh
 
-# Load Pgpool env. variables
-eval "$(pgpool_env)"
+# Load Pgpool-II environment
+. /opt/bitnami/scripts/pgpool-env.sh
 
 print_welcome_page
 
