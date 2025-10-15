@@ -146,10 +146,10 @@ tomcat_enable_ajp() {
 tomcat_enable_application() {
     local application="${1:?missing application}"
     # Access control is configured in the application's context.xml with a Valve element
-    # context.xml docs: https://tomcat.apache.org/tomcat-9.0-doc/config/context.html
-    # Valve docs for Access Control: https://tomcat.apache.org/tomcat-9.0-doc/config/valve.html#Access_Control
+    # context.xml docs: https://tomcat.apache.org/tomcat-11.0-doc/config/context.html
+    # Valve docs for Access Control: https://tomcat.apache.org/tomcat-11.0-doc/config/valve.html#Remote_CIDR_Valve
     [[ ! -f "${TOMCAT_WEBAPPS_DIR}/${application}/META-INF/context.xml" ]] && return
-    xmlstarlet ed -S --inplace --update '//Valve/@allow' --value '\d+\.\d+\.\d+\.\d+' "${TOMCAT_WEBAPPS_DIR}/${application}/META-INF/context.xml"
+    xmlstarlet ed -S --inplace --update '//Valve/@allow' --value '0.0.0.0/0' "${TOMCAT_WEBAPPS_DIR}/${application}/META-INF/context.xml"
 }
 
 ########################
