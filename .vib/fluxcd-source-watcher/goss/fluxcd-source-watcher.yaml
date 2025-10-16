@@ -1,0 +1,9 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+command:
+  check-source-watcher-help:
+    exec: source-watcher --help
+    exit-status: 0
+    stderr:
+      - "Usage of source-watcher:"
