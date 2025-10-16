@@ -290,8 +290,8 @@ volumes:
 | Name                            | Description                                         | Default Value |
 |---------------------------------|-----------------------------------------------------|---------------|
 | `CONSUL_RPC_PORT_NUMBER`        | Consul RPC port number.                             | `8300`        |
-| `CONSUL_HTTP_PORT_NUMBER`       | Consul RPC port number.                             | `8500`        |
-| `CONSUL_DNS_PORT_NUMBER`        | Consul DNS port number.                             | `8600`        |
+| `CONSUL_HTTP_PORT_NUMBER`       | Consul HTTP port number.                            | `8500`        |
+| `CONSUL_HTTPS_PORT_NUMBER`      | Consul HTTPS port number.                           | `-1`          |
 | `CONSUL_DNS_PORT_NUMBER`        | Consul DNS port number.                             | `8600`        |
 | `CONSUL_AGENT_MODE`             | Consul agent mode.                                  | `server`      |
 | `CONSUL_DISABLE_KEYRING_FILE`   | Disable keyring file in Consul.                     | `false`       |

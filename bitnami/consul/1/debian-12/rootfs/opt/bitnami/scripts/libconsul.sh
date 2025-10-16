@@ -63,7 +63,7 @@ consul_validate() {
     check_ip_value CONSUL_CLIENT_LAN_ADDRESS
     check_ip_value CONSUL_SERF_LAN_ADDRESS
 
-    for var in "CONSUL_RPC_PORT_NUMBER" "CONSUL_HTTP_PORT_NUMBER" "CONSUL_DNS_PORT_NUMBER" "CONSUL_SERF_LAN_PORT_NUMBER"; do
+    for var in "CONSUL_RPC_PORT_NUMBER" "CONSUL_DNS_PORT_NUMBER" "CONSUL_SERF_LAN_PORT_NUMBER"; do
         if ! err=$(validate_port -unprivileged "${!var}"); then
             print_validation_error "An invalid port was specified in the environment variable $var: $err"
         fi

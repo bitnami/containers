@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-14T06:06:44Z" \
+      org.opencontainers.image.created="2025-10-15T22:32:52Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/prometheus/README.md" \
-      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/prometheus" \
-      org.opencontainers.image.title="prometheus" \
+      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/haproxy/README.md" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/haproxy" \
+      org.opencontainers.image.title="haproxy" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="3.6.0"
+      org.opencontainers.image.version="3.2.6"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -23,12 +23,12 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl procps
+RUN install_packages ca-certificates curl libcrypt1 liblua5.4-0 libssl3 lua5.4 procps
 RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "prometheus-3.6.0-2-linux-${OS_ARCH}-debian-12" \
+      "haproxy-3.2.6-3-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -43,20 +43,13 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
-RUN ln -sf /opt/bitnami/prometheus/conf /etc/prometheus
-RUN ln -sf /opt/bitnami/prometheus/data /prometheus
-RUN chown -R 1001:1001 /opt/bitnami/prometheus
 RUN uninstall_packages curl
 
-RUN mkdir -p /opt/bitnami/prometheus/data/ && chmod g+rwX /opt/bitnami/prometheus/data/
-ENV APP_VERSION="3.6.0" \
-    BITNAMI_APP_NAME="prometheus" \
-    IMAGE_REVISION="3" \
-    PATH="/opt/bitnami/prometheus/bin:$PATH"
+ENV APP_VERSION="3.2.6" \
+    BITNAMI_APP_NAME="haproxy" \
+    IMAGE_REVISION="5" \
+    PATH="/opt/bitnami/haproxy/sbin:/opt/bitnami/haproxy-dataplaneapi/bin:/opt/bitnami/lua/bin:$PATH"
 
-EXPOSE 9090
-
-WORKDIR /opt/bitnami/prometheus
 USER 1001
-ENTRYPOINT [ "/opt/bitnami/prometheus/bin/prometheus" ]
-CMD [ "--config.file=/opt/bitnami/prometheus/conf/prometheus.yml", "--storage.tsdb.path=/opt/bitnami/prometheus/data", "--web.console.libraries=/opt/bitnami/prometheus/conf/console_libraries", "--web.console.templates=/opt/bitnami/prometheus/conf/consoles" ]
+ENTRYPOINT [ "/opt/bitnami/haproxy/sbin/haproxy" ]
+CMD [ "-f", "/bitnami/haproxy/conf/haproxy.cfg" ]

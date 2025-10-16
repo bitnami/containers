@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-15T00:27:44Z" \
+      org.opencontainers.image.created="2025-10-16T00:28:10Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/laravel/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/laravel" \
       org.opencontainers.image.title="laravel" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="12.7.0"
+      org.opencontainers.image.version="12.7.1"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-12" \
@@ -31,7 +31,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
       "wait-for-port-1.0.10-3-linux-${OS_ARCH}-debian-12" \
       "php-8.4.13-6-linux-${OS_ARCH}-debian-12" \
       "node-24.10.0-0-linux-${OS_ARCH}-debian-12" \
-      "laravel-12.7.0-0-linux-${OS_ARCH}-debian-12" \
+      "laravel-12.7.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -50,9 +50,9 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 COPY rootfs /
 RUN /opt/bitnami/scripts/laravel/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
-ENV APP_VERSION="12.7.0" \
+ENV APP_VERSION="12.7.1" \
     BITNAMI_APP_NAME="laravel" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="2" \
     NODE_PATH="/opt/bitnami/node/lib/node_modules" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/node/bin:$PATH" \
     PHP_ENABLE_OPCACHE="0"
