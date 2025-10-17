@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-16T00:26:46Z" \
+      org.opencontainers.image.created="2025-10-17T00:18:40Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/mastodon/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mastodon" \
@@ -54,7 +54,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/mastodon/postunpack.sh
 ENV APP_VERSION="4.4.7" \
     BITNAMI_APP_NAME="mastodon" \
-    IMAGE_REVISION="3" \
+    IMAGE_REVISION="7" \
     LD_LIBRARY_PATH="/opt/bitnami/common/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/node/bin:/opt/bitnami/python/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/redis/bin:/opt/bitnami/mastodon/bin:/opt/bitnami/ruby/bin:$PATH"
 

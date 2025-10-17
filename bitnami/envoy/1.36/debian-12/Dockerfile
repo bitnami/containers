@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-08T21:59:48Z" \
+      org.opencontainers.image.created="2025-10-16T19:08:39Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/fluent-bit/README.md" \
-      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/fluent-bit" \
-      org.opencontainers.image.title="fluent-bit" \
+      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/envoy/README.md" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/envoy" \
+      org.opencontainers.image.title="envoy" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="4.1.1"
+      org.opencontainers.image.version="1.36.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -23,12 +23,12 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libcap2 libgcc-s1 libgcrypt20 libgpg-error0 liblz4-1 liblzma5 libsasl2-2 libssl3 libstdc++6 libsystemd0 libyaml-0-2 libzstd1 procps zlib1g
+RUN install_packages ca-certificates curl procps
 RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "fluent-bit-4.1.1-0-linux-${OS_ARCH}-debian-12" \
+      "envoy-1.36.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -43,17 +43,13 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
-RUN chown -R 1001:1001 /opt/bitnami/fluent-bit
 RUN uninstall_packages curl
 
-ENV APP_VERSION="4.1.1" \
-    BITNAMI_APP_NAME="fluent-bit" \
+ENV APP_VERSION="1.36.1" \
+    BITNAMI_APP_NAME="envoy" \
     IMAGE_REVISION="0" \
-    PATH="/opt/bitnami/fluent-bit/bin:$PATH"
+    PATH="/opt/bitnami/envoy/bin:$PATH"
 
-EXPOSE 2020
-
-WORKDIR /opt/bitnami/fluent-bit
 USER 1001
-ENTRYPOINT [ "fluent-bit" ]
-CMD [ "-c", "/opt/bitnami/fluent-bit/conf/fluent-bit.conf" ]
+ENTRYPOINT [ "/opt/bitnami/envoy/bin/envoy" ]
+CMD [ "-c", "/opt/bitnami/envoy/conf/envoy.yaml" ]

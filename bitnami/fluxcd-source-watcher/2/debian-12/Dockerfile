@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-14T02:37:57Z" \
+      org.opencontainers.image.created="2025-10-16T07:49:46Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/haproxy/README.md" \
-      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/haproxy" \
-      org.opencontainers.image.title="haproxy" \
+      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/fluxcd-source-watcher/README.md" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/fluxcd-source-watcher" \
+      org.opencontainers.image.title="fluxcd-source-watcher" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="3.2.6"
+      org.opencontainers.image.version="2.0.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -23,12 +23,12 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libcrypt1 liblua5.4-0 libssl3 lua5.4 procps
+RUN install_packages ca-certificates curl procps
 RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "haproxy-3.2.6-3-linux-${OS_ARCH}-debian-12" \
+      "fluxcd-source-watcher-2.0.2-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -41,15 +41,14 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     done
 RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
-RUN chmod g+rwX /opt/bitnami
+RUN useradd -r -u 1001 -g root fluxcd-source-watcher
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN uninstall_packages curl
 
-ENV APP_VERSION="3.2.6" \
-    BITNAMI_APP_NAME="haproxy" \
-    IMAGE_REVISION="3" \
-    PATH="/opt/bitnami/haproxy/sbin:/opt/bitnami/haproxy-dataplaneapi/bin:/opt/bitnami/lua/bin:$PATH"
+ENV APP_VERSION="2.0.2" \
+    BITNAMI_APP_NAME="fluxcd-source-watcher" \
+    IMAGE_REVISION="1" \
+    PATH="/opt/bitnami/fluxcd-source-watcher/bin:$PATH"
 
 USER 1001
-ENTRYPOINT [ "/opt/bitnami/haproxy/sbin/haproxy" ]
-CMD [ "-f", "/bitnami/haproxy/conf/haproxy.cfg" ]
+ENTRYPOINT [ "/opt/bitnami/fluxcd-source-watcher/bin/source-watcher" ]

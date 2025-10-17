@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-17T00:18:01Z" \
+      org.opencontainers.image.created="2025-10-16T15:52:45Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/appsmith/README.md" \
-      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/appsmith" \
-      org.opencontainers.image.title="appsmith" \
+      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/prometheus/README.md" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/prometheus" \
+      org.opencontainers.image.title="prometheus" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.89.0"
+      org.opencontainers.image.version="3.7.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -23,18 +23,12 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages acl ca-certificates curl gettext libbz2-1.0 libcrypt1 libffi8 libgcc-s1 libgeoip1 liblzma5 libncursesw6 libpcre3 libreadline8 libsqlite3-0 libssl3 libstdc++6 libtinfo6 openssl procps zlib1g
+RUN install_packages ca-certificates curl procps
 RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "render-template-1.0.9-158-linux-${OS_ARCH}-debian-12" \
-      "python-3.14.0-4-linux-${OS_ARCH}-debian-12" \
-      "node-20.19.5-2-linux-${OS_ARCH}-debian-12" \
-      "nginx-1.29.2-0-linux-${OS_ARCH}-debian-12" \
-      "mongodb-shell-2.5.8-0-linux-${OS_ARCH}-debian-12" \
-      "jre-17.0.16-12-1-linux-${OS_ARCH}-debian-12" \
-      "appsmith-1.89.0-0-linux-${OS_ARCH}-debian-12" \
+      "prometheus-3.7.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -49,19 +43,20 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
+RUN ln -sf /opt/bitnami/prometheus/conf /etc/prometheus
+RUN ln -sf /opt/bitnami/prometheus/data /prometheus
+RUN chown -R 1001:1001 /opt/bitnami/prometheus
+RUN uninstall_packages curl
 
-COPY rootfs /
-RUN /opt/bitnami/scripts/nginx/postunpack.sh
-RUN /opt/bitnami/scripts/appsmith/postunpack.sh
-ENV APP_VERSION="1.89.0" \
-    BITNAMI_APP_NAME="appsmith" \
-    IMAGE_REVISION="7" \
-    NGINX_HTTPS_PORT_NUMBER="" \
-    NGINX_HTTP_PORT_NUMBER="" \
-    PATH="/opt/bitnami/common/bin:/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/nginx/sbin:/opt/bitnami/mongodb/bin:/opt/bitnami/java/bin:$PATH"
+RUN mkdir -p /opt/bitnami/prometheus/data/ && chmod g+rwX /opt/bitnami/prometheus/data/
+ENV APP_VERSION="3.7.0" \
+    BITNAMI_APP_NAME="prometheus" \
+    IMAGE_REVISION="0" \
+    PATH="/opt/bitnami/prometheus/bin:$PATH"
 
-EXPOSE 3000 8080 8091 8443
+EXPOSE 9090
 
+WORKDIR /opt/bitnami/prometheus
 USER 1001
-ENTRYPOINT [ "/opt/bitnami/scripts/appsmith/entrypoint.sh" ]
-CMD [ "/opt/bitnami/scripts/appsmith/run.sh" ]
+ENTRYPOINT [ "/opt/bitnami/prometheus/bin/prometheus" ]
+CMD [ "--config.file=/opt/bitnami/prometheus/conf/prometheus.yml", "--storage.tsdb.path=/opt/bitnami/prometheus/data", "--web.console.libraries=/opt/bitnami/prometheus/conf/console_libraries", "--web.console.templates=/opt/bitnami/prometheus/conf/consoles" ]

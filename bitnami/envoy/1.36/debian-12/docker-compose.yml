@@ -2,5 +2,5 @@
 # SPDX-License-Identifier: APACHE-2.0
 
 services:
-  haproxy:
-    image: docker.io/bitnami/haproxy:3
+  envoy:
+    image: docker.io/bitnami/envoy:1.36

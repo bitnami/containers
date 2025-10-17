@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-16T00:28:10Z" \
+      org.opencontainers.image.created="2025-10-17T00:23:24Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/laravel/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/laravel" \
@@ -52,7 +52,7 @@ RUN /opt/bitnami/scripts/laravel/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
 ENV APP_VERSION="12.7.1" \
     BITNAMI_APP_NAME="laravel" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="6" \
     NODE_PATH="/opt/bitnami/node/lib/node_modules" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/node/bin:$PATH" \
     PHP_ENABLE_OPCACHE="0"
