@@ -23,7 +23,6 @@ readonly repmgr_cmd=$(command -v repmgrd)
 
 postgresql_start_bg true
 info "** Starting repmgrd **"
-# TODO: properly test running the container as root
 if am_i_root; then
     exec_as_user "$POSTGRESQL_DAEMON_USER" "$repmgr_cmd" "${repmgr_flags[@]}"
 else

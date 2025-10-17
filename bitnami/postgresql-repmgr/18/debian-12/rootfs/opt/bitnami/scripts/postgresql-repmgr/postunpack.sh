@@ -18,7 +18,6 @@ for dir in "$POSTGRESQL_INITSCRIPTS_DIR" "$POSTGRESQL_TMP_DIR" "$POSTGRESQL_LOG_
     chmod -R g+rwX "$dir"
 done
 
-
 # Copying events handlers
 mv /events "$REPMGR_EVENTS_DIR"
 chmod +x "$REPMGR_EVENTS_DIR"/router.sh "$REPMGR_EVENTS_DIR"/execs/*sh "$REPMGR_EVENTS_DIR"/execs/includes/*sh
@@ -29,4 +28,3 @@ ln -sf /dev/stdout "$POSTGRESQL_LOG_FILE"
 # Copy all initially generated configuration files to the default directory
 # (this is to avoid breaking when entrypoint is being overridden)
 cp -r "${POSTGRESQL_CONF_DIR}/"* "$POSTGRESQL_DEFAULT_CONF_DIR"
-
