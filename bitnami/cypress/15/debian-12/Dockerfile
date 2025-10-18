@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-17T12:17:01Z" \
+      org.opencontainers.image.created="2025-10-18T03:16:39Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/cypress/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cypress" \
       org.opencontainers.image.title="cypress" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="15.4.0"
+      org.opencontainers.image.version="15.5.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -30,7 +30,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     COMPONENTS=( \
       "python-3.14.0-4-linux-${OS_ARCH}-debian-12" \
       "node-24.10.0-0-linux-${OS_ARCH}-debian-12" \
-      "cypress-15.4.0-0-linux-${OS_ARCH}-debian-12" \
+      "cypress-15.5.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -49,10 +49,10 @@ RUN mkdir /.local && chmod g+rwX /.local
 RUN uninstall_packages curl
 
 RUN mkdir /app && chmod g+rwX -R /app /opt/bitnami/node/cypress-cache && ln -s /app /e2e && mkdir -p /usr/local/lib /usr/local/bin && ln -s /opt/bitnami/node/node_modules /usr/local/lib/node_modules && ln -s /usr/local/lib/node_modules/cypress/bin/cypress /usr/local/bin/cypress && mkdir -p /.pki /.local /.config /.cache /.fontconfig && chmod g+rwX -R /.pki /.local /.cache /.config /.fontconfig
-ENV APP_VERSION="15.4.0" \
+ENV APP_VERSION="15.5.0" \
     BITNAMI_APP_NAME="cypress" \
     CYPRESS_CACHE_FOLDER="/opt/bitnami/node/cypress-cache" \
-    IMAGE_REVISION="13" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/node/lib/node_modules/cypress/bin:$PATH"
 
 EXPOSE 3000
