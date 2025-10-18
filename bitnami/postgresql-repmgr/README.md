@@ -635,6 +635,7 @@ Refer to [issues/27124](https://github.com/bitnami/containers/issues/27124) for 
 | `POSTGRESQL_AUTOCTL_MONITOR_HOST`          | Hostname for the monitor component                                                                   | `monitor`                                  |
 | `POSTGRESQL_AUTOCTL_HOSTNAME`              | Hostname by which postgres is reachable                                                              | `$(hostname --fqdn)`                       |
 | `REPMGR_DATA_DIR`                          | Replication Manager data directory                                                                   | `${REPMGR_VOLUME_DIR}/repmgr/data`         |
+| `REPMGR_SKIP_SETUP`                        | Skip Replication manager (and PostgreSQL) setup.                                                     | `no`                                       |
 | `REPMGR_NODE_ID`                           | Replication Manager node identifier                                                                  | `nil`                                      |
 | `REPMGR_NODE_ID_START_SEED`                | Replication Manager node identifier start seed                                                       | `1000`                                     |
 | `REPMGR_NODE_NAME`                         | Replication Manager node name                                                                        | `$(hostname)`                              |
