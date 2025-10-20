@@ -1,6 +1,0 @@
-binaries:
-  - pushgateway
-root_dir: /opt/bitnami
-version:
-  bin_name: pushgateway
-  flag: --version

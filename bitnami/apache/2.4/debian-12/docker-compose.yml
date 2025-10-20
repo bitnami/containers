@@ -1,9 +1,0 @@
-# Copyright Broadcom, Inc. All Rights Reserved.
-# SPDX-License-Identifier: APACHE-2.0
-
-services:
-  apache:
-    image: docker.io/bitnami/apache:2.4
-    ports:
-      - 80:8080
-      - 443:8443

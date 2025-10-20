@@ -1,7 +1,0 @@
-# Copyright VMware, Inc.
-# SPDX-License-Identifier: APACHE-2.0
-  
-services:
-  hubble-relay:
-    image: docker.io/bitnami/hubble-relay:1
-    container_name: hubble-relay

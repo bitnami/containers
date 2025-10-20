@@ -1,8 +1,0 @@
-binaries:
-  - python
-  - manager
-root_dir: /opt/bitnami
-directories:
-  - paths:
-      - /opt/bitnami/python
-      - /opt/bitnami/plugin-barman-cloud
