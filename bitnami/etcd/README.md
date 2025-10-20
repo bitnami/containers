@@ -236,6 +236,12 @@ Apart from providing your custom configuration file, you can also modify the ser
 
 Additionally, you can configure etcd using the upstream env variables [here](https://etcd.io/docs/v3.4/op-guide/configuration/)
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Etcd Docker image from the [Bitnami Secure Images](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+
 ## Notable Changes
 
 ### 3.5.17-debian-12-r4
