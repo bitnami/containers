@@ -4,25 +4,14 @@
 
 > Apache Kafka is a distributed streaming platform designed to build real-time pipelines and can be used as a message broker or as a replacement for a log aggregation solution for big data applications.
 
-[Overview of Apache Kafka](https://kafka.apache.org/)
-Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+[Overview of Apache Kafka](https://kafka.apache.org/)  
+Trademarks: This Docker image is maintained by **SolDevelo** and is based on the Bitnami Kafka container. The respective trademarks mentioned (e.g., Apache Kafka) are owned by their respective companies. Use of these trademarks does not imply any affiliation or endorsement by those companies.
 
 ## TL;DR
 
 ```console
-docker run --name kafka bitnami/kafka:latest
+docker run --name kafka soldevelo/kafka:latest
 ```
-
-## ⚠️ Important Notice: Upcoming changes to the Bitnami Catalog
-
-Beginning August 28th, 2025, Bitnami will evolve its public catalog to offer a curated set of hardened, security-focused images under the new [Bitnami Secure Images initiative](https://news.broadcom.com/app-dev/broadcom-introduces-bitnami-secure-images-for-production-ready-containerized-applications). As part of this transition:
-
-- Granting community users access for the first time to security-optimized versions of popular container images.
-- Bitnami will begin deprecating support for non-hardened, Debian-based software images in its free tier and will gradually remove non-latest tags from the public catalog. As a result, community users will have access to a reduced number of hardened images. These images are published only under the “latest” tag and are intended for development purposes
-- Starting August 28th, over two weeks, all existing container images, including older or versioned tags (e.g., 2.50.0, 10.6), will be migrated from the public catalog (docker.io/bitnami) to the “Bitnami Legacy” repository (docker.io/bitnamilegacy), where they will no longer receive updates.
-- For production workloads and long-term support, users are encouraged to adopt Bitnami Secure Images, which include hardened containers, smaller attack surfaces, CVE transparency (via VEX/KEV), SBOMs, and enterprise support.
-
-These changes aim to improve the security posture of all Bitnami users by promoting best practices for software supply chain integrity and up-to-date deployments. For more details, visit the [Bitnami Secure Images announcement](https://github.com/bitnami/containers/issues/83267).
 
 ## Why use Bitnami Secure Images?
 
@@ -35,10 +24,6 @@ These changes aim to improve the security posture of all Bitnami users by promot
 
 Only a subset of BSI applications are available for free. Looking to access the entire catalog of applications as well as enterprise support? Try the [commercial edition of Bitnami Secure Images today](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/).
 
-## How to deploy Apache Kafka in Kubernetes?
-
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Apache Kafka Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/kafka).
-
 ## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
@@ -47,32 +32,32 @@ Non-root container images add an extra layer of security and are generally recom
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
-You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `bitnami/ASSET/BRANCH/DISTRO/tags-info.yaml`.
+You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `soldevelo/ASSET/BRANCH/DISTRO/tags-info.yaml`.
 
-Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
+Subscribe to project updates by watching the [soldevelo/containers GitHub repo](https://github.com/soldevelo/containers).
 
 ## Get this image
 
-The recommended way to get the Bitnami Apache Kafka Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/kafka).
+The recommended way to get the Bitnami Apache Kafka Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/soldevelo/kafka).
 
 ```console
-docker pull bitnami/kafka:latest
+docker pull soldevelo/kafka:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the
-[list of available versions](https://hub.docker.com/r/bitnami/kafka/tags/)
+[list of available versions](https://hub.docker.com/r/soldevelo/kafka/tags/)
 in the Docker Hub Registry.
 
 ```console
-docker pull bitnami/kafka:[TAG]
+docker pull soldevelo/kafka:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-git clone https://github.com/bitnami/containers.git
-cd bitnami/APP/VERSION/OPERATING-SYSTEM
-docker build -t bitnami/APP:latest .
+git clone https://github.com/soldevelo/containers.git
+cd soldevelo/APP/VERSION/OPERATING-SYSTEM
+docker build -t soldevelo/APP:latest .
 ```
 
 ## Persisting your data
@@ -81,17 +66,17 @@ If you remove the container all your data and configurations will be lost, and t
 
 > Note: If you have already started using your database, follow the steps on [backing up](#backing-up-your-container) and [restoring](#restoring-a-backup) to pull the data from your running container down to your host.
 
-The image exposes a volume at `/bitnami/kafka` for the Apache Kafka data. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
+The image exposes a volume at `/soldevelo/kafka` for the Apache Kafka data. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
 
 Using Docker Compose:
 
-This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/kafka/docker-compose.yml) file present in this repository:
+This requires a minor change to the [`docker-compose.yml`](https://github.com/soldevelo/containers/blob/main/soldevelo/kafka/docker-compose.yml) file present in this repository:
 
 ```yaml
 kafka:
   ...
   volumes:
-    - /path/to/kafka-persistence:/bitnami/kafka
+    - /path/to/kafka-persistence:/soldevelo/kafka
   ...
 ```
 
@@ -126,7 +111,7 @@ docker run -d --name kafka-server --hostname kafka-server \
     -e KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT \
     -e KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-server:9093 \
     -e KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER \
-    bitnami/kafka:latest
+    soldevelo/kafka:latest
 ```
 
 #### Step 3: Launch your Apache Kafka client instance
@@ -136,7 +121,7 @@ Finally we create a new container instance to launch the Apache Kafka client and
 ```console
 docker run -it --rm \
     --network app-tier \
-    bitnami/kafka:latest kafka-topics.sh --list  --bootstrap-server kafka-server:9092
+    soldevelo/kafka:latest kafka-topics.sh --list  --bootstrap-server kafka-server:9092
 ```
 
 ### Using a Docker Compose file
@@ -152,7 +137,7 @@ networks:
 
 services:
   kafka:
-    image: bitnami/kafka:latest
+    image: soldevelo/kafka:latest
     networks:
       - app-tier
     environment:
@@ -234,10 +219,10 @@ docker-compose up -d
 Additionally, any environment variable beginning with `KAFKA_CFG_` will be mapped to its corresponding Apache Kafka key. For example, use `KAFKA_CFG_BACKGROUND_THREADS` in order to set `background.threads` or `KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE` in order to configure `auto.create.topics.enable`.
 
 ```console
-docker run --name kafka -e KAFKA_CFG_PROCESS_ROLES ... -e KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true bitnami/kafka:latest
+docker run --name kafka -e KAFKA_CFG_PROCESS_ROLES ... -e KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true soldevelo/kafka:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/kafka/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/soldevelo/containers/blob/main/soldevelo/kafka/docker-compose.yml) file present in this repository:
 
 ```yaml
 kafka:
@@ -255,7 +240,7 @@ To use Apache Kafka in a development setup, create the following `docker-compose
 version: "3"
 services:
   kafka:
-    image: bitnami/kafka:latest
+    image: soldevelo/kafka:latest
     ports:
       - 9092:9092
     environment:
@@ -348,7 +333,7 @@ You **must** also use your own certificates for SSL. You can drop your Java Key 
 
 `KAFKA_CERTIFICATE_PASSWORD=myCertificatePassword`
 
-If the truststore is mounted in a different location than `/opt/bitnami/kafka/config/certs/kafka.truststore.jks`, `/opt/bitnami/kafka/config/certs/kafka.truststore.pem`, `/bitnami/kafka/config/certs/kafka.truststore.jks` or `/bitnami/kafka/config/certs/kafka.truststore.pem`, set the `KAFKA_TLS_TRUSTSTORE_FILE` variable.
+If the truststore is mounted in a different location than `/opt/bitnami/kafka/config/certs/kafka.truststore.jks`, `/opt/bitnami/kafka/config/certs/kafka.truststore.pem`, `/soldevelo/kafka/config/certs/kafka.truststore.jks` or `/soldevelo/kafka/config/certs/kafka.truststore.pem`, set the `KAFKA_TLS_TRUSTSTORE_FILE` variable.
 
 The following script can help you with the creation of the JKS and certificates:
 
@@ -368,7 +353,7 @@ version: '2'
 
 services:
   kafka:
-    image: bitnami/kafka:latest
+    image: soldevelo/kafka:latest
     hostname: kafka.example.com
     ports:
       - 9092
@@ -407,7 +392,7 @@ services:
 
 In order to get the required credentials to consume and produce messages you need to provide the credentials in the client. If your Apache Kafka client allows it, use the credentials you've provided.
 
-While producing and consuming messages using the `bitnami/kafka` image, you'll need to point to the `consumer.properties` and/or `producer.properties` file, which contains the needed configuration
+While producing and consuming messages using the `soldevelo/kafka` image, you'll need to point to the `consumer.properties` and/or `producer.properties` file, which contains the needed configuration
 to work. You can find this files in the `/opt/bitnami/kafka/config` directory.
 
 Use this to generate messages using a secure setup:
@@ -516,7 +501,7 @@ docker run --name kafka-0 \
   -e KAFKA_CLUSTER_ID=abcdefghijklmnopqrstuv \
   -p :9092 \
   -p :9093 \
-  bitnami/kafka:latest
+  soldevelo/kafka:latest
 ```
 
 #### Step 2: Create the second node
@@ -537,7 +522,7 @@ docker run --name kafka-1 \
   -e KAFKA_CLUSTER_ID=abcdefghijklmnopqrstuv \
   -p :9092 \
   -p :9093 \
-  bitnami/kafka:latest
+  soldevelo/kafka:latest
 ```
 
 ### Step 3: Create the third node
@@ -558,7 +543,7 @@ docker run --name kafka-3 \
   -e KAFKA_CLUSTER_ID=abcdefghijklmnopqrstuv \
   -p :9092 \
   -p :9093 \
-  bitnami/kafka:latest
+  soldevelo/kafka:latest
 ```
 
 You now have an Apache Kafka cluster up and running. You can scale the cluster by adding/removing slaves without incurring any downtime.
@@ -590,7 +575,7 @@ version: '2'
 
 services:
   kafka-combined:
-    image: docker.io/bitnami/kafka:latest
+    image: docker.io/soldevelo/kafka:latest
     ports:
       - 9092:9092
     environment:
@@ -602,9 +587,9 @@ services:
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
       - KAFKA_CLUSTER_ID=abcdefghijklmnopqrstuv
     volumes:
-      - kafka_0_data:/bitnami/kafka
+      - kafka_0_data:/soldevelo/kafka
   kafka-controller:
-    image: docker.io/bitnami/kafka:latest
+    image: docker.io/soldevelo/kafka:latest
     environment:
       - KAFKA_CFG_NODE_ID=1
       - KAFKA_CFG_PROCESS_ROLES=controller
@@ -614,15 +599,15 @@ services:
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
       - KAFKA_CLUSTER_ID=abcdefghijklmnopqrstuv
     volumes:
-      - kafka_1_data:/bitnami/kafka
+      - kafka_1_data:/soldevelo/kafka
   kafka-broker:
-    image: docker.io/bitnami/kafka:latest
+    image: docker.io/soldevelo/kafka:latest
     environment:
       - KAFKA_CFG_NODE_ID=2
       - KAFKA_CFG_PROCESS_ROLES=broker
       - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093
     volumes:
-      - kafka_2_data:/bitnami/kafka
+      - kafka_2_data:/soldevelo/kafka
 
 volumes:
   kafka_0_data:
@@ -635,10 +620,10 @@ volumes:
 
 ### Full configuration
 
-The image looks for configuration files (server.properties, log4j2.yaml, etc.) in the `/bitnami/kafka/config/`, this can be changed by setting the KAFKA_MOUNTED_CONF_DIR environment variable.
+The image looks for configuration files (server.properties, log4j2.yaml, etc.) in the `/soldevelo/kafka/config/`, this can be changed by setting the KAFKA_MOUNTED_CONF_DIR environment variable.
 
 ```console
-docker run --name kafka -v /path/to/server.properties:/bitnami/kafka/config/server.properties bitnami/kafka:latest
+docker run --name kafka -v /path/to/server.properties:/soldevelo/kafka/config/server.properties soldevelo/kafka:latest
 ```
 
 After that, your changes will be taken into account in the server's behaviour.
@@ -647,7 +632,7 @@ After that, your changes will be taken into account in the server's behaviour.
 
 Run the Apache Kafka image, mounting a directory from your host.
 
-Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/kafka/docker-compose.yml) file present in this repository:
+Modify the [`docker-compose.yml`](https://github.com/soldevelo/containers/blob/main/soldevelo/kafka/docker-compose.yml) file present in this repository:
 
 ```diff
 ...
@@ -656,7 +641,7 @@ services:
     ...
     volumes:
       - kafka_data:/bitnami
-+     - /path/to/server.properties:/bitnami/kafka/config/server.properties
++     - /path/to/server.properties:/soldevelo/kafka/config/server.properties
 ```
 
 #### Step 2: Edit the configuration
@@ -727,14 +712,14 @@ We need to mount two volumes in a container we will use to create the backup: a 
 
 ```console
 docker run --rm -v /path/to/kafka-backups:/backups --volumes-from kafka busybox \
-  cp -a /bitnami/kafka /backups/latest
+  cp -a /soldevelo/kafka /backups/latest
 ```
 
 Or using Docker Compose:
 
 ```console
 docker run --rm -v /path/to/kafka-backups:/backups --volumes-from `docker-compose ps -q kafka` busybox \
-  cp -a /bitnami/kafka /backups/latest
+  cp -a /soldevelo/kafka /backups/latest
 ```
 
 ### Restoring a backup
@@ -742,15 +727,15 @@ docker run --rm -v /path/to/kafka-backups:/backups --volumes-from `docker-compos
 Restoring a backup is as simple as mounting the backup as volumes in the container.
 
 ```console
-docker run -v /path/to/kafka-backups/latest:/bitnami/kafka bitnami/kafka:latest
+docker run -v /path/to/kafka-backups/latest:/soldevelo/kafka soldevelo/kafka:latest
 ```
 
-You can also modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/kafka/docker-compose.yml) file present in this repository:
+You can also modify the [`docker-compose.yml`](https://github.com/soldevelo/containers/blob/main/soldevelo/kafka/docker-compose.yml) file present in this repository:
 
 ```yaml
 kafka:
   volumes:
-    - /path/to/kafka-backups/latest:/bitnami/kafka
+    - /path/to/kafka-backups/latest:/soldevelo/kafka
 ```
 
 ### Upgrade this image
@@ -760,11 +745,11 @@ Bitnami provides up-to-date versions of Apache Kafka, including security patches
 #### Step 1: Get the updated image
 
 ```console
-docker pull bitnami/kafka:latest
+docker pull soldevelo/kafka:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
-`bitnami/kafka:latest`.
+`soldevelo/kafka:latest`.
 
 #### Step 2: Stop and backup the currently running container
 
@@ -789,7 +774,7 @@ docker-compose rm -v kafka
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
 ```console
-docker run --name kafka bitnami/kafka:latest
+docker run --name kafka soldevelo/kafka:latest
 ```
 
 Or using Docker Compose:
@@ -800,7 +785,7 @@ docker-compose up kafka
 
 ## Migrating from Zookeeper mode to KRaft mode
 
-This guide covers how to execute the Kafka migration from Zookeeper mode to KRaft mode as explained in the [upstream documentation](https://docs.confluent.io/platform/current/installation/migrate-zk-kraft.html) when using the `bitnami/kafka:3` container.
+This guide covers how to execute the Kafka migration from Zookeeper mode to KRaft mode as explained in the [upstream documentation](https://docs.confluent.io/platform/current/installation/migrate-zk-kraft.html) when using the `soldevelo/kafka:3` container.
 
 1. Retrieve the cluster ID from Zookeeper
 
@@ -860,7 +845,7 @@ Branch 2 has been renamed to 2.8 and branch 3 has been split into branches 3.0 a
 
 ### 3.5.1-debian-11-r4, 3.4.1-debian-11-r50, 3.3.2-debian-11-r176 and 3.2.3-debian-11-r161
 
-This new release of the bitnami/kafka container includes a refactor in its logic and introduces several breaking changes and improvements:
+This new release of the soldevelo/kafka container includes a refactor in its logic and introduces several breaking changes and improvements:
 
 - Removed env variable KAFKA_ENABLE_KRAFT. Instead, KRaft configuration will be detected if KAFKA_CFG_PROCESS_ROLES is provided.
 - By default, the container will not configure neither Zookeeper mode or KRaft mode.
@@ -914,7 +899,7 @@ This new release of the bitnami/kafka container includes a refactor in its logic
 
 ### 2.4.1-r38-debian-10
 
-The configuration directory was changed to `/opt/bitnami/kafka/config`. Configuration files should be mounted to `/bitnami/kafka/config`.
+The configuration directory was changed to `/opt/bitnami/kafka/config`. Configuration files should be mounted to `/soldevelo/kafka/config`.
 
 ### 1.1.1-debian-9-r224, 2.2.1-debian-9-r16, 1.1.1-ol-7-r306 and 2.2.1-ol-7-r14
 
@@ -980,17 +965,17 @@ Configuration changes. Most environment variables now start with `KAFKA_CFG_`, a
 
 ## Using `docker-compose.yaml`
 
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/kafka).
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/soldevelo/charts/tree/main/soldevelo/kafka).
 
-If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
+If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/soldevelo/containers/blob/main/CONTRIBUTING.md).
 
 ## Contributing
 
-We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
+We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/soldevelo/containers/issues) or submitting a [pull request](https://github.com/soldevelo/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/soldevelo/containers/issues/new/choose). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)

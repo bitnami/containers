@@ -1,5 +1,6 @@
-# Copyright Broadcom, Inc. All Rights Reserved.
-# SPDX-License-Identifier: APACHE-2.0
+# Copyright 2025 SolDevelo
+# Based on Bitnami Kafka © Broadcom, Inc. (Apache-2.0)
+# SPDX-License-Identifier: Apache-2.0
 
 FROM docker.io/bitnami/minideb:bookworm
 
@@ -9,11 +10,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
       org.opencontainers.image.created="2025-10-07T03:26:11Z" \
-      org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/kafka/README.md" \
-      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kafka" \
+      org.opencontainers.image.description="Apache Kafka container image packaged by SolDevelo, based on Bitnami's work" \
+      org.opencontainers.image.documentation="https://github.com/soldevelo/containers/tree/main/soldevelo/kafka/README.md" \
+      org.opencontainers.image.source="https://github.com/soldevelo/containers/tree/main/soldevelo/kafka" \
       org.opencontainers.image.title="kafka" \
-      org.opencontainers.image.vendor="Broadcom, Inc." \
+      org.opencontainers.image.vendor="SolDevelo" \
       org.opencontainers.image.version="4.1.0"
 
 ENV HOME="/" \

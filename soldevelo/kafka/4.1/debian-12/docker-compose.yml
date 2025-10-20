@@ -1,9 +1,10 @@
-# Copyright Broadcom, Inc. All Rights Reserved.
-# SPDX-License-Identifier: APACHE-2.0
+# Copyright 2025 SolDevelo
+# Based on Bitnami Kafka © Broadcom, Inc. (Apache-2.0)
+# SPDX-License-Identifier: Apache-2.0
 
 services:
   kafka:
-    image: docker.io/bitnami/kafka:4.1
+    image: docker.io/soldevelo/kafka:4.1
     ports:
       - "9092:9092"
     volumes:

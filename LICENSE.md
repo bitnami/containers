@@ -1,7 +1,7 @@
-Copyright &copy; 2025 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
-SPDX-License-Identifier: APACHE-2.0
+Copyright 2025 SolDevelo
+Based on Bitnami Containers Library © 2025 Broadcom (licensed under Apache-2.0). The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
-This product includes third-party open source software. Additional copyright and licensing information can be found inside the Bitnami packages themselves and/or at https://bitnami.com/open-source
+This product includes third-party open source software. Additional copyright and licensing information can be found inside the packages themselves
 
 ----
                                  Apache License

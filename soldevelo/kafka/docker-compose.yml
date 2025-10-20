@@ -1,13 +1,14 @@
-# Copyright Broadcom, Inc. All Rights Reserved.
-# SPDX-License-Identifier: APACHE-2.0
+# Copyright 2025 SolDevelo
+# Based on Bitnami Kafka © Broadcom, Inc. (Apache-2.0)
+# SPDX-License-Identifier: Apache-2.0
 
 services:
   kafka:
-    image: docker.io/bitnami/kafka:4.1
+    image: docker.io/soldevelo/kafka:4.1
     ports:
       - "9092:9092"
     volumes:
-      - "kafka_data:/bitnami"
+      - "kafka_data:/bitnami"   # kept for compatibility with upstream Bitnami layout
     environment:
       # KRaft settings
       - KAFKA_CFG_NODE_ID=0
@@ -19,6 +20,7 @@ services:
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+
 volumes:
   kafka_data:
     driver: local
