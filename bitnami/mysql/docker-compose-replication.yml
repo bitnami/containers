@@ -3,7 +3,7 @@
 
 services:
   mysql-master:
-    image: docker.io/bitnami/mysql:9.4
+    image: docker.io/bitnami/mysql:9.5
     ports:
       - '3306'
     volumes:
@@ -23,7 +23,7 @@ services:
       retries: 6
 
   mysql-slave:
-    image: docker.io/bitnami/mysql:9.4
+    image: docker.io/bitnami/mysql:9.5
     ports:
       - '3306'
     depends_on:
