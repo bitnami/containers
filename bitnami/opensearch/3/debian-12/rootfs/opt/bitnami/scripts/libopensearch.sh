@@ -782,13 +782,14 @@ elasticsearch_initialize() {
             [[ -n "$DB_ACTION_DESTRUCTIVE_REQUIRES_NAME" ]] && elasticsearch_conf_set action.destructive_requires_name "$(is_boolean_yes "$DB_ACTION_DESTRUCTIVE_REQUIRES_NAME" && echo "true" || echo "false")"
             # X-Pack settings.
             elasticsearch_conf_set xpack.security.enabled "$(is_boolean_yes "$DB_ENABLE_SECURITY" && echo "true" || echo "false")"
+            ! is_empty_value "$ELASTICSEARCH_PASSWD_HASH_ALGORITHM" && elasticsearch_conf_set xpack.security.authc.password_hashing.algorithm "$ELASTICSEARCH_PASSWD_HASH_ALGORITHM"
             ! is_empty_value "$DB_PASSWORD" && elasticsearch_set_key_value "bootstrap.password" "$DB_PASSWORD"
             if is_boolean_yes "$DB_ENABLE_SECURITY"; then
                 is_boolean_yes "$DB_ENABLE_REST_TLS" && elasticsearch_http_tls_configuration
                 ! is_boolean_yes "$DB_SKIP_TRANSPORT_TLS" && elasticsearch_transport_tls_configuration
                 if is_boolean_yes "$ELASTICSEARCH_ENABLE_FIPS_MODE"; then
                     elasticsearch_conf_set xpack.security.fips_mode.enabled "true"
-                    elasticsearch_conf_set xpack.security.authc.password_hashing.algorithm "pbkdf2"
+                    elasticsearch_conf_set xpack.security.authc.password_hashing.algorithm "${ELASTICSEARCH_PASSWD_HASH_ALGORITHM:-pbkdf2}"
                 fi
             fi
             # Latest Elasticseach releases install x-pack-ml  by default. Since we have faced some issues with this library on certain platforms,

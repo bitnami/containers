@@ -9,13 +9,13 @@ ARG OPENSEARCH_PLUGINS
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-14T23:09:36Z" \
+      org.opencontainers.image.created="2025-10-22T20:11:39Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/opensearch/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/opensearch" \
       org.opencontainers.image.title="opensearch" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="3.3.0"
+      org.opencontainers.image.version="3.3.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -32,8 +32,8 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "yq-4.48.1-1-linux-${OS_ARCH}-debian-12" \
-      "jre-21.0.8-12-1-linux-${OS_ARCH}-debian-12" \
-      "opensearch-3.3.0-0-linux-${OS_ARCH}-debian-12" \
+      "jre-21.0.9-11-0-linux-${OS_ARCH}-debian-12" \
+      "opensearch-3.3.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -52,7 +52,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 COPY rootfs /
 RUN /opt/bitnami/scripts/opensearch/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
-ENV APP_VERSION="3.3.0" \
+ENV APP_VERSION="3.3.1" \
     BITNAMI_APP_NAME="opensearch" \
     IMAGE_REVISION="0" \
     JAVA_HOME="/opt/bitnami/java" \
