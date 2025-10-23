@@ -20,10 +20,6 @@ set -o pipefail
 EXEC=$(command -v elasticsearch)
 ARGS=("-p" "$DB_PID_FILE")
 [[ -z "${DB_EXTRA_FLAGS:-}" ]] || ARGS=("${ARGS[@]}" "${DB_EXTRA_FLAGS[@]}")
-# JAVA_HOME to be deprecated, see warning:
-#   warning: usage of JAVA_HOME is deprecated, use ES_JAVA_HOME
-export JAVA_HOME=/opt/bitnami/java
-export ES_JAVA_HOME=/opt/bitnami/java
 
 ARGS+=("$@")
 

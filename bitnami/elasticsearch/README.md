@@ -246,31 +246,36 @@ docker-compose up -d
 | `ELASTICSEARCH_HTTP_TLS_NODE_KEY_LOCATION`        | Path to PEM node key for HTTP TLS.                                                                                     | `$DB_NODE_KEY_LOCATION`                        |
 | `ELASTICSEARCH_HTTP_TLS_CA_CERT_LOCATION`         | Path to CA certificate for HTTP TLS.                                                                                   | `$DB_CA_CERT_LOCATION`                         |
 | `ELASTICSEARCH_ENABLE_FIPS_MODE`                  | Enables FIPS mode of operation                                                                                         | `false`                                        |
+| `ELASTICSEARCH_PASSWD_HASH_ALGORITHM`             | Password hashing algorithm                                                                                             | `nil`                                          |
 | `ELASTICSEARCH_KEYS`                              | Comma-separated list of key=value to be added to the Elasticsearch keystore                                            | `nil`                                          |
+| `ES_JAVA_HOME`                                    | Elasticsearch supported Java installation folder.                                                                      | `${JAVA_HOME}`                                 |
 
 #### Read-only environment variables
 
-| Name                                | Description                                                     | Value                              |
-|-------------------------------------|-----------------------------------------------------------------|------------------------------------|
-| `DB_FLAVOR`                         | Database flavor. Valid values: `elasticsearch` or `opensearch`. | `elasticsearch`                    |
-| `ELASTICSEARCH_VOLUME_DIR`          | Persistence base directory                                      | `/bitnami/elasticsearch`           |
-| `ELASTICSEARCH_BASE_DIR`            | Elasticsearch installation directory                            | `/opt/bitnami/elasticsearch`       |
-| `ELASTICSEARCH_CONF_DIR`            | Elasticsearch configuration directory                           | `${DB_BASE_DIR}/config`            |
-| `ELASTICSEARCH_DEFAULT_CONF_DIR`    | Elasticsearch default configuration directory                   | `${DB_BASE_DIR}/config.default`    |
-| `ELASTICSEARCH_LOGS_DIR`            | Elasticsearch logs directory                                    | `${DB_BASE_DIR}/logs`              |
-| `ELASTICSEARCH_PLUGINS_DIR`         | Elasticsearch plugins directory                                 | `${DB_BASE_DIR}/plugins`           |
-| `ELASTICSEARCH_DEFAULT_PLUGINS_DIR` | Elasticsearch default plugins directory                         | `${DB_BASE_DIR}/plugins.default`   |
-| `ELASTICSEARCH_DATA_DIR`            | Elasticsearch data directory                                    | `${DB_VOLUME_DIR}/data`            |
-| `ELASTICSEARCH_TMP_DIR`             | Elasticsearch temporary directory                               | `${DB_BASE_DIR}/tmp`               |
-| `ELASTICSEARCH_BIN_DIR`             | Elasticsearch executables directory                             | `${DB_BASE_DIR}/bin`               |
-| `ELASTICSEARCH_MOUNTED_PLUGINS_DIR` | Directory where plugins are mounted                             | `${DB_VOLUME_DIR}/plugins`         |
-| `ELASTICSEARCH_CONF_FILE`           | Path to Elasticsearch configuration file                        | `${DB_CONF_DIR}/elasticsearch.yml` |
-| `ELASTICSEARCH_LOG_FILE`            | Path to the Elasticsearch log file                              | `${DB_LOGS_DIR}/elasticsearch.log` |
-| `ELASTICSEARCH_PID_FILE`            | Path to the Elasticsearch pid file                              | `${DB_TMP_DIR}/elasticsearch.pid`  |
-| `ELASTICSEARCH_INITSCRIPTS_DIR`     | Path to the Elasticsearch container init scripts directory      | `/docker-entrypoint-initdb.d`      |
-| `ELASTICSEARCH_DAEMON_USER`         | Elasticsearch system user                                       | `elasticsearch`                    |
-| `ELASTICSEARCH_DAEMON_GROUP`        | Elasticsearch system group                                      | `elasticsearch`                    |
-| `ELASTICSEARCH_USERNAME`            | Username of the Elasticsearch superuser.                        | `elastic`                          |
+| Name                                | Description                                                     | Value                                       |
+|-------------------------------------|-----------------------------------------------------------------|---------------------------------------------|
+| `DB_FLAVOR`                         | Database flavor. Valid values: `elasticsearch` or `opensearch`. | `elasticsearch`                             |
+| `ELASTICSEARCH_VOLUME_DIR`          | Persistence base directory                                      | `/bitnami/elasticsearch`                    |
+| `ELASTICSEARCH_BASE_DIR`            | Elasticsearch installation directory                            | `/opt/bitnami/elasticsearch`                |
+| `ELASTICSEARCH_CONF_DIR`            | Elasticsearch configuration directory                           | `${DB_BASE_DIR}/config`                     |
+| `ELASTICSEARCH_DEFAULT_CONF_DIR`    | Elasticsearch default configuration directory                   | `${DB_BASE_DIR}/config.default`             |
+| `ELASTICSEARCH_LOGS_DIR`            | Elasticsearch logs directory                                    | `${DB_BASE_DIR}/logs`                       |
+| `ELASTICSEARCH_PLUGINS_DIR`         | Elasticsearch plugins directory                                 | `${DB_BASE_DIR}/plugins`                    |
+| `ELASTICSEARCH_DEFAULT_PLUGINS_DIR` | Elasticsearch default plugins directory                         | `${DB_BASE_DIR}/plugins.default`            |
+| `ELASTICSEARCH_DATA_DIR`            | Elasticsearch data directory                                    | `${DB_VOLUME_DIR}/data`                     |
+| `ELASTICSEARCH_TMP_DIR`             | Elasticsearch temporary directory                               | `${DB_BASE_DIR}/tmp`                        |
+| `ELASTICSEARCH_BIN_DIR`             | Elasticsearch executables directory                             | `${DB_BASE_DIR}/bin`                        |
+| `ELASTICSEARCH_MOUNTED_PLUGINS_DIR` | Directory where plugins are mounted                             | `${DB_VOLUME_DIR}/plugins`                  |
+| `ELASTICSEARCH_CONF_FILE`           | Path to Elasticsearch configuration file                        | `${DB_CONF_DIR}/elasticsearch.yml`          |
+| `ELASTICSEARCH_LOG_FILE`            | Path to the Elasticsearch log file                              | `${DB_LOGS_DIR}/elasticsearch.log`          |
+| `ELASTICSEARCH_PID_FILE`            | Path to the Elasticsearch pid file                              | `${DB_TMP_DIR}/elasticsearch.pid`           |
+| `ELASTICSEARCH_INITSCRIPTS_DIR`     | Path to the Elasticsearch container init scripts directory      | `/docker-entrypoint-initdb.d`               |
+| `ELASTICSEARCH_DAEMON_USER`         | Elasticsearch system user                                       | `elasticsearch`                             |
+| `ELASTICSEARCH_DAEMON_GROUP`        | Elasticsearch system group                                      | `elasticsearch`                             |
+| `ELASTICSEARCH_USERNAME`            | Username of the Elasticsearch superuser.                        | `elastic`                                   |
+| `JAVA_HOME`                         | Java installation folder.                                       | `${BITNAMI_ROOT_DIR}/java`                  |
+| `ES_JAVA_OPTS`                      | Elasticsearch supported Java options.                           | `${ES_JAVA_OPTS:-} ${JAVA_TOOL_OPTIONS:-}`  |
+| `CLI_JAVA_OPTS`                     | Elasticsearch CLI supported Java options.                       | `${CLI_JAVA_OPTS:-} ${JAVA_TOOL_OPTIONS:-}` |
 
 When you start the elasticsearch image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
