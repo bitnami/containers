@@ -16,6 +16,10 @@ for dir in "$DB_TMP_DIR" "$DB_DATA_DIR" "$DB_LOGS_DIR" "${DB_BASE_DIR}/plugins" 
     chmod -R ug+rwX "$dir"
 done
 
+# Lines commented to make it possible the dynamic FIPS support using environment variables.
+replace_in_file "${DB_BASE_DIR}/bin/opensearch-env" "echo \"warning: ignoring JAVA_TOOL_OPTIONS" "# echo \"warning: ignoring JAVA_TOOL_OPTIONS"
+replace_in_file "${DB_BASE_DIR}/bin/opensearch-env" "unset JAVA_TOOL_OPTIONS" "true"
+
 elasticsearch_configure_logging
 
 for dir in "$DB_TMP_DIR" "$DB_DATA_DIR" "$DB_LOGS_DIR" "${DB_BASE_DIR}/plugins" "${DB_BASE_DIR}/modules" "$DB_CONF_DIR" "$DB_VOLUME_DIR" "$DB_INITSCRIPTS_DIR" "$DB_MOUNTED_PLUGINS_DIR" "$DB_DEFAULT_CONF_DIR" "$DB_DEFAULT_PLUGINS_DIR"; do
