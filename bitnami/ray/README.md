@@ -1,4 +1,4 @@
-# Bitnami package for Ray
+# Bitnami Secure Image for Ray
 
 ## What is Ray?
 

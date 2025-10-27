@@ -1,4 +1,4 @@
-# Bitnami package for ScyllaDB
+# Bitnami Secure Image for ScyllaDB
 
 ## What is ScyllaDB?
 

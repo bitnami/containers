@@ -1,4 +1,4 @@
-# Bitnami package for VictoriaMetrics Alert
+# Bitnami Secure Image for VictoriaMetrics Alert
 
 ## What is VictoriaMetrics Alert?
 

@@ -1,4 +1,4 @@
-# Bitnami package for Harbor
+# Bitnami Secure Image for Harbor
 
 ## What is Harbor?
 

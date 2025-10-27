@@ -1,4 +1,4 @@
-# Bitnami package for Telegraf &trade;
+# Bitnami Secure Image for Telegraf &trade;
 
 ## What is Telegraf &trade;?
 

@@ -1,4 +1,4 @@
-# Bitnami package for KubeRay API Server
+# Bitnami Secure Image for KubeRay API Server
 
 ## What is KubeRay API Server?
 

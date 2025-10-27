@@ -1,4 +1,4 @@
-# Bitnami package for Kong
+# Bitnami Secure Image for Kong
 
 ## What is Kong?
 

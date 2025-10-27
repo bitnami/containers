@@ -1,4 +1,4 @@
-# Bitnami package for Flux Image Reflector Controller
+# Bitnami Secure Image for Flux Image Reflector Controller
 
 ## What is Flux Image Reflector Controller?
 

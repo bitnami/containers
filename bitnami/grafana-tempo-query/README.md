@@ -1,4 +1,4 @@
-# Bitnami package for Grafana Tempo Query
+# Bitnami Secure Image for Grafana Tempo Query
 
 ## What is Grafana Tempo Query?
 

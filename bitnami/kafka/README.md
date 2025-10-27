@@ -1,4 +1,4 @@
-# Bitnami package for Apache Kafka
+# Bitnami Secure Image for Apache Kafka
 
 ## What is Apache Kafka?
 

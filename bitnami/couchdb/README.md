@@ -1,4 +1,4 @@
-# Bitnami package for CouchDB
+# Bitnami Secure Image for CouchDB
 
 ## What is CouchDB?
 

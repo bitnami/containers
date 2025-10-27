@@ -1,4 +1,4 @@
-# Bitnami package for VictoriaMetrics Auth
+# Bitnami Secure Image for VictoriaMetrics Auth
 
 ## What is VictoriaMetrics Auth?
 

@@ -1,4 +1,4 @@
-# Bitnami package for Rust
+# Bitnami Secure Image for Rust
 
 ## What is Rust?
 

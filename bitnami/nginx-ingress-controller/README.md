@@ -1,4 +1,4 @@
-# Bitnami package for NGINX Ingress Controller
+# Bitnami Secure Image for NGINX Ingress Controller
 
 ## What is NGINX Ingress Controller?
 

@@ -1,4 +1,4 @@
-# Bitnami package for KServe
+# Bitnami Secure Image for KServe
 
 ## What is KServe?
 

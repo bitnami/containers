@@ -1,4 +1,4 @@
-# Bitnami package for Confluent Schema Registry
+# Bitnami Secure Image for Confluent Schema Registry
 
 ## What is Confluent Schema Registry?
 

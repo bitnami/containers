@@ -1,4 +1,4 @@
-# Bitnami package for KubeRay
+# Bitnami Secure Image for KubeRay
 
 ## What is KubeRay?
 

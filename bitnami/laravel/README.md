@@ -1,4 +1,4 @@
-# Bitnami package for Laravel
+# Bitnami Secure Image for Laravel
 
 ## What is Laravel?
 

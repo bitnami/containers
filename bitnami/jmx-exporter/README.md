@@ -1,4 +1,4 @@
-# Bitnami package for JMX Exporter
+# Bitnami Secure Image for JMX Exporter
 
 ## What is JMX Exporter?
 

@@ -1,4 +1,4 @@
-# Bitnami package for PHP-FPM
+# Bitnami Secure Image for PHP-FPM
 
 ## What is PHP-FPM?
 

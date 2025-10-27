@@ -1,4 +1,4 @@
-# Bitnami package for Hyperledger Fabric Peer
+# Bitnami Secure Image for Hyperledger Fabric Peer
 
 ## What is Hyperledger Fabric Peer?
 

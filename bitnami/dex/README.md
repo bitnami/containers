@@ -1,4 +1,4 @@
-# Bitnami package for Dex
+# Bitnami Secure Image for Dex
 
 ## What is Dex?
 

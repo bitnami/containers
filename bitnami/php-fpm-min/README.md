@@ -1,4 +1,4 @@
-# Bitnami package for PHP-FPM minimal
+# Bitnami Secure Image for PHP-FPM minimal
 
 ## What is PHP-FPM minimal?
 

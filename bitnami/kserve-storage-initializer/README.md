@@ -1,4 +1,4 @@
-# Bitnami package for KServe Storage Initializer
+# Bitnami Secure Image for KServe Storage Initializer
 
 ## What is KServe Storage Initializer?
 

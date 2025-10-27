@@ -1,4 +1,4 @@
-# Bitnami package for cert-manager
+# Bitnami Secure Image for cert-manager
 
 ## What is cert-manager?
 

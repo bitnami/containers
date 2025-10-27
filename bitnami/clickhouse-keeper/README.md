@@ -1,4 +1,4 @@
-# Bitnami package for ClickHouse Keeper
+# Bitnami Secure Image for ClickHouse Keeper
 
 ## What is ClickHouse Keeper?
 

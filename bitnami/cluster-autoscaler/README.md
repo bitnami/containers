@@ -1,4 +1,4 @@
-# Bitnami package for Cluster Autoscaler
+# Bitnami Secure Image for Cluster Autoscaler
 
 ## What is Cluster Autoscaler?
 

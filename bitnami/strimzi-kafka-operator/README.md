@@ -1,4 +1,4 @@
-# Bitnami package for Strimzi Kafka Operator
+# Bitnami Secure Image for Strimzi Kafka Operator
 
 ## What is Strimzi Kafka Operator?
 

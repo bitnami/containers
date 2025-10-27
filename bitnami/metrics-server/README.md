@@ -1,4 +1,4 @@
-# Bitnami package for Metrics Server
+# Bitnami Secure Image for Metrics Server
 
 ## What is Metrics Server?
 

@@ -1,4 +1,4 @@
-# Bitnami package for Memcached
+# Bitnami Secure Image for Memcached
 
 ## What is Memcached?
 

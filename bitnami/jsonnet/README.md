@@ -1,4 +1,4 @@
-# Bitnami package for Jsonnet
+# Bitnami Secure Image for Jsonnet
 
 ## What is Jsonnet?
 

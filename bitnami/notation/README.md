@@ -1,4 +1,4 @@
-# Bitnami package for Notation
+# Bitnami Secure Image for Notation
 
 ## What is Notation?
 

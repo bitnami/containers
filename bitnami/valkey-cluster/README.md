@@ -1,4 +1,4 @@
-# Bitnami package for Valkey Cluster
+# Bitnami Secure Image for Valkey Cluster
 
 ## What is Valkey Cluster?
 

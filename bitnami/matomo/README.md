@@ -1,4 +1,4 @@
-# Bitnami package for Matomo
+# Bitnami Secure Image for Matomo
 
 ## What is Matomo?
 

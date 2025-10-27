@@ -1,4 +1,4 @@
-# Bitnami package for Prometheus RSocket Proxy
+# Bitnami Secure Image for Prometheus RSocket Proxy
 
 ## What is Prometheus RSocket Proxy?
 

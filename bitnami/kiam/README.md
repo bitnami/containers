@@ -1,4 +1,4 @@
-# Bitnami package for Kiam
+# Bitnami Secure Image for Kiam
 
 ## What is Kiam?
 

@@ -1,4 +1,4 @@
-# Bitnami package for Argo CD
+# Bitnami Secure Image for Argo CD
 
 ## What is Argo CD?
 

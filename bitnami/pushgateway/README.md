@@ -1,4 +1,4 @@
-# Bitnami package for Push Gateway
+# Bitnami Secure Image for Push Gateway
 
 ## What is Push Gateway?
 

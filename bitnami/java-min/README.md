@@ -1,4 +1,4 @@
-# Bitnami package for Java minimal
+# Bitnami Secure Image for Java minimal
 
 ## What is Java minimal?
 

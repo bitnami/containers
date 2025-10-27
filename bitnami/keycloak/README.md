@@ -1,4 +1,4 @@
-# Bitnami package for Keycloak
+# Bitnami Secure Image for Keycloak
 
 ## What is Keycloak?
 

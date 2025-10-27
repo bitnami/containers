@@ -1,4 +1,4 @@
-# Bitnami package for Prometheus Operator
+# Bitnami Secure Image for Prometheus Operator
 
 ## What is Prometheus Operator?
 

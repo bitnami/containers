@@ -4,17 +4,16 @@
 FROM docker.io/bitnami/minideb:bookworm
 
 ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
-ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-10T23:04:47Z" \
+      org.opencontainers.image.created="2025-10-21T10:53:04Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/ksql/README.md" \
-      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/ksql" \
-      org.opencontainers.image.title="ksql" \
+      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/gitlab-runner/README.md" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/gitlab-runner" \
+      org.opencontainers.image.title="gitlab-runner" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="8.0.2"
+      org.opencontainers.image.version="18.5.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -24,13 +23,13 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl netcat-openbsd procps zlib1g
+RUN install_packages ca-certificates curl git git-lfs openssh-client procps
 RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "jre-17.0.16-12-1-linux-${OS_ARCH}-debian-12" \
-      "ksql-8.0.2-0-linux-${OS_ARCH}-debian-12" \
+      "nss-wrapper-1.1.16-0-linux-${OS_ARCH}-debian-12" \
+      "gitlab-runner-18.5.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -45,17 +44,14 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
-RUN uninstall_packages curl
 
 COPY rootfs /
-RUN /opt/bitnami/scripts/java/postunpack.sh
-RUN /opt/bitnami/scripts/ksql/postunpack.sh
-ENV APP_VERSION="8.0.2" \
-    BITNAMI_APP_NAME="ksql" \
+RUN mkdir /home/gitlab-runner && chmod -R g+rwX /home/gitlab-runner && ln -s /opt/bitnami/common/bin/dumb-init /usr/bin/dumb-init && ln -s /opt/bitnami/scripts/gitlab-runner/entrypoint.sh /entrypoint
+ENV APP_VERSION="18.5.0" \
+    BITNAMI_APP_NAME="gitlab-runner" \
     IMAGE_REVISION="0" \
-    JAVA_HOME="/opt/bitnami/java" \
-    PATH="/opt/bitnami/java/bin:/opt/bitnami/ksql/bin:/opt/bitnami/common/bin:$PATH"
+    PATH="/opt/bitnami/common/bin:/opt/bitnami/gitlab-runner/bin:$PATH"
 
 USER 1001
-ENTRYPOINT [ "/opt/bitnami/scripts/ksql/entrypoint.sh" ]
-CMD [ "/opt/bitnami/scripts/ksql/run.sh" ]
+ENTRYPOINT [ "/usr/bin/dumb-init", "/opt/bitnami/scripts/gitlab-runner/entrypoint.sh" ]
+CMD [ "run", "--user=gitlab-runner", "--working-directory=/home/gitlab-runner" ]

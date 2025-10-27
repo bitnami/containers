@@ -1,4 +1,4 @@
-# Bitnami package for EJBCA
+# Bitnami Secure Image for EJBCA
 
 ## What is EJBCA?
 

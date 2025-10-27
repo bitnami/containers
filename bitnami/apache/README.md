@@ -1,4 +1,4 @@
-# Bitnami package for Apache
+# Bitnami Secure Image for Apache
 
 ## What is Apache?
 

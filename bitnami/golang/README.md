@@ -1,4 +1,4 @@
-# Bitnami package for Golang
+# Bitnami Secure Image for Golang
 
 ## What is Golang?
 

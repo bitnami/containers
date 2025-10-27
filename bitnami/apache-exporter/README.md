@@ -1,4 +1,4 @@
-# Bitnami package for Apache Exporter
+# Bitnami Secure Image for Apache Exporter
 
 ## What is Apache Exporter?
 

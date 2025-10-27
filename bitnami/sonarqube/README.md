@@ -1,4 +1,4 @@
-# Bitnami package for SonarQube&trade;
+# Bitnami Secure Image for SonarQube&trade;
 
 ## What is SonarQube&trade;?
 

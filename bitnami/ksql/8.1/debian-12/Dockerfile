@@ -8,13 +8,13 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-10T23:14:44Z" \
+      org.opencontainers.image.created="2025-10-21T01:05:34Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/schema-registry/README.md" \
-      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/schema-registry" \
-      org.opencontainers.image.title="schema-registry" \
+      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/ksql/README.md" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/ksql" \
+      org.opencontainers.image.title="ksql" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="8.0.2"
+      org.opencontainers.image.version="8.1.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -30,7 +30,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "jre-17.0.16-12-1-linux-${OS_ARCH}-debian-12" \
-      "schema-registry-8.0.2-0-linux-${OS_ARCH}-debian-12" \
+      "ksql-8.1.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -49,13 +49,13 @@ RUN uninstall_packages curl
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
-RUN /opt/bitnami/scripts/schema-registry/postunpack.sh
-ENV APP_VERSION="8.0.2" \
-    BITNAMI_APP_NAME="schema-registry" \
+RUN /opt/bitnami/scripts/ksql/postunpack.sh
+ENV APP_VERSION="8.1.0" \
+    BITNAMI_APP_NAME="ksql" \
     IMAGE_REVISION="0" \
     JAVA_HOME="/opt/bitnami/java" \
-    PATH="/opt/bitnami/java/bin:/opt/bitnami/schema-registry/bin:/opt/bitnami/common/bin:$PATH"
+    PATH="/opt/bitnami/java/bin:/opt/bitnami/ksql/bin:/opt/bitnami/common/bin:$PATH"
 
 USER 1001
-ENTRYPOINT [ "/opt/bitnami/scripts/schema-registry/entrypoint.sh" ]
-CMD [ "/opt/bitnami/scripts/schema-registry/run.sh" ]
+ENTRYPOINT [ "/opt/bitnami/scripts/ksql/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/ksql/run.sh" ]

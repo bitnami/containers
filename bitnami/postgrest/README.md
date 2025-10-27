@@ -1,4 +1,4 @@
-# Bitnami package for PostgREST
+# Bitnami Secure Image for PostgREST
 
 ## What is PostgREST?
 

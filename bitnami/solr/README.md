@@ -1,4 +1,4 @@
-# Bitnami package for Apache Solr
+# Bitnami Secure Image for Apache Solr
 
 ## What is Apache Solr?
 

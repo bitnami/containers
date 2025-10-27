@@ -1,4 +1,4 @@
-# Bitnami package for JanusGraph
+# Bitnami Secure Image for JanusGraph
 
 ## What is JanusGraph?
 

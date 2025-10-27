@@ -1,4 +1,4 @@
-# Bitnami package for Chainloop Artifact CAS
+# Bitnami Secure Image for Chainloop Artifact CAS
 
 ## What is Chainloop Artifact CAS?
 

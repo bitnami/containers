@@ -1,4 +1,4 @@
-# Bitnami package for JAX
+# Bitnami Secure Image for JAX
 
 ## What is JAX?
 

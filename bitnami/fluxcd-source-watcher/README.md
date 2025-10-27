@@ -1,4 +1,4 @@
-# Bitnami package for Flux Source Watcher
+# Bitnami Secure Image for Flux Source Watcher
 
 ## What is Flux Source Watcher?
 

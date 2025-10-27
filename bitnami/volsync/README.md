@@ -1,4 +1,4 @@
-# Bitnami package for VolSync
+# Bitnami Secure Image for VolSync
 
 ## What is VolSync?
 

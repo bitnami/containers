@@ -1,4 +1,4 @@
-# Bitnami package for Apache Flink
+# Bitnami Secure Image for Apache Flink
 
 ## What is Apache Flink?
 

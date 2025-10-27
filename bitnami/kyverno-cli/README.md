@@ -1,4 +1,4 @@
-# Bitnami package for Kyverno CLI
+# Bitnami Secure Image for Kyverno CLI
 
 ## What is Kyverno CLI?
 

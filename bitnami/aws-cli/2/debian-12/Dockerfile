@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-11T12:19:18Z" \
+      org.opencontainers.image.created="2025-10-22T20:51:23Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/aws-cli/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/aws-cli" \
       org.opencontainers.image.title="aws-cli" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="2.31.10"
+      org.opencontainers.image.version="2.31.20"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,7 +29,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "python-3.11.14-3-linux-${OS_ARCH}-debian-12" \
-      "aws-cli-2.31.10-0-linux-${OS_ARCH}-debian-12" \
+      "aws-cli-2.31.20-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -47,10 +47,10 @@ RUN mkdir /.aws && chmod g+rwX /.aws
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN uninstall_packages curl
 
-ENV APP_VERSION="2.31.10" \
+ENV APP_VERSION="2.31.20" \
     AWS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt" \
     BITNAMI_APP_NAME="aws-cli" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/aws-cli/bin:/opt/bitnami/aws-cli/venv/bin:$PATH"
 
 USER 1001

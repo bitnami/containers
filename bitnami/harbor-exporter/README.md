@@ -1,4 +1,4 @@
-# Bitnami package for Harbor Exporter
+# Bitnami Secure Image for Harbor Exporter
 
 ## What is Harbor Exporter?
 

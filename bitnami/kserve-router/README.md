@@ -1,4 +1,4 @@
-# Bitnami package for KServe Router
+# Bitnami Secure Image for KServe Router
 
 ## What is KServe Router?
 

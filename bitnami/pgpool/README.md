@@ -1,4 +1,4 @@
-# Bitnami package for Pgpool-II
+# Bitnami Secure Image for Pgpool-II
 
 ## What is Pgpool-II?
 

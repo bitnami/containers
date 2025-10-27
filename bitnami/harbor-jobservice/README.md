@@ -1,4 +1,4 @@
-# Bitnami package for Harbor Job Service
+# Bitnami Secure Image for Harbor Job Service
 
 ## What is Harbor Job Service?
 

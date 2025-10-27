@@ -1,4 +1,4 @@
-# Bitnami package for Pinniped CLI
+# Bitnami Secure Image for Pinniped CLI
 
 ## What is Pinniped CLI?
 

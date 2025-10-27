@@ -1,4 +1,4 @@
-# Bitnami package for phpMyAdmin
+# Bitnami Secure Image for phpMyAdmin
 
 ## What is phpMyAdmin?
 

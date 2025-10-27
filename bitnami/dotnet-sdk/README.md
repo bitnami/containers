@@ -1,4 +1,4 @@
-# Bitnami package for .NET SDK
+# Bitnami Secure Image for .NET SDK
 
 ## What is .NET SDK?
 

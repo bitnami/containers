@@ -32,10 +32,6 @@ declare -a extra_args=()
 read -r -a extra_args <<< "$LOGSTASH_EXTRA_FLAGS"
 [[ "${#extra_args[@]}" -gt 0 ]] && cmd+=("${extra_args[@]}")
 
-# JAVA_HOME to be deprecated, see warning:
-#   warning: usage of JAVA_HOME is deprecated, use LS_JAVA_HOME
-export LS_JAVA_HOME=/opt/bitnami/java
-
 info "** Starting Logstash **"
 if am_i_root; then
     exec_as_user "$LOGSTASH_DAEMON_USER" "${cmd[@]}"

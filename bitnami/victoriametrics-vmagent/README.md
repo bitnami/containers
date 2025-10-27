@@ -1,4 +1,4 @@
-# Bitnami package for VictoriaMetrics Agent
+# Bitnami Secure Image for VictoriaMetrics Agent
 
 ## What is VictoriaMetrics Agent?
 

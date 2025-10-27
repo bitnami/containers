@@ -1,4 +1,4 @@
-# Bitnami package for Hubble UI Backend
+# Bitnami Secure Image for Hubble UI Backend
 
 ## What is Hubble UI Backend?
 

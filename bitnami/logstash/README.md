@@ -1,4 +1,4 @@
-# Bitnami package for Logstash
+# Bitnami Secure Image for Logstash
 
 ## What is Logstash?
 
@@ -162,6 +162,7 @@ docker run -d -p 8080:8080 bitnami/logstash:latest
 | `LOGSTASH_ENABLE_ELASTICSEARCH_OUTPUT`   | Whether to output to an Elasticsearch server            | `no`            |
 | `LOGSTASH_ELASTICSEARCH_HOST`            | Elasticsearch server hostname                           | `elasticsearch` |
 | `LOGSTASH_ELASTICSEARCH_PORT_NUMBER`     | Elasticsearch server port                               | `9200`          |
+| `LS_JAVA_HOME`                           | Logstash supported Java installation folder.            | `${JAVA_HOME}`  |
 
 #### Read-only environment variables
 
@@ -182,6 +183,7 @@ docker run -d -p 8080:8080 bitnami/logstash:latest
 | `LOGSTASH_DAEMON_USER`               | Logstash system user                                                   | `logstash`                                                         |
 | `LOGSTASH_DAEMON_GROUP`              | Logstash system group                                                  | `logstash`                                                         |
 | `JAVA_HOME`                          | Java installation folder.                                              | `${BITNAMI_ROOT_DIR}/java`                                         |
+| `LS_JAVA_OPTS`                       | Logstash supported Java options.                                       | `${LS_JAVA_OPTS:-} ${JAVA_TOOL_OPTIONS:-}`                         |
 
 ### Using a configuration string
 
