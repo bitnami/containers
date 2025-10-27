@@ -1,4 +1,4 @@
-# Bitnami package for PyTorch
+# Bitnami Secure Image for PyTorch
 
 ## What is PyTorch?
 

@@ -1,4 +1,4 @@
-# Bitnami package for Drupal
+# Bitnami Secure Image for Drupal
 
 ## What is Drupal?
 

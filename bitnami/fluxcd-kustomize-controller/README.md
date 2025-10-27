@@ -1,4 +1,4 @@
-# Bitnami package for Flux Kustomize Controller
+# Bitnami Secure Image for Flux Kustomize Controller
 
 ## What is Flux Kustomize Controller?
 

@@ -1,4 +1,4 @@
-# Bitnami package for Ghost
+# Bitnami Secure Image for Ghost
 
 ## What is Ghost?
 

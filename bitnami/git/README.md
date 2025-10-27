@@ -1,4 +1,4 @@
-# Bitnami package for Git
+# Bitnami Secure Image for Git
 
 ## What is Git?
 

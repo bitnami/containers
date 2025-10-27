@@ -1,4 +1,4 @@
-# Bitnami package for Grafana
+# Bitnami Secure Image for Grafana
 
 ## What is Grafana?
 

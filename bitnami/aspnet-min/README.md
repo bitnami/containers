@@ -1,4 +1,4 @@
-# Bitnami package for ASP.NET minimal
+# Bitnami Secure Image for ASP.NET minimal
 
 ## What is ASP.NET minimal?
 

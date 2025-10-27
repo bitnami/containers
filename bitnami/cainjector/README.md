@@ -1,4 +1,4 @@
-# Bitnami package for CA Injector
+# Bitnami Secure Image for CA Injector
 
 ## What is CA Injector?
 

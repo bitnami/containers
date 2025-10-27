@@ -1,4 +1,4 @@
-# Bitnami package for Temporal CLI
+# Bitnami Secure Image for Temporal CLI
 
 ## What is Temporal CLI?
 

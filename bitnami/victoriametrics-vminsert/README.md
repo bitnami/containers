@@ -1,4 +1,4 @@
-# Bitnami package for VictoriaMetrics Insert
+# Bitnami Secure Image for VictoriaMetrics Insert
 
 ## What is VictoriaMetrics Insert?
 

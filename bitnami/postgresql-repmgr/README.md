@@ -1,4 +1,4 @@
-# Bitnami package for PostgreSQL HA
+# Bitnami Secure Image for PostgreSQL HA
 
 ## What is PostgreSQL HA?
 

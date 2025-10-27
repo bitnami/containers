@@ -1,4 +1,4 @@
-# Bitnami package for OAuth2 Proxy
+# Bitnami Secure Image for OAuth2 Proxy
 
 ## What is OAuth2 Proxy?
 

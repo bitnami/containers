@@ -1,4 +1,4 @@
-# Bitnami package for NATS CLI
+# Bitnami Secure Image for NATS CLI
 
 ## What is NATS CLI?
 

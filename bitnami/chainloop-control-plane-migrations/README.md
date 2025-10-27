@@ -1,4 +1,4 @@
-# Bitnami package for Chainloop Control Plane migrations
+# Bitnami Secure Image for Chainloop Control Plane migrations
 
 ## What is Chainloop Control Plane migrations?
 

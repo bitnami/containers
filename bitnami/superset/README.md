@@ -1,4 +1,4 @@
-# Bitnami package for Apache Superset
+# Bitnami Secure Image for Apache Superset
 
 ## What is Apache Superset?
 

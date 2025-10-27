@@ -1,4 +1,4 @@
-# Bitnami package for Hubble Relay
+# Bitnami Secure Image for Hubble Relay
 
 ## What is Hubble Relay?
 

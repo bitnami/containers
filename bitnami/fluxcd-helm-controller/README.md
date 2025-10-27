@@ -1,4 +1,4 @@
-# Bitnami package for Flux Helm Controller
+# Bitnami Secure Image for Flux Helm Controller
 
 ## What is Flux Helm Controller?
 

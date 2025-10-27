@@ -1,4 +1,4 @@
-# Bitnami package for Apache Tomcat with JDK 11
+# Bitnami Secure Image for Apache Tomcat with JDK 11
 
 ## What is Apache Tomcat?
 

@@ -1,4 +1,4 @@
-# Bitnami package for Cosign
+# Bitnami Secure Image for Cosign
 
 ## What is Cosign?
 

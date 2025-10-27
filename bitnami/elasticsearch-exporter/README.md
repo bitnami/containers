@@ -1,4 +1,4 @@
-# Bitnami package for Elasticsearch Exporter
+# Bitnami Secure Image for Elasticsearch Exporter
 
 ## What is Elasticsearch Exporter?
 

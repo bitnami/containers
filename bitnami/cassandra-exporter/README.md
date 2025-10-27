@@ -1,4 +1,4 @@
-# Bitnami package for Cassandra Exporter
+# Bitnami Secure Image for Cassandra Exporter
 
 ## What is Cassandra Exporter?
 

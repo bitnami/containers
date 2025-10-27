@@ -1,4 +1,4 @@
-# Bitnami package for Jupyter Base Notebook
+# Bitnami Secure Image for Jupyter Base Notebook
 
 ## What is Jupyter Base Notebook?
 

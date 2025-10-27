@@ -1,4 +1,4 @@
-# Bitnami package for PostgreSQL Exporter
+# Bitnami Secure Image for PostgreSQL Exporter
 
 ## What is PostgreSQL Exporter?
 

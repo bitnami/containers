@@ -1,4 +1,4 @@
-# Bitnami package for HashiCorp Vault
+# Bitnami Secure Image for HashiCorp Vault
 
 ## What is HashiCorp Vault?
 

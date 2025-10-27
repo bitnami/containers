@@ -1,4 +1,4 @@
-# Bitnami package for Kibana
+# Bitnami Secure Image for Kibana
 
 ## What is Kibana?
 

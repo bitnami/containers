@@ -1,4 +1,4 @@
-# Bitnami package for KServe Local Model Controller
+# Bitnami Secure Image for KServe Local Model Controller
 
 ## What is KServe Local Model Controller?
 

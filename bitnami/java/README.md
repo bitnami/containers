@@ -1,4 +1,4 @@
-# Bitnami package for Java
+# Bitnami Secure Image for Java
 
 ## What is Java?
 

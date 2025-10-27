@@ -1,4 +1,4 @@
-# Bitnami package for Temporal
+# Bitnami Secure Image for Temporal
 
 ## What is Temporal?
 

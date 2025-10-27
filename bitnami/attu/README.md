@@ -1,4 +1,4 @@
-# Bitnami package for Attu
+# Bitnami Secure Image for Attu
 
 ## What is Attu?
 

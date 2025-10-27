@@ -1,4 +1,4 @@
-# Bitnami package for rClone
+# Bitnami Secure Image for rClone
 
 ## What is rClone?
 

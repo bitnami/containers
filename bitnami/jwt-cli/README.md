@@ -1,4 +1,4 @@
-# Bitnami package for JWT CLI
+# Bitnami Secure Image for JWT CLI
 
 ## What is JWT CLI?
 

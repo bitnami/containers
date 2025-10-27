@@ -1,4 +1,4 @@
-# Bitnami package for Jaeger
+# Bitnami Secure Image for Jaeger
 
 ## What is Jaeger?
 

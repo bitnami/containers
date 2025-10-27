@@ -1,4 +1,4 @@
-# Bitnami package for Kyverno Init
+# Bitnami Secure Image for Kyverno Init
 
 ## What is Kyverno Init?
 

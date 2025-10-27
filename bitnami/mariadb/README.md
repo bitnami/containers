@@ -1,4 +1,4 @@
-# Bitnami package for MariaDB
+# Bitnami Secure Image for MariaDB
 
 ## What is MariaDB?
 

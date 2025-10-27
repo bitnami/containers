@@ -1,4 +1,4 @@
-# Bitnami package for Harbor Adapter Trivy
+# Bitnami Secure Image for Harbor Adapter Trivy
 
 ## What is Harbor Adapter Trivy?
 

@@ -1,4 +1,4 @@
-# Bitnami package for Etcd
+# Bitnami Secure Image for Etcd
 
 ## What is Etcd?
 

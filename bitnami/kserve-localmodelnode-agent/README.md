@@ -1,4 +1,4 @@
-# Bitnami package for KServe Local Model Node Agent
+# Bitnami Secure Image for KServe Local Model Node Agent
 
 ## What is KServe Local Model Node Agent?
 

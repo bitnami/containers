@@ -1,4 +1,4 @@
-# Bitnami package for Grafana Pyroscope
+# Bitnami Secure Image for Grafana Pyroscope
 
 ## What is Grafana Pyroscope?
 

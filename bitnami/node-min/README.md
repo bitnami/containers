@@ -1,4 +1,4 @@
-# Bitnami package for Node.js minimal
+# Bitnami Secure Image for Node.js minimal
 
 ## What is Node.js minimal?
 

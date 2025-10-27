@@ -1,4 +1,4 @@
-# Bitnami package for cert-manager Webhook
+# Bitnami Secure Image for cert-manager Webhook
 
 ## What is cert-manager Webhook?
 

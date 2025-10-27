@@ -1,4 +1,4 @@
-# Bitnami package for MariaDB minimal
+# Bitnami Secure Image for MariaDB minimal
 
 ## What is MariaDB minimal?
 

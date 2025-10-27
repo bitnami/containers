@@ -1,4 +1,4 @@
-# Bitnami package for Temporal UI
+# Bitnami Secure Image for Temporal UI
 
 ## What is Temporal UI?
 

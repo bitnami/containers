@@ -1,4 +1,4 @@
-# Bitnami package for Cypress
+# Bitnami Secure Image for Cypress
 
 ## What is Cypress?
 

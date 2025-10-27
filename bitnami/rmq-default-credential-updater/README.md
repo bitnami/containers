@@ -1,4 +1,4 @@
-# RabbitMQ Default User Credential Updater
+# Bitnami Secure Image for RabbitMQ Default User Credential Updater
 
 ## What is RabbitMQ Default User Credential Updater?
 

@@ -1,4 +1,4 @@
-# Bitnami package for Consul Exporter
+# Bitnami Secure Image for Consul Exporter
 
 ## What is Consul Exporter?
 

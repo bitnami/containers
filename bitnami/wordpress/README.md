@@ -1,4 +1,4 @@
-# Bitnami package for WordPress
+# Bitnami Secure Image for WordPress
 
 ## What is WordPress?
 

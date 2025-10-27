@@ -1,4 +1,4 @@
-# Bitnami package for Hyperledger Fabric Orderer
+# Bitnami Secure Image for Hyperledger Fabric Orderer
 
 ## What is Hyperledger Fabric Orderer?
 

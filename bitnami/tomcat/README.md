@@ -1,4 +1,4 @@
-# Bitnami package for Apache Tomcat
+# Bitnami Secure Image for Apache Tomcat
 
 ## What is Apache Tomcat?
 

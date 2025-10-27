@@ -1,4 +1,4 @@
-# Bitnami package for WordPress with NGINX
+# Bitnami Secure Image for WordPress with NGINX
 
 ## What is WordPress with NGINX?
 

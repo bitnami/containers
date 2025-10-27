@@ -1,4 +1,4 @@
-# Bitnami package for Cilium Operator
+# Bitnami Secure Image for Cilium Operator
 
 ## What is Cilium Operator?
 

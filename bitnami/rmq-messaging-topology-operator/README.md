@@ -1,4 +1,4 @@
-# Bitnami package for RabbitMQ Messaging Topology Operator
+# Bitnami Secure Image for RabbitMQ Messaging Topology Operator
 
 ## What is RabbitMQ Messaging Topology Operator?
 

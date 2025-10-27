@@ -1,4 +1,4 @@
-# Bitnami package for Thanos
+# Bitnami Secure Image for Thanos
 
 ## What is Thanos?
 
