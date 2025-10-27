@@ -1,4 +1,4 @@
-# Bitnami package for charts-syncer
+# Bitnami Secure Image for charts-syncer
 
 ## What is charts-syncer?
 
