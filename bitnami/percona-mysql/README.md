@@ -1,4 +1,4 @@
-# Bitnami package for Percona Server for MySQL
+# Bitnami Secure Image for Percona Server for MySQL
 
 ## What is Percona Server for MySQL?
 

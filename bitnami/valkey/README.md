@@ -1,4 +1,4 @@
-# Bitnami package for Valkey
+# Bitnami Secure Image for Valkey
 
 ## What is Valkey?
 

@@ -1,4 +1,4 @@
-# Bitnami package for Chainloop
+# Bitnami Secure Image for Chainloop
 
 ## What is Chainloop?
 

@@ -1,4 +1,4 @@
-# Bitnami package for Apache APISIX Dashboard
+# Bitnami Secure Image for Apache APISIX Dashboard
 
 ## What is Apache APISIX Dashboard?
 

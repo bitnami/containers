@@ -1,4 +1,4 @@
-# Bitnami package for PyMilvus
+# Bitnami Secure Image for PyMilvus
 
 ## What is PyMilvus?
 

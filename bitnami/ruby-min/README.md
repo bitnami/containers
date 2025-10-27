@@ -1,4 +1,4 @@
-# Bitnami package for Ruby minimal
+# Bitnami Secure Image for Ruby minimal
 
 ## What is Ruby minimal?
 

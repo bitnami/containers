@@ -1,4 +1,4 @@
-# Bitnami package for Cilium
+# Bitnami Secure Image for Cilium
 
 ## What is Cilium?
 

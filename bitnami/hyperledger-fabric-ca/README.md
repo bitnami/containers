@@ -1,4 +1,4 @@
-# Bitnami package for Hyperledger Fabric CA
+# Bitnami Secure Image for Hyperledger Fabric CA
 
 ## What is Hyperledger Fabric CA?
 

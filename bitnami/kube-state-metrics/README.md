@@ -1,4 +1,4 @@
-# Bitnami package for Kube State Metrics
+# Bitnami Secure Image for Kube State Metrics
 
 ## What is Kube State Metrics?
 

@@ -1,4 +1,4 @@
-# Bitnami package for Hyperledger Fabric Tools
+# Bitnami Secure Image for Hyperledger Fabric Tools
 
 ## What is Hyperledger Fabric Tools?
 

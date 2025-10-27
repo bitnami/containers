@@ -1,4 +1,4 @@
-# Bitnami package for GoTrue
+# Bitnami Secure Image for GoTrue
 
 ## What is GoTrue?
 

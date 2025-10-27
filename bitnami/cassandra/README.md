@@ -1,4 +1,4 @@
-# Bitnami package for Apache Cassandra
+# Bitnami Secure Image for Apache Cassandra
 
 ## What is Apache Cassandra?
 

@@ -1,4 +1,4 @@
-# Bitnami package for Grafana Loki
+# Bitnami Secure Image for Grafana Loki
 
 ## What is Grafana Loki?
 

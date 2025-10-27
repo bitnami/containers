@@ -1,4 +1,4 @@
-# Bitnami package for Redmine
+# Bitnami Secure Image for Redmine
 
 ## What is Redmine?
 

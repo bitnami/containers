@@ -1,4 +1,4 @@
-# Bitnami package for Whereabouts
+# Bitnami Secure Image for Whereabouts
 
 ## What is Whereabouts?
 

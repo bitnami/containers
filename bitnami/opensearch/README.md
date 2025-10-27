@@ -1,4 +1,4 @@
-# Bitnami package for OpenSearch
+# Bitnami Secure Image for OpenSearch
 
 ## What is OpenSearch?
 

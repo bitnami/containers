@@ -1,4 +1,4 @@
-# Bitnami package for Nessie
+# Bitnami Secure Image for Nessie
 
 ## What is Nessie?
 

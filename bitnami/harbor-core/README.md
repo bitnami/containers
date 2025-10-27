@@ -1,4 +1,4 @@
-# Bitnami package for Harbor Core
+# Bitnami Secure Image for Harbor Core
 
 ## What is Harbor Core?
 

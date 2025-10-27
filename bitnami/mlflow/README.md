@@ -1,4 +1,4 @@
-# Bitnami package for MLflow
+# Bitnami Secure Image for MLflow
 
 ## What is MLflow?
 

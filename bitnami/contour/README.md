@@ -1,4 +1,4 @@
-# Bitnami package for Contour
+# Bitnami Secure Image for Contour
 
 ## What is Contour?
 

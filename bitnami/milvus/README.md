@@ -1,4 +1,4 @@
-# Bitnami package for Milvus
+# Bitnami Secure Image for Milvus
 
 ## What is Milvus?
 

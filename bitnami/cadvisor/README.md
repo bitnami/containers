@@ -1,4 +1,4 @@
-# Bitnami package for cAdvisor
+# Bitnami Secure Image for cAdvisor
 
 ## What is cAdvisor?
 

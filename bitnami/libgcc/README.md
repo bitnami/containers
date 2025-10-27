@@ -1,4 +1,4 @@
-# Bitnami package for Libgcc
+# Bitnami Secure Image for Libgcc
 
 ## What is Libgcc?
 

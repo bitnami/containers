@@ -1,4 +1,4 @@
-# Bitnami package for Envoy Rate Limit
+# Bitnami Secure Image for Envoy Rate Limit
 
 ## What is Envoy Rate Limit?
 

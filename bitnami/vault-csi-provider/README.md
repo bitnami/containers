@@ -1,4 +1,4 @@
-# Bitnami package for HashiCorp Vault CSI Provider
+# Bitnami Secure Image for HashiCorp Vault CSI Provider
 
 ## What is HashiCorp Vault CSI Provider?
 

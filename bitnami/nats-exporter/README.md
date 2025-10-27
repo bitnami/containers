@@ -1,4 +1,4 @@
-# Bitnami package for NATS Exporter
+# Bitnami Secure Image for NATS Exporter
 
 ## What is NATS Exporter?
 

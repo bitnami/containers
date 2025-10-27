@@ -1,4 +1,4 @@
-# Bitnami package for WildFly
+# Bitnami Secure Image for WildFly
 
 ## What is WildFly?
 

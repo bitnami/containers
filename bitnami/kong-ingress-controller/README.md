@@ -1,4 +1,4 @@
-# Bitnami package for Kong Ingress Controller
+# Bitnami Secure Image for Kong Ingress Controller
 
 ## What is Kong Ingress Controller?
 

@@ -1,4 +1,4 @@
-# Bitnami package for ArangoDB
+# Bitnami Secure Image for ArangoDB
 
 ## What is ArangoDB?
 

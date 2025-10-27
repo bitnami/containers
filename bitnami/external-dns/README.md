@@ -1,4 +1,4 @@
-# Bitnami package for ExternalDNS
+# Bitnami Secure Image for ExternalDNS
 
 ## What is ExternalDNS?
 

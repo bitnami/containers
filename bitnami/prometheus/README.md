@@ -1,4 +1,4 @@
-# Bitnami package for Prometheus
+# Bitnami Secure Image for Prometheus
 
 ## What is Prometheus?
 

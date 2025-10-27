@@ -1,4 +1,4 @@
-# Bitnami package for Apache APISIX Ingress Controller
+# Bitnami Secure Image for Apache APISIX Ingress Controller
 
 ## What is Apache APISIX Ingress Controller?
 

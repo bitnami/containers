@@ -1,4 +1,4 @@
-# Bitnami package for Sealed Secrets
+# Bitnami Secure Image for Sealed Secrets
 
 ## What is Sealed Secrets?
 

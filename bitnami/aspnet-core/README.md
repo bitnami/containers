@@ -1,4 +1,4 @@
-# Bitnami package for ASP.NET Core
+# Bitnami Secure Image for ASP.NET Core
 
 ## What is ASP.NET Core?
 

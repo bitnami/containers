@@ -1,4 +1,4 @@
-# Bitnami package for Confluent KSQL DB
+# Bitnami Secure Image for Confluent KSQL DB
 
 ## What is Confluent KSQL DB?
 

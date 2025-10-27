@@ -1,4 +1,4 @@
-# Bitnami package for Zipkin
+# Bitnami Secure Image for Zipkin
 
 ## What is Zipkin?
 

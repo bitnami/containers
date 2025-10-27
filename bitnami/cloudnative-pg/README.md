@@ -1,4 +1,4 @@
-# Bitnami package for CloudNativePG
+# Bitnami Secure Image for CloudNativePG
 
 ## What is CloudNativePG?
 

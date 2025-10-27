@@ -1,4 +1,4 @@
-# Bitnami package for Configurable HTTP Proxy
+# Bitnami Secure Image for Configurable HTTP Proxy
 
 ## What is Configurable HTTP Proxy?
 

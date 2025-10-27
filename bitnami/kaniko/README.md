@@ -1,4 +1,4 @@
-# Bitnami package for Kaniko
+# Bitnami Secure Image for Kaniko
 
 ## What is Kaniko?
 

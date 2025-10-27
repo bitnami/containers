@@ -1,4 +1,4 @@
-# Bitnami package for Memcached Exporter
+# Bitnami Secure Image for Memcached Exporter
 
 ## What is Memcached Exporter?
 

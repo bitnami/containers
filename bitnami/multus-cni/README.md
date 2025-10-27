@@ -1,4 +1,4 @@
-# Bitnami package for Multus CNI
+# Bitnami Secure Image for Multus CNI
 
 ## What is Multus CNI?
 

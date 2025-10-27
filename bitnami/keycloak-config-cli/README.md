@@ -1,4 +1,4 @@
-# Bitnami package for Keycloak Config CLI
+# Bitnami Secure Image for Keycloak Config CLI
 
 ## What is Keycloak Config CLI?
 

@@ -1,4 +1,4 @@
-# Bitnami package for Concourse
+# Bitnami Secure Image for Concourse
 
 ## What is Concourse?
 
