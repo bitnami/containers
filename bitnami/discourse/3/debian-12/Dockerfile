@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-11T12:24:00Z" \
+      org.opencontainers.image.created="2025-10-28T12:23:37Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/discourse/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/discourse" \
       org.opencontainers.image.title="discourse" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="3.5.1"
+      org.opencontainers.image.version="3.5.2"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-12" \
@@ -28,12 +28,12 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "python-3.12.12-3-linux-${OS_ARCH}-debian-12" \
-      "wait-for-port-1.0.10-2-linux-${OS_ARCH}-debian-12" \
-      "ruby-3.3.9-3-linux-${OS_ARCH}-debian-12" \
+      "wait-for-port-1.0.10-3-linux-${OS_ARCH}-debian-12" \
+      "ruby-3.3.10-0-linux-${OS_ARCH}-debian-12" \
       "postgresql-client-18.0.0-0-linux-${OS_ARCH}-debian-12" \
       "node-20.19.5-2-linux-${OS_ARCH}-debian-12" \
-      "brotli-1.1.0-6-linux-${OS_ARCH}-debian-12" \
-      "discourse-3.5.1-0-linux-${OS_ARCH}-debian-12" \
+      "brotli-1.2.0-0-linux-${OS_ARCH}-debian-12" \
+      "discourse-3.5.2-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -52,9 +52,9 @@ RUN uninstall_packages curl
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/discourse/postunpack.sh
-ENV APP_VERSION="3.5.1" \
+ENV APP_VERSION="3.5.2" \
     BITNAMI_APP_NAME="discourse" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/brotli/bin:/opt/bitnami/discourse/app/assets/javascripts/discourse/node_modules/ember-cli/bin:$PATH"
 
 EXPOSE 3000
