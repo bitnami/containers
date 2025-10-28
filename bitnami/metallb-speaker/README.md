@@ -1,4 +1,4 @@
-# Bitnami package for MetalLB Speaker
+# Bitnami Secure Image for MetalLB Speaker
 
 ## What is MetalLB Speaker?
 

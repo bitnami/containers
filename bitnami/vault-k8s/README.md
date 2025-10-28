@@ -1,4 +1,4 @@
-# Bitnami package for HashiCorp Vault K8s Integration
+# Bitnami Secure Image for HashiCorp Vault K8s Integration
 
 ## What is HashiCorp Vault K8s Integration?
 

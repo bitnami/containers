@@ -1,4 +1,4 @@
-# Bitnami package for Kubeseal (Sealed Secrets)
+# Bitnami Secure Image for Kubeseal (Sealed Secrets)
 
 ## What is Kubeseal (Sealed Secrets)?
 

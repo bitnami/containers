@@ -1,4 +1,4 @@
-# Bitnami package for DeepSpeed
+# Bitnami Secure Image for DeepSpeed
 
 ## What is DeepSpeed?
 

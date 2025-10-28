@@ -1,4 +1,4 @@
-# Bitnami package for Tensorflow
+# Bitnami Secure Image for Tensorflow
 
 ## What is Tensorflow?
 

@@ -1,4 +1,4 @@
-# Bitnami package for Jenkins
+# Bitnami Secure Image for Jenkins
 
 ## What is Jenkins?
 

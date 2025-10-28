@@ -1,4 +1,4 @@
-# Bitnami package for Node.js
+# Bitnami Secure Image for Node.js
 
 ## What is Node.js?
 

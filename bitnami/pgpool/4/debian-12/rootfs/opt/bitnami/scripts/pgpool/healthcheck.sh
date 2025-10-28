@@ -2,7 +2,7 @@
 # Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 #
-# Bitnami Pgpool healthcheck
+# Bitnami Pgpool-II healthcheck
 
 # shellcheck disable=SC1091
 
@@ -14,7 +14,7 @@ set -o pipefail
 # Load libraries
 . /opt/bitnami/scripts/libpgpool.sh
 
-# Load Pgpool env. variables
-eval "$(pgpool_env)"
+# Load Pgpool-II environment
+. /opt/bitnami/scripts/pgpool-env.sh
 
 pgpool_healthcheck

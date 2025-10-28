@@ -1,4 +1,4 @@
-# Bitnami package for Kubescape
+# Bitnami Secure Image for Kubescape
 
 ## What is Kubescape?
 

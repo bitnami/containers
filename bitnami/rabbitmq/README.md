@@ -1,4 +1,4 @@
-# Bitnami package for RabbitMQ
+# Bitnami Secure Image for RabbitMQ
 
 ## What is RabbitMQ?
 

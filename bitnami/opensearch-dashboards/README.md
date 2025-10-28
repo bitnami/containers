@@ -1,4 +1,4 @@
-# Bitnami package for OpenSearch Dashboards
+# Bitnami Secure Image for OpenSearch Dashboards
 
 ## What is OpenSearch Dashboards?
 

@@ -1,4 +1,4 @@
-# Bitnami package for Node Exporter
+# Bitnami Secure Image for Node Exporter
 
 ## What is Node Exporter?
 

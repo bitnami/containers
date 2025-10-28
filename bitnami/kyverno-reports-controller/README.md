@@ -1,4 +1,4 @@
-# Bitnami package for Kyverno Reports Controller
+# Bitnami Secure Image for Kyverno Reports Controller
 
 ## What is Kyverno Reports Controller?
 

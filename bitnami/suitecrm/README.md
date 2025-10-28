@@ -1,4 +1,4 @@
-# Bitnami package for SuiteCRM
+# Bitnami Secure Image for SuiteCRM
 
 ## What is SuiteCRM?
 

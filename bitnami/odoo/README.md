@@ -1,4 +1,4 @@
-# Bitnami package for Odoo
+# Bitnami Secure Image for Odoo
 
 ## What is Odoo?
 

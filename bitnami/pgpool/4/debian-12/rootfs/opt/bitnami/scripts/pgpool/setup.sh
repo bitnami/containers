@@ -2,7 +2,7 @@
 # Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 #
-# Bitnami Pgpool setup
+# Bitnami Pgpool-II setup
 
 # shellcheck disable=SC1091
 
@@ -15,17 +15,17 @@ set -o pipefail
 . /opt/bitnami/scripts/libldapclient.sh
 . /opt/bitnami/scripts/libpgpool.sh
 
-# Load Pgpool env. variables
-eval "$(pgpool_env)"
+# Load Pgpool-II environment
+. /opt/bitnami/scripts/pgpool-env.sh
 # Load LDAP environment variables
 eval "$(ldap_env)"
 
-# Ensure Pgpool environment variables are valid
+# Ensure Pgpool-II environment variables are valid
 pgpool_validate
 # Ensure 'daemon' user exists when running as 'root'
 am_i_root && ensure_user_exists "$PGPOOL_DAEMON_USER" --group "$PGPOOL_DAEMON_GROUP"
 am_i_root && ensure_user_exists "$LDAP_NSLCD_USER" --group "$LDAP_NSLCD_GROUP"
-# Ensure Pgpool is initialized
+# Ensure Pgpool-II is initialized
 pgpool_initialize
 # Ensure LDAP is initialized
 is_boolean_yes "$PGPOOL_ENABLE_LDAP" && ldap_initialize

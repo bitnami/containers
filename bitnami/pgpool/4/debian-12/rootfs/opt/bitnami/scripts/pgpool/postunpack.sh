@@ -2,7 +2,7 @@
 # Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 #
-# Bitnami Pgpool postunpack
+# Bitnami Pgpool-II postunpack
 
 # shellcheck disable=SC1091
 
@@ -11,8 +11,8 @@
 . /opt/bitnami/scripts/libldapclient.sh
 . /opt/bitnami/scripts/libpgpool.sh
 
-# Load Pgpool env. variables
-eval "$(pgpool_env)"
+# Load Pgpool-II environment
+. /opt/bitnami/scripts/pgpool-env.sh
 # Load LDAP environment variables
 eval "$(ldap_env)"
 

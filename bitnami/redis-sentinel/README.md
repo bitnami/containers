@@ -1,4 +1,4 @@
-# Bitnami package for Redis&reg; Sentinel
+# Bitnami Secure Image for Redis&reg; Sentinel
 
 ## What is Redis&reg; Sentinel?
 

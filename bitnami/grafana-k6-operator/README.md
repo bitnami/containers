@@ -1,4 +1,4 @@
-# Bitnami package for Grafana k6 Operator
+# Bitnami Secure Image for Grafana k6 Operator
 
 ## What is Grafana k6 Operator?
 

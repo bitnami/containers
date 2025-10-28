@@ -1,4 +1,4 @@
-# Bitnami package for OS Shell + Utility
+# Bitnami Secure Image for OS Shell + Utility
 
 ## What is OS Shell + Utility?
 

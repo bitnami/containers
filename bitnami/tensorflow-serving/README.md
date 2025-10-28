@@ -1,4 +1,4 @@
-# Bitnami package for TensorFlow Serving
+# Bitnami Secure Image for TensorFlow Serving
 
 ## What is TensorFlow Serving?
 

@@ -1,4 +1,4 @@
-# Bitnami package for Fluentd
+# Bitnami Secure Image for Fluentd
 
 ## What is Fluentd?
 

@@ -1,4 +1,4 @@
-# Bitnami package for Gradle
+# Bitnami Secure Image for Gradle
 
 ## What is Gradle?
 

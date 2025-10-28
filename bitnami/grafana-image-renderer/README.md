@@ -1,4 +1,4 @@
-# Bitnami package for Grafana Image Renderer
+# Bitnami Secure Image for Grafana Image Renderer
 
 ## What is Grafana Image Renderer?
 

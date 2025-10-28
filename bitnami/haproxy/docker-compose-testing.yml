@@ -4,7 +4,7 @@
 services:
 
   haproxy:
-    image: docker.io/bitnami/haproxy:3
+    image: docker.io/bitnami/haproxy:3.2
     volumes:
       - ./examples/frontend.cfg:/bitnami/haproxy/conf/haproxy.cfg
     ports:

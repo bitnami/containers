@@ -1,4 +1,4 @@
-# Bitnami package for StatsD exporter
+# Bitnami Secure Image for StatsD exporter
 
 ## What is StatsD exporter?
 

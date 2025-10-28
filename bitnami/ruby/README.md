@@ -1,4 +1,4 @@
-# Bitnami package for Ruby
+# Bitnami Secure Image for Ruby
 
 ## What is Ruby?
 

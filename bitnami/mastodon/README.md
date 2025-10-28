@@ -1,4 +1,4 @@
-# Bitnami package for Mastodon
+# Bitnami Secure Image for Mastodon
 
 ## What is Mastodon?
 

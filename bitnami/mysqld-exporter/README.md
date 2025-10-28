@@ -1,4 +1,4 @@
-# Bitnami package for MySQL Server Exporter
+# Bitnami Secure Image for MySQL Server Exporter
 
 ## What is MySQL Server Exporter?
 

@@ -1,4 +1,4 @@
-# Bitnami package for Harbor Registryctl
+# Bitnami Secure Image for Harbor Registryctl
 
 ## What is Harbor Registryctl?
 

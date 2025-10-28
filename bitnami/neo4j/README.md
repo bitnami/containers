@@ -1,4 +1,4 @@
-# Bitnami package for Neo4j
+# Bitnami Secure Image for Neo4j
 
 ## What is Neo4j?
 

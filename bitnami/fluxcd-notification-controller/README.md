@@ -1,4 +1,4 @@
-# Bitnami package for Flux Notification Controller
+# Bitnami Secure Image for Flux Notification Controller
 
 ## What is Flux Notification Controller?
 

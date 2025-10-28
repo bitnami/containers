@@ -146,14 +146,6 @@ repmgr_validate() {
         print_validation_error "The repmgr credentials are mandatory. Set the environment variables REPMGR_USERNAME and REPMGR_PASSWORD with the repmgr credentials."
     fi
 
-    if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
-        local -r psql_major_version="$(postgresql_get_major_version)"
-        if [[ "$psql_major_version" -le "9" ]]; then
-            warn "Variable REPMGR_USE_PASSFILE is not compatible with PostgreSQL ${psql_major_version}. It will be disabled."
-            export REPMGR_USE_PASSFILE="false"
-        fi
-    fi
-
     if [[ -z "$REPMGR_NODE_TYPE" ]] || ! [[ "$REPMGR_NODE_TYPE" =~ ^(data|witness)$ ]]; then
         print_validation_error "Set the environment variable REPMGR_NODE_TYPE to 'data' or 'witness'."
     fi
@@ -878,6 +870,7 @@ repmgr_initialize() {
         repmgr_wait_primary_node || exit 1
         repmgr_rewind
     fi
+
     # Run postgresql initialization skipping replication config
     postgresql_initialize true
     if ! repmgr_is_file_external "postgresql.conf"; then
@@ -915,23 +908,14 @@ repmgr_initialize() {
             debug "Skipping repmgr configuration..."
         fi
     elif [[ "$REPMGR_ROLE" = "standby" ]]; then
-        local -r psql_major_version="$(postgresql_get_major_version)"
-
         POSTGRESQL_MASTER_PORT_NUMBER="$REPMGR_CURRENT_PRIMARY_PORT"
         export POSTGRESQL_MASTER_PORT_NUMBER
         POSTGRESQL_MASTER_HOST="$REPMGR_CURRENT_PRIMARY_HOST"
         export POSTGRESQL_MASTER_HOST
-
         postgresql_configure_recovery
         postgresql_start_bg
         repmgr_unregister_standby
         repmgr_register_standby
-
-        if [[ "$psql_major_version" -lt "12" ]]; then
-            info "Check if primary running..."
-            repmgr_wait_primary_node
-            repmgr_standby_follow
-        fi
     elif [[ "$REPMGR_ROLE" = "witness" ]]; then
         postgresql_start_bg
         repmgr_create_repmgr_user

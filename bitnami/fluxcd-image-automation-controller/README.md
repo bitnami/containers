@@ -1,4 +1,4 @@
-# Bitnami package for Flux Image Automation Controller
+# Bitnami Secure Image for Flux Image Automation Controller
 
 ## What is Flux Image Automation Controller?
 

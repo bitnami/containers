@@ -1,4 +1,4 @@
-# Bitnami package for Dremio
+# Bitnami Secure Image for Dremio
 
 ## What is Dremio?
 

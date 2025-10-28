@@ -1,4 +1,4 @@
-# Bitnami package for Harbor Registry
+# Bitnami Secure Image for Harbor Registry
 
 ## What is Harbor Registry?
 

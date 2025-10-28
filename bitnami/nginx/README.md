@@ -1,4 +1,4 @@
-# Bitnami package for NGINX Open Source
+# Bitnami Secure Image for NGINX Open Source
 
 ## What is NGINX Open Source?
 

@@ -1,4 +1,4 @@
-# Bitnami package for Versity S3 Gateway
+# Bitnami Secure Image for Versity S3 Gateway
 
 ## What is Versity S3 Gateway?
 

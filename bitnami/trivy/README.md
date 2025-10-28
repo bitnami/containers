@@ -1,4 +1,4 @@
-# Bitnami package for Trivy
+# Bitnami Secure Image for Trivy
 
 ## What is Trivy?
 

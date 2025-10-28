@@ -1,4 +1,4 @@
-# Bitnami package for PgBouncer
+# Bitnami Secure Image for PgBouncer
 
 ## What is PgBouncer?
 

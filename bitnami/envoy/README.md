@@ -1,4 +1,4 @@
-# Bitnami package for Envoy
+# Bitnami Secure Image for Envoy
 
 ## What is Envoy?
 

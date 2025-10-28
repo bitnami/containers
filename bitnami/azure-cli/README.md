@@ -1,4 +1,4 @@
-# Bitnami package for Azure CLI
+# Bitnami Secure Image for Azure CLI
 
 ## What is Azure CLI?
 

@@ -1,4 +1,4 @@
-# Bitnami package for Grafana Tempo
+# Bitnami Secure Image for Grafana Tempo
 
 ## What is Grafana Tempo?
 

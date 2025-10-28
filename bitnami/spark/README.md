@@ -1,4 +1,4 @@
-# Bitnami package for Apache Spark
+# Bitnami Secure Image for Apache Spark
 
 ## What is Apache Spark?
 

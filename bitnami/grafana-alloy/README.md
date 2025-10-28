@@ -1,4 +1,4 @@
-# Bitnami package for Grafana Alloy
+# Bitnami Secure Image for Grafana Alloy
 
 ## What is Grafana Alloy?
 

@@ -1,4 +1,4 @@
-# Bitnami package for Redis Exporter
+# Bitnami Secure Image for Redis Exporter
 
 ## What is Redis Exporter?
 

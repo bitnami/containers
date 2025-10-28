@@ -1,4 +1,4 @@
-# Bitnami package for .NET
+# Bitnami Secure Image for .NET
 
 ## What is .NET?
 

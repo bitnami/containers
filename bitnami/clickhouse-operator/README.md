@@ -1,4 +1,4 @@
-# Bitnami package for ClickHouse Operator
+# Bitnami Secure Image for ClickHouse Operator
 
 ## What is ClickHouse Operator?
 

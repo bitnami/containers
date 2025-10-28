@@ -1,4 +1,4 @@
-# Bitnami package for Gitlab Runner
+# Bitnami Secure Image for Gitlab Runner
 
 ## What is Gitlab Runner?
 

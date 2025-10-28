@@ -1,4 +1,4 @@
-# Bitnami package for ArangoDB Kubernetes Operator
+# Bitnami Secure Image for ArangoDB Kubernetes Operator
 
 ## What is ArangoDB Kubernetes Operator?
 

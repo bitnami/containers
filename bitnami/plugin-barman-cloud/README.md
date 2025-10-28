@@ -1,4 +1,4 @@
-# Bitnami package for Barman Cloud Plugin for CloudNativePG
+# Bitnami Secure Image for Barman Cloud Plugin for CloudNativePG
 
 ## What is Barman Cloud Plugin for CloudNativePG?
 

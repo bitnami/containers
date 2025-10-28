@@ -1,4 +1,4 @@
-# Bitnami package for KeyDB
+# Bitnami Secure Image for KeyDB
 
 ## What is KeyDB?
 

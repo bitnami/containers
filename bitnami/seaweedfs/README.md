@@ -1,4 +1,4 @@
-# Bitnami package for SeaweedFS
+# Bitnami Secure Image for SeaweedFS
 
 ## What is SeaweedFS?
 

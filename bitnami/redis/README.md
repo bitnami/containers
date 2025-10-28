@@ -1,4 +1,4 @@
-# Bitnami package for Redis&reg;
+# Bitnami Secure Image for Redis&reg;
 
 ## What is Redis&reg;?
 
