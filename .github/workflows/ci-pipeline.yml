@@ -83,51 +83,6 @@ jobs:
       - name: Check license Headers
         uses: apache/skywalking-eyes/header@61275cc80d0798a405cb070f7d3a8aaf7cf2c2c1
         if: ${{ steps.get-modified-files.outputs.result == 'success' }}
-  verification-summary:
-    # Ensure all containers passed the verification
-    runs-on: ubuntu-latest
-    name: Check Matrix Outcome
-    permissions:
-      statuses: write
-    needs:
-      - get-containers
-    outputs:
-      result: ${{ steps.get-status.outputs.result }}
-    if: ${{ always() && github.event.pull_request.user.login != 'bitnami-bot' }}
-    steps:
-      - id: get-status
-        name: Check Status
-        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd
-        with:
-          result-encoding: string
-          script: |
-            state = 'success'
-            description = 'Well done! Everything looks good. Please wait for the Bitnami Team review.'
-            if ("${{ needs.get-containers.result }}" != "success" ) {
-              description = "If you've just created this PR, don't worry about this message. The Bitnami Team has to review it and make the verification possible."
-              core.warning(description)
-              state = 'pending'
-            } else if ("${{ needs.get-containers.outputs.result }}" == "skip" ) {
-              description = "It seems these changes don't involve any container"
-              core.warning(description)
-            } else {
-              core.notice(description)
-            }
-            try {
-              await github.rest.repos.createCommitStatus({
-                context: `${context.workflow} / Verification Summary (${context.eventName})`,
-                owner: context.payload.repository.owner.login,
-                repo: context.payload.repository.name,
-                sha: context.payload.pull_request.head.sha,
-                target_url: `${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}`,
-                description: description,
-                state: state
-              })
-              core.info(`Updated build status: ${state}`)
-            } catch (error) {
-              core.setFailed(error.message)
-            }
-            return state
   auto-pr-review:
     runs-on: ubuntu-latest
     name: Reviewal for automated PRs
