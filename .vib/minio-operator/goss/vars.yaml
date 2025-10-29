@@ -1,7 +1,0 @@
-files:
-  - mode: "0644"
-    paths:
-      - /opt/bitnami/minio-operator/.spdx-minio-operator.spdx
-  - mode: "0755"
-    paths:
-      - /minio-operator

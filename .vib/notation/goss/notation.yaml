@@ -1,7 +1,0 @@
-# Copyright Broadcom, Inc. All Rights Reserved.
-# SPDX-License-Identifier: APACHE-2.0
-
-command:
-  generate-test-key:
-    exec: notation cert generate-test --default "domain.com"
-    exit-status: 0
