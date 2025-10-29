@@ -1,4 +1,4 @@
-# Bitnami Stack for InfluxDB&trade;
+# Bitnami Stack for InfluxDB&trade; Core
 
 ## What is InfluxDB&trade; Core?
 
