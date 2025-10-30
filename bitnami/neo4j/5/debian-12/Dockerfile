@@ -8,7 +8,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-20T19:25:16Z" \
+      org.opencontainers.image.created="2025-10-30T15:39:52Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/neo4j/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/neo4j" \
@@ -29,8 +29,8 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "jre-17.0.16-12-1-linux-${OS_ARCH}-debian-12" \
-      "neo4j-5.26.14-0-linux-${OS_ARCH}-debian-12" \
+      "jre-17.0.17-11-0-linux-${OS_ARCH}-debian-12" \
+      "neo4j-5.26.14-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -52,7 +52,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/neo4j/postunpack.sh
 ENV APP_VERSION="5.26.14" \
     BITNAMI_APP_NAME="neo4j" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     JAVA_HOME="/opt/bitnami/java" \
     JAVA_OPTS="-Duser.home=/opt/bitnami/neo4j/.home" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/neo4j/bin:$PATH"
