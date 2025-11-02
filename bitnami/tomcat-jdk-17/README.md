@@ -1,4 +1,4 @@
-# Bitnami package for Apache Tomcat with JDK 17
+# Bitnami Secure Image for Apache Tomcat with JDK 17
 
 ## What is Apache Tomcat?
 

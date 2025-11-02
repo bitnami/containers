@@ -1,4 +1,4 @@
-# Bitnami package for Kube RBAC Proxy
+# Bitnami Secure Image for Kube RBAC Proxy
 
 ## What is Kube RBAC Proxy?
 

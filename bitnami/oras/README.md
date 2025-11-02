@@ -1,4 +1,4 @@
-# Bitnami package for ORAS
+# Bitnami Secure Image for ORAS
 
 ## What is ORAS?
 

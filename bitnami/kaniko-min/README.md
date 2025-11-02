@@ -1,4 +1,4 @@
-# Bitnami package for Kaniko minimal
+# Bitnami Secure Image for Kaniko minimal
 
 ## What is Kaniko minimal?
 

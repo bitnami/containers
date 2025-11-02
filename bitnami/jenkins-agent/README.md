@@ -1,4 +1,4 @@
-# Bitnami package for Jenkins Agent
+# Bitnami Secure Image for Jenkins Agent
 
 ## What is Jenkins Agent?
 

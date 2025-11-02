@@ -1,4 +1,4 @@
-# Bitnami package for Apache APISIX
+# Bitnami Secure Image for Apache APISIX
 
 ## What is Apache APISIX?
 

@@ -1,4 +1,4 @@
-# Bitnami package for KServe Agent
+# Bitnami Secure Image for KServe Agent
 
 ## What is KServe Agent?
 

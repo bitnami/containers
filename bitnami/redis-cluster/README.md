@@ -1,4 +1,4 @@
-# Bitnami package for Redis&reg; Cluster
+# Bitnami Secure Image for Redis&reg; Cluster
 
 ## What is Redis&reg; Cluster?
 

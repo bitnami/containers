@@ -1,4 +1,4 @@
-# Bitnami package for Cilium Proxy
+# Bitnami Secure Image for Cilium Proxy
 
 ## What is Cilium Proxy?
 

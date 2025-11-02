@@ -1,4 +1,4 @@
-# Bitnami package for Express
+# Bitnami Secure Image for Express
 
 ## What is Express?
 

@@ -1,4 +1,4 @@
-# Bitnami package for Nessie Utils
+# Bitnami Secure Image for Nessie Utils
 
 ## What is Nessie Utils?
 

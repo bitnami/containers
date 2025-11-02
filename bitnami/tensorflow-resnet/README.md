@@ -1,4 +1,4 @@
-# Bitnami package for TensorFlow ResNet
+# Bitnami Secure Image for TensorFlow ResNet
 
 ## What is TensorFlow ResNet?
 

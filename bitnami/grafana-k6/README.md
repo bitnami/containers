@@ -1,4 +1,4 @@
-# Bitnami package for Grafana k6
+# Bitnami Secure Image for Grafana k6
 
 ## What is Grafana k6?
 

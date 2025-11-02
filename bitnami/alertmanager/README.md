@@ -1,4 +1,4 @@
-# Bitnami package for AlertManager
+# Bitnami Secure Image for AlertManager
 
 ## What is AlertManager?
 

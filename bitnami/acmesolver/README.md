@@ -1,4 +1,4 @@
-# Bitnami package for ACME Solver
+# Bitnami Secure Image for ACME Solver
 
 ## What is ACME Solver?
 

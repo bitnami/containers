@@ -1,4 +1,4 @@
-# Bitnami package for static
+# Bitnami Secure Image for static
 
 ## What is static?
 

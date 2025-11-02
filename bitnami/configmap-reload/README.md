@@ -1,4 +1,4 @@
-# Bitnami package for ConfigMap Reload
+# Bitnami Secure Image for ConfigMap Reload
 
 ## What is ConfigMap Reload?
 

@@ -1,4 +1,4 @@
-# Bitnami package for Pinniped
+# Bitnami Secure Image for Pinniped
 
 ## What is Pinniped?
 

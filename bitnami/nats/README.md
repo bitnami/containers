@@ -1,4 +1,4 @@
-# Bitnami package for NATS
+# Bitnami Secure Image for NATS
 
 ## What is NATS?
 

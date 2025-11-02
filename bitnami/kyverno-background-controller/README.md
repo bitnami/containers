@@ -1,4 +1,4 @@
-# Bitnami package for Kyverno Background Controller
+# Bitnami Secure Image for Kyverno Background Controller
 
 ## What is Kyverno Background Controller?
 

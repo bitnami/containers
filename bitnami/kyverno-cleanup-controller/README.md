@@ -1,4 +1,4 @@
-# Bitnami package for Kyverno Cleanup Controller
+# Bitnami Secure Image for Kyverno Cleanup Controller
 
 ## What is Kyverno Cleanup Controller?
 

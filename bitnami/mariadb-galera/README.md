@@ -1,4 +1,4 @@
-# Bitnami package for MariaDB Galera
+# Bitnami Secure Image for MariaDB Galera
 
 ## What is MariaDB Galera?
 

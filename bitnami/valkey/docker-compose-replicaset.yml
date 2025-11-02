@@ -3,7 +3,7 @@
 
 services:
   valkey-primary:
-    image: docker.io/bitnami/valkey:8.1
+    image: docker.io/bitnami/valkey:9.0
     ports:
       - '6379'
     environment:
@@ -14,7 +14,7 @@ services:
       - 'valkey_data:/bitnami/valkey/data'
 
   valkey-replica:
-    image: docker.io/bitnami/valkey:8.1
+    image: docker.io/bitnami/valkey:9.0
     ports:
       - '6379'
     depends_on:

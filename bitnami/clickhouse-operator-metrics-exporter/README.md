@@ -1,4 +1,4 @@
-# Bitnami package for ClickHouse Op Metrics exporter
+# Bitnami Secure Image for ClickHouse Op Metrics exporter
 
 ## What is ClickHouse Op Metrics exporter?
 

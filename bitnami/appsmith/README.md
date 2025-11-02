@@ -1,4 +1,4 @@
-# Bitnami package for Appsmith
+# Bitnami Secure Image for Appsmith
 
 ## What is Appsmith?
 

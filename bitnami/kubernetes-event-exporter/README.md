@@ -1,4 +1,4 @@
-# Bitnami package for Kubernetes Event Exporter
+# Bitnami Secure Image for Kubernetes Event Exporter
 
 ## What is Kubernetes Event Exporter?
 

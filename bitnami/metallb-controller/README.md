@@ -1,4 +1,4 @@
-# Bitnami package for MetalLB
+# Bitnami Secure Image for MetalLB
 
 ## What is MetalLB?
 

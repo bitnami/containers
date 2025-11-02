@@ -1,4 +1,4 @@
-# Bitnami package for Apache ZooKeeper
+# Bitnami Secure Image for Apache ZooKeeper
 
 ## What is Apache ZooKeeper?
 

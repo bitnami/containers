@@ -1,4 +1,4 @@
-# Bitnami package for Parse Dashboard
+# Bitnami Secure Image for Parse Dashboard
 
 ## What is Parse Dashboard?
 

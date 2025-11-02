@@ -1,4 +1,4 @@
-# Bitnami package for VictoriaMetrics
+# Bitnami Secure Image for VictoriaMetrics
 
 ## What is VictoriaMetrics?
 

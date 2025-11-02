@@ -1,4 +1,4 @@
-# Bitnami package for Gitea
+# Bitnami Secure Image for Gitea
 
 ## What is Gitea?
 

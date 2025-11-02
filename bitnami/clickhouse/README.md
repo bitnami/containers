@@ -1,4 +1,4 @@
-# Bitnami package for ClickHouse
+# Bitnami Secure Image for ClickHouse
 
 ## What is ClickHouse?
 

@@ -1,4 +1,4 @@
-# Bitnami package for Envoy Gateway
+# Bitnami Secure Image for Envoy Gateway
 
 ## What is Envoy Gateway?
 

@@ -1,4 +1,4 @@
-# Bitnami package for Python minimal
+# Bitnami Secure Image for Python minimal
 
 ## What is Python minimal?
 

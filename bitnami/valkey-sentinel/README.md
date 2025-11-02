@@ -1,4 +1,4 @@
-# Bitnami package for Valkey Sentinel
+# Bitnami Secure Image for Valkey Sentinel
 
 ## What is Valkey Sentinel?
 

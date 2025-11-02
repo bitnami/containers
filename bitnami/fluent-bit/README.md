@@ -1,4 +1,4 @@
-# Bitnami package for Fluent Bit
+# Bitnami Secure Image for Fluent Bit
 
 ## What is Fluent Bit?
 

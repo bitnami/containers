@@ -1,4 +1,4 @@
-# Bitnami package for Grafana Mimir
+# Bitnami Secure Image for Grafana Mimir
 
 ## What is Grafana Mimir?
 

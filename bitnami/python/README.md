@@ -1,4 +1,4 @@
-# Bitnami package for Python
+# Bitnami Secure Image for Python
 
 ## What is Python?
 

@@ -1,4 +1,4 @@
-# Bitnami package for AWS CLI
+# Bitnami Secure Image for AWS CLI
 
 ## What is AWS CLI?
 

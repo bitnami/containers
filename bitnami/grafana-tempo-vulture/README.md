@@ -1,4 +1,4 @@
-# Bitnami package for Grafana Tempo Vulture
+# Bitnami Secure Image for Grafana Tempo Vulture
 
 ## What is Grafana Tempo Vulture?
 

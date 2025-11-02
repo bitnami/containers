@@ -1,4 +1,4 @@
-# Bitnami package for MongoDB Exporter
+# Bitnami Secure Image for MongoDB Exporter
 
 ## What is MongoDB Exporter?
 

@@ -1,4 +1,4 @@
-# Bitnami package for Flux
+# Bitnami Secure Image for Flux
 
 ## What is Flux?
 

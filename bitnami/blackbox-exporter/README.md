@@ -1,4 +1,4 @@
-# Bitnami package for Blackbox Exporter
+# Bitnami Secure Image for Blackbox Exporter
 
 ## What is Blackbox Exporter?
 

@@ -1,4 +1,4 @@
-# Bitnami package for HashiCorp Consul
+# Bitnami Secure Image for HashiCorp Consul
 
 ## What is HashiCorp Consul?
 

@@ -1,4 +1,4 @@
-# Bitnami package for NGINX Exporter
+# Bitnami Secure Image for NGINX Exporter
 
 ## What is NGINX Exporter?
 

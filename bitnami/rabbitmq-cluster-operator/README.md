@@ -1,4 +1,4 @@
-# Bitnami package for RabbitMQ Cluster Operator
+# Bitnami Secure Image for RabbitMQ Cluster Operator
 
 ## What is RabbitMQ Cluster Operator?
 

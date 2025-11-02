@@ -1,4 +1,4 @@
-# Bitnami package for Argo Workflows
+# Bitnami Secure Image for Argo Workflows
 
 ## What is Argo Workflows?
 

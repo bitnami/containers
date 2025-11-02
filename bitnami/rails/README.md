@@ -1,4 +1,4 @@
-# Bitnami package for Rails
+# Bitnami Secure Image for Rails
 
 ## What is Rails?
 

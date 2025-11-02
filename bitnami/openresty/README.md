@@ -1,4 +1,4 @@
-# Bitnami package for OpenResty
+# Bitnami Secure Image for OpenResty
 
 ## What is OpenResty?
 

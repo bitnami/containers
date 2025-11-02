@@ -1,4 +1,4 @@
-# Bitnami package for Logstash
+# Bitnami Secure Image for Logstash
 
 ## What is Logstash?
 

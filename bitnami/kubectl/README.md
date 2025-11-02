@@ -1,4 +1,4 @@
-# Bitnami package for Kubectl
+# Bitnami Secure Image for Kubectl
 
 ## What is Kubectl?
 
