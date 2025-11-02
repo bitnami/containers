@@ -229,7 +229,8 @@ redis_initialize() {
         [[ -z "$REDIS_SENTINEL_ANNOUNCE_PORT" ]] || redis_conf_set "sentinel announce-port" "${REDIS_SENTINEL_ANNOUNCE_PORT}"
         redis_conf_set "sentinel resolve-hostnames" "${REDIS_SENTINEL_RESOLVE_HOSTNAMES}"
         redis_conf_set "sentinel announce-hostnames" "${REDIS_SENTINEL_ANNOUNCE_HOSTNAMES}"
-        redis_conf_set "SENTINEL master-reboot-down-after-period" "${REDIS_MASTER_SET} ${REDIS_SENTINEL_MASTER_REBOOT_DOWN_AFTER_PERIOD}"
+        # This directive is only available in Redis 7
+        [[ $(redis_version --major) -ge 7 ]] && redis_conf_set "SENTINEL master-reboot-down-after-period" "${REDIS_MASTER_SET} ${REDIS_SENTINEL_MASTER_REBOOT_DOWN_AFTER_PERIOD}"
 
         # Sentinel Configuration (maybe overwritten by more specific init blocks like TLS configuration)
         redis_conf_set port "$REDIS_SENTINEL_PORT_NUMBER"
