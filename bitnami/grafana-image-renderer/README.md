@@ -116,59 +116,22 @@ You can customize Grafana Image Renderer settings by replacing the default confi
 
 #### Customizable environment variables
 
-| Name                                    | Description                                          | Default Value |
-|-----------------------------------------|------------------------------------------------------|---------------|
-| `GRAFANA_IMAGE_RENDERER_LISTEN_ADDRESS` | Grafana Image Renderer listen address                | `127.0.0.1`   |
-| `GRAFANA_IMAGE_RENDERER_PORT_NUMBER`    | Grafana Image Renderer port number                   | `8080`        |
-| `GRAFANA_IMAGE_RENDERER_ENABLE_METRICS` | Whether to enable metrics for Grafana Image Renderer | `yes`         |
+| Name                                    | Description                           | Default Value |
+|-----------------------------------------|---------------------------------------|---------------|
+| `GRAFANA_IMAGE_RENDERER_LISTEN_ADDRESS` | Grafana Image Renderer listen address | `127.0.0.1`   |
+| `GRAFANA_IMAGE_RENDERER_PORT_NUMBER`    | Grafana Image Renderer port number    | `8080`        |
 
 #### Read-only environment variables
 
-| Name                                  | Description                                                  | Value                                                 |
-|---------------------------------------|--------------------------------------------------------------|-------------------------------------------------------|
-| `GRAFANA_IMAGE_RENDERER_BASE_DIR`     | Path to the Grafana Image Renderer installation directory    | `${BITNAMI_ROOT_DIR}/grafana-image-renderer`          |
-| `GRAFANA_IMAGE_RENDERER_TMP_DIR`      | Grafana Image Renderer directory for temporary runtime files | `${GRAFANA_IMAGE_RENDERER_BASE_DIR}/tmp`              |
-| `GRAFANA_IMAGE_RENDERER_LOGS_DIR`     | Grafana Image Renderer directory for log files               | `${GRAFANA_IMAGE_RENDERER_BASE_DIR}/logs`             |
-| `GRAFANA_IMAGE_RENDERER_PID_FILE`     | Grafana Image Renderer PID file                              | `${GRAFANA_IMAGE_RENDERER_TMP_DIR}/renderer.pid`      |
-| `GRAFANA_IMAGE_RENDERER_LOG_FILE`     | Grafana Image Renderer log file                              | `${GRAFANA_IMAGE_RENDERER_LOGS_DIR}/renderer.log`     |
-| `GRAFANA_IMAGE_RENDERER_CONF_FILE`    | Path to the Grafana Image Renderer configuration file        | `${GRAFANA_IMAGE_RENDERER_BASE_DIR}/conf/config.json` |
-| `GRAFANA_IMAGE_RENDERER_DAEMON_USER`  | Grafana system user.                                         | `grafana-image-renderer`                              |
-| `GRAFANA_IMAGE_RENDERER_DAEMON_GROUP` | Grafana system group.                                        | `grafana-image-renderer`                              |
-
-### Configuration file
-
-The image looks for a `config.json` file in `/opt/bitnami/grafana-image-renderer/conf/`. You can mount a volume at `/opt/bitnami/grafana-image-renderer/conf/` and copy/edit the `config.json` file in the `/path/to/grafana-image-renderer-conf/` path. The default configurations will be populated to the `conf/` directory if it's empty.
-
-```console
-/path/to/grafana-image-renderer-conf/
-└── config.json
-
-0 directories, 1 file
-```
-
-#### Step 1: Run the Grafana Image Renderer container
-
-Run the Grafana Image Renderer container, mounting a directory from your host.
-
-docker run --name grafana-image-renderer bitnami/grafana-image-renderer:latest
-
-```console
-docker run --name grafana-image-renderer -v ${PWD}/path/to/grafana-image-renderer-conf:/opt/bitnami/grafana-image-renderer/conf/ bitnami/grafana-image-renderer:latest
-```
-
-#### Step 2: Edit the configuration
-
-Edit the configuration on your host using your favorite editor.
-
-```console
-vi /path/to/grafana-image-renderer-conf/config.json
-```
-
-#### Step 3: Restart Grafana Image Renderer
-
-After changing the configuration, restart your Grafana Image Renderer container for changes to take effect.
-
-After that, your configuration will be taken into account in the server's behaviour.
+| Name                                  | Description                                                  | Value                                             |
+|---------------------------------------|--------------------------------------------------------------|---------------------------------------------------|
+| `GRAFANA_IMAGE_RENDERER_BASE_DIR`     | Path to the Grafana Image Renderer installation directory    | `${BITNAMI_ROOT_DIR}/grafana-image-renderer`      |
+| `GRAFANA_IMAGE_RENDERER_TMP_DIR`      | Grafana Image Renderer directory for temporary runtime files | `${GRAFANA_IMAGE_RENDERER_BASE_DIR}/tmp`          |
+| `GRAFANA_IMAGE_RENDERER_LOGS_DIR`     | Grafana Image Renderer directory for log files               | `${GRAFANA_IMAGE_RENDERER_BASE_DIR}/logs`         |
+| `GRAFANA_IMAGE_RENDERER_PID_FILE`     | Grafana Image Renderer PID file                              | `${GRAFANA_IMAGE_RENDERER_TMP_DIR}/renderer.pid`  |
+| `GRAFANA_IMAGE_RENDERER_LOG_FILE`     | Grafana Image Renderer log file                              | `${GRAFANA_IMAGE_RENDERER_LOGS_DIR}/renderer.log` |
+| `GRAFANA_IMAGE_RENDERER_DAEMON_USER`  | Grafana system user.                                         | `grafana-image-renderer`                          |
+| `GRAFANA_IMAGE_RENDERER_DAEMON_GROUP` | Grafana system group.                                        | `grafana-image-renderer`                          |
 
 ### FIPS configuration in Bitnami Secure Images
 
@@ -221,6 +184,10 @@ docker run --name grafana-image-renderer bitnami/grafana-image-renderer:latest
 ```
 
 ## Notable Changes
+
+### 5.0.3-debian-12-r0
+
+The entire service has been rewritten in Go, replacing the previous Node.js implementation. This new version no longer uses the `config.json` file for configuration. More detailed context can be found on [the upstream PR](https://github.com/grafana/grafana-image-renderer/pull/818).
 
 ### Starting January 16, 2024
 
