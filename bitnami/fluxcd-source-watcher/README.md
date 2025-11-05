@@ -10,19 +10,25 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-docker run --name  bitnami/:latest
+docker run --name fluxcd-source-watcher bitnami/fluxcd-source-watcher:latest
 ```
 
 ## Why use Bitnami Secure Images?
 
-- Bitnami Secure Images and Helm charts are built to make open source more secure and enterprise ready.
-- Triage security vulnerabilities faster, with transparency into CVE risks using industry standard Vulnerability Exploitability Exchange (VEX), KEV, and EPSS scores.
-- Our hardened images use a minimal OS (Photon Linux), which reduces the attack surface while maintaining extensibility through the use of an industry standard package format.
-- Stay more secure and compliant with continuously built images updated within hours of upstream patches.
-- Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-- Hardened images come with attestation signatures (Notation), SBOMs, virus scan reports and other metadata produced in an SLSA-3 compliant software factory.
+Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
 
-Only a subset of BSI applications are available for free. Looking to access the entire catalog of applications as well as enterprise support? Try the [commercial edition of Bitnami Secure Images today](https://go-vmware.broadcom.com/contact-us).
+- Hardened secure images of popular open source software with Near-Zero Vulnerabilities
+- Vulnerability Triage & Prioritization with VEX Statements, KEV and EPSS Scores
+- Compliance focus with FIPS, STIG, and air-gap options, including secure bill of materials (SBOM)
+- Software supply chain provenance attestation through in-toto
+- First class support for the internet’s favorite Helm charts
+
+Each image comes with valuable security metadata. You can view the metadata in [our public catalog here](https://app-catalog.vmware.com/bitnami/apps). Note: Some data is only available with [commercial subscriptions to BSI](https://bitnami.com/).
+
+![Alt text](https://github.com/bitnami/containers/blob/main/BSI%20UI%201.png?raw=true "Application details")
+![Alt text](https://github.com/bitnami/containers/blob/main/BSI%20UI%202.png?raw=true "Packaging report")
+
+If you are looking for our previous generation of images based on Debian Linux, please see the [Bitnami Legacy registry](https://hub.docker.com/u/bitnamilegacy).
 
 ## Supported tags and respective `Dockerfile` links
 
@@ -34,16 +40,16 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 
 ## Get this image
 
-The recommended way to get the Bitnami Flux Source Watcher Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/).
+The recommended way to get the Bitnami Flux Source Watcher Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/fluxcd-source-watcher).
 
 ```console
-docker pull bitnami/:latest
+docker pull bitnami/fluxcd-source-watcher:latest
 ```
 
-To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami//tags/) in the Docker Hub Registry.
+To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/fluxcd-source-watcher/tags/) in the Docker Hub Registry.
 
 ```console
-docker pull bitnami/:[TAG]
+docker pull bitnami/fluxcd-source-watcher:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
@@ -65,7 +71,7 @@ Non-root container images add an extra layer of security and are generally recom
 To run commands inside this container, you can use `docker run`, for example to execute `source-watcher --help` you can follow the example below:
 
 ```console
-docker run --rm --name  bitnami/:latest -- --help
+docker run --rm --name fluxcd-source-watcher bitnami/fluxcd-source-watcher:latest -- --help
 ```
 
 Check the [official Flux Source Watcher documentation](https://github.com/fluxcd/source-watcher for more information.
