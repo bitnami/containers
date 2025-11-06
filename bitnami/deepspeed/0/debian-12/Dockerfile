@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-27T18:21:44Z" \
+      org.opencontainers.image.created="2025-11-06T02:25:27Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/deepspeed/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/deepspeed" \
       org.opencontainers.image.title="deepspeed" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="0.18.1"
+      org.opencontainers.image.version="0.18.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,8 +29,8 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "nss-wrapper-1.1.16-0-linux-${OS_ARCH}-debian-12" \
-      "python-3.11.14-3-linux-${OS_ARCH}-debian-12" \
-      "deepspeed-0.18.1-0-linux-${OS_ARCH}-debian-12" \
+      "python-3.11.14-4-linux-${OS_ARCH}-debian-12" \
+      "deepspeed-0.18.2-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -50,7 +50,7 @@ RUN uninstall_packages curl
 
 COPY rootfs /
 RUN mkdir /app /.cache && mkdir -p /home/deepspeed/.local && mkdir -p /home/deepspeed/.ssh && mkdir /home/deepspeed/.cache && ln -s /home/deepspeed/.local /opt/bitnami/deepspeed && ln -s /home/deepspeed/.ssh /opt/bitnami/deepspeed && ln -s /home/deepspeed/.cache /opt/bitnami/deepspeed && chmod g+rwX /app /.cache /home/deepspeed/.cache /home/deepspeed/.local
-ENV APP_VERSION="0.18.1" \
+ENV APP_VERSION="0.18.2" \
     BITNAMI_APP_NAME="deepspeed" \
     CFLAGS="-s -I/opt/bitnami/python/include -I/opt/bitnami/common/include" \
     CPLUS_INCLUDE_PATH="/opt/bitnami/common/include" \
