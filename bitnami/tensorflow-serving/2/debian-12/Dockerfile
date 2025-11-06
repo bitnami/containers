@@ -8,7 +8,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-07T03:16:01Z" \
+      org.opencontainers.image.created="2025-11-06T05:58:34Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/tensorflow-serving/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/tensorflow-serving" \
@@ -30,7 +30,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "render-template-1.0.9-156-linux-${OS_ARCH}-debian-12" \
+      "render-template-1.0.9-159-linux-${OS_ARCH}-debian-12" \
       "tensorflow-serving-2.19.1-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -54,7 +54,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/tensorflow-serving/postunpack.sh
 ENV APP_VERSION="2.19.1" \
     BITNAMI_APP_NAME="tensorflow-serving" \
-    IMAGE_REVISION="3" \
+    IMAGE_REVISION="4" \
     JAVA_HOME="/opt/bitnami/java"
 
 EXPOSE 8500
