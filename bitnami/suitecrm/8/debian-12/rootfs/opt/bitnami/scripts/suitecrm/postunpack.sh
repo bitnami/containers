@@ -47,9 +47,4 @@ php_conf_set "opcache.enable" "Off"
 info "Creating default web server configuration for SuiteCRM"
 web_server_validate
 # Not moving .htaccess because SuiteCRM generates some of them during installation
-# Backward compatibility with SuiteCRM 7
-if [[ -d "${SUITECRM_BASE_DIR}/public" ]]; then
-    ensure_web_server_app_configuration_exists "suitecrm" --type php --apache-move-htaccess "no" --document-root "${BITNAMI_ROOT_DIR}/suitecrm/public"
-else
-    ensure_web_server_app_configuration_exists "suitecrm" --type php --apache-move-htaccess "no"
-fi
+ensure_web_server_app_configuration_exists "suitecrm" --type php --apache-move-htaccess "no"

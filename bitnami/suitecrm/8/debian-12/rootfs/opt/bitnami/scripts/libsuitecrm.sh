@@ -23,12 +23,6 @@ elif [[ -f /opt/bitnami/scripts/libmariadb.sh ]]; then
     . /opt/bitnami/scripts/libmariadb.sh
 fi
 
-# Rewrite env variables if SuiteCRM 7 is detected
-if [[ ! -d "${SUITECRM_BASE_DIR}/public" ]]; then
-    export SUITECRM_CONF_FILE="${SUITECRM_BASE_DIR}/config.php"
-    export SUITECRM_SILENT_INSTALL_CONF_FILE="${SUITECRM_BASE_DIR}/config_si.php"
-fi
-
 ########################
 # Validate settings in SUITECRM_* env vars
 # Globals:
@@ -125,35 +119,14 @@ suitecrm_initialize() {
 
         local -r template_dir="${BITNAMI_ROOT_DIR}/scripts/suitecrm/bitnami-templates"
         if ! is_boolean_yes "$SUITECRM_SKIP_BOOTSTRAP"; then
-            # If SuiteCRM 7, use legacy install wizard
-            if [[ ! -d "${SUITECRM_BASE_DIR}/public" ]]; then
-                # Render configuration file for silent install ('config_si.php')
-                (
-                    export url_protocol=http
-                    is_boolean_yes "$SUITECRM_ENABLE_HTTPS" && url_protocol=https
-                    render-template "${template_dir}/config_si.php.tpl" > "$SUITECRM_SILENT_INSTALL_CONF_FILE"
-                )
-                web_server_start
-                suitecrm_7_pass_wizard
-                # Configure SMTP via application wizard
-                if ! is_empty_value "$SUITECRM_SMTP_HOST"; then
-                    info "Configuring SMTP"
-                    suitecrm_pass_smtp_wizard
-                fi
-                web_server_stop
-                # Delete configuration file for silent install as it's not needed anymore
-                rm "$SUITECRM_SILENT_INSTALL_CONF_FILE"
-            else
-                web_server_start
-                suitecrm_pass_wizard
-                # Configure SMTP via application wizard
-                if ! is_empty_value "$SUITECRM_SMTP_HOST"; then
-                    info "Configuring SMTP"
-                    suitecrm_pass_smtp_wizard
-                fi
-                web_server_stop
+            web_server_start
+            suitecrm_pass_wizard
+            # Configure SMTP via application wizard
+            if ! is_empty_value "$SUITECRM_SMTP_HOST"; then
+                info "Configuring SMTP"
+                suitecrm_pass_smtp_wizard
             fi
-
+            web_server_stop
         else
             info "An already initialized SuiteCRM database was provided, configuration will be skipped"
             # A very basic 'config.php' will be generated with enough information for the application to be able to connect to the database
@@ -387,42 +360,6 @@ suitecrm_pass_wizard() {
     )
 
     suitecrm_execute suitecrm:app:install "${install_args[@]}"
-}
-
-########################
-# Pass SuiteCRM 7 wizard
-# Globals:
-#   *
-# Arguments:
-#   None
-# Returns:
-#   true if the wizard succeeded, false otherwise
-#########################
-suitecrm_7_pass_wizard() {
-    local -r port="${APACHE_HTTP_PORT_NUMBER:-"$APACHE_DEFAULT_HTTP_PORT_NUMBER"}"
-    local wizard_url curl_output
-    local -a curl_opts curl_data_opts
-    local url_protocol=http
-    info "Running setup wizard"
-    is_boolean_yes "$SUITECRM_ENABLE_HTTPS" && url_protocol=https
-    wizard_url="${url_protocol}://127.0.0.1:${port}/install.php?goto=SilentInstall&cli=true"
-    curl_opts=("--location" "--silent")
-    curl_data_opts=(
-        "--data-urlencode" "current_step=8"
-        "--data-urlencode" "goto=Next"
-    )
-    local wizard_exit_code=0
-    wizard_error() {
-        error "An error occurred while installing SuiteCRM: ${*}"
-        wizard_exit_code=1
-    }
-    if ! debug_execute curl "${curl_opts[@]}" "${wizard_url}"; then
-        wizard_error "The wizard could not be accessed"
-    fi
-    if ! grep -q "Save user settings" "${SUITECRM_BASE_DIR}/install.log"; then
-        wizard_error "Installation failed"
-    fi
-    return "$wizard_exit_code"
 }
 
 ########################
