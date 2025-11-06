@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-27T15:31:50Z" \
+      org.opencontainers.image.created="2025-11-05T17:28:06Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/airflow/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/airflow" \
       org.opencontainers.image.title="airflow" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="3.1.1"
+      org.opencontainers.image.version="3.1.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -31,8 +31,8 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
       "nss-wrapper-1.1.16-0-linux-${OS_ARCH}-debian-12" \
       "ini-file-1.4.9-3-linux-${OS_ARCH}-debian-12" \
       "wait-for-port-1.0.10-3-linux-${OS_ARCH}-debian-12" \
-      "airflow-3.1.1-0-linux-${OS_ARCH}-debian-12" \
-      "python-3.12.12-3-linux-${OS_ARCH}-debian-12" \
+      "airflow-3.1.2-0-linux-${OS_ARCH}-debian-12" \
+      "python-3.12.12-5-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -57,7 +57,7 @@ RUN uninstall_packages curl
 COPY rootfs /
 RUN /opt/bitnami/scripts/airflow/postunpack.sh
 ENV AIRFLOW_HOME="/opt/bitnami/airflow" \
-    APP_VERSION="3.1.1" \
+    APP_VERSION="3.1.2" \
     BITNAMI_APP_NAME="airflow" \
     IMAGE_REVISION="0" \
     LANG="en_US.UTF-8" \
