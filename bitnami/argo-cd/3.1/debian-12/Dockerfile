@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-11-05T22:44:09Z" \
+      org.opencontainers.image.created="2025-11-10T10:57:48Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/argo-cd/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/argo-cd" \
@@ -30,7 +30,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     COMPONENTS=( \
       "nss-wrapper-1.1.16-0-linux-${OS_ARCH}-debian-12" \
       "helm-3.19.0-3-linux-${OS_ARCH}-debian-12" \
-      "argo-cd-3.1.9-1-linux-${OS_ARCH}-debian-12" \
+      "argo-cd-3.1.9-2-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -51,7 +51,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/argo-cd/postunpack.sh
 ENV APP_VERSION="3.1.9" \
     BITNAMI_APP_NAME="argo-cd" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="2" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/helm/bin:/opt/bitnami/argo-cd/bin:/opt/bitnami/argo-cd/hack:/opt/bitnami/ksonnet/bin:/opt/bitnami/kustomize/bin:$PATH"
 
 USER 1001
