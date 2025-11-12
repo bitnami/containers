@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-11-04T16:47:01Z" \
+      org.opencontainers.image.created="2025-11-12T20:34:57Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/laravel/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/laravel" \
       org.opencontainers.image.title="laravel" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="12.10.0"
+      org.opencontainers.image.version="12.10.1"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-12" \
@@ -28,10 +28,10 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "python-3.14.0-5-linux-${OS_ARCH}-debian-12" \
-      "wait-for-port-1.0.10-3-linux-${OS_ARCH}-debian-12" \
-      "php-8.4.14-2-linux-${OS_ARCH}-debian-12" \
-      "node-24.11.0-0-linux-${OS_ARCH}-debian-12" \
-      "laravel-12.10.0-0-linux-${OS_ARCH}-debian-12" \
+      "wait-for-port-1.0.10-4-linux-${OS_ARCH}-debian-12" \
+      "php-8.4.14-3-linux-${OS_ARCH}-debian-12" \
+      "node-24.11.1-0-linux-${OS_ARCH}-debian-12" \
+      "laravel-12.10.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -50,7 +50,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 COPY rootfs /
 RUN /opt/bitnami/scripts/laravel/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
-ENV APP_VERSION="12.10.0" \
+ENV APP_VERSION="12.10.1" \
     BITNAMI_APP_NAME="laravel" \
     IMAGE_REVISION="0" \
     NODE_PATH="/opt/bitnami/node/lib/node_modules" \
