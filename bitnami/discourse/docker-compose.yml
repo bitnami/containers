@@ -39,7 +39,7 @@ services:
       - DISCOURSE_REDIS_PORT_NUMBER=6379
       - POSTGRESQL_CLIENT_POSTGRES_USER=postgres
       - POSTGRESQL_CLIENT_CREATE_DATABASE_NAME=bitnami_discourse
-      - POSTGRESQL_CLIENT_CREATE_DATABASE_EXTENSIONS=hstore,pg_trgm
+      - POSTGRESQL_CLIENT_CREATE_DATABASE_EXTENSIONS=hstore,pg_trgm,vector
   sidekiq:
     image: docker.io/bitnami/discourse:3
     depends_on:
