@@ -1,5 +1,5 @@
 # Copyright 2025 SolDevelo
-# Based on Bitnami Kafka © Broadcom, Inc. (Apache-2.0)
+# Based on Bitnami jmx-exporter © Broadcom, Inc. (Apache-2.0)
 # SPDX-License-Identifier: Apache-2.0
 
 FROM docker.io/bitnami/minideb:bookworm
@@ -8,13 +8,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-07T01:38:54Z" \
+      org.opencontainers.image.created="2025-11-06T16:29:15Z" \
       org.opencontainers.image.description="Application packaged by SolDevelo, based on Bitnami's work" \
       org.opencontainers.image.documentation="https://github.com/soldevelo/containers/tree/main/soldevelo/jmx-exporter/README.md" \
       org.opencontainers.image.source="https://github.com/soldevelo/containers/tree/main/soldevelo/jmx-exporter" \
       org.opencontainers.image.title="jmx-exporter" \
       org.opencontainers.image.vendor="SolDevelo" \
-      org.opencontainers.image.version="1.4.0"
+      org.opencontainers.image.version="1.5.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,8 +29,8 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "jre-17.0.16-12-1-linux-${OS_ARCH}-debian-12" \
-      "jmx-exporter-1.4.0-0-linux-${OS_ARCH}-debian-12" \
+      "jre-17.0.17-11-0-linux-${OS_ARCH}-debian-12" \
+      "jmx-exporter-1.5.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -48,9 +48,9 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN chown -R 1001:1001 /opt/bitnami/jmx-exporter
 RUN uninstall_packages ca-certificates curl
 
-ENV APP_VERSION="1.4.0" \
+ENV APP_VERSION="1.5.0" \
     BITNAMI_APP_NAME="jmx-exporter" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="1" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 EXPOSE 5556

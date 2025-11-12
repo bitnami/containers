@@ -1,5 +1,5 @@
 # Copyright 2025 SolDevelo
-# Based on Bitnami Kafka © Broadcom, Inc. (Apache-2.0)
+# Based on Bitnami os-shell © Broadcom, Inc. (Apache-2.0)
 # SPDX-License-Identifier: Apache-2.0
 
 FROM docker.io/bitnami/minideb:bookworm
@@ -7,9 +7,8 @@ FROM docker.io/bitnami/minideb:bookworm
 ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
-LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83" \
-      org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-08-19T08:08:50Z" \
+LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
+      org.opencontainers.image.created="2025-11-06T04:41:26Z" \
       org.opencontainers.image.description="Application packaged by SolDevelo, based on Bitnami's work" \
       org.opencontainers.image.documentation="https://github.com/soldevelo/containers/tree/main/soldevelo/os-shell/README.md" \
       org.opencontainers.image.source="https://github.com/soldevelo/containers/tree/main/soldevelo/os-shell" \
@@ -30,11 +29,11 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "yq-4.47.1-2-linux-${OS_ARCH}-debian-12" \
-      "wait-for-port-1.0.10-0-linux-${OS_ARCH}-debian-12" \
-      "render-template-1.0.9-155-linux-${OS_ARCH}-debian-12" \
-      "ini-file-1.4.9-0-linux-${OS_ARCH}-debian-12" \
-      "scuttle-1.1.11-6-linux-${OS_ARCH}-debian-12" \
+      "yq-4.48.1-2-linux-${OS_ARCH}-debian-12" \
+      "wait-for-port-1.0.10-4-linux-${OS_ARCH}-debian-12" \
+      "render-template-1.0.9-159-linux-${OS_ARCH}-debian-12" \
+      "ini-file-1.4.9-4-linux-${OS_ARCH}-debian-12" \
+      "scuttle-1.1.11-10-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -51,7 +50,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
 ENV APP_VERSION="12" \
     BITNAMI_APP_NAME="os-shell" \
-    IMAGE_REVISION="51" \
+    IMAGE_REVISION="54" \
     PATH="/opt/bitnami/common/bin:$PATH"
 
 USER 1001

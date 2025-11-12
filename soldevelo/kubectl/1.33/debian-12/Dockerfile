@@ -1,5 +1,5 @@
 # Copyright 2025 SolDevelo
-# Based on Bitnami Kafka © Broadcom, Inc. (Apache-2.0)
+# Based on Bitnami kubectl © Broadcom, Inc. (Apache-2.0)
 # SPDX-License-Identifier: Apache-2.0
 
 FROM docker.io/bitnami/minideb:bookworm
