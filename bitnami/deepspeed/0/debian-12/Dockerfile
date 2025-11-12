@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-11-06T02:25:27Z" \
+      org.opencontainers.image.created="2025-11-12T18:26:37Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/deepspeed/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/deepspeed" \
@@ -56,7 +56,7 @@ ENV APP_VERSION="0.18.2" \
     CPLUS_INCLUDE_PATH="/opt/bitnami/common/include" \
     CPPFLAGS="-I/opt/bitnami/python/include -I/opt/bitnami/common/include" \
     C_INCLUDE_PATH="/opt/bitnami/common/include" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     LDFLAGS="-Wl,-rpath: /opt/bitnami/python/lib -L/opt/bitnami/python/lib -Wl,-rpath: /opt/bitnami/common/lib -L/opt/bitnami/common/lib" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib:/opt/bitnami/common/lib:${LD_LIBRARY_PATH}" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/python/bin:$PATH" \
