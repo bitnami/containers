@@ -221,7 +221,7 @@ When the `myapp` service container is restarted, it will install all the missing
 
 ## Notable Changes
 
-## 6.0.2-2-debian-10-r52
+### 6.0.2-2-debian-10-r52
 
 - Decrease the size of the container. The configuration logic is now based on Bash scripts in the `rootfs/` folder.
 
