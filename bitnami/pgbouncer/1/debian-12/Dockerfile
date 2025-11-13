@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-11-06T14:13:07Z" \
+      org.opencontainers.image.created="2025-11-12T08:49:44Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/pgbouncer/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/pgbouncer" \
       org.opencontainers.image.title="pgbouncer" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.24.1"
+      org.opencontainers.image.version="1.25.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -32,7 +32,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
       "wait-for-port-1.0.10-4-linux-${OS_ARCH}-debian-12" \
       "postgresql-client-14.19.0-0-linux-${OS_ARCH}-debian-12" \
       "ini-file-1.4.9-4-linux-${OS_ARCH}-debian-12" \
-      "pgbouncer-1.24.1-1-linux-${OS_ARCH}-debian-12" \
+      "pgbouncer-1.25.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -55,9 +55,9 @@ RUN uninstall_packages curl
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/pgbouncer/postunpack.sh
-ENV APP_VERSION="1.24.1" \
+ENV APP_VERSION="1.25.0" \
     BITNAMI_APP_NAME="pgbouncer" \
-    IMAGE_REVISION="15" \
+    IMAGE_REVISION="0" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \

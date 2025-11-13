@@ -3,7 +3,7 @@
 
 services:
   aspnet-core:
-    image: docker.io/bitnami/aspnet-core:9
+    image: docker.io/bitnami/aspnet-core:10
     command: ["tail", "-f", "/dev/null"] # To keep the container running
     volumes:
       - aspnet-core_data:/app

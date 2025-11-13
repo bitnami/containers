@@ -3,7 +3,7 @@
 
 services:
   dotnet-sdk:
-    image: docker.io/bitnami/dotnet-sdk:9
+    image: docker.io/bitnami/dotnet-sdk:10
     command: ["tail", "-f", "/dev/null"] # To keep the container running
     volumes:
       - dotnet_data:/app

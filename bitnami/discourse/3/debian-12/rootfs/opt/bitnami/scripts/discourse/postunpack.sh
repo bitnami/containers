@@ -17,6 +17,7 @@ set -o pipefail
 . /opt/bitnami/scripts/libfile.sh
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libos.sh
 
 # Ensure the Discourse base directory exists and has proper permissions
 info "Configuring file permissions for Discourse"
@@ -54,7 +55,10 @@ chmod +x "${DISCOURSE_BASE_DIR}/node_modules/esbuild/bin/esbuild" "${DISCOURSE_B
 # HACK: The discourse source code is trying to access the deprecated Imagemagick "magick". In newer versions it was changed to "convert". Creating
 # a symlink to avoid any issue
 # https://github.com/discourse/discourse/blob/3f5b0dc98d0235adeea5b91c1656420418de6589/lib/upload_creator.rb#L421
-ln -sf "$(which convert)" "/usr/bin/magick"
+if [[ "$(get_os_metadata --id)" != "photon" ]]; then
+   ln -sf "$(which convert)" "/usr/bin/magick"
+fi
+
 
 # Required for running as non-root users, for persistence logic to work properly
 # Using g+rwx/g+rw instead of explicit 775/664 permissions because Discourse includes executable binaries in different subfolders

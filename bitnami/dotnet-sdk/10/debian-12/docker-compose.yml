@@ -2,11 +2,11 @@
 # SPDX-License-Identifier: APACHE-2.0
 
 services:
-  aspnet-core:
-    image: docker.io/bitnami/aspnet-core:9
+  dotnet-sdk:
+    image: docker.io/bitnami/dotnet-sdk:10
     command: ["tail", "-f", "/dev/null"] # To keep the container running
     volumes:
-      - aspnet-core_data:/app
+      - dotnet_data:/app
 volumes:
-  aspnet-core_data:
+  dotnet_data:
     driver: local

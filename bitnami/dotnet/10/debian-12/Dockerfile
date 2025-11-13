@@ -7,15 +7,15 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-11-05T22:59:16Z" \
+      org.opencontainers.image.created="2025-11-12T10:58:17Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/envoy-gateway/README.md" \
-      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/envoy-gateway" \
-      org.opencontainers.image.title="envoy-gateway" \
+      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/dotnet/README.md" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/dotnet" \
+      org.opencontainers.image.title="dotnet" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.5.4"
+      org.opencontainers.image.version="10.0.0"
 
-ENV HOME="/" \
+ENV HOME="/app" \
     OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-12" \
     OS_NAME="linux"
@@ -23,12 +23,12 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl procps
+RUN install_packages ca-certificates curl libcap2-bin libgcc-s1 libicu-dev liblttng-ust-dev libstdc++6 procps
 RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "envoy-gateway-1.5.4-1-linux-${OS_ARCH}-debian-12" \
+      "dotnet-10.0.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -41,14 +41,20 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     done
 RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
-RUN chmod g+rwX /opt/bitnami
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
-RUN uninstall_packages curl
+RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
+    sed -i 's/^PASS_MIN_DAYS.*/PASS_MIN_DAYS    0/' /etc/login.defs && \
+    sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
-ENV APP_VERSION="1.5.4" \
-    BITNAMI_APP_NAME="envoy-gateway" \
-    IMAGE_REVISION="1" \
-    PATH="/opt/bitnami/envoy-gateway/bin:$PATH"
+COPY rootfs /
+RUN /opt/bitnami/scripts/dotnet/postunpack.sh
+ENV APP_VERSION="10.0.0" \
+    BITNAMI_APP_NAME="dotnet" \
+    DOTNET_CLI_HOME="/app" \
+    DOTNET_ROOT="/opt/bitnami/dotnet/bin" \
+    IMAGE_REVISION="0" \
+    PATH="/opt/bitnami/dotnet/bin:$PATH"
 
-USER 1001
-ENTRYPOINT [ "/opt/bitnami/envoy-gateway/bin/envoy-gateway" ]
+WORKDIR /app
+ENTRYPOINT [ "/opt/bitnami/scripts/dotnet/entrypoint.sh" ]
+CMD [ "/bin/bash" ]
