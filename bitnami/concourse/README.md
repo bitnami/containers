@@ -5,6 +5,7 @@
 > Concourse is an automation system written in Go. It is most commonly used for CI/CD, and is built to scale to any kind of automation pipeline, from simple to complex.
 
 [Overview of Concourse](https://concourse-ci.org/)
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
 
