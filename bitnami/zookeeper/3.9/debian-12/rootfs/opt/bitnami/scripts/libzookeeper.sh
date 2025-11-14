@@ -605,13 +605,18 @@ zookeeper_healthcheck() {
         command="openssl"
         args+=("s_client" "-quiet" "-crlf" "-connect" "localhost:${port}")
 
-        debug "Running healthcheck command: 'echo \"ruok\" | timeout ${ZOO_HC_TIMEOUT} ${command} ${args[*]} \
-            -key <(openssl pkcs12 -in ${ZOO_TLS_CLIENT_KEYSTORE_FILE} -nodes -nocerts -passin pass:\$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD) \
-            -cert <(openssl pkcs12 -in ${ZOO_TLS_CLIENT_KEYSTORE_FILE} -nodes -nokeys -passin pass:\$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD)'"
-        response=$(echo "ruok" | timeout "$ZOO_HC_TIMEOUT" "$command" "${args[@]}" \
-            -key <(openssl pkcs12 -in "$ZOO_TLS_CLIENT_KEYSTORE_FILE" -nodes -nocerts -passin pass:"$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD") \
-            -cert <(openssl pkcs12 -in "$ZOO_TLS_CLIENT_KEYSTORE_FILE" -nodes -nokeys -passin pass:"$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD") 2> /dev/null
-        )
+        if [[ "$ZOO_TLS_CLIENT_AUTH" != "none" ]]; then
+            debug "Running healthcheck command: 'echo \"ruok\" | timeout ${ZOO_HC_TIMEOUT} ${command} ${args[*]} \
+                -key <(openssl pkcs12 -in ${ZOO_TLS_CLIENT_KEYSTORE_FILE} -nodes -nocerts -passin pass:\$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD) \
+                -cert <(openssl pkcs12 -in ${ZOO_TLS_CLIENT_KEYSTORE_FILE} -nodes -nokeys -passin pass:\$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD)'"
+            response=$(echo "ruok" | timeout "$ZOO_HC_TIMEOUT" "$command" "${args[@]}" \
+                -key <(openssl pkcs12 -in "$ZOO_TLS_CLIENT_KEYSTORE_FILE" -nodes -nocerts -passin pass:"$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD") \
+                -cert <(openssl pkcs12 -in "$ZOO_TLS_CLIENT_KEYSTORE_FILE" -nodes -nokeys -passin pass:"$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD") 2> /dev/null
+            )
+        else
+            debug "Running healthcheck command without client cert: 'echo \"ruok\" | timeout ${ZOO_HC_TIMEOUT} ${command} ${args[*]}'"
+            response=$(echo "ruok" | timeout "$ZOO_HC_TIMEOUT" "$command" "${args[@]}" 2> /dev/null)
+        fi
     else
         command="nc"
         # Only add flag '-q' if OpenBSD netcat is used
