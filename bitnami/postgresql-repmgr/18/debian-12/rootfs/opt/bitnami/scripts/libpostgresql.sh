@@ -443,11 +443,7 @@ postgresql_configure_replication_parameters() {
     postgresql_set_property "wal_level" "$POSTGRESQL_WAL_LEVEL"
     postgresql_set_property "max_wal_size" "400MB"
     postgresql_set_property "max_wal_senders" "16"
-    if ((psql_major_version >= 13)); then
-        postgresql_set_property "wal_keep_size" "128MB"
-    else
-        postgresql_set_property "wal_keep_segments" "12"
-    fi
+    postgresql_set_property "wal_keep_size" "128MB"
     postgresql_set_property "hot_standby" "on"
 
     if is_boolean_yes "$POSTGRESQL_REPLICATION_USE_PASSFILE" && [[ ! -f "${POSTGRESQL_REPLICATION_PASSFILE_PATH}" ]]; then

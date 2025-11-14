@@ -17,7 +17,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "nats-2.12.1-1-linux-${OS_ARCH}-debian-12" \
+      "nats-2.12.2-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -40,20 +40,20 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-11-06T04:30:07Z" \
+      org.opencontainers.image.created="2025-11-13T14:39:03Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="nats" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="2.12.1"
+      org.opencontainers.image.version="2.12.2"
 
 COPY rootfs /
 COPY --from=builder /opt/bitnami/nats/.spdx-nats.spdx /opt/bitnami/nats/.spdx-nats.spdx
 COPY --from=builder /opt/bitnami/nats/bin/nats-server /opt/bitnami/nats/bin/nats-server
 COPY --from=builder /opt/bitnami/nats/licenses /opt/bitnami/nats/licenses
 
-ENV APP_VERSION="2.12.1" \
+ENV APP_VERSION="2.12.2" \
     BITNAMI_APP_NAME="nats" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/nats/bin:$PATH"
 
 EXPOSE 4222 6222 8222

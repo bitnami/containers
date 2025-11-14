@@ -7,30 +7,30 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-11-10T12:49:54Z" \
+      org.opencontainers.image.created="2025-11-13T14:20:53Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/express/README.md" \
-      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/express" \
-      org.opencontainers.image.title="express" \
+      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/argo-cd/README.md" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/argo-cd" \
+      org.opencontainers.image.title="argo-cd" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="5.1.0"
+      org.opencontainers.image.version="3.2.0"
 
-ENV OS_ARCH="${TARGETARCH:-amd64}" \
+ENV HOME="/" \
+    OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-12" \
     OS_NAME="linux"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libbz2-1.0 libffi8 libgcc-s1 liblzma5 libncursesw6 libreadline8 libsqlite3-0 libssl3 libstdc++6 libtinfo6 procps zlib1g
+RUN install_packages ca-certificates curl git git-lfs gnupg openssh-client procps
 RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "python-3.14.0-5-linux-${OS_ARCH}-debian-12" \
-      "wait-for-port-1.0.10-4-linux-${OS_ARCH}-debian-12" \
-      "node-24.11.0-0-linux-${OS_ARCH}-debian-12" \
-      "express-5.1.0-3-linux-${OS_ARCH}-debian-12" \
+      "nss-wrapper-1.1.16-0-linux-${OS_ARCH}-debian-12" \
+      "helm-3.19.2-0-linux-${OS_ARCH}-debian-12" \
+      "argo-cd-3.2.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -43,18 +43,17 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     done
 RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
+RUN chmod g+rwX /opt/bitnami
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
+RUN uninstall_packages curl
 
 COPY rootfs /
-RUN mkdir -p /dist /app /.npm /.config /.cache /.local && chmod g+rwX /dist /app /.npm /.config /.cache /.local
-RUN /opt/bitnami/scripts/express/postunpack.sh
-ENV APP_VERSION="5.1.0" \
-    BITNAMI_APP_NAME="express" \
-    IMAGE_REVISION="57" \
-    PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/node/bin:/opt/bitnami/express/bin:$PATH"
+RUN /opt/bitnami/scripts/argo-cd/postunpack.sh
+ENV APP_VERSION="3.2.0" \
+    BITNAMI_APP_NAME="argo-cd" \
+    IMAGE_REVISION="1" \
+    PATH="/opt/bitnami/common/bin:/opt/bitnami/helm/bin:/opt/bitnami/argo-cd/bin:/opt/bitnami/argo-cd/hack:/opt/bitnami/ksonnet/bin:/opt/bitnami/kustomize/bin:$PATH"
 
-EXPOSE 3000
-
-WORKDIR /app
-ENTRYPOINT [ "/opt/bitnami/scripts/express/entrypoint.sh" ]
-CMD [ "npm", "start" ]
+USER 1001
+ENTRYPOINT [ "/opt/bitnami/scripts/argo-cd/entrypoint.sh" ]
+CMD [ "argocd", "--help" ]

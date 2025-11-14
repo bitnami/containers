@@ -4,7 +4,7 @@
 
 > This PostgreSQL cluster solution includes the PostgreSQL replication manager, an open-source tool for managing replication and failover on PostgreSQL clusters.
 
-[Overview of PostgreSQL HA](https://www.postgresql.org/)
+[Overview of PostgreSQL HA](https://www.postgresql.org)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
@@ -236,7 +236,7 @@ When `POSTGRESQL_USERNAME` is specified, the `postgres` user is not assigned a p
 
 ### Setting up a HA PostgreSQL cluster with streaming replication and repmgr
 
-A HA PostgreSQL cluster with [Streaming replication](https://www.postgresql.org/docs/10/warm-standby.html#STREAMING-REPLICATION) and [repmgr](https://repmgr.org) can easily be setup with the Bitnami PostgreSQL HA Docker Image using the following environment variables:
+A HA PostgreSQL cluster with [Streaming replication](https://www.postgresql.orgdocs/10/warm-standby.html#STREAMING-REPLICATION) and [repmgr](https://repmgr.org) can easily be setup with the Bitnami PostgreSQL HA Docker Image using the following environment variables:
 
 - `POSTGRESQL_PASSWORD`: Password for `postgres` user. No defaults.
 - `POSTGRESQL_PASSWORD_FILE`: Path to a file that contains the `postgres` user password. This will override the value specified in `POSTGRESQL_PASSWORD`. No defaults.
@@ -313,7 +313,7 @@ PostgreSQL supports the encryption of connections using the SSL/TLS protocol. Sh
 - `POSTGRESQL_ENABLE_TLS`: Whether to enable TLS for traffic or not. Defaults to `no`.
 - `POSTGRESQL_TLS_CERT_FILE`: File containing the certificate file for the TLS traffic. No defaults.
 - `POSTGRESQL_TLS_KEY_FILE`: File containing the key for certificate. No defaults.
-- `POSTGRESQL_TLS_CA_FILE`: File containing the CA of the certificate. If provided, PostgreSQL will authenticate TLS/SSL clients by requesting them a certificate (see [ref](https://www.postgresql.org/docs/9.6/auth-methods.html)). No defaults.
+- `POSTGRESQL_TLS_CA_FILE`: File containing the CA of the certificate. If provided, PostgreSQL will authenticate TLS/SSL clients by requesting them a certificate (see [ref](https://www.postgresql.orgdocs/9.6/auth-methods.html)). No defaults.
 - `POSTGRESQL_TLS_CRL_FILE`: File containing a Certificate Revocation List. No defaults.
 - `POSTGRESQL_TLS_PREFER_SERVER_CIPHERS`: Whether to use the server's TLS cipher preferences rather than the client's. Defaults to `yes`.
 

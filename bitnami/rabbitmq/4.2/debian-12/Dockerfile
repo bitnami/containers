@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-30T11:28:23Z" \
+      org.opencontainers.image.created="2025-11-13T14:54:41Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/rabbitmq/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/rabbitmq" \
@@ -54,7 +54,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/rabbitmq/postunpack.sh
 ENV APP_VERSION="4.2.0" \
     BITNAMI_APP_NAME="rabbitmq" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en"
 
