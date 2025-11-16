@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-10-16T08:55:51Z" \
+      org.opencontainers.image.created="2025-11-15T09:37:04Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/apisix/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/apisix" \
@@ -48,7 +48,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="3.14.1" \
     BITNAMI_APP_NAME="apisix" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     LUA_PATH="/opt/bitnami/apisix/deps/share/lua/5.1/?/init.lua" \
     PATH="/opt/bitnami/apisix/bin:/opt/bitnami/apisix/openresty/bin:/opt/bitnami/apisix/openresty/luajit/bin:/opt/bitnami/apisix/openresty/nginx/sbin:/opt/bitnami/apisix/openresty/luarocks/bin:$PATH"
 
