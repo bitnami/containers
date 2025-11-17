@@ -1,4 +1,4 @@
-# Bitnami package for Apache Kafka
+# Soldevelo package for Apache Kafka
 
 ## What is Apache Kafka?
 
@@ -12,29 +12,6 @@ Trademarks: This Docker image is maintained by **SolDevelo** and is based on the
 ```console
 docker run --name kafka soldevelo/kafka:latest
 ```
-
-## Why use Bitnami Secure Images?
-
-- Bitnami Secure Images and Helm charts are built to make open source more secure and enterprise ready.
-- Triage security vulnerabilities faster, with transparency into CVE risks using industry standard Vulnerability Exploitability Exchange (VEX), KEV, and EPSS scores.
-- Our hardened images use a minimal OS (Photon Linux), which reduces the attack surface while maintaining extensibility through the use of an industry standard package format.
-- Stay more secure and compliant with continuously built images updated within hours of upstream patches.
-- Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-- Hardened images come with attestation signatures (Notation), SBOMs, virus scan reports and other metadata produced in an SLSA-3 compliant software factory.
-
-Only a subset of BSI applications are available for free. Looking to access the entire catalog of applications as well as enterprise support? Try the [commercial edition of Bitnami Secure Images today](https://www.arrow.com/globalecs/uk/products/bitnami-secure-images/).
-
-## Why use a non-root container?
-
-Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
-
-## Supported tags and respective `Dockerfile` links
-
-Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
-
-You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `soldevelo/ASSET/BRANCH/DISTRO/tags-info.yaml`.
-
-Subscribe to project updates by watching the [soldevelo/containers GitHub repo](https://github.com/soldevelo/containers).
 
 ## Get this image
 
@@ -66,7 +43,7 @@ If you remove the container all your data and configurations will be lost, and t
 
 > Note: If you have already started using your database, follow the steps on [backing up](#backing-up-your-container) and [restoring](#restoring-a-backup) to pull the data from your running container down to your host.
 
-The image exposes a volume at `/soldevelo/kafka` for the Apache Kafka data. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
+The image exposes a volume at `/bitnami/kafka` for the Apache Kafka data. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
 
 Using Docker Compose:
 
@@ -76,7 +53,7 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/so
 kafka:
   ...
   volumes:
-    - /path/to/kafka-persistence:/soldevelo/kafka
+    - /path/to/kafka-persistence:/bitnami/kafka
   ...
 ```
 
@@ -333,7 +310,7 @@ You **must** also use your own certificates for SSL. You can drop your Java Key 
 
 `KAFKA_CERTIFICATE_PASSWORD=myCertificatePassword`
 
-If the truststore is mounted in a different location than `/opt/bitnami/kafka/config/certs/kafka.truststore.jks`, `/opt/bitnami/kafka/config/certs/kafka.truststore.pem`, `/soldevelo/kafka/config/certs/kafka.truststore.jks` or `/soldevelo/kafka/config/certs/kafka.truststore.pem`, set the `KAFKA_TLS_TRUSTSTORE_FILE` variable.
+If the truststore is mounted in a different location than `/opt/bitnami/kafka/config/certs/kafka.truststore.jks`, `/opt/bitnami/kafka/config/certs/kafka.truststore.pem`, `/bitnami/kafka/config/certs/kafka.truststore.jks` or `/bitnami/kafka/config/certs/kafka.truststore.pem`, set the `KAFKA_TLS_TRUSTSTORE_FILE` variable.
 
 The following script can help you with the creation of the JKS and certificates:
 
@@ -587,7 +564,7 @@ services:
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
       - KAFKA_CLUSTER_ID=abcdefghijklmnopqrstuv
     volumes:
-      - kafka_0_data:/soldevelo/kafka
+      - kafka_0_data:/bitnami/kafka
   kafka-controller:
     image: docker.io/soldevelo/kafka:latest
     environment:
@@ -599,7 +576,7 @@ services:
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
       - KAFKA_CLUSTER_ID=abcdefghijklmnopqrstuv
     volumes:
-      - kafka_1_data:/soldevelo/kafka
+      - kafka_1_data:/bitnami/kafka
   kafka-broker:
     image: docker.io/soldevelo/kafka:latest
     environment:
@@ -607,7 +584,7 @@ services:
       - KAFKA_CFG_PROCESS_ROLES=broker
       - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093
     volumes:
-      - kafka_2_data:/soldevelo/kafka
+      - kafka_2_data:/bitnami/kafka
 
 volumes:
   kafka_0_data:
@@ -620,10 +597,10 @@ volumes:
 
 ### Full configuration
 
-The image looks for configuration files (server.properties, log4j2.yaml, etc.) in the `/soldevelo/kafka/config/`, this can be changed by setting the KAFKA_MOUNTED_CONF_DIR environment variable.
+The image looks for configuration files (server.properties, log4j2.yaml, etc.) in the `/bitnami/kafka/config/`, this can be changed by setting the KAFKA_MOUNTED_CONF_DIR environment variable.
 
 ```console
-docker run --name kafka -v /path/to/server.properties:/soldevelo/kafka/config/server.properties soldevelo/kafka:latest
+docker run --name kafka -v /path/to/server.properties:/bitnami/kafka/config/server.properties soldevelo/kafka:latest
 ```
 
 After that, your changes will be taken into account in the server's behaviour.
@@ -641,7 +618,7 @@ services:
     ...
     volumes:
       - kafka_data:/bitnami
-+     - /path/to/server.properties:/soldevelo/kafka/config/server.properties
++     - /path/to/server.properties:/bitnami/kafka/config/server.properties
 ```
 
 #### Step 2: Edit the configuration
@@ -712,14 +689,14 @@ We need to mount two volumes in a container we will use to create the backup: a 
 
 ```console
 docker run --rm -v /path/to/kafka-backups:/backups --volumes-from kafka busybox \
-  cp -a /soldevelo/kafka /backups/latest
+  cp -a /bitnami/kafka /backups/latest
 ```
 
 Or using Docker Compose:
 
 ```console
 docker run --rm -v /path/to/kafka-backups:/backups --volumes-from `docker-compose ps -q kafka` busybox \
-  cp -a /soldevelo/kafka /backups/latest
+  cp -a /bitnami/kafka /backups/latest
 ```
 
 ### Restoring a backup
@@ -727,7 +704,7 @@ docker run --rm -v /path/to/kafka-backups:/backups --volumes-from `docker-compos
 Restoring a backup is as simple as mounting the backup as volumes in the container.
 
 ```console
-docker run -v /path/to/kafka-backups/latest:/soldevelo/kafka soldevelo/kafka:latest
+docker run -v /path/to/kafka-backups/latest:/bitnami/kafka soldevelo/kafka:latest
 ```
 
 You can also modify the [`docker-compose.yml`](https://github.com/soldevelo/containers/blob/main/soldevelo/kafka/docker-compose.yml) file present in this repository:
@@ -735,7 +712,7 @@ You can also modify the [`docker-compose.yml`](https://github.com/soldevelo/cont
 ```yaml
 kafka:
   volumes:
-    - /path/to/kafka-backups/latest:/soldevelo/kafka
+    - /path/to/kafka-backups/latest:/bitnami/kafka
 ```
 
 ### Upgrade this image
@@ -899,7 +876,7 @@ This new release of the soldevelo/kafka container includes a refactor in its log
 
 ### 2.4.1-r38-debian-10
 
-The configuration directory was changed to `/opt/bitnami/kafka/config`. Configuration files should be mounted to `/soldevelo/kafka/config`.
+The configuration directory was changed to `/opt/bitnami/kafka/config`. Configuration files should be mounted to `/bitnami/kafka/config`.
 
 ### 1.1.1-debian-9-r224, 2.2.1-debian-9-r16, 1.1.1-ol-7-r306 and 2.2.1-ol-7-r14
 
@@ -985,7 +962,8 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2025 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
+Copyright 2025 SolDevelo  
+Based on Bitnami Containers Library (https://github.com/bitnami/containers) © 2025 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries. (licensed under Apache-2.0)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
