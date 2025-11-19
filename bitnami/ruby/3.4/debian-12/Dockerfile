@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-11-12T20:49:08Z" \
+      org.opencontainers.image.created="2025-11-19T13:47:02Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/ruby/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/ruby" \
@@ -22,12 +22,12 @@ ENV OS_ARCH="${TARGETARCH:-amd64}" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages build-essential ca-certificates curl git libcrypt1 libffi8 libreadline-dev libsqlite3-dev libssl-dev libssl3 libyaml-0-2 libyaml-dev pkg-config procps sqlite3 unzip wget zlib1g zlib1g-dev
+RUN install_packages build-essential ca-certificates curl git libcrypt1 libffi8 libgcc-s1 libjemalloc2 libreadline-dev libsqlite3-dev libssl-dev libssl3 libstdc++6 libyaml-0-2 libyaml-dev pkg-config procps sqlite3 unzip wget zlib1g zlib1g-dev
 RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "ruby-3.4.7-1-linux-${OS_ARCH}-debian-12" \
+      "ruby-3.4.7-2-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -47,7 +47,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 
 ENV APP_VERSION="3.4.7" \
     BITNAMI_APP_NAME="ruby" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="3" \
     PATH="/opt/bitnami/ruby/bin:$PATH"
 
 EXPOSE 3000
