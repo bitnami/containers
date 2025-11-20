@@ -52,10 +52,7 @@ php_conf_set post_max_size "$PHP_DEFAULT_POST_MAX_SIZE"
 # https://make.wordpress.org/hosting/handbook/handbook/server-environment/#php-extensions
 php_conf_set extension "imagick"
 # Memcached extension is required for W3 Total Cache plugin
-# Photon does not provide a package for the libmemcached library, so it can't support the extension
-if [[ "$(get_os_metadata --id)" != "photon" ]]; then
-  php_conf_set extension "memcached"
-fi
+php_conf_set extension "memcached"
 
 # Enable default web server configuration for WordPress
 info "Creating default web server configuration for WordPress"
