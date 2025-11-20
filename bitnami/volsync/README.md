@@ -2,7 +2,7 @@
 
 ## What is VolSync?
 
-> VolSync is an open-source Kubernetes operator that asynchronously replicates persistent volumes between clusters using rsync, rclone, or restic.
+> VolSync is a Kubernetes operator designed for asynchronous replication of persistent volumes within or across clusters.
 
 [Overview of VolSync](https://github.com/backube/volsync)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
