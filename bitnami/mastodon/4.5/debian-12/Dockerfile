@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-11-20T11:19:46Z" \
+      org.opencontainers.image.created="2025-11-20T16:45:47Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/mastodon/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mastodon" \
       org.opencontainers.image.title="mastodon" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="4.5.1"
+      org.opencontainers.image.version="4.5.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -33,7 +33,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
       "postgresql-client-18.1.0-0-linux-${OS_ARCH}-debian-12" \
       "wait-for-port-1.0.10-4-linux-${OS_ARCH}-debian-12" \
       "redis-client-8.2.3-0-linux-${OS_ARCH}-debian-12" \
-      "mastodon-4.5.1-0-linux-${OS_ARCH}-debian-12" \
+      "mastodon-4.5.2-0-linux-${OS_ARCH}-debian-12" \
       "ruby-3.4.7-2-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -52,9 +52,9 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mastodon/postunpack.sh
-ENV APP_VERSION="4.5.1" \
+ENV APP_VERSION="4.5.2" \
     BITNAMI_APP_NAME="mastodon" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="0" \
     LD_LIBRARY_PATH="/opt/bitnami/common/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/node/bin:/opt/bitnami/python/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/redis/bin:/opt/bitnami/mastodon/bin:/opt/bitnami/ruby/bin:$PATH"
 
