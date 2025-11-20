@@ -10,7 +10,8 @@ services:
       # KRaft settings
       - KAFKA_CFG_NODE_ID=0
       - KAFKA_CFG_PROCESS_ROLES=controller,broker
-      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093,2@kafka-2:9093
+      - KAFKA_CFG_CONTROLLER_QUORUM_BOOTSTRAP_SERVERS=kafka-0:9093,kafka-1:9093,kafka-2:9093
+      - KAFKA_INITIAL_CONTROLLERS=0@kafka-0:9093:bcdefghijklmnopqrstuvw,1@kafka-1:9093:cdefghijklmnopqrstuvwx,2@kafka-2:9093:defghijklmnopqrstuvwxy
       - KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv
       # Listeners
       - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
@@ -32,7 +33,8 @@ services:
       # KRaft settings
       - KAFKA_CFG_NODE_ID=1
       - KAFKA_CFG_PROCESS_ROLES=controller,broker
-      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093,2@kafka-2:9093
+      - KAFKA_CFG_CONTROLLER_QUORUM_BOOTSTRAP_SERVERS=kafka-0:9093,kafka-1:9093,kafka-2:9093
+      - KAFKA_INITIAL_CONTROLLERS=0@kafka-0:9093:bcdefghijklmnopqrstuvw,1@kafka-1:9093:cdefghijklmnopqrstuvwx,2@kafka-2:9093:defghijklmnopqrstuvwxy
       - KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv
       # Listeners
       - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
@@ -54,7 +56,8 @@ services:
       # KRaft settings
       - KAFKA_CFG_NODE_ID=2
       - KAFKA_CFG_PROCESS_ROLES=controller,broker
-      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093,2@kafka-2:9093
+      - KAFKA_CFG_CONTROLLER_QUORUM_BOOTSTRAP_SERVERS=kafka-0:9093,kafka-1:9093,kafka-2:9093
+      - KAFKA_INITIAL_CONTROLLERS=0@kafka-0:9093:bcdefghijklmnopqrstuvw,1@kafka-1:9093:cdefghijklmnopqrstuvwx,2@kafka-2:9093:defghijklmnopqrstuvwxy
       - KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv
       # Listeners
       - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093

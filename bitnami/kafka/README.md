@@ -119,7 +119,6 @@ docker run -d --name kafka-server --hostname kafka-server \
     -e KAFKA_CFG_PROCESS_ROLES=controller,broker \
     -e KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093 \
     -e KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT \
-    -e KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-server:9093 \
     -e KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER \
     bitnami/kafka:latest
 ```
@@ -155,7 +154,6 @@ services:
       - KAFKA_CFG_PROCESS_ROLES=controller,broker
       - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
-      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
   myapp:
     image: YOUR_APPLICATION_IMAGE
@@ -258,7 +256,6 @@ services:
       - KAFKA_CFG_PROCESS_ROLES=controller,broker
       - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
-      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
 ```
 
@@ -278,7 +275,6 @@ To do so, add the following environment variables to your docker-compose:
     environment:
       - KAFKA_CFG_NODE_ID=0
       - KAFKA_CFG_PROCESS_ROLES=controller,broker
-      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@<your_host>:9093
 +     - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094
 +     - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
 +     - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT
@@ -371,7 +367,6 @@ services:
       # KRaft
       - KAFKA_CFG_NODE_ID=0
       - KAFKA_CFG_PROCESS_ROLES=controller,broker
-      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
       # Listeners
       - KAFKA_CFG_LISTENERS=SASL_SSL://:9092,CONTROLLER://:9093
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
@@ -491,7 +486,8 @@ In order to authenticate Apache Kafka controller communications with `SASL_SSL`,
 
 An Apache Kafka cluster can easily be setup with the Bitnami Apache Kafka Docker image using the following environment variables:
 
-- `KAFKA_CFG_CONTROLLER_QUORUM_VOTERS`: Comma separated host:port pairs, each corresponding to a Kafka controller connection.
+- `KAFKA_CFG_CONTROLLER_QUORUM_BOOTSTRAP_SERVERS`: List of endpoints to use for bootstrapping the cluster metadata. The endpoints are specified in comma-separated list of {host}:{port} entries.
+- `KAFKA_INITIAL_CONTROLLERS`: Used to initialize a server with the specified dynamic quorum. The argument is a comma-separated list of id@hostname:port:directory. The same values must be used to format all nodes.
 
 #### Step 1: Create the first node for Apache Kafka
 
@@ -504,7 +500,8 @@ docker run --name kafka-0 \
   -e KAFKA_CFG_PROCESS_ROLES=controller,broker \
   -e KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093 \
   -e KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT \
-  -e KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093,2@kafka-2:9093 \
+  -e KAFKA_CFG_CONTROLLER_QUORUM_BOOTSTRAP_SERVERS=kafka-0:9093,kafka-1:9093,kafka-2:9093 \
+  -e KAFKA_INITIAL_CONTROLLERS=0@kafka-0:9093:bcdefghijklmnopqrstuvw,1@kafka-1:9093:cdefghijklmnopqrstuvwx,2@kafka-2:9093:defghijklmnopqrstuvwxy \
   -e KAFKA_CFG_OFFSETS_TOPIC_REPLICATION_FACTOR=3 \
   -e KAFKA_CFG_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=3 \
   -e KAFKA_CFG_TRANSACTION_STATE_LOG_MIN_ISR=2 \
@@ -525,7 +522,8 @@ docker run --name kafka-1 \
   -e KAFKA_CFG_PROCESS_ROLES=controller,broker \
   -e KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093 \
   -e KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT \
-  -e KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093,2@kafka-2:9093 \
+  -e KAFKA_CFG_CONTROLLER_QUORUM_BOOTSTRAP_SERVERS=kafka-0:9093,kafka-1:9093,kafka-2:9093 \
+  -e KAFKA_INITIAL_CONTROLLERS=0@kafka-0:9093:bcdefghijklmnopqrstuvw,1@kafka-1:9093:cdefghijklmnopqrstuvwx,2@kafka-2:9093:defghijklmnopqrstuvwxy \
   -e KAFKA_CFG_OFFSETS_TOPIC_REPLICATION_FACTOR=3 \
   -e KAFKA_CFG_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=3 \
   -e KAFKA_CFG_TRANSACTION_STATE_LOG_MIN_ISR=2 \
@@ -546,7 +544,8 @@ docker run --name kafka-3 \
   -e KAFKA_CFG_PROCESS_ROLES=controller,broker \
   -e KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093 \
   -e KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT \
-  -e KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093,2@kafka-2:9093 \
+  -e KAFKA_CFG_CONTROLLER_QUORUM_BOOTSTRAP_SERVERS=kafka-0:9093,kafka-1:9093,kafka-2:9093 \
+  -e KAFKA_INITIAL_CONTROLLERS=0@kafka-0:9093:bcdefghijklmnopqrstuvw,1@kafka-1:9093:cdefghijklmnopqrstuvwx,2@kafka-2:9093:defghijklmnopqrstuvwxy \
   -e KAFKA_CFG_OFFSETS_TOPIC_REPLICATION_FACTOR=3 \
   -e KAFKA_CFG_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=3 \
   -e KAFKA_CFG_TRANSACTION_STATE_LOG_MIN_ISR=2 \
@@ -593,7 +592,8 @@ services:
       - KAFKA_CFG_PROCESS_ROLES=controller,broker
       - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
-      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093
+      - KAFKA_CFG_CONTROLLER_QUORUM_BOOTSTRAP_SERVERS=kafka-0:9093,kafka-1:9093
+      - KAFKA_INITIAL_CONTROLLERS=0@kafka-0:9093:bcdefghijklmnopqrstuvw,1@kafka-1:9093:cdefghijklmnopqrstuvwx
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
       - KAFKA_CLUSTER_ID=abcdefghijklmnopqrstuv
     volumes:
@@ -605,7 +605,8 @@ services:
       - KAFKA_CFG_PROCESS_ROLES=controller
       - KAFKA_CFG_LISTENERS=CONTROLLER://:9093
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT
-      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093
+      - KAFKA_CFG_CONTROLLER_QUORUM_BOOTSTRAP_SERVERS=kafka-0:9093,kafka-1:9093
+      - KAFKA_INITIAL_CONTROLLERS=0@kafka-0:9093:bcdefghijklmnopqrstuvw,1@kafka-1:9093:cdefghijklmnopqrstuvwx
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
       - KAFKA_CLUSTER_ID=abcdefghijklmnopqrstuv
     volumes:
@@ -615,7 +616,7 @@ services:
     environment:
       - KAFKA_CFG_NODE_ID=2
       - KAFKA_CFG_PROCESS_ROLES=broker
-      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093
+      - KAFKA_CFG_CONTROLLER_QUORUM_BOOTSTRAP_SERVERS=kafka-0:9093,kafka-1:9093
     volumes:
       - kafka_2_data:/bitnami/kafka
 
@@ -844,6 +845,10 @@ This guide covers how to execute the Kafka migration from Zookeeper mode to KRaf
     ```
 
 ## Notable Changes
+
+### 4.1.1-debian-12-r1, 4.1.1-photon-5-r2
+
+Updated the logic to configure contoller.quorum.bootstrap.servers parameter instead of controller.quorum.voters. That affects the initialization and setting the KAFKA_INITIAL_CONTROLLERS env var is now mandatory when building a cluster.
 
 ### 4.0.0-debian-12-r0
 
