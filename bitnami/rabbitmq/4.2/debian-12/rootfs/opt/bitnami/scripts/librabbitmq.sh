@@ -282,10 +282,12 @@ rabbitmq_print_management_configuration() {
     fi
 
     # Allow access to web UI
+    # Sanitize the dots in the username (adding \) to avoid syntax errors
+    local -r sanitized_username="${RABBITMQ_USERNAME//./\\.}"
     if is_boolean_yes "$RABBITMQ_MANAGEMENT_ALLOW_WEB_ACCESS"; then
-        echo "loopback_users.${RABBITMQ_USERNAME} = false"
+        echo "loopback_users.${sanitized_username} = false"
     else
-        echo "loopback_users.${RABBITMQ_USERNAME} = true"
+        echo "loopback_users.${sanitized_username} = true"
     fi
 
     # End config file section
