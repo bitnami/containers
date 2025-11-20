@@ -38,6 +38,38 @@ You can see the equivalence between the different tags by taking a look at the `
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
+## Choosing between the _Standard_ and _Minimal_ image
+
+This asset is available in two flavors: _Standard_ and _Minimal_; designed to address different use cases and operational needs.
+
+### Standard images
+
+The standard images are full-featured, production-ready containers built on top of secure base operating systems. They include:
+
+- The complete runtime and commonly used system tools.
+- A familiar Linux environment (shell, package manager, debugging utilities).
+- Full compatibility with most CI/CD pipelines and existing workloads.
+
+Recommended for:
+
+- Development and testing environments.
+- Workloads requiring package installation or debugging tools.
+- Applications that depend on system utilities or shared libraries.
+
+### Minimal images
+
+The minimal images are optimized, distroless-style containers derived from a stripped-down base. They only ship what’s strictly necessary to run the application; no shell, package manager, or extra libraries. They provide:
+
+- Smaller size: Faster pull and startup times.
+- Reduced attack surface: Fewer components and potential vulnerabilities.
+- Simpler maintenance: Fewer dependencies to patch or update.
+
+Recommended for:
+
+- Production environments prioritizing performance and security.
+- Regulated or security-sensitive workloads
+- Containers built via multi-stage builds (e.g., Golang static binaries).
+
 ## Get this image
 
 The recommended way to get the Bitnami Kaniko Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/kaniko).
