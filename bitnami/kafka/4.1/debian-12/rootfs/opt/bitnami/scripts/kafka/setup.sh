@@ -34,6 +34,7 @@ for dir in "$KAFKA_LOG_DIR" "$KAFKA_CONF_DIR" "$KAFKA_MOUNTED_CONF_DIR" "$KAFKA_
         ensure_dir_exists "$dir"
     fi
 done
+
 # Kafka validation, skipped if server.properties was mounted at either $KAFKA_MOUNTED_CONF_DIR or $KAFKA_CONF_DIR
 [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/server.properties" && ! -f "$KAFKA_CONF_FILE" ]] && kafka_validate
 # Kafka initialization, skipped if server.properties was mounted at $KAFKA_CONF_DIR
