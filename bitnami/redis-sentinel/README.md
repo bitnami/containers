@@ -4,7 +4,7 @@
 
 > Redis&reg; Sentinel provides high availability for Redis. Redis Sentinel also provides other collateral tasks such as monitoring, notifications and acts as a configuration provider for clients.
 
-[Overview of Redis&reg; Sentinel](https://redis.io/)
+[Overview of Redis&reg; Sentinel](https://redis.io)
 Disclaimer: Redis is a registered trademark of Redis Ltd. Any rights therein are reserved to Redis Ltd. Any use by Bitnami is for referential purposes only and does not indicate any sponsorship, endorsement, or affiliation between Redis Ltd.
 
 ## TL;DR
@@ -215,7 +215,7 @@ After changing the configuration, restart your Redis(R) container for changes to
 docker restart redis
 ```
 
-Refer to the [Redis(R) configuration](https://redis.io/topics/config) manual for the complete list of configuration options.
+Refer to the [Redis(R) configuration](https://redis.iotopics/config) manual for the complete list of configuration options.
 
 ### FIPS configuration in Bitnami Secure Images
 
