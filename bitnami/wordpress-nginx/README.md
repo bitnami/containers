@@ -5,6 +5,7 @@
 > WordPress with NGINX combines the most popular blogging application with the power of the NGINX web server.
 
 [Overview of WordPress with NGINX](https://wordpress.org)
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
 

@@ -2,7 +2,7 @@
 
 ## What is ArangoDB Kubernetes Operator?
 
-> kube-arangodb is a Kubernetes Operator that manages ArangoDB clusters, ensuring automatic deployment, scaling, and healing of database instances.
+> kube-arangodb is a Kubernetes Operator that manages ArangoDB clusters, ensuring automatic deployment, scaling, and healing of database instances
 
 [Overview of ArangoDB Kubernetes Operator](https://arangodb.com/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
