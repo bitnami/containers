@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-11-05T23:54:23Z" \
+      org.opencontainers.image.created="2025-11-21T10:44:33Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/gitlab-runner/README.md" \
-      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/gitlab-runner" \
-      org.opencontainers.image.title="gitlab-runner" \
+      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/redis/README.md" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/redis" \
+      org.opencontainers.image.title="redis" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="18.5.0"
+      org.opencontainers.image.version="8.4.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -23,13 +23,13 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl git git-lfs openssh-client procps
+RUN install_packages ca-certificates curl libgcc-s1 libgomp1 libssl3 libstdc++6 procps
 RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "nss-wrapper-1.1.16-0-linux-${OS_ARCH}-debian-12" \
-      "gitlab-runner-18.5.0-1-linux-${OS_ARCH}-debian-12" \
+      "wait-for-port-1.0.10-4-linux-${OS_ARCH}-debian-12" \
+      "redis-8.4.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -44,14 +44,19 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
+RUN ln -s /opt/bitnami/scripts/redis/entrypoint.sh /entrypoint.sh
+RUN ln -s /opt/bitnami/scripts/redis/run.sh /run.sh
+RUN uninstall_packages curl
 
 COPY rootfs /
-RUN mkdir /home/gitlab-runner && chmod -R g+rwX /home/gitlab-runner && ln -s /opt/bitnami/common/bin/dumb-init /usr/bin/dumb-init && ln -s /opt/bitnami/scripts/gitlab-runner/entrypoint.sh /entrypoint
-ENV APP_VERSION="18.5.0" \
-    BITNAMI_APP_NAME="gitlab-runner" \
-    IMAGE_REVISION="1" \
-    PATH="/opt/bitnami/common/bin:/opt/bitnami/gitlab-runner/bin:$PATH"
+RUN /opt/bitnami/scripts/redis/postunpack.sh
+ENV APP_VERSION="8.4.0" \
+    BITNAMI_APP_NAME="redis" \
+    IMAGE_REVISION="0" \
+    PATH="/opt/bitnami/common/bin:/opt/bitnami/redis/bin:$PATH"
+
+EXPOSE 6379
 
 USER 1001
-ENTRYPOINT [ "/usr/bin/dumb-init", "/opt/bitnami/scripts/gitlab-runner/entrypoint.sh" ]
-CMD [ "run", "--user=gitlab-runner", "--working-directory=/home/gitlab-runner" ]
+ENTRYPOINT [ "/opt/bitnami/scripts/redis/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/redis/run.sh" ]
