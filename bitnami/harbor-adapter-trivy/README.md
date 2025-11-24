@@ -4,7 +4,7 @@
 
 > Harbor Adapter for Trivy translates the Harbor API into Trivy API calls and allows Harbor to provide vulnerability reports on images through Trivy as part of its vulnerability scan.
 
-[Overview of Harbor Adapter Trivy](https://github.com/aquasecurity/harbor-scanner-trivy)
+[Overview of Harbor Adapter Trivy](https://goharbor.io/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
@@ -108,7 +108,7 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 
 Harbor Adapter Trivy is a component of the Harbor application. In order to get the Harbor application running on Kubernetes we encourage you to check the [bitnami/harbor Helm chart](https://github.com/bitnami/charts/tree/master/bitnami/harbor) and configure it using the options exposed in the values.yaml file.
 
-For further information about the specific component itself, please refer to the [source repository documentation](https://github.com/aquasecurity/harbor-scanner-trivy#configuration).
+For further information about the specific component itself, please refer to the [source repository documentation](https://goharbor.io/#configuration).
 
 ### Environment variables
 
