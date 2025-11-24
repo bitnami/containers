@@ -4,7 +4,8 @@
 
 > Harbor Job Service is one of the main components of Harbor: a cloud-native registry that stores, signs, and scans content. This service is used for image replication.
 
-[Overview of Harbor Job Service](https://github.com/goharbor/harbor)
+[Overview of Harbor Job Service](https://goharbor.io/)
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
 
