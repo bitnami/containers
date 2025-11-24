@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-11-06T03:43:51Z" \
+      org.opencontainers.image.created="2025-11-24T15:51:32Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/harbor-registryctl/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/harbor-registryctl" \
       org.opencontainers.image.title="harbor-registryctl" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="2.14.0"
+      org.opencontainers.image.version="2.14.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,9 +28,9 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "yq-4.48.1-2-linux-${OS_ARCH}-debian-12" \
-      "harbor-registry-2.14.0-3-linux-${OS_ARCH}-debian-12" \
-      "harbor-registryctl-2.14.0-5-linux-${OS_ARCH}-debian-12" \
+      "yq-4.49.1-0-linux-${OS_ARCH}-debian-12" \
+      "harbor-registry-2.14.1-0-linux-${OS_ARCH}-debian-12" \
+      "harbor-registryctl-2.14.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -49,9 +49,9 @@ RUN uninstall_packages curl
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-registryctl/postunpack.sh
-ENV APP_VERSION="2.14.0" \
+ENV APP_VERSION="2.14.1" \
     BITNAMI_APP_NAME="harbor-registryctl" \
-    IMAGE_REVISION="6" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/harbor-registry/bin:/opt/bitnami/harbor-registryctl/bin:$PATH"
 
 VOLUME [ "/etc/registry", "/etc/registryctl", "/storage", "/var/lib/registry" ]

@@ -4,7 +4,8 @@
 
 > Harbor Registryctl is one of the main components of Harbor. Combined with the Harbor Registry, it is responsible for storing Docker images and processing pull/push operations.
 
-[Overview of Harbor Registryctl](https://github.com/goharbor/harbor)
+[Overview of Harbor Registryctl](https://goharbor.io/)
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
 
