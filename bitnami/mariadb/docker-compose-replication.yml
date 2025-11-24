@@ -3,7 +3,7 @@
 
 services:
   mariadb-master:
-    image: docker.io/bitnami/mariadb:12.0
+    image: docker.io/bitnami/mariadb:12.1
     ports:
       - '3306'
     volumes:
@@ -23,7 +23,7 @@ services:
       retries: 6
 
   mariadb-slave:
-    image: docker.io/bitnami/mariadb:12.0
+    image: docker.io/bitnami/mariadb:12.1
     ports:
       - '3306'
     depends_on:
