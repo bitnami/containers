@@ -4,7 +4,8 @@
 
 > Harbor Exporter is one of the components of Harbor: a cloud-native registry that stores, signs, and scans content. This component expose Harbor metrics in Prometheus format.
 
-[Overview of Harbor Exporter](https://github.com/goharbor/harbor)
+[Overview of Harbor Exporter](https://goharbor.io/)
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
 
@@ -51,7 +52,7 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 
 Harbor Exporter is a component of the Harbor application. In order to get the Harbor application running on Kubernetes we encourage you to check the [bitnami/harbor Helm chart](https://github.com/bitnami/charts/tree/master/bitnami/harbor) and configure it using the options exposed in the values.yaml file.
 
-For further information about the specific component itself, please refer to the [source repository documentation](https://github.com/goharbor/harbor/tree/main/docs
+For further information about the specific component itself, please refer to the [source repository documentation](https://goharbor.io//tree/main/docs
 
 ### Environment variables
 
