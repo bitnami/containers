@@ -2,7 +2,7 @@
 
 ## What is ArangoDB?
 
-> ArangoDB is a scalable multi-model database supporting graph, document, and key-value data models. It offers high performance, flexible data modeling, and a powerful query language.
+> ArangoDB is a scalable multi-model database supporting graph, document, and key-value data models. It offers high performance, flexible data modeling, and a powerful query language
 
 [Overview of ArangoDB](https://arangodb.com/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
