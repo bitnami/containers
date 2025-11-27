@@ -1,0 +1,25 @@
+#!/bin/bash
+# Copyright 2025 SolDevelo
+# SPDX-License-Identifier: Apache-2.0
+#
+# Testcontainers-compatible entrypoint wrapper
+# This script provides compatibility with the apache/kafka Docker image contract
+
+set -e
+
+echo "/etc/kafka/docker/run invoked"
+
+# Set default environment variables for Testcontainers compatibility
+# These can be overridden by passing environment variables to the container
+export KAFKA_CFG_NODE_ID="${KAFKA_CFG_NODE_ID:-1}"
+export KAFKA_CFG_PROCESS_ROLES="${KAFKA_CFG_PROCESS_ROLES:-broker,controller}"
+export KAFKA_CFG_CONTROLLER_QUORUM_VOTERS="${KAFKA_CFG_CONTROLLER_QUORUM_VOTERS:-1@localhost:9093}"
+export KAFKA_CFG_LISTENERS="${KAFKA_CFG_LISTENERS:-PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093}"
+export KAFKA_CFG_ADVERTISED_LISTENERS="${KAFKA_CFG_ADVERTISED_LISTENERS:-PLAINTEXT://localhost:9092}"
+export KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP="${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT}"
+export KAFKA_CFG_CONTROLLER_LISTENER_NAMES="${KAFKA_CFG_CONTROLLER_LISTENER_NAMES:-CONTROLLER}"
+export KAFKA_CFG_INTER_BROKER_LISTENER_NAME="${KAFKA_CFG_INTER_BROKER_LISTENER_NAME:-PLAINTEXT}"
+
+# Delegate to the actual Kafka entrypoint
+exec /opt/bitnami/scripts/kafka/entrypoint.sh /opt/bitnami/scripts/kafka/run.sh "$@"
+
