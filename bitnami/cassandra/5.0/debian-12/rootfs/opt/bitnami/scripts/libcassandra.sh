@@ -61,18 +61,26 @@ cassandra_setup_ports() {
 cassandra_setup_client_ssl() {
     info "Configuring client for SSL"
 
-    # The key is store in a jks keystore and needs to be converted to pks12 to be extracted
-    keytool -importkeystore -srckeystore "${DB_KEYSTORE_LOCATION}" \
-        -destkeystore "${DB_TMP_P12_FILE}" \
-        -deststoretype PKCS12 \
-        -srcstorepass "${DB_KEYSTORE_PASSWORD}" \
-        -deststorepass "${DB_KEYSTORE_PASSWORD}"
-
     mkdir -p "$(dirname "${DB_SSL_CERT_FILE}")"
 
-    openssl pkcs12 -in "${DB_TMP_P12_FILE}" -nokeys \
-        -out "${DB_SSL_CERT_FILE}" -passin pass:"${DB_KEYSTORE_PASSWORD}"
-    rm "${DB_TMP_P12_FILE}"
+    if [[ "${JAVA_FIPS_MODE:-}" == "restricted" ]]; then
+        keytool -importkeystore -srckeystore "${DB_KEYSTORE_LOCATION}" \
+            -destkeystore "${DB_SSL_CERT_FILE}" \
+            -storetype BCFKS \
+            -srcstorepass "${DB_KEYSTORE_PASSWORD}" \
+            -deststorepass "${DB_KEYSTORE_PASSWORD}"
+    else
+         keytool -importkeystore -srckeystore "${DB_KEYSTORE_LOCATION}" \
+             -destkeystore "${DB_TMP_P12_FILE}" \
+             -deststoretype PKCS12 \
+             -srcstorepass "${DB_KEYSTORE_PASSWORD}" \
+             -deststorepass "${DB_KEYSTORE_PASSWORD}"
+
+         openssl pkcs12 -in "${DB_TMP_P12_FILE}" -nokeys \
+             -out "${DB_SSL_CERT_FILE}" -passin pass:"${DB_KEYSTORE_PASSWORD}"
+
+         rm "${DB_TMP_P12_FILE}"
+    fi
 }
 
 ########################
@@ -104,6 +112,9 @@ cassandra_configure_certificates() {
     cassandra_yaml_set "keystore_password" "$DB_KEYSTORE_PASSWORD"
     cassandra_yaml_set "truststore" "$DB_TRUSTSTORE_LOCATION"
     cassandra_yaml_set "truststore_password" "$DB_TRUSTSTORE_PASSWORD"
+    if [[ "${JAVA_FIPS_MODE:-}" == "restricted" ]]; then
+        cassandra_yaml_set "store_type" "BCFKS"
+    fi
 }
 
 ########################
