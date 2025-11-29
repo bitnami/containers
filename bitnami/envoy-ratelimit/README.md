@@ -2,7 +2,7 @@
 
 ## What is Envoy Rate Limit?
 
-> Envoy Rate Limit is a Go/gRPC service enabling generic rate-limiting for apps via Redis-backed decisions based on domain and descriptors
+> Envoy Rate Limit is a Go/gRPC service enabling generic rate-limiting for apps via Redis-backed decisions based on domain and descriptors.
 
 [Overview of Envoy Rate Limit](https://github.com/envoyproxy/ratelimit)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
