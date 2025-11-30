@@ -2,7 +2,7 @@
 
 ## What is Valkey Sentinel?
 
-> Valkey Sentinel provides high availability for Valkey. Valkey Sentinel also provides other collateral tasks such as monitoring, notifications and acts as a configuration provider for clients.
+> Valkey is a high-performance data structure server that primarily serves key/value workloads. It supports a wide range of native structures and an extensible plugin system for adding new data structures and access patterns.
 
 [Overview of Valkey Sentinel](https://valkey.io/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
