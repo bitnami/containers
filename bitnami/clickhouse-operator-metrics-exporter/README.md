@@ -1,10 +1,10 @@
-# Bitnami Secure Image for ClickHouse Op Metrics exporter
+# Bitnami Secure Image for ClickHouse Operator Metrics Exporter
 
-## What is ClickHouse Op Metrics exporter?
+## What is ClickHouse Operator Metrics Exporter?
 
 > ClickHouse Operator Metrics exporter gathers ClickHouse Operator metrics for Prometheus consumption.
 
-[Overview of ClickHouse Op Metrics exporter](https://altinity.com/kubernetes-operator/)
+[Overview of ClickHouse Operator Metrics Exporter](https://altinity.com/kubernetes-operator/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
@@ -40,7 +40,7 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 
 ## Get this image
 
-The recommended way to get the Bitnami ClickHouse Op Metrics exporter Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/clickhouse-operator-metrics-exporter).
+The recommended way to get the Bitnami ClickHouse Operator Metrics Exporter Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/clickhouse-operator-metrics-exporter).
 
 ```console
 docker pull bitnami/clickhouse-operator-metrics-exporter:latest
@@ -74,7 +74,7 @@ To run commands inside this container you can use `docker run`, for example to e
 docker run --rm --name clickhouse-operator-metrics-exporter bitnami/clickhouse-operator-metrics-exporter:latest --  --help
 ```
 
-Check the [official ClickHouse Op Metrics exporter documentation](https://altinity.com/kubernetes-operator/) for more information.
+Check the [official ClickHouse Operator Metrics Exporter documentation](https://altinity.com/kubernetes-operator/) for more information.
 
 ## Contributing
 
