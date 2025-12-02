@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-11-05T22:36:53Z" \
+      org.opencontainers.image.created="2025-12-02T19:34:46Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/dex/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/dex" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "dex-2.44.0-6-linux-${OS_ARCH}-debian-12" \
+      "dex-2.44.0-8-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -47,7 +47,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 ENV APP_VERSION="2.44.0" \
     BITNAMI_APP_NAME="dex" \
     DEX_FRONTEND_DIR="/opt/bitnami/dex/web" \
-    IMAGE_REVISION="6" \
+    IMAGE_REVISION="7" \
     PATH="/opt/bitnami/dex/bin:$PATH"
 
 USER 1001
