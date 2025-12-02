@@ -2,7 +2,7 @@
 
 ## What is cAdvisor?
 
-> cAdvisor (Container Advisor) is an open-source tool by Google for monitoring containers, collecting metrics like CPU, memory, and network usage.
+> cAdvisor (Container Advisor) is an open-source tool by Google for monitoring containers, collecting metrics like CPU, memory, and network usage
 
 [Overview of cAdvisor](https://github.com/google/cadvisor)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
