@@ -79,39 +79,40 @@ Check the [official ActiveMQ documentation](https://activemq.apache.org/ for mor
 
 #### Customizable environment variables
 
-| Name                             | Description                     | Default Value |
-|----------------------------------|---------------------------------|---------------|
-| `ACTIVEMQ_MQTT_PORT_NUMBER`      | ActiveMQ MQTT port number.      | `1883`        |
-| `ACTIVEMQ_AQMQ_PORT_NUMBER`      | ActiveMQ AQMQ port number.      | `5672`        |
-| `ACTIVEMQ_HTTP_PORT_NUMBER`      | ActiveMQ HTTP port number.      | `8161`        |
-| `ACTIVEMQ_STOMP_PORT_NUMBER`     | ActiveMQ STOMP port number.     | `61613`       |
-| `ACTIVEMQ_WEBSOCKET_PORT_NUMBER` | ActiveMQ WebSocket port number. | `61614`       |
-| `ACTIVEMQ_OPENWIRE_PORT_NUMBER`  | ActiveMQ OpenWire port number.  | `61616`       |
-| `ACTIVEMQ_USERNAME`              | ActiveMQ username.              | `admin`       |
-| `ACTIVEMQ_PASSWORD`              | ActiveMQ password.              | `password`    |
-| `ACTIVEMQ_SECRET`                | ActiveMQ secret for encryption. | `bitnami`     |
+| Name                             | Description                                                                                   | Default Value                 |
+|----------------------------------|-----------------------------------------------------------------------------------------------|-------------------------------|
+| `ACTIVEMQ_MOUNTED_CONF_DIR`      | Directory for including custom configuration files (that override the default generated ones) | `${ACTIVEMQ_VOLUME_DIR}/conf` |
+| `ACTIVEMQ_MQTT_PORT_NUMBER`      | ActiveMQ MQTT port number.                                                                    | `1883`                        |
+| `ACTIVEMQ_AQMQ_PORT_NUMBER`      | ActiveMQ AQMQ port number.                                                                    | `5672`                        |
+| `ACTIVEMQ_HTTP_PORT_NUMBER`      | ActiveMQ HTTP port number.                                                                    | `8161`                        |
+| `ACTIVEMQ_STOMP_PORT_NUMBER`     | ActiveMQ STOMP port number.                                                                   | `61613`                       |
+| `ACTIVEMQ_WEBSOCKET_PORT_NUMBER` | ActiveMQ WebSocket port number.                                                               | `61614`                       |
+| `ACTIVEMQ_OPENWIRE_PORT_NUMBER`  | ActiveMQ OpenWire port number.                                                                | `61616`                       |
+| `ACTIVEMQ_USERNAME`              | ActiveMQ username.                                                                            | `admin`                       |
+| `ACTIVEMQ_PASSWORD`              | ActiveMQ password.                                                                            | `password`                    |
+| `ACTIVEMQ_SECRET`                | ActiveMQ secret for encryption.                                                               | `bitnami`                     |
 
 #### Read-only environment variables
 
-| Name                       | Description                                                   | Value                               |
-|----------------------------|---------------------------------------------------------------|-------------------------------------|
-| `ACTIVEMQ_BASE_DIR`        | ActiveMQ installation directory.                              | `${BITNAMI_ROOT_DIR}/activemq`      |
-| `ACTIVEMQ_BIN_DIR`         | ActiveMQ directory for binary files.                          | `${ACTIVEMQ_BASE_DIR}/bin`          |
-| `ACTIVEMQ_DATA_DIR`        | ActiveMQ configuration directory.                             | `${ACTIVEMQ_BASE_DIR}/data`         |
-| `ACTIVEMQ_CONF_DIR`        | ActiveMQ configuration directory.                             | `${ACTIVEMQ_BASE_DIR}/conf`         |
-| `ACTIVEMQ_LOGS_DIR`        | Directory where ActiveMQ logs are stored.                     | `${ACTIVEMQ_BASE_DIR}/logs`         |
-| `ACTIVEMQ_TMP_DIR`         | Directory where ActiveMQ temporary files are stored.          | `${ACTIVEMQ_BASE_DIR}/tmp`          |
-| `ACTIVEMQ_CONF_FILE`       | ActiveMQ configuration file.                                  | `${ACTIVEMQ_CONF_DIR}/activemq.xml` |
-| `ACTIVEMQ_LOG_FILE`        | Path to the log file for ActiveMQ.                            | `${ACTIVEMQ_LOGS_DIR}/activemq.log` |
-| `ACTIVEMQ_PID_FILE`        | Path to the PID file for ActiveMQ.                            | `${ACTIVEMQ_TMP_DIR}/activemq.pid`  |
-| `ACTIVEMQ_HOME`            | ActiveMQ home directory.                                      | `$ACTIVEMQ_BASE_DIR`                |
-| `ACTIVEMQ_DAEMON_USER`     | ActiveMQ system user.                                         | `activemq`                          |
-| `ACTIVEMQ_DAEMON_GROUP`    | ActiveMQ system group.                                        | `activemq`                          |
-| `ACTIVEMQ_DATA_TO_PERSIST` | Files to persist relatives to ActiveMQ installation directory | `data conf`                         |
-| `ACTIVEMQ_VOLUME_DIR`      | Persistence base directory.                                   | `${BITNAMI_VOLUME_DIR}/activemq`    |
-| `JAVA_HOME`                | Java installation folder.                                     | `${BITNAMI_ROOT_DIR}/java`          |
-| `ACTIVEMQ_PIDFILE`         | ActiveMQ output destination                                   | `${ACTIVEMQ_PID_FILE}`              |
-| `ACTIVEMQ_OUT`             | ActiveMQ output destination                                   | `${ACTIVEMQ_LOG_FILE}`              |
+| Name                        | Description                                          | Value                               |
+|-----------------------------|------------------------------------------------------|-------------------------------------|
+| `ACTIVEMQ_BASE_DIR`         | ActiveMQ installation directory.                     | `${BITNAMI_ROOT_DIR}/activemq`      |
+| `ACTIVEMQ_BIN_DIR`          | ActiveMQ directory for binary files.                 | `${ACTIVEMQ_BASE_DIR}/bin`          |
+| `ACTIVEMQ_VOLUME_DIR`       | Persistence base directory.                          | `${BITNAMI_VOLUME_DIR}/activemq`    |
+| `ACTIVEMQ_DATA_DIR`         | ActiveMQ configuration directory.                    | `${ACTIVEMQ_VOLUME_DIR}/data`       |
+| `ACTIVEMQ_CONF_DIR`         | ActiveMQ configuration directory.                    | `${ACTIVEMQ_BASE_DIR}/conf`         |
+| `ACTIVEMQ_DEFAULT_CONF_DIR` | ActiveMQ default configuration directory.            | `${ACTIVEMQ_BASE_DIR}/conf.default` |
+| `ACTIVEMQ_LOGS_DIR`         | Directory where ActiveMQ logs are stored.            | `${ACTIVEMQ_BASE_DIR}/logs`         |
+| `ACTIVEMQ_TMP_DIR`          | Directory where ActiveMQ temporary files are stored. | `${ACTIVEMQ_BASE_DIR}/tmp`          |
+| `ACTIVEMQ_CONF_FILE`        | ActiveMQ configuration file.                         | `${ACTIVEMQ_CONF_DIR}/activemq.xml` |
+| `ACTIVEMQ_LOG_FILE`         | Path to the log file for ActiveMQ.                   | `${ACTIVEMQ_LOGS_DIR}/activemq.log` |
+| `ACTIVEMQ_PID_FILE`         | Path to the PID file for ActiveMQ.                   | `${ACTIVEMQ_TMP_DIR}/activemq.pid`  |
+| `ACTIVEMQ_HOME`             | ActiveMQ home directory.                             | `$ACTIVEMQ_BASE_DIR`                |
+| `ACTIVEMQ_DAEMON_USER`      | ActiveMQ system user.                                | `activemq`                          |
+| `ACTIVEMQ_DAEMON_GROUP`     | ActiveMQ system group.                               | `activemq`                          |
+| `JAVA_HOME`                 | Java installation folder.                            | `${BITNAMI_ROOT_DIR}/java`          |
+| `ACTIVEMQ_PIDFILE`          | ActiveMQ output destination                          | `${ACTIVEMQ_PID_FILE}`              |
+| `ACTIVEMQ_OUT`              | ActiveMQ output destination                          | `${ACTIVEMQ_LOG_FILE}`              |
 
 ## Contributing
 

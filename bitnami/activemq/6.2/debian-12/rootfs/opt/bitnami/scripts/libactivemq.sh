@@ -10,7 +10,6 @@
 . /opt/bitnami/scripts/libfile.sh
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libos.sh
-. /opt/bitnami/scripts/libpersistence.sh
 . /opt/bitnami/scripts/libservice.sh
 . /opt/bitnami/scripts/libvalidations.sh
 
@@ -139,21 +138,19 @@ activemq_initialize() {
     # Configuring permissions for data folder
     am_i_root && configure_permissions_ownership "$ACTIVEMQ_DATA_DIR" -u "$ACTIVEMQ_DAEMON_USER" -g "$ACTIVEMQ_DAEMON_GROUP" -d "755" -f "644"
 
-    # Check if ActiveMQ has already been initialized and persisted in a previous run
-    local -r app_name="activemq"
-    if ! is_app_initialized "$app_name"; then
+    if ! is_mounted_dir_empty "$ACTIVEMQ_MOUNTED_CONF_DIR"; then
+        cp -Lr "$ACTIVEMQ_MOUNTED_CONF_DIR"/* "$ACTIVEMQ_CONF_DIR"
+    fi
+
+    if [[ -f "${ACTIVEMQ_MOUNTED_CONF_DIR}/activemq.xml" ]]; then
+        info "ActiveMQ configuration ${ACTIVEMQ_MOUNTED_CONF_DIR}/activemq.xml detected!"
+        info "Deploying ActiveMQ with persisted data"
+    else
         info "Creating config file"
         # File obtained from http://svn.apache.org/repos/asf/activemq/trunk/assembly/src/release/conf/activemq.xml
         render-template "${BITNAMI_ROOT_DIR}/scripts/activemq/files/activemq.xml.tpl" > "$ACTIVEMQ_CONF_FILE"
 
         info "Configuring the admin password"
         activemq_set_password "$ACTIVEMQ_PASSWORD" "$ACTIVEMQ_SECRET"
-
-        # Ensure the ActiveMQ base directory exists and has proper permissions
-        info "Persisting ActiveMQ installation"
-        persist_app "$app_name" "$ACTIVEMQ_DATA_TO_PERSIST"
-    else
-        info "Restoring persisted ActiveMQ installation"
-        restore_persisted_app "$app_name" "$ACTIVEMQ_DATA_TO_PERSIST"
     fi
 }

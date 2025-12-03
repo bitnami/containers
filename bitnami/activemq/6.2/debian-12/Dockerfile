@@ -8,7 +8,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-12-03T13:23:10Z" \
+      org.opencontainers.image.created="2025-12-03T17:28:38Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/activemq/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/activemq" \
@@ -24,14 +24,14 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages acl ca-certificates curl procps zlib1g
+RUN install_packages ca-certificates curl procps zlib1g
 RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "render-template-1.0.9-160-linux-${OS_ARCH}-debian-12" \
       "java-21.0.9-15-0-linux-${OS_ARCH}-debian-12" \
-      "activemq-6.2.0-0-linux-${OS_ARCH}-debian-12" \
+      "activemq-6.2.0-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -52,7 +52,7 @@ RUN /opt/bitnami/scripts/activemq/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="6.2.0" \
     BITNAMI_APP_NAME="activemq" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:/opt/bitnami/activemq/bin:$PATH"
 
