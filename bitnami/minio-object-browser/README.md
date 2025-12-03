@@ -1,11 +1,11 @@
-# Bitnami Console based on MinIO&reg;
+# Bitnami Object Storage Console based on MinIO&reg;
 
-## What is Bitnami Console based on MinIO&reg;?
+## What is Bitnami Object Storage Console based on MinIO&reg;?
 
-> MinIO&reg; Console is a UI for MinIO&reg;.
+> MinIO&reg; Console is a simple UI for MinIO&reg;
 
-[Overview of Bitnami Console based on MinIO&reg;](https://min.io/)
-Disclaimer: All software products, projects and company names are trademark(TM) or registered(R) trademarks of their respective holders, and use of them does not imply any affiliation or endorsement. This software is licensed to you subject to one or more open source licenses and VMware provides the software on an AS-IS basis. MinIO(R) is a registered trademark of the MinIO Inc. in the US and other countries. Bitnami is not affiliated, associated, authorized, endorsed by, or in any way officially connected with MinIO Inc.
+[Overview of Bitnami Object Storage Console based on MinIO&reg;](https://min.io/)
+All software products, projects and company names are trademark(TM) or registered(R) trademarks of their respective holders, and use of them does not imply any affiliation or endorsement. This software is licensed to you subject to one or more open source licenses and VMware provides the software on an AS-IS basis. MinIO(R) is a registered trademark of the MinIO, Inc in the US and other countries. Bitnami is not affiliated, associated, authorized, endorsed by, or in any way officially connected with MinIO Inc. MinIO(R) is licensed under GNU AGPL v3.0.
 
 ## TL;DR
 
@@ -44,7 +44,7 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 
 ## Get this image
 
-The recommended way to get the Bitnami Bitnami Console based on MinIO&reg; Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/minio-object-browser).
+The recommended way to get the Bitnami Bitnami Object Storage Console based on MinIO&reg; Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/minio-object-browser).
 
 ```console
 docker pull bitnami/minio-object-browser:latest
@@ -74,7 +74,7 @@ To run commands inside this container you can use `docker run`, for example to e
 docker run --rm --name minio-object-browser bitnami/minio-object-browser:latest help
 ```
 
-Check the [official Bitnami Console based on MinIO&reg; documentation](https://github.com/minio/object-browser/blob/master/README.md) for more information about configuration options.
+Check the [official Bitnami Object Storage Console based on MinIO&reg; documentation](https://github.com/minio/object-browser/blob/master/README.md) for more information about configuration options.
 
 ## Contributing
 
