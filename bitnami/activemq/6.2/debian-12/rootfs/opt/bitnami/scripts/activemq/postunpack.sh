@@ -34,10 +34,14 @@ replace_in_file "${ACTIVEMQ_CONF_DIR}/credentials-enc.properties" "activemq.user
 replace_in_file "${ACTIVEMQ_CONF_DIR}/credentials-enc.properties" "guest.*" " "
 
 # Configuring permissions for tmp and logs folders
-for dir in "$ACTIVEMQ_TMP_DIR" "$ACTIVEMQ_LOGS_DIR"; do
+for dir in "$ACTIVEMQ_TMP_DIR" "$ACTIVEMQ_LOGS_DIR" "$ACTIVEMQ_DEFAULT_CONF_DIR"; do
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
 done
 
 # Set correct owner in installation directory
 chown -R "1001:root" "$ACTIVEMQ_BASE_DIR"
+
+# Copy all initially generated configuration files to the default directory
+# (this is to avoid breaking when entrypoint is being overridden)
+cp -r "${ACTIVEMQ_CONF_DIR}/"* "$ACTIVEMQ_DEFAULT_CONF_DIR"

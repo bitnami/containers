@@ -24,6 +24,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
 activemq_env_vars=(
+    ACTIVEMQ_MOUNTED_CONF_DIR
     ACTIVEMQ_MQTT_PORT_NUMBER
     ACTIVEMQ_AQMQ_PORT_NUMBER
     ACTIVEMQ_HTTP_PORT_NUMBER
@@ -50,8 +51,11 @@ unset activemq_env_vars
 # Paths
 export ACTIVEMQ_BASE_DIR="${BITNAMI_ROOT_DIR}/activemq"
 export ACTIVEMQ_BIN_DIR="${ACTIVEMQ_BASE_DIR}/bin"
-export ACTIVEMQ_DATA_DIR="${ACTIVEMQ_BASE_DIR}/data"
+export ACTIVEMQ_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/activemq"
+export ACTIVEMQ_DATA_DIR="${ACTIVEMQ_VOLUME_DIR}/data"
 export ACTIVEMQ_CONF_DIR="${ACTIVEMQ_BASE_DIR}/conf"
+export ACTIVEMQ_DEFAULT_CONF_DIR="${ACTIVEMQ_BASE_DIR}/conf.default"
+export ACTIVEMQ_MOUNTED_CONF_DIR="${ACTIVEMQ_MOUNTED_CONF_DIR:-${ACTIVEMQ_VOLUME_DIR}/conf}"
 export ACTIVEMQ_LOGS_DIR="${ACTIVEMQ_BASE_DIR}/logs"
 export ACTIVEMQ_TMP_DIR="${ACTIVEMQ_BASE_DIR}/tmp"
 export ACTIVEMQ_CONF_FILE="${ACTIVEMQ_CONF_DIR}/activemq.xml"
@@ -73,10 +77,6 @@ export ACTIVEMQ_OPENWIRE_PORT_NUMBER="${ACTIVEMQ_OPENWIRE_PORT_NUMBER:-61616}"
 export ACTIVEMQ_USERNAME="${ACTIVEMQ_USERNAME:-admin}"
 export ACTIVEMQ_PASSWORD="${ACTIVEMQ_PASSWORD:-password}"
 export ACTIVEMQ_SECRET="${ACTIVEMQ_SECRET:-bitnami}"
-
-# ActiveMQ persistence configuration
-export ACTIVEMQ_DATA_TO_PERSIST="data conf"
-export ACTIVEMQ_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/activemq"
 
 # Default JVM configuration
 export JAVA_HOME="${BITNAMI_ROOT_DIR}/java"
