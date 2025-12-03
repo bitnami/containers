@@ -2,7 +2,7 @@
 
 ## What is KServe?
 
-> KServe is a serverless platform on Kubernetes for scalable ML model inference, supporting frameworks like TensorFlow, PyTorch, and more.
+> KServe is a serverless platform on Kubernetes for scalable ML model inference, supporting frameworks like TensorFlow, PyTorch, and others
 
 [Overview of KServe](https://kserve.github.io/website)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
