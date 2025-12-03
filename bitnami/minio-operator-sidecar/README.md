@@ -1,11 +1,11 @@
-# Storage based on MinIO&reg; Sidecar
+# Bitnami Object Storage Sidecar based on MinIO&reg;
 
-## What is Storage based on MinIO&reg; Sidecar?
+## What is Bitnami Object Storage Sidecar based on MinIO&reg;?
 
 > MinIO Operator is a Kubernetes-native tool for deploying and managing high-performance, S3-compatible MinIO object storage across hybrid cloud infrastructures.
 
-[Overview of Storage based on MinIO&reg; Sidecar](https://min.io/)
-Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+[Overview of Bitnami Object Storage Sidecar based on MinIO&reg;](https://min.io/)
+All software products, projects and company names are trademark(TM) or registered(R) trademarks of their respective holders, and use of them does not imply any affiliation or endorsement. This software is licensed to you subject to one or more open source licenses and VMware provides the software on an AS-IS basis. MinIO(R) is a registered trademark of the MinIO, Inc in the US and other countries. Bitnami is not affiliated, associated, authorized, endorsed by, or in any way officially connected with MinIO Inc. MinIO(R) is licensed under GNU AGPL v3.0.
 
 ## TL;DR
 
@@ -40,7 +40,7 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 
 ## Get this image
 
-The recommended way to get the Bitnami Storage based on MinIO&reg; Sidecar Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/minio-operator-sidecar).
+The recommended way to get the Bitnami Bitnami Object Storage Sidecar based on MinIO&reg; Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/minio-operator-sidecar).
 
 ```console
 docker pull bitnami/minio-operator-sidecar:latest
@@ -74,7 +74,7 @@ To run commands inside this container you can use `docker run`, for example to e
 docker run --rm --name minio-operator-sidecar bitnami/minio-operator-sidecar:latest --  --help
 ```
 
-Check the [official Storage based on MinIO&reg; Sidecar documentation](https://min.io/) for more information.
+Check the [official Bitnami Object Storage Sidecar based on MinIO&reg; documentation](https://min.io/) for more information.
 
 ## Contributing
 
