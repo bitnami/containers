@@ -5,6 +5,7 @@
 > Kubeseal is a CLI utility that uses asymmetric cryptography to encrypt secrets that only the Sealed Secrets controller can decrypt.
 
 [Overview of Kubeseal (Sealed Secrets)](https://github.com/bitnami-labs/sealed-secrets)
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
 
