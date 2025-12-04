@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-12-03T00:14:15Z" \
+      org.opencontainers.image.created="2025-12-04T15:42:10Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/metallb-speaker/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/metallb-speaker" \
       org.opencontainers.image.title="metallb-speaker" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="0.15.2"
+      org.opencontainers.image.version="0.15.3"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "metallb-speaker-0.15.2-10-linux-${OS_ARCH}-debian-12" \
+      "metallb-speaker-0.15.3-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -57,9 +57,9 @@ RUN curl -sLO "https://deb.frrouting.org/frr/pool/frr-9.1/f/frr/frr_9.1.3-0~deb1
     install_packages "./frr_9.1.3-0~deb12u1_${OS_ARCH}.deb" "./frr-pythontools_9.1.3-0~deb12u1_all.deb" "./libyang2_2.1.128-2~deb12u1_${OS_ARCH}.deb" && \
     rm frr_9.1.3-0~deb12u1_${OS_ARCH}.deb frr-pythontools_9.1.3-0~deb12u1_all.deb libyang2_2.1.128-2~deb12u1_${OS_ARCH}.deb
 
-ENV APP_VERSION="0.15.2" \
+ENV APP_VERSION="0.15.3" \
     BITNAMI_APP_NAME="metallb-speaker" \
-    IMAGE_REVISION="13" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/metallb-speaker/bin:$PATH"
 
 USER 1001
