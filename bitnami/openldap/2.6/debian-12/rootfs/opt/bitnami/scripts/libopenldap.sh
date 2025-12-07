@@ -226,6 +226,31 @@ is_ldap_not_running() {
     ! is_ldap_running
 }
 
+#########################
+# Wait for OpenLDAP to become ready
+# Arguments:
+#   None
+# Returns:
+#   Whether slapd is ready for queries
+########################
+is_ldap_ready() {
+    local attempts=5
+    local delay=5
+
+    info "Waiting for LDAP to be ready"
+    for ((i=1; i<=attempts; i++)); do
+        sleep "$delay"
+
+        if debug_execute ldapsearch -Y EXTERNAL -H "ldapi:///" -b "cn=config" > /dev/null 2>&1; then
+            info "LDAP is ready."
+            return 0
+        fi
+        done
+
+    info "LDAP is not ready after ${attempts} attempts."
+    return 1
+}
+
 ########################
 # Start OpenLDAP server in background
 # Arguments:
@@ -644,7 +669,11 @@ ldap_initialize() {
         # Create OpenLDAP online configuration
         ldap_create_online_configuration
         ldap_start_bg
-        ldap_admin_credentials
+        if is_ldap_ready; then
+            ldap_admin_credentials
+        else
+            exit 1
+        fi
         if ! is_boolean_yes "$LDAP_ALLOW_ANON_BINDING"; then
             ldap_disable_anon_binding
         fi
