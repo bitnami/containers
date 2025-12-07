@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-11-11T14:31:13Z" \
+      org.opencontainers.image.created="2025-12-05T16:18:36Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/kibana/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kibana" \
       org.opencontainers.image.title="kibana" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="9.2.1"
+      org.opencontainers.image.version="9.2.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -24,13 +24,13 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libexpat1 libgcc-s1 libnss3 libstdc++6 procps
+RUN install_packages ca-certificates curl libexpat1 libgcc-s1 libnspr4 libnss3 libstdc++6 procps
 RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "yq-4.48.1-2-linux-${OS_ARCH}-debian-12" \
-      "kibana-9.2.1-0-linux-${OS_ARCH}-debian-12" \
+      "yq-4.49.2-1-linux-${OS_ARCH}-debian-12" \
+      "kibana-9.2.2-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -48,11 +48,9 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/kibana/postunpack.sh
-ENV APP_VERSION="9.2.1" \
+ENV APP_VERSION="9.2.2" \
     BITNAMI_APP_NAME="kibana" \
     IMAGE_REVISION="0"
-
-EXPOSE 5601
 
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/scripts/kibana/entrypoint.sh" ]

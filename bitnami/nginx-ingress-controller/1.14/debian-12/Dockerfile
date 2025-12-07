@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-11-14T09:16:25Z" \
+      org.opencontainers.image.created="2025-12-05T13:07:19Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/nginx-ingress-controller/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/nginx-ingress-controller" \
       org.opencontainers.image.title="nginx-ingress-controller" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.14.0"
+      org.opencontainers.image.version="1.14.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "nginx-ingress-controller-1.14.0-0-linux-${OS_ARCH}-debian-12" \
+      "nginx-ingress-controller-1.14.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -61,7 +61,7 @@ RUN setcap    cap_net_bind_service=+ep /nginx-ingress-controller && \
 RUN mkdir -p /etc/ingress-controller/auth /etc/ingress-controller/ssl
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
     ln -sf /dev/stderr /var/log/nginx/error.log
-ENV APP_VERSION="1.14.0" \
+ENV APP_VERSION="1.14.1" \
     BITNAMI_APP_NAME="nginx-ingress-controller" \
     IMAGE_REVISION="0" \
     LD_LIBRARY_PATH="/lib:/usr/lib:/usr/local/lib:/modules_mount/etc/nginx/modules/otel:$LD_LIBRARY_PATH" \
