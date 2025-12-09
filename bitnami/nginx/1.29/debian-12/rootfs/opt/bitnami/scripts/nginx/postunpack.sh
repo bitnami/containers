@@ -93,3 +93,15 @@ touch /.rnd && chmod g+rw /.rnd
 # (this is to avoid breaking when entrypoint is being overridden)
 cp -r "${NGINX_CONF_DIR}"/* "$NGINX_DEFAULT_CONF_DIR"
 
+# Create symlinks to the standard Nginx directories and binary
+ln -sf /opt/bitnami/nginx/conf /etc/nginx
+ensure_dir_exists /usr/share/nginx
+ln -sf /app /usr/share/nginx/html
+ln -sf /opt/bitnami/nginx/logs /var/log/nginx
+ln -sf /opt/bitnami/nginx/tmp /var/run/nginx
+ensure_dir_exists /opt/bitnami/nginx/tmp/cache
+ln -sf /opt/bitnami/nginx/tmp/cache /var/cache/nginx
+ensure_dir_exists /usr/sbin
+ln -sf /opt/bitnami/nginx/sbin/nginx /usr/sbin/nginx
+ensure_dir_exists /usr/lib/nginx
+ln -sf /opt/bitnami/nginx/modules /usr/lib/nginx/modules
