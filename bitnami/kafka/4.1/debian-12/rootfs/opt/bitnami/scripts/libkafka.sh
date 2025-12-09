@@ -896,7 +896,7 @@ kafka_kraft_storage_initialize() {
             args+=("--add-scram" "SCRAM-SHA-512=[name=${KAFKA_CONTROLLER_USER},password=${KAFKA_CONTROLLER_PASSWORD}]")
         fi
     fi
-    if ! kafka_is_zookeeper_supported && [[ "${KAFKA_CFG_PROCESS_ROLES:-}" =~ "controller" ]]; then
+    if [[ "${KAFKA_CFG_PROCESS_ROLES:-}" =~ "controller" ]]; then
         args+=("--feature=kraft.version=1")
         if [[ -n "${KAFKA_INITIAL_CONTROLLERS:-}" ]]; then
             args+=("--initial-controllers=${KAFKA_INITIAL_CONTROLLERS}")
@@ -906,7 +906,9 @@ kafka_kraft_storage_initialize() {
     fi
 
     info "Formatting storage directories to add metadata..."
-    debug_execute "${KAFKA_HOME}/bin/kafka-storage.sh" format "${args[@]}"
+    cmd=("${KAFKA_HOME}/bin/kafka-storage.sh" "format")
+    am_i_root && cmd=("run_as_user" "$KAFKA_DAEMON_USER" "${cmd[@]}")
+    debug_execute "${cmd[@]}" "${args[@]}"
 }
 
 ########################
