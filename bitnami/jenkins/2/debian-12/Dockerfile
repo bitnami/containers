@@ -8,13 +8,13 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-12-09T12:59:13Z" \
+      org.opencontainers.image.created="2025-12-10T13:56:28Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/jenkins/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jenkins" \
       org.opencontainers.image.title="jenkins" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="2.528.2"
+      org.opencontainers.image.version="2.528.3"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -32,7 +32,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
       "nss-wrapper-1.1.16-0-linux-${OS_ARCH}-debian-12" \
       "render-template-1.0.9-160-linux-${OS_ARCH}-debian-12" \
       "jre-21.0.9-15-0-linux-${OS_ARCH}-debian-12" \
-      "jenkins-2.528.2-0-linux-${OS_ARCH}-debian-12" \
+      "jenkins-2.528.3-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -51,9 +51,9 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/jenkins/postunpack.sh
-ENV APP_VERSION="2.528.2" \
+ENV APP_VERSION="2.528.3" \
     BITNAMI_APP_NAME="jenkins" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="0" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:$PATH"
 
