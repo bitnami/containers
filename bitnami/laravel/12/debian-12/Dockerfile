@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-12-10T10:34:42Z" \
+      org.opencontainers.image.created="2025-12-16T12:38:51Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/laravel/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/laravel" \
@@ -27,10 +27,10 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "python-3.14.1-0-linux-${OS_ARCH}-debian-12" \
+      "python-3.14.2-0-linux-${OS_ARCH}-debian-12" \
       "wait-for-port-1.0.10-5-linux-${OS_ARCH}-debian-12" \
       "php-8.5.0-5-linux-${OS_ARCH}-debian-12" \
-      "node-24.11.1-0-linux-${OS_ARCH}-debian-12" \
+      "node-24.12.0-0-linux-${OS_ARCH}-debian-12" \
       "laravel-12.11.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -52,7 +52,7 @@ RUN /opt/bitnami/scripts/laravel/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
 ENV APP_VERSION="12.11.0" \
     BITNAMI_APP_NAME="laravel" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     NODE_PATH="/opt/bitnami/node/lib/node_modules" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/node/bin:$PATH" \
     PHP_ENABLE_OPCACHE="0"
