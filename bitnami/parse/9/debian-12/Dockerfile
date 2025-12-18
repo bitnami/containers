@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-12-17T21:14:19Z" \
+      org.opencontainers.image.created="2025-12-17T13:38:58Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/influxdb/README.md" \
-      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/influxdb" \
-      org.opencontainers.image.title="influxdb" \
+      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/parse/README.md" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/parse" \
+      org.opencontainers.image.title="parse" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="3.8.0"
+      org.opencontainers.image.version="9.1.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -23,14 +23,15 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl jq libgcc-s1 procps
+RUN install_packages ca-certificates curl jq libbz2-1.0 libffi8 libgcc-s1 liblzma5 libncursesw6 libreadline8 libsqlite3-0 libssl3 libstdc++6 libtinfo6 procps zlib1g
 RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "libpython-3.12.12-2-linux-${OS_ARCH}-debian-12" \
-      "influxdb-3.8.0-0-linux-${OS_ARCH}-debian-12" \
-      "wait-for-port-1.0.10-5-linux-${OS_ARCH}-debian-12" \
+      "python-3.14.2-0-linux-${OS_ARCH}-debian-12" \
+      "node-24.12.0-0-linux-${OS_ARCH}-debian-12" \
+      "mongodb-shell-2.5.10-0-linux-${OS_ARCH}-debian-12" \
+      "parse-9.1.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -45,19 +46,17 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
+RUN uninstall_packages curl
 
 COPY rootfs /
-RUN /opt/bitnami/scripts/influxdb/postunpack.sh
-ENV APP_VERSION="3.8.0" \
-    BITNAMI_APP_NAME="influxdb" \
+RUN /opt/bitnami/scripts/parse/postunpack.sh
+ENV APP_VERSION="9.1.1" \
+    BITNAMI_APP_NAME="parse" \
     IMAGE_REVISION="0" \
-    LD_LIBRARY_PATH="/opt/bitnami/python/lib:$LD_LIBRARY_PATH" \
-    PATH="/opt/bitnami/influxdb/bin:/opt/bitnami/common/bin:$PATH"
+    PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/parse/bin:$PATH"
 
-VOLUME [ "/bitnami/influxdb" ]
-
-EXPOSE 8088 8181
+EXPOSE 1337 3000
 
 USER 1001
-ENTRYPOINT [ "/opt/bitnami/scripts/influxdb/entrypoint.sh" ]
-CMD [ "/opt/bitnami/scripts/influxdb/run.sh" ]
+ENTRYPOINT [ "/opt/bitnami/scripts/parse/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/parse/run.sh" ]
