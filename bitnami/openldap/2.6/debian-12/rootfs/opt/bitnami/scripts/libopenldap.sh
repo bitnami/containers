@@ -234,21 +234,7 @@ is_ldap_not_running() {
 #   Whether slapd is ready for queries
 ########################
 is_ldap_ready() {
-    local attempts=5
-    local delay=5
-
-    info "Waiting for LDAP to be ready"
-    for ((i=1; i<=attempts; i++)); do
-        sleep "$delay"
-
-        if debug_execute ldapsearch -Y EXTERNAL -H "ldapi:///" -b "cn=config" > /dev/null 2>&1; then
-            info "LDAP is ready."
-            return 0
-        fi
-        done
-
-    info "LDAP is not ready after ${attempts} attempts."
-    return 1
+    debug_execute ldapsearch -Y EXTERNAL -H "ldapi:///" -b "cn=config" -s base "(objectClass=*)" dn
 }
 
 ########################
@@ -269,7 +255,7 @@ ldap_start_bg() {
         ulimit -n "$LDAP_ULIMIT_NOFILES"
         am_i_root && flags=("-u" "$LDAP_DAEMON_USER" "${flags[@]}")
         debug_execute slapd "${flags[@]}" &
-        if ! retry_while is_ldap_running "$retries" "$sleep_time"; then
+        if ! retry_while is_ldap_ready "$retries" "$sleep_time"; then
             error "OpenLDAP failed to start"
             return 1
         fi
@@ -669,11 +655,7 @@ ldap_initialize() {
         # Create OpenLDAP online configuration
         ldap_create_online_configuration
         ldap_start_bg
-        if is_ldap_ready; then
-            ldap_admin_credentials
-        else
-            exit 1
-        fi
+        ldap_admin_credentials
         if ! is_boolean_yes "$LDAP_ALLOW_ANON_BINDING"; then
             ldap_disable_anon_binding
         fi
