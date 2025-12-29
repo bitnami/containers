@@ -99,8 +99,6 @@ ensure_dir_exists /usr/share/nginx
 ln -sf /app /usr/share/nginx/html
 ln -sf /opt/bitnami/nginx/logs /var/log/nginx
 ln -sf /opt/bitnami/nginx/tmp /var/run/nginx
-ensure_dir_exists /opt/bitnami/nginx/tmp/cache
-ln -sf /opt/bitnami/nginx/tmp/cache /var/cache/nginx
 ensure_dir_exists /usr/sbin
 ln -sf /opt/bitnami/nginx/sbin/nginx /usr/sbin/nginx
 ensure_dir_exists /usr/lib/nginx
