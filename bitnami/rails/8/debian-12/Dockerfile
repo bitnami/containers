@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-12-15T15:21:58Z" \
+      org.opencontainers.image.created="2025-12-30T13:28:19Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/rails/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/rails" \
@@ -29,10 +29,10 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     COMPONENTS=( \
       "python-3.14.2-0-linux-${OS_ARCH}-debian-12" \
       "wait-for-port-1.0.10-5-linux-${OS_ARCH}-debian-12" \
-      "ruby-3.2.9-4-linux-${OS_ARCH}-debian-12" \
+      "ruby-3.2.9-6-linux-${OS_ARCH}-debian-12" \
       "node-24.12.0-0-linux-${OS_ARCH}-debian-12" \
       "mysql-client-12.1.2-0-linux-${OS_ARCH}-debian-12" \
-      "rails-8.1.1-3-linux-${OS_ARCH}-debian-12" \
+      "rails-8.1.1-4-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -52,7 +52,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/rails/postunpack.sh
 ENV APP_VERSION="8.1.1" \
     BITNAMI_APP_NAME="rails" \
-    IMAGE_REVISION="5" \
+    IMAGE_REVISION="6" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/ruby/bin:/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:$PATH"
 
 EXPOSE 3000
