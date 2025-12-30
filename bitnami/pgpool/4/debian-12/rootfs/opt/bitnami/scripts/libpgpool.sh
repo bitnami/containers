@@ -365,6 +365,9 @@ pgpool_create_config() {
     # ref: http://www.pgpool.net/docs/latest/en/html/configuring-pgpool.html
     cp "${PGPOOL_BASE_DIR}/etc/pgpool.conf.sample" "$PGPOOL_CONF_FILE"
 
+    # Working directory
+    pgpool_set_property "work_dir" "$PGPOOL_WORK_DIR"
+
     # Connection settings
     # ref: http://www.pgpool.net/docs/latest/en/html/runtime-config-connection.html#RUNTIME-CONFIG-CONNECTION-SETTINGS
     pgpool_set_property "listen_addresses" "*"
