@@ -51,5 +51,6 @@ web_server_validate
 if [[ -d "${SUITECRM_BASE_DIR}/public" ]]; then
     ensure_web_server_app_configuration_exists "suitecrm" --type php  --document-root "${BITNAMI_ROOT_DIR}/suitecrm/public"
 else
-    ensure_web_server_app_configuration_exists "suitecrm" --type php 
+    # This is executed for SuiteCRM 7
+    ensure_web_server_app_configuration_exists "suitecrm" --type php --apache-move-htaccess "no"
 fi

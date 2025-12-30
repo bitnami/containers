@@ -425,7 +425,15 @@ suitecrm_7_pass_wizard() {
     return "$wizard_exit_code"
 }
 
-
+########################
+# Encodes a given string
+# Globals:
+#   *
+# Arguments:
+#   None
+# Returns:
+#   Encoded string
+#########################
 urlencode() {
   local string="${1}"
   local length="${#string}"
@@ -440,7 +448,6 @@ urlencode() {
   echo "$encoded"
 }
 
-
 ########################
 # Rebuild SuiteCRM's configuration file
 # Globals:
@@ -451,8 +458,6 @@ urlencode() {
 #   true if succeded, false otherwise
 #########################
 suitecrm_rebuild_files() {
-
-
     encoded_user=$(urlencode "$SUITECRM_DATABASE_USER")
     encoded_pass=$(urlencode "$SUITECRM_DATABASE_PASSWORD")
     # Build host:port if port is given
@@ -462,7 +467,7 @@ suitecrm_rebuild_files() {
         host_string="$SUITECRM_DATABASE_HOST"
     fi
 
-    if [[ -n "$SUITECRM_APP_SECRET" ]]; then
+    if [[ -n "${SUITECRM_APP_SECRET:-}" ]]; then
         app_secret=$(openssl rand -hex 16)
     else
         app_secret="$SUITECRM_APP_SECRET"
@@ -489,8 +494,6 @@ require_once('include/utils.php');
 // Based on 'install.php' includes
 require_once('include/SugarLogger/LoggerManager.php');
 require_once('sugar_version.php');
-#require_once('install/install_utils.php');
-#require_once('install/install_defaults.php');
 require_once('suitecrm_version.php');
 require_once('include/TimeDate.php');
 require_once('include/Localization/Localization.php');
