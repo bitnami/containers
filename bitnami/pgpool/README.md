@@ -457,6 +457,7 @@ This command will prompt for a password, this password is the one set in the env
 
 | Name                                     | Description                                                                                                                        | Default Value                       |
 |------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|
+| `PGPOOL_WORK_DIR`                        | Pgpool-II working directory.                                                                                                       | `/tmp`                              |
 | `PGPOOL_USER_CONF_FILE`                  | Custom Pgpool-II configuration file to be appended at Pgpool-II configuration file.                                                | `nil`                               |
 | `PGPOOL_USER_HBA_FILE`                   | Custom Pgpool-II host-based authentication configuration to be appended to Pgpool-II host-based authentication configuration file. | `nil`                               |
 | `PGPOOL_PASSWD_FILE`                     | Pgpool-II pool password file.                                                                                                      | `pool_passwd`                       |

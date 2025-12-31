@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-12-02T18:24:03Z" \
+      org.opencontainers.image.created="2025-12-30T09:37:28Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/apisix-ingress-controller/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/apisix-ingress-controller" \
       org.opencontainers.image.title="apisix-ingress-controller" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.8.4"
+      org.opencontainers.image.version="2.0.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "apisix-ingress-controller-1.8.4-18-linux-${OS_ARCH}-debian-12" \
+      "apisix-ingress-controller-2.0.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -45,9 +45,9 @@ RUN useradd -r -u 1001 -g root apisix-ingress-controller
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN uninstall_packages curl
 
-ENV APP_VERSION="1.8.4" \
+ENV APP_VERSION="2.0.0" \
     BITNAMI_APP_NAME="apisix-ingress-controller" \
-    IMAGE_REVISION="21" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/apisix-ingress-controller/bin:$PATH"
 
 USER 1001
