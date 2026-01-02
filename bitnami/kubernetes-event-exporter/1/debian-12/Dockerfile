@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-12-02T23:39:09Z" \
+      org.opencontainers.image.created="2026-01-02T00:02:11Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/kubernetes-event-exporter/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kubernetes-event-exporter" \
@@ -47,7 +47,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="1.7.0" \
     BITNAMI_APP_NAME="kubernetes-event-exporter" \
-    IMAGE_REVISION="53" \
+    IMAGE_REVISION="54" \
     PATH="/opt/bitnami/kubernetes-event-exporter/bin:$PATH"
 
 USER 1001
