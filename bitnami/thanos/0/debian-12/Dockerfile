@@ -40,7 +40,7 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-12-03T03:28:18Z" \
+      org.opencontainers.image.created="2026-01-02T03:56:04Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="thanos" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -53,7 +53,7 @@ COPY --from=builder /opt/bitnami/thanos/licenses /opt/bitnami/thanos/licenses
 
 ENV APP_VERSION="0.40.1" \
     BITNAMI_APP_NAME="thanos" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="3" \
     PATH="/opt/bitnami/thanos/bin:$PATH"
 
 USER 1001
