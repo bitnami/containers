@@ -40,7 +40,7 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-12-03T00:36:34Z" \
+      org.opencontainers.image.created="2026-01-02T01:10:23Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="minio-operator-sidecar" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -53,7 +53,7 @@ COPY --from=builder /opt/bitnami/minio-operator-sidecar/licenses /opt/bitnami/mi
 
 ENV APP_VERSION="7.1.1" \
     BITNAMI_APP_NAME="minio-operator-sidecar" \
-    IMAGE_REVISION="13" \
+    IMAGE_REVISION="14" \
     PATH="/"
 
 USER 1001
