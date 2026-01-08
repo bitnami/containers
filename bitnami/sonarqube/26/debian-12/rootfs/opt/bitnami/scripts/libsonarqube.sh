@@ -211,8 +211,8 @@ EOF
 
     # Check and move provisioned content from mounted provisioning directory to application directory
     if ! is_mounted_dir_empty "$SONARQUBE_MOUNTED_PROVISIONING_DIR"; then
-                info "Found mounted provisioning directory"
-                sonarqube_copy_mounted_config
+        info "Found mounted provisioning directory"
+        sonarqube_copy_mounted_config
     fi
 
     # At this point it is safe to expose SonarQube publicly
