@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-12-09T13:19:13Z" \
+      org.opencontainers.image.created="2026-01-08T14:37:24Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/keydb/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/keydb" \
@@ -50,7 +50,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/keydb/postunpack.sh
 ENV APP_VERSION="6.3.4" \
     BITNAMI_APP_NAME="keydb" \
-    IMAGE_REVISION="29" \
+    IMAGE_REVISION="30" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/keydb/bin:$PATH"
 
 EXPOSE 6379
