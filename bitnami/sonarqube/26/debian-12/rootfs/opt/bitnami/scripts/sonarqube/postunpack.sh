@@ -34,6 +34,6 @@ for dir in "$SONARQUBE_DATA_DIR" "$SONARQUBE_EXTENSIONS_DIR" "$SONARQUBE_LOGS_DI
     configure_permissions_ownership "$dir" -d "775" -f "664" -u "$SONARQUBE_DAEMON_USER" -g "root"
 done
 # The installation directory needs to be writable in order for persistence logic to work (i.e. deleting folders inside it)
-# The 'sonar.sh' file needs to be writable when running as a non-root user since it si going to be modified during initialization
+# The 'sonar.sh' file needs to be writable when running as a non-root user since it is going to be modified during initialization
 chmod g+w "$SONARQUBE_CONF_FILE" "$SONARQUBE_BASE_DIR"
 chmod o+rX -R "${SONARQUBE_BASE_DIR}/elasticsearch/config"
