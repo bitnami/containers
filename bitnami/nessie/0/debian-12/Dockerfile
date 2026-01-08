@@ -8,13 +8,13 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-12-11T08:49:27Z" \
+      org.opencontainers.image.created="2026-01-07T13:24:53Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/nessie/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/nessie" \
       org.opencontainers.image.title="nessie" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="0.106.0"
+      org.opencontainers.image.version="0.106.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -30,7 +30,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "jre-21.0.9-15-0-linux-${OS_ARCH}-debian-12" \
-      "nessie-0.106.0-0-linux-${OS_ARCH}-debian-12" \
+      "nessie-0.106.1-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -49,7 +49,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
-ENV APP_VERSION="0.106.0" \
+ENV APP_VERSION="0.106.1" \
     BITNAMI_APP_NAME="nessie" \
     IMAGE_REVISION="0" \
     JAVA_HOME="/opt/bitnami/java" \
