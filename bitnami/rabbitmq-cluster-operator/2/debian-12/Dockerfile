@@ -39,7 +39,7 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-12-10T13:44:34Z" \
+      org.opencontainers.image.created="2026-01-09T15:43:37Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="rabbitmq-cluster-operator" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -52,7 +52,7 @@ COPY --from=builder /opt/bitnami/rabbitmq-cluster-operator/licenses /opt/bitnami
 
 ENV APP_VERSION="2.18.0" \
     BITNAMI_APP_NAME="rabbitmq-cluster-operator" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     PATH="/opt/bitnami/rabbitmq-cluster-operator/bin:$PATH"
 
 USER 1001
