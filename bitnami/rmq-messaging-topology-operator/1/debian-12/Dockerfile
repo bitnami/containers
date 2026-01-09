@@ -40,7 +40,7 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-12-10T13:56:14Z" \
+      org.opencontainers.image.created="2026-01-09T15:56:41Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="rmq-messaging-topology-operator" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -53,7 +53,7 @@ COPY --from=builder /opt/bitnami/rmq-messaging-topology-operator/licenses /opt/b
 
 ENV APP_VERSION="1.18.2" \
     BITNAMI_APP_NAME="rmq-messaging-topology-operator" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     PATH="/opt/bitnami/rmq-messaging-topology-operator/bin:$PATH"
 
 USER 1001
