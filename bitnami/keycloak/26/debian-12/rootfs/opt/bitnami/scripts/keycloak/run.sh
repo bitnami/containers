@@ -15,6 +15,17 @@ set -o pipefail
 # Load Keycloak environment variables
 . /opt/bitnami/scripts/keycloak-env.sh
 
+# Keycloak 26.5.0 introduced stricter validation for certain configuration options
+for env_var in \
+    "KC_HTTPS_TRUST_STORE_FILE" \
+    "KC_HTTPS_TRUST_STORE_PASSWORD" \
+    "KC_HTTPS_KEY_STORE_FILE" \
+    "KC_HTTPS_KEY_STORE_PASSWORD" \
+    "KC_HTTPS_CERTIFICATE_FILE" \
+    "KC_HTTPS_CERTIFICATE_KEY_FILE"; do
+    [[ -z "${!env_var:-}" ]] && unset "$env_var"
+done
+
 start_command=("${KEYCLOAK_BIN_DIR}/kc.sh" "-cf" "${KEYCLOAK_CONF_DIR}/${KEYCLOAK_CONF_FILE}")
 # Prepend extra args
 if [[ -n "$KEYCLOAK_EXTRA_ARGS_PREPENDED" ]]; then
