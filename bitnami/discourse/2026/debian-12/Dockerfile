@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-12-12T06:05:46Z" \
+      org.opencontainers.image.created="2026-01-08T18:30:20Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/discourse/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/discourse" \
       org.opencontainers.image.title="discourse" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="3.5.2"
+      org.opencontainers.image.version="2026.1.0"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-12" \
@@ -27,13 +27,13 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "python-3.12.12-7-linux-${OS_ARCH}-debian-12" \
+      "python-3.12.12-10-linux-${OS_ARCH}-debian-12" \
       "wait-for-port-1.0.10-5-linux-${OS_ARCH}-debian-12" \
-      "ruby-3.3.10-1-linux-${OS_ARCH}-debian-12" \
+      "ruby-3.3.10-2-linux-${OS_ARCH}-debian-12" \
       "postgresql-client-18.1.0-0-linux-${OS_ARCH}-debian-12" \
-      "node-20.19.6-1-linux-${OS_ARCH}-debian-12" \
+      "node-20.19.6-2-linux-${OS_ARCH}-debian-12" \
       "brotli-1.2.0-0-linux-${OS_ARCH}-debian-12" \
-      "discourse-3.5.2-0-linux-${OS_ARCH}-debian-12" \
+      "discourse-2026.1.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -47,15 +47,15 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
 RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
-RUN /opt/bitnami/ruby/bin/gem install --force bundler -v '< 2'
+RUN /opt/bitnami/ruby/bin/gem install --force bundler -v '2.6'
 RUN uninstall_packages curl
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/discourse/postunpack.sh
-ENV APP_VERSION="3.5.2" \
+ENV APP_VERSION="2026.1.0" \
     BITNAMI_APP_NAME="discourse" \
-    IMAGE_REVISION="3" \
-    PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/brotli/bin:/opt/bitnami/discourse/app/assets/javascripts/discourse/node_modules/ember-cli/bin:$PATH"
+    IMAGE_REVISION="0" \
+    PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/brotli/bin:$PATH"
 
 EXPOSE 3000
 

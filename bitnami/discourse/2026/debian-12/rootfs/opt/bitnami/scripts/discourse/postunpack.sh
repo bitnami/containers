@@ -50,7 +50,7 @@ done
 find "${DISCOURSE_BASE_DIR}/vendor/bundle/ruby" -wholename "*/sprockets-*/test/fixtures/errors/symlink" -type l -exec rm -f {} \;
 
 # Add execution permissions to esbuild and ember binaries
-chmod +x "${DISCOURSE_BASE_DIR}/node_modules/esbuild/bin/esbuild" "${DISCOURSE_BASE_DIR}/app/assets/javascripts/discourse/node_modules/ember-cli/bin/ember" "${DISCOURSE_BASE_DIR}/app/assets/javascripts/discourse/node_modules/.bin"/* "${DISCOURSE_BASE_DIR}/node_modules/.bin"/*
+chmod +x "${DISCOURSE_BASE_DIR}/bin"/* "${DISCOURSE_BASE_DIR}/node_modules/esbuild/bin/esbuild" "${DISCOURSE_BASE_DIR}/node_modules/.bin"/*
 
 # HACK: The discourse source code is trying to access the deprecated Imagemagick "magick". In newer versions it was changed to "convert". Creating
 # a symlink to avoid any issue

@@ -19,7 +19,7 @@ services:
     volumes:
       - 'redis_data:/bitnami/redis'
   discourse:
-    image: docker.io/bitnami/discourse:3
+    image: docker.io/bitnami/discourse:2026
     ports:
       - '80:3000'
     volumes:
@@ -41,7 +41,7 @@ services:
       - POSTGRESQL_CLIENT_CREATE_DATABASE_NAME=bitnami_discourse
       - POSTGRESQL_CLIENT_CREATE_DATABASE_EXTENSIONS=hstore,pg_trgm,vector
   sidekiq:
-    image: docker.io/bitnami/discourse:3
+    image: docker.io/bitnami/discourse:2026
     depends_on:
       - discourse
     volumes:

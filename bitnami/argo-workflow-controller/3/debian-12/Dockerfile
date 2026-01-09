@@ -40,7 +40,7 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-12-09T14:44:27Z" \
+      org.opencontainers.image.created="2026-01-08T15:03:57Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="argo-workflow-controller" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -54,7 +54,7 @@ COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo
 
 ENV APP_VERSION="3.7.6" \
     BITNAMI_APP_NAME="argo-workflow-controller" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     PATH="/opt/bitnami/argo-workflow-controller/bin:$PATH"
 
 USER 1001
