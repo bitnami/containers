@@ -2,7 +2,7 @@
 # Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 #
-# Bitnami Laravel library
+# Bitnami Kubescape library
 
 # shellcheck disable=SC1091
 
