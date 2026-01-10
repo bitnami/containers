@@ -30,7 +30,7 @@ done
 ln -sf "$DB_BASE_DIR/plugin" "$DB_BASE_DIR/lib/plugin"
 
 # Redirect all logging to stdout
-ln -sf "/proc/1/fd/1" "$DB_LOGS_DIR/mysqld.log"
+ln -sf /dev/stdout "$DB_LOGS_DIR/mysqld.log"
 
 # Copy all initially generated configuration files to the default directory
 # (this is to avoid breaking when entrypoint is being overridden)
