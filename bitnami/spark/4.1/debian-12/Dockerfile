@@ -8,13 +8,13 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-12-30T14:34:03Z" \
+      org.opencontainers.image.created="2026-01-09T13:17:04Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/spark/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/spark" \
       org.opencontainers.image.title="spark" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="4.1.0"
+      org.opencontainers.image.version="4.1.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -31,9 +31,9 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "nss-wrapper-1.1.16-0-linux-${OS_ARCH}-debian-12" \
-      "python-3.12.12-9-linux-${OS_ARCH}-debian-12" \
+      "python-3.12.12-10-linux-${OS_ARCH}-debian-12" \
       "jre-17.0.17-15-0-linux-${OS_ARCH}-debian-12" \
-      "spark-4.1.0-0-linux-${OS_ARCH}-debian-12" \
+      "spark-4.1.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -54,7 +54,7 @@ RUN uninstall_packages curl
 COPY rootfs /
 RUN /opt/bitnami/scripts/spark/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
-ENV APP_VERSION="4.1.0" \
+ENV APP_VERSION="4.1.1" \
     BITNAMI_APP_NAME="spark" \
     IMAGE_REVISION="0" \
     JAVA_HOME="/opt/bitnami/java" \
