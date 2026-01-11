@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-12-19T11:44:22Z" \
+      org.opencontainers.image.created="2026-01-11T08:59:23Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/mongodb-sharded/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mongodb-sharded" \
@@ -55,7 +55,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/mongodb-sharded/postunpack.sh
 ENV APP_VERSION="8.2.3" \
     BITNAMI_APP_NAME="mongodb-sharded" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mongodb/bin:$PATH"
 
 EXPOSE 27017
