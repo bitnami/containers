@@ -40,7 +40,7 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-12-12T12:31:18Z" \
+      org.opencontainers.image.created="2026-01-11T12:46:25Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="clickhouse-operator-metrics-exporter" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -51,7 +51,7 @@ COPY --from=builder /opt/bitnami/clickhouse-operator-metrics-exporter /opt/bitna
 
 ENV APP_VERSION="0.25.6" \
     BITNAMI_APP_NAME="clickhouse-operator-metrics-exporter" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     PATH="/opt/bitnami/clickhouse-operator-metrics-exporter/bin:$PATH"
 
 USER 1001
