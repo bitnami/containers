@@ -41,18 +41,14 @@ done
 
 info "Configuring default settings in configuration files"
 
-dir_settings_prefix="dbms"
-if [ "$(get_neo4j_major_version)" -ge 5 ]; then
-    dir_settings_prefix="server"
-fi
 ## Configure the default paths for neo4j
 ## Source: https://neo4j.com/docs/operations-manual/current/configuration/file-locations/#file-locations
-neo4j_conf_set "${dir_settings_prefix}.directories.data" "$NEO4J_DATA_DIR"
-neo4j_conf_set "${dir_settings_prefix}.directories.plugins" "$NEO4J_PLUGINS_DIR"
-neo4j_conf_set "${dir_settings_prefix}.directories.logs" "$NEO4J_LOGS_DIR"
-neo4j_conf_set "${dir_settings_prefix}.directories.import" "$NEO4J_IMPORT_DIR"
-neo4j_conf_set "${dir_settings_prefix}.directories.transaction.logs.root" "${NEO4J_DATA_DIR}/transactions"
-neo4j_conf_set "${dir_settings_prefix}.directories.dumps.root" "${NEO4J_DATA_DIR}/dumps"
+neo4j_conf_set "server.directories.data" "$NEO4J_DATA_DIR"
+neo4j_conf_set "server.directories.plugins" "$NEO4J_PLUGINS_DIR"
+neo4j_conf_set "server.directories.logs" "$NEO4J_LOGS_DIR"
+neo4j_conf_set "server.directories.import" "$NEO4J_IMPORT_DIR"
+neo4j_conf_set "server.directories.transaction.logs.root" "${NEO4J_DATA_DIR}/transactions"
+neo4j_conf_set "server.directories.dumps.root" "${NEO4J_DATA_DIR}/dumps"
 
 ## Create empty file for apoc.conf file as it is not included in the default neo4j installation
 ## Source: https://neo4j.com/labs/apoc/4.2/config/
