@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-12-18T14:35:51Z" \
+      org.opencontainers.image.created="2026-01-11T07:17:36Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/flux/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/flux" \
@@ -48,7 +48,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="2.7.5" \
     BITNAMI_APP_NAME="flux" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="3" \
     PATH="/opt/bitnami/kubectl/bin:/opt/bitnami/flux/bin:$PATH"
 
 USER 1001
