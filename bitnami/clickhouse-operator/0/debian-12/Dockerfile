@@ -40,7 +40,7 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-12-12T11:29:51Z" \
+      org.opencontainers.image.created="2026-01-11T11:40:13Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="clickhouse-operator" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -51,7 +51,7 @@ COPY --from=builder /opt/bitnami/clickhouse-operator /opt/bitnami/clickhouse-ope
 
 ENV APP_VERSION="0.25.6" \
     BITNAMI_APP_NAME="clickhouse-operator" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     PATH="/opt/bitnami/clickhouse-operator/bin:$PATH"
 
 USER 1001
