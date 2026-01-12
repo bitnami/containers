@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-01-08T10:57:33Z" \
+      org.opencontainers.image.created="2026-01-11T07:07:13Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/drupal/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/drupal" \
@@ -60,7 +60,7 @@ ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     APP_VERSION="11.3.2" \
     BITNAMI_APP_NAME="drupal" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/apache/bin:/opt/bitnami/drupal/vendor/bin:$PATH"
 
 EXPOSE 8080 8443

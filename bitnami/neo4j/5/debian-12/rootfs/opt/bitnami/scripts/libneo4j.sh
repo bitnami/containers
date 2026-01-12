@@ -128,10 +128,7 @@ is_neo4j_not_running() {
 neo4j_configure_memory_settings() {
     ## neo4j-admin memrec returns the settings to be added in neo4j.conf
     ## Source: https://neo4j.com/docs/operations-manual/current/tools/neo4j-admin-memrec/#neo4j-admin-memrec
-    local -a neo4j_admin_args=("memrec")
-    if [ "$(get_neo4j_major_version)" -ge 5 ]; then
-        neo4j_admin_args=("server" "memory-recommendation")
-    fi
+    local -a neo4j_admin_args=("server" "memory-recommendation")
     info "Adjusting memory settings"
     while IFS= read -r setting; do
         neo4j_conf_set "${setting%=*}" "${setting#*=}"
@@ -183,10 +180,7 @@ neo4j_create_admin_user() {
     ## Set initial password
     ## Source: https://neo4j.com/docs/operations-manual/current/configuration/set-initial-password/
     info "Configuring initial password"
-    local -a neo4j_admin_args=("set-initial-password")
-    if [ "$(get_neo4j_major_version)" -ge 5 ]; then
-        neo4j_admin_args=("dbms" "set-initial-password")
-    fi
+    local -a neo4j_admin_args=("dbms" "set-initial-password")
 
     if am_i_root; then
         debug_execute run_as_user "$NEO4J_DAEMON_USER" neo4j-admin "${neo4j_admin_args[@]}" "$NEO4J_PASSWORD"
@@ -288,22 +282,6 @@ neo4j_custom_init_scripts() {
 }
 
 ########################
-# Returns neo4j major version
-# Globals:
-#   NEO4J_BASE_DIR
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-get_neo4j_major_version() {
-    neo4j_version="$("${NEO4J_BASE_DIR}/bin/neo4j" version)"
-    neo4j_version="${neo4j_version#"neo4j "}"
-    major_version="$(get_sematic_version "$neo4j_version" 1)"
-    echo "${major_version:-0}"
-}
-
-########################
 # Configure connectors settings
 # Globals:
 #   NEO4J_*
@@ -314,45 +292,19 @@ get_neo4j_major_version() {
 #########################
 configure_neo4j_connector_settings() {
     local -r host="${NEO4J_HOST:-$(get_machine_ip)}"
-    local -r neo4j_major_version="$(get_neo4j_major_version)"
-    if [ "$neo4j_major_version" -eq 4 ]; then
-        ## Connector configuration
-        ## Source: https://neo4j.com/docs/operations-manual/current/configuration/connectors/
-        # Listen address configuration settings
-        neo4j_conf_set "dbms.default_listen_address" "$NEO4J_BIND_ADDRESS"
-        neo4j_conf_set "dbms.connector.bolt.listen_address" ":${NEO4J_BOLT_PORT_NUMBER}"
-        neo4j_conf_set "dbms.connector.http.listen_address" ":${NEO4J_HTTP_PORT_NUMBER}"
-        neo4j_conf_set "dbms.connector.https.listen_address" ":${NEO4J_HTTPS_PORT_NUMBER}"
-        # Advertised address configuration settings
-        neo4j_conf_set "dbms.default_advertised_address" "$host"
-        neo4j_conf_set "dbms.connector.bolt.advertised_address" ":${NEO4J_BOLT_ADVERTISED_PORT_NUMBER}"
-        neo4j_conf_set "dbms.connector.http.advertised_address" ":${NEO4J_HTTP_ADVERTISED_PORT_NUMBER}"
-        neo4j_conf_set "dbms.connector.https.advertised_address" ":${NEO4J_HTTPS_ADVERTISED_PORT_NUMBER}"
-        # TLS settings
-        neo4j_conf_set "dbms.connector.bolt.tls_level" "${NEO4J_BOLT_TLS_LEVEL}"
-        [[ "$NEO4J_BOLT_TLS_LEVEL" == "REQUIRED" || "$NEO4J_BOLT_TLS_LEVEL" == "OPTIONAL" ]] && neo4j_conf_set "dbms.ssl.policy.bolt.enabled" "true"
-        neo4j_conf_set "dbms.connector.https.enabled" "${NEO4J_HTTPS_ENABLED}"
-        neo4j_conf_set "dbms.ssl.policy.https.enabled" "${NEO4J_HTTPS_ENABLED}"
-        ## Upgrade configuration (This is for allowing automatic schema upgrades)
-        ## Source: https://neo4j.com/docs/upgrade-migration-guide/current/upgrade/upgrade-4.3/deployment-upgrading/
-        neo4j_conf_set "dbms.allow_upgrade" "$NEO4J_ALLOW_UPGRADE"
-    elif [ "$neo4j_major_version" -ge 5 ]; then
-        # Listen address configuration settings
-        neo4j_conf_set "server.default_listen_address" "$NEO4J_BIND_ADDRESS"
-        neo4j_conf_set "server.bolt.listen_address" ":${NEO4J_BOLT_PORT_NUMBER}"
-        neo4j_conf_set "server.http.listen_address" ":${NEO4J_HTTP_PORT_NUMBER}"
-        neo4j_conf_set "server.https.listen_address" ":${NEO4J_HTTPS_PORT_NUMBER}"
-        # Advertised address configuration settings
-        neo4j_conf_set "server.default_advertised_address" "$host"
-        neo4j_conf_set "server.bolt.advertised_address" ":${NEO4J_BOLT_ADVERTISED_PORT_NUMBER}"
-        neo4j_conf_set "server.http.advertised_address" ":${NEO4J_HTTP_ADVERTISED_PORT_NUMBER}"
-        neo4j_conf_set "server.https.advertised_address" ":${NEO4J_HTTPS_ADVERTISED_PORT_NUMBER}"
-        # TLS settings
-        neo4j_conf_set "server.bolt.tls_level" "${NEO4J_BOLT_TLS_LEVEL}"
-        [[ "$NEO4J_BOLT_TLS_LEVEL" == "REQUIRED" || "$NEO4J_BOLT_TLS_LEVEL" == "OPTIONAL" ]] && neo4j_conf_set "dbms.ssl.policy.bolt.enabled" "true"
-        neo4j_conf_set "server.https.enabled" "${NEO4J_HTTPS_ENABLED}"
-        neo4j_conf_set "dbms.ssl.policy.https.enabled" "${NEO4J_HTTPS_ENABLED}"
-    else
-        error "Neo4j branch ${neo4j_major_version} not supported"
-    fi
+    # Listen address configuration settings
+    neo4j_conf_set "server.default_listen_address" "$NEO4J_BIND_ADDRESS"
+    neo4j_conf_set "server.bolt.listen_address" ":${NEO4J_BOLT_PORT_NUMBER}"
+    neo4j_conf_set "server.http.listen_address" ":${NEO4J_HTTP_PORT_NUMBER}"
+    neo4j_conf_set "server.https.listen_address" ":${NEO4J_HTTPS_PORT_NUMBER}"
+    # Advertised address configuration settings
+    neo4j_conf_set "server.default_advertised_address" "$host"
+    neo4j_conf_set "server.bolt.advertised_address" ":${NEO4J_BOLT_ADVERTISED_PORT_NUMBER}"
+    neo4j_conf_set "server.http.advertised_address" ":${NEO4J_HTTP_ADVERTISED_PORT_NUMBER}"
+    neo4j_conf_set "server.https.advertised_address" ":${NEO4J_HTTPS_ADVERTISED_PORT_NUMBER}"
+    # TLS settings
+    neo4j_conf_set "server.bolt.tls_level" "${NEO4J_BOLT_TLS_LEVEL}"
+    [[ "$NEO4J_BOLT_TLS_LEVEL" == "REQUIRED" || "$NEO4J_BOLT_TLS_LEVEL" == "OPTIONAL" ]] && neo4j_conf_set "dbms.ssl.policy.bolt.enabled" "true"
+    neo4j_conf_set "server.https.enabled" "${NEO4J_HTTPS_ENABLED}"
+    neo4j_conf_set "dbms.ssl.policy.https.enabled" "${NEO4J_HTTPS_ENABLED}"
 }

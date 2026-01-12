@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-01-10T09:19:20Z" \
+      org.opencontainers.image.created="2026-01-11T06:53:03Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/couchdb/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/couchdb" \
@@ -51,7 +51,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/couchdb/postunpack.sh
 ENV APP_VERSION="3.5.1" \
     BITNAMI_APP_NAME="couchdb" \
-    IMAGE_REVISION="4" \
+    IMAGE_REVISION="5" \
     LD_LIBRARY_PATH="/opt/bitnami/common/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/erlang/bin:/opt/bitnami/couchdb/bin:$PATH"
 

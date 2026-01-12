@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-12-24T02:41:47Z" \
+      org.opencontainers.image.created="2026-01-11T13:43:49Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/pinniped-cli/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/pinniped-cli" \
@@ -46,7 +46,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
 ENV APP_VERSION="0.43.0" \
     BITNAMI_APP_NAME="pinniped-cli" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     PATH="/opt/bitnami/pinniped-cli/bin:$PATH"
 
 USER 1001

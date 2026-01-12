@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2025-12-17T21:09:08Z" \
+      org.opencontainers.image.created="2026-01-11T07:36:02Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/gradle/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/gradle" \
@@ -47,7 +47,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
 ENV APP_VERSION="9.2.1" \
     BITNAMI_APP_NAME="gradle" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="2" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/gradle/bin:$PATH"
 
 WORKDIR /app

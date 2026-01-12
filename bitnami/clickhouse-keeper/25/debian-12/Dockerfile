@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-01-06T19:59:32Z" \
+      org.opencontainers.image.created="2026-01-11T06:44:16Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/clickhouse-keeper/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/clickhouse-keeper" \
@@ -49,7 +49,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/clickhouse-keeper/postunpack.sh
 ENV APP_VERSION="25.12.2" \
     BITNAMI_APP_NAME="clickhouse-keeper" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     PATH="/opt/bitnami/clickhouse-keeper/bin:/opt/bitnami/common/bin:$PATH" \
     clickhouseCTL_API="3"
 
