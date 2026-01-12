@@ -52,6 +52,8 @@ ENV APP_VERSION="9.2.3" \
     BITNAMI_APP_NAME="kibana" \
     IMAGE_REVISION="1"
 
+EXPOSE 5601
+
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/scripts/kibana/entrypoint.sh" ]
 CMD [ "/opt/bitnami/scripts/kibana/run.sh" ]
