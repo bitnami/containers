@@ -226,6 +226,17 @@ is_ldap_not_running() {
     ! is_ldap_running
 }
 
+#########################
+# Wait for OpenLDAP to become ready
+# Arguments:
+#   None
+# Returns:
+#   Whether slapd is ready for queries
+########################
+is_ldap_ready() {
+    debug_execute ldapsearch -Y EXTERNAL -H "ldapi:///" -b "cn=config" -s base "(objectClass=*)" dn
+}
+
 ########################
 # Start OpenLDAP server in background
 # Arguments:
@@ -244,7 +255,7 @@ ldap_start_bg() {
         ulimit -n "$LDAP_ULIMIT_NOFILES"
         am_i_root && flags=("-u" "$LDAP_DAEMON_USER" "${flags[@]}")
         debug_execute slapd "${flags[@]}" &
-        if ! retry_while is_ldap_running "$retries" "$sleep_time"; then
+        if ! retry_while is_ldap_ready "$retries" "$sleep_time"; then
             error "OpenLDAP failed to start"
             return 1
         fi
