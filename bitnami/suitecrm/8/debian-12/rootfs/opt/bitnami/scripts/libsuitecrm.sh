@@ -511,6 +511,18 @@ require_once('include/utils/file_utils.php');
 \$clean_config['unique_key']=empty('$SUITECRM_APP_SECRET') ? md5(create_guid()) : '$SUITECRM_APP_SECRET';
 \$clean_config['default_theme']='suite8';
 \$clean_config['cron']['allowed_cron_users'] = array(0 => 'daemon');
+
+// Add custom override settings from comma-separated list
+// This allows to set allowed http referers, for example a reverse proxy hostname 
+if (!empty('$SUITECRM_REFERERS')) {
+    \$hosts = array_map('trim', explode(',', '$SUITECRM_REFERERS'));
+    foreach (\$hosts as \$host) {
+        if (!empty(\$host)) {
+            \$clean_config['http_referer']['list'][] = \$host;
+        }
+    }
+}
+
 rebuildConfigFile(\$clean_config, \$sugar_version);
 
 // Rebuild the .htaccess file
