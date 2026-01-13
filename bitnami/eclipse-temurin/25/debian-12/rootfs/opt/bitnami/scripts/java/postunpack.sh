@@ -14,13 +14,13 @@ set -o pipefail
 . /opt/bitnami/scripts/liblog.sh
 
 #
-# Eclipse Temurin post-unpack operations
+# Java post-unpack operations
 #
 
-# Override default files in the Eclipse Temurin security directory. This is used for
+# Override default files in the Java security directory. This is used for
 # custom base images (with custom CA certificates or block lists is used)
 
-if [[ -n "${ECLIPSE_TEMURIN_EXTRA_SECURITY_DIR:-}" ]] && ! is_dir_empty "$ECLIPSE_TEMURIN_EXTRA_SECURITY_DIR"; then
-    info "Adding custom CAs to the Eclipse Temurin security folder"
-    cp -Lr "${ECLIPSE_TEMURIN_SECURITY_DIR}/." /opt/bitnami/eclipse-temurin/lib/security
+if [[ -n "${JAVA_EXTRA_SECURITY_DIR:-}" ]] && ! is_dir_empty "$JAVA_EXTRA_SECURITY_DIR"; then
+    info "Adding custom CAs to the Java security folder"
+    cp -Lr "${JAVA_EXTRA_SECURITY_DIR}/." /opt/bitnami/java/lib/security
 fi
