@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-01-11T06:56:31Z" \
+      org.opencontainers.image.created="2026-01-13T11:38:24Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/deepspeed/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/deepspeed" \
@@ -30,7 +30,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     COMPONENTS=( \
       "nss-wrapper-1.1.16-0-linux-${OS_ARCH}-debian-12" \
       "python-3.11.14-9-linux-${OS_ARCH}-debian-12" \
-      "deepspeed-0.18.4-0-linux-${OS_ARCH}-debian-12" \
+      "deepspeed-0.18.4-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -56,7 +56,7 @@ ENV APP_VERSION="0.18.4" \
     CPLUS_INCLUDE_PATH="/opt/bitnami/common/include" \
     CPPFLAGS="-I/opt/bitnami/python/include -I/opt/bitnami/common/include" \
     C_INCLUDE_PATH="/opt/bitnami/common/include" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="2" \
     LDFLAGS="-Wl,-rpath: /opt/bitnami/python/lib -L/opt/bitnami/python/lib -Wl,-rpath: /opt/bitnami/common/lib -L/opt/bitnami/common/lib" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib:/opt/bitnami/common/lib:${LD_LIBRARY_PATH}" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/python/bin:$PATH" \
