@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-01-11T07:44:02Z" \
+      org.opencontainers.image.created="2026-01-15T22:23:04Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/grafana/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/grafana" \
@@ -29,8 +29,8 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "mysql-client-12.1.2-0-linux-${OS_ARCH}-debian-12" \
-      "ini-file-1.4.9-5-linux-${OS_ARCH}-debian-12" \
-      "grafana-12.3.1-1-linux-${OS_ARCH}-debian-12" \
+      "ini-file-1.4.9-6-linux-${OS_ARCH}-debian-12" \
+      "grafana-12.3.1-2-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -50,7 +50,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/grafana/postunpack.sh
 ENV APP_VERSION="12.3.1" \
     BITNAMI_APP_NAME="grafana" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="3" \
     PATH="/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/grafana/bin:$PATH"
 
 EXPOSE 3000
