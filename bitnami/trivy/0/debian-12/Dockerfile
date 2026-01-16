@@ -42,7 +42,7 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2025-12-17T09:47:27Z" \
+      org.opencontainers.image.created="2026-01-16T10:01:50Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="trivy" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -57,7 +57,7 @@ COPY --from=builder /opt/bitnami/trivy/licenses /opt/bitnami/trivy/licenses
 
 ENV APP_VERSION="0.68.2" \
     BITNAMI_APP_NAME="trivy" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     PATH="/opt/bitnami/trivy/bin:$PATH"
 
 WORKDIR /opt/bitnami/trivy
