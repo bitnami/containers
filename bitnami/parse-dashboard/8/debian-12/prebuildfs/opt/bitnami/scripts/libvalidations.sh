@@ -52,9 +52,9 @@ is_positive_int() {
 #########################
 is_boolean_yes() {
     local -r bool="${1:-}"
-    # comparison is performed without regard to the case of alphabetic characters
-    shopt -s nocasematch
-    if [[ "$bool" = 1 || "$bool" =~ ^(yes|true)$ ]]; then
+    # converts the string to lowercase
+    local bool_val="${bool,,}"
+    if [[ "$bool_val" = 1 || "$bool_val" =~ ^(yes|true)$ ]]; then
         true
     else
         false
