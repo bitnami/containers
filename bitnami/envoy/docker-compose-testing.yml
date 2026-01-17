@@ -4,7 +4,7 @@
 services:
 
   envoy:
-    image: docker.io/bitnami/envoy:1.36
+    image: docker.io/bitnami/envoy:1.37
     volumes:
       - ./examples/frontend.yaml:/opt/bitnami/envoy/conf/envoy.yaml
 

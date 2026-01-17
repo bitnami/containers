@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-01-11T08:53:04Z" \
+      org.opencontainers.image.created="2026-01-16T03:13:49Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/metrics-server/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/metrics-server" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "metrics-server-0.8.0-8-linux-${OS_ARCH}-debian-12" \
+      "metrics-server-0.8.0-9-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -48,7 +48,7 @@ RUN uninstall_packages curl
 RUN chown -R 1001:root /opt/bitnami/metrics-server && chmod -R g+rwX /opt/bitnami/metrics-server
 ENV APP_VERSION="0.8.0" \
     BITNAMI_APP_NAME="metrics-server" \
-    IMAGE_REVISION="13" \
+    IMAGE_REVISION="14" \
     PATH="/opt/bitnami/metrics-server/bin:$PATH"
 
 EXPOSE 8443
