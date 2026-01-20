@@ -12,7 +12,7 @@ services:
     volumes:
       - 'postgresql_data:/bitnami/postgresql'
   concourse:
-    image: docker.io/bitnami/concourse:7
+    image: docker.io/bitnami/concourse:8
     command: concourse web
     environment:
       - CONCOURSE_RUNTIME=containerd
@@ -31,7 +31,7 @@ services:
     volumes:
       - 'concourse_web_data:/bitnami/concourse'
   concourse_worker:
-    image: docker.io/bitnami/concourse:7
+    image: docker.io/bitnami/concourse:8
     command: concourse worker
     privileged: true
     environment:
