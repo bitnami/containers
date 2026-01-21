@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-01-14T04:36:18Z" \
+      org.opencontainers.image.created="2026-01-21T17:42:20Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/cypress/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cypress" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "python-3.14.2-2-linux-${OS_ARCH}-debian-12" \
+      "python-3.14.2-3-linux-${OS_ARCH}-debian-12" \
       "node-24.13.0-0-linux-${OS_ARCH}-debian-12" \
       "cypress-15.9.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
@@ -52,7 +52,7 @@ RUN mkdir /app && chmod g+rwX -R /app /opt/bitnami/node/cypress-cache && ln -s /
 ENV APP_VERSION="15.9.0" \
     BITNAMI_APP_NAME="cypress" \
     CYPRESS_CACHE_FOLDER="/opt/bitnami/node/cypress-cache" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/node/lib/node_modules/cypress/bin:$PATH"
 
 EXPOSE 3000
