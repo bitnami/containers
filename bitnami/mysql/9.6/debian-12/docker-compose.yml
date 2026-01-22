@@ -3,7 +3,7 @@
 
 services:
   mysql:
-    image: docker.io/bitnami/mysql:9.5
+    image: docker.io/bitnami/mysql:9.6
     ports:
       - '3306:3306'
     volumes:
