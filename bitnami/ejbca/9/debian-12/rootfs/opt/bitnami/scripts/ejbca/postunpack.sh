@@ -29,6 +29,9 @@ done
 
 chmod g+rw "$EJBCA_WILDFLY_STANDALONE_CONF_FILE"
 
+# Add a symlink to the ejbca base directory in /etc/ejbca as the .ear file will check for configuration there
+ln -s "$EJBCA_BASE_DIR" "/etc/ejbca"
+
 # Copy all initially generated configuration files and standalone to the default directory
 # (this is to avoid breaking when entrypoint is being overridden)
 cp -r "$EJBCA_CONF_DIR"/* "$EJBCA_DEFAULT_CONF_DIR"
