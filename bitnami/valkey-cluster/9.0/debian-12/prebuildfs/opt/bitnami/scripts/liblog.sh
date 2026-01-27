@@ -24,9 +24,9 @@ CYAN='\033[38;5;6m'
 stderr_print() {
     # 'is_boolean_yes' is defined in libvalidations.sh, but depends on this file so we cannot source it
     local bool="${BITNAMI_QUIET:-false}"
-    # comparison is performed without regard to the case of alphabetic characters
-    shopt -s nocasematch
-    if ! [[ "$bool" = 1 || "$bool" =~ ^(yes|true)$ ]]; then
+    # converts the string to lowercase
+    local bool_val="${bool,,}"
+    if ! [[ "$bool_val" = 1 || "$bool_val" =~ ^(yes|true)$ ]]; then
         printf "%b\\n" "${*}" >&2
     fi
 }
@@ -40,9 +40,9 @@ stderr_print() {
 #########################
 log() {
     local color_bool="${BITNAMI_COLOR:-true}"
-    # comparison is performed without regard to the case of alphabetic characters
-    shopt -s nocasematch
-    if [[ "$color_bool" = 1 || "$color_bool" =~ ^(yes|true)$ ]]; then
+    # converts the string to lowercase
+    local color_bool_val="${color_bool,,}"
+    if [[ "$color_bool_val" = 1 || "$color_bool_val" =~ ^(yes|true)$ ]]; then
         stderr_print "${CYAN}${MODULE:-} ${MAGENTA}$(date "+%T.%2N ")${RESET}${*}"
     else
         stderr_print "${MODULE:-} $(date "+%T.%2N ")${*}"
@@ -58,9 +58,9 @@ log() {
 info() {
     local msg_color=""
     local color_bool="${BITNAMI_COLOR:-true}"
-    # comparison is performed without regard to the case of alphabetic characters
-    shopt -s nocasematch
-    if [[ "$color_bool" = 1 || "$color_bool" =~ ^(yes|true)$ ]];then
+    # converts the string to lowercase
+    local color_bool_val="${color_bool,,}"
+    if [[ "$color_bool_val" = 1 || "$color_bool_val" =~ ^(yes|true)$ ]]; then
         msg_color="$GREEN"
     fi
     log "${msg_color}INFO ${RESET} ==> ${*}"
@@ -75,9 +75,9 @@ info() {
 warn() {
     local msg_color=""
     local color_bool="${BITNAMI_COLOR:-true}"
-    # comparison is performed without regard to the case of alphabetic characters
-    shopt -s nocasematch
-    if [[ "$color_bool" = 1 || "$color_bool" =~ ^(yes|true)$ ]];then
+    # converts the string to lowercase
+    local color_bool_val="${color_bool,,}"
+    if [[ "$color_bool_val" = 1 || "$color_bool_val" =~ ^(yes|true)$ ]]; then
         msg_color="$YELLOW"
     fi
     log "${msg_color}WARN ${RESET} ==> ${*}"
@@ -92,9 +92,9 @@ warn() {
 error() {
     local msg_color=""
     local color_bool="${BITNAMI_COLOR:-true}"
-    # comparison is performed without regard to the case of alphabetic characters
-    shopt -s nocasematch
-    if [[ "$color_bool" = 1 || "$color_bool" =~ ^(yes|true)$ ]];then
+    # converts the string to lowercase
+    local color_bool_val="${color_bool,,}"
+    if [[ "$color_bool_val" = 1 || "$color_bool_val" =~ ^(yes|true)$ ]]; then
         msg_color="$RED"
     fi
     log "${msg_color}ERROR${RESET} ==> ${*}"
@@ -111,9 +111,9 @@ error() {
 debug() {
     local msg_color=""
     local color_bool="${BITNAMI_COLOR:-true}"
-    # comparison is performed without regard to the case of alphabetic characters
-    shopt -s nocasematch
-    if [[ "$color_bool" = 1 || "$color_bool" =~ ^(yes|true)$ ]] ;then
+    # converts the string to lowercase
+    local color_bool_val="${color_bool,,}"
+    if [[ "$color_bool_val" = 1 || "$color_bool_val" =~ ^(yes|true)$ ]]; then
         msg_color="$MAGENTA"
     fi
     local debug_bool="${BITNAMI_DEBUG:-false}"
