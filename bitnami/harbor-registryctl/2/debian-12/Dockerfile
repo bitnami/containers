@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-01-16T01:33:46Z" \
+      org.opencontainers.image.created="2026-01-28T14:39:00Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/harbor-registryctl/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/harbor-registryctl" \
@@ -51,7 +51,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-registryctl/postunpack.sh
 ENV APP_VERSION="2.14.2" \
     BITNAMI_APP_NAME="harbor-registryctl" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="2" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/harbor-registry/bin:/opt/bitnami/harbor-registryctl/bin:$PATH"
 
 VOLUME [ "/etc/registry", "/etc/registryctl", "/storage", "/var/lib/registry" ]
