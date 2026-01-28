@@ -9,7 +9,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-01-13T19:09:34Z" \
+      org.opencontainers.image.created="2026-01-28T13:49:09Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/elasticsearch/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/elasticsearch" \
@@ -31,8 +31,8 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "yq-4.50.1-0-linux-${OS_ARCH}-debian-12" \
-      "java-21.0.9-15-0-linux-${OS_ARCH}-debian-12" \
+      "yq-4.50.1-1-linux-${OS_ARCH}-debian-12" \
+      "java-21.0.10-10-0-linux-${OS_ARCH}-debian-12" \
       "elasticsearch-9.2.4-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -54,7 +54,7 @@ RUN /opt/bitnami/scripts/elasticsearch/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="9.2.4" \
     BITNAMI_APP_NAME="elasticsearch" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     JAVA_HOME="/opt/bitnami/java" \
     LD_LIBRARY_PATH="/opt/bitnami/elasticsearch/jdk/lib:/opt/bitnami/elasticsearch/jdk/lib/server:$LD_LIBRARY_PATH"
 
