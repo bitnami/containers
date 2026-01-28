@@ -8,7 +8,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-01-19T10:47:23Z" \
+      org.opencontainers.image.created="2026-01-28T21:58:31Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/wildfly/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/wildfly" \
@@ -29,7 +29,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "jre-21.0.9-15-0-linux-${OS_ARCH}-debian-12" \
+      "jre-21.0.10-10-0-linux-${OS_ARCH}-debian-12" \
       "wildfly-39.0.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -52,7 +52,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/wildfly/postunpack.sh
 ENV APP_VERSION="39.0.0" \
     BITNAMI_APP_NAME="wildfly" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:$PATH" \
     WILDFLY_HOME="/home/wildfly"
