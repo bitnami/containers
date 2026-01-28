@@ -213,7 +213,6 @@ docker run -d --name moodle \
 | `MOODLE_LANG`                 | Allow to define default site language                                                                                        | `en`                               |
 | `MOODLE_USERNAME`             | Moodle user name.                                                                                                            | `user`                             |
 | `MOODLE_PASSWORD`             | Moodle user password.                                                                                                        | `bitnami`                          |
-| `MOODLE_DATABASE_MIN_VERSION` | Change database minimum version because of an issue with Azure Database for MariaDB.                                         | `nil`                              |
 | `MOODLE_EMAIL`                | Moodle user e-mail address.                                                                                                  | `user@example.com`                 |
 | `MOODLE_SMTP_HOST`            | Moodle SMTP server host.                                                                                                     | `nil`                              |
 | `MOODLE_SMTP_PORT_NUMBER`     | Moodle SMTP server port number.                                                                                              | `nil`                              |
