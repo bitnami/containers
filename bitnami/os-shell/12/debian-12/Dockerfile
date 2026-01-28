@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-01-11T09:35:13Z" \
+      org.opencontainers.image.created="2026-01-28T17:05:02Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/os-shell/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/os-shell" \
@@ -28,11 +28,11 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "yq-4.50.1-0-linux-${OS_ARCH}-debian-12" \
-      "wait-for-port-1.0.10-5-linux-${OS_ARCH}-debian-12" \
-      "render-template-1.0.9-160-linux-${OS_ARCH}-debian-12" \
-      "ini-file-1.4.9-5-linux-${OS_ARCH}-debian-12" \
-      "scuttle-1.1.12-0-linux-${OS_ARCH}-debian-12" \
+      "yq-4.50.1-1-linux-${OS_ARCH}-debian-12" \
+      "wait-for-port-1.0.10-6-linux-${OS_ARCH}-debian-12" \
+      "render-template-1.0.9-161-linux-${OS_ARCH}-debian-12" \
+      "ini-file-1.4.9-6-linux-${OS_ARCH}-debian-12" \
+      "scuttle-1.1.13-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -49,7 +49,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
 ENV APP_VERSION="12" \
     BITNAMI_APP_NAME="os-shell" \
-    IMAGE_REVISION="57" \
+    IMAGE_REVISION="58" \
     PATH="/opt/bitnami/common/bin:$PATH"
 
 USER 1001
