@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-01-11T12:13:56Z" \
+      org.opencontainers.image.created="2026-01-28T17:54:50Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/postgrest/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/postgrest" \
@@ -47,7 +47,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="14.3.0" \
     BITNAMI_APP_NAME="postgrest" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="2" \
     PATH="/opt/bitnami/postgrest/bin:$PATH"
 
 USER 1001
