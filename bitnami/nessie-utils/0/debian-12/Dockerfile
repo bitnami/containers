@@ -8,7 +8,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-01-11T09:04:59Z" \
+      org.opencontainers.image.created="2026-01-28T16:29:55Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/nessie-utils/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/nessie-utils" \
@@ -29,7 +29,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "jre-21.0.9-15-0-linux-${OS_ARCH}-debian-12" \
+      "jre-21.0.10-10-0-linux-${OS_ARCH}-debian-12" \
       "nessie-utils-0.106.1-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -51,7 +51,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="0.106.1" \
     BITNAMI_APP_NAME="nessie-utils" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="2" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/nessie/nessie-cli/bin:$PATH"
 
