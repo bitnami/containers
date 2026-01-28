@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-01-16T02:12:23Z" \
+      org.opencontainers.image.created="2026-01-28T19:38:34Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/volsync/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/volsync" \
@@ -62,7 +62,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="0.14.0" \
     BITNAMI_APP_NAME="volsync" \
-    IMAGE_REVISION="7" \
+    IMAGE_REVISION="8" \
     PATH="/opt/bitnami/volsync/bin:/opt/bitnami/rclone/bin:/opt/bitnami/diskrsync/bin:/opt/bitnami/syncthing/bin:$PATH"
 
 USER 1001
