@@ -102,23 +102,6 @@ moodle_validate() {
 }
 
 ########################
-# Bypass Azure for ManagedDB database version check
-# We detected some issues in the way that Azure Database for MariaDB
-# shows the version. This hack will bypass the Moodle installation check
-# Globals:
-#   MOODLE_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-moodle_fix_manageddb_check() {
-    info "Changing minimum required MariaDB version to $MOODLE_DATABASE_MIN_VERSION"
-    replace_in_file "$MOODLE_BASE_DIR/admin/environment.xml" "name=\"mariadb\" version=\"[^\"]+\"" "name=\"mariadb\" version=\"$MOODLE_DATABASE_MIN_VERSION\""
-    replace_in_file "$MOODLE_BASE_DIR/admin/environment.xml" "name=\"mysql\" version=\"[^\"]+\"" "name=\"mysql\" version=\"$MOODLE_DATABASE_MIN_VERSION\""
-}
-
-########################
 # Ensure Moodle is initialized
 # Globals:
 #   MOODLE_*
@@ -344,8 +327,6 @@ moodle_install() {
         "--agree-license"
         "$@"
     )
-    # HACK: Change database version check for Azure Database for MariaDB
-    ! is_empty_value "$MOODLE_DATABASE_MIN_VERSION" && moodle_fix_manageddb_check
     pushd "$MOODLE_BASE_DIR" >/dev/null || exit
     # Run as web server user to avoid having to change permissions/ownership afterwards
     if am_i_root; then
