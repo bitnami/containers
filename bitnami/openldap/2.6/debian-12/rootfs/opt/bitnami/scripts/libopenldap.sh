@@ -234,7 +234,7 @@ is_ldap_not_running() {
 #   Whether slapd is ready for queries
 ########################
 is_ldap_ready() {
-    debug_execute ldapsearch -Y EXTERNAL -H "ldapi:///" -b "cn=config" -s base "(objectClass=*)" dn
+	debug_execute ldapsearch -Y EXTERNAL -H "ldapi:///" -b "cn=config" -s base "(objectClass=*)" dn
 }
 
 ########################
