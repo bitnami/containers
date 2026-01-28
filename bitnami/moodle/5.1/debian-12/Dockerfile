@@ -9,7 +9,7 @@ ARG TARGETARCH
 ARG WITH_ALL_LOCALES="no"
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-01-11T09:02:39Z" \
+      org.opencontainers.image.created="2026-01-28T00:35:24Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/moodle/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/moodle" \
@@ -29,12 +29,12 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "render-template-1.0.9-160-linux-${OS_ARCH}-debian-12" \
-      "php-8.4.16-1-linux-${OS_ARCH}-debian-12" \
+      "render-template-1.0.9-161-linux-${OS_ARCH}-debian-12" \
+      "php-8.4.17-2-linux-${OS_ARCH}-debian-12" \
       "apache-2.4.66-0-linux-${OS_ARCH}-debian-12" \
       "postgresql-client-14.20.0-0-linux-${OS_ARCH}-debian-12" \
       "mysql-client-12.1.2-0-linux-${OS_ARCH}-debian-12" \
-      "libphp-8.4.16-0-linux-${OS_ARCH}-debian-12" \
+      "libphp-8.4.17-0-linux-${OS_ARCH}-debian-12" \
       "moodle-5.1.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -67,7 +67,7 @@ ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     APP_VERSION="5.1.1" \
     BITNAMI_APP_NAME="moodle" \
-    IMAGE_REVISION="3" \
+    IMAGE_REVISION="4" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:$PATH"
