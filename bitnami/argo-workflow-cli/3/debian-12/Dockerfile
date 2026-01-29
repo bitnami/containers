@@ -17,7 +17,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "argo-workflows-3.7.8-0-linux-${OS_ARCH}-debian-12" \
+      "argo-workflows-3.7.9-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -40,11 +40,11 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2026-01-21T11:51:13Z" \
+      org.opencontainers.image.created="2026-01-28T19:12:35Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="argo-workflow-cli" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="3.7.8"
+      org.opencontainers.image.version="3.7.9"
 
 COPY rootfs /
 COPY --from=builder /opt/bitnami/argo-workflows/hack/nsswitch.conf  /etc/nsswitch.conf
@@ -53,7 +53,7 @@ COPY --from=builder /opt/bitnami/argo-workflows/.spdx-argo-workflows.spdx /opt/b
 COPY --from=builder /opt/bitnami/argo-workflows/bin/argo /opt/bitnami/argo-workflows/bin/argo
 COPY --from=builder /opt/bitnami/argo-workflows/licenses /opt/bitnami/argo-workflows/licenses
 
-ENV APP_VERSION="3.7.8" \
+ENV APP_VERSION="3.7.9" \
     BITNAMI_APP_NAME="argo-workflow-cli" \
     IMAGE_REVISION="0" \
     PATH="/opt/bitnami/argo-workflows/bin:$PATH"

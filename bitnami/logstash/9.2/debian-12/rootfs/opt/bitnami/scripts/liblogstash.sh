@@ -97,20 +97,11 @@ logstash_create_sample_pipeline_config_file() {
     local outputs=""
     # Parse inputs
     if is_boolean_yes "$LOGSTASH_ENABLE_BEATS_INPUT"; then
-        # Newer versions of the logstash-input-beats use ssl_enabled instead of ssl
-        if [[ $(logstash_major_version) -eq 7 ]]; then
-            inputs+=$'\n'"beats {
-  ssl => false
-  host => \"${LOGSTASH_BIND_ADDRESS}\"
-  port => ${LOGSTASH_BEATS_PORT_NUMBER}
-}"
-        else
-              inputs+=$'\n'"beats {
+        inputs+=$'\n'"beats {
   ssl_enabled => false
   host => \"${LOGSTASH_BIND_ADDRESS}\"
   port => ${LOGSTASH_BEATS_PORT_NUMBER}
 }"
-        fi
     fi
     if is_boolean_yes "$LOGSTASH_ENABLE_GELF_INPUT"; then
         inputs+=$'\n'"gelf {
@@ -119,20 +110,11 @@ logstash_create_sample_pipeline_config_file() {
 }"
     fi
     if is_boolean_yes "$LOGSTASH_ENABLE_HTTP_INPUT"; then
-        # Newer versions of the logstash-input-http use ssl_enabled instead of ssl
-        if [[ $(logstash_major_version) -eq 7 ]]; then
-            inputs+=$'\n'"http {
-  ssl => false
-  host => \"${LOGSTASH_BIND_ADDRESS}\"
-  port => ${LOGSTASH_HTTP_PORT_NUMBER}
-}"
-        else
-              inputs+=$'\n'"http {
+        inputs+=$'\n'"http {
   ssl_enabled => false
   host => \"${LOGSTASH_BIND_ADDRESS}\"
   port => ${LOGSTASH_HTTP_PORT_NUMBER}
 }"
-        fi
     fi
     if is_boolean_yes "$LOGSTASH_ENABLE_TCP_INPUT"; then
         inputs+=$'\n'"tcp {
