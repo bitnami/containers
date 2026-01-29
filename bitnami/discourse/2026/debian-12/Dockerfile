@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-01-28T13:31:38Z" \
+      org.opencontainers.image.created="2026-01-29T14:13:29Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/discourse/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/discourse" \
       org.opencontainers.image.title="discourse" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="2026.1.0"
+      org.opencontainers.image.version="2026.2.0"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-12" \
@@ -31,9 +31,9 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
       "wait-for-port-1.0.10-6-linux-${OS_ARCH}-debian-12" \
       "ruby-3.3.10-4-linux-${OS_ARCH}-debian-12" \
       "postgresql-client-18.1.0-0-linux-${OS_ARCH}-debian-12" \
-      "node-20.20.0-0-linux-${OS_ARCH}-debian-12" \
+      "node-20.20.0-1-linux-${OS_ARCH}-debian-12" \
       "brotli-1.2.0-0-linux-${OS_ARCH}-debian-12" \
-      "discourse-2026.1.0-3-linux-${OS_ARCH}-debian-12" \
+      "discourse-2026.2.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -52,9 +52,9 @@ RUN uninstall_packages curl
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/discourse/postunpack.sh
-ENV APP_VERSION="2026.1.0" \
+ENV APP_VERSION="2026.2.0" \
     BITNAMI_APP_NAME="discourse" \
-    IMAGE_REVISION="6" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/brotli/bin:$PATH"
 
 EXPOSE 3000
