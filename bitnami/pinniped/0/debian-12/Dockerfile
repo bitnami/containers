@@ -17,7 +17,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "pinniped-0.43.0-1-linux-${OS_ARCH}-debian-12" \
+      "pinniped-0.44.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -40,20 +40,20 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2026-01-16T03:40:18Z" \
+      org.opencontainers.image.created="2026-01-30T21:37:49Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="pinniped" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="0.43.0"
+      org.opencontainers.image.version="0.44.0"
 
 COPY rootfs /
 COPY --from=builder /opt/bitnami/pinniped/.spdx-pinniped.spdx /opt/bitnami/pinniped/.spdx-pinniped.spdx
 COPY --from=builder /opt/bitnami/pinniped/bin /opt/bitnami/pinniped/bin
 COPY --from=builder /opt/bitnami/pinniped/licenses /opt/bitnami/pinniped/licenses
 
-ENV APP_VERSION="0.43.0" \
+ENV APP_VERSION="0.44.0" \
     BITNAMI_APP_NAME="pinniped" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/pinniped/bin:$PATH"
 
 USER 1001
