@@ -1,1 +1,0 @@
-argocd:x:1001:0:ArgoCD:/opt/bitnami/argo-cd:/bin/false
