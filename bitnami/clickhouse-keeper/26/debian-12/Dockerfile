@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-01-28T12:44:04Z" \
+      org.opencontainers.image.created="2026-02-03T12:51:27Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/argo-cd/README.md" \
-      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/argo-cd" \
-      org.opencontainers.image.title="argo-cd" \
+      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/clickhouse-keeper/README.md" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/clickhouse-keeper" \
+      org.opencontainers.image.title="clickhouse-keeper" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="3.2.6"
+      org.opencontainers.image.version="26.1.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -23,14 +23,12 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl git git-lfs gnupg openssh-client procps
+RUN install_packages ca-certificates curl procps xmlstarlet
 RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "nss-wrapper-1.1.16-0-linux-${OS_ARCH}-debian-12" \
-      "helm-3.20.0-0-linux-${OS_ARCH}-debian-12" \
-      "argo-cd-3.2.6-0-linux-${OS_ARCH}-debian-12" \
+      "clickhouse-keeper-26.1.2-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -48,12 +46,15 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN uninstall_packages curl
 
 COPY rootfs /
-RUN /opt/bitnami/scripts/argo-cd/postunpack.sh
-ENV APP_VERSION="3.2.6" \
-    BITNAMI_APP_NAME="argo-cd" \
-    IMAGE_REVISION="1" \
-    PATH="/opt/bitnami/common/bin:/opt/bitnami/helm/bin:/opt/bitnami/argo-cd/bin:/opt/bitnami/argo-cd/hack:/opt/bitnami/ksonnet/bin:/opt/bitnami/kustomize/bin:$PATH"
+RUN /opt/bitnami/scripts/clickhouse-keeper/postunpack.sh
+ENV APP_VERSION="26.1.2" \
+    BITNAMI_APP_NAME="clickhouse-keeper" \
+    IMAGE_REVISION="0" \
+    PATH="/opt/bitnami/clickhouse-keeper/bin:/opt/bitnami/common/bin:$PATH" \
+    clickhouseCTL_API="3"
+
+EXPOSE 9181 9234
 
 USER 1001
-ENTRYPOINT [ "/opt/bitnami/scripts/argo-cd/entrypoint.sh" ]
-CMD [ "argocd", "--help" ]
+ENTRYPOINT [ "/opt/bitnami/scripts/clickhouse-keeper/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/clickhouse-keeper/run.sh", "--", "--listen_host=0.0.0.0" ]

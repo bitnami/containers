@@ -3,7 +3,7 @@
 
 services:
   clickhouse:
-    image: docker.io/bitnami/clickhouse:25
+    image: docker.io/bitnami/clickhouse:26
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     ports:
