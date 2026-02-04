@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-01-28T14:00:00Z" \
+      org.opencontainers.image.created="2026-02-04T20:49:25Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/flux/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/flux" \
@@ -28,8 +28,8 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "kubectl-1.35.0-1-linux-${OS_ARCH}-debian-12" \
-      "flux-2.7.5-2-linux-${OS_ARCH}-debian-12" \
+      "kubectl-1.35.0-2-linux-${OS_ARCH}-debian-12" \
+      "flux-2.7.5-3-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -48,7 +48,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="2.7.5" \
     BITNAMI_APP_NAME="flux" \
-    IMAGE_REVISION="5" \
+    IMAGE_REVISION="6" \
     PATH="/opt/bitnami/kubectl/bin:/opt/bitnami/flux/bin:$PATH"
 
 USER 1001
