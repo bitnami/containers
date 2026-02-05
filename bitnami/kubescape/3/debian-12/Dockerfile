@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-01-28T15:47:10Z" \
+      org.opencontainers.image.created="2026-02-04T23:50:16Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/kubescape/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kubescape" \
@@ -29,7 +29,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "kubescape-3.0.48-0-linux-${OS_ARCH}-debian-12" \
+      "kubescape-3.0.48-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -49,7 +49,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/kubescape/postunpack.sh
 ENV APP_VERSION="3.0.48" \
     BITNAMI_APP_NAME="kubescape" \
-    IMAGE_REVISION="1"
+    IMAGE_REVISION="2"
 
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/scripts/kubescape/entrypoint.sh" ]
