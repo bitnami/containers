@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-01-28T19:39:35Z" \
+      org.opencontainers.image.created="2026-02-05T10:34:25Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/whereabouts/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/whereabouts" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "whereabouts-0.9.2-8-linux-${OS_ARCH}-debian-12" \
+      "whereabouts-0.9.2-9-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -48,7 +48,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="0.9.2" \
     BITNAMI_APP_NAME="whereabouts" \
-    IMAGE_REVISION="13" \
+    IMAGE_REVISION="14" \
     PATH="/opt/bitnami/whereabouts/bin:$PATH"
 
 USER 1001
