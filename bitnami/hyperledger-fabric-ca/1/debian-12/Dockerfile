@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-02-04T22:31:59Z" \
+      org.opencontainers.image.created="2026-02-06T17:45:50Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/hyperledger-fabric-ca/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/hyperledger-fabric-ca" \
       org.opencontainers.image.title="hyperledger-fabric-ca" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.5.16"
+      org.opencontainers.image.version="1.5.17"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,7 +29,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "golang-1.25.7-0-linux-${OS_ARCH}-debian-12" \
-      "hyperledger-fabric-ca-1.5.16-2-linux-${OS_ARCH}-debian-12" \
+      "hyperledger-fabric-ca-1.5.17-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -47,10 +47,10 @@ RUN mkdir -p /opt/bitnami/hyperledger-fabric-ca/etc && chmod g+rw /opt/bitnami/h
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN uninstall_packages curl
 
-ENV APP_VERSION="1.5.16" \
+ENV APP_VERSION="1.5.17" \
     BITNAMI_APP_NAME="hyperledger-fabric-ca" \
     FABRIC_CA_HOME="/opt/bitnami/hyperledger-fabric-ca/etc" \
-    IMAGE_REVISION="5" \
+    IMAGE_REVISION="0" \
     PATH="/go/bin:/opt/bitnami/go/bin:/opt/bitnami/hyperledger-fabric-ca/bin:$PATH"
 
 USER 1001
