@@ -17,7 +17,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "rabbitmq-cluster-operator-2.19.0-2-linux-${OS_ARCH}-debian-12" \
+      "rabbitmq-cluster-operator-2.19.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -39,20 +39,20 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2026-02-05T04:16:27Z" \
+      org.opencontainers.image.created="2026-02-06T13:43:48Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="rabbitmq-cluster-operator" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="2.19.0"
+      org.opencontainers.image.version="2.19.1"
 
 COPY rootfs /
 COPY --from=builder /opt/bitnami/rabbitmq-cluster-operator/.spdx-rabbitmq-cluster-operator.spdx /opt/bitnami/rabbitmq-cluster-operator/.spdx-rabbitmq-cluster-operator.spdx
 COPY --from=builder /opt/bitnami/rabbitmq-cluster-operator/bin/manager /opt/bitnami/rabbitmq-cluster-operator/bin/manager
 COPY --from=builder /opt/bitnami/rabbitmq-cluster-operator/licenses /opt/bitnami/rabbitmq-cluster-operator/licenses
 
-ENV APP_VERSION="2.19.0" \
+ENV APP_VERSION="2.19.1" \
     BITNAMI_APP_NAME="rabbitmq-cluster-operator" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/rabbitmq-cluster-operator/bin:$PATH"
 
 USER 1001
