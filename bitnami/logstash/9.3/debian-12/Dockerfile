@@ -9,7 +9,7 @@ ARG LOGSTASH_PLUGINS
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-02-09T15:43:21Z" \
+      org.opencontainers.image.created="2026-02-09T19:21:04Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/logstash/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/logstash" \
@@ -32,7 +32,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     COMPONENTS=( \
       "yq-4.52.2-1-linux-${OS_ARCH}-debian-12" \
       "java-17.0.18-10-1-linux-${OS_ARCH}-debian-12" \
-      "logstash-9.3.0-0-linux-${OS_ARCH}-debian-12" \
+      "logstash-9.3.0-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
