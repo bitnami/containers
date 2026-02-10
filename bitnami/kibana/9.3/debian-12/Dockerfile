@@ -7,28 +7,30 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-02-04T20:52:54Z" \
+      org.opencontainers.image.created="2026-02-09T19:21:50Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/grafana-alloy/README.md" \
-      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/grafana-alloy" \
-      org.opencontainers.image.title="grafana-alloy" \
+      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/kibana/README.md" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kibana" \
+      org.opencontainers.image.title="kibana" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.12.2"
+      org.opencontainers.image.version="9.3.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-12" \
-    OS_NAME="linux"
+    OS_NAME="linux" \
+    PATH="/opt/bitnami/common/bin:/opt/bitnami/kibana/bin:$PATH"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl procps
+RUN install_packages ca-certificates curl libexpat1 libgcc-s1 libnspr4 libnss3 libstdc++6 procps
 RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "grafana-alloy-1.12.2-2-linux-${OS_ARCH}-debian-12" \
+      "yq-4.52.2-1-linux-${OS_ARCH}-debian-12" \
+      "kibana-9.3.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -41,14 +43,17 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     done
 RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
-RUN useradd -r -u 1001 -g root grafana-alloy
+RUN chmod g+rwX /opt/bitnami
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
-RUN uninstall_packages curl
 
-ENV APP_VERSION="1.12.2" \
-    BITNAMI_APP_NAME="grafana-alloy" \
-    IMAGE_REVISION="3" \
-    PATH="/opt/bitnami/grafana-alloy/bin:$PATH"
+COPY rootfs /
+RUN /opt/bitnami/scripts/kibana/postunpack.sh
+ENV APP_VERSION="9.3.0" \
+    BITNAMI_APP_NAME="kibana" \
+    IMAGE_REVISION="0"
+
+EXPOSE 5601
 
 USER 1001
-ENTRYPOINT [ "/opt/bitnami/grafana-alloy/bin/alloy" ]
+ENTRYPOINT [ "/opt/bitnami/scripts/kibana/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/kibana/run.sh" ]
