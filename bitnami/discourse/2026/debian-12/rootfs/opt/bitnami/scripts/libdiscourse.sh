@@ -148,6 +148,9 @@ discourse_initialize() {
         discourse_create_conf_file
     fi
 
+    # Delete packageManger directive from package.json file to avoid download an old pnpm version
+    remove_in_file "${DISCOURSE_BASE_DIR}/package.json" 'packageManager' false
+
     # Check if Discourse has already been initialized and persisted in a previous run
     local -r app_name="discourse"
     if ! is_app_initialized "$app_name"; then

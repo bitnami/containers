@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-01-30T01:42:54Z" \
+      org.opencontainers.image.created="2026-02-10T17:39:34Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/mongodb/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mongodb" \
       org.opencontainers.image.title="mongodb" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="8.2.4"
+      org.opencontainers.image.version="8.2.5"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,11 +28,11 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "yq-4.50.1-1-linux-${OS_ARCH}-debian-12" \
-      "wait-for-port-1.0.10-6-linux-${OS_ARCH}-debian-12" \
-      "render-template-1.0.9-161-linux-${OS_ARCH}-debian-12" \
+      "yq-4.52.2-1-linux-${OS_ARCH}-debian-12" \
+      "wait-for-port-1.0.10-7-linux-${OS_ARCH}-debian-12" \
+      "render-template-1.0.9-162-linux-${OS_ARCH}-debian-12" \
       "mongodb-shell-2.6.0-0-linux-${OS_ARCH}-debian-12" \
-      "mongodb-8.2.4-1-linux-${OS_ARCH}-debian-12" \
+      "mongodb-8.2.5-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -51,9 +51,9 @@ RUN uninstall_packages curl
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mongodb/postunpack.sh
-ENV APP_VERSION="8.2.4" \
+ENV APP_VERSION="8.2.5" \
     BITNAMI_APP_NAME="mongodb" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mongodb/bin:$PATH"
 
 EXPOSE 27017
