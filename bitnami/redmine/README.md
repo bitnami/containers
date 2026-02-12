@@ -486,14 +486,6 @@ docker-compose up -d
   - `REDMINE_DB_POSTGRES` in favor of `REDMINE_DATABASE_HOST`. When used, `REDMINE_DATABASE_TYPE=postgresql` will also be set.
   - `REDMINE_DB_MYSQL`, in favor of `REDMINE_DATABASE_HOST`. Whenused, `REDMINE_DATABASE_TYPE=mariadb` will also be set.
 
-## Contributing
-
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
-
-## Issues
-
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
-
 ## License
 
 Copyright &copy; 2026 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.

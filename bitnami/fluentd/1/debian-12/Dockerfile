@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-01-28T13:59:22Z" \
+      org.opencontainers.image.created="2026-02-11T13:10:59Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/fluentd/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/fluentd" \
@@ -51,7 +51,7 @@ RUN /opt/bitnami/scripts/fluentd/postunpack.sh
 ENV APP_VERSION="1.19.1" \
     BITNAMI_APP_NAME="fluentd" \
     GEM_HOME="/opt/bitnami/fluentd" \
-    IMAGE_REVISION="4" \
+    IMAGE_REVISION="5" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/fluentd/bin:$PATH"
 
 EXPOSE 5140 24224

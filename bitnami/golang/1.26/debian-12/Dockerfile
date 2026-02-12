@@ -7,29 +7,27 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-02-10T07:07:16Z" \
+      org.opencontainers.image.created="2026-02-11T11:41:23Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
-      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/redis-cluster/README.md" \
-      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/redis-cluster" \
-      org.opencontainers.image.title="redis-cluster" \
+      org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/golang/README.md" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/golang" \
+      org.opencontainers.image.title="golang" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="8.4.1"
+      org.opencontainers.image.version="1.26.0"
 
-ENV HOME="/" \
-    OS_ARCH="${TARGETARCH:-amd64}" \
+ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-12" \
     OS_NAME="linux"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libgcc-s1 libgomp1 libssl3 libstdc++6 procps
+RUN install_packages build-essential ca-certificates curl git pkg-config procps unzip
 RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "wait-for-port-1.0.10-7-linux-${OS_ARCH}-debian-12" \
-      "redis-8.4.1-0-linux-${OS_ARCH}-debian-12" \
+      "golang-1.26.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -42,19 +40,15 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     done
 RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
-RUN chmod g+rwX /opt/bitnami
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
-RUN uninstall_packages curl
+RUN mkdir -p "/go/src" "/go/bin" && chmod -R 777 "/go"
 
-COPY rootfs /
-RUN /opt/bitnami/scripts/redis-cluster/postunpack.sh
-ENV APP_VERSION="8.4.1" \
-    BITNAMI_APP_NAME="redis-cluster" \
-    IMAGE_REVISION="1" \
-    PATH="/opt/bitnami/common/bin:/opt/bitnami/redis/bin:$PATH"
+ENV APP_VERSION="1.26.0" \
+    BITNAMI_APP_NAME="golang" \
+    GOCACHE="/go/.cache" \
+    GOPATH="/go" \
+    IMAGE_REVISION="0" \
+    PATH="/go/bin:/opt/bitnami/go/bin:$PATH"
 
-EXPOSE 6379
-
-USER 1001
-ENTRYPOINT [ "/opt/bitnami/scripts/redis-cluster/entrypoint.sh" ]
-CMD [ "/opt/bitnami/scripts/redis-cluster/run.sh" ]
+WORKDIR $GOPATH
+CMD [ "bash" ]

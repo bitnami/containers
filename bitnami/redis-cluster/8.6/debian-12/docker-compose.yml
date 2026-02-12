@@ -3,7 +3,7 @@
 
 services:
   redis-node-0:
-    image: docker.io/bitnami/redis-cluster:8.4
+    image: docker.io/bitnami/redis-cluster:8.6
     volumes:
       - redis-cluster_data-0:/bitnami/redis/data
     environment:
@@ -11,7 +11,7 @@ services:
       - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
 
   redis-node-1:
-    image: docker.io/bitnami/redis-cluster:8.4
+    image: docker.io/bitnami/redis-cluster:8.6
     volumes:
       - redis-cluster_data-1:/bitnami/redis/data
     environment:
@@ -19,7 +19,7 @@ services:
       - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
 
   redis-node-2:
-    image: docker.io/bitnami/redis-cluster:8.4
+    image: docker.io/bitnami/redis-cluster:8.6
     volumes:
       - redis-cluster_data-2:/bitnami/redis/data
     environment:
@@ -27,7 +27,7 @@ services:
       - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
 
   redis-node-3:
-    image: docker.io/bitnami/redis-cluster:8.4
+    image: docker.io/bitnami/redis-cluster:8.6
     volumes:
       - redis-cluster_data-3:/bitnami/redis/data
     environment:
@@ -35,7 +35,7 @@ services:
       - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
 
   redis-node-4:
-    image: docker.io/bitnami/redis-cluster:8.4
+    image: docker.io/bitnami/redis-cluster:8.6
     volumes:
       - redis-cluster_data-4:/bitnami/redis/data
     environment:
@@ -43,7 +43,7 @@ services:
       - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
 
   redis-node-5:
-    image: docker.io/bitnami/redis-cluster:8.4
+    image: docker.io/bitnami/redis-cluster:8.6
     volumes:
       - redis-cluster_data-5:/bitnami/redis/data
     depends_on:

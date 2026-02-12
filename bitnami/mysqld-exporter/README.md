@@ -151,14 +151,6 @@ docker run --name mysqld-exporter bitnami/mysqld-exporter:latest
 - `0.12.1-centos-7-r175` is considered the latest image based on CentOS.
 - Standard supported distros: Debian & OEL.
 
-## Contributing
-
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
-
-## Issues
-
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
-
 ## License
 
 Copyright &copy; 2026 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
