@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-02-02T19:05:28Z" \
+      org.opencontainers.image.created="2026-02-10T12:02:08Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/pymilvus/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/pymilvus" \
       org.opencontainers.image.title="pymilvus" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="2.6.8"
+      org.opencontainers.image.version="2.6.9"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,7 +29,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "python-3.12.12-13-linux-${OS_ARCH}-debian-12" \
-      "pymilvus-2.6.8-0-linux-${OS_ARCH}-debian-12" \
+      "pymilvus-2.6.9-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -48,7 +48,7 @@ RUN mkdir /.local && chmod g+rwX /.local
 RUN uninstall_packages curl
 
 RUN mkdir /app && chmod g+rwX /app
-ENV APP_VERSION="2.6.8" \
+ENV APP_VERSION="2.6.9" \
     BITNAMI_APP_NAME="pymilvus" \
     IMAGE_REVISION="0" \
     PATH="/opt/bitnami/python/bin:$PATH"
