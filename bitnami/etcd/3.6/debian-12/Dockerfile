@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-02-11T12:09:08Z" \
+      org.opencontainers.image.created="2026-02-13T19:43:01Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/etcd/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/etcd" \
       org.opencontainers.image.title="etcd" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="3.6.7"
+      org.opencontainers.image.version="3.6.8"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,7 +29,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "yq-4.52.2-1-linux-${OS_ARCH}-debian-12" \
-      "etcd-3.6.7-3-linux-${OS_ARCH}-debian-12" \
+      "etcd-3.6.8-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -48,9 +48,9 @@ RUN uninstall_packages ca-certificates curl
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/etcd/postunpack.sh
-ENV APP_VERSION="3.6.7" \
+ENV APP_VERSION="3.6.8" \
     BITNAMI_APP_NAME="etcd" \
-    IMAGE_REVISION="5" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/etcd/bin:$PATH"
 
 EXPOSE 2379 2380
