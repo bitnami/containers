@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-02-05T10:50:58Z" \
+      org.opencontainers.image.created="2026-02-13T18:34:06Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/drupal/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/drupal" \
@@ -29,9 +29,9 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "render-template-1.0.9-162-linux-${OS_ARCH}-debian-12" \
-      "php-8.4.17-5-linux-${OS_ARCH}-debian-12" \
+      "php-8.4.18-1-linux-${OS_ARCH}-debian-12" \
       "mysql-client-12.1.2-0-linux-${OS_ARCH}-debian-12" \
-      "libphp-8.4.17-0-linux-${OS_ARCH}-debian-12" \
+      "libphp-8.4.18-0-linux-${OS_ARCH}-debian-12" \
       "apache-2.4.66-0-linux-${OS_ARCH}-debian-12" \
       "drupal-11.3.3-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
@@ -60,7 +60,7 @@ ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     APP_VERSION="11.3.3" \
     BITNAMI_APP_NAME="drupal" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/apache/bin:/opt/bitnami/drupal/vendor/bin:$PATH"
 
 EXPOSE 8080 8443
