@@ -45,10 +45,6 @@ Deploying Bitnami applications as Helm Charts is the easiest way to get started 
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
-You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `bitnami/ASSET/BRANCH/DISTRO/tags-info.yaml`.
-
-Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
-
 ## Get this image
 
 The recommended way to get the Bitnami Drupal Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/drupal).
@@ -491,20 +487,6 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
 ## 8.5.3-r1
 
 - The drupal container now uses drush to install and update the Drupal application.
-
-## Contributing
-
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues/new) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
-
-## Issues
-
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new). Be sure to include the following information in your issue:
-
-- Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container
-- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 ## License
 
