@@ -1,17 +1,22 @@
 <p align="center">
-    <img width="180px" src="https://soldevelo.com/wp-content/uploads/2023/04/cropped-Frame-180x37.png" alt="SolDevelo Kafka" />
+    <img width="180px" src="https://soldevelo.com/wp-content/uploads/2023/04/cropped-Frame-180x37.png" alt="SolDevelo Containers" />
 </p>
 
-# SolDevelo Kafka Docker Image
+# SolDevelo Container Images
 
-This repository is a **fork of Bitnami's Containers Library**. Currently, we maintain only the **Apache Kafka container image**, but in the future we may add more containers. The Kafka image is maintained by SolDevelo to provide up-to-date Kafka versions and fixes, while keeping the original Bitnami base.
+This repository is a **fork of Bitnami's Containers Library**. We maintain **Apache Kafka** and **PostgreSQL HA (with repmgr)** container images, with plans to add more containers in the future. These images are maintained by SolDevelo to provide up-to-date versions and fixes, while keeping the original Bitnami base.
+
+## Available Images
+
+- **Apache Kafka** - Distributed streaming platform
+- **PostgreSQL HA** - High availability PostgreSQL with repmgr for replication and failover
 
 ## Features
 
-- Maintained Kafka container image by SolDevelo.
-- Based on Bitnami Kafka container (Apache-2.0 licensed).
-- Ready to use with Docker or Docker Compose.
-- Future support for additional containers planned.
+- Maintained container images by SolDevelo
+- Based on Bitnami containers (Apache-2.0 licensed)
+- Ready to use with Docker or Docker Compose
+- Future support for additional containers planned
 
 ## Get an image
 
