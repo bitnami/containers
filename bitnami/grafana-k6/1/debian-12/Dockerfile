@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-02-10T10:13:14Z" \
+      org.opencontainers.image.created="2026-02-16T12:19:24Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/grafana-k6/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/grafana-k6" \
       org.opencontainers.image.title="grafana-k6" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.6.0"
+      org.opencontainers.image.version="1.6.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "grafana-k6-1.6.0-0-linux-${OS_ARCH}-debian-12" \
+      "grafana-k6-1.6.1-0-linux-${OS_ARCH}-debian-12" \
       "scuttle-1.1.13-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -46,7 +46,7 @@ RUN useradd -r -u 1001 -g root grafana-k6
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN uninstall_packages curl
 
-ENV APP_VERSION="1.6.0" \
+ENV APP_VERSION="1.6.1" \
     BITNAMI_APP_NAME="grafana-k6" \
     IMAGE_REVISION="0" \
     PATH="/opt/bitnami/grafana-k6/bin:/opt/bitnami/common/bin:$PATH"
