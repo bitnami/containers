@@ -1,4 +1,4 @@
-# Copyright 2025 SolDevelo
+# Copyright 2026 SolDevelo
 # Based on Bitnami Kafka © Broadcom, Inc. (Apache-2.0)
 # SPDX-License-Identifier: Apache-2.0
 
@@ -8,7 +8,7 @@ services:
     ports:
       - "9092:9092"
     volumes:
-      - "kafka_data:/bitnami"   # kept for compatibility with upstream Bitnami layout
+      - "kafka_data:/bitnami"
     environment:
       # KRaft settings
       - KAFKA_CFG_NODE_ID=0
@@ -19,7 +19,6 @@ services:
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
-
 volumes:
   kafka_data:
     driver: local
