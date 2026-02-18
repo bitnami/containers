@@ -1,6 +1,7 @@
 #!/bin/bash
-# Copyright Broadcom, Inc. All Rights Reserved.
-# SPDX-License-Identifier: APACHE-2.0
+# Copyright 2026 SolDevelo
+# Based on Bitnami Kafka © Broadcom, Inc. (Apache-2.0)
+# SPDX-License-Identifier: Apache-2.0
 #
 # Bitnami Kafka library
 
@@ -522,6 +523,29 @@ Zookeeper."
     else
         if is_empty_value "${KAFKA_CFG_PROCESS_ROLES:-}"; then
             print_validation_error "Kafka requires at least one process role to be set. Set the environment variable KAFKA_CFG_PROCESS_ROLES to configure the process roles for Kafka."
+        fi
+        # Check for deprecated KAFKA_CFG_CONTROLLER_QUORUM_VOTERS usage
+        if ! is_empty_value "${KAFKA_CFG_CONTROLLER_QUORUM_VOTERS:-}" && is_empty_value "${KAFKA_INITIAL_CONTROLLERS:-}"; then
+            warn "================================================================"
+            warn "CONFIGURATION ERROR: Incompatible KRaft controller configuration"
+            warn "================================================================"
+            warn ""
+            warn "You are using KAFKA_CFG_CONTROLLER_QUORUM_VOTERS without KAFKA_INITIAL_CONTROLLERS."
+            warn "This configuration is no longer supported in Kafka 4.1+ due to changes in KRaft initialization."
+            warn ""
+            warn "MIGRATION REQUIRED:"
+            warn ""
+            warn "For single-node setups:"
+            warn "  Remove: KAFKA_CFG_CONTROLLER_QUORUM_VOTERS"
+            warn "  The container will auto-configure in standalone mode."
+            warn ""
+            warn "For multi-node clusters:"
+            warn "  Replace: KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@host1:9093,1@host2:9093,..."
+            warn "  With:    KAFKA_INITIAL_CONTROLLERS=0@host1:9093:voterid1,1@host2:9093:voterid2,..."
+            warn "           KAFKA_CFG_CONTROLLER_QUORUM_BOOTSTRAP_SERVERS=host1:9093,host2:9093,..."
+            warn ""
+            warn "See docker-compose-cluster.yml for a complete multi-node example."
+            warn "================================================================"
         fi
         check_kraft_process_roles
         if is_empty_value "${KAFKA_CFG_NODE_ID:-}"; then

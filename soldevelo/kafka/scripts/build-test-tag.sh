@@ -40,13 +40,15 @@ MAJOR_VERSION=$(echo "$VERSION" | cut -d. -f1,2)
 
 # Determine build directory
 BUILD_DIR="$MAJOR_VERSION/debian-12"
-if [ ! -d "$BUILD_DIR" ]; then
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+KAFKA_ROOT="$(dirname "$SCRIPT_DIR")"
+
+if [ ! -d "$KAFKA_ROOT/$BUILD_DIR" ]; then
     echo "ERROR: Build directory $BUILD_DIR does not exist"
     exit 1
 fi
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-cd "$SCRIPT_DIR/$BUILD_DIR"
+cd "$KAFKA_ROOT/$BUILD_DIR"
 
 # Configuration
 IMAGE_NAME="soldevelo/kafka"
