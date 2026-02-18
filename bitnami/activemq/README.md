@@ -110,14 +110,6 @@ Check the [official ActiveMQ documentation](https://activemq.apache.org/ for mor
 | `ACTIVEMQ_PIDFILE`          | ActiveMQ output destination                          | `${ACTIVEMQ_PID_FILE}`              |
 | `ACTIVEMQ_OUT`              | ActiveMQ output destination                          | `${ACTIVEMQ_LOG_FILE}`              |
 
-## Contributing
-
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
-
-## Issues
-
-If you encounter a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
-
 ## License
 
 Copyright &copy; 2026 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
