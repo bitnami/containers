@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-02-13T18:35:58Z" \
+      org.opencontainers.image.created="2026-02-19T03:44:20Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/pgpool/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/pgpool" \
@@ -51,7 +51,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/pgpool/postunpack.sh
 ENV APP_VERSION="4.7.0" \
     BITNAMI_APP_NAME="pgpool" \
-    IMAGE_REVISION="5" \
+    IMAGE_REVISION="6" \
     LD_LIBRARY_PATH="/opt/bitnami/common/lib:/opt/bitnami/common/lib64:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/pgpool/bin:/opt/bitnami/common/sbin:$PATH"
 
