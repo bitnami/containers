@@ -62,93 +62,11 @@ If you remove the container all your data will be lost, and the next time you ru
 
 For persistence you should mount a directory at the `/bitnami/clickhouse-keeper` path. If the mounted directory is empty, it will be initialized on the first run.
 
-```console
-docker run \
-    --volume /path/to/clickhouse-keeper-persistence:/bitnami/clickhouse-keeper \
-    bitnami/clickhouse-keeper:latest
-```
-
-You can also do this with a minor change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/clickhouse-keeper/docker-compose.yml) file present in this repository:
-
-```console
-clickhouse-keeper:
-  ...
-  volumes:
-    - /path/to/clickhouse-keeper-persistence:/bitnami/clickhouse-keeper
-  ...
-```
-
 ## Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a different server running inside a container can easily be accessed by your application containers and vice-versa.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
-
-### Using the Command Line
-
-In this example, we will create a ClickHouse Keeper client instance that will connect to the ClickHouse Keeper instance that is running on the same docker network as the client.
-
-#### Step 1: Create a network
-
-```console
-docker network create my-network --driver bridge
-```
-
-#### Step 2: Launch the ClickHouse Keeper container within your network
-
-Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `my-network` network.
-
-```console
-docker run -d --name clickhouse-keeper \
-  --env CLICKHOUSE_KEEPER_SERVER_ID=1 \
-  --network my-network \
-  bitnami/clickhouse-keeper:latest
-```
-
-#### Step 3: Launch your ClickHouse Keeper client instance
-
-Finally we create a new container instance to launch the ClickHouse Keeper client and connect to the ClickHouse Keeper created in the previous step:
-
-```console
-docker run -it --rm \
-    --network my-network \
-    bitnami/clickhouse-keeper:latest clickhouse-keeper-client --host clickhouse-keeper
-```
-
-### Using a Docker Compose file
-
-When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `my-network`. In this example we assume that you want to connect to the ClickHouse Keeper from your own custom application image which is identified in the following snippet by the service name `myapp`.
-
-```yaml
-version: '2'
-
-networks:
-  my-network:
-    driver: bridge
-
-services:
-  clickhouse-keeper:
-    image: bitnami/clickhouse-keeper:latest
-    environment:
-      - CLICKHOUSE_KEEPER_SERVER_ID=1
-    networks:
-      - my-network
-  myapp:
-    image: YOUR_APPLICATION_IMAGE
-    networks:
-      - my-network
-```
-
-> **IMPORTANT**:
->
-> 1. Please update the `YOUR_APPLICATION_IMAGE` placeholder in the above snippet with your application image
-> 2. In your application container, use the hostname `clickhouse-keeper` to connect to the ClickHouse Keeper server
-
-Launch the containers using:
-
-```console
-docker-compose up -d
-```
 
 ## Configuration
 
@@ -225,66 +143,6 @@ docker logs clickhouse-keeper
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
-
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of ClickHouse Keeper, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/clickhouse-keeper:latest
-```
-
-or if you're using Docker Compose, update the value of the image property to `bitnami/clickhouse-keeper:latest`.
-
-#### Step 2: Stop and backup the currently running container
-
-Stop the currently running container using the command
-
-```console
-docker stop clickhouse-keeper
-```
-
-or using Docker Compose:
-
-```console
-docker-compose stop clickhouse-keeper
-```
-
-Next, take a snapshot of the persistent volume `/path/to/clickhouse-keeper-persistence` using:
-
-```console
-rsync -a /path/to/clickhouse-keeper-persistence /path/to/clickhouse-keeper-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
-```
-
-#### Step 3: Remove the currently running container
-
-```console
-docker rm -v clickhouse-keeper
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v clickhouse-keeper
-```
-
-#### Step 4: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name clickhouse-keeper bitnami/clickhouse-keeper:latest
-```
-
-or using Docker Compose:
-
-```console
-docker-compose up clickhouse-keeper
-```
 
 ## License
 
