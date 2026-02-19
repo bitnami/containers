@@ -9,7 +9,7 @@ ARG LOGSTASH_PLUGINS
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-02-09T19:21:04Z" \
+      org.opencontainers.image.created="2026-02-19T02:51:38Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/logstash/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/logstash" \
@@ -30,7 +30,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "yq-4.52.2-1-linux-${OS_ARCH}-debian-12" \
+      "yq-4.52.4-0-linux-${OS_ARCH}-debian-12" \
       "java-17.0.18-10-1-linux-${OS_ARCH}-debian-12" \
       "logstash-9.3.0-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
@@ -54,7 +54,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/logstash/postunpack.sh
 ENV APP_VERSION="9.3.0" \
     BITNAMI_APP_NAME="logstash" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="2" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:/opt/bitnami/logstash/bin:$PATH"
 
