@@ -43,7 +43,7 @@ To run this application you need [Docker Engine](https://www.docker.com/products
 
 ## How to use this image
 
-Airflow requires access to a PostgreSQL database to store information. We will use our very own [PostgreSQL image](https://github.com/bitnami/containers/tree/main/bitnami/postgresql) for the database requirements. Additionally, if you pretend to use the `CeleryExecutor`, you will also need a [Redis(R) server](https://github.com/bitnami/containers/tree/main/bitnami/redis).
+Airflow requires access to a PostgreSQL database to store information. We will use the [Bitnami PostgreSQL image](https://github.com/bitnami/containers/tree/main/bitnami/postgresql) for the database requirements. Additionally, if you pretend to use the `CeleryExecutor`, you will also need a [Bitnami Redis(R) server](https://github.com/bitnami/containers/tree/main/bitnami/redis).
 
 ### Using the Docker Command Line
 
@@ -356,7 +356,7 @@ This container supports the installation of additional python modules at start-u
 | `AIRFLOW_LDAP_ROLES_MAPPING`             | Mapping from LDAP DN to a list of Airflow roles.                                                                                            | `nil`                           |
 | `AIRFLOW_LDAP_ROLES_SYNC_AT_LOGIN`       | Replace ALL the user roles each login, or only on registration.                                                                             | `True`                          |
 | `AIRFLOW_LDAP_USE_TLS`                   | Use LDAP SSL.                                                                                                                               | `False`                         |
-| `AIRFLOW_LDAP_ALLOW_SELF_SIGNED`         | Allow self signed certicates in LDAP ssl.                                                                                                   | `True`                          |
+| `AIRFLOW_LDAP_ALLOW_SELF_SIGNED`         | Allow self signed certificates in LDAP ssl.                                                                                                 | `True`                          |
 | `AIRFLOW_LDAP_TLS_CA_CERTIFICATE`        | File that store the CA for LDAP ssl.                                                                                                        | `nil`                           |
 
 #### Read-only environment variables
