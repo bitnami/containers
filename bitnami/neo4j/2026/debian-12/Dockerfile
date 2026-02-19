@@ -8,7 +8,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-02-10T18:32:35Z" \
+      org.opencontainers.image.created="2026-02-19T03:16:07Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/neo4j/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/neo4j" \
@@ -52,7 +52,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/neo4j/postunpack.sh
 ENV APP_VERSION="2026.1.4" \
     BITNAMI_APP_NAME="neo4j" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     JAVA_HOME="/opt/bitnami/java" \
     JAVA_OPTS="-Duser.home=/opt/bitnami/neo4j/.home" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/neo4j/bin:$PATH"
