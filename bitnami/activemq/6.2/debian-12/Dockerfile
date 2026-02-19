@@ -8,13 +8,13 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-02-09T07:41:08Z" \
+      org.opencontainers.image.created="2026-02-19T00:36:43Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/activemq/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/activemq" \
       org.opencontainers.image.title="activemq" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="6.2.0"
+      org.opencontainers.image.version="6.2.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -31,7 +31,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     COMPONENTS=( \
       "render-template-1.0.9-162-linux-${OS_ARCH}-debian-12" \
       "java-21.0.10-10-0-linux-${OS_ARCH}-debian-12" \
-      "activemq-6.2.0-1-linux-${OS_ARCH}-debian-12" \
+      "activemq-6.2.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -50,9 +50,9 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 COPY rootfs /
 RUN /opt/bitnami/scripts/activemq/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
-ENV APP_VERSION="6.2.0" \
+ENV APP_VERSION="6.2.1" \
     BITNAMI_APP_NAME="activemq" \
-    IMAGE_REVISION="5" \
+    IMAGE_REVISION="1" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:/opt/bitnami/activemq/bin:$PATH"
 

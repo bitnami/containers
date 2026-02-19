@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-02-09T08:55:22Z" \
+      org.opencontainers.image.created="2026-02-19T01:59:54Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/influxdb/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/influxdb" \
@@ -50,7 +50,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/influxdb/postunpack.sh
 ENV APP_VERSION="3.8.1" \
     BITNAMI_APP_NAME="influxdb" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="3" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/influxdb/bin:/opt/bitnami/common/bin:$PATH"
 

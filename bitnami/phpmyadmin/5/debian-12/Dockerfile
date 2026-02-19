@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-02-16T17:08:20Z" \
+      org.opencontainers.image.created="2026-02-18T12:44:20Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/phpmyadmin/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/phpmyadmin" \
@@ -59,7 +59,7 @@ ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     APP_VERSION="5.2.3" \
     BITNAMI_APP_NAME="phpmyadmin" \
-    IMAGE_REVISION="12" \
+    IMAGE_REVISION="13" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:$PATH"
 
 EXPOSE 8080 8443
