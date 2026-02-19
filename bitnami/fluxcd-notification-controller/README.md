@@ -57,32 +57,6 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of Flux Notification Controller, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/fluxcd-notification-controller:latest
-```
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v fluxcd-notification-controller
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name fluxcd-notification-controller bitnami/fluxcd-notification-controller:latest
-```
-
 ## Configuration
 
 ### Running commands
