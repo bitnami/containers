@@ -34,10 +34,6 @@ If you are looking for our previous generation of images based on Debian Linux, 
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
-You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `bitnami/ASSET/BRANCH/DISTRO/tags-info.yaml`.
-
-Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
-
 ## Get this image
 
 The recommended way to get the Bitnami Whereabouts Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/whereabouts).
@@ -58,32 +54,6 @@ If you wish, you can also build the image yourself by cloning the repository, ch
 git clone https://github.com/bitnami/containers.git
 cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
-```
-
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of Whereabouts, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/whereabouts:latest
-```
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v whereabouts
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name whereabouts bitnami/whereabouts:latest
 ```
 
 ## Configuration
@@ -109,14 +79,6 @@ The Bitnami Whereabouts Docker image from the [Bitnami Secure Images](https://go
 ### Starting January 16, 2024
 
 - The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
-
-## Contributing
-
-We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
-
-## Issues
-
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 

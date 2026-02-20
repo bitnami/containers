@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-02-05T10:34:25Z" \
+      org.opencontainers.image.created="2026-02-19T15:41:26Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/whereabouts/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/whereabouts" \
       org.opencontainers.image.title="whereabouts" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="0.9.2"
+      org.opencontainers.image.version="0.9.3"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "whereabouts-0.9.2-9-linux-${OS_ARCH}-debian-12" \
+      "whereabouts-0.9.3-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -46,9 +46,9 @@ RUN ln -sf /opt/bitnami/whereabouts/bin/whereabouts /whereabouts && ln -sf /opt/
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN uninstall_packages curl
 
-ENV APP_VERSION="0.9.2" \
+ENV APP_VERSION="0.9.3" \
     BITNAMI_APP_NAME="whereabouts" \
-    IMAGE_REVISION="14" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/whereabouts/bin:$PATH"
 
 USER 1001

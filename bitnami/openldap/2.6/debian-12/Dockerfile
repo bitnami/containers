@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-01-30T05:41:08Z" \
+      org.opencontainers.image.created="2026-02-19T03:28:31Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/openldap/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/openldap" \
@@ -49,7 +49,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/openldap/postunpack.sh
 ENV APP_VERSION="2.6.12" \
     BITNAMI_APP_NAME="openldap" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     PATH="/opt/bitnami/openldap/bin:/opt/bitnami/openldap/sbin:$PATH"
 
 EXPOSE 1389 1636
