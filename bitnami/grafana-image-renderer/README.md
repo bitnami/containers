@@ -145,40 +145,6 @@ docker logs grafana-image-renderer
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of Grafana Image Renderer, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/grafana-image-renderer:latest
-```
-
-#### Step 2: Stop the currently running container
-
-Stop the currently running container using the command
-
-```console
-docker stop grafana-image-renderer
-```
-
-#### Step 3: Remove the currently running container
-
-```console
-docker rm -v grafana-image-renderer
-```
-
-#### Step 4: Run the new image
-
-Re-create your container from the new image:
-
-```console
-docker run --name grafana-image-renderer bitnami/grafana-image-renderer:latest
-```
-
 ## Notable Changes
 
 ### 5.0.3-debian-12-r0
