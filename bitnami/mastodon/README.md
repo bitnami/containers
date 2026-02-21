@@ -56,46 +56,6 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of Mastodon, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/mastodon:latest
-```
-
-or if you're using Docker Compose, update the value of the image property to `bitnami/mastodon:latest`.
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v mastodon
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v mastodon
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name mastodon bitnami/mastodon:latest
-```
-
-or using Docker Compose:
-
-```console
-docker-compose up mastodon
-```
-
 ## Configuration
 
 ### Environment variables
@@ -171,32 +131,7 @@ docker-compose up mastodon
 | `MASTODON_DAEMON_USER`  | Mastodon daemon system user.      | `mastodon`                           |
 | `MASTODON_DAEMON_GROUP` | Mastodon daemon system group.     | `mastodon`                           |
 
-When you start the Mastodon image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. Please note that some variables are only considered when the container is started for the first time. If you want to add a new environment variable:
-
-- For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mastodon/docker-compose.yml) file present in this repository:
-
-    ```yaml
-    mastodon-api:
-      ...
-      environment:
-        - MASTODON_ADMIN_PASSWORD=my_password
-      ...
-    ```
-
-- For manual execution add a `--env` option with each variable and value:
-
-    ```console
-    $ docker run -d --name mastodon-api -p 80:8080 -p 443:8443 \
-      --env MASTODON_ADMIN_PASSWORD=my_password \
-      --env MASTODON_MODE=backend \
-      --network mastodon-tier \
-      --volume /path/to/mastodon-persistence:/bitnami \
-      bitnami/mastodon:latest
-    ```
-
-This container is fully compatible with the upstream Mastodon environment variables. Check the official [Mastodon documentation page](https://docs.joinmastodon.org/admin/config/) for more information.
-
-In addition to the official environment variables, the Bitnami Mastodon image adds the following extra environment variables:
+When you start the Mastodon image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
 
 #### Run mode
 
@@ -207,40 +142,6 @@ Mastodon supports three running modes:
 - Sidekiq: Performs background operations like sending emails.
 
 The running mode is defined via the `MASTODON_MODE` environment variable. The possible values are `web`, `streaming` and `sidekiq`.
-
-##### Connect Mastodon container to an existing database
-
-The Bitnami Mastodon container supports connecting the Mastodon application to an external database. This would be an example of using an external database for Mastodon.
-
-- Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mastodon/docker-compose.yml) file present in this repository:
-
-    ```diff
-       mastodon:
-         ...
-         environment:
-    -      - DB_HOST=postgresql
-    +      - DB_HOST=postgresql_host
-           - DB_PORT=5432
-           - DB_NAME=mastodon_db
-           - DB_USER=mastodon_user
-    +      - DB_PASS=mastodon_password
-         ...
-    ```
-
-- For manual execution:
-
-    ```console
-    $ docker run -d --name mastodon\
-      -p 8080:8080 -p 8443:8443 \
-      --network mastodon-network \
-      --env DB_HOST=postgresql_host \
-      --env DB_PORT=5432 \
-      --env DB_NAME=mastodon_db \
-      --env DB_USER=mastodon_user \
-      --env DB_PASS=mastodon_password \
-      --volume mastodon_data:/bitnami/mastodon \
-      bitnami/mastodon:latest
-    ```
 
 ### FIPS configuration in Bitnami Secure Images
 
@@ -263,12 +164,6 @@ docker-compose logs mastodon
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/mastodon).
-
-If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## License
 
