@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-02-19T05:19:29Z" \
+      org.opencontainers.image.created="2026-02-21T16:54:56Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/parse/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/parse" \
       org.opencontainers.image.title="parse" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="9.2.0"
+      org.opencontainers.image.version="9.3.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,10 +28,10 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "python-3.14.3-2-linux-${OS_ARCH}-debian-12" \
+      "python-3.14.3-3-linux-${OS_ARCH}-debian-12" \
       "node-24.13.1-0-linux-${OS_ARCH}-debian-12" \
       "mongodb-shell-2.7.0-0-linux-${OS_ARCH}-debian-12" \
-      "parse-9.2.0-0-linux-${OS_ARCH}-debian-12" \
+      "parse-9.3.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -50,9 +50,9 @@ RUN uninstall_packages curl
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/parse/postunpack.sh
-ENV APP_VERSION="9.2.0" \
+ENV APP_VERSION="9.3.0" \
     BITNAMI_APP_NAME="parse" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/parse/bin:$PATH"
 
 EXPOSE 1337 3000
