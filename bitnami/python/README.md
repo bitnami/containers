@@ -100,6 +100,10 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes.
+
 ## Entering the REPL
 
 By default, running this image will drop you into the Python REPL, where you can interactively test and try things out in Python.
@@ -148,52 +152,6 @@ python:
 The Bitnami Python Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
-
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of Python, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/python:latest
-```
-
-or if you're using Docker Compose, update the value of the image property to `bitnami/python:latest`.
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v python
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v python
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name python bitnami/python:latest
-```
-
-or using Docker Compose:
-
-```console
-docker-compose up python
-```
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes.
-
-If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## License
 
