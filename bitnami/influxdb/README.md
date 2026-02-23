@@ -60,100 +60,21 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/influxdb).
+
 ## Persisting your application
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
 For persistence you should mount a directory at the `/bitnami/influxdb` path. If the mounted directory is empty, it will be initialized on the first run.
 
-```console
-docker run \
-    --volume /path/to/influxdb-persistence:/bitnami/influxdb \
-    --env INFLUXDB_NODE_ID=0 \
-    bitnami/influxdb:latest
-```
-
-You can also do this with a minor change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/influxdb/docker-compose.yml) file present in this repository:
-
-```console
-InfluxDB:
-  ...
-  volumes:
-    - /path/to/influxdb-persistence:/bitnami/influxdb
-  ...
-```
-
 ## Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a different server running inside a container can easily be accessed by your application containers and vice-versa.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
-
-### Using the Command Line
-
-In this example, we will create a InfluxDB&trade; Core client instance that will connect to the server instance that is running on the same docker network as the client.
-
-#### Step 1: Create a network
-
-```console
-docker network create my-network --driver bridge
-```
-
-#### Step 2: Launch the InfluxDB&trade; Core container within your network
-
-Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `my-network` network.
-
-```console
-docker run -d --name influxdb-server \
-  --network my-network \
-  --env INFLUXDB_NODE_ID=0 \
-  bitnami/influxdb:latest
-```
-
-#### Step 3: Launch your InfluxDB&trade; Core client instance
-
-Finally we create a new container instance to launch the InfluxDB&trade; Core client and connect to the server created in the previous step:
-
-```console
-docker run -it --rm \
-    --network my-network \
-    bitnami/influxdb:latest influxdb3 show databases --host http://influxdb-server:8181
-```
-
-### Using a Docker Compose file
-
-When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `my-network`. In this example we assume that you want to connect to the InfluxDB&trade; Core server from your own custom application image which is identified in the following snippet by the service name `myapp`.
-
-```yaml
-version: '2'
-
-networks:
-  my-network:
-    driver: bridge
-
-services:
-  influxdb:
-    image: bitnami/influxdb:latest
-    environment:
-      - INFLUXDB_NODE_ID=0
-    networks:
-      - my-network
-  myapp:
-    image: YOUR_APPLICATION_IMAGE
-    networks:
-      - my-network
-```
-
-> **IMPORTANT**:
->
-> 1. Please update the `YOUR_APPLICATION_IMAGE` placeholder in the above snippet with your application image
-> 2. In your application container, use the hostname `influxdb` to connect to the InfluxDB&trade; Core server
-
-Launch the containers using:
-
-```console
-docker-compose up -d
-```
 
 ## Configuration
 
@@ -243,31 +164,9 @@ In order to have your custom files inside the docker image you can mount them as
 
 The admin token can easily be setup with the Bitnami InfluxDB&trade; Core Docker image setting the environment variable `INFLUXDB_CREATE_ADMIN_TOKEN` to `yes`.
 
-```console
-docker run --name influxdb -e INFLUXDB_CREATE_ADMIN_TOKEN=yes bitnami/influxdb:latest
-```
-
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/influxdb/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  influxdb:
-  ...
-    environment:
-      - INFLUXDB_CREATE_ADMIN_TOKEN=yes
-  ...
-```
-
 ### Creating databases during initialization
 
 You can use the `INFLUXDB_DATABASES` environment variable to specify a comma separated list of databases to created during the container initialization. This is useful if your application requires databases ready to be consumed, saving you from having to manually create them using the InfluxDB&trade; Core CLI.
-
-```console
-docker run --name influxdb \
-    -e INFLUXDB_CREATE_ADMIN_TOKEN=yes \
-    -e INFLUXDB_DATABASES=foo,bar \
-    bitnami/influxdb:latest
-```
 
 ### FIPS configuration in Bitnami Secure Images
 
@@ -284,72 +183,6 @@ docker logs influxdb
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
-
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of InfluxDB&trade; Core, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/influxdb:latest
-```
-
-or if you're using Docker Compose, update the value of the image property to `bitnami/influxdb:latest`.
-
-#### Step 2: Stop and backup the currently running container
-
-Stop the currently running container using the command
-
-```console
-docker stop influxdb
-```
-
-or using Docker Compose:
-
-```console
-docker-compose stop influxdb
-```
-
-Next, take a snapshot of the persistent volume `/path/to/influxdb-persistence` using:
-
-```console
-rsync -a /path/to/influxdb-persistence /path/to/influxdb-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
-```
-
-#### Step 3: Remove the currently running container
-
-```console
-docker rm -v influxdb
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v influxdb
-```
-
-#### Step 4: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name influxdb bitnami/influxdb:latest
-```
-
-or using Docker Compose:
-
-```console
-docker-compose up influxdb
-```
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/influxdb).
-
-If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## License
 
