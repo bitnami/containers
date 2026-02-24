@@ -60,28 +60,15 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/valkey-cluster).
+
 ## Persisting your application
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
 For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
-
-```console
-docker run \
-    -e ALLOW_EMPTY_PASSWORD=yes
-    -v /path/to/valkey-cluster-persistence:/bitnami \
-    bitnami/valkey-cluster:latest
-```
-
-You can also do this with a minor change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/valkey-cluster/docker-compose.yml) file present in this repository:
-
-```yaml
-valkey-cluster:
-  ...
-  volumes:
-    - /path/to/valkey-cluster-persistence:/bitnami
-  ...
-```
 
 ## Connecting to other containers
 
@@ -89,75 +76,9 @@ Using [Docker container networking](https://docs.docker.com/engine/userguide/net
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-### Using the Command Line
-
-#### Step 1: Create a network
-
-```console
-docker network create valkey-cluster-network --driver bridge
-```
-
-#### Step 2: Launch the Valkey Cluster container within your network
-
-Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `valkey-cluster-network` network.
-
-```console
-docker run -e ALLOW_EMPTY_PASSWORD=yes --name valkey-cluster-node1 --network valkey-cluster-network bitnami/valkey-cluster:latest
-```
-
-#### Step 3: Run another containers
-
-We can launch another containers using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
-
-## Configuration
-
-### Configuration file
-
-The image looks for configurations in `/opt/bitnami/valkey/mounted-etc/valkey.conf`. You can overwrite the `valkey.conf` file using your own custom configuration file.
-
-```console
-docker run --name valkey-cluster \
-    -e ALLOW_EMPTY_PASSWORD=yes \
-    -v /path/to/your_valkey.conf:/opt/bitnami/valkey/mounted-etc/valkey.conf \
-    -v /path/to/valkey-data-persistence:/bitnami/valkey/data \
-    bitnami/valkey-cluster:latest
-```
-
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/valkey-cluster/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  valkey-node-0:
-  ...
-    volumes:
-      - /path/to/your_valkey.conf:/opt/bitnami/valkey/mounted-etc/valkey.conf
-      - /path/to/valkey-persistence:/bitnami/valkey/data
-  ...
-```
-
-Refer to the [Valkey configuration](https://valkey.io//docs) manual for the complete list of configuration options.
-
 ### Overriding configuration
 
 Instead of providing a custom `valkey.conf`, you may also choose to provide only settings you wish to override. The image will look for `/opt/bitnami/valkey/mounted-etc/overrides.conf`. This will be ignored if custom `valkey.conf` is provided.
-
-```console
-docker run --name valkey-cluster \
-    -e ALLOW_EMPTY_PASSWORD=yes \
-    -v /path/to/overrides.conf:/opt/bitnami/valkey/mounted-etc/overrides.conf \
-    bitnami/valkey:latest
-```
-
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/valkey-cluster/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  valkey:
-  ...
-    volumes:
-      - /path/to/overrides.conf:/opt/bitnami/valkey/mounted-etc/overrides.conf
-  ...
-```
 
 ### Environment variables
 
@@ -247,68 +168,11 @@ Valkey adds the support for SSL/TLS connections, to enable this optional feature
 
 When enabling TLS, conventional standard traffic is disabled by default. However this new feature is not mutually exclusive, which means it is possible to listen to both TLS and non-TLS connection simultaneously. To enable non-TLS traffic, set `VALKEY_TLS_PORT_NUMBER` to another port different than `0`.
 
-1. Using `docker run`
-
-    ```console
-    $ docker run --name valkey-cluster \
-        -v /path/to/certs:/opt/bitnami/valkey/certs \
-        -v /path/to/valkey-cluster-persistence:/bitnami \
-        -e ALLOW_EMPTY_PASSWORD=yes \
-        -e VALKEY_TLS_ENABLED=yes \
-        -e VALKEY_TLS_CERT_FILE=/opt/bitnami/valkey/certs/valkey.crt \
-        -e VALKEY_TLS_KEY_FILE=/opt/bitnami/valkey/certs/valkey.key \
-        -e VALKEY_TLS_CA_FILE=/opt/bitnami/valkey/certs/valkeyCA.crt \
-        bitnami/valkey-cluster:latest
-    ```
-
-2. Modifying the `docker-compose.yml` file present in this repository:
-
-    ```yaml
-      valkey-cluster:
-      ...
-        environment:
-          ...
-          - VALKEY_TLS_ENABLED=yes
-          - VALKEY_TLS_CERT_FILE=/opt/bitnami/valkey/certs/valkey.crt
-          - VALKEY_TLS_KEY_FILE=/opt/bitnami/valkey/certs/valkey.key
-          - VALKEY_TLS_CA_FILE=/opt/bitnami/valkey/certs/valkeyCA.crt
-        ...
-        volumes:
-          - /path/to/certs:/opt/bitnami/valkey/certs
-        ...
-      ...
-    ```
-
 Alternatively, you may also provide with this configuration in your [custom](https://github.com/bitnami/containers/blob/main/bitnami/valkey-cluster#configuration-file) configuration file.
 
 ### Enable Valkey Cluster RDB persistence
 
-When the value of `VALKEY_RDB_POLICY_DISABLED` is `no` (default value) the Valkey default persistence strategy will be used. If you want to modify the default strategy, you can configure it through the `VALKEY_RDB_POLICY` parameter. Here is a demonstration of modifying the default persistence strategy
-
-1. Using `docker run`
-
-    ```console
-    $ docker run --name valkey-cluster \
-        -v /path/to/valkey-cluster-persistence:/bitnami \
-        -e ALLOW_EMPTY_PASSWORD=yes \
-        -e VALKEY_RDB_POLICY_DISABLED=no
-        -e VALKEY_RDB_POLICY="900#1 600#5 300#10 120#50 60#1000 30#10000"
-        bitnami/valkey-cluster:latest
-    ```
-
-2. Modifying the `docker-compose.yml` file present in this repository:
-
-    ```yaml
-      valkey-cluster:
-      ...
-        environment:
-          ...
-          - VALKEY_TLS_ENABLED=yes
-          - VALKEY_RDB_POLICY_DISABLED=no
-          - VALKEY_RDB_POLICY="900#1 600#5 300#10 120#50 60#1000 30#10000"
-        ...
-      ...
-    ```
+When the value of `VALKEY_RDB_POLICY_DISABLED` is `no` (default value) the Valkey default persistence strategy will be used. If you want to modify the default strategy, you can configure it through the `VALKEY_RDB_POLICY` parameter.
 
 ### FIPS configuration in Bitnami Secure Images
 
@@ -325,46 +189,6 @@ docker logs valkey-cluster
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
-
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of Valkey Cluster, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/valkey-cluster:latest
-```
-
-#### Step 2: Stop the running container
-
-Stop the currently running container using the command
-
-```console
-docker stop valkey-cluster
-```
-
-#### Step 3: Remove the currently running container
-
-```console
-docker rm -v valkey-cluster
-```
-
-#### Step 4: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name valkey-cluster bitnami/valkey-cluster:latest
-```
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/valkey-cluster).
-
-If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## Notable Changes
 

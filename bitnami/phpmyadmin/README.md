@@ -42,52 +42,13 @@ Deploying Bitnami applications as Helm Charts is the easiest way to get started 
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
-## Prerequisites
-
-To run this application you need [Docker Engine](https://www.docker.com/products/docker-engine) >= `1.10.0`. [Docker Compose](https://docs.docker.com/compose/) is recommended with a version `1.6.0` or later.
-
 ## How to use this image
 
-phpMyAdmin requires access to a MySQL database or MariaDB database to work. We'll use our very own [MariaDB image](https://github.com/bitnami/containers/tree/main/bitnami/mariadb).
-
-### Using the Docker Command Line
-
-1. Create a network
-
-    ```console
-    docker network create phpmyadmin-tier
-    ```
-
-2. Create a volume for MariaDB persistence and create a MariaDB container
-
-    ```console
-    docker volume create --name mariadb_data
-    docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
-      --net phpmyadmin-tier \
-      --volume mariadb_data:/bitnami/mariadb \
-      bitnami/mariadb:latest
-    ```
-
-3. Launch the phpMyAdmin container
-
-    ```console
-    docker run -d --name phpmyadmin -p 80:8080 -p 443:8443 \
-      --net phpmyadmin-tier \
-      bitnami/phpmyadmin:latest
-    ```
-
-    Access your application at `http://your-ip/`
+phpMyAdmin requires access to a MySQL database or MariaDB database to work. We'll use the [Bitnami MariaDB image](https://github.com/bitnami/containers/tree/main/bitnami/mariadb).
 
 ### Using Docker Compose
 
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/phpmyadmin/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
 Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/phpmyadmin).
-
-If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ### Persisting your application
 
@@ -95,47 +56,7 @@ If you remove the container all your data and configurations will be lost, and t
 
 For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the MariaDB data](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#persisting-your-database).
 
-The above examples define a Docker volume named `mariadb_data`. The application state will persist as long as this volume is not removed.
-
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
-
-#### Mount host directories as data volumes with Docker Compose
-
-This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/phpmyadmin/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  mariadb:
-  ...
-    volumes:
-      - /path/to/mariadb-persistence:/bitnami/mariadb
-  ...
-```
-
-#### Mount host directories as data volumes using the Docker command line
-
-1. Create a network (if it does not exist)
-
-    ```console
-    docker network create phpmyadmin-tier
-    ```
-
-2. Create a MariaDB container with host volume
-
-    ```console
-    docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
-      --net phpmyadmin-tier \
-      --volume /path/to/mariadb-persistence:/bitnami/mariadb \
-      bitnami/mariadb:latest
-    ```
-
-3. Launch the phpMyAdmin container
-
-    ```console
-    docker run -d --name phpmyadmin -p 80:8080 -p 443:8443 \
-      --net phpmyadmin-tier \
-      bitnami/phpmyadmin:latest
-    ```
 
 ## Upgrading phpMyAdmin
 
@@ -217,34 +138,6 @@ The `bitnami/phpmyadmin:latest` tag always points to the most recent release. To
 | `PHP_DEFAULT_POST_MAX_SIZE`                   | Default max PHP POST size.                                                                                                               | `80M`                                     |
 | `PHP_DEFAULT_MEMORY_LIMIT`                    | Default PHP memory limit.                                                                                                                | `256M`                                    |
 
-#### Specifying Environment variables using Docker Compose
-
-This requires a change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/phpmyadmin/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  mariadb:
-  ...
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-  ...
-  phpmyadmin:
-  ...
-    environment:
-      - DATABASE_ALLOW_NO_PASSWORD=false
-      - PHPMYADMIN_ALLOW_ARBITRARY_SERVER=yes
-  ...
-```
-
-#### Specifying Environment variables on the Docker command line
-
-```console
-docker run -d --name phpmyadmin -p 80:8080 -p 443:8443 \
-  --net phpmyadmin-tier \
-  --env PHPMYADMIN_PASSWORD=my_password \
-  bitnami/phpmyadmin:latest
-```
-
 ### FIPS configuration in Bitnami Secure Images
 
 The Bitnami phpMyAdmin Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
@@ -270,63 +163,6 @@ If your desired customizations cannot be covered using the methods mentioned abo
 FROM bitnami/phpmyadmin
 ### Put your customizations below
 ...
-```
-
-Here is an example of extending the image with the following modifications:
-
-- Install the `vim` editor
-- Modify the Apache configuration file
-- Modify the ports used by Apache
-- Modify the default container user
-
-```Dockerfile
-FROM bitnami/phpmyadmin
-
-### Change user to perform privileged actions
-USER 0
-### Install 'vim'
-RUN install_packages vim
-### Revert to the original non-root user
-USER 1001
-
-### Enable mod_ratelimit module
-RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt/bitnami/apache/conf/httpd.conf
-
-### Modify the ports used by Apache by default
-## It is also possible to change these environment variables at runtime
-ENV APACHE_HTTP_PORT_NUMBER=8181
-ENV APACHE_HTTPS_PORT_NUMBER=8143
-EXPOSE 8181 8143
-
-### Modify the default container user
-USER 1002
-```
-
-Based on the extended image, you can use a Docker Compose file like the one below to add other features:
-
-```yaml
-version: '2'
-services:
-  mariadb:
-    image: bitnami/mariadb:latest
-    environment:
-      - MARIADB_ROOT_PASSWORD=bitnami
-    volumes:
-      - mariadb_data:/bitnami/mariadb
-  phpmyadmin:
-    build: .
-    ports:
-      - 80:8181
-      - 443:8143
-    depends_on:
-      - mariadb
-    volumes:
-      - phpmyadmin_data:/bitnami/mariadb
-volumes:
-  mariadb_data:
-    driver: local
-  phpmyadmin_data:
-    driver: local
 ```
 
 ## Notable Changes

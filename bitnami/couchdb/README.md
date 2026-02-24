@@ -60,6 +60,10 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/couchdb).
+
 ## Persisting your application
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
@@ -89,26 +93,6 @@ couchdb:
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a different server running inside a container can easily be accessed by your application containers and vice-versa.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
-
-### Using the Command Line
-
-#### Step 1: Create a network
-
-```console
-docker network create couchdb-network --driver bridge
-```
-
-#### Step 2: Launch the CouchDB container within your network
-
-Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `couchdb-network` network.
-
-```console
-docker run --name couchdb-node1 --network couchdb-network bitnami/couchdb:latest
-```
-
-#### Step 3: Run another containers
-
-We can launch another containers using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
 
 ## Configuration
 
@@ -140,77 +124,11 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 | `COUCHDB_DAEMON_USER`  | CouchDB system user.                      | `couchdb`                                      |
 | `COUCHDB_DAEMON_GROUP` | CouchDB system group.                     | `couchdb`                                      |
 
-You can specify these environment variables in the `docker run` command:
-
-```console
-docker run --name couchdb -e COUCHDB_PORT_NUMBER=7777 bitnami/couchdb:latest
-```
-
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/couchdb/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  couchdb:
-  ...
-    environment:
-      - COUCHDB_PORT_NUMBER=7777
-  ...
-```
-
 ### Mounting your own configuration files
 
 If you want to provide more specific configuration options to CouchDB, you can always mount your own configuration files under `/opt/bitnami/couchdb/etc/`. You can either add new ones under `./local.d` or override the existing ones.
 
 To understand the precedence of the different configuration files, please check [how CouchDB reads them](https://docs.couchdb.org/en/stable/config/intro.html#configuration-files).
-
-#### Step 1: Run the CouchDB image
-
-Run the CouchDB image, mounting a directory from your host.
-
-```console
-docker run --name couchdb -v /path/to/config/dir:/opt/bitnami/couchdb/etc bitnami/couchdb:latest
-```
-
-or using Docker Compose:
-
-```yaml
-services:
-  couchdb:
-  ...
-    volumes:
-      - /path/to/config/dir:/opt/bitnami/couchdb/etc/
-  ...
-```
-
-#### Step 2: Edit the configuration
-
-Edit the configuration on your host using your favorite editor.
-
-```console
-vi /path/to/config/file/10-custom.ini
-```
-
-#### Step 3: Restart CouchDB
-
-After changing the configuration, restart your CouchDB container for changes to take effect.
-
-```console
-docker restart couchdb
-```
-
-or using Docker Compose:
-
-```console
-docker-compose restart couchdb
-```
-
-### Clustering configuration
-
-In order to configure CouchDB as a cluster of nodes, please make sure you set proper values for the following environment variables:
-
-- `COUCHDB_NODENAME`. A server alias. It should be different on each container.
-- `COUCHDB_CLUSTER_PORT_NUMBER`: Port for cluster communication. Default: **9100**
-- `COUCHDB_CREATE_DATABASES`: Whether to create the system databases or not. You should only set it to yes in one of the nodes. Default: **yes**
 
 ### FIPS configuration in Bitnami Secure Images
 
@@ -247,97 +165,11 @@ FROM bitnami/couchdb
 ...
 ```
 
-Here is an example of extending the image with the following modifications:
-
-- Install the `vim` editor
-- Modify the port used by CouchDB
-- Change the user that runs the container
-
-```Dockerfile
-FROM bitnami/couchdb
-
-### Change user to perform privileged actions
-USER 0
-### Install 'vim'
-RUN install_packages vim
-### Revert to the original non-root user
-USER 1001
-
-### Modify the ports used by NGINX by default
-ENV COUCHDB_PORT_NUMBER=1234 # It is also possible to change this environment variable at runtime
-EXPOSE 1234 4369
-
-### Modify the default container user
-USER 1002
-```
-
-Based on the extended image, you can use a Docker Compose file like the one below to add other features:
-
-- Add a custom configuration file
-
-```yaml
-version: '2'
-services:
-  couchdb:
-    build: .
-    environment:
-      - COUCHDB_PASSWORD=couchdb
-    ports:
-      - 1234:1234
-      - 4369:4369
-    volumes:
-      - couchdb_data:/bitnami/couchdb
-      - /path/to/config/file/10-custom.ini:/opt/bitnami/couchdb/etc/local.d/10-custom.ini
-volumes:
-  couchdb_data:
-    driver: local
-```
-
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of CouchDB, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/couchdb:latest
-```
-
-#### Step 2: Stop the running container
-
-Stop the currently running container using the command
-
-```console
-docker stop couchdb
-```
-
-#### Step 3: Remove the currently running container
-
-```console
-docker rm -v couchdb
-```
-
-#### Step 4: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name couchdb bitnami/couchdb:latest
-```
-
 ## Notable Changes
 
 ### 3.0.0-0-debian-10-r0
 
 - The usage of 'ALLOW_ANONYMOUS_LOGIN' is now deprecated. Please, specify a password for the admin user (defaults to "admin") by setting the 'COUCHDB_PASSWORD' environment variable.
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/couchdb).
-
-If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## License
 

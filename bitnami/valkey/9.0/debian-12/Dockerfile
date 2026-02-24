@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-02-19T05:08:46Z" \
+      org.opencontainers.image.created="2026-02-24T08:15:09Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/valkey/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/valkey" \
       org.opencontainers.image.title="valkey" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="9.0.2"
+      org.opencontainers.image.version="9.0.3"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,7 +29,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "wait-for-port-1.0.10-7-linux-${OS_ARCH}-debian-12" \
-      "valkey-9.0.2-0-linux-${OS_ARCH}-debian-12" \
+      "valkey-9.0.3-2-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -50,7 +50,7 @@ RUN uninstall_packages curl
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/valkey/postunpack.sh
-ENV APP_VERSION="9.0.2" \
+ENV APP_VERSION="9.0.3" \
     BITNAMI_APP_NAME="valkey" \
     IMAGE_REVISION="1" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/valkey/bin:$PATH"
