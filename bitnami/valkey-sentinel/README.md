@@ -226,46 +226,6 @@ docker logs valkey
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of Valkey Sentinel, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/valkey-sentinel:latest
-```
-
-#### Step 2: Stop and backup the currently running container
-
-Stop the currently running container using the command
-
-```console
-docker stop valkey
-```
-
-Next, take a snapshot of the persistent volume `/path/to/valkey-persistence` using:
-
-```console
-rsync -a /path/to/valkey-persistence /path/to/valkey-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
-```
-
-#### Step 3: Remove the currently running container
-
-```console
-docker rm -v valkey
-```
-
-#### Step 4: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name valkey bitnami/valkey-sentinel:latest
-```
-
 ## Notable Changes
 
 ### Starting October 20, 2024
