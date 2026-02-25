@@ -71,126 +71,15 @@ docker build -t bitnami/APP:latest .
 
 Drupal requires access to a MySQL or MariaDB database to store information. We'll use the [Bitnami Docker Image for MariaDB](https://github.com/bitnami/containers/tree/main/bitnami/mariadb) for the database requirements.
 
-### Using the Docker Command Line
-
-#### Step 1: Create a network
-
-```console
-docker network create drupal-network
-```
-
-#### Step 2: Create a volume for MariaDB persistence and create a MariaDB container
-
-```console
-$ docker volume create --name mariadb_data
-docker run -d --name mariadb \
-  --env ALLOW_EMPTY_PASSWORD=yes \
-  --env MARIADB_USER=bn_drupal \
-  --env MARIADB_PASSWORD=bitnami \
-  --env MARIADB_DATABASE=bitnami_drupal \
-  --network drupal-network \
-  --volume mariadb_data:/bitnami/mariadb \
-  bitnami/mariadb:latest
-```
-
-#### Step 3: Create volumes for Drupal persistence and launch the container
-
-```console
-$ docker volume create --name drupal_data
-docker run -d --name drupal \
-  -p 8080:8080 -p 8443:8443 \
-  --env ALLOW_EMPTY_PASSWORD=yes \
-  --env DRUPAL_DATABASE_USER=bn_drupal \
-  --env DRUPAL_DATABASE_PASSWORD=bitnami \
-  --env DRUPAL_DATABASE_NAME=bitnami_drupal \
-  --network drupal-network \
-  --volume drupal_data:/bitnami/drupal \
-  bitnami/drupal:latest
-```
-
-Access your application at `http://your-ip:8080/`
-
-### Run the application using Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/drupal/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/drupal).
-
-If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
-
 ## Persisting your application
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
 For persistence you should mount a directory at the `/bitnami/drupal` path. If the mounted directory is empty, it will be initialized on the first run. Additionally you should [mount a volume for persistence of the MariaDB data](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#persisting-your-database).
 
-The above examples define the Docker volumes named mariadb_data and drupal_data. The Drupal application state will persist as long as volumes are not removed.
-
 To avoid inadvertent removal of volumes, you can mount host directories as data volumes. Alternatively you can make use of volume plugins to host the volume data.
 
-### Mount host directories as data volumes with Docker Compose
-
-This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/drupal/docker-compose.yml) file present in this repository:
-
-```diff
-   mariadb:
-     ...
-     volumes:
--      - mariadb_data:/bitnami/mariadb
-+      - /path/to/mariadb-persistence:/bitnami/mariadb
-   ...
-   drupal:
-     ...
-     volumes:
--      - drupal_data:/bitnami/drupal
-+      - /path/to/drupal-persistence:/bitnami/drupal
-   ...
--volumes:
--  mariadb_data:
--    driver: local
--  drupal_data:
--    driver: local
-```
-
 > NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
-
-### Mount host directories as data volumes using the Docker command line
-
-#### Step 1: Create a network (if it does not exist)
-
-```console
-docker network create drupal-network
-```
-
-#### Step 2. Create a MariaDB container with host volume
-
-```console
-docker run -d --name mariadb \
-  --env ALLOW_EMPTY_PASSWORD=yes \
-  --env MARIADB_USER=bn_drupal \
-  --env MARIADB_PASSWORD=bitnami \
-  --env MARIADB_DATABASE=bitnami_drupal \
-  --network drupal-network \
-  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
-  bitnami/mariadb:latest
-```
-
-#### Step 3. Create the Drupal container with host volumes
-
-```console
-docker run -d --name drupal \
-  -p 8080:8080 -p 8443:8443 \
-  --env ALLOW_EMPTY_PASSWORD=yes \
-  --env DRUPAL_DATABASE_USER=bn_drupal \
-  --env DRUPAL_DATABASE_PASSWORD=bitnami \
-  --env DRUPAL_DATABASE_NAME=bitnami_drupal \
-  --network drupal-network \
-  --volume /path/to/drupal-persistence:/bitnami/drupal \
-  bitnami/drupal:latest
-```
 
 ## Configuration
 
@@ -234,64 +123,11 @@ docker run -d --name drupal \
 | `DRUPAL_DEFAULT_DATABASE_HOST` | Default database server host.                                                                                                    | `mariadb`                                       |
 | `PHP_DEFAULT_MEMORY_LIMIT`     | Default PHP memory limit.                                                                                                        | `256M`                                          |
 
-When you start the Drupal image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
+When you start the Drupal image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
 
-- For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/drupal/docker-compose.yml) file present in this repository:
+#### SMTP configuration
 
-```yaml
-drupal:
-  ...
-  environment:
-    - DRUPAL_PASSWORD=my_password
-  ...
-```
-
-- For manual execution add a `--env` option with each variable and value:
-
-  ```console
-  docker run -d --name drupal -p 80:8080 -p 443:8443 \
-    --env DRUPAL_PASSWORD=my_password \
-    --network drupal-tier \
-    --volume /path/to/drupal-persistence:/bitnami \
-    bitnami/drupal:latest
-  ```
-
-#### Example
-
-This would be an example of SMTP configuration using a Gmail account:
-
-- Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/drupal/docker-compose.yml) file present in this repository:
-
-```yaml
-  drupal:
-    ...
-    environment:
-      - DRUPAL_DATABASE_USER=bn_drupal
-      - DRUPAL_DATABASE_NAME=bitnami_drupal
-      - ALLOW_EMPTY_PASSWORD=yes
-      - DRUPAL_SMTP_HOST=smtp.gmail.com
-      - DRUPAL_SMTP_PORT=587
-      - DRUPAL_SMTP_USER=your_email@gmail.com
-      - DRUPAL_SMTP_PASSWORD=your_password
-      - DRUPAL_SMTP_PROTOCOL=tls
-  ...
-```
-
-- For manual execution:
-
-  ```console
-  docker run -d --name drupal -p 80:8080 -p 443:8443 \
-    --env DRUPAL_DATABASE_USER=bn_drupal \
-    --env DRUPAL_DATABASE_NAME=bitnami_drupal \
-    --env DRUPAL_SMTP_HOST=smtp.gmail.com \
-    --env DRUPAL_SMTP_PORT=587 \
-    --env DRUPAL_SMTP_USER=your_email@gmail.com \
-    --env DRUPAL_SMTP_PASSWORD=your_password \
-    --env DRUPAL_SMTP_PROTOCOL=tls \
-    --network drupal-tier \
-    --volume /path/to/drupal-persistence:/bitnami \
-    bitnami/drupal:latest
-  ```
+The `DRUPAL_SMTP_*` environment variables allows you configure the SMTP settings in the application. Please take a look at the environment variables information above for more information.
 
 ### FIPS configuration in Bitnami Secure Images
 
@@ -366,44 +202,6 @@ For the Drupal container:
    bitnami/drupal:latest
 ```
 
-### Upgrade this image
-
-Bitnami provides up-to-date versions of MariaDB and Drupal, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Drupal container. For the MariaDB upgrade see: <https://github.com/bitnami/containers/tree/main/bitnami/mariadb#upgrade-this-image>
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/drupal:latest
-```
-
-#### Step 2: Stop the running container
-
-Stop the currently running container using the command
-
-```console
-docker-compose stop drupal
-```
-
-#### Step 3: Take a snapshot of the application state
-
-Follow the steps in [Backing up your container](#backing-up-your-container) to take a snapshot of the current application state.
-
-#### Step 4: Remove the currently running container
-
-Remove the currently running container by executing the following command:
-
-```console
-docker-compose rm -v drupal
-```
-
-#### Step 5: Run the new image
-
-Update the image tag in `docker-compose.yml` and re-create your container with the new image:
-
-```console
-docker-compose up -d
-```
-
 ## Customize this image
 
 The Bitnami Drupal Docker image is designed to be extended so it can be used as the base image for your custom web applications.
@@ -423,48 +221,6 @@ If your desired customizations cannot be covered using the methods mentioned abo
 FROM bitnami/drupal
 ## Put your customizations below
 ...
-```
-
-Here is an example of extending the image with the following modifications:
-
-- Install the `vim` editor
-- Modify the Apache configuration file
-- Modify the ports used by Apache
-
-```Dockerfile
-FROM bitnami/drupal
-
-## Change user to perform privileged actions
-USER 0
-## Install 'vim'
-RUN install_packages vim
-## Revert to the original non-root user
-USER 1001
-
-## Enable mod_ratelimit module
-RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt/bitnami/apache/conf/httpd.conf
-
-## Modify the ports used by Apache by default
-# It is also possible to change these environment variables at runtime
-ENV APACHE_HTTP_PORT_NUMBER=8181
-ENV APACHE_HTTPS_PORT_NUMBER=8143
-EXPOSE 8181 8143
-```
-
-Based on the extended image, you can update the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/drupal/docker-compose.yml) file present in this repository to add other features:
-
-```diff
-   drupal:
--    image: bitnami/drupal:latest
-+    build: .
-     ports:
--      - 80:8080
--      - 443:8443
-+      - 80:8181
-+      - 443:8143
-     environment:
-+      - PHP_MEMORY_LIMIT=512m
-     ...
 ```
 
 ## Notable Changes
