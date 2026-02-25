@@ -100,6 +100,10 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes.
+
 ## Connecting to other containers
 
 This image is designed to be used with a web server to serve your PHP app, you can use docker networking to create a network and attach all the containers to that network.
@@ -108,23 +112,7 @@ This image is designed to be used with a web server to serve your PHP app, you c
 
 We will use PHP-FPM with nginx to serve our PHP app. Doing so will allow us to setup more complex configuration, serve static assets using nginx, load balance to different PHP-FPM instances, etc.
 
-#### Step 1: Create a network
-
-```console
-docker network create app-tier --driver bridge
-```
-
-or using Docker Compose:
-
-```yaml
-version: '2'
-
-networks:
-  app-tier:
-    driver: bridge
-```
-
-#### Step 2: Create a server block
+#### Step 1: Create a server block
 
 Let's create an nginx server block to reverse proxy to our PHP-FPM container.
 
@@ -148,22 +136,11 @@ server {
 }
 ```
 
-Notice we've substituted the link alias name `myapp`, we will use the same name when creating the container.
-
 Copy the server block above, saving the file somewhere on your host. We will mount it as a volume in our nginx container.
 
-#### Step 3: Run the PHP-FPM image with a specific name
+#### Step 2: Run the nginx image
 
-Docker's linking system uses container ids or names to reference containers. We can explicitly specify a name for our PHP-FPM server to make it easier to connect to other containers.
-
-```console
-docker run -it --name phpfpm \
-  --network app-tier
-  -v /path/to/app:/app \
-  bitnami/php-fpm
-```
-
-or using Docker Compose:
+Execute the following docker-compose.yml file
 
 ```yaml
 services:
@@ -173,21 +150,6 @@ services:
       - app-tier
     volumes:
       - /path/to/app:/app
-```
-
-#### Step 4: Run the nginx image
-
-```console
-docker run -it \
-  -v /path/to/server_block.conf:/opt/bitnami/nginx/conf/server_blocks/yourapp.conf \
-  --network app-tier \
-  bitnami/nginx
-```
-
-or using Docker Compose:
-
-```yaml
-services:
   nginx:
     image: bitnami/nginx:latest
     depends_on:
@@ -198,7 +160,11 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - /path/to/server_block.conf:/opt/bitnami/nginx/conf/server_blocks/yourapp.conf
+      - /path/to/server_block.conf:/opt/bitnami/nginx/conf/server_blocks/myapp.conf
+
+networks:
+  app-tier:
+    driver: bridge
 ```
 
 ## PHP runtime
@@ -270,48 +236,7 @@ docker run -it --name php-fpm -v /path/to/app:/app bitnami/php-fpm \
 
 ### Mount a custom config file
 
-You can mount a custom config file from your host to edit the default configuration for the php-fpm docker image. The following is an example to alter the configuration of the _php-fpm.conf_ configuration file:
-
-#### Step 1: Run the PHP-FPM image
-
-Run the PHP-FPM image, mounting a file from your host.
-
-```console
-docker run --name phpfpm -v /path/to/php-fpm.conf:/opt/bitnami/php/etc/php-fpm.conf bitnami/php-fpm
-```
-
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/php-fpm/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  phpfpm:
-  ...
-    volumes:
-      - /path/to/php-fpm.conf:/opt/bitnami/php/etc/php-fpm.conf
-  ...
-```
-
-#### Step 2: Edit the configuration
-
-Edit the configuration on your host using your favorite editor.
-
-```console
-vi /path/to/php-fpm.conf
-```
-
-#### Step 3: Restart PHP-FPM
-
-After changing the configuration, restart your PHP-FPM container for the changes to take effect.
-
-```console
-docker restart phpfpm
-```
-
-or using Docker Compose:
-
-```console
-docker-compose restart phpfpm
-```
+You can mount a custom `/opt/bitnami/php/etc/php-fpm.conf` file from your host to edit the default configuration for the php-fpm docker image.
 
 ### Add additional .ini files
 
@@ -320,23 +245,6 @@ PHP has been configured at compile time to scan the `/opt/bitnami/php/etc/conf.d
 Multiple files are loaded in alphabetical order. It is common to have a file per extension and use a numeric prefix to guarantee an order loading the configuration.
 
 Please check [http://php.net/manual/en/configuration.file.php#configuration.file.scan](http://php.net/manual/en/configuration.file.php#configuration.file.scan) to know more about this feature.
-
-In order to override the default `max_file_uploads` settings you can do the following:
-
-1. Create a file called _custom.ini_ with the following content:
-
-    ```config
-    max_file_uploads = 30M
-    ```
-
-2. Run the php-fpm container mounting the custom file.
-
-    ```console
-    docker run -it -v /path/to/custom.ini:/opt/bitnami/php/etc/conf.d/custom.ini bitnami/php-fpm php -i | grep max_file_uploads
-
-    ```
-
-    You should see that PHP is using the new specified value for the `max_file_uploads` setting.
 
 ### FIPS configuration in Bitnami Secure Images
 
@@ -361,69 +269,6 @@ docker-compose logs phpfpm
 ```
 
 _The `docker logs` command is only available when the `json-file` or `journald` logging driver is in use._
-
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of PHP-FPM, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/php-fpm:latest
-```
-
-or if you're using Docker Compose, update the value of the image property to
-`bitnami/php-fpm:latest`.
-
-#### Step 2: Stop and backup the currently running container
-
-Stop the currently running container using the command
-
-```console
-docker stop php-fpm
-```
-
-or using Docker Compose:
-
-```console
-docker-compose stop php-fpm
-```
-
-Next, take a snapshot of the persistent volume `/path/to/php-fpm-persistence` using:
-
-```console
-rsync -a /path/to/php-fpm-persistence /path/to/php-fpm-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
-```
-
-You can use this snapshot to restore the database state should the upgrade fail.
-
-#### Step 3: Remove the currently running container
-
-```console
-docker rm -v phpfpm
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v phpfpm
-```
-
-#### Step 4: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name phpfpm bitnami/php-fpm:latest
-```
-
-or using Docker Compose:
-
-```console
-docker-compose up phpfpm
-```
 
 ## Useful Links
 
@@ -452,12 +297,6 @@ docker-compose up phpfpm
 ### 5.5.30-0 (2015-10-06)
 
 - `/app` directory is no longer exported as a volume. This caused problems when building on top of the image, since changes in the volume are not persisted between Dockerfile `RUN` instructions. To keep the previous behavior (so that you can mount the volume in another container), create the container with the `-v /app` option.
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes.
-
-If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## License
 

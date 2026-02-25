@@ -286,32 +286,6 @@ docker run -it \
   bitnami/nginx
 ```
 
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of Node.js, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/node:latest
-```
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v node
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name node bitnami/node:latest
-```
-
 ## Notable Changes
 
 ### Starting January 16, 2024
