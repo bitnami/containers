@@ -88,32 +88,6 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of Kaniko, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/kaniko:latest
-```
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v kaniko
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name kaniko bitnami/kaniko:latest
-```
-
 ## Configuration
 
 ### Running commands
