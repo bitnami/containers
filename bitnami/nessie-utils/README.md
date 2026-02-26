@@ -56,34 +56,6 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of Nessie Utils, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/nessie-utils:latest
-```
-
-or if you're using Docker Compose, update the value of the image property to `bitnami/nessie-utils:latest`.
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v nessie-utils
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name nessie-utils bitnami/nessie-utils:latest
-```
-
 ## Configuration
 
 ### Running commands

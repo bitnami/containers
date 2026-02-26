@@ -3,7 +3,7 @@
 
 services:
   grafana:
-    image: docker.io/bitnami/grafana:12.3
+    image: docker.io/bitnami/grafana:12.4
     ports:
       - '3000:3000'
     environment:
