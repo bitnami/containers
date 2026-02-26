@@ -8,13 +8,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-02-11T16:03:23Z" \
+      org.opencontainers.image.created="2026-02-26T10:00:00Z" \
       org.opencontainers.image.description="PostgreSQL HA packaged by SolDevelo (based on Bitnami)" \
       org.opencontainers.image.documentation="https://github.com/soldevelo/containers/tree/main/soldevelo/postgresql-repmgr/README.md" \
       org.opencontainers.image.source="https://github.com/soldevelo/containers/tree/main/soldevelo/postgresql-repmgr" \
       org.opencontainers.image.title="postgresql-repmgr" \
       org.opencontainers.image.vendor="SolDevelo" \
-      org.opencontainers.image.version="18.2.0"
+      org.opencontainers.image.version="18.3.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -30,7 +30,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "nss-wrapper-1.1.16-0-linux-${OS_ARCH}-debian-12" \
-      "postgresql-repmgr-18.2.0-0-linux-${OS_ARCH}-debian-12" \
+      "postgresql-repmgr-18.3.0-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -54,9 +54,9 @@ RUN uninstall_packages curl
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/postgresql-repmgr/postunpack.sh
-ENV APP_VERSION="18.2.0" \
+ENV APP_VERSION="18.3.0" \
     BITNAMI_APP_NAME="postgresql-repmgr" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
