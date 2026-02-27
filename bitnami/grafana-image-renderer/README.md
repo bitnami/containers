@@ -1,19 +1,17 @@
 # Bitnami Secure Image for Grafana Image Renderer
 
-## What is Grafana Image Renderer?
-
 > The Grafana Image Renderer is a plugin for Grafana that uses headless Chrome to render panels and dashboards as PNG images.
 
 [Overview of Grafana Image Renderer](https://github.com/grafana/grafana-image-renderer)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
-## TL;DR
+## <a id="tl-dr"></a> TL;DR
 
 ```console
 docker run --name grafana-image-renderer bitnami/grafana-image-renderer:latest
 ```
 
-## Why use Bitnami Secure Images?
+## <a id="why-use-bitnami-secure-images"></a> Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
 
@@ -30,19 +28,19 @@ Each image comes with valuable security metadata. You can view the metadata in [
 
 If you are looking for our previous generation of images based on Debian Linux, please see the [Bitnami Legacy registry](https://hub.docker.com/u/bitnamilegacy).
 
-## How to deploy Grafana Image Renderer in Kubernetes?
+## <a id="how-to-deploy-in-kubernetes"></a> How to deploy Grafana Image Renderer in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Grafana Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/grafana).
 
-## Why use a non-root container?
+## <a id="why-non-root"></a> Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
 
-## Supported tags and respective `Dockerfile` links
+## <a id="supported-tags"></a> Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
-## Get this image
+## <a id="get-this-image"></a> Get this image
 
 The recommended way to get the Bitnami Grafana Image Renderer Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/grafana-image-renderer).
 
@@ -64,13 +62,13 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## Connecting to other containers
+## <a id="connecting-to-other-containers"></a> Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a different server running inside a container can easily be accessed by your application containers and vice-versa.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-### Using the Command Line
+### <a id="using-the-command-line"></a> Using the Command Line
 
 #### Step 1: Create a network
 
@@ -104,11 +102,13 @@ docker run -d --name grafana \
     bitnami/grafana:latest
 ```
 
-## Configuration
+## <a id="configuration"></a> Configuration
 
 You can customize Grafana Image Renderer settings by replacing the default configuration file with your custom configuration, or using environment variables.
 
-### Environment variables
+### <a id="environment-variables"></a> Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
@@ -129,13 +129,13 @@ You can customize Grafana Image Renderer settings by replacing the default confi
 | `GRAFANA_IMAGE_RENDERER_DAEMON_USER`  | Grafana system user.                                         | `grafana-image-renderer`                          |
 | `GRAFANA_IMAGE_RENDERER_DAEMON_GROUP` | Grafana system group.                                        | `grafana-image-renderer`                          |
 
-### FIPS configuration in Bitnami Secure Images
+### <a id="fips-configuration"></a> FIPS configuration in Bitnami Secure Images
 
 The Bitnami Grafana Image Renderer Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
-## Logging
+## <a id="logging"></a> Logging
 
 The Bitnami Grafana Image Renderer Docker image sends the container logs to the `stdout`. To view the logs:
 
@@ -145,17 +145,17 @@ docker logs grafana-image-renderer
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-## Notable Changes
+## <a id="notable-changes"></a> Notable Changes
 
 ### 5.0.3-debian-12-r0
 
 The entire service has been rewritten in Go, replacing the previous Node.js implementation. This new version no longer uses the `config.json` file for configuration. More detailed context can be found on [the upstream PR](https://github.com/grafana/grafana-image-renderer/pull/818).
 
-### Starting January 16, 2024
+### <a id="starting-january-16-2024"></a> Starting January 16, 2024
 
 - The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
-## License
+## <a id="license"></a> License
 
 Copyright &copy; 2026 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
