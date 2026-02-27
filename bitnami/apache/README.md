@@ -1,13 +1,11 @@
 # Bitnami Secure Image for Apache
 
-## What is Apache?
-
 > Apache HTTP Server is an open-source HTTP server. The goal of this project is to provide a secure, efficient and extensible server that provides HTTP services in sync with the current HTTP standards.
 
 [Overview of Apache](https://httpd.apache.org/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
-## TL;DR
+## <a id="tl-dr"></a> TL;DR
 
 ```console
 docker run --name apache bitnami/apache:latest
@@ -15,7 +13,7 @@ docker run --name apache bitnami/apache:latest
 
 You can find the available configuration options in the [Environment Variables](#environment-variables) section.
 
-## Why use Bitnami Secure Images?
+## <a id="why-use-bitnami-secure-images"></a> Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
 
@@ -32,19 +30,19 @@ Each image comes with valuable security metadata. You can view the metadata in [
 
 If you are looking for our previous generation of images based on Debian Linux, please see the [Bitnami Legacy registry](https://hub.docker.com/u/bitnamilegacy).
 
-## How to deploy Apache in Kubernetes?
+## <a id="how-to-deploy-in-kubernetes"></a> How to deploy Apache in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Apache Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/apache).
 
-## Why use a non-root container?
+## <a id="why-non-root"></a> Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
 
-## Supported tags and respective `Dockerfile` links
+## <a id="supported-tags"></a> Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
-## Get this image
+## <a id="get-this-image"></a> Get this image
 
 The recommended way to get the Bitnami Apache Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/apache).
 
@@ -66,7 +64,11 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## Hosting a static website
+## <a id="using-`docker-compose.yaml`"></a> Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/apache).
+
+## <a id="hosting-a-static-website"></a> Hosting a static website
 
 The `/app` path is configured as the Apache [DocumentRoot](https://httpd.apache.org/docs/2.4/urlmapping.html#documentroot). Content mounted here is served by the default catch-all virtual host.
 
@@ -89,9 +91,9 @@ services:
       - /path/to/app:/app
 ```
 
-> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
+> **NOTE** As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
-## Accessing your server from the host
+## <a id="accessing-your-server-from-the-host"></a> Accessing your server from the host
 
 To access your web server from your host machine you can ask Docker to map a random port on your host to ports `8080` and `8443` exposed in the container.
 
@@ -115,9 +117,13 @@ docker run -p 8080:8080 -p 8443:8443 bitnami/apache:latest
 
 Access your web server in the browser by navigating to `http://localhost:8080/`.
 
-## Configuration
+## <a id="configuration"></a> Configuration
 
-### Environment variables
+The following section describes the supported environment variables
+
+### <a id="environment-variables"></a> Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
@@ -174,7 +180,7 @@ docker run -d --name apache -p 80:8081 -p 443:443 \
   bitnami/apache:latest
 ```
 
-### Adding custom virtual hosts
+### <a id="adding-custom-virtual-hosts"></a> Adding custom virtual hosts
 
 The default `httpd.conf` includes virtual hosts placed in `/opt/bitnami/apache/conf/vhosts/`. You can mount a `my_vhost.conf` file containing your custom virtual hosts at the `/vhosts` folder.
 
@@ -217,7 +223,7 @@ services:
       - /path/to/my_vhost.conf:/vhosts/my_vhost.conf:ro
 ```
 
-### Using custom SSL certificates
+### <a id="using-custom-ssl-certificates"></a> Using custom SSL certificates
 
 *NOTE:* The steps below assume that you are using a custom domain name and that you have already configured the custom domain name to point to your server.
 
@@ -258,7 +264,7 @@ services:
       - /path/to/apache-certs:/certs
 ```
 
-### Full configuration
+### <a id="full-configuration"></a> Full configuration
 
 The image looks for configurations in `/opt/bitnami/apache/conf`. You can overwrite the `httpd.conf` file using your own custom configuration file.
 
@@ -283,13 +289,13 @@ services:
       - /path/to/httpd.conf:/opt/bitnami/apache/conf/httpd.conf
 ```
 
-### FIPS configuration in Bitnami Secure Images
+### <a id="fips-configuration"></a> FIPS configuration in Bitnami Secure Images
 
 The Bitnami Apache Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
-## Reverse proxy to other containers
+## <a id="reverse-proxy-to-other-containers"></a> Reverse proxy to other containers
 
 Apache can be used to reverse proxy to other containers using Docker's linking system. This is particularly useful if you want to serve dynamic content through an Apache frontend.
 
@@ -297,7 +303,7 @@ Apache can be used to reverse proxy to other containers using Docker's linking s
 
 - [mod_proxy documentation](http://httpd.apache.org/docs/2.2/mod/mod_proxy.html#forwardreverse)
 
-## Logging
+## <a id="logging"></a> Logging
 
 The Bitnami Apache Docker image sends the container logs to the `stdout`. To view the logs:
 
@@ -313,11 +319,11 @@ docker-compose logs apache
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-## Customize this image
+## <a id="customize-this-image"></a> Customize this image
 
 The Bitnami Apache Docker image is designed to be extended so it can be used as the base image for your custom web applications.
 
-### Extend this image
+### <a id="extend-this-image"></a> Extend this image
 
 Before extending this image, please note there are certain configuration settings you can modify using the original image:
 
@@ -330,7 +336,7 @@ If your desired customizations cannot be covered using the methods mentioned abo
 
 ```Dockerfile
 FROM bitnami/apache
-### Put your customizations below
+### <a id="put-your-customizations-below"></a> Put your customizations below
 ...
 ```
 
@@ -344,22 +350,22 @@ Here is an example of extending the image with the following modifications:
 ```Dockerfile
 FROM bitnami/apache
 
-### Change user to perform privileged actions
+### <a id="change-user-to-perform-privileged-actions"></a> Change user to perform privileged actions
 USER 0
-### Install 'vim'
+### <a id="install-'vim'"></a> Install 'vim'
 RUN install_packages vim
-### Revert to the original non-root user
+### <a id="revert-to-the-original-non-root-user"></a> Revert to the original non-root user
 USER 1001
 
-### Enable mod_ratelimit module
+### <a id="enable-mod_ratelimit-module"></a> Enable mod_ratelimit module
 RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt/bitnami/apache/conf/httpd.conf
 
-### Modify the ports used by Apache by default
-## It is also possible to change these environment variables at runtime
+### <a id="modify-the-ports-used-by-by-default"></a> Modify the ports used by Apache by default
+## <a id="it-is-also-possible-to-change-these-environment-variables-at-runtime"></a> It is also possible to change these environment variables at runtime
 ENV APACHE_HTTP_PORT_NUMBER=8181
 EXPOSE 8181 8443
 
-### Modify the default container user
+### <a id="modify-the-default-container-user"></a> Modify the default container user
 USER 1002
 ```
 
@@ -397,74 +403,11 @@ volumes:
     driver: local
 ```
 
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of Apache, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/apache:latest
-```
-
-or if you're using Docker Compose, update the value of the image property to
-`bitnami/apache:latest`.
-
-#### Step 2: Stop and backup the currently running container
-
-Stop the currently running container using the command
-
-```console
-docker stop apache
-```
-
-or using Docker Compose:
-
-```console
-docker-compose stop apache
-```
-
-Next, take a snapshot of the persistent volume `/path/to/apache-persistence` using:
-
-```console
-rsync -a /path/to/apache-persistence /path/to/apache-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
-```
-
-You can use this snapshot to restore the database state should the upgrade fail.
-
-#### Step 3: Remove the currently running container
-
-```console
-docker rm -v apache
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v apache
-```
-
-#### Step 4: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name apache bitnami/apache:latest
-```
-
-or using Docker Compose:
-
-```console
-docker-compose up apache
-```
-
-## Useful Links
+## <a id="useful-links"></a> Useful Links
 
 - [Create An AMP Development Environment With Bitnami Containers](https://docs.bitnami.com/containers/how-to/create-amp-environment-containers/)
 
-## Notable Changes
+## <a id="notable-changes"></a> Notable Changes
 
 ### 2.4.64-debian-12-r2
 
@@ -518,13 +461,7 @@ docker-compose up apache
 
 - The `/app` directory is no longer exported as a volume. This caused problems when building on top of the image, since changes in the volume are not persisted between Dockerfile `RUN` instructions. To keep the previous behavior (so that you can mount the volume in another container), create the container with the `-v /app` option.
 
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/apache).
-
-If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
-
-## License
+## <a id="license"></a> License
 
 Copyright &copy; 2026 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
