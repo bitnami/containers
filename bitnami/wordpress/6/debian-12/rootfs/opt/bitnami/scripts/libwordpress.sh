@@ -343,9 +343,9 @@ wordpress_initialize() {
                 fi
             fi
             # Post installation steps
-            local -r default_user_id="1"
-            wp_execute user meta set "$default_user_id" first_name "$WORDPRESS_FIRST_NAME"
-            wp_execute user meta set "$default_user_id" last_name "$WORDPRESS_LAST_NAME"
+            local -r user_id="$(wp_execute user get "$WORDPRESS_EMAIL" --field=ID)"
+            wp_execute user meta set "$user_id" first_name "$WORDPRESS_FIRST_NAME"
+            wp_execute user meta set "$user_id" last_name "$WORDPRESS_LAST_NAME"
             # Increase upload limit for multisite installations (default is 1MB)
             local -r default_site_id="1"
             is_boolean_yes "$WORDPRESS_ENABLE_MULTISITE" && wp_execute site meta update "$default_site_id" fileupload_maxk "$WORDPRESS_MULTISITE_FILEUPLOAD_MAXK"
