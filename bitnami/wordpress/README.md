@@ -1,21 +1,19 @@
 # Bitnami Secure Image for WordPress
 
-## What is WordPress?
-
 > WordPress is the world's most popular blogging and content management platform. Powerful yet simple, everyone from students to global corporations use it to build beautiful, functional websites.
 
 [Overview of WordPress](https://wordpress.org)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
-## TL;DR
+## <a id="tl-dr"></a> TL;DR
 
 ```console
 docker run --name wordpress bitnami/wordpress:latest
 ```
 
-**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
+> **NOTE** This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
 
-## Why use Bitnami Secure Images?
+## <a id="why-use-bitnami-secure-images?"></a> Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
 
@@ -32,19 +30,23 @@ Each image comes with valuable security metadata. You can view the metadata in [
 
 If you are looking for our previous generation of images based on Debian Linux, please see the [Bitnami Legacy registry](https://hub.docker.com/u/bitnamilegacy).
 
-## How to deploy WordPress in Kubernetes?
+## <a id="deploy-kubernetes"></a> How to deploy WordPress in Kubernetes
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami WordPress Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/wordpress).
 
-## Why use a non-root container?
+## <a id="why-non-root"></a> Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
 
-## Supported tags and respective `Dockerfile` links
+## <a id="supported-tags"></a> Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
-## Get this image
+You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `bitnami/ASSET/BRANCH/DISTRO/tags-info.yaml`.
+
+Subscribe to project updates by watching the [bitnami/containers GitHub repository](https://github.com/bitnami/containers).
+
+## <a id="get-this-image"></a> Get this image
 
 The recommended way to get the Bitnami WordPress Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/wordpress).
 
@@ -66,11 +68,11 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## How to use this image
+## <a id="how-to-use"></a> How to use this image
 
 WordPress requires access to a MySQL or MariaDB database to store information. We'll use the [Bitnami Docker Image for MariaDB](https://github.com/bitnami/containers/tree/main/bitnami/mariadb) for the database requirements.
 
-## Persisting your application
+## <a id="persisting"></a> Persisting your application
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -78,9 +80,15 @@ For persistence you should mount a directory at the `/bitnami/wordpress` path. I
 
 To avoid inadvertent removal of volumes, you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
-## Configuration
+> **NOTE** Because this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
-### Environment variables
+## <a id="configuration"></a> Configuration
+
+The following section describes environment variables and FIPS configuration.
+
+### <a id="environment-variables"></a> Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
@@ -161,7 +169,9 @@ To avoid inadvertent removal of volumes, you can [mount host directories as data
 
 When you start the WordPress image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
 
-### Examples
+### <a id="examples"></a> Examples
+
+The following examples show SMTP configuration and connecting to an existing database.
 
 #### SMTP configuration
 
@@ -171,13 +181,13 @@ The `WORDPRESS_SMTP_*` environment variables allows you configure the SMTP setti
 
 The Bitnami WordPress container supports connecting the WordPress application to an external database. In case the database already contains data from a previous WordPress installation, you need to set the variable `WORDPRESS_SKIP_BOOTSTRAP` to `yes`. Otherwise, the container would execute the installation wizard and could modify the existing data in the database. Note that, when setting `WORDPRESS_SKIP_BOOTSTRAP` to `yes`, values for environment variables such as `WORDPRESS_USERNAME`, `WORDPRESS_PASSWORD` or `WORDPRESS_EMAIL` will be ignored. Make sure that, in this imported database, the table prefix matches the one set in `WORDPRESS_TABLE_PREFIX`.
 
-### FIPS configuration in Bitnami Secure Images
+### <a id="fips-configuration"></a> FIPS configuration in Bitnami Secure Images
 
 The Bitnami WordPress Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
-## WP-CLI tool
+## <a id="wp-cli"></a> WP-CLI tool
 
 The Bitnami WordPress container includes the command line interface **wp-cli** that can help you to manage and interact with your WP sites. To run this tool, please note you need use the proper system user, **daemon**.
 
@@ -197,7 +207,7 @@ docker exec wordpress wp help
 
 Find more information about parameters available in the tool in the [official documentation](https://make.wordpress.org/cli/handbook/config/).
 
-## Logging
+## <a id="logging"></a> Logging
 
 The Bitnami WordPress Docker image sends the container logs to `stdout`. To view the logs:
 
@@ -213,34 +223,36 @@ docker-compose logs wordpress
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-## Maintenance
+## <a id="maintenance"></a> Maintenance
 
-### Backing up your container
+The following sections describe how to back up, restore, and upgrade the container.
+
+### <a id="backing-up"></a> Backing up your container
 
 To backup your data, configuration and logs, follow these simple steps:
 
-#### Step 1: Stop the currently running container
+1. Stop the currently running container.
 
-```console
-docker stop wordpress
-```
+    ```console
+    docker stop wordpress
+    ```
 
-Or using Docker Compose:
+    Or using Docker Compose:
 
-```console
-docker-compose stop wordpress
-```
+    ```console
+    docker-compose stop wordpress
+    ```
 
-#### Step 2: Run the backup command
+2. Run the backup command.
 
-We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
+    We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
 
-```console
-docker run --rm -v /path/to/wordpress-backups:/backups --volumes-from wordpress busybox \
-  cp -a /bitnami/wordpress /backups/latest
-```
+    ```console
+    docker run --rm -v /path/to/wordpress-backups:/backups --volumes-from wordpress busybox \
+      cp -a /bitnami/wordpress /backups/latest
+    ```
 
-### Restoring a backup
+### <a id="restoring-backup"></a> Restoring a backup
 
 Restoring a backup is as simple as mounting the backup as volumes in the containers.
 
@@ -264,11 +276,11 @@ For the WordPress container:
    bitnami/wordpress:latest
 ```
 
-## Customize this image
+## <a id="customize"></a> Customize this image
 
 The Bitnami WordPress Docker image is designed to be extended so it can be used as the base image for your custom web applications.
 
-### Extend this image
+### <a id="extend-image"></a> Extend this image
 
 Before extending this image, please note there are certain configuration settings you can modify using the original image:
 
@@ -285,11 +297,13 @@ FROM bitnami/wordpress
 ...
 ```
 
-## Notable Changes
+## <a id="notable-changes"></a> Notable changes
+
+The following subsections describe notable changes.
 
 ### 6.4.1-debian-11-r5
 
-- The XML-RCP endpoint has been disabled by default. Users can manually activate via the new `WORDPRESS_ENABLE_XML_RPC` environment variable.
+- The XML-RPC endpoint has been disabled by default. Users can manually activate it using the new `WORDPRESS_ENABLE_XML_RPC` environment variable.
 
 ### 5.7.1-debian-10-r21
 
@@ -312,7 +326,7 @@ FROM bitnami/wordpress
 
 ### 5.2.1-debian-9-r9 and 5.2.1-ol-7-r9
 
-- This image has been adapted so it's easier to customize. See the [Customize this image](#customize-this-image) section for more information.
+- This image has been adapted so it's easier to customize. See the [Customize this image](#customize) section for more information.
 - The Apache configuration volume (`/bitnami/apache`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the Apache configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom Apache configuration files are advised to mount a volume for the configuration at `/opt/bitnami/apache/conf`, or mount specific configuration files individually.
 - The PHP configuration volume (`/bitnami/php`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the PHP configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom PHP configuration files are advised to mount a volume for the configuration at `/opt/bitnami/php/conf`, or mount specific configuration files individually.
 - Enabling custom Apache certificates by placing them at `/opt/bitnami/apache/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`.
@@ -323,13 +337,13 @@ FROM bitnami/wordpress
 
 ### 5.0.3-r20
 
-- For performance and security reasons, Apache will set the `AllowOverride` directive to `None` by default. This means that, instead of using `.htaccess` files, all the default directives will be moved to the `/opt/bitnami/wordpress/wordpress-htaccess.conf` file. The only downside of this is the compatibility with certain plugins, which would require changes in that file (you would need to mount a modified version of `wordpress-htaccess.conf` compatible with these plugins). If you want to have the default `.htaccess` behavior, set the `WORDPRESS_HTACCESS_OVERRIDE_NONE` env var to `no`.
+- For performance and security reasons, Apache will set the `AllowOverride` directive to `None` by default. This means that, instead of using `.htaccess` files, all the default directives will be moved to the `/opt/bitnami/wordpress/wordpress-htaccess.conf` file. The only downside of this is the compatibility with certain plugins, which would require changes in that file (you would need to mount a modified version of `wordpress-htaccess.conf` compatible with these plugins). If you want to have the default `.htaccess` behavior, set the `WORDPRESS_HTACCESS_OVERRIDE_NONE` environment variable to `no`.
 
 ### 5.0.0-r0
 
 - **wp-cli** tool is included in the Docker image. Find it at **/opt/bitnami/wp-cli/bin/wp**.
 
-## License
+## <a id="license"></a> License
 
 Copyright &copy; 2026 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
