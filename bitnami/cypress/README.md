@@ -1,19 +1,17 @@
 # Bitnami Secure Image for Cypress
 
-## What is Cypress?
-
 > Cypress is a next-gen front-end testing tool built on Node.js for modern web. Features an improved UI, multiple browser support and high debuggability and real-time reloads.
 
 [Overview of Cypress](https://www.cypress.io/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
-## TL;DR
+## <a id="tl-dr"></a> TL;DR
 
 ```console
 docker run -it --name cypress bitnami/cypress
 ```
 
-## Why use Bitnami Secure Images?
+## <a id="why-use-bitnami-secure-images"></a> Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
 
@@ -30,15 +28,15 @@ Each image comes with valuable security metadata. You can view the metadata in [
 
 If you are looking for our previous generation of images based on Debian Linux, please see the [Bitnami Legacy registry](https://hub.docker.com/u/bitnamilegacy).
 
-## Why use a non-root container?
+## <a id="why-non-root"></a> Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
 
-## Supported tags and respective `Dockerfile` links
+## <a id="supported-tags"></a> Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
-## Get this image
+## <a id="get-this-image"></a> Get this image
 
 The recommended way to get the Bitnami cypress Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/cypress).
 
@@ -60,9 +58,11 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## Configuration
+## <a id="configuration"></a> Configuration
 
-### Running your Cypress app
+The following section describes how to run commands
+
+### <a id="running-your-app"></a> Running your Cypress app
 
 The default work directory for the Cypress image is `/app`. You can mount a folder from your host here that includes your Cypress script, and run it normally using the `cypress` command.
 
@@ -74,7 +74,7 @@ docker run -it --name cypress -v /path/to/app:/app bitnami/cypress
 
 - [cypress documentation](https://www.cypress.io//docs)
 
-### Browsers
+### <a id="browsers"></a> Browsers
 
 By default, the Cypress image contains the `chromium` browser included in the distro package repositories. In order to include extra browsers, you can extend the image using Cypress as a base. In the example below, we add the Firefox browser to the image:
 
@@ -91,13 +91,13 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 USER 1001
 ```
 
-### FIPS configuration in Bitnami Secure Images
+### <a id="fips-configuration"></a> FIPS configuration in Bitnami Secure Images
 
 The Bitnami Cypress Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
-## License
+## <a id="license"></a> License
 
 Copyright &copy; 2026 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
