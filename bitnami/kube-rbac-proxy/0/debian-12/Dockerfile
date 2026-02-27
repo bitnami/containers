@@ -17,7 +17,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "kube-rbac-proxy-0.20.2-2-linux-${OS_ARCH}-debian-12" \
+      "kube-rbac-proxy-0.21.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -40,20 +40,20 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2026-02-04T23:27:19Z" \
+      org.opencontainers.image.created="2026-02-26T13:58:54Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="kube-rbac-proxy" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="0.20.2"
+      org.opencontainers.image.version="0.21.0"
 
 COPY rootfs /
 COPY --from=builder /opt/bitnami/kube-rbac-proxy/.spdx-kube-rbac-proxy.spdx /opt/bitnami/kube-rbac-proxy/.spdx-kube-rbac-proxy.spdx
 COPY --from=builder /opt/bitnami/kube-rbac-proxy/bin/kube-rbac-proxy /opt/bitnami/kube-rbac-proxy/bin/kube-rbac-proxy
 COPY --from=builder /opt/bitnami/kube-rbac-proxy/licenses /opt/bitnami/kube-rbac-proxy/licenses
 
-ENV APP_VERSION="0.20.2" \
+ENV APP_VERSION="0.21.0" \
     BITNAMI_APP_NAME="kube-rbac-proxy" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/kube-rbac-proxy/bin:$PATH"
 
 USER 1001
