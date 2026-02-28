@@ -135,7 +135,7 @@ services:
 
 The default `nginx.conf` supports custom configuration files organized by NGINX context. You can mount configuration files into the appropriate context directories:
 
-- `/opt/bitnami/nginx/conf/context.d/main/` - For main context directives (e.g., module loading, worker processes)
+- `/opt/bitnami/nginx/conf/context.d/main/` - For main context directives (e.g., module loading)
 - `/opt/bitnami/nginx/conf/context.d/events/` - For events context directives (e.g., worker_connections)
 - `/opt/bitnami/nginx/conf/context.d/http/` - For http context directives (equivalent to server_blocks)
 
@@ -277,6 +277,16 @@ services:
     - /path/to/nginx-persistence/certs:/certs
     - /path/to/my_server_block.conf:/opt/bitnami/nginx/conf/server_blocks/my_server_block.conf:ro
   ...
+```
+
+### Configuring worker processes
+
+By default, the image configures `worker_processes` as `auto`. You can override this behavior by setting the `NGINX_WORKER_PROCESSES` environment variable to a positive integer (for example, `1`).
+
+```console
+docker run --name nginx --rm \
+  -e NGINX_WORKER_PROCESSES=1 \
+  bitnami/nginx:latest
 ```
 
 ### Solving redirection issues
@@ -477,6 +487,10 @@ To add a custom NGINX module, it is necessary to compile NGINX with that module 
 - [Create An EMP Development Environment With Bitnami Containers](https://docs.bitnami.com/containers/how-to/create-emp-environment-containers/)
 
 ## Notable Changes
+
+### Unreleased
+
+- Added support for configuring the `worker_processes` directive using the `NGINX_WORKER_PROCESSES` environment variable (allowed values: `auto` or a positive integer).
 
 ### Starting February 10, 2025
 
