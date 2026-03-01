@@ -22,7 +22,7 @@ jobs:
     strategy:
       max-parallel: 3
       matrix:
-        container: ["os-shell", "postgresql", "postgres-exporter", "redis-cluster", "redis-exporter", "minio", "minio-client", "minio-object-browser"]
+        container: ["os-shell", "postgresql", "postgres-exporter", "redis-cluster", "redis-exporter", "minio", "minio-client", "minio-object-browser", "kubectl"]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
