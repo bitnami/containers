@@ -13,7 +13,7 @@ docker run --name wordpress bitnami/wordpress:latest
 
 > **NOTE** This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
 
-## <a id="why-use-bitnami-secure-images?"></a> Why use Bitnami Secure Images?
+## <a id="why-use-bitnami-secure-images"></a> Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
 
