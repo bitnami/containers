@@ -1,13 +1,11 @@
 # Bitnami Secure Image for Odoo
 
-## What is Odoo?
-
 > Odoo is an open source ERP and CRM platform, formerly known as OpenERP, that can connect a wide variety of business operations such as sales, supply chain, finance, and project management.
 
 [Overview of Odoo](https://www.odoo.com/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
-## TL;DR
+## <a id="tl-dr"></a> TL;DR
 
 ```console
 docker run --name odoo bitnami/odoo:latest
@@ -16,7 +14,7 @@ docker run --name odoo bitnami/odoo:latest
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure d
 eployment.
 
-## Why use Bitnami Secure Images?
+## <a id="why-use-bitnami-secure-images"></a> Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
 
@@ -33,16 +31,16 @@ Each image comes with valuable security metadata. You can view the metadata in [
 
 If you are looking for our previous generation of images based on Debian Linux, please see the [Bitnami Legacy registry](https://hub.docker.com/u/bitnamilegacy).
 
-## How to deploy Odoo in Kubernetes?
+## <a id="how-to-deploy-in-kubernetes"></a> How to deploy Odoo in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the
 [Bitnami Odoo Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/odoo).
 
-## Supported tags and respective `Dockerfile` links
+## <a id="supported-tags"></a> Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
-## Get this image
+## <a id="get-this-image"></a> Get this image
 
 The recommended way to get the Bitnami Odoo Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/odoo).
 
@@ -64,15 +62,15 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## How to use this image
+## <a id="how-to-use-this-image"></a> How to use this image
 
 Odoo requires access to a PostgreSQL database to store information. We'll use the [Bitnami Docker Image for PostgreSQL](https://github.com/bitnami/containers/tree/main/bitnami/postgresql) for the database requirements.
 
-### Run the application using Docker Compose
+### <a id="run-the-application-using-docker-compose"></a> Run the application using Docker Compose
 
 Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/odoo).
 
-## Persisting your application
+## <a id="persisting-your-application"></a> Persisting your application
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -82,11 +80,15 @@ The above examples define the Docker volumes named `postgresql_data` and `odoo_d
 
 To avoid inadvertent removal of volumes, you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
-> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
+> **NOTE** As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
-## Configuration
+## <a id="configuration"></a> Configuration
 
-### Environment variables
+The following section describes the supported environment variables
+
+### <a id="environment-variables"></a> Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
@@ -134,7 +136,7 @@ To avoid inadvertent removal of volumes, you can [mount host directories as data
 
 When you start the Odoo image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
 
-### Examples
+### <a id="examples"></a> Examples
 
 #### SMTP configuration
 
@@ -144,13 +146,13 @@ The `ODOO_SMTP_*` environment variables allows you configure the SMTP settings i
 
 The Bitnami Odoo container supports connecting the Odoo application to an external database. In case the database already contains data from a previous Odoo installation, you need to set the variable `ODOO_SKIP_BOOTSTRAP` to `yes`. Otherwise, the container would execute the installation wizard and could modify the existing data in the database. Note that, when setting `ODOO_SKIP_BOOTSTRAP` to `yes`, values for environment variables such as `ODOO_EMAIL` or `ODOO_PASSWORD` will be ignored.
 
-### FIPS configuration in Bitnami Secure Images
+### <a id="fips-configuration"></a> FIPS configuration in Bitnami Secure Images
 
 The Bitnami Odoo Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
-## Logging
+## <a id="logging"></a> Logging
 
 The Bitnami Odoo Docker image sends the container logs to `stdout`. To view the logs:
 
@@ -166,9 +168,9 @@ docker-compose logs odoo
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-## Maintenance
+## <a id="maintenance"></a> Maintenance
 
-### Backing up your container
+### <a id="backing-up-your-container"></a> Backing up your container
 
 To backup your data, configuration and logs, follow these simple steps:
 
@@ -193,7 +195,7 @@ docker run --rm -v /path/to/odoo-backups:/backups --volumes-from odoo busybox \
   cp -a /bitnami/odoo /backups/latest
 ```
 
-### Restoring a backup
+### <a id="restoring-a-backup"></a> Restoring a backup
 
 Restoring a backup is as simple as mounting the backup as volumes in the containers.
 
@@ -217,9 +219,9 @@ For the Odoo container:
    bitnami/odoo:latest
 ```
 
-## Notable Changes
+## <a id="notable-changes"></a> Notable Changes
 
-### 12.0.20210615-debian-10-r20, 13.0.20210610-debian-10-r24 and 14.0.20210610-debian-10-r22
+### <a id="12.0.20210615-debian-10-r20--13.0.20210610-debian-10-r24-and-14.0.20210610-debian-10-r22"></a> 12.0.20210615-debian-10-r20, 13.0.20210610-debian-10-r24 and 14.0.20210610-debian-10-r22
 
 - The size of the container image has been decreased.
 - The configuration logic is now based on Bash scripts in the *rootfs/* folder.
@@ -228,7 +230,7 @@ For the Odoo container:
 - Added port 8072 to the list of exposed ports. This port is used by the [Odoo Longpolling service](https://www.odoo.com/documentation/14.0/administration/deployment/deploy.html#livechat).
 - The `WITHOUT_DEMO` environment variable was deprecated in favor of the boolean `ODOO_LOAD_DEMO_DATA` environment variable.
 
-## License
+## <a id="license"></a> License
 
 Copyright &copy; 2026 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 

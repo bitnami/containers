@@ -1,13 +1,11 @@
 # Bitnami Secure Image for Redmine
 
-## What is Redmine?
-
 > Redmine is an open source management application. It includes a tracking issue system, Gantt charts for a visual view of projects and deadlines, and supports SCM integration for version control.
 
 [Overview of Redmine](https://www.redmine.org/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
-## TL;DR
+## <a id="tl-dr"></a> TL;DR
 
 ```console
 docker run --name redmine bitnami/redmine:latest
@@ -15,7 +13,7 @@ docker run --name redmine bitnami/redmine:latest
 
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
 
-## Why use Bitnami Secure Images?
+## <a id="why-use-bitnami-secure-images"></a> Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
 
@@ -32,15 +30,15 @@ Each image comes with valuable security metadata. You can view the metadata in [
 
 If you are looking for our previous generation of images based on Debian Linux, please see the [Bitnami Legacy registry](https://hub.docker.com/u/bitnamilegacy).
 
-## How to deploy Redmine in Kubernetes?
+## <a id="how-to-deploy-in-kubernetes"></a> How to deploy Redmine in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Redmine Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/redmine).
 
-## Supported tags and respective `Dockerfile` links
+## <a id="supported-tags"></a> Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
-## Get this image
+## <a id="get-this-image"></a> Get this image
 
 The recommended way to get the Bitnami Redmine Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/redmine).
 
@@ -62,7 +60,7 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## Persisting your application
+## <a id="persisting-your-application"></a> Persisting your application
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -72,11 +70,15 @@ The above examples define the Docker volumes named `mariadb_data` and `redmine_d
 
 To avoid inadvertent removal of volumes, you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
-> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
+> **NOTE** As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
-## Configuration
+## <a id="configuration"></a> Configuration
 
-### Environment variables
+The following section describes the supported environment variables
+
+### <a id="environment-variables"></a> Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
@@ -124,13 +126,13 @@ To avoid inadvertent removal of volumes, you can [mount host directories as data
 
 When you start the Redmine image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
 
-### FIPS configuration in Bitnami Secure Images
+### <a id="fips-configuration"></a> FIPS configuration in Bitnami Secure Images
 
 The Bitnami Redmine Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
-## Logging
+## <a id="logging"></a> Logging
 
 The Bitnami Redmine Docker image sends the container logs to `stdout`. To view the logs:
 
@@ -146,11 +148,11 @@ docker-compose logs redmine
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-## Customize this image
+## <a id="customize-this-image"></a> Customize this image
 
 The Bitnami Redmine Docker image is designed to be extended.
 
-### Extend this image
+### <a id="extend-this-image"></a> Extend this image
 
 Before extending this image, please note there are certain configuration settings you can modify using the original image:
 
@@ -161,13 +163,13 @@ If your desired customizations cannot be covered using the methods mentioned abo
 
 ```Dockerfile
 FROM bitnami/redmine
-### Put your customizations below
+### <a id="put-your-customizations-below"></a> Put your customizations below
 ...
 ```
 
-## Maintenance
+## <a id="maintenance"></a> Maintenance
 
-### Backing up your container
+### <a id="backing-up-your-container"></a> Backing up your container
 
 To backup your data, configuration and logs, follow these simple steps:
 
@@ -192,7 +194,7 @@ docker run --rm -v /path/to/redmine-backups:/backups --volumes-from redmine busy
   cp -a /bitnami/redmine /backups/latest
 ```
 
-### Restoring a backup
+### <a id="restoring-a-backup"></a> Restoring a backup
 
 Restoring a backup is as simple as mounting the backup as volumes in the containers.
 
@@ -216,7 +218,7 @@ For the Redmine container:
    bitnami/redmine:latest
 ```
 
-## Notable Changes
+## <a id="notable-changes"></a> Notable Changes
 
 ### 4.2.1-debian-10-r70
 
@@ -228,7 +230,7 @@ For the Redmine container:
   - `REDMINE_DB_POSTGRES` in favor of `REDMINE_DATABASE_HOST`. When used, `REDMINE_DATABASE_TYPE=postgresql` will also be set.
   - `REDMINE_DB_MYSQL`, in favor of `REDMINE_DATABASE_HOST`. Whenused, `REDMINE_DATABASE_TYPE=mariadb` will also be set.
 
-## License
+## <a id="license"></a> License
 
 Copyright &copy; 2026 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
