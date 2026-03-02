@@ -1,19 +1,19 @@
 # Bitnami Secure Image for Ray
 
-## What is Ray?
-
 > Ray is a Python library for scaling AI and Python applications. Provides an API  and consists of a core distributed runtime and a set of AI libraries for simplifying ML compute
 
 [Overview of Ray](https://ray.io)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
-## TL;DR
+## <a id="tl-dr"></a> TL;DR
+
+Use this quick command to run the container.
 
 ```console
 docker run -it --name ray bitnami/ray
 ```
 
-## Why use Bitnami Secure Images?
+## <a id="why-use-bitnami-secure-images"></a> Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
 
@@ -30,15 +30,15 @@ Each image comes with valuable security metadata. You can view the metadata in [
 
 If you are looking for our previous generation of images based on Debian Linux, please see the [Bitnami Legacy registry](https://hub.docker.com/u/bitnamilegacy).
 
-## Why use a non-root container?
+## <a id="why-non-root"></a> Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
 
-## Supported tags and respective `Dockerfile` links
+## <a id="supported-tags"></a> Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
-## Get this image
+## <a id="get-this-image"></a> Get this image
 
 The recommended way to get the Bitnami Ray Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/ray).
 
@@ -60,7 +60,7 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## Entering the REPL
+## <a id="entering-the-repl"></a> Entering the REPL
 
 By default, running this image will drop you into the Python REPL, where you can interactively test and try things out with Ray in Python.
 
@@ -68,18 +68,20 @@ By default, running this image will drop you into the Python REPL, where you can
 docker run -it --name ray bitnami/ray
 ```
 
-## Configuration
+## <a id="configuration"></a> Configuration
 
-### Running your Ray app
+The following sections describe how to run your app and configure FIPS.
 
-The default work directory for the Ray image is `/app`. You can mount a folder from your host here that includes your Ray script, and run it normally using the `python` command.
+### <a id="running-your-ray-app"></a> Running your Ray app
+
+The default work directory for the Ray image is `/app`. You can mount a folder from your host here that includes your Ray script and run it normally using the `python` command.
 
 ```console
 docker run -it --name ray -v /path/to/app:/app bitnami/ray \
   python script.py
 ```
 
-### Running a Ray app with package dependencies
+### <a id="running-ray-app-with-dependencies"></a> Running a Ray app with package dependencies
 
 If your Ray app has a `requirements.txt` defining your app's dependencies, you can install the dependencies before running your app.
 
@@ -88,49 +90,25 @@ docker run -it --name ray -v /path/to/app:/app bitnami/ray \
   sh -c "pip install --file requirements.txt && python script.py"
 ```
 
-**Further Reading:**
+**Additional documentation:**
 
-- [ray documentation](https://ray.iodocs/)
+- [Ray documentation](https://ray.iodocs/)
 
-### FIPS configuration in Bitnami Secure Images
+### <a id="fips-configuration"></a> FIPS configuration in Bitnami Secure Images
 
 The Bitnami Ray Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
-## Maintenance
+## <a id="notable-changes"></a> Notable changes
 
-### Upgrade this image
-
-Bitnami provides up-to-date versions of Ray, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/ray:latest
-```
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v ray
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name ray bitnami/ray:latest
-```
-
-## Notable Changes
+The following subsections describe notable changes.
 
 ### Starting January 16, 2024
 
 - The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
-## License
+## <a id="license"></a> License
 
 Copyright &copy; 2026 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
