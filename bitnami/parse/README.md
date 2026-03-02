@@ -1,13 +1,11 @@
 # Bitnami Secure Image for Parse Server
 
-## What is Parse Server?
-
 > Parse is a platform that enables users to add a scalable and powerful backend to launch a full-featured app for iOS, Android, JavaScript, Windows, Unity, and more.
 
 [Overview of Parse Server](https://parseplatform.org/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
-## TL;DR
+## <a id="tl-dr"></a> TL;DR
 
 ```console
 docker run --name parse bitnami/parse:latest
@@ -15,7 +13,7 @@ docker run --name parse bitnami/parse:latest
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
 
-## Why use Bitnami Secure Images?
+## <a id="why-use-bitnami-secure-images"></a> Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
 
@@ -32,27 +30,27 @@ Each image comes with valuable security metadata. You can view the metadata in [
 
 If you are looking for our previous generation of images based on Debian Linux, please see the [Bitnami Legacy registry](https://hub.docker.com/u/bitnamilegacy).
 
-## How to deploy Parse Server in Kubernetes?
+## <a id="how-to-deploy-in-kubernetes"></a> How to deploy Parse Server in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Parse Server Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/parse).
 
-## Why use a non-root container?
+## <a id="why-non-root"></a> Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
 
-## Supported tags and respective `Dockerfile` links
+## <a id="supported-tags"></a> Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
-## How to use this image
+## <a id="how-to-use-this-image"></a> How to use this image
 
-### Run Parse with a Database Container
+### <a id="run-parse-with-a-database-container"></a> Run Parse with a Database Container
 
 #### Run the application using Docker Compose
 
 Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/parse).
 
-### Persisting your application
+### <a id="persisting-your-application"></a> Persisting your application
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -62,9 +60,9 @@ The above examples define docker volumes namely `mongodb_data` and `parse_data`.
 
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
-> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
+> **NOTE** As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
-## Upgrade this application
+## <a id="upgrade-this-application"></a> Upgrade this application
 
 Bitnami provides up-to-date versions of Mongodb and Parse, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Parse container. For the Mongodb upgrade see <https://github.com/bitnami/containers/tree/main/bitnami/mongodb#user-content-upgrade-this-image>
 
@@ -99,9 +97,13 @@ Bitnami provides up-to-date versions of Mongodb and Parse, including security pa
     - For docker-compose: `$ docker-compose up parse`
     - For manual execution (mount the directories if needed): `docker run --name parse bitnami/parse:latest`
 
-## Configuration
+## <a id="configuration"></a> Configuration
 
-### Environment variables
+The following section describes the supported environment variables
+
+### <a id="environment-variables"></a> Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
@@ -140,7 +142,7 @@ Bitnami provides up-to-date versions of Mongodb and Parse, including security pa
 
 When you start the parse image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
 
-### How to deploy your Cloud functions with Parse Cloud Code?
+### <a id="how-to-deploy-your-cloud-functions-with-parse-cloud-code?"></a> How to deploy your Cloud functions with Parse Cloud Code?
 
 You can use Cloud Code to run a piece of code in your Parse Server instead of the user's mobile devices. To run your Cloud functions using this image, follow the steps below:
 
@@ -162,13 +164,13 @@ EOF
 
 Find more information about Cloud Code and Cloud functions in the [official documentation](https://docs.parseplatform.org/cloudcode/guide/).
 
-### FIPS configuration in Bitnami Secure Images
+### <a id="fips-configuration"></a> FIPS configuration in Bitnami Secure Images
 
 The Bitnami Parse Server Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
-## Notable Changes
+## <a id="notable-changes"></a> Notable Changes
 
 ### 4.9.3
 
@@ -183,7 +185,7 @@ The Bitnami Parse Server Docker image from the [Bitnami Secure Images](https://g
 
 - The Parse container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Parse daemon was started as the `parse` user. From now on, both the container and the Parse daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
-## License
+## <a id="license"></a> License
 
 Copyright &copy; 2026 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
