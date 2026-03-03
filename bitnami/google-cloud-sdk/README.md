@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Google Cloud SDK
 
-## What is Google Cloud SDK?
-
 > The Gcloud CLI is a set of command-line tools and libraries for use with Google Cloud. It enables users to access multiple Google Cloud services and products from the command line.
 
 [Overview of Google Cloud SDK](https://cloud.google.com/sdk/gcloud)
@@ -57,6 +55,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
