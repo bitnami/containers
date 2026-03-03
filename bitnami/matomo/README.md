@@ -1,13 +1,11 @@
 # Bitnami Secure Image for Matomo
 
-## What is Matomo?
-
 > Matomo, formerly known as Piwik, is a real time web analytics program. It provides detailed reports on website visitors.
 
 [Overview of Matomo](https://matomo.org/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
-## TL;DR
+## <a id="tl-dr"></a> TL;DR
 
 ```console
 docker run --name matomo bitnami/matomo:latest
@@ -16,7 +14,7 @@ docker run --name matomo bitnami/matomo:latest
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure d
 eployment.
 
-## Why use Bitnami Secure Images?
+## <a id="why-use-bitnami-secure-images"></a> Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
 
@@ -33,15 +31,15 @@ Each image comes with valuable security metadata. You can view the metadata in [
 
 If you are looking for our previous generation of images based on Debian Linux, please see the [Bitnami Legacy registry](https://hub.docker.com/u/bitnamilegacy).
 
-## Why use a non-root container?
+## <a id="why-non-root"></a> Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
 
-## Supported tags and respective `Dockerfile` links
+## <a id="supported-tags"></a> Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
-## How to get this image
+## <a id="how-to-get-this-image"></a> How to get this image
 
 The recommended way to get the Bitnami Matomo Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/matomo/).
 To use a specific version, you can pull a versioned tag. Find the [list of available versions] (<https://hub.docker.com/r/bitnami/matomo/tags/>) in the Docker Hub Registry.
@@ -58,15 +56,15 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## How to use this image
+## <a id="how-to-use-this-image"></a> How to use this image
 
 Matomo requires access to a MySQL database or MariaDB database to store information. It uses our [MariaDB image] (<https://github.com/bitnami/containers/blob/main/bitnami/mariadb>) for the database requirements.
 
-### Run the application using Docker Compose
+### <a id="run-the-application-using-docker-compose"></a> Run the application using Docker Compose
 
 Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/matomo).
 
-### Persisting your application
+### <a id="persisting-your-application"></a> Persisting your application
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -76,11 +74,15 @@ The above examples define docker volumes namely `mariadb_data` and `matomo_data`
 
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
-> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
+> **NOTE** As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
-## Configuration
+## <a id="configuration"></a> Configuration
 
-### Environment variables
+The following section describes the supported environment variables
+
+### <a id="environment-variables"></a> Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
@@ -170,7 +172,7 @@ This would be an example of reverse proxy configuration:
 
 The `MATOMO_SMTP_*` environment variables allows you configure the SMTP settings in the application. Please take a look at the environment variables information above for more information.
 
-### Backing up your container
+### <a id="backing-up-your-container"></a> Backing up your container
 
 To backup your data, configuration and logs, follow these simple steps:
 
@@ -195,7 +197,7 @@ docker run --rm -v /path/to/matomo-backups:/backups --volumes-from matomo busybo
   cp -a /bitnami/matomo /backups/latest
 ```
 
-### Restoring a backup
+### <a id="restoring-a-backup"></a> Restoring a backup
 
 Restoring a backup is as simple as mounting the backup as volumes in the containers.
 
@@ -219,7 +221,7 @@ For the Matomo container:
    bitnami/matomo:latest
 ```
 
-## Upgrading Matomo
+## <a id="upgrading"></a> Upgrading Matomo
 
 Bitnami provides up-to-date versions of MariaDB and Matomo, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Matomo container. For the MariaDB upgrade you can take a look at <https://github.com/bitnami/containers/tree/main/bitnami/mariadb#upgrade-this-image>
 
@@ -254,17 +256,17 @@ Bitnami provides up-to-date versions of MariaDB and Matomo, including security p
     - For docker-compose: `$ docker-compose up matomo`
     - For manual execution (mount the directories if needed): `docker run --name matomo bitnami/matomo:latest`
 
-### FIPS configuration in Bitnami Secure Images
+### <a id="fips-configuration"></a> FIPS configuration in Bitnami Secure Images
 
 The Bitnami Matomo Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
-## Customize this image
+## <a id="customize-this-image"></a> Customize this image
 
 The Bitnami Matomo Docker image is designed to be extended so it can be used as the base image for your custom web applications.
 
-### Extend this image
+### <a id="extend-this-image"></a> Extend this image
 
 Before extending this image, please note there are certain configuration settings you can modify using the original image:
 
@@ -277,11 +279,11 @@ If your desired customizations cannot be covered using the methods mentioned abo
 
 ```Dockerfile
 FROM bitnami/matomo
-### Put your customizations below
+### <a id="put-your-customizations-below"></a> Put your customizations below
 ...
 ```
 
-## Notable Changes
+## <a id="notable-changes"></a> Notable Changes
 
 ## 4.15.0-debian-11-r20
 
@@ -315,7 +317,7 @@ To upgrade a previous Bitnami Matomo container image, which did not support non-
 - The PHP configuration volume (`/bitnami/php`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the PHP configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom PHP configuration files are advised to mount a volume for the configuration at `/opt/bitnami/php/conf`, or mount specific configuration files individually.
 - Enabling custom Apache certificates by placing them at `/opt/bitnami/apache/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`.
 
-## License
+## <a id="license"></a> License
 
 Copyright &copy; 2026 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
