@@ -1,19 +1,17 @@
 # Bitnami Secure Image for PostgREST
 
-## What is PostgREST?
-
 > PostgREST is a web server that allows communicating to PostgreSQL using API endpoints and operations.
 
 [Overview of PostgREST](https://postgrest.org/en/stable/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
-## TL;DR
+## <a id="tl-dr"></a> TL;DR
 
 ```console
 docker run -it --name postgrest bitnami/postgrest
 ```
 
-## Why use Bitnami Secure Images?
+## <a id="why-use-bitnami-secure-images"></a> Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
 
@@ -30,11 +28,11 @@ Each image comes with valuable security metadata. You can view the metadata in [
 
 If you are looking for our previous generation of images based on Debian Linux, please see the [Bitnami Legacy registry](https://hub.docker.com/u/bitnamilegacy).
 
-## Supported tags and respective `Dockerfile` links
+## <a id="supported-tags"></a> Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
-## Get this image
+## <a id="get-this-image"></a> Get this image
 
 The recommended way to get the Bitnami PostgREST Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/postgrest).
 
@@ -56,9 +54,13 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## Configuration
+## <a id="configuration"></a> Configuration
 
-### Environment variables
+The following section describes the supported environment variables
+
+### <a id="environment-variables"></a> Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
@@ -88,7 +90,7 @@ docker build -t bitnami/APP:latest .
 | `POSTGREST_DAEMON_USER`  | postgrest system user.                      | `supabase`                                                                                  |
 | `POSTGREST_DAEMON_GROUP` | postgrest system group.                     | `supabase`                                                                                  |
 
-### Running commands
+### <a id="running-commands"></a> Running commands
 
 To run commands inside this container you can use `docker run`, for example to execute `postgrest --help` you can follow the example below:
 
@@ -98,19 +100,19 @@ docker run --rm --name postgrest bitnami/postgrest:latest --help
 
 Check the [official PostgREST documentation](https://postgrest.org/en/stable//configuration.html) for more information about how to use PostgREST.
 
-### FIPS configuration in Bitnami Secure Images
+### <a id="fips-configuration"></a> FIPS configuration in Bitnami Secure Images
 
 The Bitnami PostgREST Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
-## Notable Changes
+## <a id="notable-changes"></a> Notable Changes
 
-### Starting January 16, 2024
+### <a id="starting-january-16-2024"></a> Starting January 16, 2024
 
 - The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
-## License
+## <a id="license"></a> License
 
 Copyright &copy; 2026 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
