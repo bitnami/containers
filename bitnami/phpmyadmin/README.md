@@ -5,9 +5,9 @@
 [Overview of phpMyAdmin](https://www.phpmyadmin.net/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
-## <a id="tl-dr"></a> TL;DR
+## TL;DR
 
-### <a id="docker-compose"></a> Docker Compose
+### Docker Compose
 
 ```console
 docker run --name phpmyadmin bitnami/phpmyadmin:latest
@@ -15,7 +15,7 @@ docker run --name phpmyadmin bitnami/phpmyadmin:latest
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
 
-## <a id="why-use-bitnami-secure-images"></a> Why use Bitnami Secure Images?
+## Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
 
@@ -32,23 +32,23 @@ Each image comes with valuable security metadata. You can view the metadata in [
 
 If you are looking for our previous generation of images based on Debian Linux, please see the [Bitnami Legacy registry](https://hub.docker.com/u/bitnamilegacy).
 
-## <a id="how-to-deploy-in-kubernetes"></a> How to deploy phpMyAdmin in Kubernetes?
+## How to deploy phpMyAdmin in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami phpMyAdmin Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/phpmyadmin).
 
-## <a id="supported-tags"></a> Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
-## <a id="how-to-use-this-image"></a> How to use this image
+## How to use this image
 
 phpMyAdmin requires access to a MySQL database or MariaDB database to work. We'll use the [Bitnami MariaDB image](https://github.com/bitnami/containers/tree/main/bitnami/mariadb).
 
-### <a id="using-docker-compose"></a> Using Docker Compose
+### Using Docker Compose
 
 Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/phpmyadmin).
 
-### <a id="persisting-your-application"></a> Persisting your application
+### Persisting your application
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -56,7 +56,7 @@ For persistence you should mount a volume at the `/bitnami` path. Additionally y
 
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
-## <a id="upgrading"></a> Upgrading phpMyAdmin
+## Upgrading phpMyAdmin
 
 Bitnami provides up-to-date versions of MariaDB and phpMyAdmin, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the phpMyAdmin container. For the MariaDB upgrade see <https://github.com/bitnami/containers/tree/main/bitnami/mariadb#upgrade-this-image>
 
@@ -83,11 +83,11 @@ The `bitnami/phpmyadmin:latest` tag always points to the most recent release. To
     - For docker-compose: `$ docker-compose up phpmyadmin`
     - For manual execution: `docker run --name phpmyadmin bitnami/phpmyadmin:latest`
 
-## <a id="configuration"></a> Configuration
+## Configuration
 
 The following section describes the supported environment variables
 
-### <a id="environment-variables"></a> Environment variables
+### Environment variables
 
 The following tables list the main variables you can set.
 
@@ -140,17 +140,17 @@ The following tables list the main variables you can set.
 | `PHP_DEFAULT_POST_MAX_SIZE`                   | Default max PHP POST size.                                                                                                               | `80M`                                     |
 | `PHP_DEFAULT_MEMORY_LIMIT`                    | Default PHP memory limit.                                                                                                                | `256M`                                    |
 
-### <a id="fips-configuration"></a> FIPS configuration in Bitnami Secure Images
+### FIPS configuration in Bitnami Secure Images
 
 The Bitnami phpMyAdmin Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
-## <a id="customize-this-image"></a> Customize this image
+## Customize this image
 
 The Bitnami phpMyAdmin Docker image is designed to be extended so it can be used as the base image for your custom web applications.
 
-### <a id="extend-this-image"></a> Extend this image
+### Extend this image
 
 Before extending this image, please note there are certain configuration settings you can modify using the original image:
 
@@ -163,11 +163,11 @@ If your desired customizations cannot be covered using the methods mentioned abo
 
 ```Dockerfile
 FROM bitnami/phpmyadmin
-### <a id="put-your-customizations-below"></a> Put your customizations below
+### Put your customizations below
 ...
 ```
 
-## <a id="notable-changes"></a> Notable Changes
+## Notable Changes
 
 ### 5.0.2-debian-10-r73
 
@@ -182,7 +182,7 @@ FROM bitnami/phpmyadmin
 - The PHP configuration volume (`/bitnami/php`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the PHP configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom PHP configuration files are advised to mount a volume for the configuration at `/opt/bitnami/php/conf`, or mount specific configuration files individually.
 - Enabling custom Apache certificates by placing them at `/opt/bitnami/apache/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`.
 
-## <a id="license"></a> License
+## License
 
 Copyright &copy; 2026 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
