@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Apache Airflow
 
-## What is Apache Airflow?
-
 > Apache Airflow is a tool to express and execute workflows as directed acyclic graphs (DAGs). It includes utilities to schedule tasks, monitor task progress and handle task dependencies.
 
 [Overview of Apache Airflow](https://airflow.apache.org/)
@@ -9,12 +7,13 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ## TL;DR
 
+Use this quick command to run the container.
+
 ```console
 docker run --name airflow bitnami/airflow:latest
 ```
 
-**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure d
-eployment.
+> **NOTE** This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
 
 ## Why use Bitnami Secure Images?
 
@@ -55,6 +54,8 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 ## Configuration
 
+The following sections describe how to load DAGs, install modules, and set environment variables.
+
 ### Load DAG files
 
 Custom DAG files can be mounted to `/opt/bitnami/airflow/dags`.
@@ -64,6 +65,8 @@ Custom DAG files can be mounted to `/opt/bitnami/airflow/dags`.
 This container supports the installation of additional python modules at start-up time. In order to do that, you can mount a `requirements.txt` file with your specific needs under the path `/bitnami/python/requirements.txt`.
 
 ### Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
@@ -158,7 +161,9 @@ The Bitnami Apache Airflow Docker image from the [Bitnami Secure Images](https:/
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
-## Notable Changes
+## Notable changes
+
+The following subsections describe notable changes.
 
 ### Starting October 30, 2024
 
