@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Dex
 
-## What is Dex?
-
 > Dex is an identity provider for applications. It is based on the OpenID Connect standard.
 
 [Overview of Dex](https://dexidp.io/)
@@ -57,6 +55,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
