@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Grafana k6 Operator
 
-## What is Grafana k6 Operator?
-
 > Grafana k6 Operator is a Kubernetes operator that enables running distributed k6 load tests in a cluster, automating test execution and scaling for performance validation.
 
 [Overview of Grafana k6 Operator](https://k6.io/)
@@ -34,10 +32,6 @@ If you are looking for our previous generation of images based on Debian Linux, 
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
-You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `bitnami/ASSET/BRANCH/DISTRO/tags-info.yaml`.
-
-Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
-
 ## Get this image
 
 The recommended way to get the Bitnami Grafana k6 Operator Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/grafana-k6-operator).
@@ -66,6 +60,8 @@ Non-root container images add an extra layer of security and are generally recom
 
 ## Configuration
 
+The following section describes how to run commands
+
 ### Running commands
 
 To run commands inside this container you can use `docker run`, for example to execute `manager --help` you can follow the example below:
@@ -75,14 +71,6 @@ docker run --rm --name grafana-k6-operator bitnami/grafana-k6-operator:latest --
 ```
 
 Check the [official Grafana k6 Operator documentation](https://k6.io/) for more information.
-
-## Contributing
-
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
-
-## Issues
-
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 
