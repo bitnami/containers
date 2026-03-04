@@ -289,7 +289,7 @@ docker run --name nginx --rm \
   bitnami/nginx:latest
 ```
 
-### <a id="solving-redirection-issues"></a> Solving redirection issues
+### Solving redirection issues
 
 By default redirections issued by NGINX Open Source image will be relative. If you need to activate absolute redirections you can set `NGINX_ENABLE_ABSOLUTE_REDIRECT` to `yes`. You should pay attention to the port where the container is listening, because it won't appear in redirections unless you set also `NGINX_ENABLE_PORT_IN_REDIRECT` to `yes`.
 
