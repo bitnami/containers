@@ -1,13 +1,13 @@
 # Bitnami Secure Image for MLflow
 
-## What is MLflow?
-
 > MLflow is an open-source platform designed to manage the end-to-end machine learning lifecycle. It allows you to track experiments, package code into reproducible runs, and share and deploy models.
 
 [Overview of MLflow](https://mlflow.org/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
+
+Use this quick command to run the container.
 
 ```console
 docker run -it --name mlflow bitnami/mlflow:latest
@@ -40,7 +40,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 ## Get this image
 
-The recommended way to get the Bitnami Mlflow Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/mlflow).
+The recommended way to get the Bitnami MLflow Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/mlflow).
 
 ```console
 docker pull bitnami/mlflow:latest
@@ -70,16 +70,18 @@ docker run -it --name mlflow bitnami/mlflow
 
 ## Configuration
 
+The following sections describe how to run your app and configure FIPS.
+
 ### Running your MLflow app
 
-The default work directory for the MLflow image is `/app`. You can mount a folder from your host here that includes your MLflow script, and run it normally using the `python` command.
+The default work directory for the MLflow image is `/app`. You can mount a folder from your host here that includes your MLflow script and run it normally using the `python` command.
 
 ```console
 docker run -it --name mlflow -v /path/to/app:/app bitnami/mlflow \
   python script.py
 ```
 
-### Running a MLflow app with package dependencies
+### Running an MLflow app with package dependencies
 
 If your MLflow app has a `requirements.txt` defining your app's dependencies, you can install the dependencies before running your app.
 
@@ -88,9 +90,7 @@ docker run -it --name mlflow -v /path/to/app:/app bitnami/mlflow \
   sh -c "pip install -r requirements.txt && python script.py"
 ```
 
-**Further Reading:**
-
-- [mlflow documentation](https://mlflow.org/docs/)
+For more information, see the [MLflow documentation](https://mlflow.org/docs/).
 
 ### FIPS configuration in Bitnami Secure Images
 
