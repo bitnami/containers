@@ -492,7 +492,7 @@ To add a custom NGINX module, it is necessary to compile NGINX with that module 
 
 - Added support for configuring the `worker_processes` directive using the `NGINX_WORKER_PROCESSES` environment variable (allowed values: `auto` or a positive integer).
 
-### <a id="starting-february-10--2025"></a> Starting February 10, 2025
+### Starting February 10, 2025
 
 - The [module ngx_http_dav_module](http://nginx.org/en/docs/http/ngx_http_dav_module.html), WebDAV protocol, has been converted into a dynamic module.
 
