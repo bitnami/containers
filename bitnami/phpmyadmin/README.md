@@ -1,7 +1,5 @@
 # Bitnami Secure Image for phpMyAdmin
 
-## What is phpMyAdmin?
-
 > phpMyAdmin is a free software tool written in PHP, intended to handle the administration of MySQL over the Web. phpMyAdmin supports a wide range of operations on MySQL and MariaDB.
 
 [Overview of phpMyAdmin](https://www.phpmyadmin.net/)
@@ -87,7 +85,11 @@ The `bitnami/phpmyadmin:latest` tag always points to the most recent release. To
 
 ## Configuration
 
+The following section describes the supported environment variables
+
 ### Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 

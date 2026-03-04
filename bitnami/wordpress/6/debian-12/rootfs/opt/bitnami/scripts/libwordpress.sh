@@ -343,7 +343,7 @@ wordpress_initialize() {
                 fi
             fi
             # Post installation steps
-            local -r user_id="$(wp_execute user get "$WORDPRESS_EMAIL" --field=ID)"
+            local -r user_id="$(wp_execute_print_output user get "$WORDPRESS_EMAIL" --field=ID)"
             wp_execute user meta set "$user_id" first_name "$WORDPRESS_FIRST_NAME"
             wp_execute user meta set "$user_id" last_name "$WORDPRESS_LAST_NAME"
             # Increase upload limit for multisite installations (default is 1MB)

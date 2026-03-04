@@ -8,13 +8,13 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-02-19T04:53:30Z" \
+      org.opencontainers.image.created="2026-03-03T11:17:01Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/sonarqube/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/sonarqube" \
       org.opencontainers.image.title="sonarqube" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="26.2.0"
+      org.opencontainers.image.version="26.3.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,9 +29,9 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "postgresql-client-18.2.0-0-linux-${OS_ARCH}-debian-12" \
+      "postgresql-client-18.3.0-0-linux-${OS_ARCH}-debian-12" \
       "java-21.0.10-10-0-linux-${OS_ARCH}-debian-12" \
-      "sonarqube-26.2.0-0-linux-${OS_ARCH}-debian-12" \
+      "sonarqube-26.3.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -50,10 +50,11 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/sonarqube/postunpack.sh
-ENV APP_VERSION="26.2.0" \
+ENV APP_VERSION="26.3.0" \
     BITNAMI_APP_NAME="sonarqube" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="0" \
     JAVA_HOME="/opt/bitnami/java" \
+    LD_LIBRARY_PATH="/opt/bitnami/postgresql/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/java/bin:$PATH"
 
 EXPOSE 9000
