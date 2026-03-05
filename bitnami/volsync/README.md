@@ -1,7 +1,5 @@
 # Bitnami Secure Image for VolSync
 
-## What is VolSync?
-
 > VolSync is a Kubernetes operator designed for asynchronous replication of persistent volumes within or across clusters.
 
 [Overview of VolSync](https://github.com/backube/volsync)
@@ -57,6 +55,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
