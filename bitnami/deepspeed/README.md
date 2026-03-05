@@ -1,7 +1,5 @@
 # Bitnami Secure Image for DeepSpeed
 
-## What is DeepSpeed?
-
 > DeepSpeed is deep learning software suite for empowering ChatGPT-like model training. Features dense or sparse model inference, high throughput and high compression.
 
 [Overview of DeepSpeed](https://www.deepspeed.ai/)
@@ -56,33 +54,9 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of DeepSpeed, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/deepspeed:latest
-```
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v deepspeed
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name deepspeed bitnami/deepspeed:latest
-```
-
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
