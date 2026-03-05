@@ -5,13 +5,13 @@
 [Overview of PHP-FPM](https://php.net/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
-## <a id="tl-dr"></a> TL;DR
+## TL;DR
 
 ```console
 docker run -it --name phpfpm -v /path/to/app:/app bitnami/php-fpm
 ```
 
-## <a id="why-use-bitnami-secure-images"></a> Why use Bitnami Secure Images?
+## Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
 
@@ -28,11 +28,11 @@ Each image comes with valuable security metadata. You can view the metadata in [
 
 If you are looking for our previous generation of images based on Debian Linux, please see the [Bitnami Legacy registry](https://hub.docker.com/u/bitnamilegacy).
 
-## <a id="choosing-between-the-_standard_-and-_minimal_-image"></a> Choosing between the _Standard_ and _Minimal_ image
+## Choosing between the _Standard_ and _Minimal_ image
 
 This asset is available in two flavors: _Standard_ and _Minimal_; designed to address different use cases and operational needs.
 
-### <a id="standard-images"></a> Standard images
+### Standard images
 
 The standard images are full-featured, production-ready containers built on top of secure base operating systems. They include:
 
@@ -46,7 +46,7 @@ Recommended for:
 - Workloads requiring package installation or debugging tools.
 - Applications that depend on system utilities or shared libraries.
 
-### <a id="minimal-images"></a> Minimal images
+### Minimal images
 
 The minimal images are optimized, distroless-style containers derived from a stripped-down base. They only ship what’s strictly necessary to run the application; no shell, package manager, or extra libraries. They provide:
 
@@ -60,15 +60,15 @@ Recommended for:
 - Regulated or security-sensitive workloads
 - Containers built via multi-stage builds (e.g., Golang static binaries).
 
-## <a id="supported-tags"></a> Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
-### <a id="deprecation-note-(2022-01-21)"></a> Deprecation Note (2022-01-21)
+### Deprecation Note (2022-01-21)
 
 The `prod` tags has been removed; from now on just the regular container images will be released.
 
-### <a id="deprecation-note-(2020-08-18)"></a> Deprecation Note (2020-08-18)
+### Deprecation Note (2020-08-18)
 
 The formatting convention for `prod` tags has been changed:
 
@@ -76,7 +76,7 @@ The formatting convention for `prod` tags has been changed:
 - `VERSION-debian-10-rX-prod` is now tagged as `VERSION-prod-debian-10-rX`
 - `latest-prod` is now deprecated
 
-## <a id="get-this-image"></a> Get this image
+## Get this image
 
 The recommended way to get the Bitnami PHP-FPM Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/php-fpm).
 
@@ -98,15 +98,15 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## <a id="using-`docker-compose.yaml`"></a> Using `docker-compose.yaml`
+## Using `docker-compose.yaml`
 
 Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes.
 
-## <a id="connecting-to-other-containers"></a> Connecting to other containers
+## Connecting to other containers
 
 This image is designed to be used with a web server to serve your PHP app, you can use docker networking to create a network and attach all the containers to that network.
 
-### <a id="serving-your-php-app-through-an-nginx-frontend"></a> Serving your PHP app through an nginx frontend
+### Serving your PHP app through an nginx frontend
 
 We will use PHP-FPM with nginx to serve our PHP app. Doing so will allow us to setup more complex configuration, serve static assets using nginx, load balance to different PHP-FPM instances, etc.
 
@@ -165,11 +165,11 @@ networks:
     driver: bridge
 ```
 
-## <a id="php-runtime"></a> PHP runtime
+## PHP runtime
 
 Since this image bundles a PHP runtime, you may want to make use of PHP outside of PHP-FPM. By default, running this image will start a server. To use the PHP runtime instead, we can override the the default command Docker runs by stating a different command to run after the image name.
 
-### <a id="entering-the-repl"></a> Entering the REPL
+### Entering the REPL
 
 PHP provides a REPL where you can interactively test and try things out in PHP.
 
@@ -181,7 +181,7 @@ docker run -it --name phpfpm bitnami/php-fpm php -a
 
 - [PHP Interactive Shell Documentation](http://php.net/manual/en/features.commandline.interactive.php)
 
-## <a id="running-your-php-script"></a> Running your PHP script
+## Running your PHP script
 
 The default work directory for the PHP-FPM image is `/app`. You can mount a folder from your host here that includes your PHP script, and run it normally using the `php` command.
 
@@ -190,11 +190,11 @@ docker run -it --name php-fpm -v /path/to/app:/app bitnami/php-fpm \
   php script.php
 ```
 
-## <a id="configuration"></a> Configuration
+## Configuration
 
 The following section describes the supported environment variables
 
-### <a id="environment-variables"></a> Environment variables
+### Environment variables
 
 The following tables list the main variables you can set.
 
@@ -236,11 +236,11 @@ The following tables list the main variables you can set.
 | `PHP_EXPOSE_PHP`                              | Enables HTTP header with PHP version.                                                                       | `0`                               |
 | `PHP_OUTPUT_BUFFERING`                        | Size of the output buffer for PHP                                                                           | `8196`                            |
 
-### <a id="mount-a-custom-config-file"></a> Mount a custom config file
+### Mount a custom config file
 
 You can mount a custom `/opt/bitnami/php/etc/php-fpm.conf` file from your host to edit the default configuration for the php-fpm docker image.
 
-### <a id="add-additional-.ini-files"></a> Add additional .ini files
+### Add additional .ini files
 
 PHP has been configured at compile time to scan the `/opt/bitnami/php/etc/conf.d/` folder for extra .ini configuration files so it is also possible to mount your customizations there.
 
@@ -248,13 +248,13 @@ Multiple files are loaded in alphabetical order. It is common to have a file per
 
 Please check [http://php.net/manual/en/configuration.file.php#configuration.file.scan](http://php.net/manual/en/configuration.file.php#configuration.file.scan) to know more about this feature.
 
-### <a id="fips-configuration"></a> FIPS configuration in Bitnami Secure Images
+### FIPS configuration in Bitnami Secure Images
 
 The Bitnami PHP-FPM Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
-## <a id="logging"></a> Logging
+## Logging
 
 The Bitnami PHP-FPM Docker Image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/reference/run/#logging-drivers-log-driver) using the `--log-driver` option. By defauly the `json-file` driver is used.
 
@@ -272,12 +272,12 @@ docker-compose logs phpfpm
 
 _The `docker logs` command is only available when the `json-file` or `journald` logging driver is in use._
 
-## <a id="useful-links"></a> Useful Links
+## Useful Links
 
 - [Create An AMP Development Environment With Bitnami Containers](https://docs.bitnami.com/containers/how-to/create-amp-environment-containers/)
 - [Create An EMP Development Environment With Bitnami Containers](https://docs.bitnami.com/containers/how-to/create-emp-environment-containers/)
 
-## <a id="notable-changes"></a> Notable Changes
+## Notable Changes
 
 ### 7.2.3-r2, 7.1.15-r2, 7.0.28-r2 and 5.6.34-r2 (2018-03-13)
 
@@ -300,7 +300,7 @@ _The `docker logs` command is only available when the `json-file` or `journald` 
 
 - `/app` directory is no longer exported as a volume. This caused problems when building on top of the image, since changes in the volume are not persisted between Dockerfile `RUN` instructions. To keep the previous behavior (so that you can mount the volume in another container), create the container with the `-v /app` option.
 
-## <a id="license"></a> License
+## License
 
 Copyright &copy; 2026 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
