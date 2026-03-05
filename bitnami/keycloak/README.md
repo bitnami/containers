@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Keycloak
 
-## What is Keycloak?
-
 > Keycloak is a high performance Java-based identity and access management solution. It lets developers add an authentication layer to their applications with minimum effort.
 
 [Overview of Keycloak](https://www.keycloak.org/)
@@ -9,11 +7,13 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ## TL;DR
 
+Use this quick command to run the container.
+
 ```console
 docker run --name keycloak bitnami/keycloak:latest
 ```
 
-**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
+> **NOTE** This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
 
 ## Why use Bitnami Secure Images?
 
@@ -32,7 +32,7 @@ Each image comes with valuable security metadata. You can view the metadata in [
 
 If you are looking for our previous generation of images based on Debian Linux, please see the [Bitnami Legacy registry](https://hub.docker.com/u/bitnamilegacy).
 
-## How to deploy Keycloak in Kubernetes?
+## How to deploy Keycloak in Kubernetes
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Keycloak Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/keycloak).
 
@@ -46,7 +46,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 ## Get this image
 
-The recommended way to get the Bitnami keycloak Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/keycloak).
+The recommended way to get the Bitnami Keycloak Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/keycloak).
 
 ```console
 docker pull bitnami/keycloak:latest
@@ -72,7 +72,11 @@ Please be aware this file has not undergone internal testing. Consequently, we a
 
 ## Configuration
 
+The following sections describe environment variables and related settings.
+
 ### Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
@@ -140,7 +144,7 @@ Please be aware this file has not undergone internal testing. Consequently, we a
 
 ### Extra arguments to Keycloak startup
 
-In case you want to add extra flags to the Keycloak use the `KEYCLOAK_EXTRA_ARGS` variable. Example:
+In case you want to add extra flags to Keycloak use the `KEYCLOAK_EXTRA_ARGS` variable. Example:
 
 ```console
 docker run --name keycloak \
@@ -177,23 +181,23 @@ keycloak:
     - /path/to/init-scripts:/docker-entrypoint-initdb.d
 ```
 
-### TLS Encryption
+### TLS encryption
 
-The Bitnami Keycloak Docker image allows configuring HTTPS/TLS encription. This is done by mounting in `/opt/bitnami/keycloak/certs` two files:
+The Bitnami Keycloak Docker image allows configuring HTTPS/TLS encryption. This is done by mounting in `/opt/bitnami/keycloak/certs` two files:
 
-- `keystore`: File with the server keystore
-- `truststore`: File with the server truststore
+- `keystore`: File with the server `keystore`
+- `truststore`: File with the server `truststore`
 
-> Note: find more information about how to create these files at the [Keycloak documentation](https://www.keycloak.org/server/keycloak-truststore).
+> **NOTE** Find more information about how to create these files at the [Keycloak documentation](https://www.keycloak.org/server/keycloak-truststore).
 
 Apart from that, the following environment variables must be set:
 
-- `KEYCLOAK_ENABLE_HTTPS`: Enable TLS encryption using the keystore. Default: **false**.
-- `KEYCLOAK_HTTPS_KEY_STORE_FILE`: Path to the keystore file (e.g. `/opt/bitnami/keycloak/certs/keystore.jks`). No defaults.
-- `KEYCLOAK_HTTPS_TRUST_STORE_FILE`: Path to the truststore file (e.g. `/opt/bitnami/keycloak/certs/truststore.jks`). No defaults.
-- `KEYCLOAK_HTTPS_KEY_STORE_PASSWORD`: Password for accessing the keystore. No defaults.
-- `KEYCLOAK_HTTPS_TRUST_STORE_PASSWORD`: Password for accessing the truststore. No defaults.
-- `KEYCLOAK_HTTPS_USE_PEM`: Set to true to configure HTTPS using PEM certificates'. Default: **false**.
+- `KEYCLOAK_ENABLE_HTTPS`: Enable TLS encryption using the `keystore`. Default: **false**.
+- `KEYCLOAK_HTTPS_KEY_STORE_FILE`: Path to the `keystore` file (e.g. `/opt/bitnami/keycloak/certs/keystore.jks`). No defaults.
+- `KEYCLOAK_HTTPS_TRUST_STORE_FILE`: Path to the `truststore` file (e.g. `/opt/bitnami/keycloak/certs/truststore.jks`). No defaults.
+- `KEYCLOAK_HTTPS_KEY_STORE_PASSWORD`: Password for accessing the `keystore`. No defaults.
+- `KEYCLOAK_HTTPS_TRUST_STORE_PASSWORD`: Password for accessing the `truststore`. No defaults.
+- `KEYCLOAK_HTTPS_USE_PEM`: Set to true to configure HTTPS using PEM certificates. Default: **false**.
 - `KEYCLOAK_HTTPS_CERTIFICATE_FILE`: Path to the PEM certificate file (e.g. `/opt/bitnami/keycloak/certs/tls.crt`). No defaults.
 - `KEYCLOAK_HTTPS_CERTIFICATE_KEY_FILE`: Path to the PEM key file (e.g. `/opt/bitnami/keycloak/certs/tls.key`). No defaults.
 
@@ -229,16 +233,15 @@ volumes:
 
 ### Enabling metrics
 
-The Bitnami Keycloak container can activate different set of metrics (database, jgroups and http) by setting the environment variable `KC_METRICS_ENABLED=true`. See [the official documentation](https://www.keycloak.org/observability/configuration-metrics) for more information about these metrics.
+The Bitnami Keycloak container can activate different set of metrics (database, `jgroups` and HTTP) by setting the environment variable `KC_METRICS_ENABLED=true`. See [the official documentation](https://www.keycloak.org/observability/configuration-metrics) for more information about these metrics.
 
 ### Enabling health endpoints
 
-The Bitnami Keycloak container can activate several endpoints providing information about the health of Keycloak, by setting the environment variable `KC_HEALTH_ENABLED=true`.
-See [the official documentation](https://www.keycloak.org/observability/health) for more information about these endpoints.
+The Bitnami Keycloak container can activate several endpoints providing information about the health of Keycloak by setting the environment variable `KC_HEALTH_ENABLED=true`. See [the official documentation](https://www.keycloak.org/observability/health) for more information about these endpoints.
 
 ### Full configuration
 
-The image looks for configuration files in the `/bitnami/keycloak/conf/` directory, this directory can be changed by setting the `KEYCLOAK_MOUNTED_CONF_DIR` environment variable.
+The image looks for configuration files in the `/bitnami/keycloak/conf/` directory. This directory can be changed by setting the `KEYCLOAK_MOUNTED_CONF_DIR` environment variable.
 
 ```console
 docker run --name keycloak \
@@ -263,7 +266,9 @@ The Bitnami Keycloak Docker image from the [Bitnami Secure Images](https://go-vm
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
-## Notable Changes
+## Notable changes
+
+The following subsections describe notable changes.
 
 ### 26.3.2-debian-12-r1
 
@@ -277,7 +282,7 @@ The following environment variables have been deprecated. Instead rely on the na
 - `KEYCLOAK_ADMIN_USER` and `KEYCLOAK_BOOTSTRAP_ADMIN_PASSWORD`
 
 The [https://github.com/aerogear/keycloak-metrics-spi](https://github.com/aerogear/keycloak-metrics-spi) provider is no longer shipped by default in the container image.
-Also, support for deprecated SPI truststore was removed.
+Also, support for deprecated SPI `truststore` was removed.
 
 ### 19-debian-11-r4
 
@@ -288,7 +293,7 @@ Also, support for deprecated SPI truststore was removed.
   - `KEYCLOAK_TLS_KEYSTORE_PASSWORD` was renamed as `KEYCLOAK_TLS_KEY_STORE_PASSWORD`.
   - `KEYCLOAK_TLS_TRUSTSTORE_PASSWORD` was renamed as `KEYCLOAK_TLS_TRUST_STORE_PASSWORD`.
 - HTTPS/TLS can now be configured using PEM certificates.
-- Added support to add SPI truststore file.
+- Added support to add SPI `truststore` file.
 
 ### 17-debian-10
 
