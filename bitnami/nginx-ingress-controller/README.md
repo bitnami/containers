@@ -1,7 +1,5 @@
 # Bitnami Secure Image for NGINX Ingress Controller
 
-## What is NGINX Ingress Controller?
-
 > NGINX Ingress Controller is an Ingress controller that manages external access to HTTP services in a Kubernetes cluster using NGINX.
 
 [Overview of NGINX Ingress Controller](https://kubernetes.github.io/ingress-nginx/)
