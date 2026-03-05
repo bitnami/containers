@@ -5,13 +5,13 @@
 [Overview of Ruby](https://www.ruby-lang.org)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
-## <a id="tl-dr"></a> TL;DR
+## TL;DR
 
 ```console
 docker run -it --name ruby bitnami/ruby:latest
 ```
 
-## <a id="why-use-bitnami-secure-images"></a> Why use Bitnami Secure Images?
+## Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
 
@@ -28,11 +28,11 @@ Each image comes with valuable security metadata. You can view the metadata in [
 
 If you are looking for our previous generation of images based on Debian Linux, please see the [Bitnami Legacy registry](https://hub.docker.com/u/bitnamilegacy).
 
-## <a id="choosing-between-the-_standard_-and-_minimal_-image"></a> Choosing between the _Standard_ and _Minimal_ image
+## Choosing between the _Standard_ and _Minimal_ image
 
 This asset is available in two flavors: _Standard_ and _Minimal_; designed to address different use cases and operational needs.
 
-### <a id="standard-images"></a> Standard images
+### Standard images
 
 The standard images are full-featured, production-ready containers built on top of secure base operating systems. They include:
 
@@ -46,7 +46,7 @@ Recommended for:
 - Workloads requiring package installation or debugging tools.
 - Applications that depend on system utilities or shared libraries.
 
-### <a id="minimal-images"></a> Minimal images
+### Minimal images
 
 The minimal images are optimized, distroless-style containers derived from a stripped-down base. They only ship what’s strictly necessary to run the application; no shell, package manager, or extra libraries. They provide:
 
@@ -60,15 +60,15 @@ Recommended for:
 - Regulated or security-sensitive workloads
 - Containers built via multi-stage builds (e.g., Golang static binaries).
 
-## <a id="supported-tags"></a> Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
-### <a id="deprecation-note-(2022-01-21)"></a> Deprecation Note (2022-01-21)
+### Deprecation Note (2022-01-21)
 
 The `prod` tags has been removed; from now on just the regular container images will be released.
 
-### <a id="deprecation-note-(2020-08-18)"></a> Deprecation Note (2020-08-18)
+### Deprecation Note (2020-08-18)
 
 The formatting convention for `prod` tags has been changed:
 
@@ -76,7 +76,7 @@ The formatting convention for `prod` tags has been changed:
 - `VERSION-debian-10-rX-prod` is now tagged as `VERSION-prod-debian-10-rX`
 - `latest-prod` is now deprecated
 
-## <a id="get-this-image"></a> Get this image
+## Get this image
 
 The recommended way to get the Bitnami Ruby Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/ruby).
 
@@ -98,11 +98,11 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## <a id="using-`docker-compose.yaml`"></a> Using `docker-compose.yaml`
+## Using `docker-compose.yaml`
 
 Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes.
 
-## <a id="entering-the-repl"></a> Entering the REPL
+## Entering the REPL
 
 By default, running this image will drop you into the Ruby REPL (`irb`), where you can interactively test and try things out in Ruby.
 
@@ -114,11 +114,11 @@ docker run -it --name ruby bitnami/ruby:latest
 
 - [Ruby IRB Documentation](http://ruby-doc.org/stdlib-2.4.0/libdoc/irb/rdoc/IRB.html)
 
-## <a id="configuration"></a> Configuration
+## Configuration
 
 The following section describes how to run commands
 
-### <a id="running-your-script"></a> Running your Ruby script
+### Running your Ruby script
 
 The default work directory for the Ruby image is `/app`. You can mount a folder from your host here that includes your Ruby script, and run it normally using the `ruby` command.
 
@@ -127,7 +127,7 @@ docker run -it --name ruby -v /path/to/app:/app bitnami/ruby:latest \
   ruby script.rb
 ```
 
-### <a id="running-a-app-with-gems"></a> Running a Ruby app with gems
+### Running a Ruby app with gems
 
 If your Ruby app has a `Gemfile` defining your app's dependencies and start script, you can install the dependencies before running your app.
 
@@ -152,7 +152,7 @@ ruby:
 - [rubygems.org](https://rubygems.org/)
 - [bundler.io](http://bundler.io/)
 
-### <a id="accessing-a-app-running-a-web-server"></a> Accessing a Ruby app running a web server
+### Accessing a Ruby app running a web server
 
 This image exposes port `3000` in the container, so you should ensure that your web server is binding to port `3000`, as well as listening on `0.0.0.0` to accept remote connections from your host.
 
@@ -190,17 +190,17 @@ docker run -it --name ruby -p 8080:3000 bitnami/ruby:latest
 
 Access your web server in the browser by navigating to `http://localhost:8080`.
 
-### <a id="fips-configuration"></a> FIPS configuration in Bitnami Secure Images
+### FIPS configuration in Bitnami Secure Images
 
 The Bitnami Ruby Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
-## <a id="connecting-to-other-containers"></a> Connecting to other containers
+## Connecting to other containers
 
 If you want to connect to your Ruby web server inside another container, you can use docker networking to create a network and attach all the containers to that network.
 
-### <a id="serving-your-app-through-an-nginx-frontend"></a> Serving your Ruby app through an nginx frontend
+### Serving your Ruby app through an nginx frontend
 
 We may want to make our Ruby web server only accessible via an nginx web server. Doing so will allow us to setup more complex configuration, serve static assets using nginx, load balance to different Ruby instances, etc.
 
@@ -288,7 +288,7 @@ nginx:
     - /path/to/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf
 ```
 
-## <a id="notable-changes"></a> Notable Changes
+## Notable Changes
 
 ### 2.3.1-r0 (2016-05-11)
 
@@ -302,7 +302,7 @@ nginx:
 
 - Permissions fixed so `bitnami` user can install gems without needing `sudo`.
 
-## <a id="license"></a> License
+## License
 
 Copyright &copy; 2026 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
