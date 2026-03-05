@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Apache Superset
 
-## What is Apache Superset?
-
 > Superset is a modern data exploration and data visualization platform.
 
 [Overview of Apache Superset](https://superset.apache.org/)
@@ -62,6 +60,8 @@ docker build -t bitnami/APP:latest .
 
 ## Configuration
 
+The following section describes how to run commands
+
 ### Running your Apache Superset app
 
 The default work directory for the Apache Superset image is `/app`. You can mount a folder from your host here that includes your Apache Superset script, and run it normally using the `python` command.
@@ -89,32 +89,6 @@ docker run -it --name superset -v /path/to/app:/app bitnami/superset \
 The Bitnami Apache Superset Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
-
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of Apache Superset, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/superset:latest
-```
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v superset
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name superset bitnami/superset:latest
-```
 
 ## License
 
