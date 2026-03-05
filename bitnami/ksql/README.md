@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Confluent KSQL DB
 
-## What is Confluent KSQL DB?
-
 > ksqlDB is a database for building stream processing applications on top of Apache Kafka. It is distributed, scalable, reliable, and real-time.
 
 [Overview of Confluent KSQL DB](https://www.confluent.io)
