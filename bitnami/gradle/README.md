@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Gradle
 
-## What is Gradle?
-
 > Gradle is an open source automation tool to compile, deploy, and package software for any platform. It supports multiple languages such as Java,  C/C++, and JavaScript.
 
 [Overview of Gradle](https://gradle.org/)
@@ -58,6 +56,8 @@ docker build -t bitnami/APP:latest .
 
 ## Configuration
 
+The following section describes how to run commands
+
 ### Running your Gradle builds
 
 The default work directory for the Gradle image is `/app`. You can mount a folder from your host here that includes your Gradle build script, and run any task specifying its identifier.
@@ -77,32 +77,6 @@ docker run --name gradle -v /path/to/app:/app bitnami/gradle \
 The Bitnami Gradle Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
-
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of Gradle, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/gradle:latest
-```
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v gradle
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name gradle bitnami/gradle:latest
-```
 
 ## Notable Changes
 
