@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-03-04T06:54:55Z" \
+      org.opencontainers.image.created="2026-03-05T16:22:21Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/mlflow/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mlflow" \
       org.opencontainers.image.title="mlflow" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="3.10.0"
+      org.opencontainers.image.version="3.10.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -30,7 +30,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     COMPONENTS=( \
       "python-3.12.13-0-linux-${OS_ARCH}-debian-12" \
       "postgresql-lib-18.3.0-0-linux-${OS_ARCH}-debian-12" \
-      "mlflow-3.10.0-1-linux-${OS_ARCH}-debian-12" \
+      "mlflow-3.10.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -49,9 +49,9 @@ RUN mkdir /.local && chmod g+rwX /.local
 RUN uninstall_packages curl
 
 RUN mkdir -p /app/mlruns /app/mlartifacts /bitnami/mlflow && chmod g+rwX /app /app/mlruns /app/mlartifacts /bitnami/mlflow && ln -s /opt/bitnami/python/lib/*/site-packages/mlflow/server/auth/ /bitnami/mlflow-basic-auth
-ENV APP_VERSION="3.10.0" \
+ENV APP_VERSION="3.10.1" \
     BITNAMI_APP_NAME="mlflow" \
-    IMAGE_REVISION="3" \
+    IMAGE_REVISION="0" \
     LD_LIBRARY_PATH="/opt/bitnami/postgresql/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
