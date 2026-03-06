@@ -1,13 +1,13 @@
 # Bitnami Secure Image for ArangoDB Kubernetes Operator
 
-## What is ArangoDB Kubernetes Operator?
-
 > kube-arangodb is a Kubernetes Operator that manages ArangoDB clusters, ensuring automatic deployment, scaling, and healing of database instances
 
 [Overview of ArangoDB Kubernetes Operator](https://arangodb.com/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
+
+Use this quick command to run the container.
 
 ```console
 docker run --name kube-arangodb bitnami/kube-arangodb:latest
@@ -61,6 +61,8 @@ docker build -t bitnami/APP:latest .
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
 
 ## Configuration
+
+The following sections describe how to run commands and configure FIPS.
 
 ### Running commands
 
