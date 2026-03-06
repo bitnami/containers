@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Kubernetes Event Exporter
 
-## What is Kubernetes Event Exporter?
-
 > Kubernetes Event Exporter makes it easy to export Kubernetes events to other tools, thereby enabling better event observability, custom alerts and aggregation.
 
 [Overview of Kubernetes Event Exporter](https://github.com/resmoio/kubernetes-event-exporter)
