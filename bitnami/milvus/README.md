@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Milvus
 
-## What is Milvus?
-
 > Milvus is a cloud-native, open-source vector database solution for AI applications and similarity search. Features high scalability, hibrid search and unified lambda structure.
 
 [Overview of Milvus](https://milvus.io/)
@@ -56,33 +54,9 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of Milvus, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/milvus:latest
-```
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v milvus
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name milvus bitnami/milvus:latest
-```
-
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
