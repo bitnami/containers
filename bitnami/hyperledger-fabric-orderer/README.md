@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Hyperledger Fabric Orderer
 
-## What is Hyperledger Fabric Orderer?
-
 > Hyperledger Fabric Orderer is responsible for transactions inside a Fabric blockchain. Hyperledger Fabric is the open-source permissioned blockchain framework.
 
 [Overview of Hyperledger Fabric Orderer](https://www.hyperledger.org/projects/fabric)
@@ -57,6 +55,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
