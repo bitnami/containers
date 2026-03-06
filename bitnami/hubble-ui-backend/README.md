@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Hubble UI Backend
 
-## What is Hubble UI Backend?
-
 > Hubble UI Backend is the required backend for the open-source user interface for Cilium Hubble.
 
 [Overview of Hubble UI Backend](https://cilium.io/)
