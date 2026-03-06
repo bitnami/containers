@@ -1,7 +1,5 @@
 # Bitnami Secure Image for KubeRay
 
-## What is KubeRay?
-
 > KubeRay is a Kubernetes operator for deploying and management of Ray applications on Kubernetes using CustomResourceDefinitions.
 
 [Overview of KubeRay](https://ray.io)
@@ -56,33 +54,9 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of KubeRay, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/kuberay-operator:latest
-```
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v kuberay-operator
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name kuberay-operator bitnami/kuberay-operator:latest
-```
-
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
