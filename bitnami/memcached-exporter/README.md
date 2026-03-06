@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Memcached Exporter
 
-## What is Memcached Exporter?
-
 > The memcached exporter exports metrics from a memcached server for consumption by prometheus.
 
 [Overview of Memcached Exporter](https://github.com/prometheus/memcached_exporter)
@@ -105,40 +103,6 @@ docker logs memcached-exporter
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
-
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of Memcached Exporter, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/memcached-exporter:latest
-```
-
-#### Step 2: Stop the running container
-
-Stop the currently running container using the command
-
-```console
-docker stop memcached-exporter
-```
-
-#### Step 3: Remove the currently running container
-
-```console
-docker rm -v memcached-exporter
-```
-
-#### Step 4: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name memcached-exporter bitnami/memcached-exporter:latest
-```
 
 ## Notable Changes
 
