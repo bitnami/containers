@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Cilium Operator
 
-## What is Cilium Operator?
-
 > In Cilium, the Cilium Operator is responsible for managing duties that should logically be handled at cluster level.
 
 [Overview of Cilium Operator](https://cilium.io/)
@@ -61,6 +59,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
