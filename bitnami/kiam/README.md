@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Kiam
 
-## What is Kiam?
-
 > kiam is a proxy that captures AWS Metadata API requests. It allows AWS IAM roles to be set for Kubernetes workloads.
 
 [Overview of Kiam](https://github.com/uswitch/kiam)
@@ -60,6 +58,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
