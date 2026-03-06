@@ -1,7 +1,5 @@
 # Bitnami Object Storage Console based on MinIO&reg;
 
-## What is Bitnami Object Storage Console based on MinIO&reg;?
-
 > MinIO&reg; Console is a simple UI for MinIO&reg;
 
 [Overview of Bitnami Object Storage Console based on MinIO&reg;](https://min.io/)
@@ -61,6 +59,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
