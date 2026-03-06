@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Harbor Registry
 
-## What is Harbor Registry?
-
 > Harbor Registry is one of the main components of Harbor. Combined with the Harbor Registryctl, it is responsible for storing Docker images and processing pull/push operations.
 
 [Overview of Harbor Registry](https://goharbor.io/)
@@ -9,7 +7,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ## TL;DR
 
-This container is part of the [Harbor solution](https://github.com/bitnami/charts/tree/main/bitnami/harbor) that is primarily intended to be deployed in Kubernetes.
+Use this quick command to run the container.
 
 ```console
 docker run --name harbor-registry bitnami/harbor-registry:latest
@@ -32,7 +30,7 @@ Each image comes with valuable security metadata. You can view the metadata in [
 
 If you are looking for our previous generation of images based on Debian Linux, please see the [Bitnami Legacy registry](https://hub.docker.com/u/bitnamilegacy).
 
-## How to deploy Harbor in Kubernetes?
+## How to deploy Harbor in Kubernetes
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Harbor Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/harbor).
 
@@ -52,6 +50,8 @@ For further information about the specific component itself, please refer to the
 
 ### Environment variables
 
+The following table lists the main environment variables.
+
 #### Customizable environment variables
 
 #### Read-only environment variables
@@ -69,7 +69,9 @@ The Bitnami Harbor Registry Docker image from the [Bitnami Secure Images](https:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
-## Notable Changes
+## Notable changes
+
+The following subsections describe notable changes.
 
 ### Starting January 16, 2024
 
