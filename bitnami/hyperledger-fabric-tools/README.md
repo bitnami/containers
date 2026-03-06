@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Hyperledger Fabric Tools
 
-## What is Hyperledger Fabric Tools?
-
 > Hyperledger Fabric Tools is a set of tools for Hyperledger Fabric, the open-source permissioned blockchain framework.
 
 [Overview of Hyperledger Fabric Tools](https://www.hyperledger.org/projects/fabric)
@@ -57,6 +55,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
