@@ -1,7 +1,5 @@
 # Bitnami Secure Image for ExternalDNS
 
-## What is ExternalDNS?
-
 > ExternalDNS is a Kubernetes addon that configures public DNS servers with information about exposed Kubernetes services to make them discoverable.
 
 [Overview of ExternalDNS](https://github.com/kubernetes-incubator/external-dns)
