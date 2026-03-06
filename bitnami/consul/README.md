@@ -5,7 +5,7 @@
 [Overview of HashiCorp Consul](https://consul.io)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
-## <a id="tl-dr"></a> TL;DR
+## TL;DR
 
 ```console
 docker run --name consul bitnami/consul:latest
@@ -13,7 +13,7 @@ docker run --name consul bitnami/consul:latest
 
 You can find the available configuration options in the [Environment Variables](#environment-variables) section.
 
-## <a id="why-use-bitnami-secure-images"></a> Why use Bitnami Secure Images?
+## Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
 
@@ -30,19 +30,19 @@ Each image comes with valuable security metadata. You can view the metadata in [
 
 If you are looking for our previous generation of images based on Debian Linux, please see the [Bitnami Legacy registry](https://hub.docker.com/u/bitnamilegacy).
 
-## <a id="how-to-deploy-in-kubernetes"></a> How to deploy HashiCorp Consul in Kubernetes?
+## How to deploy HashiCorp Consul in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami HashiCorp Consul Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/consul).
 
-## <a id="why-non-root"></a> Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
 
-## <a id="supported-tags"></a> Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
-## <a id="get-this-image"></a> Get this image
+## Get this image
 
 The recommended way to get the Bitnami HashiCorp Consul Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/consul).
 
@@ -64,11 +64,11 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## <a id="using-`docker-compose.yaml`"></a> Using `docker-compose.yaml`
+## Using `docker-compose.yaml`
 
 Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/consul).
 
-## <a id="persisting-your-application"></a> Persisting your application
+## Persisting your application
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -78,17 +78,17 @@ To avoid inadvertent removal of this volume you can [mount host directories as d
 
 > **NOTE** As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
-## <a id="connecting-to-other-containers"></a> Connecting to other containers
+## Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a different server running inside a container can easily be accessed by your application containers and vice-versa.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-## <a id="configuration"></a> Configuration
+## Configuration
 
 The following section describes the supported environment variables
 
-### <a id="environment-variables"></a> Environment variables
+### Environment variables
 
 The following tables list the main variables you can set.
 
@@ -146,7 +146,7 @@ The following tables list the main variables you can set.
 | `CONSUL_DAEMON_USER`           | Consul system user.                         | `consul`                                   |
 | `CONSUL_DAEMON_GROUP`          | Consul system group.                        | `consul`                                   |
 
-### <a id="using-custom-configuration-files"></a> Using custom HashiCorp Consul configuration files
+### Using custom HashiCorp Consul configuration files
 
 In order to load your own configuration files, you will have to make them available to the container. You can do it doing the following:
 
@@ -163,7 +163,7 @@ Configuration can be added by passing the configuration in JSON format via the e
 
 Check the [Persisting your data](# Persisting your application) section to add custom volumes to the HashiCorp Consul container
 
-### <a id="configuring-the-gossip-encryption-key"></a> Configuring the Gossip encryption key
+### Configuring the Gossip encryption key
 
 Specifies the secret key to use for encryption of HashiCorp Consul network traffic. This key must be 16-bytes that are Base64-encoded. The easiest way to create an encryption key is to use `consul keygen`
 
@@ -177,13 +177,13 @@ This command will generate a keygen, that you can add to your Dockerfile, docker
 docker run -e CONSUL_GOSSIP_ENCRYPTION_KEY=YOUR_GENERATED_KEY --name consul bitnami/consul:latest
 ```
 
-### <a id="fips-configuration"></a> FIPS configuration in Bitnami Secure Images
+### FIPS configuration in Bitnami Secure Images
 
 The Bitnami HashiCorp Consul Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
-## <a id="logging"></a> Logging
+## Logging
 
 The Bitnami consul Docker image sends the container logs to the `stdout`. To view the logs:
 
@@ -199,7 +199,7 @@ docker-compose logs consul
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-## <a id="notable-changes"></a> Notable Changes
+## Notable Changes
 
 ### Debian 1.6.1-r6 and Oracle 1.6.1-r7
 
@@ -216,7 +216,7 @@ Also, some env var changes have been performed maintaining backward compatibilit
 
 - The Consul container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Consul daemon was started as the `consul` user. From now on, both the container and the Consul daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
-## <a id="license"></a> License
+## License
 
 Copyright &copy; 2026 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
