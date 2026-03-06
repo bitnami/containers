@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Kubeseal (Sealed Secrets)
 
-## What is Kubeseal (Sealed Secrets)?
-
 > Kubeseal is a CLI utility that uses asymmetric cryptography to encrypt secrets that only the Sealed Secrets controller can decrypt.
 
 [Overview of Kubeseal (Sealed Secrets)](https://github.com/bitnami-labs/sealed-secrets)
@@ -57,6 +55,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
