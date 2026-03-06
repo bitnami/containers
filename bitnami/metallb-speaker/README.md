@@ -1,7 +1,5 @@
 # Bitnami Secure Image for MetalLB Speaker
 
-## What is MetalLB Speaker?
-
 > MetalLB is a load-balancer that allows enabling "LoadBalancer" service addresses in any bare-metal Kubernetes installation. MetalLB speaker is in charge of IP advertisement.
 
 [Overview of MetalLB Speaker](https://metallb.universe.tf/)
@@ -57,6 +55,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
