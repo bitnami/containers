@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Harbor Exporter
 
-## What is Harbor Exporter?
-
 > Harbor Exporter is one of the components of Harbor: a cloud-native registry that stores, signs, and scans content. This component expose Harbor metrics in Prometheus format.
 
 [Overview of Harbor Exporter](https://goharbor.io/)
@@ -51,6 +49,8 @@ Harbor Exporter is a component of the Harbor application. In order to get the Ha
 For further information about the specific component itself, please refer to the [source repository documentation](https://goharbor.io//tree/main/docs
 
 ### Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
