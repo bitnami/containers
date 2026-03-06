@@ -1,7 +1,5 @@
 # Bitnami Secure Image for AlertManager
 
-## What is AlertManager?
-
 > The Alertmanager handles alerts sent by client applications such as the Prometheus server. It takes care of deduplicating, grouping, and routing them to the correct receiver integrations.
 
 [Overview of AlertManager](https://github.com/prometheus/alertmanager)
@@ -72,7 +70,7 @@ To avoid inadvertent removal of this volume you can [mount host directories as d
 docker run -v /path/to/alertmanager-persistence:/opt/bitnami/alertmanager/data bitnami/alertmanager:latest
 ```
 
-> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
+> **NOTE** As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 ## Connecting to other containers
 
@@ -143,48 +141,6 @@ docker logs alertmanager
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
-
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of alertmanager, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/alertmanager:latest
-```
-
-#### Step 2: Stop and backup the currently running container
-
-Stop the currently running container using the command
-
-```console
-docker stop alertmanager
-```
-
-Next, take a snapshot of the persistent volume `/path/to/alertmanager-persistence` using:
-
-```console
-rsync -a /path/to/alertmanager-persistence /path/to/alertmanager-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
-```
-
-You can use this snapshot to restore the database state should the upgrade fail.
-
-#### Step 3: Remove the currently running container
-
-```console
-docker rm -v alertmanager
-```
-
-#### Step 4: Run the new image
-
-Re-create your container from the new image, restoring your backup if necessary.
-
-```console
-docker run --name alertmanager bitnami/alertmanager:latest
-```
 
 ## Notable Changes
 
