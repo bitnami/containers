@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Cosign
 
-## What is Cosign?
-
 > Cosign supports container signing, verification, and storage in an OCI registry. Written in Go, it aims to make signatures invisible infrastructure.
 
 [Overview of Cosign](https://github.com/sigstore/cosign)
@@ -57,6 +55,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
