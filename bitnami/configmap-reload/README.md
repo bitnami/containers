@@ -1,7 +1,5 @@
 # Bitnami Secure Image for ConfigMap Reload
 
-## What is ConfigMap Reload?
-
 > ConfigMap Reload is a cloud-native tool that watches Kubernetes ConfigMaps and triggers a reload when ConfigMaps are updated
 
 [Overview of ConfigMap Reload](https://github.com/jimmidyson/configmap-reload)
