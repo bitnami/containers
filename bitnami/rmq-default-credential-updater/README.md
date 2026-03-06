@@ -1,7 +1,5 @@
 # Bitnami Secure Image for RabbitMQ Default User Credential Updater
 
-## What is RabbitMQ Default User Credential Updater?
-
 > RabbitMQ Default User Credential Updater is a component of the RabbitMQ Cluster Operator Helm chart that enables Hashicorp Vault integration.
 
 [Overview of RabbitMQ Default User Credential Updater](https://github.com/rabbitmq/default-user-credential-updater)
@@ -62,6 +60,8 @@ Non-root container images add an extra layer of security and are generally recom
 
 ## Configuration
 
+The following section describes how to run commands
+
 ### Running commands
 
 To run commands inside this container you can use `docker run`, for example to execute `default-user-credential-updater --help` you can follow the example below:
@@ -77,14 +77,6 @@ Check the [official RabbitMQ Default User Credential Updater documentation](http
 ### Starting January 16, 2024
 
 - The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
-
-## Contributing
-
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
-
-## Issues
-
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 
