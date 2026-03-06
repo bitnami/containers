@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Kube RBAC Proxy
 
-## What is Kube RBAC Proxy?
-
 > kube-rbac-proxy is an HTTP proxy that can perform RBAC authorization against the Kubernetes API based on the SubjectAccessReview authorization resource.
 
 [Overview of Kube RBAC Proxy](https://github.com/brancz/kube-rbac-proxy)
@@ -61,6 +59,8 @@ docker build -t bitnami/APP:latest .
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
