@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Grafana
 
-## What is Grafana?
-
 > Grafana is an open source metric analytics and visualization suite for visualizing time series data that supports various types of data sources.
 
 [Overview of Grafana](https://grafana.com/)
@@ -76,7 +74,11 @@ Containers attached to the same network can communicate with each other using th
 
 ## Configuration
 
+The following section describes the supported environment variables
+
 ### Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
