@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Prometheus Operator
 
-## What is Prometheus Operator?
-
 > Prometheus Operator provides easy monitoring definitions for Kubernetes services and deployment and management of Prometheus instances.
 
 [Overview of Prometheus Operator](https://github.com/coreos/prometheus-operator)
