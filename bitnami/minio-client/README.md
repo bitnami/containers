@@ -1,7 +1,5 @@
 # Bitnami Object Storage Client based on MinIO&reg;
 
-## What is Bitnami Object Storage Client based on MinIO&reg;?
-
 > MinIO&reg; Client is a Golang CLI tool that offers alternatives for ls, cp, mkdir, diff, and rsync commands for filesystems and object storage systems.
 
 [Overview of Bitnami Object Storage Client based on MinIO&reg;](https://min.io/)
