@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Whereabouts
 
-## What is Whereabouts?
-
 > Whereabouts is a CNI IPAM plugin for Kubernetes clusters. It dynamically assigns IP addresses cluster-wide. Features both IPv4 and IPv6 addressing.
 
 [Overview of Whereabouts](https://github.com/k8snetworkplumbingwg/whereabouts)
@@ -57,6 +55,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
