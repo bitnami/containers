@@ -1,7 +1,5 @@
 # Bitnami Secure Image for HashiCorp Vault CSI Provider
 
-## What is HashiCorp Vault CSI Provider?
-
 > HashiCorp Vault CSI Provider integrates Vault with the Secrets Store CSI driver interface for Kubernetes pods. Vault is a tool for securely managing and accessing secrets.
 
 [Overview of HashiCorp Vault CSI Provider](https://github.com/hashicorp/vault-csi-provider)
@@ -56,33 +54,9 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of HashiCorp Vault CSI Provider, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/vault-csi-provider:latest
-```
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v vault-csi-provider
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name vault-csi-provider bitnami/vault-csi-provider:latest
-```
-
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
