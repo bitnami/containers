@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Barman Cloud Plugin for CloudNativePG
 
-## What is Barman Cloud Plugin for CloudNativePG?
-
 > Barman Cloud CNPG-I plugin enables PostgreSQL backups and recovery in cloud storage, integrating with CloudNativePG for seamless data protection
 
 [Overview of Barman Cloud Plugin for CloudNativePG](https://cloudnative-pg.io/plugin-barman-cloud/)
@@ -61,6 +59,8 @@ docker build -t bitnami/APP:latest .
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
