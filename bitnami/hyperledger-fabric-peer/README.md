@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Hyperledger Fabric Peer
 
-## What is Hyperledger Fabric Peer?
-
 > Hyperledger Fabric Peer is a server that part of a network of peer nodes that make up a Fabric blockchain. Hyperledger Fabric is the open-source permissioned blockchain framework.
 
 [Overview of Hyperledger Fabric Peer](https://www.hyperledger.org/projects/fabric)
@@ -57,6 +55,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
