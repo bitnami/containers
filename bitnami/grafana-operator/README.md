@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Grafana Operator
 
-## What is Grafana Operator?
-
 > Grafana Operator is a Kubernetes operator that enables the installation and management of Grafana instances, dashboards and plugins.
 
 [Overview of Grafana Operator](https://github.com/integr8ly/grafana-operator)
