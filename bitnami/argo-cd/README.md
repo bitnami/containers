@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Argo CD
 
-## What is Argo CD?
-
 > Argo CD is a continuous delivery tool for Kubernetes based on GitOps.
 
 [Overview of Argo CD](https://argoproj.github.io/cd)
@@ -57,6 +55,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
