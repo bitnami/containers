@@ -1,7 +1,5 @@
 # Bitnami Secure Image for MongoDB Exporter
 
-## What is MongoDB Exporter?
-
 > A Prometheus exporter for MongoDB&reg; including sharding, replication and storage engines.
 
 [Overview of MongoDB Exporter](https://github.com/percona/mongodb_exporter)
