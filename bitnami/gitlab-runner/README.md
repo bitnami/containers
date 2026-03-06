@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Gitlab Runner
 
-## What is Gitlab Runner?
-
 > Gitlab Runner is an auxiliary application for Gitlab installations. Written in Go, it allows to run CI/CD jobs and send the results back to Gitlab.
 
 [Overview of Gitlab Runner](https://gitlab.com/gitlab-org/gitlab-runner/)
@@ -57,6 +55,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
