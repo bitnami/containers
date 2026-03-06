@@ -1,7 +1,5 @@
 # Bitnami Secure Image for OpenResty
 
-## What is OpenResty?
-
 > OpenResty is a platform for scalable Web applications and services. It is based on enhanced versions of NGINX and LuaJIT.
 
 [Overview of OpenResty](https://openresty.org/)
@@ -95,7 +93,11 @@ Access your web server in the browser by navigating to `http://localhost:9000`.
 
 ## Configuration
 
+The following section describes the supported environment variables
+
 ### Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
@@ -326,40 +328,6 @@ EXPOSE 8181 8143
 
 ## Modify the default container user
 USER 1002
-```
-
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of OpenResty, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/openresty:latest
-```
-
-#### Step 2: Stop and backup the currently running container
-
-Stop the currently running container using the command
-
-```console
-docker stop openresty
-```
-
-#### Step 3: Remove the currently running container
-
-```console
-docker rm -v openresty
-```
-
-#### Step 4: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name nginx bitnami/openresty:latest
 ```
 
 ## Notable Changes
