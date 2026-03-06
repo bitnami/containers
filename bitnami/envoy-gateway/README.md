@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Envoy Gateway
 
-## What is Envoy Gateway?
-
 > Envoy Gateway simplifies traffic management by extending Envoy Proxy's features, offering Kubernetes Gateway API integration for secure, scalable, and observable application routing
 
 [Overview of Envoy Gateway](https://gateway.envoyproxy.io/)
@@ -61,6 +59,8 @@ docker build -t bitnami/APP:latest .
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
