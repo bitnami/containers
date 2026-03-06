@@ -1,7 +1,5 @@
 # Bitnami Secure Image for HashiCorp Vault K8s Integration
 
-## What is HashiCorp Vault K8s Integration?
-
 > HashiCorp Vault Kubernetes Integration allows HashiCorp Vault to interact with the Kubernetes API. Vault is a tool for securely managing and accessing secrets.
 
 [Overview of HashiCorp Vault K8s Integration](https://github.com/hashicorp/vault-k8s)
@@ -56,33 +54,9 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of HashiCorp Vault K8s Integration, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/vault-k8s:latest
-```
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v vault-k8s
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name vault-k8s bitnami/vault-k8s:latest
-```
-
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
