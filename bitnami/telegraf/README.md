@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Telegraf &trade;
 
-## What is Telegraf &trade;?
-
 > Telegraf is a server agent for collecting and sending metrics and events from databases, systems, and IoT sensors. It is easily extendable with plugins for collection and output of data operations.
 
 [Overview of Telegraf &trade;](https://github.com/influxdata/telegraf)
@@ -34,9 +32,13 @@ If you are looking for our previous generation of images based on Debian Linux, 
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
+You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `bitnami/ASSET/BRANCH/DISTRO/tags-info.yaml`.
+
+Subscribe to project updates by watching the [bitnami/containers GitHub repository](https://github.com/bitnami/containers).
+
 ## Get this image
 
-The recommended way to get the Bitnami telegraf Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/telegraf).
+The recommended way to get the Bitnami Telegraf &trade; Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/telegraf).
 
 ```console
 docker pull bitnami/telegraf:latest
@@ -58,6 +60,8 @@ docker build -t bitnami/APP:latest .
 
 ## Configuration
 
+The following sections describe how to run commands and configure FIPS.
+
 ### Running commands
 
 To run commands inside this container you can use `docker run`, for example to execute `telegraf --version` you can follow the example below:
@@ -66,7 +70,7 @@ To run commands inside this container you can use `docker run`, for example to e
 docker run --rm --name telegraf bitnami/telegraf:latest -- telegraf --version
 ```
 
-Check the [official Telegraf documentation](https://docs.influxdata.com/telegraf) for a list of the available parameters.
+Check the [official Telegraf &trade; documentation](https://docs.influxdata.com/telegraf) for a list of the available parameters.
 
 ### FIPS configuration in Bitnami Secure Images
 
@@ -74,7 +78,9 @@ The Bitnami Telegraf &trade; Docker image from the [Bitnami Secure Images](https
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
-## Notable Changes
+## Notable changes
+
+The following subsections describe notable changes.
 
 ### Starting January 16, 2024
 
