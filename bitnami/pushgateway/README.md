@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Push Gateway
 
-## What is Push Gateway?
-
 > The Pushgateway is an intermediary service which allows you to push metrics from jobs which cannot be scraped
 
 [Overview of Push Gateway](https://prometheus.io/)
@@ -107,48 +105,6 @@ docker logs pushgateway
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
-
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of pushgateway, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/pushgateway:latest
-```
-
-#### Step 2: Stop and backup the currently running container
-
-Stop the currently running container using the command
-
-```console
-docker stop pushgateway
-```
-
-Next, take a snapshot of the persistent volume `/path/to/pushgateway-persistence` using:
-
-```console
-rsync -a /path/to/pushgateway-persistence /path/to/pushgateway-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
-```
-
-You can use this snapshot to restore the database state should the upgrade fail.
-
-#### Step 3: Remove the currently running container
-
-```console
-docker rm -v pushgateway
-```
-
-#### Step 4: Run the new image
-
-Re-create your container from the new image, restoring your backup if necessary.
-
-```console
-docker run --name pushgateway bitnami/pushgateway:latest
-```
 
 ## Notable Changes
 
