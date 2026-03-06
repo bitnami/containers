@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Kube State Metrics
 
-## What is Kube State Metrics?
-
 > kube-state-metrics is a simple service that listens to the Kubernetes API server and generates metrics about the state of the objects.
 
 [Overview of Kube State Metrics](https://github.com/kubernetes/kube-state-metrics)
@@ -59,6 +57,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to configure the application
 
 ### Resource recommendation
 
