@@ -1,13 +1,13 @@
 # Bitnami Secure Image for NATS
 
-## What is NATS?
-
 > NATS is an open source, lightweight and high-performance messaging system. It is ideal for distributed systems and supports modern cloud architectures and pub-sub, request-reply and queuing models.
 
 [Overview of NATS](https://nats.io/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
+
+Use this quick command to run the container.
 
 ```console
 docker run -it --name nats bitnami/nats:latest
@@ -30,7 +30,7 @@ Each image comes with valuable security metadata. You can view the metadata in [
 
 If you are looking for our previous generation of images based on Debian Linux, please see the [Bitnami Legacy registry](https://hub.docker.com/u/bitnamilegacy).
 
-## How to deploy NATS in Kubernetes?
+## How to deploy NATS in Kubernetes
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami NATS Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/nats).
 
@@ -41,10 +41,6 @@ Non-root container images add an extra layer of security and are generally recom
 ## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
-
-## Prerequisites
-
-To run this application you need [Docker Engine](https://www.docker.com/products/docker-engine) >= `1.10.0`. [Docker Compose](https://docs.docker.com/compose/) is recommended with a version `1.6.0` or later.
 
 ## Get this image
 
@@ -70,44 +66,48 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/nats).
+
 ## Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a NATS server running inside a container can easily be accessed by your application containers using a NATS client.
 
-Containers attached to the same network can communicate with each other using the container name as the hostname.
+Containers attached to the same network can communicate with each other using the container name as the host name.
 
-### Using the Command Line
+### Using the command line
 
 In this example, we will create a NATS client instance that will connect to the server instance that is running on the same docker network as the client.
 
-#### Step 1: Create a network
+1. Create a network
 
-```console
-docker network create app-tier --driver bridge
-```
+    ```console
+    docker network create app-tier --driver bridge
+    ```
 
-#### Step 2: Launch the NATS server instance
+2. Launch the NATS server instance
 
-Use the `--network app-tier` argument to the `docker run` command to attach the NATS container to the `app-tier` network.
+    Use the `--network app-tier` argument to the `docker run` command to attach the NATS container to the `app-tier` network.
 
-```console
-docker run -d --name nats-server \
-    --network app-tier \
-    --publish 4222:4222 \
-    --publish 6222:6222 \
-    --publish 8222:8222 \
-    --volume /path/to/nats-server.conf:/etc/nats-server.conf:ro \
-    bitnami/nats:latest -c /etc/nats-server.conf
-```
+    ```console
+    docker run -d --name nats-server \
+        --network app-tier \
+        --publish 4222:4222 \
+        --publish 6222:6222 \
+        --publish 8222:8222 \
+        --volume /path/to/nats-server.conf:/etc/nats-server.conf:ro \
+        bitnami/nats:latest -c /etc/nats-server.conf
+    ```
 
-#### Step 3: Launch your NATS client instance
+3. Launch your NATS client instance
 
 You can create a NATS client instance as shown below:
 
 ```console
 docker run -it --rm \
     --network app-tier \
-    --volume /path/to/your/workspace:/go
+    --volume /path/to/your/workspace:/go \
     bitnami/natscli -s nats://nats-server:4222 <your-nats-command>
 ```
 
@@ -139,10 +139,10 @@ services:
       - app-tier
 ```
 
-> **IMPORTANT**:
->
-> 1. Please update the `YOUR_APPLICATION_IMAGE` placeholder in the above snippet with your application image
-> 2. In your application container, use the hostname `nats` to connect to the NATS server
+> **Important** 
+> 
+> 1. Update the `YOUR_APPLICATION_IMAGE` placeholder in the above snippet with your application image. 
+> 2. In your application container, use the host name `nats` to connect to the NATS server.
 
 Launch the containers using:
 
@@ -151,6 +151,8 @@ docker-compose up -d
 ```
 
 ## Configuration
+
+The following sections describe how to run commands and where to find further documentation.
 
 ### Running commands
 
@@ -162,25 +164,21 @@ docker run -d --name nats-server -p 4222:4222 -p 6222:6222 -p 8222:8222 \
   bitnami/nats:latest -c /etc/nats-server.conf
 ```
 
-### Further documentation
+### Additional documentation
 
-For further documentation, please check [NATS documentation](https://docs.nats.io/)
+For additional documentation, please check [NATS documentation](https://docs.nats.io/).
 
-## Notable Changes
+## Notable changes
+
+The following subsections describe notable changes.
 
 ### 2.10.24-debian-12-r3
 
-- This image revision dramatically reduces the image given it removes the existing OS distro. Instead, it simply includes the NATS binary on top of a scratch base image.
+- This image revision dramatically reduces the image given it removes the existing OS distribution. Instead, it simply includes the NATS binary on top of a scratch base image.
 
 ### 2.6.4-debian-10-r14
 
 - The configuration logic is now based on Bash scripts in the *rootfs/* folder.
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/nats).
-
-If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## License
 
