@@ -1,7 +1,5 @@
 # Bitnami Secure Image for NATS CLI
 
-## What is NATS CLI?
-
 > NATS CLI is a command-line tool for interacting with NATS clusters. NATS is an open source, lightweight and high-performance messaging system
 
 [Overview of NATS CLI](https://nats.io/)
@@ -56,33 +54,9 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of NATS CLI, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/natscli:latest
-```
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v natscli
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name natscli bitnami/natscli:latest
-```
-
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
