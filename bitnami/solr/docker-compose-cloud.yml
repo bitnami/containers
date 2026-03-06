@@ -3,7 +3,7 @@
 
 services:
   solrnode1:
-    image: docker.io/bitnami/solr:9
+    image: docker.io/bitnami/solr:10
     environment:
       - SOLR_ENABLE_CLOUD_MODE=yes
       - SOLR_CLOUD_BOOTSTRAP=yes
