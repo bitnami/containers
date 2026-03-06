@@ -1,7 +1,5 @@
 # Bitnami Secure Image for CloudNativePG
 
-## What is CloudNativePG?
-
 > CloudNativePG is an open-source tool for managing PostgreSQL databases on Kubernetes, from setup to ongoing upkeep.
 
 [Overview of CloudNativePG](https://cloudnative-pg.io/)
@@ -62,6 +60,8 @@ Non-root container images add an extra layer of security and are generally recom
 
 ## Configuration
 
+The following section describes how to run commands
+
 ### Running commands
 
 To run commands inside this container you can use `docker run`, for example to execute `manager --help` you can follow the example below:
@@ -71,14 +71,6 @@ docker run --rm --name cloudnative-pg bitnami/cloudnative-pg:latest --  --help
 ```
 
 Check the [official CloudNativePG documentation](https://cloudnative-pg.io//tree/main/docs) for more information.
-
-## Contributing
-
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
-
-## Issues
-
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 
