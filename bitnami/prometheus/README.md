@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Prometheus
 
-## What is Prometheus?
-
 > Prometheus is an open source monitoring and alerting system. It enables sysadmins to monitor their infrastructures by collecting metrics from configured targets at given intervals.
 
 [Overview of Prometheus](https://prometheus.io/)
@@ -29,6 +27,10 @@ Each image comes with valuable security metadata. You can view the metadata in [
 ![Alt text](https://github.com/bitnami/containers/blob/main/BSI%20UI%202.png?raw=true "Packaging report")
 
 If you are looking for our previous generation of images based on Debian Linux, please see the [Bitnami Legacy registry](https://hub.docker.com/u/bitnamilegacy).
+
+## How to deploy Prometheus in Kubernetes?
+
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Prometheus Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/prometheus).
 
 ## Why use a non-root container?
 
@@ -62,7 +64,7 @@ docker build -t bitnami/APP:latest .
 
 ## Persisting your database
 
-If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will add persistance even after the container is removed.
+If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will add persistence even after the container is removed.
 
 For persistence, mount a directory at the `/opt/bitnami/prometheus/data` path. If the mounted directory is empty, it will be initialized on the first run.
 
@@ -72,7 +74,7 @@ docker run --name prometheus \
     bitnami/prometheus:latest
 ```
 
-> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
+> **NOTE** As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 ## Connecting to other containers
 
@@ -141,6 +143,10 @@ docker logs prometheus
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Notable Changes
+
+### Starting March 4, 2026
+
+- This image revision dramatically reduces the image given it removes the existing OS distribution. Instead, it simply includes the Prometheus binary on top of a scratch base image.
 
 ### Starting January 16, 2024
 
