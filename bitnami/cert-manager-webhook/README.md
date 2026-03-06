@@ -1,7 +1,5 @@
 # Bitnami Secure Image for cert-manager Webhook
 
-## What is cert-manager Webhook?
-
 > cert-manager Webhook provides dynamic admission control over cert-manager resources using a webhook server.
 > Cert-manager is a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources.
 
@@ -16,7 +14,7 @@ docker run --name cert-manager-webhook -e ALLOW_EMPTY_PASSWORD=yes bitnami/cert-
 
 **Warning**: These quick setups are only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
 
-## Prerequisites
+## Before you begin
 
 Kubernetes cluster with `CustomResourceDefinition` or `ThirdPartyResource support`
 
@@ -46,6 +44,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
 ## Configuration
+
+The following section describes how to configure the application
 
 ### Further documentation
 
