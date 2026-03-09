@@ -95,7 +95,7 @@ The following tables list the main variables you can set.
 | `SOLR_ENABLE_CLOUD_MODE`        | Starts solr in cloud mode                                                     | `no`                                               |
 | `SOLR_NUMBER_OF_NODES`          | Number of nodes of the solr cloud cluster                                     | `1`                                                |
 | `SOLR_HOST`                     | Solr Host name                                                                | `nil`                                              |
-| `SOLR_JETTY_HOST`               | Configuration to listen on a specific IP address or host name                 | `0.0.0.0`                                          |
+| `SOLR_HOST_BIND`                | Configuration to listen on a specific IP address or host name                 | `0.0.0.0`                                          |
 | `SOLR_HEAP`                     | Solr Heap                                                                     | `nil`                                              |
 | `SOLR_SECURITY_MANAGER_ENABLED` | Solr Java security manager                                                    | `false`                                            |
 | `SOLR_JAVA_MEM`                 | Solr JVM memory                                                               | `-Xms512m -Xmx512m`                                |

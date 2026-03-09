@@ -22,6 +22,8 @@ start_command=("${SOLR_BIN_DIR}/solr" "-p" "${SOLR_PORT_NUMBER}" "-d" "/opt/bitn
 
 if is_boolean_yes "$SOLR_ENABLE_CLOUD_MODE"; then
     start_command+=("-cloud" "-z" "${SOLR_ZK_HOSTS}${SOLR_ZK_CHROOT}")
+else
+    start_command+=("--user-managed")
 fi
 
 is_boolean_yes "$SOLR_SSL_ENABLED" && export SOLR_SSL_ENABLED=true
