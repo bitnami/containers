@@ -475,7 +475,7 @@ solr_start_bg() {
 
     info "Starting solr in background"
     if [[ "$mode" == "cloud" ]]; then
-        start_args+=("-cloud" "-z" "${SOLR_ZK_HOSTS}${SOLR_ZK_CHROOT}")
+        start_args+=("-z" "${SOLR_ZK_HOSTS}${SOLR_ZK_CHROOT}")
     else
         start_args+=("--user-managed")
     fi
@@ -567,7 +567,7 @@ solr_zk_initialize() {
 solr_set_ssl_url_scheme() {
     info "Initializing configuring Solr HTTPS in Zookeeper"
 
-    solr_wait_for_zk_root && "${SOLR_SERVER_DIR}/scripts/cloud-scripts/zkcli.sh" -zkhost "${SOLR_ZK_HOSTS}${SOLR_ZK_CHROOT}" -cmd clusterprop -name urlScheme -val https
+    solr_wait_for_zk_root && "${SOLR_BIN_DIR}/solr" cluster --property urlScheme --value https -z "${SOLR_ZK_HOSTS}${SOLR_ZK_CHROOT}"
 }
 
 #########################
