@@ -18,10 +18,10 @@ set -o pipefail
 . /opt/bitnami/scripts/solr-env.sh
 
 info "** Starting solr **"
-start_command=("${SOLR_BIN_DIR}/solr" "-p" "${SOLR_PORT_NUMBER}" "-d" "/opt/bitnami/solr/server" "-f")
+start_command=("${SOLR_BIN_DIR}/solr" "start" "-p" "${SOLR_PORT_NUMBER}" "--server-dir" "/opt/bitnami/solr/server" "-f")
 
 if is_boolean_yes "$SOLR_ENABLE_CLOUD_MODE"; then
-    start_command+=("-cloud" "-z" "${SOLR_ZK_HOSTS}${SOLR_ZK_CHROOT}")
+    start_command+=("-z" "${SOLR_ZK_HOSTS}${SOLR_ZK_CHROOT}")
 else
     start_command+=("--user-managed")
 fi
