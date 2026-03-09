@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Cilium Proxy
 
-## What is Cilium Proxy?
-
 > Cilium Proxy ships Envoy with minimal extensions and Cilium policy enforcement filters.
 
 [Overview of Cilium Proxy](https://cilium.io/)
@@ -65,6 +63,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
