@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Nessie Utils
 
-## What is Nessie Utils?
-
 > Nessie Utils contains the tools nessie-cli, nessie-gc and nessie-admin-server-tool. Nessie is an open-source version control system for data lakes.
 
 [Overview of Nessie Utils](https://projectnessie.org/)
@@ -57,6 +55,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
