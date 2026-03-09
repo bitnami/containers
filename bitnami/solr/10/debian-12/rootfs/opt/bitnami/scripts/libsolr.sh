@@ -328,7 +328,7 @@ solr_create_cloud_user() {
     local -r exec="${SOLR_BIN_DIR}/solr"
     local -r username="${1:?user is required}"
     local -r password="${2:?password is required}"
-    local command_args=("auth" "enable" "-type" "basicAuth" "-credentials" "${username}:${password}" "-blockUnknown" "true" "-z" "${SOLR_ZK_HOSTS}${SOLR_ZK_CHROOT}")
+    local command_args=("auth" "enable" "-type" "basicAuth" "-credentials" "${username}:${password}" "-block-unknown" "true" "-z" "${SOLR_ZK_HOSTS}${SOLR_ZK_CHROOT}")
 
     info "Creating user: ${username}"
 
@@ -471,11 +471,13 @@ solr_is_zk_initialized() {
 solr_start_bg() {
     local -r mode="${1:-}"
     local -r exec="${SOLR_BIN_DIR}/solr"
-    local start_args=("start" "-p" "${SOLR_PORT_NUMBER}" "-d" "server")
+    local start_args=("start" "-p" "${SOLR_PORT_NUMBER}" "--server-dir" "server")
 
     info "Starting solr in background"
     if [[ "$mode" == "cloud" ]]; then
         start_args+=("-cloud" "-z" "${SOLR_ZK_HOSTS}${SOLR_ZK_CHROOT}")
+    else
+        start_args+=("--user-managed")
     fi
 
     # Do not start as root, to avoid solr error message
