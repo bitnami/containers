@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-02-25T10:20:39Z" \
+      org.opencontainers.image.created="2026-03-10T16:28:34Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/plugin-barman-cloud-sidecar/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/plugin-barman-cloud-sidecar" \
@@ -23,14 +23,15 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libbz2-1.0 libffi8 libgcc-s1 liblzma5 libncursesw6 libreadline8 libsqlite3-0 libssl3 libstdc++6 libtinfo6 procps zlib1g
+RUN install_packages ca-certificates curl libbz2-1.0 libffi8 libgcc-s1 libgmp10 libgnutls30 libhogweed6 libicu72 libidn2-0 libldap-2.5-0 liblzma5 libncursesw6 libnettle8 libp11-kit0 libreadline8 libsasl2-2 libsqlite3-0 libssl3 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 procps zlib1g
 RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "plugin-barman-cloud-sidecar-0.11.0-1-linux-${OS_ARCH}-debian-12" \
-      "plugin-barman-cloud-0.11.0-3-linux-${OS_ARCH}-debian-12" \
-      "python-3.13.12-6-linux-${OS_ARCH}-debian-12" \
+      "plugin-barman-cloud-0.11.0-4-linux-${OS_ARCH}-debian-12" \
+      "python-3.13.12-11-linux-${OS_ARCH}-debian-12" \
+      "postgresql-lib-18.3.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -50,7 +51,8 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="0.11.0" \
     BITNAMI_APP_NAME="plugin-barman-cloud-sidecar" \
-    IMAGE_REVISION="3" \
+    IMAGE_REVISION="4" \
+    LD_LIBRARY_PATH="/opt/bitnami/postgresql/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/plugin-barman-cloud/bin:/opt/bitnami/python/bin:$PATH"
 
 USER 1001
