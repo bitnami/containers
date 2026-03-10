@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Attu
 
-## What is Attu?
-
 > Attu is an administration tool for Milvus installations. Provides a dashboard for performing searches, managing users and collections.
 
 [Overview of Attu](https://github.com/zilliztech/attu)
@@ -56,33 +54,9 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of Attu, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/attu:latest
-```
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v attu
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name attu bitnami/attu:latest
-```
-
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
