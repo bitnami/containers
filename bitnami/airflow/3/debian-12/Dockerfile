@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-03-11T16:44:40Z" \
+      org.opencontainers.image.created="2026-03-11T17:41:32Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/airflow/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/airflow" \
@@ -32,7 +32,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
       "ini-file-1.4.9-8-linux-${OS_ARCH}-debian-12" \
       "wait-for-port-1.0.10-8-linux-${OS_ARCH}-debian-12" \
       "mariadb-lib-12.2.2-2-linux-${OS_ARCH}-debian-12" \
-      "airflow-3.1.7-9-linux-${OS_ARCH}-debian-12" \
+      "airflow-3.1.7-10-linux-${OS_ARCH}-debian-12" \
       "python-3.12.13-2-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -60,7 +60,7 @@ RUN /opt/bitnami/scripts/airflow/postunpack.sh
 ENV AIRFLOW_HOME="/opt/bitnami/airflow" \
     APP_VERSION="3.1.7" \
     BITNAMI_APP_NAME="airflow" \
-    IMAGE_REVISION="13" \
+    IMAGE_REVISION="14" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     LD_LIBRARY_PATH="/opt/bitnami/mariadb/lib:$LD_LIBRARY_PATH" \
