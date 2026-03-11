@@ -8,7 +8,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-03-09T19:06:43Z" \
+      org.opencontainers.image.created="2026-03-11T14:10:59Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/scylladb/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/scylladb" \
@@ -31,7 +31,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     COMPONENTS=( \
       "python-3.12.13-2-linux-${OS_ARCH}-debian-12" \
       "jre-11.0.30-9-1-linux-${OS_ARCH}-debian-12" \
-      "scylladb-2025.4.5-1-linux-${OS_ARCH}-debian-12" \
+      "scylladb-2025.4.5-2-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -53,7 +53,7 @@ RUN /opt/bitnami/scripts/scylladb/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="2025.4.5" \
     BITNAMI_APP_NAME="scylladb" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="2" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/scylladb/bin:/opt/bitnami/scylladb/sbin:/opt/bitnami/scylladb/python3/bin:/opt/bitnami/supervisor/bin:/opt/bitnami/scylladb/share/cassandra/bin:$PATH"
 
