@@ -5,7 +5,7 @@
 [Overview of Bitnami LMS powered by Moodle&trade; LMS](https://moodle.org/)
 Disclaimer: The respective trademarks mentioned in the offering are owned by the respective companies. We do not provide commercial license of any of these products. This listing has an open source license. Moodle(TM) LMS is run and maintained by Moodle HQ, that is a completely and separate project from Bitnami.
 
-## <a id="tl-dr"></a> TL;DR
+## TL;DR
 
 ```console
 docker run --name moodle bitnami/moodle:latest
@@ -13,7 +13,7 @@ docker run --name moodle bitnami/moodle:latest
 
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
 
-## <a id="why-use-bitnami-secure-images"></a> Why use Bitnami Secure Images?
+## Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
 
@@ -30,15 +30,15 @@ Each image comes with valuable security metadata. You can view the metadata in [
 
 If you are looking for our previous generation of images based on Debian Linux, please see the [Bitnami Legacy registry](https://hub.docker.com/u/bitnamilegacy).
 
-## <a id="how-to-deploy-moodle&trade--in-kubernetes?"></a> How to deploy Moodle&trade; in Kubernetes?
+## How to deploy Moodle&trade; in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Chart for Moodle&trade; GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/moodle).
 
-## <a id="supported-tags"></a> Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
-## <a id="get-this-image"></a> Get this image
+## Get this image
 
 The recommended way to get the Bitnami Docker Image for Moodle&trade; is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/moodle).
 
@@ -60,11 +60,11 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-### <a id="run-the-application-using-docker-compose"></a> Run the application using Docker Compose
+### Run the application using Docker Compose
 
 Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/moodle).
 
-## <a id="persisting-your-application"></a> Persisting your application
+## Persisting your application
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -72,11 +72,11 @@ For persistence you should mount a directory at the `/bitnami/moodle` path and a
 
 To avoid inadvertent removal of volumes, you can mount host directories as data volumes. Alternatively you can make use of volume plugins to host the volume data.
 
-## <a id="configuration"></a> Configuration
+## Configuration
 
 The following section describes the supported environment variables
 
-### <a id="environment-variables"></a> Environment variables
+### Environment variables
 
 The following tables list the main variables you can set.
 
@@ -121,7 +121,7 @@ The following tables list the main variables you can set.
 
 When you start the Moodle&trade; image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
 
-### <a id="examples"></a> Examples
+### Examples
 
 #### SMTP configuration
 
@@ -156,7 +156,7 @@ This would be an instance ready to be put behind the NGINX load balancer.
     bitnami/moodle:latest
   ```
 
-### <a id="installing-additional-language-packs"></a> Installing additional language packs
+### Installing additional language packs
 
 By default, this container packs a generic English version of Moodle&trade;. Nevertheless, more Language Packs can be added to the default configuration using the in-platform Administration [interface](https://docs.moodle.org/38/en/Language_packs#Language_pack_installation_and_uninstallation). In order to fully support a new Language Pack it is also a requirement to update the system's locales files. To do that, you have several options:
 
@@ -179,13 +179,13 @@ RUN echo "es_ES.UTF-8 UTF-8" >> /etc/locale.gen && locale-gen
 
 Bear in mind that in the example above `es_ES.UTF-8 UTF-8` is the locale needed for the desired Language Pack to install. You may change this value to the locale corresponding to your pack.
 
-### <a id="fips-configuration"></a> FIPS configuration in Bitnami Secure Images
+### FIPS configuration in Bitnami Secure Images
 
 The Bitnami Bitnami LMS powered by Moodle&trade; LMS Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
-## <a id="logging"></a> Logging
+## Logging
 
 The Bitnami Docker image for Moodle&trade; sends the container logs to `stdout`. To view the logs:
 
@@ -203,9 +203,9 @@ You can configure the containers [logging driver](https://docs.docker.com/engine
 
 By default, the logging of debug information is disabled. You can enable it by setting the environment variable `BITNAMI_DEBUG` to `true`.
 
-## <a id="maintenance"></a> Maintenance
+## Maintenance
 
-### <a id="backing-up-your-container"></a> Backing up your container
+### Backing up your container
 
 To backup your data, configuration and logs, follow these simple steps:
 
@@ -230,7 +230,7 @@ docker run --rm -v /path/to/moodle-backups:/backups --volumes-from moodle busybo
   cp -a /bitnami/moodle /backups/latest
 ```
 
-### <a id="restoring-a-backup"></a> Restoring a backup
+### Restoring a backup
 
 Restoring a backup is as simple as mounting the backup as volumes in the containers.
 
@@ -256,11 +256,11 @@ For the Moodle&trade; container:
    bitnami/moodle:latest
 ```
 
-## <a id="customize-this-image"></a> Customize this image
+## Customize this image
 
 The Bitnami Docker image for Moodle&trade; is designed to be extended so it can be used as the base image for your custom web applications.
 
-### <a id="extend-this-image"></a> Extend this image
+### Extend this image
 
 Before extending this image, please note there are certain configuration settings you can modify using the original image:
 
@@ -273,7 +273,7 @@ If your desired customizations cannot be covered using the methods mentioned abo
 
 ```Dockerfile
 FROM bitnami/moodle
-## <a id="put-your-customizations-below"></a> Put your customizations below
+## Put your customizations below
 ...
 ```
 
@@ -286,13 +286,13 @@ Here is an example of extending the image with the following modifications:
 ```Dockerfile
 FROM bitnami/moodle
 
-## <a id="install-'vim'"></a> Install 'vim'
+## Install 'vim'
 RUN install_packages vim
 
-## <a id="enable-mod_ratelimit-module"></a> Enable mod_ratelimit module
+## Enable mod_ratelimit module
 RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt/bitnami/apache/conf/httpd.conf
 
-## <a id="modify-the-ports-used-by-apache-by-default"></a> Modify the ports used by Apache by default
+## Modify the ports used by Apache by default
 # It is also possible to change these environment variables at runtime
 ENV APACHE_HTTP_PORT_NUMBER=8181
 ENV APACHE_HTTPS_PORT_NUMBER=8143
@@ -316,7 +316,7 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
      ...
 ```
 
-## <a id="notable-changes"></a> Notable Changes
+## Notable Changes
 
 ## 3.9.0-debian-10-r17
 
@@ -337,7 +337,7 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
 - The PHP configuration volume (`/bitnami/php`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the PHP configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom PHP configuration files are advised to mount a volume for the configuration at `/opt/bitnami/php/conf`, or mount specific configuration files individually.
 - Enabling custom Apache certificates by placing them at `/opt/bitnami/apache/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`.
 
-## <a id="license"></a> License
+## License
 
 Copyright &copy; 2026 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
