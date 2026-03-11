@@ -756,7 +756,7 @@ cassandra_change_cassandra_password() {
 
     if (echo "ALTER USER cassandra WITH PASSWORD \$\$${escaped_password}\$\$;" | cassandra_execute_with_retries "$retries" "$sleep_time" "$user" "$old_password"); then
         debug "ALTER USER command executed. Trying to log in"
-        wait_for_cql_access "$user" "$new_password" "" "$retries" "$sleep_time"
+        wait_for_cql_access "$user" "$new_password" "localhost" "$retries" "$sleep_time"
         info "Password updated successfully"
     fi
 }
@@ -906,7 +906,7 @@ cassandra_initialize() {
             cassandra_execute_startup_cql
         else
             info "Non-seeder node. Waiting for synchronization"
-            wait_for_cql_access "$DB_USER" "$DB_PASSWORD" "" "$DB_PEER_CQL_MAX_RETRIES" "$DB_PEER_CQL_SLEEP_TIME"
+            wait_for_cql_access "$DB_USER" "$DB_PASSWORD" "localhost" "$DB_PEER_CQL_MAX_RETRIES" "$DB_PEER_CQL_SLEEP_TIME"
         fi
     fi
 }
