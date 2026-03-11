@@ -256,7 +256,7 @@ The Bitnami PHP-FPM Docker image from the [Bitnami Secure Images](https://go-vmw
 
 ## Logging
 
-The Bitnami PHP-FPM Docker Image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/reference/run/#logging-drivers-log-driver) using the `--log-driver` option. By defauly the `json-file` driver is used.
+The Bitnami PHP-FPM Docker Image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/reference/run/#logging-drivers-log-driver) using the `--log-driver` option. By default the `json-file` driver is used.
 
 To view the logs:
 
