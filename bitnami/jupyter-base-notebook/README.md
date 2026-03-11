@@ -1,13 +1,13 @@
 # Bitnami Secure Image for Jupyter Base Notebook
 
-## What is Jupyter Base Notebook?
-
 > Jupyter Base Notebook is an instance of Jupyter Notebook for your JupyterHub installation. The Base flavor contains the essential Python 3 packages and the JupyterLab user interface.
 
 [Overview of Jupyter Base Notebook](https://github.com/jupyter/docker-stacks)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
+
+Use this quick command to run the container.
 
 ```console
 docker run --name jupyter-base-notebook bitnami/jupyter-base-notebook:latest
@@ -62,6 +62,8 @@ Non-root container images add an extra layer of security and are generally recom
 
 ## Configuration
 
+The following sections describe how to run commands and add packages.
+
 ### Running commands
 
 To run commands inside this container you can use `docker run`, for example to execute `jupyterhub-singleuser --version` you can follow the example below:
@@ -74,7 +76,8 @@ Check the [official Jupyter Notebook documentation](https://jupyter.readthedocs.
 
 ### Adding more python packages
 
-To add more python packages, you need to create a Dockerfile extending the current image, and the commands to install the desired packages.
+To add more python packages, you need to create a Dockerfile extending the current image and add the commands to install the desired packages.
+
 In the following example, the base notebook image is used to add `scipy` and `matplotlib`.
 
 ```Dockerfile
@@ -93,7 +96,9 @@ The Bitnami Jupyter Base Notebook Docker image from the [Bitnami Secure Images](
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
-## Notable Changes
+## Notable changes
+
+The following subsections describe notable changes.
 
 ### Starting January 16, 2024
 
