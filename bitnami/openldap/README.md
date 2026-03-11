@@ -5,13 +5,13 @@
 [Overview of OpenLDAP](https://openldap.org/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
-## <a id="tl-dr"></a> TL;DR
+## TL;DR
 
 ```console
 docker run --name openldap bitnami/openldap:latest
 ```
 
-## <a id="why-use-bitnami-secure-images"></a> Why use Bitnami Secure Images?
+## Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
 
@@ -28,15 +28,15 @@ Each image comes with valuable security metadata. You can view the metadata in [
 
 If you are looking for our previous generation of images based on Debian Linux, please see the [Bitnami Legacy registry](https://hub.docker.com/u/bitnamilegacy).
 
-## <a id="why-non-root"></a> Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
 
-## <a id="supported-tags"></a> Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
-## <a id="get-this-image"></a> Get this image
+## Get this image
 
 The recommended way to get the Bitnami OpenLDAP Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/openldap).
 
@@ -58,21 +58,21 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## <a id="using-`docker-compose.yaml`"></a> Using `docker-compose.yaml`
+## Using `docker-compose.yaml`
 
 Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes.
 
-## <a id="connecting-to-other-containers"></a> Connecting to other containers
+## Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a different server running inside a container can easily be accessed by your application containers and vice-versa.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-## <a id="configuration"></a> Configuration
+## Configuration
 
 The Bitnami Docker OpenLDAP can be easily setup with the following environment variables:
 
-- `LDAP_PORT_NUMBER`: The port OpenLDAP is listening for requests. Priviledged port is supported (e.g. `389`). Default: **1389** (non privileged port).
+- `LDAP_PORT_NUMBER`: The port OpenLDAP is listening for requests. Privileged port is supported (e.g. `389`). Default: **1389** (non privileged port).
 - `LDAP_ROOT`: LDAP baseDN (or suffix) of the LDAP tree. Default: **dc=example,dc=org**
 - `LDAP_ADMIN_USERNAME`: LDAP database admin user. Default: **admin**
 - `LDAP_ADMIN_PASSWORD`: LDAP database admin password. Default: **adminpassword**
@@ -101,7 +101,7 @@ The Bitnami Docker OpenLDAP can be easily setup with the following environment v
 - `LDAP_PPOLICY_USE_LOCKOUT`: Whether bind attempts to locked accounts will always return an error. Will only be applied with `LDAP_CONFIGURE_PPOLICY` active. Default: **no**.
 - `LDAP_PPOLICY_HASH_CLEARTEXT`: Whether plaintext passwords should be hashed automatically. Will only be applied with `LDAP_CONFIGURE_PPOLICY` active. Default: **no**.
 
-### <a id="bootstrapping"></a> Bootstrapping
+### Bootstrapping
 
 User side bootstrapping happens in two primary phases:
 
@@ -132,11 +132,11 @@ Some key concepts:
 - ldifs are loaded in alpha-numeric order so you can load things in 01-mygroups.ldif, 02-myusers.ldif etc.
 - this only runs on first init of the container.
 
-### <a id="data-persistence"></a> Data Persistence
+### Data Persistence
 
 To ensure that the OpenLDAP state is retained across container restarts and updates, it is recommended to mount a volume at `/bitnami/openldap`.
 
-### <a id="overlays"></a> Overlays
+### Overlays
 
 Overlays are dynamic modules that can be added to an OpenLDAP server to extend or modify its functionality. See section on Bootstrapping for an example on adding the memberOf or other overlays not directly provided as an overlay flag.
 
@@ -178,13 +178,13 @@ IMPORTANT: The `dynlist` requires the schema `dyngroup`. This can be done by add
 
 Check the official page [OpenLDAP, Overlays, Dynamic Lists](https://www.openldap.org/doc/admin26/overlays.html#Dynamic%20Lists) for detailed configuration information.
 
-### <a id="securing-traffic"></a> Securing OpenLDAP traffic
+### Securing OpenLDAP traffic
 
 OpenLDAP clients and servers are capable of using the Transport Layer Security (TLS) framework to provide integrity and confidentiality protections and to support LDAP authentication using the SASL EXTERNAL mechanism. Should you desire to enable this optional feature, you may use the following environment variables to configure the application:
 
 - `LDAP_ENABLE_TLS`: Whether to enable TLS for traffic or not. Defaults to `no`.
 - `LDAP_REQUIRE_TLS`: Whether connections must use TLS. Will only be applied with `LDAP_ENABLE_TLS` active. Defaults to `no`.
-- `LDAP_LDAPS_PORT_NUMBER`: Port used for TLS secure traffic. Priviledged port is supported (e.g. `636`). Default: **1636** (non privileged port).
+- `LDAP_LDAPS_PORT_NUMBER`: Port used for TLS secure traffic. Privileged port is supported (e.g. `636`). Default: **1636** (non privileged port).
 - `LDAP_TLS_CERT_FILE`: File containing the certificate file for the TLS traffic. No defaults.
 - `LDAP_TLS_KEY_FILE`: File containing the key for certificate. No defaults.
 - `LDAP_TLS_CA_FILE`: File containing the CA of the certificate. No defaults.
@@ -192,7 +192,7 @@ OpenLDAP clients and servers are capable of using the Transport Layer Security (
 
 This new feature is not mutually exclusive, which means it is possible to listen to both TLS and non-TLS connection simultaneously. To use TLS you can use the URI `ldaps://openldap:1636` or use the non-TLS URI forcing ldap to use TLS `ldap://openldap:1389 -ZZ`.
 
-### <a id="run-behind-load-balancer"></a> Run behind load balancer
+### Run behind load balancer
 
 OpenLDAP supports the HAProxy proxy protocol version 2 to detect real client IP that is masked when server runs behind load balancer. You can enable and configure this feature with the following environment variables:
 
@@ -206,21 +206,21 @@ Enabling this feature will replace regular and TLS ports with proxy protocol cap
 
 Check the official page [OpenLDAP, Running slapd, Command-Line Options](https://www.openldap.org/doc/admin26/runningslapd.html#Command-Line%20Options) for additional information.
 
-### <a id="initializing-a-new-instance"></a> Initializing a new instance
+### Initializing a new instance
 
 The [Bitnami OpenLDAP](https://github.com/bitnami/containers/blob/main/bitnami/openldap) image allows you to use your custom scripts to initialize a fresh instance.
 
 The allowed script extension is `.sh`, all scripts are executed in alphabetical order and need to reside in `/docker-entrypoint-initdb.d/`.
 
-Scripts are executed are after the initilization and before the startup of the OpenLDAP service.
+Scripts are executed are after the initialization and before the startup of the OpenLDAP service.
 
-### <a id="fips-configuration"></a> FIPS configuration in Bitnami Secure Images
+### FIPS configuration in Bitnami Secure Images
 
 The Bitnami OpenLDAP Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
-## <a id="logging"></a> Logging
+## Logging
 
 The Bitnami OpenLDAP Docker image sends the container logs to `stdout`. To view the logs:
 
@@ -232,13 +232,13 @@ You can configure the containers [logging driver](https://docs.docker.com/engine
 
 To see the actual output of slapd in the container's logs, set the environment variable `BITNAMI_DEBUG=true`. Useful especially to find/debug problems in your configuration that lead to errors so OpenLDAP won't start.
 
-## <a id="notable-changes"></a> Notable Changes
+## Notable Changes
 
 ### 2.4.58-debian-10-r93
 
 - The default database backend has been changed from `hdb` to `mdb` as recommended. No additional steps should be necessary at upgrade time; the new container version `2.4.59` will initialize using the persisted data.
 
-## <a id="license"></a> License
+## License
 
 Copyright &copy; 2026 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
