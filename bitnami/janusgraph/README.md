@@ -1,7 +1,5 @@
 # Bitnami Secure Image for JanusGraph
 
-## What is JanusGraph?
-
 > JanusGraph is a scalable graph database optimized for storing and querying graphs containing hundreds of billions of vertices and edges distributed across a multi-machine cluster.
 
 [Overview of JanusGraph](https://janusgraph.org/)
@@ -58,7 +56,11 @@ docker build -t bitnami/APP:latest .
 
 ## Configuration
 
+The following section describes the supported environment variables
+
 ### Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
