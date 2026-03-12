@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Apache APISIX
 
-## What is Apache APISIX?
-
 > Apache APISIX is high-performance, real-time API Gateway. Features load balancing, dynamic upstream, canary release, circuit breaking, authentication, observability, amongst others.
 
 [Overview of Apache APISIX](https://apisix.apache.org/)
@@ -56,33 +54,9 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of Apache APISIX, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/apisix:latest
-```
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v apisix
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name apisix bitnami/apisix:latest
-```
-
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
