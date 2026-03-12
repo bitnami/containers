@@ -1,7 +1,5 @@
 # Bitnami Secure Image for PgBouncer
 
-## What is PgBouncer?
-
 > PgBouncer is a connection pooler for PostgreSQL. It reduces performance overhead by rotating client connections to PostgreSQL databases. It supports PostgreSQL databases located on different hosts.
 
 [Overview of PgBouncer](https://www.pgbouncer.org/)
@@ -62,9 +60,17 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes.
+
 ## Configuration
 
+The following section describes the supported environment variables
+
 ### Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
@@ -183,24 +189,7 @@ To expose a ["fallback database" (wildcard that matches any)](https://www.pgboun
 
 ### Initializing a new instance
 
-When the container is launched, it will execute the files with extension `.sh` located at `/docker-entrypoint-initdb.d`.
-
-In order to have your custom files inside the docker image you can mount them as a volume.
-
-```console
-docker run --name pgbouncer \
-  -v /path/to/init-scripts:/docker-entrypoint-initdb.d \
-  bitnami/pgbouncer:latest
-```
-
-Or with docker-compose
-
-```yaml
-pgbouncer:
-  image: bitnami/pgbouncer:latest
-  volumes:
-    - /path/to/init-scripts:/docker-entrypoint-initdb.d
-```
+When the container is launched, it will execute the files with extension `.sh` located at `/docker-entrypoint-initdb.d`. In order to have your custom files inside the docker image you can mount them as a volume.
 
 ### Securing PgBouncer traffic
 
@@ -219,103 +208,13 @@ PgBouncer supports the encryption of connections using the SSL/TLS protocol. Sho
 - `PGBOUNCER_SERVER_TLS_PROTOCOLS`: TLS protocols to be used in server connection. Defaults to `secure`. Check the [official PgBouncer documentation](https://www.pgbouncer.org/config.html) for the available values for `server_tls_protocols`.
 - `PGBOUNCER_SERVER_TLS_CIPHERS`: TLS ciphers to be used in server connection. Defaults to `fast`. Check the [official PgBouncer documentation](https://www.pgbouncer.org/config.html) for the available values for `server_tls_ciphers`.
 
-When enabling TLS, PgBouncer will support both standard and encrypted traffic by default but prefer the latter. Below there are some examples of how to quickly set up client TLS traffic:
-
-1. Using `docker run`
-
-    ```console
-    $ docker run \
-        -v /path/to/certs:/opt/bitnami/pgbouncer/certs \
-        -e PGBOUNCER_CLIENT_TLS_SSLMODE=require \
-        -e PGBOUNCER_CLIENT_TLS_CERT_FILE=/opt/bitnami/pgbouncer/certs/pgbouncer.crt \
-        -e PGBOUNCER_CLIENT_TLS_KEY_FILE=/opt/bitnami/pgbouncer/certs/pgbouncer.key \
-        bitnami/pgbouncer:latest
-    ```
-
-2. Modifying the `docker-compose.yml` file present in this repository:
-
-    ```yaml
-    services:
-      pgbouncer:
-      ...
-        environment:
-          ...
-          - PGBOUNCER_CLIENT_TLS_SSLMODE=require
-          - PGBOUNCER_CLIENT_TLS_CERT_FILE=/opt/bitnami/pgbouncer/certs/pgbouncer.crt
-          - PGBOUNCER_CLIENT_TLS_KEY_FILE=/opt/bitnami/pgbouncer/certs/pgbouncer.key
-        ...
-        volumes:
-          ...
-          - /path/to/certs:/opt/bitnami/pgbouncer/certs
-      ...
-    ```
+When enabling TLS, PgBouncer will support both standard and encrypted traffic by default but prefer the latter.
 
 Alternatively, you may also provide this configuration in your [custom](https://github.com/bitnami/containers/blob/main/bitnami/pgbouncer#configuration-file) configuration file.
 
 ### Configuration file
 
-The image looks for `pgbouncer.ini` file in `/opt/bitnami/pgbouncer/conf/`. You can mount a volume at `/bitnami/pgbouncer/conf/` and copy/edit the `pgbouncer.ini` file in the `/path/to/pgbouncer-persistence/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
-
-```console
-/path/to/pgbouncer-persistence/conf/
-└── pgbouncer.ini
-
-0 directories, 1 file
-```
-
-As PgBouncer image is non-root, you need to set the proper permissions to the mounted directory in your host:
-
-```console
-sudo chown 1001:1001 /path/to/pgbouncer-persistence/conf/
-```
-
-#### Step 1: Run the PgBouncer image
-
-Run the PgBouncer image, mounting a directory from your host.
-
-```console
-docker run --name pgbouncer \
-    -v /path/to/pgbouncer-persistence/conf/:/bitnami/pgbouncer/conf/ \
-    bitnami/pgbouncer:latest
-```
-
-or using Docker Compose:
-
-```yaml
-version: '2'
-
-...
-
-services:
-  pgbouncer:
-    image: bitnami/pgbouncer:latest
-    ports:
-      - 6432:6432
-    volumes:
-      - /path/to/pgbouncer-persistence/conf/:/bitnami/pgbouncer/conf/
-```
-
-#### Step 2: Edit the configuration
-
-Edit the configuration on your host using your favorite editor.
-
-```console
-vi /path/to/pgbouncer-persistence/conf/pgbouncer.ini
-```
-
-#### Step 3: Restart PgBouncer
-
-After changing the configuration, restart your PgBouncer container for changes to take effect.
-
-```console
-docker restart pgbouncer
-```
-
-or using Docker Compose:
-
-```console
-docker-compose restart pgbouncer
-```
+The image looks for `pgbouncer.ini` file in `/opt/bitnami/pgbouncer/conf/`. You can mount a volume at `/bitnami/pgbouncer/conf/` and copy/edit the `pgbouncer.ini` file in the `/path/to/pgbouncer-persistence/conf/`. The default configuration will be populated to the `conf/` directory if it's empty.
 
 Refer to the [server configuration](https://www.pgbouncer.org/usage.html) manual for the complete list of configuration options.
 
@@ -323,86 +222,12 @@ Refer to the [server configuration](https://www.pgbouncer.org/usage.html) manual
 
 It is possible to connect a single PgBouncer instance with multiple PostgreSQL backends. By using as many `PGBOUNCER_DSN_${i}` environment variables (with `i` starting at zero, `0`) as needed, and the `PGBOUNCER_USERLIST_FILE` variable pointing to a mounted volume with the required credentials for any extra PostgreSQL database in the format `"<postgresql-user>" "<password>"`.
 
-The PgBouncer initialization process requires one PostgreSQL backend to be configured using the different `POSTGRESQL_*` variables listed in the [Environment Variables](#environment-variables) section, but the rest of backends connections can be provided using the method explained in this section. An example `docker-compose.yaml` for this scenario can be found below
-
-```yaml
-  pg1:
-    image: docker.io/bitnami/postgresql:latest
-    volumes:
-      - pg1_data:/bitnami/postgresql
-    environment:
-      - POSTGRESQL_PASSWORD=password1
-      - POSTGRESQL_DATABASE=db1
-
-  pg2:
-    image: docker.io/bitnami/postgresql:latest
-    volumes:
-      - pg2_data:/bitnami/postgresql
-    environment:
-      - POSTGRESQL_PASSWORD=password2
-      - POSTGRESQL_DATABASE=db2
-
-  pg3:
-    image: docker.io/bitnami/postgresql:latest
-    volumes:
-      - pg3_data:/bitnami/postgresql
-    environment:
-      - POSTGRESQL_PASSWORD=password3
-      - POSTGRESQL_DATABASE=db3
-
-  pgbouncer:
-    image: docker.io/bitnami/pgbouncer:latest
-    ports:
-      - 6432:6432
-    volumes:
-      - ./userlists.txt:/bitnami/userlists.txt
-    environment:
-      - POSTGRESQL_HOST=pg1
-      - POSTGRESQL_PASSWORD=password1
-      - POSTGRESQL_DATABASE=db1
-      - PGBOUNCER_AUTH_TYPE=trust
-      - PGBOUNCER_USERLIST_FILE=/bitnami/userlists.txt
-      - PGBOUNCER_DSN_0=pg1=host=pg1 port=5432 dbname=db1
-      - PGBOUNCER_DSN_1=pg2=host=pg2 port=5432 dbname=db2
-      - PGBOUNCER_DSN_2=pg3=host=pg3 port=5432 dbname=db3
-volumes:
-  pg1_data:
-    driver: local
-  pg2_data:
-    driver: local
-  pg3_data:
-    driver: local
-```
-
-And this is the content of the `userlists.txt` file:
-
-```text
-"postgres" "password1"
-"postgres" "password2"
-"postgres" "password3"
-```
-
-Once initialized, the scenario above provides access to three diferent PostgreSQL backends from a single PgBouncer instance. As an example, you can request the PostgreSQL version of the backend server number two (notice it is the only running PostgreSQL 15.x in this scenario):
-
-```bash
-$ docker exec -it -u root debian-12-pgbouncer-1 psql -p 6432 -U postgres pg2 -c "show server_version;"
- server_version
- ----------------
-  15.4
-  (1 row)
-```
-
+The PgBouncer initialization process requires one PostgreSQL backend to be configured using the different `POSTGRESQL_*` variables listed in the [Environment Variables](#environment-variables) section, but the rest of backends connections can be provided using the method explained in this section.
 ### FIPS configuration in Bitnami Secure Images
 
 The Bitnami PgBouncer Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes.
-
-If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## License
 
