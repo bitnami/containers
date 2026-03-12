@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Redis&reg; Cluster
 
-## What is Redis&reg; Cluster?
-
 > Redis&reg; is an open source, scalable, distributed in-memory cache for applications. It can be used to store and serve data in the form of strings, hashes, lists, sets and sorted sets.
 
 [Overview of Redis&reg; Cluster](https://redis.io)
@@ -78,6 +76,8 @@ Containers attached to the same network can communicate with each other using th
 
 ## Configuration
 
+The following section describes how to configure the application
+
 ### Configuration file
 
 The image looks for configurations in `/opt/bitnami/redis/mounted-etc/redis.conf`. You can overwrite the `redis.conf` file using your own custom configuration file.
@@ -90,6 +90,8 @@ Instead of providing a custom `redis.conf`, you may also choose to provide only 
 
 ### Environment variables
 
+The following tables list the main variables you can set.
+
 #### Customizable environment variables
 
 | Name                                    | Description                                                               | Default Value                              |
@@ -99,7 +101,7 @@ Instead of providing a custom `redis.conf`, you may also choose to provide only 
 | `REDIS_DISABLE_COMMANDS`                | Commands to disable in Redis                                              | `nil`                                      |
 | `REDIS_DATABASE`                        | Default Redis database                                                    | `redis`                                    |
 | `REDIS_AOF_ENABLED`                     | Enable AOF                                                                | `yes`                                      |
-| `REDIS_RDB_POLICY`                      | Enable RDB policy persitence                                              | `nil`                                      |
+| `REDIS_RDB_POLICY`                      | Enable RDB policy persistence                                             | `nil`                                      |
 | `REDIS_RDB_POLICY_DISABLED`             | Allows to enable RDB policy persistence                                   | `no`                                       |
 | `REDIS_MASTER_HOST`                     | Redis master host (used by slaves)                                        | `nil`                                      |
 | `REDIS_MASTER_PORT_NUMBER`              | Redis master host port (used by slaves)                                   | `6379`                                     |
@@ -130,7 +132,7 @@ Instead of providing a custom `redis.conf`, you may also choose to provide only 
 | `REDIS_CLUSTER_ANNOUNCE_IP`             | IP to use for announcing the cluster service                              | `nil`                                      |
 | `REDIS_CLUSTER_ANNOUNCE_PORT`           | Client port to use for announcing the cluster service                     | `nil`                                      |
 | `REDIS_CLUSTER_ANNOUNCE_BUS_PORT`       | Cluster message bus port to use for announcing the cluster service        | `nil`                                      |
-| `REDIS_DNS_RETRIES`                     | Number of retries in order to get an addresable domain name               | `120`                                      |
+| `REDIS_DNS_RETRIES`                     | Number of retries in order to get an addressable domain name              | `120`                                      |
 | `REDIS_NODES`                           | List of Redis cluster nodes                                               | `nil`                                      |
 | `REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP` | Time to wait before the DNS lookup                                        | `0`                                        |
 | `REDIS_CLUSTER_DNS_LOOKUP_RETRIES`      | Number of retires for the DNS lookup                                      | `1`                                        |
