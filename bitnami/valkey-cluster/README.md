@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Valkey Cluster
 
-## What is Valkey Cluster?
-
 > Valkey is an open source (BSD) high-performance key/value datastore that supports a variety workloads such as caching, message queues, and can act as a primary database.
 
 [Overview of Valkey Cluster](https://valkey.io/)
@@ -82,6 +80,8 @@ Instead of providing a custom `valkey.conf`, you may also choose to provide only
 
 ### Environment variables
 
+The following tables list the main variables you can set.
+
 #### Customizable environment variables
 
 | Name                                     | Description                                                               | Default Value                               |
@@ -91,7 +91,7 @@ Instead of providing a custom `valkey.conf`, you may also choose to provide only
 | `VALKEY_DISABLE_COMMANDS`                | Commands to disable in Valkey                                             | `nil`                                       |
 | `VALKEY_DATABASE`                        | Default Valkey database                                                   | `valkey`                                    |
 | `VALKEY_AOF_ENABLED`                     | Enable AOF                                                                | `yes`                                       |
-| `VALKEY_RDB_POLICY`                      | Enable RDB policy persitence                                              | `nil`                                       |
+| `VALKEY_RDB_POLICY`                      | Enable RDB policy persistence                                             | `nil`                                       |
 | `VALKEY_RDB_POLICY_DISABLED`             | Allows to enable RDB policy persistence                                   | `no`                                        |
 | `VALKEY_PRIMARY_HOST`                    | Valkey primary host (used by replicas)                                    | `nil`                                       |
 | `VALKEY_PRIMARY_PORT_NUMBER`             | Valkey primary host port (used by replicas)                               | `6379`                                      |
@@ -122,7 +122,7 @@ Instead of providing a custom `valkey.conf`, you may also choose to provide only
 | `VALKEY_CLUSTER_ANNOUNCE_IP`             | IP to use for announcing the cluster service                              | `nil`                                       |
 | `VALKEY_CLUSTER_ANNOUNCE_PORT`           | Client port to use for announcing the cluster service                     | `nil`                                       |
 | `VALKEY_CLUSTER_ANNOUNCE_BUS_PORT`       | Cluster message bus port to use for announcing the cluster service        | `nil`                                       |
-| `VALKEY_DNS_RETRIES`                     | Number of retries in order to get an addresable domain name               | `120`                                       |
+| `VALKEY_DNS_RETRIES`                     | Number of retries in order to get an addressable domain name              | `120`                                       |
 | `VALKEY_NODES`                           | List of Valkey cluster nodes                                              | `nil`                                       |
 | `VALKEY_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP` | Time to wait before the DNS lookup                                        | `0`                                         |
 | `VALKEY_CLUSTER_DNS_LOOKUP_RETRIES`      | Number of retires for the DNS lookup                                      | `1`                                         |
