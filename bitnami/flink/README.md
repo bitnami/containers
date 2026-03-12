@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Apache Flink
 
-## What is Apache Flink?
-
 > Apache Flink is a framework and distributed processing engine for stateful computations over unbounded and bounded data streams.
 
 [Overview of Apache Flink](https://flink.apache.org/)
@@ -9,6 +7,8 @@
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
+
+Use this quick command to run the container.
 
 ```console
 docker run --name flink bitnami/flink:latest
@@ -37,7 +37,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 ## Get this image
 
-The recommended way to get the Bitnami flink Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/flink).
+The recommended way to get the Bitnami `flink` Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/flink).
 
 ```console
 docker pull bitnami/flink:latest
@@ -57,13 +57,21 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/flink).
+
 ## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
 
 ## Configuration
 
+The following sections describe environment variables and how to run commands.
+
 ### Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
@@ -93,9 +101,9 @@ Non-root container images add an extra layer of security and are generally recom
 
 ### Running commands
 
-To run commands inside this container you can use `docker run`. The default endpoint runs a Flink JobManager instance (jobmanager mode), while you can use the environment variable FLINK_MODE for run the image in a different mode:
+To run commands inside this container you can use `docker run`. The default endpoint runs a Flink JobManager instance (`jobmanager` mode). You can use the `FLINK_MODE` environment variable to run the image in a different mode.
 
-Also, you can use the `help` Flink Mode in order to obtain an updated list of modes to run of different components instances
+You can use the `help` Flink mode to obtain an updated list of modes for different component instances.
 
 ```console
 docker run --rm -e FLINK_MODE=help --name flink bitnami/flink:latest
@@ -104,7 +112,7 @@ docker run --rm -e FLINK_MODE=help --name flink bitnami/flink:latest
 ```console
 $ Usage: FLINK_MODE=(jobmanager|standalone-job|taskmanager|history-server)
 
-  By default, the Apache Flink Packaged by Bitnami  image will run in jobmanager mode.
+  By default, the Apache Flink Packaged by Bitnami  image will run in `jobmanager` mode.
   Also, by default, Apache Flink Packaged by Bitnami image adopts jemalloc as default memory allocator. This behavior can be disabled by setting the 'DISABLE_JEMALLOC' environment variable to 'true'.
 ```
 
@@ -115,12 +123,6 @@ Check the [official Apache Flink documentation](https://flink.apache.org//docs) 
 The Bitnami Apache Flink Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/flink).
-
-If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## License
 
