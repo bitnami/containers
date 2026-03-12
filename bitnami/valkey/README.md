@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Valkey
 
-## What is Valkey?
-
 > Valkey is a high-performance data structure server that primarily serves key/value workloads. It supports a wide range of native structures and an extensible plugin system for adding new data structures and access patterns.
 
 [Overview of Valkey](https://valkey.io/)
@@ -78,7 +76,7 @@ If you remove the container all your data will be lost, and the next time you ru
 
 For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
-> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
+> **NOTE** As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 ## Connecting to other containers
 
@@ -88,7 +86,11 @@ Containers attached to the same network can communicate with each other using th
 
 ## Configuration
 
+The following section describes the supported environment variables
+
 ### Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
@@ -99,7 +101,7 @@ Containers attached to the same network can communicate with each other using th
 | `VALKEY_DISABLE_COMMANDS`         | Commands to disable in Valkey                      | `nil`                                       |
 | `VALKEY_DATABASE`                 | Default Valkey database                            | `valkey`                                    |
 | `VALKEY_AOF_ENABLED`              | Enable AOF                                         | `yes`                                       |
-| `VALKEY_RDB_POLICY`               | Enable RDB policy persitence                       | `nil`                                       |
+| `VALKEY_RDB_POLICY`               | Enable RDB policy persistence                      | `nil`                                       |
 | `VALKEY_RDB_POLICY_DISABLED`      | Allows to enable RDB policy persistence            | `no`                                        |
 | `VALKEY_PRIMARY_HOST`             | Valkey primary host (used by replicas)             | `nil`                                       |
 | `VALKEY_PRIMARY_PORT_NUMBER`      | Valkey primary host port (used by replicas)        | `6379`                                      |
@@ -191,7 +193,7 @@ Valkey offers different [options](https://valkey.io/docs/topics/persistence.html
 
 ### Enabling Access Control List
 
-Valkey offers [ACL](https://valkey.io/docs/topics/acl.html) which allows certain connections to be limited in terms of the commands that can be executed and the keys that can be accessed. We strongly recommend enabling ACL in production by specifiying the `VALKEY_ACLFILE`.
+Valkey offers [ACL](https://valkey.io/docs/topics/acl.html) which allows certain connections to be limited in terms of the commands that can be executed and the keys that can be accessed. We strongly recommend enabling ACL in production by specifying the `VALKEY_ACLFILE`.
 
 ```console
 docker run -name valkey -e VALKEY_ACLFILE=/opt/bitnami/valkey/mounted-etc/users.acl -v /path/to/users.acl:/opt/bitnami/valkey/mounted-etc/users.acl bitnami/valkey:latest
@@ -222,7 +224,7 @@ A replication cluster can easily be setup with the Bitnami Valkey Docker Image u
 - `VALKEY_REPLICA_IP`: The replication announce ip. Defaults to `$(get_machine_ip)` which return the ip of the container.
 - `VALKEY_REPLICA_PORT`: The replication announce port. Defaults to `VALKEY_PRIMARY_PORT_NUMBER`.
 - `VALKEY_PRIMARY_HOST`: Hostname/IP of replication primary (replica node parameter). No defaults.
-- `VALKEY_PRIMARY_PORT_NUMBER`: Server port of the replication primaty (replica node parameter). Defaults to `6379`.
+- `VALKEY_PRIMARY_PORT_NUMBER`: Server port of the replication primary (replica node parameter). Defaults to `6379`.
 - `VALKEY_PRIMARY_PASSWORD`: Password to authenticate with the primary (replica node parameter). No defaults. As an alternative, you can mount a file with the password and set the `VALKEY_PRIMARY_PASSWORD_FILE` variable.
 
 In a replication cluster you can have one primary and zero or more replicas. When replication is enabled the primary node is in read-write mode, while the replicas are in read-only mode. For best performance its advisable to limit the reads to the replicas.
