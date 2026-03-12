@@ -1,13 +1,13 @@
 # Bitnami Secure Image for CouchDB
 
-## What is CouchDB?
-
 > CouchDB is an open source NoSQL database that stores your data with JSON documents, which you can access via HTTP. It allows you to index, combine, and transform your documents with JavaScript.
 
 [Overview of CouchDB](https://couchdb.apache.org)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
+
+Use this quick command to run the container.
 
 ```console
 docker run --name couchdb bitnami/couchdb:latest
@@ -86,7 +86,7 @@ couchdb:
   ...
 ```
 
-> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
+> **NOTE** As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 ## Connecting to other containers
 
@@ -96,7 +96,11 @@ Containers attached to the same network can communicate with each other using th
 
 ## Configuration
 
+The following sections describe environment variables and related settings.
+
 ### Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
@@ -165,7 +169,9 @@ FROM bitnami/couchdb
 ...
 ```
 
-## Notable Changes
+## Notable changes
+
+The following subsections describe notable changes.
 
 ### 3.0.0-0-debian-10-r0
 
