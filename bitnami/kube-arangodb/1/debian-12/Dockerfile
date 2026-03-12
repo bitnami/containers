@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-03-06T13:18:41Z" \
+      org.opencontainers.image.created="2026-03-12T18:20:11Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/kube-arangodb/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kube-arangodb" \
@@ -27,7 +27,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "envoy-1.37.0-0-linux-${OS_ARCH}-debian-12" \
+      "envoy-1.37.1-0-linux-${OS_ARCH}-debian-12" \
       "kube-arangodb-1.4.1-3-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -46,7 +46,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="1.4.1" \
     BITNAMI_APP_NAME="kube-arangodb" \
-    IMAGE_REVISION="5" \
+    IMAGE_REVISION="6" \
     PATH="/opt/bitnami/envoy/bin:/opt/bitnami/kube-arangodb/bin:$PATH"
 
 ENTRYPOINT [ "/opt/bitnami/kube-arangodb/bin/arangodb_operator" ]
