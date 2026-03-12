@@ -1,7 +1,5 @@
 # Bitnami Secure Image for ActiveMQ
 
-## What is ActiveMQ?
-
 > Apache ActiveMQ is an open source message broker written in Java together with a full Java Message Service (JMS) client.
 [Overview of ActiveMQ](https://activemq.apache.org/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
@@ -61,6 +59,8 @@ Non-root container images add an extra layer of security and are generally recom
 
 ## Configuration
 
+The following section describes how to run commands
+
 ### Running commands
 
 To run commands inside this container, you can use `docker run`, for example to execute `activemq --help` you can follow the example below:
@@ -72,6 +72,8 @@ docker run --rm --name activemq bitnami/activemq:latest -- --help
 Check the [official ActiveMQ documentation](https://activemq.apache.org/ for more information.
 
 ### Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
