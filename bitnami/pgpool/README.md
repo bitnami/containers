@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Pgpool-II
 
-## What is Pgpool-II?
-
 > Pgpool-II is the PostgreSQL proxy. It stands between PostgreSQL servers and their clients providing connection pooling, load balancing, automated failover, and replication.
 
 [Overview of Pgpool-II](https://pgpool.net/)
@@ -80,6 +78,8 @@ Containers attached to the same network can communicate with each other using th
 
 ## Configuration
 
+The following section describes how to configure the application
+
 ### Initializing with custom scripts
 
 **Everytime the container is started**, it will execute the files with extension `.sh` located at `/docker-entrypoint-initdb.d` after initializing Pgpool-II.
@@ -143,6 +143,8 @@ pcp_attach_node -h localhost -U $PGPOOL_ADMIN_USERNAME 0
 This command will prompt for a password, this password is the one set in the environment variable: `PGPOOL_ADMIN_PASSWORD`
 
 ### Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
