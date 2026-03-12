@@ -1,7 +1,5 @@
 # Bitnami Stack for InfluxDB&trade; Core
 
-## What is InfluxDB&trade; Core?
-
 > InfluxDB&trade; Core is an open source time-series database. It is a core component of the FDAP (Apache Flight, DataFusion, Arrow, and Parquet) stack.
 
 [Overview of InfluxDB&trade; Core](https://www.influxdata.com/products/influxdb-overview)
@@ -82,6 +80,8 @@ InfluxDB&trade; Core can be configured via environment variables or using CLI fl
 
 ### Environment variables
 
+The following tables list the main variables you can set.
+
 #### Customizable environment variables
 
 | Name                                    | Description                                                                            | Default Value                              |
@@ -143,7 +143,6 @@ InfluxDB&trade; Core can be configured via environment variables or using CLI fl
 | `INFLUXDB_DEFAULT_CONF_DIR` | InfluxDB default configuration directory.                    | `${INFLUXDB_BASE_DIR}/etc.default`                         |
 | `INFLUXDB_CONF_FILE`        | InfluxDB configuration file.                                 | `${INFLUXDB_CONF_DIR}/config.${INFLUXDB_CONF_FILE_FORMAT}` |
 | `INFLUXDB_INITSCRIPTS_DIR`  | Directory where to look for InfluxDB init scripts.           | `/docker-entrypoint-initdb.d`                              |
-| `LD_LIBRARY_PATH`           | Add search path for the linker.                              | `${BITNAMI_ROOT_DIR}/python/lib`                           |
 | `INFLUXD_ENGINE_PATH`       | InfluxDB 2.x alias for engine path.                          | `${INFLUXDB_VOLUME_DIR}`                                   |
 | `INFLUXD_BOLT_PATH`         | InfluxDB 2.x alias for bolt path.                            | `${INFLUXDB_VOLUME_DIR}/influxd.bolt`                      |
 | `INFLUX_CONFIGS_PATH`       | InfluxDB 2.x alias for paths to extra configuration folders. | `${INFLUXDB_VOLUME_DIR}/configs`                           |
