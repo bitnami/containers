@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Redis&reg;
 
-## What is Redis&reg;?
-
 > Redis&reg; is an open source, advanced key-value store. It is often referred to as a data structure server since keys can contain strings, hashes, lists, sets and sorted sets.
 
 [Overview of Redis&reg;](https://redis.io)
@@ -78,7 +76,7 @@ If you remove the container all your data will be lost, and the next time you ru
 
 For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
-> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
+> **NOTE** As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 ## Connecting to other containers
 
@@ -88,7 +86,11 @@ Containers attached to the same network can communicate with each other using th
 
 ## Configuration
 
+The following section describes the supported environment variables
+
 ### Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
@@ -99,7 +101,7 @@ Containers attached to the same network can communicate with each other using th
 | `REDIS_DISABLE_COMMANDS`         | Commands to disable in Redis                     | `nil`                                      |
 | `REDIS_DATABASE`                 | Default Redis database                           | `redis`                                    |
 | `REDIS_AOF_ENABLED`              | Enable AOF                                       | `yes`                                      |
-| `REDIS_RDB_POLICY`               | Enable RDB policy persitence                     | `nil`                                      |
+| `REDIS_RDB_POLICY`               | Enable RDB policy persistence                    | `nil`                                      |
 | `REDIS_RDB_POLICY_DISABLED`      | Allows to enable RDB policy persistence          | `no`                                       |
 | `REDIS_MASTER_HOST`              | Redis master host (used by slaves)               | `nil`                                      |
 | `REDIS_MASTER_PORT_NUMBER`       | Redis master host port (used by slaves)          | `6379`                                     |
@@ -197,7 +199,7 @@ Redis(R) offers different [options](https://redis.io/topics/persistence) when it
 
 ### Enabling Access Control List
 
-Redis(R) offers [ACL](https://redis.io/topics/acl) since 6.0 which allows certain connections to be limited in terms of the commands that can be executed and the keys that can be accessed. We strongly recommend enabling ACL in production by specifiying the `REDIS_ACLFILE`.
+Redis(R) offers [ACL](https://redis.io/topics/acl) since 6.0 which allows certain connections to be limited in terms of the commands that can be executed and the keys that can be accessed. We strongly recommend enabling ACL in production by specifying the `REDIS_ACLFILE`.
 
 ```console
 docker run -name redis -e REDIS_ACLFILE=/opt/bitnami/redis/mounted-etc/users.acl -v /path/to/users.acl:/opt/bitnami/redis/mounted-etc/users.acl bitnami/redis:latest
