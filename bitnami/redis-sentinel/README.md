@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Redis&reg; Sentinel
 
-## What is Redis&reg; Sentinel?
-
 > Redis&reg; Sentinel provides high availability for Redis. Redis Sentinel also provides other collateral tasks such as monitoring, notifications and acts as a configuration provider for clients.
 
 [Overview of Redis&reg; Sentinel](https://redis.io)
@@ -102,7 +100,11 @@ docker run -it --rm \
 
 ## Configuration
 
+The following section describes the supported environment variables
+
 ### Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
