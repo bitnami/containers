@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Jenkins
 
-## What is Jenkins?
-
 > Jenkins is an open source Continuous Integration and Continuous Delivery (CI/CD) server designed to automate the building, testing, and deploying of any software project.
 
 [Overview of Jenkins](https://jenkins.io/)
@@ -68,25 +66,9 @@ docker build -t bitnami/APP:latest .
 
 ## How to use this image
 
-### Using the Docker Command Line
+### Using Docker Compose
 
-#### Step 1: Create a network
-
-```console
-docker network create jenkins-network
-```
-
-#### Step 2: Create volumes for Jenkins persistence and launch the container
-
-```console
-$ docker volume create --name jenkins_data
-docker run -d -p 80:8080 --name jenkins \
-  --network jenkins-network \
-  --volume jenkins_data:/bitnami/jenkins \
-  bitnami/jenkins:latest
-```
-
-Access your application at `http://your-ip/`
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/jenkins).
 
 ## Persisting your application
 
@@ -96,56 +78,13 @@ For persistence you should mount a volume at the `/bitnami/jenkins` path. The ab
 
 To avoid inadvertent removal of this volume you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
-### Mount host directories as data volumes with Docker Compose
-
-This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/jenkins/docker-compose.yml) file present in this repository:
-
-```diff
-  ...
-  services:
-    jenkins:
-    ...
-    volumes:
--     - jenkins_data:/bitnami/jenkins
-+     - /path/to/jenkins-persistence:/bitnami/jenkins
-- volumes:
--   jenkins_data:
--     driver: local
-```
-
-> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
-
-### Mount host directories as data volumes using the Docker command line
-
-#### Step 1: Create a network (if it does not exist)
-
-```console
-docker network create jenkins-network
-```
-
-#### Step 2. Create the Jenkins container with host volumes
-
-```console
-docker run -d -p 80:8080 --name jenkins \
-  --network jenkins-network \
-  --volume /path/to/jenkins-persistence:/bitnami/jenkins \
-  bitnami/jenkins:latest
-```
-
-### Using Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/jenkins/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/jenkins).
-
-If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
-
 ## Configuration
 
+The following section describes the supported environment variables
+
 ### Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
@@ -200,27 +139,7 @@ If you detect any issue in the `docker-compose.yaml` file, feel free to report i
 | `JENKINS_DEFAULT_HTTPS_PORT_NUMBER`    | Default Jenkins HTTPS port number to enable at build time.                                 | `8443`                                                  |
 | `JENKINS_DEFAULT_JNLP_PORT_NUMBER`     | Default Jenkins JNLP port number to enable at build time.                                  | `50000`                                                 |
 
-When you start the Jenkins image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
-
-- For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/jenkins/docker-compose.yml) file present in this repository:
-
-    ```yaml
-    jenkins:
-      ...
-      environment:
-        - JENKINS_PASSWORD=my_password
-      ...
-    ```
-
-- For manual execution add a `--env` option with each variable and value:
-
-    ```console
-    $ docker run -d -p 80:8080 --name jenkins \
-      --env JENKINS_PASSWORD=my_password \
-      --network jenkins-network \
-      --volume /path/to/jenkins-persistence:/bitnami/jenkins \
-      bitnami/jenkins:latest
-    ```
+When you start the Jenkins image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
 
 ### FIPS configuration in Bitnami Secure Images
 
@@ -275,35 +194,6 @@ Restoring a backup is as simple as mounting the backup as volumes in the contain
 +  --volume /path/to/jenkins-backups/latest:/bitnami/jenkins \
    bitnami/jenkins:latest
 ```
-
-### Upgrading Jenkins
-
-Bitnami provides up-to-date versions of Jenkins, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Jenkins container.
-
-### Step 1. Get the updated images
-
-```console
-docker pull bitnami/jenkins:latest
-```
-
-### Step 2. Stop your container
-
-- For docker-compose: `$ docker-compose stop jenkins`
-- For manual execution: `$ docker stop jenkins`
-
-### Step 3. Take a snapshot of the application state
-
-Follow the steps in [Backing up your container](#backing-up-your-container) to take a snapshot of the current application state.
-
-### Step 4. Remove the stopped container
-
-- For docker-compose: `$ docker-compose rm -v jenkins`
-- For manual execution: `$ docker rm -v jenkins`
-
-### Step 5. Run the new image
-
-- For docker-compose: `$ docker-compose up jenkins`
-- For manual execution (mount the directories if needed): `docker run --name jenkins bitnami/jenkins:latest`
 
 ## Customize this image
 
@@ -413,7 +303,7 @@ docker run -d -p 80:8080 --name jenkins \
   bitnami/jenkins:latest
 ```
 
-> NOTE: The default `admin` user with this setup will not be created. It should be done separately.
+> **NOTE** The default `admin` user with this setup will not be created. It should be done separately.
 
 ## Notable Changes
 
