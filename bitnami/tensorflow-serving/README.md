@@ -1,7 +1,5 @@
 # Bitnami Secure Image for TensorFlow Serving
 
-## What is TensorFlow Serving?
-
 > TensorFlow Serving is an open source high-performance system for serving machine learning models. It allows programmers to easily deploy algorithms and experiments without changing the architecture.
 
 [Overview of TensorFlow Serving](https://github.com/tensorflow/serving)
@@ -62,28 +60,17 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/tensorflow-resnet).
+
 ## Persisting your configuration
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the data and configurations will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
 For persistence you should mount a volume at the `/bitnami` path for the TensorFlow Serving data and configurations. If the mounted directory is empty, it will be initialized on the first run.
 
-```console
-docker run -v /path/to/tensorflow-serving-persistence:/bitnami bitnami/tensorflow-serving:latest
-```
-
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/tensorflow-serving/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  tensorflow-serving:
-  ...
-    volumes:
-      - /path/to/tensorflow-serving-persistence:/bitnami
-  ...
-```
-
-> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
+> **NOTE** As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 ## Connecting to other containers
 
@@ -91,98 +78,9 @@ Using [Docker container networking](https://docs.docker.com/engine/userguide/net
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-### Using the Command Line
-
-In this example, we will create a TensorFlow ResNet client instance that will connect to the server instance that is running on the same docker network as the client. The ResNet client will export an already trained data so the server can read it and you will be able to query the server with an image to get it categorized.
-
-#### Step 1: Download the ResNet trained data
-
-```console
-mkdir -p /tmp/model-data/1
-cd /tmp/model-data
-curl -o resnet_50_classification_1.tar.gz https://storage.googleapis.com/tfhub-modules/tensorflow/resnet_50/classification/1.tar.gz
-tar xzf resnet_50_classification_1.tar.gz -C 1
-```
-
-#### Step 2: Create a network
-
-```console
-docker network create app-tier --driver bridge
-```
-
-#### Step 3: Launch the TensorFlow Serving server instance
-
-Use the `--network app-tier` argument to the `docker run` command to attach the TensorFlow Serving container to the `app-tier` network.
-
-```console
-docker run -d --name tensorflow-serving \
-    --volume /tmp/model-data:/bitnami/model-data \
-    --network app-tier \
-    bitnami/tensorflow-serving:latest
-```
-
-#### Step 4: Export the data model
-
-Run the `tensorflow-resnet` container in background mode to export the data model that you have already downloaded.
-
-```console
-docker run -d --name tensorflow-resnet \
-    --volume /tmp/model-data:/bitnami/model-data \
-    --network app-tier \
-    bitnami/tensorflow-resnet:latest
-```
-
-Monitor the logs of tensorflow-serving until it shows the message `Successfully loaded servable version`. That will mean it is serving the model:
-
-```console
-docker logs tensorflow-serving -f
-```
-
-#### Step 5: Launch your TensorFlow ResNet client instance
-
-Finally we create a new container instance to launch the TensorFlow Serving client and connect to the server created in the previous step:
-
-```console
-docker run -it --rm \
-    --volume /tmp/model-data:/bitnami/model-data \
-    --network app-tier \
-    bitnami/tensorflow-resnet:latest resnet_client_cc --server_port=tensorflow-serving:8500 --image_file=path/to/image.jpg
-```
-
-### Using a Docker Compose file
-
-When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the TensorFlow Serving server from your own custom application image which is identified in the following snippet by the service name `myapp`.
-
-```yaml
-version: '2'
-
-networks:
-  app-tier:
-    driver: bridge
-
-services:
-  tensorflow-serving:
-    image: bitnami/tensorflow-serving:latest
-    networks:
-      - app-tier
-  myapp:
-    image: YOUR_APPLICATION_IMAGE
-    networks:
-      - app-tier
-```
-
-> **IMPORTANT**:
->
-> 1. Please update the **YOUR_APPLICATION_IMAGE_** placeholder in the above snippet with your application image
-> 2. In your application container, use the hostname `tensorflow-serving` to connect to the TensorFlow Serving server
-
-Launch the containers using:
-
-```console
-docker-compose up -d
-```
-
 ## Configuration
+
+The following section describes the supported environment variables
 
 ### Environment variables
 
@@ -219,48 +117,7 @@ Tensorflow Serving can be customized by specifying environment variables on the 
 
 ### Configuration file
 
-The image looks for configurations in `/bitnami/tensorflow-serving/conf/`. As mentioned in [Persisting your configuation](#persisting-your-configuration) you can mount a volume at `/bitnami` and copy/edit the configurations in the `/path/to/tensorflow-serving-persistence/tensorflow-serving/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
-
-#### Step 1: Run the TensorFlow Serving image
-
-Run the TensorFlow Serving image, mounting a directory from your host.
-
-```console
-docker run --name tensorflow-serving -v /path/to/tensorflow-serving-persistence:/bitnami bitnami/tensorflow-serving:latest
-```
-
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/tensorflow-serving/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  tensorflow-serving:
-  ...
-    volumes:
-      - /path/to/tensorflow-serving-persistence:/bitnami
-  ...
-```
-
-#### Step 2: Edit the configuration
-
-Edit the configuration on your host using your favorite editor.
-
-```console
-vi /path/to/tensorflow-serving-persistence/conf/tensorflow-serving.conf
-```
-
-#### Step 3: Restart TensorFlow Serving
-
-After changing the configuration, restart your TensorFlow Serving container for changes to take effect.
-
-```console
-docker restart tensorflow-serving
-```
-
-or using Docker Compose:
-
-```console
-docker-compose restart tensorflow-serving
-```
+The image looks for configurations in `/bitnami/tensorflow-serving/conf/`. As mentioned in [Persisting your configuation](#persisting-your-configuration) you can mount a volume at `/bitnami` and copy/edit the configurations in the `/path/to/tensorflow-serving-persistence/tensorflow-serving/conf/`. The default configuration will be populated to the `conf/` directory if it's empty.
 
 ### FIPS configuration in Bitnami Secure Images
 
@@ -286,69 +143,6 @@ The logs are also stored inside the container in the /opt/bitnami/tensorflow-ser
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of TensorFlow Serving, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/tensorflow-serving:latest
-```
-
-or if you're using Docker Compose, update the value of the image property to
-`bitnami/tensorflow-serving:latest`.
-
-#### Step 2: Stop and backup the currently running container
-
-Stop the currently running container using the command
-
-```console
-docker stop tensorflow-serving
-```
-
-or using Docker Compose:
-
-```console
-docker-compose stop tensorflow-serving
-```
-
-Next, take a snapshot of the persistent volume `/path/to/tensorflow-serving-persistence` using:
-
-```console
-rsync -a /path/to/tensorflow-serving-persistence /path/to/tensorflow-serving-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
-```
-
-You can use this snapshot to restore the database state should the upgrade fail.
-
-#### Step 3: Remove the currently running container
-
-```console
-docker rm -v tensorflow-serving
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v tensorflow-serving
-```
-
-#### Step 4: Run the new image
-
-Re-create your container from the new image, restoring your backup if necessary.
-
-```console
-docker run --name tensorflow-serving bitnami/tensorflow-serving:latest
-```
-
-or using Docker Compose:
-
-```console
-docker-compose start tensorflow-serving
-```
-
 ## Notable Changes
 
 ### 2.5.1-debian-10-r12
@@ -363,12 +157,6 @@ docker-compose start tensorflow-serving
 ### 1.8.0-r12, 1.8.0-debian-9-r1, 1.8.0-ol-7-r11
 
 - The default serving port has changed from 9000 to 8500.
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/tensorflow-resnet).
-
-If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## License
 
