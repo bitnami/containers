@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Valkey Sentinel
 
-## What is Valkey Sentinel?
-
 > Valkey is a high-performance data structure server that primarily serves key/value workloads. It supports a wide range of native structures and an extensible plugin system for adding new data structures and access patterns.
 
 [Overview of Valkey Sentinel](https://valkey.io/)
@@ -102,7 +100,11 @@ docker run -it --rm \
 
 ## Configuration
 
+The following section describes the supported environment variables
+
 ### Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
