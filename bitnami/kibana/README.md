@@ -5,15 +5,15 @@
 [Overview of Kibana](https://www.elastic.co/products/kibana)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
-## <a id="tl-dr"></a> TL;DR
+## TL;DR
 
-### <a id="docker-compose"></a> Docker Compose
+### Docker Compose
 
 ```console
 docker run --name kibana bitnami/kibana:latest
 ```
 
-## <a id="why-use-bitnami-secure-images"></a> Why use Bitnami Secure Images?
+## Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
 
@@ -30,15 +30,15 @@ Each image comes with valuable security metadata. You can view the metadata in [
 
 If you are looking for our previous generation of images based on Debian Linux, please see the [Bitnami Legacy registry](https://hub.docker.com/u/bitnamilegacy).
 
-## <a id="why-non-root"></a> Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
 
-## <a id="supported-tags"></a> Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
-## <a id="get-this-image"></a> Get this image
+## Get this image
 
 The recommended way to get the Bitnami Kibana Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/kibana).
 
@@ -60,9 +60,9 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## <a id="how-to-use-this-image"></a> How to use this image
+## How to use this image
 
-### <a id="run-the-application-manually"></a> Run the application manually
+### Run the application manually
 
 If you want to run the application manually instead of using the chart, these are the basic steps you need to run:
 
@@ -88,7 +88,7 @@ If you want to run the application manually instead of using the chart, these ar
 
   Then you can access your application at `http://your-ip:5601/`
 
-## <a id="persisting-your-application"></a> Persisting your application
+## Persisting your application
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -104,13 +104,13 @@ docker run -v /path/to/kibana-persistence:/bitnami/kibana bitnami/kibana:latest
 
 > **NOTE** As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
-## <a id="connecting-to-other-containers"></a> Connecting to other containers
+## Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a Kibana server running inside a container can easily be accessed by your application containers.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-### <a id="using-the-command-line"></a> Using the Command Line
+### Using the Command Line
 
 #### Step 1: Create a network
 
@@ -141,11 +141,11 @@ docker run -d --name myapp \
 > 1. Please update the **YOUR_APPLICATION_IMAGE** placeholder in the above snippet with your application image
 > 2. In your application container, use the hostname `kibana-server` to connect to the Kibana server
 
-## <a id="configuration"></a> Configuration
+## Configuration
 
 The following section describes the supported environment variables
 
-### <a id="environment-variables"></a> Environment variables
+### Environment variables
 
 The following tables list the main variables you can set.
 
@@ -217,13 +217,13 @@ When you start the kibana image, you can adjust the configuration of the instanc
 docker run -d -e KIBANA_ELASTICSEARCH_URL=elasticsearch --name kibana bitnami/kibana:latest
 ```
 
-### <a id="initializing-a-new-instance"></a> Initializing a new instance
+### Initializing a new instance
 
 When the container is executed for the first time, it will execute the files with extension `.sh`, located at `/docker-entrypoint-initdb.d`.
 
 In order to have your custom files inside the docker image you can mount them as a volume.
 
-### <a id="configuration-file"></a> Configuration file
+### Configuration file
 
 The image looks for configurations in `/bitnami/kibana/conf/`. As mentioned in [Persisting your application](#persisting-your-application) you can mount a volume at `/bitnami` and copy/edit the configurations in the `/path/to/kibana-persistence/kibana/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
 
@@ -253,13 +253,13 @@ docker restart kibana
 
 Refer to the [configuration](https://www.elastic.co/guide/en/kibana/current/settings.html) manual for the complete list of configuration options.
 
-### <a id="fips-configuration"></a> FIPS configuration in Bitnami Secure Images
+### FIPS configuration in Bitnami Secure Images
 
 The Bitnami Kibana Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
-## <a id="logging"></a> Logging
+## Logging
 
 The Bitnami Kibana Docker image sends the container logs to the `stdout`. To view the logs:
 
@@ -269,9 +269,9 @@ docker logs kibana
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-## <a id="notable-changes"></a> Notable Changes
+## Notable Changes
 
-### <a id="starting-january-16-2024"></a> Starting January 16, 2024
+### Starting January 16, 2024
 
 - The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
@@ -291,7 +291,7 @@ You can configure the containers [logging driver](https://docs.docker.com/engine
 - `ELASTICSEARCH_URL` parameter has been renamed to `KIBANA_ELASTICSEARCH_URL`.
 - `ELASTICSEARCH_PORT` parameter has been renamed to `KIBANA_ELASTICSEARCH_PORT`.
 
-## <a id="license"></a> License
+## License
 
 Copyright &copy; 2026 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
