@@ -153,6 +153,7 @@ cassandra_setup_ports() {
 #   $1 - Log file to write (default /dev/stdout)
 #   $2 - Maximum number of retries (default $DB_INIT_MAX_RETRIES)
 #   $3 - Sleep time during retries (default $DB_INIT_SLEEP_TIME)
+#   $4 - Extra arguments to pass to the scylla binary (optional)
 # Returns:
 #   None
 #########################
@@ -160,12 +161,17 @@ cassandra_start_bg() {
     local -r logger="${1:-/dev/stdout}"
     local -r retries="${2:-$DB_INIT_MAX_RETRIES}"
     local -r sleep_time="${3:-$DB_INIT_SLEEP_TIME}"
+    local extra_args="${4:-}"
 
     info "Starting $DB_FLAVOR"
     local -r cmd=("$DB_BIN_DIR/scylla")
     local args=("--options-file" "$DB_CONF_FILE")
     if is_boolean_yes "$SCYLLADB_DEVELOPER_MODE"; then
         args+=("--developer-mode" "true")
+    fi
+    if [[ -n "$extra_args" ]]; then
+        read -ra extra_args_array <<< "$extra_args"
+        args+=("${extra_args_array[@]}")
     fi
 
     if am_i_root; then
@@ -217,6 +223,42 @@ cassandra_stop() {
     # Manually remove PID file
     rm -f "$DB_PID_FILE"
 }
+
+########################
+# Wait until ScyllaDB has written the default superuser record to its log.
+# Only meaningful on the seeder (first-boot) node: non-seeders never emit this
+# line because the superuser is replicated from the seeder, not created locally.
+# Globals:
+#   DB_*
+# Arguments:
+#   $1 - Log file path
+#   $2 - Maximum number of retries (default $DB_INIT_MAX_RETRIES)
+#   $3 - Sleep time during retries (default $DB_INIT_SLEEP_TIME)
+# Returns:
+#   None
+#########################
+wait_for_superuser_log_entry() {
+    local -r logger="${1:-/dev/stdout}"
+    local -r retries="${2:-$DB_INIT_MAX_RETRIES}"
+    local -r sleep_time="${3:-$DB_INIT_SLEEP_TIME}"
+
+    check_superuser_ready() {
+        local output="/dev/null"
+        [[ "$BITNAMI_DEBUG" = "true" ]] && output="/dev/stdout"
+        grep -E "Created default superuser authentication record" "$logger" >"${output}"
+    }
+
+    if check_superuser_ready 2>/dev/null; then
+        return 0
+    fi
+
+    debug "Waiting for default superuser authentication record to be created..."
+    if ! retry_while check_superuser_ready "$retries" "$sleep_time"; then
+        # Non-fatal: older ScyllaDB versions may not emit this line
+        debug "Superuser auth record not found in log, proceeding"
+    fi
+}
+
 
 #!/bin/bash
 # Copyright Broadcom, Inc. All Rights Reserved.
@@ -750,7 +792,11 @@ cassandra_change_cassandra_password() {
 
     if (echo "ALTER USER cassandra WITH PASSWORD \$\$${escaped_password}\$\$;" | cassandra_execute_with_retries "$retries" "$sleep_time" "$user" "$old_password"); then
         debug "ALTER USER command executed. Trying to log in"
-        wait_for_cql_access "$user" "$new_password" "localhost" "$retries" "$sleep_time"
+        # ScyllaDB uses 127.0.0.1 explicitly to keep cqlsh on the loopback interface
+        # and avoid the topology-aware reconnect to the pod IP during first-boot init.
+        local cql_host=""
+        [[ "$DB_FLAVOR" = "scylladb" ]] && cql_host="127.0.0.1"
+        wait_for_cql_access "$user" "$new_password" "$cql_host" "$retries" "$sleep_time"
         info "Password updated successfully"
     fi
 }
@@ -883,13 +929,27 @@ cassandra_initialize() {
         info "Deploying $DB_FLAVOR with persisted data"
     else
         info "Deploying $DB_FLAVOR from scratch"
-        cassandra_start_bg "$DB_FIRST_BOOT_LOG_FILE"
+        if [[ "$DB_FLAVOR" = "scylladb" ]]; then
+            # ScyllaDB 2025.4.5+ (PR #22532): keep cqlsh on loopback during first-boot init.
+            # Otherwise, cqlsh reconnects to the pod IP (via system.local), blocked by the ensure_superuser_is_created gate.
+            cassandra_start_bg "$DB_FIRST_BOOT_LOG_FILE" "" "" "--broadcast-rpc-address 127.0.0.1"
+        else
+            cassandra_start_bg "$DB_FIRST_BOOT_LOG_FILE"
+        fi
         if is_boolean_yes "$DB_PASSWORD_SEEDER"; then
             info "Password seeder node"
-            # Check that all peers are ready
-            for peer in ${DB_PEERS//,/ }; do
-                wait_for_cql_access "cassandra" "cassandra" "$peer" "$DB_PEER_CQL_MAX_RETRIES" "$DB_PEER_CQL_SLEEP_TIME"
-            done
+            if [[ "$DB_FLAVOR" = "scylladb" ]]; then
+                # ScyllaDB 2025.4.5+ (PR #22532): wait for the superuser record before connecting,
+                # as CQL is accepting connections but auth is not ready until that log line appears.
+                # Use 127.0.0.1 explicitly to prevent cqlsh from reconnecting to the pod IP via system.local.
+                wait_for_superuser_log_entry "$DB_FIRST_BOOT_LOG_FILE" "$DB_PEER_CQL_MAX_RETRIES" "$DB_PEER_CQL_SLEEP_TIME"
+                wait_for_cql_access "cassandra" "cassandra" "127.0.0.1" "$DB_PEER_CQL_MAX_RETRIES" "$DB_PEER_CQL_SLEEP_TIME"
+            else
+                # Check that all peers are ready
+                for peer in ${DB_PEERS//,/ }; do
+                    wait_for_cql_access "cassandra" "cassandra" "$peer" "$DB_PEER_CQL_MAX_RETRIES" "$DB_PEER_CQL_SLEEP_TIME"
+                done
+            fi
             # Setup user
             if [[ "$DB_USER" = "cassandra" ]]; then
                 cassandra_change_cassandra_password "cassandra" "$DB_PASSWORD" "$DB_CQL_MAX_RETRIES" "$DB_CQL_SLEEP_TIME"
@@ -900,8 +960,15 @@ cassandra_initialize() {
             cassandra_execute_startup_cql
         else
             info "Non-seeder node. Waiting for synchronization"
-            wait_for_cql_access "$DB_USER" "$DB_PASSWORD" "localhost" "$DB_PEER_CQL_MAX_RETRIES" "$DB_PEER_CQL_SLEEP_TIME"
+            # ScyllaDB uses 127.0.0.1 explicitly to keep cqlsh on the loopback interface
+            # and avoid the topology-aware reconnect to the pod IP during first-boot init.
+            local cql_host=""
+            [[ "$DB_FLAVOR" = "scylladb" ]] && cql_host="127.0.0.1"
+            wait_for_cql_access "$DB_USER" "$DB_PASSWORD" "$cql_host" "$DB_PEER_CQL_MAX_RETRIES" "$DB_PEER_CQL_SLEEP_TIME"
         fi
+        # ScyllaDB is started with '--broadcast-rpc-address 127.0.0.1' for init only;
+        # stop it so the entrypoint can start it cleanly with the real address.
+        [[ "$DB_FLAVOR" = "scylladb" ]] && cassandra_stop
     fi
 }
 
