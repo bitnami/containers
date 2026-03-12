@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Percona Server for MySQL
 
-## What is Percona Server for MySQL?
-
 > Percona Server for MySQL is an open-source replacement for MySQL. Its features include additional storage engines; scalability, encryption and compression options; and granular performance metrics.
 
 [Overview of Percona Server for MySQL](https://www.percona.com/software/mysql-database)
@@ -55,6 +53,10 @@ git clone https://github.com/bitnami/containers.git
 cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
+
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes..
 
 ## Environment variables
 
@@ -126,12 +128,6 @@ docker build -t bitnami/APP:latest .
 The Bitnami Percona Server for MySQL Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes..
-
-If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## License
 
