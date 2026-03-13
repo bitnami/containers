@@ -932,7 +932,9 @@ cassandra_initialize() {
         fi
         # ScyllaDB is started with '--broadcast-rpc-address 127.0.0.1' for init only;
         # stop it so the entrypoint can start it cleanly with the real address.
-        [[ "$DB_FLAVOR" = "scylladb" ]] && cassandra_stop
+        if [[ "$DB_FLAVOR" = "scylladb" ]]; then
+            cassandra_stop
+        fi
     fi
 }
 
