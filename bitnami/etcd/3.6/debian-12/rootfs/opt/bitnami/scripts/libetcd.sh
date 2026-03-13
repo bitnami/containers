@@ -544,7 +544,7 @@ is_node_still_a_member() {
 
     while read -r line; do
         debug_execute echo "$line"
-        if [[ "$line" =~ (established TCP streaming connection with remote peer|the member has been permanently removed from the cluster|ignored streaming request; ID mismatch|\"error\":\"cluster ID mismatch\") ]]; then
+        if [[ "$line" =~ (established TCP streaming connection with remote peer|the member has been permanently removed from the cluster|ignored streaming request; ID mismatch|\"error\":\"cluster ID mismatch\"|\"level\":\"fatal\") ]]; then
             etcd_stop
             break
         fi
@@ -555,6 +555,9 @@ is_node_still_a_member() {
         return 1
     elif grep -q "\"error\":\"cluster ID mismatch\"" "$tmp_file"; then
         info "The remote cluster ID is different from the local cluster ID"
+        return 1
+    elif grep -q '"level":"fatal"' "$tmp_file"; then
+        info "etcd exited with a fatal error, treating node as not a member"
         return 1
     fi
 
