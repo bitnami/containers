@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Rust
 
-## What is Rust?
-
 > Rust is a modern systems programming language focusing on safety, speed, and concurrency.
 
 [Overview of Rust](https://www.rust-lang.org/)
@@ -61,6 +59,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
