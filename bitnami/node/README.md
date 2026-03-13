@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Node.js
 
-## What is Node.js?
-
 > Node.js is a runtime environment built on V8 JavaScript engine. Its event-driven, non-blocking I/O model enables the development of fast, scalable, and data-intensive server applications.
 
 [Overview of Node.js](https://nodejs.org/)
@@ -101,6 +99,8 @@ docker run -it --name node bitnami/node
 - [nodejs.org/api/repl.html](https://nodejs.org/api/repl.html)
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running your Node.js script
 
