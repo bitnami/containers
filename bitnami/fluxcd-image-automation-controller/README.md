@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Flux Image Automation Controller
 
-## What is Flux Image Automation Controller?
-
 > Image Automation Controller is a component of Flux. Flux is a tool for keeping Kubernetes clusters in sync with sources of configuration.
 
 [Overview of Flux Image Automation Controller](https://github.com/fluxcd/image-automation-controller)
@@ -57,33 +55,9 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of Flux Image Automation Controller, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/fluxcd-image-automation-controller:latest
-```
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v fluxcd-image-automation-controller
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name fluxcd-image-automation-controller bitnami/fluxcd-image-automation-controller:latest
-```
-
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 

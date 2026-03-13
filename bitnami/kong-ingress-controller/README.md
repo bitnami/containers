@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Kong Ingress Controller
 
-## What is Kong Ingress Controller?
-
 > Kong Ingress Controller is an Ingress controller that manages external access to HTTP services in a Kubernetes cluster using the Kong API Gateway.
 
 [Overview of Kong Ingress Controller](https://github.com/Kong/kubernetes-ingress-controller)
@@ -57,6 +55,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 

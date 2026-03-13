@@ -1,7 +1,5 @@
 # Bitnami Secure Image for rClone
 
-## What is rClone?
-
 > RClone synchronizes files and directories to and from different cloud storage providers. It supports different backends, including GCS, S3 and Azure Blob Storage. It provides caching and encryption.
 
 [Overview of rClone](https://rclone.org/)
@@ -57,6 +55,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 

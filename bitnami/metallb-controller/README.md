@@ -1,7 +1,5 @@
 # Bitnami Secure Image for MetalLB
 
-## What is MetalLB?
-
 > MetalLB is a load-balancer implementation for bare metal Kubernetes clusters, using standard routing protocols.
 
 [Overview of MetalLB](https://metallb.universe.tf/)
@@ -57,6 +55,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 

@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Git
 
-## What is Git?
-
 > Git is an open source distributed version control system that can handle both small and large projects with speed and efficiency.
 
 [Overview of Git](https://git-scm.com/)
@@ -57,6 +55,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 

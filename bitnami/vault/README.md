@@ -1,7 +1,5 @@
 # Bitnami Secure Image for HashiCorp Vault
 
-## What is HashiCorp Vault?
-
 > Vault is a tool for securely managing and accessing secrets using a unified interface. Features secure storage, dynamic secrets, data encryption and revocation.
 
 [Overview of HashiCorp Vault](https://www.vaultproject.io/)
@@ -34,6 +32,10 @@ If you are looking for our previous generation of images based on Debian Linux, 
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
+You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `bitnami/ASSET/BRANCH/DISTRO/tags-info.yaml`.
+
+Subscribe to project updates by watching the [bitnami/containers GitHub repository](https://github.com/bitnami/containers).
+
 ## Get this image
 
 The recommended way to get the Bitnami HashiCorp Vault Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/vault).
@@ -56,33 +58,9 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of HashiCorp Vault, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/vault:latest
-```
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v vault
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name vault bitnami/vault:latest
-```
-
 ## Configuration
+
+The following sections describe how to run commands and configure FIPS.
 
 ### Running commands
 
@@ -100,7 +78,9 @@ The Bitnami HashiCorp Vault Docker image from the [Bitnami Secure Images](https:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
-## Notable Changes
+## Notable changes
+
+The following subsections describe notable changes.
 
 ### Starting January 16, 2024
 

@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Hubble UI
 
-## What is Hubble UI?
-
 > Hubble UI is an open-source user interface for Cilium Hubble.
 
 [Overview of Hubble UI](https://cilium.io/)

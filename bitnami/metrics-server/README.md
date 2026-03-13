@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Metrics Server
 
-## What is Metrics Server?
-
 > Metrics Server aggregates resource usage data, such as container CPU and memory usage, in a Kubernetes cluster and makes it available via the Metrics API.
 
 [Overview of Metrics Server](https://github.com/kubernetes-incubator/metrics-server)

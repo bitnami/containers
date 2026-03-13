@@ -1,7 +1,5 @@
 # Bitnami Secure Image for PostgreSQL Exporter
 
-## What is PostgreSQL Exporter?
-
 > PostgreSQL Exporter gathers PostgreSQL metrics for Prometheus consumption.
 
 [Overview of PostgreSQL Exporter](https://github.com/wrouesnel/postgres_exporter)

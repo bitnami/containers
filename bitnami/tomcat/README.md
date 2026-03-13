@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Apache Tomcat
 
-## What is Apache Tomcat?
-
 > Apache Tomcat is an open-source web server designed to host and run Java-based web applications. It is a lightweight server with a good performance for applications running in production environments.
 
 [Overview of Apache Tomcat](https://tomcat.apache.org/)
@@ -66,28 +64,17 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/tomcat).
+
 ## Persisting your application
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
 For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
-```console
-docker run -v /path/to/tomcat-persistence:/bitnami bitnami/tomcat:latest
-```
-
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/tomcat/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  tomcat:
-  ...
-    volumes:
-      - /path/to/tomcat-persistence:/bitnami
-  ...
-```
-
-> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
+> **NOTE** As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 ## Deploying web applications on Apache Tomcat
 
@@ -111,34 +98,15 @@ You can also deploy web applications on a running Apache Tomcat instance using t
 
 **Further Reading:**
 
-- [Apache Tomcat Web Application Deployment](https://tomcat.apache.org/tomcat-7.0-doc/deployer-howto.html)
-
-## Accessing your Apache Tomcat server from the host
-
-To access your web server from your host machine you can ask Docker to map a random port on your host to port `8080` exposed in the container.
-
-```console
-docker run --name tomcat -P bitnami/tomcat:latest
-```
-
-Run `docker port` to determine the random ports Docker assigned.
-
-```console
-$ docker port tomcat
-8080/tcp -> 0.0.0.0:32768
-```
-
-You can also manually specify the ports you want forwarded from your host to the container.
-
-```console
-docker run -p 8080:8080 bitnami/tomcat:latest
-```
-
-Access your web server in the browser by navigating to `http://localhost:8080`.
+- [Apache Tomcat Web Application Deployment](https://tomcat.apache.org/tomcat-11.0-doc/deployer-howto.html)
 
 ## Configuration
 
+The following section describes the supported environment variables
+
 ### Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
@@ -186,49 +154,11 @@ By default, a management user named `manager` is created and is not assigned a p
 
 Additionally you can specify a user name for the management user using the `TOMCAT_USERNAME` environment variable. When not specified, the `TOMCAT_PASSWORD` configuration is applied on the default user (`manager`).
 
-#### Specifying Environment variables using Docker Compose
-
-This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/tomcat/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  tomcat:
-  ...
-    environment:
-      - TOMCAT_USERNAME=my_user
-      - TOMCAT_PASSWORD=my_password
-  ...
-```
-
-#### Specifying Environment variables on the Docker command line
-
-```console
-docker run --name tomcat \
-  -e TOMCAT_USERNAME=my_user \
-  -e TOMCAT_PASSWORD=my_password \
-  bitnami/tomcat:latest
-```
-
 ### Configuration files
 
 During the initialization of the container, the default Apache Tomcat configuration files are modified with the basic options defined through [environment variables](#environment-variables). If you want to add more specific configuration options, you can always mount your own configuration files under `/opt/bitnami/tomcat/conf/` to override the existing ones. Please note that those files should be writable by the system user of the container.
 
-```console
-docker run --name tomcat -v /path/to/config/server.xml:/opt/bitnami/tomcat/conf/server.xml bitnami/tomcat:latest
-```
-
-or using Docker Compose:
-
-```yaml
-services:
-  tomcat:
-  ...
-    volumes:
-      - /path/to/config/server.xml:/opt/bitnami/tomcat/conf/server.xml
-  ...
-```
-
-Refer to the [Apache Tomcat configuration](https://tomcat.apache.org/tomcat-7.0-doc/config/index.html) manual for the complete list of configuration options.
+Refer to the [Apache Tomcat configuration](https://tomcat.apache.org/tomcat-11.0-doc/config/index.html) manual for the complete list of configuration options.
 
 ### FIPS configuration in Bitnami Secure Images
 
@@ -252,67 +182,6 @@ docker-compose logs tomcat
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of Apache Tomcat, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/tomcat:latest
-```
-
-or if you're using Docker Compose, update the value of the image property to
-`bitnami/tomcat:latest`.
-
-#### Step 2: Stop and backup the currently running container
-
-Stop the currently running container using the command
-
-```console
-docker stop tomcat
-```
-
-or using Docker Compose:
-
-```console
-docker-compose stop tomcat
-```
-
-Next, take a snapshot of the persistent volume `/path/to/tomcat-persistence` using:
-
-```console
-rsync -a /path/to/tomcat-persistence /path/to/tomcat-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
-```
-
-#### Step 3: Remove the currently running container
-
-```console
-docker rm -v tomcat
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v tomcat
-```
-
-#### Step 4: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name tomcat bitnami/tomcat:latest
-```
-
-or using Docker Compose:
-
-```console
-docker-compose up tomcat
-```
-
 ## Notable Changes
 
 ### Debian: 9.0.26-r0, 8.5.46-r0, 8.0.53-r382, 7.0.96-r50. Oracle: 9.0.24-ol-7-r35, 8.5.45-ol-7-r34, 8.0.53-ol-7-r426, 7.0.96-ol-7-r61
@@ -331,12 +200,6 @@ docker-compose up tomcat
 
 - All volumes have been merged at `/bitnami/tomcat`. Now you only need to mount a single volume at `/bitnami/tomcat` for persistence.
 - The logs are always sent to the `stdout` and are no longer collected in the volume.
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/tomcat).
-
-If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## License
 

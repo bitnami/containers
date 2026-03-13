@@ -5,9 +5,9 @@
 [Overview of Apache Spark](https://spark.apache.org/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
-## <a id="tl-dr"></a> TL;DR
+## TL;DR
 
-### <a id="docker-compose"></a> Docker Compose
+### Docker Compose
 
 ```console
 docker run --name spark bitnami/spark:latest
@@ -15,7 +15,7 @@ docker run --name spark bitnami/spark:latest
 
 You can find the available configuration options in the [Environment Variables](#environment-variables) section.
 
-## <a id="why-use-bitnami-secure-images"></a> Why use Bitnami Secure Images?
+## Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
 
@@ -32,19 +32,19 @@ Each image comes with valuable security metadata. You can view the metadata in [
 
 If you are looking for our previous generation of images based on Debian Linux, please see the [Bitnami Legacy registry](https://hub.docker.com/u/bitnamilegacy).
 
-## <a id="deploy-in-kubernetes"></a> How to deploy Apache Spark in Kubernetes
+## How to deploy Apache Spark in Kubernetes
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Apache Spark Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/spark).
 
-## <a id="why-non-root"></a> Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
 
-## <a id="supported-tags"></a> Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
-## <a id="get-this-image"></a> Get this image
+## Get this image
 
 The recommended way to get the Bitnami Apache Spark Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/spark).
 
@@ -68,15 +68,15 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## <a id="using-docker-compose"></a> Using `docker-compose.yaml`
+## Using `docker-compose.yaml`
 
 Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/spark).
 
-## <a id="configuration"></a> Configuration
+## Configuration
 
 The following sections describe environment variables and related settings.
 
-### <a id="environment-variables"></a> Environment variables
+### Environment variables
 
 The following tables list the main variables you can set.
 
@@ -125,7 +125,7 @@ For example, you could still use `SPARK_WORKER_CORES` or `SPARK_WORKER_MEMORY` t
 
 When you start the spark image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
 
-### <a id="security"></a> Security
+### Security
 
 The Bitnami Apache Spark docker image supports enabling RPC authentication, RPC encryption and local storage encryption easily using the following environment variables in all the nodes of the cluster.
 
@@ -156,7 +156,7 @@ Additionally, SSL configuration can be easily activated following the next steps
 
 2. You need to mount your spark `keystore` and `truststore` files to `/opt/bitnami/spark/conf/certs`. Please note they should be called `spark-keystore.jks` and `spark-truststore.jks` and they should be in JKS format.
 
-### <a id="setting-up-spark-cluster"></a> Setting up an Apache Spark cluster
+### Setting up an Apache Spark cluster
 
 A Apache Spark cluster can easily be set up with the default docker-compose.yml file from the root of this repository. The docker-compose includes two different services, `spark-master` and `spark-worker.`
 
@@ -168,11 +168,11 @@ If you want N workers, all you need to do is start the docker-compose deployment
 docker-compose up --scale spark-worker=3
 ```
 
-### <a id="mount-custom-configuration"></a> Mount a custom configuration file
+### Mount a custom configuration file
 
 The image looks for configuration in the `conf/` directory of `/opt/bitnami/spark`.
 
-### <a id="installing-additional-jars"></a> Installing additional jars
+### Installing additional jars
 
 By default, this container bundles a generic set of jar files but the default image can be extended to add as many jars as needed for your specific use case. For instance, the following Dockerfile adds [`aws-java-sdk-bundle-1.11.704.jar`](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-bundle/1.11.704):
 
@@ -208,13 +208,13 @@ $ pyspark
 '2.7.4'
 ```
 
-### <a id="fips-configuration"></a> FIPS configuration in Bitnami Secure Images
+### FIPS configuration in Bitnami Secure Images
 
 The Bitnami Apache Spark Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
-## <a id="logging"></a> Logging
+## Logging
 
 The Bitnami Apache Spark Docker image sends the container logs to the `stdout`. To view the logs:
 
@@ -230,11 +230,11 @@ docker-compose logs spark
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-## <a id="maintenance"></a> Maintenance
+## Maintenance
 
 The following sections describe how to back up, restore, and upgrade the image.
 
-### <a id="backing-up-container"></a> Backing up your container
+### Backing up your container
 
 To backup your data, configuration and logs, follow these simple steps:
 
@@ -266,7 +266,7 @@ To backup your data, configuration and logs, follow these simple steps:
       cp -a /bitnami/spark /backups/latest
     ```
 
-### <a id="restoring-backup"></a> Restoring your backup
+### Restoring your backup
 
 To restore your backup, mount the backup as volumes in the container.
 
@@ -285,7 +285,7 @@ services:
   ...
 ```
 
-## <a id="notable-changes"></a> Notable changes
+## Notable changes
 
 The following subsections describe notable changes.
 
@@ -301,7 +301,7 @@ The following subsections describe notable changes.
 
 - This image now has an aws-cli and two jars: `hadoop-aws` and `aws-java-sdk` for provide an easier way to use AWS.
 
-## <a id="license"></a> License
+## License
 
 Copyright &copy; 2026 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 

@@ -1,7 +1,5 @@
 # Bitnami Secure Image for PyMilvus
 
-## What is PyMilvus?
-
 > PyMilvus is a Python-based SDK for Milvus. Milvus is a cloud-native, open-source vector database solution for AI applications and similarity search
 
 [Overview of PyMilvus](https://github.com/milvus-io/pymilvus)
@@ -70,6 +68,8 @@ docker run -it --name pymilvus bitnami/pymilvus
 
 ## Configuration
 
+The following section describes how to run commands
+
 ### Running your PyMilvus app
 
 The default work directory for the PyMilvus image is `/app`. You can mount a folder from your host here that includes your PyMilvus script, and run it normally using the `python` command.
@@ -97,32 +97,6 @@ docker run -it --name pymilvus -v /path/to/app:/app bitnami/pymilvus \
 The Bitnami PyMilvus Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
-
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of PyMilvus, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/pymilvus:latest
-```
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v pymilvus
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name pymilvus bitnami/pymilvus:latest
-```
 
 ## Notable Changes
 

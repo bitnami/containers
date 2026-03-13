@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Nessie
 
-## What is Nessie?
-
 > Nessie is an open-source version control system for data lakes, enabling isolated data experimentation before committing changes.
 
 [Overview of Nessie](https://projectnessie.org/)
@@ -57,6 +55,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to configure the application
 
 ### Configuration variables
 

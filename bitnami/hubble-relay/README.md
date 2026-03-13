@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Hubble Relay
 
-## What is Hubble Relay?
-
 > Hubble Relay collects eBPF-based visibility data from every running Hubble server in a cluster by connecting to their respective gRPC APIs and providing an unique API that represents all of them.
 
 [Overview of Hubble Relay](https://cilium.io/)
@@ -67,6 +65,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 

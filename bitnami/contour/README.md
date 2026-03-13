@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Contour
 
-## What is Contour?
-
 > Contour is an open source Kubernetes ingress controller that works by deploying the Envoy proxy as a reverse proxy and load balancer.
 
 [Overview of Contour](https://github.com/projectcontour/contour)

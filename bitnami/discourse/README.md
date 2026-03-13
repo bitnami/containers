@@ -1,7 +1,5 @@
 # Discourse&reg; packaged by Bitnami
 
-## What is Discourse&reg;?
-
 > Discourse is an open source discussion platform with built-in moderation and governance systems that let discussion communities protect themselves from bad actors even without official moderators.
 
 [Overview of Discourse&reg;](https://www.discourse.org/)
@@ -63,66 +61,6 @@ docker build -t bitnami/APP:latest .
 
 Discourse requires access to a PostgreSQL database to store information. We'll use the [Bitnami Docker Image for PostgreSQL](https://github.com/bitnami/containers/tree/main/bitnami/postgresql) for the database requirements.
 
-### Using the Docker Command Line
-
-#### Step 1: Create a network
-
-```console
-docker network create discourse-network
-```
-
-#### Step 2: Create a volume for PostgreSQL persistence and create a PostgreSQL container
-
-```console
-$ docker volume create --name postgresql_data
-docker run -d --name postgresql \
-  --env ALLOW_EMPTY_PASSWORD=yes \
-  --env POSTGRESQL_USERNAME=bn_discourse \
-  --env POSTGRESQL_PASSWORD=bitnami123 \
-  --env POSTGRESQL_DATABASE=bitnami_discourse \
-  --network discourse-network \
-  --volume postgresql_data:/bitnami/postgresql \
-  bitnami/postgresql:latest
-```
-
-#### Step 3: Create a volume for Redis persistence and create a Redis container
-
-```console
-$ docker volume create --name redis_data
-docker run -d --name redis \
-  --env ALLOW_EMPTY_PASSWORD=yes \
-  --network discourse-network \
-  --volume redis_data:/bitnami/redis \
-  bitnami/redis:latest
-```
-
-#### Step 4: Create volumes for Discourse persistence and launch the container
-
-```console
-$ docker volume create --name discourse_data
-docker run -d --name discourse \
-  -p 8080:8080 -p 8443:8443 \
-  --env ALLOW_EMPTY_PASSWORD=yes \
-  --env DISCOURSE_DATABASE_USER=bn_discourse \
-  --env DISCOURSE_DATABASE_PASSWORD=bitnami123 \
-  --env DISCOURSE_DATABASE_NAME=bitnami_discourse \
-  --env DISCOURSE_HOST=www.example.com \
-  --network discourse-network \
-  --volume discourse_data:/bitnami/discourse \
-  bitnami/discourse:latest
-```
-
-#### Step 5: Launch the Sidekiq container
-
-```console
-docker run -d --name sidekiq \
-  --network discourse-network \
-  --volume discourse_data:/bitnami/discourse \
-  bitnami/discourse:latest /opt/bitnami/scripts/discourse-sidekiq/run.sh
-```
-
-Access your application at `http://your-ip/`
-
 ### Run the application using Docker Compose
 
 ```console
@@ -131,8 +69,6 @@ docker-compose up -d
 ```
 
 Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/discourse).
-
-If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ### Troubleshooting discourse
 
@@ -153,100 +89,9 @@ The above examples define the Docker volumes named `postgresql_data` and `discou
 
 To avoid inadvertent removal of volumes, you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
-### Mount host directories as data volumes with Docker Compose
-
-This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/discourse/docker-compose.yml) file present in this repository:
-
-```diff
-   postgresql:
-     ...
-     volumes:
--      - postgresql_data:/bitnami/postgresql
-+      - /path/to/postgresql-persistence:/bitnami/postgresql
-   ...
-   redis:
-     ...
-     volumes:
--      - redis_data:/bitnami/redis
-+      - /path/to/redis-persistence:/bitnami/redis
-   ...
-   discourse:
-     ...
-     volumes:
--      - discourse_data:/bitnami/discourse
-+      - /path/to/discourse-persistence:/bitnami/discourse
-   ...
-   sidekiq:
-     ...
-     volumes:
--      - discourse_data:/bitnami/discourse
-+      - /path/to/discourse-persistence:/bitnami/discourse
-   ...
--volumes:
--  postgresql_data:
--    driver: local
--  redis_data:
--    driver: local
--  discourse_data:
--    driver: local
-```
-
-### Mount host directories as data volumes using the Docker command line
-
-#### Step 1: Create a network (if it does not exist)
-
-```console
-docker network create discourse-network
-```
-
-#### Step 2. Create a PostgreSQL container with host volume
-
-```console
-docker run -d --name postgresql \
-  --env ALLOW_EMPTY_PASSWORD=yes \
-  --env POSTGRESQL_USERNAME=bn_discourse \
-  --env POSTGRESQL_PASSWORD=bitnami123 \
-  --env POSTGRESQL_DATABASE=bitnami_discourse \
-  --network discourse-network \
-  --volume /path/to/postgresql-persistence:/bitnami/postgresql \
-  bitnami/postgresql:latest
-```
-
-#### Step 3. Create a Redis container with host volume
-
-```console
-docker run -d --name redis \
-  --env ALLOW_EMPTY_PASSWORD=yes \
-  --network discourse-network \
-  --volume /path/to/redis-persistence:/bitnami/redis \
-  bitnami/redis:latest
-```
-
-#### Step 4. Create the Discourse container with host volumes
-
-```console
-docker run -d --name discourse \
-  -p 8080:8080 -p 8443:8443 \
-  --env ALLOW_EMPTY_PASSWORD=yes \
-  --env DISCOURSE_DATABASE_USER=bn_discourse \
-  --env DISCOURSE_DATABASE_PASSWORD=bitnami123 \
-  --env DISCOURSE_DATABASE_NAME=bitnami_discourse \
-  --env DISCOURSE_HOST=www.example.com \
-  --network discourse-network \
-  --volume /path/to/discourse-persistence:/bitnami/discourse \
-  bitnami/discourse:latest
-```
-
-#### Step 5. Create the Sidekiq container with host volumes
-
-```console
-docker run -d --name sidekiq \
-  --network discourse-network \
-  --volume /path/to/discourse-persistence:/bitnami/discourse \
-  bitnami/discourse:latest
-```
-
 ## Configuration
+
+The following section describes how to configure the application
 
 ### Configuration files
 
@@ -259,6 +104,8 @@ You can mount your configuration files to the `/opt/bitnami/discourse/mounted-co
 The set of default standard configuration files may be found [here](https://github.com/discourse/discourse/tree/master/config). You may refer to the the Discourse [webpage](https://www.discourse.org/) for further details and specific configuration guides.
 
 ### Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
@@ -317,139 +164,17 @@ The set of default standard configuration files may be found [here](https://gith
 | `DISCOURSE_DEFAULT_DATABASE_HOST` | Default database server host.                        | `postgresql`                                  |
 | `DISCOURSE_DEFAULT_REDIS_HOST`    | Default Redis(R) server host.                        | `redis`                                       |
 
-When you start the Discourse image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
-
-- For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/discourse/docker-compose.yml) file present in this repository:
-
-    ```yaml
-    discourse:
-      ...
-      environment:
-        - DISCOURSE_PASSWORD=my_password
-      ...
-    ```
-
-- For manual execution add a `--env` option with each variable and value:
-
-    ```console
-    $ docker run -d --name discourse -p 80:8080 -p 443:8443 \
-      --env DISCOURSE_PASSWORD=my_password \
-      --network discourse-tier \
-      --volume /path/to/discourse-persistence:/bitnami \
-      bitnami/discourse:latest
-    ```
+When you start the Discourse image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
 
 #### Examples
 
-##### SMTP configuration using a Gmail account
+##### SMTP configuration
 
-This would be an example of SMTP configuration using a Gmail account:
-
-- Modify the environment variables used for the `discourse` and `sidekiq` containers in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/discourse/docker-compose.yml) file present in this repository:
-
-    ```yaml
-      discourse:
-        ...
-        environment:
-          ...
-          - DISCOURSE_SMTP_HOST=smtp.gmail.com
-          - DISCOURSE_SMTP_PORT=587
-          - DISCOURSE_SMTP_USER=your_email@gmail.com
-          - DISCOURSE_SMTP_PASSWORD=your_password
-          - DISCOURSE_SMTP_PROTOCOL=tls
-      ...
-      sidekiq:
-        ...
-        environment:
-          ...
-          - DISCOURSE_SMTP_HOST=smtp.gmail.com
-          - DISCOURSE_SMTP_PORT=587
-          - DISCOURSE_SMTP_USER=your_email@gmail.com
-          - DISCOURSE_SMTP_PASSWORD=your_password
-          - DISCOURSE_SMTP_PROTOCOL=tls
-      ...
-    ```
-
-- For manual execution:
-
-  - First, create the Discourse container:
-
-    ```console
-    $ docker run -d --name discourse -p 80:8080 -p 443:8443 \
-      --env DISCOURSE_DATABASE_USER=bn_discourse \
-      --env DISCOURSE_DATABASE_NAME=bitnami_discourse \
-      --env DISCOURSE_SMTP_HOST=smtp.gmail.com \
-      --env DISCOURSE_SMTP_PORT=587 \
-      --env DISCOURSE_SMTP_USER=your_email@gmail.com \
-      --env DISCOURSE_SMTP_PASSWORD=your_password \
-      --env DISCOURSE_SMTP_PROTOCOL=tls \
-      --network discourse-tier \
-      --volume /path/to/discourse-persistence:/bitnami \
-      bitnami/discourse:latest
-    ```
-
-  - Then, create the Sidekiq container:
-
-    ```console
-    $ docker run -d --name sidekiq \
-      --env DISCOURSE_DATABASE_USER=bn_discourse \
-      --env DISCOURSE_DATABASE_NAME=bitnami_discourse \
-      --env DISCOURSE_SMTP_HOST=smtp.gmail.com \
-      --env DISCOURSE_SMTP_PORT=587 \
-      --env DISCOURSE_SMTP_USER=your_email@gmail.com \
-      --env DISCOURSE_SMTP_PASSWORD=your_password \
-      --env DISCOURSE_SMTP_PROTOCOL=tls \
-      --network discourse-tier \
-      --volume /path/to/discourse-persistence:/bitnami \
-      bitnami/discourse:latest
-    ```
-
-In order to verify your configuration works properly, you can test your configuration parameters from the container itself.
-
-```console
-docker run -u root -it bitnami/discourse:latest bash
-install_packages swaks
-swaks --to your_email@domain.com --from your_email@domain.com --server your.smtp.server.com --auth LOGIN --auth-user your_email@domain.com -tls
-```
-
-See the [documentation on troubleshooting SMTP issues](https://docs.bitnami.com/general/how-to/troubleshoot-smtp-issues/) if there are problems.
+The `DISCOURSE_SMTP_*` environment variables allows you configure the SMTP settings in the application. Please take a look at the environment variables information above for more information.
 
 ##### Connect Discourse container to an existing database
 
-The Bitnami Discourse container supports connecting the Discourse application to an external database. This would be an example of using an external database for Discourse.
-
-- Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/discourse/docker-compose.yml) file present in this repository:
-
-    ```diff
-       discourse:
-         ...
-         environment:
-    -      - DISCOURSE_DATABASE_HOST=mariadb
-    +      - DISCOURSE_DATABASE_HOST=mariadb_host
-           - DISCOURSE_DATABASE_PORT_NUMBER=3306
-           - DISCOURSE_DATABASE_NAME=discourse_db
-           - DISCOURSE_DATABASE_USER=discourse_user
-    -      - ALLOW_EMPTY_PASSWORD=yes
-    +      - DISCOURSE_DATABASE_PASSWORD=discourse_password
-         ...
-    ```
-
-- For manual execution:
-
-    ```console
-    $ docker run -d --name discourse\
-      -p 8080:8080 -p 8443:8443 \
-      --network discourse-network \
-      --env DISCOURSE_DATABASE_HOST=mariadb_host \
-      --env DISCOURSE_DATABASE_PORT_NUMBER=3306 \
-      --env DISCOURSE_DATABASE_NAME=discourse_db \
-      --env DISCOURSE_DATABASE_USER=discourse_user \
-      --env DISCOURSE_DATABASE_PASSWORD=discourse_password \
-      --volume discourse_data:/bitnami/discourse \
-      bitnami/discourse:latest
-    ```
-
-In case the database already contains data from a previous Discourse installation, you need to set the variable `DISCOURSE_SKIP_BOOTSTRAP` to `yes`. Otherwise, the container would execute the installation wizard and could modify the existing data in the database. Note that, when setting `DISCOURSE_SKIP_BOOTSTRAP` to `yes`, values for environment variables such as `DISCOURSE_USERNAME`, `DISCOURSE_PASSWORD` or `DISCOURSE_EMAIL` will be ignored.
+The Bitnami Discourse container supports connecting the Discourse application to an external database. In case the database already contains data from a previous Discourse installation, you need to set the variable `DISCOURSE_SKIP_BOOTSTRAP` to `yes`. Otherwise, the container would execute the installation wizard and could modify the existing data in the database. Note that, when setting `DISCOURSE_SKIP_BOOTSTRAP` to `yes`, values for environment variables such as `DISCOURSE_USERNAME`, `DISCOURSE_PASSWORD` or `DISCOURSE_EMAIL` will be ignored.
 
 ### FIPS configuration in Bitnami Secure Images
 
@@ -522,46 +247,6 @@ For the Discourse container:
 -  --volume /path/to/discourse-persistence:/bitnami/discourse \
 +  --volume /path/to/discourse-backups/latest:/bitnami/discourse \
    bitnami/discourse:latest
-```
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of PostgreSQL and Discourse, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Discourse container. For the PostgreSQL upgrade see: <https://github.com/bitnami/containers/blob/main/bitnami/postgresql/README.md#user-content-upgrade-this-image>
-
-The `bitnami/discourse:latest` tag always points to the most recent release. To get the most recent release you can simple repull the `latest` tag from the Docker Hub with `docker pull bitnami/discourse:latest`. However it is recommended to use [tagged versions](https://hub.docker.com/r/bitnami/discourse/tags/).
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/discourse:latest
-```
-
-#### Step 2: Stop the running container
-
-Stop the currently running container using the command
-
-```console
-docker-compose stop discourse
-```
-
-#### Step 3: Take a snapshot of the application state
-
-Follow the steps in [Backing up your container](#backing-up-your-container) to take a snapshot of the current application state.
-
-#### Step 4: Remove the currently running container
-
-Remove the currently running container by executing the following command:
-
-```console
-docker-compose rm -v discourse
-```
-
-#### Step 5: Run the new image
-
-Update the image tag in `docker-compose.yml` and re-create your container with the new image:
-
-```console
-docker-compose up -d
 ```
 
 ## Notable Changes

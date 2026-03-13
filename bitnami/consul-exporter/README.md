@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Consul Exporter
 
-## What is Consul Exporter?
-
 > Export Consul service health to Prometheus.
 
 [Overview of Consul Exporter](https://github.com/prometheus/consul_exporter)
@@ -105,40 +103,6 @@ docker logs consul-exporter
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
-
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of Consul Exporter, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/consul-exporter:latest
-```
-
-#### Step 2: Stop the running container
-
-Stop the currently running container using the command
-
-```console
-docker stop consul-exporter
-```
-
-#### Step 3: Remove the currently running container
-
-```console
-docker rm -v consul-exporter
-```
-
-#### Step 4: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name consul-exporter bitnami/consul-exporter:latest
-```
 
 ## Notable Changes
 

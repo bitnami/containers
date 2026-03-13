@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Jenkins Agent
 
-## What is Jenkins Agent?
-
 > Jenkins Agent executable (agent.jar). This executable is an instance of the Jenkins Remoting library.
 
 [Overview of Jenkins Agent](https://github.com/jenkinsci/remoting)
@@ -64,7 +62,11 @@ docker build -t bitnami/APP:latest .
 
 ## Configuration
 
+The following section describes the supported environment variables
+
 ### Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
@@ -120,8 +122,6 @@ docker logs jenkins
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
-
-## Maintenance
 
 ## Customize this image
 

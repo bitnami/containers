@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Mastodon
 
-## What is Mastodon?
-
 > Mastodon is self-hosted social network server based on ActivityPub. Written in Ruby, features real-time updates, multimedia attachments and no vendor lock-in.
 
 [Overview of Mastodon](https://joinmastodon.org/)
@@ -58,7 +56,11 @@ docker build -t bitnami/APP:latest .
 
 ## Configuration
 
+The following section describes the supported environment variables
+
 ### Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 

@@ -1,7 +1,5 @@
 # Bitnami Secure Image for OS Shell + Utility
 
-## What is OS Shell + Utility?
-
 > OS Shell + Utility is a general-purpose minimal image, well-suited for helper tasks such as running initialization in initContainers from Helm charts.
 
 [Overview of OS Shell + Utility](https://bitnami.com)
@@ -57,6 +55,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 

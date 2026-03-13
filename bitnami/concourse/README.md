@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Concourse
 
-## What is Concourse?
-
 > Concourse is an automation system written in Go. It is most commonly used for CI/CD, and is built to scale to any kind of automation pipeline, from simple to complex.
 
 [Overview of Concourse](https://concourse-ci.org/)
@@ -83,6 +81,8 @@ Containers attached to the same network can communicate with each other using th
 Find how to configure Concourse in its [official documentation](https://concourse-ci.org//docs.html).
 
 ### Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 

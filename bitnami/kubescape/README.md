@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Kubescape
 
-## What is Kubescape?
-
 > An open-source Kubernetes security platform for your clusters, CI/CD pipelines, and IDE that separates out the security signal from the scanner noise.
 
 [Overview of Kubescape](https://github.com/kubescape/kubescape)
@@ -57,6 +55,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 

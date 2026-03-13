@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Cilium
 
-## What is Cilium?
-
 > Cilium is an eBPF-based networking, observability, and security for Linux container management platforms like Docker and Kubernetes.
 
 [Overview of Cilium](https://cilium.io/)
@@ -61,6 +59,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 

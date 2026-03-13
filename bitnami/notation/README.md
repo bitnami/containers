@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Notation
 
-## What is Notation?
-
 > Notation is a CLI project to add signatures as standard items in the OCI registry ecosystem, and to build a set of simple tooling for signing and verifying these signatures.
 
 [Overview of Notation](https://notaryproject.dev)
@@ -56,33 +54,9 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of Notation, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/notation:latest
-```
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v notation
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name notation bitnami/notation:latest
-```
-
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 

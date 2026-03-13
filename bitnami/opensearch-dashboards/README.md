@@ -1,7 +1,5 @@
 # Bitnami Secure Image for OpenSearch Dashboards
 
-## What is OpenSearch Dashboards?
-
 > OpenSearch Dashboards is a visualization tool for OpenSearch installations. OpenSearch is a scalable open-source solution for search, analytics, and observability.
 
 [Overview of OpenSearch Dashboards](https://opensearch.org/)
@@ -56,35 +54,13 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of OpenSearch Dashboards, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/opensearch-dashboards:latest
-```
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v opensearch-dashboards
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name opensearch-dashboards bitnami/opensearch-dashboards:latest
-```
-
 ## Configuration
 
+The following section describes the supported environment variables
+
 ### Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 

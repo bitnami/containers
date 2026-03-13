@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Keycloak Config CLI
 
-## What is Keycloak Config CLI?
-
 > keycloak-config-cli is a Keycloak extension to import JSON or YAML configuration into the Keycloak server without restarting it.
 
 [Overview of Keycloak Config CLI](https://github.com/adorsys/keycloak-config-cli)

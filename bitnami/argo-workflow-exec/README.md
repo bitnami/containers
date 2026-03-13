@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Argo Workflow Executor
 
-## What is Argo Workflow Executor?
-
 > Argo Workflow Executor is the executor component for the Argo Workflows engine, which is meant to orchestrate Kubernetes jobs in parallel.
 
 [Overview of Argo Workflow Executor](https://argoproj.github.io/workflows)
@@ -60,33 +58,9 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of Argo Workflows Executor, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/argo-workflow-exec:latest
-```
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v argo-workflow-exec
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name argo-workflow-exec bitnami/argo-workflow-exec:latest
-```
-
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 

@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Apache APISIX Ingress Controller
 
-## What is Apache APISIX Ingress Controller?
-
 > Apache APISIX Ingress Controller integrates Apache APISIX in Kubernetes installations via the Ingress resource. Supports plugins and load balancing, amongst others.
 
 [Overview of Apache APISIX Ingress Controller](https://github.com/apache/apisix-ingress-controller)
@@ -56,33 +54,9 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of Apache APISIX Ingress Controller, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/apisix-ingress-controller:latest
-```
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v apisix-ingress-controller
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name apisix-ingress-controller bitnami/apisix-ingress-controller:latest
-```
-
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 

@@ -1,7 +1,5 @@
 # Bitnami Secure Image for HAProxy
 
-## What is HAProxy?
-
 > HAProxy is a TCP proxy and a HTTP reverse proxy. It supports SSL termination and offloading, TCP and HTTP normalization, traffic regulation, caching and protection against DDoS attacks.
 
 [Overview of HAProxy](https://www.haproxy.org/)
@@ -65,6 +63,8 @@ Please be aware this file has not undergone internal testing. Consequently, we a
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
