@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Fluentd
 
-## What is Fluentd?
-
 > Fluentd collects events from various data sources and writes them to files, RDBMS, NoSQL, IaaS, SaaS, Hadoop and so on.
 
 [Overview of Fluentd](https://www.fluentd.org)
@@ -174,48 +172,6 @@ FROM bitnami/fluentd
 
 ### Install custom Fluentd plugins
 RUN fluent-gem install 'fluent-plugin-docker_metadata_filter'
-```
-
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of fluentd, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/fluentd:latest
-```
-
-#### Step 2: Stop and backup the currently running container
-
-Stop the currently running container using the command
-
-```console
-docker stop fluentd
-```
-
-Next, take a snapshot of the persistent volume `/path/to/fluentd-persistence` using:
-
-```console
-rsync -a /path/to/fluentd-persistence /path/to/fluentd-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
-```
-
-You can use this snapshot to restore the database state should the upgrade fail.
-
-#### Step 3: Remove the currently running container
-
-```console
-docker rm -v fluentd
-```
-
-#### Step 4: Run the new image
-
-Re-create your container from the new image, restoring your backup if necessary.
-
-```console
-docker run --name fluentd bitnami/fluentd:latest
 ```
 
 ## Notable Changes
