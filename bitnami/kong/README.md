@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Kong
 
-## What is Kong?
-
 > Kong is an open source Microservice API gateway and platform designed for managing microservices requests of high-availability, fault-tolerance, and distributed systems.
 
 [Overview of Kong](https://konghq.com/kong-community-edition/)
@@ -92,7 +90,11 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 
 ## Configuration
 
+The following section describes the supported environment variables
+
 ### Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
