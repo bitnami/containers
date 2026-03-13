@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-03-12T16:54:06Z" \
+      org.opencontainers.image.created="2026-03-13T21:06:15Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/airflow/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/airflow" \
@@ -60,7 +60,7 @@ RUN /opt/bitnami/scripts/airflow/postunpack.sh
 ENV AIRFLOW_HOME="/opt/bitnami/airflow" \
     APP_VERSION="3.1.7" \
     BITNAMI_APP_NAME="airflow" \
-    IMAGE_REVISION="15" \
+    IMAGE_REVISION="16" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     LD_LIBRARY_PATH="/opt/bitnami/mariadb/lib:$LD_LIBRARY_PATH" \
