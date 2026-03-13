@@ -129,7 +129,7 @@ The following tables list the main variables you can set.
 | `CONSUL_DEFAULT_CONF_DIR`      | Consul default configuration directory.     | `${CONSUL_BASE_DIR}/conf.default`          |
 | `CONSUL_BIN_DIR`               | Consul binary directory.                    | `${CONSUL_BASE_DIR}/bin`                   |
 | `CONSUL_CONF_FILE`             | Consul configuration file.                  | `${CONSUL_CONF_DIR}/consul.json`           |
-| `CONSUL_ENCRYPT_FILE`          | Consul encrytion configuration file.        | `${CONSUL_CONF_DIR}/encrypt.json`          |
+| `CONSUL_ENCRYPT_FILE`          | Consul encryption configuration file.       | `${CONSUL_CONF_DIR}/encrypt.json`          |
 | `CONSUL_LOCAL_FILE`            | Consul local configuration file.            | `${CONSUL_CONF_DIR}/local.json`            |
 | `CONSUL_LOG_DIR`               | Directory where Consul logs are stored.     | `${CONSUL_BASE_DIR}/logs`                  |
 | `CONSUL_LOG_FILE`              | Consul log file.                            | `${CONSUL_LOG_DIR}/consul.log`             |
