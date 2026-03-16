@@ -5,13 +5,13 @@
 [Overview of AWS CLI](https://aws.amazon.com/cli/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
-## <a id="tl-dr"></a> TL;DR
+## TL;DR
 
 ```console
 docker run --name aws-cli bitnami/aws-cli:latest
 ```
 
-## <a id="why-use-bitnami-secure-images"></a> Why use Bitnami Secure Images?
+## Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
 
@@ -28,11 +28,11 @@ Each image comes with valuable security metadata. You can view the metadata in [
 
 If you are looking for our previous generation of images based on Debian Linux, please see the [Bitnami Legacy registry](https://hub.docker.com/u/bitnamilegacy).
 
-## <a id="supported-tags"></a> Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
-## <a id="get-this-image"></a> Get this image
+## Get this image
 
 The recommended way to get the Bitnami aws-cli Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/aws-cli).
 
@@ -54,11 +54,11 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## <a id="configuration"></a> Configuration
+## Configuration
 
 The following section describes how to run commands
 
-### <a id="running-commands"></a> Running commands
+### Running commands
 
 To run commands inside this container you can use `docker run`, for example to execute `aws-cli --version` you can follow the example below:
 
@@ -68,7 +68,7 @@ docker run --rm --name aws-cli bitnami/aws-cli:latest -- --version
 
 Consult the [aws-cli Reference Documentation](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/index.html) to find the completed list of commands available.
 
-### <a id="loading-your-own-configuration"></a> Loading your own configuration
+### Loading your own configuration
 
 It's possible to load your own configuration, which is useful if you want to connect to a remote cluster:
 
@@ -76,19 +76,19 @@ It's possible to load your own configuration, which is useful if you want to con
 docker run --rm --name aws-cli -v /path/to/your/aws/config:/.aws/config bitnami/aws-cli:latest
 ```
 
-### <a id="fips-configuration"></a> FIPS configuration in Bitnami Secure Images
+### FIPS configuration in Bitnami Secure Images
 
 The Bitnami AWS CLI Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
-## <a id="notable-changes"></a> Notable Changes
+## Notable Changes
 
-### <a id="starting-january-16-2024"></a> Starting January 16, 2024
+### Starting January 16, 2024
 
 - The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
-## <a id="license"></a> License
+## License
 
 Copyright &copy; 2026 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
