@@ -1,7 +1,5 @@
 # Bitnami Secure Image for KServe Storage Initializer
 
-## What is KServe Storage Initializer?
-
 > KServe is a serverless platform on Kubernetes for scalable ML model inference, supporting frameworks like TensorFlow, PyTorch, and others
 
 [Overview of KServe Storage Initializer](https://kserve.github.io/website)
@@ -61,6 +59,8 @@ docker build -t bitnami/APP:latest .
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-work-with-non-root-containers-index.html).
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
