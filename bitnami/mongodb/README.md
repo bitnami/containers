@@ -357,7 +357,7 @@ You can configure the containers [logging driver](https://docs.docker.com/engine
 
 ### 3.6.9, 4.0.4 and 4.1.5 or later
 
-- All MongoDB&reg; versions released after October 16, 2018 (3.6.9 or later, 4.0.4 or later or 4.1.5 or later) are licensed under the [Server Side Public License](https://www.mongodb.com/licensing/server-side-public-license) that is not currently accepted as a Open Source license by the Open Source Iniciative (OSI).
+- All MongoDB&reg; versions released after October 16, 2018 (3.6.9 or later, 4.0.4 or later or 4.1.5 or later) are licensed under the [Server Side Public License](https://www.mongodb.com/licensing/server-side-public-license) that is not currently accepted as a Open Source license by the Open Source Initiative (OSI).
 
 ### 3.6.6-r16 and 4.1.1-r9
 
