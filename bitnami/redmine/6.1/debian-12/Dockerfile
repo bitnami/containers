@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-03-13T18:32:15Z" \
+      org.opencontainers.image.created="2026-03-17T09:10:54Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/redmine/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/redmine" \
       org.opencontainers.image.title="redmine" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="6.1.1"
+      org.opencontainers.image.version="6.1.2"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-12" \
@@ -32,7 +32,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
       "postgresql-client-18.3.0-0-linux-${OS_ARCH}-debian-12" \
       "mysql-client-12.2.2-0-linux-${OS_ARCH}-debian-12" \
       "mariadb-lib-12.2.2-2-linux-${OS_ARCH}-debian-12" \
-      "redmine-6.1.1-6-linux-${OS_ARCH}-debian-12" \
+      "redmine-6.1.2-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -51,9 +51,9 @@ RUN uninstall_packages curl
 COPY rootfs /
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/redmine/postunpack.sh
-ENV APP_VERSION="6.1.1" \
+ENV APP_VERSION="6.1.2" \
     BITNAMI_APP_NAME="redmine" \
-    IMAGE_REVISION="17" \
+    IMAGE_REVISION="0" \
     LD_LIBRARY_PATH="/opt/bitnami/mariadb/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/common/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:$PATH"
 
