@@ -1,7 +1,5 @@
 # Bitnami Secure Image for WildFly
 
-## What is WildFly?
-
 > Wildfly is a lightweight, open source application server, formerly known as JBoss, that implements the latest enterprise Java standards.
 
 [Overview of WildFly](https://www.wildfly.org/)
@@ -64,30 +62,17 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/wildfly).
+
 ## Persisting your application
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
 For persistence you should mount a directory at the `/bitnami/wildfly` path. If the mounted directory is empty, it will be initialized on the first run.
 
-```console
-docker run -p 8080:8080 -p 9990:9990 \
-    -v /path/to/wildfly-persistence:/bitnami/wildfly \
-    bitnami/wildfly:latest
-```
-
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/wildfly/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  wildfly:
-  ...
-    volumes:
-      - /path/to/wildfly-persistence:/bitnami/wildfly
-  ...
-```
-
-> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
+> **NOTE** As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 ## Deploying web applications on WildFly
 
@@ -99,35 +84,15 @@ Additionally a helper symlink `/app` is present that points to the deployments d
 docker cp /path/to/app.war wildfly:/app
 ```
 
-Find more information about the directory structue at [WildFly official documentation](https://docs.wildfly.org/23/Getting_Started_Guide.html#standalone-directory-structure)
+Find more information about the directory structure at [WildFly official documentation](https://docs.wildfly.org/23/Getting_Started_Guide.html#standalone-directory-structure)
 
-> NOTE: You can also deploy web applications on a running WildFly instance using the WildFly management interface.
+> **NOTE** You can also deploy web applications on a running WildFly instance using the WildFly management interface.
 
 ## Accessing your WildFly server from the host
 
-The Bitnami WildFly image exposes the application server on port `8080` and the management console on port `9990`. To access your web server from your host machine you can ask Docker to map random ports on your host to the ports `8080` and `9990` of the container.
+The Bitnami WildFly image exposes the application server on port `8080` and the management console on port `9990`. Access your web server in the browser by navigating to `http://localhost:8080` to access the application server and `http://localhost:9990/console` to access the management console.
 
-```console
-docker run --name wildfly -P bitnami/wildfly:latest
-```
-
-Run `docker port` to determine the random ports Docker assigned.
-
-```console
-$ docker port wildfly
-8080/tcp -> 0.0.0.0:32775
-9990/tcp -> 0.0.0.0:32774
-```
-
-You can also manually specify the ports you want forwarded from your host to the container.
-
-```console
-docker run -p 8080:8080 -p 9990:9990 bitnami/wildfly:latest
-```
-
-Access your web server in the browser by navigating to `http://localhost:8080` to access the application server and `http://localhost:9990/console` to access the management console.
-
-> NOTE: the management console is configured by default to listen exclusively in the localhost interface for security reasons. To allow access from different hosts, you can use the `WILDFLY_MANAGEMENT_LISTEN_ADDRESS` environment variable to set a different listen address (this is not recommended for production environments).
+> **NOTE** the management console is configured by default to listen exclusively in the localhost interface for security reasons. To allow access from different hosts, you can use the `WILDFLY_MANAGEMENT_LISTEN_ADDRESS` environment variable to set a different listen address (this is not recommended for production environments).
 
 ## Accessing the command line interface
 
@@ -135,34 +100,7 @@ The command line management tool `jboss-cli.sh` allows a user to connect to the 
 
 ### Connecting a client container to the WildFly server container
 
-#### Step 1: Create a network
-
-```console
-docker network create wildfly-tier --driver bridge
-```
-
-#### Step 2: Launch the WildFly server instance
-
-Use the `--network wildfly-tier` argument to the `docker run` command to attach the WildFly container to the `wildfly-tier` network.
-
-```console
-docker run -d --name wildfly-server \
-    --network wildfly-tier \
-    bitnami/wildfly:latest
-```
-
-#### Step 3: Launch your WildFly client instance
-
-Finally we create a new container instance to launch the WildFly client and connect to the server created in the previous step:
-
-```console
-docker run -it --rm \
-    --network wildfly-tier \
-    bitnami/wildfly:latest \
-    jboss-cli.sh --controller=wildfly-server:9990 --connect
-```
-
-You can also run the client in the same container as the server using the Docker [exec](https://docs.docker.com/reference/commandline/cli/#exec) command.
+You can run the client in the same container as the server using the Docker [exec](https://docs.docker.com/reference/commandline/cli/#exec) command.
 
 ```console
 $ docker exec -it wildfly-server \
@@ -171,7 +109,11 @@ $ docker exec -it wildfly-server \
 
 ## Configuration
 
+The following section describes the supported environment variables
+
 ### Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
@@ -224,47 +166,9 @@ By default, a management user named `user` is created with the default password 
 
 Additionally you can specify a user name for the management user using the `WILDFLY_USERNAME` environment variable. When not specified, the `WILDFLY_PASSWORD` configuration is applied on the default user (`user`).
 
-```console
-docker run --name wildfly \
-    -e WILDFLY_USERNAME=my_user \
-    -e WILDFLY_PASSWORD=my_password \
-    bitnami/wildfly:latest
-```
-
-or modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/wildfly/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  wildfly:
-  ...
-    environment:
-      - WILDFLY_USERNAME=my_user
-      - WILDFLY_PASSWORD=my_password
-  ...
-```
-
 ### Full configuration
 
 The image looks for configurations (e.g. `standalone.xml`) in the `/bitnami/wildfly/configuration/` directory, this directory can be changed by setting the `WILDFLY_MOUNTED_CONF_DIR` environment variable.
-
-```console
-docker run --name wildfly \
-    -v /path/to/standalone.xml:/bitnami/wildfly/configuration/standalone.xml \
-    bitnami/wildfly:latest
-```
-
-Alternatively, modify the [docker-compose.yml](https://github.com/bitnami/containers/blob/main/bitnami/wildfly/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  wildfly:
-    ...
-    volumes:
-      - /path/to/standalone.xml:/bitnami/wildfly/configuration/standalone.xml:ro
-    ...
-```
-
-After that, your changes will be taken into account in the server's behaviour.
 
 ### FIPS configuration in Bitnami Secure Images
 
@@ -287,66 +191,6 @@ docker-compose logs wildfly
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
-
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of WildFly, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/wildfly:latest
-```
-
-or if you're using Docker Compose, update the value of the image property to `bitnami/wildfly:latest`.
-
-#### Step 2: Stop and backup the currently running container
-
-Stop the currently running container using the command
-
-```console
-docker stop wildfly
-```
-
-or using Docker Compose:
-
-```console
-docker-compose stop wildfly
-```
-
-Next, take a snapshot of the persistent volume `/path/to/wildfly-persistence` using:
-
-```console
-rsync -a /path/to/wildfly-persistence /path/to/wildfly-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
-```
-
-#### Step 3: Remove the currently running container
-
-```console
-docker rm -v wildfly
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v wildfly
-```
-
-#### Step 4: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name wildfly bitnami/wildfly:latest
-```
-
-or using Docker Compose:
-
-```console
-docker-compose up wildfly
-```
 
 ## Notable Changes
 
@@ -372,12 +216,6 @@ Consequences:
 
 - All volumes have been merged at `/bitnami/wildfly`. Now you only need to mount a single volume at `/bitnami/wildfly` for persistence.
 - The logs are always sent to the `stdout` and are no longer collected in the volume.
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/wildfly).
-
-If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
 
 ## License
 
