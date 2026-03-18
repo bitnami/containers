@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Tensorflow
 
-## What is Tensorflow?
-
 > TensorFlow is an open-source machine learning framework for Python. It enables efficient computation and manipulation of multi-dimensional arrays for building and training machine learning models.
 
 [Overview of Tensorflow](https://tensorflow.org)
@@ -70,6 +68,8 @@ docker run -it --name tensorflow bitnami/tensorflow
 
 ## Configuration
 
+The following section describes how to run commands
+
 ### Running your Tensorflow app
 
 The default work directory for the Tensorflow image is `/app`. You can mount a folder from your host here that includes your Tensorflow script, and run it normally using the `python` command.
@@ -97,32 +97,6 @@ docker run -it --name tensorflow -v /path/to/app:/app bitnami/tensorflow \
 The Bitnami Tensorflow Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
-
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of Tensorflow, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/tensorflow:latest
-```
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v tensorflow
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name tensorflow bitnami/tensorflow:latest
-```
 
 ## Notable Changes
 
