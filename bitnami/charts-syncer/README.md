@@ -82,6 +82,14 @@ Switched the container instructions from `CMD` to `ENTRYPOINT`. The reason for t
 
 We moved the binary from `/charts-syncer` to `/opt/bitnami/charts-syncer/bin/charts-syncer`, and added the `PATH` environment variable, so usage no longer requires adding the `/` prefix.
 
+
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami charts-syncer Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+- `GODEBUG`: controls Go FIPS mode. Use `fips140=only` (restricted), `fips140=on` (relaxed), or `fips140=off` (disabled).
+
 ## License
 
 Copyright &copy; 2026 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
