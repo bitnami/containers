@@ -72,6 +72,14 @@ docker run --rm --name chainloop-artifact-cas bitnami/chainloop-artifact-cas:lat
 
 Check the [official Chainloop Artifact CAS documentation](https://github.com/chainloop-dev/chainloop/tree/main/app/artifact-cas) for more information about configuration options.
 
+
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Chainloop Artifact CAS Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+- `GODEBUG`: controls Go FIPS mode. Use `fips140=only` (restricted), `fips140=on` (relaxed), or `fips140=off` (disabled).
+
 ## License
 
 Copyright &copy; 2026 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
