@@ -82,6 +82,14 @@ Check the [official Argo Workflows Controller documentation](https://argoproj.gi
 
 - The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
 
+
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Argo Workflow Controller Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+- `GODEBUG`: controls Go FIPS mode. Use `fips140=only` (restricted), `fips140=on` (relaxed), or `fips140=off` (disabled).
+
 ## License
 
 Copyright &copy; 2026 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
