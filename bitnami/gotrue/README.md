@@ -1,6 +1,6 @@
 # Bitnami Secure Image for GoTrue
 
-> GoTrue is an API written in Golang that can handle user registration and authentication for Jamstack projects. Based on OAuth2 and JWT, fetures user signup, authentication and custom user data.
+> GoTrue is an API written in Golang that can handle user registration and authentication for Jamstack projects. Based on OAuth2 and JWT, features user signup, authentication and custom user data.
 
 [Overview of GoTrue](https://github.com/netlify/gotrue)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
