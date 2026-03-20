@@ -8,7 +8,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-02-18T12:39:54Z" \
+      org.opencontainers.image.created="2026-03-20T14:03:57Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/java/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/java" \
@@ -54,7 +54,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="25.0.2-12" \
     BITNAMI_APP_NAME="java" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="3" \
     JAVA_HOME="/opt/bitnami/java" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
