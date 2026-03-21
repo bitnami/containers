@@ -1,7 +1,5 @@
 # Bitnami Secure Image for TensorFlow ResNet
 
-## What is TensorFlow ResNet?
-
 > TensorFlow ResNet is a client utility for use with TensorFlow Serving and ResNet models.
 
 [Overview of TensorFlow ResNet](https://github.com/tensorflow/models)
@@ -42,10 +40,6 @@ Non-root container images add an extra layer of security and are generally recom
 ## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
-
-## Prerequisites
-
-To run this application you need Docker Engine 1.10.0.
 
 ## How to use this image
 
@@ -108,6 +102,8 @@ You can use these snapshots to restore the application state should the upgrade 
     - Mount the directories if needed: `docker run --name tensorflow-resnet bitnami/tensorflow-resnet:latest`
 
 ## Configuration
+
+The following section describes how to configure the application
 
 ### Predict an image
 
