@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Zipkin
 
-## What is Zipkin?
-
 > Zipkin is a distributed tracing system that helps collect and analyze timing data to troubleshoot latency issues in service architectures, providing visibility into service call performance.
 
 [Overview of Zipkin](https://zipkin.io/)
@@ -70,6 +68,8 @@ docker run -it --name zipkin bitnami/zipkin
 
 ## Configuration
 
+The following section describes how to run commands
+
 ### Running commands
 
 To run commands inside this container you can use `docker run`, for example to execute `start-zipkin --version` you can follow below example
@@ -85,32 +85,7 @@ Read the [official Zipkin documentation](https://zipkin.io/pages/quickstart.html
 The Bitnami Zipkin Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
-
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of Zipkin, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/zipkin:latest
-```
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v zipkin
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name zipkin bitnami/zipkin:latest
-```
+- `JAVA_TOOL_OPTIONS`: controls Java FIPS mode. Use `-Djava.security.properties==/opt/bitnami/java/conf/security/java.security.restricted` (restricted), `-Djava.security.properties==/opt/bitnami/java/conf/security/java.security.relaxed` (relaxed), or `-Djava.security.properties==/opt/bitnami/java/conf/security/java.security.original` (off).
 
 ## Notable Changes
 
