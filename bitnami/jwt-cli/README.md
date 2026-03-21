@@ -1,7 +1,5 @@
 # Bitnami Secure Image for JWT CLI
 
-## What is JWT CLI?
-
 > jwt-cli is a command-line tool for creating JSON Web Tokens (JWTs). Written in Rust, it allows custom header values, custom claim bodies and any secret.
 
 [Overview of JWT CLI](https://github.com/mike-engel/jwt-cli)
@@ -56,33 +54,9 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of JWT CLI, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/jwt-cli:latest
-```
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v jwt-cli
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name jwt-cli bitnami/jwt-cli:latest
-```
-
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
