@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-02-19T02:09:30Z" \
+      org.opencontainers.image.created="2026-03-21T02:33:51Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/jwt-cli/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jwt-cli" \
@@ -47,7 +47,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="6.2.0" \
     BITNAMI_APP_NAME="jwt-cli" \
-    IMAGE_REVISION="24" \
+    IMAGE_REVISION="25" \
     PATH="/opt/bitnami/jwt-cli/bin:$PATH"
 
 USER 1001
