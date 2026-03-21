@@ -1,13 +1,13 @@
 # Bitnami Secure Image for PyTorch
 
-## What is PyTorch?
-
 > PyTorch is a deep learning platform that accelerates the transition from research prototyping to production deployment. Bitnami image includes Torchvision for specific computer vision support.
 
 [Overview of PyTorch](https://pytorch.org/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
+
+Use this quick command to run the container.
 
 ```console
 docker run -it --name pytorch bitnami/pytorch
@@ -40,7 +40,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 ## Get this image
 
-The recommended way to get the Bitnami Pytorch Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/pytorch).
+The recommended way to get the Bitnami PyTorch Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/pytorch).
 
 ```console
 docker pull bitnami/pytorch:latest
@@ -60,6 +60,10 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
+## Using `docker-compose.yaml`
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/pytorch).
+
 ## Entering the REPL
 
 By default, running this image will drop you into the Python REPL, where you can interactively test and try things out with PyTorch in Python.
@@ -70,9 +74,11 @@ docker run -it --name pytorch bitnami/pytorch
 
 ## Configuration
 
+The following sections describe how to run your app and configure FIPS.
+
 ### Running your PyTorch app
 
-The default work directory for the PyTorch image is `/app`. You can mount a folder from your host here that includes your PyTorch script, and run it normally using the `python` command.
+The default work directory for the PyTorch image is `/app`. You can mount a folder from your host here that includes your PyTorch script and run it normally using the `python` command.
 
 ```console
 docker run -it --name pytorch -v /path/to/app:/app bitnami/pytorch \
@@ -88,10 +94,10 @@ docker run -it --name pytorch -v /path/to/app:/app bitnami/pytorch \
   sh -c "conda install -y --file requirements.txt && python script.py"
 ```
 
-**Further Reading:**
+**Additional documentation:**
 
-- [pytorch documentation](https://pytorch.org/docs/stable/index.html)
-- [conda documentation](https://docs.conda.io/en/latest/)
+- [PyTorch documentation](https://pytorch.org/docs/stable/index.html)
+- [Conda documentation](https://docs.conda.io/en/latest/)
 
 ### FIPS configuration in Bitnami Secure Images
 
@@ -99,57 +105,11 @@ The Bitnami PyTorch Docker image from the [Bitnami Secure Images](https://go-vmw
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
-## Maintenance
-
-### Upgrade this image
-
-Bitnami provides up-to-date versions of PyTorch, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
-
-#### Step 1: Get the updated image
-
-```console
-docker pull bitnami/pytorch:latest
-```
-
-or if you're using Docker Compose, update the value of the image property to `bitnami/pytorch:latest`.
-
-#### Step 2: Remove the currently running container
-
-```console
-docker rm -v pytorch
-```
-
-or using Docker Compose:
-
-```console
-docker-compose rm -v pytorch
-```
-
-#### Step 3: Run the new image
-
-Re-create your container from the new image.
-
-```console
-docker run --name pytorch bitnami/pytorch:latest
-```
-
-or using Docker Compose:
-
-```console
-docker-compose up pytorch
-```
-
 ## Notable changes
 
 ### 1.9.0-debian-10-r3
 
-This version removes miniconda in favour of pip. This creates a smaller container and least prone to security issues. Users extending this container with other packages will need to switch from conda to pip commands.
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/pytorch).
-
-If you detect any issue in the `docker-compose.yaml` file, feel free to report it or contribute with a fix by following our [Contributing Guidelines](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md).
+This version removes `miniconda` in favour of `pip`. This creates a smaller container and least prone to security issues. Users extending this container with other packages will need to switch from `conda` to `pip` commands.
 
 ## License
 
