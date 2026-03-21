@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Prometheus RSocket Proxy
 
-## What is Prometheus RSocket Proxy?
-
 > Prometheus RSocket Proxy is a collection of resources used to get application metrics into Prometheus without ingress. It preserves the pull model by using RSocket bidirectional persistent RPC.
 
 [Overview of Prometheus RSocket Proxy](https://github.com/micrometer-metrics/prometheus-rsocket-proxy)
@@ -69,6 +67,7 @@ For further documentation, please check [here](https://github.com/micrometer-met
 The Bitnami Prometheus RSocket Proxy Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+- `JAVA_TOOL_OPTIONS`: controls Java FIPS mode. Use `-Djava.security.properties==/opt/bitnami/java/conf/security/java.security.restricted` (restricted), `-Djava.security.properties==/opt/bitnami/java/conf/security/java.security.relaxed` (relaxed), or `-Djava.security.properties==/opt/bitnami/java/conf/security/java.security.original` (off).
 
 ## Notable Changes
 
