@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-02-19T02:07:00Z" \
+      org.opencontainers.image.created="2026-03-21T02:34:07Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/jmx-exporter/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jmx-exporter" \
@@ -49,7 +49,7 @@ RUN uninstall_packages ca-certificates curl
 
 ENV APP_VERSION="1.5.0" \
     BITNAMI_APP_NAME="jmx-exporter" \
-    IMAGE_REVISION="6" \
+    IMAGE_REVISION="7" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 EXPOSE 5556
