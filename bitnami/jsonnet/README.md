@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Jsonnet
 
-## What is Jsonnet?
-
 > Jsonnet is a data templating language for application and tool developers, based on JSON.
 
 [Overview of Jsonnet](https://jsonnet.org)
@@ -57,6 +55,8 @@ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
+
+The following section describes how to run commands
 
 ### Running commands
 
