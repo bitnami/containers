@@ -111,7 +111,7 @@ docker network create app-tier --driver bridge
 
 #### Step 2: Launch the Apache Cassandra server instance
 
-Use the `--network app-tier` argument to the `docker run` command to attach the Apache Cassandracontainer to the `app-tier` network.
+Use the `--network app-tier` argument to the `docker run` command to attach the Apache Cassandra container to the `app-tier` network.
 
 ```console
 docker run -d --name cassandra-server \
@@ -439,6 +439,7 @@ See the [configuration](http://docs.datastax.com/en/cassandra/3.x/cassandra/conf
 The Bitnami Apache Cassandra Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+- `JAVA_TOOL_OPTIONS`: controls Java FIPS mode. Use `-Djava.security.properties==/opt/bitnami/java/conf/security/java.security.restricted` (restricted), `-Djava.security.properties==/opt/bitnami/java/conf/security/java.security.relaxed` (relaxed), or `-Djava.security.properties==/opt/bitnami/java/conf/security/java.security.original` (off).
 
 ## TLS encryption
 
