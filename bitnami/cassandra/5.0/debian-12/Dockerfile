@@ -8,13 +8,13 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-03-13T07:37:31Z" \
+      org.opencontainers.image.created="2026-03-23T16:51:14Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/cassandra/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cassandra" \
       org.opencontainers.image.title="cassandra" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="5.0.6"
+      org.opencontainers.image.version="5.0.7"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -31,7 +31,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     COMPONENTS=( \
       "python-3.11.15-2-linux-${OS_ARCH}-debian-12" \
       "jre-11.0.30-9-1-linux-${OS_ARCH}-debian-12" \
-      "cassandra-5.0.6-3-linux-${OS_ARCH}-debian-12" \
+      "cassandra-5.0.7-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -53,9 +53,9 @@ RUN uninstall_packages curl
 COPY rootfs /
 RUN /opt/bitnami/scripts/cassandra/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
-ENV APP_VERSION="5.0.6" \
+ENV APP_VERSION="5.0.7" \
     BITNAMI_APP_NAME="cassandra" \
-    IMAGE_REVISION="10" \
+    IMAGE_REVISION="0" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/cassandra/bin:$PATH"
 
