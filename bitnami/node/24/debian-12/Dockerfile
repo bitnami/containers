@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-03-13T18:30:25Z" \
+      org.opencontainers.image.created="2026-03-24T22:27:25Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/node/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/node" \
       org.opencontainers.image.title="node" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="24.14.0"
+      org.opencontainers.image.version="24.14.1"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-12" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "python-3.14.3-11-linux-${OS_ARCH}-debian-12" \
-      "node-24.14.0-0-linux-${OS_ARCH}-debian-12" \
+      "node-24.14.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -49,10 +49,10 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/node/postunpack.sh
-ENV APP_VERSION="24.14.0" \
+ENV APP_VERSION="24.14.1" \
     BITNAMI_APP_NAME="node" \
     COREPACK_HOME="/opt/bitnami/node/corepack" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:$PATH"
 
 EXPOSE 3000
