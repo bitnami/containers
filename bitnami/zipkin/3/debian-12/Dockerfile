@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-03-21T07:40:51Z" \
+      org.opencontainers.image.created="2026-03-24T05:03:34Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/zipkin/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/zipkin" \
       org.opencontainers.image.title="zipkin" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="3.5.1"
+      org.opencontainers.image.version="3.6.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,7 +29,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "jre-21.0.10-10-0-linux-${OS_ARCH}-debian-12" \
-      "zipkin-3.5.1-0-linux-${OS_ARCH}-debian-12" \
+      "zipkin-3.6.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -46,9 +46,9 @@ RUN useradd -r -u 1001 -g root zipkin
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN uninstall_packages curl
 
-ENV APP_VERSION="3.5.1" \
+ENV APP_VERSION="3.6.0" \
     BITNAMI_APP_NAME="zipkin" \
-    IMAGE_REVISION="14" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/zipkin/bin:$PATH"
 
 EXPOSE 9411
