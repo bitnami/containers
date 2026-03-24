@@ -112,6 +112,13 @@ The following tables list the main variables you can set.
 | `ACTIVEMQ_PIDFILE`          | ActiveMQ output destination                          | `${ACTIVEMQ_PID_FILE}`              |
 | `ACTIVEMQ_OUT`              | ActiveMQ output destination                          | `${ACTIVEMQ_LOG_FILE}`              |
 
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami ActiveMQ Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+- `JAVA_TOOL_OPTIONS`: controls Java FIPS mode. Use `-Djava.security.properties==/opt/bitnami/java/conf/security/java.security.restricted` (restricted), `-Djava.security.properties==/opt/bitnami/java/conf/security/java.security.relaxed` (relaxed), or `-Djava.security.properties==/opt/bitnami/java/conf/security/java.security.original` (off).
+
 ## License
 
 Copyright &copy; 2026 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
