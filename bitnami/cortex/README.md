@@ -1,4 +1,4 @@
-# Bitnami Secure Image for Renovate
+# Bitnami Secure Image for Cortex
 
 ## What is Cortex?
 
