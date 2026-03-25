@@ -138,7 +138,7 @@ grafana:
 
 ### Grafana plugins
 
-You can customize this image and include the plugins you desire editing the list of plugins avilable in the script (see the variable "grafana_plugin_list") and build your own image as shown below:
+You can customize this image and include the plugins you desire editing the list of plugins available in the script (see the variable "grafana_plugin_list") and build your own image as shown below:
 
 ```console
 cd 12/debian-12
@@ -164,6 +164,7 @@ As an alternative to install this plugin, you can use the [Grafana Image Rendere
 The Bitnami Grafana Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+- `GODEBUG`: controls Go FIPS mode. Use `fips140=only` (restricted), `fips140=on` (relaxed), or `fips140=off` (disabled).
 
 ## Logging
 
