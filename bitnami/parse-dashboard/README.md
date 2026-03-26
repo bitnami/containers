@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Parse Dashboard
 
-## What is Parse Dashboard?
-
 > Parse Dashboard is a standalone dashboard for managing your Parse apps. You can use it to manage your Parse Server apps.
 
 [Overview of Parse Dashboard](https://parseplatform.org/)
@@ -154,7 +152,11 @@ Bitnami provides up-to-date versions of Parse Dashboard, including security patc
 
 ## Configuration
 
+The following section describes the supported environment variables
+
 ### Environment variables
+
+The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
