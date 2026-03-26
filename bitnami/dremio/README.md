@@ -1,7 +1,5 @@
 # Bitnami Secure Image for Dremio
 
-## What is Dremio?
-
 > Dremio is an open-source self-service data access tool that provides high-performance queries for interactive analytics on data lakes.
 
 [Overview of Dremio](https://www.dremio.com/)
@@ -36,27 +34,11 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 ## Get this image
 
-The recommended way to get the Bitnami Dremio Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/dremio).
-
-```console
-docker pull bitnami/dremio:latest
-```
-
-To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/dremio/tags/) in the Docker Hub Registry.
-
-```console
-docker pull bitnami/dremio:[TAG]
-```
-
-If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
-
-```console
-git clone https://github.com/bitnami/containers.git
-cd bitnami/APP/VERSION/OPERATING-SYSTEM
-docker build -t bitnami/APP:latest .
-```
+The Bitnami Dremio Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
 
 ## Configuration
+
+The following section describes how to configure the application
 
 ### Configuration variables
 
@@ -67,6 +49,7 @@ This container supports the upstream Dremio environment variables. Check the [of
 The Bitnami Dremio Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+- `JAVA_TOOL_OPTIONS`: controls Java FIPS mode. Use `-Djava.security.properties==/opt/bitnami/java/conf/security/java.security.restricted` (restricted), `-Djava.security.properties==/opt/bitnami/java/conf/security/java.security.relaxed` (relaxed), or `-Djava.security.properties==/opt/bitnami/java/conf/security/java.security.original` (off).
 
 ## License
 
