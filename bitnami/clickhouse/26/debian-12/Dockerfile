@@ -49,7 +49,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/clickhouse/postunpack.sh
 ENV APP_VERSION="26.3.2" \
     BITNAMI_APP_NAME="clickhouse" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     PATH="/opt/bitnami/clickhouse/bin:/opt/bitnami/common/bin:$PATH" \
     clickhouseCTL_API="3"
 
