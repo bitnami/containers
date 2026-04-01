@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-03-12T12:16:26Z" \
+      org.opencontainers.image.created="2026-04-01T06:57:24Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/odoo/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/odoo" \
       org.opencontainers.image.title="odoo" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="19.0.20260301"
+      org.opencontainers.image.version="19.0.20260401"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-12" \
@@ -30,8 +30,8 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
       "python-3.12.13-2-linux-${OS_ARCH}-debian-12" \
       "render-template-1.0.9-163-linux-${OS_ARCH}-debian-12" \
       "postgresql-client-18.3.0-0-linux-${OS_ARCH}-debian-12" \
-      "node-22.22.1-0-linux-${OS_ARCH}-debian-12" \
-      "odoo-19.0.20260301-2-linux-${OS_ARCH}-debian-12" \
+      "node-22.22.2-0-linux-${OS_ARCH}-debian-12" \
+      "odoo-19.0.20260401-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -56,9 +56,9 @@ RUN curl -sLO "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/odoo/postunpack.sh
-ENV APP_VERSION="19.0.20260301" \
+ENV APP_VERSION="19.0.20260401" \
     BITNAMI_APP_NAME="odoo" \
-    IMAGE_REVISION="3" \
+    IMAGE_REVISION="0" \
     LD_LIBRARY_PATH="/opt/bitnami/postgresql/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/odoo/bin:$PATH"
 
