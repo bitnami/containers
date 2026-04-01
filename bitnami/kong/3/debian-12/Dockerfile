@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-03-23T23:03:59Z" \
+      org.opencontainers.image.created="2026-04-01T18:20:02Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/kong/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kong" \
@@ -48,7 +48,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/kong/postunpack.sh
 ENV APP_VERSION="3.9.1" \
     BITNAMI_APP_NAME="kong" \
-    IMAGE_REVISION="35" \
+    IMAGE_REVISION="36" \
     PATH="/opt/bitnami/kong/bin:/opt/bitnami/kong/openresty/bin:/opt/bitnami/kong/openresty/luajit/bin:/opt/bitnami/kong/openresty/nginx/sbin:/opt/bitnami/kong/luarocks/bin:$PATH"
 
 EXPOSE 8000 8001 8443 8444
