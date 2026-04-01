@@ -44,27 +44,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 ## Get this image
 
-The recommended way to get the Bitnami Etcd Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/etcd).
-
-```console
-docker pull bitnami/etcd:latest
-```
-
-To use a specific version, you can pull a versioned tag. You can view the
-[list of available versions](https://hub.docker.com/r/bitnami/etcd/tags/)
-in the Docker Hub Registry.
-
-```console
-docker pull bitnami/etcd:[TAG]
-```
-
-If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
-
-```console
-git clone https://github.com/bitnami/containers.git
-cd bitnami/APP/VERSION/OPERATING-SYSTEM
-docker build -t bitnami/APP:latest .
-```
+The Bitnami Etcd Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
 
 ## Using `docker-compose.yaml`
 
@@ -117,19 +97,19 @@ Apart from providing your custom configuration file, you can also modify the ser
 
 #### Read-only environment variables
 
-| Name                        | Description                                                          | Value                              |
-|-----------------------------|----------------------------------------------------------------------|------------------------------------|
-| `ETCD_BASE_DIR`             | etcd installation directory.                                         | `/opt/bitnami/etcd`                |
-| `ETCD_VOLUME_DIR`           | Persistence base directory.                                          | `/bitnami/etcd`                    |
-| `ETCD_BIN_DIR`              | etcd executables directory.                                          | `${ETCD_BASE_DIR}/bin`             |
-| `ETCD_DATA_DIR`             | etcd data directory.                                                 | `${ETCD_VOLUME_DIR}/data`          |
-| `ETCD_CONF_DIR`             | etcd configuration directory.                                        | `${ETCD_BASE_DIR}/conf`            |
-| `ETCD_DEFAULT_CONF_DIR`     | etcd default configuration directory.                                | `${ETCD_BASE_DIR}/conf.default`    |
-| `ETCD_TMP_DIR`              | Directory where ETCD temporary files are stored.                     | `${ETCD_BASE_DIR}/tmp`             |
-| `ETCD_CONF_FILE`            | ETCD configuration file.                                             | `${ETCD_CONF_DIR}/etcd.yaml`       |
-| `ETCD_NEW_MEMBERS_ENV_FILE` | File containining the etcd environment to use after adding a member. | `${ETCD_DATA_DIR}/new_member_envs` |
-| `ETCD_DAEMON_USER`          | etcd system user name.                                               | `etcd`                             |
-| `ETCD_DAEMON_GROUP`         | etcd system user group.                                              | `etcd`                             |
+| Name                        | Description                                                        | Value                              |
+|-----------------------------|--------------------------------------------------------------------|------------------------------------|
+| `ETCD_BASE_DIR`             | etcd installation directory.                                       | `/opt/bitnami/etcd`                |
+| `ETCD_VOLUME_DIR`           | Persistence base directory.                                        | `/bitnami/etcd`                    |
+| `ETCD_BIN_DIR`              | etcd executables directory.                                        | `${ETCD_BASE_DIR}/bin`             |
+| `ETCD_DATA_DIR`             | etcd data directory.                                               | `${ETCD_VOLUME_DIR}/data`          |
+| `ETCD_CONF_DIR`             | etcd configuration directory.                                      | `${ETCD_BASE_DIR}/conf`            |
+| `ETCD_DEFAULT_CONF_DIR`     | etcd default configuration directory.                              | `${ETCD_BASE_DIR}/conf.default`    |
+| `ETCD_TMP_DIR`              | Directory where ETCD temporary files are stored.                   | `${ETCD_BASE_DIR}/tmp`             |
+| `ETCD_CONF_FILE`            | ETCD configuration file.                                           | `${ETCD_CONF_DIR}/etcd.yaml`       |
+| `ETCD_NEW_MEMBERS_ENV_FILE` | File containing the etcd environment to use after adding a member. | `${ETCD_DATA_DIR}/new_member_envs` |
+| `ETCD_DAEMON_USER`          | etcd system user name.                                             | `etcd`                             |
+| `ETCD_DAEMON_GROUP`         | etcd system user group.                                            | `etcd`                             |
 
 Additionally, you can configure etcd using the upstream env variables [here](https://etcd.io/docs/v3.6/op-guide/configuration/)
 
