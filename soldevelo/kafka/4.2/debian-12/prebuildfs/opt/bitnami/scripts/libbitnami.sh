@@ -43,10 +43,11 @@ print_welcome_page() {
 #   None
 #########################
 print_image_welcome_page() {
-    local github_url="https://github.com/bitnami/containers"
+    local github_url="https://github.com/soldevelo/containers"
 
     info ""
     info "${BOLD}Welcome to the SolDevelo ${BITNAMI_APP_NAME} container${RESET}"
+    info "Subscribe to project updates by watching ${BOLD}${github_url}${RESET}"
     info ""
 }
 
