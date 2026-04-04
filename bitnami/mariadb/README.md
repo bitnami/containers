@@ -76,27 +76,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 ## Get this image
 
-The recommended way to get the Bitnami MariaDB Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/mariadb).
-
-```console
-docker pull bitnami/mariadb:latest
-```
-
-To use a specific version, you can pull a versioned tag. You can view the
-[list of available versions](https://hub.docker.com/r/bitnami/mariadb/tags/)
-in the Docker Hub Registry.
-
-```console
-docker pull bitnami/mariadb:[TAG]
-```
-
-If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
-
-```console
-git clone https://github.com/bitnami/containers.git
-cd bitnami/APP/VERSION/OPERATING-SYSTEM
-docker build -t bitnami/APP:latest .
-```
+The Bitnami MariaDB Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
 
 ## Using `docker-compose.yaml`
 
@@ -336,7 +316,7 @@ or using Docker Compose:
 docker-compose logs mariadb
 ```
 
-To increase the verbosity on intialization or add extra debug information, you can assign the `BITNAMI_DEBUG` environment variable to `true`.
+To increase the verbosity on initialization or add extra debug information, you can assign the `BITNAMI_DEBUG` environment variable to `true`.
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
@@ -405,6 +385,12 @@ $ docker-compose up -d
 
 - All volumes have been merged at `/bitnami/mariadb`. Now you only need to mount a single volume at `/bitnami/mariadb` for persistence.
 - The logs are always sent to the `stdout` and are no longer collected in the volume.
+
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami MariaDB Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
 ## License
 
