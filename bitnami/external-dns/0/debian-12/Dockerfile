@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-03-06T04:35:48Z" \
+      org.opencontainers.image.created="2026-04-05T05:05:57Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/external-dns/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/external-dns" \
@@ -47,7 +47,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="0.20.0" \
     BITNAMI_APP_NAME="external-dns" \
-    IMAGE_REVISION="8" \
+    IMAGE_REVISION="9" \
     PATH="/opt/bitnami/external-dns/bin:$PATH"
 
 EXPOSE 7979
