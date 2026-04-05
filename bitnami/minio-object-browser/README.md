@@ -38,25 +38,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 ## Get this image
 
-The recommended way to get the Bitnami Bitnami Object Storage Console based on MinIO&reg; Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/minio-object-browser).
-
-```console
-docker pull bitnami/minio-object-browser:latest
-```
-
-To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/minio-object-browser/tags/) in the Docker Hub Registry.
-
-```console
-docker pull bitnami/minio-object-browser:[TAG]
-```
-
-If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
-
-```console
-git clone https://github.com/bitnami/containers.git
-cd bitnami/APP/VERSION/OPERATING-SYSTEM
-docker build -t bitnami/APP:latest .
-```
+The Bitnami Bitnami Object Storage Console based on MinIO&reg; Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
 
 ## Configuration
 
@@ -71,6 +53,14 @@ docker run --rm --name minio-object-browser bitnami/minio-object-browser:latest 
 ```
 
 Check the [official Bitnami Object Storage Console based on MinIO&reg; documentation](https://github.com/minio/object-browser/blob/master/README.md) for more information about configuration options.
+
+
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami Bitnami Object Storage Console based on MinIO&reg; Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+- `GODEBUG`: controls Go FIPS mode. Use `fips140=only` (restricted), `fips140=on` (relaxed), or `fips140=off` (disabled).
 
 ## License
 
