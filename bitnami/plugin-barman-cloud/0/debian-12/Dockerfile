@@ -41,7 +41,7 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2026-03-06T16:58:54Z" \
+      org.opencontainers.image.created="2026-04-05T17:24:30Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="plugin-barman-cloud" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -52,7 +52,7 @@ COPY --from=builder /opt/bitnami/plugin-barman-cloud /opt/bitnami/plugin-barman-
 
 ENV APP_VERSION="0.11.0" \
     BITNAMI_APP_NAME="plugin-barman-cloud" \
-    IMAGE_REVISION="4" \
+    IMAGE_REVISION="5" \
     PATH="/opt/bitnami/plugin-barman-cloud/bin:$PATH"
 
 USER 1001
