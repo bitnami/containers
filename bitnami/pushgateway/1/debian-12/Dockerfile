@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-03-06T17:15:29Z" \
+      org.opencontainers.image.created="2026-04-05T17:43:03Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/pushgateway/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/pushgateway" \
@@ -47,7 +47,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="1.11.2" \
     BITNAMI_APP_NAME="pushgateway" \
-    IMAGE_REVISION="9" \
+    IMAGE_REVISION="10" \
     PATH="/opt/bitnami/pushgateway/bin:$PATH"
 
 EXPOSE 9091
