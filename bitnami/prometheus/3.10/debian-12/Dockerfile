@@ -41,7 +41,7 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2026-03-06T15:13:16Z" \
+      org.opencontainers.image.created="2026-04-05T15:42:28Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="prometheus" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -57,7 +57,7 @@ COPY --from=builder /opt/bitnami/prometheus/licenses /opt/bitnami/prometheus/lic
 
 ENV APP_VERSION="3.10.0" \
     BITNAMI_APP_NAME="prometheus" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="2" \
     PATH="/opt/bitnami/prometheus/bin:$PATH"
 
 EXPOSE 9090
