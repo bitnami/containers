@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-03-06T14:13:31Z" \
+      org.opencontainers.image.created="2026-04-05T14:52:50Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/minio-client/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/minio-client" \
@@ -49,7 +49,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/minio-client/postunpack.sh
 ENV APP_VERSION="2025.8.13" \
     BITNAMI_APP_NAME="minio-client" \
-    IMAGE_REVISION="13" \
+    IMAGE_REVISION="14" \
     PATH="/opt/bitnami/minio-client/bin:$PATH"
 
 WORKDIR /opt/bitnami/minio-client
