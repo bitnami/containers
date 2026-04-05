@@ -40,7 +40,7 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2026-03-06T14:55:32Z" \
+      org.opencontainers.image.created="2026-04-05T15:23:23Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="minio-object-browser" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -53,7 +53,7 @@ COPY --from=builder /opt/bitnami/minio-object-browser/licenses /opt/bitnami/mini
 
 ENV APP_VERSION="2.0.4" \
     BITNAMI_APP_NAME="minio-object-browser" \
-    IMAGE_REVISION="10" \
+    IMAGE_REVISION="11" \
     PATH="/opt/bitnami/minio-object-browser/bin:$PATH"
 
 EXPOSE 9090
