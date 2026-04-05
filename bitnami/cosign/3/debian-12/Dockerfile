@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-03-06T03:43:27Z" \
+      org.opencontainers.image.created="2026-04-05T04:04:02Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/cosign/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cosign" \
@@ -50,7 +50,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="3.0.5" \
     BITNAMI_APP_NAME="cosign" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="2" \
     PATH="/opt/bitnami/cosign/bin:$PATH"
 
 WORKDIR /cosign-keys
