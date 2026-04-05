@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-03-06T22:37:07Z" \
+      org.opencontainers.image.created="2026-04-05T22:53:03Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/memcached/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/memcached" \
@@ -51,7 +51,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/memcached/postunpack.sh
 ENV APP_VERSION="1.6.41" \
     BITNAMI_APP_NAME="memcached" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     PATH="/opt/bitnami/memcached/bin:$PATH"
 
 EXPOSE 11211
