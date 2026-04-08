@@ -8,7 +8,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-04-02T14:38:14Z" \
+      org.opencontainers.image.created="2026-04-08T21:37:34Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/sonarqube/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/sonarqube" \
@@ -52,7 +52,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/sonarqube/postunpack.sh
 ENV APP_VERSION="26.3.0" \
     BITNAMI_APP_NAME="sonarqube" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="2" \
     JAVA_HOME="/opt/bitnami/java" \
     LD_LIBRARY_PATH="/opt/bitnami/postgresql/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/java/bin:$PATH"
