@@ -90,6 +90,7 @@ The following tables list the main variables you can set.
 The Bitnami Harbor Exporter Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+- `GODEBUG`: controls Go FIPS mode. Use `fips140=only` (restricted), `fips140=on` (relaxed), or `fips140=off` (disabled).
 
 ## License
 
