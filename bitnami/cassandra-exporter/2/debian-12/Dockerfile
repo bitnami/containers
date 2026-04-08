@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-03-12T13:20:34Z" \
+      org.opencontainers.image.created="2026-04-08T18:18:11Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/cassandra-exporter/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cassandra-exporter" \
@@ -48,7 +48,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="2.3.8" \
     BITNAMI_APP_NAME="cassandra-exporter" \
-    IMAGE_REVISION="61" \
+    IMAGE_REVISION="62" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 EXPOSE 8080
