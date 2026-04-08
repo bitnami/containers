@@ -601,17 +601,52 @@ zookeeper_healthcheck() {
     local port="$ZOO_PORT_NUMBER"
 
     if [[ "$ZOO_TLS_CLIENT_ENABLE" = true ]]; then
-        port="$ZOO_TLS_PORT_NUMBER"
-        command="openssl"
-        args+=("s_client" "-quiet" "-crlf" "-connect" "localhost:${port}")
+        if [[ "$JAVA_FIPS_MODE" = "restricted" ]]; then
+            # In FIPS-restricted mode OpenSSL only allows FIPS-approved algorithms and
+            # the legacy provider is completely disabled. Any keystore that uses RC2,
+            # 3DES, or a SHA-1 MAC (common in Java-generated PKCS12 and BCFKS) cannot
+            # be parsed by openssl pkcs12.
+            # Primary: use the admin HTTP server (no keystore interaction required).
+            # Fallback: nc on the plain clientPort (ZOO_PORT_NUMBER), which ZooKeeper
+            # keeps open alongside the TLS secureClientPort.
+            local admin_url="http://127.0.0.1:${ZOO_ADMIN_SERVER_PORT_NUMBER}/commands/ruok"
+            debug "Running healthcheck via admin server (FIPS mode): 'curl -sf --max-time ${ZOO_HC_TIMEOUT} ${admin_url}'"
+            local curl_output=""
+            local curl_exit_code=0
+            curl_output=$(curl -sf --max-time "$ZOO_HC_TIMEOUT" "$admin_url") || curl_exit_code=$?
+            if [[ $curl_exit_code -eq 0 ]]; then
+                debug "Admin server response: ${curl_output}"
+                response="imok"
+            else
+                # Admin server is not available. Fall back to the plain clientPort
+                # (ZOO_PORT_NUMBER). Even when TLS is enabled, Bitnami's zoo.cfg always
+                # sets both clientPort and secureClientPort, so ZooKeeper keeps a
+                # plain-text listener on ZOO_PORT_NUMBER alongside the TLS one. Using
+                # nc avoids any keystore interaction.
+                warn "Admin server not reachable (exit code ${curl_exit_code}, url ${admin_url}); falling back to plain port ${ZOO_PORT_NUMBER}."
+                local nc_args=("-w" "$ZOO_HC_TIMEOUT" "127.0.0.1" "$ZOO_PORT_NUMBER")
+                if nc -help 2>&1 | grep -q "\[-q seconds\]"; then
+                    nc_args=("-q" "1" "${nc_args[@]}")
+                fi
+                debug "Running healthcheck command (FIPS fallback): 'echo \"ruok\" | timeout ${ZOO_HC_TIMEOUT} nc ${nc_args[*]}'"
+                response=$(echo "ruok" | timeout "$ZOO_HC_TIMEOUT" nc "${nc_args[@]}" 2>/dev/null)
+                if [[ ! "$response" =~ "imok" ]]; then
+                    error "Plain port fallback also failed (response: '${response}'). Ensure ZOO_PORT_NUMBER=${ZOO_PORT_NUMBER} is reachable or enable the admin server with ZOO_ENABLE_ADMIN_SERVER=yes."
+                fi
+            fi
+        else
+            port="$ZOO_TLS_PORT_NUMBER"
+            command="openssl"
+            args+=("s_client" "-quiet" "-crlf" "-connect" "localhost:${port}")
 
-        debug "Running healthcheck command: 'echo \"ruok\" | timeout ${ZOO_HC_TIMEOUT} ${command} ${args[*]} \
-            -key <(openssl pkcs12 -in ${ZOO_TLS_CLIENT_KEYSTORE_FILE} -nodes -nocerts -passin pass:\$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD) \
-            -cert <(openssl pkcs12 -in ${ZOO_TLS_CLIENT_KEYSTORE_FILE} -nodes -nokeys -passin pass:\$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD)'"
-        response=$(echo "ruok" | timeout "$ZOO_HC_TIMEOUT" "$command" "${args[@]}" \
-            -key <(openssl pkcs12 -in "$ZOO_TLS_CLIENT_KEYSTORE_FILE" -nodes -nocerts -passin pass:"$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD") \
-            -cert <(openssl pkcs12 -in "$ZOO_TLS_CLIENT_KEYSTORE_FILE" -nodes -nokeys -passin pass:"$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD") 2> /dev/null
-        )
+            debug "Running healthcheck command: 'echo \"ruok\" | timeout ${ZOO_HC_TIMEOUT} ${command} ${args[*]} \
+                -key <(openssl pkcs12 -in ${ZOO_TLS_CLIENT_KEYSTORE_FILE} -nodes -nocerts -passin pass:\$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD) \
+                -cert <(openssl pkcs12 -in ${ZOO_TLS_CLIENT_KEYSTORE_FILE} -nodes -nokeys -passin pass:\$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD)'"
+            response=$(echo "ruok" | timeout "$ZOO_HC_TIMEOUT" "$command" "${args[@]}" \
+                -key <(openssl pkcs12 -in "$ZOO_TLS_CLIENT_KEYSTORE_FILE" -nodes -nocerts -passin pass:"$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD") \
+                -cert <(openssl pkcs12 -in "$ZOO_TLS_CLIENT_KEYSTORE_FILE" -nodes -nokeys -passin pass:"$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD") 2> /dev/null
+            )
+        fi
     else
         command="nc"
         # Only add flag '-q' if OpenBSD netcat is used
