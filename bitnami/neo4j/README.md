@@ -86,6 +86,9 @@ The following tables list the main variables you can set.
 | `NEO4J_HTTPS_ADVERTISED_PORT_NUMBER`      | Advertised port for the https protocol.                                                                                                       | `$NEO4J_HTTPS_PORT_NUMBER` |
 | `NEO4J_HTTPS_ENABLED`                     | Enables the HTTPS connector.                                                                                                                  | `false`                    |
 | `NEO4J_BOLT_TLS_LEVEL`                    | The encryption level to be used to secure communications with Bolt connector. Allowed values: REQUIRED, OPTIONAL, DISABLED                    | `DISABLED`                 |
+| `NEO4J_HTTP_X_FORWARD_ENABLED`            | Enable processing of X-Forwarded-Host and X-Forwarded-Proto headers.                                                                          | `false`                    |
+| `NEO4J_HTTP_X_FORWARD_ALLOW_PROXIES`      | Enable processing of X-Forwarded-Host and X-Forwarded-Proto headers.                                                                          | `nil`                      |
+| `NEO4J_HTTP_X_FORWARD_ALLOW_HOSTS`        | List of allowed hostnames that can appear in X-Forwarded-Host header.                                                                         | `nil`                      |
 
 #### Read-only environment variables
 
