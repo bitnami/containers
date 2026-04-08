@@ -34,25 +34,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 ## Get this image
 
-The recommended way to get the Bitnami rmq-default-credential-updater Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/rmq-default-credential-updater).
-
-```console
-docker pull bitnami/rmq-messaging-topology-operator:latest
-```
-
-To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/rmq-messaging-topology-operator/tags/) in the Docker Hub Registry.
-
-```console
-docker pull bitnami/rmq-messaging-topology-operator:[TAG]
-```
-
-If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
-
-```console
-git clone https://github.com/bitnami/containers.git
-cd bitnami/APP/VERSION/OPERATING-SYSTEM
-docker build -t bitnami/APP:latest .
-```
+The Bitnami RabbitMQ Messaging Topology Operator Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
 
 ## Why use a non-root container?
 
@@ -77,6 +59,14 @@ Check the [official RabbitMQ Messaging Topology Operator documentation](https://
 ### Starting January 16, 2024
 
 - The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
+
+
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami RabbitMQ Messaging Topology Operator Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+- `GODEBUG`: controls Go FIPS mode. Use `fips140=only` (restricted), `fips140=on` (relaxed), or `fips140=off` (disabled).
 
 ## License
 
