@@ -40,25 +40,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 ## Get this image
 
-The recommended way to get the Bitnami Kibana Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/kibana).
-
-```console
-docker pull bitnami/kibana:latest
-```
-
-To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/kibana/tags/) in the Docker Hub Registry.
-
-```console
-docker pull bitnami/kibana:[TAG]
-```
-
-If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
-
-```console
-git clone https://github.com/bitnami/containers.git
-cd bitnami/APP/VERSION/OPERATING-SYSTEM
-docker build -t bitnami/APP:latest .
-```
+The Bitnami Kibana Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
 
 ## How to use this image
 
@@ -177,7 +159,7 @@ The following tables list the main variables you can set.
 | `KIBANA_ELASTICSEARCH_TLS_USE_PEM`           | Configure Elasticsearch TLS settings using PEM certificates.                                       | `false`                                                          |
 | `KIBANA_ELASTICSEARCH_CA_CERT_LOCATION`      | Path to Elasticsearch CA certificate.                                                              | `${SERVER_CERTS_DIR}/elasticsearch/ca.crt`                       |
 | `KIBANA_DISABLE_STRICT_CSP`                  | Disable strict Content Security Policy (CSP) for Kibana                                            | `no`                                                             |
-| `KIBANA_CREATE_USER`                         | Enable the creation of the kibana_system user, if it doesnt exists                                 | `false`                                                          |
+| `KIBANA_CREATE_USER`                         | Enable the creation of the kibana_system user, if it does not exist                                | `false`                                                          |
 | `KIBANA_ELASTICSEARCH_PASSWORD`              | Password for the elastic superuser. Required if KIBANA_CREATE_USER is enabled                      | `nil`                                                            |
 | `KIBANA_SERVER_PUBLICBASEURL`                | Publicly available URL that end-users access Kibana at                                             | `nil`                                                            |
 | `KIBANA_XPACK_SECURITY_ENCRYPTIONKEY`        | Encryption key so that sessions are not invalidated                                                | `nil`                                                            |
