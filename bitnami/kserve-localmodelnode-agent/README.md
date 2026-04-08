@@ -34,25 +34,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 ## Get this image
 
-The recommended way to get the Bitnami KServe Local Model Node Agent Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/kserve-localmodelnode-agent).
-
-```console
-docker pull bitnami/kserve-localmodelnode-agent:latest
-```
-
-To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/kserve-localmodelnode-agent/tags/) in the Docker Hub Registry.
-
-```console
-docker pull bitnami/kserve-localmodelnode-agent:[TAG]
-```
-
-If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
-
-```console
-git clone https://github.com/bitnami/containers.git
-cd bitnami/APP/VERSION/OPERATING-SYSTEM
-docker build -t bitnami/APP:latest .
-```
+The Bitnami KServe Local Model Node Agent Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
 
 ## Why use a non-root container?
 
@@ -71,6 +53,14 @@ docker run --rm --name kserve-localmodelnode-agent bitnami/kserve-localmodelnode
 ```
 
 Check the [official KServe Local Model Node Agent documentation](https://kserve.github.io/website) for more information.
+
+
+### FIPS configuration in Bitnami Secure Images
+
+The Bitnami KServe Local Model Node Agent Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+
+- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
+- `GODEBUG`: controls Go FIPS mode. Use `fips140=only` (restricted), `fips140=on` (relaxed), or `fips140=off` (disabled).
 
 ## License
 
