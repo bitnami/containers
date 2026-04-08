@@ -115,7 +115,7 @@ services:
 
 The default `nginx.conf` supports custom configuration files organized by NGINX context. You can mount configuration files into the appropriate context directories:
 
-- `/opt/bitnami/nginx/conf/context.d/main/` - For main context directives (e.g., module loading)
+- `/opt/bitnami/nginx/conf/context.d/main/` - For main context directives (e.g., module loading, worker processes)
 - `/opt/bitnami/nginx/conf/context.d/events/` - For events context directives (e.g., worker_connections)
 - `/opt/bitnami/nginx/conf/context.d/http/` - For http context directives (equivalent to server_blocks)
 
