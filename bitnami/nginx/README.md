@@ -488,7 +488,7 @@ To add a custom NGINX module, it is necessary to compile NGINX with that module 
 
 ## Notable Changes
 
-### Unreleased
+### Starting March, 2026
 
 - Added support for configuring the `worker_processes` directive using the `NGINX_WORKER_PROCESSES` environment variable (allowed values: `auto` or a positive integer).
 
