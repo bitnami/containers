@@ -307,4 +307,25 @@ configure_neo4j_connector_settings() {
     [[ "$NEO4J_BOLT_TLS_LEVEL" == "REQUIRED" || "$NEO4J_BOLT_TLS_LEVEL" == "OPTIONAL" ]] && neo4j_conf_set "dbms.ssl.policy.bolt.enabled" "true"
     neo4j_conf_set "server.https.enabled" "${NEO4J_HTTPS_ENABLED}"
     neo4j_conf_set "dbms.ssl.policy.https.enabled" "${NEO4J_HTTPS_ENABLED}"
+    # X-Forwarded headers settings
+    neo4j_version=$(neo4j_get_version)
+    major_version=$(get_sematic_version "$neo4j_version" 1)
+    if [[ "$major_version" -ne 5 ]]; then
+        neo4j_conf_set "server.http.x_forward.enabled" "${NEO4J_HTTP_X_FORWARD_ENABLED}"
+        neo4j_conf_set "server.http.x_forward.allow_proxies" "${NEO4J_HTTP_X_FORWARD_ALLOW_PROXIES}"
+        neo4j_conf_set "server.http.x_forward.allow_hosts" "${NEO4J_HTTP_X_FORWARD_ALLOW_HOSTS}"
+    fi
+}
+
+########################
+# Get neo4j version
+# Globals:
+#   NEO4J_*
+# Arguments:
+#   None
+# Returns:
+#   Neo4j version
+#########################
+neo4j_get_version() {
+    "${NEO4J_BASE_DIR}/bin/neo4j" "--version" 2>/dev/null
 }
