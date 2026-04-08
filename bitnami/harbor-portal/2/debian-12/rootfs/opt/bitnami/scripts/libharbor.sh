@@ -25,7 +25,7 @@
 get_system_cert_paths() {
     local distro
     distro="$(get_os_metadata --id)"
-    if [[ "$distro" =~ ^(debian|ubuntu)$ ]]; then
+    if [[ "$distro" =~ ^debian$ ]]; then
         echo "/etc/ssl/certs/"
     elif [[ "$distro" =~ ^photon$ ]]; then
         echo "/etc/pki/tls/certs/"
@@ -98,7 +98,7 @@ install_cert() {
     local distro
     distro="$(get_os_metadata --id)"
 
-    if [[ "$distro" =~ ^(debian|ubuntu)$ ]]; then
+    if [[ "$distro" =~ ^debian$ ]]; then
         cat "$cert" >> /etc/ssl/certs/ca-certificates.crt
     elif [[ "$distro" =~ ^photon$ ]]; then
         cat "$cert" >> /etc/pki/tls/certs/ca-bundle.crt
