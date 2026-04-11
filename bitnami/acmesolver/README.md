@@ -12,8 +12,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/acmesolver:latest
 ```
 
-**Warning**: These quick setups are only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
-
 ## Before you begin
 
 Kubernetes cluster with `CustomResourceDefinition` or `ThirdPartyResource support`
