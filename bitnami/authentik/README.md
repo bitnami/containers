@@ -57,12 +57,6 @@ The Bitnami Authentik Docker image from the [Bitnami Secure Images](https://go-v
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 - `GODEBUG`: controls Go FIPS mode where applicable. Use `fips140=only` (restricted), `fips140=on` (relaxed), or `fips140=off` (disabled).
 
-## Notable Changes
-
-### Starting January 16, 2024
-
-- The `docker-compose.yaml` file has been removed, as it was solely intended for internal testing purposes.
-
 ## License
 
 Copyright &copy; 2026 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
