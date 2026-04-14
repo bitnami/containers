@@ -11,6 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name fluent-bit bitnami/fluent-bit:latest
 ```
 
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/fluent-bit/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/fluent-bit/docker-compose.yml)
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/fluent-bit).
+
 ## Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
@@ -40,69 +48,6 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 The Bitnami Fluent Bit Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
 
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/fluent-bit).
-
-## Connecting to other containers
-
-Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a different server running inside a container can easily be accessed by your application containers and vice-versa.
-
-Containers attached to the same network can communicate with each other using the container name as the hostname.
-
-### Using the Command Line
-
-#### Step 1: Create a network
-
-```console
-docker network create fluent-bit-network --driver bridge
-```
-
-#### Step 2: Launch the Fluent Bit container within your network
-
-Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `fluent-bit-network` network.
-
-```console
-docker run --name fluent-bit-node1 --network fluent-bit-network bitnami/fluent-bit:latest
-```
-
-#### Step 3: Run another container
-
-We can launch another container using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
-
-### Using a Docker Compose file
-
-When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the Fluent Bit log processor from your own custom application image which is identified in the following snippet by the service name `myapp`.
-
-```yaml
-version: '2'
-
-networks:
-  app-tier:
-    driver: bridge
-
-services:
-  fluent-bit:
-    image: bitnami/fluent-bit:latest
-    networks:
-      - app-tier
-  myapp:
-    image: YOUR_APPLICATION_IMAGE
-    networks:
-      - app-tier
-```
-
-> **IMPORTANT**:
->
-> 1. Please update the **YOUR_APPLICATION_IMAGE** placeholder in the above snippet with your application image
-> 2. In your application container, use the hostname `fluent-bit` to connect to the Fluent Bit log processor
-
-Launch the containers using:
-
-```console
-docker-compose up -d
-```
-
 ## Configuration
 
 Fluent Bit is flexible enough to be configured either from the command line or through a configuration file. For production environments, Fluent Bit strongly recommends to use the configuration file approach.
@@ -123,13 +68,7 @@ Fluent Bit supports multiple extensions via plugins.
 
 ## Logging
 
-The Bitnami fluent-bit Docker image sends the container logs to the `stdout`. To view the logs:
-
-```console
-docker logs fluent-bit
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+The Bitnami Fluent Bit Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## License
 
