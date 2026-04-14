@@ -11,6 +11,12 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name dotnet bitnami/dotnet:latest
 ```
 
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/dotnet/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/dotnet/docker-compose.yml)
+
 ## Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
@@ -36,10 +42,6 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 The Bitnami .NET Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
 
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes.
-
 ## Persisting your application
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
@@ -64,13 +66,7 @@ The Bitnami .NET Docker image from the [Bitnami Secure Images](https://go-vmware
 
 ## Logging
 
-The Bitnami Dotnet Docker image sends the container logs to `stdout`. To view the logs:
-
-```console
-docker logs dotnet
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+The Bitnami .NET Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## License
 
