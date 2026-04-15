@@ -11,7 +11,13 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name discourse bitnami/discourse:latest
 ```
 
-**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/discourse/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/discourse/docker-compose.yml)
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/discourse).
 
 ## Why use Bitnami Secure Images?
 
@@ -41,24 +47,6 @@ The Bitnami Discourse&reg; Docker image is only available to [Bitnami Secure Ima
 ## How to use this image
 
 Discourse requires access to a PostgreSQL database to store information. We'll use the [Bitnami Docker Image for PostgreSQL](https://github.com/bitnami/containers/tree/main/bitnami/postgresql) for the database requirements.
-
-### Run the application using Docker Compose
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/discourse/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-```
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/discourse).
-
-### Troubleshooting discourse
-
-If you need to run discourse administrative commands like [Create admin account from console](https://meta.discourse.org/t/create-admin-account-from-console/17274), you can do so by executing a shell inside the container and running with the proper environment variables.
-
-```console
-cd /opt/bitnami/discourse
-RAILS_ENV=production bundle exec rake admin:create
-```
 
 ## Persisting your application
 
@@ -145,8 +133,6 @@ The following tables list the main variables you can set.
 | `DISCOURSE_DEFAULT_DATABASE_HOST` | Default database server host.                        | `postgresql`                                  |
 | `DISCOURSE_DEFAULT_REDIS_HOST`    | Default Redis(R) server host.                        | `redis`                                       |
 
-When you start the Discourse image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
-
 #### Examples
 
 ##### SMTP configuration
@@ -165,70 +151,7 @@ The Bitnami Discourse&reg; Docker image from the [Bitnami Secure Images](https:/
 
 ## Logging
 
-The Bitnami Discourse Docker image sends the container logs to `stdout`. To view the logs:
-
-```console
-docker logs discourse
-```
-
-Or using Docker Compose:
-
-```console
-docker-compose logs discourse
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
-
-## Maintenance
-
-### Backing up your container
-
-To backup your data, configuration and logs, follow these simple steps:
-
-#### Step 1: Stop the currently running container
-
-```console
-docker stop discourse
-```
-
-Or using Docker Compose:
-
-```console
-docker-compose stop discourse
-```
-
-#### Step 2: Run the backup command
-
-We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
-
-```console
-docker run --rm -v /path/to/discourse-backups:/backups --volumes-from discourse busybox \
-  cp -a /bitnami/discourse /backups/latest
-```
-
-### Restoring a backup
-
-Restoring a backup is as simple as mounting the backup as volumes in the containers.
-
-For the PostgreSQL database container:
-
-```diff
- $ docker run -d --name postgresql \
-   ...
--  --volume /path/to/postgresql-persistence:/bitnami/postgresql \
-+  --volume /path/to/postgresql-backups/latest:/bitnami/postgresql \
-   bitnami/postgresql:latest
-```
-
-For the Discourse container:
-
-```diff
- $ docker run -d --name discourse \
-   ...
--  --volume /path/to/discourse-persistence:/bitnami/discourse \
-+  --volume /path/to/discourse-backups/latest:/bitnami/discourse \
-   bitnami/discourse:latest
-```
+The Bitnami Discourse&reg; Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Notable Changes
 
