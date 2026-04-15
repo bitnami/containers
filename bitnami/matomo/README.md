@@ -11,7 +11,13 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name matomo bitnami/matomo:latest
 ```
 
-**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/matomo/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/matomo/docker-compose.yml)
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/matomo).
 
 ## Why use Bitnami Secure Images?
 
@@ -120,127 +126,13 @@ The following tables list the main variables you can set.
 | `MATOMO_DEFAULT_DATABASE_HOST` | Default database server host.                     | `mariadb`                           |
 | `PHP_DEFAULT_MEMORY_LIMIT`     | Default PHP memory limit.                         | `256M`                              |
 
-When you start the Matomo image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
-
 #### Reverse proxy configuration example
 
-This would be an example of reverse proxy configuration:
-
-- Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/matomo/docker-compose.yml) file present in this repository:
-
-```yaml
-  application:
-  ...
-    environment:
-      - MATOMO_PROXY_CLIENT_HEADER=HTTP_X_FORWARDED_FOR
-      - MATOMO_ENABLE_FORCE_SSL=yes
-      - MATOMO_ENABLE_ASSUME_SECURE_PROTOCOL=yes
-  ...
-```
-
-- For manual execution:
-
-```console
- $ docker run -d --name matomo -p 80:80 -p 443:443 \
-   --net matomo_network \
-   -e MARIADB_HOST=mariadb \
-   -e MARIADB_PORT_NUMBER=3306 \
-   -e MATOMO_DATABASE_USER=bn_matomo \
-   -e MATOMO_DATABASE_NAME=bitnami_matomo \
-   -e MATOMO_PROXY_CLIENT_HEADER=HTTP_X_FORWARDED_FOR \
-   -e MATOMO_ENABLE_FORCE_SSL=yes \
-   -e MATOMO_ENABLE_ASSUME_SECURE_PROTOCOL=yes \
-   -v /your/local/path/bitnami/matomo:/bitnami \
- bitnami/matomo:latest
-```
+The `MATOMO_PROXY_CLIENT_HEADER` environment variable allows you configure the proxy http header. Please take a look at the environment variables information above for more information.
 
 #### SMTP configuration
 
 The `MATOMO_SMTP_*` environment variables allows you configure the SMTP settings in the application. Please take a look at the environment variables information above for more information.
-
-### Backing up your container
-
-To backup your data, configuration and logs, follow these simple steps:
-
-#### Step 1: Stop the currently running container
-
-```console
-docker stop matomo
-```
-
-Or using Docker Compose:
-
-```console
-docker-compose stop matomo
-```
-
-#### Step 2: Run the backup command
-
-We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
-
-```console
-docker run --rm -v /path/to/matomo-backups:/backups --volumes-from matomo busybox \
-  cp -a /bitnami/matomo /backups/latest
-```
-
-### Restoring a backup
-
-Restoring a backup is as simple as mounting the backup as volumes in the containers.
-
-For the MariaDB database container:
-
-```diff
- $ docker run -d --name mariadb \
-   ...
--  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
-+  --volume /path/to/mariadb-backups/latest:/bitnami/mariadb \
-   bitnami/mariadb:latest
-```
-
-For the Matomo container:
-
-```diff
- $ docker run -d --name matomo \
-   ...
--  --volume /path/to/matomo-persistence:/bitnami/matomo \
-+  --volume /path/to/matomo-backups/latest:/bitnami/matomo \
-   bitnami/matomo:latest
-```
-
-## Upgrading Matomo
-
-Bitnami provides up-to-date versions of MariaDB and Matomo, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Matomo container. For the MariaDB upgrade you can take a look at <https://github.com/bitnami/containers/tree/main/bitnami/mariadb#upgrade-this-image>
-
-1. Get the updated images:
-
-    ```console
-    docker pull bitnami/matomo:latest
-    ```
-
-2. Stop your container
-
-    - For docker-compose: `$ docker-compose stop matomo`
-    - For manual execution: `$ docker stop matomo`
-
-3. Take a snapshot of the application state
-
-    ```console
-    rsync -a /path/to/matomo-persistence /path/to/matomo-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
-    ```
-
-    Additionally, [snapshot the MariaDB data](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#step-2-stop-and-backup-the-currently-running-container)
-
-    You can use these snapshots to restore the application state should the upgrade fail.
-
-4. Remove the currently running container
-
-    - For docker-compose: `$ docker-compose rm -v matomo`
-    - For manual execution: `$ docker rm -v matomo`
-
-5. Run the new image
-
-    - For docker-compose: `$ docker-compose up matomo`
-    - For manual execution (mount the directories if needed): `docker run --name matomo bitnami/matomo:latest`
 
 ### FIPS configuration in Bitnami Secure Images
 
@@ -281,7 +173,7 @@ From this version on, all Matomo files are persisted (MATOMO_DATA_TO_PERSIST env
 - The configuration logic is now based on Bash scripts in the *rootfs/* folder.
 - The Matomo container image has been migrated to a "non-root" user approach. Previously the container ran as the `root` user and the Apache daemon was started as the `daemon` user. From now on, both the container and the Apache daemon run as user `1001`. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile, or `user: root` in `docker-compose.yml`. Consequences:
   - The HTTP/HTTPS ports exposed by the container are now `8080/8443` instead of `80/443`.
-  - Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating the Matomo site by exporting its content, and importing it on a new Matomo container. Follow the steps in [Backing up your container](#backing-up-your-container) and [Restoring a backup](#restoring-a-backup) to migrate the data between the old and new container.
+  - Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating the Matomo site by exporting its content, and importing it on a new Matomo container. Before recreating the container, back up or copy the persisted application and database data so you can attach it to the new deployment.
 
 To upgrade a previous Bitnami Matomo container image, which did not support non-root, the easiest way is to start the new image as a root user and updating the port numbers. Modify your docker-compose.yml file as follows:
 
