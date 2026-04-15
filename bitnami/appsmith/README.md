@@ -11,6 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run -it --name appsmith bitnami/appsmith:latest
 ```
 
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/appsmith/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/appsmith/docker-compose.yml)
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/appsmith).
+
 ## Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
@@ -35,10 +43,6 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 ## Get this image
 
 The Bitnami Appsmith Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/appsmith).
 
 ## Configuration
 
@@ -95,8 +99,6 @@ The following tables list the main variables you can set.
 | `APPSMITH_DAEMON_USER`      | Appsmith daemon system user.                 | `appsmith`                          |
 | `APPSMITH_DAEMON_GROUP`     | Appsmith daemon system group.                | `appsmith`                          |
 
-When you start the Appsmith image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. Please note that some variables are only considered when the container is started for the first time.
-
 #### Run mode
 
 Appsmith supports three running modes:
@@ -120,19 +122,7 @@ The Bitnami Appsmith Docker image from the [Bitnami Secure Images](https://go-vm
 
 ## Logging
 
-The Bitnami Appsmith Docker image sends the container logs to `stdout`. To view the logs:
-
-```console
-docker logs wordpress
-```
-
-Or using Docker Compose:
-
-```console
-docker-compose logs wordpress
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+The Bitnami Appsmith Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## License
 
