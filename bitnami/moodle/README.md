@@ -11,7 +11,13 @@ Disclaimer: The respective trademarks mentioned in the offering are owned by the
 docker run --name moodle bitnami/moodle:latest
 ```
 
-**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/moodle/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/moodle/docker-compose.yml)
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/moodle).
 
 ## Why use Bitnami Secure Images?
 
@@ -101,8 +107,6 @@ The following tables list the main variables you can set.
 | `PHP_DEFAULT_MEMORY_LIMIT`   | Default PHP memory limit.                                  | `256M`                          |
 | `PHP_DEFAULT_MAX_INPUT_VARS` | Default maximum amount of input variables for PHP scripts. | `5000`                          |
 
-When you start the Moodle&trade; image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
-
 ### Examples
 
 #### SMTP configuration
@@ -169,74 +173,7 @@ The Bitnami Bitnami LMS powered by Moodle&trade; LMS Docker image from the [Bitn
 
 ## Logging
 
-The Bitnami Docker image for Moodle&trade; sends the container logs to `stdout`. To view the logs:
-
-```console
-docker logs moodle
-```
-
-Or using Docker Compose:
-
-```console
-docker-compose logs moodle
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
-
-By default, the logging of debug information is disabled. You can enable it by setting the environment variable `BITNAMI_DEBUG` to `true`.
-
-## Maintenance
-
-### Backing up your container
-
-To backup your data, configuration and logs, follow these simple steps:
-
-#### Step 1: Stop the currently running container
-
-```console
-docker stop moodle
-```
-
-Or using Docker Compose:
-
-```console
-docker-compose stop moodle
-```
-
-#### Step 2: Run the backup command
-
-We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
-
-```console
-docker run --rm -v /path/to/moodle-backups:/backups --volumes-from moodle busybox \
-  cp -a /bitnami/moodle /backups/latest
-```
-
-### Restoring a backup
-
-Restoring a backup is as simple as mounting the backup as volumes in the containers.
-
-For the MariaDB database container:
-
-```diff
- $ docker run -d --name mariadb \
-   ...
--  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
-+  --volume /path/to/mariadb-backups/latest:/bitnami/mariadb \
-   bitnami/mariadb:latest
-```
-
-For the Moodle&trade; container:
-
-```diff
- $ docker run -d --name moodle \
-   ...
--  --volume /path/to/moodle-persistence:/bitnami/moodle \
-+  --volume /path/to/moodle-backups/latest/moodle:/bitnami/moodle \
--  --volume /path/to/moodledata-persistence:/bitnami/moodledata \
-+  --volume /path/to/moodledata-backups/latest/moodledata:/bitnami/moodledata \
-   bitnami/moodle:latest
-```
+The Bitnami Bitnami LMS powered by Moodle&trade; LMS Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Customize this image
 
