@@ -11,6 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name postgresql-repmgr bitnami/postgresql-repmgr:latest
 ```
 
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/postgresql-repmgr/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/postgresql-repmgr/docker-compose.yml)
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/postgresql-ha).
+
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
 
 ## Why use Bitnami Secure Images?
@@ -45,10 +53,6 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 ## Get this image
 
 The Bitnami PostgreSQL HA Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/postgresql-ha).
 
 ## Persisting your application
 
@@ -322,7 +326,7 @@ Apart of using a custom `repmgr.conf`, `postgresql.conf` or `pg_hba.conf`, you c
 
 ### Adding extra services to base docker-compose.yaml
 
-It is possible to add extra services to the provided `docker-compose.yaml` file, like [a witness node](https://repmgr.org/docs/4.3/repmgrd-witness-server.html). When adding the new service, please take into account the cluster set up process relays on the `REPMGR_NODE_ID_START_SEED` environment variable plus the service ID in the name (if present, or zero (`0`) by default) to assign cluster's ID to each service/node involved on it. In the case of docker-compose based clusters, this may lead to collisions in the internal IDs in case two or more services share the same ID in their names, making the service initialization process to fail. This isn't an issue on Kubernetes environments, as the Kubernetes controller enumerates the pods with different ID numbers by default.
+It is possible to add extra services like [a witness node](https://repmgr.org/docs/4.3/repmgrd-witness-server.html). When adding the new service, please take into account the cluster set up process relays on the `REPMGR_NODE_ID_START_SEED` environment variable plus the service ID in the name (if present, or zero (`0`) by default) to assign cluster's ID to each service/node involved on it. In the case of docker-compose based clusters, this may lead to collisions in the internal IDs in case two or more services share the same ID in their names, making the service initialization process to fail. This isn't an issue on Kubernetes environments, as the Kubernetes controller enumerates the pods with different ID numbers by default.
 
 We recommend setting a different value for the `REPMGR_NODE_ID_START_SEED` in those nodes, or ensuring no services names use repeated numbers.
 
@@ -336,13 +340,7 @@ The Bitnami PostgreSQL HA Docker image from the [Bitnami Secure Images](https://
 
 ## Logging
 
-The Bitnami PostgreSQL HA Docker image sends the container logs to `stdout`. To view the logs:
-
-```console
-docker logs pg-0
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+The Bitnami PostgreSQL HA Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Notable Changes
 
