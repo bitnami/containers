@@ -7,13 +7,17 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ## TL;DR
 
-Use this quick command to run the container.
-
 ```console
 docker run --name keycloak bitnami/keycloak:latest
 ```
 
-> **NOTE** This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/keycloak/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/keycloak/docker-compose.yml)
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/keycloak).
 
 ## Why use Bitnami Secure Images?
 
@@ -47,10 +51,6 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 ## Get this image
 
 The Bitnami Keycloak Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/keycloak).
 
 ## Configuration
 
@@ -154,15 +154,6 @@ docker run --name keycloak \
   bitnami/keycloak:latest
 ```
 
-Or with docker-compose
-
-```yaml
-keycloak:
-  image: bitnami/keycloak:latest
-  volumes:
-    - /path/to/init-scripts:/docker-entrypoint-initdb.d
-```
-
 ### TLS encryption
 
 The Bitnami Keycloak Docker image allows configuring HTTPS/TLS encryption. This is done by mounting in `/opt/bitnami/keycloak/certs` two files:
@@ -229,15 +220,6 @@ The image looks for configuration files in the `/bitnami/keycloak/conf/` directo
 docker run --name keycloak \
     -v /path/to/keycloak.conf:/bitnami/keycloak/conf/keycloak.conf \
     bitnami/keycloak:latest
-```
-
-Or with docker-compose
-
-```yaml
-keycloak:
-  image: bitnami/keycloak:latest
-  volumes:
-    - /path/to/keycloak.conf:/bitnami/keycloak/conf/keycloak.conf:ro
 ```
 
 After that, your changes will be taken into account in the server's behaviour.
