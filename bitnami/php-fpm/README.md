@@ -11,6 +11,12 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run -it --name phpfpm -v /path/to/app:/app bitnami/php-fpm
 ```
 
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/php-fpm/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/php-fpm/docker-compose.yml)
+
 ## Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
@@ -79,10 +85,6 @@ The formatting convention for `prod` tags has been changed:
 ## Get this image
 
 The Bitnami PHP-FPM Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes.
 
 ## Connecting to other containers
 
@@ -238,21 +240,7 @@ The Bitnami PHP-FPM Docker image from the [Bitnami Secure Images](https://go-vmw
 
 ## Logging
 
-The Bitnami PHP-FPM Docker Image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/reference/run/#logging-drivers-log-driver) using the `--log-driver` option. By default the `json-file` driver is used.
-
-To view the logs:
-
-```console
-docker logs phpfpm
-```
-
-or using Docker Compose:
-
-```console
-docker-compose logs phpfpm
-```
-
-_The `docker logs` command is only available when the `json-file` or `journald` logging driver is in use._
+The Bitnami PHP-FPM Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Useful Links
 
