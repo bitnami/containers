@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-04-14T12:51:16Z" \
+      org.opencontainers.image.created="2026-04-15T15:33:23Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/php-fpm/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/php-fpm" \
@@ -48,7 +48,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 
 ENV APP_VERSION="8.5.5" \
     BITNAMI_APP_NAME="php-fpm" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="3" \
     LD_LIBRARY_PATH="/opt/bitnami/postgresql/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:$PATH"
 
