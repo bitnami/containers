@@ -7,13 +7,19 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ## TL;DR
 
-### Docker Compose
-
 ```console
 docker run --name phpmyadmin bitnami/phpmyadmin:latest
 ```
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
+
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/phpmyadmin/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/phpmyadmin/docker-compose.yml)
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/phpmyadmin).
 
 ## Why use Bitnami Secure Images?
 
@@ -55,31 +61,6 @@ If you remove the container all your data and configurations will be lost, and t
 For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the MariaDB data](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#persisting-your-database).
 
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
-
-## Upgrading phpMyAdmin
-
-Bitnami provides up-to-date versions of MariaDB and phpMyAdmin, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the phpMyAdmin container. For the MariaDB upgrade see <https://github.com/bitnami/containers/tree/main/bitnami/mariadb#upgrade-this-image>
-
-1. Get the updated images:
-
-    ```console
-    docker pull bitnami/phpmyadmin:latest
-    ```
-
-2. Stop your container
-
-    - For docker-compose: `$ docker-compose stop phpmyadmin`
-    - For manual execution: `$ docker stop phpmyadmin`
-
-3. Remove the currently running container
-
-    - For docker-compose: `$ docker-compose rm -v phpmyadmin`
-    - For manual execution: `$ docker rm -v phpmyadmin`
-
-4. Run the new image
-
-    - For docker-compose: `$ docker-compose up phpmyadmin`
-    - For manual execution: `docker run --name phpmyadmin bitnami/phpmyadmin:latest`
 
 ## Configuration
 
