@@ -102,17 +102,6 @@ docker run --rm -v /path/to/app:/app bitnami/node npm install
 docker run -it --name node  -v /path/to/app:/app bitnami/node npm start
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/node/docker-compose.yml) file present in this repository:
-
-```yaml
-node:
-  ...
-  command: "sh -c 'npm install && npm start'"
-  volumes:
-    - .:/app
-  ...
-```
-
 **Further Reading:**
 
 - [package.json documentation](https://docs.npmjs.com/files/package.json)
