@@ -11,7 +11,13 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name wordpress-nginx bitnami/wordpress-nginx:latest
 ```
 
-**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/wordpress-nginx/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/wordpress-nginx/docker-compose.yml)
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/wordpress).
 
 ## Why use Bitnami Secure Images?
 
@@ -147,8 +153,6 @@ The following tables list the main variables you can set.
 | `WP_CLI_DAEMON_USER`              | WP-CLI system user.                                  | `daemon`                              |
 | `WP_CLI_DAEMON_GROUP`             | WP-CLI system group.                                 | `daemon`                              |
 
-When you start the WordPress image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
-
 ### Examples
 
 #### SMTP configuration
@@ -173,14 +177,6 @@ The Bitnami WordPress container includes the command line interface **wp-cli** t
 
 This would be an example of using **wp-cli** to display the help menu:
 
-- Using `docker-compose` command:
-
-```console
-docker-compose exec wordpress wp help
-```
-
-- Using `docker` command:
-
 ```console
 docker exec wordpress wp help
 ```
@@ -189,70 +185,7 @@ Find more information about parameters available in the tool in the [official do
 
 ## Logging
 
-The Bitnami WordPress Docker image sends the container logs to `stdout`. To view the logs:
-
-```console
-docker logs wordpress
-```
-
-Or using Docker Compose:
-
-```console
-docker-compose logs wordpress
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
-
-## Maintenance
-
-### Backing up your container
-
-To backup your data, configuration and logs, follow these simple steps:
-
-#### Step 1: Stop the currently running container
-
-```console
-docker stop wordpress
-```
-
-Or using Docker Compose:
-
-```console
-docker-compose stop wordpress
-```
-
-#### Step 2: Run the backup command
-
-We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
-
-```console
-docker run --rm -v /path/to/wordpress-backups:/backups --volumes-from wordpress busybox \
-  cp -a /bitnami/wordpress /backups/latest
-```
-
-### Restoring a backup
-
-Restoring a backup is as simple as mounting the backup as volumes in the containers.
-
-For the MariaDB database container:
-
-```diff
- $ docker run -d --name mariadb \
-   ...
--  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
-+  --volume /path/to/mariadb-backups/latest:/bitnami/mariadb \
-   bitnami/mariadb:latest
-```
-
-For the WordPress container:
-
-```diff
- $ docker run -d --name wordpress \
-   ...
--  --volume /path/to/wordpress-persistence:/bitnami/wordpress \
-+  --volume /path/to/wordpress-backups/latest:/bitnami/wordpress \
-   bitnami/wordpress:latest
-```
+The Bitnami WordPress with NGINX Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Customize this image
 
