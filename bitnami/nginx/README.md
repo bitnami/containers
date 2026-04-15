@@ -11,6 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name nginx bitnami/nginx:latest
 ```
 
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/nginx/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/nginx/docker-compose.yml)
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/nginx).
+
 ## Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
@@ -44,27 +52,12 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 The Bitnami NGINX Open Source Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
 
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/nginx).
-
 ## Hosting a static website
 
 This NGINX Open Source image exposes a volume at `/app`. Content mounted here is served by the default catch-all server block.
 
 ```console
 docker run -v /path/to/app:/app bitnami/nginx:latest
-```
-
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/nginx/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  nginx:
-  ...
-    volumes:
-      - /path/to/app:/app
-  ...
 ```
 
 ## Accessing your server from the host
@@ -100,17 +93,6 @@ docker run --name nginx \
   bitnami/nginx:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/nginx/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  nginx:
-  ...
-    volumes:
-      - /path/to/my_server_block.conf:/opt/bitnami/nginx/conf/server_blocks/my_server_block.conf:ro
-  ...
-```
-
 ### Adding custom configuration by context
 
 The default `nginx.conf` supports custom configuration files organized by NGINX context. You can mount configuration files into the appropriate context directories:
@@ -131,17 +113,6 @@ Mount it to the main context directory:
 docker run --name nginx \
   -v /path/to/webdav.conf:/opt/bitnami/nginx/conf/context.d/main/webdav.conf:ro \
   bitnami/nginx:latest
-```
-
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/nginx/docker-compose.yml) file:
-
-```yaml
-services:
-  nginx:
-  ...
-    volumes:
-      - /path/to/webdav.conf:/opt/bitnami/nginx/conf/context.d/main/webdav.conf:ro
-  ...
 ```
 
 Similarly, you can add custom server blocks to the http context:
@@ -182,20 +153,6 @@ docker run --name nginx \
   -e NGINX_ENABLE_STREAM=yes \
   -v /path/to/my_stream_server_block.conf:/opt/bitnami/nginx/conf/stream_server_blocks/my_stream_server_block.conf:ro \
   bitnami/nginx:latest
-```
-
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/nginx/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  nginx:
-  ...
-    environment:
-      - NGINX_ENABLE_STREAM=yes
-  ...
-    volumes:
-      - /path/to/my_stream_server_block.conf:/opt/bitnami/nginx/conf/stream_server_blocks/my_stream_server_block.conf:ro
-  ...
 ```
 
 ### Using custom SSL certificates
@@ -245,18 +202,6 @@ docker run --name nginx \
   -v /path/to/my_server_block.conf:/opt/bitnami/nginx/conf/server_blocks/my_server_block.conf:ro \
   -v /path/to/nginx-persistence/certs:/certs \
   bitnami/nginx:latest
-```
-
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/nginx/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  nginx:
-  ...
-    volumes:
-    - /path/to/nginx-persistence/certs:/certs
-    - /path/to/my_server_block.conf:/opt/bitnami/nginx/conf/server_blocks/my_server_block.conf:ro
-  ...
 ```
 
 ### Configuring worker processes
@@ -369,17 +314,6 @@ docker run --name nginx \
   bitnami/nginx:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/nginx/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  nginx:
-  ...
-    volumes:
-      - /path/to/your_nginx.conf:/opt/bitnami/nginx/conf/nginx.conf:ro
-  ...
-```
-
 ### FIPS configuration in Bitnami Secure Images
 
 The Bitnami NGINX Open Source Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
@@ -414,19 +348,7 @@ server {
 
 ## Logging
 
-The Bitnami NGINX Open Source Docker image sends the container logs to the `stdout`. To view the logs:
-
-```console
-docker logs nginx
-```
-
-or using Docker Compose:
-
-```console
-docker-compose logs nginx
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+The Bitnami NGINX Open Source Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Customize this image
 
