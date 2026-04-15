@@ -18,7 +18,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "atlas-1.2.0-0-linux-${OS_ARCH}-debian-12" \
-      "chainloop-control-plane-migrations-1.92.0-0-linux-${OS_ARCH}-debian-12" \
+      "chainloop-control-plane-migrations-1.93.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -41,11 +41,11 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2026-04-14T17:35:03Z" \
+      org.opencontainers.image.created="2026-04-15T14:33:01Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="chainloop-control-plane-migrations" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.92.0"
+      org.opencontainers.image.version="1.93.0"
 
 COPY rootfs /
 COPY --from=builder /opt/bitnami/chainloop/migrations /migrations
@@ -55,7 +55,7 @@ COPY --from=builder /opt/bitnami/atlas/licenses /opt/bitnami/atlas/licenses
 COPY --from=builder /opt/bitnami/chainloop/.spdx-chainloop-control-plane-migrations.spdx /opt/bitnami/chainloop/.spdx-chainloop-control-plane-migrations.spdx
 COPY --from=builder /opt/bitnami/chainloop/licenses /opt/bitnami/chainloop/licenses
 
-ENV APP_VERSION="1.92.0" \
+ENV APP_VERSION="1.93.0" \
     BITNAMI_APP_NAME="chainloop-control-plane-migrations" \
     IMAGE_REVISION="0" \
     PATH="/opt/bitnami/atlas/bin:$PATH"
