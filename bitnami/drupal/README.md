@@ -1,4 +1,3 @@
-# Bitnami Secure Image for Drupal
 
 > Drupal is one of the most versatile open source content management systems in the world. It is pre-configured with the Ctools and Views modules, Drush and Let's Encrypt auto-configuration support.
 
@@ -11,7 +10,13 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name drupal bitnami/drupal:latest
 ```
 
-**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/drupal/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/drupal/docker-compose.yml)
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/drupal).
 
 ## Why use Bitnami Secure Images?
 
@@ -106,8 +111,6 @@ The following tables list the main variables you can set.
 | `DRUPAL_DEFAULT_DATABASE_HOST` | Default database server host.                                                                                                    | `mariadb`                                       |
 | `PHP_DEFAULT_MEMORY_LIMIT`     | Default PHP memory limit.                                                                                                        | `256M`                                          |
 
-When you start the Drupal image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
-
 #### SMTP configuration
 
 The `DRUPAL_SMTP_*` environment variables allows you configure the SMTP settings in the application. Please take a look at the environment variables information above for more information.
@@ -120,70 +123,7 @@ The Bitnami Drupal Docker image from the [Bitnami Secure Images](https://go-vmwa
 
 ## Logging
 
-The Bitnami Drupal Docker image sends the container logs to `stdout`. To view the logs:
-
-```console
-docker logs drupal
-```
-
-Or using Docker Compose:
-
-```console
-docker-compose logs drupal
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
-
-## Maintenance
-
-### Backing up your container
-
-To backup your data, configuration and logs, follow these simple steps:
-
-#### Step 1: Stop the currently running container
-
-```console
-docker stop drupal
-```
-
-Or using Docker Compose:
-
-```console
-docker-compose stop drupal
-```
-
-#### Step 2: Run the backup command
-
-We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
-
-```console
-docker run --rm -v /path/to/drupal-backups:/backups --volumes-from drupal busybox \
-  cp -a /bitnami/drupal /backups/latest
-```
-
-### Restoring a backup
-
-Restoring a backup is as simple as mounting the backup as volumes in the containers.
-
-For the MariaDB database container:
-
-```diff
- $ docker run -d --name mariadb \
-   ...
--  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
-+  --volume /path/to/mariadb-backups/latest:/bitnami/mariadb \
-   bitnami/mariadb:latest
-```
-
-For the Drupal container:
-
-```diff
- $ docker run -d --name drupal \
-   ...
--  --volume /path/to/drupal-persistence:/bitnami/drupal \
-+  --volume /path/to/drupal-backups/latest:/bitnami/drupal \
-   bitnami/drupal:latest
-```
+The Bitnami Drupal Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Customize this image
 
@@ -214,7 +154,7 @@ FROM bitnami/drupal
 - The configuration logic is now based on Bash scripts in the *rootfs/* folder.
 - The Drupal container image has been migrated to a "non-root" user approach. Previously the container ran as the `root` user and the Apache daemon was started as the `daemon` user. From now on, both the container and the Apache daemon run as user `1001`. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile, or `user: root` in `docker-compose.yml`. Consequences:
   - The HTTP/HTTPS ports exposed by the container are now `8080/8443` instead of `80/443`.
-  - Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating the Drupal site by exporting its content, and importing it on a new Drupal container. Follow the steps in [Backing up your container](#backing-up-your-container) and [Restoring a backup](#restoring-a-backup) to migrate the data between the old and new container.
+  - Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating the Drupal site by exporting its content, and importing it on a new Drupal container. Before recreating the container, back up or copy the persisted application and database data so you can attach it to the new deployment.
 
 ## 8.7.2-debian-9-r8 and 8.7.2-ol-7-r8
 
