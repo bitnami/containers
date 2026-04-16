@@ -11,6 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name ghost bitnami/ghost:latest
 ```
 
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/ghost/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/ghost/docker-compose.yml)
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/ghost).
+
 ## Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
@@ -116,8 +124,6 @@ The following tables list the main variables you can set.
 | `GHOST_DEFAULT_PORT_NUMBER`   | Default Ghost port number to enable at build time. | `2368`                                     |
 | `GHOST_DEFAULT_DATABASE_HOST` | Default database server host.                      | `mysql`                                    |
 
-When you start the Ghost image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
-
 #### Examples
 
 ##### SMTP configuration
@@ -136,70 +142,7 @@ The Bitnami Ghost Docker image from the [Bitnami Secure Images](https://go-vmwar
 
 ## Logging
 
-The Bitnami Ghost Docker image sends the container logs to `stdout`. To view the logs:
-
-```console
-docker logs ghost
-```
-
-Or using Docker Compose:
-
-```console
-docker-compose logs ghost
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
-
-## Maintenance
-
-### Backing up your container
-
-To backup your data, configuration and logs, follow these simple steps:
-
-#### Step 1: Stop the currently running container
-
-```console
-docker stop ghost
-```
-
-Or using Docker Compose:
-
-```console
-docker-compose stop ghost
-```
-
-#### Step 2: Run the backup command
-
-We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
-
-```console
-docker run --rm -v /path/to/ghost-backups:/backups --volumes-from ghost busybox \
-  cp -a /bitnami/ghost /backups/latest
-```
-
-### Restoring a backup
-
-Restoring a backup is as simple as mounting the backup as volumes in the containers.
-
-For the MySQL database container:
-
-```diff
- $ docker run -d --name mysql \
-   ...
--  --volume /path/to/mysql-persistence:/bitnami/mysql \
-+  --volume /path/to/mysql-backups/latest:/bitnami/mysql \
-   bitnami/mysql:latest
-```
-
-For the Ghost container:
-
-```diff
- $ docker run -d --name ghost \
-   ...
--  --volume /path/to/ghost-persistence:/bitnami/ghost \
-+  --volume /path/to/ghost-backups/latest:/bitnami/ghost \
-   bitnami/ghost:latest
-```
+The Bitnami Ghost Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Customize this image
 
