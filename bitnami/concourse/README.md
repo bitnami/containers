@@ -15,7 +15,7 @@ docker run --name concourse bitnami/concourse:latest
 
 The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
 
-https://github.com/bitnami/containers/tree/main/bitnami/concourse/docker-compose.yml
+[https://github.com/bitnami/containers/tree/main/bitnami/concourse/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/concourse/docker-compose.yml)
 
 Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/concourse).
 
