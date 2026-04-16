@@ -11,6 +11,12 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run -it --name ruby bitnami/ruby:latest
 ```
 
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/ruby/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/ruby/docker-compose.yml)
+
 ## Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
@@ -80,10 +86,6 @@ The formatting convention for `prod` tags has been changed:
 
 The Bitnami Ruby Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
 
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes.
-
 ## Entering the REPL
 
 By default, running this image will drop you into the Ruby REPL (`irb`), where you can interactively test and try things out in Ruby.
@@ -116,17 +118,6 @@ If your Ruby app has a `Gemfile` defining your app's dependencies and start scri
 ```console
 docker run -it --name ruby -v /path/to/app:/app bitnami/ruby:latest \
   sh -c "bundle install && ruby script.rb"
-```
-
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/ruby/docker-compose.yml) file present in this repository:
-
-```yaml
-ruby:
-  ...
-  command: "sh -c 'bundle install && ruby script.rb'"
-  volumes:
-    - .:/app
-  ...
 ```
 
 **Further Reading:**
