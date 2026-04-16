@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-04-10T17:51:40Z" \
+      org.opencontainers.image.created="2026-04-16T12:07:54Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/ghost/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/ghost" \
       org.opencontainers.image.title="ghost" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="6.28.0"
+      org.opencontainers.image.version="6.30.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,10 +29,10 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "nss-wrapper-1.1.16-0-linux-${OS_ARCH}-debian-12" \
-      "python-3.12.13-4-linux-${OS_ARCH}-debian-12" \
+      "python-3.12.13-7-linux-${OS_ARCH}-debian-12" \
       "node-22.22.2-0-linux-${OS_ARCH}-debian-12" \
       "mysql-client-12.2.2-0-linux-${OS_ARCH}-debian-12" \
-      "ghost-6.28.0-0-linux-${OS_ARCH}-debian-12" \
+      "ghost-6.30.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -51,7 +51,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 COPY rootfs /
 RUN /opt/bitnami/scripts/ghost/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
-ENV APP_VERSION="6.28.0" \
+ENV APP_VERSION="6.30.0" \
     BITNAMI_APP_NAME="ghost" \
     IMAGE_REVISION="0" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:/opt/bitnami/ghost/bin:$PATH"
