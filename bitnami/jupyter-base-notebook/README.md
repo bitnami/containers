@@ -7,8 +7,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ## TL;DR
 
-Use this quick command to run the container.
-
 ```console
 docker run --name jupyter-base-notebook bitnami/jupyter-base-notebook:latest
 ```
