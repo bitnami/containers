@@ -7,7 +7,9 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ## TL;DR
 
-Use this quick command to run the container.
+```console
+docker run --name jupyterhub bitnami/jupyterhub:latest
+```
 
 ## Why use Bitnami Secure Images?
 
@@ -33,10 +35,6 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 ## Get this image
 
 The Bitnami JupyterHub Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/jupyterhub).
 
 ## Why use a non-root container?
 
