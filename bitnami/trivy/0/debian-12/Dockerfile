@@ -17,7 +17,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "trivy-0.69.4-1-linux-${OS_ARCH}-debian-12" \
+      "trivy-0.70.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -42,11 +42,11 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2026-04-08T09:04:15Z" \
+      org.opencontainers.image.created="2026-04-17T06:54:25Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="trivy" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="0.69.4"
+      org.opencontainers.image.version="0.70.0"
 
 COPY rootfs /
 COPY --from=builder /opt/bitnami/rootfs /
@@ -55,9 +55,9 @@ COPY --from=builder /opt/bitnami/trivy/bin/trivy /opt/bitnami/trivy/bin/trivy
 COPY --from=builder /opt/bitnami/trivy/contrib /opt/bitnami/trivy/contrib
 COPY --from=builder /opt/bitnami/trivy/licenses /opt/bitnami/trivy/licenses
 
-ENV APP_VERSION="0.69.4" \
+ENV APP_VERSION="0.70.0" \
     BITNAMI_APP_NAME="trivy" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/trivy/bin:$PATH"
 
 WORKDIR /opt/bitnami/trivy
