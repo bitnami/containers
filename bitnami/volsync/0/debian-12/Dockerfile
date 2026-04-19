@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-04-11T01:39:20Z" \
+      org.opencontainers.image.created="2026-04-19T11:55:48Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/volsync/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/volsync" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "volsync-0.15.0-5-linux-${OS_ARCH}-debian-12" \
+      "volsync-0.15.0-6-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -62,7 +62,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="0.15.0" \
     BITNAMI_APP_NAME="volsync" \
-    IMAGE_REVISION="6" \
+    IMAGE_REVISION="7" \
     PATH="/opt/bitnami/volsync/bin:/opt/bitnami/rclone/bin:/opt/bitnami/diskrsync/bin:/opt/bitnami/syncthing/bin:$PATH"
 
 USER 1001
