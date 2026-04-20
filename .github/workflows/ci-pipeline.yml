@@ -98,7 +98,7 @@ jobs:
       # Approve the CI's PR automatically, as it has been tested in our internal pipeline already
       # Approved by the 'github-actions' user; a PR can't be approved by its author
       - name: PR Approval
-        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3
         with:
           result-encoding: string
           retries: 3
@@ -111,7 +111,7 @@ jobs:
             });
       - name: Merge
         id: merge
-        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3
         with:
           result-encoding: string
           retries: 3
@@ -128,7 +128,7 @@ jobs:
       # post a comment on the PR and assign a maintainer agent to review it
       - name: Manual review required
         if: ${{ always() && steps.merge.outcome != 'success' }}
-        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3
         env:
           BODY: |
             There has been an error during the automated release process. Manual revision is now required.
