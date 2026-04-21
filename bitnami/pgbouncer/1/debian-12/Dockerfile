@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-04-08T20:33:15Z" \
+      org.opencontainers.image.created="2026-04-21T09:15:21Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/pgbouncer/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/pgbouncer" \
@@ -57,7 +57,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/pgbouncer/postunpack.sh
 ENV APP_VERSION="1.25.1" \
     BITNAMI_APP_NAME="pgbouncer" \
-    IMAGE_REVISION="7" \
+    IMAGE_REVISION="8" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     LD_LIBRARY_PATH="/opt/bitnami/postgresql/lib:$LD_LIBRARY_PATH" \
