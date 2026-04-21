@@ -22,3 +22,6 @@ for dir in "$PGBOUNCER_CONF_DIR" "$PGBOUNCER_LOG_DIR" "$PGBOUNCER_TMP_DIR" "$PGB
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
 done
+
+# Necessary symlink for cloudnative-pg operator
+ln -s /opt/bitnami/pgbouncer/bin/pgbouncer /usr/bin/pgbouncer

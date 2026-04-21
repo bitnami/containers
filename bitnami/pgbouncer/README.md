@@ -11,7 +11,11 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name pgbouncer bitnami/pgbouncer:latest
 ```
 
-**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/pgbouncer/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/pgbouncer/docker-compose.yml)
 
 ## Why use Bitnami Secure Images?
 
@@ -41,10 +45,6 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 ## Get this image
 
 The Bitnami PgBouncer Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes.
 
 ## Configuration
 
