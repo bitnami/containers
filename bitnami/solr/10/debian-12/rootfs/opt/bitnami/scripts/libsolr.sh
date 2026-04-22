@@ -649,6 +649,10 @@ solr_initialize() {
                     solr_wait_for_zk_root
                 fi
             fi
+
+            # Persistence changes break adding Solr cores. Persist data in cloud mode only
+            info "Persisting Solr installation"
+            persist_app "$app_name" "$SOLR_DATA_TO_PERSIST"
         else
             info "Deploying Solr from scratch"
 
@@ -664,9 +668,6 @@ solr_initialize() {
 
             solr_stop
         fi
-
-        info "Persisting Solr installation"
-        persist_app "$app_name" "$SOLR_DATA_TO_PERSIST"
     else
         info "Restoring persisted Solr installation"
 
