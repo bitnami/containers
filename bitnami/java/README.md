@@ -11,11 +11,11 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run -it --name java bitnami/java
 ```
 
-### Docker Compose
+## Using `docker-compose.yml`
 
-```console
-docker run --name java bitnami/java:latest
-```
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/java/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/java/docker-compose.yml)
 
 ## Why use Bitnami Secure Images?
 
@@ -85,10 +85,6 @@ The formatting convention for `prod` tags has been changed:
 ## Get this image
 
 The Bitnami Java Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes.
 
 ## Configuration
 
