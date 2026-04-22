@@ -11,7 +11,13 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name solr bitnami/solr:latest
 ```
 
-You can find the available configuration options in the [Environment Variables](#environment-variables) section.
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/solr/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/solr/docker-compose.yml)
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/solr).
 
 ## Why use Bitnami Secure Images?
 
@@ -41,10 +47,6 @@ Subscribe to project updates by watching the [bitnami/containers GitHub reposito
 ## Get this image
 
 The Bitnami Apache Solr Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/solr).
 
 ## Persisting your application
 
@@ -119,8 +121,6 @@ The following tables list the main variables you can set.
 | `SOLR_DAEMON_GROUP`          | Solr system group                      | `solr`                                         |
 | `SOLR_ZK_CONNECTION_TIMEOUT` | ZooKeeper connection attempt timeout.  | `10`                                           |
 
-When you start the solr image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
-
 ### Using your Apache Solr Cores configuration files
 
 In order to load your own configuration files, you will have to make them available to the container. You can do it mounting a [volume](https://docs.docker.com/engine/tutorials/dockervolumes/) in the desired location and setting the environment variable with the customized value (as it is pointed above, the default value is **data_driven_schema_configs**).
@@ -134,19 +134,7 @@ The Bitnami Apache Solr Docker image from the [Bitnami Secure Images](https://go
 
 ## Logging
 
-The Bitnami Solr Docker image sends the container logs to the `stdout`. To view the logs:
-
-```console
-docker logs solr
-```
-
-or using Docker Compose:
-
-```console
-docker-compose logs solr
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+The Bitnami Apache Solr Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Notable changes
 
