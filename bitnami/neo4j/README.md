@@ -7,13 +7,19 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ## TL;DR
 
-Use this quick command to run the container.
-
 ```console
 docker run --name neo4j bitnami/neo4j:latest
 ```
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
+
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/neo4j/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/neo4j/docker-compose.yml)
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/neo4j).
 
 ## Why use Bitnami Secure Images?
 
@@ -39,10 +45,6 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 ## Get this image
 
 The Bitnami Neo4j Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes.
 
 ## Persisting your application
 
@@ -118,8 +120,6 @@ The following tables list the main variables you can set.
 | `NEO4J_DAEMON_GROUP`        | Neo4j system group.                              | `neo4j`                            |
 | `JAVA_HOME`                 | Java installation folder.                        | `${BITNAMI_ROOT_DIR}/java`         |
 
-When you start the neo4j image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
-
 ### Using your Neo4j configuration files
 
 In order to load your own configuration files, you will have to make them available to the container. You can do it mounting a [volume](https://docs.docker.com/engine/tutorials/dockervolumes/) in `/bitnami/neo4j/conf`.
@@ -137,19 +137,7 @@ The Bitnami Neo4j Docker image from the [Bitnami Secure Images](https://go-vmwar
 
 ## Logging
 
-The Bitnami neo4j Docker image sends the container logs to the `stdout`. To view the logs:
-
-```console
-docker logs neo4j
-```
-
-or using Docker Compose:
-
-```console
-docker-compose logs neo4j
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+The Bitnami Neo4j Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Notable changes
 
