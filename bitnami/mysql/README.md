@@ -11,6 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name mysql -e ALLOW_EMPTY_PASSWORD=yes bitnami/mysql:latest
 ```
 
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/mysql/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/mysql/docker-compose.yml)
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/mysql).
+
 ## Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
@@ -43,10 +51,6 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 ## Get this image
 
 The Bitnami MySQL Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/mysql).
 
 ## Persisting your database
 
@@ -227,34 +231,7 @@ FROM bitnami/mysql
 ```
 ## Logging
 
-The Bitnami MySQL Docker image sends the container logs to the `stdout`. To view the logs:
-
-```console
-docker logs mysql
-```
-
-or using Docker Compose:
-
-```console
-docker-compose logs mysql
-```
-
-To increase the verbosity on initialization or add extra debug information, you can assign the `BITNAMI_DEBUG` environment variable to `true`.
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
-
-### Slow query logs
-
-By default MySQL doesn't enable [slow query log](https://dev.mysql.com/doc/refman/en/slow-query-log.html) to record the SQL queries that take a long time to perform. You can modify these settings using the following environment variables:
-
-- `MYSQL_ENABLE_SLOW_QUERY`: Whether to enable slow query logs. Default: `0`
-- `MYSQL_LONG_QUERY_TIME`: How much time, in seconds, defines a slow query. Default: `10.0`
-
-Slow queries information is logged to the `<data-dir>/<hostname>-slow.log` file by default, and you can easily check it with the `mysqldumpslow` tool ([link to docs](https://dev.mysql.com/doc/refman/en/mysqldumpslow.html)).
-
-### Slow filesystems
-
-In some platforms, the filesystem used for persistence could be slow. That could cause the database to take extra time to be ready. If that's the case, you can configure the `MYSQL_INIT_SLEEP_TIME` environment variable to make the initialization script to wait extra time (in seconds) before proceeding with the configuration operations.
+The Bitnami MySQL Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Notable Changes
 
