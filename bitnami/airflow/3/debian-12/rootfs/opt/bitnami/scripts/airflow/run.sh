@@ -17,8 +17,6 @@ set -o pipefail
 . /opt/bitnami/scripts/libairflow.sh
 
 command=("$AIRFLOW_COMPONENT_TYPE")
-# 2.x and 3.x compatibility
-[[ "$AIRFLOW_COMPONENT_TYPE" = "api-server" ]] && [[ $(airflow_major_version) -eq 2 ]] && command=("webserver")
 args=("--pid" "${AIRFLOW_TMP_DIR}/airflow-${AIRFLOW_COMPONENT_TYPE}.pid" "$@")
 if [[ "$AIRFLOW_COMPONENT_TYPE" = "worker" ]]; then
     command=("celery" "worker")
