@@ -11,7 +11,13 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name consul bitnami/consul:latest
 ```
 
-You can find the available configuration options in the [Environment Variables](#environment-variables) section.
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/consul/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/consul/docker-compose.yml)
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/consul).
 
 ## Why use Bitnami Secure Images?
 
@@ -45,10 +51,6 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 ## Get this image
 
 The Bitnami HashiCorp Consul Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/consul).
 
 ## Persisting your application
 
@@ -168,19 +170,7 @@ The Bitnami HashiCorp Consul Docker image from the [Bitnami Secure Images](https
 
 ## Logging
 
-The Bitnami consul Docker image sends the container logs to the `stdout`. To view the logs:
-
-```console
-docker logs consul
-```
-
-or using Docker Compose:
-
-```console
-docker-compose logs consul
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+The Bitnami HashiCorp Consul Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Notable Changes
 
