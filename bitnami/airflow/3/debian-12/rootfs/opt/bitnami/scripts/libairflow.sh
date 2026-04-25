@@ -186,10 +186,6 @@ airflow_initialize() {
 
     local db_init_command="migrate"
     local db_upgrade_command="migrate"
-    if [[ $(airflow_major_version) -eq 2 ]]; then
-        db_init_command="init"
-        db_upgrade_command="upgrade"
-    fi
     case "$AIRFLOW_COMPONENT_TYPE" in
     webserver|api-server)
         # Remove pid file if exists to prevent error after WSL restarts
@@ -289,20 +285,13 @@ airflow_generate_config() {
     *)
         # Generate Airflow default files
         debug_execute airflow config list --defaults > "${AIRFLOW_CONF_FILE}"
-        if [[ $(airflow_major_version) -ne 2 ]]; then
-            airflow_conf_set "api" "host" "${AIRFLOW_APISERVER_HOST}"
-            airflow_conf_set "core" "execution_api_server_url" "http://${AIRFLOW_APISERVER_HOST}:${AIRFLOW_APISERVER_PORT_NUMBER}/execution/"
-        fi
+        airflow_conf_set "api" "host" "${AIRFLOW_APISERVER_HOST}"
+        airflow_conf_set "core" "execution_api_server_url" "http://${AIRFLOW_APISERVER_HOST}:${AIRFLOW_APISERVER_PORT_NUMBER}/execution/"
         ;;
     esac
 
-    if [[ $(airflow_major_version) -eq 2 ]]; then
-        # Configure the web server
-        airflow_conf_set "webserver" "web_server_port" "$AIRFLOW_APISERVER_PORT_NUMBER"
-    else
-        # Configure the api server
-        airflow_conf_set "api" "port" "$AIRFLOW_APISERVER_PORT_NUMBER"
-    fi
+    # Configure the api server
+    airflow_conf_set "api" "port" "$AIRFLOW_APISERVER_PORT_NUMBER"
     # Configure Airflow Hostname
     [[ -n "$AIRFLOW_HOSTNAME_CALLABLE" ]] && airflow_conf_set "core" "hostname_callable" "$AIRFLOW_HOSTNAME_CALLABLE"
     # Configure Airflow database
@@ -315,14 +304,10 @@ airflow_generate_config() {
 
     # Configure the web server secret key parameter
     secret_key_section="api"
-    [[ $(airflow_major_version) -eq 2 ]] && secret_key_section="webserver"
     airflow_conf_set "${secret_key_section}" "secret_key" "${AIRFLOW_WEBSERVER_SECRET_KEY}"
-
-    [[ $(airflow_major_version) -ne 2 ]] && airflow_conf_set "api_auth" "jwt_secret" "$AIRFLOW_APISERVER_SECRET_KEY"
+    airflow_conf_set "api_auth" "jwt_secret" "$AIRFLOW_APISERVER_SECRET_KEY"
 
     local capacity_key="capacity"
-    [[ $(airflow_major_version) -eq 2 ]] && capacity_key="default_capacity"
-
     [[ "$AIRFLOW_COMPONENT_TYPE" = "triggerer" && -n "$AIRFLOW_TRIGGERER_DEFAULT_CAPACITY" ]] && airflow_conf_set "triggerer" "${capacity_key}" "$AIRFLOW_TRIGGERER_DEFAULT_CAPACITY"
     if [[ "$AIRFLOW_COMPONENT_TYPE" != "worker" ]]; then
         # Configure Airflow to load examples
@@ -407,15 +392,11 @@ airflow_configure_host() {
         base_url="$(airflow_base_url "$host")"
         info "Configuring Airflow URL to ${base_url}"
         airflow_conf_set "webserver" "base_url" "${base_url}"
-        if [[ $(airflow_major_version) -eq 3 ]]; then
-            airflow_conf_set "api" "base_url" "${base_url}"
-        fi
+        airflow_conf_set "api" "base_url" "${base_url}"
     else
         info "Configuring Airflow URL to ${AIRFLOW_APISERVER_BASE_URL}"
         airflow_conf_set "webserver" "base_url" "$AIRFLOW_APISERVER_BASE_URL"
-        if [[ $(airflow_major_version) -eq 3 ]]; then
-            airflow_conf_set "api" "base_url" "$AIRFLOW_APISERVER_BASE_URL"
-        fi
+        airflow_conf_set "api" "base_url" "$AIRFLOW_APISERVER_BASE_URL"
     fi
 }
 
@@ -480,10 +461,8 @@ airflow_configure_webserver_authentication() {
 #   None
 #########################
 airflow_configure_webserver_hashing() {
-    if [[ $(airflow_major_version) -eq 3 ]]; then
-        info "Configuring Airflow webserver hashing method"
-        airflow_webserver_conf_set "FAB_PASSWORD_HASH_METHOD" "pbkdf2:sha256" "yes"
-    fi
+    info "Configuring Airflow webserver hashing method"
+    airflow_webserver_conf_set "FAB_PASSWORD_HASH_METHOD" "pbkdf2:sha256" "yes"
 }
 
 ########################
@@ -662,7 +641,6 @@ airflow_create_admin_user() {
 airflow_create_pool() {
     if [[ -n "$AIRFLOW_POOL_NAME" ]] && [[ -n "$AIRFLOW_POOL_SIZE" ]] && [[ -n "$AIRFLOW_POOL_DESC" ]]; then
         local pool_cmd=("pools" "set")
-        [[ $(airflow_major_version) -eq 2 ]] && pool_cmd=("pool" "-s")
         info "Creating Airflow pool"
         airflow_execute "${pool_cmd[@]}" "$AIRFLOW_POOL_NAME" "$AIRFLOW_POOL_SIZE" "$AIRFLOW_POOL_DESC"
     fi
@@ -769,20 +747,6 @@ airflow_exporter_stop() {
 }
 
 ########################
-# Get Airflow major version
-# Globals:
-#   AIRFLOW_BASE_DIR
-# Arguments:
-#   None
-# Returns:
-#   airflow major version
-#########################
-airflow_major_version() {
-    local -r raw_version="$("${AIRFLOW_BASE_DIR}/venv/bin/airflow" version | grep -v "WARNING\|DEBUG" 2>/dev/null)"
-    get_sematic_version "$raw_version" 1
-}
-
-########################
 # Generate a secret key for Airflow
 # Arguments:
 #   None
@@ -804,10 +768,8 @@ airflow_update_secret_keys() {
     local -r webserver_key="$(airflow_generate_secret_key)"
     airflow_conf_set "webserver" "secret_key" "${webserver_key}"
 
-    if [[ $(airflow_major_version) -eq 3 ]]; then
-        local -r apiserver_key="$(airflow_generate_secret_key)"
-        airflow_conf_set "api_auth" "jwt_secret" "${apiserver_key}"
-    fi
+    local -r apiserver_key="$(airflow_generate_secret_key)"
+    airflow_conf_set "api_auth" "jwt_secret" "${apiserver_key}"
 }
 
 ########################
