@@ -17,7 +17,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "prometheus-3.11.2-1-linux-${OS_ARCH}-debian-12" \
+      "prometheus-3.11.3-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -41,11 +41,11 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2026-04-13T13:02:40Z" \
+      org.opencontainers.image.created="2026-04-27T15:58:56Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="prometheus" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="3.11.2"
+      org.opencontainers.image.version="3.11.3"
 
 COPY rootfs /
 COPY --from=builder /opt/bitnami/rootfs /
@@ -55,9 +55,9 @@ COPY --from=builder /opt/bitnami/prometheus/conf /opt/bitnami/prometheus/conf
 COPY --from=builder /opt/bitnami/prometheus/data /opt/bitnami/prometheus/data
 COPY --from=builder /opt/bitnami/prometheus/licenses /opt/bitnami/prometheus/licenses
 
-ENV APP_VERSION="3.11.2" \
+ENV APP_VERSION="3.11.3" \
     BITNAMI_APP_NAME="prometheus" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/prometheus/bin:$PATH"
 
 EXPOSE 9090
