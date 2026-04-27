@@ -11,6 +11,12 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name charts-syncer bitnami/charts-syncer:latest
 ```
 
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/charts-syncer/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/charts-syncer/docker-compose.yml)
+
 ## Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
