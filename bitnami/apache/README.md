@@ -11,7 +11,13 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name apache bitnami/apache:latest
 ```
 
-You can find the available configuration options in the [Environment Variables](#environment-variables) section.
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/apache/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/apache/docker-compose.yml)
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/apache).
 
 ## Why use Bitnami Secure Images?
 
@@ -45,10 +51,6 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 ## Get this image
 
 The Bitnami Apache Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/apache).
 
 ## Hosting a static website
 
@@ -135,32 +137,6 @@ The following tables list the main variables you can set.
 | `APACHE_DAEMON_GROUP`              | Apache system group.                                      | `daemon`                          |
 | `APACHE_DEFAULT_HTTP_PORT_NUMBER`  | Default Apache HTTP port number to enable at build time.  | `8080`                            |
 | `APACHE_DEFAULT_HTTPS_PORT_NUMBER` | Default Apache HTTPS port number to enable at build time. | `8443`                            |
-
-When you start the Apache image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
-
-- For docker-compose add the variable name and value under the application section:
-
-```yaml
-version: '2'
-
-services:
-  apache:
-    image: bitnami/apache:latest
-    ports:
-      - 80:8081
-      - 443:8443
-    environment:
-      - APACHE_HTTP_PORT_NUMBER=8081
-```
-
-- For manual execution add a `-e` option with each variable and value:
-
-```console
-docker run -d --name apache -p 80:8081 -p 443:443 \
-  --network apache-tier \
-  --e APACHE_HTTP_PORT_NUMBER=8081 \
-  bitnami/apache:latest
-```
 
 ### Adding custom virtual hosts
 
@@ -287,19 +263,7 @@ Apache can be used to reverse proxy to other containers using Docker's linking s
 
 ## Logging
 
-The Bitnami Apache Docker image sends the container logs to the `stdout`. To view the logs:
-
-```console
-docker logs apache
-```
-
-or using Docker Compose:
-
-```console
-docker-compose logs apache
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+The Bitnami Apache Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Customize this image
 
