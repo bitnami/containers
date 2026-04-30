@@ -11,6 +11,14 @@ All software products, projects and company names are trademark(TM) or registere
 docker run --name minio bitnami/minio:latest
 ```
 
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/minio/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/minio/docker-compose.yml)
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/minio).
+
 ## Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
@@ -43,10 +51,6 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 ## Get this image
 
 The Bitnami Bitnami Object Storage based on MinIO&reg; Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/minio).
 
 ## Persisting your database
 
@@ -116,14 +120,6 @@ docker run --name minio -d bitnami/minio:latest
 docker exec minio mc admin info local
 ```
 
-or using Docker Compose:
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/minio/docker-compose.yml > docker-compose.yml
-docker-compose up -d
-docker-compose exec minio mc admin info local
-```
-
 ### Creating default buckets
 
 You can create a series of buckets in the MinIO(R) server during the initialization of the container by setting the environment variable `MINIO_DEFAULT_BUCKETS`.
@@ -161,25 +157,7 @@ The Bitnami Bitnami Object Storage based on MinIO&reg; Docker image from the [Bi
 
 ## Logging
 
-The Bitnami MinIO(R) Docker image sends the container logs to the `stdout`. To view the logs:
-
-```console
-docker logs minio
-```
-
-or using Docker Compose:
-
-```console
-docker-compose logs minio
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
-
-### HTTP log trace
-
-To enable HTTP log trace, you can set the environment variable `MINIO_HTTP_TRACE` to redirect the logs to a specific file as detailed at [MinIO(R) documentation](https://docs.min.io/docs/minio-server-configuration-guide.html).
-
-When setting this environment variable to `/opt/bitnami/minio/log/minio.log`, the logs will be sent to the `stdout`.
+The Bitnami Bitnami Object Storage based on MinIO&reg; Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## License
 
