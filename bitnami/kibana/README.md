@@ -7,8 +7,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ## TL;DR
 
-### Docker Compose
-
 ```console
 docker run --name kibana bitnami/kibana:latest
 ```
@@ -243,13 +241,7 @@ The Bitnami Kibana Docker image from the [Bitnami Secure Images](https://go-vmwa
 
 ## Logging
 
-The Bitnami Kibana Docker image sends the container logs to the `stdout`. To view the logs:
-
-```console
-docker logs kibana
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+The Bitnami Kibana Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Notable Changes
 
