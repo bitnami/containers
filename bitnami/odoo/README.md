@@ -11,7 +11,13 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name odoo bitnami/odoo:latest
 ```
 
-**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/odoo/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/odoo/docker-compose.yml)
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/odoo).
 
 ## Why use Bitnami Secure Images?
 
@@ -115,8 +121,6 @@ The following tables list the main variables you can set.
 | `ODOO_DAEMON_GROUP`          | Odoo system group.                              | `odoo`                                        |
 | `ODOO_DEFAULT_DATABASE_HOST` | Default database server host.                   | `postgresql`                                  |
 
-When you start the Odoo image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
-
 ### Examples
 
 #### SMTP configuration
@@ -135,70 +139,7 @@ The Bitnami Odoo Docker image from the [Bitnami Secure Images](https://go-vmware
 
 ## Logging
 
-The Bitnami Odoo Docker image sends the container logs to `stdout`. To view the logs:
-
-```console
-docker logs odoo
-```
-
-Or using Docker Compose:
-
-```console
-docker-compose logs odoo
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
-
-## Maintenance
-
-### Backing up your container
-
-To backup your data, configuration and logs, follow these simple steps:
-
-#### Step 1: Stop the currently running container
-
-```console
-docker stop odoo
-```
-
-Or using Docker Compose:
-
-```console
-docker-compose stop odoo
-```
-
-#### Step 2: Run the backup command
-
-We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
-
-```console
-docker run --rm -v /path/to/odoo-backups:/backups --volumes-from odoo busybox \
-  cp -a /bitnami/odoo /backups/latest
-```
-
-### Restoring a backup
-
-Restoring a backup is as simple as mounting the backup as volumes in the containers.
-
-For the PostgreSQL database container:
-
-```diff
- $ docker run -d --name postgresql \
-   ...
--  --volume /path/to/postgresql-persistence:/bitnami/postgresql \
-+  --volume /path/to/postgresql-backups/latest:/bitnami/postgresql \
-   bitnami/postgresql:latest
-```
-
-For the Odoo container:
-
-```diff
- $ docker run -d --name odoo \
-   ...
--  --volume /path/to/odoo-persistence:/bitnami/odoo \
-+  --volume /path/to/odoo-backups/latest:/bitnami/odoo \
-   bitnami/odoo:latest
-```
+The Bitnami Odoo Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Notable Changes
 
