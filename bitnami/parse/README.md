@@ -13,6 +13,14 @@ docker run --name parse bitnami/parse:latest
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
 
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/parse/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/parse/docker-compose.yml)
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/parse).
+
 ## Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
@@ -62,41 +70,6 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 > **NOTE** As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
-## Upgrade this application
-
-Bitnami provides up-to-date versions of Mongodb and Parse, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Parse container. For the Mongodb upgrade see <https://github.com/bitnami/containers/tree/main/bitnami/mongodb#user-content-upgrade-this-image>
-
-1. Get the updated images:
-
-   ```console
-   docker pull bitnami/parse:latest
-   ```
-
-2. Stop your container
-
-    - For docker-compose: `$ docker-compose stop parse`
-    - For manual execution: `$ docker stop parse`
-
-3. Take a snapshot of the application state
-
-    ```console
-    rsync -a /path/to/parse-persistence /path/to/parse-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
-    ```
-
-    Additionally, [snapshot the MongoDB&reg; data](https://github.com/bitnami/containers/blob/main/bitnami/mongodb#step-2-stop-and-backup-the-currently-running-container)
-
-    You can use these snapshots to restore the application state should the upgrade fail.
-
-4. Remove the currently running container
-
-    - For docker-compose: `$ docker-compose rm parse`
-    - For manual execution: `$ docker rm parse`
-
-5. Run the new image
-
-    - For docker-compose: `$ docker-compose up parse`
-    - For manual execution (mount the directories if needed): `docker run --name parse bitnami/parse:latest`
-
 ## Configuration
 
 The following section describes the supported environment variables
@@ -139,8 +112,6 @@ The following tables list the main variables you can set.
 | `PARSE_DAEMON_USER`           | Parse system user.                               | `parse`                         |
 | `PARSE_DAEMON_GROUP`          | Parse system group.                              | `parse`                         |
 | `PARSE_DEFAULT_DATABASE_HOST` | Default database server host.                    | `mongodb`                       |
-
-When you start the parse image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
 
 ### How to deploy your Cloud functions with Parse Cloud Code?
 
