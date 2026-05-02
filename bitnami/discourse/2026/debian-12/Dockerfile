@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-05-01T12:26:26Z" \
+      org.opencontainers.image.created="2026-05-02T18:32:27Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/discourse/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/discourse" \
@@ -54,7 +54,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/discourse/postunpack.sh
 ENV APP_VERSION="2026.5.0" \
     BITNAMI_APP_NAME="discourse" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="3" \
     LD_LIBRARY_PATH="/opt/bitnami/postgresql/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/brotli/bin:$PATH"
 
