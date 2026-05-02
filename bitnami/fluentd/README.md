@@ -11,8 +11,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name fluentd bitnami/fluentd:latest
 ```
 
-You can find the available configuration options in the [Environment Variables](#environment-variables) section.
-
 ## Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
@@ -120,13 +118,7 @@ The Bitnami Fluentd Docker image from the [Bitnami Secure Images](https://go-vmw
 
 ## Logging
 
-The Bitnami fluentd Docker image sends the container logs to the `stdout`. To view the logs:
-
-```console
-docker logs fluentd
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+The Bitnami Fluentd Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Customize this image
 
