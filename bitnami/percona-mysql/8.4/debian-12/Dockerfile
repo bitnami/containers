@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-04-24T18:17:42Z" \
+      org.opencontainers.image.created="2026-05-02T20:11:58Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/percona-mysql/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/percona-mysql" \
@@ -52,7 +52,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/mysql/postunpack.sh
 ENV APP_VERSION="8.4.8-8" \
     BITNAMI_APP_NAME="percona-mysql" \
-    IMAGE_REVISION="3" \
+    IMAGE_REVISION="4" \
     MYSQL_HOME="/opt/bitnami/mysql/conf" \
     PATH="/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/mysql/sbin:$PATH"
 
