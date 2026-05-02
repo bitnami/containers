@@ -11,6 +11,12 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name golang bitnami/golang:latest
 ```
 
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/golang/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/golang/docker-compose.yml)
+
 ## Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
@@ -36,10 +42,6 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 The Bitnami Golang Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
 
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes.
-
 ## Persisting your application
 
 For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
@@ -48,16 +50,6 @@ For persistence you should mount a directory at the `/bitnami` path. If the moun
 docker run \
     -v /path/to/golang-persistence:/bitnami \
     bitnami/golang:latest
-```
-
-You can also do this with a minor change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/golang/docker-compose.yml) file present in this repository:
-
-```yaml
-golang:
-  ...
-  volumes:
-    - /path/to/golang-persistence:/bitnami
-  ...
 ```
 
 ## Connecting to other containers
@@ -90,13 +82,7 @@ The Bitnami Golang Docker image from the [Bitnami Secure Images](https://go-vmwa
 
 ## Logging
 
-The Bitnami Golang Docker image sends the container logs to `stdout`. To view the logs:
-
-```console
-docker logs golang
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+The Bitnami Golang Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## License
 
