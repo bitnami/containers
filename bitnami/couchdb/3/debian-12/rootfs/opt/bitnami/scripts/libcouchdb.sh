@@ -96,8 +96,9 @@ couchdb_initialize() {
         if is_boolean_yes "$COUCHDB_CREATE_DATABASES"; then
             couchdb_start_bg
             couchdb_create_initial_databases
-            couchdb_stop
         fi
+        couchdb_run_init_scripts
+        is_couchdb_running && couchdb_stop
     else
         info "Deploying CouchDB with persisted data"
     fi
@@ -234,6 +235,55 @@ couchdb_create_initial_databases() {
         debug "Creating database '${db}'"
         debug_execute "${query[@]}"
     done
+}
+
+########################
+# Run custom init scripts from COUCHDB_INITSCRIPTS_DIR on first boot
+# Globals:
+#   COUCHDB_INITSCRIPTS_DIR
+#   COUCHDB_IGNORE_INITDB_SCRIPTS
+#   COUCHDB_DATA_DIR
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+couchdb_run_init_scripts() {
+    local -r semaphore="${COUCHDB_DATA_DIR}/.user_scripts_initialized"
+
+    if is_boolean_yes "${COUCHDB_IGNORE_INITDB_SCRIPTS:-no}"; then
+        info "Skipping init scripts (COUCHDB_IGNORE_INITDB_SCRIPTS=yes)"
+        return
+    fi
+
+    if [[ -f "$semaphore" ]]; then
+        info "Init scripts already executed, skipping..."
+        return
+    fi
+
+    local -a scripts
+    readarray -d '' scripts < <(find "${COUCHDB_INITSCRIPTS_DIR}/" -type f -name "*.sh" -print0 2>/dev/null | sort -z)
+    if [[ "${#scripts[@]}" -eq 0 ]]; then
+        return
+    fi
+
+    info "Loading user's custom files from ${COUCHDB_INITSCRIPTS_DIR} ..."
+    if ! is_couchdb_running; then
+        couchdb_start_bg
+    fi
+
+    for f in "${scripts[@]}"; do
+        if [[ -x "$f" ]]; then
+            debug "Executing $f"
+            "$f"
+        else
+            debug "Sourcing $f"
+            # shellcheck disable=SC1090
+            . "$f"
+        fi
+    done
+
+    touch "$semaphore"
 }
 
 ########################
