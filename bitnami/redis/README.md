@@ -11,7 +11,13 @@ Disclaimer: Redis is a registered trademark of Redis Ltd. Any rights therein are
 docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis:latest
 ```
 
-**Warning**: These quick setups are only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/redis/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/redis/docker-compose.yml)
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/redis).
 
 ## Why use Bitnami Secure Images?
 
@@ -46,13 +52,9 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 The Bitnami Redis&reg; Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
 
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/redis).
-
 ## Persisting your database
 
-Redis(R) provides a different range of [persistence options](https://redis.io/topics/persistence). This contanier uses *AOF persistence by default* but it is easy to overwrite that configuration in a `docker-compose.yaml` file with this entry `command: /opt/bitnami/scripts/redis/run.sh --appendonly no`. Alternatively, you may use the `REDIS_AOF_ENABLED` env variable as explained in [Disabling AOF persistence](https://github.com/bitnami/containers/blob/main/bitnami/redis#disabling-aof-persistence).
+Redis(R) provides a different range of [persistence options](https://redis.io/topics/persistence). This contanier uses *AOF persistence by default* but it is easy to overwrite that configuration by setting the following command when running the container  `/opt/bitnami/scripts/redis/run.sh --appendonly no`. Alternatively, you may use the `REDIS_AOF_ENABLED` env variable as explained in [Disabling AOF persistence](https://github.com/bitnami/containers/blob/main/bitnami/redis#disabling-aof-persistence).
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -145,18 +147,6 @@ Passing extra command-line flags to the redis service command is possible by add
 docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis:latest /opt/bitnami/scripts/redis/run.sh --maxmemory 100mb
 ```
 
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/redis/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  redis:
-  ...
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    command: /opt/bitnami/scripts/redis/run.sh --maxmemory 100mb
-  ...
-```
-
 Refer to the [Redis(R) documentation](https://redis.io/topics/config#passing-arguments-via-the-command-line) for the complete list of arguments.
 
 ### Setting the server password on first run
@@ -185,19 +175,6 @@ Redis(R) offers [ACL](https://redis.io/topics/acl) since 6.0 which allows certai
 
 ```console
 docker run -name redis -e REDIS_ACLFILE=/opt/bitnami/redis/mounted-etc/users.acl -v /path/to/users.acl:/opt/bitnami/redis/mounted-etc/users.acl bitnami/redis:latest
-```
-
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/redis/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  redis:
-  ...
-    environment:
-      - REDIS_ACLFILE=/opt/bitnami/redis/mounted-etc/users.acl
-    volumes:
-      - /path/to/users.acl:/opt/bitnami/redis/mounted-etc/users.acl
-  ...
 ```
 
 ### Setting up replication
@@ -242,18 +219,6 @@ docker run --name redis \
     bitnami/redis:latest
 ```
 
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/redis/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  redis:
-  ...
-    volumes:
-      - /path/to/your_redis.conf:/opt/bitnami/redis/mounted-etc/redis.conf
-      - /path/to/redis-persistence:/bitnami/redis/data
-  ...
-```
-
 Refer to the [Redis(R) configuration](https://redis.io/topics/config) manual for the complete list of configuration options.
 
 ### Overriding configuration
@@ -265,17 +230,6 @@ docker run --name redis \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -v /path/to/overrides.conf:/opt/bitnami/redis/mounted-etc/overrides.conf \
     bitnami/redis:latest
-```
-
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/redis/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  redis:
-  ...
-    volumes:
-      - /path/to/overrides.conf:/opt/bitnami/redis/mounted-etc/overrides.conf
-  ...
 ```
 
 ### Enable Redis(R) RDB persistence
@@ -290,19 +244,7 @@ The Bitnami Redis&reg; Docker image from the [Bitnami Secure Images](https://go-
 
 ## Logging
 
-The Bitnami Redis(R) Docker image sends the container logs to the `stdout`. To view the logs:
-
-```console
-docker logs redis
-```
-
-or using Docker Compose:
-
-```console
-docker-compose logs redis
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+The Bitnami Redis&reg; Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Notable Changes
 
