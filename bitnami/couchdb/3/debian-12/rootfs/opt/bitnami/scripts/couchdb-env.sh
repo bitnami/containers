@@ -55,6 +55,8 @@ export COUCHDB_CONF_DIR="${COUCHDB_BASE_DIR}/etc"
 export COUCHDB_CONF_FILE="${COUCHDB_CONF_DIR}/default.d/10-bitnami.ini"
 export COUCHDB_DATA_DIR="${COUCHDB_VOLUME_DIR}/data"
 export COUCHDB_INITSCRIPTS_DIR="/docker-entrypoint-initdb.d"
+export COUCHDB_TMP_DIR="${COUCHDB_BASE_DIR}/var/run"
+export COUCHDB_PID_FILE="${COUCHDB_TMP_DIR}/couchdb.pid"
 
 # System users (when running with a privileged user)
 export COUCHDB_DAEMON_USER="couchdb"

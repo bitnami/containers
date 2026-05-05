@@ -99,6 +99,8 @@ The following tables list the main variables you can set.
 | `COUCHDB_CONF_FILE`       | CouchDB configuration file.                                              | `${COUCHDB_CONF_DIR}/default.d/10-bitnami.ini` |
 | `COUCHDB_DATA_DIR`        | CouchDB directory where data is stored.                                  | `${COUCHDB_VOLUME_DIR}/data`                   |
 | `COUCHDB_INITSCRIPTS_DIR` | Path to directory containing custom init scripts executed on first boot. | `/docker-entrypoint-initdb.d`                  |
+| `COUCHDB_TMP_DIR`         | Directory where CouchDB temporary files are stored.                      | `${COUCHDB_BASE_DIR}/var/run`                  |
+| `COUCHDB_PID_FILE`        | Path to the PID file for CouchDB.                                        | `${COUCHDB_TMP_DIR}/couchdb.pid`               |
 | `COUCHDB_DAEMON_USER`     | CouchDB system user.                                                     | `couchdb`                                      |
 | `COUCHDB_DAEMON_GROUP`    | CouchDB system group.                                                    | `couchdb`                                      |
 
