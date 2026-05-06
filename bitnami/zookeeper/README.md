@@ -11,6 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name zookeeper bitnami/zookeeper:latest
 ```
 
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/zookeeper/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/zookeeper/docker-compose.yml)
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/zookeeper).
+
 ## Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
@@ -48,15 +56,9 @@ Subscribe to project updates by watching the [bitnami/containers GitHub reposito
 
 The Bitnami Apache ZooKeeper Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
 
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/zookeeper).
-
 ## Persisting your data
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
-
-> **NOTE** If you have already started using Apache ZooKeeper, follow the steps on [backing up](#backing-up-your-container) and [restoring](#restoring-a-backup) to pull the data from your running container down to your host.
 
 The image exposes a volume at `/bitnami/zookeeper` for the Apache ZooKeeper data. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
 
@@ -151,25 +153,6 @@ You can adjust the instance using the variables below.
 | `ZOO_DAEMON_USER`      | ZooKeeper system user.                      | `zookeeper`                     |
 | `ZOO_DAEMON_GROUP`     | ZooKeeper system group.                     | `zookeeper`                     |
 
-When you start the Apache ZooKeeper image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
-
-- For manual execution add a -e option with each variable and value:
-
-```console
-docker run --name zookeeper -e ZOO_SERVER_ID=1 bitnami/zookeeper:latest
-```
-
-- For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/zookeeper/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  zookeeper:
-  ...
-    environment:
-      - ZOO_SERVER_ID=1
-  ...
-```
-
 ### Apache ZooKeeper configuration
 
 The image looks for configuration in the `conf/` directory of `/opt/bitnami/zookeeper`.
@@ -227,77 +210,7 @@ The Bitnami Apache ZooKeeper Docker image from the [Bitnami Secure Images](https
 
 ## Logging
 
-The Bitnami Apache ZooKeeper Docker image sends the container logs to the `stdout`. To view the logs:
-
-```console
-docker logs zookeeper
-```
-
-or using Docker Compose:
-
-```console
-docker-compose logs zookeeper
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
-
-## Maintenance
-
-The following sections describe how to back up, restore, and upgrade the container.
-
-### Backing up your container
-
-To backup your data, follow these simple steps:
-
-#### Step 1: Stop the currently running container
-
-```console
-docker stop zookeeper
-```
-
-or using Docker Compose:
-
-```console
-docker-compose stop zookeeper
-```
-
-#### Step 2: Run the backup command
-
-We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
-
-```console
-docker run --rm -v /path/to/zookeeper-backups:/backups --volumes-from zookeeper busybox \
-  cp -a /bitnami/zookeeper /backups/latest
-```
-
-or using Docker Compose:
-
-```console
-docker run --rm -v /path/to/zookeeper-backups:/backups --volumes-from `docker-compose ps -q zookeeper` busybox \
-  cp -a /bitnami/zookeeper /backups/latest
-```
-
-### Restoring a backup
-
-Restoring a backup is as simple as mounting the backup as volumes in the container.
-
-```console
-docker run -v /path/to/zookeeper-backups/latest:/bitnami/zookeeper bitnami/zookeeper:latest
-```
-
-or using Docker Compose:
-
-```yaml
-version: '2'
-
-services:
-  zookeeper:
-    image: bitnami/zookeeper:latest
-    ports:
-      - 2181:2181
-    volumes:
-      - /path/to/zookeeper-backups/latest:/bitnami/zookeeper
-```
+The Bitnami Apache ZooKeeper Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Notable changes
 

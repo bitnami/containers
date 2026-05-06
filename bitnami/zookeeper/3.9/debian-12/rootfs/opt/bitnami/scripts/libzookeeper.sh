@@ -601,14 +601,19 @@ zookeeper_healthcheck() {
     local port="$ZOO_PORT_NUMBER"
 
     if [[ "$ZOO_TLS_CLIENT_ENABLE" = true ]]; then
-        if [[ "$JAVA_FIPS_MODE" = "restricted" ]]; then
+        if [[ "$JAVA_FIPS_MODE" = "restricted" || "$JAVA_FIPS_MODE" = "relaxed" ]]; then
             # In FIPS-restricted mode OpenSSL only allows FIPS-approved algorithms and
             # the legacy provider is completely disabled. Any keystore that uses RC2,
             # 3DES, or a SHA-1 MAC (common in Java-generated PKCS12 and BCFKS) cannot
             # be parsed by openssl pkcs12.
-            # Primary: use the admin HTTP server (no keystore interaction required).
-            # Fallback: nc on the plain clientPort (ZOO_PORT_NUMBER), which ZooKeeper
-            # keeps open alongside the TLS secureClientPort.
+            # In FIPS-relaxed mode the FIPS OpenSSL provider is still active
+            # (OPENSSL_FIPS_PROVIDER_PATH=/etc/ssl/provider_fips.cnf), which disables the
+            # file-store loader. openssl s_client cannot open /dev/fd file descriptors
+            # created by process substitution (-key <(...) -cert <(...)), making the
+            # standard TLS healthcheck unreliable.
+            # For both modes: primary check via the admin HTTP server (no keystore
+            # interaction). Fallback: nc on the plain clientPort (ZOO_PORT_NUMBER), which
+            # ZooKeeper keeps open alongside the TLS secureClientPort.
             local admin_url="http://127.0.0.1:${ZOO_ADMIN_SERVER_PORT_NUMBER}/commands/ruok"
             debug "Running healthcheck via admin server (FIPS mode): 'curl -sf --max-time ${ZOO_HC_TIMEOUT} ${admin_url}'"
             local curl_output=""
