@@ -11,7 +11,13 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name valkey -e ALLOW_EMPTY_PASSWORD=yes bitnami/valkey:latest
 ```
 
-**Warning**: These quick setups are only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/valkey/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/valkey/docker-compose.yml)
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/valkey).
 
 ## Why use Bitnami Secure Images?
 
@@ -46,13 +52,9 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 The Bitnami Valkey Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
 
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/valkey).
-
 ## Persisting your database
 
-Valkey provides a different range of [persistence options](https://valkey.io/docs/topics/persistence.html). This contanier uses *AOF persistence by default* but it is easy to overwrite that configuration in a `docker-compose.yaml` file with this entry `command: /opt/bitnami/scripts/valkey/run.sh --appendonly no`. Alternatively, you may use the `VALKEY_AOF_ENABLED` env variable as explained in [Disabling AOF persistence](https://github.com/bitnami/containers/blob/main/bitnami/valkey#disabling-aof-persistence).
+Valkey provides a different range of [persistence options](https://valkey.io/docs/topics/persistence.html). This contanier uses *AOF persistence by default* but it is easy to overwrite that configuration by setting the following command when running the container `/opt/bitnami/scripts/valkey/run.sh --appendonly no`. Alternatively, you may use the `VALKEY_AOF_ENABLED` env variable as explained in [Disabling AOF persistence](https://github.com/bitnami/containers/blob/main/bitnami/valkey#disabling-aof-persistence).
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -145,18 +147,6 @@ Passing extra command-line flags to the valkey service command is possible by ad
 docker run --name valkey -e ALLOW_EMPTY_PASSWORD=yes bitnami/valkey:latest /opt/bitnami/scripts/valkey/run.sh --maxmemory 100mb
 ```
 
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/valkey/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  valkey:
-  ...
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    command: /opt/bitnami/scripts/valkey/run.sh --maxmemory 100mb
-  ...
-```
-
 ### Setting the server password on first run
 
 Passing the `VALKEY_PASSWORD` environment variable when running the image for the first time will set the Valkey server password to the value of `VALKEY_PASSWORD` (or the content of the file specified in `VALKEY_PASSWORD_FILE`).
@@ -179,19 +169,6 @@ Valkey offers [ACL](https://valkey.io/docs/topics/acl.html) which allows certain
 
 ```console
 docker run -name valkey -e VALKEY_ACLFILE=/opt/bitnami/valkey/mounted-etc/users.acl -v /path/to/users.acl:/opt/bitnami/valkey/mounted-etc/users.acl bitnami/valkey:latest
-```
-
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/valkey/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  valkey:
-  ...
-    environment:
-      - VALKEY_ACLFILE=/opt/bitnami/valkey/mounted-etc/users.acl
-    volumes:
-      - /path/to/users.acl:/opt/bitnami/valkey/mounted-etc/users.acl
-  ...
 ```
 
 ### Setting up a standalone instance
@@ -240,18 +217,6 @@ docker run --name valkey \
     bitnami/valkey:latest
 ```
 
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/valkey/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  valkey:
-  ...
-    volumes:
-      - /path/to/your_valkey.conf:/opt/bitnami/valkey/mounted-etc/valkey.conf
-      - /path/to/valkey-persistence:/bitnami/valkey/data
-  ...
-```
-
 ### Overriding configuration
 
 Instead of providing a custom `valkey.conf`, you may also choose to provide only settings you wish to override. The image will look for `/opt/bitnami/valkey/mounted-etc/overrides.conf`. This will be ignored if custom `valkey.conf` is provided.
@@ -261,17 +226,6 @@ docker run --name valkey \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -v /path/to/overrides.conf:/opt/bitnami/valkey/mounted-etc/overrides.conf \
     bitnami/valkey:latest
-```
-
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/valkey/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  valkey:
-  ...
-    volumes:
-      - /path/to/overrides.conf:/opt/bitnami/valkey/mounted-etc/overrides.conf
-  ...
 ```
 
 ### Enable Valkey RDB persistence
@@ -286,19 +240,7 @@ The Bitnami Valkey Docker image from the [Bitnami Secure Images](https://go-vmwa
 
 ## Logging
 
-The Bitnami Valkey Docker image sends the container logs to the `stdout`. To view the logs:
-
-```console
-docker logs valkey
-```
-
-or using Docker Compose:
-
-```console
-docker-compose logs valkey
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+The Bitnami Valkey Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Notable Changes
 
