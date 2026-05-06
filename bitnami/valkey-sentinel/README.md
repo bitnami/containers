@@ -11,8 +11,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name valkey-sentinel -e VALKEY_PRIMARY_HOST=valkey bitnami/valkey-sentinel:latest
 ```
 
-**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
-
 ## Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
@@ -202,13 +200,7 @@ The Bitnami Valkey Sentinel Docker image from the [Bitnami Secure Images](https:
 
 ## Logging
 
-The Bitnami Valkey Sentinel Docker Image sends the container logs to the `stdout`. To view the logs:
-
-```console
-docker logs valkey
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+The Bitnami Valkey Sentinel Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Notable Changes
 
