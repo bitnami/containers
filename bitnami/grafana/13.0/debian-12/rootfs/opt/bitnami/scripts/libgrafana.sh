@@ -132,7 +132,13 @@ grafana_initialize() {
     grafana_install_plugins
 
     # Configure Grafana feature toggles
-    ! is_empty_value "$GF_FEATURE_TOGGLES" && grafana_conf_set "feature_toggles" "enable" "$GF_FEATURE_TOGGLES"
+    if ! is_empty_value "$GF_FEATURE_TOGGLES"; then
+        local -a feature_toggles_array
+        read -r -a feature_toggles_array <<< "$(tr ',' ' ' <<< "${GF_FEATURE_TOGGLES}")"
+        for feature in "${feature_toggles_array[@]}"; do
+            grafana_conf_set "feature_toggles" "$feature" "true"
+        done
+    fi
 
     # If using an external database, avoid nodes collition during migration
     if is_boolean_yes "$GRAFANA_MIGRATION_LOCK"; then
