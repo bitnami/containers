@@ -79,13 +79,7 @@ The Bitnami Consul Exporter Docker image from the [Bitnami Secure Images](https:
 
 ## Logging
 
-The Bitnami Consul Exporter Docker image sends the container logs to `stdout`. To view the logs:
-
-```console
-docker logs consul-exporter
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+The Bitnami Consul Exporter Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Notable Changes
 
