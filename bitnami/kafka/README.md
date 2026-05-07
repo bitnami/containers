@@ -11,6 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name kafka bitnami/kafka:latest
 ```
 
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/kafka/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/kafka/docker-compose.yml)
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/kafka).
+
 ## Why use Bitnami Secure Images?
 
 Those are hardened, minimal CVE images built and maintained by Bitnami. Bitnami Secure Images are based on the cloud-optimized, security-hardened enterprise [OS Photon Linux](https://vmware.github.io/photon/). Why choose BSI images?
@@ -44,15 +52,11 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 The Bitnami Apache Kafka Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
 
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/kafka).
-
 ## Persisting your data
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-> Note: If you have already started using your database, follow the steps on [backing up](#backing-up-your-container) and [restoring](#restoring-a-backup) to pull the data from your running container down to your host.
+> Note: If you have already started using your data, preserve the `/bitnami/kafka` volume contents before removing the container so you can mount the same data in a new container.
 
 The image exposes a volume at `/bitnami/kafka` for the Apache Kafka data. For persistence you can mount a directory at this location from your host. If the mounted directory is empty, it will be initialized on the first run.
 
@@ -126,16 +130,6 @@ Additionally, any environment variable beginning with `KAFKA_CFG_` will be mappe
 
 ```console
 docker run --name kafka -e KAFKA_CFG_PROCESS_ROLES ... -e KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true bitnami/kafka:latest
-```
-
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/kafka/docker-compose.yml) file present in this repository:
-
-```yaml
-kafka:
-  ...
-  environment:
-    - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
-  ...
 ```
 
 ### Security
@@ -266,69 +260,7 @@ The Bitnami Apache Kafka Docker image from the [Bitnami Secure Images](https://g
 
 ## Logging
 
-The Bitnami Apache Kafka Docker image sends the container logs to the `stdout`. To view the logs:
-
-```console
-docker logs kafka
-```
-
-Or using Docker Compose:
-
-```console
-docker-compose logs kafka
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
-
-## Maintenance
-
-### Backing up your container
-
-To backup your data, configuration and logs, follow these simple steps:
-
-#### Step 1: Stop the currently running container
-
-```console
-docker stop kafka
-```
-
-Or using Docker Compose:
-
-```console
-docker-compose stop kafka
-```
-
-#### Step 2: Run the backup command
-
-We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
-
-```console
-docker run --rm -v /path/to/kafka-backups:/backups --volumes-from kafka busybox \
-  cp -a /bitnami/kafka /backups/latest
-```
-
-Or using Docker Compose:
-
-```console
-docker run --rm -v /path/to/kafka-backups:/backups --volumes-from `docker-compose ps -q kafka` busybox \
-  cp -a /bitnami/kafka /backups/latest
-```
-
-### Restoring a backup
-
-Restoring a backup is as simple as mounting the backup as volumes in the container.
-
-```console
-docker run -v /path/to/kafka-backups/latest:/bitnami/kafka bitnami/kafka:latest
-```
-
-You can also modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/kafka/docker-compose.yml) file present in this repository:
-
-```yaml
-kafka:
-  volumes:
-    - /path/to/kafka-backups/latest:/bitnami/kafka
-```
+The Bitnami Apache Kafka Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Notable Changes
 
