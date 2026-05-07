@@ -85,13 +85,7 @@ The Bitnami Elasticsearch Exporter Docker image from the [Bitnami Secure Images]
 
 ## Logging
 
-The Bitnami elasticsearch-exporter Docker image sends the container logs to the `stdout`. To view the logs:
-
-```console
-docker logs elasticsearch-exporter
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+The Bitnami Elasticsearch Exporter Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Notable Changes
 
