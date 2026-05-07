@@ -102,6 +102,9 @@ couchdb_initialize() {
     else
         info "Deploying CouchDB with persisted data"
     fi
+
+    # Avoid exit code of previous commands to affect the result of this function
+    true
 }
 
 ########################
@@ -117,10 +120,14 @@ couchdb_update_conf_file() {
     is_empty_value "$COUCHDB_PORT_NUMBER" || couchdb_conf_set "chttpd" "port" "$COUCHDB_PORT_NUMBER"
     is_empty_value "$COUCHDB_BIND_ADDRESS" || couchdb_conf_set "chttpd" "bind_address" "$COUCHDB_BIND_ADDRESS"
     couchdb_conf_set "admins" "$COUCHDB_USER" "$COUCHDB_PASSWORD" "${COUCHDB_CONF_DIR}/local.ini"
+    # Write to the volume-backed persistent conf (loaded last, highest precedence) so that password
+    # rotation takes effect on restarts with a new secret.
+    [[ -f "${COUCHDB_PERSISTENT_CONF_FILE:-}" ]] && couchdb_conf_set "admins" "$COUCHDB_USER" "$COUCHDB_PASSWORD" "${COUCHDB_PERSISTENT_CONF_FILE}"
     couchdb_conf_set "chttpd" "require_valid_user" "true"
     couchdb_conf_set "couch_httpd_auth" "require_valid_user" "true"
     couchdb_conf_set "httpd" "WWW-Authenticate" 'Basic realm="administrator"'
     is_empty_value "$COUCHDB_SECRET" || couchdb_conf_set "couch_httpd_auth" "secret" "$COUCHDB_SECRET"
+    is_empty_value "$COUCHDB_SECRET" || couchdb_conf_set "chttpd_auth" "secret" "$COUCHDB_SECRET"
 }
 
 ########################
@@ -132,11 +139,38 @@ couchdb_update_conf_file() {
 # Returns:
 #   None
 #########################
-couchdb_update_vm_args_file() { # TODO Confirm that works
+couchdb_update_vm_args_file() {
     couchdb_vm_args_set "-name" "$COUCHDB_NODENAME"
     couchdb_vm_args_set "-kernel inet_dist_listen_min" "$COUCHDB_CLUSTER_PORT_NUMBER"
     couchdb_vm_args_set "-kernel inet_dist_listen_max" "$COUCHDB_CLUSTER_PORT_NUMBER"
     couchdb_vm_args_set "-setcookie" "$COUCHDB_SECRET"
+    couchdb_vm_args_set "-kernel inet_dist_use_interface" "{0,0,0,0}"
+    if ! is_empty_value "${COUCHDB_ERLANG_HMAX:-}" && [ "${COUCHDB_ERLANG_HMAX}" -gt 0 ]; then
+        couchdb_vm_args_set "+hmax" "$((COUCHDB_ERLANG_HMAX / 8))"
+    fi
+    if is_boolean_yes "${COUCHDB_INTERNODE_TLS_ENABLED:-no}"; then
+        local ssl_dist_cfg="${COUCHDB_CONF_DIR}/ssl_dist.cfg"
+        cat > "${ssl_dist_cfg}" << EOF
+[{server,
+  [{certfile, "${COUCHDB_TLS_CERT_FILE}"},
+   {keyfile, "${COUCHDB_TLS_KEY_FILE}"},
+   {cacertfile, "${COUCHDB_TLS_CA_FILE}"},
+   {verify, verify_peer},
+   {fail_if_no_peer_cert, true}]},
+ {client,
+  [{certfile, "${COUCHDB_TLS_CERT_FILE}"},
+   {keyfile, "${COUCHDB_TLS_KEY_FILE}"},
+   {cacertfile, "${COUCHDB_TLS_CA_FILE}"},
+   {verify, verify_peer},
+   {server_name_indication, disable}]}].
+EOF
+        couchdb_vm_args_set "-proto_dist" "couch"
+        couchdb_vm_args_set "-couch_dist no_tls" "false"
+        couchdb_vm_args_set "-ssl_dist_optfile" "${ssl_dist_cfg}"
+    fi
+    if ! is_empty_value "${COUCHDB_EXTRA_VM_ARGS:-}"; then
+        echo "${COUCHDB_EXTRA_VM_ARGS}" >>"${COUCHDB_CONF_DIR}/vm.args"
+    fi
 }
 
 ########################
@@ -156,7 +190,7 @@ couchdb_vm_args_set() {
 
     if ! is_empty_value "$value"; then
         if grep -q -E "^\s*${key}\s+.*$" "${COUCHDB_CONF_DIR}/vm.args"; then
-            vm_args_content="$(sed -E "s/^\s*${key}\s+.*$/${key} ${value}/" "${COUCHDB_CONF_DIR}/vm.args")"
+            vm_args_content="$(sed -E "s|^\s*${key}\s+.*$|${key} ${value}|" "${COUCHDB_CONF_DIR}/vm.args")"
             echo "$vm_args_content" >"${COUCHDB_CONF_DIR}/vm.args"
         else
             echo "${key} ${value}" >>"${COUCHDB_CONF_DIR}/vm.args"
@@ -198,9 +232,14 @@ couchdb_start_bg() {
     info "Starting CouchDB in background..."
     local start_command=("${COUCHDB_BIN_DIR}/couchdb")
     am_i_root && start_command=("run_as_user" "$COUCHDB_DAEMON_USER" "${start_command[@]}")
-    debug_execute "${start_command[@]}" &
-    wait-for-port "${COUCHDB_PORT_NUMBER:-5984}"
-    wait-for-port "${COUCHDB_CLUSTER_PORT_NUMBER:-9100}"
+    local -r couchdb_log_file="${COUCHDB_TMP_DIR}/couchdb-startup.log"
+    "${start_command[@]}" >"${couchdb_log_file}" 2>&1 &
+    if ! wait-for-port "${COUCHDB_PORT_NUMBER:-5984}" || ! wait-for-port "${COUCHDB_CLUSTER_PORT_NUMBER:-9100}"; then
+        error "CouchDB failed to start. Startup output:"
+        cat "${couchdb_log_file}" >&2
+        return 1
+    fi
+    debug_execute cat "${couchdb_log_file}"
 }
 
 ########################

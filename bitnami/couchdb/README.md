@@ -87,22 +87,29 @@ The following tables list the main variables you can set.
 | `COUCHDB_USER`                  | CouchDB admin username.                                                                               | `admin`       |
 | `COUCHDB_PASSWORD`              | Password for the CouchDB admin user.                                                                  | `couchdb`     |
 | `COUCHDB_SECRET`                | CouchDB secret/token used for proxy and cookie authentication.                                        | `bitnami`     |
+| `COUCHDB_ERLANG_HMAX`           | Per-process Erlang heap cap in bytes. Used to compute +hmax (value / 8 = word count).                 | `nil`         |
+| `COUCHDB_EXTRA_VM_ARGS`         | Additional Erlang VM arguments appended to vm.args.                                                   | `nil`         |
+| `COUCHDB_INTERNODE_TLS_ENABLED` | Enable TLS encryption for the Erlang distribution protocol (inter-node communication).                | `no`          |
+| `COUCHDB_TLS_CERT_FILE`         | Path to the TLS certificate file used for Erlang distribution encryption.                             | `nil`         |
+| `COUCHDB_TLS_KEY_FILE`          | Path to the TLS private key file used for Erlang distribution encryption.                             | `nil`         |
+| `COUCHDB_TLS_CA_FILE`           | Path to the CA certificate file used to verify peers during Erlang distribution.                      | `nil`         |
 
 #### Read-only environment variables
 
-| Name                      | Description                                                              | Value                                          |
-|---------------------------|--------------------------------------------------------------------------|------------------------------------------------|
-| `COUCHDB_BASE_DIR`        | CouchDB installation directory.                                          | `${BITNAMI_ROOT_DIR}/couchdb`                  |
-| `COUCHDB_VOLUME_DIR`      | CouchDB persistence directory.                                           | `/bitnami/couchdb`                             |
-| `COUCHDB_BIN_DIR`         | CouchDB directory for binary executables.                                | `${COUCHDB_BASE_DIR}/bin`                      |
-| `COUCHDB_CONF_DIR`        | CouchDB configuration directory.                                         | `${COUCHDB_BASE_DIR}/etc`                      |
-| `COUCHDB_CONF_FILE`       | CouchDB configuration file.                                              | `${COUCHDB_CONF_DIR}/default.d/10-bitnami.ini` |
-| `COUCHDB_DATA_DIR`        | CouchDB directory where data is stored.                                  | `${COUCHDB_VOLUME_DIR}/data`                   |
-| `COUCHDB_INITSCRIPTS_DIR` | Path to directory containing custom init scripts executed on first boot. | `/docker-entrypoint-initdb.d`                  |
-| `COUCHDB_TMP_DIR`         | Directory where CouchDB temporary files are stored.                      | `${COUCHDB_BASE_DIR}/var/run`                  |
-| `COUCHDB_PID_FILE`        | Path to the PID file for CouchDB.                                        | `${COUCHDB_TMP_DIR}/couchdb.pid`               |
-| `COUCHDB_DAEMON_USER`     | CouchDB system user.                                                     | `couchdb`                                      |
-| `COUCHDB_DAEMON_GROUP`    | CouchDB system group.                                                    | `couchdb`                                      |
+| Name                           | Description                                                                                                                                     | Value                                                    |
+|--------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|
+| `COUCHDB_BASE_DIR`             | CouchDB installation directory.                                                                                                                 | `${BITNAMI_ROOT_DIR}/couchdb`                            |
+| `COUCHDB_VOLUME_DIR`           | CouchDB persistence directory.                                                                                                                  | `/bitnami/couchdb`                                       |
+| `COUCHDB_BIN_DIR`              | CouchDB directory for binary executables.                                                                                                       | `${COUCHDB_BASE_DIR}/bin`                                |
+| `COUCHDB_CONF_DIR`             | CouchDB configuration directory.                                                                                                                | `${COUCHDB_BASE_DIR}/etc`                                |
+| `COUCHDB_CONF_FILE`            | CouchDB configuration file.                                                                                                                     | `${COUCHDB_CONF_DIR}/default.d/10-bitnami.ini`           |
+| `COUCHDB_DATA_DIR`             | CouchDB directory where data is stored.                                                                                                         | `${COUCHDB_VOLUME_DIR}/data`                             |
+| `COUCHDB_PERSISTENT_CONF_FILE` | Path to the persistent CouchDB configuration file (survives container restarts). Admin credentials are written here so password rotation works. | `${COUCHDB_VOLUME_DIR}/persist-conf/99-runtime-conf.ini` |
+| `COUCHDB_INITSCRIPTS_DIR`      | Path to directory containing custom init scripts executed on first boot.                                                                        | `/docker-entrypoint-initdb.d`                            |
+| `COUCHDB_TMP_DIR`              | Directory where CouchDB temporary files are stored.                                                                                             | `${COUCHDB_BASE_DIR}/var/run`                            |
+| `COUCHDB_PID_FILE`             | Path to the PID file for CouchDB.                                                                                                               | `${COUCHDB_TMP_DIR}/couchdb.pid`                         |
+| `COUCHDB_DAEMON_USER`          | CouchDB system user.                                                                                                                            | `couchdb`                                                |
+| `COUCHDB_DAEMON_GROUP`         | CouchDB system group.                                                                                                                           | `couchdb`                                                |
 
 ### Mounting your own configuration files
 
