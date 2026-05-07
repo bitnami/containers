@@ -94,10 +94,11 @@ The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
-| Name                                    | Description                           | Default Value |
-|-----------------------------------------|---------------------------------------|---------------|
-| `GRAFANA_IMAGE_RENDERER_LISTEN_ADDRESS` | Grafana Image Renderer listen address | `127.0.0.1`   |
-| `GRAFANA_IMAGE_RENDERER_PORT_NUMBER`    | Grafana Image Renderer port number    | `8080`        |
+| Name                                    | Description                                                                       | Default Value                             |
+|-----------------------------------------|-----------------------------------------------------------------------------------|-------------------------------------------|
+| `GRAFANA_IMAGE_RENDERER_LISTEN_ADDRESS` | Grafana Image Renderer listen address                                             | `127.0.0.1`                               |
+| `GRAFANA_IMAGE_RENDERER_PORT_NUMBER`    | Grafana Image Renderer port number                                                | `8080`                                    |
+| `GRAFANA_IMAGE_RENDERER_EXTRA_ENV_FILE` | File to store extra environment variables for the Grafana Image Renderer service. | `${GRAFANA_IMAGE_RENDERER_BASE_DIR}/.env` |
 
 #### Read-only environment variables
 
