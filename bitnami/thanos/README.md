@@ -40,17 +40,7 @@ Non-root container images add an extra layer of security and are generally recom
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/thanos).
-
-## Connecting to other containers
-
-Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a different server running inside a container can easily be accessed by your application containers and vice-versa.
-
-Containers attached to the same network can communicate with each other using the container name as the hostname.
-
-### Using Docker Compose
+## Using Docker Compose
 
 You can use the **docker-compose-cluster.yml** available on this repository to deploy an architecture like the one below:
 
@@ -81,6 +71,12 @@ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/mini
 docker-compose up -d
 ```
 
+## Connecting to other containers
+
+Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a different server running inside a container can easily be accessed by your application containers and vice-versa.
+
+Containers attached to the same network can communicate with each other using the container name as the hostname.
+
 ## Configuration
 
 Thanos can be configured via command-line flags and, depending on them, the same container image can be used to create components with differentes roles:
@@ -96,20 +92,7 @@ For further documentation, please check [Thanos documentation](https://github.co
 
 ## Logging
 
-The Bitnami Thanos Docker image sends the container logs to the `stdout`. To view the logs:
-
-```console
-docker logs thanos
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
-
-### FIPS configuration in Bitnami Secure Images
-
-The Bitnami Thanos Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
-
-- `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
-- `GODEBUG`: controls Go FIPS mode. Use `fips140=only` (restricted), `fips140=on` (relaxed), or `fips140=off` (disabled).
+The Bitnami Thanos Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## License
 
