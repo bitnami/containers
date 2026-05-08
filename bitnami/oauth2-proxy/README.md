@@ -80,13 +80,7 @@ The Bitnami OAuth2 Proxy Docker image from the [Bitnami Secure Images](https://g
 
 ## Logging
 
-The Bitnami oauth2-proxy Docker image sends the container logs to the `stdout`. To view the logs:
-
-```console
-docker logs oauth2-proxy
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+The Bitnami OAuth2 Proxy Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Notable Changes
 
