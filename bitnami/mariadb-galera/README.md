@@ -13,7 +13,13 @@ docker run --name mariadb \
   bitnami/mariadb-galera:latest
 ```
 
-**Warning**: These quick setups are only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/mariadb-galera/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/mariadb-galera/docker-compose.yml)
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/mariadb-galera).
 
 ## Why use Bitnami Secure Images?
 
@@ -49,10 +55,6 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 ## Get this image
 
 The Bitnami MariaDB Galera Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/mariadb-galera).
 
 ## Persisting your database
 
@@ -292,21 +294,7 @@ FROM bitnami/mariadb-galera
 
 ## Logging
 
-The Bitnami MariaDB Galera Docker image sends the container logs to `stdout`. To view the logs:
-
-```console
-docker logs mariadb
-```
-
-or using Docker Compose:
-
-```console
-docker-compose logs mariadb
-```
-
-To increase the verbosity on initialization or add extra debug information, you can assign the `BITNAMI_DEBUG` environment variable to `true`.
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+The Bitnami MariaDB Galera Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Useful Links
 

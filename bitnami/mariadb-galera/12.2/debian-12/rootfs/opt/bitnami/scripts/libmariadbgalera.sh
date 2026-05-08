@@ -163,6 +163,10 @@ datadir=${DB_DATA_DIR}
 [client]
 port=${DB_DEFAULT_PORT_NUMBER}
 socket=${DB_SOCKET_FILE}
+
+[mysql]
+port=${DB_DEFAULT_PORT_NUMBER}
+socket=${DB_SOCKET_FILE}
 default_character_set=${DB_DEFAULT_CHARACTER_SET}
 plugin_dir=${DB_BASE_DIR}/lib/plugin
 
@@ -861,6 +865,10 @@ binlog_format=row
 log_bin=mysql-bin
 
 [client]
+port=${DB_DEFAULT_PORT_NUMBER}
+socket=${DB_SOCKET_FILE}
+
+[mysql]
 port=${DB_DEFAULT_PORT_NUMBER}
 socket=${DB_SOCKET_FILE}
 default_character_set=${DB_DEFAULT_CHARACTER_SET}
