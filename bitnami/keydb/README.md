@@ -11,7 +11,13 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 docker run --name keydb -e ALLOW_EMPTY_PASSWORD=yes bitnami/keydb:latest
 ```
 
-**Warning**: These quick setups are only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/keydb/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/keydb/docker-compose.yml)
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/keydb).
 
 ## Why use Bitnami Secure Images?
 
@@ -42,13 +48,9 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 The Bitnami KeyDB Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
 
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/keydb).
-
 ## Persisting your database
 
-KeyDB provides a different range of [persistence options](https://keydb.io/docs/topics/persistence.html). This contanier uses *AOF persistence by default* but it is easy to overwrite that configuration in a `docker-compose.yaml` file with this entry `command: /opt/bitnami/scripts/keydb/run.sh --appendonly no`. Alternatively, you may use the `KEYDB_AOF_ENABLED` env variable as explained in [Disabling AOF persistence](https://github.com/bitnami/containers/blob/main/bitnami/keydb#disabling-aof-persistence).
+KeyDB provides a different range of [persistence options](https://keydb.io/docs/topics/persistence.html). This contanier uses *AOF persistence by default* but it is easy to overwrite that configuration by setting the following command when running the container `/opt/bitnami/scripts/keydb/run.sh --appendonly no`. Alternatively, you may use the `KEYDB_AOF_ENABLED` env variable as explained in [Disabling AOF persistence](https://github.com/bitnami/containers/blob/main/bitnami/keydb#disabling-aof-persistence).
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -137,18 +139,6 @@ Passing extra command-line flags to the keydb service command is possible by add
 docker run --name keydb -e ALLOW_EMPTY_PASSWORD=yes bitnami/keydb:latest /opt/bitnami/scripts/keydb/run.sh --maxmemory 100mb
 ```
 
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/keydb/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  keydb:
-  ...
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    command: /opt/bitnami/scripts/keydb/run.sh --maxmemory 100mb
-  ...
-```
-
 ### Setting the server password on first run
 
 Passing the `KEYDB_PASSWORD` environment variable when running the image for the first time will set the KeyDB server password to the value of `KEYDB_PASSWORD` (or the content of the file specified in `KEYDB_PASSWORD_FILE`).
@@ -171,19 +161,6 @@ KeyDB offers [ACL](https://keydb.io/docs/topics/acl.html) which allows certain c
 
 ```console
 docker run -name keydb -e KEYDB_ACL_FILE=/opt/bitnami/keydb/mounted-etc/users.acl -v /path/to/users.acl:/opt/bitnami/keydb/mounted-etc/users.acl bitnami/keydb:latest
-```
-
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/keydb/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  keydb:
-  ...
-    environment:
-      - KEYDB_ACL_FILE=/opt/bitnami/keydb/mounted-etc/users.acl
-    volumes:
-      - /path/to/users.acl:/opt/bitnami/keydb/mounted-etc/users.acl
-  ...
 ```
 
 ### Setting up a standalone instance
@@ -245,19 +222,7 @@ The Bitnami KeyDB Docker image from the [Bitnami Secure Images](https://go-vmwar
 
 ## Logging
 
-The Bitnami KeyDB Docker image sends the container logs to the `stdout`. To view the logs:
-
-```console
-docker logs keydb
-```
-
-or using Docker Compose:
-
-```console
-docker-compose logs keydb
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+The Bitnami KeyDB Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## License
 
