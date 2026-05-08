@@ -81,13 +81,7 @@ The Bitnami Push Gateway Docker image from the [Bitnami Secure Images](https://g
 
 ## Logging
 
-The Bitnami pushgateway Docker image sends the container logs to the `stdout`. To view the logs:
-
-```console
-docker logs pushgateway
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+The Bitnami Push Gateway Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Notable Changes
 
