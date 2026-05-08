@@ -7,8 +7,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ## TL;DR
 
-Use this quick command to run the container.
-
 ```console
 docker run --name harbor-adapter-trivy bitnami/harbor-adapter-trivy:latest
 ```
@@ -116,13 +114,7 @@ The Bitnami Harbor Adapter Trivy Docker image from the [Bitnami Secure Images](h
 
 ## Logging
 
-The Bitnami Harbor-Adapter-Trivy Docker image sends the container logs to `stdout`. To view the logs:
-
-```console
-docker logs harbor-adapter-trivy
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+The Bitnami Harbor Adapter Trivy Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Notable changes
 
