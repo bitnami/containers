@@ -78,13 +78,7 @@ You can also find more information in [the Memcached Exporter official documenta
 
 ## Logging
 
-The Bitnami Memcached Exporter Docker image sends the container logs to `stdout`. To view the logs:
-
-```console
-docker logs memcached-exporter
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+The Bitnami Memcached Exporter Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Notable Changes
 
