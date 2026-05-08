@@ -7,13 +7,17 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ## TL;DR
 
-### Docker Compose
-
 ```console
 docker run --name pgpool bitnami/pgpool:latest
 ```
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
+
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/pgpool/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/pgpool/docker-compose.yml)
 
 ## Why use Bitnami Secure Images?
 
@@ -47,10 +51,6 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 ## Get this image
 
 The Bitnami Pgpool-II Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes.
 
 ## Connecting to other containers
 
@@ -213,13 +213,7 @@ The Bitnami Pgpool-II Docker image from the [Bitnami Secure Images](https://go-v
 
 ## Logging
 
-The Bitnami Pgpool-II Docker image sends the container logs to `stdout`. To view the logs:
-
-```console
-docker logs pgpool
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+The Bitnami Pgpool-II Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Notable Changes
 
