@@ -7,11 +7,17 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ## TL;DR
 
-Use this quick command to run the container.
-
 ```console
 docker run --name harbor-registry bitnami/harbor-registry:latest
 ```
+
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/harbor-portal/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/harbor-portal/docker-compose.yml)
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/harbor).
 
 ## Why use Bitnami Secure Images?
 
