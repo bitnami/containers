@@ -7,13 +7,17 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ## TL;DR
 
-### Docker Compose
-
 ```console
 docker run --name spark bitnami/spark:latest
 ```
 
-You can find the available configuration options in the [Environment Variables](#environment-variables) section.
+## Using `docker-compose.yml`
+
+The docker-compose.yaml file of this container can be found in the [Bitnami Containers repository](https://github.com/bitnami/containers/).
+
+[https://github.com/bitnami/containers/tree/main/bitnami/spark/docker-compose.yml](https://github.com/bitnami/containers/tree/main/bitnami/spark/docker-compose.yml)
+
+Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/spark).
 
 ## Why use Bitnami Secure Images?
 
@@ -47,10 +51,6 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 ## Get this image
 
 The Bitnami Apache Spark Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
-
-## Using `docker-compose.yaml`
-
-Please be aware this file has not undergone internal testing. Consequently, we advise its use exclusively for development or testing purposes. For production-ready deployments, we highly recommend utilizing its associated [Bitnami Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/spark).
 
 ## Configuration
 
@@ -103,8 +103,6 @@ Additionally, more environment variables natively supported by Apache Spark can 
 
 For example, you could still use `SPARK_WORKER_CORES` or `SPARK_WORKER_MEMORY` to configure the number of cores and the amount of memory to be used by a worker machine.
 
-When you start the spark image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line.
-
 ### Security
 
 The Bitnami Apache Spark docker image supports enabling RPC authentication, RPC encryption and local storage encryption easily using the following environment variables in all the nodes of the cluster.
@@ -135,18 +133,6 @@ Additionally, SSL configuration can be easily activated following the next steps
     > Please note that `KEY_PASSWORD`, `KEYSTORE_PASSWORD`, and `TRUSTSTORE_PASSWORD` are placeholders that needs to be updated with a correct value.
 
 2. You need to mount your spark `keystore` and `truststore` files to `/opt/bitnami/spark/conf/certs`. Please note they should be called `spark-keystore.jks` and `spark-truststore.jks` and they should be in JKS format.
-
-### Setting up an Apache Spark cluster
-
-A Apache Spark cluster can easily be set up with the default docker-compose.yml file from the root of this repository. The docker-compose includes two different services, `spark-master` and `spark-worker.`
-
-By default, when you deploy the docker-compose file you will get an Apache Spark cluster with 1 master and 1 worker.
-
-If you want N workers, all you need to do is start the docker-compose deployment with the following command:
-
-```console
-docker-compose up --scale spark-worker=3
-```
 
 ### Mount a custom configuration file
 
@@ -197,74 +183,7 @@ The Bitnami Apache Spark Docker image from the [Bitnami Secure Images](https://g
 
 ## Logging
 
-The Bitnami Apache Spark Docker image sends the container logs to the `stdout`. To view the logs:
-
-```console
-docker logs spark
-```
-
-or using Docker Compose:
-
-```console
-docker-compose logs spark
-```
-
-You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
-
-## Maintenance
-
-The following sections describe how to back up, restore, and upgrade the image.
-
-### Backing up your container
-
-To backup your data, configuration and logs, follow these simple steps:
-
-1. Stop the currently running container
-
-    ```console
-    docker stop spark
-    ```
-
-    or using Docker Compose:
-
-    ```console
-    docker-compose stop spark
-    ```
-
-2. Run the backup command
-
-    We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
-
-    ```console
-    docker run --rm -v /path/to/spark-backups:/backups --volumes-from spark busybox \
-      cp -a /bitnami/spark /backups/latest
-    ```
-
-    or using Docker Compose:
-
-    ```console
-    docker run --rm -v /path/to/spark-backups:/backups --volumes-from `docker-compose ps -q spark` busybox \
-      cp -a /bitnami/spark /backups/latest
-    ```
-
-### Restoring your backup
-
-To restore your backup, mount the backup as volumes in the container.
-
-```console
-docker run -v /path/to/spark-backups/latest:/bitnami/spark bitnami/spark:latest
-```
-
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/spark/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  spark:
-  ...
-    volumes:
-      - /path/to/spark-backups/latest:/bitnami/spark
-  ...
-```
+The Bitnami Apache Spark Docker image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
 ## Notable changes
 
