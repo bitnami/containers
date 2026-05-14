@@ -186,7 +186,7 @@ opensearch_dashboards_vars=(
 # Security Plugin
 function setupSecurityPlugin {
     if [ -d "${OPENSEARCH_DASHBOARDS_PATH_PLUGINS}/securityDashboards" ]; then
-        if [ "$DISABLE_SECURITY_DASHBOARDS_PLUGIN" = "true" ]; then
+        if [ "${DISABLE_SECURITY_DASHBOARDS_PLUGIN:-false}" = "true" ]; then
             echo "Disabling OpenSearch Security Dashboards Plugin"
             "${OPENSEARCH_DASHBOARDS_PATH_BIN}/opensearch-dashboards-plugin" remove securityDashboards
 
