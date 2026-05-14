@@ -25,19 +25,6 @@ print_welcome_page
 debug "Copying files from $SERVER_DEFAULT_CONF_DIR to $SERVER_CONF_DIR"
 cp -nr "$SERVER_DEFAULT_CONF_DIR"/. "$SERVER_CONF_DIR"
 
-if ! is_dir_empty "$SERVER_DEFAULT_PLUGINS_DIR"; then
-    debug "Copying plugins from $SERVER_DEFAULT_PLUGINS_DIR to $SERVER_PLUGINS_DIR"
-    # Copy the plugins installed by default to the plugins directory
-    # If there is already a plugin with the same name in the plugins folder do nothing
-    for plugin_path in "${SERVER_DEFAULT_PLUGINS_DIR}"/*; do
-        plugin_name="$(basename "$plugin_path")"
-        plugin_moved_path="${SERVER_PLUGINS_DIR}/${plugin_name}"
-        if ! [[ -d "$plugin_moved_path" ]]; then
-            cp -r "$plugin_path" "$plugin_moved_path" 
-        fi
-    done
-fi
-
 if [[ "$1" = "/opt/bitnami/scripts/opensearch-dashboards/run.sh" ]]; then
     info "** Starting Opensearch Dashboards setup **"
     /opt/bitnami/scripts/opensearch-dashboards/setup.sh
