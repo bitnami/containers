@@ -184,7 +184,7 @@ opensearch_dashboards_vars=(
 )
 
 # Security Plugin
-function setupSecurityPlugin {
+function setupSecurityDashboardsPlugin {
     if [ -d "${OPENSEARCH_DASHBOARDS_PATH_PLUGINS}/securityDashboards" ]; then
         if [ "${DISABLE_SECURITY_DASHBOARDS_PLUGIN:-false}" = "true" ]; then
             echo "Disabling OpenSearch Security Dashboards Plugin"
@@ -211,7 +211,7 @@ function runOpenSearchDashboards {
     longopts=()
     for opensearch_dashboards_var in ${opensearch_dashboards_vars[*]}; do
         env_var=$(echo ${opensearch_dashboards_var^^} | tr . _)
-        value=${!env_var}
+        value=${!env_var:-}
         if [[ -n $value ]]; then
             longopt="--${opensearch_dashboards_var}=${value}"
             longopts+=("${longopt}")
