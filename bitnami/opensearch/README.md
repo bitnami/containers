@@ -186,7 +186,7 @@ For larger cluster, you can setup 'dedicated nodes' using the following environm
 - `OPENSEARCH_NODE_TYPE`: OpenSearch node type when behaving as a 'dedicated node'. Valid values: *master*, *data*, *coordinating* or *ingest*.
 - `OPENSEARCH_CLUSTER_MASTER_HOSTS`: List of OpenSearch master-eligible hosts. Available separators are ' ', ',' and ';'. If no values are provided, it will have the same value as `OPENSEARCH_CLUSTER_HOSTS`.
 
-Find more information about 'dedicated nodes' in the [official documentation](https://www.elastic.co/guide/en/opensearch/reference/current/modules-node.html).
+Find more information about 'dedicated nodes' in the [official documentation](https://docs.opensearch.org/latest/tuning-your-cluster/).
 
 ### Configuration file
 

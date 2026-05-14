@@ -11,7 +11,7 @@
 # Load environment
 . /opt/bitnami/scripts/opensearch-env.sh
 
-for dir in "$DB_TMP_DIR" "$DB_DATA_DIR" "$DB_LOGS_DIR" "${DB_BASE_DIR}/plugins" "${DB_BASE_DIR}/modules" "${DB_BASE_DIR}/extensions" "$DB_CONF_DIR" "$DB_VOLUME_DIR" "$DB_INITSCRIPTS_DIR" "$DB_MOUNTED_PLUGINS_DIR" "$DB_DEFAULT_CONF_DIR" "$DB_DEFAULT_PLUGINS_DIR"; do
+for dir in "$DB_TMP_DIR" "$DB_DATA_DIR" "$DB_LOGS_DIR" "${DB_BASE_DIR}/plugins" "${DB_BASE_DIR}/modules" "${DB_BASE_DIR}/extensions" "$DB_CONF_DIR" "$DB_VOLUME_DIR" "$DB_INITSCRIPTS_DIR" "$DB_MOUNTED_PLUGINS_DIR" "$DB_DEFAULT_CONF_DIR"; do
     ensure_dir_exists "$dir"
     chmod -R ug+rwX "$dir"
 done
@@ -22,7 +22,7 @@ replace_in_file "${DB_BASE_DIR}/bin/opensearch-env" "unset JAVA_TOOL_OPTIONS" "t
 
 elasticsearch_configure_logging
 
-for dir in "$DB_TMP_DIR" "$DB_DATA_DIR" "$DB_LOGS_DIR" "${DB_BASE_DIR}/plugins" "${DB_BASE_DIR}/modules" "$DB_CONF_DIR" "$DB_VOLUME_DIR" "$DB_INITSCRIPTS_DIR" "$DB_MOUNTED_PLUGINS_DIR" "$DB_DEFAULT_CONF_DIR" "$DB_DEFAULT_PLUGINS_DIR"; do
+for dir in "$DB_TMP_DIR" "$DB_DATA_DIR" "$DB_LOGS_DIR" "${DB_BASE_DIR}/plugins" "${DB_BASE_DIR}/modules" "$DB_CONF_DIR" "$DB_VOLUME_DIR" "$DB_INITSCRIPTS_DIR" "$DB_MOUNTED_PLUGINS_DIR" "$DB_DEFAULT_CONF_DIR"; do
     # `elasticsearch-plugin install` command complains about being unable to create the a plugin's directory
     # even when having the proper permissions.
     # The reason: the code is checking trying to check the permissions by consulting the parent directory owner,
@@ -36,19 +36,13 @@ for dir in "$DB_TMP_DIR" "$DB_DATA_DIR" "$DB_LOGS_DIR" "${DB_BASE_DIR}/plugins" 
     chown -R 1001:0 "$dir"
 done
 
-elasticsearch_install_plugins
+[[ -n "${DB_PLUGINS:-}" ]] && elasticsearch_install_plugins
 
 # Copy all initially generated configuration files to the default directory
 # (this is to avoid breaking when entrypoint is being overridden)
 cp -r "${DB_CONF_DIR}/"* "$DB_DEFAULT_CONF_DIR"
 chmod o+rX -R "$DB_DEFAULT_CONF_DIR"
 
-if ! is_dir_empty "$DB_PLUGINS_DIR"; then
-    # Move all initially installed plugins to the default plugins directory.
-    for plugin_path in "${DB_PLUGINS_DIR}"/*; do
-        plugin_name="$(basename "$plugin_path")"
-        plugin_moved_path="${DB_DEFAULT_PLUGINS_DIR}/${plugin_name}"
-        mv "$plugin_path" "$plugin_moved_path"
-    done
-    chmod o+rX -R "$DB_DEFAULT_PLUGINS_DIR"
-fi
+# Create a structure compatible with OpenSearch K8s Operator that's
+# based on the upstream image that installs OpenSearch under /usr/share/opensearch
+ln -s "$OPENSEARCH_BASE_DIR" /usr/share/opensearch
