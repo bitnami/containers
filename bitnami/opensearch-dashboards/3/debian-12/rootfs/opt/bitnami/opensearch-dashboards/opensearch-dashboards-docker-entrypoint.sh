@@ -18,7 +18,7 @@ export OPENSEARCH_DASHBOARDS_HOME=/opt/bitnami/opensearch-dashboards
 export OPENSEARCH_DASHBOARDS_PATH_BIN="${OPENSEARCH_DASHBOARDS_HOME}/bin"
 export OPENSEARCH_DASHBOARDS_PATH_CONF="${OPENSEARCH_DASHBOARDS_HOME}/config"
 export OPENSEARCH_DASHBOARDS_PATH_PLUGINS="${OPENSEARCH_DASHBOARDS_HOME}/plugins"
-export OPENSEARCH_DASHBOARDS_JAVA_OPTS="-Dopensearch.cgroups.hierarchy.override=/ $OPENSEARCH_DASHBOARDS_JAVA_OPTS"
+export OPENSEARCH_DASHBOARDS_JAVA_OPTS="-Dopensearch.cgroups.hierarchy.override=/ ${OPENSEARCH_DASHBOARDS_JAVA_OPTS:-}"
 
 opensearch_dashboards_vars=(
     console.enabled
