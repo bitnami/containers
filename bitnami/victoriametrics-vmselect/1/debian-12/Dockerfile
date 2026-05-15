@@ -40,7 +40,7 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2026-05-11T10:04:43Z" \
+      org.opencontainers.image.created="2026-05-15T11:05:28Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="victoriametrics-vmselect" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -51,7 +51,7 @@ COPY --from=builder /opt/bitnami/victoriametrics /opt/bitnami/victoriametrics
 
 ENV APP_VERSION="1.143.0" \
     BITNAMI_APP_NAME="victoriametrics-vmselect" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     PATH="/opt/bitnami/victoriametrics/bin:$PATH"
 
 USER 1001

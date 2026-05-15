@@ -1,0 +1,62 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  init-volumes:
+    image: docker.io/bitnami/os-shell:latest
+    user: root
+    command: >
+      sh -c "mkdir -p /storage /cache && chown -R 1001:1001 /storage /cache"
+    volumes:
+      - vmstorage_data:/storage
+      - vmselect_cache:/cache
+
+  vmstorage:
+    image: docker.io/bitnami/victoriametrics-vmstorage:1
+    command:
+      - --retentionPeriod=1
+      - --storageDataPath=/storage
+      - --httpListenAddr=:8482
+      - --vminsertAddr=:8400
+      - --vmselectAddr=:8401
+    ports:
+      - "8482:8482"
+      - "8400:8400"
+      - "8401:8401"
+    volumes:
+      - vmstorage_data:/storage
+    depends_on:
+      init-volumes:
+        condition: service_completed_successfully
+
+  vminsert:
+    image: docker.io/bitnami/victoriametrics-vminsert:1
+    command:
+      - --storageNode=vmstorage:8400
+      - --httpListenAddr=:8480
+    ports:
+      - "8480:8480"
+    depends_on:
+      - vmstorage
+
+  vmselect:
+    image: docker.io/bitnami/victoriametrics-vmselect:1
+    command:
+      - --storageNode=vmstorage:8401
+      - --httpListenAddr=:8481
+      - --cacheDataPath=/cache
+    ports:
+      - "8481:8481"
+    volumes:
+      - vmselect_cache:/cache
+    depends_on:
+      init-volumes:
+        condition: service_completed_successfully
+      vmstorage:
+        condition: service_started
+
+volumes:
+  vmstorage_data:
+    driver: local
+  vmselect_cache:
+    driver: local
