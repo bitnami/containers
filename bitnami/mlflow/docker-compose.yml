@@ -1,0 +1,64 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  postgresql:
+    image: docker.io/bitnami/postgresql:latest
+    environment:
+      - POSTGRESQL_DATABASE=bitnami_mlflow
+      - POSTGRESQL_USERNAME=bn_mlflow
+      - POSTGRESQL_PASSWORD=bitnami1
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - postgresql_data:/bitnami/postgresql
+
+  minio:
+    image: docker.io/bitnami/minio:latest
+    environment:
+      - MINIO_ROOT_USER=admin
+      - MINIO_ROOT_PASSWORD=password
+      - MINIO_DEFAULT_BUCKETS=mlflow
+    ports:
+      - '9000:9000'
+      - '9001:9001'
+    volumes:
+      - minio_data:/bitnami/minio/data
+
+  minio-client:
+    image: docker.io/bitnami/minio-client:latest
+    depends_on:
+      - minio
+    command: >
+      sh -c "sleep 5 &&
+      mc alias set local http://minio:9000 admin password &&
+      mc anonymous set download local/mlflow"
+
+  mlflow:
+    image: docker.io/bitnami/mlflow:3
+    environment:
+      - AWS_ACCESS_KEY_ID=admin
+      - AWS_SECRET_ACCESS_KEY=password
+      - MLFLOW_S3_ENDPOINT_URL=http://minio:9000
+      - MLFLOW_S3_IGNORE_TLS=true
+    entrypoint:
+      - mlflow
+    command:
+      - server
+      - --allowed-hosts=*
+      - --cors-allowed-origins=*
+      - --backend-store-uri=postgresql://bn_mlflow:bitnami1@postgresql:5432/bitnami_mlflow
+      - --artifacts-destination=s3://mlflow
+      - --serve-artifacts
+      - --host=0.0.0.0
+      - --port=5000
+    ports:
+      - '5000:5000'
+    depends_on:
+      - postgresql
+      - minio
+
+volumes:
+  postgresql_data:
+    driver: local
+  minio_data:
+    driver: local
