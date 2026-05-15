@@ -1,0 +1,52 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  kuberay-apiserver:
+    image: docker.io/bitnami/kuberay-apiserver:1
+    command:
+      - --kubeconfig=/kubeconfig
+    environment:
+      - KUBECONFIG=/kubeconfig
+    volumes:
+      - ./kubeconfig:/kubeconfig:ro
+    ports:
+      - "8888:8888"
+      - "8887:8887"
+
+  kuberay-operator:
+    image: docker.io/bitnami/kuberay-operator:1
+    command:
+      - --kubeconfig=/kubeconfig
+      - --leader-election-namespace=default
+    environment:
+      - KUBECONFIG=/kubeconfig
+    volumes:
+      - ./kubeconfig:/kubeconfig:ro
+    ports:
+      - "8080:8080"
+      - "8082:8082"
+
+  ray-head:
+    image: docker.io/bitnami/ray:latest
+    entrypoint: ["ray"]
+    command:
+      - start
+      - --head
+      - --port=6379
+      - --dashboard-host=0.0.0.0
+      - --block
+    ports:
+      - "6379:6379"
+      - "8265:8265"
+      - "10001:10001"
+
+  ray-worker:
+    image: docker.io/bitnami/ray:latest
+    entrypoint: ["ray"]
+    command:
+      - start
+      - --address=ray-head:6379
+      - --block
+    depends_on:
+      - ray-head
