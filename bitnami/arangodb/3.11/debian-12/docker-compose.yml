@@ -1,0 +1,23 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  arangodb:
+    image: docker.io/bitnami/arangodb:3.11
+    command:
+      - --server.endpoint
+      - tcp://0.0.0.0:8529
+      # Disable authentication for development purposes. Remove for production.
+      - --server.authentication
+      - "false"
+    ports:
+      - '8529:8529'
+    volumes:
+      - 'arangodb_data:/opt/bitnami/arangodb/var/lib/arangodb3'
+      - 'arangodb_apps_data:/opt/bitnami/arangodb/var/lib/arangodb3-apps'
+
+volumes:
+  arangodb_data:
+    driver: local
+  arangodb_apps_data:
+    driver: local
