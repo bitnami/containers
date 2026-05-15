@@ -1,0 +1,75 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  postgresql:
+    image: docker.io/bitnami/postgresql:latest
+    environment:
+      - POSTGRESQL_USERNAME=jupyterhub
+      - POSTGRESQL_PASSWORD=jupyterhub
+      - POSTGRESQL_DATABASE=jupyterhub
+    volumes:
+      - postgresql_data:/bitnami/postgresql
+
+  jupyterhub:
+    image: docker.io/bitnami/jupyterhub:5
+    user: root
+    environment:
+      - JUPYTERHUB_CRYPT_KEY=c31f45e8a4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1
+      - CONFIGPROXY_AUTH_TOKEN=c31f45e8a4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - jupyterhub_data:/data
+    command: >
+      --JupyterHub.spawner_class=dockerspawner.DockerSpawner
+      --DockerSpawner.image=docker.io/bitnami/jupyter-base-notebook:5
+      --DockerSpawner.network_name=jupyterhub_default
+      --JupyterHub.hub_ip=0.0.0.0
+      --JupyterHub.hub_connect_ip=jupyterhub
+      --JupyterHub.authenticator_class=dummy
+      --DummyAuthenticator.password=bitnami
+      --JupyterHub.cookie_secret_file=/data/jupyterhub_cookie_secret
+      --JupyterHub.db_url=postgresql://jupyterhub:jupyterhub@postgresql:5432/jupyterhub
+      --ConfigurableHTTPProxy.should_start=False
+      --ConfigurableHTTPProxy.api_url=http://proxy:8001
+    depends_on:
+      - postgresql
+
+  proxy:
+    image: docker.io/bitnami/configurable-http-proxy:latest
+    command:
+      - --ip=0.0.0.0
+      - --api-ip=0.0.0.0
+      - --api-port=8001
+      - --default-target=http://jupyterhub:8081
+      - --error-target=http://jupyterhub:8081/hub/error
+      - --port=8000
+    ports:
+      - "8000:8000"
+    environment:
+      - CONFIGPROXY_AUTH_TOKEN=c31f45e8a4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1
+    depends_on:
+      - jupyterhub
+
+  jupyter-base-notebook:
+    image: docker.io/bitnami/jupyter-base-notebook:5
+    command:
+      - jupyter
+      - lab
+      - --ip=0.0.0.0
+      - --port=8888
+      - --no-browser
+      - --ServerApp.token=''
+      - --ServerApp.password=''
+    ports:
+      - '8888:8888'
+    volumes:
+      - 'jupyter_data:/opt/bitnami/jupyterhub-singleuser/'
+
+volumes:
+  postgresql_data:
+    driver: local
+  jupyterhub_data:
+    driver: local
+  jupyter_data:
+    driver: local
