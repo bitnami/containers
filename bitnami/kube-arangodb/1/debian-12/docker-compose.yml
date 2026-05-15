@@ -1,0 +1,6 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  kube-arangodb:
+    image: docker.io/bitnami/kube-arangodb:1

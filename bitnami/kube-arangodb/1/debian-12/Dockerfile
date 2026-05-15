@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-05-08T01:30:59Z" \
+      org.opencontainers.image.created="2026-05-15T16:02:08Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/kube-arangodb/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kube-arangodb" \
@@ -46,7 +46,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="1.4.3" \
     BITNAMI_APP_NAME="kube-arangodb" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="3" \
     PATH="/opt/bitnami/envoy/bin:/opt/bitnami/kube-arangodb/bin:$PATH"
 
 ENTRYPOINT [ "/opt/bitnami/kube-arangodb/bin/arangodb_operator" ]
