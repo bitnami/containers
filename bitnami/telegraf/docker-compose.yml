@@ -1,0 +1,13 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  telegraf:
+    image: docker.io/bitnami/telegraf:1
+    volumes:
+      - ./telegraf.conf:/opt/bitnami/telegraf/config/telegraf.conf:ro
+    command:
+      - --config
+      - /opt/bitnami/telegraf/config/telegraf.conf
+    ports:
+      - '8080:8080'
