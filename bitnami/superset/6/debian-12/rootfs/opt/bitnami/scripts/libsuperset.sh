@@ -89,6 +89,28 @@ superset_initialize() {
 }
 
 ########################
+# Wait for a connection to be available
+# Globals:
+#   None
+# Arguments:
+#   $1 - host
+#   $2 - port
+# Returns:
+#   0 if successful, 1 otherwise
+#########################
+wait_for_connection() {
+    local -r host="${1:?missing host}"
+    local -r port="${2:?missing port}"
+    check_connection() {
+        (echo > /dev/tcp/"$host"/"$port") >/dev/null 2>&1
+    }
+    if ! retry_while "check_connection"; then
+        error "Could not connect to ${host}:${port}"
+        return 1
+    fi
+}
+
+########################
 # Run Superset init commands
 # Globals:
 #   SUPERSET_*
@@ -98,6 +120,13 @@ superset_initialize() {
 #   None
 #########################
 superset_run_init() {
+    if ! is_boolean_yes "$SUPERSET_SKIP_DATABASE_WAIT"; then
+        info "Waiting for PostgreSQL to be available"
+        wait_for_connection "$SUPERSET_DATABASE_HOST" "$SUPERSET_DATABASE_PORT_NUMBER"
+        info "Waiting for Redis to be available"
+        wait_for_connection "$REDIS_HOST" "$REDIS_PORT_NUMBER"
+    fi
+
     # Initialize the database
     info "Applying DB migrations"
     superset_execute db upgrade

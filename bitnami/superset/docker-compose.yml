@@ -1,0 +1,83 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  postgresql:
+    image: docker.io/bitnami/postgresql:latest
+    volumes:
+      - 'postgresql_data:/bitnami/postgresql'
+    environment:
+      - POSTGRESQL_DATABASE=bitnami_superset
+      - POSTGRESQL_USERNAME=bn_superset
+      - POSTGRESQL_PASSWORD=bitnami1
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+  redis:
+    image: docker.io/bitnami/redis:latest
+    volumes:
+      - 'redis_data:/bitnami/redis/data'
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+  superset-init:
+    image: docker.io/bitnami/superset:6
+    environment:
+      - BITNAMI_DEBUG=true
+      - SUPERSET_ROLE=init
+      - SUPERSET_DATABASE_HOST=postgresql
+      - SUPERSET_DATABASE_NAME=bitnami_superset
+      - SUPERSET_DATABASE_USER=bn_superset
+      - SUPERSET_DATABASE_PASSWORD=bitnami1
+      - REDIS_HOST=redis
+      - SUPERSET_SECRET_KEY=bitnami_superset_secret_key_1234567890
+    depends_on:
+      - postgresql
+      - redis
+  superset-worker:
+    image: docker.io/bitnami/superset:6
+    environment:
+      - SUPERSET_ROLE=celery-worker
+      - SUPERSET_DATABASE_HOST=postgresql
+      - SUPERSET_DATABASE_NAME=bitnami_superset
+      - SUPERSET_DATABASE_USER=bn_superset
+      - SUPERSET_DATABASE_PASSWORD=bitnami1
+      - REDIS_HOST=redis
+      - SUPERSET_SECRET_KEY=bitnami_superset_secret_key_1234567890
+    depends_on:
+      superset-init:
+        condition: service_completed_successfully
+  superset-beat:
+    image: docker.io/bitnami/superset:6
+    environment:
+      - SUPERSET_ROLE=celery-beat
+      - SUPERSET_DATABASE_HOST=postgresql
+      - SUPERSET_DATABASE_NAME=bitnami_superset
+      - SUPERSET_DATABASE_USER=bn_superset
+      - SUPERSET_DATABASE_PASSWORD=bitnami1
+      - REDIS_HOST=redis
+      - SUPERSET_SECRET_KEY=bitnami_superset_secret_key_1234567890
+    depends_on:
+      superset-init:
+        condition: service_completed_successfully
+  superset:
+    image: docker.io/bitnami/superset:6
+    environment:
+      - SUPERSET_ROLE=webserver
+      - SUPERSET_DATABASE_HOST=postgresql
+      - SUPERSET_DATABASE_NAME=bitnami_superset
+      - SUPERSET_DATABASE_USER=bn_superset
+      - SUPERSET_DATABASE_PASSWORD=bitnami1
+      - REDIS_HOST=redis
+      - SUPERSET_SECRET_KEY=bitnami_superset_secret_key_1234567890
+    ports:
+      - '8080:8080'
+    depends_on:
+      superset-init:
+        condition: service_completed_successfully
+
+volumes:
+  postgresql_data:
+    driver: local
+  redis_data:
+    driver: local
