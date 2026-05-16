@@ -9,7 +9,7 @@ ARG TARGETARCH
 ARG WITH_ALL_LOCALES="no"
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-05-15T08:14:20Z" \
+      org.opencontainers.image.created="2026-05-16T08:37:43Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/moodle/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/moodle" \
@@ -67,7 +67,7 @@ ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     APP_VERSION="5.2.0" \
     BITNAMI_APP_NAME="moodle" \
-    IMAGE_REVISION="4" \
+    IMAGE_REVISION="5" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     LD_LIBRARY_PATH="/opt/bitnami/postgresql/lib:$LD_LIBRARY_PATH" \
