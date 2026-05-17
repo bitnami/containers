@@ -8,7 +8,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-05-08T20:15:06Z" \
+      org.opencontainers.image.created="2026-05-17T08:08:18Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/janusgraph/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/janusgraph" \
@@ -55,7 +55,7 @@ RUN /opt/bitnami/scripts/janusgraph/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="1.1.0" \
     BITNAMI_APP_NAME="janusgraph" \
-    IMAGE_REVISION="36" \
+    IMAGE_REVISION="37" \
     JAVA_HOME="/opt/bitnami/java"
 
 USER 1001
