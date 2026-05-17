@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-05-15T08:25:04Z" \
+      org.opencontainers.image.created="2026-05-17T09:58:29Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/openresty/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/openresty" \
@@ -48,7 +48,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/openresty/postunpack.sh
 ENV APP_VERSION="1.29.2-3" \
     BITNAMI_APP_NAME="openresty" \
-    IMAGE_REVISION="5" \
+    IMAGE_REVISION="6" \
     PATH="/opt/bitnami/openresty/bin:/opt/bitnami/openresty/luajit/bin:$PATH"
 
 EXPOSE 8080 8443
