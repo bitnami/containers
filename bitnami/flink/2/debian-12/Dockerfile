@@ -8,7 +8,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-05-14T14:05:45Z" \
+      org.opencontainers.image.created="2026-05-17T07:27:49Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/flink/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/flink" \
@@ -52,7 +52,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="2.2.1" \
     BITNAMI_APP_NAME="flink" \
     FLINK_HOME="/opt/bitnami/flink" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/flink/bin:$PATH"
 
