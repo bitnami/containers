@@ -51,7 +51,7 @@ To run commands inside this container, you can use `docker run`, for example to 
 docker run --rm --name activemq bitnami/activemq:latest -- --help
 ```
 
-Check the [official ActiveMQ documentation](https://activemq.apache.org/ for more information.
+Check the [official ActiveMQ documentation](https://activemq.apache.org/) for more information.
 
 ### Environment variables
 
