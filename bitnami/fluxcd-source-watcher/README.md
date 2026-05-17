@@ -52,7 +52,7 @@ To run commands inside this container, you can use `docker run`, for example to 
 docker run --rm --name fluxcd-source-watcher bitnami/fluxcd-source-watcher:latest -- --help
 ```
 
-Check the [official Flux Source Watcher documentation](https://github.com/fluxcd/source-watcher for more information.
+Check the [official Flux Source Watcher documentation](https://github.com/fluxcd/source-watcher) for more information.
 
 ### FIPS configuration in Bitnami Secure Images
 
