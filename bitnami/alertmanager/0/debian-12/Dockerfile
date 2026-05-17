@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-05-07T18:23:35Z" \
+      org.opencontainers.image.created="2026-05-17T06:32:25Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/alertmanager/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/alertmanager" \
@@ -50,7 +50,7 @@ RUN uninstall_packages curl
 RUN mkdir -p /opt/bitnami/alertmanager/data/ && chmod g+rwX /opt/bitnami/alertmanager/data/
 ENV APP_VERSION="0.32.1" \
     BITNAMI_APP_NAME="alertmanager" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="3" \
     PATH="/opt/bitnami/alertmanager/bin:$PATH"
 
 EXPOSE 9093
