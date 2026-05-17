@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-05-16T01:59:41Z" \
+      org.opencontainers.image.created="2026-05-17T10:40:45Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/python/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/python" \
@@ -47,7 +47,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 
 ENV APP_VERSION="3.14.5" \
     BITNAMI_APP_NAME="python" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="3" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 EXPOSE 8000
