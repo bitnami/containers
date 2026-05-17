@@ -15,7 +15,7 @@ export OPENSEARCH_HOME=/opt/bitnami/opensearch
 export OPENSEARCH_PATH_BIN="${OPENSEARCH_HOME}/bin"
 export OPENSEARCH_PATH_CONF="${OPENSEARCH_HOME}/config"
 export OPENSEARCH_PATH_PLUGINS="${OPENSEARCH_HOME}/plugins"
-export OPENSEARCH_JAVA_OPTS="-Dopensearch.cgroups.hierarchy.override=/ $OPENSEARCH_JAVA_OPTS"
+export OPENSEARCH_JAVA_OPTS="-Dopensearch.cgroups.hierarchy.override=/ ${OPENSEARCH_JAVA_OPTS:-}"
 
 # Security Plugin
 function setupSecurityPlugin {

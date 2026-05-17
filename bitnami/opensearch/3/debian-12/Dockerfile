@@ -9,7 +9,7 @@ ARG OPENSEARCH_PLUGINS
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-05-14T09:23:23Z" \
+      org.opencontainers.image.created="2026-05-17T10:04:32Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/opensearch/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/opensearch" \
@@ -54,7 +54,7 @@ RUN /opt/bitnami/scripts/opensearch/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="3.6.0" \
     BITNAMI_APP_NAME="opensearch" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="3" \
     JAVA_HOME="/opt/bitnami/java" \
     LD_LIBRARY_PATH="/opt/bitnami/opensearch/plugins/opensearch-knn/lib:$LD_LIBRARY_PATH" \
     OPENSEARCH_JAVA_HOME="/opt/bitnami/java"
