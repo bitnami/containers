@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-05-16T06:35:27Z" \
+      org.opencontainers.image.created="2026-05-17T07:38:00Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/grafana-image-renderer/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/grafana-image-renderer" \
@@ -50,7 +50,7 @@ ENV APP_VERSION="5.8.3" \
     BITNAMI_APP_NAME="grafana-image-renderer" \
     HTTP_HOST="0.0.0.0" \
     HTTP_PORT="8080" \
-    IMAGE_REVISION="3" \
+    IMAGE_REVISION="4" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/grafana-image-renderer/bin:$PATH"
 
 EXPOSE 8080
