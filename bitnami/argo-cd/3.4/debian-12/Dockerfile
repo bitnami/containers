@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-05-15T06:42:36Z" \
+      org.opencontainers.image.created="2026-05-17T06:30:40Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/argo-cd/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/argo-cd" \
@@ -51,7 +51,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/argo-cd/postunpack.sh
 ENV APP_VERSION="3.4.2" \
     BITNAMI_APP_NAME="argo-cd" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="2" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/helm/bin:/opt/bitnami/argo-cd/bin:/opt/bitnami/argo-cd/hack:/opt/bitnami/ksonnet/bin:/opt/bitnami/kustomize/bin:$PATH"
 
 USER 1001
