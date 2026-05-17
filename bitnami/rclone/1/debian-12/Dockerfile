@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-05-09T14:40:14Z" \
+      org.opencontainers.image.created="2026-05-17T10:48:31Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/rclone/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/rclone" \
@@ -47,7 +47,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="1.74.1" \
     BITNAMI_APP_NAME="rclone" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     PATH="/opt/bitnami/rclone/bin:$PATH"
 
 USER 1001
