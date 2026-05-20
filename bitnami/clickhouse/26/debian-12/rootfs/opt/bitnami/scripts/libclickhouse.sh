@@ -55,7 +55,9 @@ clickhouse_validate() {
 
     # Validate credentials
     if ! is_boolean_yes "$CLICKHOUSE_SKIP_USER_SETUP"; then
-        if is_boolean_yes "${ALLOW_EMPTY_PASSWORD:-}"; then
+        if [[ "$CLICKHOUSE_ADMIN_USER" != "default" ]]; then
+            check_empty_value "CLICKHOUSE_ADMIN_PASSWORD"
+        elif is_boolean_yes "${ALLOW_EMPTY_PASSWORD:-}"; then
             warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD:-}. For safety reasons, do not use this flag in a production environment."
         elif is_empty_value "$CLICKHOUSE_ADMIN_PASSWORD"; then
             print_validation_error "The CLICKHOUSE_ADMIN_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow a blank password. This is only recommended for development environments."
@@ -198,6 +200,7 @@ clickhouse_initialize() {
     elif [[ "$CLICKHOUSE_ADMIN_USER" != "default" ]]; then
         # If we need to set an admin user different from default, we create a configuration override
         local -r admin_user_override="${CLICKHOUSE_CONF_DIR}/users.d/__bitnami_default_user.xml"
+        local -r password_sha256_hash="$(echo -n "$CLICKHOUSE_ADMIN_PASSWORD" | sha256sum | awk '{print $1}')"
         cat <<EOF >"${admin_user_override}"
 <clickhouse>
   <!-- Docs: <https://clickhouse.com/docs/en/operations/settings/settings_users/> -->
@@ -208,7 +211,7 @@ clickhouse_initialize() {
 
     <${CLICKHOUSE_ADMIN_USER}>
       <profile>default</profile>
-      <password from_env="CLICKHOUSE_ADMIN_PASSWORD"></password>
+      <password_sha256_hex>${password_sha256_hash}</password_sha256_hex>
       <networks>
         <ip>::/0</ip>
       </networks>
