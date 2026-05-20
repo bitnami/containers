@@ -93,14 +93,18 @@ airflow_validate() {
     fi
 
     # Check Web authentication
-    check_empty_value "AIRFLOW_WEBSERVER_SECRET_KEY"
+    if is_empty_value "$AIRFLOW_WEBSERVER_SECRET_KEY"; then
+        AIRFLOW_WEBSERVER_SECRET_KEY="$(airflow_generate_secret_key)"
+    fi
     if validate_string "$AIRFLOW_WEBSERVER_SECRET_KEY" -max-length 32; then
         warn "AIRFLOW_WEBSERVER_SECRET_KEY has more than 32 characters, the rest will be ignored"
     fi
     AIRFLOW_WEBSERVER_SECRET_KEY="$(echo -n "${AIRFLOW_WEBSERVER_SECRET_KEY:0:32}" | base64)"
 
     # Check API authentication
-    check_empty_value "AIRFLOW_APISERVER_SECRET_KEY"
+    if is_empty_value "$AIRFLOW_APISERVER_SECRET_KEY"; then
+        AIRFLOW_APISERVER_SECRET_KEY="$(airflow_generate_secret_key)"
+    fi
     if validate_string "$AIRFLOW_APISERVER_SECRET_KEY" -max-length 32; then
         warn "AIRFLOW_APISERVER_SECRET_KEY has more than 32 characters, the rest will be ignored"
     fi
@@ -118,6 +122,13 @@ airflow_validate() {
 
     case "$AIRFLOW_COMPONENT_TYPE" in
     webserver|api-server)
+        # Check credentials
+        if is_boolean_yes "${ALLOW_EMPTY_PASSWORD:-}"; then
+            warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD}. For safety reasons, do not use this flag in a production environment."
+        else
+            check_empty_value "AIRFLOW_PASSWORD"
+        fi
+
         # Check webserver port number
         check_allowed_port AIRFLOW_APISERVER_PORT_NUMBER
 
@@ -303,8 +314,7 @@ airflow_generate_config() {
     [[ -n "$AIRFLOW_FERNET_KEY" ]] && airflow_conf_set "core" "fernet_key" "$AIRFLOW_FERNET_KEY"
 
     # Configure the web server secret key parameter
-    secret_key_section="api"
-    airflow_conf_set "${secret_key_section}" "secret_key" "${AIRFLOW_WEBSERVER_SECRET_KEY}"
+    airflow_conf_set "api" "secret_key" "$AIRFLOW_WEBSERVER_SECRET_KEY"
     airflow_conf_set "api_auth" "jwt_secret" "$AIRFLOW_APISERVER_SECRET_KEY"
 
     local capacity_key="capacity"

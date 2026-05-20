@@ -58,6 +58,7 @@ services:
   airflow:
     image: docker.io/bitnami/airflow:3
     environment:
+      - AIRFLOW_PASSWORD=bitnami123
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
       - AIRFLOW_DATABASE_USERNAME=bn_airflow
       - AIRFLOW_DATABASE_PASSWORD=bitnami1
