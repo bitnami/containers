@@ -46,6 +46,7 @@ services:
     environment:
       - APPSMITH_MODE=backend
       - BITNAMI_DEBUG=true
+      - APPSMITH_PASSWORD=bitnami123
       - APPSMITH_API_HOST=appsmith-api
       - APPSMITH_DATABASE_HOST=mongodb,mongodb-secondary
       - APPSMITH_DATABASE_PORT_NUMBER=27017

@@ -58,10 +58,10 @@ The following tables list the main variables you can set.
 |---------------------------------|---------------------------------------------------------|-----------------------|
 | `ALLOW_EMPTY_PASSWORD`          | Allow an empty password.                                | `no`                  |
 | `APPSMITH_USERNAME`             | Appsmith default username.                              | `user`                |
-| `APPSMITH_PASSWORD`             | Appsmith default password.                              | `bitnami123`          |
+| `APPSMITH_PASSWORD`             | Appsmith default password.                              | `nil`                 |
 | `APPSMITH_EMAIL`                | Appsmith default email.                                 | `user@example.com`    |
 | `APPSMITH_MODE`                 | Appsmith service to run (can be backend, client or UI). | `backend`             |
-| `APPSMITH_ENCRYPTION_PASSWORD`  | Appsmith database encryption password.                  | `bitnami123`          |
+| `APPSMITH_ENCRYPTION_PASSWORD`  | Appsmith database encryption password.                  | `nil`                 |
 | `APPSMITH_ENCRYPTION_SALT`      | Appsmith database encryption salt.                      | `nil`                 |
 | `APPSMITH_API_HOST`             | Appsmith API host.                                      | `appsmith-api`        |
 | `APPSMITH_API_PORT`             | Appsmith API port.                                      | `8080`                |

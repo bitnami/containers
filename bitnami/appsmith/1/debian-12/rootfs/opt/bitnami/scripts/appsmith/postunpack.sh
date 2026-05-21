@@ -24,7 +24,7 @@ set -o pipefail
 # System User
 ensure_user_exists "$APPSMITH_DAEMON_USER" --group "$APPSMITH_DAEMON_GROUP" --system
 
-for dir in "${APPSMITH_CONF_DIR}" "${APPSMITH_DEFAULT_CONF_DIR}" "${APPSMITH_LOG_DIR}" "${APPSMITH_TMP_DIR}" "${APPSMITH_VOLUME_DIR}" "${APPSMITH_GIT_ROOT}"; do
+for dir in "${APPSMITH_CONF_DIR}" "${APPSMITH_DEFAULT_CONF_DIR}" "${APPSMITH_LOG_DIR}" "${APPSMITH_TMP_DIR}" "${APPSMITH_VOLUME_DIR}" "${APPSMITH_GIT_ROOT}" "/.mongodb"; do
     ensure_dir_exists "$dir"
     configure_permissions_ownership "$dir" -d "775" -f "664" -u "$APPSMITH_DAEMON_USER" -g "root"
 done
