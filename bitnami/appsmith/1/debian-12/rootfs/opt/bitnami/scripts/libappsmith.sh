@@ -77,10 +77,9 @@ appsmith_validate() {
             is_empty_value "${APPSMITH_REDIS_PASSWORD}" && print_validation_error "The APPSMITH_REDIS_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow a blank password. This is only recommended for development environments."
         fi
     fi
-
     if [[ "$APPSMITH_MODE" == "backend" ]]; then
-        for empty_env_var in "APPSMITH_ENCRYPTION_PASSWORD" "APPSMITH_ENCRYPTION_SALT"; do
-            is_empty_value "${!empty_env_var}" && print_validation_error "The ${empty_env_var} environment variable is empty or not set."
+        for empty_env_var in "APPSMITH_PASSWORD" "APPSMITH_ENCRYPTION_PASSWORD" "APPSMITH_ENCRYPTION_SALT"; do
+            check_empty_value "$empty_env_var"
         done
     fi
 
@@ -95,7 +94,6 @@ appsmith_validate() {
     fi
     # Appsmith mode
     check_multi_value "APPSMITH_MODE" "backend rts client"
-
     if [[ $APPSMITH_MODE == "rts" ]]; then
         is_empty_value "${APPSMITH_API_HOST}" && print_validation_error "For RTS mode, the APPSMITH_API_HOST variable must be set"
     fi
@@ -337,8 +335,6 @@ appsmith_initialize() {
                 appsmith_conf_set "APPSMITH_GIT_ROOT" "$APPSMITH_GIT_ROOT"
                 info "Ensuring Appsmith directories exist"
                 ensure_dir_exists "$APPSMITH_VOLUME_DIR"
-                info "Persisting Appsmith installation"
-                persist_app "appsmith" "$APPSMITH_DATA_TO_PERSIST"
 
                 # Create Appsmith user
                 appsmith_backend_start_bg "${APPSMITH_LOG_DIR}/appsmith_first_boot.log"
@@ -346,23 +342,39 @@ appsmith_initialize() {
                 local -r -a create_user_cmd=("curl")
                 # Taken from inspecting Appsmith wizard
                 # https://github.com/appsmithorg/appsmith/blob/release/app/server/appsmith-server/src/main/java/com/appsmith/server/dtos/UserSignupRequestDTO.java#L26
-                # Necessary for the installer to succeed
-                local -r -a create_user_args=("-L" "http://localhost:${APPSMITH_API_PORT}/api/v1/users/super"
+                # Necessary for the installer to succeed.
+                # Note: the /users/super endpoint always responds with a redirect (302) for
+                # both success and error cases. We intentionally omit -L to avoid following
+                # the error redirect to an external URL (https://app.appsmith.com) which may
+                # return 401. User creation success is verified via MongoDB instead.
+                local -r -a create_user_args=("http://localhost:${APPSMITH_API_PORT}/api/v1/users/super"
+                    "--silent"
                     "-H" "Origin: http://localhost:${APPSMITH_API_PORT}"
                     "-H" "Content-Type: application/x-www-form-urlencoded"
                     "-H" "X-Requested-By: Appsmith"
                     "--data-urlencode" "name=${APPSMITH_USERNAME}"
                     "--data-urlencode" "email=${APPSMITH_EMAIL}"
                     "--data-urlencode" "password=${APPSMITH_PASSWORD}"
-                    "--data-urlencode" "allowCollectingAnnonymousData=false"
+                    "--data-urlencode" "allowCollectingAnonymousData=false"
                     "--data-urlencode" "signupForNewsletter=false"
                     "--data-urlencode" "proficiency=Advanced"
-                    "--data-urlencode" "useCase='personal project'")
+                    "--data-urlencode" "useCase=personal project")
                 if ! debug_execute "${create_user_cmd[@]}" "${create_user_args[@]}"; then
+                    error "Installation failed. Could not reach the Appsmith API"
+                    exit 1
+                fi
+                # Verify the user was actually created, since the API always redirects.
+                local user_count_after
+                user_count_after=$(mongosh "$connection_string" --quiet --eval \
+                    'db.user.countDocuments({isSystemGenerated: {$ne: true}})' 2>/dev/null | tail -1)
+                if [[ "${user_count_after:-0}" -eq 0 ]]; then
                     error "Installation failed. User ${APPSMITH_USERNAME} could not be created"
                     exit 1
                 fi
                 info "User created successfully"
+
+                info "Persisting Appsmith installation"
+                persist_app "appsmith" "$APPSMITH_DATA_TO_PERSIST"
             fi
         else
             # The migration is done by Appsmith itself, not necessary to run
