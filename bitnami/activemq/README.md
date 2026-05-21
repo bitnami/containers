@@ -68,9 +68,8 @@ The following tables list the main variables you can set.
 | `ACTIVEMQ_STOMP_PORT_NUMBER`     | ActiveMQ STOMP port number.                                                                   | `61613`                       |
 | `ACTIVEMQ_WEBSOCKET_PORT_NUMBER` | ActiveMQ WebSocket port number.                                                               | `61614`                       |
 | `ACTIVEMQ_OPENWIRE_PORT_NUMBER`  | ActiveMQ OpenWire port number.                                                                | `61616`                       |
-| `ACTIVEMQ_USERNAME`              | ActiveMQ username.                                                                            | `admin`                       |
-| `ACTIVEMQ_PASSWORD`              | ActiveMQ password.                                                                            | `password`                    |
-| `ACTIVEMQ_SECRET`                | ActiveMQ secret for encryption.                                                               | `bitnami`                     |
+| `ACTIVEMQ_PASSWORD`              | ActiveMQ password.                                                                            | `nil`                         |
+| `ACTIVEMQ_SECRET`                | ActiveMQ secret for encryption.                                                               | `nil`                         |
 
 #### Read-only environment variables
 

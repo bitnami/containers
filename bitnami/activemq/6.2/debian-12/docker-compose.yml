@@ -1,0 +1,13 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  apache:
+    image: docker.io/bitnami/activemq:6.2
+    ports:
+      - 8161:8161
+      - 1883:1883
+      - 5672:5672
+    environment:
+      - ACTIVEMQ_PASSWORD=password
+      - ACTIVEMQ_SECRET=bitnami
