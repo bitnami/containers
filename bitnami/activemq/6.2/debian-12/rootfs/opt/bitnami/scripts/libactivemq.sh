@@ -86,7 +86,7 @@ activemq_validate() {
         check_valid_port "$port_to_check"
     done
 
-    for empty_env_var in "ACTIVEMQ_USERNAME" "ACTIVEMQ_PASSWORD" "ACTIVEMQ_SECRET"; do
+    for empty_env_var in "ACTIVEMQ_PASSWORD" "ACTIVEMQ_SECRET"; do
         is_empty_value "${!empty_env_var}" && print_validation_error "The ${empty_env_var} environment variable is empty or not set."
     done
 
@@ -108,19 +108,25 @@ activemq_set_password() {
     local -r secret="${2:?secret is requires}"
     local encryptedPasswordMatch
 
-    replace_in_file "$ACTIVEMQ_CONF_FILE" "name=\"password\" value=\"\"" "name=\"password\" value=\"${secret}\""
+    # Skip password configuration if users.properties, credentials-enc.properties or jmx.password are not writable.
+    if [[ ! -w "${ACTIVEMQ_CONF_DIR}/users.properties" ]] || [[ ! -w "${ACTIVEMQ_CONF_DIR}/credentials-enc.properties" ]] || [[ ! -w "${ACTIVEMQ_CONF_DIR}/jmx.password" ]]; then
+        warn "Skipping password configuration because users.properties, credentials-enc.properties or jmx.password are not writable."
+        return 0
+    fi
+    replace_in_file "${ACTIVEMQ_CONF_DIR}/users.properties" "admin=.*" "admin=${password}"
+    replace_in_file "${ACTIVEMQ_CONF_DIR}/jmx.password" "admin.*" "admin ${password}"
+    chmod 640 "${ACTIVEMQ_CONF_DIR}/users.properties" "${ACTIVEMQ_CONF_DIR}/jmx.password"
 
-    local -a cmd=("activemq" "encrypt" "--password" "$secret" "--input" "$password")
+    local -a cmd=("activemq" "encrypt" "--input" "$password")
+    export ACTIVEMQ_ENCRYPTION_PASSWORD="$secret"
     am_i_root && cmd=("run_as_user" "$ACTIVEMQ_DAEMON_USER" "${cmd[@]}")
     encryptedPasswordMatch=$("${cmd[@]}" | grep "Encrypted text:")
+    unset ACTIVEMQ_ENCRYPTION_PASSWORD
 
     is_empty_value "$encryptedPasswordMatch" && error "Execution of activemq encrypt failed" && exit 1
 
     local -r encryptedPassword="${encryptedPasswordMatch#"Encrypted text: "}"
-
-    replace_in_file "${ACTIVEMQ_CONF_DIR}/users.properties" "admin=.*" "admin=${password}"
     replace_in_file "${ACTIVEMQ_CONF_DIR}/credentials-enc.properties" "activemq.password=.*" "activemq.password=ENC(${encryptedPassword})"
-    replace_in_file "${ACTIVEMQ_CONF_DIR}/jmx.password" "admin.*" "admin ${password}"
 }
 
 ########################
@@ -149,8 +155,8 @@ activemq_initialize() {
         info "Creating config file"
         # File obtained from http://svn.apache.org/repos/asf/activemq/trunk/assembly/src/release/conf/activemq.xml
         render-template "${BITNAMI_ROOT_DIR}/scripts/activemq/files/activemq.xml.tpl" > "$ACTIVEMQ_CONF_FILE"
-
-        info "Configuring the admin password"
-        activemq_set_password "$ACTIVEMQ_PASSWORD" "$ACTIVEMQ_SECRET"
+        replace_in_file "$ACTIVEMQ_CONF_FILE" "name=\"password\" value=\"\"" "name=\"password\" value=\"${ACTIVEMQ_SECRET}\""
     fi
+    info "Configuring the admin password"
+    activemq_set_password "$ACTIVEMQ_PASSWORD" "$ACTIVEMQ_SECRET"
 }
