@@ -122,11 +122,15 @@ airflow_validate() {
 
     case "$AIRFLOW_COMPONENT_TYPE" in
     webserver|api-server)
-        # Check credentials
-        if is_boolean_yes "${ALLOW_EMPTY_PASSWORD:-}"; then
-            warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD}. For safety reasons, do not use this flag in a production environment."
-        else
-            check_empty_value "AIRFLOW_PASSWORD"
+        # Check credentials only when this component handles user creation.
+        # When AIRFLOW_SKIP_DB_SETUP=yes the setup-db job owns that step and
+        # the web/api-server pod never receives AIRFLOW_PASSWORD.
+        if ! is_boolean_yes "$AIRFLOW_SKIP_DB_SETUP"; then
+            if is_boolean_yes "${ALLOW_EMPTY_PASSWORD:-}"; then
+                warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD}. For safety reasons, do not use this flag in a production environment."
+            else
+                check_empty_value "AIRFLOW_PASSWORD"
+            fi
         fi
 
         # Check webserver port number
