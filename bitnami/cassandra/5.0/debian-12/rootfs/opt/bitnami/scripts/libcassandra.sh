@@ -63,21 +63,31 @@ cassandra_setup_client_ssl() {
 
     mkdir -p "$(dirname "${DB_SSL_CERT_FILE}")"
 
+    # Avoid passing keystore passwords as arguments to keytool, to avoid leaking them given
+    # given a local observer with /proc read access can read them
+    # Instead, we can read them from temporary files
+    local keystore_password_file
+    keystore_password_file="$(mktemp)"
+    chmod 0600 "$keystore_password_file"
+    echo "$DB_KEYSTORE_PASSWORD" > "$keystore_password_file"
+    # shellcheck disable=SC2064
+    trap "rm -f $keystore_password_file" RETURN ERR INT TERM
+
     if [[ "${JAVA_FIPS_MODE:-}" == "restricted" ]]; then
         keytool -importkeystore -srckeystore "${DB_KEYSTORE_LOCATION}" \
             -destkeystore "${DB_SSL_CERT_FILE}" \
             -storetype BCFKS \
-            -srcstorepass "${DB_KEYSTORE_PASSWORD}" \
-            -deststorepass "${DB_KEYSTORE_PASSWORD}"
+            -srcstorepass "$(<"$keystore_password_file")" \
+            -deststorepass "$(<"$keystore_password_file")"
     else
          keytool -importkeystore -srckeystore "${DB_KEYSTORE_LOCATION}" \
              -destkeystore "${DB_TMP_P12_FILE}" \
              -deststoretype PKCS12 \
-             -srcstorepass "${DB_KEYSTORE_PASSWORD}" \
-             -deststorepass "${DB_KEYSTORE_PASSWORD}"
+             -srcstorepass "$(<"$keystore_password_file")" \
+             -deststorepass "$(<"$keystore_password_file")"
 
          openssl pkcs12 -in "${DB_TMP_P12_FILE}" -nokeys \
-             -out "${DB_SSL_CERT_FILE}" -passin pass:"${DB_KEYSTORE_PASSWORD}"
+             -out "${DB_SSL_CERT_FILE}" -passin pass:"$(<"$keystore_password_file")"
 
          rm "${DB_TMP_P12_FILE}"
     fi
@@ -791,6 +801,8 @@ cassandra_create_admin_user() {
     local -r escaped_password="${password//\'/\'\'}"
 
     echo "CREATE USER '${new_user}' WITH PASSWORD \$\$${escaped_password}\$\$ SUPERUSER;" | cassandra_execute_with_retries "$retries" "$sleep_time" "$admin_user" "$admin_user_password"
+    info "Dropping builtin 'cassandra' superuser"
+    echo "DROP USER 'cassandra';" | cassandra_execute_with_retries "$retries" "$sleep_time" "$new_user" "$password"
 }
 
 ########################
@@ -1027,7 +1039,18 @@ cassandra_execute() {
     local -r extra_args="${5:-}"
     local -r port="${DB_CQL_PORT_NUMBER}"
     local -r cmd=("cqlsh")
-    local args=("-u" "$user" "-p" "$pass")
+
+    # Avoid passing user / password as arguments to cqlsh, to avoid leaking them given
+    # cqlsh is a Python client and does not scrub argv, so the cleartext password appears
+    # in /proc/<pid>/cmdline for the duration of every init-time CQL call.
+    # Instead, we use a temporary cqlshrc credentials file
+    local cqlshrc
+    cqlshrc="$(mktemp)"
+    chmod 0600 "$cqlshrc"
+    printf '[authentication]\nusername = %s\npassword = %s\n' "$user" "$pass" > "$cqlshrc"
+    # shellcheck disable=SC2064
+    trap "rm -f $cqlshrc" RETURN ERR INT TERM
+    local args=("--cqlshrc" "$cqlshrc")
 
     is_boolean_yes "$DB_CLIENT_ENCRYPTION" && args+=("--ssl")
     [[ -n "$keyspace" ]] && args+=("-k" "$keyspace")
