@@ -21,6 +21,7 @@ services:
     volumes:
       - "wildfly_data:/bitnami/wildfly"
     environment:
+      - EJBCA_ADMIN_PASSWORD=bitnami123
       - EJBCA_DATABASE_HOST=mariadb
       - EJBCA_DATABASE_NAME=bitnami_ejbca
       - EJBCA_DATABASE_USERNAME=bn_ejbca
