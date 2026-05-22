@@ -50,6 +50,12 @@ drupal_validate() {
         fi
     }
 
+    check_empty_value() {
+        if is_empty_value "${!1}"; then
+            print_validation_error "${1} must be set"
+        fi
+    }
+
     check_yes_no_value() {
         if ! is_yes_no_value "${!1}" && ! is_true_false_value "${!1}"; then
             print_validation_error "The allowed values for ${1} are: yes no"
@@ -85,12 +91,11 @@ drupal_validate() {
     check_mounted_file "DRUPAL_DATABASE_TLS_CA_FILE"
 
     # Validate database credentials
+    check_empty_value "DRUPAL_PASSWORD"
     if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
         warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD}. For safety reasons, do not use this flag in a production environment."
     else
-        for empty_env_var in "DRUPAL_DATABASE_PASSWORD" "DRUPAL_PASSWORD"; do
-            is_empty_value "${!empty_env_var}" && print_validation_error "The ${empty_env_var} environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow a blank password. This is only recommended for development environments."
-        done
+        is_empty_value "$DRUPAL_DATABASE_PASSWORD" && print_validation_error "The DRUPAL_DATABASE_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow a blank password. This is only recommended for development environments."
     fi
 
     # Validate SMTP credentials
@@ -283,11 +288,23 @@ drupal_site_install() {
         PHP_OPTIONS="-d sendmail_path=$(which true)"
         export PHP_OPTIONS
 
+        # Avoid passing Drupal & database password as arguments to drush, to avoid leaking them given
+        # given a local observer with /proc read access can read them
+        # Instead, we can read them from temporary files
+        local drush_password_file database_url_file
+        drush_password_file="$(mktemp)"
+        database_url_file="$(mktemp)"
+        chmod 0600 "$drush_password_file" "$database_url_file"
+        echo "$DRUPAL_PASSWORD" > "$drush_password_file"
+        echo "mysql://${DRUPAL_DATABASE_USER}:${DRUPAL_DATABASE_PASSWORD}@${DRUPAL_DATABASE_HOST}:${DRUPAL_DATABASE_PORT_NUMBER}/${DRUPAL_DATABASE_NAME}" > "$database_url_file"
+        # shellcheck disable=SC2064
+        trap "rm -f $drush_password_file $database_url_file" RETURN ERR INT TERM
+
         drush_execute "site:install" \
-            "--db-url=mysql://${DRUPAL_DATABASE_USER}:${DRUPAL_DATABASE_PASSWORD}@${DRUPAL_DATABASE_HOST}:${DRUPAL_DATABASE_PORT_NUMBER}/${DRUPAL_DATABASE_NAME}" \
+            "--db-url=$(<"$database_url_file")" \
             "--account-name=${DRUPAL_USERNAME}" \
             "--account-mail=${DRUPAL_EMAIL}" \
-            "--account-pass=${DRUPAL_PASSWORD}" \
+            "--account-pass=$(<"$drush_password_file")" \
             "--site-name=${DRUPAL_SITE_NAME}" \
             "--site-mail=${DRUPAL_EMAIL}" \
             "-y" "$DRUPAL_PROFILE"

@@ -87,7 +87,7 @@ export DRUPAL_HASH_SALT="${DRUPAL_HASH_SALT:-}" # only used during the first ini
 
 # Drupal credentials
 export DRUPAL_USERNAME="${DRUPAL_USERNAME:-user}" # only used during the first initialization
-export DRUPAL_PASSWORD="${DRUPAL_PASSWORD:-bitnami}" # only used during the first initialization
+export DRUPAL_PASSWORD="${DRUPAL_PASSWORD:-}" # only used during the first initialization
 export DRUPAL_EMAIL="${DRUPAL_EMAIL:-user@example.com}" # only used during the first initialization
 
 # Drupal SMTP credentials

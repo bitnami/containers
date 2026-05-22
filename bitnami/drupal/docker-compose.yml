@@ -17,6 +17,7 @@ services:
       - '80:8080'
       - '443:8443'
     environment:
+      - DRUPAL_PASSWORD=bitnami
       - DRUPAL_DATABASE_HOST=mariadb
       - DRUPAL_DATABASE_PORT_NUMBER=3306
       - DRUPAL_DATABASE_USER=bn_drupal

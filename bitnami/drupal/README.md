@@ -86,7 +86,7 @@ The following tables list the main variables you can set.
 | `DRUPAL_CONFIG_SYNC_DIR`      | Drupal sync configuration directory location. Only used when `DRUPAL_SKIP_BOOTSTRAP` is enabled.                             | `nil`                               |
 | `DRUPAL_HASH_SALT`            | Drupal string used to generate random values. Only used when `DRUPAL_SKIP_BOOTSTRAP` is enabled.                             | `nil`                               |
 | `DRUPAL_USERNAME`             | Drupal user name.                                                                                                            | `user`                              |
-| `DRUPAL_PASSWORD`             | Drupal user password.                                                                                                        | `bitnami`                           |
+| `DRUPAL_PASSWORD`             | Drupal user password.                                                                                                        | `nil`                               |
 | `DRUPAL_EMAIL`                | Drupal user e-mail address.                                                                                                  | `user@example.com`                  |
 | `DRUPAL_SMTP_HOST`            | Drupal SMTP server host.                                                                                                     | `nil`                               |
 | `DRUPAL_SMTP_PORT_NUMBER`     | Drupal SMTP server port number.                                                                                              | `25`                                |
