@@ -32,6 +32,8 @@ fi
 #   0 if the validation succeeded, 1 otherwise
 #########################
 discourse_validate() {
+    local -r is_sidekiq="${1:-false}"
+
     debug "Validating settings in DISCOURSE_* environment variables..."
     local error_code=0
 
@@ -83,9 +85,7 @@ discourse_validate() {
     check_empty_value "DISCOURSE_HOST"
     check_multi_value "DISCOURSE_ENV" "development production test"
     check_multi_value "DISCOURSE_PASSENGER_SPAWN_METHOD" "direct smart"
-    check_password_length "DISCOURSE_PASSWORD" 10
     ! is_empty_value "$DISCOURSE_ENABLE_HTTPS" && check_yes_no_value "DISCOURSE_ENABLE_HTTPS"
-    ! is_empty_value "$DISCOURSE_SKIP_BOOTSTRAP" && check_yes_no_value "DISCOURSE_SKIP_BOOTSTRAP"
     ! is_empty_value "$DISCOURSE_DATABASE_HOST" && check_resolved_hostname "$DISCOURSE_DATABASE_HOST"
     ! is_empty_value "$DISCOURSE_DATABASE_PORT_NUMBER" && check_valid_port "DISCOURSE_DATABASE_PORT_NUMBER"
     ! is_empty_value "$DISCOURSE_REDIS_HOST" && check_resolved_hostname "$DISCOURSE_REDIS_HOST"
@@ -95,6 +95,15 @@ discourse_validate() {
     if ! is_file_writable "$DISCOURSE_CONF_FILE"; then
         warn "The Discourse configuration file ${DISCOURSE_CONF_FILE} is not writable. Configurations specified via environment variables will not be applied to this file."
         is_boolean_yes "$DISCOURSE_ENABLE_CONF_PERSISTENCE" && warn "The DISCOURSE_ENABLE_CONF_PERSISTENCE configuration is enabled but the ${DISCOURSE_CONF_FILE} file is not writable. The file will not be persisted."
+    fi
+
+    # Validation that don't apply to sidekiq
+    if ! is_boolean_yes "$is_sidekiq"; then
+        ! is_empty_value "$DISCOURSE_SKIP_BOOTSTRAP" && check_yes_no_value "DISCOURSE_SKIP_BOOTSTRAP"
+        if ! is_boolean_yes "$DISCOURSE_SKIP_BOOTSTRAP"; then
+            check_empty_value "DISCOURSE_PASSWORD"
+            check_password_length "DISCOURSE_PASSWORD" 10
+        fi
     fi
 
     # Validate credentials
@@ -219,7 +228,6 @@ discourse_initialize() {
 discourse_conf_set() {
     local -r key="${1:?key missing}"
     local -r value="${2:-}"
-    debug "Setting ${key} to '${value}' in Discourse configuration"
     # Sanitize key (sed does not support fixed string substitutions)
     local sanitized_pattern
     sanitized_pattern="^\s*(#\s*)?$(sed 's/[]\[^$.*/]/\\&/g' <<< "$key")\s*=\s*(.*)"
