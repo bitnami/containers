@@ -389,6 +389,7 @@ ejbca_generate_ca() {
     ejbca_ca="$(ejbca_execute_command_print_output ca listcas 2>&1)"
     if ! grep -q 'CA Name: ' <<<"$ejbca_ca"; then
         info "Init CA"
+
         ejbca_execute_command ca init \
             --dn "CN=$EJBCA_CA_NAME,$EJBCA_BASE_DN" \
             --caname "$EJBCA_CA_NAME" \
@@ -401,6 +402,16 @@ ejbca_generate_ca() {
             -s "$EJBCA_CA_CERT_SIGNATURE_ALGORITHM" \
             -type "x509"
 
+        # Avoid passing EJBCA admin password as arguments to ejbca.sh, to avoid leaking them given
+        # given a local observer with /proc read access can read them
+        # Instead, we can read them from temporary files
+        local ejbca_admin_password_file
+        ejbca_admin_password_file="$(mktemp)"
+        chmod 0600 "$ejbca_admin_password_file"
+        echo "$EJBCA_ADMIN_PASSWORD" > "$ejbca_admin_password_file"
+        # shellcheck disable=SC2064
+        trap "rm -f $ejbca_admin_password_file" RETURN ERR INT TERM
+
         info "Add superadmin user"
         ejbca_execute_command ra addendentity \
             --username "$EJBCA_ADMIN_USERNAME" \
@@ -408,7 +419,7 @@ ejbca_generate_ca() {
             --caname "$EJBCA_CA_NAME" \
             --type 1 \
             --token P12 \
-            --password "$EJBCA_ADMIN_PASSWORD"
+            --password "$(<"$ejbca_admin_password_file")"
     fi
 
     ejbca_ca="$(ejbca_execute_command_print_output ca listcas 2>&1)"
