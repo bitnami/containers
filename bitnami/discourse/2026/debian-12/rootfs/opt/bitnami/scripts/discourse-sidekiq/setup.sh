@@ -24,7 +24,7 @@ fi
 . /opt/bitnami/scripts/libdiscoursesidekiq.sh
 
 # Ensure Discourse environment variables are valid
-discourse_validate
+discourse_validate true
 
 # Ensure Discourse is initialized
 discourse_sidekiq_initialize

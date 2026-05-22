@@ -129,7 +129,7 @@ export DISCOURSE_PASSENGER_EXTRA_FLAGS="${DISCOURSE_PASSENGER_EXTRA_FLAGS:-}"
 
 # Discourse credentials
 export DISCOURSE_USERNAME="${DISCOURSE_USERNAME:-user}" # only used during the first initialization
-export DISCOURSE_PASSWORD="${DISCOURSE_PASSWORD:-bitnami123}" # only used during the first initialization
+export DISCOURSE_PASSWORD="${DISCOURSE_PASSWORD:-}" # only used during the first initialization
 export DISCOURSE_EMAIL="${DISCOURSE_EMAIL:-user@example.com}" # only used during the first initialization
 export DISCOURSE_FIRST_NAME="${DISCOURSE_FIRST_NAME:-UserName}" # only used during the first initialization
 export DISCOURSE_LAST_NAME="${DISCOURSE_LAST_NAME:-LastName}" # only used during the first initialization
