@@ -85,8 +85,8 @@ The following tables list the main variables you can set.
 | `COUCHDB_CREATE_DATABASES`      | Whether to create CouchDB system databases during initialization. Useful for clustering.              | `yes`         |
 | `COUCHDB_IGNORE_INITDB_SCRIPTS` | Skip execution of init scripts from COUCHDB_INITSCRIPTS_DIR. Set to yes on non-primary cluster nodes. | `no`          |
 | `COUCHDB_USER`                  | CouchDB admin username.                                                                               | `admin`       |
-| `COUCHDB_PASSWORD`              | Password for the CouchDB admin user.                                                                  | `couchdb`     |
-| `COUCHDB_SECRET`                | CouchDB secret/token used for proxy and cookie authentication.                                        | `bitnami`     |
+| `COUCHDB_PASSWORD`              | Password for the CouchDB admin user.                                                                  | `nil`         |
+| `COUCHDB_SECRET`                | CouchDB secret/token used for proxy and cookie authentication.                                        | `nil`         |
 | `COUCHDB_ERLANG_HMAX`           | Per-process Erlang heap cap in bytes. Used to compute +hmax (value / 8 = word count).                 | `nil`         |
 | `COUCHDB_EXTRA_VM_ARGS`         | Additional Erlang VM arguments appended to vm.args.                                                   | `nil`         |
 | `COUCHDB_INTERNODE_TLS_ENABLED` | Enable TLS encryption for the Erlang distribution protocol (inter-node communication).                | `no`          |

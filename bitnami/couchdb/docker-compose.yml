@@ -7,6 +7,7 @@ services:
     environment:
       - COUCHDB_USER=admin
       - COUCHDB_PASSWORD=couchdb
+      - COUCHDB_SECRET=bitnami
     ports:
       - '5984:5984'
       - '4369:4369'
