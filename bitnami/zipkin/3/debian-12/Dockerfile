@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-05-21T06:46:48Z" \
+      org.opencontainers.image.created="2026-05-23T12:24:40Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/zipkin/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/zipkin" \
@@ -48,7 +48,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="3.6.1" \
     BITNAMI_APP_NAME="zipkin" \
-    IMAGE_REVISION="3" \
+    IMAGE_REVISION="4" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/zipkin/bin:$PATH"
 
 EXPOSE 9411
