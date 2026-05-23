@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-05-22T10:57:09Z" \
+      org.opencontainers.image.created="2026-05-23T11:33:18Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/seaweedfs/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/seaweedfs" \
@@ -48,7 +48,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="4.28.0" \
     BITNAMI_APP_NAME="seaweedfs" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     PATH="/opt/bitnami/seaweedfs/bin:$PATH"
 
 EXPOSE 8080 8333 8888 9327 9333 18080 18333 18888 19333
