@@ -803,6 +803,10 @@ apache_create_password_file() {
     local -r username="${2:?missing username}"
     local -r password="${3:?missing password}"
 
-    "${APACHE_BIN_DIR}/htpasswd" -bc "$file" "$username" "$password"
-    am_i_root && configure_permissions_ownership "$file" --file-mode "600" --user "$APACHE_DAEMON_USER" --group "$APACHE_DAEMON_GROUP"
+    # The -B flag uses bcrypt to hash the password, which is more secure than legacy APR1 (1000-iteration MD5) hash
+    # The -C flag computing time used for the bcrypt algorithm (default is 5)
+    "${APACHE_BIN_DIR}/htpasswd" -Bbc -C 12 "$file" "$username" "$password"
+    am_i_root && configure_permissions_ownership "$file" --user "$APACHE_DAEMON_USER" --group "$APACHE_DAEMON_GROUP"
+    # We can set strong permissions regardless the container is running as root or not
+    chmod 0600 "$file"
 }
