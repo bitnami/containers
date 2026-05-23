@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-05-21T02:20:18Z" \
+      org.opencontainers.image.created="2026-05-23T07:59:00Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/grafana-tempo-query/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/grafana-tempo-query" \
@@ -47,7 +47,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="2.10.5" \
     BITNAMI_APP_NAME="grafana-tempo-query" \
-    IMAGE_REVISION="3" \
+    IMAGE_REVISION="4" \
     PATH="/opt/bitnami/grafana-tempo-query/bin:$PATH"
 
 USER 1001
