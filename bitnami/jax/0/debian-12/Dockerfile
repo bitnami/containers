@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-05-21T06:52:20Z" \
+      org.opencontainers.image.created="2026-05-23T12:31:09Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/jax/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jax" \
@@ -50,7 +50,7 @@ RUN uninstall_packages curl
 RUN mkdir /app && chmod g+rwX /app
 ENV APP_VERSION="0.10.0" \
     BITNAMI_APP_NAME="jax" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="3" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 WORKDIR /app
