@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-05-21T04:53:33Z" \
+      org.opencontainers.image.created="2026-05-23T10:27:42Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/postgres-exporter/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/postgres-exporter" \
@@ -47,7 +47,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="0.19.1" \
     BITNAMI_APP_NAME="postgres-exporter" \
-    IMAGE_REVISION="6" \
+    IMAGE_REVISION="7" \
     PATH="/opt/bitnami/postgres-exporter/bin:$PATH"
 
 EXPOSE 9187
