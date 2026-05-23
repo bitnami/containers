@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-05-21T02:55:26Z" \
+      org.opencontainers.image.created="2026-05-23T08:30:12Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/jsonnet/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jsonnet" \
@@ -48,7 +48,7 @@ RUN uninstall_packages ca-certificates curl
 RUN chmod +x /opt/bitnami/jsonnet/bin/jsonnet
 ENV APP_VERSION="0.22.0" \
     BITNAMI_APP_NAME="jsonnet" \
-    IMAGE_REVISION="3" \
+    IMAGE_REVISION="4" \
     PATH="/opt/bitnami/jsonnet/bin:$PATH"
 
 USER 1001
