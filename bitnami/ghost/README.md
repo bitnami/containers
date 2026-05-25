@@ -93,7 +93,7 @@ The following tables list the main variables you can set.
 | `GHOST_BLOG_TITLE`                 | Ghost blog title.                                                                                                           | `"User's blog"`                  |
 | `GHOST_SKIP_BOOTSTRAP`             | Whether to perform initial bootstrapping for the application.                                                               | `nil`                            |
 | `GHOST_USERNAME`                   | Ghost user name.                                                                                                            | `user`                           |
-| `GHOST_PASSWORD`                   | Ghost user password.                                                                                                        | `bitnami123`                     |
+| `GHOST_PASSWORD`                   | Ghost user password.                                                                                                        | `nil`                            |
 | `GHOST_EMAIL`                      | Ghost user e-mail address.                                                                                                  | `user@example.com`               |
 | `GHOST_SMTP_FROM_ADDRESS`          | Ghost SMTP from address.                                                                                                    | `nil`                            |
 | `GHOST_SMTP_HOST`                  | Ghost SMTP server host.                                                                                                     | `nil`                            |
