@@ -105,7 +105,7 @@ export GHOST_SKIP_BOOTSTRAP="${GHOST_SKIP_BOOTSTRAP:-}" # only used during the f
 
 # Ghost credentials
 export GHOST_USERNAME="${GHOST_USERNAME:-user}" # only used during the first initialization
-export GHOST_PASSWORD="${GHOST_PASSWORD:-bitnami123}" # only used during the first initialization
+export GHOST_PASSWORD="${GHOST_PASSWORD:-}" # only used during the first initialization
 export GHOST_EMAIL="${GHOST_EMAIL:-user@example.com}" # only used during the first initialization
 
 # Ghost SMTP credentials
