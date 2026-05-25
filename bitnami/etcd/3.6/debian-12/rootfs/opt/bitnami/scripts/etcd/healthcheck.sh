@@ -19,7 +19,8 @@ set -o nounset
 read -r -a advertised_array <<< "$(tr ',;' ' ' <<< "$ETCD_ADVERTISE_CLIENT_URLS")"
 host="$(parse_uri "${advertised_array[0]}" "host")"
 port="$(parse_uri "${advertised_array[0]}" "port")"
-read -r -a extra_flags <<< "$(etcdctl_auth_flags)"
+read -r -a extra_flags <<< "$(etcdctl_auth_norbac_flags)"
+! is_empty_value "$ETCD_ROOT_PASSWORD" && export ETCDCTL_USER="root:$ETCD_ROOT_PASSWORD"
 extra_flags+=("--endpoints=${host}:${port}")
 
 # if ETCD_AUTO_TLS true or CA file not exists, just skip server cert verification

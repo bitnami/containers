@@ -35,7 +35,8 @@ endpoints_as_host_port() {
 # from the cluster before running Helm upgrades that potentially scale
 # down the etcd cluster
 
-read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
+read -r -a extra_flags <<<"$(etcdctl_auth_norbac_flags)"
+! is_empty_value "$ETCD_ROOT_PASSWORD" && export ETCDCTL_USER="root:$ETCD_ROOT_PASSWORD"
 is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(endpoints_as_host_port)")
 
 if [[ -n "$ETCD_PREUPGRADE_START_DELAY" ]]; then
