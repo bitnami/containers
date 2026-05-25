@@ -3,7 +3,7 @@
 
 services:
   consul-node1:
-    image: docker.io/bitnami/consul:1
+    image: docker.io/bitnami/consul:2
     environment:
       - CONSUL_BOOTSTRAP_EXPECT=3
       - CONSUL_CLIENT_LAN_ADDRESS=0.0.0.0
@@ -20,7 +20,7 @@ services:
       - 'consul-node1_data:/bitnami'
 
   consul-node2:
-    image: docker.io/bitnami/consul:1
+    image: docker.io/bitnami/consul:2
     environment:
       - CONSUL_BOOTSTRAP_EXPECT=3
       - CONSUL_CLIENT_LAN_ADDRESS=0.0.0.0
@@ -31,7 +31,7 @@ services:
       - 'consul-node2_data:/bitnami'
 
   consul-node3:
-    image: docker.io/bitnami/consul:1
+    image: docker.io/bitnami/consul:2
     environment:
       - CONSUL_BOOTSTRAP_EXPECT=3
       - CONSUL_CLIENT_LAN_ADDRESS=0.0.0.0
