@@ -21,7 +21,8 @@ endpoints="$(etcdctl_get_endpoints)"
 read -r -a endpoints_array <<< "$(tr ',;' ' ' <<< "$endpoints")"
 for e in "${endpoints_array[@]}"; do
     debug "Using endpoint $e"
-    read -r -a extra_flags <<< "$(etcdctl_auth_flags)"
+    read -r -a extra_flags <<< "$(etcdctl_auth_norbac_flags)"
+    ! is_empty_value "$ETCD_ROOT_PASSWORD" && export ETCDCTL_USER="root:$ETCD_ROOT_PASSWORD"
     extra_flags+=("--endpoints=$e")
     if etcdctl endpoint health "${extra_flags[@]}"; then
         info "Snapshotting the keyspace"

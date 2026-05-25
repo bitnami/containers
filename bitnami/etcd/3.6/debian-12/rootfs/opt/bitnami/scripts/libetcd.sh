@@ -264,22 +264,6 @@ etcdctl_get_endpoints() {
 }
 
 ########################
-# Obtain etcdctl authentication flags to use
-# Globals:
-#   ETCD_*
-# Arguments:
-#   None
-# Returns:
-#   Array with extra flags to use for authentication
-#########################
-etcdctl_auth_flags() {
-    local -a authFlags=()
-
-    ! is_empty_value "$ETCD_ROOT_PASSWORD" && authFlags+=("--user" "root:$ETCD_ROOT_PASSWORD")
-    echo "${authFlags[*]} $(etcdctl_auth_norbac_flags)"
-}
-
-########################
 # Obtain etcdctl authentication flags to use (before RBAC is enabled)
 # Globals:
 #   ETCD_*
@@ -346,7 +330,8 @@ etcd_configure_rbac() {
 ########################
 is_new_etcd_cluster() {
     local -a extra_flags
-    read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
+    read -r -a extra_flags <<<"$(etcdctl_auth_norbac_flags)"
+    ! is_empty_value "$ETCD_ROOT_PASSWORD" && export ETCDCTL_USER="root:$ETCD_ROOT_PASSWORD"
     is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
     ! debug_execute etcdctl endpoint status --cluster "${extra_flags[@]}"
 }
@@ -373,7 +358,8 @@ setup_etcd_active_endpoints() {
     port="$(parse_uri "${advertised_array[0]}" "port")"
     if [[ $cluster_size -gt 0 ]]; then
         for e in "${endpoints_array[@]}"; do
-            read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
+            read -r -a extra_flags <<<"$(etcdctl_auth_norbac_flags)"
+            ! is_empty_value "$ETCD_ROOT_PASSWORD" && export ETCDCTL_USER="root:$ETCD_ROOT_PASSWORD"
             extra_flags+=("--endpoints=$e")
             if [[ "$e" != "$host:$port" ]] && etcdctl endpoint health "${extra_flags[@]}" >/dev/null 2>&1; then
                 debug "$e endpoint is active"
@@ -494,7 +480,8 @@ remove_old_member_if_exist() {
     if ! is_empty_value "$old_member_id"; then
         info "Removing old member $old_member_id"
         local -a extra_flags
-        read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
+        read -r -a extra_flags <<<"$(etcdctl_auth_norbac_flags)"
+        ! is_empty_value "$ETCD_ROOT_PASSWORD" && export ETCDCTL_USER="root:$ETCD_ROOT_PASSWORD"
         is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
         etcdctl member remove "$old_member_id" "${extra_flags[@]}"
     fi
@@ -512,7 +499,8 @@ remove_old_member_if_exist() {
 add_new_member() {
     info "Adding new member to existing cluster"
     local -a extra_flags
-    read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
+    read -r -a extra_flags <<<"$(etcdctl_auth_norbac_flags)"
+    ! is_empty_value "$ETCD_ROOT_PASSWORD" && export ETCDCTL_USER="root:$ETCD_ROOT_PASSWORD"
     is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
     extra_flags+=("--peer-urls=$ETCD_INITIAL_ADVERTISE_PEER_URLS")
     mkdir -p "$(dirname $ETCD_NEW_MEMBERS_ENV_FILE)" || true
@@ -731,7 +719,6 @@ etcd_initialize() {
 #########################
 add_self_to_cluster() {
     local -a extra_flags
-    read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
     # is_healthy_etcd_cluster will also set ETCD_ACTIVE_ENDPOINTS
     while ! is_healthy_etcd_cluster; do
         warn "Cluster not healthy, not adding self to cluster for now, keeping trying..."
@@ -741,7 +728,9 @@ add_self_to_cluster() {
     # only send req to healthy nodes
 
     if is_empty_value "$(get_member_id)"; then
+        read -r -a extra_flags <<<"$(etcdctl_auth_norbac_flags)"
         extra_flags+=("--endpoints=${ETCD_ACTIVE_ENDPOINTS}" "--peer-urls=$ETCD_INITIAL_ADVERTISE_PEER_URLS")
+        ! is_empty_value "$ETCD_ROOT_PASSWORD" && export ETCDCTL_USER="root:$ETCD_ROOT_PASSWORD"
         while ! etcdctl member add "$ETCD_NAME" "${extra_flags[@]}" | grep "^ETCD_" >"$ETCD_NEW_MEMBERS_ENV_FILE"; do
             warn "Failed to add self to cluster, keeping trying..."
             sleep 10
@@ -768,7 +757,8 @@ get_member_id() {
     local ret
     local -a extra_flags
 
-    read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
+    read -r -a extra_flags <<<"$(etcdctl_auth_norbac_flags)"
+    ! is_empty_value "$ETCD_ROOT_PASSWORD" && export ETCDCTL_USER="root:$ETCD_ROOT_PASSWORD"
     is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
     ret=$(etcdctl "${extra_flags[@]}" member list | grep -w "$ETCD_INITIAL_ADVERTISE_PEER_URLS" | awk -F "," '{ print $1 }')
     # if not return zero
