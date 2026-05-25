@@ -17,6 +17,7 @@ services:
     volumes:
       - 'gitea_data:/bitnami/gitea'
     environment:
+      - GITEA_ADMIN_PASSWORD=bitnami
       - GITEA_DATABASE_HOST=postgresql
       - GITEA_DATABASE_NAME=bitnami_gitea
       - GITEA_DATABASE_USERNAME=bn_gitea
