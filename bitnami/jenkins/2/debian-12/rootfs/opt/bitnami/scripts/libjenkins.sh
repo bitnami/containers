@@ -100,7 +100,6 @@ jenkins_cli_execute() {
     local -r jenkins_url="http://127.0.0.1:${http_port}"
     local -r args=("-jar" "${cli_jar}" "-s" "$jenkins_url" "-auth" "${JENKINS_USERNAME}:${JENKINS_PASSWORD}" "$@")
 
-    debug "Executing command: java ${args[*]}"
     if am_i_root; then
         debug_execute run_as_user "$JENKINS_DAEMON_USER" java "${args[@]}"
     else
@@ -179,6 +178,7 @@ jenkins_validate() {
 
     # Validate credentials
     check_empty_value "JENKINS_PASSWORD"
+    ! is_boolean_yes "$JENKINS_SKIP_JKS" && check_empty_value "JENKINS_KEYSTORE_PASSWORD"
     if [[ "${#JENKINS_PASSWORD}" -lt 6 ]]; then
         print_validation_error "The admin password must be at least 6 characters long. Set the environment variable JENKINS_PASSWORD with a longer value"
     fi
@@ -223,15 +223,16 @@ jenkins_initialize() {
             info "Creating init script"
             ensure_dir_exists "${JENKINS_HOME}/init.groovy.d"
             jnlp_port="${JENKINS_JNLP_PORT_NUMBER:-"$JENKINS_DEFAULT_JNLP_PORT_NUMBER"}" render-template "$init_jenkins_groovy_tpl" >"${JENKINS_HOME}/init.groovy.d/init-jenkins.groovy"
+            # shellcheck disable=SC2064
+            trap "rm -f ${JENKINS_HOME}/init.groovy.d/init-jenkins.groovy" RETURN ERR INT TERM
             jenkins_start_bg
             # Configure host
             ! is_empty_value "$JENKINS_HOST" && jenkins_configure_host "$JENKINS_HOST"
             # Rotate the logs in Jenkins to clean the Jenkins warnings before actually configuring the app
             jenkins_stop
             # Generate jenkins.jks
-            "${JAVA_HOME}/bin/keytool" -genkey -keyalg RSA -keypass "${JENKINS_KEYSTORE_PASSWORD}" -storepass "${JENKINS_KEYSTORE_PASSWORD}" -keystore "${JENKINS_CERTS_DIR}/jenkins.jks" -dname "CN=${JENKINS_HOST}, O=${JENKINS_HOST}" -alias "${JENKINS_HOST}"
+            ! is_boolean_yes "$JENKINS_SKIP_JKS" && "${JAVA_HOME}/bin/keytool" -genkey -keyalg RSA -keypass "${JENKINS_KEYSTORE_PASSWORD}" -storepass "${JENKINS_KEYSTORE_PASSWORD}" -keystore "${JENKINS_CERTS_DIR}/jenkins.jks" -dname "CN=${JENKINS_HOST}, O=${JENKINS_HOST}" -alias "${JENKINS_HOST}"
             mv "$JENKINS_LOG_FILE" "${JENKINS_LOGS_DIR}/jenkins.firstboot.log"
-            rm "${JENKINS_HOME}/init.groovy.d/init-jenkins.groovy"
         else
             info "Skipping Bitnami initialization"
         fi

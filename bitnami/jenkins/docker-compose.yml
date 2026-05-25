@@ -8,6 +8,7 @@ services:
       - '80:8080'
     environment:
       - JENKINS_PASSWORD=bitnami
+      - JENKINS_KEYSTORE_PASSWORD=bitnami
     volumes:
       - 'jenkins_data:/bitnami/jenkins'
 

@@ -41,6 +41,7 @@ jenkins_env_vars=(
     JENKINS_HOST
     JENKINS_FORCE_HTTPS
     JENKINS_SKIP_BOOTSTRAP
+    JENKINS_SKIP_JKS
     JENKINS_ENABLE_SWARM
     JENKINS_CERTS_DIR
     JENKINS_KEYSTORE_PASSWORD
@@ -107,14 +108,15 @@ export JENKINS_HOST="${JENKINS_HOST:-}"
 export JENKINS_FORCE_HTTPS="${JENKINS_FORCE_HTTPS:-no}"
 JENKINS_SKIP_BOOTSTRAP="${JENKINS_SKIP_BOOTSTRAP:-"${DISABLE_JENKINS_INITIALIZATION:-}"}"
 export JENKINS_SKIP_BOOTSTRAP="${JENKINS_SKIP_BOOTSTRAP:-no}" # only used during the first initialization
+export JENKINS_SKIP_JKS="${JENKINS_SKIP_JKS:-yes}" # only used during the first initialization
 export JENKINS_ENABLE_SWARM="${JENKINS_ENABLE_SWARM:-no}"
 export JENKINS_CERTS_DIR="${JENKINS_CERTS_DIR:-${JENKINS_HOME}}"
-export JENKINS_KEYSTORE_PASSWORD="${JENKINS_KEYSTORE_PASSWORD:-bitnami}"
+export JENKINS_KEYSTORE_PASSWORD="${JENKINS_KEYSTORE_PASSWORD:-}"
 export JENKINS_OPTS="${JENKINS_OPTS:-}"
 
 # Jenkins credentials
 export JENKINS_USERNAME="${JENKINS_USERNAME:-user}" # only used during the first initialization
-export JENKINS_PASSWORD="${JENKINS_PASSWORD:-bitnami}" # only used during the first initialization
+export JENKINS_PASSWORD="${JENKINS_PASSWORD:-}" # only used during the first initialization
 export JENKINS_EMAIL="${JENKINS_EMAIL:-user@example.com}" # only used during the first initialization
 export JENKINS_SWARM_USERNAME="${JENKINS_SWARM_USERNAME:-swarm}" # only used during the first initialization
 export JENKINS_SWARM_PASSWORD="${JENKINS_SWARM_PASSWORD:-}" # only used during the first initialization
