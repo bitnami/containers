@@ -1,0 +1,8 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  hyperledger-fabric-ca:
+    image: docker.io/bitnami/hyperledger-fabric-ca:1
+    environment:
+      - FABRIC_CA_SERVER_BOOTSTRAP_USER_PASS=admin:adminpwd
