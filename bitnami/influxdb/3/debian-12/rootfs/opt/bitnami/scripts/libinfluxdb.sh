@@ -210,12 +210,27 @@ influxdb_create_primary_setup() {
         --org "${INFLUXDB_ADMIN_ORG}"
         --bucket "${INFLUXDB_ADMIN_BUCKET}"
         --username "${INFLUXDB_ADMIN_USER}"
-        --password "${INFLUXDB_ADMIN_USER_PASSWORD}"
         --retention "${INFLUXDB_ADMIN_RETENTION}"
     )
+    # Avoid passing credentials as arguments to influx CLI, to avoid leaking them
+    # given a local observer with /proc read access can read them
+    # Instead, we can read them from temporary files
+    local admin_user_password_file
+    admin_user_password_file="$(mktemp)"
+    chmod 0600 "$admin_user_password_file"
+    echo "$INFLUXDB_ADMIN_USER_PASSWORD" > "$admin_user_password_file"
+    # shellcheck disable=SC2064
+    trap "rm -f $admin_user_password_file" RETURN ERR INT TERM
+    args+=('--password' "$(<"$admin_user_password_file")")
 
     if [ -n "${INFLUXDB_ADMIN_USER_TOKEN}" ]; then
-        args+=('--token' "${INFLUXDB_ADMIN_USER_TOKEN}")
+        local admin_user_token_file
+        admin_user_token_file="$(mktemp)"
+        chmod 0600 "$admin_user_token_file"
+        echo "$INFLUXDB_ADMIN_USER_TOKEN" > "$admin_user_token_file"
+        # shellcheck disable=SC2064
+        trap "rm -f $admin_user_token_file" RETURN ERR INT TERM
+        args+=('--token' "$(<"$admin_user_token_file")")
     fi
 
     local setup_command=("$(influxdb_cli_binary)" setup "${args[@]}")
@@ -238,7 +253,6 @@ influxdb_run_upgrade() {
         --org "${INFLUXDB_ADMIN_ORG}"
         --bucket "${INFLUXDB_ADMIN_BUCKET}"
         --username "${INFLUXDB_ADMIN_USER}"
-        --password "${INFLUXDB_ADMIN_USER_PASSWORD}"
         --retention "${INFLUXDB_ADMIN_RETENTION}"
         --v2-config-path "${INFLUXDB_CONF_FILE}"
         --influx-configs-path "${INFLUX_CONFIGS_PATH}"
@@ -249,14 +263,30 @@ influxdb_run_upgrade() {
         --v1-dir "${INFLUXDB_INIT_V1_DIR}"
     )
 
+    # Avoid passing credentials as arguments to influx CLI, to avoid leaking them
+    # given a local observer with /proc read access can read them
+    # Instead, we can read them from temporary files
+    local admin_user_password_file
+    admin_user_password_file="$(mktemp)"
+    chmod 0600 "$admin_user_password_file"
+    echo "$INFLUXDB_ADMIN_USER_PASSWORD" > "$admin_user_password_file"
+    # shellcheck disable=SC2064
+    trap "rm -f $admin_user_password_file" RETURN ERR INT TERM
+    args+=('--password' "$(<"$admin_user_password_file")")
+
     if [ -n "${INFLUXDB_ADMIN_USER_TOKEN}" ]; then
-        args+=('--token' "${INFLUXDB_ADMIN_USER_TOKEN}")
+        local admin_user_token_file
+        admin_user_token_file="$(mktemp)"
+        chmod 0600 "$admin_user_token_file"
+        echo "$INFLUXDB_ADMIN_USER_TOKEN" > "$admin_user_token_file"
+        # shellcheck disable=SC2064
+        trap "rm -f $admin_user_token_file" RETURN ERR INT TERM
+        args+=('--token' "$(<"$admin_user_token_file")")
     fi
 
     local logLevel="info"
     is_boolean_yes "${BITNAMI_DEBUG}" && logLevel="debug"
     args+=('--log-level' "${logLevel}")
-
 
     local upgrade_command=("$(influxdb_binary)" upgrade "${args[@]}")
     am_i_root && upgrade_command=("run_as_user" "$INFLUXDB_DAEMON_USER" "${upgrade_command[@]}")
@@ -445,8 +475,8 @@ influxdb3_create_admin_token() {
     local create_command=("$(influxdb_binary)" "create" "token" "--admin" "--host" "http://127.0.0.1:${INFLUXDB_HTTP_PORT_NUMBER}" "--format" "json")
 
     info "Creating admin token..."
-    "${create_command[@]}" | jq -r ".token" > "$INFLUXDB_AUTOGEN_ADMIN_TOKEN_FILE"
-    chmod 600 "$INFLUXDB_AUTOGEN_ADMIN_TOKEN_FILE"
+    install -m 600 /dev/null "$INFLUXDB_AUTOGEN_ADMIN_TOKEN_FILE"
+    "${create_command[@]}" | jq -r ".token" >> "$INFLUXDB_AUTOGEN_ADMIN_TOKEN_FILE"
     warn "Auto-generated admin token saved in ${INFLUXDB_AUTOGEN_ADMIN_TOKEN_FILE} for later use. Please, ensure you use it to regenerate it and remove the file afterwards."
 }
 
