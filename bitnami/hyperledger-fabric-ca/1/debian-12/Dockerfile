@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-05-23T08:17:56Z" \
+      org.opencontainers.image.created="2026-05-25T09:55:22Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/hyperledger-fabric-ca/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/hyperledger-fabric-ca" \
@@ -47,11 +47,12 @@ RUN mkdir -p /opt/bitnami/hyperledger-fabric-ca/etc && chmod g+rw /opt/bitnami/h
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN uninstall_packages curl
 
+COPY rootfs /
 ENV APP_VERSION="1.5.20" \
     BITNAMI_APP_NAME="hyperledger-fabric-ca" \
     FABRIC_CA_HOME="/opt/bitnami/hyperledger-fabric-ca/etc" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="2" \
     PATH="/go/bin:/opt/bitnami/go/bin:/opt/bitnami/hyperledger-fabric-ca/bin:$PATH"
 
 USER 1001
-CMD [ "fabric-ca-server", "start", "-b", "admin:adminpw" ]
+CMD [ "/opt/bitnami/hyperledger-fabric-ca/run.sh" ]
