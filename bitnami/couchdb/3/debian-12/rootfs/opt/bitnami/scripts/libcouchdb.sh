@@ -97,12 +97,12 @@ couchdb_initialize() {
 
     if is_dir_empty "$COUCHDB_DATA_DIR"; then
         info "Deploying CouchDB from scratch"
+        couchdb_start_bg
         if is_boolean_yes "$COUCHDB_CREATE_DATABASES"; then
-            couchdb_start_bg
             couchdb_create_initial_databases
         fi
         couchdb_run_init_scripts
-        is_couchdb_running && couchdb_stop
+        couchdb_stop
     else
         info "Deploying CouchDB with persisted data"
     fi
@@ -311,10 +311,6 @@ couchdb_run_init_scripts() {
     fi
 
     info "Loading user's custom files from ${COUCHDB_INITSCRIPTS_DIR} ..."
-    if ! is_couchdb_running; then
-        couchdb_start_bg
-    fi
-
     for f in "${scripts[@]}"; do
         if [[ -x "$f" ]]; then
             debug "Executing $f"
