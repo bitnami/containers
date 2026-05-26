@@ -269,10 +269,11 @@ minio_validate() {
         fi
     }
 
+    if [[ -z "${MINIO_ROOT_USER:-}" ]] || [[ -z "${MINIO_ROOT_PASSWORD:-}" ]]; then
+        print_validation_error "Both MINIO_ROOT_USER and MINIO_ROOT_PASSWORD environment must be set"
+    fi
+
     if is_boolean_yes "$MINIO_DISTRIBUTED_MODE_ENABLED"; then
-        if [[ -z "${MINIO_ROOT_USER:-}" ]] || [[ -z "${MINIO_ROOT_PASSWORD:-}" ]]; then
-            print_validation_error "Distributed mode is enabled. Both MINIO_ROOT_USER and MINIO_ROOT_PASSWORD environment must be set"
-        fi
         if [[ -z "${MINIO_DISTRIBUTED_NODES:-}" ]]; then
             print_validation_error "Distributed mode is enabled. Nodes must be indicated setting the environment variable MINIO_DISTRIBUTED_NODES"
         else
@@ -367,11 +368,10 @@ minio_regenerate_keys() {
             error_code=1
         fi
     fi
-    echo "$MINIO_ROOT_USER" >"${MINIO_DATA_DIR}/.root_user"
-    echo "$MINIO_ROOT_PASSWORD" >"${MINIO_DATA_DIR}/.root_password"
-    if ! chmod 600 "${MINIO_DATA_DIR}/.root_user" "${MINIO_DATA_DIR}/.root_password"; then
-        warn "Unable to set secure permissions on key files ${MINIO_DATA_DIR}/.root_*"
-    fi
+    install -m 600 /dev/null "${MINIO_DATA_DIR}/.root_user" || error_code=1
+    install -m 600 /dev/null "${MINIO_DATA_DIR}/.root_password" || error_code=1
+    echo "$MINIO_ROOT_USER" >> "${MINIO_DATA_DIR}/.root_user"
+    echo "$MINIO_ROOT_PASSWORD" >> "${MINIO_DATA_DIR}/.root_password"
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 

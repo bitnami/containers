@@ -94,7 +94,7 @@ The following tables list the main variables you can set.
 | `MINIO_APACHE_API_HTTPS_PORT_NUMBER`     | MinIO API HTTPS port, exposed via Apache with basic authentication.        | `9443`                                             |
 | `MINIO_FORCE_NEW_KEYS`                   | Force recreating MinIO keys.                                               | `no`                                               |
 | `MINIO_ROOT_USER`                        | MinIO root user name.                                                      | `minio`                                            |
-| `MINIO_ROOT_PASSWORD`                    | Password for MinIO root user.                                              | `miniosecret`                                      |
+| `MINIO_ROOT_PASSWORD`                    | Password for MinIO root user.                                              | `nil`                                              |
 
 #### Read-only environment variables
 

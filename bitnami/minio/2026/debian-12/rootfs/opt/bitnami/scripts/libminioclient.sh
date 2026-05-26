@@ -58,11 +58,15 @@ minio_client_execute() {
 #   None
 minio_client_execute_timeout() {
     local -r args=("--config-dir" "${MINIO_CLIENT_CONF_DIR}" "--quiet" "$@")
-    local exec
+    local exec script_file
     exec=$(command -v mc)
 
     if am_i_root; then
-        cat > /tmp/cmd.sh << EOF
+        if ! script_file=$(mktemp "${TMPDIR:-/tmp}/cmd.XXXXXXXX"); then
+            echo "Error: Failed to create script file" >&2
+            return 1
+        fi
+        cat > "$script_file" << EOF
 #!/bin/bash
 # timeout forks its own shell process, so we need to provide it with the expected environment
 . /opt/bitnami/scripts/libos.sh
@@ -72,9 +76,9 @@ minio_client_execute_timeout() {
 . /opt/bitnami/scripts/libminioclient.sh
 run_as_user "$MINIO_DAEMON_USER" "${exec}" ${args[@]}
 EOF
-        chmod +x /tmp/cmd.sh
-        timeout 5s bash -c "/tmp/cmd.sh"
-        rm -f /tmp/cmd.sh
+        chmod +x "$script_file"
+        timeout 5s bash -c "$script_file"
+        rm -f "$script_file"
     else
         timeout 5s "${exec}" "${args[@]}"
     fi
