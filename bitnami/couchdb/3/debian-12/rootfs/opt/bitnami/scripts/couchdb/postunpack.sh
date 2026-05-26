@@ -17,7 +17,7 @@ set -o pipefail
 . /opt/bitnami/scripts/couchdb-env.sh
 
 # Ensure directories used by CouchDB exist
-for dir in "$COUCHDB_DATA_DIR" "$COUCHDB_CONF_DIR" "$(dirname "$COUCHDB_CONF_FILE")"; do
+for dir in "$COUCHDB_DATA_DIR" "$COUCHDB_CONF_DIR" "$(dirname "$COUCHDB_CONF_FILE")" "$COUCHDB_TMP_DIR"; do
     ensure_dir_exists "$dir"
 done
 
@@ -28,6 +28,6 @@ couchdb_vm_args_set "-kernel inet_dist_listen_max" "9100"
 couchdb_vm_args_set "-name" "couchdb@127.0.0.1"
 
 # Ensure directories used by CouchDB have proper permissions
-for dir in "$COUCHDB_DATA_DIR" "$COUCHDB_CONF_DIR"; do
+for dir in "$COUCHDB_DATA_DIR" "$COUCHDB_CONF_DIR" "$COUCHDB_TMP_DIR"; do
     chmod -R g+rwX "$dir"
 done
