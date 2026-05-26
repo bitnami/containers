@@ -10,6 +10,7 @@ set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
+. /opt/bitnami/scripts/libfile.sh
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libkafka.sh
@@ -20,6 +21,8 @@ set -o pipefail
 # Map Kafka environment variables
 kafka_create_alias_environment_variables
 
+# Ensure we clean up temporary files when this script ends
+trap cleanup_credentials EXIT
 # Dynamically set node.id/broker.id/controller.quorum.bootstrap.servers if the _COMMAND environment variable is set
 kafka_dynamic_environment_variables
 # Set the default truststore locations before validation

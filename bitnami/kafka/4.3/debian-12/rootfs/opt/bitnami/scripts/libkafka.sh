@@ -731,8 +731,11 @@ kafka_zookeeper_create_sasl_scram_users() {
     fi
     for ((i = 0; i < ${#users[@]}; i++)); do
         debug "Creating user ${users[i]} in zookeeper"
+        # Avoid passing credentials as arguments to kafka-configs.sh, to avoid leaking them given a local observer with /proc read access can read them
+        local config_file
+        config_file="$(credential_to_temp_file "SCRAM-SHA-256=[iterations=8192,password=${passwords[i]}],SCRAM-SHA-512=[password=${passwords[i]}]")"
         # Ref: https://docs.confluent.io/current/kafka/authentication_sasl/authentication_sasl_scram.html#sasl-scram-overview
-        debug_execute kafka-configs.sh --zookeeper "$zookeeper_connect" --alter --add-config "SCRAM-SHA-256=[iterations=8192,password=${passwords[i]}],SCRAM-SHA-512=[password=${passwords[i]}]" --entity-type users --entity-name "${users[i]}"
+        debug_execute kafka-configs.sh --zookeeper "$zookeeper_connect" --alter --add-config "$(<"$config_file")" --entity-type users --entity-name "${users[i]}"
     done
 }
 
@@ -892,26 +895,38 @@ kafka_kraft_storage_initialize() {
         # Configure SCRAM-SHA-256 if enabled
         if grep -Eq "^sasl.enabled.mechanisms=.*SCRAM-SHA-256" "$KAFKA_CONF_FILE"; then
             for ((i = 0; i < ${#users[@]}; i++)); do
-                args+=("--add-scram" "SCRAM-SHA-256=[name=${users[i]},password=${passwords[i]}]")
+                local scram_file
+                scram_file="$(credential_to_temp_file "SCRAM-SHA-256=[name=${users[i]},password=${passwords[i]}]")"
+                args+=("--add-scram" "$(<"$scram_file")")
             done
         fi
         # Configure SCRAM-SHA-512 if enabled
         if grep -Eq "^sasl.enabled.mechanisms=.*SCRAM-SHA-512" "$KAFKA_CONF_FILE"; then
             for ((i = 0; i < ${#users[@]}; i++)); do
-                args+=("--add-scram" "SCRAM-SHA-512=[name=${users[i]},password=${passwords[i]}]")
+                local scram_file
+                scram_file="$(credential_to_temp_file "SCRAM-SHA-512=[name=${users[i]},password=${passwords[i]}]")"
+                args+=("--add-scram" "$(<"$scram_file")")
             done
         fi
         # Add interbroker credentials
         if grep -Eq "^sasl.mechanism.inter.broker.protocol=SCRAM-SHA-256" "$KAFKA_CONF_FILE"; then
-            args+=("--add-scram" "SCRAM-SHA-256=[name=${KAFKA_INTER_BROKER_USER},password=${KAFKA_INTER_BROKER_PASSWORD}]")
+            local scram_file
+            scram_file="$(credential_to_temp_file "SCRAM-SHA-256=[name=${KAFKA_INTER_BROKER_USER},password=${KAFKA_INTER_BROKER_PASSWORD}]")"
+            args+=("--add-scram" "$(<"$scram_file")")
         elif grep -Eq "^sasl.mechanism.inter.broker.protocol=SCRAM-SHA-512" "$KAFKA_CONF_FILE"; then
-            args+=("--add-scram" "SCRAM-SHA-512=[name=${KAFKA_INTER_BROKER_USER},password=${KAFKA_INTER_BROKER_PASSWORD}]")
+            local scram_file
+            scram_file="$(credential_to_temp_file "SCRAM-SHA-512=[name=${KAFKA_INTER_BROKER_USER},password=${KAFKA_INTER_BROKER_PASSWORD}]")"
+            args+=("--add-scram" "$(<"$scram_file")")
         fi
         # Add controller credentials
         if grep -Eq "^sasl.mechanism.controller.protocol=SCRAM-SHA-256" "$KAFKA_CONF_FILE"; then
-            args+=("--add-scram" "SCRAM-SHA-256=[name=${KAFKA_CONTROLLER_USER},password=${KAFKA_CONTROLLER_PASSWORD}]")
+            local scram_file
+            scram_file="$(credential_to_temp_file "SCRAM-SHA-256=[name=${KAFKA_CONTROLLER_USER},password=${KAFKA_CONTROLLER_PASSWORD}]")"
+            args+=("--add-scram" "$(<"$scram_file")")
         elif grep -Eq "^sasl.mechanism.controller.protocol=SCRAM-SHA-512" "$KAFKA_CONF_FILE"; then
-            args+=("--add-scram" "SCRAM-SHA-512=[name=${KAFKA_CONTROLLER_USER},password=${KAFKA_CONTROLLER_PASSWORD}]")
+            local scram_file
+            scram_file="$(credential_to_temp_file "SCRAM-SHA-512=[name=${KAFKA_CONTROLLER_USER},password=${KAFKA_CONTROLLER_PASSWORD}]")"
+            args+=("--add-scram" "$(<"$scram_file")")
         fi
     fi
     if kafka_is_dynamic_controller_quorum_supported && [[ "${KAFKA_CFG_PROCESS_ROLES:-}" =~ "controller" ]] && [[ "${KAFKA_KRAFT_VERSION:-}" -eq "1" ]]; then
