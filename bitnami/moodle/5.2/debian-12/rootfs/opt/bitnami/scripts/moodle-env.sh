@@ -93,7 +93,7 @@ export MOODLE_LANG="${MOODLE_LANG:-en}"
 
 # Moodle credentials
 export MOODLE_USERNAME="${MOODLE_USERNAME:-user}" # only used during the first initialization
-export MOODLE_PASSWORD="${MOODLE_PASSWORD:-bitnami}" # only used during the first initialization
+export MOODLE_PASSWORD="${MOODLE_PASSWORD:-}" # only used during the first initialization
 export MOODLE_EMAIL="${MOODLE_EMAIL:-user@example.com}" # only used during the first initialization
 
 # Moodle SMTP credentials
