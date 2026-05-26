@@ -83,7 +83,7 @@ The following tables list the main variables you can set.
 | `MOODLE_SSLPROXY`             | Activate the sslproxy feature of Moodle.                                                                                     | `no`                               |
 | `MOODLE_LANG`                 | Allow to define default site language                                                                                        | `en`                               |
 | `MOODLE_USERNAME`             | Moodle user name.                                                                                                            | `user`                             |
-| `MOODLE_PASSWORD`             | Moodle user password.                                                                                                        | `bitnami`                          |
+| `MOODLE_PASSWORD`             | Moodle user password.                                                                                                        | `nil`                              |
 | `MOODLE_EMAIL`                | Moodle user e-mail address.                                                                                                  | `user@example.com`                 |
 | `MOODLE_SMTP_HOST`            | Moodle SMTP server host.                                                                                                     | `nil`                              |
 | `MOODLE_SMTP_PORT_NUMBER`     | Moodle SMTP server port number.                                                                                              | `nil`                              |

@@ -19,6 +19,7 @@ services:
       - '80:8080'
       - '443:8443'
     environment:
+      - MOODLE_PASSWORD=bitnami
       - MOODLE_DATABASE_HOST=mariadb
       - MOODLE_DATABASE_PORT_NUMBER=3306
       - MOODLE_DATABASE_USER=bn_moodle

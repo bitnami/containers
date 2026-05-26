@@ -47,6 +47,11 @@ moodle_validate() {
         error "$1"
         error_code=1
     }
+    check_empty_value() {
+        if is_empty_value "${!1}"; then
+            print_validation_error "${1} must be set"
+        fi
+    }
     check_multi_value() {
         if [[ " ${2} " != *" ${!1} "* ]]; then
             print_validation_error "The allowed values for ${1} are: ${2}"
@@ -66,12 +71,11 @@ moodle_validate() {
     }
 
     # Validate credentials
+    check_empty_value "MOODLE_PASSWORD"
     if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
         warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD}. For safety reasons, do not use this flag in a production environment."
     else
-        for empty_env_var in "MOODLE_DATABASE_PASSWORD" "MOODLE_PASSWORD"; do
-            is_empty_value "${!empty_env_var}" && print_validation_error "The ${empty_env_var} environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow a blank password. This is only recommended for development environments."
-        done
+        is_empty_value "${MOODLE_DATABASE_PASSWORD}" && print_validation_error "The MOODLE_DATABASE_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow a blank password. This is only recommended for development environments."
     fi
 
     # Validate SMTP credentials
@@ -79,8 +83,8 @@ moodle_validate() {
         for empty_env_var in "MOODLE_SMTP_USER" "MOODLE_SMTP_PASSWORD"; do
             is_empty_value "${!empty_env_var}" && warn "The ${empty_env_var} environment variable is empty or not set."
         done
-        is_empty_value "$MOODLE_SMTP_PORT_NUMBER" && print_validation_error "The MOODLE_SMTP_PORT_NUMBER environment variable is empty or not set."
-        ! is_empty_value "$MOODLE_SMTP_PORT_NUMBER" && check_valid_port "MOODLE_SMTP_PORT_NUMBER"
+        check_empty_value "MOODLE_SMTP_PORT_NUMBER"
+        check_valid_port "MOODLE_SMTP_PORT_NUMBER"
     fi
 
     # Compatibility with older images where 'moodledata' was located inside the 'htdocs' directory
