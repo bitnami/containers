@@ -20,6 +20,7 @@ services:
       - "80:8080"
       - "443:8443"
     environment:
+      - MATOMO_PASSWORD=bitnami
       - MATOMO_DATABASE_HOST=mariadb
       - MATOMO_DATABASE_PORT_NUMBER=3306
       - MATOMO_DATABASE_USER=bn_matomo

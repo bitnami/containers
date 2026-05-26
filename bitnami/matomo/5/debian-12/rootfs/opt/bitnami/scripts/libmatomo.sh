@@ -41,6 +41,11 @@ matomo_validate() {
         error "$1"
         error_code=1
     }
+    check_empty_value() {
+        if is_empty_value "${!1}"; then
+            print_validation_error "${1} must be set"
+        fi
+    }
     check_yes_no_value() {
         if ! is_yes_no_value "${!1}" && ! is_true_false_value "${!1}"; then
             print_validation_error "The allowed values for ${1} are: yes no"
@@ -51,7 +56,6 @@ matomo_validate() {
             print_validation_error "The allowed values for ${1} are: ${2}"
         fi
     }
-
     check_valid_port() {
         local port_var="${1:?missing port variable}"
         local err
@@ -61,12 +65,11 @@ matomo_validate() {
     }
 
     # Validate credentials
+    check_empty_value "MATOMO_PASSWORD"
     if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
         warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD}. For safety reasons, do not use this flag in a production environment."
     else
-        for empty_env_var in "MATOMO_DATABASE_PASSWORD" "MATOMO_PASSWORD"; do
-            is_empty_value "${!empty_env_var}" && print_validation_error "The ${empty_env_var} environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow a blank password. This is only recommended for development environments."
-        done
+        is_empty_value "${MATOMO_DATABASE_PASSWORD}" && print_validation_error "The MATOMO_DATABASE_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow a blank password. This is only recommended for development environments."
     fi
 
     # Check yes no values
@@ -79,7 +82,7 @@ matomo_validate() {
         for empty_env_var in "MATOMO_SMTP_USER" "MATOMO_SMTP_PASSWORD"; do
             is_empty_value "${!empty_env_var}" && warn "The ${empty_env_var} environment variable is empty or not set."
         done
-        is_empty_value "$MATOMO_SMTP_PORT_NUMBER" && print_validation_error "The MATOMO_SMTP_PORT_NUMBER environment variable is empty or not set."
+        check_empty_value "MATOMO_SMTP_PORT_NUMBER"
         ! is_empty_value "$MATOMO_SMTP_PORT_NUMBER" && check_valid_port "MATOMO_SMTP_PORT_NUMBER"
         ! is_empty_value "$MATOMO_SMTP_PROTOCOL" && check_multi_value "MATOMO_SMTP_PROTOCOL" "ssl tls none"
         ! is_empty_value "$MATOMO_SMTP_AUTH" && check_multi_value "MATOMO_SMTP_AUTH" "Plain Login Cram-md5"

@@ -101,7 +101,7 @@ export MATOMO_ENABLE_PROXY_URI_HEADER="${MATOMO_ENABLE_PROXY_URI_HEADER:-no}" # 
 
 # Matomo credentials
 export MATOMO_USERNAME="${MATOMO_USERNAME:-user}" # only used during the first initialization
-export MATOMO_PASSWORD="${MATOMO_PASSWORD:-bitnami}" # only used during the first initialization
+export MATOMO_PASSWORD="${MATOMO_PASSWORD:-}" # only used during the first initialization
 export MATOMO_EMAIL="${MATOMO_EMAIL:-user@example.com}" # only used during the first initialization
 export MATOMO_HOST="${MATOMO_HOST:-127.0.0.1}" # only used during the first initialization
 export MATOMO_WEBSITE_NAME="${MATOMO_WEBSITE_NAME:-example}" # only used during the first initialization
