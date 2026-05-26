@@ -8,6 +8,8 @@ services:
       - "27017:27017"
     volumes:
       - 'mongodb_data:/bitnami/mongodb'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
 
 volumes:
   mongodb_data:

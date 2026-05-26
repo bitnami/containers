@@ -23,8 +23,8 @@ is_boolean_yes "$MONGODB_ENABLE_IPV6" && MONGODB_ENABLE_IPV6="true" || MONGODB_E
 
 # Ensure MongoDB env var settings are valid
 mongodb_validate
-# Ensure MongoDB is stopped when this script ends.
-trap "mongodb_stop" EXIT
+# Ensure MongoDB is stopped when this script ends and we clean up temporary files
+trap "mongodb_stop; cleanup_credentials" EXIT
 
 # Ensure 'daemon' user exists when running as 'root'
 am_i_root && ensure_user_exists "$MONGODB_DAEMON_USER" --group "$MONGODB_DAEMON_GROUP"
