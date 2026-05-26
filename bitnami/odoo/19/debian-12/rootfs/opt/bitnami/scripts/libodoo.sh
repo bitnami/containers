@@ -80,12 +80,11 @@ odoo_validate() {
     [[ -n "${WITHOUT_DEMO:-}" ]] && warn "The WITHOUT_DEMO environment variable has been deprecated in favor of ODOO_LOAD_DEMO_DATA=yes. Support for it may be removed in a future release."
 
     # Validate credentials
+    check_empty_value "ODOO_PASSWORD"
     if is_boolean_yes "${ALLOW_EMPTY_PASSWORD:-}"; then
         warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD:-}. For safety reasons, do not use this flag in a production environment."
     else
-        for empty_env_var in "ODOO_DATABASE_PASSWORD" "ODOO_PASSWORD"; do
-            is_empty_value "${!empty_env_var}" && print_validation_error "The ${empty_env_var} environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow a blank password. This is only recommended for development environments."
-        done
+        is_empty_value "${ODOO_DATABASE_PASSWORD}" && print_validation_error "The ODOO_DATABASE_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow a blank password. This is only recommended for development environments."
     fi
 
     # Validate SMTP credentials
@@ -93,8 +92,8 @@ odoo_validate() {
         for empty_env_var in "ODOO_SMTP_USER" "ODOO_SMTP_PASSWORD"; do
             is_empty_value "${!empty_env_var}" && warn "The ${empty_env_var} environment variable is empty or not set."
         done
-        is_empty_value "$ODOO_SMTP_PORT_NUMBER" && print_validation_error "The ODOO_SMTP_PORT_NUMBER environment variable is empty or not set."
-        ! is_empty_value "$ODOO_SMTP_PORT_NUMBER" && check_valid_port "ODOO_SMTP_PORT_NUMBER"
+        check_empty_value "ODOO_SMTP_PORT_NUMBER"
+        check_valid_port "ODOO_SMTP_PORT_NUMBER"
         ! is_empty_value "$ODOO_SMTP_PROTOCOL" && check_multi_value "ODOO_SMTP_PROTOCOL" "ssl tls"
     fi
 
@@ -166,7 +165,17 @@ odoo_initialize() {
             odoo_execute "${init_args[@]}"
 
             info "Updating admin user credentials"
-            postgresql_remote_execute "${db_execute_args[@]}" <<< "UPDATE res_users SET login = '${ODOO_EMAIL}', password = '${ODOO_PASSWORD}' WHERE login = 'admin'"
+            local _hashed_pw
+            _hashed_pw="$(python3 - "${ODOO_PASSWORD}" <<'PYEOF'
+import sys, os, hashlib, base64
+def b64s(data):
+    return base64.b64encode(data).rstrip(b'=').replace(b'+', b'.').decode('ascii')
+rounds, salt = 25000, os.urandom(16)
+dk = hashlib.pbkdf2_hmac('sha512', sys.argv[1].encode('utf-8'), salt, rounds, dklen=64)
+sys.stdout.write('$pbkdf2-sha512${}${}${}'.format(rounds, b64s(salt), b64s(dk)))
+PYEOF
+)"
+            postgresql_remote_execute "${db_execute_args[@]}" <<< "UPDATE res_users SET login = '${ODOO_EMAIL}', password = '${_hashed_pw}' WHERE login = 'admin'"
         else
             info "An already initialized Odoo database was provided, configuration will be skipped"
             # Odoo stores a cache of the full path to cached .css/.js files in the filesystem

@@ -100,7 +100,7 @@ export ODOO_LIST_DB="${ODOO_LIST_DB:-no}" # only used during the first initializ
 
 # Odoo credentials
 export ODOO_EMAIL="${ODOO_EMAIL:-user@example.com}" # only used during the first initialization
-export ODOO_PASSWORD="${ODOO_PASSWORD:-bitnami}" # only used during the first initialization
+export ODOO_PASSWORD="${ODOO_PASSWORD:-}" # only used during the first initialization
 
 # Odoo SMTP credentials
 ODOO_SMTP_HOST="${ODOO_SMTP_HOST:-"${SMTP_HOST:-}"}"
