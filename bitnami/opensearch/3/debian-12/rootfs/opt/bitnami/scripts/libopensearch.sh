@@ -2,7 +2,7 @@
 # Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 #
-# Bitnami Opensearch library
+# Bitnami OpenSearch library
 
 # shellcheck disable=SC1090,SC1091
 
@@ -16,10 +16,10 @@
 . /opt/bitnami/scripts/libservice.sh
 . /opt/bitnami/scripts/libvalidations.sh
 
-# Opensearch Functions
+# OpenSearch Functions
 
 ########################
-# Bootstrap Opensearch Security by running the securityadmin.sh tool
+# Bootstrap OpenSearch Security by running the securityadmin.sh tool
 # Globals:
 #   DB_*
 #   OPENSEARCH_SECURITY_*
@@ -30,18 +30,23 @@
 #########################
 opensearch_security_bootstrap() {
     local failure=0
-    local cmd=("${OPENSEARCH_SECURITY_DIR}/tools/securityadmin.sh" "-nhnv")
-
-    cmd+=("-cd" "$OPENSEARCH_SECURITY_CONF_DIR")
-    cmd+=("-cn" "$DB_CLUSTER_NAME")
-    cmd+=("-h" "$(get_elasticsearch_hostname)")
-    cmd+=("-cacert" "$DB_CA_CERT_LOCATION")
-    cmd+=("-cert" "$OPENSEARCH_SECURITY_ADMIN_CERT_LOCATION")
-    cmd+=("-key" "$OPENSEARCH_SECURITY_ADMIN_KEY_LOCATION")
+    local cmd=(
+        "${OPENSEARCH_SECURITY_DIR}/tools/securityadmin.sh"
+        "-cd" "$OPENSEARCH_SECURITY_CONF_DIR"
+        "-cn" "$DB_CLUSTER_NAME"
+        # We want to use 127.0.0.1 to avoid being exposed to a potential DNS/ARP interception attack
+        "-h" "127.0.0.1"
+        "-cacert" "$DB_CA_CERT_LOCATION"
+        "-cert" "$OPENSEARCH_SECURITY_ADMIN_CERT_LOCATION"
+        "-key" "$OPENSEARCH_SECURITY_ADMIN_KEY_LOCATION"
+    )
+    # Given we're using 127.0.0.1, we need to suppress hostname verification
+    # when DB_TLS_VERIFICATION_MODE is full (default) to avoid a bootstrap failure
+    [[ "${DB_TLS_VERIFICATION_MODE:-full}" != "full" ]] && cmd+=("-nhnv")
 
     elasticsearch_start
 
-    info "Running Opensearch Admin tool..."
+    info "Running OpenSearch Admin tool..."
     "${cmd[@]}" || failure=$?
     elasticsearch_stop
 
@@ -66,9 +71,9 @@ opensearch_security_internal_user_set() {
     read -r -a attributes <<<"$(tr ',;' ' ' <<<"${5:-}")"
     local description="${6:-}"
 
-    local hash
-
-    hash=$("${OPENSEARCH_SECURITY_DIR}/tools/hash.sh" -p "$password" | sed '/^\*\*/d')
+    local hash password_file
+    password_file="$(credential_to_temp_file "$password")"
+    hash=$("${OPENSEARCH_SECURITY_DIR}/tools/hash.sh" -p "$(<"$password_file")" | sed '/^\*\*/d')
     yq -i eval ".$username.hash = \"$hash\"" "${OPENSEARCH_SECURITY_CONF_DIR}/internal_users.yml"
 
     if [[ -n "${backend_roles[*]:-}" ]]; then
@@ -88,7 +93,7 @@ opensearch_security_internal_user_set() {
 }
 
 ########################
-# Configure Opensearch Security built-in users and passwords
+# Configure OpenSearch Security built-in users and passwords
 # Globals:
 #   ELASTICSEARCH_*
 #   OPENSEARCH_SECURITY_*
@@ -98,11 +103,11 @@ opensearch_security_internal_user_set() {
 #   None
 #########################
 opensearch_security_configure_users() {
-    info "Configuring Opensearch security users and roles..."
+    info "Configuring OpenSearch security users and roles..."
     # Execute permission for configuration binaries
     chmod +x "${OPENSEARCH_SECURITY_DIR}/tools/hash.sh"
     chmod +x "${OPENSEARCH_SECURITY_DIR}/tools/securityadmin.sh"
-    # Opensearch security configuration
+    # OpenSearch security configuration
     if [ ! -f "${OPENSEARCH_SECURITY_DIR}/internal_users.yml" ]; then
         # Delete content of the demo file
         echo "" > "${OPENSEARCH_SECURITY_CONF_DIR}/internal_users.yml"
@@ -118,7 +123,7 @@ opensearch_security_configure_users() {
 }
 
 ########################
-# Configure Opensearch TLS settings
+# Configure OpenSearch TLS settings
 # Globals:
 #   DB_*
 # Arguments:
@@ -127,9 +132,11 @@ opensearch_security_configure_users() {
 #   None
 #########################
 opensearch_transport_tls_configuration(){
-    info "Configuring Opensearch Transport TLS settings..."
+    info "Configuring OpenSearch Transport TLS settings..."
     elasticsearch_conf_set plugins.security.ssl.transport.enabled "true"
-    elasticsearch_conf_write plugins.security.ssl.transport.enforce_hostname_verification "$DB_TLS_VERIFICATION_MODE" bool
+    local _enforce_hn_verify="false"
+    [[ "$DB_TLS_VERIFICATION_MODE" = "full" ]] && _enforce_hn_verify="true"
+    elasticsearch_conf_write plugins.security.ssl.transport.enforce_hostname_verification "$_enforce_hn_verify" bool
 
     if is_boolean_yes "$DB_TRANSPORT_TLS_USE_PEM"; then
         debug "Configuring Transport Layer TLS settings using PEM certificates..."
@@ -175,7 +182,7 @@ opensearch_http_tls_configuration(){
 
 #!/bin/bash
 #
-# Bitnami Elasticsearch/Opensearch common library
+# Bitnami Elasticsearch/OpenSearch common library
 
 # shellcheck disable=SC1090,SC1091
 
@@ -224,6 +231,7 @@ elasticsearch_conf_write() {
         ;;
     esac
     cp "$tempfile" "$DB_CONF_FILE"
+    rm "$tempfile"
 }
 
 ########################
@@ -384,6 +392,11 @@ elasticsearch_validate() {
         error "$1"
         error_code=1
     }
+    check_empty_value() {
+        if is_empty_value "${!1}"; then
+            print_validation_error "${1} must be set"
+        fi
+    }
 
     validate_node_roles() {
         if [ -n "$DB_NODE_ROLES" ]; then
@@ -406,6 +419,8 @@ elasticsearch_validate() {
         fi
     }
 
+    # TODO: these are not simple validations, they actually create users and adapt permissions on the filesystem
+    #    so we should move them to a separate function
     debug "Ensuring expected directories/files exist..."
     am_i_root && ensure_user_exists "$DB_DAEMON_USER" --group "$DB_DAEMON_GROUP"
     for dir in "$DB_TMP_DIR" "$DB_LOGS_DIR" "$DB_PLUGINS_DIR" "$DB_BASE_DIR/modules" "$DB_CONF_DIR"; do
@@ -422,7 +437,7 @@ elasticsearch_validate() {
 
     if ! is_boolean_yes "$DB_IS_DEDICATED_NODE"; then
         warn "Setting ${DB_FLAVOR^^}_IS_DEDICATED_NODE is disabled."
-        warn "${DB_FLAVOR^^}_NODE_ROLES will be ignored and ${DB_FLAVOR^} will asume all different roles."
+        warn "${DB_FLAVOR^^}_NODE_ROLES will be ignored and ${DB_FLAVOR^} will assume all different roles."
     else
         validate_node_roles
     fi
@@ -433,17 +448,20 @@ elasticsearch_validate() {
 
     if is_boolean_yes "$DB_ENABLE_SECURITY"; then
         if [[ "$DB_FLAVOR" = "opensearch" ]]; then
+            # Validate credentials
+            for var in "DB_PASSWORD" "OPENSEARCH_DASHBOARDS_PASSWORD" "LOGSTASH_PASSWORD"; do
+                check_empty_value "$var"
+            done
+            # Validate certificates
             if [[ ! -f "$OPENSEARCH_SECURITY_ADMIN_KEY_LOCATION" ]] || [[ ! -f "$OPENSEARCH_SECURITY_ADMIN_CERT_LOCATION" ]]; then
-                print_validation_error "In order to enable Opensearch Security, you must provide a valid admin PEM key and certificate."
+                print_validation_error "In order to enable OpenSearch Security, you must provide a valid admin PEM key and certificate."
             fi
-            if is_empty_value "$OPENSEARCH_SECURITY_NODES_DN"; then
-                print_validation_error "The variable OPENSEARCH_SECURITY_NODES_DN is required."
-            fi
-            if is_empty_value "$OPENSEARCH_SECURITY_ADMIN_DN"; then
-                print_validation_error "The variable OPENSEARCH_SECURITY_ADMIN_DN is required."
-            fi
+            # Validate DNs
+            for var in "OPENSEARCH_SECURITY_NODES_DN" "OPENSEARCH_SECURITY_ADMIN_DN"; do
+                check_empty_value "$var"
+            done
             if ! is_boolean_yes "$OPENSEARCH_ENABLE_REST_TLS"; then
-                print_validation_error "Opensearch does not support plaintext conections (HTTP) when Security is enabled."
+                print_validation_error "OpenSearch does not support plaintext connections (HTTP) when Security is enabled."
             fi
         fi
         if ! is_boolean_yes "$DB_SKIP_TRANSPORT_TLS"; then
@@ -586,6 +604,7 @@ elasticsearch_custom_configuration() {
     info "Adding custom configuration"
     yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' "$DB_CONF_FILE" "$custom_conf_file" >"$tempfile"
     cp "$tempfile" "$DB_CONF_FILE"
+    rm "$tempfile"
 }
 
 ########################
@@ -689,7 +708,7 @@ EOF
 }
 
 ########################
-# Configure/initialize Elasticsearch/Opensearch
+# Configure/initialize Elasticsearch/OpenSearch
 # Globals:
 #   DB_*
 # Arguments:
@@ -934,21 +953,20 @@ elasticsearch_configure_logging() {
 }
 
 ########################
-# Check Elasticsearch/Opensearch health
+# Check Elasticsearch/OpenSearch health
 # Globals:
 #   DB_*
 # Arguments:
 #   None
 # Returns:
-#   0 when healthy (or waiting for Opensearch security bootstrap)
+#   0 when healthy (or waiting for OpenSearch security bootstrap)
 #   1 when unhealthy
 #########################
 elasticsearch_healthcheck() {
     info "Checking ${DB_FLAVOR^} health..."
-    local -r cmd="curl"
-    local command_args=("--silent" "--write-out" "%{http_code}")
+    local curl_args=("--silent" "--write-out" "%{http_code}")
     local protocol="http"
-    local host
+    local host output return_code
 
     host=$(get_elasticsearch_hostname)
     if validate_ipv6 "$host"; then
@@ -956,21 +974,27 @@ elasticsearch_healthcheck() {
     fi
 
     if is_boolean_yes "$DB_ENABLE_SECURITY"; then
-        command_args+=("-k" "--user" "${DB_USERNAME}:${DB_PASSWORD}")
-        is_boolean_yes "$DB_ENABLE_REST_TLS" && protocol="https"
+        # Avoid passing credentials as arguments to curl, to avoid leaking them given a local observer with /proc read access can read them
+        local user_file
+        user_file="$(credential_to_temp_file "${DB_USERNAME}:${DB_PASSWORD}")"
+        curl_args+=("--user" "$(<"$user_file")")
+        if is_boolean_yes "$DB_ENABLE_REST_TLS"; then
+            # TODO: use the CA certificate to verify the server certificate
+            # Currently it's not trivial given keystores / truststores are mounted
+            curl_args+=("-k")
+        fi
     fi
 
     # Combination of --silent, --output and --write-out allows us to obtain both the status code and the request body
     output=$(mktemp)
-    command_args+=("-o" "$output" "${protocol}://${host}:${DB_HTTP_PORT_NUMBER}/_cluster/health?local=true")
-    HTTP_CODE=$("$cmd" "${command_args[@]}")
+    curl_args+=("-o" "$output" "${protocol}://${host}:${DB_HTTP_PORT_NUMBER}/_cluster/health?local=true")
+    HTTP_CODE=$(curl "${curl_args[@]}") || true
+    return_code=1
     if [[ ${HTTP_CODE} -ge 200 && ${HTTP_CODE} -le 299 ]] || ([[ "$DB_FLAVOR" = "opensearch" ]] && [[ ${HTTP_CODE} -eq 503 ]] && grep -q "OpenSearch Security not initialized" "$output" ); then
-        rm "$output"
-        return 0
-    else
-        rm "$output"
-        return 1
+        return_code=0
     fi
+    rm "$output"
+    return "$return_code"
 }
 
 ########################
