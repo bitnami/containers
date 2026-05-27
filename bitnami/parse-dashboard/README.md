@@ -163,7 +163,7 @@ The following tables list the main variables you can set.
 | Name                                         | Description                                             | Default Value |
 |----------------------------------------------|---------------------------------------------------------|---------------|
 | `PARSE_DASHBOARD_FORCE_OVERWRITE_CONF_FILE`  | Force the config.json config file generation.           | `no`          |
-| `PARSE_DASHBOARD_ENABLE_HTTPS`               | Whether to enable HTTPS for Parse Dashboard by default. | `no`          |
+| `PARSE_DASHBOARD_ENABLE_HTTPS`               | Whether to enable HTTPS for Parse Dashboard by default. | `yes`         |
 | `PARSE_DASHBOARD_EXTERNAL_HTTP_PORT_NUMBER`  | External HTTP port for Parse Dashboard.                 | `80`          |
 | `PARSE_DASHBOARD_EXTERNAL_HTTPS_PORT_NUMBER` | External HTTPS port for Parse Dashboard.                | `443`         |
 | `PARSE_DASHBOARD_PARSE_HOST`                 | Parse host name.                                        | `parse`       |
@@ -171,11 +171,11 @@ The following tables list the main variables you can set.
 | `PARSE_DASHBOARD_PARSE_PORT_NUMBER`          | Parse server port number.                               | `1337`        |
 | `PARSE_DASHBOARD_PARSE_APP_ID`               | A sample string environment variable.                   | `myappID`     |
 | `PARSE_DASHBOARD_APP_NAME`                   | Parse Dashboard App name.                               | `MyDashboard` |
-| `PARSE_DASHBOARD_PARSE_MASTER_KEY`           | Parse server master key.                                | `mymasterKey` |
+| `PARSE_DASHBOARD_PARSE_MASTER_KEY`           | Parse server master key.                                | `nil`         |
 | `PARSE_DASHBOARD_PARSE_MOUNT_PATH`           | Parse Dashboard mount path.                             | `/parse`      |
 | `PARSE_DASHBOARD_PARSE_PROTOCOL`             | Parse server protocol.                                  | `http`        |
 | `PARSE_DASHBOARD_USERNAME`                   | Parse Dashboard user name.                              | `user`        |
-| `PARSE_DASHBOARD_PASSWORD`                   | Parse Dashboard user password.                          | `bitnami`     |
+| `PARSE_DASHBOARD_PASSWORD`                   | Parse Dashboard user password.                          | `nil`         |
 
 #### Read-only environment variables
 
