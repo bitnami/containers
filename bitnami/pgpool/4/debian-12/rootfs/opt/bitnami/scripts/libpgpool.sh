@@ -509,9 +509,13 @@ pgpool_generate_password_file() {
     if is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD"; then
         info "Generating password file for local authentication..."
 
-        debug_execute pgpool_encrypt_execute -m --config-file="$PGPOOL_CONF_FILE" -u "$PGPOOL_POSTGRES_USERNAME" "$PGPOOL_POSTGRES_PASSWORD"
+        local postgres_password_file
+        postgres_password_file="$(credential_to_temp_file "$PGPOOL_POSTGRES_PASSWORD")"
+        debug_execute pgpool_encrypt_execute -m --config-file="$PGPOOL_CONF_FILE" -u "$PGPOOL_POSTGRES_USERNAME" "$(<"$postgres_password_file")"
         if [[ -n "$PGPOOL_SR_CHECK_USER" ]]; then
-            debug_execute pgpool_encrypt_execute -m --config-file="$PGPOOL_CONF_FILE" -u "$PGPOOL_SR_CHECK_USER" "$PGPOOL_SR_CHECK_PASSWORD"
+            local sr_check_password_file
+            sr_check_password_file="$(credential_to_temp_file "$PGPOOL_SR_CHECK_PASSWORD")"
+            debug_execute pgpool_encrypt_execute -m --config-file="$PGPOOL_CONF_FILE" -u "$PGPOOL_SR_CHECK_USER" "$(<"$sr_check_password_file")"
         fi
 
         if [[ -n "${PGPOOL_POSTGRES_CUSTOM_USERS}" ]]; then
@@ -520,7 +524,9 @@ pgpool_generate_password_file() {
 
             local index=0
             for user in "${custom_users_list[@]}"; do
-                debug_execute pgpool_encrypt_execute -m --config-file="$PGPOOL_CONF_FILE" -u "$user" "${custom_passwords_list[$index]}"
+                local custom_password_file
+                custom_password_file="$(credential_to_temp_file "${custom_passwords_list[$index]}")"
+                debug_execute pgpool_encrypt_execute -m --config-file="$PGPOOL_CONF_FILE" -u "$user" "$(<"$custom_password_file")"
                 ((index += 1))
             done
         fi
@@ -541,10 +547,12 @@ pgpool_generate_password_file() {
 pgpool_encrypt_password() {
     local -r password="${1:?missing password}"
 
+    local password_file
+    password_file="$(credential_to_temp_file "$password")"
     if [[ "$PGPOOL_AUTHENTICATION_METHOD" =~ ^(scram-sha-256|trust)$ ]]; then
-        pgpool_encrypt_execute "$password" | grep -o -E "AES.+" | tr -d '\n'
+        pgpool_encrypt_execute "$(<"$password_file")" | grep -o -E "AES.+" | tr -d '\n'
     else
-        pgpool_encrypt_execute "$password" | tr -d '\n'
+        pgpool_encrypt_execute "$(<"$password_file")" | tr -d '\n'
     fi
 }
 
@@ -608,8 +616,8 @@ pgpool_initialize() {
     rm -f "$PGPOOL_PID_FILE"
 
     # Configuring permissions for tmp, logs and data folders
-    am_i_root && configure_permissions_ownership "$PGPOOL_TMP_DIR $PGPOOL_LOG_DIR" -u "$PGPOOL_DAEMON_USER" -g "$PGPOOL_DAEMON_GROUP"
-    am_i_root && configure_permissions_ownership "$PGPOOL_DATA_DIR" -u "$PGPOOL_DAEMON_USER" -g "$PGPOOL_DAEMON_GROUP" -d "755" -f "644"
+    am_i_root && configure_permissions_ownership "$PGPOOL_TMP_DIR $PGPOOL_LOG_DIR" -u "$PGPOOL_DAEMON_USER" -g "$PGPOOL_DAEMON_GROUP" -n
+    am_i_root && configure_permissions_ownership "$PGPOOL_DATA_DIR" -u "$PGPOOL_DAEMON_USER" -g "$PGPOOL_DAEMON_GROUP" -d "755" -f "644" -n
 
     pgpool_create_pghba
     pgpool_create_config
