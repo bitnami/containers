@@ -15,4 +15,6 @@ set -o pipefail
 # Load Elasticsearch environment variables
 . /opt/bitnami/scripts/elasticsearch-env.sh
 
+# Ensure we clean up temporary files when this script ends
+trap "cleanup_credentials" EXIT
 elasticsearch_healthcheck
