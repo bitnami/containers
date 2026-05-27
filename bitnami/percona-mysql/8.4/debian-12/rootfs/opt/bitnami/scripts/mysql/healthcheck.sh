@@ -15,4 +15,6 @@ set -o pipefail
 # Load Percona Server for MySQL environment variables
 . /opt/bitnami/scripts/mysql-env.sh
 
+# Ensure we clean up temporary files when this script ends
+trap "cleanup_credentials" EXIT
 mysql_healthcheck
