@@ -192,7 +192,10 @@ mysql_exec_initial_dump() {
     local -r dump_file="${DB_DATA_DIR}/dump_all_databases.sql"
 
     info "MySQL dump master data start..."
-    mysqldump --verbose --single-transaction --quick --source-data=2 --all-databases -h "$DB_MASTER_HOST" -P "$DB_MASTER_PORT_NUMBER" -u "$DB_MASTER_ROOT_USER" -p"$DB_MASTER_ROOT_PASSWORD" > "$dump_file"
+    # Avoid passing credentials as arguments to mysqldump, to avoid leaking them given a local observer with /proc read access can read them
+    local root_password_file
+    root_password_file="$(credential_to_temp_file "$DB_MASTER_ROOT_PASSWORD")"
+    mysqldump --verbose --single-transaction --quick --source-data=2 --all-databases -h "$DB_MASTER_HOST" -P "$DB_MASTER_PORT_NUMBER" -u "$DB_MASTER_ROOT_USER" -p"$(<"$root_password_file")" > "$dump_file"
     debug "Finish dump databases"
 
     # Look for the line containing "CHANGE REPLICATION SOURCE"
@@ -632,7 +635,12 @@ mysql_execute_print_output() {
     fi
     args+=("-N" "-u" "$user")
     [[ -n "$db" ]] && args+=("$db")
-    [[ -n "$pass" ]] && args+=("-p$pass")
+    # Avoid passing credentials as arguments to mysql, to avoid leaking them given a local observer with /proc read access can read them
+    if [[ -n "$pass" ]]; then
+        local pass_file
+        pass_file="$(credential_to_temp_file "$pass")"
+        args+=("-p$(<"$pass_file")")
+    fi
     [[ "${#opts[@]}" -gt 0 ]] && args+=("${opts[@]}")
     [[ "${#extra_opts[@]}" -gt 0 ]] && args+=("${extra_opts[@]}")
 
@@ -640,7 +648,6 @@ mysql_execute_print_output() {
     if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
         local mysql_cmd
         mysql_cmd="$(</dev/stdin)"
-        debug "Executing SQL command:\n$mysql_cmd"
         "$(mysql_binary)" "${args[@]}" <<<"$mysql_cmd"
     else
         # Do not store the command(s) as a variable, to avoid issues when importing large files
@@ -1357,7 +1364,10 @@ mysql_healthcheck() {
 
     root_password="$(get_master_env_var_value ROOT_PASSWORD)"
     if [[ -n "$root_password" ]]; then
-        args+=("-p${root_password}")
+        # Avoid passing credentials as arguments to mysqladmin, to avoid leaking them given a local observer with /proc read access can read them
+        local root_password_file
+        root_password_file="$(credential_to_temp_file "$root_password")"
+        args+=("-p$(<"$root_password_file")")
     fi
 
     mysqladmin "${args[@]}" ping && mysqladmin "${args[@]}" status
