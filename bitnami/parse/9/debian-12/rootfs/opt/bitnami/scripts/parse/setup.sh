@@ -25,5 +25,7 @@ fi
 # Ensure Parse environment variables are valid
 parse_validate
 
+# Ensure we clean up temporary files
+trap "cleanup_credentials" EXIT
 # Ensure Parse is initialized
 parse_initialize

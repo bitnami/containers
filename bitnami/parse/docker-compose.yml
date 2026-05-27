@@ -20,6 +20,7 @@ services:
     depends_on:
       - mongodb
     environment:
+      - PARSE_MASTER_KEY=mymasterKey
       - PARSE_DATABASE_HOST=mongodb
       - PARSE_DATABASE_PORT_NUMBER=27017
       - PARSE_DATABASE_USER=bn_parse

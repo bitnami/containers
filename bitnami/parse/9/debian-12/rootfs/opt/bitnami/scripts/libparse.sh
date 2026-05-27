@@ -7,6 +7,7 @@
 # shellcheck disable=SC1091
 
 # Load generic libraries
+. /opt/bitnami/scripts/libfile.sh
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libnet.sh
@@ -199,8 +200,10 @@ parse_conf_get() {
 #########################
 parse_wait_for_mongodb_connection() {
     local -r connection_string="${1:?missing connection string}"
+    local connection_string_file
+    connection_string_file="$(credential_to_temp_file "$connection_string")"
     check_mongodb_connection() {
-        local -r mongo_args=("$connection_string" "--eval" "db.stats()")
+        local -r mongo_args=("$(<"$connection_string_file")" "--eval" "db.stats()")
         local -r res=$(mongosh "${mongo_args[@]}")
         debug "$res"
         echo "$res" | grep -q 'ok: 1'

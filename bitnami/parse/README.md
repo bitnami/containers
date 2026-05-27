@@ -88,7 +88,7 @@ The following tables list the main variables you can set.
 | `PARSE_HOST`                      | Parse host.                                   | `127.0.0.1`                    |
 | `PARSE_PORT_NUMBER`               | Port number in which Parse will run.          | `1337`                         |
 | `PARSE_APP_ID`                    | Parse app ID.                                 | `myappID`                      |
-| `PARSE_MASTER_KEY`                | Parse master key.                             | `mymasterKey`                  |
+| `PARSE_MASTER_KEY`                | Parse master key.                             | `nil`                          |
 | `PARSE_APP_NAME`                  | Parse app name.                               | `parse-server`                 |
 | `PARSE_MOUNT_PATH`                | Parse mount path.                             | `/parse`                       |
 | `PARSE_ENABLE_CLOUD_CODE`         | Enable Parse cloud code support.              | `no`                           |
