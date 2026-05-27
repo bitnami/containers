@@ -942,6 +942,7 @@ elasticsearch_healthcheck() {
         user_file="$(credential_to_temp_file "${DB_USERNAME}:${DB_PASSWORD}")"
         curl_args+=("--user" "$(<"$user_file")")
         if is_boolean_yes "$DB_ENABLE_REST_TLS"; then
+            protocol="https"
             # TODO: use the CA certificate to verify the server certificate
             # Currently it's not trivial given keystores / truststores are mounted
             curl_args+=("-k")
