@@ -17,5 +17,7 @@ set -o pipefail
 
 # Ensure MongoDB Shell environment variables settings are valid
 mongodb_shell_validate
+# Ensure we clean up temporary files
+trap "cleanup_credentials" EXIT
 # Ensure MongoDB Shell is initialized
 mongodb_shell_initialize

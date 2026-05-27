@@ -7,6 +7,7 @@
 # shellcheck disable=SC1091
 
 # Load Generic Libraries
+. /opt/bitnami/scripts/libfile.sh
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libvalidations.sh
@@ -128,7 +129,12 @@ mongodb_execute() {
 
     local -a args=("--host" "$host" "--port" "$port")
     [[ -n "$final_user" ]] && args+=("-u" "$final_user")
-    [[ -n "$password" ]] && args+=("-p" "$password")
+    # Avoid passing credentials as arguments to mongosh, to avoid leaking them given a local observer with /proc read access can read them
+    if [[ -n "$password" ]]; then
+        local pass_file
+        pass_file="$(credential_to_temp_file "$password")"
+        args+=("-p" "$(<"$pass_file")")
+    fi
     if [[ -n "$extra_args" ]]; then
         local extra_args_array=()
         read -r -a extra_args_array <<<"$extra_args"
@@ -136,5 +142,5 @@ mongodb_execute() {
     fi
     [[ -n "$database" ]] && args+=("$database")
 
-    "$MONGODB_BIN_DIR/mongosh" "${args[@]}"
+    "${MONGODB_BIN_DIR}/mongosh" "${args[@]}"
 }
