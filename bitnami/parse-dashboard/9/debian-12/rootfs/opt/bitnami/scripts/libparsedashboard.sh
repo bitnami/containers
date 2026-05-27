@@ -73,6 +73,10 @@ parse_dashboard_validate() {
     ! is_empty_value "$PARSE_DASHBOARD_PARSE_PORT_NUMBER" && check_valid_port "PARSE_DASHBOARD_PARSE_PORT_NUMBER"
     ! is_empty_value "$PARSE_DASHBOARD_EXTERNAL_HTTPS_PORT_NUMBER" && check_valid_port "PARSE_DASHBOARD_EXTERNAL_HTTPS_PORT_NUMBER"
     ! is_empty_value "$PARSE_DASHBOARD_EXTERNAL_HTTP_PORT_NUMBER" && check_valid_port "PARSE_DASHBOARD_EXTERNAL_HTTP_PORT_NUMBER"
+    # Warn about insecure HTTPS usage
+    if ! is_boolean_yes "$PARSE_DASHBOARD_ENABLE_HTTPS"; then
+        warn "PARSE_DASHBOARD_ENABLE_HTTPS=no: Login credentials and session cookies will be transmitted in cleartext. Do not expose port 4040 to untrusted networks."
+    fi
 
     return "$error_code"
 }
@@ -93,7 +97,7 @@ parse_dashboard_initialize() {
         info "Ensuring Parse directories exist"
         ensure_dir_exists "$PARSE_DASHBOARD_VOLUME_DIR"
         # Use daemon:root ownership for compatibility when running as a non-root user
-        am_i_root && configure_permissions_ownership "$PARSE_DASHBOARD_VOLUME_DIR" -d "775" -f "664" -u "$PARSE_DASHBOARD_DAEMON_USER" -g "root"
+        am_i_root && configure_permissions_ownership "$PARSE_DASHBOARD_VOLUME_DIR" -d "775" -f "664" -u "$PARSE_DASHBOARD_DAEMON_USER" -g "root" -n
         local -r parse_url="${PARSE_DASHBOARD_PARSE_PROTOCOL}://${PARSE_DASHBOARD_PARSE_HOST}:${PARSE_DASHBOARD_PARSE_PORT_NUMBER}${PARSE_DASHBOARD_PARSE_MOUNT_PATH}"
         # Configure Parse Dashboard using a configuration file
         # Based on https://github.com/parse-community/parse-dashboard#configuring-parse-dashboard
@@ -106,9 +110,11 @@ parse_dashboard_initialize() {
         parse_dashboard_conf_set "apps[0].appName" "$PARSE_DASHBOARD_APP_NAME"
         parse_dashboard_conf_set "users[0].user" "$PARSE_DASHBOARD_USERNAME"
         parse_dashboard_conf_set "users[0].pass" "$PARSE_DASHBOARD_PASSWORD"
+        chmod 600 "$PARSE_DASHBOARD_CONF_FILE"
     else
         warn "Parse Dashboard config.json detected in persistence. Persisting configuration files is deprecated"
         cp "$persisted_conf_file" "$PARSE_DASHBOARD_CONF_FILE"
+        chmod 600 "$PARSE_DASHBOARD_CONF_FILE"
         local -r parse_url="$(parse_dashboard_conf_get "apps[0].serverURL")"
         info "Trying to connect to the Parse server ${parse_url}"
         parse_dashboard_wait_for_parse_connection "$parse_url"
