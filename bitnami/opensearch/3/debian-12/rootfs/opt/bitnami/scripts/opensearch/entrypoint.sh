@@ -25,9 +25,9 @@ debug "Copying files from $DB_DEFAULT_CONF_DIR to $DB_CONF_DIR"
 cp -nr "$DB_DEFAULT_CONF_DIR"/. "$DB_CONF_DIR"
 
 if [[ "$1" = "/opt/bitnami/scripts/opensearch/run.sh" ]]; then
-    info "** Starting Opensearch setup **"
+    info "** Starting OpenSearch setup **"
     /opt/bitnami/scripts/opensearch/setup.sh
-    info "** Opensearch setup finished! **"
+    info "** OpenSearch setup finished! **"
 fi
 
 echo ""

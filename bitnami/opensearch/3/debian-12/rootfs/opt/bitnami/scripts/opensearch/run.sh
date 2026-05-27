@@ -32,7 +32,7 @@ fi
 
 ARGS+=("$@")
 
-info "** Starting Opensearch **"
+info "** Starting OpenSearch **"
 if am_i_root; then
     exec_as_user "$DB_DAEMON_USER" "$EXEC" "${ARGS[@]}"
 else

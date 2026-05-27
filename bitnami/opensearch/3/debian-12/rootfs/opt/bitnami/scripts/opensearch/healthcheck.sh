@@ -12,7 +12,9 @@ set -o pipefail
 # Load libraries
 . /opt/bitnami/scripts/libopensearch.sh
 
-# Load Opensearch environment variables
+# Load OpenSearch environment variables
 . /opt/bitnami/scripts/opensearch-env.sh
 
+# Ensure we clean up temporary files when this script ends
+trap "cleanup_credentials" EXIT
 elasticsearch_healthcheck

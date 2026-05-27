@@ -17,17 +17,17 @@ set -o pipefail
 # Load environment
 . /opt/bitnami/scripts/opensearch-env.sh
 
-# Ensure Opensearch environment variables settings are valid
+# Ensure OpenSearch environment variables settings are valid
 elasticsearch_validate
-# Ensure Opensearch is stopped when this script ends
-trap "elasticsearch_stop" EXIT
+# Ensure OpenSearch is stopped when this script ends and we clean up temporary files
+trap "elasticsearch_stop; cleanup_credentials" EXIT
 # Ensure 'daemon' user exists when running as 'root'
 am_i_root && ensure_user_exists "$DB_DAEMON_USER" --group "$DB_DAEMON_GROUP"
-# Ensure Opensearch is initialized
+# Ensure OpenSearch is initialized
 elasticsearch_initialize
 # Ensure kernel settings are valid
 elasticsearch_validate_kernel
-# Install Opensearch plugins
+# Install OpenSearch plugins
 elasticsearch_install_plugins
 # Ensure custom initialization scripts are executed
 elasticsearch_custom_init_scripts
