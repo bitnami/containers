@@ -206,8 +206,8 @@ pgbouncer_initialize() {
     info "Configuring credentials"
     # Create credentials file
     if ! pgbouncer_is_file_external "userlist.txt"; then
-        echo "\"$(pgbouncer_escape_auth "$POSTGRESQL_USERNAME")\" \"$(pgbouncer_escape_auth "$POSTGRESQL_PASSWORD")\"" \
-           > "$PGBOUNCER_AUTH_FILE"
+        install -m 600 /dev/null "$PGBOUNCER_AUTH_FILE"
+        echo "\"$(pgbouncer_escape_auth "$POSTGRESQL_USERNAME")\" \"$(pgbouncer_escape_auth "$POSTGRESQL_PASSWORD")\"" >> "$PGBOUNCER_AUTH_FILE"
         echo "$PGBOUNCER_USERLIST" >> "$PGBOUNCER_AUTH_FILE"
     else
         debug "User list file mounted externally, skipping configuration"
@@ -336,12 +336,12 @@ pgbouncer_initialize() {
     fi
 
     # Configuring permissions for tmp and logs folders
-    am_i_root && configure_permissions_ownership "$PGBOUNCER_TMP_DIR $PGBOUNCER_LOG_DIR" -u "$PGBOUNCER_DAEMON_USER" -g "$PGBOUNCER_DAEMON_GROUP"
+    am_i_root && configure_permissions_ownership "$PGBOUNCER_TMP_DIR $PGBOUNCER_LOG_DIR" -u "$PGBOUNCER_DAEMON_USER" -g "$PGBOUNCER_DAEMON_GROUP" -n
 
     # Configure ownership and permissions for the socket directory if PGBOUNCER_SOCKET_DIR is set.
     # This ensures the directory is usable by PGBOUNCER_DAEMON_USER, especially if it's a root-owned mount point.
-    if ! is_empty_value "$PGBOUNCER_SOCKET_DIR"; then
-        am_i_root && configure_permissions_ownership "$PGBOUNCER_SOCKET_DIR" -u "$PGBOUNCER_DAEMON_USER" -g "$PGBOUNCER_DAEMON_GROUP" --dir-mode "0755"
+    if am_i_root && ! is_empty_value "$PGBOUNCER_SOCKET_DIR" && [[ "$PGBOUNCER_SOCKET_DIR" != "/tmp" ]]; then
+        configure_permissions_ownership "$PGBOUNCER_SOCKET_DIR" -u "$PGBOUNCER_DAEMON_USER" -g "$PGBOUNCER_DAEMON_GROUP" --dir-mode "0755" -n
     fi
 
     # Avoid exit code of previous commands to affect the result of this function
