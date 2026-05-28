@@ -127,6 +127,10 @@ postgresql_validate() {
         empty_password_error "You can not set POSTGRESQL_LDAP_URL and POSTGRESQL_LDAP_SERVER at the same time. Check your LDAP configuration."
     fi
 
+    if is_boolean_yes "$POSTGRESQL_ENABLE_LDAP" && is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
+        print_validation_error "You cannot enable LDAP authentication and allow empty passwords at the same time."
+    fi
+
     if ! is_yes_no_value "$POSTGRESQL_SR_CHECK"; then
         print_validation_error "The values allowed for POSTGRESQL_SR_CHECK are: yes or no"
     elif is_boolean_yes "$POSTGRESQL_SR_CHECK" && [[ -z "$POSTGRESQL_SR_CHECK_USERNAME" || -z "$POSTGRESQL_SR_CHECK_DATABASE" ]]; then
@@ -220,7 +224,15 @@ postgresql_ldap_auth_configuration() {
         [[ -n "$POSTGRESQL_LDAP_PORT" ]] && ldap_configuration+=" ldapport=${POSTGRESQL_LDAP_PORT}"
         [[ -n "$POSTGRESQL_LDAP_BASE_DN" ]] && ldap_configuration+=" ldapbasedn=\"${POSTGRESQL_LDAP_BASE_DN}\""
         [[ -n "$POSTGRESQL_LDAP_BIND_DN" ]] && ldap_configuration+=" ldapbinddn=\"${POSTGRESQL_LDAP_BIND_DN}\""
-        [[ -n "$POSTGRESQL_LDAP_BIND_PASSWORD" ]] && ldap_configuration+=" ldapbindpasswd=${POSTGRESQL_LDAP_BIND_PASSWORD}"
+        if [[ -n "$POSTGRESQL_LDAP_BIND_PASSWORD" ]]; then
+            if is_boolean_yes "$POSTGRESQL_LDAP_BIND_USE_PASSFILE" && [[ ! -f "${POSTGRESQL_LDAP_BIND_PASSFILE_PATH}" ]]; then
+                install -m 600 /dev/null "$POSTGRESQL_LDAP_BIND_PASSFILE_PATH"
+                echo "$POSTGRESQL_LDAP_BIND_PASSWORD" >> "$POSTGRESQL_LDAP_BIND_PASSFILE_PATH"
+                ldap_opts+=" ldapbindpasswdfile=${POSTGRESQL_LDAP_BIND_PASSFILE_PATH}"
+            else
+                ldap_opts+=" ldapbindpasswd=\"${POSTGRESQL_LDAP_BIND_PASSWORD}\""
+            fi
+        fi
         [[ -n "$POSTGRESQL_LDAP_SEARCH_ATTR" ]] && ldap_configuration+=" ldapsearchattribute=${POSTGRESQL_LDAP_SEARCH_ATTR}"
         [[ -n "$POSTGRESQL_LDAP_SEARCH_FILTER" ]] && ldap_configuration+=" ldapsearchfilter=\"${POSTGRESQL_LDAP_SEARCH_FILTER}\""
         [[ -n "$POSTGRESQL_LDAP_TLS" ]] && ldap_configuration+=" ldaptls=${POSTGRESQL_LDAP_TLS}"
