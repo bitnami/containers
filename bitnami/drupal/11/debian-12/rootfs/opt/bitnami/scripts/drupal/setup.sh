@@ -34,5 +34,7 @@ drupal_validate
 # Update web server configuration with runtime environment (needs to happen before the initialization)
 web_server_update_app_configuration "drupal"
 
+# Ensure we clean up temporary files when this script ends
+trap cleanup_credentials EXIT
 # Ensure Drupal is initialized
 drupal_initialize

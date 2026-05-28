@@ -8,6 +8,7 @@
 
 # Load Generic Libraries
 . /opt/bitnami/scripts/libphp.sh
+. /opt/bitnami/scripts/libfile.sh
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libnet.sh
@@ -144,7 +145,7 @@ drupal_initialize() {
         info "Configuring file permissions for Drupal"
         ensure_dir_exists "$DRUPAL_VOLUME_DIR"
         # Use daemon:root ownership for compatibility when running as a non-root user
-        am_i_root && configure_permissions_ownership "$DRUPAL_VOLUME_DIR" -d "775" -f "664" -u "$WEB_SERVER_DAEMON_USER" -g "root"
+        am_i_root && configure_permissions_ownership "$DRUPAL_VOLUME_DIR" -d "775" -f "664" -u "$WEB_SERVER_DAEMON_USER" -g "root" -n
 
         if ! is_boolean_yes "$DRUPAL_SKIP_BOOTSTRAP"; then
             # Perform initial bootstrapping for Drupal
@@ -288,18 +289,11 @@ drupal_site_install() {
         PHP_OPTIONS="-d sendmail_path=$(which true)"
         export PHP_OPTIONS
 
-        # Avoid passing Drupal & database password as arguments to drush, to avoid leaking them given
+        # Avoid passing Drupal & database password as arguments to drush, to avoid leaking them
         # given a local observer with /proc read access can read them
-        # Instead, we can read them from temporary files
         local drush_password_file database_url_file
-        drush_password_file="$(mktemp)"
-        database_url_file="$(mktemp)"
-        chmod 0600 "$drush_password_file" "$database_url_file"
-        echo "$DRUPAL_PASSWORD" > "$drush_password_file"
-        echo "mysql://${DRUPAL_DATABASE_USER}:${DRUPAL_DATABASE_PASSWORD}@${DRUPAL_DATABASE_HOST}:${DRUPAL_DATABASE_PORT_NUMBER}/${DRUPAL_DATABASE_NAME}" > "$database_url_file"
-        # shellcheck disable=SC2064
-        trap "rm -f $drush_password_file $database_url_file" RETURN ERR INT TERM
-
+        drush_password_file="$(credential_to_temp_file "$DRUPAL_PASSWORD")"
+        database_url_file="$(credential_to_temp_file "mysql://${DRUPAL_DATABASE_USER}:${DRUPAL_DATABASE_PASSWORD}@${DRUPAL_DATABASE_HOST}:${DRUPAL_DATABASE_PORT_NUMBER}/${DRUPAL_DATABASE_NAME}")"
         drush_execute "site:install" \
             "--db-url=$(<"$database_url_file")" \
             "--account-name=${DRUPAL_USERNAME}" \
