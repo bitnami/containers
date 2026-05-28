@@ -39,7 +39,7 @@ done
 # Configure phpMyAdmin based on build-time defaults
 info "Configuring default phpMyAdmin options"
 phpmyadmin_conf_set "\$cfg['AllowArbitraryServer']" "$(php_convert_to_boolean "$PHPMYADMIN_DEFAULT_ALLOW_ARBITRARY_SERVER")" yes
-phpmyadmin_conf_set "\$cfg['Servers'][\$i]['AllowNoPassword']" "$(php_convert_to_boolean "$DATABASE_DEFAULT_ALLOW_NO_PASSWORD")" yes
+phpmyadmin_conf_set "\$cfg['Servers'][\$i]['AllowNoPassword']" "false" yes
 # The database port entry is not included in the configuration, so we add it manually right after the host
 database_server_host_pattern="^[/\s]*[$]cfg\['Servers'\]\[[$]i\]\['host'\]\s*=.*"
 database_server_host_replacement="\$cfg['Servers'][\$i]['host'] = '${DATABASE_DEFAULT_HOST}';\n\$cfg['Servers'][\$i]['port'] = '${DATABASE_DEFAULT_PORT_NUMBER}';"

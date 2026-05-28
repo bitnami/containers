@@ -100,7 +100,6 @@ phpmyadmin_initialize() {
     ! is_empty_value "$DATABASE_PORT_NUMBER" && info "Setting database port number option" && phpmyadmin_conf_set "\$cfg['Servers'][\$i]['port']" "$DATABASE_PORT_NUMBER"
     ! is_empty_value "$DATABASE_ALLOW_NO_PASSWORD" && info "Setting AllowNoPassword option" && phpmyadmin_conf_set "\$cfg['Servers'][\$i]['AllowNoPassword']" "$(php_convert_to_boolean "$DATABASE_ALLOW_NO_PASSWORD")" yes
     if is_boolean_yes "$DATABASE_ENABLE_SSL"; then
-        local database_ssl_option_env_var
         info "Configuring SSL options"
         phpmyadmin_conf_set "\$cfg['Servers'][\$i]['ssl']" true yes
         [ -f "$DATABASE_SSL_KEY" ] && phpmyadmin_conf_set "\$cfg['Servers'][\$i]['ssl_key']" "$DATABASE_SSL_KEY"
@@ -154,7 +153,6 @@ phpmyadmin_conf_set() {
     local -r key="${1:?key missing}"
     local -r value="${2:?value missing}"
     local -r is_literal="${3:-no}"
-    debug "Setting ${key} to '${value}' in phpMyAdmin configuration (literal: ${is_literal})"
     # Sanitize key (sed does not support fixed string substitutions)
     local sanitized_pattern
     sanitized_pattern="^(\s*//\s*)?$(sed 's/[]\[^$.*/]/\\&/g' <<< "$key")\s*=.*"
