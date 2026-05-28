@@ -243,7 +243,7 @@ neo4j_initialize() {
     if am_i_root; then
         info "Configuring file permissions for Neo4j"
         for dir in "$NEO4J_LOGS_DIR" "$NEO4J_DATA_DIR" "$NEO4J_RUN_DIR" "$NEO4J_METRICS_DIR"; do
-            configure_permissions_ownership "$dir" -u "$NEO4J_DAEMON_USER" -g "$NEO4J_DAEMON_GROUP" -d 755 -f 644
+            configure_permissions_ownership "$dir" -u "$NEO4J_DAEMON_USER" -g "$NEO4J_DAEMON_GROUP" -d 755 -f 644 -n
         done
     fi
 }
