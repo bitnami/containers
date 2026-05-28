@@ -55,22 +55,25 @@ postgresql_validate() {
         error "$1"
         error_code=1
     }
-
     check_multi_value() {
         if [[ " ${2} " != *" ${!1} "* ]]; then
             print_validation_error "The allowed values for ${1} are: ${2}"
         fi
     }
-
     empty_password_enabled_warn() {
         warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD}. For safety reasons, do not use this flag in a production environment."
     }
     empty_password_error() {
         print_validation_error "The $1 environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with blank passwords. This is recommended only for development."
     }
+
+    check_multi_value "POSTGRESQL_PGHBA_AUTH_METHOD" "md5 scram-sha-256"
     if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
         empty_password_enabled_warn
     else
+        if [[ "$POSTGRESQL_PGHBA_AUTH_METHOD" = "md5" ]]; then
+            warn "POSTGRESQL_AUTH_METHOD is 'md5': md5 format is vulnerable to pass-the-hash attacks. Please consider using 'scram-sha-256' instead."
+        fi
         if [[ -z "$POSTGRESQL_PASSWORD" ]]; then
             empty_password_error "POSTGRESQL_PASSWORD"
         fi
@@ -125,6 +128,10 @@ postgresql_validate() {
 
     if is_boolean_yes "$POSTGRESQL_ENABLE_LDAP" && [[ -n "$POSTGRESQL_LDAP_URL" ]] && [[ -n "$POSTGRESQL_LDAP_SERVER" ]]; then
         empty_password_error "You can not set POSTGRESQL_LDAP_URL and POSTGRESQL_LDAP_SERVER at the same time. Check your LDAP configuration."
+    fi
+
+    if is_boolean_yes "$POSTGRESQL_ENABLE_LDAP" && is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
+        print_validation_error "You cannot enable LDAP authentication and allow empty passwords at the same time."
     fi
 
     if ! is_yes_no_value "$POSTGRESQL_SR_CHECK"; then
@@ -220,7 +227,15 @@ postgresql_ldap_auth_configuration() {
         [[ -n "$POSTGRESQL_LDAP_PORT" ]] && ldap_configuration+=" ldapport=${POSTGRESQL_LDAP_PORT}"
         [[ -n "$POSTGRESQL_LDAP_BASE_DN" ]] && ldap_configuration+=" ldapbasedn=\"${POSTGRESQL_LDAP_BASE_DN}\""
         [[ -n "$POSTGRESQL_LDAP_BIND_DN" ]] && ldap_configuration+=" ldapbinddn=\"${POSTGRESQL_LDAP_BIND_DN}\""
-        [[ -n "$POSTGRESQL_LDAP_BIND_PASSWORD" ]] && ldap_configuration+=" ldapbindpasswd=${POSTGRESQL_LDAP_BIND_PASSWORD}"
+        if [[ -n "$POSTGRESQL_LDAP_BIND_PASSWORD" ]]; then
+            if is_boolean_yes "$POSTGRESQL_LDAP_BIND_USE_PASSFILE" && [[ ! -f "${POSTGRESQL_LDAP_BIND_PASSFILE_PATH}" ]]; then
+                install -m 600 /dev/null "$POSTGRESQL_LDAP_BIND_PASSFILE_PATH"
+                echo "$POSTGRESQL_LDAP_BIND_PASSWORD" >> "$POSTGRESQL_LDAP_BIND_PASSFILE_PATH"
+                ldap_opts+=" ldapbindpasswdfile=${POSTGRESQL_LDAP_BIND_PASSFILE_PATH}"
+            else
+                ldap_opts+=" ldapbindpasswd=\"${POSTGRESQL_LDAP_BIND_PASSWORD}\""
+            fi
+        fi
         [[ -n "$POSTGRESQL_LDAP_SEARCH_ATTR" ]] && ldap_configuration+=" ldapsearchattribute=${POSTGRESQL_LDAP_SEARCH_ATTR}"
         [[ -n "$POSTGRESQL_LDAP_SEARCH_FILTER" ]] && ldap_configuration+=" ldapsearchfilter=\"${POSTGRESQL_LDAP_SEARCH_FILTER}\""
         [[ -n "$POSTGRESQL_LDAP_TLS" ]] && ldap_configuration+=" ldaptls=${POSTGRESQL_LDAP_TLS}"
@@ -321,7 +336,7 @@ EOF
 #########################
 postgresql_restrict_pghba() {
     if [[ -n "$POSTGRESQL_PASSWORD" ]]; then
-        replace_in_file "$POSTGRESQL_PGHBA_FILE" "trust" "md5" false
+        replace_in_file "$POSTGRESQL_PGHBA_FILE" "trust" "$POSTGRESQL_PGHBA_AUTH_METHOD" false
     fi
 }
 
@@ -337,7 +352,7 @@ postgresql_restrict_pghba() {
 postgresql_add_replication_to_pghba() {
     local replication_auth="trust"
     if [[ -n "$POSTGRESQL_REPLICATION_PASSWORD" ]]; then
-        replication_auth="md5"
+        replication_auth="$POSTGRESQL_PGHBA_AUTH_METHOD"
     fi
     cat <<EOF >>"$POSTGRESQL_PGHBA_FILE"
 host      replication     all             0.0.0.0/0               ${replication_auth}
@@ -357,7 +372,7 @@ EOF
 postgresql_add_sr_check_user_to_pghba() {
     local sr_check_auth="trust"
     if [[ -n "$POSTGRESQL_SR_CHECK_PASSWORD" ]]; then
-        sr_check_auth="md5"
+        sr_check_auth="$POSTGRESQL_PGHBA_AUTH_METHOD"
     fi
     cat <<EOF >>"$POSTGRESQL_PGHBA_FILE"
 host      $POSTGRESQL_SR_CHECK_DATABASE     $POSTGRESQL_SR_CHECK_USERNAME      0.0.0.0/0               ${sr_check_auth}
