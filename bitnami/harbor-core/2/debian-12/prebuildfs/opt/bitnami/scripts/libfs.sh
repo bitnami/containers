@@ -131,6 +131,7 @@ relativize() {
 #   -d|--dir-mode - mode for files.
 #   -u|--user - user
 #   -g|--group - group
+#   -n|--no-dereference - do not follow symlinks (use for runtime root chown of daemon-writable dirs)
 # Returns:
 #   None
 #########################
@@ -140,6 +141,7 @@ configure_permissions_ownership() {
     local file_mode=""
     local user=""
     local group=""
+    local follow_symlinks="yes"
 
     # Validate arguments
     shift 1
@@ -161,6 +163,9 @@ configure_permissions_ownership() {
             shift
             group="${1:?missing group}"
             ;;
+        -n | --no-dereference)
+            follow_symlinks="no"
+            ;;
         *)
             echo "Invalid command line flag $1" >&2
             return 1
@@ -169,22 +174,29 @@ configure_permissions_ownership() {
         shift
     done
 
+    # -L: follow symlinks and emits the target path
+    # This is dangerous at runtime, given a co-located lower-privileged process with write access
+    # to the target path can redirect the chown/chmod to arbitrary paths. Example:
+    # Lower-privileged process run: ln -s /etc /tmp/etc
+    # Then, setup.sh runs: configure_permissions_ownership --dir-mode 775 /tmp
+    local find_L_flag=(); [[ "$follow_symlinks" == "yes" ]] && find_L_flag=("-L")
+    # -h: changes symlink inode ownership without touching the target.
+    local chown_flags=(); [[ "$follow_symlinks" == "no" ]] && chown_flags=("-h")
     read -r -a filepaths <<<"$paths"
     for p in "${filepaths[@]}"; do
         if [[ -e "$p" ]]; then
-            find -L "$p" -printf ""
             if [[ -n $dir_mode ]]; then
-                find -L "$p" -type d ! -perm "$dir_mode" -print0 | xargs -r -0 chmod "$dir_mode"
+                find "${find_L_flag[@]}" "$p" -not -type l -type d ! -perm "$dir_mode" -print0 | xargs -r -0 chmod "$dir_mode"
             fi
             if [[ -n $file_mode ]]; then
-                find -L "$p" -type f ! -perm "$file_mode" -print0 | xargs -r -0 chmod "$file_mode"
+                find "${find_L_flag[@]}" "$p" -not -type l -type f ! -perm "$file_mode" -print0 | xargs -r -0 chmod "$file_mode"
             fi
             if [[ -n $user ]] && [[ -n $group ]]; then
-                find -L "$p" -print0 | xargs -r -0 chown "${user}:${group}"
+                find "${find_L_flag[@]}" "$p" -print0 | xargs -r -0 chown "${chown_flags[@]}" "${user}:${group}"
             elif [[ -n $user ]] && [[ -z $group ]]; then
-                find -L "$p" -print0 | xargs -r -0 chown "${user}"
+                find "${find_L_flag[@]}" "$p" -print0 | xargs -r -0 chown "${chown_flags[@]}" "${user}"
             elif [[ -z $user ]] && [[ -n $group ]]; then
-                find -L "$p" -print0 | xargs -r -0 chgrp "${group}"
+                find "${find_L_flag[@]}" "$p" -print0 | xargs -r -0 chgrp "${chown_flags[@]}" "${group}"
             fi
         else
             stderr_print "$p does not exist"
