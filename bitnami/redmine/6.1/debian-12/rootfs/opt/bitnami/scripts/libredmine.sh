@@ -91,12 +91,11 @@ redmine_validate() {
     ! is_empty_value "$REDMINE_DATABASE_PORT_NUMBER" && check_valid_port "REDMINE_DATABASE_PORT_NUMBER"
 
     # Validate credentials
+    check_empty_value "REDMINE_PASSWORD"
     if is_boolean_yes "${ALLOW_EMPTY_PASSWORD:-}"; then
         warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD:-}. For safety reasons, do not use this flag in a production environment."
     else
-        for empty_env_var in "REDMINE_DATABASE_PASSWORD" "REDMINE_PASSWORD"; do
-            is_empty_value "${!empty_env_var}" && print_validation_error "The ${empty_env_var} environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow a blank password. This is only recommended for development environments."
-        done
+        is_empty_value "$REDMINE_DATABASE_PASSWORD" && print_validation_error "The REDMINE_DATABASE_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow a blank password. This is only recommended for development environments."
     fi
 
     # Validate SMTP credentials
@@ -104,8 +103,8 @@ redmine_validate() {
         for empty_env_var in "REDMINE_SMTP_USER" "REDMINE_SMTP_PASSWORD"; do
             is_empty_value "${!empty_env_var}" && warn "The ${empty_env_var} environment variable is empty or not set."
         done
-        is_empty_value "$REDMINE_SMTP_PORT_NUMBER" && print_validation_error "The REDMINE_SMTP_PORT_NUMBER environment variable is empty or not set."
-        ! is_empty_value "$REDMINE_SMTP_PORT_NUMBER" && check_valid_port "REDMINE_SMTP_PORT_NUMBER"
+        check_empty_value "REDMINE_SMTP_PASSWORD"
+        check_valid_port "REDMINE_SMTP_PORT_NUMBER"
         check_multi_value "REDMINE_SMTP_AUTH" "plain login cram_md5"
         if ! is_empty_value "${SMTP_AUTH:-}"; then
             warn "The environment variable SMTP_TLS is set. This configuration will be deprecated soon. Please set REDMINE_PROTOCOL=tls to avoid errors in the future."
@@ -137,7 +136,7 @@ redmine_initialize() {
         info "Ensuring Redmine directories exist"
         ensure_dir_exists "$REDMINE_VOLUME_DIR"
         # Use daemon:root ownership for compatibility when running as a non-root user
-        am_i_root && configure_permissions_ownership "$REDMINE_VOLUME_DIR" -d "775" -f "664" -u "$REDMINE_DAEMON_USER" -g "root"
+        am_i_root && configure_permissions_ownership "$REDMINE_VOLUME_DIR" -d "775" -f "664" -u "$REDMINE_DAEMON_USER" -g "root" -n
 
         info "Trying to connect to the database server"
         local db_type="mysql"

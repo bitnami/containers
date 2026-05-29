@@ -20,6 +20,7 @@ services:
       - postgresql
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+      - REDMINE_PASSWORD=bitnami1
       - REDMINE_DATABASE_TYPE=postgresql
       - REDMINE_DATABASE_HOST=postgresql
       - REDMINE_DATABASE_PORT_NUMBER=5432
