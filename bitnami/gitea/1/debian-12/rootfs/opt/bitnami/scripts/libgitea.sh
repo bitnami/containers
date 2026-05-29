@@ -151,7 +151,7 @@ gitea_initialize() {
         for dir in "${dirs[@]}"; do
             if ! is_empty_value "$dir"; then
                 ensure_dir_exists "$dir"
-                am_i_root && configure_permissions_ownership "$dir" -d "775" -f "664" -u "$GITEA_DAEMON_USER" -g "root"
+                am_i_root && configure_permissions_ownership "$dir" -d "775" -f "664" -u "$GITEA_DAEMON_USER" -g "root" -n
             fi
         done
         gitea_update_conf_file
