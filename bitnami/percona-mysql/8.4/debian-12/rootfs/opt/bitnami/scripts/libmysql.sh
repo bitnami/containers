@@ -1413,15 +1413,21 @@ mysql_client_extra_opts() {
     local -a opts=()
     local key value
     if is_boolean_yes "${DB_ENABLE_SSL:-no}"; then
+        ca_file="$(mysql_client_env_value "SSL_CA_FILE")"
         if [[ "$(mysql_client_flavor)" = "mysql" ]]; then
-            opts+=("--ssl-mode=REQUIRED")
+            if [[ -f "$ca_file " ]]; then
+                opts+=("--ssl-mode=VERIFY_CA")
+            else
+                opts+=("--ssl-mode=REQUIRED")
+            fi
         else
             opts+=("--ssl=TRUE")
+            [[ -f "$ca_file" ]] && opts+=("--ssl-verify-server-cert")
         fi
-        # Add "--ssl-ca", "--ssl-key" and "--ssl-cert" options if the env vars are defined
+        # Add "--ssl-ca", "--ssl-key" and "--ssl-cert" options if the env vars are defined and the files exist
         for key in ca key cert; do
             value="$(mysql_client_env_value "SSL_${key^^}_FILE")"
-            [[ -n "${value}" ]] && opts+=("--ssl-${key}=${value}")
+            [[ -f "${value}" ]] && opts+=("--ssl-${key}=${value}")
         done
     else
         # Skip SSL validation
