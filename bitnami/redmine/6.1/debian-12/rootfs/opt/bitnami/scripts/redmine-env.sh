@@ -110,7 +110,7 @@ export REDMINE_QUEUE_ADAPTER="${REDMINE_QUEUE_ADAPTER:-inline}"
 
 # Redmine credentials
 export REDMINE_USERNAME="${REDMINE_USERNAME:-user}" # only used during the first initialization
-export REDMINE_PASSWORD="${REDMINE_PASSWORD:-bitnami1}" # only used during the first initialization
+export REDMINE_PASSWORD="${REDMINE_PASSWORD:-}" # only used during the first initialization
 export REDMINE_EMAIL="${REDMINE_EMAIL:-user@example.com}" # only used during the first initialization
 export REDMINE_FIRST_NAME="${REDMINE_FIRST_NAME:-UserName}" # only used during the first initialization
 export REDMINE_LAST_NAME="${REDMINE_LAST_NAME:-LastName}" # only used during the first initialization
