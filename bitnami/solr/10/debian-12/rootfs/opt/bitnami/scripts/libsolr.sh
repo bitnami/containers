@@ -24,13 +24,15 @@
 #   None
 #########################
 solr_generate_initial_security() {
+    local pw_hash
+    pw_hash="$(solr_hash_password "$SOLR_ADMIN_PASSWORD")"
     info "Generating initial security file"
     cat >"${SOLR_BASE_DIR}/server/solr/security.json" <<EOF
 {
 "authentication":{
    "blockUnknown": true,
    "class":"solr.BasicAuthPlugin",
-   "credentials":{"${SOLR_ADMIN_USERNAME}":"IV0EHq1OnNrj6gvRCwvFwTrZ1+z1oBbnQdiVC3otuq0= Ndd7LKvVBAaZIF0QAVi1ekCfAJXr1GGfLtRUXhgrF8c="},
+   "credentials":{"${SOLR_ADMIN_USERNAME}":"${pw_hash}"},
    "forwardCredentials": false
 },
 "authorization":{
@@ -42,7 +44,7 @@ solr_generate_initial_security() {
 EOF
 
     if am_i_root; then
-        configure_permissions_ownership "${SOLR_BASE_DIR}/server/solr/security.json" -u "$SOLR_DAEMON_USER" -g "$SOLR_DAEMON_GROUP"
+        configure_permissions_ownership "${SOLR_BASE_DIR}/server/solr/security.json" -u "$SOLR_DAEMON_USER" -g "$SOLR_DAEMON_GROUP" -n
     fi
 }
 
@@ -209,38 +211,6 @@ solr_create_cores() {
 }
 
 #########################
-# Update user password
-# Globals:
-#   SOLR_*
-# Arguments:
-#   $1 - username
-#   $2 - password
-# Returns:
-#   None
-#########################
-solr_update_password() {
-    local -r exec="curl"
-    local -r default_password="SolrRocks"
-    local -r username="${1:?user is required}"
-    local -r password="${2:?password is required}"
-    local protocol="http"
-    local command_args=()
-
-    is_boolean_yes "$SOLR_SSL_ENABLED" && protocol="https" && command_args+=("-k")
-
-    command_args+=("--silent" "--user" "${username}:${default_password}" "${protocol}://localhost:${SOLR_PORT_NUMBER}/api/cluster/security/authentication" "-H" "'Content-type:application/json'" "-d" "{\"set-user\":{\"${username}\":\"${password}\"}}")
-
-    info "Updating user password"
-
-    if ! debug_execute "$exec" "${command_args[@]}"; then
-        error "There was an error when updating the user password"
-        exit 1
-    else
-        info "Password updated"
-    fi
-}
-
-#########################
 # Check if the API is ready
 # Globals:
 #   SOLR_*
@@ -325,22 +295,23 @@ solr_auth_already_enabled() {
 #   None
 #########################
 solr_create_cloud_user() {
-    local -r exec="${SOLR_BIN_DIR}/solr"
     local -r username="${1:?user is required}"
     local -r password="${2:?password is required}"
+    # We can't pass the credentials using a pipe nor read them from a temporary file
+    # to avoid plaintext-on-cmdline exposure (CLI limitations)
     local command_args=("auth" "enable" "-type" "basicAuth" "-credentials" "${username}:${password}" "-block-unknown" "true" "-z" "${SOLR_ZK_HOSTS}${SOLR_ZK_CHROOT}")
 
     info "Creating user: ${username}"
 
     if ! solr_auth_already_enabled; then
-      if ! debug_execute "$exec" "${command_args[@]}"; then
-          error "There was an error when creating the user"
-          exit 1
-      else
-          info "User created"
-      fi
+        if ! debug_execute "${SOLR_BIN_DIR}/solr" "${command_args[@]}"; then
+            error "There was an error when creating the user"
+            exit 1
+        else
+            info "User created"
+        fi
     else
-      info "Skipping. Security is already enabled."
+        info "Skipping. Security is already enabled."
     fi
 }
 
@@ -587,12 +558,37 @@ solr_migrate_old_data() {
         warn "Persisted data detected in old location. Migrating and changing permissions"
         ensure_dir_exists "${SOLR_VOLUME_DIR}/server"
         debug_execute "$exec" "${command_args[@]}"
-        configure_permissions_ownership "${SOLR_VOLUME_DIR}/server/solr" -d 775 -f 664 -g "root"
+        configure_permissions_ownership "${SOLR_VOLUME_DIR}/server/solr" -d 775 -f 664 -g "root" -n
         warn "Data migrated."
     else
         error "Persisted data detected in old location. You will need to run first the container as root to migrate the data"
         exit 1
     fi
+}
+
+#########################
+# Hash a password
+# Arguments:
+#   $1 - Password
+# Returns:
+#   Hashed password
+#########################
+solr_hash_password() {
+    local password="$1"
+    local tmp_dir
+    tmp_dir="$(mktemp -d)"
+    trap 'rm -rf "${tmp_dir}"' RETURN ERR
+
+    # Generate 32-byte random salt
+    dd if=/dev/urandom bs=32 count=1 2>/dev/null > "${tmp_dir}/salt.bin"
+    # h1 = SHA256(salt || password)
+    { cat "${tmp_dir}/salt.bin"; printf '%s' "$password"; } | openssl dgst -sha256 -binary > "${tmp_dir}/h1.bin"
+    # h2 = SHA256(h1) — matches Sha256AuthenticationProvider.getSaltedHashedValue()
+    openssl dgst -sha256 -binary < "${tmp_dir}/h1.bin" > "${tmp_dir}/h2.bin"
+
+    printf '%s %s\n' \
+        "$(openssl base64 -A < "${tmp_dir}/h2.bin")" \
+        "$(openssl base64 -A < "${tmp_dir}/salt.bin")"
 }
 
 #########################
@@ -631,15 +627,16 @@ solr_initialize() {
 
             if is_boolean_yes "$SOLR_CLOUD_BOOTSTRAP"; then
                 solr_zk_initialize
+                # Security FIRST: write credentials to ZK before Solr binds to 0.0.0.0
+                is_boolean_yes "$SOLR_ENABLE_AUTHENTICATION" && solr_create_cloud_user "$SOLR_ADMIN_USERNAME" "$SOLR_ADMIN_PASSWORD"
 
                 solr_start_bg "cloud"
-
-                solr_wait_for_api "admin" "SolrRocks"
+                local api_password="SolrRocks"
+                is_boolean_yes "$SOLR_ENABLE_AUTHENTICATION" && api_password="$SOLR_ADMIN_PASSWORD"
+                solr_wait_for_api "admin" "$api_password"
 
                 is_boolean_yes "$SOLR_SSL_ENABLED" && solr_set_ssl_url_scheme
-
                 [[ -n "$SOLR_COLLECTION" ]] && solr_create_collection
-                is_boolean_yes "$SOLR_ENABLE_AUTHENTICATION" && solr_create_cloud_user "$SOLR_ADMIN_USERNAME" "$SOLR_ADMIN_PASSWORD"
 
                 solr_stop
             else
@@ -659,10 +656,9 @@ solr_initialize() {
             is_boolean_yes "$SOLR_ENABLE_AUTHENTICATION" && solr_generate_initial_security
 
             solr_start_bg
-
-            solr_wait_for_api "admin" "SolrRocks"
-
-            is_boolean_yes "$SOLR_ENABLE_AUTHENTICATION" && solr_update_password "$SOLR_ADMIN_USERNAME" "$SOLR_ADMIN_PASSWORD"
+            local api_password="SolrRocks"
+            is_boolean_yes "$SOLR_ENABLE_AUTHENTICATION" && api_password="$SOLR_ADMIN_PASSWORD"
+            solr_wait_for_api "admin" "$api_password"
 
             [[ -n "$SOLR_CORES" ]] && solr_create_cores
 

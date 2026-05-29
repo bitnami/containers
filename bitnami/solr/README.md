@@ -86,17 +86,17 @@ The following tables list the main variables you can set.
 | `SOLR_COLLECTION_SHARDS`        | Solar collection shards                                                       | `1`                                                |
 | `SOLR_ENABLE_AUTHENTICATION`    | Enables authentication                                                        | `no`                                               |
 | `SOLR_ADMIN_USERNAME`           | Administrator Username                                                        | `admin`                                            |
-| `SOLR_ADMIN_PASSWORD`           | Administrator password                                                        | `bitnami`                                          |
+| `SOLR_ADMIN_PASSWORD`           | Administrator password                                                        | `nil`                                              |
 | `SOLR_CLOUD_BOOTSTRAP`          | Indicates if this node is the one that performs the boostraping               | `no`                                               |
 | `SOLR_CORE_CONF_DIR`            | Solar CORE configuration directory                                            | `${SOLR_SERVER_DIR}/solr/configsets/_default/conf` |
 | `SOLR_SSL_ENABLED`              | Indicates if Solr starts with SSL enabled                                     | `no`                                               |
-| `SOLR_SSL_CHECK_PEER_NAME`      | Indicates if Solr should check the peer names                                 | `false`                                            |
+| `SOLR_SSL_CHECK_PEER_NAME`      | Indicates if Solr should check the peer names                                 | `true`                                             |
 | `SOLR_SSL_KEY_STORE_PASSWORD`   | Password for the Solr SSL keystore                                            | `nil`                                              |
 | `SOLR_SSL_TRUST_STORE_PASSWORD` | Password for the Solr SSL truststore                                          | `nil`                                              |
 | `SOLR_ZK_MAX_RETRIES`           | Maximum retries when waiting for zookeeper configuration operations to finish | `5`                                                |
 | `SOLR_ZK_SLEEP_TIME`            | Sleep time when waiting for zookeeper configuration operations to finish      | `5`                                                |
 | `SOLR_ZK_CHROOT`                | ZooKeeper ZNode chroot where to store solr data. Default: /solr               | `/solr`                                            |
-| `SOLR_ZK_HOSTS`                 | ZooKeeper nodes (comma-separated list of `host:port`\)                        | `nil`                                              |
+| `SOLR_ZK_HOSTS`                 | ZooKeeper nodes (comma-separated list of `host:port`)                         | `nil`                                              |
 
 #### Read-only environment variables
 

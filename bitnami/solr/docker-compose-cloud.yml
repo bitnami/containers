@@ -11,6 +11,7 @@ services:
       - SOLR_ZK_HOSTS=zk1:2181
       - SOLR_HOST=solrnode1
       - SOLR_ENABLE_AUTHENTICATION=yes
+      - SOLR_ADMIN_PASSWORD=bitnami
     ports:
       - '8983:8983'
     volumes:
