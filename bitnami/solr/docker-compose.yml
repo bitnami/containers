@@ -6,6 +6,7 @@ services:
     image: docker.io/bitnami/solr:10
     environment:
       - SOLR_ENABLE_AUTHENTICATION=yes
+      - SOLR_ADMIN_PASSWORD=bitnami
     ports:
       - '8983:8983'
     volumes:
