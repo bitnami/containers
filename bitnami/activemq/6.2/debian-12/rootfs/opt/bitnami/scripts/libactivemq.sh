@@ -142,7 +142,7 @@ activemq_initialize() {
     info "Initializing ActiveMQ ..."
 
     # Configuring permissions for data folder
-    am_i_root && configure_permissions_ownership "$ACTIVEMQ_DATA_DIR" -u "$ACTIVEMQ_DAEMON_USER" -g "$ACTIVEMQ_DAEMON_GROUP" -d "755" -f "644"
+    am_i_root && configure_permissions_ownership "$ACTIVEMQ_DATA_DIR" -u "$ACTIVEMQ_DAEMON_USER" -g "$ACTIVEMQ_DAEMON_GROUP" -d "755" -f "644" -n
 
     if ! is_mounted_dir_empty "$ACTIVEMQ_MOUNTED_CONF_DIR"; then
         cp -Lr "$ACTIVEMQ_MOUNTED_CONF_DIR"/* "$ACTIVEMQ_CONF_DIR"
