@@ -113,7 +113,7 @@ matomo_initialize() {
         info "Ensuring Matomo directories exist"
         ensure_dir_exists "$MATOMO_VOLUME_DIR"
         # Use daemon:root ownership for compatibility when running as a non-root user
-        am_i_root && configure_permissions_ownership "$MATOMO_VOLUME_DIR" -d "775" -f "664" -u "$WEB_SERVER_DAEMON_USER" -g "root"
+        am_i_root && configure_permissions_ownership "$MATOMO_VOLUME_DIR" -d "775" -f "664" -u "$WEB_SERVER_DAEMON_USER" -g "root" -n
         info "Trying to connect to the database server"
         db_host="$MATOMO_DATABASE_HOST"
         db_port="$MATOMO_DATABASE_PORT_NUMBER"
@@ -241,7 +241,7 @@ EOF
         matomo_wait_for_db_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
         info "Launching schema update"
         php "$MATOMO_BASE_DIR"/console "core:update" "--yes"
-        am_i_root && configure_permissions_ownership "$MATOMO_BASE_DIR"/tmp -d "775" -f "664" -u "$WEB_SERVER_DAEMON_USER" -g "root"
+        am_i_root && configure_permissions_ownership "$MATOMO_BASE_DIR"/tmp -d "775" -f "664" -u "$WEB_SERVER_DAEMON_USER" -g "root" -n
         debug "Re-creating .htaccess files"
         php "$MATOMO_BASE_DIR"/console "core:create-security-files"
     fi
