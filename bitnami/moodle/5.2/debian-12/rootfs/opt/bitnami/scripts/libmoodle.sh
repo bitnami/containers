@@ -124,7 +124,7 @@ moodle_initialize() {
         for dir in "$MOODLE_VOLUME_DIR" "$MOODLE_DATA_DIR"; do
             ensure_dir_exists "$dir"
             # Use daemon:root ownership for compatibility when running as a non-root user
-            am_i_root && configure_permissions_ownership "$dir" -d "775" -f "664" -u "$WEB_SERVER_DAEMON_USER" -g "root"
+            am_i_root && configure_permissions_ownership "$dir" -d "775" -f "664" -u "$WEB_SERVER_DAEMON_USER" -g "root" -n
         done
 
         info "Trying to connect to the database server"
