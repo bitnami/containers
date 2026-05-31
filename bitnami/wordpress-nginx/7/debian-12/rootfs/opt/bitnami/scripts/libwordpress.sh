@@ -236,7 +236,7 @@ wordpress_initialize() {
         info "Ensuring WordPress directories exist"
         ensure_dir_exists "$WORDPRESS_VOLUME_DIR"
         # Use daemon:root ownership for compatibility when running as a non-root user
-        am_i_root && configure_permissions_ownership "$WORDPRESS_VOLUME_DIR" -d "775" -f "664" -u "$WEB_SERVER_DAEMON_USER" -g "root"
+        am_i_root && configure_permissions_ownership "$WORDPRESS_VOLUME_DIR" -d "775" -f "664" -u "$WEB_SERVER_DAEMON_USER" -g "root" -n
         info "Trying to connect to the database server"
         wordpress_wait_for_mysql_connection "$WORDPRESS_DATABASE_HOST" "$WORDPRESS_DATABASE_PORT_NUMBER" "$WORDPRESS_DATABASE_NAME" "$WORDPRESS_DATABASE_USER" "$WORDPRESS_DATABASE_PASSWORD"
 
@@ -413,7 +413,7 @@ wordpress_initialize() {
             wp_config_path="$(readlink -f "$WORDPRESS_CONF_FILE")"
             if am_i_root; then
                 is_file_writable "$wp_config_path" && configure_permissions_ownership "$wp_config_path" -f "440" -u "$WEB_SERVER_DAEMON_USER" -g "root"
-                configure_permissions_ownership "${WORDPRESS_VOLUME_DIR}/wp-content" -d "775" -f "664" -u "$WEB_SERVER_DAEMON_USER" -g "root"
+                configure_permissions_ownership "${WORDPRESS_VOLUME_DIR}/wp-content" -d "775" -f "664" -u "$WEB_SERVER_DAEMON_USER" -g "root" -n
             else
                 is_file_writable "$wp_config_path" && configure_permissions_ownership "$wp_config_path" -f "440"
                 configure_permissions_ownership "${WORDPRESS_VOLUME_DIR}/wp-content" -d "775" -f "664"
