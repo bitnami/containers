@@ -25,6 +25,7 @@ services:
     environment:
       - BITNAMI_DEBUG=true
       - SUPERSET_ROLE=init
+      - SUPERSET_PASSWORD=bitnami
       - SUPERSET_DATABASE_HOST=postgresql
       - SUPERSET_DATABASE_NAME=bitnami_superset
       - SUPERSET_DATABASE_USER=bn_superset

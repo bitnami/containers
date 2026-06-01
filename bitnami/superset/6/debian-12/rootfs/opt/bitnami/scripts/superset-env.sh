@@ -97,7 +97,7 @@ export SUPERSET_DAEMON_GROUP="superset"
 
 # Superset user configuration
 export SUPERSET_USERNAME="${SUPERSET_USERNAME:-user}"
-export SUPERSET_PASSWORD="${SUPERSET_PASSWORD:-bitnami}"
+export SUPERSET_PASSWORD="${SUPERSET_PASSWORD:-}"
 export SUPERSET_FIRSTNAME="${SUPERSET_FIRSTNAME:-Firstname}"
 export SUPERSET_LASTNAME="${SUPERSET_LASTNAME:-Lastname}"
 export SUPERSET_EMAIL="${SUPERSET_EMAIL:-user@example.com}"
