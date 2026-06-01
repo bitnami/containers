@@ -134,7 +134,7 @@ The following tables list the main variables you can set.
 | `MARIADB_TLS_KEY_FILE`                        | Path to the MariaDB Galera SSL/TLS certificate key file.                                                                  | `nil`                                     |
 | `MARIADB_TLS_CA_FILE`                         | Path to the MariaDB Galera SSL/TLS certificate authority CA file.                                                         | `nil`                                     |
 | `MARIADB_REPLICATION_USER`                    | MariaDB Galera replication database user.                                                                                 | `monitor`                                 |
-| `MARIADB_REPLICATION_PASSWORD`                | Password for the MariaDB Galera replication database user.                                                                | `monitor`                                 |
+| `MARIADB_REPLICATION_PASSWORD`                | Password for the MariaDB Galera replication database user.                                                                | `nil`                                     |
 
 #### Read-only environment variables
 
