@@ -101,7 +101,7 @@ grafana_initialize() {
 
     if am_i_root; then
         for dir in "$GF_PATHS_DATA" "$GF_PATHS_LOGS" "$GF_PATHS_PLUGINS"; do
-            is_mounted_dir_empty "$dir" && configure_permissions_ownership "$dir" -d "775" -f "664" -u "$GRAFANA_DAEMON_USER"
+            is_mounted_dir_empty "$dir" && configure_permissions_ownership "$dir" -d "775" -f "664" -u "$GRAFANA_DAEMON_USER" -n
         done
     fi
 
