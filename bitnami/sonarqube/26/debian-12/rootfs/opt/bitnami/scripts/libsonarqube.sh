@@ -76,15 +76,30 @@ sonarqube_validate() {
     ! is_empty_value "$SONARQUBE_DATABASE_PORT_NUMBER" && check_valid_port "SONARQUBE_DATABASE_PORT_NUMBER"
 
     # Validate credentials
+    check_empty_value "SONARQUBE_PASSWORD"
     if is_boolean_yes "${ALLOW_EMPTY_PASSWORD:-}"; then
         warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD:-}. For safety reasons, do not use this flag in a production environment."
     else
-        for empty_env_var in "SONARQUBE_DATABASE_PASSWORD" "SONARQUBE_PASSWORD"; do
-            is_empty_value "${!empty_env_var}" && print_validation_error "The ${empty_env_var} environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow a blank password. This is only recommended for development environments."
-        done
-        if ! validate_string "$SONARQUBE_PASSWORD" -min-length 12; then
-            print_validation_error "SONARQUBE_PASSWORD must have at least 12 characters"
-        fi
+        is_empty_value "$SONARQUBE_DATABASE_PASSWORD" && print_validation_error "The SONARQUBE_DATABASE_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow a blank password. This is only recommended for development environments."
+    fi
+    # SonarQube enforces a local password policy for the built-in admin account.
+    # The password must be at least 12 characters long and contain at least one
+    # uppercase letter, one lowercase letter, one digit and one special character.
+    # Validating here avoids a cryptic HTTP 400 during the credentials bootstrap.
+    if ! validate_string "$SONARQUBE_PASSWORD" -min-length 12; then
+        print_validation_error "SONARQUBE_PASSWORD must have at least 12 characters"
+    fi
+    if [[ ! "$SONARQUBE_PASSWORD" =~ [[:upper:]] ]]; then
+        print_validation_error "SONARQUBE_PASSWORD must contain at least one uppercase character"
+    fi
+    if [[ ! "$SONARQUBE_PASSWORD" =~ [[:lower:]] ]]; then
+        print_validation_error "SONARQUBE_PASSWORD must contain at least one lowercase character"
+    fi
+    if [[ ! "$SONARQUBE_PASSWORD" =~ [[:digit:]] ]]; then
+        print_validation_error "SONARQUBE_PASSWORD must contain at least one digit"
+    fi
+    if [[ ! "$SONARQUBE_PASSWORD" =~ [^[:alnum:]] ]]; then
+        print_validation_error "SONARQUBE_PASSWORD must contain at least one special character"
     fi
 
     # Validate SMTP credentials
@@ -152,7 +167,7 @@ sonarqube_initialize() {
         info "Ensuring SonarQube directories exist"
         ensure_dir_exists "$SONARQUBE_VOLUME_DIR"
         # Use daemon:root ownership for compatibility when running as a non-root user
-        am_i_root && configure_permissions_ownership "$SONARQUBE_VOLUME_DIR" -d "775" -f "664" -u "$SONARQUBE_DAEMON_USER" -g "root"
+        am_i_root && configure_permissions_ownership "$SONARQUBE_VOLUME_DIR" -d "775" -f "664" -u "$SONARQUBE_DAEMON_USER" -g "root" -n
 
         # Start SonarQube to initialize database, in order to be able to update users
         sonarqube_start_bg
@@ -165,13 +180,17 @@ sonarqube_initialize() {
             local sonarqube_api_url="http://127.0.0.1:${SONARQUBE_PORT_NUMBER}/api"
             local -a curl_opts=(
                 "--silent"
+                "--fail"
                 "--request" "POST"
                 "--user" "${sonarqube_default_username}:${sonarqube_default_password}"
                 "--data-urlencode" "login=${sonarqube_default_username}"
                 "--data-urlencode" "previousPassword=${sonarqube_default_password}"
                 "--data-urlencode" "password=${SONARQUBE_PASSWORD}"
             )
-            debug_execute curl "${curl_opts[@]}" "${sonarqube_api_url}/users/change_password"
+            if ! debug_execute curl "${curl_opts[@]}" "${sonarqube_api_url}/users/change_password"; then
+                error "Installation failed. Could not reach the SonarQube API to change the password"
+                exit 1
+            fi
 
             # Update the username and email as well
             postgresql_remote_execute "${postgresql_execute_args[@]}" <<EOF
@@ -265,7 +284,6 @@ sonarqube_start_bg() {
 sonarqube_conf_set() {
     local -r key="${1:?key missing}"
     local -r value="${2:-}"
-    debug "Setting ${key} to '${value}' in SonarQube configuration"
     # Sanitize key (sed does not support fixed string substitutions)
     local sanitized_pattern
     sanitized_pattern="^\s*(#\s*)?$(sed 's/[]\[^$.*/]/\\&/g' <<< "$key")\s*=.*"
