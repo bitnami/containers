@@ -107,6 +107,7 @@ tomcat_ensure_user_exists() {
         --insert '$new_node' --type attr --name 'password' --value "$password" \
         --insert '$new_node' --type attr --name 'roles' --value "manager-gui,admin-gui" \
         "$TOMCAT_USERS_CONF_FILE"
+    chmod 600 "$TOMCAT_USERS_CONF_FILE"
 }
 
 ########################
@@ -119,18 +120,19 @@ tomcat_ensure_user_exists() {
 #   None
 #########################
 tomcat_enable_ajp() {
-    local ajp_port="${1:?missing ajp port}"
     # We want to locate the AJP connector right after the related comment, hence the substitution and not using xmlstarlet
     # Unfortunately the AJP connector is inside a multi-line comment, so the simplest approach is to add a new line in the proper location
     local ajp_protocol="AJP/1.3"
     local ajp_selector="//Connector[@protocol=\"${ajp_protocol}\"]"
+    local secret_attr="secretRequired=\"false\""
+    ! is_empty_value "${TOMCAT_AJP_SECRET:-}" && secret_attr="secretRequired=\"true\" secret=\"${TOMCAT_AJP_SECRET:-}\""
     if is_empty_value "$(xmlstarlet sel --template --value-of "${ajp_selector}/@port" "$TOMCAT_CONF_FILE")"; then
         # Ensure that it is only added once
-        local ajp_connector="<Connector protocol=\"${ajp_protocol}\" address=\"localhost\" secretRequired=\"false\" port=\"${ajp_port}\" redirectPort=\"8443\"/>"
+        local ajp_connector="<Connector protocol=\"${ajp_protocol}\" address=\"localhost\" ${secret_attr} port=\"${TOMCAT_AJP_PORT_NUMBER}\" redirectPort=\"8443\"/>"
         replace_in_file "$TOMCAT_CONF_FILE" "^(\s*)(<!-- Define an AJP .* -->)$" "\1\2\n\1${ajp_connector}"
     else
         # If it was already added, update the port number
-        xmlstarlet ed -S --inplace --update "${ajp_selector}/@port" --value "$ajp_port" "$TOMCAT_CONF_FILE"
+        xmlstarlet ed -S --inplace --update "${ajp_selector}/@port" --value "$TOMCAT_AJP_PORT_NUMBER" "$TOMCAT_CONF_FILE"
     fi
 }
 
@@ -177,7 +179,7 @@ EOF
 
     if is_boolean_yes "$TOMCAT_ENABLE_AJP"; then
         info "Enabling AJP"
-        tomcat_enable_ajp "$TOMCAT_AJP_PORT_NUMBER"
+        tomcat_enable_ajp
     fi
 
     if is_boolean_yes "$TOMCAT_ENABLE_AUTH"; then
@@ -198,7 +200,7 @@ EOF
         info "Ensuring Tomcat directories exist"
         ensure_dir_exists "$TOMCAT_WEBAPPS_DIR"
         # Use tomcat:root ownership for compatibility when running as a non-root user
-        am_i_root && configure_permissions_ownership "$TOMCAT_WEBAPPS_DIR" -d "775" -f "664" -u "$TOMCAT_DAEMON_USER" -g "root"
+        am_i_root && configure_permissions_ownership "$TOMCAT_WEBAPPS_DIR" -d "775" -f "664" -u "$TOMCAT_DAEMON_USER" -g "root" -n
 
         if is_boolean_yes "$TOMCAT_INSTALL_DEFAULT_WEBAPPS"; then
             info "Deploying Tomcat from scratch"
