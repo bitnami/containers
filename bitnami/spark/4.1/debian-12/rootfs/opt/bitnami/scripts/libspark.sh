@@ -94,6 +94,7 @@ spark_validate() {
 spark_generate_conf_file() {
     info "Generating Spark configuration file..."
     mv "${SPARK_CONF_DIR}/spark-defaults.conf.template" "${SPARK_CONF_DIR}/spark-defaults.conf"
+    chmod 600 "${SPARK_CONF_DIR}/spark-defaults.conf"
 }
 
 ########################
