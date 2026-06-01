@@ -115,7 +115,7 @@ export SONARQUBE_EXTRA_PROPERTIES="${SONARQUBE_EXTRA_PROPERTIES:-}"
 
 # SonarQube credentials
 export SONARQUBE_USERNAME="${SONARQUBE_USERNAME:-admin}" # only used during the first initialization
-export SONARQUBE_PASSWORD="${SONARQUBE_PASSWORD:-bitnami}" # only used during the first initialization
+export SONARQUBE_PASSWORD="${SONARQUBE_PASSWORD:-}" # only used during the first initialization
 export SONARQUBE_EMAIL="${SONARQUBE_EMAIL:-user@example.com}" # only used during the first initialization
 
 # SonarQube SMTP credentials
