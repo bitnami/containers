@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-05-31T00:29:30Z" \
+      org.opencontainers.image.created="2026-06-01T13:56:16Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/wordpress/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/wordpress" \
@@ -31,7 +31,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
       "render-template-1.0.9-165-linux-${OS_ARCH}-debian-12" \
       "php-8.4.21-5-linux-${OS_ARCH}-debian-12" \
       "apache-2.4.67-1-linux-${OS_ARCH}-debian-12" \
-      "mysql-client-12.2.2-0-linux-${OS_ARCH}-debian-12" \
+      "mysql-client-12.3.2-0-linux-${OS_ARCH}-debian-12" \
       "postgresql-lib-18.4.0-0-linux-${OS_ARCH}-debian-12" \
       "libphp-8.4.21-0-linux-${OS_ARCH}-debian-12" \
       "wordpress-7.0.0-0-linux-${OS_ARCH}-debian-12" \
@@ -61,7 +61,7 @@ ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     APP_VERSION="7.0.0" \
     BITNAMI_APP_NAME="wordpress" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="3" \
     LD_LIBRARY_PATH="/opt/bitnami/postgresql/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/wp-cli/bin:/opt/bitnami/common/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:$PATH"
 
