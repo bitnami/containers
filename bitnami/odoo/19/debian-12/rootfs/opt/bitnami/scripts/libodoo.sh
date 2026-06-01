@@ -119,7 +119,7 @@ odoo_initialize() {
         info "Ensuring Odoo directories exist"
         ensure_dir_exists "$ODOO_VOLUME_DIR"
         # Use daemon:root ownership for compatibility when running as a non-root user
-        am_i_root && configure_permissions_ownership "$ODOO_VOLUME_DIR" -d "775" -f "664" -u "$ODOO_DAEMON_USER" -g "root"
+        am_i_root && configure_permissions_ownership "$ODOO_VOLUME_DIR" -d "775" -f "664" -u "$ODOO_DAEMON_USER" -g "root" -n
         info "Trying to connect to the database server"
         odoo_wait_for_postgresql_connection "${db_execute_args[@]}"
 
