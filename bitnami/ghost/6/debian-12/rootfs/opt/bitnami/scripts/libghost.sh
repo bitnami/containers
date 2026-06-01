@@ -249,7 +249,7 @@ ghost_initialize() {
         info "Ensuring Ghost directories exist"
         ensure_dir_exists "$GHOST_VOLUME_DIR"
         # Use ghost:root ownership for compatibility when running as a non-root user
-        am_i_root && configure_permissions_ownership "$GHOST_VOLUME_DIR" -d "775" -f "664" -u "$GHOST_DAEMON_USER" -g "root"
+        am_i_root && configure_permissions_ownership "$GHOST_VOLUME_DIR" -d "775" -f "664" -u "$GHOST_DAEMON_USER" -g "root" -n
         info "Trying to connect to the database server"
         ghost_wait_for_mysql_connection "$GHOST_DATABASE_HOST" "$GHOST_DATABASE_PORT_NUMBER" "$GHOST_DATABASE_NAME" "$GHOST_DATABASE_USER" "$GHOST_DATABASE_PASSWORD"
         # Configure database
