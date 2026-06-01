@@ -22,28 +22,19 @@ set -m
 
 read -ra nodes <<< "$(tr ',;' ' ' <<< "${VALKEY_NODES}")"
 
-ARGS=("--port" "$VALKEY_PORT_NUMBER")
-ARGS+=("--include" "${VALKEY_BASE_DIR}/etc/valkey.conf")
-
-if ! is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
-    ARGS+=("--requirepass" "$VALKEY_PASSWORD")
-    ARGS+=("--primaryauth" "$VALKEY_PASSWORD")
-else
-    ARGS+=("--protected-mode" "no")
-fi
-
+args=("${REDIS_BASE_DIR}/etc/valkey.conf" "--daemonize" "no")
 # Add flags specified via the 'VALKEY_EXTRA_FLAGS' environment variable
 read -r -a extra_flags <<< "$VALKEY_EXTRA_FLAGS"
-[[ "${#extra_flags[@]}" -gt 0 ]] && ARGS+=("${extra_flags[@]}")
-
-ARGS+=("$@")
+[[ "${#extra_flags[@]}" -gt 0 ]] && args+=("${extra_flags[@]}")
+# Add flags passed to this script
+args+=("$@")
 
 if is_boolean_yes "$VALKEY_CLUSTER_CREATOR" && ! [[ -f "${VALKEY_DATA_DIR}/nodes.conf" ]]; then
     # Start Valkey in background
     if am_i_root; then
-        run_as_user "$VALKEY_DAEMON_USER" valkey-server "${ARGS[@]}" &
+        run_as_user "$VALKEY_DAEMON_USER" valkey-server "${args[@]}" &
     else
-        valkey-server "${ARGS[@]}" &
+        valkey-server "${args[@]}" &
     fi
     # Create the cluster
     valkey_cluster_create "${nodes[@]}"
@@ -51,8 +42,8 @@ if is_boolean_yes "$VALKEY_CLUSTER_CREATOR" && ! [[ -f "${VALKEY_DATA_DIR}/nodes
     fg
 else
     if am_i_root; then
-        exec_as_user "$VALKEY_DAEMON_USER" valkey-server "${ARGS[@]}"
+        exec_as_user "$VALKEY_DAEMON_USER" valkey-server "${args[@]}"
     else
-        exec valkey-server "${ARGS[@]}"
+        exec valkey-server "${args[@]}"
     fi
 fi
