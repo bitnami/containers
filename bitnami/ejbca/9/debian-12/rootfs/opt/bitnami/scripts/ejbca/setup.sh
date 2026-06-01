@@ -18,6 +18,9 @@ set -o pipefail
 # Ensure ejbca environment variables are valid
 ejbca_validate
 
+# Ensure we clean up temporary files when this script ends
+trap cleanup_credentials EXIT
+
 # Ensure ejbca is initialized
 ejbca_initialize
 

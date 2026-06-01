@@ -7,13 +7,13 @@
 # shellcheck disable=SC1091
 
 # Load Generic Libraries
+. /opt/bitnami/scripts/libfile.sh
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libvalidations.sh
 . /opt/bitnami/scripts/libpersistence.sh
 . /opt/bitnami/scripts/libservice.sh
-. /opt/bitnami/scripts/libfile.sh
 
 ########################
 # Validate settings in EJBCA_* env. variables
@@ -402,15 +402,10 @@ ejbca_generate_ca() {
             -s "$EJBCA_CA_CERT_SIGNATURE_ALGORITHM" \
             -type "x509"
 
-        # Avoid passing EJBCA admin password as arguments to ejbca.sh, to avoid leaking them given
+        # Avoid passing EJBCA admin password as arguments to ejbca.sh, to avoid leaking them
         # given a local observer with /proc read access can read them
-        # Instead, we can read them from temporary files
         local ejbca_admin_password_file
-        ejbca_admin_password_file="$(mktemp)"
-        chmod 0600 "$ejbca_admin_password_file"
-        echo "$EJBCA_ADMIN_PASSWORD" > "$ejbca_admin_password_file"
-        # shellcheck disable=SC2064
-        trap "rm -f $ejbca_admin_password_file" RETURN ERR INT TERM
+        ejbca_admin_password_file="$(credential_to_temp_file "$EJBCA_ADMIN_PASSWORD")"
 
         info "Add superadmin user"
         ejbca_execute_command ra addendentity \
@@ -620,8 +615,8 @@ ejbca_initialize() {
     info "Initializing EJBCA..."
 
     # Configuring permissions for tmp, logs and data folders
-    am_i_root && configure_permissions_ownership "$EJBCA_TMP_DIR" -u "$EJBCA_DAEMON_USER" -g "$EJBCA_DAEMON_GROUP"
-    am_i_root && configure_permissions_ownership "$EJBCA_DATA_DIR" -u "$EJBCA_DAEMON_USER" -g "$EJBCA_DAEMON_GROUP"
+    am_i_root && configure_permissions_ownership "$EJBCA_TMP_DIR" -u "$EJBCA_DAEMON_USER" -g "$EJBCA_DAEMON_GROUP" -n
+    am_i_root && configure_permissions_ownership "$EJBCA_DATA_DIR" -u "$EJBCA_DAEMON_USER" -g "$EJBCA_DAEMON_GROUP" -n
 
     # Note we need to use wildfly instead of ejbca as directory since the persist_app function relativizes them to /opt/bitnami/wildfly
     if ! is_app_initialized "wildfly"; then
