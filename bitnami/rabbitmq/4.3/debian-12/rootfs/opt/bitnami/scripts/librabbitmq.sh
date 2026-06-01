@@ -497,7 +497,8 @@ rabbitmq_erlang_ssl_dir() {
 #########################
 rabbitmq_create_combined_ssl_file() {
     if [[ ! -f "$RABBITMQ_COMBINED_CERT_PATH" ]]; then
-        cat "$RABBITMQ_SSL_CERTFILE" "$RABBITMQ_SSL_KEYFILE" >"$RABBITMQ_COMBINED_CERT_PATH"
+        install -m 600 /dev/null "$RABBITMQ_COMBINED_CERT_PATH"
+        cat "$RABBITMQ_SSL_CERTFILE" "$RABBITMQ_SSL_KEYFILE" >> "$RABBITMQ_COMBINED_CERT_PATH"
     fi
 }
 
@@ -519,13 +520,32 @@ NODE_PORT=$RABBITMQ_NODE_PORT_NUMBER
 NODENAME=$RABBITMQ_NODE_NAME
 EOF
         if [[ -f "$RABBITMQ_COMBINED_CERT_PATH" ]]; then
+            # Build Erlang dist SSL options, enabling mutual verify_peer when a CA cert is available
+            local dist_ssl_opts
+            dist_ssl_opts="-pa \$ERL_SSL_PATH -proto_dist inet_tls"
+            # Identity: both server and client sides of every inter-node connection use the node cert
+            dist_ssl_opts+=" -ssl_dist_opt server_certfile ${RABBITMQ_COMBINED_CERT_PATH}"
+            dist_ssl_opts+=" -ssl_dist_opt client_certfile ${RABBITMQ_COMBINED_CERT_PATH}"
+            if [[ -n "${RABBITMQ_SSL_CACERTFILE:-}" ]]; then
+                # Peer verification: validate the peer certificate against the cluster CA
+                dist_ssl_opts+=" -ssl_dist_opt server_cacertfile ${RABBITMQ_SSL_CACERTFILE}"
+                dist_ssl_opts+=" -ssl_dist_opt client_cacertfile ${RABBITMQ_SSL_CACERTFILE}"
+                dist_ssl_opts+=" -ssl_dist_opt server_verify verify_peer"
+                dist_ssl_opts+=" -ssl_dist_opt client_verify verify_peer"
+                # Every cluster node has TLS configured, so every peer must present a certificate
+                dist_ssl_opts+=" -ssl_dist_opt server_fail_if_no_peer_cert true"
+                if [[ -n "${RABBITMQ_SSL_DEPTH:-}" ]]; then
+                    dist_ssl_opts+=" -ssl_dist_opt server_depth ${RABBITMQ_SSL_DEPTH}"
+                    dist_ssl_opts+=" -ssl_dist_opt client_depth ${RABBITMQ_SSL_DEPTH}"
+                fi
+            else
+                warn "No CA certificate file provided. Peer verification will not be performed."
+            fi
+            dist_ssl_opts+=" -ssl_dist_opt server_secure_renegotiate true -ssl_dist_opt client_secure_renegotiate true"
             cat <<EOF
 # SSL configuration
 ERL_SSL_PATH=$(rabbitmq_erlang_ssl_dir)
-SERVER_ADDITIONAL_ERL_ARGS="-pa \$ERL_SSL_PATH
-  -proto_dist inet_tls \
-  -ssl_dist_opt server_certfile ${RABBITMQ_COMBINED_CERT_PATH} \
-  -ssl_dist_opt server_secure_renegotiate true client_secure_renegotiate true"
+SERVER_ADDITIONAL_ERL_ARGS="${dist_ssl_opts}"
 RABBITMQ_CTL_ERL_ARGS="\$SERVER_ADDITIONAL_ERL_ARGS"
 EOF
         fi
@@ -544,11 +564,46 @@ EOF
 rabbitmq_download_community_plugins() {
     debug "Downloading custom plugins..."
     read -r -a plugins <<<"$(tr ',;' ' ' <<<"$RABBITMQ_COMMUNITY_PLUGINS")"
-    cd "$RABBITMQ_PLUGINS_DIR" || return
-    for plugin in "${plugins[@]}"; do
-        curl --remote-name --location --silent "$plugin"
+    local tmp_file
+    for plugin_spec in "${plugins[@]}"; do
+        # Parse optional inline checksum: https://host/foo.ez@sha256:HEXHASH
+        local plugin_url="${plugin_spec%%@sha256:*}"
+        local plugin_filename="${plugin_url##*/}"
+        plugin_filename="${plugin_filename%%\?*}"
+        local expected_hash=""
+        if [[ "$plugin_spec" = *"@sha256:"* ]]; then
+            expected_hash="${plugin_spec##*@sha256:}"
+        fi
+        # Scheme allow-list
+        if is_boolean_yes "$RABBITMQ_COMMUNITY_PLUGINS_SECURE" && [[ "$plugin_url" != "https://"* ]] && [[ "$plugin_url" != "file://"* ]]; then
+            error "RABBITMQ_COMMUNITY_PLUGINS: '${plugin_url}' uses a non-HTTPS scheme. Only https:// and file:// are permitted."
+            return 1
+        fi
+
+        # Atomic download: write to tmp, verify, then move into plugins dir
+        tmp_file="$(mktemp)"
+        if ! curl --fail --location --max-redirs 5 --output "$tmp_file" "$plugin_url"; then
+            rm -f "$tmp_file"
+            error "Failed to download plugin from '${plugin_url}'"
+            return 1
+        fi
+
+        if [[ -n "$expected_hash" ]]; then
+            local actual_hash
+            actual_hash="$(sha256sum "$tmp_file" | awk '{print $1}')"
+            if [[ "$actual_hash" != "$expected_hash" ]]; then
+                rm -f "$tmp_file"
+                error "Checksum mismatch for plugin '${plugin_url}': expected sha256:${expected_hash}, got sha256:${actual_hash}."
+                return 1
+            fi
+            debug "sha256 verified for plugin '${plugin_url}'"
+        elif is_boolean_yes "$RABBITMQ_COMMUNITY_PLUGINS_SECURE"; then
+            error "Secure installation of community plugins is enabled, but no checksum was provided for plugin '${plugin_url}'."
+            return 1
+        fi
+
+        mv "$tmp_file" "${RABBITMQ_PLUGINS_DIR}/${plugin_filename}"
     done
-    cd - || return
 }
 
 ########################
@@ -711,12 +766,37 @@ rabbitmq_stop() {
 rabbitmq_change_password() {
     local user="${1:?user is required}"
     local password="${2:?password is required}"
-    debug "Changing password for user '${user}'..."
 
+    debug "Changing password for user '${user}'..."
+    # We can't pass the password using a pipe to avoid plaintext-on-cmdline exposure
+    # given there isn't a stdin path available
+    # change_password doesn't support pre-hashed passwords either as add_user does
+    # see https://github.com/rabbitmq/rabbitmq-server/issues/13141
     if ! debug_execute "${RABBITMQ_BIN_DIR}/rabbitmqctl" change_password -- "$user" "$password"; then
         error "Couldn't change password for user '${user}'."
         return 1
     fi
+}
+
+########################
+# Hash a password in RabbitMQ's internal format
+# Format: base64(salt || SHA512(salt || password)), 4-byte random salt
+# Globals:
+#   None
+# Arguments:
+#   $1 - Password
+# Returns:
+#   Hash string suitable for --pre-hashed-password
+#########################
+rabbitmq_hash_password() {
+    local password="$1"
+    local tmp_dir
+    tmp_dir="$(mktemp -d)"
+    trap 'rm -rf "${tmp_dir}"' RETURN ERR
+
+    dd if=/dev/urandom bs=4 count=1 2>/dev/null > "${tmp_dir}/salt.bin"
+    { cat "${tmp_dir}/salt.bin"; printf '%s' "$password"; } | openssl dgst -sha512 -binary > "${tmp_dir}/hash.bin"
+    cat "${tmp_dir}/salt.bin" "${tmp_dir}/hash.bin" | openssl base64 -A
 }
 
 ########################
@@ -872,7 +952,7 @@ rabbitmq_initialize() {
         ! is_rabbitmq_running && rabbitmq_start_bg
         if is_boolean_yes "$RABBITMQ_LOAD_DEFINITIONS"; then
             if ! grep -q '"users"' "$RABBITMQ_DEFINITIONS_FILE"; then
-                debug_execute "${RABBITMQ_BIN_DIR}/rabbitmqctl" add_user "$RABBITMQ_USERNAME" "$RABBITMQ_PASSWORD"
+                debug_execute "${RABBITMQ_BIN_DIR}/rabbitmqctl" add_user --pre-hashed-password "$RABBITMQ_USERNAME" "$(rabbitmq_hash_password "$RABBITMQ_PASSWORD")"
                 debug_execute "${RABBITMQ_BIN_DIR}/rabbitmqctl" set_user_tags "$RABBITMQ_USERNAME" administrator
             fi
         elif is_boolean_yes "$RABBITMQ_SECURE_PASSWORD"; then
