@@ -194,7 +194,7 @@ valkey_cluster_check() {
 }
 
 #########################
-## Recovers the cluster when using dynamic IPs by changing them in the nodes.conf
+# Recovers the cluster when using dynamic IPs by changing them in the nodes.conf
 # Globals:
 #   VALKEY_*
 # Arguments:
@@ -214,10 +214,22 @@ valkey_cluster_update_ips() {
             host_2_ip_array["$node"]="$ip"
         done
         echo "Storing map with hostnames and IPs"
-        declare -p host_2_ip_array >"${VALKEY_DATA_DIR}/nodes.sh"
+        for key in "${!host_2_ip_array[@]}"; do
+            printf "%s=\"%s\"\n" "$key" "${host_2_ip_array[$key]}" >> "${VALKEY_DATA_DIR}/nodes.sh"
+        done
     else
-        # The cluster was already started
-        . "${VALKEY_DATA_DIR}/nodes.sh"
+        # The cluster was already started, let's read hosts and IPs from the nodes.sh file
+        while IFS= read -r line || [[ -n "$line" ]]; do
+            # Skip blank lines and shell comments
+            [[ -z "$line" || "$line" == \#* ]] && continue
+            # We only support format NODE_0_HOSTNAME="NODE_0_IP" for entries
+            if [[ "$line" =~ ([a-zA-Z0-9._-]+)\=\"([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})\" ]]; then
+                host_2_ip_array["${BASH_REMATCH[1]}"]="${BASH_REMATCH[2]}"
+            else
+                error "Invalid line format in nodes.sh: $line"
+                exit 1
+            fi
+        done < "${VALKEY_DATA_DIR}/nodes.sh"
         # Update the IPs in the nodes.conf
         for node in "${nodes[@]}"; do
             read -r -a host_and_port <<< "$(to_host_and_port "$node")"
