@@ -105,6 +105,7 @@ mastodon_validate() {
         check_empty_value "MASTODON_ADMIN_EMAIL"
         check_empty_value "MASTODON_ADMIN_PASSWORD"
         check_empty_value "MASTODON_ADMIN_USERNAME"
+        check_password_length "MASTODON_ADMIN_PASSWORD" "8"
     fi
 
     check_true_false "MASTODON_S3_ENABLED"
@@ -140,7 +141,6 @@ mastodon_validate() {
     check_valid_port "MASTODON_REDIS_PORT_NUMBER"
 
     check_true_false "MASTODON_ALLOW_ALL_DOMAINS"
-    check_password_length "MASTODON_ADMIN_PASSWORD" "8"
     return "$error_code"
 }
 

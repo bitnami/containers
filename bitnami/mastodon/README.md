@@ -60,11 +60,11 @@ The following tables list the main variables you can set.
 | `ALLOW_EMPTY_PASSWORD`               | Allow an empty password.                                              | `no`                                                                           |
 | `MASTODON_CREATE_ADMIN`              | Create admin for Mastodon.                                            | `true`                                                                         |
 | `MASTODON_ADMIN_USERNAME`            | Mastodon admin username.                                              | `user`                                                                         |
-| `MASTODON_ADMIN_PASSWORD`            | Mastodon admin password.                                              | `bitnami1`                                                                     |
+| `MASTODON_ADMIN_PASSWORD`            | Mastodon admin password.                                              | `nil`                                                                          |
 | `MASTODON_ADMIN_EMAIL`               | Mastodon admin email.                                                 | `user@bitnami.org`                                                             |
 | `MASTODON_ALLOW_ALL_DOMAINS`         | Allow accessing Mastodon with any domain.                             | `true`                                                                         |
-| `MASTODON_SECRET_KEY_BASE`           | Mastodon secret key base.                                             | `bitnami123`                                                                   |
-| `MASTODON_OTP_SECRET`                | Mastodon OTP secret.                                                  | `bitnami123`                                                                   |
+| `MASTODON_SECRET_KEY_BASE`           | Mastodon secret key base.                                             | `nil`                                                                          |
+| `MASTODON_OTP_SECRET`                | Mastodon OTP secret.                                                  | `nil`                                                                          |
 | `MASTODON_HTTPS_ENABLED`             | Enable HTTPS in Mastodon.                                             | `false`                                                                        |
 | `MASTODON_ASSETS_PRECOMPILE`         | Run rake assets:precompile on startup.                                | `true`                                                                         |
 | `MASTODON_WEB_DOMAIN`                | Mastodon web domain (for generating links).                           | `127.0.0.1`                                                                    |
@@ -103,7 +103,7 @@ The following tables list the main variables you can set.
 | `MASTODON_S3_PORT_NUMBER`            | S3 port                                                               | `9000`                                                                         |
 | `MASTODON_S3_ALIAS_HOST`             | S3 route for uploaded files (for generating links in Mastodon)        | `localhost:${MASTODON_S3_PORT_NUMBER}`                                         |
 | `MASTODON_AWS_SECRET_ACCESS_KEY`     | AWS secret access key                                                 | `nil`                                                                          |
-| `MASTODON_AWS_ACCESS_KEY_ID`         | AWS access key id                                                     | `nil`                                                                          |
+| `MASTODON_AWS_ACCESS_KEY_ID`         | AWS  access key id                                                    | `nil`                                                                          |
 | `MASTODON_S3_REGION`                 | S3 region                                                             | `us-east-1`                                                                    |
 | `MASTODON_S3_ENDPOINT`               | S3 endpoint                                                           | `${MASTODON_S3_PROTOCOL}://${MASTODON_S3_HOSTNAME}:${MASTODON_S3_PORT_NUMBER}` |
 | `MASTODON_STARTUP_ATTEMPTS`          | Startup check attempts.                                               | `40`                                                                           |
