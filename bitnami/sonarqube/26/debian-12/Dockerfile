@@ -8,7 +8,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-06-02T15:51:46Z" \
+      org.opencontainers.image.created="2026-06-02T16:53:13Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/sonarqube/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/sonarqube" \
@@ -31,7 +31,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     COMPONENTS=( \
       "postgresql-client-18.4.0-0-linux-${OS_ARCH}-debian-12" \
       "java-21.0.11-11-2-linux-${OS_ARCH}-debian-12" \
-      "sonarqube-26.4.0-1-linux-${OS_ARCH}-debian-12" \
+      "sonarqube-26.4.0-2-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -52,7 +52,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/sonarqube/postunpack.sh
 ENV APP_VERSION="26.4.0" \
     BITNAMI_APP_NAME="sonarqube" \
-    IMAGE_REVISION="7" \
+    IMAGE_REVISION="8" \
     JAVA_HOME="/opt/bitnami/java" \
     LD_LIBRARY_PATH="/opt/bitnami/postgresql/lib" \
     PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/java/bin:$PATH"
