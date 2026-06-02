@@ -153,7 +153,7 @@ export WORDPRESS_ENABLE_XML_RPC="${WORDPRESS_ENABLE_XML_RPC:-no}" # only used du
 
 # WordPress credentials
 export WORDPRESS_USERNAME="${WORDPRESS_USERNAME:-user}" # only used during the first initialization
-export WORDPRESS_PASSWORD="${WORDPRESS_PASSWORD:-bitnami}" # only used during the first initialization
+export WORDPRESS_PASSWORD="${WORDPRESS_PASSWORD:-}" # only used during the first initialization
 export WORDPRESS_EMAIL="${WORDPRESS_EMAIL:-user@example.com}" # only used during the first initialization
 export WORDPRESS_FIRST_NAME="${WORDPRESS_FIRST_NAME:-UserName}" # only used during the first initialization
 export WORDPRESS_LAST_NAME="${WORDPRESS_LAST_NAME:-LastName}" # only used during the first initialization

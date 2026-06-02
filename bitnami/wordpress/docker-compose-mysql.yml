@@ -21,6 +21,7 @@ services:
       - mysql
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+      - WORDPRESS_PASSWORD=bitnami
       - WORDPRESS_DATABASE_HOST=mysql
       - WORDPRESS_DATABASE_PORT_NUMBER=3306
       - WORDPRESS_DATABASE_USER=bn_wordpress
