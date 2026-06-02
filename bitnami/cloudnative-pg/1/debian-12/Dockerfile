@@ -17,17 +17,17 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "cloudnative-pg-1.29.1-0-linux-${OS_ARCH}-debian-12" \
+      "cloudnative-pg-1.29.1-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
         curl -SsLf "https://${DOWNLOADS_URL}/${COMPONENT}.tar.gz" -O ; \
-        curl -SsLf "https://${DOWNLOADS_URL}/${COMPONENT}.tar.gz.sha256" -O ; \
       fi ; \
-      sha256sum -c "${COMPONENT}.tar.gz.sha256" ; \
+      sha256sum -c "/opt/bitnami/checksums/${COMPONENT}.tar.gz.sha256" ; \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner ; \
-      rm -rf "${COMPONENT}".tar.gz{,.sha256} ; \
-    done
+      rm -rf "${COMPONENT}".tar.gz ; \
+    done ; \
+    rm -rf /opt/bitnami/checksums ;
 RUN uninstall_packages curl
 
 ######
@@ -40,7 +40,7 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2026-05-12T14:26:34Z" \
+      org.opencontainers.image.created="2026-06-02T22:45:20Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="cloudnative-pg" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -54,7 +54,7 @@ COPY --from=builder /opt/bitnami/cloudnative-pg/licenses /opt/bitnami/cloudnativ
 
 ENV APP_VERSION="1.29.1" \
     BITNAMI_APP_NAME="cloudnative-pg" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     PATH="/operator:$PATH"
 
 USER 1001
