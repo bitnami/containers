@@ -205,7 +205,7 @@ jenkins_initialize() {
     if am_i_root; then
         # Ensure Jenkins daemon user has proper permissions on Jenkins home directory
         info "Configuring file permissions for Jenkins"
-        is_mounted_dir_empty "$JENKINS_HOME" && configure_permissions_ownership "$JENKINS_HOME" -d "755" -f "644" -u "$JENKINS_DAEMON_USER" -g "$JENKINS_DAEMON_GROUP"
+        is_mounted_dir_empty "$JENKINS_HOME" && configure_permissions_ownership "$JENKINS_HOME" -d "755" -f "644" -u "$JENKINS_DAEMON_USER" -g "$JENKINS_DAEMON_GROUP" -n
     fi
 
     if is_mounted_dir_empty "$JENKINS_HOME"; then
@@ -213,7 +213,9 @@ jenkins_initialize() {
         if ! is_mounted_dir_empty "$JENKINS_MOUNTED_CONTENT_DIR"; then
             info "Moving custom mounted files to Jenkins home directory"
             echo "--- Copying files at $(date)" >>"${JENKINS_LOGS_DIR}/copy_reference_file.log"
-            find "$JENKINS_MOUNTED_CONTENT_DIR" \( -type f -o -type l \) -and -not -path "$JENKINS_MOUNTED_CONTENT_DIR/plugins/*" | xargs -I % -P10 bash -c '. /opt/bitnami/scripts/libjenkins.sh && jenkins_add_custom_file %'
+            while IFS= read -r -d '' custom_file; do
+                jenkins_add_custom_file "$custom_file"
+            done < <(find "$JENKINS_MOUNTED_CONTENT_DIR" \( -type f -o -type l \) -and -not -path "$JENKINS_MOUNTED_CONTENT_DIR/plugins/*" -print0 | sort -z)
         fi
         # Install Jenkins plugins defined in JENKINS_PLUGINS
         jenkins_install_plugins
@@ -415,7 +417,7 @@ jenkins_install_plugins() {
         debug "Moving image plugins to $JENKINS_HOME"
         ensure_dir_exists "${JENKINS_HOME}/plugins"
         mv "${JENKINS_BASE_DIR}/plugins"/* "${JENKINS_HOME}/plugins"
-        am_i_root && configure_permissions_ownership "${JENKINS_HOME}/plugins" -d "755" -f "644" -u "$JENKINS_DAEMON_USER" -g "$JENKINS_DAEMON_GROUP"
+        am_i_root && configure_permissions_ownership "${JENKINS_HOME}/plugins" -d "755" -f "644" -u "$JENKINS_DAEMON_USER" -g "$JENKINS_DAEMON_GROUP" -n
     else
         debug "${JENKINS_BASE_DIR}/plugins is empty"
     fi
@@ -424,7 +426,9 @@ jenkins_install_plugins() {
     if ! is_mounted_dir_empty "$JENKINS_MOUNTED_CONTENT_DIR/plugins"; then
         debug "Moving custom mounted plugins to Jenkins home directory"
         echo "--- Copying files at $(date)" >>"${JENKINS_LOGS_DIR}/copy_reference_file.log"
-        find "$JENKINS_MOUNTED_CONTENT_DIR/plugins" \( -type f -o -type l \) | xargs -I % -P10 bash -c '. /opt/bitnami/scripts/libjenkins.sh && jenkins_add_custom_file %'
+        while IFS= read -r -d '' custom_file; do
+            jenkins_add_custom_file "$custom_file"
+        done < <(find "$JENKINS_MOUNTED_CONTENT_DIR/plugins" \( -type f -o -type l \) -print0 | sort -z)
     else
         debug "${JENKINS_MOUNTED_CONTENT_DIR}/plugins is empty"
     fi
@@ -477,7 +481,9 @@ jenkins_override_home_paths() {
         # Mount relative path from mounted content dir
         if ! is_mounted_dir_empty "$JENKINS_MOUNTED_CONTENT_DIR/${relpath}"; then
             debug "Copying mounted directory ${relpath} to Jenkins home directory"
-            find "$JENKINS_MOUNTED_CONTENT_DIR/${relpath}" \( -type f -o -type l \) | xargs -I % -P10 bash -c '. /opt/bitnami/scripts/libjenkins.sh && jenkins_add_custom_file %'
+            while IFS= read -r -d '' custom_file; do
+                jenkins_add_custom_file "$custom_file"
+            done < <(find "$JENKINS_MOUNTED_CONTENT_DIR/${relpath}" \( -type f -o -type l \) -print0 | sort -z)
         elif [[ -f "$JENKINS_MOUNTED_CONTENT_DIR/${relpath}" ]]; then
             debug "Copying mounted file ${relpath} to Jenkins home directory"
             jenkins_add_custom_file "$JENKINS_MOUNTED_CONTENT_DIR/${relpath}"
