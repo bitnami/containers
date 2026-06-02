@@ -113,6 +113,7 @@ The following tables list the main variables you can set.
 | `REDIS_SENTINEL_MASTER_NAME`     | Redis Sentinel master name                       | `nil`                                      |
 | `REDIS_SENTINEL_HOST`            | Redis Sentinel host                              | `nil`                                      |
 | `REDIS_SENTINEL_PORT_NUMBER`     | Redis Sentinel host port (used by slaves)        | `26379`                                    |
+| `REDIS_SENTINEL_PASSWORD`        | Redis Sentinel password                          | `nil`                                      |
 
 #### Read-only environment variables
 
