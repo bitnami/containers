@@ -149,17 +149,16 @@ wildfly_conf_set() {
 wildfly_add_user() {
     local user="${1:?missing user}"
     local password="${2:?missing password}"
+    local users_file="${WILDFLY_CONF_DIR}/mgmt-users.properties"
+    local hash
 
-    args=(
-        "-cw"                              # Automatically confirm warning in interactive mode
-        "-u" "$user"                       # Name of the user
-        "-p" "$password"                   # Password of the user
-        "-sc" "$WILDFLY_CONF_DIR"          # Location of the server config directory
-    )
-    if am_i_root; then
-        debug_execute run_as_user "$WILDFLY_DAEMON_USER" "${WILDFLY_BIN_DIR}/add-user.sh" "${args[@]}"
+    # Compute the Properties-Realm digest: HEX(MD5("user:realm:password")).
+    hash="$(printf '%s:%s:%s' "$user" "ManagementRealm" "$password" | md5sum | cut -d' ' -f1)"
+    # Write (or replace) the user entry in mgmt-users.properties.
+    if grep -q "^${user}=" "$users_file"; then
+        replace_in_file "$users_file" "^${user}=.*" "${user}=${hash}"
     else
-        debug_execute "${WILDFLY_BIN_DIR}/add-user.sh" "${args[@]}"
+        printf '%s=%s\n' "$user" "$hash" >> "$users_file"
     fi
 }
 

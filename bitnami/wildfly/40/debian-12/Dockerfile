@@ -8,7 +8,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-05-29T11:19:14Z" \
+      org.opencontainers.image.created="2026-06-02T11:10:45Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/wildfly/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/wildfly" \
@@ -52,7 +52,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/wildfly/postunpack.sh
 ENV APP_VERSION="40.0.0" \
     BITNAMI_APP_NAME="wildfly" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:$PATH" \
     WILDFLY_HOME="/home/wildfly"
