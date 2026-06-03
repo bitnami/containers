@@ -9,7 +9,7 @@ services:
     volumes:
       - 'zookeeper_data:/bitnami/zookeeper'
     environment:
-      - ALLOW_ANONYMOUS_LOGIN=yes
+      - ALLOW_EMPTY_PASSWORD=yes
 
 volumes:
   zookeeper_data:

@@ -71,8 +71,13 @@ zookeeper_validate() {
     is_boolean_yes "$ZOO_ENABLE_ADMIN_SERVER" && check_conflicting_ports ZOO_PORT_NUMBER ZOO_PROMETHEUS_METRICS_PORT_NUMBER ZOO_ADMIN_SERVER_PORT_NUMBER
 
     # ZooKeeper client-server authentication validations
-    if is_boolean_yes "$ZOO_ENABLE_AUTH" && is_boolean_yes $ZOO_FIPS_MODE; then
-        print_validation_error "The ZOO_ENABLE_AUTH environment variable configures authentication using SASL/Digest-MD5 which is incompatible with FIPS. Set the environment variable ZOO_FIPS_MODE=no to disable FIPS in ZooKeeper."
+    if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
+        warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD}. For safety reasons, do not use this flag in a production environment."
+    elif ! is_boolean_yes "$ZOO_ENABLE_AUTH"; then
+        print_validation_error "ZooKeeper authentication is disabled. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow starting ZooKeeper without authentication. This is only recommended for development environments."
+    fi
+    if (is_boolean_yes "$ZOO_ENABLE_AUTH" || is_boolean_yes "$ZOO_ENABLE_QUORUM_AUTH") && is_boolean_yes $ZOO_FIPS_MODE; then
+        print_validation_error "The ZOO_ENABLE_AUTH and ZOO_ENABLE_QUORUM_AUTH environment variables configure authentication using SASL/Digest-MD5 which is incompatible with FIPS. Set the environment variable ZOO_FIPS_MODE=no to disable FIPS in ZooKeeper."
     fi
 
     # ZooKeeper server-server authentication validations
@@ -191,6 +196,7 @@ zookeeper_initialize() {
 #########################
 zookeeper_generate_conf() {
     cp "${ZOO_CONF_DIR}/zoo_sample.cfg" "$ZOO_CONF_FILE"
+    chmod 600 "$ZOO_CONF_FILE"
     echo >>"$ZOO_CONF_FILE"
 
     zookeeper_conf_set "$ZOO_CONF_FILE" tickTime "$ZOO_TICK_TIME"
@@ -246,6 +252,7 @@ zookeeper_generate_conf() {
 
     # If TLS in enable
     if is_boolean_yes "$ZOO_TLS_CLIENT_ENABLE"; then
+        remove_in_file "$ZOO_CONF_FILE" "^clientPort=.*" false
         zookeeper_conf_set "$ZOO_CONF_FILE" client.secure true
         zookeeper_conf_set "$ZOO_CONF_FILE" ssl.clientAuth "$ZOO_TLS_CLIENT_AUTH"
         zookeeper_conf_set "$ZOO_CONF_FILE" secureClientPort "$ZOO_TLS_PORT_NUMBER"
@@ -323,7 +330,9 @@ zookeeper_enable_client_server_authentication() {
 
     info "Enabling authentication..."
     zookeeper_conf_set "$filename" authProvider.1 org.apache.zookeeper.server.auth.SASLAuthenticationProvider
-    zookeeper_conf_set "$filename" requireClientAuthScheme sasl
+    zookeeper_conf_set "$filename" sessionRequireClientSASLAuth true
+    zookeeper_conf_set enforce.auth.enabled true
+    zookeeper_conf_set enforce.auth.schemes sasl
 }
 
 ########################
@@ -467,6 +476,9 @@ zookeeper_configure_acl() {
     done
     acl_string="${acl_string#,}"
 
+    # Restrict the bootstrap instance to loopback to eliminate the race window where
+    # unauthenticated external clients can reach :2181
+    zookeeper_conf_set "$ZOO_CONF_FILE" clientPortAddress "127.0.0.1"
     zookeeper_start_bg
 
     for path in / /zookeeper /zookeeper/quota; do
@@ -475,6 +487,7 @@ zookeeper_configure_acl() {
     done
 
     zookeeper_stop
+    remove_in_file "$ZOO_CONF_FILE" "^clientPortAddress=.*" false
     mv "${ZOO_LOG_DIR}/zookeeper.out" "${ZOO_LOG_DIR}/zookeeper.out.firstboot"
 }
 
@@ -598,7 +611,6 @@ is_zookeeper_not_running() {
 zookeeper_healthcheck() {
     local command=""
     local args=()
-    local port="$ZOO_PORT_NUMBER"
 
     if [[ "$ZOO_TLS_CLIENT_ENABLE" = true ]]; then
         if [[ "$JAVA_FIPS_MODE" = "restricted" || "$JAVA_FIPS_MODE" = "relaxed" ]]; then
@@ -611,45 +623,31 @@ zookeeper_healthcheck() {
             # file-store loader. openssl s_client cannot open /dev/fd file descriptors
             # created by process substitution (-key <(...) -cert <(...)), making the
             # standard TLS healthcheck unreliable.
-            # For both modes: primary check via the admin HTTP server (no keystore
-            # interaction). Fallback: nc on the plain clientPort (ZOO_PORT_NUMBER), which
-            # ZooKeeper keeps open alongside the TLS secureClientPort.
-            local admin_url="http://127.0.0.1:${ZOO_ADMIN_SERVER_PORT_NUMBER}/commands/ruok"
-            debug "Running healthcheck via admin server (FIPS mode): 'curl -sf --max-time ${ZOO_HC_TIMEOUT} ${admin_url}'"
-            local curl_output=""
-            local curl_exit_code=0
-            curl_output=$(curl -sf --max-time "$ZOO_HC_TIMEOUT" "$admin_url") || curl_exit_code=$?
-            if [[ $curl_exit_code -eq 0 ]]; then
-                debug "Admin server response: ${curl_output}"
-                response="imok"
+            # For both modes: check via the admin HTTP server (no keystore
+            # interaction) if admin server is enabled. Otherwise, simply check there's
+            # a process listening using pgrep
+            if is_boolean_yes "$ZOO_ENABLE_ADMIN_SERVER"; then
+                local admin_url="http://127.0.0.1:${ZOO_ADMIN_SERVER_PORT_NUMBER}/commands/ruok"
+                debug "Running healthcheck via admin server (FIPS mode): 'curl -sf --max-time ${ZOO_HC_TIMEOUT} ${admin_url}'"
+                local curl_output=""
+                local curl_exit_code=0
+                curl_output=$(curl -sf --max-time "$ZOO_HC_TIMEOUT" "$admin_url") || curl_exit_code=$?
+                if [[ $curl_exit_code -eq 0 ]]; then
+                    debug "Admin server response: ${curl_output}"
+                    response="imok"
+                fi
             else
-                # Admin server is not available. Fall back to the plain clientPort
-                # (ZOO_PORT_NUMBER). Even when TLS is enabled, Bitnami's zoo.cfg always
-                # sets both clientPort and secureClientPort, so ZooKeeper keeps a
-                # plain-text listener on ZOO_PORT_NUMBER alongside the TLS one. Using
-                # nc avoids any keystore interaction.
-                warn "Admin server not reachable (exit code ${curl_exit_code}, url ${admin_url}); falling back to plain port ${ZOO_PORT_NUMBER}."
-                local nc_args=("-w" "$ZOO_HC_TIMEOUT" "127.0.0.1" "$ZOO_PORT_NUMBER")
-                if nc -help 2>&1 | grep -q "\[-q seconds\]"; then
-                    nc_args=("-q" "1" "${nc_args[@]}")
-                fi
-                debug "Running healthcheck command (FIPS fallback): 'echo \"ruok\" | timeout ${ZOO_HC_TIMEOUT} nc ${nc_args[*]}'"
-                response=$(echo "ruok" | timeout "$ZOO_HC_TIMEOUT" nc "${nc_args[@]}" 2>/dev/null)
-                if [[ ! "$response" =~ "imok" ]]; then
-                    error "Plain port fallback also failed (response: '${response}'). Ensure ZOO_PORT_NUMBER=${ZOO_PORT_NUMBER} is reachable or enable the admin server with ZOO_ENABLE_ADMIN_SERVER=yes."
-                fi
+                pgrep -f "^" >/dev/null && response="imok"
             fi
         else
-            port="$ZOO_TLS_PORT_NUMBER"
             command="openssl"
-            args+=("s_client" "-quiet" "-crlf" "-connect" "localhost:${port}")
-
+            args+=("s_client" "-quiet" "-crlf" "-connect" "localhost:${ZOO_TLS_PORT_NUMBER}")
             debug "Running healthcheck command: 'echo \"ruok\" | timeout ${ZOO_HC_TIMEOUT} ${command} ${args[*]} \
-                -key <(openssl pkcs12 -in ${ZOO_TLS_CLIENT_KEYSTORE_FILE} -nodes -nocerts -passin pass:\$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD) \
-                -cert <(openssl pkcs12 -in ${ZOO_TLS_CLIENT_KEYSTORE_FILE} -nodes -nokeys -passin pass:\$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD)'"
+                -key <(openssl pkcs12 -in ${ZOO_TLS_CLIENT_KEYSTORE_FILE} -nodes -nocerts -passin env:ZOO_TLS_CLIENT_KEYSTORE_PASSWORD) \
+                -cert <(openssl pkcs12 -in ${ZOO_TLS_CLIENT_KEYSTORE_FILE} -nodes -nokeys -passin env:ZOO_TLS_CLIENT_KEYSTORE_PASSWORD)'"
             response=$(echo "ruok" | timeout "$ZOO_HC_TIMEOUT" "$command" "${args[@]}" \
-                -key <(openssl pkcs12 -in "$ZOO_TLS_CLIENT_KEYSTORE_FILE" -nodes -nocerts -passin pass:"$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD") \
-                -cert <(openssl pkcs12 -in "$ZOO_TLS_CLIENT_KEYSTORE_FILE" -nodes -nokeys -passin pass:"$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD") 2> /dev/null
+                -key <(openssl pkcs12 -in "$ZOO_TLS_CLIENT_KEYSTORE_FILE" -nodes -nocerts -passin env:ZOO_TLS_CLIENT_KEYSTORE_PASSWORD) \
+                -cert <(openssl pkcs12 -in "$ZOO_TLS_CLIENT_KEYSTORE_FILE" -nodes -nokeys -passin env:ZOO_TLS_CLIENT_KEYSTORE_PASSWORD) 2> /dev/null
             )
         fi
     else
@@ -658,7 +656,7 @@ zookeeper_healthcheck() {
         if nc -help 2>&1 | grep -q "\[-q seconds\]"; then
             args+=("-q" "1")
         fi
-        args+=("-w" "$ZOO_HC_TIMEOUT" "localhost" "$port")
+        args+=("-w" "$ZOO_HC_TIMEOUT" "localhost" "$ZOO_PORT_NUMBER")
         debug "Running healthcheck command: 'echo \"ruok\" | timeout ${ZOO_HC_TIMEOUT} ${command} ${args[*]}'"
         response=$(echo "ruok" | timeout "$ZOO_HC_TIMEOUT" "$command" "${args[@]}")
     fi
