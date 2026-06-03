@@ -11,6 +11,7 @@ set -o nounset
 set -o pipefail
 
 # Load Generic Libraries
+. /opt/bitnami/scripts/libfile.sh
 . /opt/bitnami/scripts/libvalidations.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libcassandra.sh
@@ -25,6 +26,8 @@ cassandra_validate
 cassandra_validate_tls
 # Ensure 'daemon' user exists when running as 'root'
 am_i_root && ensure_user_exists "$DB_DAEMON_USER" --group "$DB_DAEMON_GROUP"
+# Ensure we clean up temporary files when this script ends
+trap cleanup_credentials EXIT
 # Ensure Cassandra is initialized
 cassandra_initialize
 

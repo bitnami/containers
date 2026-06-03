@@ -116,6 +116,8 @@ export CASSANDRA_INITSCRIPTS_BOOT_LOG_FILE="${DB_LOG_DIR}/cassandra_init_scripts
 export DB_INITSCRIPTS_BOOT_LOG_FILE="$CASSANDRA_INITSCRIPTS_BOOT_LOG_FILE"
 export CASSANDRA_PID_FILE="${DB_TMP_DIR}/cassandra.pid"
 export DB_PID_FILE="$CASSANDRA_PID_FILE"
+export CASSANDRA_INIT_SEMAPHORE="${DB_VOLUME_DIR}/.cassandra-init"
+export DB_INIT_SEMAPHORE="$CASSANDRA_INIT_SEMAPHORE"
 export PATH="${DB_BIN_DIR}:${BITNAMI_ROOT_DIR}/common/bin:${BITNAMI_ROOT_DIR}/python/bin:${BITNAMI_ROOT_DIR}/java/bin:$PATH"
 
 # System users (when running with a privileged user)
