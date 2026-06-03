@@ -124,7 +124,7 @@ The following tables list the main variables you can set.
 | `AIRFLOW_LDAP_ROLES_MAPPING`             | Mapping from LDAP DN to a list of Airflow roles.                                                                                            | `nil`                           |
 | `AIRFLOW_LDAP_ROLES_SYNC_AT_LOGIN`       | Replace ALL the user roles each login, or only on registration.                                                                             | `True`                          |
 | `AIRFLOW_LDAP_USE_TLS`                   | Use LDAP SSL.                                                                                                                               | `False`                         |
-| `AIRFLOW_LDAP_ALLOW_SELF_SIGNED`         | Allow self signed certificates in LDAP ssl.                                                                                                 | `True`                          |
+| `AIRFLOW_LDAP_ALLOW_SELF_SIGNED`         | Allow self signed certificates in LDAP ssl.                                                                                                 | `False`                         |
 | `AIRFLOW_LDAP_TLS_CA_CERTIFICATE`        | File that store the CA for LDAP ssl.                                                                                                        | `nil`                           |
 
 #### Read-only environment variables
