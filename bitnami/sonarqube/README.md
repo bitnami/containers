@@ -91,6 +91,8 @@ The following tables list the main variables you can set.
 | `SONARQUBE_MIN_HEAP_SIZE`               | Minimum heap size for SonarQube services (CE, Search and Web).                                                                                         | `nil`                                               |
 | `SONARQUBE_ELASTICSEARCH_JAVA_ADD_OPTS` | Additional Java options for Elasticsearch.                                                                                                             | `nil`                                               |
 | `SONARQUBE_EXTRA_PROPERTIES`            | Comma separated list of properties to be set in the sonar.properties file, e.g. `my.sonar.property1=property_value,my.sonar.property2=property_value`. | `nil`                                               |
+| `SONARQUBE_ENABLE_DEFAULT_PLUGINS`      | Whether to enable the default bundled plugins.                                                                                                         | `no`                                                |
+| `SONARQUBE_ACCEPT_RISK_CONSENT`         | Whether to accept the third-party plugins risk consent.                                                                                                | `no`                                                |
 | `SONARQUBE_USERNAME`                    | SonarQube user name.                                                                                                                                   | `admin`                                             |
 | `SONARQUBE_PASSWORD`                    | SonarQube user password.                                                                                                                               | `nil`                                               |
 | `SONARQUBE_EMAIL`                       | SonarQube user e-mail address.                                                                                                                         | `user@example.com`                                  |
@@ -117,6 +119,7 @@ The following tables list the main variables you can set.
 | `SONARQUBE_LOGS_DIR`              | Directory for SonarQube log files.                   | `${SONARQUBE_BASE_DIR}/logs`                              |
 | `SONARQUBE_LOG_FILE`              | SonarQube log file.                                  | `${SONARQUBE_LOGS_DIR}/sonar.log`                         |
 | `SONARQUBE_TMP_DIR`               | Directory for SonarQube temporary files.             | `${SONARQUBE_BASE_DIR}/temp`                              |
+| `SONARQUBE_PLUGINS_DIR`           | Directory for SonarQube plugins.                     | `${SONARQUBE_BASE_DIR}/extensions/plugins`                |
 | `SONARQUBE_PID_FILE`              | SonarQube PID file.                                  | `${SONARQUBE_BASE_DIR}/pids/SonarQube.pid`                |
 | `SONARQUBE_BIN_DIR`               | SonarQube directory for binary executables.          | `${SONARQUBE_BASE_DIR}/bin/linux-x86-64`                  |
 | `SONARQUBE_VOLUME_DIR`            | SonarQube directory for mounted configuration files. | `${BITNAMI_VOLUME_DIR}/sonarqube`                         |

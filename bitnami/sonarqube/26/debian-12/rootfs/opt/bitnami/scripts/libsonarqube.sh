@@ -147,6 +147,17 @@ sonarqube_initialize() {
     ! is_empty_value "$SONARQUBE_WEB_JAVA_ADD_OPTS" && sonarqube_conf_set "sonar.web.javaAdditionalOpts" "$SONARQUBE_WEB_JAVA_ADD_OPTS"
     # Disable log rotation (to be handled externally)
     sonarqube_conf_set "sonar.log.rollingPolicy" "none"
+    # Enable default plugins
+    if is_boolean_yes "$SONARQUBE_ENABLE_DEFAULT_PLUGINS"; then
+        info "Enabling default plugins"
+        if [[ -d "${SONARQUBE_BASE_DIR}/extensions/default-plugins" ]]; then
+            mv "${SONARQUBE_BASE_DIR}/extensions/default-plugins"/*.jar "$SONARQUBE_PLUGINS_DIR/" 2>/dev/null || true
+        fi
+    fi
+    # Accept risk consent
+    if is_boolean_yes "$SONARQUBE_ACCEPT_RISK_CONSENT"; then
+        sonarqube_conf_set "sonar.plugins.risk.consent" "ACCEPTED"
+    fi
     # Additional properties
     local -a additional_properties
     IFS=',' read -r -a additional_properties <<< "$SONARQUBE_EXTRA_PROPERTIES"
