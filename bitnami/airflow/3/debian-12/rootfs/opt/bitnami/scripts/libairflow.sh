@@ -84,9 +84,9 @@ airflow_validate() {
 
     # Check cryptography parameters
     if [[ -n "$AIRFLOW_RAW_FERNET_KEY" && -z "$AIRFLOW_FERNET_KEY" ]]; then
-        if validate_string "$AIRFLOW_RAW_FERNET_KEY" -min-length 32; then
+        if ! validate_string "$AIRFLOW_RAW_FERNET_KEY" -min-length 32; then
             print_validation_error "AIRFLOW_RAW_FERNET_KEY must have at least 32 characters"
-        elif validate_string "$AIRFLOW_RAW_FERNET_KEY" -max-length 32; then
+        elif ! validate_string "$AIRFLOW_RAW_FERNET_KEY" -max-length 32; then
             warn "AIRFLOW_RAW_FERNET_KEY has more than 32 characters, the rest will be ignored"
         fi
         AIRFLOW_FERNET_KEY="$(echo -n "${AIRFLOW_RAW_FERNET_KEY:0:32}" | base64)"
@@ -96,7 +96,7 @@ airflow_validate() {
     if is_empty_value "$AIRFLOW_WEBSERVER_SECRET_KEY"; then
         AIRFLOW_WEBSERVER_SECRET_KEY="$(airflow_generate_secret_key)"
     fi
-    if validate_string "$AIRFLOW_WEBSERVER_SECRET_KEY" -max-length 32; then
+    if ! validate_string "$AIRFLOW_WEBSERVER_SECRET_KEY" -max-length 32; then
         warn "AIRFLOW_WEBSERVER_SECRET_KEY has more than 32 characters, the rest will be ignored"
     fi
     AIRFLOW_WEBSERVER_SECRET_KEY="$(echo -n "${AIRFLOW_WEBSERVER_SECRET_KEY:0:32}" | base64)"
@@ -105,7 +105,7 @@ airflow_validate() {
     if is_empty_value "$AIRFLOW_APISERVER_SECRET_KEY"; then
         AIRFLOW_APISERVER_SECRET_KEY="$(airflow_generate_secret_key)"
     fi
-    if validate_string "$AIRFLOW_APISERVER_SECRET_KEY" -max-length 32; then
+    if ! validate_string "$AIRFLOW_APISERVER_SECRET_KEY" -max-length 32; then
         warn "AIRFLOW_APISERVER_SECRET_KEY has more than 32 characters, the rest will be ignored"
     fi
     AIRFLOW_APISERVER_SECRET_KEY="$(echo -n "${AIRFLOW_APISERVER_SECRET_KEY:0:32}" | base64)"
@@ -146,9 +146,11 @@ airflow_validate() {
                 check_yes_no_value "$var"
             done
             if is_boolean_yes "$AIRFLOW_LDAP_USE_TLS"; then
-                for var in "AIRFLOW_LDAP_ALLOW_SELF_SIGNED" "AIRFLOW_LDAP_TLS_CA_CERTIFICATE"; do
-                    check_empty_value "$var"
-                done
+                if is_boolean_yes "$AIRFLOW_LDAP_ALLOW_SELF_SIGNED"; then
+                    warn "AIRFLOW_LDAP_ALLOW_SELF_SIGNED is True: the LDAP TLS certificate will not be validated. A network attacker can present a self-signed certificate and intercept LDAP bind credentials and user passwords. Set AIRFLOW_LDAP_ALLOW_SELF_SIGNED=False and configure AIRFLOW_LDAP_TLS_CACERTFILE to enforce certificate-chain verification."
+                elif is_empty_value "$AIRFLOW_LDAP_TLS_CACERTFILE"; then
+                    warn "AIRFLOW_LDAP_USE_TLS is enabled but AIRFLOW_LDAP_TLS_CACERTFILE is not set. The system CA bundle will be used. If your LDAP server uses an internal or private CA, set AIRFLOW_LDAP_TLS_CACERTFILE to the PEM file for that CA to prevent certificate-validation failures."
+                fi
             fi
         fi
 
