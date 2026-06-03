@@ -6,7 +6,7 @@ SetEnvIf X-Forwarded-Proto https HTTPS=on
 <VirtualHost _default_:80>
   DocumentRoot "{{APACHE_BASE_DIR}}/htdocs"
   <Directory "{{APACHE_BASE_DIR}}/htdocs">
-    Options Indexes FollowSymLinks
+    Options FollowSymLinks
     AllowOverride All
     Require all granted
   </Directory>
