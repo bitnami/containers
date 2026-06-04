@@ -64,6 +64,13 @@ couchdb_validate() {
         fi
     done
 
+    # CouchDB TLS server name indication validations
+    if is_boolean_yes "${COUCHDB_INTERNODE_TLS_ENABLED:-no}"; then
+        if [[ "${COUCHDB_TLS_SERVER_NAME_INDICATION:-}" = "disable" ]]; then
+            warn "COUCHDB_TLS_SERVER_NAME_INDICATION=disable suppresses hostname verification and makes internode TLS vulnerable to MITM. Only use this for troubleshooting, never in production."
+        fi
+    fi
+
     # CouchDB create database validations
     if ! is_yes_no_value "$COUCHDB_CREATE_DATABASES"; then
         print_validation_error "The allowed values for COUCHDB_CREATE_DATABASES are [yes, no]"
@@ -154,6 +161,12 @@ couchdb_update_vm_args_file() {
     fi
     if is_boolean_yes "${COUCHDB_INTERNODE_TLS_ENABLED:-no}"; then
         local ssl_dist_cfg="${COUCHDB_CONF_DIR}/ssl_dist.cfg"
+        local sni_option=""
+        if [[ "${COUCHDB_TLS_SERVER_NAME_INDICATION:-}" = "disable" ]]; then
+            print -v sni_option ',\n   {server_name_indication, disable}'
+        elif [[ -n "${COUCHDB_TLS_SERVER_NAME_INDICATION:-}" ]]; then
+            printf -v sni_option ',\n   {server_name_indication, "%s"}' "${COUCHDB_TLS_SERVER_NAME_INDICATION}"
+        fi
         cat > "${ssl_dist_cfg}" << EOF
 [{server,
   [{certfile, "${COUCHDB_TLS_CERT_FILE}"},
@@ -165,8 +178,7 @@ couchdb_update_vm_args_file() {
   [{certfile, "${COUCHDB_TLS_CERT_FILE}"},
    {keyfile, "${COUCHDB_TLS_KEY_FILE}"},
    {cacertfile, "${COUCHDB_TLS_CA_FILE}"},
-   {verify, verify_peer},
-   {server_name_indication, disable}]}].
+   {verify, verify_peer}${sni_option}]}].
 EOF
         couchdb_vm_args_set "-proto_dist" "couch"
         couchdb_vm_args_set "-couch_dist no_tls" "false"

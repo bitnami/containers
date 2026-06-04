@@ -76,23 +76,24 @@ The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
-| Name                            | Description                                                                                           | Default Value |
-|---------------------------------|-------------------------------------------------------------------------------------------------------|---------------|
-| `COUCHDB_NODENAME`              | Name of the CouchDB node.                                                                             | `nil`         |
-| `COUCHDB_PORT_NUMBER`           | Port number used by CouchDB.                                                                          | `nil`         |
-| `COUCHDB_CLUSTER_PORT_NUMBER`   | Port number used by CouchDB for clustering.                                                           | `nil`         |
-| `COUCHDB_BIND_ADDRESS`          | Address to which the CouchDB process will bind to.                                                    | `nil`         |
-| `COUCHDB_CREATE_DATABASES`      | Whether to create CouchDB system databases during initialization. Useful for clustering.              | `yes`         |
-| `COUCHDB_IGNORE_INITDB_SCRIPTS` | Skip execution of init scripts from COUCHDB_INITSCRIPTS_DIR. Set to yes on non-primary cluster nodes. | `no`          |
-| `COUCHDB_USER`                  | CouchDB admin username.                                                                               | `admin`       |
-| `COUCHDB_PASSWORD`              | Password for the CouchDB admin user.                                                                  | `nil`         |
-| `COUCHDB_SECRET`                | CouchDB secret/token used for proxy and cookie authentication.                                        | `nil`         |
-| `COUCHDB_ERLANG_HMAX`           | Per-process Erlang heap cap in bytes. Used to compute +hmax (value / 8 = word count).                 | `nil`         |
-| `COUCHDB_EXTRA_VM_ARGS`         | Additional Erlang VM arguments appended to vm.args.                                                   | `nil`         |
-| `COUCHDB_INTERNODE_TLS_ENABLED` | Enable TLS encryption for the Erlang distribution protocol (inter-node communication).                | `no`          |
-| `COUCHDB_TLS_CERT_FILE`         | Path to the TLS certificate file used for Erlang distribution encryption.                             | `nil`         |
-| `COUCHDB_TLS_KEY_FILE`          | Path to the TLS private key file used for Erlang distribution encryption.                             | `nil`         |
-| `COUCHDB_TLS_CA_FILE`           | Path to the CA certificate file used to verify peers during Erlang distribution.                      | `nil`         |
+| Name                                 | Description                                                                                                                                                                                                                 | Default Value |
+|--------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+| `COUCHDB_NODENAME`                   | Name of the CouchDB node.                                                                                                                                                                                                   | `nil`         |
+| `COUCHDB_PORT_NUMBER`                | Port number used by CouchDB.                                                                                                                                                                                                | `nil`         |
+| `COUCHDB_CLUSTER_PORT_NUMBER`        | Port number used by CouchDB for clustering.                                                                                                                                                                                 | `nil`         |
+| `COUCHDB_BIND_ADDRESS`               | Address to which the CouchDB process will bind to.                                                                                                                                                                          | `nil`         |
+| `COUCHDB_CREATE_DATABASES`           | Whether to create CouchDB system databases during initialization. Useful for clustering.                                                                                                                                    | `yes`         |
+| `COUCHDB_IGNORE_INITDB_SCRIPTS`      | Skip execution of init scripts from COUCHDB_INITSCRIPTS_DIR. Set to yes on non-primary cluster nodes.                                                                                                                       | `no`          |
+| `COUCHDB_USER`                       | CouchDB admin username.                                                                                                                                                                                                     | `admin`       |
+| `COUCHDB_PASSWORD`                   | Password for the CouchDB admin user.                                                                                                                                                                                        | `nil`         |
+| `COUCHDB_SECRET`                     | CouchDB secret/token used for proxy and cookie authentication.                                                                                                                                                              | `nil`         |
+| `COUCHDB_ERLANG_HMAX`                | Per-process Erlang heap cap in bytes. Used to compute +hmax (value / 8 = word count).                                                                                                                                       | `nil`         |
+| `COUCHDB_EXTRA_VM_ARGS`              | Additional Erlang VM arguments appended to vm.args.                                                                                                                                                                         | `nil`         |
+| `COUCHDB_INTERNODE_TLS_ENABLED`      | Enable TLS encryption for the Erlang distribution protocol (inter-node communication).                                                                                                                                      | `no`          |
+| `COUCHDB_TLS_CERT_FILE`              | Path to the TLS certificate file used for Erlang distribution encryption.                                                                                                                                                   | `nil`         |
+| `COUCHDB_TLS_KEY_FILE`               | Path to the TLS private key file used for Erlang distribution encryption.                                                                                                                                                   | `nil`         |
+| `COUCHDB_TLS_CA_FILE`                | Path to the CA certificate file used to verify peers during Erlang distribution.                                                                                                                                            | `nil`         |
+| `COUCHDB_TLS_SERVER_NAME_INDICATION` | SNI hostname sent in the TLS client hello for internode connections (leave unset to derive it automatically from the peer node name, set to an explicit hostname, or set to "disable" that suppresses hostname verification | `nil`         |
 
 #### Read-only environment variables
 
