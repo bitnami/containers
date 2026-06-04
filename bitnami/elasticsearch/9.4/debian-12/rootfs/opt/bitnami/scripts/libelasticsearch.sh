@@ -771,7 +771,15 @@ elasticsearch_initialize() {
                 ! is_boolean_yes "$DB_SKIP_TRANSPORT_TLS" && elasticsearch_transport_tls_configuration
                 if is_boolean_yes "$ELASTICSEARCH_ENABLE_FIPS_MODE"; then
                     elasticsearch_conf_set xpack.security.fips_mode.enabled "true"
-                    elasticsearch_conf_set xpack.security.authc.password_hashing.algorithm "${ELASTICSEARCH_PASSWD_HASH_ALGORITHM:-pbkdf2}"
+                    # Disable autoconfiguration — required for FIPS compliance (new installs)
+                    elasticsearch_conf_set xpack.security.autoconfiguration.enabled "false"
+                    # pbkdf2_stretch is the recommended FIPS-compliant stored password hashing algorithm
+                    elasticsearch_conf_set xpack.security.authc.password_hashing.algorithm "${ELASTICSEARCH_PASSWD_HASH_ALGORITHM:-pbkdf2_stretch}"
+                    # Optionally enforce specific FIPS security providers (ES 8.13+)
+                    if ! is_empty_value "${ELASTICSEARCH_FIPS_REQUIRED_PROVIDERS:-}"; then
+                        read -r -a fips_providers <<< "$(tr ',' ' ' <<< "$ELASTICSEARCH_FIPS_REQUIRED_PROVIDERS")"
+                        elasticsearch_conf_set xpack.security.fips_mode.required_providers "${fips_providers[@]}"
+                    fi
                 fi
             fi
             # Latest Elasticseach releases install x-pack-ml  by default. Since we have faced some issues with this library on certain platforms,
