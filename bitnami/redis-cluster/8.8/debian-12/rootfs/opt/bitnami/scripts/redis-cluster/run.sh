@@ -22,7 +22,19 @@ set -m
 
 read -ra nodes <<< "$(tr ',;' ' ' <<< "${REDIS_NODES}")"
 
-args=("${REDIS_BASE_DIR}/etc/redis.conf" "--daemonize" "no")
+args=("--port" "$REDIS_PORT_NUMBER" "--include" "${REDIS_BASE_DIR}/etc/redis.conf")
+if ! is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
+    if [[ -w "${REDIS_BASE_DIR}/etc/redis.conf" ]]; then
+        redis_conf_set requirepass "$REDIS_PASSWORD"
+        redis_conf_set masterauth "$REDIS_PASSWORD"
+    else
+        args+=("--requirepass" "$REDIS_PASSWORD")
+        args+=("--masterauth" "$REDIS_PASSWORD")
+    fi
+else
+    args+=("--protected-mode" "no")
+fi
+
 # Add flags specified via the 'REDIS_EXTRA_FLAGS' environment variable
 read -r -a extra_flags <<< "$REDIS_EXTRA_FLAGS"
 [[ "${#extra_flags[@]}" -gt 0 ]] && args+=("${extra_flags[@]}")
