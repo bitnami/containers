@@ -193,6 +193,8 @@ drupal_initialize() {
         drupal_update_database
     fi
 
+    [[ -n "${DRUPAL_TRUSTED_HOSTS:-}" ]] && drupal_conf_set "\$settings['trusted_host_patterns']" "$DRUPAL_TRUSTED_HOSTS"
+
     # Avoid exit code of previous commands to affect the result of this function
     true
 }
@@ -477,7 +479,7 @@ drupal_set_database_ssl_settings() {
   'driver' => 'mysql',
   'pdo' => array (
     PDO::MYSQL_ATTR_SSL_CA => '${DRUPAL_DATABASE_TLS_CA_FILE}',
-    PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => 0
+    PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => 1
   )
 );
 EOF
@@ -552,7 +554,7 @@ SetHandler Drupal_Security_Do_Not_Remove_See_SA_2006_006
 </Files>
 
 # If we know how to do it safely, disable the PHP engine entirely.
-<IfModule mod_php7.c>
+<IfModule mod_php8.c>
   php_flag engine off
 </IfModule>
 EOF

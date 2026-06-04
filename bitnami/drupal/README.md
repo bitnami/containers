@@ -85,6 +85,7 @@ The following tables list the main variables you can set.
 | `DRUPAL_ENABLE_MODULES`       | Comma or space separated list of installed modules to enable during the first initialization.                                | `nil`                               |
 | `DRUPAL_CONFIG_SYNC_DIR`      | Drupal sync configuration directory location. Only used when `DRUPAL_SKIP_BOOTSTRAP` is enabled.                             | `nil`                               |
 | `DRUPAL_HASH_SALT`            | Drupal string used to generate random values. Only used when `DRUPAL_SKIP_BOOTSTRAP` is enabled.                             | `nil`                               |
+| `DRUPAL_TRUSTED_HOSTS`        | Trusted hosts patterns to configure (HTTP HOST Header attacks protection).                                                   | `nil`                               |
 | `DRUPAL_USERNAME`             | Drupal user name.                                                                                                            | `user`                              |
 | `DRUPAL_PASSWORD`             | Drupal user password.                                                                                                        | `nil`                               |
 | `DRUPAL_EMAIL`                | Drupal user e-mail address.                                                                                                  | `user@example.com`                  |

@@ -31,6 +31,7 @@ drupal_env_vars=(
     DRUPAL_ENABLE_MODULES
     DRUPAL_CONFIG_SYNC_DIR
     DRUPAL_HASH_SALT
+    DRUPAL_TRUSTED_HOSTS
     DRUPAL_USERNAME
     DRUPAL_PASSWORD
     DRUPAL_EMAIL
@@ -84,6 +85,7 @@ export DRUPAL_SKIP_BOOTSTRAP="${DRUPAL_SKIP_BOOTSTRAP:-}" # only used during the
 export DRUPAL_ENABLE_MODULES="${DRUPAL_ENABLE_MODULES:-}" # only used during the first initialization
 export DRUPAL_CONFIG_SYNC_DIR="${DRUPAL_CONFIG_SYNC_DIR:-}" # only used during the first initialization
 export DRUPAL_HASH_SALT="${DRUPAL_HASH_SALT:-}" # only used during the first initialization
+export DRUPAL_TRUSTED_HOSTS="${DRUPAL_TRUSTED_HOSTS:-}"
 
 # Drupal credentials
 export DRUPAL_USERNAME="${DRUPAL_USERNAME:-user}" # only used during the first initialization
