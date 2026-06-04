@@ -39,6 +39,7 @@ couchdb_env_vars=(
     COUCHDB_TLS_CERT_FILE
     COUCHDB_TLS_KEY_FILE
     COUCHDB_TLS_CA_FILE
+    COUCHDB_TLS_SERVER_NAME_INDICATION
 )
 for env_var in "${couchdb_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -86,5 +87,6 @@ export COUCHDB_INTERNODE_TLS_ENABLED="${COUCHDB_INTERNODE_TLS_ENABLED:-no}"
 export COUCHDB_TLS_CERT_FILE="${COUCHDB_TLS_CERT_FILE:-}"
 export COUCHDB_TLS_KEY_FILE="${COUCHDB_TLS_KEY_FILE:-}"
 export COUCHDB_TLS_CA_FILE="${COUCHDB_TLS_CA_FILE:-}"
+export COUCHDB_TLS_SERVER_NAME_INDICATION="${COUCHDB_TLS_SERVER_NAME_INDICATION:-}"
 
 # Custom environment variables may be defined below
