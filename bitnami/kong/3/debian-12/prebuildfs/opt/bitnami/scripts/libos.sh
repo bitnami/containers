@@ -170,7 +170,7 @@ ensure_user_exists() {
     if [[ -n "$home" ]]; then
         mkdir -p "$home"
         usermod -d "$home" "$user" >/dev/null 2>&1
-        configure_permissions_ownership "$home" -d "775" -f "664" -u "$user" -g "$group"
+        configure_permissions_ownership "$home" -d "775" -f "664" -u "$user" -g "$group" -n
     fi
 }
 
