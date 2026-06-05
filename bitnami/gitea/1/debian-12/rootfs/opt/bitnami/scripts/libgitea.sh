@@ -227,6 +227,7 @@ gitea_update_conf_file() {
     gitea_conf_set "server" "SSH_DOMAIN" "$GITEA_SSH_DOMAIN"
     gitea_conf_set "server" "SSH_PORT" "$GITEA_SSH_PORT"
     gitea_conf_set "server" "SSH_LISTEN_PORT" "$GITEA_SSH_LISTEN_PORT"
+    gitea_conf_set "server" "HTTP_ADDR" "$GITEA_HTTP_ADDR"
     gitea_conf_set "server" "HTTP_PORT" "$GITEA_HTTP_PORT"
     gitea_conf_set "log" "ROOT_PATH" "$GITEA_LOG_ROOT_PATH"
     gitea_conf_set "repository" "ROOT" "$GITEA_REPO_ROOT_PATH"
@@ -283,6 +284,8 @@ gitea_pass_wizard() {
     wizard_url="http://127.0.0.1:${port}"
     cookie_file="/tmp/cookie$(generate_random_string -t alphanumeric -c 8)"
     curl_opts=("--location" "--silent" "--cookie" "$cookie_file" "--cookie-jar" "$cookie_file")
+    # Set HTTP_ADDR to 127.0.0.1 to avoid binding to 0.0.0.0 during wizard setup
+    gitea_conf_set "server" "HTTP_ADDR" "127.0.0.1"
     # Ensure gitea is started
     gitea_start_bg
     # Step 0: Get cookies
@@ -332,6 +335,8 @@ gitea_pass_wizard() {
         return 1
     fi
     gitea_stop
+    # After passing the wizard, we can bind to the configured address
+    gitea_conf_set "server" "HTTP_ADDR" "$GITEA_HTTP_ADDR"
     info "Gitea installation finished"
     true
 }
