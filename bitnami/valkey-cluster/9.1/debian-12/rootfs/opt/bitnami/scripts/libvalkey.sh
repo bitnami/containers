@@ -408,7 +408,8 @@ valkey_configure_default() {
         chmod 600 "${VALKEY_BASE_DIR}/etc/valkey.conf"
     else
         info "Setting Valkey config file"
-        chmod 600 "${VALKEY_BASE_DIR}/etc/valkey.conf"
+        # We try to enforce strict permissions, but we don't fail if it's not possible
+        chmod 600 "${VALKEY_BASE_DIR}/etc/valkey.conf" || true
         if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
             # Allow remote connections without password
             valkey_conf_set protected-mode no
