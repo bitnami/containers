@@ -22,7 +22,18 @@ set -m
 
 read -ra nodes <<< "$(tr ',;' ' ' <<< "${VALKEY_NODES}")"
 
-args=("${REDIS_BASE_DIR}/etc/valkey.conf" "--daemonize" "no")
+args=("--port" "$VALKEY_PORT_NUMBER" "--include" "${VALKEY_BASE_DIR}/etc/valkey.conf")
+if ! is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
+    if [[ -w "${VALKEY_BASE_DIR}/etc/valkey.conf" ]]; then
+        valkey_conf_set requirepass "$VALKEY_PASSWORD"
+        valkey_conf_set masterauth "$VALKEY_PASSWORD"
+    else
+        args+=("--requirepass" "$VALKEY_PASSWORD")
+        args+=("--masterauth" "$VALKEY_PASSWORD")
+    fi
+else
+    args+=("--protected-mode" "no")
+fi
 # Add flags specified via the 'VALKEY_EXTRA_FLAGS' environment variable
 read -r -a extra_flags <<< "$VALKEY_EXTRA_FLAGS"
 [[ "${#extra_flags[@]}" -gt 0 ]] && args+=("${extra_flags[@]}")
