@@ -50,10 +50,14 @@ valkey_conf_set() {
     local value="${2:-}"
 
     # Sanitize inputs
+    # 1. Escape special characters (\, &, ?)
     value="${value//\\/\\\\}"
     value="${value//&/\\&}"
     value="${value//\?/\\?}"
-    value="${value//[$'\t\n\r']}"
+    # 2. \000-\037 strips all ASCII control characters (0-31)
+    # 3. \177 strips DEL (delete) character (127)
+    value="${value//[$'\000'-$'\037'$'\177']}"
+    # 4. If the value is empty, set it to an empty string
     [[ "$value" = "" ]] && value="\"$value\""
 
     # Determine whether to enable the configuration for RDB persistence, if yes, do not enable the replacement operation
@@ -269,11 +273,13 @@ valkey_configure_replication() {
     elif [[ "$VALKEY_REPLICATION_MODE" = "replica" ]]; then
         if [[ -n "$VALKEY_SENTINEL_HOST" ]]; then
             local -a sentinel_info_command=("valkey-cli" "-h" "${VALKEY_SENTINEL_HOST}" "-p" "${VALKEY_SENTINEL_PORT_NUMBER}")
-            is_boolean_yes "$VALKEY_TLS_ENABLED" && sentinel_info_command+=("--tls" "--cert" "${VALKEY_TLS_CERT_FILE}" "--key" "${VALKEY_TLS_KEY_FILE}")
-            # shellcheck disable=SC2015
-            is_empty_value "$VALKEY_TLS_CA_FILE" && sentinel_info_command+=("--cacertdir" "${VALKEY_TLS_CA_DIR}") || sentinel_info_command+=("--cacert" "${VALKEY_TLS_CA_FILE}")
+            if is_boolean_yes "$VALKEY_TLS_ENABLED"; then
+                sentinel_info_command+=("--tls" "--cert" "${VALKEY_TLS_CERT_FILE}" "--key" "${VALKEY_TLS_KEY_FILE}")
+                # shellcheck disable=SC2015
+                is_empty_value "$VALKEY_TLS_CA_FILE" && sentinel_info_command+=("--cacertdir" "${VALKEY_TLS_CA_DIR}") || sentinel_info_command+=("--cacert" "${VALKEY_TLS_CA_FILE}")
+            fi
             sentinel_info_command+=("sentinel" "get-master-addr-by-name" "${VALKEY_SENTINEL_PRIMARY_NAME}")
-            read -r -a VALKEY_SENTINEL_INFO <<< "$("${sentinel_info_command[@]}" | tr '\n' ' ')"
+            read -r -a VALKEY_SENTINEL_INFO <<< "$(REDISCLI_AUTH="${VALKEY_SENTINEL_PASSWORD:-}" "${sentinel_info_command[@]}" | tr '\n' ' ')"
             VALKEY_PRIMARY_HOST=${VALKEY_SENTINEL_INFO[0]}
             VALKEY_PRIMARY_PORT_NUMBER=${VALKEY_SENTINEL_INFO[1]}
         fi
@@ -399,8 +405,11 @@ valkey_configure_default() {
             rm "${VALKEY_BASE_DIR}/etc/valkey-default.conf"
         fi
         cp "${VALKEY_MOUNTED_CONF_DIR}/valkey.conf" "${VALKEY_BASE_DIR}/etc/valkey.conf"
+        chmod 600 "${VALKEY_BASE_DIR}/etc/valkey.conf"
     else
         info "Setting Valkey config file"
+        # We try to enforce strict permissions, but we don't fail if it's not possible
+        chmod 600 "${VALKEY_BASE_DIR}/etc/valkey.conf" || true
         if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
             # Allow remote connections without password
             valkey_conf_set protected-mode no
