@@ -61,13 +61,11 @@ valkey_validate() {
         error "$1"
         error_code=1
     }
-
     check_resolved_hostname() {
         if ! is_hostname_resolved "$1"; then
             warn "Hostname ${1} could not be resolved, this could lead to connection issues"
         fi
     }
-
     check_allowed_port() {
         local validate_port_args=()
         ! am_i_root && validate_port_args+=("-unprivileged")
@@ -75,6 +73,18 @@ valkey_validate() {
             print_validation_error "An invalid port was specified in the environment variable ${1}: ${err}"
         fi
     }
+    empty_password_enabled_warn() {
+        warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD}. For safety reasons, do not use this flag in a production environment."
+    }
+    empty_password_error() {
+        print_validation_error "The $1 environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with blank passwords. This is recommended only for development."
+    }
+
+    if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
+        empty_password_enabled_warn
+    else
+        [[ -z "$VALKEY_SENTINEL_PASSWORD" ]] && empty_password_error VALKEY_SENTINEL_PASSWORD
+    fi
 
     [[ -w "$VALKEY_SENTINEL_CONF_FILE" ]] || print_validation_error "The configuration file ${VALKEY_SENTINEL_CONF_FILE} is not writable"
 
@@ -255,6 +265,7 @@ valkey_initialize() {
         fi
 
         cp -pf "$VALKEY_SENTINEL_CONF_FILE" "${VALKEY_SENTINEL_VOLUME_DIR}/conf/sentinel.conf"
+        chmod 600 "${VALKEY_SENTINEL_VOLUME_DIR}/conf/sentinel.conf"
     else
         info "Persisted files detected, restoring..."
     fi
