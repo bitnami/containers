@@ -113,6 +113,7 @@ The following tables list the main variables you can set.
 | `VALKEY_SENTINEL_PRIMARY_NAME`    | Valkey Sentinel primary name                       | `nil`                                       |
 | `VALKEY_SENTINEL_HOST`            | Valkey Sentinel host                               | `nil`                                       |
 | `VALKEY_SENTINEL_PORT_NUMBER`     | Valkey Sentinel host port (used by replicas)       | `26379`                                     |
+| `VALKEY_SENTINEL_PASSWORD`        | Valkey Sentinel password                           | `nil`                                       |
 
 #### Read-only environment variables
 
