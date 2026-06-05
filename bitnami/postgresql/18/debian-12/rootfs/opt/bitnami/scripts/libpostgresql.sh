@@ -55,22 +55,25 @@ postgresql_validate() {
         error "$1"
         error_code=1
     }
-
     check_multi_value() {
         if [[ " ${2} " != *" ${!1} "* ]]; then
             print_validation_error "The allowed values for ${1} are: ${2}"
         fi
     }
-
     empty_password_enabled_warn() {
         warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD}. For safety reasons, do not use this flag in a production environment."
     }
     empty_password_error() {
         print_validation_error "The $1 environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with blank passwords. This is recommended only for development."
     }
+
+    check_multi_value "POSTGRESQL_PGHBA_AUTH_METHOD" "md5 scram-sha-256"
     if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
         empty_password_enabled_warn
     else
+        if [[ "$POSTGRESQL_PGHBA_AUTH_METHOD" = "md5" ]]; then
+            warn "POSTGRESQL_AUTH_METHOD is 'md5': md5 format is vulnerable to pass-the-hash attacks. Please consider using 'scram-sha-256' instead."
+        fi
         if [[ -z "$POSTGRESQL_PASSWORD" ]]; then
             empty_password_error "POSTGRESQL_PASSWORD"
         fi
@@ -333,7 +336,7 @@ EOF
 #########################
 postgresql_restrict_pghba() {
     if [[ -n "$POSTGRESQL_PASSWORD" ]]; then
-        replace_in_file "$POSTGRESQL_PGHBA_FILE" "trust" "md5" false
+        replace_in_file "$POSTGRESQL_PGHBA_FILE" "trust" "$POSTGRESQL_PGHBA_AUTH_METHOD" false
     fi
 }
 
@@ -349,7 +352,7 @@ postgresql_restrict_pghba() {
 postgresql_add_replication_to_pghba() {
     local replication_auth="trust"
     if [[ -n "$POSTGRESQL_REPLICATION_PASSWORD" ]]; then
-        replication_auth="md5"
+        replication_auth="$POSTGRESQL_PGHBA_AUTH_METHOD"
     fi
     cat <<EOF >>"$POSTGRESQL_PGHBA_FILE"
 host      replication     all             0.0.0.0/0               ${replication_auth}
@@ -369,7 +372,7 @@ EOF
 postgresql_add_sr_check_user_to_pghba() {
     local sr_check_auth="trust"
     if [[ -n "$POSTGRESQL_SR_CHECK_PASSWORD" ]]; then
-        sr_check_auth="md5"
+        sr_check_auth="$POSTGRESQL_PGHBA_AUTH_METHOD"
     fi
     cat <<EOF >>"$POSTGRESQL_PGHBA_FILE"
 host      $POSTGRESQL_SR_CHECK_DATABASE     $POSTGRESQL_SR_CHECK_USERNAME      0.0.0.0/0               ${sr_check_auth}
