@@ -26,10 +26,10 @@ args=("--port" "$VALKEY_PORT_NUMBER" "--include" "${VALKEY_BASE_DIR}/etc/valkey.
 if ! is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
     if [[ -w "${VALKEY_BASE_DIR}/etc/valkey.conf" ]]; then
         valkey_conf_set requirepass "$VALKEY_PASSWORD"
-        valkey_conf_set masterauth "$VALKEY_PASSWORD"
+        valkey_conf_set primaryauth "$VALKEY_PASSWORD"
     else
         args+=("--requirepass" "$VALKEY_PASSWORD")
-        args+=("--masterauth" "$VALKEY_PASSWORD")
+        args+=("--primaryauth" "$VALKEY_PASSWORD")
     fi
 else
     args+=("--protected-mode" "no")
