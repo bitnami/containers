@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-05-29T18:51:46Z" \
+      org.opencontainers.image.created="2026-06-05T06:56:37Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/golang/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/golang" \
       org.opencontainers.image.title="golang" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.26.3"
+      org.opencontainers.image.version="1.26.4"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-12" \
@@ -27,7 +27,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "golang-1.26.3-0-linux-${OS_ARCH}-debian-12" \
+      "golang-1.26.4-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -43,11 +43,11 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN mkdir -p "/go/src" "/go/bin" && chmod -R 777 "/go"
 
-ENV APP_VERSION="1.26.3" \
+ENV APP_VERSION="1.26.4" \
     BITNAMI_APP_NAME="golang" \
     GOCACHE="/go/.cache" \
     GOPATH="/go" \
-    IMAGE_REVISION="6" \
+    IMAGE_REVISION="0" \
     PATH="/go/bin:/opt/bitnami/go/bin:$PATH"
 
 WORKDIR $GOPATH
