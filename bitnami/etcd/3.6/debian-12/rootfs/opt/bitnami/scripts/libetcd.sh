@@ -299,11 +299,15 @@ etcdctl_auth_norbac_flags() {
 #   None
 ########################
 etcd_configure_rbac() {
+    local orig_listen_client_urls="$ETCD_LISTEN_CLIENT_URLS"
+    local return_value=0
 
+    local scheme="http"
+    [[ $ETCD_AUTO_TLS = true || -f "$ETCD_CERT_FILE" ]] && scheme="https"
+    export ETCD_LISTEN_CLIENT_URLS="${scheme}://127.0.0.1:2379"
     ! is_etcd_running && etcd_start_bg
     read -r -a extra_flags <<<"$(etcdctl_auth_norbac_flags)"
-
-    is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
+    extra_flags+=("--endpoints=${scheme}://127.0.0.1:2379")
     if retry_while "etcdctl ${extra_flags[*]} member list" >/dev/null 2>&1; then
         if retry_while "etcdctl ${extra_flags[*]} auth status" >/dev/null 2>&1; then
             if etcdctl "${extra_flags[@]}" auth status | grep -q "Authentication Status: true"; then
@@ -315,8 +319,51 @@ etcd_configure_rbac() {
                 etcdctl "${extra_flags[@]}" auth enable
             fi
         fi
+    else
+        error "Failed to enable etcd authentication"
+        return_value=1
     fi
     etcd_stop
+    export ETCD_LISTEN_CLIENT_URLS="$orig_listen_client_urls"
+
+    return $return_value
+}
+
+########################
+# Wait for primary member to enable RBAC before opening client port
+# Globals:
+#   ETCD_*
+# Arguments:
+#   None
+# Returns:
+#   None
+########################
+etcd_wait_for_rbac() {
+    local return_value=0
+    local orig_listen_client_urls="$ETCD_LISTEN_CLIENT_URLS"
+    local scheme="http"
+
+    [[ $ETCD_AUTO_TLS = true || -f "$ETCD_CERT_FILE" ]] && scheme="https"
+    export ETCD_LISTEN_CLIENT_URLS="${scheme}://127.0.0.1:2379"
+    ! is_etcd_running && etcd_start_bg
+
+    read -r -a extra_flags <<<"$(etcdctl_auth_norbac_flags)"
+    extra_flags+=("--endpoints=${scheme}://127.0.0.1:2379")
+    info "Non-primary member: waiting for primary to enable RBAC before opening client port"
+    # shellcheck disable=SC2329
+    _auth_enabled() {
+        etcdctl "${extra_flags[@]}" auth status | grep -q "Authentication Status: true"
+    }
+    if ! retry_while "_auth_enabled"; then
+        error "Timed out waiting for RBAC — refusing to start production etcd unauthenticated."
+        return_value=1
+    else
+        info "RBAC is enabled"
+    fi
+    etcd_stop
+    export ETCD_LISTEN_CLIENT_URLS="$orig_listen_client_urls"
+
+    return $return_value
 }
 
 ########################
@@ -505,8 +552,24 @@ add_new_member() {
     extra_flags+=("--peer-urls=$ETCD_INITIAL_ADVERTISE_PEER_URLS")
     mkdir -p "$(dirname $ETCD_NEW_MEMBERS_ENV_FILE)" || true
     etcdctl member add "$ETCD_NAME" "${extra_flags[@]}" | grep "^ETCD_" >"$ETCD_NEW_MEMBERS_ENV_FILE"
-    replace_in_file "$ETCD_NEW_MEMBERS_ENV_FILE" "^" "export "
-    sync -d "$ETCD_NEW_MEMBERS_ENV_FILE"
+}
+
+########################
+# Safe loader — reads KEY=VALUE without eval or source
+# Globals:
+#   ETCD_NEW_MEMBERS_ENV_FILE
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+etcd_safe_load_member_env() {
+    [[ -f "$ETCD_NEW_MEMBERS_ENV_FILE" ]] || return 0
+    local _k _v
+    while IFS='=' read -r _k _v; do
+        [[ "$_k" =~ ^ETCD_[A-Z_]+$ ]] || continue
+        export "$_k"="$_v"
+    done < "$ETCD_NEW_MEMBERS_ENV_FILE"
 }
 
 ########################
@@ -597,6 +660,7 @@ etcd_initialize() {
                         # it from ETCD_INITIAL_ADVERTISE_PEER_URLS
                         domain="$ETCD_CLUSTER_DOMAIN"
                     fi
+                    # shellcheck disable=SC2329
                     hostname_has_N_ips() {
                         local -r hostname="${1:?hostname is required}"
                         local -r n=${2:?number of ips is required}
@@ -697,8 +761,8 @@ etcd_initialize() {
         # When there's more than one etcd replica, RBAC should be only enabled in one member
         if ! is_empty_value "$ETCD_ROOT_PASSWORD" && [[ "${initial_members[0]}" = *"$ETCD_INITIAL_ADVERTISE_PEER_URLS"* ]]; then
             etcd_configure_rbac
-        else
-            debug "Skipping RBAC configuration in member $ETCD_NAME"
+        elif [[ "${ETCD_INITIAL_CLUSTER_STATE:-}" != "existing" ]]; then
+            etcd_wait_for_rbac || return 1
         fi
     else
         ! is_empty_value "$ETCD_ROOT_PASSWORD" && etcd_configure_rbac
@@ -726,7 +790,6 @@ add_self_to_cluster() {
     done
 
     # only send req to healthy nodes
-
     if is_empty_value "$(get_member_id)"; then
         read -r -a extra_flags <<<"$(etcdctl_auth_norbac_flags)"
         extra_flags+=("--endpoints=${ETCD_ACTIVE_ENDPOINTS}" "--peer-urls=$ETCD_INITIAL_ADVERTISE_PEER_URLS")
@@ -735,13 +798,11 @@ add_self_to_cluster() {
             warn "Failed to add self to cluster, keeping trying..."
             sleep 10
         done
-        replace_in_file "$ETCD_NEW_MEMBERS_ENV_FILE" "^" "export "
-        sync -d "$ETCD_NEW_MEMBERS_ENV_FILE"
     else
         info "Node already in cluster"
     fi
     info "Loading env vars of existing cluster"
-    . "$ETCD_NEW_MEMBERS_ENV_FILE"
+    etcd_safe_load_member_env
 }
 
 ########################
