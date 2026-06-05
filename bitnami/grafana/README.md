@@ -81,7 +81,7 @@ The following tables list the main variables you can set.
 | `GF_PATHS_PLUGINS`            | Grafana directory for plugins.                                                       | `${GF_PATHS_DATA}/plugins`              |
 | `GF_PATHS_PROVISIONING`       | Grafana directory for provisioning configurations.                                   | `${GRAFANA_BASE_DIR}/conf/provisioning` |
 | `GF_INSTALL_PLUGINS`          | Grafana plugins to install                                                           | `nil`                                   |
-| `GF_INSTALL_PLUGINS_SKIP_TLS` | Whether to skip TLS certificate verification when installing plugins                 | `yes`                                   |
+| `GF_INSTALL_PLUGINS_SKIP_TLS` | Whether to skip TLS certificate verification when installing plugins                 | `no`                                    |
 | `GF_FEATURE_TOGGLES`          | Comma-separated list of Grafana feature toggles.                                     | `nil`                                   |
 | `GF_SECURITY_ADMIN_PASSWORD`  | Grafana admin password.                                                              | `nil`                                   |
 | `GRAFANA_MIGRATION_LOCK`      | Enable the migration lock mechanism to avoid issues caused by concurrent migrations. | `false`                                 |
