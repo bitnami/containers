@@ -357,6 +357,10 @@ matomo_pass_wizard() {
     wizard_url="http://127.0.0.1:${port}/"
     cookie_file="/tmp/cookie$(generate_random_string -t alphanumeric -c 8)"
     curl_opts=("--location" "--silent" "--cookie" "$cookie_file" "--cookie-jar" "$cookie_file")
+    # Disable remote access during wizard setup
+    for vhost in "matomo-vhost.conf" "matomo-https-vhost.conf"; do
+        replace_in_file "/opt/bitnami/apache/conf/vhosts/$vhost" "Require all granted" "Require local"
+    done
     # Ensure the web server is started
     web_server_start
     info "Passing Matomo installation wizard"
@@ -431,4 +435,8 @@ matomo_pass_wizard() {
     fi
     # Stop the web server afterwards
     web_server_stop
+    # Enable remote access again
+    for vhost in "matomo-vhost.conf" "matomo-https-vhost.conf"; do
+        replace_in_file "/opt/bitnami/apache/conf/vhosts/$vhost" "Require local" "Require all granted"
+    done
 }
