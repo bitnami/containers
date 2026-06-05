@@ -20,13 +20,8 @@ set -o pipefail
 
 # We need to unset ETCD_ROOT_PASSWORD otherwise it will be logged by etcd process
 unset ETCD_ROOT_PASSWORD
-if [[ -f "$ETCD_NEW_MEMBERS_ENV_FILE" ]]; then
-    debug "Loading env vars of existing cluster"
-    . "$ETCD_NEW_MEMBERS_ENV_FILE"
-    # We rely on the original value of ETCD_INITIAL_CLUSTER
-    # when bootstrapping a new cluster since
-    # we need all initial members to calcualte a same cluster_id
-fi
+# Load env vars of existing cluster
+etcd_safe_load_member_env
 
 declare -a cmd=("etcd")
 # If provided, run using configuration file
