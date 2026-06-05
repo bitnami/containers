@@ -322,13 +322,13 @@ jenkins_add_custom_file() {
             debug "Plugin ${filename} already exists"
             plugin_version=$(get_plugin_version "${JENKINS_HOME}/${relpath}")
             current_version=$(get_plugin_version "$filepath")
-            if [[ "$(get_sematic_version "$plugin_version" 1)" -gt "$(get_sematic_version "$current_version" 1)" ]]; then
+            if [[ "$(compare_semantic_versions "$plugin_version" "$current_version")" -eq "1" ]]; then
                 action="UPGRADED"
-                reason="Installed version ($current_version) is older than installed version ($plugin_version)"
+                reason="Version to be installed ($plugin_version) is newer than current version ($current_version)"
                 cp -pr "$(realpath "${filepath}")" "${JENKINS_HOME}/${relpath}"
             else
                 action="SKIPPED"
-                reason="Installed version ($current_version) is lower or equal than installed version ($plugin_version)"
+                reason="Version to be installed ($plugin_version) is older or equal than current version ($current_version)"
             fi
         else
             action="INSTALLED"
