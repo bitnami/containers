@@ -8,6 +8,7 @@
 
 # Load Generic Libraries
 . /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libfile.sh
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libservice.sh
@@ -214,13 +215,8 @@ influxdb_create_primary_setup() {
     )
     # Avoid passing credentials as arguments to influx CLI, to avoid leaking them
     # given a local observer with /proc read access can read them
-    # Instead, we can read them from temporary files
     local admin_user_password_file
-    admin_user_password_file="$(mktemp)"
-    chmod 0600 "$admin_user_password_file"
-    echo "$INFLUXDB_ADMIN_USER_PASSWORD" > "$admin_user_password_file"
-    # shellcheck disable=SC2064
-    trap "rm -f $admin_user_password_file" RETURN ERR INT TERM
+    admin_user_password_file="$(credential_to_temp_file "$INFLUXDB_ADMIN_USER_PASSWORD")"
     args+=('--password' "$(<"$admin_user_password_file")")
 
     if [ -n "${INFLUXDB_ADMIN_USER_TOKEN}" ]; then
@@ -265,13 +261,8 @@ influxdb_run_upgrade() {
 
     # Avoid passing credentials as arguments to influx CLI, to avoid leaking them
     # given a local observer with /proc read access can read them
-    # Instead, we can read them from temporary files
     local admin_user_password_file
-    admin_user_password_file="$(mktemp)"
-    chmod 0600 "$admin_user_password_file"
-    echo "$INFLUXDB_ADMIN_USER_PASSWORD" > "$admin_user_password_file"
-    # shellcheck disable=SC2064
-    trap "rm -f $admin_user_password_file" RETURN ERR INT TERM
+    admin_user_password_file="$(credential_to_temp_file "$INFLUXDB_ADMIN_USER_PASSWORD")"
     args+=('--password' "$(<"$admin_user_password_file")")
 
     if [ -n "${INFLUXDB_ADMIN_USER_TOKEN}" ]; then
@@ -394,7 +385,7 @@ influxdb_start_bg() {
         debug_execute "${start_command[@]}" &
         wait-for-port "$INFLUXDB_HTTP_PORT_NUMBER"
     else
-        INFLUXDB_HTTP_HTTPS_ENABLED=false INFLUXDB_HTTP_BIND_ADDRESS="127.0.0.1:${INFLUXDB_HTTP_PORT_NUMBER}" debug_execute "${start_command[@]}" &
+        INFLUXDB_HTTP_HTTPS_ENABLED=false INFLUXD_HTTP_BIND_ADDRESS="127.0.0.1:${INFLUXDB_HTTP_PORT_NUMBER}" debug_execute "${start_command[@]}" &
         wait-for-port --timeout="$INFLUXDB_PORT_READINESS_TIMEOUT" "$INFLUXDB_HTTP_PORT_NUMBER"
         wait_for_influxdb
     fi

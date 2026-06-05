@@ -23,8 +23,8 @@ influxdb_validate
 if am_i_root && ! is_influxdb_3; then
     chown -R "$INFLUXDB_DAEMON_USER" "$INFLUXDB_VOLUME_DIR" "$INFLUXDB_CONF_DIR"
 fi
-# Ensure InfluxDB is stopped when this script ends.
-trap "influxdb_stop" EXIT
+# Ensure InfluxDB is stopped when this script ends and we clean up temporary files
+trap "influxdb_stop; cleanup_credentials" EXIT
 # Ensure InfluxDB is initialized
 influxdb_initialize
 # Allow running custom initialization scripts
