@@ -24,15 +24,12 @@ info "Configuring file permissions for Ghost"
 ensure_user_exists "$GHOST_DAEMON_USER" --group "$GHOST_DAEMON_GROUP" --system --home "/home/$GHOST_DAEMON_USER"
 
 declare -a writable_dirs=(
-    # Skipping GHOST_BASE_DIR intentionally because it contains a lot of files/folders that should not be writable
-    "$GHOST_VOLUME_DIR"
     # Folders to persist
     "${GHOST_BASE_DIR}/content"
     # Folders that need to be writable for the app to work
     "/.ghost"
     "${GHOST_BASE_DIR}/content/logs"
 )
-
 for dir in "${writable_dirs[@]}"; do
     ensure_dir_exists "$dir"
     # Use ghost:root ownership for compatibility when running as a non-root user
@@ -41,5 +38,10 @@ for dir in "${writable_dirs[@]}"; do
     # is clearly a limitation in terms of security
     configure_permissions_ownership "$dir" -d "777" -f "666" -u "$GHOST_DAEMON_USER" -g "root"
 done
+# Provide write permissions in volume directory
+ensure_dir_exists "$GHOST_VOLUME_DIR"
+configure_permissions_ownership "$GHOST_VOLUME_DIR" -d "775" -f "664" -u "$GHOST_DAEMON_USER" -g "root"
 # Provide write permissions in installation directory (without doing it recursively)
-chmod a+rwX "$GHOST_BASE_DIR" "${GHOST_BASE_DIR}/.ghost-cli" && chown "${GHOST_DAEMON_USER}:root" "$GHOST_BASE_DIR" "${GHOST_BASE_DIR}/.ghost-cli"
+for dir in "$GHOST_BASE_DIR" "${GHOST_BASE_DIR}/.ghost-cli"; do
+    chmod a+rwX "$dir" && chown "${GHOST_DAEMON_USER}:root" "$dir"
+done
