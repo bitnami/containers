@@ -133,6 +133,11 @@ wordpress_validate() {
         is_empty_value "${WORDPRESS_DATABASE_PASSWORD}" && print_validation_error "The WORDPRESS_DATABASE_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow a blank password. This is only recommended for development environments."
     fi
 
+    # Validate hostname
+    if is_empty_value "$WORDPRESS_HOSTNAME"; then
+        warn "WORDPRESS_HOSTNAME is not set, site URL will be constructed based on HTTP_HOST header which opens up vulnerability to password-reset poisoning attacks. Do not leave this variable empty in production environments."
+    fi
+
     # Validate SMTP credentials
     if ! is_empty_value "$WORDPRESS_SMTP_HOST"; then
         check_resolved_hostname "$WORDPRESS_SMTP_HOST"
@@ -619,9 +624,13 @@ EOF
 #   None
 #########################
 wordpress_configure_urls() {
-    # Set URL to dynamic value, depending on which host WordPress is accessed from (to be overridden later)
-    # Note that wp-config.php is officially indented via tabs, not spaces
-    wordpress_conf_append "$(
+    local wp_url_string
+    local wp_url_protocol="http"
+    if is_empty_value "$WORDPRESS_HOSTNAME"; then
+        wp_url_string="'${wp_url_protocol}://' . \$_SERVER['HTTP_HOST'] . '/'"
+        # Set URL to dynamic value, depending on which host WordPress is accessed from (to be overridden later)
+        # Note that wp-config.php is officially indented via tabs, not spaces
+        wordpress_conf_append "$(
         cat <<"EOF"
 /**
  * The WP_SITEURL and WP_HOME options are configured to access from any hostname or IP address.
@@ -634,10 +643,10 @@ if ( defined( 'WP_CLI' ) ) {
 	$_SERVER['HTTP_HOST'] = '127.0.0.1';
 }
 EOF
-    )"
-    local wp_url_protocol="http"
-    (is_boolean_yes "$WORDPRESS_ENABLE_HTTPS" || [[ "$WORDPRESS_SCHEME" = "https" ]]) && wp_url_protocol="https"
-    local wp_url_string="'${wp_url_protocol}://' . \$_SERVER['HTTP_HOST'] . '/'"
+)"
+    else
+        wp_url_string="'${wp_url_protocol}://${WORDPRESS_HOSTNAME}/'"
+    fi
     wordpress_conf_set "WP_HOME" "$wp_url_string" yes
     wordpress_conf_set "WP_SITEURL" "$wp_url_string" yes
 }
@@ -724,6 +733,9 @@ wordpress_generate_web_server_configuration() {
     else
         error "Unknown WordPress Multisite network mode"
         return 1
+    fi
+    if ! is_empty_value "$WORDPRESS_HOSTNAME"; then
+        web_server_config_create_flags+=("--server-name" "$WORDPRESS_HOSTNAME")
     fi
 
     if ! is_boolean_yes "$WORDPRESS_ENABLE_XML_RPC"; then
