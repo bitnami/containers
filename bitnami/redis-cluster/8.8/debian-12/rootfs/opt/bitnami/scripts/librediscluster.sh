@@ -218,6 +218,18 @@ redis_cluster_update_ips() {
             printf "%s=\"%s\"\n" "$key" "${host_2_ip_array[$key]}" >> "${REDIS_DATA_DIR}/nodes.sh"
         done
     else
+        info "Updating Redis cluster IPs"
+        # Safeguard to detect old format on nodes.sh
+        if grep -q "declare -A host_2_ip_array=" "${REDIS_DATA_DIR}/nodes.sh"; then
+            # Transform the old format to the new format in a sub-shell
+            (
+                source "${REDIS_DATA_DIR}/nodes.sh"
+                for host in "${!host_2_ip_array[@]}"; do
+                    echo "${host}=\"${host_2_ip_array[$host]}\""
+                done
+            ) > "${REDIS_DATA_DIR}/nodes.sh.new"
+            mv "${REDIS_DATA_DIR}/nodes.sh.new" "${REDIS_DATA_DIR}/nodes.sh"
+        fi
         # The cluster was already started, let's read hosts and IPs from the nodes.sh file
         while IFS= read -r line || [[ -n "$line" ]]; do
             # Skip blank lines and shell comments

@@ -406,11 +406,11 @@ redis_configure_default() {
             rm "${REDIS_BASE_DIR}/etc/redis-default.conf"
         fi
         cp "${REDIS_MOUNTED_CONF_DIR}/redis.conf" "${REDIS_BASE_DIR}/etc/redis.conf"
-        chmod 600 "${REDIS_BASE_DIR}/etc/redis.conf"
+        chmod 640 "${REDIS_BASE_DIR}/etc/redis.conf"
     else
         info "Setting Redis config file"
         # We try to enforce strict permissions, but we don't fail if it's not possible
-        chmod 600 "${REDIS_BASE_DIR}/etc/redis.conf" || true
+        chmod 640 "${REDIS_BASE_DIR}/etc/redis.conf" || true
         if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
             # Allow remote connections without password
             redis_conf_set protected-mode no
