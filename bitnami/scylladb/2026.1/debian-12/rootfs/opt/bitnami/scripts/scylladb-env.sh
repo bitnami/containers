@@ -120,6 +120,8 @@ export SCYLLADB_INITSCRIPTS_BOOT_LOG_FILE="${DB_LOG_DIR}/scylladb_init_scripts_b
 export DB_INITSCRIPTS_BOOT_LOG_FILE="$SCYLLADB_INITSCRIPTS_BOOT_LOG_FILE"
 export SCYLLADB_PID_FILE="${DB_TMP_DIR}/scylladb.pid"
 export DB_PID_FILE="$SCYLLADB_PID_FILE"
+export SCYLLADB_INIT_SEMAPHORE="${DB_VOLUME_DIR}/.scylladb-init"
+export DB_INIT_SEMAPHORE="$SCYLLADB_INIT_SEMAPHORE"
 export PATH="${DB_BIN_DIR}:${BITNAMI_ROOT_DIR}/common/bin:${BITNAMI_ROOT_DIR}/python/bin:${BITNAMI_ROOT_DIR}/java/bin:$PATH"
 
 # System users (when running with a privileged user)
