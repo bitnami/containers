@@ -14,17 +14,6 @@ cassandra_validate_tls() {
         error_code=1
     }
 
-    check_empty_value() {
-        if is_empty_value "${!1}"; then
-            print_validation_error "The $1 environment variable is empty or not set."
-        fi
-    }
-
-    check_default_password() {
-        if [[ "${!1}" = "cassandra" ]]; then
-            warn "You set the environment variable $1=cassandra. This is the default value when bootstrapping ScyllaDB and should not be used in production environments."
-        fi
-    }
     if is_boolean_yes "$DB_CLIENT_ENCRYPTION" || is_boolean_yes "$DB_INTERNODE_ENCRYPTION"; then
         ! [[ -f "$DB_SSL_CERT_FILE" ]] && print_validation_error "Certificate file $DB_SSL_CERT_FILE does not exist. Please mount a certificate file in that location"
         ! [[ -f "$DB_SSL_KEY_FILE" ]] && print_validation_error "Certificate key file $DB_SSL_KEY_FILE does not exist. Please mount a certificate file in that location"
@@ -792,11 +781,10 @@ cassandra_change_cassandra_password() {
 
     if (echo "ALTER USER cassandra WITH PASSWORD \$\$${escaped_password}\$\$;" | cassandra_execute_with_retries "$retries" "$sleep_time" "$user" "$old_password"); then
         debug "ALTER USER command executed. Trying to log in"
-        # ScyllaDB uses 127.0.0.1 explicitly to keep cqlsh on the loopback interface
-        # and avoid the topology-aware reconnect to the pod IP during first-boot init.
-        local cql_host=""
-        [[ "$DB_FLAVOR" = "scylladb" ]] && cql_host="127.0.0.1"
-        wait_for_cql_access "$user" "$new_password" "$cql_host" "$retries" "$sleep_time"
+        # The CQL port is bound to loopback during first-boot credential seeding, so
+        # verify the new password over 127.0.0.1. This also keeps cqlsh on the loopback
+        # interface and avoids the topology-aware reconnect to the pod IP.
+        wait_for_cql_access "$user" "$new_password" "127.0.0.1" "$retries" "$sleep_time"
         info "Password updated successfully"
     fi
 }
@@ -927,15 +915,13 @@ cassandra_initialize() {
         am_i_root && chown -R "$DB_DAEMON_USER:$DB_DAEMON_GROUP" "$dir"
     done
 
-    if ! is_dir_empty "$DB_DATA_DIR"; then
-        info "Deploying $DB_FLAVOR with persisted data"
-    else
-        info "Deploying $DB_FLAVOR from scratch"
+    __credential_seeding() {
         if [[ "$DB_FLAVOR" = "scylladb" ]]; then
             # ScyllaDB 2025.4.5+ (PR #22532): keep cqlsh on loopback during first-boot init.
             # Otherwise, cqlsh reconnects to the pod IP (via system.local), blocked by the ensure_superuser_is_created gate.
             cassandra_start_bg "$DB_FIRST_BOOT_LOG_FILE" "" "" "--broadcast-rpc-address 127.0.0.1"
         else
+            cassandra_yaml_set "rpc_address" "127.0.0.1"
             cassandra_start_bg "$DB_FIRST_BOOT_LOG_FILE"
         fi
         if is_boolean_yes "$DB_PASSWORD_SEEDER"; then
@@ -947,10 +933,10 @@ cassandra_initialize() {
                 wait_for_superuser_log_entry "$DB_FIRST_BOOT_LOG_FILE" "$DB_PEER_CQL_MAX_RETRIES" "$DB_PEER_CQL_SLEEP_TIME"
                 wait_for_cql_access "cassandra" "cassandra" "127.0.0.1" "$DB_PEER_CQL_MAX_RETRIES" "$DB_PEER_CQL_SLEEP_TIME"
             else
-                # Check that all peers are ready
-                for peer in ${DB_PEERS//,/ }; do
-                    wait_for_cql_access "cassandra" "cassandra" "$peer" "$DB_PEER_CQL_MAX_RETRIES" "$DB_PEER_CQL_SLEEP_TIME"
-                done
+                # Wait for all peers to be ready before changing the password
+                wait_for_peers_ready "$DB_PEERS" "$DB_PEER_CQL_MAX_RETRIES" "$DB_PEER_CQL_SLEEP_TIME"
+                # Ensure the local auth subsystem is ready (over loopback) before altering it.
+                wait_for_cql_access "cassandra" "cassandra" "127.0.0.1" "$DB_PEER_CQL_MAX_RETRIES" "$DB_PEER_CQL_SLEEP_TIME"
             fi
             # Setup user
             if [[ "$DB_USER" = "cassandra" ]]; then
@@ -960,19 +946,23 @@ cassandra_initialize() {
             fi
 
             cassandra_execute_startup_cql
+            touch "$CASSANDRA_INIT_SEMAPHORE"
         else
             info "Non-seeder node. Waiting for synchronization"
-            # ScyllaDB uses 127.0.0.1 explicitly to keep cqlsh on the loopback interface
-            # and avoid the topology-aware reconnect to the pod IP during first-boot init.
-            local cql_host=""
-            [[ "$DB_FLAVOR" = "scylladb" ]] && cql_host="127.0.0.1"
-            wait_for_cql_access "$DB_USER" "$DB_PASSWORD" "$cql_host" "$DB_PEER_CQL_MAX_RETRIES" "$DB_PEER_CQL_SLEEP_TIME"
+            wait_for_cql_access "$DB_USER" "$DB_PASSWORD" "127.0.0.1" "$DB_PEER_CQL_MAX_RETRIES" "$DB_PEER_CQL_SLEEP_TIME"
         fi
-        # ScyllaDB is started with '--broadcast-rpc-address 127.0.0.1' for init only;
-        # stop it so the entrypoint can start it cleanly with the real address.
-        if [[ "$DB_FLAVOR" = "scylladb" ]]; then
-            cassandra_stop
-        fi
+        cassandra_stop
+        [[ "$DB_FLAVOR" = "cassandra" && "$DB_ENABLE_REMOTE_CONNECTIONS" = "true" ]] && cassandra_yaml_set "rpc_address" "0.0.0.0"
+    }
+
+    if is_dir_empty "$DB_DATA_DIR"; then
+        info "Deploying $DB_FLAVOR from scratch"
+        __credential_seeding
+    elif [[ ! -f "$CASSANDRA_INIT_SEMAPHORE" ]] && is_boolean_yes "$DB_PASSWORD_SEEDER"; then
+        warn "The init semaphore is absent: the seed pod was interrupted between start and credential seeding. Re-running seeding against the persisted data."
+        __credential_seeding
+    else
+        info "Deploying $DB_FLAVOR with persisted data"
     fi
 }
 
@@ -1293,6 +1283,55 @@ wait_for_cql_access() {
         error "Could not access CQL server"
         exit 1
     fi
+}
+
+########################
+# Wait until all cluster peers report Up/Normal (UN) via gossip (nodetool status)
+# This is used during first-boot credential seeding instead of connecting to each
+# peer over CQL with the default credentials, which would require exposing the
+# default superuser on the network.
+# Globals:
+#   BITNAMI_DEBUG
+#   DB_*
+# Arguments:
+#   1 - Comma/space separated list of peers (default: $DB_PEERS)
+#   2 - Maximum number of retries (default: $DB_PEER_CQL_MAX_RETRIES)
+#   3 - Sleep time between retries (default: $DB_PEER_CQL_SLEEP_TIME)
+# Returns:
+#   None
+#########################
+wait_for_peers_ready() {
+    local -r peers="${1:-$DB_PEERS}"
+    local -r retries="${2:-$DB_PEER_CQL_MAX_RETRIES}"
+    local -r sleep_time="${3:-$DB_PEER_CQL_SLEEP_TIME}"
+
+    local peer peer_ip
+    for peer in ${peers//,/ }; do
+        peer_ip="$(dns_lookup "$peer" "v4")"
+        [[ -z "$peer_ip" ]] && peer_ip="$peer"
+        info "Waiting for peer $peer to reach Up/Normal (UN) status"
+
+        check_peer_un() {
+            # Using legacy RMI URL parsing to avoid URISyntaxException: 'Malformed IPv6 address at index 7: rmi://[127.0.0.1]:7199' error
+            # https://community.datastax.com/questions/13764/java-version-for-cassandra-3113.html
+            local -r check_cmd=("nodetool" "-Dcom.sun.jndi.rmiURLParsing=legacy")
+            local -r check_args=("status" "--port" "$DB_JMX_PORT_NUMBER")
+            local -r check_regex="UN\s*(${peer}|${peer_ip})"
+
+            local output="/dev/null"
+            if [[ "$BITNAMI_DEBUG" = "true" ]]; then
+                output="/dev/stdout"
+            fi
+
+            "${check_cmd[@]}" "${check_args[@]}" | grep -E "${check_regex}" >"${output}"
+        }
+
+        if ! retry_while check_peer_un "$retries" "$sleep_time"; then
+            error "Peer $peer did not reach Up/Normal (UN) status"
+            exit 1
+        fi
+    done
+    info "All peers reached Up/Normal (UN) status"
 }
 
 ########################

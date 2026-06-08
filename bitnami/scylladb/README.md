@@ -155,6 +155,7 @@ The following tables list the main variables you can set.
 | `SCYLLADB_FIRST_BOOT_LOG_FILE`       | Path to the ScyllaDB first boot log file                                       | `${DB_LOG_DIR}/scylladb_first_boot.log`                          |
 | `SCYLLADB_INITSCRIPTS_BOOT_LOG_FILE` | Path to the ScyllaDB init scripts log file                                     | `${DB_LOG_DIR}/scylladb_init_scripts_boot.log`                   |
 | `SCYLLADB_PID_FILE`                  | Path to the ScyllaDB pid file                                                  | `${DB_TMP_DIR}/scylladb.pid`                                     |
+| `SCYLLADB_INIT_SEMAPHORE`            | Path to the ScyllaDB init semaphore file                                       | `${DB_VOLUME_DIR}/.scylladb-init`                                |
 | `SCYLLADB_DAEMON_USER`               | ScyllaDB system user                                                           | `scylladb`                                                       |
 | `SCYLLADB_DAEMON_GROUP`              | ScyllaDB system group                                                          | `scylladb`                                                       |
 | `SCYLLADB_CONF_DIR`                  | ScyllaDB configuration directory                                               | `${DB_BASE_DIR}/etc`                                             |
