@@ -263,12 +263,6 @@ mysql_execute_print_output() {
     fi
     args+=("-N" "-u" "$user")
     [[ -n "$db" ]] && args+=("$db")
-    # Avoid passing credentials as arguments to mysql, to avoid leaking them given a local observer with /proc read access can read them
-    if [[ -n "$pass" ]]; then
-        local pass_file
-        pass_file="$(credential_to_temp_file "$pass")"
-        args+=("-p$(<"$pass_file")")
-    fi
     [[ "${#opts[@]}" -gt 0 ]] && args+=("${opts[@]}")
     [[ "${#extra_opts[@]}" -gt 0 ]] && args+=("${extra_opts[@]}")
 
@@ -276,11 +270,19 @@ mysql_execute_print_output() {
     if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
         local mysql_cmd
         mysql_cmd="$(</dev/stdin)"
-        "$(mysql_binary)" "${args[@]}" <<<"$mysql_cmd"
+        if [[ -n "$pass" ]]; then
+            MYSQL_PWD="$pass" "$(mysql_binary)" "${args[@]}" <<<"$mysql_cmd"
+        else
+            "$(mysql_binary)" "${args[@]}" <<<"$mysql_cmd"
+        fi
     else
         # Do not store the command(s) as a variable, to avoid issues when importing large files
         # https://github.com/bitnami/bitnami-docker-mariadb/issues/251
-        "$(mysql_binary)" "${args[@]}"
+        if [[ -n "$pass" ]]; then
+            MYSQL_PWD="$pass" "$(mysql_binary)" "${args[@]}"
+        else
+            "$(mysql_binary)" "${args[@]}"
+        fi
     fi
 }
 
@@ -992,13 +994,10 @@ mysql_healthcheck() {
 
     root_password="$(get_master_env_var_value ROOT_PASSWORD)"
     if [[ -n "$root_password" ]]; then
-        # Avoid passing credentials as arguments to mysqladmin, to avoid leaking them given a local observer with /proc read access can read them
-        local root_password_file
-        root_password_file="$(credential_to_temp_file "$root_password")"
-        args+=("-p$(<"$root_password_file")")
+        MYSQL_PWD="$root_password" mysqladmin "${args[@]}" ping && MYSQL_PWD="$root_password" mysqladmin "${args[@]}" status
+    else
+        mysqladmin "${args[@]}" ping && mysqladmin "${args[@]}" status
     fi
-
-    mysqladmin "${args[@]}" ping && mysqladmin "${args[@]}" status
 }
 
 ########################
