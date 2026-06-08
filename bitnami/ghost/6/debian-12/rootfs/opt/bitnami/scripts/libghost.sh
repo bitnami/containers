@@ -327,17 +327,15 @@ ghost_initialize() {
             ghost_pass_wizard
             mv "$GHOST_LOG_FILE" "${GHOST_BASE_DIR}/content/logs/ghost.setup.log"
             # After passing the wizard, we can bind to 0.0.0.0
-            if am_i_root; then
-                debug_execute run_as_user "$GHOST_DAEMON_USER" ghost setup "--ip" "0.0.0.0"
-            else
-                debug_execute ghost setup "--ip" "0.0.0.0"
-            fi
+            ghost_conf_set "server.host" "0.0.0.0"
         else
             info "An already initialized Ghost database was provided, configuration will be skipped"
         fi
 
         info "Persisting Ghost installation"
         persist_app "$app_name" "$GHOST_DATA_TO_PERSIST"
+        # After passing the wizard and persisting the app, we can restrict permissions on content directory
+        configure_permissions_ownership "${GHOST_VOLUME_DIR}/content" -d "775" -f "664"
     else
         info "Restoring persisted Ghost installation"
         restore_persisted_app "$app_name" "$GHOST_DATA_TO_PERSIST"
