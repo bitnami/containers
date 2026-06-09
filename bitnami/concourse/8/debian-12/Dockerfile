@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-06-05T07:56:59Z" \
+      org.opencontainers.image.created="2026-06-09T15:03:44Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/concourse/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/concourse" \
@@ -22,7 +22,7 @@ ENV OS_ARCH="${TARGETARCH:-amd64}" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl erofs-utils iproute2 iptables libseccomp2 procps
+RUN install_packages ca-certificates curl erofs-utils iproute2 iptables libseccomp2 perl procps
 RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
@@ -47,7 +47,7 @@ RUN update-alternatives --set iptables /usr/sbin/iptables-legacy && \
 
 ENV APP_VERSION="8.2.3" \
     BITNAMI_APP_NAME="concourse" \
-    IMAGE_REVISION="3" \
+    IMAGE_REVISION="4" \
     PATH="/opt/bitnami/concourse/bin:$PATH"
 
 CMD [ "/opt/bitnami/concourse/bin/concourse", "--help" ]
