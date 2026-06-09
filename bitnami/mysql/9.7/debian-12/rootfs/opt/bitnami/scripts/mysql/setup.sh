@@ -21,7 +21,7 @@ set -o pipefail
 rm -rf "${DB_SOCKET_FILE}.lock"
 # Ensure MySQL environment variables settings are valid
 mysql_validate
-# Ensure MySQL is stopped when this script ends.
+# Ensure MySQL is stopped when this script ends
 trap "mysql_stop" EXIT
 if am_i_root; then
     # Ensure 'daemon' user exists when running as 'root'
