@@ -78,6 +78,10 @@ moodle_validate() {
         is_empty_value "${MOODLE_DATABASE_PASSWORD}" && print_validation_error "The MOODLE_DATABASE_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow a blank password. This is only recommended for development environments."
     fi
 
+    if is_empty_value "$MOODLE_HOST"; then
+        warn "MOODLE_HOST is not set, wwwroot will be constructed based on HTTP_HOST header which opens up vulnerability to password-reset poisoning attacks. Do not leave this variable empty in production environments."
+    fi
+
     # Validate SMTP credentials
     if ! is_empty_value "$MOODLE_SMTP_HOST"; then
         for empty_env_var in "MOODLE_SMTP_USER" "MOODLE_SMTP_PASSWORD"; do
@@ -161,7 +165,7 @@ moodle_initialize() {
             [[ "$db_type" = "pgsql" ]] && db_remote_execute="postgresql_remote_execute"
             local -a db_execute_args=("$db_host" "$db_port" "$db_name" "$db_user" "$db_pass")
             # Configure no-reply e-mail address for SMTP
-	    echo "INSERT INTO ${mdl_prefix}config (name, value) VALUES ('noreplyaddress', '${MOODLE_EMAIL}')" | "$db_remote_execute" "${db_execute_args[@]}"
+            echo "INSERT INTO ${mdl_prefix}config (name, value) VALUES ('noreplyaddress', '${MOODLE_EMAIL}')" | "$db_remote_execute" "${db_execute_args[@]}"
             # Additional Bitnami customizations
             echo "UPDATE ${mdl_prefix}course SET summary='Moodle powered by Bitnami' WHERE id='1'" | "$db_remote_execute" "${db_execute_args[@]}"
             # SMTP configuration
@@ -183,10 +187,12 @@ EOF
             info "Running database upgrade"
             moodle_upgrade
         fi
-        # Change wwwroot configuration so the Moodle site can be accessible from anywhere
+        # Change wwwroot configuration
         moodle_configure_wwwroot
         # Turn on Moodle's reverseproxy (also sslproxy if using ssl) so we can use the reverse proxy
-        moodle_configure_reverseproxy
+        if is_boolean_yes "$MOODLE_REVERSEPROXY" || is_boolean_yes "$MOODLE_SSLPROXY"; then
+            moodle_configure_reverseproxy
+        fi
 
         info "Persisting Moodle installation"
         persist_app "$app_name" "$MOODLE_DATA_TO_PERSIST"
@@ -336,7 +342,7 @@ moodle_install() {
     if am_i_root; then
         debug_execute run_as_user "$WEB_SERVER_DAEMON_USER" "${moodle_install_args[@]}"
         # Remove write permissions for the web server to the config.php file
-        configure_permissions_ownership "$MOODLE_CONF_FILE" -f "644" -u "root" -g "$WEB_SERVER_DAEMON_GROUP"
+        configure_permissions_ownership "$MOODLE_CONF_FILE" -f "640" -u "root" -g "$WEB_SERVER_DAEMON_GROUP"
     else
         debug_execute "${moodle_install_args[@]}"
     fi
