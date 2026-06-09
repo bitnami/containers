@@ -62,7 +62,7 @@ The following tables list the main variables you can set.
 | `MASTODON_ADMIN_USERNAME`            | Mastodon admin username.                                              | `user`                                                                         |
 | `MASTODON_ADMIN_PASSWORD`            | Mastodon admin password.                                              | `nil`                                                                          |
 | `MASTODON_ADMIN_EMAIL`               | Mastodon admin email.                                                 | `user@bitnami.org`                                                             |
-| `MASTODON_ALLOW_ALL_DOMAINS`         | Allow accessing Mastodon with any domain.                             | `true`                                                                         |
+| `MASTODON_ALLOW_ALL_DOMAINS`         | Allow accessing Mastodon with any domain.                             | `false`                                                                        |
 | `MASTODON_SECRET_KEY_BASE`           | Mastodon secret key base.                                             | `nil`                                                                          |
 | `MASTODON_OTP_SECRET`                | Mastodon OTP secret.                                                  | `nil`                                                                          |
 | `MASTODON_HTTPS_ENABLED`             | Enable HTTPS in Mastodon.                                             | `false`                                                                        |

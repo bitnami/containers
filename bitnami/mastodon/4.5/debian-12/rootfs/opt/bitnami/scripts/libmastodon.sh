@@ -141,6 +141,9 @@ mastodon_validate() {
     check_valid_port "MASTODON_REDIS_PORT_NUMBER"
 
     check_true_false "MASTODON_ALLOW_ALL_DOMAINS"
+    if is_boolean_yes "$MASTODON_ALLOW_ALL_DOMAINS"; then
+        warn "MASTODON_ALLOW_ALL_DOMAINS is set to true which opens up vulnerability to password-reset poisoning attacks. This is not recommended for production environments."
+    fi
     return "$error_code"
 }
 
@@ -254,7 +257,7 @@ mastodon_ensure_admin_user_exists() {
         # encrypted_password field set and then we proceed to reset the password
         # https://github.com/mastodon/mastodon/blob/main/app/models/user.rb#L374
         mastodon_console_execute <<EOF
-user = User.find(1)
+user = User.find_by!(email: '${MASTODON_ADMIN_EMAIL}')
 user.reset_password!
 user.reset_password('${MASTODON_ADMIN_PASSWORD}', '${MASTODON_ADMIN_PASSWORD}')
 EOF
