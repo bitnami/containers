@@ -588,14 +588,15 @@ nginx_update_app_configuration() {
     rename_conf_file() {
         local -r origin="$1"
         local -r destination="$2"
-        if is_file_writable "$origin" && is_file_writable "$destination"; then
-            warn "Could not rename server block file '${origin}' to '${destination}' due to lack of permissions."
-        else
-            mv "$origin" "$destination"
+        if ! is_file_writable "$origin" || ! is_file_writable "$destination"; then
+            warn "Could not rename server block file '${origin}' to '${destination}': lack of permissions."
+            return 1
         fi
+        mv "$origin" "$destination"
     }
-    is_boolean_yes "$disable_http" && [[ -e "$http_server_block" ]] && rename_conf_file "${http_server_block}${disable_suffix}" "$http_server_block"
-    is_boolean_yes "$disable_https" && [[ -e "$https_server_block" ]] && rename_conf_file "${https_server_block}${disable_suffix}" "$https_server_block"
+    local -r disable_suffix=".disabled"
+    is_boolean_yes "$disable_http" && [[ -e "$http_server_block" ]] && rename_conf_file "${http_server_block}" "${http_server_block}${disable_suffix}"
+    is_boolean_yes "$disable_https" && [[ -e "$https_server_block" ]] && rename_conf_file "$https_server_block" "${https_server_block}${disable_suffix}"
     is_boolean_yes "$enable_http" && [[ -e "${http_server_block}${disable_suffix}" ]] && rename_conf_file "${http_server_block}${disable_suffix}" "$http_server_block"
     is_boolean_yes "$enable_https" && [[ -e "${https_server_block}${disable_suffix}" ]] && rename_conf_file "${https_server_block}${disable_suffix}" "$https_server_block"
     # Update only configuration files without the '.disabled' suffix
