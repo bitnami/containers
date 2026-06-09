@@ -232,6 +232,8 @@ gitea_update_conf_file() {
     gitea_conf_set "log" "ROOT_PATH" "$GITEA_LOG_ROOT_PATH"
     gitea_conf_set "repository" "ROOT" "$GITEA_REPO_ROOT_PATH"
     gitea_conf_set "security" "PASSWORD_HASH_ALGO" "$GITEA_PASSWORD_HASH_ALGO"
+    gitea_conf_set "security" "REVERSE_PROXY_LIMIT" "$GITEA_REVERSE_PROXY_LIMIT"
+    ! is_empty_value "$GITEA_REVERSE_PROXY_TRUSTED_PROXIES" && gitea_conf_set "security" "REVERSE_PROXY_TRUSTED_PROXIES" "$GITEA_REVERSE_PROXY_TRUSTED_PROXIES"
 
     gitea_conf_set "mailer" "ENABLED" "$GITEA_SMTP_ENABLED"
     is_empty_value "$GITEA_SMTP_HOST" || gitea_conf_set "mailer" "SMTP_ADDR" "$GITEA_SMTP_HOST"
