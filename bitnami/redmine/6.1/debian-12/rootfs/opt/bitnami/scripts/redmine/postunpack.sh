@@ -51,5 +51,8 @@ for dir in "${writable_dirs[@]}"; do
 done
 
 # Required for running as non-root users, for persistence logic to work properly
-# Using g+rwx/g+rw instead of explicit 775/664 permissions because Redmine includes executable binaries in different subfolders
-configure_permissions_ownership "$REDMINE_BASE_DIR" -d "g+rwx" -f "g+rw" -u "$REDMINE_DAEMON_USER" -g "root"
+# Using g+rx/g+r instead of explicit 755/644 permissions because Redmine includes executable binaries in different subfolders
+configure_permissions_ownership "$REDMINE_BASE_DIR" -d "g+rx" -f "g+r" -u "$REDMINE_DAEMON_USER" -g "root"
+# config/initializers/ is auto-loaded by Rails on startup — writing there is equivalent to writing application code
+# so we need to restrict write permissions on this directory
+configure_permissions_ownership "${REDMINE_BASE_DIR}/config/initializers" -d "750" -f "640" -u "$REDMINE_DAEMON_USER" -g "root"
