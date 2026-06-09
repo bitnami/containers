@@ -183,7 +183,7 @@ keycloak_initialize() {
 #   None
 #########################
 keycloak_custom_init_scripts() {
-    if [[ -n $(find "${KEYCLOAK_INITSCRIPTS_DIR}/" -type f -regex ".*\.sh") ]] && [[ ! -f "${KEYCLOAK_INITSCRIPTS_DIR}/.user_scripts_initialized" ]]; then
+    if [[ -n $(find "${KEYCLOAK_INITSCRIPTS_DIR}/" -type f -regex ".*\.sh") ]] && [[ ! -f "${KEYCLOAK_VOLUME_DIR}/.user_scripts_initialized" ]]; then
         info "Loading user's custom files from ${KEYCLOAK_INITSCRIPTS_DIR} ..."
         local -r tmp_file="/tmp/filelist"
         find "${KEYCLOAK_INITSCRIPTS_DIR}/" -type f -regex ".*\.sh" | sort >"$tmp_file"
