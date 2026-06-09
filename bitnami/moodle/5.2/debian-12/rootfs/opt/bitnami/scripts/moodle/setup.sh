@@ -42,7 +42,9 @@ fi
 moodle_validate
 
 # Update web server configuration with runtime environment (needs to happen before the initialization)
-web_server_update_app_configuration "moodle"
+web_server_update_app_configuration_flags=("moodle")
+! is_empty_value "$MOODLE_HOST" && web_server_update_app_configuration_flags+=("--server-name" "$MOODLE_HOST")
+web_server_update_app_configuration "${web_server_update_app_configuration_flags[@]}"
 
 # Ensure Moodle is initialized
 moodle_initialize
