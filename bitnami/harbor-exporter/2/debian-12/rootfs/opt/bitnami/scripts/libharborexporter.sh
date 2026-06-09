@@ -84,6 +84,9 @@ harbor_exporter_validate() {
 
     check_resolved_hostname "$HARBOR_DATABASE_HOST"
     check_valid_port "HARBOR_DATABASE_PORT"
+    if [[ "$HARBOR_DATABASE_SSLMODE" = "disable" ]]; then
+        warn "HARBOR_DATABASE_SSLMODE is set to 'disable'. This is not recommended for production environments."
+    fi
 
     check_multi_value "HARBOR_SERVICE_SCHEME" "http https"
     check_resolved_hostname "$HARBOR_SERVICE_HOST"
