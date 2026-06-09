@@ -225,7 +225,7 @@ neo4j_initialize() {
 
     if ! [[ -f "${NEO4J_MOUNTED_CONF_DIR}/apoc.conf" ]]; then
         ## Apoc plugin configuration
-        ## Source: https://neo4j.com/labs/apoc/4.2/config/
+        ## Source: https://neo4j.com/labs/apoc/2026/config
         neo4j_conf_set "apoc.import.file.enabled" "$NEO4J_APOC_IMPORT_FILE_ENABLED" "$NEO4J_APOC_CONF_FILE"
         neo4j_conf_set "apoc.import.file.use_neo4j_config" "$NEO4J_APOC_IMPORT_FILE_USE_NEO4J_CONFIG" "$NEO4J_APOC_CONF_FILE"
     else
@@ -258,7 +258,7 @@ neo4j_initialize() {
 #   None
 #########################
 neo4j_custom_init_scripts() {
-    if [[ -n $(find "${NEO4J_INITSCRIPTS_DIR}/" -type f -regex ".*\.sh") ]] && [[ ! -f "${NEO4J_INITSCRIPTS_DIR}/.user_scripts_initialized" ]]; then
+    if [[ -n $(find "${NEO4J_INITSCRIPTS_DIR}/" -type f -regex ".*\.sh") ]] && [[ ! -f "${NEO4J_VOLUME_DIR}/.user_scripts_initialized" ]]; then
         info "Loading user's custom files from ${NEO4J_INITSCRIPTS_DIR} ..."
         local -r tmp_file="/tmp/filelist"
         find "${NEO4J_INITSCRIPTS_DIR}/" -type f -regex ".*\.sh" | sort >"$tmp_file"
@@ -277,7 +277,7 @@ neo4j_custom_init_scripts() {
             esac
         done <$tmp_file
         rm -f "$tmp_file"
-        touch "$NEO4J_VOLUME_DIR"/.user_scripts_initialized
+        touch "${NEO4J_VOLUME_DIR}/.user_scripts_initialized"
     fi
 }
 
