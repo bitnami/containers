@@ -31,8 +31,8 @@ list_db = {{list_db}}
 ; https://www.odoo.com/es_ES/forum/ayuda-1/could-not-obtain-lock-on-row-in-relation-ir-cron-74519
 max_cron_threads = 1
 pidfile = {{ODOO_PID_FILE}}
-; Odoo will always be running behind a proxy (e.g. Docker or Apache)
-proxy_mode = True
+; Set ODOO_ENABLE_PROXY_MODE=yes when Odoo runs behind a trusted reverse proxy
+proxy_mode = {{proxy_mode}}
 ; osv_memory_age_limit = 1.0
 ; osv_memory_count_limit = False
 ; pg_path =

@@ -141,7 +141,10 @@ odoo_initialize() {
         list_db="$(is_boolean_yes "$ODOO_LIST_DB" && echo 'True' || echo 'False')" \
             odoo_debug="$(is_boolean_yes "$BITNAMI_DEBUG" && echo 'True' || echo 'False')" \
             event_port_parameter="$event_port_parameter" \
+            proxy_mode="$(is_boolean_yes "$ODOO_ENABLE_PROXY_MODE" && echo 'True' || echo 'False')" \
             render-template "${template_dir}/odoo.conf.tpl" > "$ODOO_CONF_FILE"
+        # No read access for others, creds are present in the config file
+        am_i_root && configure_permissions_ownership "$ODOO_CONF_FILE" -u "$ODOO_DAEMON_USER" -g "root" -f "660"
 
         if ! is_empty_value "$ODOO_SMTP_HOST"; then
             info "Configuring SMTP"
