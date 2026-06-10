@@ -200,6 +200,8 @@ The following tables list the main variables you can set.
 | `REPMGR_PASSWORD`                          | Replication manager password                                                                         | `nil`                                   |
 | `REPMGR_USE_PASSFILE`                      | Use PGPASSFILE instead of PGPASSWORD                                                                 | `yes`                                   |
 | `REPMGR_PASSFILE_PATH`                     | Path to store passfile                                                                               | `$REPMGR_CONF_DIR/.pgpass`              |
+| `REPMGR_SSL_MODE`                          | SSL mode for repmgr clone / pg_rewind connections                                                    | `prefer`                                |
+| `REPMGR_SSL_CA_FILE`                       | Path to CA certificate to use to validate SSL connections                                            | `nil`                                   |
 | `PGCONNECT_TIMEOUT`                        | PostgreSQL connection timeout                                                                        | `10`                                    |
 
 #### Read-only environment variables
