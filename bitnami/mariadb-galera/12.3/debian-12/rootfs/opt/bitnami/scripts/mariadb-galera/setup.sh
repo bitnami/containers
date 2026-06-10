@@ -10,7 +10,6 @@ set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
-. /opt/bitnami/scripts/libfile.sh
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libmariadbgalera.sh
@@ -26,8 +25,8 @@ eval "$(ldap_env)"
 rm -rf "${DB_SOCKET_FILE}.lock"
 # Ensure MariaDB environment variables settings are valid
 mysql_validate
-# Ensure MariaDB is stopped when this script ends and we clean up temporary files
-trap "mysql_stop; cleanup_credentials" EXIT
+# Ensure MariaDB is stopped when this script ends
+trap "mysql_stop" EXIT
 if am_i_root; then
     # Ensure 'daemon' user exists when running as 'root'
     ensure_user_exists "$DB_DAEMON_USER" --group "$DB_DAEMON_GROUP"

@@ -10,12 +10,9 @@ set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
-. /opt/bitnami/scripts/libfile.sh
 . /opt/bitnami/scripts/libmariadbgalera.sh
 
 # Load MariaDB environment variables
 . /opt/bitnami/scripts/mariadb-env.sh
 
-# Ensure we clean up temporary files when this script ends
-trap "cleanup_credentials" EXIT
 mysql_healthcheck
