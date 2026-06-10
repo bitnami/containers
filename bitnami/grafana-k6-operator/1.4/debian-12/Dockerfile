@@ -40,7 +40,7 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2026-06-10T15:13:09Z" \
+      org.opencontainers.image.created="2026-06-10T17:50:15Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="grafana-k6-operator" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
