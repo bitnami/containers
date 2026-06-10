@@ -315,7 +315,7 @@ create user '$user'@'%' $([ "$password" != "" ] && echo "identified by \"$passwo
 EOF
 
     mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
-grant REPLICATION SLAVE on *.* to '$user'@'%' with grant option;
+grant REPLICATION SLAVE on *.* to '$user'@'%';
 flush privileges;
 EOF
 }
