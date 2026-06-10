@@ -3,11 +3,11 @@
 
 FROM docker.io/bitnami/minideb:bookworm
 
-ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
+ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-06-02T23:09:19Z" \
+      org.opencontainers.image.created="2026-06-10T16:21:07Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/harbor-registry/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/harbor-registry" \
@@ -28,11 +28,11 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "harbor-registry-2.15.1-1-linux-${OS_ARCH}-debian-12" \
+      "harbor-registry-2.15.1-2-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
-        curl -SsLf "https://${DOWNLOADS_URL}/${COMPONENT}.tar.gz" -O ; \
+        curl -SsLf "${DOWNLOADS_URL}/${COMPONENT}.tar.gz" -O ; \
       fi ; \
       sha256sum -c "/opt/bitnami/checksums/${COMPONENT}.tar.gz.sha256" ; \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner ; \
@@ -49,7 +49,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-registry/postunpack.sh
 ENV APP_VERSION="2.15.1" \
     BITNAMI_APP_NAME="harbor-registry" \
-    IMAGE_REVISION="4" \
+    IMAGE_REVISION="5" \
     PATH="/opt/bitnami/harbor-registry/bin:$PATH"
 
 VOLUME [ "/etc/registry", "/storage", "/var/lib/registry" ]
