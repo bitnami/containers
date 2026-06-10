@@ -162,6 +162,10 @@ repmgr_validate() {
         print_validation_error "The allowed values for REPMGR_FAILOVER are: automatic or manual."
     fi
 
+    if [[ -z "$REPMGR_SSL_CA_FILE" ]] && [[ "$REPMGR_SSL_MODE" =~ ^(verify-ca|verify-full)$ ]]; then
+        print_validation_error "The environment variable REPMGR_SSL_CA_FILE is required when REPMGR_SSL_MODE is set to 'verify-ca' or 'verify-full'."
+    fi
+
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
@@ -663,8 +667,11 @@ repmgr_clone_primary() {
     fi
 
     info "Cloning data from primary node..."
-    local -r flags=("-f" "$REPMGR_CONF_FILE" "-h" "$REPMGR_CURRENT_PRIMARY_HOST" "-p" "$REPMGR_CURRENT_PRIMARY_PORT" "-U" "$REPMGR_USERNAME" "-d" "dbname=$REPMGR_DATABASE host=$REPMGR_CURRENT_PRIMARY_HOST port=$REPMGR_CURRENT_PRIMARY_PORT connect_timeout=$REPMGR_CONNECT_TIMEOUT" "-D" "$POSTGRESQL_DATA_DIR" "standby" "clone" "--fast-checkpoint" "--force")
-
+    local ssl_connstr="sslmode=${REPMGR_SSL_MODE}"
+    if [[ -f "${REPMGR_SSL_CA_FILE:-}" ]]; then
+        ssl_connstr+=" sslrootcert=${REPMGR_SSL_CA_FILE}"
+    fi
+    local -r flags=("-f" "$REPMGR_CONF_FILE" "-h" "$REPMGR_CURRENT_PRIMARY_HOST" "-p" "$REPMGR_CURRENT_PRIMARY_PORT" "-U" "$REPMGR_USERNAME" "-d" "dbname=$REPMGR_DATABASE host=$REPMGR_CURRENT_PRIMARY_HOST port=$REPMGR_CURRENT_PRIMARY_PORT connect_timeout=$REPMGR_CONNECT_TIMEOUT ${ssl_connstr}" "-D" "$POSTGRESQL_DATA_DIR" "standby" "clone" "--fast-checkpoint" "--force")
     if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
         PGPASSFILE="$REPMGR_PASSFILE_PATH" repmgr_execute "${flags[@]}"
     else
@@ -683,7 +690,11 @@ repmgr_clone_primary() {
 #########################
 repmgr_pgrewind() {
     info "Running pg_rewind data to primary node..."
-    local -r flags=("-D" "$POSTGRESQL_DATA_DIR" "--source-server" "host=${REPMGR_CURRENT_PRIMARY_HOST} port=${REPMGR_CURRENT_PRIMARY_PORT} user=${REPMGR_USERNAME} dbname=${REPMGR_DATABASE}")
+    local ssl_connstr="sslmode=${REPMGR_SSL_MODE}"
+    if [[ -f "${REPMGR_SSL_CA_FILE:-}" ]]; then
+        ssl_connstr+=" sslrootcert=${REPMGR_SSL_CA_FILE}"
+    fi
+    local -r flags=("-D" "$POSTGRESQL_DATA_DIR" "--source-server" "host=${REPMGR_CURRENT_PRIMARY_HOST} port=${REPMGR_CURRENT_PRIMARY_PORT} user=${REPMGR_USERNAME} dbname=${REPMGR_DATABASE} ${ssl_connstr}")
 
     if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
         PGPASSFILE="$REPMGR_PASSFILE_PATH" debug_execute "${POSTGRESQL_BIN_DIR}/pg_rewind" "${flags[@]}"
