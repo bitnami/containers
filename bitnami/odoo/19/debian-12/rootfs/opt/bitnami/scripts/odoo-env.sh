@@ -31,6 +31,7 @@ odoo_env_vars=(
     ODOO_SKIP_MODULES_UPDATE
     ODOO_LOAD_DEMO_DATA
     ODOO_LIST_DB
+    ODOO_ENABLE_PROXY_MODE
     ODOO_EMAIL
     ODOO_PASSWORD
     ODOO_SMTP_HOST
@@ -97,6 +98,7 @@ export ODOO_SKIP_BOOTSTRAP="${ODOO_SKIP_BOOTSTRAP:-no}" # only used during the f
 export ODOO_SKIP_MODULES_UPDATE="${ODOO_SKIP_MODULES_UPDATE:-no}" # only used during the first initialization
 export ODOO_LOAD_DEMO_DATA="${ODOO_LOAD_DEMO_DATA:-no}" # only used during the first initialization
 export ODOO_LIST_DB="${ODOO_LIST_DB:-no}" # only used during the first initialization
+export ODOO_ENABLE_PROXY_MODE="${ODOO_ENABLE_PROXY_MODE:-no}" # only used during the first initialization
 
 # Odoo credentials
 export ODOO_EMAIL="${ODOO_EMAIL:-user@example.com}" # only used during the first initialization
