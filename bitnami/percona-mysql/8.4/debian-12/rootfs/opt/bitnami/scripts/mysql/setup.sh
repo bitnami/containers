@@ -21,8 +21,8 @@ set -o pipefail
 rm -rf "${DB_SOCKET_FILE}.lock"
 # Ensure Percona Server for MySQL environment variables settings are valid
 mysql_validate
-# Ensure Percona Server for MySQL is stopped when this script ends and we clean up temporary files
-trap "mysql_stop; cleanup_credentials" EXIT
+# Ensure Percona Server for MySQL is stopped when this script ends
+trap "mysql_stop" EXIT
 if am_i_root; then
     # Ensure 'daemon' user exists when running as 'root'
     ensure_user_exists "$DB_DAEMON_USER" --group "$DB_DAEMON_GROUP"
