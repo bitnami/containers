@@ -14,6 +14,15 @@
 . /opt/bitnami/scripts/libservice.sh
 . /opt/bitnami/scripts/libvalidations.sh
 
+
+# Helper function to create a PBKDF2-SHA512 password hash
+slappasswd_pbkdf2() {
+    slappasswd -n -T /dev/stdin \
+        -h '{PBKDF2-SHA512}' \
+        -o module-load=pw-pbkdf2 \
+        -o module-path=/opt/bitnami/openldap/libexec/openldap
+}
+
 ########################
 # Load global variables used on OpenLDAP configuration
 # Globals:
@@ -114,12 +123,13 @@ for env_var in "${ldap_env_vars[@]}"; do
         fi
     fi
 done
-unset ldap_env_vars
-
 # Setting encrypted admin passwords
-export LDAP_ENCRYPTED_ADMIN_PASSWORD="$(echo -n $LDAP_ADMIN_PASSWORD | slappasswd -n -T /dev/stdin)"
-export LDAP_ENCRYPTED_CONFIG_ADMIN_PASSWORD="$(echo -n $LDAP_CONFIG_ADMIN_PASSWORD | slappasswd -n -T /dev/stdin)"
-export LDAP_ENCRYPTED_ACCESSLOG_ADMIN_PASSWORD="$(echo -n $LDAP_ACCESSLOG_ADMIN_PASSWORD | slappasswd -n -T /dev/stdin)"
+for env_var in "${ldap_env_vars[@]}"; do
+    if [[ -n "${!env_var:-}" ]]; then
+        export "${env_var}_ENCRYPTED=$(printf '%s' "${!env_var}" | slappasswd_pbkdf2)"
+    fi
+done
+unset ldap_env_vars
 EOF
 }
 
@@ -257,7 +267,7 @@ is_ldap_ready() {
 ldap_start_bg() {
     local -r retries="${1:-12}"
     local -r sleep_time="${2:-1}"
-    local -a flags=("-h" "ldap://:${LDAP_PORT_NUMBER}/ ldapi:/// " "-F" "${LDAP_CONF_DIR}/slapd.d" "-d" "$LDAP_LOGLEVEL")
+    local -a flags=("-h" "ldapi:/// " "-F" "${LDAP_CONF_DIR}/slapd.d" "-d" "$LDAP_LOGLEVEL")
 
     if is_ldap_not_running; then
         info "Starting OpenLDAP server in background"
@@ -324,13 +334,14 @@ olcArgsFile: /opt/bitnami/openldap/var/run/slapd.args
 olcPidFile: /opt/bitnami/openldap/var/run/slapd.pid
 
 #
-# Enable pw-sha2 module
+# Enable pw-sha2 & pw-pbkdf2 modules
 #
 dn: cn=module,cn=config
 cn: module
 objectClass: olcModuleList
 olcModulePath: /opt/bitnami/openldap/libexec/openldap
 olcModuleLoad: pw-sha2.so
+olcModuleLoad: pw-pbkdf2.so
 
 #
 # Schema settings
@@ -438,7 +449,7 @@ olcRootDN: $LDAP_ADMIN_DN
 dn: olcDatabase={2}mdb,cn=config
 changeType: modify
 add: olcRootPW
-olcRootPW: $LDAP_ENCRYPTED_ADMIN_PASSWORD
+olcRootPW: ${LDAP_ADMIN_PASSWORD_ENCRYPTED:-}
 
 dn: olcDatabase={1}monitor,cn=config
 changetype: modify
@@ -456,7 +467,7 @@ olcRootDN: $LDAP_CONFIG_ADMIN_DN
 dn: olcDatabase={0}config,cn=config
 changetype: modify
 add: olcRootPW
-olcRootPW: $LDAP_ENCRYPTED_CONFIG_ADMIN_PASSWORD
+olcRootPW: ${LDAP_CONFIG_ADMIN_PASSWORD_ENCRYPTED:-}
 EOF
     fi
     debug_execute ldapmodify -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/admin.ldif"
@@ -593,7 +604,7 @@ sn: Bar$((index + 1 ))
 objectClass: inetOrgPerson
 objectClass: posixAccount
 objectClass: shadowAccount
-userPassword: $(printf '%s' "${passwords[$index]}" | slappasswd -n -T /dev/stdin)
+userPassword: $(printf '%s' "${passwords[$index]}" | slappasswd_pbkdf2)
 uid: $user
 uidNumber: $((index + 1000 ))
 gidNumber: $((index + 1000 ))
@@ -935,7 +946,7 @@ olcDatabase: {3}mdb
 olcDbDirectory: $LDAP_ACCESSLOG_DATA_DIR
 olcSuffix: $LDAP_ACCESSLOG_DB
 olcRootDN: $LDAP_ACCESSLOG_ADMIN_DN
-olcRootPW: $LDAP_ENCRYPTED_ACCESSLOG_ADMIN_PASSWORD
+olcRootPW: ${LDAP_ACCESSLOG_ADMIN_PASSWORD_ENCRYPTED:-}
 olcDbIndex: default eq
 olcDbIndex: entryCSN,objectClass,reqEnd,reqResult,reqStart
 EOF
