@@ -49,3 +49,36 @@ get_sematic_version () {
         fi
     fi
 }
+
+########################
+# Compares two semantic versions
+# Arguments:
+#   $1 - version1: first version to compare
+#   $2 - version2: second version to compare
+# Returns:
+#   -1 if version1 is less than version2
+#   0 if version1 is equal to version2
+#   1 if version1 is greater than version2
+#########################
+compare_semantic_versions() {
+    local version1="${1:?version1 is required}"
+    local version2="${2:?version2 is required}"
+    local major1 major2 minor1 minor2 patch1 patch2
+
+    major1="$(get_sematic_version "$version1" 1)"
+    major2="$(get_sematic_version "$version2" 1)"
+    minor1="$(get_sematic_version "$version1" 2)"
+    minor2="$(get_sematic_version "$version2" 2)"
+    patch1="$(get_sematic_version "$version1" 3)"
+    patch2="$(get_sematic_version "$version2" 3)"
+
+    if [[ "$major1" -eq "$major2" ]] && [[ "$minor1" -eq "$minor2" ]] && [[ "$patch1" -eq "$patch2" ]]; then
+        echo "0"
+    elif [[ "$major1" -lt "$major2" ]] ||
+      { [[ "$major1" -eq "$major2" ]] && [[ "$minor1" -lt "$minor2" ]]; } ||
+      { [[ "$major1" -eq "$major2" ]] && [[ "$minor1" -eq "$minor2" ]] && [[ "$patch1" -lt "$patch2" ]]; }; then
+        echo "-1"
+    else
+        echo "1"
+    fi
+}

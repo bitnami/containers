@@ -190,10 +190,7 @@ mariadb_exec_initial_dump() {
     local -r dump_file="${DB_DATA_DIR}/dump_all_databases.sql"
 
     info "MariaDB dump master data start..."
-    # Avoid passing credentials as arguments to mariadb-dump, to avoid leaking them given a local observer with /proc read access can read them
-    local root_password_file
-    root_password_file="$(credential_to_temp_file "$DB_MASTER_ROOT_PASSWORD")"
-    mariadb-dump --verbose --single-transaction --quick --source-data=2 --all-databases -h "$DB_MASTER_HOST" -P "$DB_MASTER_PORT_NUMBER" -u "$DB_MASTER_ROOT_USER" -p"$(<"$root_password_file")" > "$dump_file"
+    MYSQL_PWD="$DB_MASTER_ROOT_PASSWORD" mariadb-dump --verbose --single-transaction --quick --source-data=2 --all-databases -h "$DB_MASTER_HOST" -P "$DB_MASTER_PORT_NUMBER" -u "$DB_MASTER_ROOT_USER" > "$dump_file"
     debug "Finish dump databases"
 
     # Look for the line containing "CHANGE REPLICATION SOURCE"
@@ -536,14 +533,12 @@ mariadb_upgrade() {
     local -a args=("--defaults-file=${DB_CONF_FILE}" "-u" "$DB_ROOT_USER")
     info "Running mariadb_upgrade"
     mariadb_start_bg
-    if is_boolean_yes "${ROOT_AUTH_ENABLED:-false}"; then
-        # Avoid passing credentials as arguments to mariadb_upgrade, to avoid leaking them given a local observer with /proc read access can read them
-        local root_password_file
-        root_password_file="$(credential_to_temp_file "$(get_master_env_var_value ROOT_PASSWORD)")"
-        args+=("-p$(<"$root_password_file")")
-    fi
     [[ "${DB_UPGRADE}" == "FORCE" ]] && args+=("--force")
-    debug_execute "${DB_BIN_DIR}/mariadb_upgrade" "${args[@]}" || info "This installation is already upgraded"
+    if is_boolean_yes "${ROOT_AUTH_ENABLED:-false}"; then
+        MYSQL_PWD="$(get_master_env_var_value ROOT_PASSWORD)" debug_execute "${DB_BIN_DIR}/mariadb_upgrade" "${args[@]}" || info "This installation is already upgraded"
+    else
+        debug_execute "${DB_BIN_DIR}/mariadb_upgrade" "${args[@]}" || info "This installation is already upgraded"
+    fi
 }
 
 #!/bin/bash
@@ -657,12 +652,6 @@ mysql_execute_print_output() {
     fi
     args+=("-N" "-u" "$user")
     [[ -n "$db" ]] && args+=("$db")
-    # Avoid passing credentials as arguments to mysql, to avoid leaking them given a local observer with /proc read access can read them
-    if [[ -n "$pass" ]]; then
-        local pass_file
-        pass_file="$(credential_to_temp_file "$pass")"
-        args+=("-p$(<"$pass_file")")
-    fi
     [[ "${#opts[@]}" -gt 0 ]] && args+=("${opts[@]}")
     [[ "${#extra_opts[@]}" -gt 0 ]] && args+=("${extra_opts[@]}")
 
@@ -670,11 +659,19 @@ mysql_execute_print_output() {
     if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
         local mysql_cmd
         mysql_cmd="$(</dev/stdin)"
-        "$(mysql_binary)" "${args[@]}" <<<"$mysql_cmd"
+        if [[ -n "$pass" ]]; then
+            MYSQL_PWD="$pass" "$(mysql_binary)" "${args[@]}" <<<"$mysql_cmd"
+        else
+            "$(mysql_binary)" "${args[@]}" <<<"$mysql_cmd"
+        fi
     else
         # Do not store the command(s) as a variable, to avoid issues when importing large files
         # https://github.com/bitnami/bitnami-docker-mariadb/issues/251
-        "$(mysql_binary)" "${args[@]}"
+        if [[ -n "$pass" ]]; then
+            MYSQL_PWD="$pass" "$(mysql_binary)" "${args[@]}"
+        else
+            "$(mysql_binary)" "${args[@]}"
+        fi
     fi
 }
 
@@ -1386,13 +1383,10 @@ mysql_healthcheck() {
 
     root_password="$(get_master_env_var_value ROOT_PASSWORD)"
     if [[ -n "$root_password" ]]; then
-        # Avoid passing credentials as arguments to mysqladmin, to avoid leaking them given a local observer with /proc read access can read them
-        local root_password_file
-        root_password_file="$(credential_to_temp_file "$root_password")"
-        args+=("-p$(<"$root_password_file")")
+        MYSQL_PWD="$root_password" mysqladmin "${args[@]}" ping && MYSQL_PWD="$root_password" mysqladmin "${args[@]}" status
+    else
+        mysqladmin "${args[@]}" ping && mysqladmin "${args[@]}" status
     fi
-
-    mysqladmin "${args[@]}" ping && mysqladmin "${args[@]}" status
 }
 
 ########################
@@ -1412,6 +1406,17 @@ mysql_client_flavor() {
     fi
 }
 
+# Helper to get the proper value for the MySQL client environment variable
+mysql_client_env_value() {
+    local env_name="MYSQL_CLIENT_${1:?missing name}"
+    if [[ -n "${!env_name:-}" ]]; then
+        echo "${!env_name:-}"
+    else
+        env_name="DB_CLIENT_${1}"
+        echo "${!env_name:-}"
+    fi
+}
+
 ########################
 # Prints extra options for MySQL client calls (i.e. SSL options)
 # Globals:
@@ -1422,16 +1427,6 @@ mysql_client_flavor() {
 #   List of options to pass to "mysql" CLI
 #########################
 mysql_client_extra_opts() {
-    # Helper to get the proper value for the MySQL client environment variable
-    mysql_client_env_value() {
-        local env_name="MYSQL_CLIENT_${1:?missing name}"
-        if [[ -n "${!env_name:-}" ]]; then
-            echo "${!env_name:-}"
-        else
-            env_name="DB_CLIENT_${1}"
-            echo "${!env_name:-}"
-        fi
-    }
     local -a opts=()
     local key value
     if is_boolean_yes "${DB_ENABLE_SSL:-no}"; then
