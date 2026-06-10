@@ -96,6 +96,10 @@ mysql_validate() {
             if [[ -z "$DB_MASTER_HOST" ]]; then
                 print_validation_error "Slave replication mode chosen without setting the environment variable $(get_env_var MASTER_HOST). Use it to indicate where the Master node is running"
             fi
+            if ! is_boolean_yes "$DB_REPLICATION_USE_SSL"; then
+                warn "SSL is not enabled for replication. MITM substitution of the RSA public key can recover DB_REPLICATION_PASSWORD."
+            fi
+
         else
             print_validation_error "Invalid replication mode. Available options are 'master/slave'"
         fi
@@ -180,6 +184,27 @@ EOF
 }
 
 ########################
+# Helper to get the SSL clause for replication
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   SSL clause for replication
+#########################
+mysql_replication_ssl_clause() {
+    local replication_ssl_clause
+    if is_boolean_yes "$DB_REPLICATION_USE_SSL"; then
+        replication_ssl_clause="SOURCE_SSL=1,"
+        ca_file="$(mysql_client_env_value "SSL_CA_FILE")"
+        [[ -f "$ca_file" ]] && replication_ssl_clause+=" SOURCE_SSL_CA='${ca_file}', SOURCE_SSL_VERIFY_SERVER_CERT=1,"
+    else
+        replication_ssl_clause="GET_SOURCE_PUBLIC_KEY=1,"
+    fi
+    echo "$replication_ssl_clause"
+}
+
+########################
 # Make a dump on master database and update slave database
 # Globals:
 #   DB_*
@@ -191,11 +216,13 @@ EOF
 mysql_exec_initial_dump() {
     local -r dump_file="${DB_DATA_DIR}/dump_all_databases.sql"
 
+    local ssl_flags=()
+    is_boolean_yes "$DB_REPLICATION_USE_SSL" && ssl_flags+=("--ssl-mode=REQUIRED")
+    ca_file="$(mysql_client_env_value "SSL_CA_FILE")"
+    [[ -f "$ca_file" ]] && ssl_flags+=("--ssl-ca=${ca_file}")
+
     info "MySQL dump master data start..."
-    # Avoid passing credentials as arguments to mysqldump, to avoid leaking them given a local observer with /proc read access can read them
-    local root_password_file
-    root_password_file="$(credential_to_temp_file "$DB_MASTER_ROOT_PASSWORD")"
-    mysqldump --verbose --single-transaction --quick --source-data=2 --all-databases -h "$DB_MASTER_HOST" -P "$DB_MASTER_PORT_NUMBER" -u "$DB_MASTER_ROOT_USER" -p"$(<"$root_password_file")" > "$dump_file"
+    MYSQL_PWD="$DB_MASTER_ROOT_PASSWORD" mysqldump --verbose --single-transaction --quick --source-data=2 --all-databases -h "$DB_MASTER_HOST" -P "$DB_MASTER_PORT_NUMBER" -u "$DB_MASTER_ROOT_USER" "${ssl_flags[@]}" > "$dump_file"
     debug "Finish dump databases"
 
     # Look for the line containing "CHANGE REPLICATION SOURCE"
@@ -218,8 +245,8 @@ SOURCE_PASSWORD='$DB_REPLICATION_PASSWORD',
 SOURCE_DELAY=$DB_MASTER_DELAY,
 SOURCE_LOG_FILE='$log_file',
 SOURCE_LOG_POS=$log_position,
-SOURCE_CONNECT_RETRY=10,
-GET_SOURCE_PUBLIC_KEY=1;
+$(mysql_replication_ssl_clause)
+SOURCE_CONNECT_RETRY=10;
 EOF
     debug "Finish import dump databases"
 
@@ -255,8 +282,8 @@ SOURCE_PORT=$DB_MASTER_PORT_NUMBER,
 SOURCE_USER='$DB_REPLICATION_USER',
 SOURCE_PASSWORD='$DB_REPLICATION_PASSWORD',
 SOURCE_DELAY=$DB_MASTER_DELAY,
-SOURCE_CONNECT_RETRY=10,
-GET_SOURCE_PUBLIC_KEY=1;
+$(mysql_replication_ssl_clause)
+SOURCE_CONNECT_RETRY=10;
 EOF
 
         fi
@@ -288,7 +315,7 @@ create user '$user'@'%' $([ "$password" != "" ] && echo "identified by \"$passwo
 EOF
 
     mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
-grant REPLICATION SLAVE on *.* to '$user'@'%' with grant option;
+grant REPLICATION SLAVE on *.* to '$user'@'%';
 flush privileges;
 EOF
 }
@@ -635,12 +662,6 @@ mysql_execute_print_output() {
     fi
     args+=("-N" "-u" "$user")
     [[ -n "$db" ]] && args+=("$db")
-    # Avoid passing credentials as arguments to mysql, to avoid leaking them given a local observer with /proc read access can read them
-    if [[ -n "$pass" ]]; then
-        local pass_file
-        pass_file="$(credential_to_temp_file "$pass")"
-        args+=("-p$(<"$pass_file")")
-    fi
     [[ "${#opts[@]}" -gt 0 ]] && args+=("${opts[@]}")
     [[ "${#extra_opts[@]}" -gt 0 ]] && args+=("${extra_opts[@]}")
 
@@ -648,11 +669,19 @@ mysql_execute_print_output() {
     if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
         local mysql_cmd
         mysql_cmd="$(</dev/stdin)"
-        "$(mysql_binary)" "${args[@]}" <<<"$mysql_cmd"
+        if [[ -n "$pass" ]]; then
+            MYSQL_PWD="$pass" "$(mysql_binary)" "${args[@]}" <<<"$mysql_cmd"
+        else
+            "$(mysql_binary)" "${args[@]}" <<<"$mysql_cmd"
+        fi
     else
         # Do not store the command(s) as a variable, to avoid issues when importing large files
         # https://github.com/bitnami/bitnami-docker-mariadb/issues/251
-        "$(mysql_binary)" "${args[@]}"
+        if [[ -n "$pass" ]]; then
+            MYSQL_PWD="$pass" "$(mysql_binary)" "${args[@]}"
+        else
+            "$(mysql_binary)" "${args[@]}"
+        fi
     fi
 }
 
@@ -1364,13 +1393,10 @@ mysql_healthcheck() {
 
     root_password="$(get_master_env_var_value ROOT_PASSWORD)"
     if [[ -n "$root_password" ]]; then
-        # Avoid passing credentials as arguments to mysqladmin, to avoid leaking them given a local observer with /proc read access can read them
-        local root_password_file
-        root_password_file="$(credential_to_temp_file "$root_password")"
-        args+=("-p$(<"$root_password_file")")
+        MYSQL_PWD="$root_password" mysqladmin "${args[@]}" ping && MYSQL_PWD="$root_password" mysqladmin "${args[@]}" status
+    else
+        mysqladmin "${args[@]}" ping && mysqladmin "${args[@]}" status
     fi
-
-    mysqladmin "${args[@]}" ping && mysqladmin "${args[@]}" status
 }
 
 ########################
@@ -1390,6 +1416,17 @@ mysql_client_flavor() {
     fi
 }
 
+# Helper to get the proper value for the MySQL client environment variable
+mysql_client_env_value() {
+    local env_name="MYSQL_CLIENT_${1:?missing name}"
+    if [[ -n "${!env_name:-}" ]]; then
+        echo "${!env_name:-}"
+    else
+        env_name="DB_CLIENT_${1}"
+        echo "${!env_name:-}"
+    fi
+}
+
 ########################
 # Prints extra options for MySQL client calls (i.e. SSL options)
 # Globals:
@@ -1400,16 +1437,6 @@ mysql_client_flavor() {
 #   List of options to pass to "mysql" CLI
 #########################
 mysql_client_extra_opts() {
-    # Helper to get the proper value for the MySQL client environment variable
-    mysql_client_env_value() {
-        local env_name="MYSQL_CLIENT_${1:?missing name}"
-        if [[ -n "${!env_name:-}" ]]; then
-            echo "${!env_name:-}"
-        else
-            env_name="DB_CLIENT_${1}"
-            echo "${!env_name:-}"
-        fi
-    }
     local -a opts=()
     local key value
     if is_boolean_yes "${DB_ENABLE_SSL:-no}"; then
