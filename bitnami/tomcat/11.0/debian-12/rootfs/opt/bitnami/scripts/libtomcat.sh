@@ -107,7 +107,7 @@ tomcat_ensure_user_exists() {
         --insert '$new_node' --type attr --name 'password' --value "$password" \
         --insert '$new_node' --type attr --name 'roles' --value "manager-gui,admin-gui" \
         "$TOMCAT_USERS_CONF_FILE"
-    chmod 600 "$TOMCAT_USERS_CONF_FILE"
+    chmod 640 "$TOMCAT_USERS_CONF_FILE"
 }
 
 ########################
