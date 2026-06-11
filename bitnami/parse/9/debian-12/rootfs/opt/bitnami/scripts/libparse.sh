@@ -103,7 +103,7 @@ parse_initialize() {
         info "Ensuring Parse directories exist"
         ensure_dir_exists "$PARSE_VOLUME_DIR"
         # Use daemon:root ownership for compatibility when running as a non-root user
-        am_i_root && configure_permissions_ownership "$PARSE_VOLUME_DIR" -d "775" -f "664" -u "$PARSE_DAEMON_USER" -g "root"
+        am_i_root && configure_permissions_ownership "$PARSE_VOLUME_DIR" -d "775" -f "664" -u "$PARSE_DAEMON_USER" -g "root" -n
         info "Trying to connect to the database server"
         local -r connection_string="mongodb://${PARSE_DATABASE_USER}:${PARSE_DATABASE_PASSWORD}@${PARSE_DATABASE_HOST}:${PARSE_DATABASE_PORT_NUMBER}/${PARSE_DATABASE_NAME}"
         parse_wait_for_mongodb_connection "$connection_string"
