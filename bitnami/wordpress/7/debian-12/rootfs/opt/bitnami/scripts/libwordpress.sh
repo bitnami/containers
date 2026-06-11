@@ -597,20 +597,26 @@ EOF
 #   None
 #########################
 wordpress_configure_reverse_proxy() {
-    wordpress_conf_append "$(
-        cat <<"EOF"
+    local xfh_condition
+    if ! is_empty_value "$WORDPRESS_HOSTNAME"; then
+        # Only accept XFH that exactly matches the configured canonical hostname
+        xfh_condition="! empty( \$_SERVER['HTTP_X_FORWARDED_HOST'] ) && strtolower( trim( \$_SERVER['HTTP_X_FORWARDED_HOST'] ) ) === strtolower( '${WORDPRESS_HOSTNAME}' )"
+    else
+        xfh_condition="! empty( \$_SERVER['HTTP_X_FORWARDED_HOST'] )"
+    fi
+    wordpress_conf_append "$(cat <<PHPEOF
 /**
  * Handle potential reverse proxy headers. Ref:
  *  - https://wordpress.org/support/article/faq-installation/#how-can-i-get-wordpress-working-when-im-behind-a-reverse-proxy
  *  - https://wordpress.org/support/article/administration-over-ssl/#using-a-reverse-proxy
  */
-if ( ! empty( $_SERVER['HTTP_X_FORWARDED_HOST'] ) ) {
-	$_SERVER['HTTP_HOST'] = $_SERVER['HTTP_X_FORWARDED_HOST'];
+if ( ${xfh_condition} ) {
+	\$_SERVER['HTTP_HOST'] = \$_SERVER['HTTP_X_FORWARDED_HOST'];
 }
-if ( ! empty( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) \&\& 'https' === $_SERVER['HTTP_X_FORWARDED_PROTO'] ) {
-	$_SERVER['HTTPS'] = 'on';
+if ( ! empty( \$_SERVER['HTTP_X_FORWARDED_PROTO'] ) \&\& 'https' === \$_SERVER['HTTP_X_FORWARDED_PROTO'] ) {
+	\$_SERVER['HTTPS'] = 'on';
 }
-EOF
+PHPEOF
     )"
 }
 
