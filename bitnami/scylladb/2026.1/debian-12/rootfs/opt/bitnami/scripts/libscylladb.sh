@@ -518,6 +518,10 @@ cassandra_validate() {
     check_true_false_value DB_SSL_VALIDATE
     check_true_false_value DB_AUTOMATIC_SSTABLE_UPGRADE
 
+    if is_boolean_yes "$DB_CLIENT_ENCRYPTION" && ! is_boolean_yes "$DB_SSL_VALIDATE"; then
+        warn "Client encryption is enabled but SSL validation is not enabled. This is vulnerable to a man-in-the-middle attack where an attacker can present an arbitrary certificate to the client."
+    fi
+
     if ((${#DB_PASSWORD} > 512)); then
         print_validation_error "The password cannot be longer than 512 characters. Set the environment variable DB_PASSWORD with a shorter value"
     fi
