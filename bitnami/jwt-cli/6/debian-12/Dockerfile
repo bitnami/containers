@@ -3,11 +3,11 @@
 
 FROM docker.io/bitnami/minideb:bookworm
 
-ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
+ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-05-23T08:32:46Z" \
+      org.opencontainers.image.created="2026-06-11T01:20:35Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/jwt-cli/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jwt-cli" \
@@ -32,13 +32,13 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
-        curl -SsLf "https://${DOWNLOADS_URL}/${COMPONENT}.tar.gz" -O ; \
-        curl -SsLf "https://${DOWNLOADS_URL}/${COMPONENT}.tar.gz.sha256" -O ; \
+        curl -SsLf "${DOWNLOADS_URL}/${COMPONENT}.tar.gz" -O ; \
       fi ; \
-      sha256sum -c "${COMPONENT}.tar.gz.sha256" ; \
+      sha256sum -c "/opt/bitnami/checksums/${COMPONENT}.tar.gz.sha256" ; \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner ; \
-      rm -rf "${COMPONENT}".tar.gz{,.sha256} ; \
-    done
+      rm -rf "${COMPONENT}".tar.gz ; \
+    done ; \
+    rm -rf /opt/bitnami/checksums ;
 RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN useradd -r -u 1001 -g root jwt-cli
@@ -47,7 +47,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="6.2.0" \
     BITNAMI_APP_NAME="jwt-cli" \
-    IMAGE_REVISION="30" \
+    IMAGE_REVISION="31" \
     PATH="/opt/bitnami/jwt-cli/bin:$PATH"
 
 USER 1001
