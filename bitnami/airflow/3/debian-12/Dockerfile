@@ -3,11 +3,11 @@
 
 FROM docker.io/bitnami/minideb:bookworm
 
-ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
+ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-06-03T08:09:21Z" \
+      org.opencontainers.image.created="2026-06-11T03:40:36Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/airflow/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/airflow" \
@@ -28,16 +28,16 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "python-3.13.13-8-linux-${OS_ARCH}-debian-12" \
+      "python-3.13.13-10-linux-${OS_ARCH}-debian-12" \
       "nss-wrapper-1.1.16-0-linux-${OS_ARCH}-debian-12" \
-      "ini-file-1.4.9-11-linux-${OS_ARCH}-debian-12" \
+      "ini-file-1.4.9-12-linux-${OS_ARCH}-debian-12" \
       "wait-for-port-1.0.10-11-linux-${OS_ARCH}-debian-12" \
-      "mariadb-lib-12.3.2-0-linux-${OS_ARCH}-debian-12" \
+      "mariadb-lib-12.3.2-1-linux-${OS_ARCH}-debian-12" \
       "airflow-3.2.1-2-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
-        curl -SsLf "https://${DOWNLOADS_URL}/${COMPONENT}.tar.gz" -O ; \
+        curl -SsLf "${DOWNLOADS_URL}/${COMPONENT}.tar.gz" -O ; \
       fi ; \
       sha256sum -c "/opt/bitnami/checksums/${COMPONENT}.tar.gz.sha256" ; \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner ; \
@@ -60,7 +60,7 @@ RUN /opt/bitnami/scripts/airflow/postunpack.sh
 ENV AIRFLOW_HOME="/opt/bitnami/airflow" \
     APP_VERSION="3.2.1" \
     BITNAMI_APP_NAME="airflow" \
-    IMAGE_REVISION="12" \
+    IMAGE_REVISION="13" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     LD_LIBRARY_PATH="/opt/bitnami/airflow/venv/lib/python3.13/site-packages/numpy.libs:/opt/bitnami/mariadb/lib:/opt/bitnami/python/lib" \
