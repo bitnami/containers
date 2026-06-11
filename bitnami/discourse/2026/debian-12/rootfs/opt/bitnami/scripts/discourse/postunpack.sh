@@ -49,8 +49,8 @@ done
 # We need to remove the broken symlink for chown to succeed
 find "${DISCOURSE_BASE_DIR}/vendor/bundle/ruby" -wholename "*/sprockets-*/test/fixtures/errors/symlink" -type l -exec rm -f {} \;
 
-# Add execution permissions to esbuild and ember binaries
-chmod +x "${DISCOURSE_BASE_DIR}/bin"/* "${DISCOURSE_BASE_DIR}/node_modules/esbuild/bin/esbuild" "${DISCOURSE_BASE_DIR}/node_modules/.bin"/*
+# Add execution permissions to binaries
+chmod +x "${DISCOURSE_BASE_DIR}/bin"/* "${DISCOURSE_BASE_DIR}/node_modules/.bin"/* "${DISCOURSE_BASE_DIR}/node_modules"/*/"bin/"*
 
 # HACK: The discourse source code is trying to access the deprecated Imagemagick "magick". In newer versions it was changed to "convert". Creating
 # a symlink to avoid any issue
