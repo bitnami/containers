@@ -21,7 +21,7 @@ SSLSessionCacheTimeout  300
   SSLCertificateKeyFile "{{APACHE_CONF_DIR}}/bitnami/certs/tls.key"
 
   <Directory "{{APACHE_BASE_DIR}}/htdocs">
-    Options Indexes FollowSymLinks
+    Options FollowSymLinks
     AllowOverride All
     Require all granted
   </Directory>
