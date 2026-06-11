@@ -3,11 +3,11 @@
 
 FROM docker.io/bitnami/minideb:bookworm
 
-ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
+ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-06-03T03:52:27Z" \
+      org.opencontainers.image.created="2026-06-11T04:23:52Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/zookeeper/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/zookeeper" \
@@ -35,7 +35,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
-        curl -SsLf "https://${DOWNLOADS_URL}/${COMPONENT}.tar.gz" -O ; \
+        curl -SsLf "${DOWNLOADS_URL}/${COMPONENT}.tar.gz" -O ; \
       fi ; \
       sha256sum -c "/opt/bitnami/checksums/${COMPONENT}.tar.gz.sha256" ; \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner ; \
@@ -53,7 +53,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/zookeeper/postunpack.sh
 ENV APP_VERSION="3.9.5" \
     BITNAMI_APP_NAME="zookeeper" \
-    IMAGE_REVISION="8"
+    IMAGE_REVISION="9"
 
 EXPOSE 2181 2888 3888 8080
 
