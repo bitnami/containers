@@ -409,8 +409,10 @@ redis_configure_default() {
         chmod 640 "${REDIS_BASE_DIR}/etc/redis.conf"
     else
         info "Setting Redis config file"
-        # We try to enforce strict permissions, but we don't fail if it's not possible
-        chmod 640 "${REDIS_BASE_DIR}/etc/redis.conf" || true
+        # Try to enforce strict permissions when we own the file or are root
+        if am_i_root || [[ -O "${REDIS_BASE_DIR}/etc/redis.conf" ]]; then
+            chmod 640 "${REDIS_BASE_DIR}/etc/redis.conf"
+        fi
         if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
             # Allow remote connections without password
             redis_conf_set protected-mode no
