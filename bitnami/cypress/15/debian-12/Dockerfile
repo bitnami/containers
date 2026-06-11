@@ -3,11 +3,11 @@
 
 FROM docker.io/bitnami/minideb:bookworm
 
-ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
+ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-06-09T06:40:20Z" \
+      org.opencontainers.image.created="2026-06-11T08:57:10Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/cypress/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cypress" \
@@ -28,13 +28,13 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "python-3.14.5-3-linux-${OS_ARCH}-debian-12" \
+      "python-3.14.6-0-linux-${OS_ARCH}-debian-12" \
       "node-24.16.0-0-linux-${OS_ARCH}-debian-12" \
       "cypress-15.16.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
-        curl -SsLf "https://${DOWNLOADS_URL}/${COMPONENT}.tar.gz" -O ; \
+        curl -SsLf "${DOWNLOADS_URL}/${COMPONENT}.tar.gz" -O ; \
       fi ; \
       sha256sum -c "/opt/bitnami/checksums/${COMPONENT}.tar.gz.sha256" ; \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner ; \
@@ -52,7 +52,7 @@ RUN mkdir /app && chmod g+rwX -R /app /opt/bitnami/node/cypress-cache && ln -s /
 ENV APP_VERSION="15.16.0" \
     BITNAMI_APP_NAME="cypress" \
     CYPRESS_CACHE_FOLDER="/opt/bitnami/node/cypress-cache" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="3" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/node/lib/node_modules/cypress/bin:$PATH"
 
 EXPOSE 3000
