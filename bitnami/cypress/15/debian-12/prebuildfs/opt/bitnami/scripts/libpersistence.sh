@@ -39,7 +39,7 @@ persist_app() {
     fi
     pushd "$install_dir" >/dev/null || exit
     local file_to_persist_relative file_to_persist_destination file_to_persist_destination_folder
-    local -r tmp_file="/tmp/perms.acl"
+    local -r acl_file="$(mktemp "${TMPDIR:-/tmp}"/acl.XXXXXXXXXX)"
     for file_to_persist in "${files_to_persist[@]}"; do
         if [[ ! -f "$file_to_persist" && ! -d "$file_to_persist" ]]; then
             error "Cannot persist '${file_to_persist}' because it does not exist"
@@ -50,22 +50,22 @@ persist_app() {
         file_to_persist_destination_folder="$(dirname "$file_to_persist_destination")"
         # Get original permissions for existing files, which will be applied later
         # Exclude the root directory with 'sed', to avoid issues when copying the entirety of it to a volume
-        getfacl -R "$file_to_persist_relative" | sed -E '/# file: (\..+|[^.])/,$!d' > "$tmp_file"
+        getfacl -R "$file_to_persist_relative" | sed -E '/# file: (\..+|[^.])/,$!d' > "$acl_file"
         # Copy directories to the volume
         ensure_dir_exists "$file_to_persist_destination_folder"
         cp -Lr --preserve=links "$file_to_persist_relative" "$file_to_persist_destination_folder"
         # Restore permissions
         pushd "$persist_dir" >/dev/null || exit
         if am_i_root; then
-            setfacl --restore="$tmp_file"
+            setfacl --restore="$acl_file"
         else
             # When running as non-root, don't change ownership
-            setfacl --restore=<(grep -E -v '^# (owner|group):' "$tmp_file")
+            setfacl --restore=<(grep -E -v '^# (owner|group):' "$acl_file")
         fi
         popd >/dev/null || exit
     done
     popd >/dev/null || exit
-    rm -f "$tmp_file"
+    rm -f "$acl_file"
     # Install the persisted files into the installation directory, via symlinks
     restore_persisted_app "$@"
 }
