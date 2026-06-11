@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-06-11T04:23:52Z" \
+      org.opencontainers.image.created="2026-06-11T08:42:19Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/zookeeper/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/zookeeper" \
@@ -53,7 +53,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/zookeeper/postunpack.sh
 ENV APP_VERSION="3.9.5" \
     BITNAMI_APP_NAME="zookeeper" \
-    IMAGE_REVISION="9"
+    IMAGE_REVISION="10"
 
 EXPOSE 2181 2888 3888 8080
 

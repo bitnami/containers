@@ -223,7 +223,8 @@ zookeeper_generate_conf() {
     else
       zookeeper_conf_set "${ZOO_CONF_DIR}/log4j.properties" zookeeper.console.threshold "$ZOO_LOG_LEVEL"
     fi
-    # Admin web server https://zookeeper.apache.org/doc/r3.5.7/zookeeperAdmin.html#sc_adminserver
+    # Admin web server https://zookeeper.apache.org/doc/r3.9.5/zookeeperAdmin.html#sc_adminserver_config
+    zookeeper_conf_set "$ZOO_CONF_FILE" admin.serverAddress "$ZOO_ADMIN_SERVER_ADDRESS"
     zookeeper_conf_set "$ZOO_CONF_FILE" admin.serverPort "$ZOO_ADMIN_SERVER_PORT_NUMBER"
     zookeeper_conf_set "$ZOO_CONF_FILE" admin.enableServer "$(is_boolean_yes "$ZOO_ENABLE_ADMIN_SERVER" && echo "true" || echo "false")"
 
