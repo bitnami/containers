@@ -3,11 +3,11 @@
 
 FROM docker.io/bitnami/minideb:bookworm
 
-ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
+ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-06-09T14:18:14Z" \
+      org.opencontainers.image.created="2026-06-11T03:54:40Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/mastodon/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mastodon" \
@@ -29,16 +29,16 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "node-22.22.3-0-linux-${OS_ARCH}-debian-12" \
-      "python-3.14.5-3-linux-${OS_ARCH}-debian-12" \
+      "python-3.14.6-0-linux-${OS_ARCH}-debian-12" \
       "postgresql-client-18.4.0-0-linux-${OS_ARCH}-debian-12" \
       "wait-for-port-1.0.10-11-linux-${OS_ARCH}-debian-12" \
-      "redis-client-8.8.0-0-linux-${OS_ARCH}-debian-12" \
-      "ruby-3.4.9-4-linux-${OS_ARCH}-debian-12" \
+      "redis-client-8.8.0-1-linux-${OS_ARCH}-debian-12" \
+      "ruby-3.4.9-5-linux-${OS_ARCH}-debian-12" \
       "mastodon-4.5.11-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
-        curl -SsLf "https://${DOWNLOADS_URL}/${COMPONENT}.tar.gz" -O ; \
+        curl -SsLf "${DOWNLOADS_URL}/${COMPONENT}.tar.gz" -O ; \
       fi ; \
       sha256sum -c "/opt/bitnami/checksums/${COMPONENT}.tar.gz.sha256" ; \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner ; \
@@ -54,7 +54,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/mastodon/postunpack.sh
 ENV APP_VERSION="4.5.11" \
     BITNAMI_APP_NAME="mastodon" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="3" \
     LD_LIBRARY_PATH="/opt/bitnami/common/lib:/opt/bitnami/postgresql/lib" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/node/bin:/opt/bitnami/python/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/redis/bin:/opt/bitnami/ruby/bin:/opt/bitnami/mastodon/bin:$PATH"
 
