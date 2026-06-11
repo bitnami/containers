@@ -1017,6 +1017,17 @@ mysql_client_flavor() {
     fi
 }
 
+# Helper to get the proper value for the MySQL client environment variable
+mysql_client_env_value() {
+    local env_name="MYSQL_CLIENT_${1:?missing name}"
+    if [[ -n "${!env_name:-}" ]]; then
+        echo "${!env_name:-}"
+    else
+        env_name="DB_CLIENT_${1}"
+        echo "${!env_name:-}"
+    fi
+}
+
 ########################
 # Prints extra options for MySQL client calls (i.e. SSL options)
 # Globals:
@@ -1027,16 +1038,6 @@ mysql_client_flavor() {
 #   List of options to pass to "mysql" CLI
 #########################
 mysql_client_extra_opts() {
-    # Helper to get the proper value for the MySQL client environment variable
-    mysql_client_env_value() {
-        local env_name="MYSQL_CLIENT_${1:?missing name}"
-        if [[ -n "${!env_name:-}" ]]; then
-            echo "${!env_name:-}"
-        else
-            env_name="DB_CLIENT_${1}"
-            echo "${!env_name:-}"
-        fi
-    }
     local -a opts=()
     local key value
     if is_boolean_yes "${DB_ENABLE_SSL:-no}"; then
