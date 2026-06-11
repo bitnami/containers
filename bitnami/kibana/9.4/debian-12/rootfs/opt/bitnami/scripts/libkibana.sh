@@ -45,12 +45,26 @@ kibana_set_key_value() {
 kibana_create_system_user() {
     local -r retries="60"
     local -r sleep_time="5"
-    local url
+    local curl_args, url
     # Connecting to the first host to create system user
     url=$(kibana_sanitize_elasticsearch_hosts "${KIBANA_ELASTICSEARCH_URL%%,*}" "${KIBANA_ELASTICSEARCH_PORT_NUMBER}")
+    curl_args=("-L" "-s" "-o" "/dev/null")
+    if is_boolean_yes "$SERVER_DB_ENABLE_TLS"; then
+        if [[ "$SERVER_DB_TLS_VERIFICATION_MODE" = "none" ]];then
+            curl_args+=("-k")
+        elif is_boolean_yes "$SERVER_DB_TLS_USE_PEM"; then
+            curl_args+=("--cacert" "$SERVER_DB_CA_CERT_LOCATION")
+        else
+            warn "CA cert in JKS format, incompatible with curl. Skipping TLS verification."
+            curl_args+=("-k")
+        fi
+    fi
+    curl_args+=("${url}")
+
+    # shellcheck disable=SC2329
     check_elasticsearch() {
         local status_code="000"
-        status_code=$(curl -L -s -k -o /dev/null "${url}" -w "%{http_code}")
+        status_code=$(curl "${curl_args[@]}" -w "%{http_code}")
         debug "Attempted to connect with Elasticsearch. Url: '${url}'. Status code: $status_code"
         # Any status code different to 000 will be considered valid
         [[ "$status_code" != "000" ]]
@@ -64,11 +78,11 @@ kibana_create_system_user() {
     fi
 
     # Check kibana_system user doesn't exists
-    status_code=$(curl -L -s -k -o /dev/null -u "kibana_system:${KIBANA_PASSWORD}" "${url}" -w "%{http_code}")
+    status_code=$(curl "${curl_args[@]}" -u "kibana_system:${KIBANA_PASSWORD}" -w "%{http_code}")
     if [[ "$status_code" == "401" ]]; then
         info "Setting password for user 'kibana_system'"
-        curl -L -s -k -o /dev/null -X POST -u "elastic:${KIBANA_ELASTICSEARCH_PASSWORD}" -H "Content-Type: application/json" "${url}/_security/user/kibana_system/_password" -d "{\"password\":\"${KIBANA_PASSWORD}\"}"
-        status_code=$(curl -L -s -k -o /dev/null -u "kibana_system:${KIBANA_PASSWORD}" "${url}" -w "%{http_code}")
+        curl "${curl_args[@]}" -X POST -u "elastic:${KIBANA_ELASTICSEARCH_PASSWORD}" -H "Content-Type: application/json" "${url}/_security/user/kibana_system/_password" -d "{\"password\":\"${KIBANA_PASSWORD}\"}"
+        status_code=$(curl "${curl_args[@]}" -u "kibana_system:${KIBANA_PASSWORD}" -w "%{http_code}")
         if [[ "$status_code" == "200" ]]; then
             info "Password for kibana_system successfully configured"
         else
