@@ -17,7 +17,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "kserve-0.18.0-4-linux-${OS_ARCH}-debian-12" \
+      "kserve-0.19.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -40,18 +40,18 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2026-06-10T17:30:31Z" \
+      org.opencontainers.image.created="2026-06-12T21:45:56Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="kserve-controller" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="0.18.0"
+      org.opencontainers.image.version="0.19.0"
 
 COPY rootfs /
 COPY --from=builder /opt/bitnami/kserve /opt/bitnami/kserve
 
-ENV APP_VERSION="0.18.0" \
+ENV APP_VERSION="0.19.0" \
     BITNAMI_APP_NAME="kserve-controller" \
-    IMAGE_REVISION="4" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/kserve/bin:$PATH"
 
 USER 1001
