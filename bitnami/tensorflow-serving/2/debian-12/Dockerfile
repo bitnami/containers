@@ -8,13 +8,13 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-06-11T04:11:11Z" \
+      org.opencontainers.image.created="2026-06-12T13:02:29Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/tensorflow-serving/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/tensorflow-serving" \
       org.opencontainers.image.title="tensorflow-serving" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="2.19.1"
+      org.opencontainers.image.version="2.20.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -31,7 +31,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "render-template-1.0.9-167-linux-${OS_ARCH}-debian-12" \
-      "tensorflow-serving-2.19.1-1-linux-${OS_ARCH}-debian-12" \
+      "tensorflow-serving-2.20.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -52,9 +52,9 @@ RUN uninstall_packages curl
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/tensorflow-serving/postunpack.sh
-ENV APP_VERSION="2.19.1" \
+ENV APP_VERSION="2.20.0" \
     BITNAMI_APP_NAME="tensorflow-serving" \
-    IMAGE_REVISION="18" \
+    IMAGE_REVISION="0" \
     JAVA_HOME="/opt/bitnami/java"
 
 EXPOSE 8500
