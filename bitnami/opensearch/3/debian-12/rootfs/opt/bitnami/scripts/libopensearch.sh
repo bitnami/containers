@@ -756,6 +756,48 @@ elasticsearch_initialize() {
             replace_in_file "${DB_CONF_DIR}/jvm.options" "(^.*logs[/]gc.log.*$)" "# \1"
         fi
         elasticsearch_set_heap_size
+        # Write BC FIPS JVM options only when FIPS mode is enabled AND Java is in restricted mode.
+        # Restricted mode is signalled by JAVA_TOOL_OPTIONS containing "java.security.restricted",
+        # which the chart sets via common.fips.config when fips.java=restricted.
+        # Relaxed mode (fips.java=relaxed) uses the non-FIPS BouncyCastle provider and does not
+        # need the BC FIPS module path.
+        if is_boolean_yes "${ELASTICSEARCH_ENABLE_FIPS_MODE:-false}" && \
+           [[ "${JAVA_TOOL_OPTIONS:-}" == *"java.security.restricted"* ]]; then
+            info "Writing BC FIPS JVM options to ${DB_CONF_DIR}/jvm.options.d/bc-fips.options..."
+            # BC FIPS JARs are placed into ${BITNAMI_ROOT_DIR}/elasticsearch/lib/ at container start by the
+            # prepare-bcfips-lib initContainer (see charts-private extra-init-vals7.yaml). This makes
+            # them named modules (org.bouncycastle.fips.core etc.) in the ES server layer, which is
+            # required for the es.entitlements.policy.server patch to work.
+            # The patch grants manage_threads to org.bouncycastle.fips.core so DisposalDaemon can
+            # call Thread.setDaemon() without triggering NotEntitledException.
+            # --module-path is NOT written here; BC FIPS is already in lib/ (server layer) via the
+            # initContainer, and JAVA_TOOL_OPTIONS provides it for CLI tools and the boot layer.
+            # The version is detected at runtime from the installed JAR filename so the patch
+            # never goes stale on upgrades. We avoid calling elasticsearch_get_version() here
+            # because at this point the BC FIPS JARs are already in lib/ (server layer via the
+            # prepare-bcfips-lib initContainer), and running the elasticsearch binary without
+            # the entitlement patch would trigger DisposalDaemon.<clinit> → NotEntitledException
+            # before the version string is ever printed (chicken-and-egg problem).
+            local es_version
+            es_version="$(ls "${DB_BASE_DIR}/lib/elasticsearch-"*.jar 2>/dev/null | grep -oP '\d+\.\d+\.\d+' | head -1)"
+            if [[ -z "$es_version" ]]; then
+                warn "Could not detect Elasticsearch version from lib/; skipping entitlement patch"
+                return
+            fi
+            local bc_fips_entitlement_patch
+            bc_fips_entitlement_patch="$(printf 'versions:\n  - %s\npolicy:\n  org.bouncycastle.fips.core:\n    - manage_threads\n' "${es_version}" | base64 -w 0)"
+
+            cat > "${DB_CONF_DIR}/jvm.options.d/bc-fips.options" <<BCFIPS
+## Bouncy Castle FIPS provider JVM options (restricted mode only)
+## BC FIPS JARs are loaded from ${BITNAMI_ROOT_DIR}/elasticsearch/lib/ as named Java modules in the ES
+## server layer (placed there by the prepare-bcfips-lib initContainer at container start).
+## The entitlement patch grants manage_threads to org.bouncycastle.fips.core for DisposalDaemon.
+## java.security.restricted is overlaid by the prepare-bcfips-lib initContainer to add SunJCE
+## as provider 4 so the JDK PKCS12KeyStore can resolve PBEWithHmacSHA256AndAES_256 AlgParams.
+-Djava.security.properties==${BITNAMI_ROOT_DIR}/java/conf/security/java.security.restricted
+-Des.entitlements.policy.server=${bc_fips_entitlement_patch}
+BCFIPS
+        fi
     else
         warn "The JVM options configuration files are not writable. Configurations based on environment variables will not be applied"
     fi
@@ -818,6 +860,11 @@ elasticsearch_initialize() {
                         elasticsearch_conf_set xpack.security.fips_mode.required_providers "${fips_providers[@]}"
                     fi
                 fi
+                # In FIPS restricted mode the ES server refuses to bootstrap a keystore
+                # with an empty password. If no secure settings were added above
+                # (e.g. bootstrap.password is empty), ensure we still have a
+                # password-protected keystore so the server can start.
+                elasticsearch_ensure_fips_keystore
             fi
             # Latest Elasticseach releases install x-pack-ml  by default. Since we have faced some issues with this library on certain platforms,
             # currently we are disabling this machine learning module whatsoever by defining "xpack.ml.enabled=false" in the "elasicsearch.yml" file
