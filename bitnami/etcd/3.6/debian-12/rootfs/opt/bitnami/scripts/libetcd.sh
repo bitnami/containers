@@ -757,15 +757,17 @@ etcd_initialize() {
     fi
 
     # For both existing and new deployments, configure RBAC if set
-    if [[ ${#initial_members[@]} -gt 1 ]]; then
-        # When there's more than one etcd replica, RBAC should be only enabled in one member
-        if ! is_empty_value "$ETCD_ROOT_PASSWORD" && [[ "${initial_members[0]}" = *"$ETCD_INITIAL_ADVERTISE_PEER_URLS"* ]]; then
+    if ! is_empty_value "$ETCD_ROOT_PASSWORD"; then
+        if [[ ${#initial_members[@]} -gt 1 ]]; then
+            # When there's more than one etcd replica, RBAC should be only enabled in one member
+            if [[ "${initial_members[0]}" = *"$ETCD_INITIAL_ADVERTISE_PEER_URLS"* ]]; then
+                etcd_configure_rbac
+            elif [[ "${ETCD_INITIAL_CLUSTER_STATE:-}" != "existing" ]]; then
+                etcd_wait_for_rbac || return 1
+            fi
+        else
             etcd_configure_rbac
-        elif [[ "${ETCD_INITIAL_CLUSTER_STATE:-}" != "existing" ]]; then
-            etcd_wait_for_rbac || return 1
         fi
-    else
-        ! is_empty_value "$ETCD_ROOT_PASSWORD" && etcd_configure_rbac
     fi
 
     # Avoid exit code of previous commands to affect the result of this function
