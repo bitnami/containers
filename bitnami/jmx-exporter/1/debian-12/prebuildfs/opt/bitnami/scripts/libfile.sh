@@ -139,3 +139,40 @@ wait_for_log_entry() {
         return 1
     fi
 }
+
+########################
+# Creates a secure temporary file containing the provided secret
+# Arguments:
+#   $1 - secret to write to the temporary file
+# Returns:
+#   String
+#########################
+credential_to_temp_file() {
+    local secret="$1"
+    local tmp_file
+
+    # Use mktemp with a specific prefix for easier debugging if something lingers
+    if ! tmp_file=$(mktemp "${TMPDIR:-/tmp}/at.cred.XXXXXXXX"); then
+        echo "Error: Failed to create temp file" >&2
+        return 1
+    fi
+
+    # Restrict permissions before writing the secret
+    chmod 0600 "$tmp_file"
+    # Write secret and ensure it's flushed to disk
+    printf "%s" "$secret" > "$tmp_file"
+    # Output the filename so the caller can capture it
+    echo "$tmp_file"
+}
+
+########################
+# Cleans up temporary files created by credential_to_temp_file
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+cleanup_credentials() {
+    debug "Cleaning up temporary files containing credentials"
+    rm -rf "${TMPDIR:-/tmp}"/at.cred.*
+}
