@@ -45,7 +45,7 @@ kibana_set_key_value() {
 kibana_create_system_user() {
     local -r retries="60"
     local -r sleep_time="5"
-    local curl_args, url
+    local curl_args url
     # Connecting to the first host to create system user
     url=$(kibana_sanitize_elasticsearch_hosts "${KIBANA_ELASTICSEARCH_URL%%,*}" "${KIBANA_ELASTICSEARCH_PORT_NUMBER}")
     curl_args=("-L" "-s" "-o" "/dev/null")
