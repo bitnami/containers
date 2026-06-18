@@ -75,8 +75,10 @@ The following tables list the main variables you can set.
 | `SPARK_SSL_KEY_PASSWORD`                 | The password to the private key in the key store.                                | `nil`                                          |
 | `SPARK_SSL_KEYSTORE_PASSWORD`            | The password for the key store.                                                  | `nil`                                          |
 | `SPARK_SSL_KEYSTORE_FILE`                | Location of the key store.                                                       | `${SPARK_CONF_DIR}/certs/spark-keystore.jks`   |
+| `SPARK_SSL_KEYSTORE_TYPE`                | The type of the key store.                                                       | `JKS`                                          |
 | `SPARK_SSL_TRUSTSTORE_PASSWORD`          | The password for the trust store.                                                | `nil`                                          |
 | `SPARK_SSL_TRUSTSTORE_FILE`              | Location of the key store.                                                       | `${SPARK_CONF_DIR}/certs/spark-truststore.jks` |
+| `SPARK_SSL_TRUSTSTORE_TYPE`              | The type of the trust store.                                                     | `JKS`                                          |
 | `SPARK_SSL_NEED_CLIENT_AUTH`             | Whether to require client authentication.                                        | `yes`                                          |
 | `SPARK_SSL_PROTOCOL`                     | TLS protocol to use.                                                             | `TLSv1.2`                                      |
 | `SPARK_WEBUI_SSL_PORT`                   | Spark management server port number for SSL/TLS connections.                     | `nil`                                          |

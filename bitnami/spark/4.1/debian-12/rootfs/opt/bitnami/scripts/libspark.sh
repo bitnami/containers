@@ -188,14 +188,14 @@ spark_enable_ssl() {
     spark_conf_set spark.ssl.keyPassword "${SPARK_SSL_KEY_PASSWORD}"
     spark_conf_set spark.ssl.keyStore "${SPARK_SSL_KEYSTORE_FILE}"
     spark_conf_set spark.ssl.keyStorePassword "${SPARK_SSL_KEYSTORE_PASSWORD}"
-    spark_conf_set spark.ssl.keyStoreType "JKS"
+    spark_conf_set spark.ssl.keyStoreType "${SPARK_SSL_KEYSTORE_TYPE}"
     spark_conf_set spark.ssl.protocol "${SPARK_SSL_PROTOCOL}"
     if is_boolean_yes "$SPARK_SSL_NEED_CLIENT_AUTH"; then
         spark_conf_set spark.ssl.needClientAuth "true"
     fi
     spark_conf_set spark.ssl.trustStore "${SPARK_SSL_TRUSTSTORE_FILE}"
     spark_conf_set spark.ssl.trustStorePassword "${SPARK_SSL_TRUSTSTORE_PASSWORD}"
-    spark_conf_set spark.ssl.trustStoreType "JKS"
+    spark_conf_set spark.ssl.trustStoreType "${SPARK_SSL_TRUSTSTORE_TYPE}"
 }
 
 ########################
