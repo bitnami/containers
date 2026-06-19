@@ -1,0 +1,8 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  nifi:
+    image: docker.io/bitnami/nifi:latest
+    volumes:
+      - ./nifi.properties:/opt/bitnami/nifi/conf/nifi.properties

@@ -1,0 +1,22 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+  jupyter-base-notebook:
+    image: docker.io/bitnami/jupyter-base-notebook:latest
+    command:
+      - jupyter
+      - lab
+      - --ip=0.0.0.0
+      - --port=8888
+      - --no-browser
+      - --ServerApp.token=''
+      - --ServerApp.password=''
+    ports:
+      - '8888:8888'
+    volumes:
+      - 'jupyter_data:/opt/bitnami/jupyterhub-singleuser/'
+
+volumes:
+  jupyter_data:
+    driver: local
