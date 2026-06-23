@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-06-10T22:21:46Z" \
+      org.opencontainers.image.created="2026-06-23T12:33:35Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/percona-mysql/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/percona-mysql" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "mysql-shell-8.4.9-1-linux-${OS_ARCH}-debian-12" \
+      "mysql-shell-8.4.10-0-linux-${OS_ARCH}-debian-12" \
       "ini-file-1.4.9-12-linux-${OS_ARCH}-debian-12" \
       "percona-mysql-8.4.8-8-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
@@ -52,7 +52,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/mysql/postunpack.sh
 ENV APP_VERSION="8.4.8-8" \
     BITNAMI_APP_NAME="percona-mysql" \
-    IMAGE_REVISION="11" \
+    IMAGE_REVISION="12" \
     MYSQL_HOME="/opt/bitnami/mysql/conf" \
     PATH="/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/mysql/sbin:$PATH"
 
