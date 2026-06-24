@@ -151,7 +151,7 @@ FROM bitnami/redmine
 - The following environment variables have been deprecated. They will continue to work as before, but support for these may be removed in a future update:
 
   - `REDMINE_DB_POSTGRES` in favor of `REDMINE_DATABASE_HOST`. When used, `REDMINE_DATABASE_TYPE=postgresql` will also be set.
-  - `REDMINE_DB_MYSQL`, in favor of `REDMINE_DATABASE_HOST`. Whenused, `REDMINE_DATABASE_TYPE=mariadb` will also be set.
+  - `REDMINE_DB_MYSQL`, in favor of `REDMINE_DATABASE_HOST`. When used, `REDMINE_DATABASE_TYPE=mariadb` will also be set.
 
 ## License
 
