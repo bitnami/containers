@@ -3,17 +3,17 @@
 
 FROM docker.io/bitnami/minideb:bookworm
 
-ARG DOWNLOADS_URL="downloads.bitnami.com/files/stacksmith"
+ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-06-02T21:50:16Z" \
+      org.opencontainers.image.created="2026-06-24T18:02:12Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/fluxcd-source-watcher/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/fluxcd-source-watcher" \
       org.opencontainers.image.title="fluxcd-source-watcher" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="2.1.1"
+      org.opencontainers.image.version="2.2.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,11 +28,11 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "fluxcd-source-watcher-2.1.1-3-linux-${OS_ARCH}-debian-12" \
+      "fluxcd-source-watcher-2.2.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
-        curl -SsLf "https://${DOWNLOADS_URL}/${COMPONENT}.tar.gz" -O ; \
+        curl -SsLf "${DOWNLOADS_URL}/${COMPONENT}.tar.gz" -O ; \
       fi ; \
       sha256sum -c "/opt/bitnami/checksums/${COMPONENT}.tar.gz.sha256" ; \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner ; \
@@ -45,9 +45,9 @@ RUN useradd -r -u 1001 -g root fluxcd-source-watcher
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN uninstall_packages curl
 
-ENV APP_VERSION="2.1.1" \
+ENV APP_VERSION="2.2.0" \
     BITNAMI_APP_NAME="fluxcd-source-watcher" \
-    IMAGE_REVISION="6" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/fluxcd-source-watcher/bin:$PATH"
 
 USER 1001
