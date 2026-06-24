@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-06-22T13:23:41Z" \
+      org.opencontainers.image.created="2026-06-24T19:24:35Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/mastodon/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mastodon" \
       org.opencontainers.image.title="mastodon" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="4.6.0"
+      org.opencontainers.image.version="4.6.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,13 +28,13 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "node-22.23.0-0-linux-${OS_ARCH}-debian-12" \
+      "node-22.23.1-0-linux-${OS_ARCH}-debian-12" \
       "python-3.14.6-4-linux-${OS_ARCH}-debian-12" \
       "postgresql-client-18.4.0-0-linux-${OS_ARCH}-debian-12" \
       "wait-for-port-1.0.10-13-linux-${OS_ARCH}-debian-12" \
       "redis-client-8.8.0-1-linux-${OS_ARCH}-debian-12" \
       "ruby-3.4.9-5-linux-${OS_ARCH}-debian-12" \
-      "mastodon-4.6.0-0-linux-${OS_ARCH}-debian-12" \
+      "mastodon-4.6.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -52,7 +52,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mastodon/postunpack.sh
-ENV APP_VERSION="4.6.0" \
+ENV APP_VERSION="4.6.1" \
     BITNAMI_APP_NAME="mastodon" \
     IMAGE_REVISION="0" \
     LD_LIBRARY_PATH="/opt/bitnami/common/lib:/opt/bitnami/postgresql/lib" \
