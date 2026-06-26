@@ -100,6 +100,7 @@ The following tables list the main variables you can set.
 | `CASSANDRA_HOST`                                   | Cassandra host name                                                                     | `nil`                                 |
 | `CASSANDRA_INTERNODE_ENCRYPTION`                   | Internode encryption type                                                               | `none`                                |
 | `CASSANDRA_NUM_TOKENS`                             | Number of tokens in cluster connection                                                  | `256`                                 |
+| `CASSANDRA_ISOLATED_SEEDING`                       | Perform seeding without exposing RPC endpoint                                           | `yes`                                 |
 | `CASSANDRA_PASSWORD_SEEDER`                        | Set node as password seeder in the cluster                                              | `no`                                  |
 | `CASSANDRA_SEEDS`                                  | List of cluster seeds                                                                   | `$DB_HOST`                            |
 | `CASSANDRA_PEERS`                                  | List of cluster peers                                                                   | `$DB_SEEDS`                           |

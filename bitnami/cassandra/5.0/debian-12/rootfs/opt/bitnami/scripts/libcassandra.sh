@@ -498,6 +498,10 @@ cassandra_validate() {
     check_true_false_value DB_SSL_VALIDATE
     check_true_false_value DB_AUTOMATIC_SSTABLE_UPGRADE
 
+    if is_boolean_yes "$DB_CLIENT_ENCRYPTION" && ! is_boolean_yes "$DB_SSL_VALIDATE"; then
+        warn "Client encryption is enabled but SSL validation is not enabled. This is vulnerable to a man-in-the-middle attack where an attacker can present an arbitrary certificate to the client."
+    fi
+
     if ((${#DB_PASSWORD} > 512)); then
         print_validation_error "The password cannot be longer than 512 characters. Set the environment variable DB_PASSWORD with a shorter value"
     fi
@@ -901,7 +905,7 @@ cassandra_initialize() {
             # Otherwise, cqlsh reconnects to the pod IP (via system.local), blocked by the ensure_superuser_is_created gate.
             cassandra_start_bg "$DB_FIRST_BOOT_LOG_FILE" "" "" "--broadcast-rpc-address 127.0.0.1"
         else
-            cassandra_yaml_set "rpc_address" "127.0.0.1"
+            is_boolean_yes "$DB_ISOLATED_SEEDING" && cassandra_yaml_set "rpc_address" "127.0.0.1"
             cassandra_start_bg "$DB_FIRST_BOOT_LOG_FILE"
         fi
         if is_boolean_yes "$DB_PASSWORD_SEEDER"; then
@@ -926,7 +930,7 @@ cassandra_initialize() {
             fi
 
             cassandra_execute_startup_cql
-            touch "$CASSANDRA_INIT_SEMAPHORE"
+            touch "$DB_INIT_SEMAPHORE"
         else
             info "Non-seeder node. Waiting for synchronization"
             wait_for_cql_access "$DB_USER" "$DB_PASSWORD" "127.0.0.1" "$DB_PEER_CQL_MAX_RETRIES" "$DB_PEER_CQL_SLEEP_TIME"
@@ -938,7 +942,7 @@ cassandra_initialize() {
     if is_dir_empty "$DB_DATA_DIR"; then
         info "Deploying $DB_FLAVOR from scratch"
         __credential_seeding
-    elif [[ ! -f "$CASSANDRA_INIT_SEMAPHORE" ]] && is_boolean_yes "$DB_PASSWORD_SEEDER"; then
+    elif [[ ! -f "$DB_INIT_SEMAPHORE" ]] && is_boolean_yes "$DB_PASSWORD_SEEDER"; then
         warn "The init semaphore is absent: the seed pod was interrupted between start and credential seeding. Re-running seeding against the persisted data."
         __credential_seeding
     else
@@ -1287,28 +1291,31 @@ wait_for_peers_ready() {
 
     local peer peer_ip
     for peer in ${peers//,/ }; do
-        peer_ip="$(dns_lookup "$peer" "v4")"
-        [[ -z "$peer_ip" ]] && peer_ip="$peer"
-        info "Waiting for peer $peer to reach Up/Normal (UN) status"
+        if is_boolean_yes "$DB_ISOLATED_SEEDING"; then
+            peer_ip="$(dns_lookup "$peer" "v4")"
+            [[ -z "$peer_ip" ]] && peer_ip="$peer"
+            # shellcheck disable=SC2329
+            check_peer_un() {
+                # Using legacy RMI URL parsing to avoid URISyntaxException: 'Malformed IPv6 address at index 7: rmi://[127.0.0.1]:7199' error
+                # https://community.datastax.com/questions/13764/java-version-for-cassandra-3113.html
+                local -r check_cmd=("nodetool" "-Dcom.sun.jndi.rmiURLParsing=legacy")
+                local -r check_args=("status" "--port" "$DB_JMX_PORT_NUMBER")
+                local -r check_regex="UN\s*(${peer}|${peer_ip})"
+                local output="/dev/null"
+                if [[ "$BITNAMI_DEBUG" = "true" ]]; then
+                    output="/dev/stdout"
+                fi
 
-        check_peer_un() {
-            # Using legacy RMI URL parsing to avoid URISyntaxException: 'Malformed IPv6 address at index 7: rmi://[127.0.0.1]:7199' error
-            # https://community.datastax.com/questions/13764/java-version-for-cassandra-3113.html
-            local -r check_cmd=("nodetool" "-Dcom.sun.jndi.rmiURLParsing=legacy")
-            local -r check_args=("status" "--port" "$DB_JMX_PORT_NUMBER")
-            local -r check_regex="UN\s*(${peer}|${peer_ip})"
+                "${check_cmd[@]}" "${check_args[@]}" | grep -E "${check_regex}" >"${output}"
+            }
 
-            local output="/dev/null"
-            if [[ "$BITNAMI_DEBUG" = "true" ]]; then
-                output="/dev/stdout"
+            info "Waiting for peer $peer to reach Up/Normal (UN) status"
+            if ! retry_while check_peer_un "$retries" "$sleep_time"; then
+                error "Peer $peer did not reach Up/Normal (UN) status"
+                exit 1
             fi
-
-            "${check_cmd[@]}" "${check_args[@]}" | grep -E "${check_regex}" >"${output}"
-        }
-
-        if ! retry_while check_peer_un "$retries" "$sleep_time"; then
-            error "Peer $peer did not reach Up/Normal (UN) status"
-            exit 1
+        else
+            wait_for_cql_access "cassandra" "cassandra" "$peer" "$retries" "$sleep_time"
         fi
     done
     info "All peers reached Up/Normal (UN) status"
