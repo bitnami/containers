@@ -17,7 +17,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "cloudnative-pg-1.29.1-3-linux-${OS_ARCH}-debian-12" \
+      "cloudnative-pg-1.30.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -40,11 +40,11 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2026-06-10T14:40:04Z" \
+      org.opencontainers.image.created="2026-06-29T20:24:37Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="cloudnative-pg" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.29.1"
+      org.opencontainers.image.version="1.30.0"
 
 COPY rootfs /
 COPY --from=builder /opt/bitnami/cloudnative-pg/manager /manager
@@ -52,9 +52,9 @@ COPY --from=builder /opt/bitnami/cloudnative-pg/bin /operator
 COPY --from=builder /opt/bitnami/cloudnative-pg/.spdx-cloudnative-pg.spdx /opt/bitnami/cloudnative-pg/.spdx-cloudnative-pg.spdx
 COPY --from=builder /opt/bitnami/cloudnative-pg/licenses /opt/bitnami/cloudnative-pg/licenses
 
-ENV APP_VERSION="1.29.1" \
+ENV APP_VERSION="1.30.0" \
     BITNAMI_APP_NAME="cloudnative-pg" \
-    IMAGE_REVISION="3" \
+    IMAGE_REVISION="0" \
     PATH="/operator:$PATH"
 
 USER 1001
