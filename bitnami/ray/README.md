@@ -80,7 +80,7 @@ docker run -it --name ray -v /path/to/app:/app bitnami/ray \
 
 **Additional documentation:**
 
-- [Ray documentation](https://ray.iodocs/)
+- [Ray documentation](https://docs.ray.io/)
 
 ### FIPS configuration in Bitnami Secure Images
 
