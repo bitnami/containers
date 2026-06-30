@@ -25,7 +25,19 @@ ARGS+=("$@")
 
 info "** Starting Elasticsearch **"
 if am_i_root; then
-    exec_as_user "$DB_DAEMON_USER" "$EXEC" "${ARGS[@]}"
+    _exec_elasticsearch() { exec_as_user "$DB_DAEMON_USER" "$EXEC" "${ARGS[@]}"; }
 else
-    exec "$EXEC" "${ARGS[@]}"
+    _exec_elasticsearch() { exec "$EXEC" "${ARGS[@]}"; }
+fi
+
+# In FIPS restricted mode ES 9.x reads the keystore password from stdin
+# (Terminal.readSecret()). ES_KEYSTORE_PASSPHRASE is auto-populated from
+# ES_KEYSTORE_PASSPHRASE_FILE by the Bitnami framework; supplying it via
+# a here-string avoids an interactive TTY.
+if [[ "${ELASTICSEARCH_ENABLE_FIPS_MODE:-false}" == "true" ]] && \
+   [[ "${JAVA_TOOL_OPTIONS:-}" == *"java.security.restricted"* ]] && \
+   [[ -n "${ES_KEYSTORE_PASSPHRASE:-}" ]]; then
+    _exec_elasticsearch <<< "${ES_KEYSTORE_PASSPHRASE}"
+else
+    _exec_elasticsearch
 fi
