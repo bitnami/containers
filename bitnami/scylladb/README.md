@@ -92,6 +92,7 @@ The following tables list the main variables you can set.
 | `SCYLLADB_HOST`                                   | ScyllaDB host name                                                                      | `nil`                                 |
 | `SCYLLADB_INTERNODE_ENCRYPTION`                   | Internode encryption type                                                               | `none`                                |
 | `SCYLLADB_NUM_TOKENS`                             | Number of tokens in cluster connection                                                  | `256`                                 |
+| `SCYLLADB_ISOLATED_SEEDING`                       | Perform seeding without exposing RPC endpoint                                           | `yes`                                 |
 | `SCYLLADB_PASSWORD_SEEDER`                        | Set node as password seeder in the cluster                                              | `no`                                  |
 | `SCYLLADB_SEEDS`                                  | List of cluster seeds                                                                   | `$DB_HOST`                            |
 | `SCYLLADB_PEERS`                                  | List of cluster peers                                                                   | `$DB_SEEDS`                           |

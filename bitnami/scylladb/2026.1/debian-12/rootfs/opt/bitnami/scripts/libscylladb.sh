@@ -925,7 +925,7 @@ cassandra_initialize() {
             # Otherwise, cqlsh reconnects to the pod IP (via system.local), blocked by the ensure_superuser_is_created gate.
             cassandra_start_bg "$DB_FIRST_BOOT_LOG_FILE" "" "" "--broadcast-rpc-address 127.0.0.1"
         else
-            cassandra_yaml_set "rpc_address" "127.0.0.1"
+            is_boolean_yes "$DB_ISOLATED_SEEDING" && cassandra_yaml_set "rpc_address" "127.0.0.1"
             cassandra_start_bg "$DB_FIRST_BOOT_LOG_FILE"
         fi
         if is_boolean_yes "$DB_PASSWORD_SEEDER"; then
@@ -1311,28 +1311,31 @@ wait_for_peers_ready() {
 
     local peer peer_ip
     for peer in ${peers//,/ }; do
-        peer_ip="$(dns_lookup "$peer" "v4")"
-        [[ -z "$peer_ip" ]] && peer_ip="$peer"
-        info "Waiting for peer $peer to reach Up/Normal (UN) status"
+        if is_boolean_yes "$DB_ISOLATED_SEEDING"; then
+            peer_ip="$(dns_lookup "$peer" "v4")"
+            [[ -z "$peer_ip" ]] && peer_ip="$peer"
+            # shellcheck disable=SC2329
+            check_peer_un() {
+                # Using legacy RMI URL parsing to avoid URISyntaxException: 'Malformed IPv6 address at index 7: rmi://[127.0.0.1]:7199' error
+                # https://community.datastax.com/questions/13764/java-version-for-cassandra-3113.html
+                local -r check_cmd=("nodetool" "-Dcom.sun.jndi.rmiURLParsing=legacy")
+                local -r check_args=("status" "--port" "$DB_JMX_PORT_NUMBER")
+                local -r check_regex="UN\s*(${peer}|${peer_ip})"
+                local output="/dev/null"
+                if [[ "$BITNAMI_DEBUG" = "true" ]]; then
+                    output="/dev/stdout"
+                fi
 
-        check_peer_un() {
-            # Using legacy RMI URL parsing to avoid URISyntaxException: 'Malformed IPv6 address at index 7: rmi://[127.0.0.1]:7199' error
-            # https://community.datastax.com/questions/13764/java-version-for-cassandra-3113.html
-            local -r check_cmd=("nodetool" "-Dcom.sun.jndi.rmiURLParsing=legacy")
-            local -r check_args=("status" "--port" "$DB_JMX_PORT_NUMBER")
-            local -r check_regex="UN\s*(${peer}|${peer_ip})"
+                "${check_cmd[@]}" "${check_args[@]}" | grep -E "${check_regex}" >"${output}"
+            }
 
-            local output="/dev/null"
-            if [[ "$BITNAMI_DEBUG" = "true" ]]; then
-                output="/dev/stdout"
+            info "Waiting for peer $peer to reach Up/Normal (UN) status"
+            if ! retry_while check_peer_un "$retries" "$sleep_time"; then
+                error "Peer $peer did not reach Up/Normal (UN) status"
+                exit 1
             fi
-
-            "${check_cmd[@]}" "${check_args[@]}" | grep -E "${check_regex}" >"${output}"
-        }
-
-        if ! retry_while check_peer_un "$retries" "$sleep_time"; then
-            error "Peer $peer did not reach Up/Normal (UN) status"
-            exit 1
+        else
+            wait_for_cql_access "cassandra" "cassandra" "$peer" "$retries" "$sleep_time"
         fi
     done
     info "All peers reached Up/Normal (UN) status"
