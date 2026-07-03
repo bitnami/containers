@@ -17,7 +17,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "clickhouse-backup-2.7.2-0-linux-${OS_ARCH}-debian-12" \
+      "clickhouse-backup-2.7.3-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -40,16 +40,16 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2026-06-24T14:19:06Z" \
+      org.opencontainers.image.created="2026-07-03T14:20:24Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="clickhouse-backup" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="2.7.2"
+      org.opencontainers.image.version="2.7.3"
 
 COPY rootfs /
 COPY --from=builder /opt/bitnami/clickhouse-backup /opt/bitnami/clickhouse-backup
 
-ENV APP_VERSION="2.7.2" \
+ENV APP_VERSION="2.7.3" \
     BITNAMI_APP_NAME="clickhouse-backup" \
     IMAGE_REVISION="0" \
     PATH="/opt/bitnami/clickhouse-backup/bin:$PATH"
