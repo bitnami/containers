@@ -936,6 +936,12 @@ cassandra_initialize() {
                 # Use 127.0.0.1 explicitly to prevent cqlsh from reconnecting to the pod IP via system.local.
                 wait_for_superuser_log_entry "$DB_FIRST_BOOT_LOG_FILE" "$DB_PEER_CQL_MAX_RETRIES" "$DB_PEER_CQL_SLEEP_TIME"
                 wait_for_cql_access "cassandra" "cassandra" "127.0.0.1" "$DB_PEER_CQL_MAX_RETRIES" "$DB_PEER_CQL_SLEEP_TIME"
+                # ScyllaDB 2026.2+ enforces RAFT quorum for CREATE USER; wait for all peers
+                # before attempting user creation with a custom username (ALTER USER does not
+                # require quorum and is unaffected).
+                if [[ "$DB_USER" != "cassandra" ]]; then
+                    wait_for_peers_ready "$DB_PEERS" "$DB_PEER_CQL_MAX_RETRIES" "$DB_PEER_CQL_SLEEP_TIME"
+                fi
             else
                 # Wait for all peers to be ready before changing the password
                 wait_for_peers_ready "$DB_PEERS" "$DB_PEER_CQL_MAX_RETRIES" "$DB_PEER_CQL_SLEEP_TIME"
