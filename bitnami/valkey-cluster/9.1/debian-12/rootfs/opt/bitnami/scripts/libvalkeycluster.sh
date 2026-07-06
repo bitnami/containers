@@ -218,6 +218,18 @@ valkey_cluster_update_ips() {
             printf "%s=\"%s\"\n" "$key" "${host_2_ip_array[$key]}" >> "${VALKEY_DATA_DIR}/nodes.sh"
         done
     else
+        info "Updating Valkey cluster IPs"
+        # Safeguard to detect old format on nodes.sh
+        if grep -q "declare -A host_2_ip_array=" "${VALKEY_DATA_DIR}/nodes.sh"; then
+            # Transform the old format to the new format in a sub-shell
+            (
+                source "${VALKEY_DATA_DIR}/nodes.sh"
+                for host in "${!host_2_ip_array[@]}"; do
+                    echo "${host}=\"${host_2_ip_array[$host]}\""
+                done
+            ) > "${VALKEY_DATA_DIR}/nodes.sh.new"
+            mv "${VALKEY_DATA_DIR}/nodes.sh.new" "${VALKEY_DATA_DIR}/nodes.sh"
+        fi
         # The cluster was already started, let's read hosts and IPs from the nodes.sh file
         while IFS= read -r line || [[ -n "$line" ]]; do
             # Skip blank lines and shell comments
