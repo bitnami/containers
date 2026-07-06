@@ -568,6 +568,10 @@ etcd_safe_load_member_env() {
     local _k _v
     while IFS='=' read -r _k _v; do
         [[ "$_k" =~ ^ETCD_[A-Z_]+$ ]] || continue
+        # etcdctl member add emits shell-quoted KEY="VALUE" lines; strip
+        # the surrounding double-quotes so they are not passed to etcd.
+        _v="${_v#\"}"
+        _v="${_v%\"}"
         export "$_k"="$_v"
     done < "$ETCD_NEW_MEMBERS_ENV_FILE"
 }
