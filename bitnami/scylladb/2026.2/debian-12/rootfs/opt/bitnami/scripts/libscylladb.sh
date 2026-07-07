@@ -248,6 +248,59 @@ wait_for_superuser_log_entry() {
     fi
 }
 
+########################
+# Returns scylla minor version
+# Globals:
+#   DB_BIN_DIR
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+scylla_get_minor_version() {
+    scylla_version="$("${DB_BIN_DIR}/scylla" --version)"
+    minor_version="$(get_sematic_version "$scylla_version" 2)"
+    echo "${minor_version:-0}"
+}
+
+########################
+# Checks whether the running scylla release supports pre-seeding the default
+# superuser via the auth_superuser_name/auth_superuser_salted_password config
+# keys instead of relying on the built-in cassandra/cassandra account.
+# ScyllaDB 2026.2 removed the default cassandra/cassandra superuser
+# (https://github.com/scylladb/scylladb/issues/27215), so on 2026.2+ the
+# superuser must be seeded via config before the first boot.
+# Globals:
+#   DB_FLAVOR
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+scylladb_supports_auth_superuser_config() {
+    [[ "$DB_FLAVOR" = "scylladb" ]] || return 1
+    local -r major="$(scylla_get_major_version)"
+    local -r minor="$(scylla_get_minor_version)"
+    [[ "$major" -gt 2026 ]] || { [[ "$major" -eq 2026 ]] && [[ "$minor" -ge 2 ]]; }
+}
+
+########################
+# Computes a salted password hash suitable for the auth_superuser_salted_password
+# scylla.yaml key. The -6 flag selects the SHA-512 crypt(3) scheme, matching
+# ScyllaDB's own default password hashing scheme (see the "Using password
+# hashing scheme: $6$" line ScyllaDB logs on startup). Supported since OpenSSL
+# 1.1.0 (2016); verified available on all our target distros (debian-11/12,
+# photon-5, redhatubi-8/9).
+# Arguments:
+#   $1 - password
+# Returns:
+#   String
+#########################
+scylladb_hash_password() {
+    local -r password="${1:?missing password}"
+    openssl passwd -6 "$password"
+}
+
 
 #!/bin/bash
 # Copyright Broadcom, Inc. All Rights Reserved.
@@ -306,7 +359,10 @@ scylla_get_major_version() {
 #   $1 - property
 #   $2 - value
 #   $3 - Use quotes in value (default: yes)
-#   $4 - Path to configuration file (default: $DB_CONF_FILE)
+#   $4 - Append the property instead of being a no-op when it is not already
+#        present (commented or not) in the file, e.g. for config keys not
+#        shipped in Bitnami's default configuration template (default: no)
+#   $5 - Path to configuration file (default: $DB_CONF_FILE)
 # Returns:
 #   None
 #########################
@@ -314,9 +370,16 @@ cassandra_yaml_set() {
     local -r property="${1:?missing property}"
     local -r value="${2:?missing value}"
     local -r use_quotes="${3:-yes}"
-    local -r conf_file="${4:-$DB_CONF_FILE}"
+    local -r append="${4:-no}"
+    local -r conf_file="${5:-$DB_CONF_FILE}"
 
-    if is_boolean_yes "$use_quotes"; then
+    if is_boolean_yes "$append" && ! grep -qE "^\s*(#\s*)?(\-\s*)?${property}:" "$conf_file"; then
+        if is_boolean_yes "$use_quotes"; then
+            echo "${property}: '${value}'" >>"$conf_file"
+        else
+            echo "${property}: ${value}" >>"$conf_file"
+        fi
+    elif is_boolean_yes "$use_quotes"; then
         replace_in_file "$conf_file" "^(\s*)(#\s*)?(\s*)(\-\s*)?${property}:.*" "\1\3\4${property}: '${value}'"
     else
         replace_in_file "$conf_file" "^(\s*)(#\s*)?(\s*)(\-\s*)?${property}:.*" "\1\3\4${property}: ${value}"
@@ -635,6 +698,11 @@ cassandra_enable_auth() {
                 cassandra_yaml_set "authenticator" "${DB_AUTHENTICATOR}"
                 cassandra_yaml_set "authorizer" "${DB_AUTHORIZER}"
             fi
+            if [[ "$DB_FLAVOR" = "scylladb" ]] && scylladb_supports_auth_superuser_config; then
+                info "Pre-seeding default superuser '$DB_USER' via auth_superuser_name/auth_superuser_salted_password"
+                cassandra_yaml_set "auth_superuser_name" "${DB_USER}" "yes" "yes"
+                cassandra_yaml_set "auth_superuser_salted_password" "$(scylladb_hash_password "$DB_PASSWORD")" "yes" "yes"
+            fi
         fi
     else
         debug "${DB_MOUNTED_CONF_PATH} mounted. Skipping authentication method configuration"
@@ -930,18 +998,22 @@ cassandra_initialize() {
         fi
         if is_boolean_yes "$DB_PASSWORD_SEEDER"; then
             info "Password seeder node"
-            if [[ "$DB_FLAVOR" = "scylladb" ]]; then
+            local scylladb_preseeded_superuser="no"
+            if [[ "$DB_FLAVOR" = "scylladb" ]] && scylladb_supports_auth_superuser_config; then
+                scylladb_preseeded_superuser="yes"
+            fi
+            if is_boolean_yes "$scylladb_preseeded_superuser"; then
+                # ScyllaDB 2026.2+ no longer creates a default cassandra/cassandra superuser
+                # (scylladb/scylladb#27215); cassandra_enable_auth already pre-seeded $DB_USER
+                # as the superuser via auth_superuser_name/auth_superuser_salted_password, so
+                # there is no separate bootstrap-then-create/change-user step to perform here.
+                wait_for_cql_access "$DB_USER" "$DB_PASSWORD" "127.0.0.1" "$DB_PEER_CQL_MAX_RETRIES" "$DB_PEER_CQL_SLEEP_TIME"
+            elif [[ "$DB_FLAVOR" = "scylladb" ]]; then
                 # ScyllaDB 2025.4.5+ (PR #22532): wait for the superuser record before connecting,
                 # as CQL is accepting connections but auth is not ready until that log line appears.
                 # Use 127.0.0.1 explicitly to prevent cqlsh from reconnecting to the pod IP via system.local.
                 wait_for_superuser_log_entry "$DB_FIRST_BOOT_LOG_FILE" "$DB_PEER_CQL_MAX_RETRIES" "$DB_PEER_CQL_SLEEP_TIME"
                 wait_for_cql_access "cassandra" "cassandra" "127.0.0.1" "$DB_PEER_CQL_MAX_RETRIES" "$DB_PEER_CQL_SLEEP_TIME"
-                # ScyllaDB 2026.2+ enforces RAFT quorum for CREATE USER; wait for all peers
-                # before attempting user creation with a custom username (ALTER USER does not
-                # require quorum and is unaffected).
-                if [[ "$DB_USER" != "cassandra" ]]; then
-                    wait_for_peers_ready "$DB_PEERS" "$DB_PEER_CQL_MAX_RETRIES" "$DB_PEER_CQL_SLEEP_TIME"
-                fi
             else
                 # Wait for all peers to be ready before changing the password
                 wait_for_peers_ready "$DB_PEERS" "$DB_PEER_CQL_MAX_RETRIES" "$DB_PEER_CQL_SLEEP_TIME"
@@ -949,10 +1021,12 @@ cassandra_initialize() {
                 wait_for_cql_access "cassandra" "cassandra" "127.0.0.1" "$DB_PEER_CQL_MAX_RETRIES" "$DB_PEER_CQL_SLEEP_TIME"
             fi
             # Setup user
-            if [[ "$DB_USER" = "cassandra" ]]; then
-                cassandra_change_cassandra_password "cassandra" "$DB_PASSWORD" "$DB_CQL_MAX_RETRIES" "$DB_CQL_SLEEP_TIME"
-            else
-                cassandra_create_admin_user "$DB_USER" "$DB_PASSWORD" "cassandra" "cassandra" "$DB_CQL_MAX_RETRIES" "$DB_CQL_SLEEP_TIME"
+            if ! is_boolean_yes "$scylladb_preseeded_superuser"; then
+                if [[ "$DB_USER" = "cassandra" ]]; then
+                    cassandra_change_cassandra_password "cassandra" "$DB_PASSWORD" "$DB_CQL_MAX_RETRIES" "$DB_CQL_SLEEP_TIME"
+                else
+                    cassandra_create_admin_user "$DB_USER" "$DB_PASSWORD" "cassandra" "cassandra" "$DB_CQL_MAX_RETRIES" "$DB_CQL_SLEEP_TIME"
+                fi
             fi
 
             cassandra_execute_startup_cql
