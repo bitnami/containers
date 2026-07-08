@@ -424,3 +424,23 @@ EOF
 WantedBy=bitnami.service
 EOF
 }
+
+########################
+# Register a SIGTERM handler that forwards the signal to all child processes.
+# Should be called at the start of run.sh, before launching any background processes.
+# Globals:
+#   None
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+service_register_term_forwarder() {
+    _service_forward_term() {
+        warn "Caught signal SIGTERM, passing it to child processes..."
+        pgrep -P $$ | xargs kill -TERM 2>/dev/null
+        wait
+        exit $?
+    }
+    trap _service_forward_term TERM
+}
