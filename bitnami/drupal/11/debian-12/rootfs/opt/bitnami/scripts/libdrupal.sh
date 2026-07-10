@@ -273,6 +273,19 @@ drupal_wait_for_db_connection() {
 }
 
 ########################
+# Get the installed Drupal core version
+# Globals:
+#   DRUPAL_BASE_DIR
+# Arguments:
+#   None
+# Returns:
+#   String
+#########################
+drupal_get_version() {
+    grep -oE "const VERSION = '[0-9.]+'" "${DRUPAL_BASE_DIR}/core/lib/Drupal.php" | grep -oE '[0-9.]+'
+}
+
+########################
 # Drupal Site Install
 # Globals:
 #   *
@@ -305,6 +318,15 @@ drupal_site_install() {
             "--site-mail=${DRUPAL_EMAIL}" \
             "-y" "$DRUPAL_PROFILE"
     )
+
+    # Drupal core 11.4.0 removed the Article and Page content types from the "standard"
+    # install profile/recipe (drupal.org issue #3587118). Restore them via their own
+    # recipes on affected versions so sites keep the content types earlier Drupal
+    # versions provided by default.
+    if [[ "$DRUPAL_PROFILE" = "standard" ]] && [[ "$(compare_semantic_versions "$(drupal_get_version)" "11.4.0")" -ge 0 ]]; then
+        drush_execute recipe "core/recipes/article_content_type" "-y"
+        drush_execute recipe "core/recipes/page_content_type" "-y"
+    fi
 
     # When Drupal settings are patched to allow SSL database connections, the database settings block is duplicated
     # after the installation with Drush
