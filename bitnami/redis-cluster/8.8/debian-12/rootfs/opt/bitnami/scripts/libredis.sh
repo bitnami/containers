@@ -54,9 +54,9 @@ redis_conf_set() {
     value="${value//\\/\\\\}"
     value="${value//&/\\&}"
     value="${value//\?/\\?}"
-    # 2. \000-\037 strips all ASCII control characters (0-31)
+    # 2. \001-\037 strips all ASCII control characters (1-31), \000 is the NUL character (0) that Bash cannot store
     # 3. \177 strips DEL (delete) character (127)
-    value="${value//[$'\000'-$'\037'$'\177']}"
+    value="${value//[$'\001'-$'\037'$'\177']}"
     # 4. If the value is empty, set it to an empty string
     [[ "$value" = "" ]] && value="\"$value\""
 
@@ -409,8 +409,10 @@ redis_configure_default() {
         chmod 640 "${REDIS_BASE_DIR}/etc/redis.conf"
     else
         info "Setting Redis config file"
-        # We try to enforce strict permissions, but we don't fail if it's not possible
-        chmod 640 "${REDIS_BASE_DIR}/etc/redis.conf" || true
+        # Try to enforce strict permissions when we own the file or are root
+        if am_i_root || [[ -O "${REDIS_BASE_DIR}/etc/redis.conf" ]]; then
+            chmod 640 "${REDIS_BASE_DIR}/etc/redis.conf"
+        fi
         if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
             # Allow remote connections without password
             redis_conf_set protected-mode no
