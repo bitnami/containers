@@ -130,12 +130,18 @@ kubescape_oss_assessment() {
   fi
 
   # Run Kubescape scan for the provided project and add custom field 'security'
+  # NOTE: '--output' is used (instead of parsing stdout) because kubescape also prints a human-readable
+  # summary to stdout alongside the JSON report, which would otherwise break JSON parsing
   info "Running command '${cmd} ${scan_args[*]}'"
+  local scan_output_file
+  scan_output_file="$(mktemp --suffix=.json)"
   if is_boolean_yes "$silent"; then
-    KUBESCAPE_OUTPUT="$(${cmd} "${scan_args[@]}" 2> /dev/null | jq '.security = []' || true)"
+    ${cmd} "${scan_args[@]}" --output "$scan_output_file" > /dev/null 2>/dev/null || true
   else
-    KUBESCAPE_OUTPUT="$(${cmd} "${scan_args[@]}" | jq '.security = []' || true)"
+    ${cmd} "${scan_args[@]}" --output "$scan_output_file" > /dev/null || true
   fi
+  KUBESCAPE_OUTPUT="$(jq '.security = []' "$scan_output_file" 2>/dev/null || true)"
+  rm -f "$scan_output_file"
   if [[ -n "$KUBESCAPE_OUTPUT" ]]; then
     ! is_boolean_yes "$silent" && debug "Result:\n$KUBESCAPE_OUTPUT"
   else
@@ -170,7 +176,11 @@ kubescape_oss_assessment() {
     KUBESCAPE_IMAGE_OUTPUT=""
     info "Scanning image $((images_scanned + 1)) out of ${#unique_matching_images[@]}: ${image}"
     for ((i = 1; i <= retries; i += 1)); do
-      KUBESCAPE_IMAGE_OUTPUT="$(${cmd} "${scan_image_args[@]}" "${image}" 2> /dev/null || echo '')"
+      local image_output_file
+      image_output_file="$(mktemp --suffix=.json)"
+      ${cmd} "${scan_image_args[@]}" "${image}" --output "$image_output_file" > /dev/null 2>/dev/null || true
+      KUBESCAPE_IMAGE_OUTPUT="$(cat "$image_output_file" 2>/dev/null)"
+      rm -f "$image_output_file"
       if [[ -n "$KUBESCAPE_IMAGE_OUTPUT" ]]; then
         debug "Result: $KUBESCAPE_IMAGE_OUTPUT"
         break

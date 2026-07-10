@@ -196,7 +196,8 @@ zookeeper_initialize() {
 #########################
 zookeeper_generate_conf() {
     cp "${ZOO_CONF_DIR}/zoo_sample.cfg" "$ZOO_CONF_FILE"
-    chmod 600 "$ZOO_CONF_FILE"
+    chmod 640 "$ZOO_CONF_FILE"
+    am_i_root && chown ":$ZOO_DAEMON_GROUP" "$ZOO_CONF_FILE"
     echo >>"$ZOO_CONF_FILE"
 
     zookeeper_conf_set "$ZOO_CONF_FILE" tickTime "$ZOO_TICK_TIME"
@@ -332,8 +333,8 @@ zookeeper_enable_client_server_authentication() {
     info "Enabling authentication..."
     zookeeper_conf_set "$filename" authProvider.1 org.apache.zookeeper.server.auth.SASLAuthenticationProvider
     zookeeper_conf_set "$filename" sessionRequireClientSASLAuth true
-    zookeeper_conf_set enforce.auth.enabled true
-    zookeeper_conf_set enforce.auth.schemes sasl
+    zookeeper_conf_set "$filename" enforce.auth.enabled true
+    zookeeper_conf_set "$filename" enforce.auth.schemes sasl
 }
 
 ########################

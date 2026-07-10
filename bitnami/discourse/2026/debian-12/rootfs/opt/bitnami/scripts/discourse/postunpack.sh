@@ -42,7 +42,7 @@ declare -a writable_dirs=(
 for dir in "${writable_dirs[@]}"; do
     ensure_dir_exists "$dir"
     # Use daemon:root ownership for compatibility when running as a non-root user
-    configure_permissions_ownership "$dir" -d "775" -f "664" -u "$DISCOURSE_DAEMON_USER" -g "root"
+    configure_permissions_ownership "$dir" -d "775" -f "664" -u "$DISCOURSE_DAEMON_USER" -g "root" -n
 done
 
 # Gem 'sprockets' purposely includes a broken symlink, which causes permissions change to fail
@@ -62,4 +62,4 @@ fi
 
 # Required for running as non-root users, for persistence logic to work properly
 # Using g+rwx/g+rw instead of explicit 775/664 permissions because Discourse includes executable binaries in different subfolders
-configure_permissions_ownership "$DISCOURSE_BASE_DIR" -d "g+rwx" -f "g+rw" -u "$DISCOURSE_DAEMON_USER" -g "root"
+configure_permissions_ownership "$DISCOURSE_BASE_DIR" -d "g+rwx" -f "g+rw" -u "$DISCOURSE_DAEMON_USER" -g "root" -n
