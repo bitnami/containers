@@ -8,7 +8,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-06-10T17:01:13Z" \
+      org.opencontainers.image.created="2026-07-10T17:54:20Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/ejbca/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/ejbca" \
@@ -29,7 +29,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "wildfly-32.0.1-28-linux-${OS_ARCH}-debian-12" \
+      "wildfly-32.0.1-32-linux-${OS_ARCH}-debian-12" \
       "jre-21.0.11-11-1-linux-${OS_ARCH}-debian-12" \
       "mysql-client-12.3.2-1-linux-${OS_ARCH}-debian-12" \
       "ejbca-9.3.7-3-linux-${OS_ARCH}-debian-12" \
@@ -54,7 +54,7 @@ RUN /opt/bitnami/scripts/ejbca/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="9.3.7" \
     BITNAMI_APP_NAME="ejbca" \
-    IMAGE_REVISION="16" \
+    IMAGE_REVISION="17" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/wildfly/bin:/opt/bitnami/java/bin:/opt/bitnami/mysql/bin:/opt/bitnami/ejbca/bin:$PATH"
 

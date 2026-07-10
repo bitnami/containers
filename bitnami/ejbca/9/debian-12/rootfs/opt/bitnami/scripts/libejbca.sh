@@ -212,9 +212,15 @@ ejbca_configure_wildfly_https() {
     ejbca_wildfly_command "/socket-binding-group=standard-sockets/socket-binding=httpspriv:add(port=\"$EJBCA_HTTPS_PORT_NUMBER\",interface=\"httpspriv\")"
 
     info "Configure TLS"
-    ejbca_wildfly_command "/subsystem=elytron/key-store=httpsKS:add(path=\"keystore.jks\",relative-to=jboss.server.config.dir,credential-reference={clear-text=\"$EJBCA_KEYSTORE_PASSWORD\"},type=JKS)"
-    ejbca_wildfly_command "/subsystem=elytron/key-store=httpsTS:add(path=\"truststore.jks\",relative-to=jboss.server.config.dir,credential-reference={clear-text=\"$EJBCA_TRUSTSTORE_PASSWORD\"},type=JKS)"
-    ejbca_wildfly_command "/subsystem=elytron/key-manager=httpsKM:add(key-store=httpsKS,algorithm=\"SunX509\",credential-reference={clear-text=\"$EJBCA_KEYSTORE_PASSWORD\"})"
+    if [[ "${JAVA_FIPS_MODE:-}" == "restricted" ]]; then
+        ejbca_wildfly_command "/subsystem=elytron/key-store=httpsKS:add(path=\"keystore.p12\",relative-to=jboss.server.config.dir,credential-reference={clear-text=\"$EJBCA_KEYSTORE_PASSWORD\"},type=PKCS12)"
+        ejbca_wildfly_command "/subsystem=elytron/key-store=httpsTS:add(path=\"truststore.p12\",relative-to=jboss.server.config.dir,credential-reference={clear-text=\"$EJBCA_TRUSTSTORE_PASSWORD\"},type=PKCS12)"
+        ejbca_wildfly_command "/subsystem=elytron/key-manager=httpsKM:add(key-store=httpsKS,algorithm=\"PKIX\",credential-reference={clear-text=\"$EJBCA_KEYSTORE_PASSWORD\"})"
+    else
+        ejbca_wildfly_command "/subsystem=elytron/key-store=httpsKS:add(path=\"keystore.jks\",relative-to=jboss.server.config.dir,credential-reference={clear-text=\"$EJBCA_KEYSTORE_PASSWORD\"},type=JKS)"
+        ejbca_wildfly_command "/subsystem=elytron/key-store=httpsTS:add(path=\"truststore.jks\",relative-to=jboss.server.config.dir,credential-reference={clear-text=\"$EJBCA_TRUSTSTORE_PASSWORD\"},type=JKS)"
+        ejbca_wildfly_command "/subsystem=elytron/key-manager=httpsKM:add(key-store=httpsKS,algorithm=\"SunX509\",credential-reference={clear-text=\"$EJBCA_KEYSTORE_PASSWORD\"})"
+    fi
     ejbca_wildfly_command '/subsystem=elytron/trust-manager=httpsTM:add(key-store=httpsTS)'
     ejbca_wildfly_command '/subsystem=elytron/server-ssl-context=httpspub:add(key-manager=httpsKM,protocols=["TLSv1.2"])'
     ejbca_wildfly_command '/subsystem=elytron/server-ssl-context=httpspriv:add(key-manager=httpsKM,protocols=["TLSv1.2"],trust-manager=httpsTM,need-client-auth=false,authentication-optional=true,want-client-auth=true)'
@@ -430,12 +436,14 @@ ejbca_generate_ca() {
             fi
 
             info "Add RA Entity"
+            local ra_token_type="JKS"
+            [[ "${JAVA_FIPS_MODE:-}" == "restricted" ]] && ra_token_type="PKCS12"
             ejbca_execute_command ra addendentity \
                 --username "$end_entity_name" \
                 --dn "\"CN=$instance_hostname,$EJBCA_BASE_DN\"" \
                 --caname "$EJBCA_CA_NAME" \
                 --type 1 \
-                --token JKS \
+                --token "$ra_token_type" \
                 --password "$EJBCA_KEYSTORE_PASSWORD" \
                 --altname "dnsName=$instance_hostname" \
                 --certprofile SERVER
