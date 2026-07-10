@@ -164,7 +164,7 @@ USER root
 RUN install_packages curl
 USER 1001
 RUN rm -r /opt/bitnami/spark/jars && \
-    curl --location https://dlcdn.apache.org/spark/spark-3.5.0/spark-3.5.0-bin-hadoop3.tgz | \
+    curl --location https://archive.apache.org/dist/spark/spark-3.5.0/spark-3.5.0-bin-hadoop3.tgz | \
     tar --extract --gzip --strip=1 --directory /opt/bitnami/spark/ spark-3.5.0-bin-hadoop3/jars/
 ```
 

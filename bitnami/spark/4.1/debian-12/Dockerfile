@@ -8,7 +8,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-06-18T17:35:37Z" \
+      org.opencontainers.image.created="2026-07-10T22:29:18Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/spark/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/spark" \
@@ -25,15 +25,15 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libbz2-1.0 libcom-err2 libcrypt1 libffi8 libgcc-s1 libgssapi-krb5-2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblzma5 libncursesw6 libnsl2 libreadline8 libsqlite3-0 libssl3 libstdc++6 libtinfo6 libtirpc3 openssl procps zlib1g
+RUN install_packages ca-certificates curl libbz2-1.0 libffi8 libgcc-s1 liblzma5 libncursesw6 libreadline8 libsqlite3-0 libssl3 libstdc++6 libtinfo6 openssl procps zlib1g
 RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "nss-wrapper-1.1.16-0-linux-${OS_ARCH}-debian-12" \
-      "python-3.12.13-15-linux-${OS_ARCH}-debian-12" \
+      "python-3.14.6-6-linux-${OS_ARCH}-debian-12" \
       "jre-17.0.19-11-1-linux-${OS_ARCH}-debian-12" \
-      "spark-4.1.2-0-linux-${OS_ARCH}-debian-12" \
+      "spark-4.1.2-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -56,9 +56,9 @@ RUN /opt/bitnami/scripts/spark/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="4.1.2" \
     BITNAMI_APP_NAME="spark" \
-    IMAGE_REVISION="4" \
+    IMAGE_REVISION="5" \
     JAVA_HOME="/opt/bitnami/java" \
-    LD_LIBRARY_PATH="/opt/bitnami/python/lib:/opt/bitnami/spark/venv/lib/python3.12/site-packages/numpy.libs" \
+    LD_LIBRARY_PATH="/opt/bitnami/python/lib:/opt/bitnami/spark/venv/lib/python3.14/site-packages/numpy.libs" \
     LIBNSS_WRAPPER_PATH="/opt/bitnami/common/lib/libnss_wrapper.so" \
     NSS_WRAPPER_GROUP="/opt/bitnami/spark/tmp/nss_group" \
     NSS_WRAPPER_PASSWD="/opt/bitnami/spark/tmp/nss_passwd" \
