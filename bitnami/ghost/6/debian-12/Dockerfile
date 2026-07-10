@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-07-06T18:14:16Z" \
+      org.opencontainers.image.created="2026-07-10T08:44:35Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/ghost/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/ghost" \
@@ -23,14 +23,14 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages acl ca-certificates curl jq libaudit1 libbz2-1.0 libcap-ng0 libcom-err2 libcrypt1 libffi8 libgcc-s1 libgssapi-krb5-2 libicu72 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblzma5 libncurses6 libncursesw6 libnsl2 libpam0g libreadline8 libsqlite3-0 libssl3 libstdc++6 libtinfo6 libtirpc3 libxml2 procps zlib1g
+RUN install_packages acl ca-certificates curl jq libaudit1 libbz2-1.0 libcap-ng0 libffi8 libgcc-s1 libicu72 liblzma5 libncurses6 libncursesw6 libpam0g libreadline8 libsqlite3-0 libssl3 libstdc++6 libtinfo6 libxml2 procps zlib1g
 RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "nss-wrapper-1.1.16-0-linux-${OS_ARCH}-debian-12" \
-      "python-3.12.13-16-linux-${OS_ARCH}-debian-12" \
-      "node-22.23.1-0-linux-${OS_ARCH}-debian-12" \
+      "python-3.14.6-6-linux-${OS_ARCH}-debian-12" \
+      "node-22.23.1-1-linux-${OS_ARCH}-debian-12" \
       "mysql-client-12.3.2-1-linux-${OS_ARCH}-debian-12" \
       "ghost-6.51.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
@@ -53,7 +53,7 @@ RUN /opt/bitnami/scripts/ghost/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APP_VERSION="6.51.0" \
     BITNAMI_APP_NAME="ghost" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:/opt/bitnami/ghost/bin:$PATH"
 
 EXPOSE 2368 3000
