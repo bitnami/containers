@@ -8,7 +8,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-06-26T09:21:13Z" \
+      org.opencontainers.image.created="2026-07-10T22:01:11Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/cassandra/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cassandra" \
@@ -24,12 +24,12 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libbz2-1.0 libcom-err2 libcrypt1 libffi8 libgssapi-krb5-2 libjemalloc2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblzma5 libncursesw6 libnsl2 libreadline8 libsqlite3-0 libssl3 libtinfo6 libtirpc3 procps zlib1g
+RUN install_packages ca-certificates curl libbz2-1.0 libffi8 libjemalloc2 liblzma5 libncursesw6 libreadline8 libsqlite3-0 libssl3 libtinfo6 procps zlib1g
 RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "python-3.11.15-19-linux-${OS_ARCH}-debian-12" \
+      "python-3.14.6-6-linux-${OS_ARCH}-debian-12" \
       "jre-11.0.31-11-1-linux-${OS_ARCH}-debian-12" \
       "cassandra-5.0.8-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
@@ -55,7 +55,7 @@ RUN /opt/bitnami/scripts/cassandra/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="5.0.8" \
     BITNAMI_APP_NAME="cassandra" \
-    IMAGE_REVISION="7" \
+    IMAGE_REVISION="8" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/cassandra/bin:$PATH"
 
