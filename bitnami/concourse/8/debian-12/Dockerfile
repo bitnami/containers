@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-07-10T01:55:40Z" \
+      org.opencontainers.image.created="2026-07-12T12:29:25Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/concourse/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/concourse" \
@@ -47,7 +47,7 @@ RUN update-alternatives --set iptables /usr/sbin/iptables-legacy && \
 
 ENV APP_VERSION="8.2.4" \
     BITNAMI_APP_NAME="concourse" \
-    IMAGE_REVISION="7" \
+    IMAGE_REVISION="8" \
     PATH="/opt/bitnami/concourse/bin:$PATH"
 
 CMD [ "/opt/bitnami/concourse/bin/concourse", "--help" ]
