@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-07-10T11:14:45Z" \
+      org.opencontainers.image.created="2026-07-12T14:22:46Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/plugin-barman-cloud-sidecar/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/plugin-barman-cloud-sidecar" \
@@ -51,7 +51,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="0.13.0" \
     BITNAMI_APP_NAME="plugin-barman-cloud-sidecar" \
-    IMAGE_REVISION="3" \
+    IMAGE_REVISION="4" \
     LD_LIBRARY_PATH="/opt/bitnami/postgresql/lib" \
     PATH="/opt/bitnami/plugin-barman-cloud/bin:/opt/bitnami/python/bin:$PATH"
 
