@@ -61,6 +61,24 @@ memcached_validate() {
         print_validation_error "The variable MEMCACHED_MAX_ITEM_SIZE must be positive integer"
     fi
 
+    # TLS validation
+    if [[ "${MEMCACHED_TLS_ENABLED:-no}" == "yes" ]]; then
+        if [[ -z "${MEMCACHED_TLS_CERT_FILE}" ]]; then
+            print_validation_error "TLS is enabled but MEMCACHED_TLS_CERT_FILE is not set"
+        elif [[ ! -f "${MEMCACHED_TLS_CERT_FILE}" ]]; then
+            print_validation_error "TLS certificate file '${MEMCACHED_TLS_CERT_FILE}' does not exist"
+        fi
+        if [[ -n "${MEMCACHED_TLS_KEY_FILE}" && ! -f "${MEMCACHED_TLS_KEY_FILE}" ]]; then
+            print_validation_error "TLS key file '${MEMCACHED_TLS_KEY_FILE}' does not exist"
+        fi
+        if [[ -n "${MEMCACHED_TLS_CA_FILE}" && ! -f "${MEMCACHED_TLS_CA_FILE}" ]]; then
+            print_validation_error "TLS CA file '${MEMCACHED_TLS_CA_FILE}' does not exist"
+        fi
+        if [[ -n "${MEMCACHED_TLS_VERIFY_MODE}" ]] && ! [[ "${MEMCACHED_TLS_VERIFY_MODE}" =~ ^[0-3]$ ]]; then
+            print_validation_error "MEMCACHED_TLS_VERIFY_MODE must be 0 (None), 1 (Request), 2 (Require), or 3 (Once)"
+        fi
+    fi
+
     [[ "${error_code}" -eq 0 ]] || exit "$error_code"
 }
 

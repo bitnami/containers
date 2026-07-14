@@ -68,18 +68,23 @@ The following tables list the main variables you can set.
 
 #### Customizable environment variables
 
-| Name                        | Description                                                            | Default Value |
-|-----------------------------|------------------------------------------------------------------------|---------------|
-| `MEMCACHED_LISTEN_ADDRESS`  | Host that the Memcached service will bind to.                          | `nil`         |
-| `MEMCACHED_PORT_NUMBER`     | Port number used by Memcached.                                         | `11211`       |
-| `MEMCACHED_USERNAME`        | Memcached admin username.                                              | `root`        |
-| `MEMCACHED_PASSWORD`        | Password for the Memcached admin user.                                 | `nil`         |
-| `MEMCACHED_MAX_ITEM_SIZE`   | Memcached maximum item size.                                           | `nil`         |
-| `MEMCACHED_EXTRA_FLAGS`     | Extra flags to be used when running Memcached.                         | `nil`         |
-| `MEMCACHED_MAX_TIMEOUT`     | Maximum timeout in seconds for Memcached to start or stop.             | `5`           |
-| `MEMCACHED_CACHE_SIZE`      | Memcached cache size in MB.                                            | `nil`         |
-| `MEMCACHED_MAX_CONNECTIONS` | Maximum amount of concurrent connections that Memcached will tolerate. | `nil`         |
-| `MEMCACHED_THREADS`         | Amount of process threads that Memcached will use.                     | `nil`         |
+| Name                        | Description                                                                       | Default Value |
+|-----------------------------|-----------------------------------------------------------------------------------|---------------|
+| `MEMCACHED_LISTEN_ADDRESS`  | Host that the Memcached service will bind to.                                     | `nil`         |
+| `MEMCACHED_PORT_NUMBER`     | Port number used by Memcached.                                                    | `11211`       |
+| `MEMCACHED_USERNAME`        | Memcached admin username.                                                         | `root`        |
+| `MEMCACHED_PASSWORD`        | Password for the Memcached admin user.                                            | `nil`         |
+| `MEMCACHED_MAX_ITEM_SIZE`   | Memcached maximum item size.                                                      | `nil`         |
+| `MEMCACHED_EXTRA_FLAGS`     | Extra flags to be used when running Memcached.                                    | `nil`         |
+| `MEMCACHED_MAX_TIMEOUT`     | Maximum timeout in seconds for Memcached to start or stop.                        | `5`           |
+| `MEMCACHED_CACHE_SIZE`      | Memcached cache size in MB.                                                       | `nil`         |
+| `MEMCACHED_MAX_CONNECTIONS` | Maximum amount of concurrent connections that Memcached will tolerate.            | `nil`         |
+| `MEMCACHED_THREADS`         | Amount of process threads that Memcached will use.                                | `nil`         |
+| `MEMCACHED_TLS_ENABLED`     | Whether to enable TLS/SSL encryption. Valid values: yes, no.                      | `no`          |
+| `MEMCACHED_TLS_CERT_FILE`   | Path to the TLS certificate chain file in PEM format.                             | `nil`         |
+| `MEMCACHED_TLS_KEY_FILE`    | Path to the TLS private key file in PEM format.                                   | `nil`         |
+| `MEMCACHED_TLS_CA_FILE`     | Path to the CA certificate file used for client certificate verification.         | `nil`         |
+| `MEMCACHED_TLS_VERIFY_MODE` | Peer certificate verification mode: 0 (None), 1 (Request), 2 (Require), 3 (Once). | `0`           |
 
 #### Read-only environment variables
 

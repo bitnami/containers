@@ -27,6 +27,14 @@ args=("-u" "$MEMCACHED_DAEMON_USER" "-p" "$MEMCACHED_PORT_NUMBER" "-v")
 [[ -n "$MEMCACHED_MAX_CONNECTIONS" ]] && args+=("-c" "$MEMCACHED_MAX_CONNECTIONS")
 [[ -n "$MEMCACHED_THREADS" ]] && args+=("-t" "$MEMCACHED_THREADS")
 [[ -n "$MEMCACHED_MAX_ITEM_SIZE" ]] && args+=("-I" "$MEMCACHED_MAX_ITEM_SIZE")
+# TLS
+if [[ "${MEMCACHED_TLS_ENABLED:-no}" == "yes" ]]; then
+    args+=("-Z")
+    [[ -n "$MEMCACHED_TLS_CERT_FILE" ]] && args+=("-o" "ssl_chain_cert=${MEMCACHED_TLS_CERT_FILE}")
+    [[ -n "$MEMCACHED_TLS_KEY_FILE" ]] && args+=("-o" "ssl_key=${MEMCACHED_TLS_KEY_FILE}")
+    [[ -n "$MEMCACHED_TLS_CA_FILE" ]] && args+=("-o" "ssl_ca_cert=${MEMCACHED_TLS_CA_FILE}")
+    [[ -n "$MEMCACHED_TLS_VERIFY_MODE" ]] && args+=("-o" "ssl_verify_mode=${MEMCACHED_TLS_VERIFY_MODE}")
+fi
 # Extra flags
 read -r -a extra_flags <<<"$MEMCACHED_EXTRA_FLAGS"
 [[ "${#extra_flags[@]}" -gt 0 ]] && args+=("${extra_flags[@]}")
