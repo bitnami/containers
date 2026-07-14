@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-07-08T04:41:13Z" \
+      org.opencontainers.image.created="2026-07-14T08:00:15Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/notation/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/notation" \
@@ -48,7 +48,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="1.3.2" \
     BITNAMI_APP_NAME="notation" \
-    IMAGE_REVISION="35" \
+    IMAGE_REVISION="36" \
     PATH="/opt/bitnami/notation/bin:$PATH"
 
 USER 1001
