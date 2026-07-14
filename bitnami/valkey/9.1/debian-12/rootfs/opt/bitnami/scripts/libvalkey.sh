@@ -54,9 +54,9 @@ valkey_conf_set() {
     value="${value//\\/\\\\}"
     value="${value//&/\\&}"
     value="${value//\?/\\?}"
-    # 2. \000-\037 strips all ASCII control characters (0-31)
+    # 2. \001-\037 strips all ASCII control characters (1-31), \000 is the NUL character (0) that Bash cannot store
     # 3. \177 strips DEL (delete) character (127)
-    value="${value//[$'\000'-$'\037'$'\177']}"
+    value="${value//[$'\001'-$'\037'$'\177']}"
     # 4. If the value is empty, set it to an empty string
     [[ "$value" = "" ]] && value="\"$value\""
 

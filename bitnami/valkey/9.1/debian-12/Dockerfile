@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-07-08T07:47:11Z" \
+      org.opencontainers.image.created="2026-07-14T09:21:23Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/valkey/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/valkey" \
@@ -52,7 +52,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/valkey/postunpack.sh
 ENV APP_VERSION="9.1.0" \
     BITNAMI_APP_NAME="valkey" \
-    IMAGE_REVISION="6" \
+    IMAGE_REVISION="7" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/valkey/bin:$PATH"
 
 EXPOSE 6379
