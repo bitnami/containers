@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-07-07T23:22:08Z" \
+      org.opencontainers.image.created="2026-07-14T06:45:35Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/envoy-ratelimit/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/envoy-ratelimit" \
@@ -47,7 +47,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="2026.7.6" \
     BITNAMI_APP_NAME="envoy-ratelimit" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="2" \
     PATH="/opt/bitnami/envoy-ratelimit/bin:$PATH"
 
 USER 1001
