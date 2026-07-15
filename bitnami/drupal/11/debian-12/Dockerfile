@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-07-14T12:53:40Z" \
+      org.opencontainers.image.created="2026-07-15T19:53:12Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/drupal/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/drupal" \
       org.opencontainers.image.title="drupal" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="11.4.3"
+      org.opencontainers.image.version="11.4.4"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -34,7 +34,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
       "libphp-8.4.23-0-linux-${OS_ARCH}-debian-12" \
       "postgresql-lib-18.4.0-0-linux-${OS_ARCH}-debian-12" \
       "apache-2.4.68-3-linux-${OS_ARCH}-debian-12" \
-      "drupal-11.4.3-0-linux-${OS_ARCH}-debian-12" \
+      "drupal-11.4.4-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -59,7 +59,7 @@ RUN /opt/bitnami/scripts/drupal/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="11.4.3" \
+    APP_VERSION="11.4.4" \
     BITNAMI_APP_NAME="drupal" \
     IMAGE_REVISION="0" \
     LD_LIBRARY_PATH="/opt/bitnami/postgresql/lib" \
