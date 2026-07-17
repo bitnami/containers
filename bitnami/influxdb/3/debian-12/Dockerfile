@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-07-15T18:17:09Z" \
+      org.opencontainers.image.created="2026-07-17T11:44:49Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/influxdb/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/influxdb" \
@@ -29,7 +29,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "libpython-3.14.6-0-linux-${OS_ARCH}-debian-12" \
-      "influxdb-3.10.3-0-linux-${OS_ARCH}-debian-12" \
+      "influxdb-3.10.3-1-linux-${OS_ARCH}-debian-12" \
       "wait-for-port-1.0.10-14-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -50,7 +50,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/influxdb/postunpack.sh
 ENV APP_VERSION="3.10.3" \
     BITNAMI_APP_NAME="influxdb" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib" \
     PATH="/opt/bitnami/influxdb/bin:/opt/bitnami/common/bin:$PATH"
 
