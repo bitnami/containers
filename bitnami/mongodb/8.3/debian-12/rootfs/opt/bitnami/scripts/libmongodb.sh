@@ -942,6 +942,32 @@ EOF
 }
 
 ########################
+# Get if secondary node already has voting rights
+# Globals:
+#   MONGODB_*
+# Arguments:
+#   $1 - node
+#   $2 - port
+# Returns:
+#   Boolean
+#########################
+mongodb_secondary_node_has_voting_rights() {
+    local -r node="${1:?node is required}"
+    local -r port="${2:?port is required}"
+    local result
+
+    debug "Checking voting rights of the node"
+    result=$(
+        mongodb_execute_print_output "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
+rs.conf().members.filter(m => m.host === '$node:$port' && m.votes > 0 && m.priority > 0).length === 1
+EOF
+    )
+    debug "$result"
+
+    grep -q "true" <<<"$result"
+}
+
+########################
 # Get if hidden node is pending
 # Globals:
 #   MONGODB_*
@@ -1177,7 +1203,15 @@ mongodb_configure_secondary() {
             exit 1
         fi
         mongodb_wait_confirmation "$node" "$port"
+    fi
 
+    # Grant voting rights to the node if it does not have them yet. This must be
+    # done even when the node is already in the cluster: a previous attempt may
+    # have added it with votes/priority 0 and failed (or been restarted) before
+    # granting voting rights, leaving the node stuck without them.
+    if mongodb_secondary_node_has_voting_rights "$node" "$port"; then
+        info "Node already has voting rights"
+    else
         # Ensure that secondary nodes do not count as voting members until they are fully initialized
         # https://docs.mongodb.com/manual/reference/method/rs.add/#behavior
         if ! retry_while "mongodb_is_secondary_node_ready $node $port" "$MONGODB_INIT_RETRY_ATTEMPTS" "$MONGODB_INIT_RETRY_DELAY"; then
@@ -1188,17 +1222,16 @@ mongodb_configure_secondary() {
         # Grant voting rights to node
         # https://docs.mongodb.com/manual/tutorial/modify-psa-replica-set-safely/
         if ! retry_while "mongodb_configure_secondary_node_voting $node $port" "$MONGODB_INIT_RETRY_ATTEMPTS" "$MONGODB_INIT_RETRY_DELAY"; then
-            error "Secondary node did not get marked as secondary"
+            error "Secondary node did not get granted voting rights"
             exit 1
         fi
+    fi
 
-        # Mark node as readable. This is necessary in cases where the PVC is lost
-        if is_boolean_yes "$MONGODB_SET_SECONDARY_OK"; then
-            mongodb_execute_print_output "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" <<EOF
+    # Mark node as readable. This is necessary in cases where the PVC is lost
+    if is_boolean_yes "$MONGODB_SET_SECONDARY_OK"; then
+        mongodb_execute_print_output "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" <<EOF
 rs.secondaryOk()
 EOF
-        fi
-
     fi
 }
 
