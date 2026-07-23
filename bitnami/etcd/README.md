@@ -70,9 +70,9 @@ Apart from providing your custom configuration file, you can also modify the ser
 
 | Name                               | Description                                                                                  | Default Value           |
 |------------------------------------|----------------------------------------------------------------------------------------------|-------------------------|
-| `ETCD_SNAPSHOTS_DIR`               | etcd snaphots directory (used on "disaster recovery" feature).                               | `/snapshots`            |
-| `ETCD_SNAPSHOT_HISTORY_LIMIT`      | etcd snaphots history limit.                                                                 | `1`                     |
-| `ETCD_INIT_SNAPSHOTS_DIR`          | etcd init snaphots directory (used on "init from snapshot" feature).                         | `/init-snapshot`        |
+| `ETCD_SNAPSHOTS_DIR`               | etcd snapshots directory (used on "disaster recovery" feature).                              | `/snapshots`            |
+| `ETCD_SNAPSHOT_HISTORY_LIMIT`      | etcd snapshots history limit.                                                                | `1`                     |
+| `ETCD_INIT_SNAPSHOTS_DIR`          | etcd init snapshots directory (used on "init from snapshot" feature).                        | `/init-snapshot`        |
 | `ALLOW_NONE_AUTHENTICATION`        | Allow accessing etcd without any password.                                                   | `no`                    |
 | `ETCD_ROOT_PASSWORD`               | Password for the etcd root user.                                                             | `nil`                   |
 | `ETCD_CLUSTER_DOMAIN`              | Domain to use to discover other etcd members.                                                | `nil`                   |
