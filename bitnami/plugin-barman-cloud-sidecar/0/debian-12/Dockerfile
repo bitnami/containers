@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-07-12T14:22:46Z" \
+      org.opencontainers.image.created="2026-07-29T11:42:27Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/plugin-barman-cloud-sidecar/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/plugin-barman-cloud-sidecar" \
       org.opencontainers.image.title="plugin-barman-cloud-sidecar" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="0.13.0"
+      org.opencontainers.image.version="0.14.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,9 +28,9 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "plugin-barman-cloud-sidecar-0.13.0-1-linux-${OS_ARCH}-debian-12" \
-      "plugin-barman-cloud-0.13.0-1-linux-${OS_ARCH}-debian-12" \
-      "python-3.14.6-6-linux-${OS_ARCH}-debian-12" \
+      "plugin-barman-cloud-sidecar-0.14.0-0-linux-${OS_ARCH}-debian-12" \
+      "plugin-barman-cloud-0.14.0-0-linux-${OS_ARCH}-debian-12" \
+      "python-3.14.6-8-linux-${OS_ARCH}-debian-12" \
       "postgresql-lib-18.4.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -49,9 +49,9 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN ln -sf /opt/bitnami/plugin-barman-cloud/bin/manager /manager
 RUN uninstall_packages curl
 
-ENV APP_VERSION="0.13.0" \
+ENV APP_VERSION="0.14.0" \
     BITNAMI_APP_NAME="plugin-barman-cloud-sidecar" \
-    IMAGE_REVISION="4" \
+    IMAGE_REVISION="0" \
     LD_LIBRARY_PATH="/opt/bitnami/postgresql/lib" \
     PATH="/opt/bitnami/plugin-barman-cloud/bin:/opt/bitnami/python/bin:$PATH"
 
