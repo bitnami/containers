@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-07-31T10:26:56Z" \
+      org.opencontainers.image.created="2026-07-31T11:01:17Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/superset/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/superset" \
@@ -30,7 +30,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     COMPONENTS=( \
       "python-3.12.13-20-linux-${OS_ARCH}-debian-12" \
       "mariadb-lib-12.3.2-1-linux-${OS_ARCH}-debian-12" \
-      "superset-6.1.0-4-linux-${OS_ARCH}-debian-12" \
+      "superset-6.1.0-5-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -51,7 +51,7 @@ RUN /opt/bitnami/scripts/superset/postunpack.sh
 ENV APP_VERSION="6.1.0" \
     BITNAMI_APP_NAME="superset" \
     FLASK_APP="superset.app:create_app()" \
-    IMAGE_REVISION="8" \
+    IMAGE_REVISION="9" \
     LD_LIBRARY_PATH="/opt/bitnami/mariadb/lib" \
     PATH="/opt/bitnami/superset/venv/bin:/opt/bitnami/python/bin:$PATH" \
     SUPERSET_HOME="/opt/bitnami/superset/superset_home"
