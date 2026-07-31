@@ -3,7 +3,7 @@
 
 services:
   mariadb-galera:
-    image: docker.io/bitnami/mariadb-galera:12.3
+    image: docker.io/bitnami/mariadb-galera:13.0
     ports:
       - '3306:3306'
       - '4444:4444'
