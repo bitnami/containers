@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-07-30T08:00:18Z" \
+      org.opencontainers.image.created="2026-07-31T22:43:44Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/harbor-exporter/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/harbor-exporter" \
@@ -49,7 +49,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-exporter/postunpack.sh
 ENV APP_VERSION="2.15.2" \
     BITNAMI_APP_NAME="harbor-exporter" \
-    IMAGE_REVISION="7" \
+    IMAGE_REVISION="8" \
     PATH="/opt/bitnami/harbor-exporter/bin:$PATH"
 
 EXPOSE 9090
