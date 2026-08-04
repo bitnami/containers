@@ -86,6 +86,7 @@ The following tables list the main variables you can set.
 
 | Name                           | Description                                        | Default Value                                                                                                                   |
 |--------------------------------|----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| `KONG_PREFIX`                  | Kong installation directory.                       | `${KONG_SERVER_DIR}`                                                                                                            |
 | `KONG_MIGRATE`                 | Perform Kong database migration.                   | `no`                                                                                                                            |
 | `KONG_EXIT_AFTER_MIGRATE`      | Exit Kong after performing the database migration. | `no`                                                                                                                            |
 | `KONG_PROXY_LISTEN_ADDRESS`    | Listen address for Kong proxy daemon.              | `0.0.0.0`                                                                                                                       |
@@ -113,7 +114,6 @@ The following tables list the main variables you can set.
 | `KONG_DEFAULT_CONF_FILE`  | Kong default configuration file.                      | `${KONG_CONF_DIR}/kong.conf.default` |
 | `KONG_INITSCRIPTS_DIR`    | Kong directory for init scripts.                      | `/docker-entrypoint-initdb.d`        |
 | `KONG_SERVER_DIR`         | Directory where Kong Openresty instance is created.   | `${KONG_BASE_DIR}/server`            |
-| `KONG_PREFIX`             | Kong installation directory.                          | `${KONG_SERVER_DIR}`                 |
 | `KONG_DEFAULT_SERVER_DIR` | Directory with default Kong Openresty instance files. | `${KONG_BASE_DIR}/server.default`    |
 | `KONG_LOGS_DIR`           | Directory where Kong logs are stored.                 | `${KONG_SERVER_DIR}/logs`            |
 | `KONG_DAEMON_USER`        | Kong system user.                                     | `kong`                               |
