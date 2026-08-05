@@ -1,0 +1,1096 @@
+#!/bin/bash
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+#
+# Bitnami Elasticsearch library
+
+# shellcheck disable=SC1090,SC1091
+
+# Load Generic Libraries
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libfile.sh
+. /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libnet.sh
+. /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libversion.sh
+. /opt/bitnami/scripts/libservice.sh
+. /opt/bitnami/scripts/libvalidations.sh
+
+# Functions
+
+########################
+# Configure TLS settings
+# Globals:
+#   ELASTICSEARCH_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+elasticsearch_transport_tls_configuration() {
+    info "Configuring Elasticsearch Transport TLS settings..."
+    elasticsearch_conf_set xpack.security.transport.ssl.enabled "true"
+    elasticsearch_conf_set xpack.security.transport.ssl.verification_mode "$DB_TLS_VERIFICATION_MODE"
+
+    if is_boolean_yes "$DB_TRANSPORT_TLS_USE_PEM"; then
+        debug "Configuring Transport Layer TLS settings using PEM certificates..."
+        ! is_empty_value "$DB_TRANSPORT_TLS_KEY_PASSWORD" && elasticsearch_set_key_value "xpack.security.transport.ssl.secure_key_passphrase" "$DB_TRANSPORT_TLS_KEY_PASSWORD"
+        elasticsearch_conf_set xpack.security.transport.ssl.key "$DB_TRANSPORT_TLS_NODE_KEY_LOCATION"
+        elasticsearch_conf_set xpack.security.transport.ssl.certificate "$DB_TRANSPORT_TLS_NODE_CERT_LOCATION"
+        elasticsearch_conf_set xpack.security.transport.ssl.certificate_authorities "$DB_TRANSPORT_TLS_CA_CERT_LOCATION"
+    else
+        debug "Configuring Transport Layer TLS settings using JKS/PKCS certificates..."
+        ! is_empty_value "$DB_TRANSPORT_TLS_KEYSTORE_PASSWORD" && elasticsearch_set_key_value "xpack.security.transport.ssl.keystore.secure_password" "$DB_TRANSPORT_TLS_KEYSTORE_PASSWORD"
+        ! is_empty_value "$DB_TRANSPORT_TLS_TRUSTSTORE_PASSWORD" && elasticsearch_set_key_value "xpack.security.transport.ssl.truststore.secure_password" "$DB_TRANSPORT_TLS_TRUSTSTORE_PASSWORD"
+        elasticsearch_conf_set xpack.security.transport.ssl.keystore.path "$DB_TRANSPORT_TLS_KEYSTORE_LOCATION"
+        elasticsearch_conf_set xpack.security.transport.ssl.truststore.path "$DB_TRANSPORT_TLS_TRUSTSTORE_LOCATION"
+    fi
+}
+
+########################
+# Configure TLS settings
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+elasticsearch_http_tls_configuration() {
+    info "Configuring Elasticsearch HTTP TLS settings..."
+    elasticsearch_conf_set xpack.security.http.ssl.enabled "true"
+    if is_boolean_yes "$DB_HTTP_TLS_USE_PEM"; then
+        debug "Configuring REST API TLS settings using PEM certificates..."
+        ! is_empty_value "$DB_HTTP_TLS_KEY_PASSWORD" && elasticsearch_set_key_value "xpack.security.http.ssl.secure_key_passphrase" "$DB_HTTP_TLS_KEY_PASSWORD"
+        elasticsearch_conf_set xpack.security.http.ssl.key "$DB_HTTP_TLS_NODE_KEY_LOCATION"
+        elasticsearch_conf_set xpack.security.http.ssl.certificate "$DB_HTTP_TLS_NODE_CERT_LOCATION"
+        elasticsearch_conf_set xpack.security.http.ssl.certificate_authorities "$DB_HTTP_TLS_CA_CERT_LOCATION"
+    else
+        debug "Configuring REST API TLS settings using JKS/PKCS certificates..."
+        ! is_empty_value "$DB_HTTP_TLS_KEYSTORE_PASSWORD" && elasticsearch_set_key_value "xpack.security.http.ssl.keystore.secure_password" "$DB_HTTP_TLS_KEYSTORE_PASSWORD"
+        ! is_empty_value "$DB_HTTP_TLS_TRUSTSTORE_PASSWORD" && elasticsearch_set_key_value "xpack.security.http.ssl.truststore.secure_password" "$DB_HTTP_TLS_TRUSTSTORE_PASSWORD"
+        elasticsearch_conf_set xpack.security.http.ssl.keystore.path "$DB_HTTP_TLS_KEYSTORE_LOCATION"
+        elasticsearch_conf_set xpack.security.http.ssl.truststore.path "$DB_HTTP_TLS_TRUSTSTORE_LOCATION"
+    fi
+}
+
+########################
+# Migrate old Elasticsearch data
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+migrate_old_data() {
+    warn "Persisted data follows old structure. Migrating to new one..."
+    warn "Custom configuration files won't be persisted any longer!"
+    local old_data_dir="${DB_DATA_DIR}/elasticsearch"
+    local old_custom_conf_file="${old_data_dir}/conf/elasticsearch_custom.yml"
+    local custom_conf_file="${DB_CONF_DIR}/elasticsearch_custom.yml"
+    if [[ -f "$old_custom_conf_file" ]]; then
+        debug "Adding old custom configuration to user configuration"
+        echo "" >>"$custom_conf_file"
+        cat "$old_custom_conf_file" >>"$custom_conf_file"
+    fi
+    debug "Adapting data to new file structure"
+    find "${old_data_dir}/data" -maxdepth 1 -mindepth 1 -exec mv {} "$DB_DATA_DIR" \;
+    debug "Removing data that is not persisted anymore from persisted directory"
+    rm -rf "$old_data_dir" "${DB_DATA_DIR}/java"
+}
+
+########################
+# Set Elasticsearch keystore values
+# Globals:
+#   ELASTICSEARCH_KEYS
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+elasticsearch_set_keys() {
+    read -r -a keys_list <<<"$(tr ',;' ' ' <<<"$ELASTICSEARCH_KEYS")"
+    if [[ "${#keys_list[@]}" -gt 0 ]]; then
+        for key_value in "${keys_list[@]}"; do
+            read -r -a key_value <<<"$(tr '=' ' ' <<<"$key_value")"
+            local key="${key_value[0]}"
+            local value="${key_value[1]}"
+
+            elasticsearch_set_key_value "$key" "$value"
+        done
+    fi
+}
+
+########################
+# Ensure a FIPS-compliant password-protected keystore exists.
+# Called during initialization when FIPS mode is enabled and
+# ES_KEYSTORE_PASSPHRASE is set, even if no secure settings
+# are being added (which would otherwise leave no keystore for the
+# server to decrypt, causing bootstrap() to run with empty password).
+# Globals:
+#   ELASTICSEARCH_ENABLE_FIPS_MODE, ES_KEYSTORE_PASSPHRASE, DB_CONF_DIR
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+elasticsearch_ensure_fips_keystore() {
+    [[ "${ELASTICSEARCH_ENABLE_FIPS_MODE:-false}" == "true" ]] || return 0
+    # Only enforce a password-protected keystore in restricted mode.
+    # BC FIPS (restricted) requires a minimum 112-bit passphrase for PBKDF2; relaxed mode does not.
+    [[ "${JAVA_TOOL_OPTIONS:-}" == *"java.security.restricted"* ]] || return 0
+    is_empty_value "${ES_KEYSTORE_PASSPHRASE:-}" && return 0
+    [[ -f "${DB_CONF_DIR}/elasticsearch.keystore" ]] && return 0
+
+    info "Creating FIPS-compliant password-protected Elasticsearch keystore..."
+    printf "%s\n%s\n" "$ES_KEYSTORE_PASSPHRASE" "$ES_KEYSTORE_PASSPHRASE" | elasticsearch-keystore create -p
+    am_i_root && configure_permissions_ownership "${DB_CONF_DIR}/elasticsearch.keystore" \
+        --file-mode "640" --user "$DB_DAEMON_USER" --group "$DB_DAEMON_GROUP"
+}
+
+########################
+# Set Elasticsearch keystore values
+# Globals:
+#   ELASTICSEARCH_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+elasticsearch_set_key_value() {
+    local key="${1:?missing key}"
+    local value="${2:?missing value}"
+
+    debug "Storing key: ${key}"
+
+    # Keystore password (required in FIPS restricted mode).
+    # BC FIPS requires a minimum 112-bit (>=14 char) passphrase for all PBKDF2
+    # key derivation operations used by elasticsearch-keystore internally.
+    # ES_KEYSTORE_PASSPHRASE is auto-populated from ES_KEYSTORE_PASSPHRASE_FILE
+    # by the Bitnami framework when the _FILE variant is declared in env.jsonnet.
+    local ks_pass="${ES_KEYSTORE_PASSPHRASE:-}"
+
+    # Create keystore if it doesn't exist yet. In FIPS restricted mode the
+    # keystore must be password-protected; delegate to elasticsearch_ensure_fips_keystore
+    # which handles that case. If not created above (non-FIPS or no passphrase),
+    # fall back to an unprotected keystore.
+    if [[ ! -f "${DB_CONF_DIR}/elasticsearch.keystore" ]]; then
+        elasticsearch_ensure_fips_keystore
+        if [[ ! -f "${DB_CONF_DIR}/elasticsearch.keystore" ]]; then
+            elasticsearch-keystore create
+            am_i_root && configure_permissions_ownership "${DB_CONF_DIR}/elasticsearch.keystore" \
+                --file-mode "640" --user "$DB_DAEMON_USER" --group "$DB_DAEMON_GROUP"
+        fi
+    fi
+
+    # Add the key value. When the keystore is password-protected, the CLI reads
+    # the keystore password from stdin first (Terminal.readSecret), then the
+    # value. Pipe both so no interactive prompt is needed.
+    if [[ -n "$ks_pass" ]]; then
+        printf "%s\n%s\n" "$ks_pass" "$value" | elasticsearch-keystore add --stdin --force "$key"
+    else
+        elasticsearch-keystore add --stdin --force "$key" <<<"$value"
+    fi
+
+    am_i_root && configure_permissions_ownership "${DB_CONF_DIR}/elasticsearch.keystore" \
+        --file-mode "640" --user "$DB_DAEMON_USER" --group "$DB_DAEMON_GROUP"
+    # Avoid exit code of previous commands to affect the result of this function
+    true
+}
+
+#!/bin/bash
+#
+# Bitnami Elasticsearch/OpenSearch common library
+
+# shellcheck disable=SC1090,SC1091
+
+# Load Generic Libraries
+. /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libfile.sh
+. /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libnet.sh
+. /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libversion.sh
+. /opt/bitnami/scripts/libservice.sh
+. /opt/bitnami/scripts/libvalidations.sh
+
+# Functions
+
+########################
+# Write a configuration setting value
+# Globals:
+#   DB_CONF_FILE
+# Arguments:
+#   $1 - key
+#   $2 - value
+#   $3 - YAML type (string, int or bool)
+# Returns:
+#   None
+#########################
+elasticsearch_conf_write() {
+    local -r key="${1:?Missing key}"
+    local -r value="${2:-}"
+    local -r type="${3:-string}"
+    local -r tempfile=$(mktemp)
+
+    case "$type" in
+    string)
+        yq eval "(.${key}) |= \"${value}\"" "$DB_CONF_FILE" >"$tempfile"
+        ;;
+    int)
+        yq eval "(.${key}) |= ${value}" "$DB_CONF_FILE" >"$tempfile"
+        ;;
+    bool)
+        yq eval "(.${key}) |= (\"${value}\" | test(\"true\"))" "$DB_CONF_FILE" >"$tempfile"
+        ;;
+    *)
+        error "Type unknown: ${type}"
+        return 1
+        ;;
+    esac
+    cp "$tempfile" "$DB_CONF_FILE"
+    rm "$tempfile"
+}
+
+########################
+# Set a configuration setting value
+# Globals:
+#   DB_CONF_FILE
+# Arguments:
+#   $1 - key
+#   $2 - values (array)
+# Returns:
+#   None
+#########################
+elasticsearch_conf_set() {
+    local key="${1:?missing key}"
+    shift
+    local values=("${@}")
+
+    if [[ "${#values[@]}" -eq 0 ]]; then
+        stderr_print "$key"
+        stderr_print "missing values"
+        return 1
+    elif [[ "${#values[@]}" -eq 1 ]] && [[ -n "${values[0]}" ]]; then
+        elasticsearch_conf_write "$key" "${values[0]}"
+    else
+        for i in "${!values[@]}"; do
+            if [[ -n "${values[$i]}" ]]; then
+                elasticsearch_conf_write "${key}[$i]" "${values[$i]}"
+            fi
+        done
+    fi
+}
+
+########################
+# Check if Elasticsearch is running
+# Globals:
+#   DB_TMP_DIR
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_elasticsearch_running() {
+    local pid
+    pid="$(get_pid_from_file "$DB_PID_FILE")"
+
+    if [[ -z "$pid" ]]; then
+        false
+    else
+        is_service_running "$pid"
+    fi
+}
+
+########################
+# Check if Elasticsearch is not running
+# Globals:
+#   DB_TMP_DIR
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_elasticsearch_not_running() {
+    ! is_elasticsearch_running
+    return "$?"
+}
+
+########################
+# Stop Elasticsearch
+# Globals:
+#   DB_TMP_DIR
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+elasticsearch_stop() {
+    ! is_elasticsearch_running && return
+    debug "Stopping ${DB_FLAVOR^}..."
+    stop_service_using_pid "$DB_PID_FILE"
+}
+
+########################
+# Start Elasticsearch and wait until it's ready
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+elasticsearch_start() {
+    is_elasticsearch_running && return
+
+    debug "Starting ${DB_FLAVOR^}..."
+    local command=("${DB_BASE_DIR}/bin/${DB_FLAVOR}" "-d" "-p" "$DB_PID_FILE")
+    am_i_root && command=("run_as_user" "$DB_DAEMON_USER" "${command[@]}")
+    if [[ "$BITNAMI_DEBUG" = true ]]; then
+        "${command[@]}" &
+    else
+        "${command[@]}" >/dev/null 2>&1 &
+    fi
+
+    local retries=50
+    local seconds=2
+    # Check the process is running
+    retry_while "is_elasticsearch_running" "$retries" "$seconds"
+    # Check Elasticsearch API is reachable
+    retry_while "elasticsearch_healthcheck" "$retries" "$seconds"
+}
+
+########################
+# Validate kernel settings
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+elasticsearch_validate_kernel() {
+    # Auxiliary functions
+    validate_sysctl_key() {
+        local key="${1:?key is missing}"
+        local value="${2:?value is missing}"
+        local current_value
+        current_value="$(sysctl -n "$key")"
+        if [[ "$current_value" -lt "$value" ]]; then
+            error "Invalid kernel settings. ${DB_FLAVOR^} requires at least: $key = $value"
+            exit 1
+        fi
+    }
+
+    debug "Validating Kernel settings..."
+    if [[ $(yq eval .index.store.type "$DB_CONF_FILE") ]]; then
+        debug "Custom index.store.type found in the config file. Skipping kernel validation..."
+    else
+        validate_sysctl_key "fs.file-max" 65536
+    fi
+    if [[ $(yq eval .node.store.allow_mmap "$DB_CONF_FILE") ]]; then
+        debug "Custom node.store.allow_mmap found in the config file. Skipping kernel validation..."
+    else
+        validate_sysctl_key "vm.max_map_count" 262144
+    fi
+}
+
+########################
+# Validate settings in DB_* env vars
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+elasticsearch_validate() {
+    local error_code=0
+
+    # Auxiliary functions
+    print_validation_error() {
+        error "$1"
+        error_code=1
+    }
+    check_empty_value() {
+        if is_empty_value "${!1}"; then
+            print_validation_error "${1} must be set"
+        fi
+    }
+
+    validate_node_roles() {
+        if [ -n "$DB_NODE_ROLES" ]; then
+            read -r -a roles_list <<<"$(get_elasticsearch_roles)"
+            local master_role="master"
+            local major_version="$(get_sematic_version "$(elasticsearch_get_version)" 1)"
+            [[ "$DB_FLAVOR" = "opensearch" && "$major_version" -eq 2 ]] && master_role="cluster_manager"
+            if [[ "${#roles_list[@]}" -le 0 ]]; then
+                warn "Setting ${DB_FLAVOR^^}_NODE_ROLES is empty and ${DB_FLAVOR^^}_IS_DEDICATED_NODE is set to true, ${DB_FLAVOR^} will be configured as coordinating-only node."
+            fi
+            for role in "${roles_list[@]}"; do
+                case "$role" in
+                "$master_role" | data | data_content | data_hot | data_warm | data_cold | data_frozen | ingest | ml | remote_cluster_client | transform) ;;
+
+                *)
+                    print_validation_error "Invalid node role '$role'. Supported roles are '${master_role},data,data_content,data_hot,data_warm,data_cold,data_frozen,ingest,ml,remote_cluster_client,transform'"
+                    ;;
+                esac
+            done
+        fi
+    }
+
+    # TODO: these are not simple validations, they actually create users and adapt permissions on the filesystem
+    #    so we should move them to a separate function
+    debug "Ensuring expected directories/files exist..."
+    am_i_root && ensure_user_exists "$DB_DAEMON_USER" --group "$DB_DAEMON_GROUP"
+    for dir in "$DB_TMP_DIR" "$DB_LOGS_DIR" "$DB_PLUGINS_DIR" "$DB_BASE_DIR/modules" "$DB_CONF_DIR"; do
+        ensure_dir_exists "$dir"
+        am_i_root && chown -R "$DB_DAEMON_USER:$DB_DAEMON_GROUP" "$dir" || true
+    done
+
+    debug "Validating settings in DB_* env vars..."
+    for var in "DB_HTTP_PORT_NUMBER" "DB_TRANSPORT_PORT_NUMBER"; do
+        if ! err=$(validate_port "${!var}"); then
+            print_validation_error "An invalid port was specified in the environment variable $var: $err"
+        fi
+    done
+
+    if ! is_boolean_yes "$DB_IS_DEDICATED_NODE"; then
+        warn "Setting ${DB_FLAVOR^^}_IS_DEDICATED_NODE is disabled."
+        warn "${DB_FLAVOR^^}_NODE_ROLES will be ignored and ${DB_FLAVOR^} will assume all different roles."
+    else
+        validate_node_roles
+    fi
+
+    if [[ -n "$DB_BIND_ADDRESS" ]] && ! validate_ipv4 "$DB_BIND_ADDRESS"; then
+        print_validation_error "The Bind Address specified in the environment variable ${DB_FLAVOR^^}_BIND_ADDRESS is not a valid IPv4"
+    fi
+
+    if is_boolean_yes "$DB_ENABLE_SECURITY"; then
+        if [[ "$DB_FLAVOR" = "opensearch" ]]; then
+            # Validate credentials
+            for var in "DB_PASSWORD" "OPENSEARCH_DASHBOARDS_PASSWORD" "LOGSTASH_PASSWORD"; do
+                check_empty_value "$var"
+            done
+            # Validate certificates
+            if [[ ! -f "$OPENSEARCH_SECURITY_ADMIN_KEY_LOCATION" ]] || [[ ! -f "$OPENSEARCH_SECURITY_ADMIN_CERT_LOCATION" ]]; then
+                print_validation_error "In order to enable OpenSearch Security, you must provide a valid admin PEM key and certificate."
+            fi
+            # Validate DNs
+            for var in "OPENSEARCH_SECURITY_NODES_DN" "OPENSEARCH_SECURITY_ADMIN_DN"; do
+                check_empty_value "$var"
+            done
+            if ! is_boolean_yes "$OPENSEARCH_ENABLE_REST_TLS"; then
+                print_validation_error "OpenSearch does not support plaintext connections (HTTP) when Security is enabled."
+            fi
+        fi
+        if ! is_boolean_yes "$DB_SKIP_TRANSPORT_TLS"; then
+            if is_boolean_yes "$DB_TRANSPORT_TLS_USE_PEM"; then
+                if [[ ! -f "$DB_TRANSPORT_TLS_NODE_CERT_LOCATION" ]] || [[ ! -f "$DB_TRANSPORT_TLS_NODE_KEY_LOCATION" ]] || [[ ! -f "$DB_TRANSPORT_TLS_CA_CERT_LOCATION" ]]; then
+                    print_validation_error "In order to configure the TLS encryption for ${DB_FLAVOR^} Transport you must provide your node key, certificate and a valid certification_authority certificate."
+                fi
+            elif [[ ! -f "$DB_TRANSPORT_TLS_KEYSTORE_LOCATION" ]] || [[ ! -f "$DB_TRANSPORT_TLS_TRUSTSTORE_LOCATION" ]]; then
+                print_validation_error "In order to configure the TLS encryption for ${DB_FLAVOR^} Transport with JKS/PKCS12 certs you must mount a valid keystore and truststore."
+            fi
+        fi
+        if is_boolean_yes "$DB_HTTP_TLS_USE_PEM"; then
+            if is_boolean_yes "$DB_HTTP_TLS_USE_PEM"; then
+                if [[ ! -f "$DB_HTTP_TLS_NODE_CERT_LOCATION" ]] || [[ ! -f "$DB_HTTP_TLS_NODE_KEY_LOCATION" ]] || [[ ! -f "$DB_HTTP_TLS_CA_CERT_LOCATION" ]]; then
+                    print_validation_error "In order to configure the TLS encryption for ${DB_FLAVOR^} you must provide your node key, certificate and a valid certification_authority certificate."
+                fi
+            elif [[ ! -f "$DB_HTTP_TLS_KEYSTORE_LOCATION" ]] || [[ ! -f "$DB_HTTP_TLS_TRUSTSTORE_LOCATION" ]]; then
+                print_validation_error "In order to configure the TLS encryption for ${DB_FLAVOR^} with JKS/PKCS12 certs you must mount a valid keystore and truststore."
+            fi
+        fi
+    fi
+
+    [[ "$error_code" -eq 0 ]] || exit "$error_code"
+}
+
+########################
+# Determine the hostname by which Elasticsearch can be contacted
+# Returns:
+#   The value of $DB_ADVERTISED_HOSTNAME or the current host address
+########################
+get_elasticsearch_hostname() {
+    if [[ -n "$DB_ADVERTISED_HOSTNAME" ]]; then
+        echo "$DB_ADVERTISED_HOSTNAME"
+    else
+        get_machine_ip
+    fi
+}
+
+########################
+# Evaluates the env variable DB_NODE_ROLES and replaces master with
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   Array of node roles
+#########################
+get_elasticsearch_roles() {
+    local major_version="$(get_sematic_version "$(elasticsearch_get_version)" 1)"
+
+    read -r -a roles_list_tmp <<<"$(tr ',;' ' ' <<<"$DB_NODE_ROLES")"
+    roles_list=("${roles_list_tmp[@]}")
+    for i in "${!roles_list[@]}"; do
+        if [[ ${roles_list[$i]} == "master" ]] && [[ "$DB_FLAVOR" = "opensearch" && "$major_version" -eq 2 ]]; then
+            roles_list[i]="cluster_manager"
+        fi
+    done
+    echo "${roles_list[@]}"
+}
+
+########################
+# Configure cluster settings
+# Globals:
+#  DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+elasticsearch_cluster_configuration() {
+    # Auxiliary functions
+    bind_address() {
+        if [[ -n "$DB_BIND_ADDRESS" ]]; then
+            echo "$DB_BIND_ADDRESS"
+        else
+            echo "0.0.0.0"
+        fi
+    }
+
+    is_node_master() {
+        if is_boolean_yes "$DB_IS_DEDICATED_NODE"; then
+            if [ -n "$DB_NODE_ROLES" ]; then
+                read -r -a roles_list <<<"$(get_elasticsearch_roles)"
+                if [[ " ${roles_list[*]} " = *" master "* ]]; then
+                    true
+                elif [[ "$DB_FLAVOR" = "opensearch" && " ${roles_list[*]} " = *" cluster_manager "* ]]; then
+                    true
+                else
+                    false
+                fi
+            else
+                false
+            fi
+        else
+            true
+        fi
+    }
+
+    info "Configuring ${DB_FLAVOR^} cluster settings..."
+    elasticsearch_conf_set network.host "$(get_elasticsearch_hostname)"
+    elasticsearch_conf_set network.publish_host "$(get_elasticsearch_hostname)"
+    elasticsearch_conf_set network.bind_host "$(bind_address)"
+    elasticsearch_conf_set cluster.name "$DB_CLUSTER_NAME"
+    elasticsearch_conf_set node.name "${DB_NODE_NAME:-$(hostname)}"
+
+    if [[ -n "$DB_CLUSTER_HOSTS" ]]; then
+        read -r -a host_list <<<"$(tr ',;' ' ' <<<"$DB_CLUSTER_HOSTS")"
+        master_list=("${host_list[@]}")
+        if [[ -n "$DB_CLUSTER_MASTER_HOSTS" ]]; then
+            read -r -a master_list <<<"$(tr ',;' ' ' <<<"$DB_CLUSTER_MASTER_HOSTS")"
+        fi
+        elasticsearch_conf_set discovery.seed_hosts "${host_list[@]}"
+        if is_node_master; then
+            local major_version="$(get_sematic_version "$(elasticsearch_get_version)" 1)"
+            if [[ "$DB_FLAVOR" = "opensearch" && "$major_version" -eq 2 ]]; then
+                elasticsearch_conf_set cluster.initial_cluster_manager_nodes "${master_list[@]}"
+            else
+                elasticsearch_conf_set cluster.initial_master_nodes "${master_list[@]}"
+            fi
+        fi
+        elasticsearch_conf_set discovery.initial_state_timeout "10m"
+    else
+        elasticsearch_conf_set "discovery.type" "single-node"
+    fi
+}
+
+########################
+# Extend cluster settings with custom, user-provided config
+# Globals:
+#  DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+elasticsearch_custom_configuration() {
+    local custom_conf_file="${DB_CONF_DIR}/my_${DB_FLAVOR}.yml"
+    local -r tempfile=$(mktemp)
+    [[ ! -s "$custom_conf_file" ]] && return
+    info "Adding custom configuration"
+    yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' "$DB_CONF_FILE" "$custom_conf_file" >"$tempfile"
+    cp "$tempfile" "$DB_CONF_FILE"
+    rm "$tempfile"
+}
+
+########################
+# Configure node roles.
+# There are 3 scenarios:
+# * If DB_IS_DEDICATED_NODE is disabled, 'node.roles' is omitted and assumes all the roles (check docs).
+# * Otherwise, 'node.roles' with a list of roles provided with DB_NODE_ROLES.
+# * In addition, if DB_NODE_ROLES is empty, node.roles will be configured empty, meaning that the role is 'coordinating-only'.
+#
+# Docs ref: https://www.elastic.co/guide/en/opensearch/reference/current/modules-node.html
+#
+# Globals:
+#  DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+elasticsearch_configure_node_roles() {
+    debug "Configure ${DB_FLAVOR^} Node roles..."
+
+    local set_repo_path="no"
+    if is_boolean_yes "$DB_IS_DEDICATED_NODE"; then
+        read -r -a roles_list <<<"$(get_elasticsearch_roles)"
+        if [[ "${#roles_list[@]}" -eq 0 ]]; then
+            elasticsearch_conf_write node.roles "[]" int
+        else
+            elasticsearch_conf_set node.roles "${roles_list[@]}"
+            for role in "${roles_list[@]}"; do
+                case "$role" in
+                    cluster_manager | master | data | data_content | data_hot | data_warm | data_cold | data_frozen)
+                        set_repo_path="yes"
+                        ;;
+                    *) ;;
+                esac
+            done
+        fi
+    else
+        set_repo_path="yes"
+    fi
+
+    if is_boolean_yes "$set_repo_path" && [[ -n "$DB_FS_SNAPSHOT_REPO_PATH" ]]; then
+        # Configure path.repo to restore snapshots from system repository
+        # It must be set on every cluster_manager and data node
+        # ref: https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-filesystem-repository.html
+        elasticsearch_conf_set path.repo "$DB_FS_SNAPSHOT_REPO_PATH"
+    fi
+}
+
+########################
+# Configure Heap Size
+# Globals:
+#  DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+elasticsearch_set_heap_size() {
+    local heap_size
+
+    # Remove heap.options if it already exists
+    rm -f "${DB_CONF_DIR}/jvm.options.d/heap.options"
+
+    if [[ -n "$DB_HEAP_SIZE" ]]; then
+        debug "Using specified values for Xmx and Xms heap options..."
+        heap_size="$DB_HEAP_SIZE"
+    else
+        debug "Calculating appropriate Xmx and Xms values..."
+        local machine_mem=""
+        machine_mem="$(get_total_memory)"
+        if [[ "$machine_mem" -lt 65536 ]]; then
+            local max_allowed_memory
+            local calculated_heap_size
+            calculated_heap_size="$((machine_mem / 2))"
+            max_allowed_memory="$((DB_MAX_ALLOWED_MEMORY_PERCENTAGE * machine_mem))"
+            max_allowed_memory="$((max_allowed_memory / 100))"
+            # Allow for absolute memory limit when calculating limit from percentage
+            if [[ -n "$DB_MAX_ALLOWED_MEMORY" && "$max_allowed_memory" -gt "$DB_MAX_ALLOWED_MEMORY" ]]; then
+                max_allowed_memory="$DB_MAX_ALLOWED_MEMORY"
+            fi
+            if [[ "$calculated_heap_size" -gt "$max_allowed_memory" ]]; then
+                info "Calculated Java heap size of ${calculated_heap_size} will be limited to ${max_allowed_memory}"
+                calculated_heap_size="$max_allowed_memory"
+            fi
+            heap_size="${calculated_heap_size}m"
+
+        else
+            heap_size=32768m
+        fi
+    fi
+    debug "Setting '-Xmx${heap_size} -Xms${heap_size}' heap options..."
+    cat >"${DB_CONF_DIR}/jvm.options.d/heap.options" <<EOF
+-Xms${heap_size}
+-Xmx${heap_size}
+EOF
+    am_i_root && chown "$DB_DAEMON_USER:$DB_DAEMON_GROUP" "${DB_CONF_DIR}/jvm.options.d/heap.options"
+
+    # Avoid exit code of previous commands to affect the result of this function
+    true
+}
+
+########################
+# Configure/initialize Elasticsearch/OpenSearch
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+elasticsearch_initialize() {
+    info "Configuring/Initializing ${DB_FLAVOR^}..."
+
+    # This fixes an issue where the trap would kill the entrypoint.sh, if a PID was left over from a previous run
+    # Exec replaces the process without creating a new one, and when the container is restarted it may have the same PID
+    rm -f "$DB_PID_FILE"
+
+    read -r -a data_dirs_list <<<"$(tr ',;' ' ' <<<"$DB_DATA_DIR_LIST")"
+    if [[ "${#data_dirs_list[@]}" -gt 0 ]]; then
+        info "Multiple data directories specified, ignoring ${DB_FLAVOR^^}_DATA_DIR environment variable."
+    else
+        data_dirs_list+=("$DB_DATA_DIR")
+
+        # Persisted data from old versions of
+        if [[ "$DB_FLAVOR" = "elasticsearch" ]] && ! is_dir_empty "$DB_DATA_DIR"; then
+            debug "Detected persisted data from previous deployments"
+            [[ -d "$DB_DATA_DIR/elasticsearch" ]] && [[ -f "$DB_DATA_DIR/elasticsearch/.initialized" ]] && migrate_old_data
+        fi
+    fi
+
+    debug "Ensuring expected directories/files exist..."
+    for dir in "$DB_TMP_DIR" "$DB_LOGS_DIR" "$DB_PLUGINS_DIR" "$DB_BASE_DIR/modules" "$DB_CONF_DIR"; do
+        ensure_dir_exists "$dir"
+        am_i_root && chown -R "$DB_DAEMON_USER:$DB_DAEMON_GROUP" "$dir" || true
+    done
+    for dir in "${data_dirs_list[@]}"; do
+        ensure_dir_exists "$dir"
+        am_i_root && is_mounted_dir_empty "$dir" && chown -R "$DB_DAEMON_USER:$DB_DAEMON_GROUP" "$dir"
+    done
+
+    if is_file_writable "${DB_CONF_DIR}/jvm.options" && is_file_writable "${DB_CONF_DIR}/jvm.options.d"; then
+        if is_boolean_yes "$DB_DISABLE_JVM_HEAP_DUMP"; then
+            info "Disabling JVM heap dumps..."
+            replace_in_file "${DB_CONF_DIR}/jvm.options" "-XX:[+]HeapDumpOnOutOfMemoryError" "# -XX:+HeapDumpOnOutOfMemoryError"
+        fi
+        if is_boolean_yes "$DB_DISABLE_GC_LOGS"; then
+            info "Disabling JVM GC logs..."
+            replace_in_file "${DB_CONF_DIR}/jvm.options" "(^.*logs[/]gc.log.*$)" "# \1"
+        fi
+        elasticsearch_set_heap_size
+        # Write BC FIPS JVM options only when FIPS mode is enabled AND Java is in restricted mode.
+        # Restricted mode is signalled by JAVA_TOOL_OPTIONS containing "java.security.restricted",
+        # which the chart sets via common.fips.config when fips.java=restricted.
+        # Relaxed mode (fips.java=relaxed) uses the non-FIPS BouncyCastle provider and does not
+        # need the BC FIPS module path.
+        if is_boolean_yes "${ELASTICSEARCH_ENABLE_FIPS_MODE:-false}" && \
+           [[ "${JAVA_TOOL_OPTIONS:-}" == *"java.security.restricted"* ]]; then
+            info "Writing BC FIPS JVM options to ${DB_CONF_DIR}/jvm.options.d/bc-fips.options..."
+            # BC FIPS JARs are placed into ${BITNAMI_ROOT_DIR}/elasticsearch/lib/ at container start by the
+            # prepare-bcfips-lib initContainer (see charts-private extra-init-vals7.yaml). This makes
+            # them named modules (org.bouncycastle.fips.core etc.) in the ES server layer, which is
+            # required for the es.entitlements.policy.server patch to work.
+            # The patch grants manage_threads to org.bouncycastle.fips.core so DisposalDaemon can
+            # call Thread.setDaemon() without triggering NotEntitledException.
+            # --module-path is NOT written here; BC FIPS is already in lib/ (server layer) via the
+            # initContainer, and JAVA_TOOL_OPTIONS provides it for CLI tools and the boot layer.
+            # The version is detected at runtime from the installed JAR filename so the patch
+            # never goes stale on upgrades. We avoid calling elasticsearch_get_version() here
+            # because at this point the BC FIPS JARs are already in lib/ (server layer via the
+            # prepare-bcfips-lib initContainer), and running the elasticsearch binary without
+            # the entitlement patch would trigger DisposalDaemon.<clinit> → NotEntitledException
+            # before the version string is ever printed (chicken-and-egg problem).
+            local es_version
+            es_version="$(ls "${DB_BASE_DIR}/lib/elasticsearch-"*.jar 2>/dev/null | grep -oP '\d+\.\d+\.\d+' | head -1)"
+            if [[ -z "$es_version" ]]; then
+                warn "Could not detect Elasticsearch version from lib/; skipping entitlement patch"
+                return
+            fi
+            local bc_fips_entitlement_patch
+            bc_fips_entitlement_patch="$(printf 'versions:\n  - %s\npolicy:\n  org.bouncycastle.fips.core:\n    - manage_threads\n' "${es_version}" | base64 -w 0)"
+
+            cat > "${DB_CONF_DIR}/jvm.options.d/bc-fips.options" <<BCFIPS
+## Bouncy Castle FIPS provider JVM options (restricted mode only)
+## BC FIPS JARs are loaded from ${BITNAMI_ROOT_DIR}/elasticsearch/lib/ as named Java modules in the ES
+## server layer (placed there by the prepare-bcfips-lib initContainer at container start).
+## The entitlement patch grants manage_threads to org.bouncycastle.fips.core for DisposalDaemon.
+## java.security.restricted is overlaid by the prepare-bcfips-lib initContainer to add SunJCE
+## as provider 4 so the JDK PKCS12KeyStore can resolve PBEWithHmacSHA256AndAES_256 AlgParams.
+-Djava.security.properties==${BITNAMI_ROOT_DIR}/java/conf/security/java.security.restricted
+-Des.entitlements.policy.server=${bc_fips_entitlement_patch}
+BCFIPS
+        fi
+    else
+        warn "The JVM options configuration files are not writable. Configurations based on environment variables will not be applied"
+    fi
+
+    if [[ -f "$DB_CONF_FILE" ]]; then
+        info "Custom configuration file detected, using it..."
+    else
+        info "Setting default configuration"
+        touch "$DB_CONF_FILE"
+        elasticsearch_conf_set http.port "$DB_HTTP_PORT_NUMBER"
+        elasticsearch_conf_set path.data "${data_dirs_list[@]}"
+        elasticsearch_conf_set transport.port "$DB_TRANSPORT_PORT_NUMBER"
+        is_boolean_yes "$DB_LOCK_ALL_MEMORY" && elasticsearch_conf_set bootstrap.memory_lock "true"
+        elasticsearch_cluster_configuration
+        elasticsearch_configure_node_roles
+        if [[ "$DB_FLAVOR" = "opensearch" ]]; then
+            if is_boolean_yes "$DB_ENABLE_SECURITY"; then
+                info "Configuring ${DB_FLAVOR^} security NODES_DN and ADMIN_DN"
+                read -r -a nodes_dn <<<"$(tr ';' ' ' <<<"$OPENSEARCH_SECURITY_NODES_DN")"
+                read -r -a admin_dn <<<"$(tr ';' ' ' <<<"$OPENSEARCH_SECURITY_ADMIN_DN")"
+                elasticsearch_conf_set plugins.security.nodes_dn "${nodes_dn[@]}"
+                elasticsearch_conf_set plugins.security.authcz.admin_dn "${admin_dn[@]}"
+            fi
+        fi
+
+        # Moved here to be able to overwrite nodes_dn and admin_dn from custom configuration
+        elasticsearch_custom_configuration
+
+        if [[ "$DB_FLAVOR" = "opensearch" ]]; then
+            if is_boolean_yes "$DB_ENABLE_SECURITY"; then
+                info "Configuring ${DB_FLAVOR^} security plugin"
+                is_boolean_yes "$DB_ENABLE_REST_TLS" && opensearch_http_tls_configuration
+                ! is_boolean_yes "$DB_SKIP_TRANSPORT_TLS" && opensearch_transport_tls_configuration
+
+                opensearch_security_configure_users
+                if is_boolean_yes "$OPENSEARCH_SECURITY_BOOTSTRAP"; then
+                    opensearch_security_bootstrap
+                fi
+            else
+                elasticsearch_conf_set plugins.security.disabled "true"
+            fi
+        else
+            [[ -n "$DB_ACTION_DESTRUCTIVE_REQUIRES_NAME" ]] && elasticsearch_conf_set action.destructive_requires_name "$(is_boolean_yes "$DB_ACTION_DESTRUCTIVE_REQUIRES_NAME" && echo "true" || echo "false")"
+            # X-Pack settings.
+            elasticsearch_conf_set xpack.security.enabled "$(is_boolean_yes "$DB_ENABLE_SECURITY" && echo "true" || echo "false")"
+            ! is_empty_value "$ELASTICSEARCH_PASSWD_HASH_ALGORITHM" && elasticsearch_conf_set xpack.security.authc.password_hashing.algorithm "$ELASTICSEARCH_PASSWD_HASH_ALGORITHM"
+            ! is_empty_value "$DB_PASSWORD" && elasticsearch_set_key_value "bootstrap.password" "$DB_PASSWORD"
+            if is_boolean_yes "$DB_ENABLE_SECURITY"; then
+                is_boolean_yes "$DB_ENABLE_REST_TLS" && elasticsearch_http_tls_configuration
+                ! is_boolean_yes "$DB_SKIP_TRANSPORT_TLS" && elasticsearch_transport_tls_configuration
+                if is_boolean_yes "$ELASTICSEARCH_ENABLE_FIPS_MODE"; then
+                    elasticsearch_conf_set xpack.security.fips_mode.enabled "true"
+                    # Disable autoconfiguration — required for FIPS compliance (new installs)
+                    elasticsearch_conf_set xpack.security.autoconfiguration.enabled "false"
+                    # pbkdf2_stretch is the recommended FIPS-compliant stored password hashing algorithm
+                    elasticsearch_conf_set xpack.security.authc.password_hashing.algorithm "${ELASTICSEARCH_PASSWD_HASH_ALGORITHM:-pbkdf2_stretch}"
+                    # Optionally enforce specific FIPS security providers (ES 8.13+)
+                    if ! is_empty_value "${ELASTICSEARCH_FIPS_REQUIRED_PROVIDERS:-}"; then
+                        read -r -a fips_providers <<< "$(tr ',' ' ' <<< "$ELASTICSEARCH_FIPS_REQUIRED_PROVIDERS")"
+                        elasticsearch_conf_set xpack.security.fips_mode.required_providers "${fips_providers[@]}"
+                    fi
+                fi
+                # In FIPS restricted mode the ES server refuses to bootstrap a keystore
+                # with an empty password. If no secure settings were added above
+                # (e.g. bootstrap.password is empty), ensure we still have a
+                # password-protected keystore so the server can start.
+                elasticsearch_ensure_fips_keystore
+            fi
+            # Latest Elasticseach releases install x-pack-ml  by default. Since we have faced some issues with this library on certain platforms,
+            # currently we are disabling this machine learning module whatsoever by defining "xpack.ml.enabled=false" in the "elasicsearch.yml" file
+            if is_dir_empty "${DB_BASE_DIR}/modules/x-pack-ml/platform/linux-"*; then
+                elasticsearch_conf_set xpack.ml.enabled "false"
+            fi
+        fi
+    fi
+}
+
+########################
+# Install Elasticsearch plugins
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+elasticsearch_install_plugins() {
+    read -r -a plugins_list <<<"$(tr ',;' ' ' <<<"$DB_PLUGINS")"
+    local mandatory_plugins=""
+    local cmd="elasticsearch-plugin"
+    [[ "$DB_FLAVOR" = "opensearch" ]] && cmd="opensearch-plugin"
+
+    # Helper function for extracting the plugin name from a tarball name
+    # Examples:
+    #   get_plugin_name plugin -> plugin
+    #   get_plugin_name file://plugin.zip -> plugin
+    #   get_plugin_name http://plugin-0.1.2.zip -> plugin
+    get_plugin_name() {
+        local plugin="${1:?missing plugin}"
+        # Remove any paths, and strip both the .zip extension and the version
+        basename "$plugin" | sed -E -e 's/.zip$//' -e 's/-[0-9]+\.[0-9]+(\.[0-9]+){0,}$//'
+    }
+
+    # Collect plugins that should be installed offline
+    read -r -a mounted_plugins <<<"$(find "$DB_MOUNTED_PLUGINS_DIR" -type f -name "*.zip" -print0 | xargs -0)"
+    if [[ "${#mounted_plugins[@]}" -gt 0 ]]; then
+        for plugin in "${mounted_plugins[@]}"; do
+            plugins_list+=("file://${plugin}")
+        done
+    fi
+
+    # Skip if there isn't any plugin to install
+    [[ -z "${plugins_list[*]:-}" ]] && return
+
+    # Install plugins
+    debug "Installing plugins: ${plugins_list[*]}"
+    for plugin in "${plugins_list[@]}"; do
+        plugin_name="$(get_plugin_name "$plugin")"
+        [[ -n "$mandatory_plugins" ]] && mandatory_plugins="${mandatory_plugins},${plugin_name}" || mandatory_plugins="$plugin_name"
+
+        # Check if the plugin was already installed
+        if [[ -d "${DB_PLUGINS_DIR}/${plugin_name}" ]]; then
+            debug "Plugin already installed: ${plugin}"
+            continue
+        fi
+
+        debug "Installing plugin: ${plugin}"
+        if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
+            "$cmd" install -b -v "$plugin"
+        else
+            "$cmd" install -b -v "$plugin" >/dev/null 2>&1
+        fi
+    done
+
+    # Mark plugins as mandatory
+    elasticsearch_conf_set plugin.mandatory "$mandatory_plugins"
+}
+
+########################
+# Run custom initialization scripts
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+elasticsearch_custom_init_scripts() {
+    read -r -a init_scripts <<<"$(find "$DB_INITSCRIPTS_DIR" -type f -name "*.sh" -print0 | xargs -0)"
+    if [[ "${#init_scripts[@]}" -gt 0 ]] && [[ ! -f "$DB_VOLUME_DIR"/.user_scripts_initialized ]]; then
+        info "Loading user's custom files from $DB_INITSCRIPTS_DIR"
+        for f in "${init_scripts[@]}"; do
+            debug "Executing $f"
+            case "$f" in
+            *.sh)
+                if [[ -x "$f" ]]; then
+                    if ! "$f"; then
+                        error "Failed executing $f"
+                        return 1
+                    fi
+                else
+                    warn "Sourcing $f as it is not executable by the current user, any error may cause initialization to fail"
+                    . "$f"
+                fi
+                ;;
+            *)
+                warn "Skipping $f, supported formats are: .sh"
+                ;;
+            esac
+        done
+        touch "$DB_VOLUME_DIR"/.user_scripts_initialized
+    fi
+}
+
+########################
+# Modify log4j2.properties to send events to stdout instead of a logfile
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+elasticsearch_configure_logging() {
+    # Back up the original file for users who'd like to use logfile logging
+    cp "${DB_CONF_DIR}/log4j2.properties" "${DB_CONF_DIR}/log4j2.file.properties"
+
+    # Replace RollingFile with Console
+    replace_in_file "${DB_CONF_DIR}/log4j2.properties" "RollingFile" "Console"
+
+    local -a delete_patterns=(
+        # Remove RollingFile specific settings
+        "^.*\.policies\..*$" "^.*\.filePattern.*$" "^.*\.fileName.*$" "^.*\.strategy\..*$"
+        # Remove headers
+        "^###.*$"
+        # Remove .log and .json because of multiline configurations (filename)
+        "^\s\s.*\.log" "^\s\s.*\.json"
+        # Remove default rolling logger and references
+        "^appender\.rolling" "appenderRef\.rolling"
+        # Remove _old loggers
+        "_old\."
+        # Remove .filePermissions config
+        "\.filePermissions"
+    )
+    for pattern in "${delete_patterns[@]}"; do
+        remove_in_file "${DB_CONF_DIR}/log4j2.properties" "$pattern"
+    done
+}
+
+########################
+# Check Elasticsearch/OpenSearch health
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   0 when healthy (or waiting for OpenSearch security bootstrap)
+#   1 when unhealthy
+#########################
+elasticsearch_healthcheck() {
+    info "Checking ${DB_FLAVOR^} health..."
+    local curl_args=("--silent" "--write-out" "%{http_code}")
+    local protocol="http"
+    local host output return_code
+
+    host=$(get_elasticsearch_hostname)
+    if validate_ipv6 "$host"; then
+        host="[${host}]"
+    fi
+
+    if is_boolean_yes "$DB_ENABLE_SECURITY"; then
+        # Avoid passing credentials as arguments to curl, to avoid leaking them given a local observer with /proc read access can read them
+        local user_file
+        user_file="$(credential_to_temp_file "${DB_USERNAME}:${DB_PASSWORD}")"
+        curl_args+=("--user" "$(<"$user_file")")
+        if is_boolean_yes "$DB_ENABLE_REST_TLS"; then
+            protocol="https"
+            # TODO: use the CA certificate to verify the server certificate
+            # Currently it's not trivial given keystores / truststores are mounted
+            curl_args+=("-k")
+        fi
+    fi
+
+    # Combination of --silent, --output and --write-out allows us to obtain both the status code and the request body
+    output=$(mktemp)
+    curl_args+=("-o" "$output" "${protocol}://${host}:${DB_HTTP_PORT_NUMBER}/_cluster/health?local=true")
+    HTTP_CODE=$(curl "${curl_args[@]}") || true
+    return_code=1
+    if [[ ${HTTP_CODE} -ge 200 && ${HTTP_CODE} -le 299 ]] || ([[ "$DB_FLAVOR" = "opensearch" ]] && [[ ${HTTP_CODE} -eq 503 ]] && grep -q "OpenSearch Security not initialized" "$output" ); then
+        return_code=0
+    fi
+    rm "$output"
+    return "$return_code"
+}
+
+########################
+# Extract opensearch version from version string
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   Version string
+#########################
+elasticsearch_get_version() {
+    local ver_string
+    local -a ver_split
+
+    if [[ "$DB_FLAVOR" = "opensearch" ]]; then
+        ver_string=$("${DB_BIN_DIR}/opensearch" "--version" 2>/dev/null)
+    else
+        ver_string=$("${DB_BIN_DIR}/elasticsearch" "--version" 2>/dev/null)
+    fi
+
+    read -r -a ver_split <<< "$ver_string"
+    echo "${ver_split[1]::-1}"
+}
