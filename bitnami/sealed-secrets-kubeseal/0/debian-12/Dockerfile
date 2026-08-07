@@ -40,7 +40,7 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2026-07-08T05:50:40Z" \
+      org.opencontainers.image.created="2026-08-07T10:55:49Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="sealed-secrets-kubeseal" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -53,7 +53,7 @@ COPY --from=builder /opt/bitnami/sealed-secrets-kubeseal/licenses /opt/bitnami/s
 
 ENV APP_VERSION="0.38.4" \
     BITNAMI_APP_NAME="sealed-secrets-kubeseal" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="2" \
     PATH="/opt/bitnami/sealed-secrets-kubeseal/bin:$PATH"
 
 USER 1001
