@@ -50,15 +50,31 @@ redis_conf_set() {
     local value="${2:-}"
 
     # Sanitize inputs
-    # 1. Escape special characters (\, &, ?)
-    value="${value//\\/\\\\}"
-    value="${value//&/\\&}"
-    value="${value//\?/\\?}"
-    # 2. \001-\037 strips all ASCII control characters (1-31), \000 is the NUL character (0) that Bash cannot store
-    # 3. \177 strips DEL (delete) character (127)
+    # 1. \001-\037 strips all ASCII control characters (1-31), \000 is the NUL character (0) that Bash cannot store
+    # 2. \177 strips DEL (delete) character (127)
     value="${value//[$'\001'-$'\037'$'\177']}"
-    # 4. If the value is empty, set it to an empty string
-    [[ "$value" = "" ]] && value="\"$value\""
+
+    case "$key" in
+        masterauth | requirepass | tls-key-file-pass)
+            # These keys hold a single opaque string value (e.g. passwords) that may contain
+            # spaces, '#', quotes or backslashes. Format as a double-quoted Redis config string
+            # so the parser handles them safely. Other keys (e.g. bind, save, replicaof) pack
+            # multiple space-separated tokens into $value and must NOT be quoted as a whole.
+            value="${value//\\/\\\\}"
+            value="${value//\"/\\\"}"
+            value="\"${value}\""
+            # Escape for sed replacement string in replace_in_file (\ -> \\, & -> \&)
+            value="${value//\\/\\\\}"
+            value="${value//&/\\&}"
+            ;;
+        *)
+            # Escape special characters for sed replacement (\, &, ?)
+            value="${value//\\/\\\\}"
+            value="${value//&/\\&}"
+            value="${value//\?/\\?}"
+            [[ "$value" = "" ]] && value="\"\""
+            ;;
+    esac
 
     # Determine whether to enable the configuration for RDB persistence, if yes, do not enable the replacement operation
     if [ "${key}" == "save" ]; then
