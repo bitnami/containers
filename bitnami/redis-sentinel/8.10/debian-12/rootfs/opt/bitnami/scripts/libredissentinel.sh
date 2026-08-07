@@ -31,10 +31,28 @@ redis_conf_set() {
     local value="${2:-}"
 
     # Sanitize inputs
-    value="${value//\\/\\\\}"
-    value="${value//&/\\&}"
-    value="${value//\?/\\?}"
-    [[ "$value" = "" ]] && value="\"$value\""
+    value="${value//[$'\001'-$'\037'$'\177']}"
+
+    case "$key" in
+        requirepass)
+            # Holds a single opaque string value (password) that may contain spaces, '#', quotes
+            # or backslashes. Format as a double-quoted Redis config string so the parser handles
+            # it safely. Other keys (e.g. "sentinel auth-pass", "sentinel monitor") pack multiple
+            # space-separated tokens into $value and must NOT be quoted as a whole.
+            value="${value//\\/\\\\}"
+            value="${value//\"/\\\"}"
+            value="\"${value}\""
+            # Escape for sed replacement string in replace_in_file (\ -> \\, & -> \&)
+            value="${value//\\/\\\\}"
+            value="${value//&/\\&}"
+            ;;
+        *)
+            value="${value//\\/\\\\}"
+            value="${value//&/\\&}"
+            value="${value//\?/\\?}"
+            [[ "$value" = "" ]] && value="\"\""
+            ;;
+    esac
 
     if grep -q "^\s*$key .*" "$REDIS_SENTINEL_CONF_FILE"; then
         replace_in_file "$REDIS_SENTINEL_CONF_FILE" "^\s*${key} .*" "${key} ${value}" false
