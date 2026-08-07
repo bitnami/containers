@@ -40,7 +40,7 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2026-07-08T00:30:21Z" \
+      org.opencontainers.image.created="2026-08-07T00:56:33Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="grafana-k6-operator" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -51,7 +51,7 @@ COPY --from=builder /opt/bitnami/grafana-k6-operator /opt/bitnami/grafana-k6-ope
 
 ENV APP_VERSION="1.5.0" \
     BITNAMI_APP_NAME="grafana-k6-operator" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="2" \
     PATH="/opt/bitnami/grafana-k6-operator/bin:$PATH"
 
 USER 1001
