@@ -40,7 +40,7 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2026-07-09T11:49:09Z" \
+      org.opencontainers.image.created="2026-08-08T12:00:09Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="kube-rbac-proxy" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -53,7 +53,7 @@ COPY --from=builder /opt/bitnami/kube-rbac-proxy/licenses /opt/bitnami/kube-rbac
 
 ENV APP_VERSION="0.22.1" \
     BITNAMI_APP_NAME="kube-rbac-proxy" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     PATH="/opt/bitnami/kube-rbac-proxy/bin:$PATH"
 
 USER 1001
