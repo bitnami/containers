@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-07-22T20:10:50Z" \
+      org.opencontainers.image.created="2026-08-11T15:53:41Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/mongodb-sharded/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mongodb-sharded" \
       org.opencontainers.image.title="mongodb-sharded" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="8.3.7"
+      org.opencontainers.image.version="8.3.8"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,10 +29,10 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "yq-4.53.3-2-linux-${OS_ARCH}-debian-12" \
-      "wait-for-port-1.0.10-14-linux-${OS_ARCH}-debian-12" \
-      "render-template-1.0.9-168-linux-${OS_ARCH}-debian-12" \
+      "wait-for-port-1.0.11-0-linux-${OS_ARCH}-debian-12" \
+      "render-template-1.0.10-0-linux-${OS_ARCH}-debian-12" \
       "mongodb-shell-2.9.2-0-linux-${OS_ARCH}-debian-12" \
-      "mongodb-8.3.7-0-linux-${OS_ARCH}-debian-12" \
+      "mongodb-8.3.8-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -53,7 +53,7 @@ RUN ln -s /opt/bitnami/scripts/mongodb-sharded/run.sh /run.sh
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mongodb-sharded/postunpack.sh
-ENV APP_VERSION="8.3.7" \
+ENV APP_VERSION="8.3.8" \
     BITNAMI_APP_NAME="mongodb-sharded" \
     IMAGE_REVISION="0" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mongodb/bin:$PATH"
