@@ -386,7 +386,7 @@ The Bitnami PostgreSQL Docker image sends the container logs to the `stdout`. Yo
 
 ### 9.6.11-r38, 10.6.0-r39 and 11.1.0-r34
 
-- The PostgreSQL container now contains options to easily configure synchronous commits between slaves. This provides more data stability, but must be configured with caution as it also has a cost in performance. For more information, check [Synchronous Commits](#synchronous-commits).
+- The PostgreSQL container now contains options to easily configure synchronous commits between slaves. This provides more data stability, but must be configured with caution as it also has a cost in performance. For more information, check [Synchronous Replication](https://www.postgresql.org/docs/current/warm-standby.html#SYNCHRONOUS-REPLICATION).
 
 ### 9.6.9-r19 and 10.4.0-r19
 
