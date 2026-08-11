@@ -9,13 +9,13 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-08-05T11:23:15Z" \
+      org.opencontainers.image.created="2026-08-11T21:18:19Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/elasticsearch/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/elasticsearch" \
       org.opencontainers.image.title="elasticsearch" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="9.5.0"
+      org.opencontainers.image.version="9.5.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -33,7 +33,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     COMPONENTS=( \
       "yq-4.53.3-2-linux-${OS_ARCH}-debian-12" \
       "java-21.0.12-10-0-linux-${OS_ARCH}-debian-12" \
-      "elasticsearch-9.5.0-0-linux-${OS_ARCH}-debian-12" \
+      "elasticsearch-9.5.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -52,7 +52,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 COPY rootfs /
 RUN /opt/bitnami/scripts/elasticsearch/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
-ENV APP_VERSION="9.5.0" \
+ENV APP_VERSION="9.5.1" \
     BITNAMI_APP_NAME="elasticsearch" \
     IMAGE_REVISION="0" \
     JAVA_HOME="/opt/bitnami/java" \
