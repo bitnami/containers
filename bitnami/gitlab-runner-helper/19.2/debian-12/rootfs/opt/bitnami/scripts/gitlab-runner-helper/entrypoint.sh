@@ -30,7 +30,7 @@ if ! am_i_root; then
         if [[ "$HOME" == "/" ]]; then
             export HOME=/home/gitlab-runner
         fi
-        echo "gitlab-runner:x:$(id -u):$(id -g):GitlabRunner:${HOME}:/bin/false" >"$NSS_WRAPPER_PASSWD"
+        echo "gitlab-runner:x:$(id -u):$(id -g):GitLabRunner:${HOME}:/bin/false" >"$NSS_WRAPPER_PASSWD"
         echo "gitlab-runner:x:$(id -g):" >"$NSS_WRAPPER_GROUP"
         chmod 400 "$NSS_WRAPPER_PASSWD" "$NSS_WRAPPER_GROUP"
     fi
