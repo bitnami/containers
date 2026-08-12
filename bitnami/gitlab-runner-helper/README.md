@@ -1,8 +1,8 @@
-# Bitnami Secure Image for Gitlab Runner Helper
+# Bitnami Secure Image for GitLab Runner Helper
 
-> Gitlab Runner Helper is an auxiliary container to be used with Gitlab Runner. Gitlab Runner allows to run CI/CD jobs and send the results back to Gitlab.
+> GitLab Runner Helper is an auxiliary container to be used with GitLab Runner. GitLab Runner allows to run CI/CD jobs and send the results back to GitLab.
 
-[Overview of Gitlab Runner Helper](https://gitlab.com/gitlab-org/gitlab-runner/)
+[Overview of GitLab Runner Helper](https://gitlab.com/gitlab-org/gitlab-runner/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
@@ -34,7 +34,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 ## Get this image
 
-The Bitnami Gitlab Runner Helper Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
+The Bitnami GitLab Runner Helper Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
 
 ## Configuration
 
@@ -48,11 +48,11 @@ To run commands inside this container you can use `docker run`, for example to e
 docker run --rm --name gitlab-runner-helper bitnami/gitlab-runner–helper:latest --help
 ```
 
-Check the [official Gitlab Runner Helper documentation](https://docs.gitlab.com/runner/configuration/advanced-configuration.html#helper-image) for the list of the available parameters.
+Check the [official GitLab Runner Helper documentation](https://docs.gitlab.com/runner/configuration/advanced-configuration.html#helper-image) for the list of the available parameters.
 
 ### FIPS configuration in Bitnami Secure Images
 
-The Bitnami Gitlab Runner Helper Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+The Bitnami GitLab Runner Helper Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 
