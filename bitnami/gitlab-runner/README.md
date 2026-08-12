@@ -1,8 +1,8 @@
-# Bitnami Secure Image for Gitlab Runner
+# Bitnami Secure Image for GitLab Runner
 
-> Gitlab Runner is an auxiliary application for Gitlab installations. Written in Go, it allows to run CI/CD jobs and send the results back to Gitlab.
+> GitLab Runner is an auxiliary application for GitLab installations. Written in Go, it allows to run CI/CD jobs and send the results back to GitLab.
 
-[Overview of Gitlab Runner](https://gitlab.com/gitlab-org/gitlab-runner/)
+[Overview of GitLab Runner](https://gitlab.com/gitlab-org/gitlab-runner/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
@@ -34,7 +34,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 ## Get this image
 
-The Bitnami Gitlab Runner Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
+The Bitnami GitLab Runner Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
 
 ## Configuration
 
@@ -48,11 +48,11 @@ To run commands inside this container you can use `docker run`, for example to e
 docker run --rm --name gitlab-runner bitnami/gitlab-runner:latest --help
 ```
 
-Check the [official Gitlab Runner documentation](https://docs.gitlab.com/runner/commands/) for the list of the available parameters.
+Check the [official GitLab Runner documentation](https://docs.gitlab.com/runner/commands/) for the list of the available parameters.
 
 ### FIPS configuration in Bitnami Secure Images
 
-The Bitnami Gitlab Runner Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+The Bitnami GitLab Runner Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 - `GODEBUG`: controls Go FIPS mode. Use `fips140=only` (restricted), `fips140=on` (relaxed), or `fips140=off` (disabled).
