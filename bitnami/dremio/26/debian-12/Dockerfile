@@ -8,7 +8,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-07-14T06:45:47Z" \
+      org.opencontainers.image.created="2026-08-13T08:12:00Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/dremio/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/dremio" \
@@ -30,7 +30,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "nss-wrapper-1.1.16-0-linux-${OS_ARCH}-debian-12" \
-      "jre-21.0.11-11-1-linux-${OS_ARCH}-debian-12" \
+      "jre-21.0.12-10-2-linux-${OS_ARCH}-debian-12" \
       "dremio-26.0.5-4-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -53,7 +53,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="26.0.5" \
     BITNAMI_APP_NAME="dremio" \
-    IMAGE_REVISION="19" \
+    IMAGE_REVISION="20" \
     JAVA_HOME="/opt/bitnami/java" \
     LD_LIBRARY_PATH="/opt/bitnami/java/lib/server" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:/opt/bitnami/dremio/bin:$PATH"
