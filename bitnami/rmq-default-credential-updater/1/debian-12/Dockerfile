@@ -40,7 +40,7 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2026-07-14T10:41:39Z" \
+      org.opencontainers.image.created="2026-08-13T10:54:41Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="rmq-default-credential-updater" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -53,7 +53,7 @@ COPY --from=builder /opt/bitnami/rmq-default-credential-updater/licenses /opt/bi
 
 ENV APP_VERSION="1.0.16" \
     BITNAMI_APP_NAME="rmq-default-credential-updater" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     PATH="/opt/bitnami/rmq-default-credential-updater/bin:$PATH"
 
 USER 1001
