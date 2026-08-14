@@ -1,8 +1,8 @@
-# Bitnami Secure Image for Etcd
+# Bitnami Secure Image for etcd
 
 > etcd is a distributed key-value store designed to securely store data across a cluster. etcd is widely used in production on account of its reliability, fault-tolerance and ease of use.
 
-[Overview of Etcd](https://etcd.io/)
+[Overview of etcd](https://etcd.io/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
@@ -36,9 +36,9 @@ Each image comes with valuable security metadata. You can view the metadata in [
 
 If you are looking for our previous generation of images based on Debian Linux, please see the [Bitnami Legacy registry](https://hub.docker.com/u/bitnamilegacy).
 
-## How to deploy Etcd in Kubernetes?
+## How to deploy etcd in Kubernetes?
 
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Etcd Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/etcd).
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami etcd Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/etcd).
 
 ## Why use a non-root container?
 
@@ -50,11 +50,11 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 ## Get this image
 
-The Bitnami Etcd Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
+The Bitnami etcd Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
 
 ## Connecting to other containers
 
-Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a Etcd server running inside a container can easily be accessed by your application containers using a Etcd client.
+Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a etcd server running inside a container can easily be accessed by your application containers using a etcd client.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
@@ -68,34 +68,34 @@ Apart from providing your custom configuration file, you can also modify the ser
 
 #### Customizable environment variables
 
-| Name                               | Description                                                                                  | Default Value           |
-|------------------------------------|----------------------------------------------------------------------------------------------|-------------------------|
-| `ETCD_SNAPSHOTS_DIR`               | etcd snapshots directory (used on "disaster recovery" feature).                              | `/snapshots`            |
-| `ETCD_SNAPSHOT_HISTORY_LIMIT`      | etcd snapshots history limit.                                                                | `1`                     |
-| `ETCD_INIT_SNAPSHOTS_DIR`          | etcd init snapshots directory (used on "init from snapshot" feature).                        | `/init-snapshot`        |
-| `ALLOW_NONE_AUTHENTICATION`        | Allow accessing etcd without any password.                                                   | `no`                    |
-| `ETCD_ROOT_PASSWORD`               | Password for the etcd root user.                                                             | `nil`                   |
-| `ETCD_CLUSTER_DOMAIN`              | Domain to use to discover other etcd members.                                                | `nil`                   |
-| `ETCD_START_FROM_SNAPSHOT`         | Whether etcd should start from an existing snapshot or not.                                  | `no`                    |
-| `ETCD_DISASTER_RECOVERY`           | Whether etcd should try or not to recover from snapshots when the cluste disastrously fails. | `no`                    |
-| `ETCD_ON_K8S`                      | Whether etcd is running on a K8s environment or not.                                         | `no`                    |
-| `ETCD_INIT_SNAPSHOT_FILENAME`      | Existing snapshot filename to start the etcd cluster from.                                   | `nil`                   |
-| `ETCD_PREUPGRADE_START_DELAY`      | Optional delay before starting the pre-upgrade hook (in seconds).                            | `nil`                   |
-| `ETCD_NAME`                        | etcd member name.                                                                            | `nil`                   |
-| `ETCD_LOG_LEVEL`                   | etcd log level.                                                                              | `info`                  |
-| `ETCD_LISTEN_CLIENT_URLS`          | List of URLs to listen on for client traffic.                                                | `http://0.0.0.0:2379`   |
-| `ETCD_ADVERTISE_CLIENT_URLS`       | List of this member client URLs to advertise to the rest of the cluster.                     | `http://127.0.0.1:2379` |
-| `ETCD_INITIAL_CLUSTER`             | Initial list of members to bootstrap a cluster.                                              | `nil`                   |
-| `ETCD_LISTEN_PEER_URLS`            | List of URLs to listen on for peers traffic.                                                 | `nil`                   |
-| `ETCD_INITIAL_ADVERTISE_PEER_URLS` | List of this member peer URLs to advertise to the rest of the cluster while bootstrapping.   | `nil`                   |
-| `ETCD_INITIAL_CLUSTER_TOKEN`       | Unique initial cluster token used for bootstrapping.                                         | `nil`                   |
-| `ETCD_AUTO_TLS`                    | Use generated certificates for TLS communications with clients.                              | `false`                 |
-| `ETCD_CERT_FILE`                   | Path to the client server TLS cert file.                                                     | `nil`                   |
-| `ETCD_KEY_FILE`                    | Path to the client server TLS key file.                                                      | `nil`                   |
-| `ETCD_TRUSTED_CA_FILE`             | Path to the client server TLS trusted CA cert file.                                          | `nil`                   |
-| `ETCD_CLIENT_CERT_AUTH`            | Enable client cert authentication                                                            | `false`                 |
-| `ETCD_PEER_AUTO_TLS`               | Use generated certificates for TLS communications with peers.                                | `false`                 |
-| `ETCD_EXTRA_AUTH_FLAGS`            | Comma separated list of authentication flags to append to etcdctl                            | `nil`                   |
+| Name                               | Description                                                                                   | Default Value           |
+|------------------------------------|-----------------------------------------------------------------------------------------------|-------------------------|
+| `ETCD_SNAPSHOTS_DIR`               | etcd snapshots directory (used on "disaster recovery" feature).                               | `/snapshots`            |
+| `ETCD_SNAPSHOT_HISTORY_LIMIT`      | etcd snapshots history limit.                                                                 | `1`                     |
+| `ETCD_INIT_SNAPSHOTS_DIR`          | etcd init snapshots directory (used on "init from snapshot" feature).                         | `/init-snapshot`        |
+| `ALLOW_NONE_AUTHENTICATION`        | Allow accessing etcd without any password.                                                    | `no`                    |
+| `ETCD_ROOT_PASSWORD`               | Password for the etcd root user.                                                              | `nil`                   |
+| `ETCD_CLUSTER_DOMAIN`              | Domain to use to discover other etcd members.                                                 | `nil`                   |
+| `ETCD_START_FROM_SNAPSHOT`         | Whether etcd should start from an existing snapshot or not.                                   | `no`                    |
+| `ETCD_DISASTER_RECOVERY`           | Whether etcd should try or not to recover from snapshots when the cluster disastrously fails. | `no`                    |
+| `ETCD_ON_K8S`                      | Whether etcd is running on a K8s environment or not.                                          | `no`                    |
+| `ETCD_INIT_SNAPSHOT_FILENAME`      | Existing snapshot filename to start the etcd cluster from.                                    | `nil`                   |
+| `ETCD_PREUPGRADE_START_DELAY`      | Optional delay before starting the pre-upgrade hook (in seconds).                             | `nil`                   |
+| `ETCD_NAME`                        | etcd member name.                                                                             | `nil`                   |
+| `ETCD_LOG_LEVEL`                   | etcd log level.                                                                               | `info`                  |
+| `ETCD_LISTEN_CLIENT_URLS`          | List of URLs to listen on for client traffic.                                                 | `http://0.0.0.0:2379`   |
+| `ETCD_ADVERTISE_CLIENT_URLS`       | List of this member client URLs to advertise to the rest of the cluster.                      | `http://127.0.0.1:2379` |
+| `ETCD_INITIAL_CLUSTER`             | Initial list of members to bootstrap a cluster.                                               | `nil`                   |
+| `ETCD_LISTEN_PEER_URLS`            | List of URLs to listen on for peers traffic.                                                  | `nil`                   |
+| `ETCD_INITIAL_ADVERTISE_PEER_URLS` | List of this member peer URLs to advertise to the rest of the cluster while bootstrapping.    | `nil`                   |
+| `ETCD_INITIAL_CLUSTER_TOKEN`       | Unique initial cluster token used for bootstrapping.                                          | `nil`                   |
+| `ETCD_AUTO_TLS`                    | Use generated certificates for TLS communications with clients.                               | `false`                 |
+| `ETCD_CERT_FILE`                   | Path to the client server TLS cert file.                                                      | `nil`                   |
+| `ETCD_KEY_FILE`                    | Path to the client server TLS key file.                                                       | `nil`                   |
+| `ETCD_TRUSTED_CA_FILE`             | Path to the client server TLS trusted CA cert file.                                           | `nil`                   |
+| `ETCD_CLIENT_CERT_AUTH`            | Enable client cert authentication                                                             | `false`                 |
+| `ETCD_PEER_AUTO_TLS`               | Use generated certificates for TLS communications with peers.                                 | `false`                 |
+| `ETCD_EXTRA_AUTH_FLAGS`            | Comma separated list of authentication flags to append to etcdctl                             | `nil`                   |
 
 #### Read-only environment variables
 
@@ -123,7 +123,7 @@ You can find a sample configuration file on this [link](https://github.com/coreo
 
 ### FIPS configuration in Bitnami Secure Images
 
-The Bitnami Etcd Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+The Bitnami etcd Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 - `GODEBUG`: controls Go FIPS mode. Use `fips140=only` (restricted), `fips140=on` (relaxed), or `fips140=off` (disabled).
@@ -140,7 +140,7 @@ The Bitnami Etcd Docker image from the [Bitnami Secure Images](https://go-vmware
 
 ### 3.4.15-debian-10-r7
 
-- The container now contains the needed logic to deploy the Etcd container on Kubernetes using the [Bitnami Etcd Chart](https://github.com/bitnami/charts/tree/master/bitnami/etcd).
+- The container now contains the needed logic to deploy the etcd container on Kubernetes using the [Bitnami etcd Chart](https://github.com/bitnami/charts/tree/master/bitnami/etcd).
 
 ### 3.4.13-debian-10-r7
 
@@ -152,7 +152,7 @@ The Bitnami Etcd Docker image from the [Bitnami Secure Images](https://go-vmware
 
 ## Further documentation
 
-For further documentation, please check [Etcd documentation](https://coreos.com/etcd/docs/latest/) or its [GitHub repository](https://github.com/coreos/etcd)
+For further documentation, please check [etcd documentation](https://coreos.com/etcd/docs/latest/) or its [GitHub repository](https://github.com/coreos/etcd)
 
 ## License
 
