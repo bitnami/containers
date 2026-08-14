@@ -79,7 +79,7 @@ Containers attached to the same network can communicate with each other using th
 
 ## Configuration
 
-Thanos can be configured via command-line flags and, depending on them, the same container image can be used to create components with differentes roles:
+Thanos can be configured via command-line flags and, depending on them, the same container image can be used to create components with different roles:
 
 - Sidecar: connects to Prometheus, reads its data for query and/or uploads it to cloud storage.
 - Store Gateway: serves metrics inside of a cloud storage bucket.
