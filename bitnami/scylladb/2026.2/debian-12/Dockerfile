@@ -8,13 +8,13 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-08-05T11:08:15Z" \
+      org.opencontainers.image.created="2026-08-14T22:59:49Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/scylladb/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/scylladb" \
       org.opencontainers.image.title="scylladb" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="2026.2.3"
+      org.opencontainers.image.version="2026.2.4"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,9 +29,9 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "python-3.14.6-9-linux-${OS_ARCH}-debian-12" \
+      "python-3.14.7-5-linux-${OS_ARCH}-debian-12" \
       "jre-11.0.32-11-0-linux-${OS_ARCH}-debian-12" \
-      "scylladb-2026.2.3-0-linux-${OS_ARCH}-debian-12" \
+      "scylladb-2026.2.4-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -51,7 +51,7 @@ RUN uninstall_packages curl
 COPY rootfs /
 RUN /opt/bitnami/scripts/scylladb/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
-ENV APP_VERSION="2026.2.3" \
+ENV APP_VERSION="2026.2.4" \
     BITNAMI_APP_NAME="scylladb" \
     IMAGE_REVISION="0" \
     JAVA_HOME="/opt/bitnami/java" \
