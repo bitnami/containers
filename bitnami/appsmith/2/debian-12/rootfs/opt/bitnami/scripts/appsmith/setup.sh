@@ -30,7 +30,7 @@ am_i_root && ensure_user_exists "$APPSMITH_DAEMON_USER" --group "$APPSMITH_DAEMO
 debug "Copying files from $NGINX_DEFAULT_CONF_DIR to $NGINX_CONF_DIR"
 cp -nr "$NGINX_DEFAULT_CONF_DIR"/. "$NGINX_CONF_DIR" || true
 
-# Nginx configuration, based on upstream nginx configuration but removing hardcoded references to localhost
+# NGINX configuration, based on upstream nginx configuration but removing hardcoded references to localhost
 # https://github.com/appsmithorg/appsmith/blob/release/deploy/docker/templates/nginx/nginx-app-http.conf.template.sh#L102
 ensure_web_server_app_configuration_exists "appsmith" \
     --document-root /opt/bitnami/appsmith/editor      \
