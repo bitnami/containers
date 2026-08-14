@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-08-14T05:14:42Z" \
+      org.opencontainers.image.created="2026-08-14T09:35:39Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/cilium/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cilium" \
@@ -32,7 +32,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
       "llvm-22.1.8-0-linux-${OS_ARCH}-debian-12" \
       "gops-0.3.29-10-linux-${OS_ARCH}-debian-12" \
       "bpftool-7.7.0-0-linux-${OS_ARCH}-debian-12" \
-      "cilium-1.20.0-1-linux-${OS_ARCH}-debian-12" \
+      "cilium-1.20.0-2-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -52,7 +52,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/cilium/postunpack.sh
 ENV APP_VERSION="1.20.0" \
     BITNAMI_APP_NAME="cilium" \
-    IMAGE_REVISION="2"
+    IMAGE_REVISION="3"
 
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/scripts/cilium/entrypoint.sh" ]
