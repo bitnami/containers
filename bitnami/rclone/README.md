@@ -1,8 +1,8 @@
-# Bitnami Secure Image for rClone
+# Bitnami Secure Image for rclone
 
-> RClone synchronizes files and directories to and from different cloud storage providers. It supports different backends, including GCS, S3 and Azure Blob Storage. It provides caching and encryption.
+> rclone synchronizes files and directories to and from different cloud storage providers. It supports different backends, including GCS, S3 and Azure Blob Storage. It provides caching and encryption.
 
-[Overview of rClone](https://rclone.org/)
+[Overview of rclone](https://rclone.org/)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
@@ -34,7 +34,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 ## Get this image
 
-The Bitnami rClone Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
+The Bitnami rclone Docker image is only available to [Bitnami Secure Images](https://bitnami.com) customers.
 
 ## Configuration
 
@@ -48,11 +48,11 @@ To run commands inside this container you can use `docker run`, for example to e
 docker run --rm --name rclone bitnami/rclone:latest -- rclone --version
 ```
 
-Check the [official rClone documentation](https://rclone.org/docs/) for a list of the available parameters.
+Check the [official rclone documentation](https://rclone.org/docs/) for a list of the available parameters.
 
 ### FIPS configuration in Bitnami Secure Images
 
-The Bitnami rClone Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
+The Bitnami rclone Docker image from the [Bitnami Secure Images](https://go-vmware.broadcom.com/contact-us) catalog includes extra features and settings to configure the container with FIPS capabilities. You can configure the next environment variables:
 
 - `OPENSSL_FIPS`: whether OpenSSL runs in FIPS mode or not. `yes` (default), `no`.
 - `GODEBUG`: controls Go FIPS mode. Use `fips140=only` (restricted), `fips140=on` (relaxed), or `fips140=off` (disabled).
