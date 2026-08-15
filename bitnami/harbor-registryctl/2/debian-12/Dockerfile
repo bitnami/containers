@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-08-14T19:38:05Z" \
+      org.opencontainers.image.created="2026-08-15T07:31:12Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/harbor-registryctl/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/harbor-registryctl" \
@@ -30,7 +30,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     COMPONENTS=( \
       "yq-4.53.3-3-linux-${OS_ARCH}-debian-12" \
       "harbor-registry-2.15.2-5-linux-${OS_ARCH}-debian-12" \
-      "harbor-registryctl-2.15.2-12-linux-${OS_ARCH}-debian-12" \
+      "harbor-registryctl-2.15.2-13-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -51,7 +51,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-registryctl/postunpack.sh
 ENV APP_VERSION="2.15.2" \
     BITNAMI_APP_NAME="harbor-registryctl" \
-    IMAGE_REVISION="14" \
+    IMAGE_REVISION="15" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/harbor-registry/bin:/opt/bitnami/harbor-registryctl/bin:$PATH"
 
 VOLUME [ "/etc/registry", "/etc/registryctl", "/storage", "/var/lib/registry" ]
