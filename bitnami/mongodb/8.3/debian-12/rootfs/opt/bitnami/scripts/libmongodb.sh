@@ -957,14 +957,17 @@ mongodb_secondary_node_has_voting_rights() {
     local result
 
     debug "Checking voting rights of the node"
+    # mongosh prints a connection banner containing 'directConnection=true', so a
+    # plain 'true' match always succeeds. Match an explicit sentinel instead, built
+    # at runtime so the positive value never appears verbatim in the sent script.
     result=$(
         mongodb_execute_print_output "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
-rs.conf().members.filter(m => m.host === '$node:$port' && m.votes > 0 && m.priority > 0).length === 1
+print("HAS_VOTES_" + (rs.conf().members.some(m => m.host === '$node:$port' && m.votes > 0 && m.priority > 0) ? "YES" : "NO"))
 EOF
     )
     debug "$result"
 
-    grep -q "true" <<<"$result"
+    grep -q "HAS_VOTES_YES" <<<"$result"
 }
 
 ########################
