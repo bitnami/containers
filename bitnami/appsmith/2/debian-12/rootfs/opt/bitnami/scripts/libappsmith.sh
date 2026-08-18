@@ -46,9 +46,11 @@ appsmith_validate() {
         fi
     }
     check_resolved_hostname() {
-        if ! is_hostname_resolved "$1"; then
-            warn "Hostname ${1} could not be resolved, this could lead to connection issues"
-        fi
+        for host in ${1//,/ }; do
+            if ! is_hostname_resolved "$host"; then
+                warn "Hostname ${host} could not be resolved, this could lead to connection issues"
+            fi
+        done
     }
     check_valid_port() {
         local port_var="${1:?missing port variable}"
@@ -412,7 +414,7 @@ appsmith_backend_start_bg() {
     is_appsmith_backend_running && return
 
     local -r cmd=("java")
-    local -r args=("-Dserver.port=${APPSMITH_API_PORT}" "-Dappsmith.admin.envfile=${APPSMITH_CONF_FILE}" "-Djava.security.egd=file:/dev/./urandom" "-jar" "${APPSMITH_BASE_DIR}/backend/server.jar")
+    local -r args=("-Dserver.address=0.0.0.0" "-Dserver.port=${APPSMITH_API_PORT}" "-Dappsmith.admin.envfile=${APPSMITH_CONF_FILE}" "-Djava.security.egd=file:/dev/./urandom" "-jar" "${APPSMITH_BASE_DIR}/backend/server.jar")
     # We need to load in the environment the Appsmith configuration file in order
     # for the application to work. Using a similar approach as the upstream container.
     # We also need to load only those environment variables that are not empty, otherwise
