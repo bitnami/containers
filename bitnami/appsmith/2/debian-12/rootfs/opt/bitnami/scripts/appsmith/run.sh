@@ -36,7 +36,7 @@ if [[ "$APPSMITH_MODE" == "backend" ]]; then
     # https://github.com/appsmithorg/appsmith/blob/release/app/server/entrypoint.sh#L15
     cd "${APPSMITH_BASE_DIR}/backend" || exit 1
     cmd+=("java")
-    args+=("-Dserver.port=${APPSMITH_API_PORT}" "-Dappsmith.admin.envfile=${APPSMITH_CONF_FILE}" "-Djava.security.egd=file:/dev/./urandom" "-jar" "${APPSMITH_BASE_DIR}/backend/server.jar")
+    args+=("-Dserver.address=0.0.0.0" "-Dserver.port=${APPSMITH_API_PORT}" "-Dappsmith.admin.envfile=${APPSMITH_CONF_FILE}" "-Djava.security.egd=file:/dev/./urandom" "-jar" "${APPSMITH_BASE_DIR}/backend/server.jar")
 elif [[ "$APPSMITH_MODE" == "rts" ]]; then
     # We need to be in the same folder as the server.js script or it will fail
     # https://github.com/appsmithorg/appsmith/blob/release/app/rts/start-server.sh#L5
