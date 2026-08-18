@@ -14,6 +14,10 @@ set -o pipefail
 
 # Load libraries
 . /opt/bitnami/scripts/libneo4j.sh
+# Enterprise-only extensions (clustering, metrics): only shipped in the neo4j-enterprise image
+if [[ -f /opt/bitnami/scripts/libneo4j-enterprise.sh ]]; then
+    . /opt/bitnami/scripts/libneo4j-enterprise.sh
+fi
 
 # Ensure Neo4j environment variables are valid
 neo4j_validate
