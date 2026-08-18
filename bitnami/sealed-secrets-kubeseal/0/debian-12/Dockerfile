@@ -17,7 +17,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "sealed-secrets-kubeseal-0.38.4-3-linux-${OS_ARCH}-debian-12" \
+      "sealed-secrets-kubeseal-0.39.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -40,20 +40,20 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2026-08-14T15:11:28Z" \
+      org.opencontainers.image.created="2026-08-18T15:29:44Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="sealed-secrets-kubeseal" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="0.38.4"
+      org.opencontainers.image.version="0.39.0"
 
 COPY rootfs /
 COPY --from=builder /opt/bitnami/sealed-secrets-kubeseal/.spdx-sealed-secrets-kubeseal.spdx /opt/bitnami/sealed-secrets-kubeseal/.spdx-sealed-secrets-kubeseal.spdx
 COPY --from=builder /opt/bitnami/sealed-secrets-kubeseal/bin/kubeseal /opt/bitnami/sealed-secrets-kubeseal/bin/kubeseal
 COPY --from=builder /opt/bitnami/sealed-secrets-kubeseal/licenses /opt/bitnami/sealed-secrets-kubeseal/licenses
 
-ENV APP_VERSION="0.38.4" \
+ENV APP_VERSION="0.39.0" \
     BITNAMI_APP_NAME="sealed-secrets-kubeseal" \
-    IMAGE_REVISION="4" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/sealed-secrets-kubeseal/bin:$PATH"
 
 USER 1001
