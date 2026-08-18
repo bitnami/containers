@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-08-14T12:30:14Z" \
+      org.opencontainers.image.created="2026-08-18T10:14:57Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/hubble-relay/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/hubble-relay" \
       org.opencontainers.image.title="hubble-relay" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.20.0"
+      org.opencontainers.image.version="1.20.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -30,7 +30,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     COMPONENTS=( \
       "grpc-health-probe-0.4.55-0-linux-${OS_ARCH}-debian-12" \
       "gops-0.3.29-10-linux-${OS_ARCH}-debian-12" \
-      "hubble-relay-1.20.0-2-linux-${OS_ARCH}-debian-12" \
+      "hubble-relay-1.20.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -47,9 +47,9 @@ RUN chmod g+rwX /opt/bitnami
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN uninstall_packages curl
 
-ENV APP_VERSION="1.20.0" \
+ENV APP_VERSION="1.20.1" \
     BITNAMI_APP_NAME="hubble-relay" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/hubble-relay/bin:$PATH"
 
 EXPOSE 4245 6062 9893 9966
