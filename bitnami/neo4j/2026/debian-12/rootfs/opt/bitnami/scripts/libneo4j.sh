@@ -73,6 +73,19 @@ neo4j_validate() {
 
     ! is_empty_value "$NEO4J_HOST" && check_resolved_hostname "$NEO4J_HOST"
 
+    # Enterprise-only settings (clustering, metrics) are validated by neo4j_validate_enterprise,
+    # defined only in libneo4j-enterprise.sh - a file that is only present in the neo4j-enterprise
+    # image. Its mere absence is itself the "this is Community" signal (no packaging_info/edition
+    # parsing needed), but still worth a clear error rather than a silent no-op if someone sets
+    # one of these on an image that doesn't have the file.
+    if declare -F neo4j_validate_enterprise >/dev/null; then
+        neo4j_validate_enterprise
+    else
+        is_boolean_yes "${NEO4J_CLUSTERING_ENABLED:-false}" && print_validation_error "NEO4J_CLUSTERING_ENABLED is set to 'true' but this image does not support Causal Clustering (requires Neo4j Enterprise Edition)"
+        is_boolean_yes "${NEO4J_METRICS_PROMETHEUS_ENABLED:-false}" && print_validation_error "NEO4J_METRICS_PROMETHEUS_ENABLED is set to 'true' but this image does not support Prometheus metrics (requires Neo4j Enterprise Edition)"
+        is_boolean_yes "${NEO4J_BACKUP_ENABLED:-false}" && print_validation_error "NEO4J_BACKUP_ENABLED is set to 'true' but this image does not support online backup (requires Neo4j Enterprise Edition)"
+    fi
+
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
@@ -219,6 +232,13 @@ neo4j_initialize() {
     info "Configuring Neo4j with settings provided via environment variables"
     if ! [[ -f "${NEO4J_MOUNTED_CONF_DIR}/neo4j.conf" ]]; then
         configure_neo4j_connector_settings
+        # Enterprise-only settings (clustering, metrics, backup): configure_neo4j_cluster_settings,
+        # configure_neo4j_metrics_settings, and configure_neo4j_backup_settings are defined in
+        # libneo4j-enterprise.sh, which is only present in the neo4j-enterprise image, so these
+        # are no-ops on Community.
+        declare -F configure_neo4j_cluster_settings >/dev/null && configure_neo4j_cluster_settings
+        declare -F configure_neo4j_metrics_settings >/dev/null && configure_neo4j_metrics_settings
+        declare -F configure_neo4j_backup_settings >/dev/null && configure_neo4j_backup_settings
     else
         info "Found mounted neo4j.conf file in ${NEO4J_MOUNTED_CONF_DIR}/neo4j.conf. The general Neo4j configuration will be skipped"
     fi
