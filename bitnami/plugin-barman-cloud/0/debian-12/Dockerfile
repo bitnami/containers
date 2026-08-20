@@ -17,7 +17,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "plugin-barman-cloud-0.14.0-2-linux-${OS_ARCH}-debian-12" \
+      "plugin-barman-cloud-0.14.0-3-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -41,7 +41,7 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2026-08-14T14:39:18Z" \
+      org.opencontainers.image.created="2026-08-20T00:28:52Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="plugin-barman-cloud" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -52,7 +52,7 @@ COPY --from=builder /opt/bitnami/plugin-barman-cloud /opt/bitnami/plugin-barman-
 
 ENV APP_VERSION="0.14.0" \
     BITNAMI_APP_NAME="plugin-barman-cloud" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="2" \
     PATH="/opt/bitnami/plugin-barman-cloud/bin:$PATH"
 
 USER 1001
