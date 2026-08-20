@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-08-14T01:47:16Z" \
+      org.opencontainers.image.created="2026-08-20T00:05:44Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/notation/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/notation" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "notation-1.3.2-22-linux-${OS_ARCH}-debian-12" \
+      "notation-1.3.2-23-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -48,7 +48,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="1.3.2" \
     BITNAMI_APP_NAME="notation" \
-    IMAGE_REVISION="38" \
+    IMAGE_REVISION="39" \
     PATH="/opt/bitnami/notation/bin:$PATH"
 
 USER 1001
