@@ -145,6 +145,7 @@ The following tables list the main variables you can set.
 | `OPENSEARCH_SECURITY_ADMIN_DN`                 | Comma-separated list including the Opensearch Admin user allowed TLS DNs.                                           | `nil`                                       |
 | `OPENSEARCH_SECURITY_ADMIN_CERT_LOCATION`      | Path to the Opensearch Admin PEM certificate.                                                                       | `${DB_CERTS_DIR}/admin.crt`                 |
 | `OPENSEARCH_SECURITY_ADMIN_KEY_LOCATION`       | Path to the Opensearch Admin PEM key.                                                                               | `${DB_CERTS_DIR}/admin.key`                 |
+| `OPENSEARCH_SECURE_SETTINGS_KEYSTORE_PASSWORD` | Password used to create the FIPS keystore in restricted mode.                                                       | `FIPS_password_123!`                        |
 
 #### Read-only environment variables
 
