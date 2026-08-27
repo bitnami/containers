@@ -59,14 +59,14 @@ fi
 
 original_command="$(basename "$0")"
 # Update links to point to the selected binaries
-if [ -x /usr/sbin/alternatives ]; then
+if command -v alternatives >/dev/null 2>&1 || [ -x /usr/sbin/alternatives ] || [ -x /opt/bitnami/common/sbin/alternatives ]; then
     # Fedora/SUSE style alternatives
     alternatives --set iptables "/usr/sbin/iptables-${mode}" > /dev/null || failed=1
     if [ "${failed:-0}" = 1 ]; then
         # Try the multi-binary if alternatives failed
         exec "/usr/sbin/xtables-${mode}-multi" "$original_command" "$@"
     fi
-elif [ -x /usr/sbin/update-alternatives ] || [ -x /usr/bin/update-alternatives ]; then
+elif command -v update-alternatives >/dev/null 2>&1 || [ -x /usr/sbin/update-alternatives ] || [ -x /usr/bin/update-alternatives ] || [ -x /opt/bitnami/common/sbin/update-alternatives ]; then
     # Debian style alternatives
     update-alternatives --set iptables "/usr/sbin/iptables-${mode}" > /dev/null || failed=1
     update-alternatives --set ip6tables "/usr/sbin/ip6tables-${mode}" > /dev/null || failed=1

@@ -29,7 +29,7 @@ ln -s "$CILIUM_LIB_DIR" "/var/lib/cilium"
 ln -s "$CILIUM_RUN_DIR" "/var/run/cilium"
 
 ALTERNATIVES_CMD=update-alternatives
-if [ -x /usr/bin/alternatives ] || [ -x /usr/sbin/alternatives ]; then
+if command -v alternatives >/dev/null 2>&1 || [ -x /usr/bin/alternatives ] || [ -x /usr/sbin/alternatives ] || [ -x /opt/bitnami/common/sbin/alternatives ]; then
     # Fedora/SUSE style alternatives
     ALTERNATIVES_CMD=alternatives
 fi
