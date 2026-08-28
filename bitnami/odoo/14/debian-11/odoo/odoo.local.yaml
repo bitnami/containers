@@ -1,0 +1,11 @@
+bootstrap:
+  extend: odoo.project.yaml
+odoo:
+  options:
+    load_language: pt_BR,en_US
+    limit_memory_hard: 26843545600
+    limit_memory_soft: 21474836480
+    limit_time_cpu: 600
+    limit_time_real: 1200
+    limit_time_real_cron: -1
+    overwrite_existing_translations: True

@@ -1,0 +1,1071 @@
+
+#
+2to3==1.0
+acme
+# acme==1.23.0
+acme==1.23.0
+aiohttp
+#aiohttp==3.8.3
+# aiohttp==3.8.4
+aiosignal
+#aiosignal==1.2.0
+# aiosignal==1.3.1
+# ak==2.1.1
+# alabaster==0.7.13
+alabaster==0.7.13
+#algoliasearch>=2.0,<3.0
+# algoliasearch==2.6.3
+#algoliasearch==2.6.3
+amqp
+amqp==5.1.1
+# aniso8601==8.0.0
+aniso8601==9.0.1
+apispec
+apispec>=4.0.0
+# apispec==6.3.0
+apispec==6.3.0
+appdirs
+# appdirs==1.4.4
+appdirs==1.4.4
+# argcomplete==2.1.1
+argcomplete==2.1.2
+# arrow==1.2.3
+arrow==1.2.3
+# asn1crypto==1.5.1
+#asn1crypto==1.5.1
+asterisk
+astor
+# astor==0.8.1
+astor==0.8.1
+async-timeout
+# async-timeout==4.0.2
+async-timeout==4.0.2
+attrs
+attrs==22.1.0
+# attrs==22.2.0
+Avalara
+# Avalara==23.2.0
+Avalara==23.3.0
+Babel
+# Babel==2.6.0
+#Babel==2.6.0
+#Babel==2.6.0; python_version <= '3.9'
+Babel==2.9.1; python_version > '3.9'  # (Jammy) 2.6.0 has issues with python 3.10
+# backports.zoneinfo==0.2.1
+backports.zoneinfo==0.2.1
+barcode
+barcode==1.0.2
+# bcrypt==4.0.1
+#bcrypt==4.0.1
+# beautifulsoup4==4.11.2
+#beautifulsoup4==4.11.2
+billiard
+billiard==3.6.4.0
+bitmath==1.3.3.1
+black==23.1.0
+bleach
+bleach==6.0.0
+# blessed==1.20.0
+blessed==1.20.0
+# bokeh==2.3.1
+bokeh==2.3.1
+# boto==2.42.0
+boto==2.49.0
+boto3
+# boto3==1.15.18
+#boto3==1.15.18
+# botocore==1.18.18
+#botocore==1.18.18
+# bravado-core==5.17.1
+bravado-core==5.17.1
+brazilcep
+bs4==0.0.1
+# bullseye version, focal patched 2.10
+CacheControl==0.12.11
+# cached-property==1.5.2
+cached-property==1.5.2
+# cachetools==5.3.0
+#cachetools==5.3.0
+cachy==0.3.0
+candyshop
+candyshop==0.1.4
+celery
+celery==5.2.2
+cerberus
+# Cerberus==1.3.4
+#Cerberus==1.3.4
+certifi
+# certifi==2022.12.7
+certifi==2022.9.24
+# certvalidator==0.11.1
+certvalidator==0.11.1
+cffi
+# cffi==1.15.1
+cffi==1.15.1
+cfgv==3.3.1
+chardet
+# chardet==3.0.4
+#chardet==3.0.4
+charset-normalizer
+charset-normalizer==2.1.1
+# charset-normalizer==3.1.0
+cleo==0.7.6
+click
+# click==8.1.3
+click==8.1.3
+click-didyoumean
+click-didyoumean==0.3.0
+click-plugins
+click-plugins==1.1.1
+click-repl
+click-repl==0.2.0
+clikit==0.4.3
+clipboard==0.0.4
+cloc==0.2.5
+clodoo
+clodoo==2.0.3
+cmdw==0.26
+# colorama==0.4.6
+colorama==0.4.6
+# colorclass==2.2.2
+colorclass==2.2.2
+colored==1.4.4
+commonmark
+commonmark==0.9.1
+component
+component==0.0.1
+# compressed-rtf==1.0.6
+compressed-rtf==1.0.6
+configparser==5.3.0
+configset==1.42
+contextvars;python_version<"3.7"
+# contourpy==1.0.7
+contourpy==1.0.7
+# convertdate==2.4.0
+convertdate==2.4.0
+coverage==7.2.2
+cryptography
+# cryptography==3.3.2
+#cryptography==3.3.2
+cssselect
+# cssselect==1.2.0
+cssselect==1.2.0
+# cssutils==2.5.1
+cssutils==2.6.0
+# cycler==0.11.0
+cycler==0.11.0
+dataclasses
+# dataclasses==0.6
+dataclasses==0.6
+dateparser
+# dateparser==1.1.1
+#dateparser==1.1.1
+# debugpy==1.6.6
+debugpy==1.6.6
+decorator
+# decorator==4.3.0
+#decorator==4.3.0
+# defusedxml==0.7.1
+defusedxml==0.7.1
+Deprecated
+Deprecated==1.2.13
+dicttoxml
+# dicttoxml==1.7.16
+dicttoxml==1.7.16
+# distlib==0.3.6
+distlib==0.3.6
+dnspython
+# dnspython==2.3.0
+dnspython==2.3.0
+doblib>=0.5
+docker-compose
+docutils
+# docutils==0.14
+#docutils==0.14
+# easygui==0.98.3
+easygui==0.98.3
+# ebaysdk==2.1.5
+#ebaysdk==2.1.5
+# ebcdic==1.1.1
+ebcdic==1.1.1
+# ecdsa==0.18.0
+ecdsa==0.18.0
+#-e git+https://github.com/escodoo/erpbrasil.assinatura.git@master-nfse_paulistana-workaround#egg=erpbrasil.assinatura
+# eight==1.0.1
+eight==1.0.1
+elasticsearch>=7.0.0,<=7.13.4
+# elasticsearch==7.13.4
+elasticsearch==7.13.4
+# elementpath==4.0.1
+elementpath==4.0.1
+email-validator
+# email-validator==1.3.1
+email-validator==1.3.1
+endesive
+# endesive==2.0.15
+endesive==2.0.15
+erpbrasil.assinatura==1.7.0
+erpbrasil.base
+erpbrasil.edoc
+erpbrasil.edoc.pdf
+erpbrasil.transmissao
+# et-xmlfile==1.1.0
+et-xmlfile==1.1.0
+exceptiongroup==1.1.1
+extendable
+# extendable==0.0.3
+extendable-pydantic
+# extendable_pydantic==0.0.3
+#extendable_pydantic==0.0.3
+extract_msg
+# extract-msg==0.33.0
+extract-msg==0.33.0
+factur-x
+# factur-x==2.4
+#factur-x==2.4
+feedparser
+# filelock==3.10.0
+filelock==3.10.0
+flanker
+flanker==0.9.11
+flower
+flower==1.2.0
+# fonttools==4.39.0
+fonttools==4.39.2
+# fqdn==1.5.1
+fqdn==1.5.1
+freezegun
+freezegun==0.3.11; python_version < '3.8'
+# freezegun==0.3.15
+#freezegun==0.3.15
+#freezegun==0.3.15; python_version >= '3.8'
+frozenlist
+# frozenlist==1.3.3
+frozenlist==1.3.3
+# future==0.18.3
+#future==0.18.3
+# generated from manifests external_dependencies
+# Genshi==0.7.7
+Genshi==0.7.7
+# geoip2==2.9.0
+geoip2==2.9.0
+geojson
+geojson==3.0.1
+geopandas==0.3.0
+gevent
+gevent==1.1.2 ; sys_platform != 'win32' and python_version < '3.7'
+gevent==1.4.0 ; sys_platform == 'win32' and python_version < '3.7'
+#gevent==1.5.0 ; python_version == '3.7'
+# gevent==20.9.0
+#gevent==20.9.0
+#gevent==20.9.0 ; python_version > '3.7' and python_version <= '3.9'
+gevent==21.8.0 ; python_version > '3.9'  # (Jammy)
+gidgethub
+gidgethub==4.1.0
+# git-aggregator==2.1.0
+git-aggregator==2.1.0
+git+https://github.com/akretion/ak
+git+https://github.com/apache/chemistry-cmislib.git@py3_compat#egg=cmislib
+git+https://github.com/OCA/odoorpc.git@master
+#git+https://github.com/OCA/openupgradelib.git@master
+github3.py
+github3.py==3.1.1
+GitPython 
+graphene
+# graphene==3.2.2
+graphene==3.2.2
+# graphql-core==3.2.0
+graphql-core==3.2.3
+# graphql-relay==3.1.0
+graphql-relay==3.2.0
+graphql_server
+# graphql-server==3.0.0b5
+graphql-server==3.0.0b5
+graphviz==0.20.1
+greenlet
+greenlet==0.4.10 ; python_version < '3.7'
+greenlet==0.4.15 ; python_version == '3.7'
+# greenlet==0.4.17
+#greenlet==0.4.17
+#greenlet==0.4.17 ; python_version > '3.7' and python_version <= '3.9'
+greenlet==1.1.2 ; python_version  > '3.9'  # (Jammy)
+html2text
+html5lib==1.1
+humanize
+# humanize==4.6.0
+humanize==4.6.0
+hypothesis==6.70.0
+identify==2.5.21
+idna
+# idna==2.6
+#idna==2.6
+# imagesize==1.4.1
+imagesize==1.4.1
+# IMAPClient==2.1.0
+IMAPClient==2.3.1
+importlib-metadata
+# importlib-metadata==4.4.0
+importlib-metadata==6.1.0
+# importlib-resources==5.12.0
+importlib-resources==5.12.0
+# importmagic3==0.2.0
+importmagic3==0.2.0
+iniconfig==2.0.0
+# inotify==0.2.10
+inotify==0.2.10
+invoice2data
+# invoice2data==0.4.2
+#invoice2data==0.4.2
+iso8601==1.1.0
+# isodate==0.6.1
+isodate==0.6.1
+# isoduration==20.11.0
+isoduration==20.11.0
+isort
+isort==5.12.0
+jaraco.classes
+jaraco.classes==3.2.3
+# jedi==0.18.2
+jedi==0.18.2
+jeepney
+jeepney==0.8.0
+Jinja2
+Jinja2==2.10.1; python_version < '3.8'
+# Jinja2==2.11.2
+#Jinja2==2.11.2
+#Jinja2==2.11.2; python_version >= '3.8'
+# jmespath==0.10.0
+#jmespath==0.10.0
+josepy
+# josepy==1.13.0
+josepy==1.13.0
+jsondiff
+# jsondiff==2.0.0
+jsondiff==2.0.0
+jsonlib-python3==1.6.1
+# jsonpointer==2.3
+jsonpointer==2.3
+# jsonref==1.1.0
+jsonref==1.1.0
+jsonschema==3.2.0
+# jsonschema==4.17.3
+# kaptan==0.5.12
+kaptan==0.5.12
+keyring
+keyring==20.0.1
+# kiwisolver==1.4.4
+kiwisolver==1.4.4
+kombu
+kombu==5.2.4
+# lark-parser==0.12.0
+lark-parser==0.12.0
+Levenshtein==0.20.9
+libsass
+# libsass==0.17.0
+#libsass==0.17.0
+lockfile==0.12.2
+lodoo
+lodoo==0.3.0
+# log-colorizer==2.0.0
+log-colorizer==2.0.0
+# lunardate==0.2.0
+lunardate==0.2.0
+lxml
+#lxml==3.7.1 ; sys_platform != 'win32' and python_version < '3.7'
+#lxml>=4.2.3
+#lxml==4.3.2 ; sys_platform != 'win32' and python_version == '3.7'
+# lxml 4.6.1 has incompatibility issues with python 3.10
+# lxml==4.6.5
+#lxml==4.6.5
+#lxml==4.6.5 ; sys_platform != 'win32' and python_version > '3.7'  # min version = 4.5.0 (Focal - with security backports)
+lxml ; sys_platform == 'win32'
+magento
+#magento==3.1
+# mailbits==0.2.1
+mailbits==0.2.1
+make-colors==3.32
+Mako
+# Mako==1.0.7
+#Mako==1.0.7
+markdown-it-py==2.2.0
+MarkupSafe
+# MarkupSafe==1.1.0
+#MarkupSafe==1.1.0
+marshmallow
+# marshmallow==3.19.0
+marshmallow==3.19.0
+marshmallow-objects>=2.0.0
+# marshmallow-objects==2.3.0
+marshmallow-objects==2.3.0
+# matplotlib==3.7.1
+matplotlib==3.7.1
+# maxminddb==2.2.0
+maxminddb==2.2.0
+mccabe==0.7.0
+mdurl==0.1.2
+mock
+mock==5.0.1
+more-itertools
+#more-itertools==9.1.0
+mpld3
+# mpld3==0.5.9
+mpld3==0.5.9
+# msgpack==1.0.5
+msgpack==1.0.5
+# msoffcrypto-tool==5.0.0
+msoffcrypto-tool==5.0.0
+multidict
+# multidict==6.0.4
+#multidict==6.0.4
+mypy-extensions==1.0.0
+#nfelib
+# nfelib==1.3.0
+nfelib>=2.0.0
+# nfselib.ginfes==0.2.0
+nfselib.ginfes==0.2.0
+nfselib.paulistana
+# nfselib.paulistana==0.2.0
+nfselib.paulistana==0.2.0
+nodeenv==1.7.0
+nose
+# nose==1.3.7
+nose==1.3.7
+num2words
+# num2words==0.5.6
+#num2words==0.5.6
+numpy>=1.15
+numpy==1.23.5
+# numpy==1.24.2
+#numpy==1.24.2
+# numpy-financial==1.0.0
+numpy-financial<=1.0.0
+numpy-financial==1.0.0
+oca-decorators
+oca-decorators==0.0.1
+oca-odoo-pre-commit-hooks
+oca-odoo-pre-commit-hooks==0.0.25
+odoo-analyse==1.3.0
+odoo-analyse[graph]
+odoo-connect
+odoo-connect==0.4.2
+# ./odoo/custom/dependencies/requirements.txt 
+# ./odoo/custom/src/10n-brazil/requirements.txt 
+# ./odoo/custom/src/10n-brazil/test-requirements.txt 
+# ./odoo/custom/src/account-closing/requirements.txt 
+# ./odoo/custom/src/account-financial-reporting/requirements.txt 
+# ./odoo/custom/src/account-financial-tools/requirements.txt 
+# ./odoo/custom/src/account-financial-tools/test-requirements.txt 
+# ./odoo/custom/src/account-fiscal-rule/requirements.txt 
+# ./odoo/custom/src/account-invoicing/requirements.txt 
+# ./odoo/custom/src/account-payment/requirements.txt 
+# ./odoo/custom/src/account-reconcile/requirements.txt 
+# ./odoo/custom/src/bank-payment/requirements.txt 
+# ./odoo/custom/src/bank-statement-import/requirements.txt 
+# ./odoo/custom/src/bank-statement-import/test-requirements.txt 
+# ./odoo/custom/src/calendar/requirements.txt 
+# ./odoo/custom/src/community-data-files/requirements.txt 
+# ./odoo/custom/src/contract/agreement_project/test-requirements.txt 
+# ./odoo/custom/src/contract/requirements.txt 
+# ./odoo/custom/src/contract/test-requirements.txt 
+# ./odoo/custom/src/delivery-carrier/requirements.txt 
+# ./odoo/custom/src/delivery-carrier/test-requirements.txt 
+# ./odoo/custom/src/edi/requirements.txt 
+# ./odoo/custom/src/edi/test-requirements.txt 
+# ./odoo/custom/src/hr/requirements.txt 
+# ./odoo/custom/src/l10n-brazil/requirements.txt 
+# ./odoo/custom/src/l10n-brazil/test-requirements.txt 
+# ./odoo/custom/src/multi-company/requirements.txt 
+# ./odoo/custom/src/multi-company/test-requirements.txt 
+# ./odoo/custom/src/oca-custom/requirements.txt 
+# ./odoo/custom/src/odoo-pim/requirements.txt 
+# ./odoo/custom/src/odoo-pim/test-requirements.txt 
+# ./odoo/custom/src/odoo/requirements.txt 
+# ./odoo/custom/src/partner-contact/requirements.txt 
+# ./odoo/custom/src/payroll/requirements.txt 
+# ./odoo/custom/src/product-attribute/requirements.txt 
+# ./odoo/custom/src/product-attribute/test-requirements.txt 
+# ./odoo/custom/src/project/requirements.txt 
+# ./odoo/custom/src/purchase-workflow/test-requirements.txt 
+# ./odoo/custom/src/queue/requirements.txt 
+# ./odoo/custom/src/reporting-engine/requirements.txt 
+# ./odoo/custom/src/report-print-send/requirements.txt 
+# ./odoo/custom/src/rest-framework/requirements.txt 
+# ./odoo/custom/src/rest-framework/test-requirements.txt 
+# ./odoo/custom/src/sale-workflow/requirements.txt 
+# ./odoo/custom/src/sale-workflow/test-requirements.txt 
+# ./odoo/custom/src/search-engine/requirements.txt 
+# ./odoo/custom/src/search-engine/test-requirements.txt 
+# ./odoo/custom/src/server-auth/requirements.txt 
+# ./odoo/custom/src/server-auth/test-requirements.txt 
+# ./odoo/custom/src/server-brand/requirements.txt 
+# ./odoo/custom/src/server-env/requirements.txt 
+# ./odoo/custom/src/server-tools/requirements.txt 
+# ./odoo/custom/src/server-tools/test-requirements.txt 
+# ./odoo/custom/src/server-ux/requirements.txt 
+# ./odoo/custom/src/server-ux/test-requirements.txt 
+# ./odoo/custom/src/social/requirements.txt 
+# ./odoo/custom/src/social/test-requirements.txt 
+# ./odoo/custom/src/stock-logistics-warehouse/stock_vertical_lift_kardex/proxy/requirements.txt 
+# ./odoo/custom/src/stock-logistics-warehouse/stock_vertical_lift_kardex/requirements.txt 
+# ./odoo/custom/src/stock-logistics-warehouse/test-requirements.txt 
+# ./odoo/custom/src/stock-logistics-workflow/requirements.txt 
+# ./odoo/custom/src/storage/requirements.txt 
+# ./odoo/custom/src/storage/test-requirements.txt 
+# ./odoo/custom/src/timesheet/requirements.txt 
+# ./odoo/custom/src/web/requirements.txt 
+# ./odoo/custom/src/website-cms/test-requirements.txt 
+# Odoo dependencies
+odoo-downloader
+odoo-downloader==0.17
+# ./odoo/lib/python3.8/site-packages/inotify/resources/requirements.txt 
+odoo-module-migrator
+odoo-module-migrator==0.3.1
+# ./odoo/requirements/requirements.txt 
+odoorpc
+OdooRPC
+# OdooRPC==0.9.0
+#OdooRPC==0.9.0
+odoo_score
+odoo-score==2.0.3
+odoo-sphinx-autodoc
+odoo-sphinx-autodoc==0.3.2
+# ./odoo/src/erpbrasil-assinatura/ci/requirements.txt 
+# ./odoo/src/erpbrasil-assinatura/docs/requirements.txt 
+# ./odoo/src/erpbrasil-assinatura/requirements.txt 
+odoo-test-helper
+odoo_test_helper
+odoo-test-helper >= 1.1.0
+odoo-test-helper>=1.1.0
+# odoo-test-helper==2.0.4
+odoo-test-helper==2.1.0
+odoo-test-helper  # Needed by spec_driven_model
+OERPLib==0.8.4
+ofxparse
+# ofxparse==0.19
+#ofxparse==0.19
+#ofxparse==0.19; python_version <= '3.9'
+#ofxparse==0.21; python_version > '3.9'  # (Jammy) ABC removed from collections in 3.10 but still used in ofxparse < 0.21
+# olefile==0.46
+olefile==0.46
+# oletools==0.56
+oletools==0.60.1
+openpyxl
+# openpyxl==3.1.2
+openpyxl==3.1.2
+openupgradelib
+# openupgradelib==3.4.2.dev4+gf45dcfe
+os0==2.0.1
+# oscrypto==1.3.0
+oscrypto==1.3.0
+ovh
+# ovh==1.0.0
+ovh==1.0.0
+packaging
+# packaging==23.0
+packaging==23.0
+pandas==0.25.3
+paramiko
+# paramiko==3.1.0
+#paramiko==3.1.0
+parse-accept-language
+# parse-accept-language==0.1.2
+#parse-accept-language==0.1.2
+# parso==0.8.3
+parso==0.8.3
+passlib
+# passlib==1.7.1
+#passlib==1.7.1
+pastel==0.2.1
+pathspec
+pathspec==0.11.1
+# pcodedmp==1.2.6
+pcodedmp==1.2.6
+pdf2image
+# pdf2image==1.16.3
+pdf2image==1.16.3
+pdfminer
+pdfminer==20191125
+#pdfminer.six==20200517
+# pdfminer.six==20220319
+pdfplumber
+# pdfplumber==0.5.28
+# pdfplumber==0.5.3
+pdftools
+pdftotext
+pdftotext==2.2.2
+pexpect==4.8.0
+# pg-activity==3.1.1
+pg-activity==3.2.0
+pheader==0.24
+phonenumbers
+# phonenumbers==8.13.7
+#phonenumbers==8.13.7
+pika
+Pillow
+#Pillow==5.4.1 ; python_version <= '3.7' and sys_platform != 'win32'
+#Pillow==6.1.0 ; python_version <= '3.7' and sys_platform == 'win32'
+# Pillow==8.1.1
+#Pillow==8.1.1
+#Pillow==8.1.1 ; python_version > '3.7'
+#pip>=19.1.1
+# pip==23.0.1
+#pip==23.0.1
+pipx
+#pipx==1.2.0
+pkginfo
+#pkginfo==1.9.6
+# pkgutil_resolve_name==1.3.10
+pkgutil_resolve_name==1.3.10
+# platformdirs==3.1.1
+platformdirs==3.1.1
+# plotly==5.4.0
+plotly==5.4.0
+pluggy==1.0.0
+# plumbum==1.8.1
+plumbum==1.8.1
+ply==3.11
+# po checks
+poetry
+poetry==1.0.10
+polib
+# polib==1.1.0
+#polib==1.1.0
+polib<=1.2.0
+pre-commit
+pre-commit==3.2.0
+premailer
+premailer==3.10.0
+# premailer==3.9.0
+Prestapyt
+prestapyt==0.11.1
+prometheus-client
+prometheus-client==0.16.0
+promise==2.3
+promise # Needed by graphene.test.Client
+prompt-toolkit
+prompt-toolkit==3.0.38
+psutil
+# psutil==5.6.6
+#psutil==5.6.6
+psycogreen
+psycopg2
+#psycopg2==2.7.7; sys_platform != 'win32' and python_version < '3.8'
+# psycopg2==2.8.5
+#psycopg2==2.8.5
+#psycopg2==2.8.5; sys_platform == 'win32' or python_version >= '3.8'
+psycopg2-binary==2.9.5
+#ptyprocess==0.7.0
+# pudb==2022.1.3
+pudb==2022.1.3
+py==1.11.0
+py3o.formats
+# py3o.formats==0.3
+py3o.formats==0.3
+py3o.template
+# py3o.template==0.10.0
+py3o.template==0.10.0
+# pyasn1==0.4.8
+pyasn1==0.4.8
+# pyasn1-modules==0.2.8
+pyasn1-modules==0.2.8
+pycep_correios
+# pycep-correios==5.1.0
+pycep-correios==5.1.0
+pycountry
+# pycountry==22.3.5
+pycountry==22.3.5
+pycparser
+# pycparser==2.21
+pycparser==2.21
+# pycrypto==2.6.1
+pycrypto==2.6.1
+# pycryptodome==3.17
+#pycryptodome==3.17
+pycups
+# pycups==2.0.0
+pycups==2.0.1
+pydantic
+# pydantic==1.10.6
+pydantic==1.10.6
+pydebugger==0.36
+# pydevd-odoo==1.2.1
+pydevd-odoo==1.2.1
+pydot
+# pydot==1.4.1
+#pydot==1.4.1
+pyftpdlib
+# pyftpdlib==1.5.6
+pyftpdlib==1.5.7
+pygithub
+PyGithub==1.58.0
+Pygments
+# Pygments==2.14.0
+Pygments==2.14.0
+pygount
+pygount==1.2.4
+# pyjon.utils==0.7
+pyjon.utils==0.7
+pyjwt
+PyJWT
+pyjwt==2.6.0
+# PyJWT==2.6.0
+PyJWT==2.6.0
+pyjwt[cryptography]
+# PyKCS11==1.5.11
+PyKCS11==1.5.11
+pyldap
+pylev==1.4.0
+# pyluach==2.2.0
+pyluach==2.2.0
+# PyMeeus==0.5.12
+PyMeeus==0.5.12
+PyMuPDF
+PyMuPDF==1.21.1
+# PyNaCl==1.5.0
+#PyNaCl==1.5.0
+pyOpenSSL
+# pyOpenSSL==19.1.0
+#pyOpenSSL==19.1.0
+pyotp
+pyotp==2.8.0
+pypandas
+pyparsing
+# pyparsing==2.4.7
+pyparsing==2.4.7
+PyPDF2
+# PyPDF2==1.26.0
+#PyPDF2==1.26.0
+#PyPDF2==1.28.4
+# PyPDF4==1.27.0
+#PyPDF4==1.27.0
+pyperclip==1.8.2
+pypiwin32 ; sys_platform == 'win32'
+pyquerystring
+# pyquerystring==1.1
+#pyquerystring==1.1
+# pyRFC3339==1.1
+pyRFC3339==1.1
+pyrsistent==0.14.11
+# pyrsistent==0.19.3
+pysaml2
+# pysaml2==7.3.1
+pysaml2==7.3.1
+pyserial
+# pyserial==3.4
+#pyserial==3.4
+pysftp
+# pysftp==0.2.9
+pysftp==0.2.9
+pytest==7.2.2
+pytest-cov==4.0.0
+python-barcode 
+python-dateutil
+# python-dateutil==2.7.3
+#python-dateutil==2.7.3
+# Python Dependencies
+python-jose
+# python-jose==3.3.0
+python-jose==3.3.0
+python-ldap
+# python-ldap==3.1.0
+#python-ldap==3.1.0
+#python-ldap==3.1.0; sys_platform != 'win32'
+python-Levenshtein==0.20.9
+python-magic
+# python-magic==0.4.27
+python-magic==0.4.27
+python-plus==2.0.5
+python_slugify
+# python-slugify==8.0.0
+python-slugify==8.0.1
+python-stdnum
+# python-stdnum==1.8
+#python-stdnum==1.8
+pytz
+pytz>=2016.7
+# pytz==2019.1
+#pytz==2019.1
+# pytz-deprecation-shim==0.1.0.post0
+pytz-deprecation-shim==0.1.0.post0
+pyusb
+# pyusb==1.0.2
+#pyusb==1.0.2
+pywget==0.31
+pyyaml
+PyYAML
+# PyYAML==5.4.1
+pyzbar
+# pyzbar==0.1.9
+pyzbar==0.1.9
+qrcode
+# qrcode==6.1
+#qrcode==6.1
+rapidfuzz==2.13.7
+raven
+raven==6.10.0
+readme-renderer
+#readme-renderer==37.3
+# red-black-tree-mod==1.20
+red-black-tree-mod==1.21
+redis
+redis==4.5.1
+regex
+# regex==2022.3.2
+#regex==2022.3.2
+reportlab
+#reportlab==3.5.13; python_version < '3.8'
+# reportlab==3.5.55
+#reportlab==3.5.55
+#reportlab==3.5.55; python_version >= '3.8'
+requests
+# requests==2.21.0
+#requests==2.21.0
+#requests==2.21.0; python_version <= '3.9'
+#requests==2.25.1; python_version > '3.9'  # (Jammy) versions < 2.25 aren't compatible w/ urllib3 1.26. Bullseye = 2.25.1. min version = 2.22.0 (Focal)
+requests-mock
+#requests-mock==1.10.0
+requests-toolbelt
+# requests-toolbelt==0.10.1
+requests-toolbelt==0.8.0
+# Required for bootstrapping.
+# ./requirements.txt 
+responses
+# responses==0.10.15
+responses==0.10.15
+# rfc3339-validator==0.1.4
+rfc3339-validator==0.1.4
+rfc3986
+rfc3986==2.0.0
+# rfc3987==1.3.8
+rfc3987==1.3.8
+rich
+rich==13.3.2
+roulier
+# roulier==1.1.0
+roulier==1.1.0
+# rsa==4.9
+rsa==4.9
+# RTFDE==0.0.2
+RTFDE==0.0.2
+# s3transfer==0.3.7
+#s3transfer==0.3.7
+satcomum
+# satcomum==2.2
+satcomum==2.2
+SecretStorage
+SecretStorage==3.3.3
+sentry_sdk
+# sentry-sdk==1.9.0
+sentry-sdk==1.9.0
+setuptools>=18.0.1
+# setuptools==57.5.0
+setuptools==57.5.0
+setuptools-odoo
+setuptools-odoo==3.1.11
+setuptools-scm
+setuptools-scm==7.1.0
+# sh==2.0.2
+sh==2.0.2
+shapely
+shapely==2.0.1
+shellingham==1.5.0.post1
+# signxml==2.8.2
+#signxml==2.8.2
+#signxml<3.1.0
+# simplejson==3.18.4
+#simplejson==3.18.4
+six
+# six==1.16.0
+six==1.16.0
+# snowballstemmer==2.2.0
+snowballstemmer==2.2.0
+# sortedcontainers==2.4.0
+sortedcontainers==2.4.0
+# soupsieve==2.4
+soupsieve==2.4
+# spark-parser==1.8.9
+spark-parser==1.8.9
+sphinx>=1.3
+# Sphinx==5.1.1
+#Sphinx==5.1.1
+sphinx_bootstrap_theme
+sphinx-bootstrap-theme==0.8.1
+# sphinxcontrib-applehelp==1.0.4
+sphinxcontrib-applehelp==1.0.4
+# sphinxcontrib-devhelp==1.0.2
+sphinxcontrib-devhelp==1.0.2
+# sphinxcontrib-htmlhelp==2.0.1
+sphinxcontrib-htmlhelp==2.0.1
+# sphinxcontrib-jquery==4.1
+sphinxcontrib-jquery==4.1
+# sphinxcontrib-jsmath==1.0.1
+sphinxcontrib-jsmath==1.0.1
+# sphinxcontrib-qthelp==1.0.3
+sphinxcontrib-qthelp==1.0.3
+# sphinxcontrib-serializinghtml==1.1.5
+sphinxcontrib-serializinghtml==1.1.5
+sphinx-intl
+sphinx-intl==2.1.0
+sphinx-rtd-theme
+# sphinx-rtd-theme==1.2.0
+#sphinx-rtd-theme==1.2.0
+strict-rfc3339==0.7
+suds
+suds-jurko
+suds-jurko==0.6
+# swagger-spec-validator==3.0.3
+swagger-spec-validator==3.0.3
+# tenacity==8.2.2
+tenacity==8.2.2
+# tests
+# text-unidecode==1.3
+text-unidecode==1.3
+timetrack-odoo
+timetrack-odoo==1.0.2102
+tld==0.13
+toml==0.10.2
+tomli
+tomli==2.0.1
+tomlkit==0.5.11
+tornado
+# tornado==6.2
+tornado==6.2
+tox
+tox==3.28.0
+tox-gh-actions
+tox-gh-actions==2.12.0
+tqdm==4.65.0
+twine
+twine==3.7.1
+types-cryptography
+types-cryptography==3.3.23.2
+typing-extensions
+typing_extensions
+# typing_extensions==4.5.0
+# tzdata==2022.7
+tzdata==2022.7
+# tzlocal==4.2
+#tzlocal==4.3
+# uncompyle6==3.9.0
+uncompyle6==3.9.0
+unicodecsv
+# unicodecsv==0.14.1
+unicodecsv==0.14.1
+unidecode
+# Unidecode==1.3.6
+#Unidecode==1.3.6
+uritemplate
+# uri-template==1.2.0
+uri-template==1.2.0
+uritemplate==4.1.1
+urllib3
+# urllib3==1.24.3
+#urllib3==1.24.3
+#urllib3==1.26.5; python_version > '3.9'  # (Jammy) indirect / min version = 1.25.8 (Focal with security backports)
+# urwid==2.1.2
+urwid==2.1.2
+# urwid-readline==0.13
+urwid-readline==0.13
+userpath==1.8.0
+validate_email
+validate-email==1.3
+validators
+# validators==0.19.0
+validators==0.20.0
+vatnumber
+# vatnumber==1.2
+vatnumber==1.2
+vcrpy
+# vcrpy==4.2.1
+#vcrpy==4.2.1
+vcrpy  # Needed by payment_pagseguro
+vcrpy-unittest
+vcrpy-unittest==0.1.7
+vine
+vine==5.0.0
+virtualenv>=16.6.0
+# virtualenv==20.21.0
+virtualenv==20.21.0
+vobject
+# vobject==0.9.6.1
+vobject==0.9.6.1
+# Wand==0.6.11
+Wand==0.6.11
+# watchdog==2.3.1
+watchdog==2.3.1
+wcwidth
+# wcwidth==0.2.6
+wcwidth==0.2.6
+# wdb==3.3.0
+wdb==3.3.0
+# webcolors==1.12
+webcolors==1.12
+webdav
+webencodings
+webencodings==0.5.1
+WebOb==1.8.7
+websocket-client
+# websocket-client==0.59.0
+#websocket-client==1.5.1
+# Werkzeug==0.16.1
+#Werkzeug==0.16.1
+Werkzeug==0.16.1
+Werkzeug==0.16.1 ; python_version <= '3.9'
+Werkzeug==2.0.2 ; python_version > '3.9'  # (Jammy)
+# wheel==0.38.4
+wheel==0.40.0
+#wodoo
+workalendar
+# workalendar==17.0.0
+workalendar==17.0.0
+wrapt
+# wrapt==1.15.0
+#wrapt==1.15.0
+# xdis==6.0.5
+xdis==6.0.5
+xlrd
+#xlrd==1.1.0; python_version < '3.8'
+# xlrd==1.2.0
+#xlrd==1.2.0
+#xlrd==1.2.0; python_version >= '3.8'
+XlsxWriter
+# XlsxWriter==1.1.2
+#XlsxWriter==1.1.2
+xlwt
+xlwt==1.3.*
+# xlwt==1.3.0
+#xlwt==1.3.0
+# xml checks
+xmldiff
+# xmldiff==2.5
+xmldiff==2.5
+xmlschema
+# xmlschema==2.2.2
+xmlschema==2.2.2
+xmlsec
+# xmlsec==1.3.13
+xmlsec==1.3.13
+xmltodict
+# xmltodict==0.13.0
+xmltodict==0.13.0
+xmlunittest
+xmlunittest==0.5.0
+yarl
+# yarl==1.8.2
+#yarl==1.8.2
+z0lib==2.0.3
+zeep
+# zeep==3.2.0
+#zeep==3.2.0
+zipp
+# zipp==3.15.0
+zipp==3.15.0
+# zope.event==4.6
+zope.event==4.6
+# zope.interface==5.5.2
+zope.interface==6.0
+# zplgrf==1.6.0
+zplgrf==1.6.0
+zxcvbn
+# zxcvbn==1.0
+zxcvbn==4.4.28

@@ -1,0 +1,93 @@
+# Definition of action for defusing of databases
+actions:
+  anonymize:
+    anonymize_res_partner:
+      model: res.partner
+      values:
+        name:
+          length: 20
+        ref:
+          length: 10
+        display_name:
+          length: 20
+        city:
+          length: 10
+        street:
+          length: 20
+          suffix: " 42"
+        street2:
+          length: 20
+          suffix: " 42"
+        zip: &number_string "12345"
+        phone: *number_string
+        mobile: *number_string
+        email: False
+
+    anonymize_account_invoice:
+      model: account.invoice
+      values:
+        amount_untaxed: &anon_float
+          lower: 0
+          upper: 1000
+        amount_tax: *anon_float
+        amount_total: *anon_float
+        residual: *anon_float
+
+    anonymize_account_invoice_line:
+      model: account.invoice.line
+      values:
+        price_unit: *anon_float
+        price_subtotal: *anon_float
+
+    anonymize_account_invoice_tax:
+      model: account.invoice.tax
+      values:
+        amount: *anon_float
+
+    anonymize_account_move_line:
+      model: account.move.line
+      values:
+        debit: 0
+        credit: 0
+        amount_currency: 0
+
+    anonymize_acount_analytic_line:
+      model: account.analytic.line
+      values:
+        amount: *anon_float
+
+    anonymize_sale_order:
+      model: sale.order
+      values:
+        amount_tax: *anon_float
+        amount_total: *anon_float
+        amount_untaxed: *anon_float
+
+    anonymize_sale_order_line:
+      model: sale.order.line
+      values:
+        price_unit: *anon_float
+        discount: *anon_float
+
+    anonymize_purchase_order:
+      model: purchase.order
+      values:
+        amount_total: *anon_float
+        amount_tax: *anon_float
+        amount_untaxed: *anon_float
+
+    anonymize_purchase_order_line:
+      model: purchase.order.line
+      values:
+        price_unit: *anon_float
+
+    anonymize_product_template:
+      model: product.template
+      values:
+        name:
+          length: 20
+
+    anonymize_res_users:
+      model: res.users
+      values:
+        signature: False

@@ -1,0 +1,34 @@
+# General configuration file. Do not change for a single project
+bootstrap:
+  # Create the coverage statistics when testing
+  coverage: True
+  # Pre-defined urls to the repository sources
+  github_url: https://github.com/
+  github_ssh: "git@github.com:"
+  gitlab_url: "git@git.initos.com:"
+
+  # Path to the odoo directory
+  odoo: parts/odoo
+
+  # Default definition of the repositories
+  repo:
+    defaults:
+      depth: 100
+    merges:
+      - origin ${odoo:version}
+    remotes:
+      origin: ${bootstrap:github_url}OCA/{}.git
+    target: origin ${odoo:version}
+
+# Odoo configuration
+odoo: {}
+
+# List of modules to install/update
+modules: []
+
+# Definition of the repositories to load
+repos:
+  parts/odoo:
+    addon_path: parts/odoo/addons
+    remotes:
+      origin: ${bootstrap:github_url}OCA/OCB.git

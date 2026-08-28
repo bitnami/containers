@@ -1,0 +1,384 @@
+
+a2wsgi
+ach
+acme
+aiohttp
+algoliasearch>=2.0,<3.0
+apispec
+apispec>=4.0.0
+asn1crypto
+astor
+Avalara
+Babel==2.6.0; python_version <= '3.9'
+Babel==2.9.1; python_version > '3.9'  # (Jammy) 2.6.0 has issues with python 3.10
+barcode
+bokeh==2.3.1
+boto3
+brazilcep
+bs4
+# bullseye version, focal patched 2.10
+cachetools
+candyshop
+cerberus
+chardet
+chardet==3.0.4
+clodoo
+cmislib
+codicefiscale
+component
+contextvars; python_version < '3.7'
+cssselect
+dataclasses
+dateparser
+# datev_export_xml: Newer version is required because of empty namespaces in formats
+decorator==4.3.0
+dicttoxml
+dnspython
+docutils==0.14
+ebaysdk==2.1.5
+elasticsearch>=7.0.0,<=7.13.4
+elementpath
+email-validator
+email_validator
+endesive
+erpbrasil.assinatura>=1.7.0
+erpbrasil.base>=2.3.0
+erpbrasil.edoc>=2.5.2
+erpbrasil.edoc.pdf
+erpbrasil.transmissao>=1.1.0
+extract_msg
+factur-x
+fastapi
+feedparser
+flanker
+# For ebill_paynet
+# For tests
+freezegun
+#freezegun==0.3.11; python_version < '3.8'
+#freezegun==0.3.12
+freezegun==0.3.15; python_version >= '3.8'
+# generated from manifests external_dependencies
+geojson
+gevent==1.1.2 ; sys_platform != 'win32' and python_version < '3.7'
+gevent==1.4.0 ; sys_platform == 'win32' and python_version < '3.7'
+gevent==1.5.0 ; python_version == '3.7'
+gevent==20.9.0 ; python_version > '3.7' and python_version <= '3.9'
+gevent==21.8.0 ; python_version > '3.9'  # (Jammy)
+git+https://github.com/akretion/ak
+git+https://github.com/apache/chemistry-cmislib.git@py3_compat#egg=cmislib
+git+https://github.com/OCA/odoorpc.git@master
+git+https://github.com/OCA/openupgradelib.git@master
+GitPython
+graphene
+graphql_server
+greenlet==0.4.10 ; python_version < '3.7'
+greenlet==0.4.15 ; python_version == '3.7'
+greenlet==0.4.17 ; python_version > '3.7' and python_version <= '3.9'
+greenlet==1.1.2 ; python_version  > '3.9'  # (Jammy)
+html2text
+httpx
+idna==2.6
+invoice2data
+isort
+jdatetime
+Jinja2==2.10.1; python_version < '3.8'
+Jinja2==2.11.2; python_version >= '3.8'
+josepy
+jsondiff
+libsass==0.17.0
+lodoo
+lxml
+lxml==3.7.1 ; sys_platform != 'win32' and python_version < '3.7'
+lxml==4.3.2 ; sys_platform != 'win32' and python_version == '3.7'
+lxml>=4.4.0
+# lxml 4.6.1 has incompatibility issues with python 3.10
+lxml==4.6.5 ; sys_platform != 'win32' and python_version > '3.7'  # min version = 4.5.0 (Focal - with security backports)
+lxml ; sys_platform == 'win32'
+magento
+Mako==1.0.7
+MarkupSafe==1.1.0
+marshmallow
+marshmallow-objects>=2.0.0
+mock
+mpld3
+nfelib>=2.0.0
+nfselib.ginfes
+nfselib.paulistana
+num2words
+num2words==0.5.6
+numpy>=1.15
+numpy-financial<=1.0.0
+oca-decorators
+oca-odoo-pre-commit-hooks
+odoo-analyse[graph]
+odoo-connect
+odoo-downloader
+odoo-module-migrator
+# odoo/parts/OCA/account-closing/requirements.txt 
+# ./odoo/parts/OCA/account-closing/test-requirements.txt 
+# odoo/parts/OCA/account-financial-reporting/requirements.txt 
+# odoo/parts/OCA/account-financial-tools/requirements.txt 
+# odoo/parts/OCA/account-fiscal-rule/requirements.txt 
+# odoo/parts/OCA/account-invoicing/requirements.txt 
+# odoo/parts/OCA/account-payment/requirements.txt 
+# ./odoo/parts/OCA/account-payment/test-requirements.txt 
+# odoo/parts/OCA/account-reconcile/requirements.txt 
+# odoo/parts/OCA/bank-payment/requirements.txt 
+# odoo/parts/OCA/bank-statement-import/requirements.txt 
+# ./odoo/parts/OCA/bank-statement-import/test-requirements.txt 
+# odoo/parts/OCA/calendar/requirements.txt 
+# odoo/parts/OCA/community-data-files/requirements.txt 
+# odoo/parts/OCA/connector-cmis/requirements.txt 
+# odoo/parts/OCA/connector-interfaces/requirements.txt 
+# ./odoo/parts/OCA/connector-interfaces/test-requirements.txt 
+# odoo/parts/OCA/connector-prestashop/requirements.txt 
+# odoo/parts/OCA/connector/requirements.txt 
+# odoo/parts/OCA/connector-telephony/asterisk_click2dial/requirements.txt 
+# odoo/parts/OCA/connector-telephony/base_phone/requirements.txt 
+# odoo/parts/OCA/connector-telephony/requirements.txt 
+# ./odoo/parts/OCA/connector-telephony/test-requirements.txt 
+# ./odoo/parts/OCA/contract/agreement_project/test-requirements.txt 
+# odoo/parts/OCA/contract/requirements.txt 
+# ./odoo/parts/OCA/contract/test-requirements.txt 
+# odoo/parts/OCA/ddmrp/requirements.txt 
+# ./odoo/parts/OCA/ddmrp/test-requirements.txt 
+# odoo/parts/OCA/delivery-carrier/requirements.txt 
+# ./odoo/parts/OCA/delivery-carrier/test-requirements.txt 
+# odoo/parts/OCA/edi/requirements.txt 
+# ./odoo/parts/OCA/edi/test-requirements.txt 
+# odoo/parts/OCA/field-service/requirements.txt 
+# odoo/parts/OCA/geospatial/requirements.txt 
+# odoo/parts/OCA/hr/requirements.txt 
+# odoo/parts/OCA/interface-github/requirements.txt 
+# ./odoo/parts/OCA/interface-github/test-requirements.txt 
+# odoo/parts/OCA/intrastat-extrastat/requirements.txt 
+# ./odoo/parts/OCA/intrastat-extrastat/test-requirements.txt 
+# odoo/parts/OCA/iot/requirements.txt 
+# ./odoo/parts/OCA/knowledge/test-requirements.txt 
+# odoo/parts/OCA/l10n-argentina/requirements.txt 
+# odoo/parts/OCA/l10n-belgium/requirements.txt 
+# ./odoo/parts/OCA/l10n-belgium/test-requirements.txt 
+# odoo/parts/OCA/l10n-brazil/requirements.txt 
+# ./odoo/parts/OCA/l10n-brazil/test-requirements.txt 
+# odoo/parts/OCA/l10n-france/requirements.txt 
+# ./odoo/parts/OCA/l10n-germany/test-requirements.txt 
+# odoo/parts/OCA/l10n-iran/requirements.txt 
+# odoo/parts/OCA/l10n-italy/requirements.txt 
+# ./odoo/parts/OCA/l10n-italy/test-requirements.txt 
+# odoo/parts/OCA/l10n-netherlands/requirements.txt 
+# odoo/parts/OCA/l10n-romania/requirements.txt 
+# odoo/parts/OCA/l10n-spain/requirements.txt 
+# odoo/parts/OCA/l10n-switzerland/requirements.txt 
+# ./odoo/parts/OCA/l10n-switzerland/test-requirements.txt 
+# odoo/parts/OCA/l10n-thailand/requirements.txt 
+# odoo/parts/OCA/l10n-usa/requirements.txt 
+# odoo/parts/OCA/maintenance/requirements.txt 
+# odoo/parts/OCA/multi-company/requirements.txt 
+# ./odoo/parts/OCA/multi-company/test-requirements.txt 
+# odoo/parts/OCA/oca-custom/requirements.txt 
+# odoo/parts/OCA/odoo-pim/requirements.txt 
+# ./odoo/parts/OCA/odoo-pim/test-requirements.txt 
+# odoo/parts/OCA/OpenUpgrade/requirements.txt 
+# odoo/parts/OCA/partner-contact/requirements.txt 
+# odoo/parts/OCA/payroll/requirements.txt 
+# odoo/parts/OCA/pms/requirements.txt 
+# odoo/parts/OCA/product-attribute/requirements.txt 
+# ./odoo/parts/OCA/product-attribute/test-requirements.txt 
+# odoo/parts/OCA/project/requirements.txt 
+# ./odoo/parts/OCA/purchase-workflow/test-requirements.txt 
+# odoo/parts/OCA/queue/requirements.txt 
+# odoo/parts/OCA/reporting-engine/requirements.txt 
+# odoo/parts/OCA/report-print-send/requirements.txt 
+# odoo/parts/OCA/rest-framework/requirements.txt 
+# ./odoo/parts/OCA/rest-framework/test-requirements.txt 
+# odoo/parts/OCA/sale-workflow/requirements.txt 
+# ./odoo/parts/OCA/sale-workflow/test-requirements.txt 
+# odoo/parts/OCA/search-engine/requirements.txt 
+# ./odoo/parts/OCA/search-engine/test-requirements.txt 
+# odoo/parts/OCA/server-auth/requirements.txt 
+# ./odoo/parts/OCA/server-auth/test-requirements.txt 
+# odoo/parts/OCA/server-brand/requirements.txt 
+# odoo/parts/OCA/server-env/requirements.txt 
+# odoo/parts/OCA/server-tools/requirements.txt 
+# ./odoo/parts/OCA/server-tools/test-requirements.txt 
+# odoo/parts/OCA/server-ux/requirements.txt 
+# ./odoo/parts/OCA/server-ux/test-requirements.txt 
+# odoo/parts/OCA/social/requirements.txt 
+# ./odoo/parts/OCA/social/test-requirements.txt 
+# odoo/parts/OCA/stock-logistics-barcode/requirements.txt 
+# ./odoo/parts/OCA/stock-logistics-barcode/test-requirements.txt 
+# odoo/parts/OCA/stock-logistics-warehouse/stock_vertical_lift_kardex/proxy/requirements.txt 
+# odoo/parts/OCA/stock-logistics-warehouse/stock_vertical_lift_kardex/requirements.txt 
+# ./odoo/parts/OCA/stock-logistics-warehouse/test-requirements.txt 
+# odoo/parts/OCA/stock-logistics-workflow/requirements.txt 
+# odoo/parts/OCA/storage/requirements.txt 
+# ./odoo/parts/OCA/storage/test-requirements.txt 
+# odoo/parts/OCA/timesheet/requirements.txt 
+# odoo/parts/OCA/vertical-abbey/requirements.txt 
+# odoo/parts/OCA/vertical-hotel/requirements.txt 
+# ./odoo/parts/OCA/web-api/test-requirements.txt 
+# odoo/parts/OCA/web/requirements.txt 
+# ./odoo/parts/OCA/website-cms/test-requirements.txt 
+# odoo/parts/OCA/wms/requirements.txt 
+# ./odoo/parts/OCA/wms/test-requirements.txt 
+# odoo/parts/odoo/requirements.txt 
+odoorpc
+odoo_score
+odoo-sphinx-autodoc
+odoo-test-helper
+odoo_test_helper
+odoo-test-helper >= 1.1.0
+odoo-test-helper>=1.1.0
+odoo-test-helper  # Needed by spec_driven_model
+ofxparse
+ofxparse==0.19; python_version <= '3.9'
+ofxparse==0.21; python_version > '3.9'  # (Jammy) ABC removed from collections in 3.10 but still used in ofxparse < 0.21
+openpyxl
+openupgradelib
+ovh
+pandas
+pandas>=0.25.3
+parameterized
+paramiko
+parse-accept-language
+passlib==1.7.1
+pathspec
+pdf2image
+pdfminer
+pdfminer.six # needed by attachment_indexation module
+pdfplumber
+pdftools
+pdftotext
+pgpy
+phonenumbers
+pika
+Pillow==5.4.1 ; python_version <= '3.7' and sys_platform != 'win32'
+Pillow==6.1.0 ; python_version <= '3.7' and sys_platform == 'win32'
+Pillow==8.1.1 ; python_version > '3.7'
+pipx
+plotly==5.4.0
+poetry
+polib==1.1.0
+pre-commit
+premailer
+prestapyt
+Prestapyt
+promise # Needed by graphene.test.Client
+promptpay
+psutil==5.6.6
+psycogreen
+psycopg2==2.7.7; sys_platform != 'win32' and python_version < '3.8'
+psycopg2==2.8.5; sys_platform == 'win32' or python_version >= '3.8'
+py3o.formats
+py3o.template
+pyafipws@https://github.com/reingart/pyafipws/archive/main.zip
+py-Asterisk
+pycoda
+pycountry
+pycryptodome
+pycups
+pydantic<2
+pydot==1.4.1
+pyftpdlib
+pygithub
+PyGithub
+pygount
+pyjwt
+PyMuPDF
+pyOpenSSL
+pyotp
+PyPDF2
+PyPDF2==1.26.0
+pypdf>=3.1.0
+pypiwin32 ; sys_platform == 'win32'
+pyquerystring
+pysaml2
+pyserial==3.4
+pysftp
+pysimplesoap
+python-barcode
+python-dateutil
+python-dateutil==2.7.3
+# Python Dependencies
+python-jose
+python-ldap
+python-ldap==3.1.0; sys_platform != 'win32'
+python-magic
+python-multipart
+python_slugify
+#python-stdnum
+#python-stdnum>=1.16
+#python-stdnum==1.8
+python-stdnum==1.18
+pytz
+pytz  # no version pinning to avoid OS perturbations
+pyusb==1.0.2
+pyyaml
+PyYAML
+pyzbar
+qrcode
+qrcode==6.1
+quickpac
+regex
+reportlab==3.5.13; python_version < '3.8'
+reportlab==3.5.55; python_version >= '3.8'
+requests
+requests==2.21.0; python_version <= '3.9'
+requests==2.25.1; python_version > '3.9'  # (Jammy) versions < 2.25 aren't compatible w/ urllib3 1.26. Bullseye = 2.25.1. min version = 2.22.0 (Focal)
+requests-mock
+requests_mock
+requests_oauthlib
+requests_pkcs12
+responses
+roulier
+satcomum
+sentry_sdk<=1.9.0
+setuptools
+setuptools-odoo
+shapely
+signxml<3.1.0
+simplejson
+sphinx_bootstrap_theme
+sphinx-intl
+suds
+suds-py3
+# tests
+timetrack-odoo
+tox
+tox-gh-actions
+twine
+typing-extensions
+ujson
+unicodecsv
+unidecode
+urllib3==1.26.5; python_version > '3.9'  # (Jammy) indirect / min version = 1.25.8 (Focal with security backports)
+validate_email
+validators
+vcrpy
+vcrpy==2.0.1
+vcrpy  # Needed by payment_pagseguro
+vcrpy-unittest
+vobject==0.9.6.1
+Voicent-Python
+webcolors
+webdav
+Werkzeug==0.16.1 ; python_version <= '3.9'
+Werkzeug==2.0.2 ; python_version > '3.9'  # (Jammy)
+workalendar
+xlrd
+xlrd==1.1.0; python_version < '3.8'
+xlrd==1.2.0; python_version >= '3.8'
+xlsxwriter
+XlsxWriter==1.1.2
+xlwt==1.3.*
+xmldiff
+xmlschema
+xmlschema>=1.7.0
+xmlsig
+xmltodict
+xmlunittest
+xmlunittest==0.5.0
+zeep
+zeep==3.2.0
+#zeep==3.4.0
+zxcvbn

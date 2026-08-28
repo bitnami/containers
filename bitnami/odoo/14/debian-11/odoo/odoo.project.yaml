@@ -1,0 +1,656 @@
+# Project specific configuration file
+bootstrap:
+  extend:
+    - odoo.default.yaml
+    - odoo.yaml
+  #  - defuse.yaml
+  #  - anonymize.yaml
+  # Version used for the update scripts
+  version: "0.1"
+
+# Odoo configuration
+odoo:
+  addons_path:
+    - src/addons
+  version: "14.0"
+
+# List of modules to install/update
+modules:
+  - base_technical_features
+  - disable_odoo_online
+  # Nice to have if ported to the odoo version
+  - module_auto_update
+  #- module_change_auto_install
+  - remove_odoo_enterprise
+  # Only load the ribbon module when mode dev/staging is defined
+  - web_environment_ribbon: [dev, staging]
+
+# Definition of the repositories to load
+repos:
+
+  #parts/CybroOooo/CybroAddons:
+  #  remotes:
+  #    origin: https://github.com/CybroOdoo/CybroAddons
+
+  #parts/datacosmos/l10n-brazil:
+  #  remotes:
+  #     origin: ${bootstrap:github_url}OCA/l10n-brazil
+  #  target: datacosmos 14.0-develbr
+  #  merges:
+  #    - datacosmos a53f732a82c97ecb4b7011b273fd35ad8c0d79f1
+
+  parts/OCA/account-analytic:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/account-analytic.git
+  parts/OCA/account-budgeting:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/account-budgeting.git
+  parts/OCA/account-closing:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/account-closing.git
+  parts/OCA/account-consolidation:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/account-consolidation.git
+  parts/OCA/account-financial-reporting:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/account-financial-reporting.git
+  parts/OCA/account-financial-tools:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/account-financial-tools.git
+  parts/OCA/account-fiscal-rule:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/account-fiscal-rule.git
+  parts/OCA/account-invoice-reporting:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/account-invoice-reporting.git
+  parts/OCA/account-invoicing:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/account-invoicing.git
+  parts/OCA/account-payment:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/account-payment.git
+  parts/OCA/account-reconcile:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/account-reconcile.git
+#  parts/OCA/agreement:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/agreement.git
+  parts/OCA/apps-store:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/apps-store.git
+  parts/OCA/bank-payment:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/bank-payment.git
+  #  merges:
+  #    - origin 55e9aff82ae282b3e26d85a05f3059e7bdbcd70c
+  parts/OCA/bank-statement-import:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/bank-statement-import.git
+  parts/OCA/brand:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/brand.git
+  parts/OCA/business-requirement:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/business-requirement.git
+  parts/OCA/calendar:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/calendar.git
+  parts/OCA/commission:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/commission.git
+  parts/OCA/community-data-files:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/community-data-files.git
+  parts/OCA/connector:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/connector.git
+  parts/OCA/connector-cmis:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/connector-cmis.git
+  parts/OCA/connector-ecommerce:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/connector-ecommerce.git
+  parts/OCA/connector-interfaces:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/connector-interfaces.git
+  parts/OCA/connector-jira:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/connector-jira.git
+  parts/OCA/connector-odoo2odoo:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/connector-odoo2odoo.git
+  parts/OCA/connector-prestashop:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/connector-prestashop.git
+  parts/OCA/connector-telephony:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/connector-telephony.git
+  parts/OCA/contract:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/contract.git
+  parts/OCA/cooperative:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/cooperative.git
+  parts/OCA/credit-control:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/credit-control.git
+  parts/OCA/crm:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/crm.git
+  parts/OCA/currency:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/currency.git
+  parts/OCA/data-protection:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/data-protection.git
+  parts/OCA/ddmrp:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/ddmrp.git
+  parts/OCA/delivery-carrier:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/delivery-carrier.git
+  parts/OCA/department:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/department.git
+  parts/OCA/dms:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/dms.git
+  parts/OCA/donation:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/donation.git
+  parts/OCA/dotnet:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/dotnet.git
+  parts/OCA/e-commerce:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/e-commerce.git
+  parts/OCA/edi:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/edi.git
+  parts/OCA/event:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/event.git
+  #parts/OCA/field-service:
+  #  remotes:
+  #    origin: ${bootstrap:github_url}OCA/field-service.git
+  # parts/OCA/fleet:
+  #   remotes:
+  #     origin: ${bootstrap:github_url}OCA/fleet.git
+  parts/OCA/geospatial:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/geospatial.git
+  parts/OCA/helpdesk:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/helpdesk.git
+  parts/OCA/hr:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/hr.git
+  parts/OCA/hr-attendance:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/hr-attendance.git
+  parts/OCA/hr-expense:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/hr-expense.git
+  parts/OCA/hr-holidays:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/hr-holidays.git
+  parts/OCA/infrastructure:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/infrastructure.git
+  parts/OCA/interface-github:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/interface-github.git
+  parts/OCA/intrastat-extrastat:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/intrastat-extrastat.git
+  parts/OCA/iot:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/iot.git
+  parts/OCA/knowledge:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/knowledge.git
+#  parts/OCA/l10n-argentina:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-argentina.git
+#  parts/OCA/l10n-austria:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-austria.git
+#  parts/OCA/l10n-belarus:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-belarus.git
+#  parts/OCA/l10n-belgium:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-belgium.git
+  parts/OCA/l10n-brazil:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/l10n-brazil.git
+#  parts/OCA/l10n-cambodia:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-cambodia.git
+#  parts/OCA/l10n-canada:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-canada.git
+#  parts/OCA/l10n-chile:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-chile.git
+#  parts/OCA/l10n-china:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-china.git
+#  parts/OCA/l10n-colombia:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-colombia.git
+#  parts/OCA/l10n-costa-rica:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-costa-rica.git
+#  parts/OCA/l10n-croatia:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-croatia.git
+#  parts/OCA/l10n-ecuador:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-ecuador.git
+#  parts/OCA/l10n-estonia:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-estonia.git
+#  parts/OCA/l10n-ethiopia:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-ethiopia.git
+#  parts/OCA/l10n-finland:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-finland.git
+#  parts/OCA/l10n-france:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-france.git
+#  parts/OCA/l10n-germany:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-germany.git
+#  parts/OCA/l10n-greece:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-greece.git
+#  parts/OCA/l10n-india:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-india.git
+#  parts/OCA/l10n-indonesia:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-indonesia.git
+#  parts/OCA/l10n-iran:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-iran.git
+#  parts/OCA/l10n-ireland:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-ireland.git
+#  parts/OCA/l10n-italy:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-italy.git
+#  parts/OCA/l10n-japan:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-japan.git
+#  parts/OCA/l10n-luxemburg:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-luxemburg.git
+#  parts/OCA/l10n-macedonia:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-macedonia.git
+#  parts/OCA/l10n-mexico:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-mexico.git
+#  parts/OCA/l10n-morocco:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-morocco.git
+#  parts/OCA/l10n-netherlands:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-netherlands.git
+#  parts/OCA/l10n-norway:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-norway.git
+#  parts/OCA/l10n-peru:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-peru.git
+#  parts/OCA/l10n-poland:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-poland.git
+#  parts/OCA/l10n-portugal:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-portugal.git
+#  parts/OCA/l10n-romania:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-romania.git
+#  parts/OCA/l10n-russia:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-russia.git
+#  parts/OCA/l10n-slovenia:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-slovenia.git
+#  parts/OCA/l10n-spain:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-spain.git
+#  parts/OCA/l10n-switzerland:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-switzerland.git
+#  parts/OCA/l10n-taiwan:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-taiwan.git
+#  parts/OCA/l10n-thailand:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-thailand.git
+#  parts/OCA/l10n-turkey:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-turkey.git
+#  parts/OCA/l10n-ukraine:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-ukraine.git
+#  parts/OCA/l10n-united-kingdom:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-united-kingdom.git
+#  parts/OCA/l10n-uruguay:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-uruguay.git
+#  parts/OCA/l10n-usa:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-usa.git
+#  parts/OCA/l10n-venezuela:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-venezuela.git
+#  parts/OCA/l10n-vietnam:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/l10n-vietnam.git
+  #parts/OCA/maintenance:
+  #  remotes:
+  #    origin: ${bootstrap:github_url}OCA/maintenance.git
+  parts/OCA/management-system:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/management-system.git
+  # parts/OCA/manufacture:
+  #   remotes:
+  #     origin: ${bootstrap:github_url}OCA/manufacture.git
+  # parts/OCA/manufacture-reporting:
+  #   remotes:
+  #     origin: ${bootstrap:github_url}OCA/manufacture-reporting.git
+  parts/OCA/margin-analysis:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/margin-analysis.git
+  parts/OCA/mis-builder:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/mis-builder.git
+  parts/OCA/mis-builder-contrib:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/mis-builder-contrib.git
+  parts/OCA/multi-company:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/multi-company.git
+  parts/OCA/oca-custom:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/oca-custom.git
+  parts/OCA/odoo-pim:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/odoo-pim.git
+  #parts/OCA/OpenUpgrade:
+  #  remotes:
+  #    origin: ${bootstrap:github_url}OCA/OpenUpgrade.git
+  parts/OCA/operating-unit:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/operating-unit.git
+  parts/OCA/partner-contact:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/partner-contact.git
+  parts/OCA/payroll:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/payroll.git
+  #parts/OCA/pms:
+  #  remotes:
+  #    origin: ${bootstrap:github_url}OCA/pms.git
+  parts/OCA/pos:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/pos.git
+  parts/OCA/product-attribute:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/product-attribute.git
+  parts/OCA/product-configurator:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/product-configurator.git
+  parts/OCA/product-kitting:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/product-kitting.git
+  parts/OCA/product-pack:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/product-pack.git
+  parts/OCA/product-variant:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/product-variant.git
+  parts/OCA/program:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/program.git
+  parts/OCA/project:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/project.git
+  parts/OCA/project-agile:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/project-agile.git
+  parts/OCA/project-reporting:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/project-reporting.git
+  # parts/OCA/purchase-reporting:
+  #   remotes:
+  #     origin: ${bootstrap:github_url}OCA/purchase-reporting.git
+  # parts/OCA/purchase-workflow:
+  #   remotes:
+  #     origin: ${bootstrap:github_url}OCA/purchase-workflow.git
+  parts/OCA/queue:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/queue.git
+  parts/OCA/report-print-send:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/report-print-send.git
+  parts/OCA/reporting-engine:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/reporting-engine.git
+  parts/OCA/rest-framework:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/rest-framework.git
+#  parts/OCA/role-policy:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/role-policy.git
+  parts/OCA/runbot-addons:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/runbot-addons.git
+#  parts/OCA/sale-channel:
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/sale-channel.git
+  parts/OCA/sale-financial:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/sale-financial.git
+  parts/OCA/sale-promotion:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/sale-promotion.git
+  parts/OCA/sale-reporting:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/sale-reporting.git
+  parts/OCA/sale-workflow:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/sale-workflow.git
+  parts/OCA/search-engine:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/search-engine.git
+  parts/OCA/server-auth:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/server-auth.git
+  parts/OCA/server-backend:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/server-backend.git
+  parts/OCA/server-brand:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/server-brand.git
+  parts/OCA/server-env:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/server-env.git
+  parts/OCA/server-tools:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/server-tools.git
+  parts/OCA/server-ux:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/server-ux.git
+  parts/OCA/shift-planning:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/shift-planning.git
+  parts/OCA/social:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/social.git
+#  parts/OCA/spreadsheet :
+#    remotes:
+#      origin: ${bootstrap:github_url}OCA/spreadsheet .git
+  #parts/OCA/stock-logistics-barcode:
+  #  remotes:
+  #    origin: ${bootstrap:github_url}OCA/stock-logistics-barcode.git
+  #parts/OCA/stock-logistics-reporting:
+  #  remotes:
+  #    origin: ${bootstrap:github_url}OCA/stock-logistics-reporting.git
+  #parts/OCA/stock-logistics-tracking:
+  #  remotes:
+  #    origin: ${bootstrap:github_url}OCA/stock-logistics-tracking.git
+  #parts/OCA/stock-logistics-transport:
+  #  remotes:
+  #    origin: ${bootstrap:github_url}OCA/stock-logistics-transport.git
+  #parts/OCA/stock-logistics-warehouse:
+  #  remotes:
+  #    origin: ${bootstrap:github_url}OCA/stock-logistics-warehouse.git
+  #parts/OCA/stock-logistics-workflow:
+  #  remotes:
+  #    origin: ${bootstrap:github_url}OCA/stock-logistics-workflow.git
+  parts/OCA/storage:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/storage.git
+  parts/OCA/survey:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/survey.git
+  parts/OCA/timesheet:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/timesheet.git
+  #parts/OCA/vertical-abbey:
+  #  remotes:
+  #    origin: ${bootstrap:github_url}OCA/vertical-abbey.git
+  #parts/OCA/vertical-agriculture:
+  #  remotes:
+  #    origin: ${bootstrap:github_url}OCA/vertical-agriculture.git
+  #parts/OCA/vertical-association:
+  #  remotes:
+  #    origin: ${bootstrap:github_url}OCA/vertical-association.git
+  #parts/OCA/vertical-community:
+  #  remotes:
+  #    origin: ${bootstrap:github_url}OCA/vertical-community.git
+  #parts/OCA/vertical-construction:
+  #  remotes:
+  #    origin: ${bootstrap:github_url}OCA/vertical-construction.git
+  #parts/OCA/vertical-edition:
+  #  remotes:
+  #    origin: ${bootstrap:github_url}OCA/vertical-edition.git
+  #parts/OCA/vertical-education:
+  #  remotes:
+  #    origin: ${bootstrap:github_url}OCA/vertical-education.git
+  #parts/OCA/vertical-hotel:
+  #  remotes:
+  #    origin: ${bootstrap:github_url}OCA/vertical-hotel.git
+  #parts/OCA/vertical-isp:
+  #  remotes:
+  #    origin: ${bootstrap:github_url}OCA/vertical-isp.git
+  #parts/OCA/vertical-medical:
+  #  remotes:
+  #    origin: ${bootstrap:github_url}OCA/vertical-medical.git
+  #parts/OCA/vertical-ngo:
+  #  remotes:
+  #    origin: ${bootstrap:github_url}OCA/vertical-ngo.git
+  #parts/OCA/vertical-realestate:
+  #  remotes:
+  #    origin: ${bootstrap:github_url}OCA/vertical-realestate.git
+  #parts/OCA/vertical-rental:
+  #  remotes:
+  #    origin: ${bootstrap:github_url}OCA/vertical-rental.git
+  #parts/OCA/vertical-travel:
+  #  remotes:
+  #    origin: ${bootstrap:github_url}OCA/vertical-travel.git
+  parts/OCA/wallet:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/wallet.git
+  parts/OCA/web:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/web.git
+  parts/OCA/web-api:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/web-api.git
+  parts/OCA/webhook:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/webhook.git
+  parts/OCA/webkit-tools:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/webkit-tools.git
+  parts/OCA/website:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/website.git
+  parts/OCA/website-cms:
+    remotes:
+      origin: ${bootstrap:github_url}OCA/website-cms.git
+  #parts/OCA/wms:
+  #  remotes:
+  #    origin: ${bootstrap:github_url}OCA/wms.git
+#https://github.com/OCA/website-themes/tree/14.0
+#https://github.com/OCA/vertical-edition/tree/14.0
+#https://github.com/OCA/vertical-cooperative-supermarket/tree/14.0
+#https://github.com/OCA/stock-logistics-request/branches
+#https://github.com/OCA/stock-logistics-orderpoint/branches
+#https://github.com/OCA/stock-logistics-interfaces/branches
+#https://github.com/OCA/stock-logistics-availability/branches
+#https://github.com/OCA/sign/branches
+ # https://github.com/OCA/rma
+#https://github.com/OCA/rest-api/branches
+#https://github.com/OCA/repair/branches
+##https://github.com/OCA/pylint-odoo/branches
+#https://github.com/OCA/pwa-builder/branches
+##https://github.com/OCA/openupgradelib/branches
+#https://github.com/OCA/OpenUpgrade/tree/14.0
+##https://github.com/OCA/odoorpc
+##https://github.com/OCA/odoo-test-helper
+##https://github.com/OCA/odoo-sphinx-autodoc
+##https://github.com/OCA/odoo-sentinel
+##https://github.com/OCA/odoo-pre-commit-hooks
+##https://github.com/OCA/odoo-module-migrator
+##https://github.com/OCA/odoo-community.org
+##https://github.com/OCA/oca.recipe.odoo
+##https://github.com/OCA/oca-weblate-deployment
+##https://github.com/OCA/oca-port
+##https://github.com/OCA/oca-github-bot
+##https://github.com/OCA/oca-decorators
+##https://github.com/OCA/oca-ci
+##https://github.com/OCA/oca-addons-repo-template
+##https://github.com/OCA/mirrors-flake8
+##https://github.com/OCA/maintainer-tools
+##https://github.com/OCA/maintainer-quality-tools
+ # https://github.com/OCA/edi-framework/tree/14.0
+ # https://github.com/OCA/ddmrp
+#https://github.com/OCA/connector-woocommerce/tree/14.0
+#https://github.com/OCA/connector-spscommerce/tree/14.0
+#https://github.com/OCA/connector-salesforce/tree/14.0
+#https://github.com/OCA/connector-sage/tree/14.0
+#https://github.com/OCA/connector-redmine/tree/14.0
+##https://github.com/OCA/connector-magento-php-extension/branches
+#https://github.com/OCA/connector-magento/tree/14.0
+#https://github.com/OCA/connector-lims/tree/14.0
+#https://github.com/OCA/connector-lengow/tree/14.0
+#https://github.com/OCA/connector-jira/tree/14.0
+#https://github.com/OCA/connector-infor/tree/14.0
+#https://github.com/OCA/connector-accountedge/tree/14.0
+##https://github.com/OCA/ansible-odoO
+ # https://github.com/itpp-labs/sync-addons/tree/14.0
+ # https://github.com/itpp-labs/access-addons/tree/14.0
+ # https://github.com/itpp-labs/pos-addons/tree/14.0
+ # https://github.com/itpp-labs/website-addons
+#https://github.com/itpp-labs/mail-addons
+ # https://github.com/itpp-labs/misc-addons
+#https://github.com/itpp-labs/l10n-addons
+##https://github.com/itpp-labs/odoo-development
+##https://github.com/itpp-labs/odoo-test-docs
+##https://github.com/itpp-labs/odoo-port-docs
+##https://github.com/itpp-labs/whatsapp-api
+##https://github.com/itpp-labs/chatops-docs
+ # https://github.com/ajepe/odoo-addons/tree/14.0
+ # https://github.com/JayVora-SerpentCS/SerpentCS_Contributions
+ # https://github.com/JayVora-SerpentCS/Jasperreports_odoo/tree/14.0
+ # https://github.com/JayVora-SerpentCS/DOST/tree/14.0 # https://github.com/JayVora-SerpentCS/DOST/tree/14.0odoo/tree/14.0
+#https://github.com/JayVora-SerpentCS/MassEditing/branches

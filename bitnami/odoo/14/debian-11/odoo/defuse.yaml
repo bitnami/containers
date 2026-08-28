@@ -1,0 +1,141 @@
+# Definition of action for anonymizing of databases
+actions:
+  defuse:
+    defuse_ir_cron:
+      model: ir.cron
+      values:
+        active: False
+        cron_name: &cron
+          suffix: " (defused)"
+        name: *cron
+
+    defuse_queue_job:
+      action: delete
+      model: queue.job
+
+    defuse_uuid:
+      model: ir.config_parameter
+      domain:
+        - "|"
+        - ["key", "=", "database.uuid"]
+        - ["key", "=", "database.secret"]
+      values:
+        value:
+          uuid: 4
+
+    defuse_mail_mail:
+      model: mail.mail
+      values:
+        state: exception
+
+    defuse_fetchmail_server:
+      model: fetchmail.server
+      values:
+        active: False
+        password: &defused_pw "notmypass"
+
+    defuse_ir_mail_server:
+      model: ir.mail_server
+      values:
+        smtp_host: &defused_host "127.0.0.1"
+        smtp_port: 1025
+        smtp_encryption: "none"
+        smtp_user: ""
+        smtp_pass: ""
+
+    defuse_website_cdn:
+      model: website
+      values:
+        cdn_activated: False
+
+    defuse_hr_attendance_terminal:
+      model: hr.attendance_terminal
+      values:
+        ip: *defused_host
+        host: "localhost"
+        license_nr: "ABC1DEFG23HI"
+
+    defuse_base_newsletter_sendy:
+      model: ir.config_parameter
+      domain:
+        - ["key", "=", "sendy_list"]
+      values:
+        value: ""
+
+    defuse_enterprise_contract:
+      action: delete
+      model: ir.config_parameter
+      domain:
+        - "|"
+        - ["key", "=", "database.enterprise_code"]
+        - ["key", "=like", "database.expiration_%"]
+
+    defuse_web_base_url:
+      action: delete
+      model: ir.config_parameter
+      domain:
+        - ["key", "in", ["web.base.url", "web.base.url.freeze", "report.url"]]
+
+    defuse_shipcloud:
+      model: ir.config_parameter
+      domain:
+        - ["key", "=", "shipcloud_api_key"]
+      values:
+        value: ""
+
+    defuse_owncloud:
+      model: ir.config_parameter
+      domain:
+        - ["key", "in", ["owncloud_url", "owncloud_password"]]
+      values:
+        value: ""
+
+    defuse_google_calendar:
+      model: ir.config_parameter
+      domain:
+        - ["key", "=like", "google_calendar_client_%"]
+      values:
+        value: ""
+
+    defuse_google_drive:
+      model: ir.config_parameter
+      domain:
+        - ["key", "=like", "google_drive_%"]
+      values:
+        value: ""
+
+    defuse_google_management:
+      model: ir.config_parameter
+      domain:
+        - ["key", "=like", "google_management_client_%"]
+      values:
+        value: ""
+
+    defuse_iap:
+      model: ir.config_parameter
+      domain:
+        - "|"
+        - ["key", "=", "enrich.endpoint"]
+        - ["key", "=", "iap.endpoint"]
+      values:
+        value: "https://iap-sandbox.odoo.com"
+
+    defuse_iap_account:
+      action: delete
+      model: iap.account
+
+    defuse_enrich_endpoint_create:
+      action: insert
+      model: ir.config_parameter
+      domain: [["key", "=", "enrich.endpoint"]]
+      values:
+        key: "enrich.endpoint"
+        value: "https://iap-sandbox.odoo.com"
+
+    defuse_iap_endpoint_create:
+      action: insert
+      model: ir.config_parameter
+      domain: [["key", "=", "iap.endpoint"]]
+      values:
+        key: "iap.endpoint"
+        value: "https://iap-sandbox.odoo.com"

@@ -1,0 +1,675 @@
+# odoo/parts/OCA/account-closing/requirements.txt 
+# generated from manifests external_dependencies
+openupgradelib
+
+# odoo/parts/OCA/account-financial-reporting/requirements.txt 
+# generated from manifests external_dependencies
+
+# odoo/parts/OCA/account-financial-tools/requirements.txt 
+# generated from manifests external_dependencies
+numpy-financial<=1.0.0
+numpy>=1.15
+
+# odoo/parts/OCA/account-fiscal-rule/requirements.txt 
+# generated from manifests external_dependencies
+Avalara
+
+# odoo/parts/OCA/account-invoicing/requirements.txt 
+# generated from manifests external_dependencies
+openupgradelib
+
+# odoo/parts/OCA/account-payment/requirements.txt 
+# generated from manifests external_dependencies
+num2words
+
+# odoo/parts/OCA/account-reconcile/requirements.txt 
+# generated from manifests external_dependencies
+xlrd
+
+# odoo/parts/OCA/bank-payment/requirements.txt 
+# generated from manifests external_dependencies
+lxml
+unidecode
+
+# odoo/parts/OCA/bank-statement-import/requirements.txt 
+# generated from manifests external_dependencies
+chardet
+ofxparse
+xlrd
+
+# odoo/parts/OCA/calendar/requirements.txt 
+# generated from manifests external_dependencies
+cssselect
+
+# odoo/parts/OCA/community-data-files/requirements.txt 
+# generated from manifests external_dependencies
+pycountry
+
+# odoo/parts/OCA/connector-cmis/requirements.txt 
+# generated from manifests external_dependencies
+cmislib
+
+# odoo/parts/OCA/connector-interfaces/requirements.txt 
+# generated from manifests external_dependencies
+chardet
+pytz
+pyyaml
+
+# odoo/parts/OCA/connector-prestashop/requirements.txt 
+# generated from manifests external_dependencies
+bs4
+freezegun
+html2text
+prestapyt
+vcrpy
+
+# odoo/parts/OCA/connector/requirements.txt 
+# generated from manifests external_dependencies
+cachetools
+
+# odoo/parts/OCA/connector-telephony/asterisk_click2dial/requirements.txt 
+py-Asterisk
+
+# odoo/parts/OCA/connector-telephony/base_phone/requirements.txt 
+phonenumbers
+
+# odoo/parts/OCA/connector-telephony/requirements.txt 
+# generated from manifests external_dependencies
+phonenumbers
+requests
+Voicent-Python
+
+# odoo/parts/OCA/contract/requirements.txt 
+# generated from manifests external_dependencies
+python-dateutil
+
+# odoo/parts/OCA/ddmrp/requirements.txt 
+# generated from manifests external_dependencies
+pandas>=0.25.3
+
+# odoo/parts/OCA/delivery-carrier/requirements.txt 
+# generated from manifests external_dependencies
+dicttoxml
+PyPDF2
+roulier
+unidecode
+xmltodict
+zeep
+
+# odoo/parts/OCA/edi/requirements.txt 
+# generated from manifests external_dependencies
+dateparser
+factur-x
+invoice2data
+ovh
+pdfplumber
+phonenumbers
+pypdf>=3.1.0
+pyyaml
+regex
+xmlschema
+
+# odoo/parts/OCA/field-service/requirements.txt 
+# generated from manifests external_dependencies
+webcolors
+
+# odoo/parts/OCA/geospatial/requirements.txt 
+# generated from manifests external_dependencies
+geojson
+shapely
+simplejson
+
+# odoo/parts/OCA/hr/requirements.txt 
+# generated from manifests external_dependencies
+python-dateutil
+
+# odoo/parts/OCA/interface-github/requirements.txt 
+# generated from manifests external_dependencies
+GitPython
+pathspec
+PyGithub
+pygount
+
+# odoo/parts/OCA/intrastat-extrastat/requirements.txt 
+# generated from manifests external_dependencies
+python-stdnum>=1.16
+
+# odoo/parts/OCA/iot/requirements.txt 
+# generated from manifests external_dependencies
+pika
+
+# odoo/parts/OCA/l10n-argentina/requirements.txt 
+# generated from manifests external_dependencies
+pyafipws@https://github.com/reingart/pyafipws/archive/main.zip
+pyOpenSSL
+pysimplesoap
+
+# odoo/parts/OCA/l10n-belgium/requirements.txt 
+# generated from manifests external_dependencies
+pycoda
+zeep
+
+# odoo/parts/OCA/l10n-brazil/requirements.txt 
+# generated from manifests external_dependencies
+brazilcep
+email-validator
+erpbrasil.assinatura>=1.7.0
+erpbrasil.base>=2.3.0
+erpbrasil.edoc.pdf
+erpbrasil.edoc>=2.5.2
+erpbrasil.transmissao>=1.1.0
+nfelib>=2.0.0
+nfselib.ginfes
+nfselib.paulistana
+num2words
+phonenumbers
+pyyaml
+satcomum
+unidecode
+workalendar
+
+# odoo/parts/OCA/l10n-france/requirements.txt 
+# generated from manifests external_dependencies
+pgpy
+python-stdnum
+requests
+requests_oauthlib
+unicodecsv
+unidecode
+
+# odoo/parts/OCA/l10n-iran/requirements.txt 
+# generated from manifests external_dependencies
+jdatetime
+
+# odoo/parts/OCA/l10n-italy/requirements.txt 
+# generated from manifests external_dependencies
+asn1crypto
+codicefiscale
+elementpath
+openupgradelib
+unidecode
+xlrd
+xlsxwriter
+xmlschema>=1.7.0
+
+# odoo/parts/OCA/l10n-netherlands/requirements.txt 
+# generated from manifests external_dependencies
+python-stdnum
+
+# odoo/parts/OCA/l10n-romania/requirements.txt 
+# generated from manifests external_dependencies
+python-dateutil
+
+# odoo/parts/OCA/l10n-spain/requirements.txt 
+# generated from manifests external_dependencies
+chardet
+cryptography<39
+paramiko
+pycountry
+pycryptodome
+pyOpenSSL
+qrcode
+requests
+requests_pkcs12
+suds-py3
+unidecode
+xmlsig
+xmltodict
+zeep
+
+# odoo/parts/OCA/l10n-switzerland/requirements.txt 
+# generated from manifests external_dependencies
+quickpac
+unidecode
+zeep
+
+# odoo/parts/OCA/l10n-thailand/requirements.txt 
+# generated from manifests external_dependencies
+num2words
+promptpay
+
+# odoo/parts/OCA/l10n-usa/requirements.txt 
+# generated from manifests external_dependencies
+ach
+python-stdnum
+
+# odoo/parts/OCA/maintenance/requirements.txt 
+# generated from manifests external_dependencies
+python-dateutil
+
+# odoo/parts/OCA/multi-company/requirements.txt 
+# generated from manifests external_dependencies
+odoo-test-helper
+
+# odoo/parts/OCA/oca-custom/requirements.txt 
+# generated from manifests external_dependencies
+responses
+
+# odoo/parts/OCA/odoo-pim/requirements.txt 
+# generated from manifests external_dependencies
+unidecode
+
+# odoo/parts/OCA/OpenUpgrade/requirements.txt 
+# generated from manifests external_dependencies
+openupgradelib
+
+# odoo/parts/OCA/partner-contact/requirements.txt 
+# generated from manifests external_dependencies
+email-validator
+phonenumbers
+python-stdnum
+
+# odoo/parts/OCA/payroll/requirements.txt 
+# generated from manifests external_dependencies
+openupgradelib
+
+# odoo/parts/OCA/pms/requirements.txt 
+# generated from manifests external_dependencies
+bs4
+pycountry
+xlrd
+
+# odoo/parts/OCA/product-attribute/requirements.txt 
+# generated from manifests external_dependencies
+
+# odoo/parts/OCA/project/requirements.txt 
+# generated from manifests external_dependencies
+
+# odoo/parts/OCA/queue/requirements.txt 
+# generated from manifests external_dependencies
+requests
+
+# odoo/parts/OCA/reporting-engine/requirements.txt 
+# generated from manifests external_dependencies
+cryptography
+endesive
+py3o.formats
+py3o.template
+
+# odoo/parts/OCA/report-print-send/requirements.txt 
+# generated from manifests external_dependencies
+pycups
+
+# odoo/parts/OCA/rest-framework/requirements.txt 
+# generated from manifests external_dependencies
+a2wsgi
+apispec
+apispec>=4.0.0
+cerberus
+extendable-pydantic
+extendable-pydantic>=0.0.4
+extendable>=0.0.4
+fastapi
+graphene
+graphql_server
+jsondiff
+marshmallow
+marshmallow-objects>=2.0.0
+parse-accept-language
+pydantic<2
+pyquerystring
+python-multipart
+typing-extensions
+ujson
+
+# odoo/parts/OCA/sale-workflow/requirements.txt 
+# generated from manifests external_dependencies
+openupgradelib
+
+# odoo/parts/OCA/search-engine/requirements.txt 
+# generated from manifests external_dependencies
+algoliasearch>=2.0,<3.0
+elasticsearch>=7.0.0,<=7.13.4
+requests
+unidecode
+
+# odoo/parts/OCA/server-auth/requirements.txt 
+# generated from manifests external_dependencies
+cryptography
+email_validator
+lxml
+pyjwt
+pysaml2
+python-jose
+python-ldap
+zxcvbn
+
+# odoo/parts/OCA/server-brand/requirements.txt 
+# generated from manifests external_dependencies
+
+# odoo/parts/OCA/server-env/requirements.txt 
+# generated from manifests external_dependencies
+cryptography
+
+# odoo/parts/OCA/server-tools/requirements.txt 
+# generated from manifests external_dependencies
+acme
+astor
+contextvars; python_version < '3.7'
+cryptography<23.2.0
+dataclasses
+dnspython
+josepy
+odoorpc
+openpyxl
+openupgradelib
+pygount
+pysftp
+sentry_sdk<=1.9.0
+unidecode
+
+# odoo/parts/OCA/server-ux/requirements.txt 
+# generated from manifests external_dependencies
+pdf2image
+pyzbar
+
+# odoo/parts/OCA/social/requirements.txt 
+# generated from manifests external_dependencies
+extract_msg
+premailer
+
+# odoo/parts/OCA/stock-logistics-barcode/requirements.txt 
+# generated from manifests external_dependencies
+python-barcode
+
+# odoo/parts/OCA/stock-logistics-warehouse/stock_vertical_lift_kardex/proxy/requirements.txt 
+aiohttp
+
+# odoo/parts/OCA/stock-logistics-warehouse/stock_vertical_lift_kardex/requirements.txt 
+aiohttp
+
+# odoo/parts/OCA/stock-logistics-workflow/requirements.txt 
+# generated from manifests external_dependencies
+openupgradelib
+pytz
+xlrd
+
+# odoo/parts/OCA/storage/requirements.txt 
+# generated from manifests external_dependencies
+boto3
+paramiko
+pyftpdlib
+python-magic
+python_slugify
+unicodecsv
+validators
+
+# odoo/parts/OCA/timesheet/requirements.txt 
+# generated from manifests external_dependencies
+openupgradelib
+
+# odoo/parts/OCA/vertical-abbey/requirements.txt 
+# generated from manifests external_dependencies
+xlsxwriter
+
+# odoo/parts/OCA/vertical-hotel/requirements.txt 
+# generated from manifests external_dependencies
+python-dateutil
+
+# odoo/parts/OCA/web/requirements.txt 
+# generated from manifests external_dependencies
+bokeh==2.3.1
+mpld3
+plotly==5.4.0
+
+# odoo/parts/OCA/wms/requirements.txt 
+# generated from manifests external_dependencies
+
+# odoo/parts/odoo/requirements.txt 
+Babel==2.6.0; python_version <= '3.9'
+Babel==2.9.1; python_version > '3.9'  # (Jammy) 2.6.0 has issues with python 3.10
+chardet==3.0.4
+decorator==4.3.0
+docutils==0.14
+ebaysdk==2.1.5
+freezegun==0.3.11; python_version < '3.8'
+freezegun==0.3.15; python_version >= '3.8'
+gevent==1.1.2 ; sys_platform != 'win32' and python_version < '3.7'
+gevent==1.4.0 ; sys_platform == 'win32' and python_version < '3.7'
+gevent==1.5.0 ; python_version == '3.7'
+gevent==20.9.0 ; python_version > '3.7' and python_version <= '3.9'
+gevent==21.8.0 ; python_version > '3.9'  # (Jammy)
+greenlet==0.4.10 ; python_version < '3.7'
+greenlet==0.4.15 ; python_version == '3.7'
+greenlet==0.4.17 ; python_version > '3.7' and python_version <= '3.9'
+greenlet==1.1.2 ; python_version  > '3.9'  # (Jammy)
+idna==2.6
+Jinja2==2.10.1; python_version < '3.8'
+# bullseye version, focal patched 2.10
+Jinja2==2.11.2; python_version >= '3.8'
+libsass==0.17.0
+lxml==3.7.1 ; sys_platform != 'win32' and python_version < '3.7'
+lxml==4.3.2 ; sys_platform != 'win32' and python_version == '3.7'
+# lxml 4.6.1 has incompatibility issues with python 3.10
+lxml==4.6.5 ; sys_platform != 'win32' and python_version > '3.7'  # min version = 4.5.0 (Focal - with security backports)
+lxml ; sys_platform == 'win32'
+Mako==1.0.7
+MarkupSafe==1.1.0
+num2words==0.5.6
+ofxparse==0.19; python_version <= '3.9'
+ofxparse==0.21; python_version > '3.9'  # (Jammy) ABC removed from collections in 3.10 but still used in ofxparse < 0.21
+passlib==1.7.1
+Pillow==5.4.1 ; python_version <= '3.7' and sys_platform != 'win32'
+Pillow==6.1.0 ; python_version <= '3.7' and sys_platform == 'win32'
+Pillow==8.1.1 ; python_version > '3.7'
+polib==1.1.0
+psutil==5.6.6
+psycopg2==2.7.7; sys_platform != 'win32' and python_version < '3.8'
+psycopg2==2.8.5; sys_platform == 'win32' or python_version >= '3.8'
+pydot==1.4.1
+python-ldap==3.1.0; sys_platform != 'win32'
+PyPDF2==1.26.0
+pyserial==3.4
+python-dateutil==2.7.3
+pytz  # no version pinning to avoid OS perturbations
+pyusb==1.0.2
+qrcode==6.1
+reportlab==3.5.13; python_version < '3.8'
+reportlab==3.5.55; python_version >= '3.8'
+requests==2.21.0; python_version <= '3.9'
+requests==2.25.1; python_version > '3.9'  # (Jammy) versions < 2.25 aren't compatible w/ urllib3 1.26. Bullseye = 2.25.1. min version = 2.22.0 (Focal)
+urllib3==1.26.5; python_version > '3.9'  # (Jammy) indirect / min version = 1.25.8 (Focal with security backports)
+zeep==3.2.0
+python-stdnum==1.8
+vobject==0.9.6.1
+Werkzeug==0.16.1 ; python_version <= '3.9'
+Werkzeug==2.0.2 ; python_version > '3.9'  # (Jammy)
+XlsxWriter==1.1.2
+xlwt==1.3.*
+xlrd==1.1.0; python_version < '3.8'
+xlrd==1.2.0; python_version >= '3.8'
+pypiwin32 ; sys_platform == 'win32'
+
+# ./odoo/parts/OCA/account-closing/test-requirements.txt 
+freezegun
+parameterized
+
+# ./odoo/parts/OCA/account-payment/test-requirements.txt 
+
+# ./odoo/parts/OCA/bank-statement-import/test-requirements.txt 
+odoo_test_helper
+
+# ./odoo/parts/OCA/connector-interfaces/test-requirements.txt 
+odoo-test-helper
+
+# ./odoo/parts/OCA/connector-telephony/test-requirements.txt 
+requests_mock
+
+# ./odoo/parts/OCA/contract/agreement_project/test-requirements.txt 
+
+# ./odoo/parts/OCA/contract/test-requirements.txt 
+odoo_test_helper
+
+# ./odoo/parts/OCA/ddmrp/test-requirements.txt 
+freezegun
+
+# ./odoo/parts/OCA/delivery-carrier/test-requirements.txt 
+odoo-test-helper >= 1.1.0
+vcrpy
+vcrpy-unittest
+
+# ./odoo/parts/OCA/edi/test-requirements.txt 
+freezegun
+odoo_test_helper
+responses
+# Python Dependencies
+PyYAML
+xmlunittest
+
+# ./odoo/parts/OCA/interface-github/test-requirements.txt 
+responses
+
+# ./odoo/parts/OCA/intrastat-extrastat/test-requirements.txt 
+odoo-test-helper
+freezegun
+
+# ./odoo/parts/OCA/knowledge/test-requirements.txt 
+odoo_test_helper
+
+# ./odoo/parts/OCA/l10n-belgium/test-requirements.txt 
+freezegun
+vcrpy-unittest
+
+# ./odoo/parts/OCA/l10n-brazil/test-requirements.txt 
+vcrpy  # Needed by payment_pagseguro
+odoo-test-helper  # Needed by spec_driven_model
+signxml<3.1.0
+xmldiff
+
+# ./odoo/parts/OCA/l10n-germany/test-requirements.txt 
+# datev_export_xml: Newer version is required because of empty namespaces in formats
+lxml>=4.4.0
+
+# ./odoo/parts/OCA/l10n-italy/test-requirements.txt 
+pdfminer.six # needed by attachment_indexation module
+
+# ./odoo/parts/OCA/l10n-switzerland/test-requirements.txt 
+# For ebill_paynet
+zeep==3.4.0
+# For tests
+freezegun==0.3.12
+vcrpy==2.0.1
+xmlunittest==0.5.0
+
+# ./odoo/parts/OCA/multi-company/test-requirements.txt 
+odoo-test-helper>=1.1.0
+
+# ./odoo/parts/OCA/odoo-pim/test-requirements.txt 
+odoo_test_helper
+
+# ./odoo/parts/OCA/product-attribute/test-requirements.txt 
+odoo_test_helper
+
+# ./odoo/parts/OCA/purchase-workflow/test-requirements.txt 
+odoo_test_helper
+
+# ./odoo/parts/OCA/rest-framework/test-requirements.txt 
+promise # Needed by graphene.test.Client
+httpx
+
+# ./odoo/parts/OCA/sale-workflow/test-requirements.txt 
+odoo_test_helper
+
+# ./odoo/parts/OCA/search-engine/test-requirements.txt 
+odoo-test-helper >= 1.1.0
+
+algoliasearch>=2.0,<3.0
+unidecode
+
+# tests
+vcrpy-unittest
+
+# ./odoo/parts/OCA/server-auth/test-requirements.txt 
+pyjwt[cryptography]
+
+# ./odoo/parts/OCA/server-tools/test-requirements.txt 
+odoorpc
+openupgradelib
+odoo_test_helper
+
+# ./odoo/parts/OCA/server-ux/test-requirements.txt 
+odoo_test_helper
+
+# ./odoo/parts/OCA/social/test-requirements.txt 
+mock
+odoo_test_helper
+
+# ./odoo/parts/OCA/stock-logistics-barcode/test-requirements.txt 
+odoo_test_helper
+
+# ./odoo/parts/OCA/stock-logistics-warehouse/test-requirements.txt 
+odoo_test_helper
+
+# ./odoo/parts/OCA/storage/test-requirements.txt 
+vcrpy-unittest
+requests-mock
+odoo_test_helper
+
+# ./odoo/parts/OCA/web-api/test-requirements.txt 
+responses
+
+# ./odoo/parts/OCA/website-cms/test-requirements.txt 
+odoo-test-helper
+
+# ./odoo/parts/OCA/wms/test-requirements.txt 
+freezegun
+odoo_test_helper
+
+git+https://github.com/OCA/openupgradelib.git@master
+unicodecsv
+git+https://github.com/akretion/ak
+
+
+barcode
+candyshop
+clodoo
+component
+flanker
+geojson
+git+https://github.com/apache/chemistry-cmislib.git@py3_compat#egg=cmislib
+git+https://github.com/OCA/odoorpc.git@master
+isort
+lodoo
+magento
+oca-decorators
+oca-odoo-pre-commit-hooks
+odoo_score
+odoo-analyse[graph]
+odoo-connect
+odoo-downloader
+odoo-module-migrator
+odoo-sphinx-autodoc
+pandas
+pathspec
+pipx
+poetry
+pre-commit
+Prestapyt
+pygithub
+pygount
+pyotp
+pyjwt
+setuptools-odoo
+setuptools
+shapely
+sphinx_bootstrap_theme
+sphinx-intl
+timetrack-odoo
+tox
+tox-gh-actions
+twine
+validate_email
+
+PyMuPDF
+pdfminer
+pdftotext
+pdfplumber
+dateparser
+regex
+
+psycogreen
+suds
+pdftools
+webdav
+feedparser
+GitPython

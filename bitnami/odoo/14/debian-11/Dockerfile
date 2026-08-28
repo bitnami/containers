@@ -1,0 +1,87 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+FROM docker.io/bitnami/minideb:bullseye
+
+ARG TARGETARCH
+
+LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
+      org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
+      org.opencontainers.image.created="2023-10-11T21:09:27Z" \
+      org.opencontainers.image.description="Application packaged by VMware, Inc" \
+      org.opencontainers.image.licenses="Apache-2.0" \
+      org.opencontainers.image.ref.name="14.0.20231010-debian-11-r1" \
+      org.opencontainers.image.title="odoo" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="14.0.20231010"
+
+ENV OS_ARCH="${TARGETARCH:-amd64}" \
+    OS_FLAVOUR="debian-11" \
+    OS_NAME="linux"
+
+COPY prebuildfs /
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+# Install required system packages and dependencies
+RUN install_packages acl ca-certificates curl fontconfig libbsd0 libbz2-1.0 libc6 libcap2-bin libcom-err2 libcrypt1 libedit2 libffi7 libfreetype6 libgcc-s1 libgmp10 libgnutls30 libgssapi-krb5-2 libhogweed6 libicu67 libidn2-0 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblz4-1 liblzma5 libmd0 libncursesw6 libnettle8 libnsl2 libp11-kit0 libpng16-16 libpq5 libreadline8 libsasl2-2 libsqlite3-0 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libtirpc3 libunistring2 libuuid1 libx11-6 libxcb1 libxext6 libxml2 libxrender1 libxslt1.1 procps xfonts-75dpi xfonts-base zlib1g
+RUN install_packages build-essential build-essential cloc curl curl expect-dev fonts-liberation2 git gnupg2 graphviz less libcairo2-dev libcups2-dev libjpeg-dev libldap2-dev libmupdf-dev libpng-dev libpoppler-cpp-dev libpq-dev libpq-dev libsasl2-dev libssl-dev libxml2-dev libxml2-dev libxmlsec1-dev libxslt-dev locales-all mupdf nano node-clean-css node-less npm pg-activity pkg-config poppler-utils postgresql-client procps procps python3 python3-dev python3-dev python3-pip ssh-client swig vim vim wget 
+RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
+    COMPONENTS=( \
+      "python-3.8.18-2-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.6-2-linux-${OS_ARCH}-debian-11" \
+      "postgresql-client-16.0.0-0-linux-${OS_ARCH}-debian-11" \
+      "node-18.18.1-0-linux-${OS_ARCH}-debian-11" \
+      "odoo-14.0.20231010-0-linux-${OS_ARCH}-debian-11" \
+    ) && \
+    for COMPONENT in "${COMPONENTS[@]}"; do \
+      if [ ! -f "${COMPONENT}.tar.gz" ]; then \
+        curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz" -O ; \
+        curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz.sha256" -O ; \
+      fi && \
+      sha256sum -c "${COMPONENT}.tar.gz.sha256" && \
+      tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+      rm -rf "${COMPONENT}".tar.gz{,.sha256} ; \
+    done
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
+RUN curl -sLO "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.bullseye_${OS_ARCH}.deb" && \
+    if [ "$OS_ARCH" = "amd64" ]; then \
+      echo "9c687f0c58cf50e01f2a6375d2e34372f8feeec56a84690ea113d298fccadd98  wkhtmltox_0.12.6.1-3.bullseye_${OS_ARCH}.deb" | sha256sum -c - ; \
+    else \
+      echo "e73435a82cf21ba0387bfee32a193f221fa43e48dda6ed38b12e4c1b70c69728  wkhtmltox_0.12.6.1-3.bullseye_${OS_ARCH}.deb" | sha256sum -c - ; \
+    fi && \
+    dpkg -i "wkhtmltox_0.12.6.1-3.bullseye_${OS_ARCH}.deb" && \
+    rm wkhtmltox_0.12.6.1-3.bullseye_${OS_ARCH}.deb
+
+COPY rootfs /
+RUN /opt/bitnami/scripts/odoo/postunpack.sh
+ENV APP_VERSION="14.0.20231010" \
+    BITNAMI_APP_NAME="odoo" \
+    PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/odoo/bin:$PATH"
+
+ADD odoo/npm.txt /opt/binami/odoo/npm.txt
+RUN cat /opt/binami/odoo/npm.txt | xargs npm install --global
+
+ADD odoo/requirements.txt odoo/versions.txt* /opt/binami/odoo/
+
+RUN pip install --upgrade pip --user
+RUN pip install setuptools==57.5.0 --user
+RUN pip install wheel==0.40.0 --user
+RUN if [ -r '/opt/binami/odoo/versions.txt' ]; \
+        then python3 -m pip install --no-cache-dir -r /opt/binami/odoo/versions.txt; \
+    fi
+
+RUN python3 -m pip install --no-cache-dir -r /opt/binami/odoo/requirements.txt
+
+ADD  odoo/base_requirements.txt odoo/extra_requirements.txt  /opt/binami/odoo/
+RUN python3 -m pip install --no-cache-dir -r /opt/binami/odoo/base_requirements.txt -r /opt/binami/odoo/extra_requirements.txt
+
+ADD odoo/requirements-atual.txt   /opt/binami/odoo/
+RUN python3 -m pip install --no-cache-dir -r /opt/binami/odoo/requirements-atual.txt
+
+ADD odoo/*.yaml /opt/binami/odoo 
+
+
+EXPOSE 3000 8069 8072
+
+ENTRYPOINT [ "/opt/bitnami/scripts/odoo/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/odoo/run.sh" ]

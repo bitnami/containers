@@ -1,0 +1,311 @@
+# generated from manifests external_dependencies
+jdatetime
+# generated from manifests external_dependencies
+requests
+# generated from manifests external_dependencies
+webcolors
+# generated from manifests external_dependencies
+xlsxwriter
+# generated from manifests external_dependencies
+extract_msg
+premailer
+# generated from manifests external_dependencies
+python-dateutil
+# generated from manifests external_dependencies
+bs4
+pycountry
+xlrd
+# generated from manifests external_dependencies
+dicttoxml
+PyPDF2
+roulier
+unidecode
+xmltodict
+zeep
+# generated from manifests external_dependencies
+GitPython
+pathspec
+PyGithub
+pygount
+# generated from manifests external_dependencies
+pdf2image
+pyzbar
+# generated from manifests external_dependencies
+odoo-test-helper
+# generated from manifests external_dependencies
+lxml
+unidecode
+# generated from manifests external_dependencies
+pika
+# generated from manifests external_dependencies
+dateparser
+factur-x
+invoice2data
+ovh
+pdfplumber
+phonenumbers
+pyyaml
+regex
+xmlschema
+# generated from manifests external_dependencies
+python-dateutil
+# generated from manifests external_dependencies
+pycups
+# generated from manifests external_dependencies
+# generated from manifests external_dependencies
+Avalara
+# generated from manifests external_dependencies
+python-dateutil
+# generated from manifests external_dependencies
+# generated from manifests external_dependencies
+email-validator
+erpbrasil.assinatura>=1.7.0
+erpbrasil.base>=2.3.0
+erpbrasil.edoc
+erpbrasil.edoc.pdf
+erpbrasil.transmissao
+nfelib>=2.0.0
+nfselib.ginfes
+nfselib.paulistana
+num2words
+phonenumbers
+pycep_correios
+pyyaml
+satcomum
+unidecode
+workalendar
+# generated from manifests external_dependencies
+openupgradelib
+pytz
+xlrd
+# generated from manifests external_dependencies
+pycountry
+# generated from manifests external_dependencies
+openupgradelib
+# generated from manifests external_dependencies
+unidecode
+aiohttp
+aiohttp
+# generated from manifests external_dependencies
+python-dateutil
+# generated from manifests external_dependencies
+chardet
+ofxparse
+xlrd
+# generated from manifests external_dependencies
+cssselect
+# generated from manifests external_dependencies
+chardet
+cryptography
+paramiko
+pycountry
+pycryptodome
+pyOpenSSL
+qrcode
+requests
+requests_pkcs12
+suds-py3
+unidecode
+xmlsig
+xmltodict
+zeep
+# generated from manifests external_dependencies
+bokeh==2.3.1
+mpld3
+plotly==5.4.0
+# generated from manifests external_dependencies
+cachetools
+# generated from manifests external_dependencies
+xlrd
+# generated from manifests external_dependencies
+python-dateutil
+# generated from manifests external_dependencies
+cmislib
+# generated from manifests external_dependencies
+pgpy
+python-stdnum
+requests
+requests_oauthlib
+unicodecsv
+unidecode
+# generated from manifests external_dependencies
+asn1crypto
+codicefiscale
+elementpath
+openupgradelib
+unidecode
+xlrd
+xlsxwriter
+xmlschema>=1.7.0
+py-Asterisk
+# generated from manifests external_dependencies
+phonenumbers
+requests
+Voicent-Python
+phonenumbers
+# generated from manifests external_dependencies
+geojson
+shapely
+simplejson
+# generated from manifests external_dependencies
+#python-stdnum>=1.16
+# generated from manifests external_dependencies
+openupgradelib
+# generated from manifests external_dependencies
+openupgradelib
+# generated from manifests external_dependencies
+acme
+astor
+contextvars; python_version < '3.7'
+cryptography
+dataclasses
+dnspython
+josepy
+odoorpc
+openpyxl
+openupgradelib
+pygount
+pysftp
+sentry_sdk<=1.9.0
+unidecode
+# generated from manifests external_dependencies
+algoliasearch
+elasticsearch>=7.0.0,<=7.13.4
+requests
+unidecode
+# generated from manifests external_dependencies
+quickpac
+unidecode
+zeep
+# generated from manifests external_dependencies
+pandas>=0.25.3
+# generated from manifests external_dependencies
+python-stdnum
+# generated from manifests external_dependencies
+# generated from manifests external_dependencies
+boto3
+paramiko
+pyftpdlib
+python-magic
+python_slugify
+unicodecsv
+validators
+# generated from manifests external_dependencies
+openupgradelib
+# generated from manifests external_dependencies
+# generated from manifests external_dependencies
+numpy-financial<=1.0.0
+numpy>=1.15
+vatnumber<=1.0
+# generated from manifests external_dependencies
+num2words
+promptpay
+# generated from manifests external_dependencies
+python-barcode
+# generated from manifests external_dependencies
+bs4
+freezegun
+html2text
+prestapyt
+vcrpy
+# generated from manifests external_dependencies
+cryptography
+# generated from manifests external_dependencies
+cryptography
+endesive
+py3o.formats
+py3o.template
+# generated from manifests external_dependencies
+responses
+# generated from manifests external_dependencies
+cryptography
+email_validator
+lxml
+pyjwt
+pysaml2
+python-jose
+python-ldap
+zxcvbn
+# generated from manifests external_dependencies
+chardet
+pytz
+pyyaml
+# generated from manifests external_dependencies
+pyafipws@https://github.com/reingart/pyafipws/archive/main.zip
+pyOpenSSL
+pysimplesoap
+# generated from manifests external_dependencies
+openupgradelib
+# generated from manifests external_dependencies
+# generated from manifests external_dependencies
+ach
+python-stdnum
+# generated from manifests external_dependencies
+pycoda
+zeep
+# generated from manifests external_dependencies
+a2wsgi
+apispec
+apispec>=4.0.0
+cerberus
+extendable-pydantic
+extendable-pydantic>=0.0.4
+extendable>=0.0.4
+fastapi
+graphene
+graphql_server
+jsondiff
+marshmallow
+marshmallow-objects>=2.0.0
+parse-accept-language
+pydantic<2
+pyquerystring
+python-multipart
+typing-extensions
+ujson
+# generated from manifests external_dependencies
+num2words
+# generated from manifests external_dependencies
+email-validator
+phonenumbers
+python-stdnum
+# generated from manifests external_dependencies
+openupgradelib
+Babel
+chardet
+decorator
+docutils
+ebaysdk
+gevent
+greenlet
+idna
+Jinja2
+libsass
+lxml
+Mako
+MarkupSafe
+num2words
+ofxparse
+passlib
+Pillow
+polib
+psutil
+psycopg2
+pydot
+python-ldap
+PyPDF2
+pyserial
+python-dateutil
+pytz  # no version pinning to avoid OS perturbations
+pyusb
+qrcode
+reportlab
+requests
+urllib3
+zeep
+python-stdnum
+vobject==0.9.6.1
+Werkzeug==0.16.1
+XlsxWriter
+xlwt==1.3.*
+xlrd
