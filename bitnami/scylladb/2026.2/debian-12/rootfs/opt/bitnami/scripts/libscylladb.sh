@@ -289,7 +289,7 @@ scylladb_supports_auth_superuser_config() {
 # scylla.yaml key. The -6 flag selects the SHA-512 crypt(3) scheme, matching
 # ScyllaDB's own default password hashing scheme (see the "Using password
 # hashing scheme: $6$" line ScyllaDB logs on startup). Supported since OpenSSL
-# 1.1.0 (2016); verified available on all our target distros (debian-11/12,
+# 1.1.0 (2016); verified available on all our target distros (debian-12,
 # photon-5, redhatubi-8/9).
 # Arguments:
 #   $1 - password
