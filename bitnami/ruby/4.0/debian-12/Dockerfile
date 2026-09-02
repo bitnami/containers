@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-08-31T11:52:57Z" \
+      org.opencontainers.image.created="2026-09-02T08:14:31Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/ruby/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/ruby" \
@@ -47,7 +47,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 
 ENV APP_VERSION="4.0.6" \
     BITNAMI_APP_NAME="ruby" \
-    IMAGE_REVISION="5" \
+    IMAGE_REVISION="6" \
     PATH="/opt/bitnami/ruby/bin:$PATH"
 
 EXPOSE 3000
