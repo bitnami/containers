@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-08-25T10:29:10Z" \
+      org.opencontainers.image.created="2026-09-02T06:53:25Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/phpmyadmin/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/phpmyadmin" \
@@ -28,12 +28,12 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "render-template-1.0.10-3-linux-${OS_ARCH}-debian-12" \
-      "php-8.4.24-1-linux-${OS_ARCH}-debian-12" \
+      "render-template-1.0.10-4-linux-${OS_ARCH}-debian-12" \
+      "php-8.4.25-1-linux-${OS_ARCH}-debian-12" \
       "apache-2.4.68-4-linux-${OS_ARCH}-debian-12" \
       "mysql-client-13.0.1-0-linux-${OS_ARCH}-debian-12" \
       "postgresql-client-18.6.0-0-linux-${OS_ARCH}-debian-12" \
-      "libphp-8.4.24-3-linux-${OS_ARCH}-debian-12" \
+      "libphp-8.4.25-0-linux-${OS_ARCH}-debian-12" \
       "phpmyadmin-5.2.3-5-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -60,7 +60,7 @@ ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     APP_VERSION="5.2.3" \
     BITNAMI_APP_NAME="phpmyadmin" \
-    IMAGE_REVISION="43" \
+    IMAGE_REVISION="44" \
     LD_LIBRARY_PATH="/opt/bitnami/postgresql/lib" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/postgresql/bin:$PATH"
 
