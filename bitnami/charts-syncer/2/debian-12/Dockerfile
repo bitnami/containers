@@ -17,7 +17,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "charts-syncer-2.5.0-4-linux-${OS_ARCH}-debian-12" \
+      "charts-syncer-2.5.0-5-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -41,7 +41,7 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2026-09-01T20:58:16Z" \
+      org.opencontainers.image.created="2026-09-02T02:24:02Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="charts-syncer" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -55,7 +55,7 @@ COPY --from=builder /rootfs /
 
 ENV APP_VERSION="2.5.0" \
     BITNAMI_APP_NAME="charts-syncer" \
-    IMAGE_REVISION="4" \
+    IMAGE_REVISION="5" \
     PATH="/opt/bitnami/charts-syncer/bin:$PATH"
 
 USER 1001
