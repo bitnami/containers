@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-08-24T09:40:04Z" \
+      org.opencontainers.image.created="2026-09-02T02:19:32Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/harbor-core/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/harbor-core" \
@@ -28,8 +28,8 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "ini-file-1.4.10-3-linux-${OS_ARCH}-debian-12" \
-      "harbor-core-2.15.2-16-linux-${OS_ARCH}-debian-12" \
+      "ini-file-1.4.10-4-linux-${OS_ARCH}-debian-12" \
+      "harbor-core-2.15.2-17-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -50,7 +50,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-core/postunpack.sh
 ENV APP_VERSION="2.15.2" \
     BITNAMI_APP_NAME="harbor-core" \
-    IMAGE_REVISION="16" \
+    IMAGE_REVISION="17" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/harbor-core/bin:$PATH"
 
 VOLUME [ "/data", "/etc/core" ]
