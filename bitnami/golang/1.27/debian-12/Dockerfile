@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-09-01T20:53:33Z" \
+      org.opencontainers.image.created="2026-09-03T08:04:44Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/golang/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/golang" \
@@ -22,7 +22,7 @@ ENV OS_ARCH="${TARGETARCH:-amd64}" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages build-essential ca-certificates curl git pkg-config procps unzip
+RUN install_packages build-essential ca-certificates curl git p7zip-full pkg-config procps
 RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
@@ -47,7 +47,7 @@ ENV APP_VERSION="1.27.1" \
     BITNAMI_APP_NAME="golang" \
     GOCACHE="/go/.cache" \
     GOPATH="/go" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     PATH="/go/bin:/opt/bitnami/go/bin:$PATH"
 
 WORKDIR $GOPATH
