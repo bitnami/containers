@@ -59,6 +59,6 @@ ENV APP_VERSION="11.0.25" \
 
 EXPOSE 8009 8080
 
-USER 1001
+USER 999
 ENTRYPOINT [ "/opt/bitnami/scripts/tomcat/entrypoint.sh" ]
 CMD [ "/opt/bitnami/scripts/tomcat/run.sh" ]
