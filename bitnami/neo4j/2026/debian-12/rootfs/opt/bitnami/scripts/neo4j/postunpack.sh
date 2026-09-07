@@ -17,6 +17,10 @@ set -o pipefail
 . /opt/bitnami/scripts/libfile.sh
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/liblog.sh
+# Enterprise-only extensions (clustering, metrics): only shipped in the neo4j-enterprise image
+if [[ -f /opt/bitnami/scripts/libneo4j-enterprise.sh ]]; then
+    . /opt/bitnami/scripts/libneo4j-enterprise.sh
+fi
 
 export JAVA_HOME="/opt/bitnami/java"
 
@@ -49,6 +53,12 @@ neo4j_conf_set "server.directories.logs" "$NEO4J_LOGS_DIR"
 neo4j_conf_set "server.directories.import" "$NEO4J_IMPORT_DIR"
 neo4j_conf_set "server.directories.transaction.logs.root" "${NEO4J_DATA_DIR}/transactions"
 neo4j_conf_set "server.directories.dumps.root" "${NEO4J_DATA_DIR}/dumps"
+
+# Enterprise-only: bake the metrics directory into the image at build time (in addition to the
+# runtime call in neo4j_initialize) so it is already correct even when a caller runs the container
+# without going through entrypoint.sh/setup.sh (e.g. VIB's container-level goss tests, which start
+# the container with an overridden command and never trigger the normal startup flow).
+declare -F configure_neo4j_metrics_settings >/dev/null && configure_neo4j_metrics_settings
 
 ## Create empty file for apoc.conf file as it is not included in the default neo4j installation
 ## Source: https://neo4j.com/labs/apoc/4.2/config/
