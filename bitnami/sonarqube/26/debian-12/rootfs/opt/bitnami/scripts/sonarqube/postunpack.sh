@@ -36,4 +36,5 @@ done
 # The installation directory needs to be writable in order for persistence logic to work (i.e. deleting folders inside it)
 # The 'sonar.sh' file needs to be writable when running as a non-root user since it is going to be modified during initialization
 chmod g+w "$SONARQUBE_CONF_FILE" "$SONARQUBE_BASE_DIR"
+chmod -R +x "${SONARQUBE_BASE_DIR}/bin"
 chmod o+rX -R "${SONARQUBE_BASE_DIR}/elasticsearch/config"
