@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-09-02T08:43:42Z" \
+      org.opencontainers.image.created="2026-09-06T21:35:25Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/vault/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/vault" \
@@ -46,7 +46,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
 ENV APP_VERSION="2.1.0" \
     BITNAMI_APP_NAME="vault" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="2" \
     PATH="/opt/bitnami/vault/bin:$PATH"
 
 USER 1001
