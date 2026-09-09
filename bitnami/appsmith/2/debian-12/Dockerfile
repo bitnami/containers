@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-09-06T18:29:59Z" \
+      org.opencontainers.image.created="2026-09-09T19:41:51Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/appsmith/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/appsmith" \
       org.opencontainers.image.title="appsmith" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="2.3.0"
+      org.opencontainers.image.version="2.4.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -30,11 +30,11 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     COMPONENTS=( \
       "render-template-1.0.10-4-linux-${OS_ARCH}-debian-12" \
       "python-3.14.7-8-linux-${OS_ARCH}-debian-12" \
-      "node-24.20.0-0-linux-${OS_ARCH}-debian-12" \
-      "nginx-1.31.5-0-linux-${OS_ARCH}-debian-12" \
+      "node-24.21.0-0-linux-${OS_ARCH}-debian-12" \
+      "nginx-1.31.5-2-linux-${OS_ARCH}-debian-12" \
       "mongodb-shell-2.10.0-0-linux-${OS_ARCH}-debian-12" \
       "jre-25.0.4-9-0-linux-${OS_ARCH}-debian-12" \
-      "appsmith-2.3.0-0-linux-${OS_ARCH}-debian-12" \
+      "appsmith-2.4.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -53,9 +53,9 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 COPY rootfs /
 RUN /opt/bitnami/scripts/nginx/postunpack.sh
 RUN /opt/bitnami/scripts/appsmith/postunpack.sh
-ENV APP_VERSION="2.3.0" \
+ENV APP_VERSION="2.4.0" \
     BITNAMI_APP_NAME="appsmith" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="0" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/nginx/sbin:/opt/bitnami/mongodb/bin:/opt/bitnami/java/bin:$PATH"
