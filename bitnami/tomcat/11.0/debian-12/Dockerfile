@@ -8,13 +8,13 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-09-07T21:48:29Z" \
+      org.opencontainers.image.created="2026-09-09T22:48:58Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/tomcat/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/tomcat" \
       org.opencontainers.image.title="tomcat" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="11.0.25"
+      org.opencontainers.image.version="11.0.26"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -31,7 +31,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     COMPONENTS=( \
       "render-template-1.0.10-4-linux-${OS_ARCH}-debian-12" \
       "jre-21.0.12-10-2-linux-${OS_ARCH}-debian-12" \
-      "tomcat-11.0.25-1-linux-${OS_ARCH}-debian-12" \
+      "tomcat-11.0.26-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -51,9 +51,9 @@ RUN uninstall_packages curl
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/tomcat/postunpack.sh
-ENV APP_VERSION="11.0.25" \
+ENV APP_VERSION="11.0.26" \
     BITNAMI_APP_NAME="tomcat" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="0" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:$PATH"
 
