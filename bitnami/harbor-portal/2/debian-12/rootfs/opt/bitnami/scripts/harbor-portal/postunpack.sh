@@ -16,7 +16,7 @@ set -o pipefail
 . /opt/bitnami/scripts/libnginx.sh
 . /opt/bitnami/scripts/libharbor.sh
 
-# Load Nginx environment variables
+# Load NGINX environment variables
 . /opt/bitnami/scripts/nginx-env.sh
 
 # Load environment
