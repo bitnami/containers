@@ -64,8 +64,6 @@ services:
 volumes:
   postgresql_data:
     driver: local
-  minio_data:
-    driver: local
   redis_data:
     driver: local
   elasticsearch_data:
