@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-09-08T15:51:20Z" \
+      org.opencontainers.image.created="2026-09-11T17:31:00Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/mongodb-sharded/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mongodb-sharded" \
       org.opencontainers.image.title="mongodb-sharded" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="8.3.9"
+      org.opencontainers.image.version="8.3.11"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -32,7 +32,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
       "wait-for-port-1.0.11-3-linux-${OS_ARCH}-debian-12" \
       "render-template-1.0.10-4-linux-${OS_ARCH}-debian-12" \
       "mongodb-shell-2.10.0-0-linux-${OS_ARCH}-debian-12" \
-      "mongodb-8.3.9-0-linux-${OS_ARCH}-debian-12" \
+      "mongodb-8.3.11-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -53,7 +53,7 @@ RUN ln -s /opt/bitnami/scripts/mongodb-sharded/run.sh /run.sh
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mongodb-sharded/postunpack.sh
-ENV APP_VERSION="8.3.9" \
+ENV APP_VERSION="8.3.11" \
     BITNAMI_APP_NAME="mongodb-sharded" \
     IMAGE_REVISION="0" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mongodb/bin:$PATH"
