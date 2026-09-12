@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-08-13T08:14:41Z" \
+      org.opencontainers.image.created="2026-09-12T08:50:58Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/keycloak-config-cli/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/keycloak-config-cli" \
@@ -49,7 +49,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="6.5.1" \
     BITNAMI_APP_NAME="keycloak-config-cli" \
-    IMAGE_REVISION="5" \
+    IMAGE_REVISION="6" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 WORKDIR /opt/bitnami/keycloak-config-cli
