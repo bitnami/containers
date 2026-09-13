@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-09-02T21:01:29Z" \
+      org.opencontainers.image.created="2026-09-13T01:43:27Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/milvus/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/milvus" \
@@ -48,7 +48,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="3.0.1" \
     BITNAMI_APP_NAME="milvus" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     LD_LIBRARY_PATH="/opt/bitnami/milvus/lib" \
     PATH="/opt/bitnami/milvus/bin:$PATH"
 
