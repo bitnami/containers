@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-09-10T00:38:16Z" \
+      org.opencontainers.image.created="2026-09-15T19:48:47Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/redmine/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/redmine" \
@@ -22,7 +22,7 @@ ENV OS_ARCH="${TARGETARCH:-amd64}" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages acl ca-certificates curl ghostscript git gsfonts imagemagick libaudit1 libbrotli1 libbsd0 libcap-ng0 libcom-err2 libcrypt1 libcurl4 libedit2 libffi8 libgcc-s1 libgmp10 libgnutls30 libgssapi-krb5-2 libhogweed6 libicu72 libidn2-0 libjemalloc2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.5-0 liblz4-1 liblzma5 libmd0 libncurses6 libnettle8 libnghttp2-14 libp11-kit0 libpam0g libpcre2-8-0 libpsl5 libreadline-dev librtmp1 libsasl2-2 libssh2-1 libssl-dev libssl3 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 libyaml-0-2 libyaml-dev libzstd1 procps zlib1g
+RUN install_packages acl ca-certificates curl ghostscript git gsfonts imagemagick libatomic1 libaudit1 libbrotli1 libbsd0 libcap-ng0 libcom-err2 libcrypt1 libcurl4 libedit2 libffi8 libgcc-s1 libgmp10 libgnutls30 libgssapi-krb5-2 libhogweed6 libicu72 libidn2-0 libjemalloc2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.5-0 liblz4-1 liblzma5 libmd0 libncurses6 libnettle8 libnghttp2-14 libp11-kit0 libpam0g libpcre2-8-0 libpsl5 libreadline-dev librtmp1 libsasl2-2 libssh2-1 libssl-dev libssl3 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 libyaml-0-2 libyaml-dev libzstd1 procps zlib1g
 RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
@@ -30,7 +30,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
       "ruby-3.4.10-5-linux-${OS_ARCH}-debian-12" \
       "yq-4.53.6-2-linux-${OS_ARCH}-debian-12" \
       "postgresql-client-18.6.0-0-linux-${OS_ARCH}-debian-12" \
-      "mysql-client-13.0.1-0-linux-${OS_ARCH}-debian-12" \
+      "mysql-client-13.1.1-0-linux-${OS_ARCH}-debian-12" \
       "mariadb-lib-12.3.3-0-linux-${OS_ARCH}-debian-12" \
       "redmine-7.0.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
@@ -53,7 +53,7 @@ RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/redmine/postunpack.sh
 ENV APP_VERSION="7.0.1" \
     BITNAMI_APP_NAME="redmine" \
-    IMAGE_REVISION="3" \
+    IMAGE_REVISION="4" \
     LD_LIBRARY_PATH="/opt/bitnami/mariadb/lib:/opt/bitnami/postgresql/lib" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/common/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:$PATH"
 
