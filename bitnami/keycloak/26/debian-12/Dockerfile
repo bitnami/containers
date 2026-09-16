@@ -8,13 +8,13 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-09-06T19:15:28Z" \
+      org.opencontainers.image.created="2026-09-16T16:03:17Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/keycloak/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/keycloak" \
       org.opencontainers.image.title="keycloak" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="26.7.3"
+      org.opencontainers.image.version="26.7.4"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -31,7 +31,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     COMPONENTS=( \
       "wait-for-port-1.0.11-3-linux-${OS_ARCH}-debian-12" \
       "jre-21.0.12-10-2-linux-${OS_ARCH}-debian-12" \
-      "keycloak-26.7.3-0-linux-${OS_ARCH}-debian-12" \
+      "keycloak-26.7.4-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -50,9 +50,9 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/keycloak/postunpack.sh
-ENV APP_VERSION="26.7.3" \
+ENV APP_VERSION="26.7.4" \
     BITNAMI_APP_NAME="keycloak" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="0" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:/opt/bitnami/keycloak/bin:$PATH"
 
