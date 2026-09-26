@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-09-08T13:46:56Z" \
+      org.opencontainers.image.created="2026-09-26T02:36:27Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/hubble-ui/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/hubble-ui" \
@@ -29,7 +29,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "render-template-1.0.10-4-linux-${OS_ARCH}-debian-12" \
-      "nginx-1.31.5-0-linux-${OS_ARCH}-debian-12" \
+      "nginx-1.31.6-2-linux-${OS_ARCH}-debian-12" \
       "hubble-ui-0.13.6-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -55,7 +55,7 @@ RUN rm -rf /app && \
     ln -sf /opt/bitnami/hubble-ui/public /app
 ENV APP_VERSION="0.13.6" \
     BITNAMI_APP_NAME="hubble-ui" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/nginx/sbin:$PATH"
