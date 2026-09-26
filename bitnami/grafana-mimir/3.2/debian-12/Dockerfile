@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-09-10T10:50:53Z" \
+      org.opencontainers.image.created="2026-09-26T02:05:29Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/grafana-mimir/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/grafana-mimir" \
@@ -48,7 +48,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="3.2.1" \
     BITNAMI_APP_NAME="grafana-mimir" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     PATH="/opt/bitnami/grafana-mimir/bin:$PATH"
 
 EXPOSE 8080 9095
