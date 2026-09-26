@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-09-06T20:41:55Z" \
+      org.opencontainers.image.created="2026-09-26T04:54:25Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/opensearch-dashboards/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/opensearch-dashboards" \
@@ -50,7 +50,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/opensearch-dashboards/postunpack.sh
 ENV APP_VERSION="3.8.0" \
     BITNAMI_APP_NAME="opensearch-dashboards" \
-    IMAGE_REVISION="2"
+    IMAGE_REVISION="3"
 
 EXPOSE 5601
 
