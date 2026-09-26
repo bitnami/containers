@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-09-12T07:32:27Z" \
+      org.opencontainers.image.created="2026-09-26T00:39:39Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/cassandra-exporter/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cassandra-exporter" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "jre-17.0.20-10-2-linux-${OS_ARCH}-debian-12" \
+      "jre-17.0.20-101-0-linux-${OS_ARCH}-debian-12" \
       "cassandra-exporter-2.3.8-8-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -48,7 +48,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="2.3.8" \
     BITNAMI_APP_NAME="cassandra-exporter" \
-    IMAGE_REVISION="71" \
+    IMAGE_REVISION="72" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 EXPOSE 8080
