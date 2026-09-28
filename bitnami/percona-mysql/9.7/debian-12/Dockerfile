@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-09-26T05:01:54Z" \
+      org.opencontainers.image.created="2026-09-28T15:55:26Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/percona-mysql/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/percona-mysql" \
       org.opencontainers.image.title="percona-mysql" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="9.7.1-1"
+      org.opencontainers.image.version="9.7.2-2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -23,14 +23,14 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libaio1 libatomic1 libaudit1 libbz2-1.0 libcap-ng0 libcom-err2 libcrypt1 libev4 libffi8 libgcc-s1 libgdbm-compat4 libgdbm6 libgmp10 libgnutls30 libgssapi-krb5-2 libhogweed6 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.5-0 libnettle8 libnuma-dev libp11-kit0 libpam0g libsasl2-2 libssl3 libstdc++6 libtasn1-6 libtirpc3 libudev0 libudev1 libunistring2 libuuid1 procps zlib1g
+RUN install_packages ca-certificates curl libaio1 libatomic1 libaudit1 libbrotli1 libbz2-1.0 libcap-ng0 libcom-err2 libcrypt1 libcurl4 libev4 libffi8 libgcc-s1 libgdbm-compat4 libgdbm6 libgmp10 libgnutls30 libgssapi-krb5-2 libhogweed6 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.5-0 libnettle8 libnghttp2-14 libnuma-dev libp11-kit0 libpam0g libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl3 libstdc++6 libtasn1-6 libtirpc3 libudev0 libudev1 libunistring2 libuuid1 libzstd1 procps zlib1g
 RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "mysql-shell-9.7.1-0-linux-${OS_ARCH}-debian-12" \
       "ini-file-1.4.10-4-linux-${OS_ARCH}-debian-12" \
-      "percona-mysql-9.7.1-1-1-linux-${OS_ARCH}-debian-12" \
+      "percona-mysql-9.7.2-2-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -50,9 +50,9 @@ RUN uninstall_packages curl
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mysql/postunpack.sh
-ENV APP_VERSION="9.7.1-1" \
+ENV APP_VERSION="9.7.2-2" \
     BITNAMI_APP_NAME="percona-mysql" \
-    IMAGE_REVISION="3" \
+    IMAGE_REVISION="0" \
     LD_LIBRARY_PATH="/opt/bitnami/mysql/lib/private/:/opt/bitnami/mysql/lib/mysqlsh/:/opt/bitnami/mysql/lib/mysqlrouter/private/" \
     MYSQL_HOME="/opt/bitnami/mysql/conf" \
     PATH="/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/mysql/sbin:$PATH"
