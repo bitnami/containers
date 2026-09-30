@@ -1,0 +1,61 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+FROM docker.io/bitnami/minideb:bookworm AS builder
+
+ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
+ARG TARGETARCH
+
+ENV OS_ARCH="${TARGETARCH:-amd64}"
+
+COPY prebuildfs /
+SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
+
+# Install required system packages and dependencies
+RUN install_packages ca-certificates curl
+RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
+    DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
+    mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
+    COMPONENTS=( \
+      "keda-admission-webhooks-2.21.0-0-linux-${OS_ARCH}-debian-12" \
+    ) ; \
+    for COMPONENT in "${COMPONENTS[@]}"; do \
+      if [ ! -f "${COMPONENT}.tar.gz" ]; then \
+        curl -SsLf "${DOWNLOADS_URL}/${COMPONENT}.tar.gz" -O ; \
+      fi ; \
+      sha256sum -c "/opt/bitnami/checksums/${COMPONENT}.tar.gz.sha256" ; \
+      tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner ; \
+      rm -rf "${COMPONENT}".tar.gz ; \
+    done ; \
+    rm -rf /opt/bitnami/checksums ;
+RUN uninstall_packages curl
+
+######
+
+FROM scratch
+
+ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
+ARG TARGETARCH
+
+ENV OS_ARCH="${TARGETARCH:-amd64}"
+
+LABEL org.opencontainers.image.base.name="scratch" \
+      org.opencontainers.image.created="2026-09-30T13:17:53Z" \
+      org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
+      org.opencontainers.image.title="keda-admission-webhooks" \
+      org.opencontainers.image.vendor="Broadcom, Inc." \
+      org.opencontainers.image.version="2.21.0"
+
+COPY rootfs /
+COPY --from=builder /opt/bitnami/keda-admission-webhooks /opt/bitnami/keda-admission-webhooks
+
+ENV APP_VERSION="2.21.0" \
+    BITNAMI_APP_NAME="keda-admission-webhooks" \
+    IMAGE_REVISION="0" \
+    PATH="/opt/bitnami/keda-admission-webhooks/bin:$PATH"
+
+USER 1001
+
+ENTRYPOINT [ "keda-admission-webhooks" ]
+
+CMD [ "--zap-log-level=info", "--zap-encoder=console" ]
