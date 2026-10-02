@@ -40,7 +40,7 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2026-09-02T05:07:27Z" \
+      org.opencontainers.image.created="2026-10-02T12:29:10Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="oras" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -53,7 +53,7 @@ COPY --from=builder /opt/bitnami/oras/licenses /opt/bitnami/oras/licenses
 
 ENV APP_VERSION="1.3.4" \
     BITNAMI_APP_NAME="oras" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="2" \
     PATH="/opt/bitnami/oras/bin:$PATH"
 
 USER 1001
