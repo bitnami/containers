@@ -40,7 +40,7 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2026-09-02T04:12:42Z" \
+      org.opencontainers.image.created="2026-10-02T09:08:25Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="memcached-exporter" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -53,7 +53,7 @@ COPY --from=builder /opt/bitnami/memcached-exporter/licenses /opt/bitnami/memcac
 
 ENV APP_VERSION="0.17.0" \
     BITNAMI_APP_NAME="memcached-exporter" \
-    IMAGE_REVISION="4" \
+    IMAGE_REVISION="5" \
     PATH="/opt/bitnami/memcached-exporter/bin:$PATH"
 
 EXPOSE 9150
