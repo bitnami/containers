@@ -41,7 +41,7 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2026-09-02T02:24:02Z" \
+      org.opencontainers.image.created="2026-10-02T07:24:49Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="charts-syncer" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
@@ -55,7 +55,7 @@ COPY --from=builder /rootfs /
 
 ENV APP_VERSION="2.5.0" \
     BITNAMI_APP_NAME="charts-syncer" \
-    IMAGE_REVISION="5" \
+    IMAGE_REVISION="6" \
     PATH="/opt/bitnami/charts-syncer/bin:$PATH"
 
 USER 1001
