@@ -305,6 +305,7 @@ gitea_pass_wizard() {
         "--data-urlencode" "db_schema=${GITEA_DATABASE_SCHEMA}"
         "--data-urlencode" "charset=${GITEA_DATABASE_CHARSET}"
         "--data-urlencode" "app_name=${GITEA_APP_NAME}"
+        "--data-urlencode" "app_data_path=${GITEA_DATA_DIR}"
         "--data-urlencode" "repo_root_path=${GITEA_REPO_ROOT_PATH}"
         "--data-urlencode" "lfs_root_path=${GITEA_LFS_ROOT_PATH}"
         "--data-urlencode" "run_user=${GITEA_DAEMON_USER}"
