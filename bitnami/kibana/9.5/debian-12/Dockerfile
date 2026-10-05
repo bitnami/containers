@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-10-02T11:33:27Z" \
+      org.opencontainers.image.created="2026-10-05T03:16:22Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/kibana/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kibana" \
@@ -50,7 +50,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/kibana/postunpack.sh
 ENV APP_VERSION="9.5.4" \
     BITNAMI_APP_NAME="kibana" \
-    IMAGE_REVISION="2"
+    IMAGE_REVISION="3"
 
 EXPOSE 5601
 
