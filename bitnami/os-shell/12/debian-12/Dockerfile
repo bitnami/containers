@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-09-26T04:58:24Z" \
+      org.opencontainers.image.created="2026-10-05T05:09:44Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/os-shell/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/os-shell" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "yq-4.53.6-2-linux-${OS_ARCH}-debian-12" \
+      "yq-4.54.1-0-linux-${OS_ARCH}-debian-12" \
       "wait-for-port-1.0.11-3-linux-${OS_ARCH}-debian-12" \
       "render-template-1.0.10-4-linux-${OS_ARCH}-debian-12" \
       "ini-file-1.4.10-4-linux-${OS_ARCH}-debian-12" \
@@ -50,7 +50,7 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
 ENV APP_VERSION="12" \
     BITNAMI_APP_NAME="os-shell" \
-    IMAGE_REVISION="74" \
+    IMAGE_REVISION="75" \
     PATH="/opt/bitnami/common/bin:$PATH"
 
 USER 1001
