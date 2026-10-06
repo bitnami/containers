@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-10-05T05:48:29Z" \
+      org.opencontainers.image.created="2026-10-06T19:01:27Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/redis-sentinel/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/redis-sentinel" \
@@ -50,7 +50,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/redis-sentinel/postunpack.sh
 ENV APP_VERSION="8.10.2" \
     BITNAMI_APP_NAME="redis-sentinel" \
-    IMAGE_REVISION="2"
+    IMAGE_REVISION="3"
 
 EXPOSE 26379
 
