@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-10-05T04:15:01Z" \
+      org.opencontainers.image.created="2026-10-06T16:34:33Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/metrics-server/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/metrics-server" \
@@ -48,7 +48,7 @@ RUN uninstall_packages curl
 RUN chown -R 1001:root /opt/bitnami/metrics-server && chmod -R g+rwX /opt/bitnami/metrics-server
 ENV APP_VERSION="0.9.0" \
     BITNAMI_APP_NAME="metrics-server" \
-    IMAGE_REVISION="8" \
+    IMAGE_REVISION="9" \
     PATH="/opt/bitnami/metrics-server/bin:$PATH"
 
 EXPOSE 8443
