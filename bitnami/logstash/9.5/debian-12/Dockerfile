@@ -9,13 +9,13 @@ ARG LOGSTASH_PLUGINS
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-10-06T20:52:26Z" \
+      org.opencontainers.image.created="2026-10-06T23:05:24Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/logstash/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/logstash" \
       org.opencontainers.image.title="logstash" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="9.5.4"
+      org.opencontainers.image.version="9.5.5"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -32,7 +32,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     COMPONENTS=( \
       "yq-4.54.1-0-linux-${OS_ARCH}-debian-12" \
       "java-21.0.12-101-0-linux-${OS_ARCH}-debian-12" \
-      "logstash-9.5.4-0-linux-${OS_ARCH}-debian-12" \
+      "logstash-9.5.5-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -52,9 +52,9 @@ RUN uninstall_packages curl
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/logstash/postunpack.sh
-ENV APP_VERSION="9.5.4" \
+ENV APP_VERSION="9.5.5" \
     BITNAMI_APP_NAME="logstash" \
-    IMAGE_REVISION="3" \
+    IMAGE_REVISION="0" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:/opt/bitnami/logstash/bin:$PATH"
 
