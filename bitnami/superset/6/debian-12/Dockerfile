@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-10-05T06:48:11Z" \
+      org.opencontainers.image.created="2026-10-06T20:12:59Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/superset/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/superset" \
@@ -51,7 +51,7 @@ RUN /opt/bitnami/scripts/superset/postunpack.sh
 ENV APP_VERSION="6.1.0" \
     BITNAMI_APP_NAME="superset" \
     FLASK_APP="superset.app:create_app()" \
-    IMAGE_REVISION="14" \
+    IMAGE_REVISION="15" \
     LD_LIBRARY_PATH="/opt/bitnami/mariadb/lib" \
     PATH="/opt/bitnami/superset/venv/bin:/opt/bitnami/python/bin:$PATH" \
     SUPERSET_HOME="/opt/bitnami/superset/superset_home"
