@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-10-05T02:55:56Z" \
+      org.opencontainers.image.created="2026-10-06T15:05:57Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/jupyter-base-notebook/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jupyter-base-notebook" \
@@ -49,7 +49,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="6.0.1" \
     BITNAMI_APP_NAME="jupyter-base-notebook" \
-    IMAGE_REVISION="3" \
+    IMAGE_REVISION="4" \
     PATH="/opt/bitnami/miniforge/bin:/opt/bitnami/common/bin:$PATH"
 
 USER 1001
