@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-10-05T08:04:41Z" \
+      org.opencontainers.image.created="2026-10-06T12:28:53Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/appsmith/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/appsmith" \
@@ -32,7 +32,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
       "python-3.14.8-2-linux-${OS_ARCH}-debian-12" \
       "node-24.21.0-0-linux-${OS_ARCH}-debian-12" \
       "nginx-1.31.6-2-linux-${OS_ARCH}-debian-12" \
-      "mongodb-shell-2.12.0-0-linux-${OS_ARCH}-debian-12" \
+      "mongodb-shell-2.13.0-0-linux-${OS_ARCH}-debian-12" \
       "jre-25.0.4-101-0-linux-${OS_ARCH}-debian-12" \
       "appsmith-2.4.3-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
@@ -55,7 +55,7 @@ RUN /opt/bitnami/scripts/nginx/postunpack.sh
 RUN /opt/bitnami/scripts/appsmith/postunpack.sh
 ENV APP_VERSION="2.4.3" \
     BITNAMI_APP_NAME="appsmith" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/nginx/sbin:/opt/bitnami/mongodb/bin:/opt/bitnami/java/bin:$PATH"
