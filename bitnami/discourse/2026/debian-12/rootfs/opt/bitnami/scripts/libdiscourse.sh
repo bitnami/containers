@@ -200,6 +200,8 @@ discourse_initialize() {
         discourse_rake_execute db:migrate
     fi
 
+    am_i_root && configure_permissions_ownership "$DISCOURSE_VOLUME_DIR" -d "775" -f "664" -u "$DISCOURSE_DAEMON_USER" -g "root" -n
+
     if is_boolean_yes "$DISCOURSE_PRECOMPILE_ASSETS"; then
         info "Precompiling assets, this may take some time..."
         discourse_rake_execute assets:precompile
