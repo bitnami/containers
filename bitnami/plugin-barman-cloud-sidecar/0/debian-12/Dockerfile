@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-10-06T20:52:57Z" \
+      org.opencontainers.image.created="2026-10-07T13:37:27Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/plugin-barman-cloud-sidecar/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/plugin-barman-cloud-sidecar" \
       org.opencontainers.image.title="plugin-barman-cloud-sidecar" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="0.15.0"
+      org.opencontainers.image.version="0.15.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,7 +28,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "plugin-barman-cloud-sidecar-0.15.0-0-linux-${OS_ARCH}-debian-12" \
+      "plugin-barman-cloud-sidecar-0.15.1-0-linux-${OS_ARCH}-debian-12" \
       "plugin-barman-cloud-0.15.1-0-linux-${OS_ARCH}-debian-12" \
       "python-3.14.8-2-linux-${OS_ARCH}-debian-12" \
       "postgresql-lib-18.6.0-0-linux-${OS_ARCH}-debian-12" \
@@ -49,9 +49,9 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN ln -sf /opt/bitnami/plugin-barman-cloud/bin/manager /manager
 RUN uninstall_packages curl
 
-ENV APP_VERSION="0.15.0" \
+ENV APP_VERSION="0.15.1" \
     BITNAMI_APP_NAME="plugin-barman-cloud-sidecar" \
-    IMAGE_REVISION="4" \
+    IMAGE_REVISION="0" \
     LD_LIBRARY_PATH="/opt/bitnami/postgresql/lib" \
     PATH="/opt/bitnami/plugin-barman-cloud/bin:/opt/bitnami/python/bin:$PATH"
 
