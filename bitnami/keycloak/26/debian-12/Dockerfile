@@ -8,7 +8,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-10-06T15:24:28Z" \
+      org.opencontainers.image.created="2026-10-08T14:33:52Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/keycloak/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/keycloak" \
@@ -31,7 +31,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     COMPONENTS=( \
       "wait-for-port-1.0.11-3-linux-${OS_ARCH}-debian-12" \
       "jre-21.0.12-101-0-linux-${OS_ARCH}-debian-12" \
-      "keycloak-26.8.0-0-linux-${OS_ARCH}-debian-12" \
+      "keycloak-26.8.0-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -52,7 +52,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/keycloak/postunpack.sh
 ENV APP_VERSION="26.8.0" \
     BITNAMI_APP_NAME="keycloak" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="3" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:/opt/bitnami/keycloak/bin:$PATH"
 
