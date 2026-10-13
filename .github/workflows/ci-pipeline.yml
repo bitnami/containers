@@ -68,6 +68,10 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
+          # Safe here: this job only runs once a maintainer applies the 'verify' label (see the 'get-containers' job's `if:`),
+          # has read-only contents permission and no secrets, and the fork code is only read as data
+          # (Dockerfiles and .licenserc.yaml) by the license header linter.
+          allow-unsafe-pr-checkout: true
       - id: get-modified-files
         name: 'Get modified files'
         env:
