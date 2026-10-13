@@ -900,6 +900,9 @@ mongodb_is_secondary_node_ready() {
     local -r port="${2:?port is required}"
 
     debug "Waiting for the node to be marked as secondary"
+    # mongosh prints a connection banner containing 'directConnection=true', so a
+    # plain 'true' match always succeeds. Match an explicit sentinel instead, built
+    # at runtime so the positive value never appears verbatim in the sent script.
     result=$(
         mongodb_execute_print_output "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
 print("IS_SECONDARY_" + (rs.status().members.some(m => m.name === '$node:$port' && m.stateStr === 'SECONDARY') ? "YES" : "NO"))
