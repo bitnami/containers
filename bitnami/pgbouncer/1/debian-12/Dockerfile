@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-10-06T17:56:56Z" \
+      org.opencontainers.image.created="2026-10-14T18:26:31Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/pgbouncer/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/pgbouncer" \
       org.opencontainers.image.title="pgbouncer" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.26.0"
+      org.opencontainers.image.version="1.26.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,10 +29,10 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "nss-wrapper-1.1.16-0-linux-${OS_ARCH}-debian-12" \
-      "wait-for-port-1.0.11-3-linux-${OS_ARCH}-debian-12" \
+      "wait-for-port-1.0.11-4-linux-${OS_ARCH}-debian-12" \
       "postgresql-client-14.24.0-0-linux-${OS_ARCH}-debian-12" \
-      "ini-file-1.4.10-4-linux-${OS_ARCH}-debian-12" \
-      "pgbouncer-1.26.0-0-linux-${OS_ARCH}-debian-12" \
+      "ini-file-1.4.10-5-linux-${OS_ARCH}-debian-12" \
+      "pgbouncer-1.26.1-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -55,9 +55,9 @@ RUN uninstall_packages curl
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/pgbouncer/postunpack.sh
-ENV APP_VERSION="1.26.0" \
+ENV APP_VERSION="1.26.1" \
     BITNAMI_APP_NAME="pgbouncer" \
-    IMAGE_REVISION="3" \
+    IMAGE_REVISION="0" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     LD_LIBRARY_PATH="/opt/bitnami/postgresql/lib" \
