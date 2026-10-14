@@ -16,6 +16,8 @@ dbfilter = {{ODOO_DATABASE_FILTER}}
 debug_mode = {{odoo_debug}}
 email_from = {{ODOO_EMAIL}}
 http_port = {{ODOO_PORT_NUMBER}}
+; Odoo 20 binds to 127.0.0.1 by default (0.0.0.0 in 19 and earlier), so be explicit to keep the service reachable from other containers
+http_interface = 0.0.0.0
 ; limit_memory_hard = 2684354560
 ; limit_memory_soft = 2147483648
 ; limit_request = 8192
