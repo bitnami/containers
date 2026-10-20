@@ -1,6 +1,6 @@
 # Bitnami Secure Image for KEDA Admission Webhooks
 
-> KEDA's admission webhooks validate ScaledObject and ScaledJob custom resources before they are persisted to the Kubernetes API server.
+> KEDA admission webhooks validate ScaledObject and ScaledJob custom resources before they are persisted to the Kubernetes API server.
 
 [Overview of KEDA Admission Webhooks](https://github.com/kedacore/keda)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
