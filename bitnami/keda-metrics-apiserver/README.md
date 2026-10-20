@@ -1,6 +1,6 @@
 # Bitnami Secure Image for KEDA Metrics API Server
 
-> KEDA's Metrics API Server exposes external and custom metrics to the Kubernetes Horizontal Pod Autoscaler for event-driven scaling decisions.
+> KEDA Metrics API Server exposes external and custom metrics to the Kubernetes Horizontal Pod Autoscaler for event-driven scaling decisions.
 
 [Overview of KEDA Metrics API Server](https://github.com/kedacore/keda)
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
