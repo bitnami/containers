@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-10-15T17:43:58Z" \
+      org.opencontainers.image.created="2026-10-21T16:18:09Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/wordpress-nginx/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/wordpress-nginx" \
@@ -28,8 +28,8 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "render-template-1.0.10-5-linux-${OS_ARCH}-debian-12" \
-      "php-8.4.26-2-linux-${OS_ARCH}-debian-12" \
+      "render-template-1.0.10-6-linux-${OS_ARCH}-debian-12" \
+      "php-8.4.27-1-linux-${OS_ARCH}-debian-12" \
       "nginx-1.31.7-0-linux-${OS_ARCH}-debian-12" \
       "mysql-client-13.1.1-0-linux-${OS_ARCH}-debian-12" \
       "postgresql-lib-18.6.0-0-linux-${OS_ARCH}-debian-12" \
@@ -58,7 +58,7 @@ RUN /opt/bitnami/scripts/nginx-php-fpm/postunpack.sh
 RUN /opt/bitnami/scripts/wordpress/postunpack.sh
 ENV APP_VERSION="7.1.3" \
     BITNAMI_APP_NAME="wordpress-nginx" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="2" \
     LD_LIBRARY_PATH="/opt/bitnami/postgresql/lib" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
