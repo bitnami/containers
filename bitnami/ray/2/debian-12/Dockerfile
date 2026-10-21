@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-10-06T21:07:25Z" \
+      org.opencontainers.image.created="2026-10-21T06:27:53Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/ray/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/ray" \
       org.opencontainers.image.title="ray" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="2.58.0"
+      org.opencontainers.image.version="2.59.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,8 +28,8 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "python-3.14.8-2-linux-${OS_ARCH}-debian-12" \
-      "ray-2.58.0-0-linux-${OS_ARCH}-debian-12" \
+      "python-3.14.8-5-linux-${OS_ARCH}-debian-12" \
+      "ray-2.59.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -45,12 +45,13 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN useradd -r -u 1001 -g root ray
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN mkdir /.local && chmod g+rwX /.local
+RUN mkdir -p /.ray && chown 1001:0 /.ray && chmod 770 /.ray
 RUN uninstall_packages curl
 
 RUN mkdir /app && chmod g+rwX /app && ln -s /opt/bitnami/python/bin/ray /usr/bin/ray && ln -s /opt/bitnami/python/bin/python /usr/bin/python
-ENV APP_VERSION="2.58.0" \
+ENV APP_VERSION="2.59.0" \
     BITNAMI_APP_NAME="ray" \
-    IMAGE_REVISION="4" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 WORKDIR /app
