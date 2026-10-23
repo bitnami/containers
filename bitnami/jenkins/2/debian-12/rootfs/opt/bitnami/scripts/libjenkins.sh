@@ -304,7 +304,7 @@ jenkins_add_custom_file() {
     local -r filename="$(basename "$filepath")"
     local -r relpath="${filepath#"${JENKINS_MOUNTED_CONTENT_DIR}/"}"
     local action
-    local reason
+    local reason=""
 
     get_plugin_version() {
         local -r pluginpath="${1:?pluginpath is required}"
