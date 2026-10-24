@@ -52,7 +52,7 @@ To run commands inside this container you can use `docker run`, for example to e
 docker run --rm --name oras bitnami/oras:latest --version
 ```
 
-Check the [official ORAS documentation](https://oras.land/cli/) for a list of the available commands and parameters.
+Check the [official ORAS documentation](https://oras.land/docs/category/oras-commands/) for a list of the available commands and parameters.
 
 ## Notable Changes
 
