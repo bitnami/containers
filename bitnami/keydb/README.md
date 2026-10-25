@@ -50,7 +50,7 @@ The Bitnami KeyDB Docker image is only available to [Bitnami Secure Images](http
 
 ## Persisting your database
 
-KeyDB provides a different range of [persistence options](https://keydb.io/docs/topics/persistence.html). This contanier uses *AOF persistence by default* but it is easy to overwrite that configuration by setting the following command when running the container `/opt/bitnami/scripts/keydb/run.sh --appendonly no`. Alternatively, you may use the `KEYDB_AOF_ENABLED` env variable as explained in [Disabling AOF persistence](https://github.com/bitnami/containers/blob/main/bitnami/keydb#disabling-aof-persistence).
+KeyDB provides a different range of [persistence options](https://github.com/Snapchat/KeyDB-docs/blob/master/docs/persistence.md). This contanier uses *AOF persistence by default* but it is easy to overwrite that configuration by setting the following command when running the container `/opt/bitnami/scripts/keydb/run.sh --appendonly no`. Alternatively, you may use the `KEYDB_AOF_ENABLED` env variable as explained in [Disabling AOF persistence](https://github.com/bitnami/containers/blob/main/bitnami/keydb#disabling-aof-persistence).
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -153,11 +153,11 @@ By default the KeyDB image expects all the available passwords to be set. In ord
 
 ### Disabling AOF persistence
 
-KeyDB offers different [options](https://keydb.io/docs/topics/persistence.html) when it comes to persistence. By default, this image is set up to use the AOF (Append Only File) approach. Should you need to change this behaviour, setting the `KEYDB_AOF_ENABLED=no` env variable will disable this feature.
+KeyDB offers different [options](https://github.com/Snapchat/KeyDB-docs/blob/master/docs/persistence.md) when it comes to persistence. By default, this image is set up to use the AOF (Append Only File) approach. Should you need to change this behaviour, setting the `KEYDB_AOF_ENABLED=no` env variable will disable this feature.
 
 ### Enabling Access Control List
 
-KeyDB offers [ACL](https://keydb.io/docs/topics/acl.html) which allows certain connections to be limited in terms of the commands that can be executed and the keys that can be accessed. We strongly recommend enabling ACL in production by specifying the `KEYDB_ACL_FILE`.
+KeyDB offers [ACL](https://github.com/Snapchat/KeyDB-docs/blob/master/docs/acl.md) which allows certain connections to be limited in terms of the commands that can be executed and the keys that can be accessed. We strongly recommend enabling ACL in production by specifying the `KEYDB_ACL_FILE`.
 
 ```console
 docker run -name keydb -e KEYDB_ACL_FILE=/opt/bitnami/keydb/mounted-etc/users.acl -v /path/to/users.acl:/opt/bitnami/keydb/mounted-etc/users.acl bitnami/keydb:latest
