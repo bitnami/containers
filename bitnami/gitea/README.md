@@ -135,7 +135,7 @@ The following tables list the main variables you can set.
 
 The configuration can easily be setup by mounting your own configuration overrides on the directory `/bitnami/gitea/custom/conf/app.ini`:
 
-Check the [official gitea configuration documentation](https://docs.gitea.io/en-us/config-cheat-sheet/) for all the possible overrides and settings.
+Check the [official gitea configuration documentation](https://docs.gitea.com/administration/config-cheat-sheet/) for all the possible overrides and settings.
 
 ### Initializing a new instance
 
