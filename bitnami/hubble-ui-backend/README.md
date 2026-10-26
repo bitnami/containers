@@ -50,7 +50,7 @@ The Bitnami Hubble UI Backend Docker image is only available to [Bitnami Secure 
 
 ## Configuration
 
-Hubble UI Backend is a component of Hubble. In order to get the Hubble running on Kubernetes we encourage you to check the [bitnami/hubble Helm chart](https://github.com/bitnami/charts/tree/master/bitnami/hubble) and configure it using the options exposed in the values.yaml file.
+Hubble UI Backend is a component of Hubble.
 
 For further information about the specific component itself, please refer to the [official Hubble documentation](https://docs.cilium.io/en/stable/internals/hubble).
 
