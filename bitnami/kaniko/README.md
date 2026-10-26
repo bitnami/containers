@@ -80,7 +80,7 @@ To run commands inside this container you can use `docker run`, for example to e
 docker run --rm --name kaniko bitnami/kaniko:latest --help
 ```
 
-Check the [official Kaniko documentation](https://github.com/chainguard-dev/kanikodocs/) for more information about how to use Kaniko.
+Check the [official Kaniko documentation](https://github.com/chainguard-forks/kaniko/tree/main/docs) for more information about how to use Kaniko.
 
 ## Notable Changes
 
