@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-10-20T09:12:27Z" \
+      org.opencontainers.image.created="2026-10-26T21:22:30Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/metallb-controller/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/metallb-controller" \
@@ -47,7 +47,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="0.16.1" \
     BITNAMI_APP_NAME="metallb-controller" \
-    IMAGE_REVISION="15" \
+    IMAGE_REVISION="16" \
     PATH="/opt/bitnami/metallb/bin:$PATH"
 
 USER 1001
