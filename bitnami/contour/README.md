@@ -30,7 +30,7 @@ If you are looking for our previous generation of images based on Debian Linux, 
 
 ## Why use a non-root container?
 
-Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/containers/how-to/work-with-non-root-containers/).
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more in our [container security best practices](https://techdocs.broadcom.com/us/en/vmware-tanzu/bitnami-secure-images/bitnami-secure-images/services/bsi-doc/security-frameworks-security-frameworks-industry-best-practices-in-tac.html).
 
 ## Supported tags and respective `Dockerfile` links
 
