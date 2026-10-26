@@ -155,7 +155,7 @@ registry.my-network:5000/<image-name>@sha256:073b75987e95b89f187a89809f08a320339
     └── sha256:528017e21fc9f8342d4a888ed91bb61031974814695001f453bb829517cfe931
 ```
 
-Check the [official Notation documentation](https://notaryproject.dev/docs/quickstart-guides/quickstart/) for more information about how to use Notation.
+Check the [official Notation documentation](https://notaryproject.dev/docs/quickstart/) for more information about how to use Notation.
 
 ### FIPS configuration in Bitnami Secure Images
 
