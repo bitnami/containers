@@ -48,7 +48,7 @@ To run commands inside this container you can use `docker run`, for example to e
 docker run --rm --name apisix-ingress-controller bitnami/apisix-ingress-controller:latest --help
 ```
 
-Check the [official Apache APISIX Ingress Controller documentation](https://github.com/apache/apisix-ingress-controllerdocs/) for more information about how to use Apache APISIX Ingress Controller.
+Check the [official Apache APISIX Ingress Controller documentation](https://github.com/apache/apisix-ingress-controller/tree/master/docs) for more information about how to use Apache APISIX Ingress Controller.
 
 ### FIPS configuration in Bitnami Secure Images
 
