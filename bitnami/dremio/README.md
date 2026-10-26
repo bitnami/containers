@@ -42,7 +42,7 @@ The following section describes how to configure the application
 
 ### Configuration variables
 
-This container supports the upstream Dremio environment variables. Check the [official Dremio documentation](https://www.dremio.com//dremio-latest/configuration/) for the possible environment variables.
+This container supports the upstream Dremio environment variables. Check the [official Dremio documentation](https://docs.dremio.com/current/help-support/advanced-topics/configuration-files/) for the possible environment variables.
 
 ### FIPS configuration in Bitnami Secure Images
 
