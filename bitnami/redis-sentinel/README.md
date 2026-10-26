@@ -193,7 +193,7 @@ After changing the configuration, restart your Redis(R) container for changes to
 docker restart redis
 ```
 
-Refer to the [Redis(R) configuration](https://redis.iotopics/config) manual for the complete list of configuration options.
+Refer to the [Redis(R) configuration](https://redis.io/docs/latest/operate/oss_and_stack/management/config/) manual for the complete list of configuration options.
 
 ### FIPS configuration in Bitnami Secure Images
 
