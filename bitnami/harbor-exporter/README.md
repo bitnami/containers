@@ -46,7 +46,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 Harbor Exporter is a component of the Harbor application. In order to get the Harbor application running on Kubernetes we encourage you to check the [bitnami/harbor Helm chart](https://github.com/bitnami/charts/tree/master/bitnami/harbor) and configure it using the options exposed in the values.yaml file.
 
-For further information about the specific component itself, please refer to the [source repository documentation](https://goharbor.io//tree/main/docs
+For further information about the specific component itself, please refer to the [Harbor documentation](https://goharbor.io/docs/).
 
 ### Environment variables
 
