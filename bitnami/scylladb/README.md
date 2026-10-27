@@ -314,7 +314,7 @@ After changing the configuration, restart your ScyllaDB container for changes to
 docker restart scylladb
 ```
 
-Refer to the [configuration](http://docs.datastax.com/en/scylladb/3.x/scylladb/configuration/configTOC.html) manual for the complete list of configuration options.
+Refer to the [configuration](https://docs.scylladb.com/manual/stable/reference/configuration-parameters.html) manual for the complete list of configuration options.
 
 ### FIPS configuration in Bitnami Secure Images
 
