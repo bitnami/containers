@@ -8,7 +8,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-10-21T21:52:05Z" \
+      org.opencontainers.image.created="2026-10-26T23:54:20Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/tomcat/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/tomcat" \
@@ -30,7 +30,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "render-template-1.0.10-6-linux-${OS_ARCH}-debian-12" \
-      "jre-21.0.13-11-0-linux-${OS_ARCH}-debian-12" \
+      "jre-21.0.13-35-0-linux-${OS_ARCH}-debian-12" \
       "tomcat-11.0.27-3-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -53,7 +53,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/tomcat/postunpack.sh
 ENV APP_VERSION="11.0.27" \
     BITNAMI_APP_NAME="tomcat" \
-    IMAGE_REVISION="4" \
+    IMAGE_REVISION="5" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:$PATH"
 
