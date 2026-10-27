@@ -86,7 +86,7 @@ The command line management tool `jboss-cli.sh` allows a user to connect to the 
 
 ### Connecting a client container to the WildFly server container
 
-You can run the client in the same container as the server using the Docker [exec](https://docs.docker.com/reference/commandline/cli/#exec) command.
+You can run the client in the same container as the server using the Docker [exec](https://docs.docker.com/reference/cli/docker/container/exec/) command.
 
 ```console
 $ docker exec -it wildfly-server \
