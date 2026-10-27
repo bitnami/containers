@@ -17,7 +17,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "rmq-default-credential-updater-1.0.18-1-linux-${OS_ARCH}-debian-12" \
+      "rmq-default-credential-updater-1.0.19-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -40,20 +40,20 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2026-10-20T10:35:01Z" \
+      org.opencontainers.image.created="2026-10-27T14:44:58Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.title="rmq-default-credential-updater" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.0.18"
+      org.opencontainers.image.version="1.0.19"
 
 COPY rootfs /
 COPY --from=builder /opt/bitnami/rmq-default-credential-updater/.spdx-rmq-default-credential-updater.spdx /opt/bitnami/rmq-default-credential-updater/.spdx-rmq-default-credential-updater.spdx
 COPY --from=builder /opt/bitnami/rmq-default-credential-updater/bin/default-user-credential-updater /opt/bitnami/rmq-default-credential-updater/bin/default-user-credential-updater
 COPY --from=builder /opt/bitnami/rmq-default-credential-updater/licenses /opt/bitnami/rmq-default-credential-updater/licenses
 
-ENV APP_VERSION="1.0.18" \
+ENV APP_VERSION="1.0.19" \
     BITNAMI_APP_NAME="rmq-default-credential-updater" \
-    IMAGE_REVISION="1" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/rmq-default-credential-updater/bin:$PATH"
 
 USER 1001
