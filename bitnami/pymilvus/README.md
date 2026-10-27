@@ -72,7 +72,7 @@ docker run -it --name pymilvus -v /path/to/app:/app bitnami/pymilvus \
 
 **Further Reading:**
 
-- [pymilvus documentation](https://github.com/milvus-io/pymilvusdocs/)
+- [pymilvus documentation](https://github.com/milvus-io/pymilvus)
 
 ### FIPS configuration in Bitnami Secure Images
 
