@@ -40,9 +40,9 @@ Non-root container images add an extra layer of security and are generally recom
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://techdocs.broadcom.com/us/en/vmware-tanzu/application-catalog/tanzu-application-catalog/services/tac-doc/apps-tutorials-understand-rolling-tags-containers-index.html).
 
-## Using Docker Compose
+## Example architecture
 
-You can use the **docker-compose-cluster.yml** available on this repository to deploy an architecture like the one below:
+The following diagram shows an example architecture using Thanos:
 
 ```text
  ┌──────────────┐                  ┌──────────────┐             ┌──────────────┐       ┌──────────────┐
@@ -63,13 +63,6 @@ You can use the **docker-compose-cluster.yml** available on this repository to d
 
 Under the [configuration section](#configuration) you can find more information about each component's role.
 The unique "mandatory" components are Prometheus, Thanos Sidecar and Thanos Query. The rest of components are optional.
-
-To do so, run the commands below:
-
-```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/minio/master/docker-compose-cluster.yml > docker-compose.yml
-docker-compose up -d
-```
 
 ## Connecting to other containers
 
