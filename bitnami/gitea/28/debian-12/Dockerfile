@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-11-01T06:53:12Z" \
+      org.opencontainers.image.created="2026-11-01T09:42:09Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/gitea/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/gitea" \
       org.opencontainers.image.title="gitea" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="28.2.0"
+      org.opencontainers.image.version="28.3.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -32,7 +32,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
       "wait-for-port-1.0.11-5-linux-${OS_ARCH}-debian-12" \
       "render-template-1.0.10-6-linux-${OS_ARCH}-debian-12" \
       "ini-file-1.4.10-7-linux-${OS_ARCH}-debian-12" \
-      "gitea-28.2.0-1-linux-${OS_ARCH}-debian-12" \
+      "gitea-28.3.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -50,9 +50,9 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/gitea/postunpack.sh
-ENV APP_VERSION="28.2.0" \
+ENV APP_VERSION="28.3.0" \
     BITNAMI_APP_NAME="gitea" \
-    IMAGE_REVISION="5" \
+    IMAGE_REVISION="0" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/gitea/bin:$PATH"
 
