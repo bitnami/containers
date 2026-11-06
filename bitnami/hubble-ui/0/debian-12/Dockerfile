@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-10-26T19:57:10Z" \
+      org.opencontainers.image.created="2026-11-06T02:32:19Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/hubble-ui/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/hubble-ui" \
@@ -55,7 +55,7 @@ RUN rm -rf /app && \
     ln -sf /opt/bitnami/hubble-ui/public /app
 ENV APP_VERSION="0.13.6" \
     BITNAMI_APP_NAME="hubble-ui" \
-    IMAGE_REVISION="5" \
+    IMAGE_REVISION="6" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/nginx/sbin:$PATH"
