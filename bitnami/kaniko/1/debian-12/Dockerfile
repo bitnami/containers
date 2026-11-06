@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-11-03T18:58:53Z" \
+      org.opencontainers.image.created="2026-11-06T03:03:48Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/kaniko/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kaniko" \
@@ -48,7 +48,7 @@ ENV APP_VERSION="1.25.21" \
     BITNAMI_APP_NAME="kaniko" \
     DOCKER_CONFIG="/kaniko/.docker" \
     DOCKER_CREDENTIAL_GCR_CONFIG="/kaniko/.config/gcloud/docker_credential_gcr_config.json" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     PATH="/kaniko:$PATH" \
     SSL_CERT_DIR="/etc/ssl/certs/" \
     USER="root"
