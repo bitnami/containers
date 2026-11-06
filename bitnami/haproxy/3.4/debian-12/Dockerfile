@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-10-28T21:06:53Z" \
+      org.opencontainers.image.created="2026-11-06T02:25:59Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/haproxy/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/haproxy" \
@@ -47,7 +47,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="3.4.7" \
     BITNAMI_APP_NAME="haproxy" \
-    IMAGE_REVISION="4" \
+    IMAGE_REVISION="5" \
     PATH="/opt/bitnami/haproxy/sbin:/opt/bitnami/haproxy-dataplaneapi/bin:/opt/bitnami/lua/bin:$PATH"
 
 USER 1001
