@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-11-06T01:04:31Z" \
+      org.opencontainers.image.created="2026-11-10T02:01:23Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/azure-cli/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/azure-cli" \
       org.opencontainers.image.title="azure-cli" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="2.91.0"
+      org.opencontainers.image.version="2.92.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,8 +28,8 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "python-3.14.10-1-linux-${OS_ARCH}-debian-12" \
-      "azure-cli-2.91.0-0-linux-${OS_ARCH}-debian-12" \
+      "python-3.14.10-2-linux-${OS_ARCH}-debian-12" \
+      "azure-cli-2.92.0-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -47,9 +47,9 @@ RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 RUN mkdir /.azure /.azcopy && chmod g+rwX /.azure /.azcopy /bin
 RUN uninstall_packages curl
 
-ENV APP_VERSION="2.91.0" \
+ENV APP_VERSION="2.92.0" \
     BITNAMI_APP_NAME="azure-cli" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/azure-cli/bin:/opt/bitnami/azure-cli/venv/bin:$PATH"
 
 USER 1001
