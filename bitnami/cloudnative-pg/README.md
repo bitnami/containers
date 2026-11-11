@@ -52,7 +52,7 @@ To run commands inside this container you can use `docker run`, for example to e
 docker run --rm --name cloudnative-pg bitnami/cloudnative-pg:latest --  --help
 ```
 
-Check the [official CloudNativePG documentation](https://cloudnative-pg.io//tree/main/docs) for more information.
+Check the [official CloudNativePG documentation](https://cloudnative-pg.io/docs/) for more information.
 
 
 ### FIPS configuration in Bitnami Secure Images
