@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-11-06T04:08:01Z" \
+      org.opencontainers.image.created="2026-11-11T09:20:32Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/mongodb-sharded/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mongodb-sharded" \
       org.opencontainers.image.title="mongodb-sharded" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="9.0.4"
+      org.opencontainers.image.version="9.0.8"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,11 +28,11 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "yq-4.54.2-0-linux-${OS_ARCH}-debian-12" \
-      "wait-for-port-1.0.11-5-linux-${OS_ARCH}-debian-12" \
-      "render-template-1.0.10-6-linux-${OS_ARCH}-debian-12" \
+      "yq-4.54.3-1-linux-${OS_ARCH}-debian-12" \
+      "wait-for-port-1.0.11-6-linux-${OS_ARCH}-debian-12" \
+      "render-template-1.0.10-7-linux-${OS_ARCH}-debian-12" \
       "mongodb-shell-2.14.1-0-linux-${OS_ARCH}-debian-12" \
-      "mongodb-9.0.4-2-linux-${OS_ARCH}-debian-12" \
+      "mongodb-9.0.8-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -53,9 +53,9 @@ RUN ln -s /opt/bitnami/scripts/mongodb-sharded/run.sh /run.sh
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mongodb-sharded/postunpack.sh
-ENV APP_VERSION="9.0.4" \
+ENV APP_VERSION="9.0.8" \
     BITNAMI_APP_NAME="mongodb-sharded" \
-    IMAGE_REVISION="9" \
+    IMAGE_REVISION="0" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mongodb/bin:$PATH"
 
 EXPOSE 27017
