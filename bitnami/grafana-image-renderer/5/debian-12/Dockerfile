@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-11-06T02:13:26Z" \
+      org.opencontainers.image.created="2026-11-11T02:57:29Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/grafana-image-renderer/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/grafana-image-renderer" \
@@ -28,8 +28,8 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     DOWNLOADS_URL=${SECRET_DOWNLOADS_URL:-${DOWNLOADS_URL}} ; \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
-      "python-3.14.10-1-linux-${OS_ARCH}-debian-12" \
-      "grafana-image-renderer-5.12.10-0-linux-${OS_ARCH}-debian-12" \
+      "python-3.14.10-3-linux-${OS_ARCH}-debian-12" \
+      "grafana-image-renderer-5.12.10-1-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -51,7 +51,7 @@ ENV APP_VERSION="5.12.10" \
     BITNAMI_APP_NAME="grafana-image-renderer" \
     HTTP_HOST="0.0.0.0" \
     HTTP_PORT="8080" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="3" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/grafana-image-renderer/bin:$PATH"
 
 EXPOSE 8080
