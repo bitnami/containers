@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-11-11T00:18:53Z" \
+      org.opencontainers.image.created="2026-11-17T11:07:33Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/cilium/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cilium" \
       org.opencontainers.image.title="cilium" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="1.20.4"
+      org.opencontainers.image.version="1.20.5"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -32,7 +32,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
       "llvm-23.1.5-0-linux-${OS_ARCH}-debian-12" \
       "gops-0.3.29-17-linux-${OS_ARCH}-debian-12" \
       "bpftool-7.8.1-0-linux-${OS_ARCH}-debian-12" \
-      "cilium-1.20.4-2-linux-${OS_ARCH}-debian-12" \
+      "cilium-1.20.5-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -50,9 +50,9 @@ RUN uninstall_packages curl
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/cilium/postunpack.sh
-ENV APP_VERSION="1.20.4" \
+ENV APP_VERSION="1.20.5" \
     BITNAMI_APP_NAME="cilium" \
-    IMAGE_REVISION="4"
+    IMAGE_REVISION="0"
 
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/scripts/cilium/entrypoint.sh" ]
