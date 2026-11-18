@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-11-16T12:36:00Z" \
+      org.opencontainers.image.created="2026-11-18T18:16:23Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/redmine/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/redmine" \
@@ -31,7 +31,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
       "yq-4.54.3-1-linux-${OS_ARCH}-debian-12" \
       "postgresql-client-18.7.0-0-linux-${OS_ARCH}-debian-12" \
       "mysql-client-13.1.1-0-linux-${OS_ARCH}-debian-12" \
-      "mariadb-lib-12.3.3-0-linux-${OS_ARCH}-debian-12" \
+      "mariadb-lib-12.3.4-0-linux-${OS_ARCH}-debian-12" \
       "redmine-7.0.3-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -53,7 +53,7 @@ RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/redmine/postunpack.sh
 ENV APP_VERSION="7.0.3" \
     BITNAMI_APP_NAME="redmine" \
-    IMAGE_REVISION="2" \
+    IMAGE_REVISION="3" \
     LD_LIBRARY_PATH="/opt/bitnami/mariadb/lib:/opt/bitnami/postgresql/lib" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/common/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:$PATH"
 
