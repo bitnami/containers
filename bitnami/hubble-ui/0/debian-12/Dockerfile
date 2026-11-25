@@ -7,13 +7,13 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-11-19T22:33:25Z" \
+      org.opencontainers.image.created="2026-11-25T14:31:12Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/hubble-ui/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/hubble-ui" \
       org.opencontainers.image.title="hubble-ui" \
       org.opencontainers.image.vendor="Broadcom, Inc." \
-      org.opencontainers.image.version="0.13.6"
+      org.opencontainers.image.version="0.13.7"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,8 +29,8 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
     mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ || exit 1 ; \
     COMPONENTS=( \
       "render-template-1.0.10-7-linux-${OS_ARCH}-debian-12" \
-      "nginx-1.31.9-1-linux-${OS_ARCH}-debian-12" \
-      "hubble-ui-0.13.6-0-linux-${OS_ARCH}-debian-12" \
+      "nginx-1.31.10-0-linux-${OS_ARCH}-debian-12" \
+      "hubble-ui-0.13.7-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -53,9 +53,9 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/nginx/postunpack.sh
 RUN rm -rf /app && \
     ln -sf /opt/bitnami/hubble-ui/public /app
-ENV APP_VERSION="0.13.6" \
+ENV APP_VERSION="0.13.7" \
     BITNAMI_APP_NAME="hubble-ui" \
-    IMAGE_REVISION="8" \
+    IMAGE_REVISION="0" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/nginx/sbin:$PATH"
