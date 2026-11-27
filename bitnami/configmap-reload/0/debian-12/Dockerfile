@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-11-11T00:07:35Z" \
+      org.opencontainers.image.created="2026-11-27T18:31:00Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/configmap-reload/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/configmap-reload" \
@@ -48,7 +48,7 @@ RUN uninstall_packages curl
 
 ENV APP_VERSION="0.15.0" \
     BITNAMI_APP_NAME="configmap-reload" \
-    IMAGE_REVISION="51" \
+    IMAGE_REVISION="52" \
     PATH="/opt/bitnami/configmap-reload/bin:$PATH"
 
 EXPOSE 8080
