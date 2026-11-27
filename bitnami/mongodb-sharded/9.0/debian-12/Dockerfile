@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-11-11T09:20:32Z" \
+      org.opencontainers.image.created="2026-11-27T21:17:46Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/mongodb-sharded/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mongodb-sharded" \
@@ -31,7 +31,7 @@ RUN --mount=type=secret,id=downloads_url,env=SECRET_DOWNLOADS_URL \
       "yq-4.54.3-1-linux-${OS_ARCH}-debian-12" \
       "wait-for-port-1.0.11-6-linux-${OS_ARCH}-debian-12" \
       "render-template-1.0.10-7-linux-${OS_ARCH}-debian-12" \
-      "mongodb-shell-2.14.1-0-linux-${OS_ARCH}-debian-12" \
+      "mongodb-shell-2.14.3-0-linux-${OS_ARCH}-debian-12" \
       "mongodb-9.0.8-0-linux-${OS_ARCH}-debian-12" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -55,7 +55,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/mongodb-sharded/postunpack.sh
 ENV APP_VERSION="9.0.8" \
     BITNAMI_APP_NAME="mongodb-sharded" \
-    IMAGE_REVISION="0" \
+    IMAGE_REVISION="1" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mongodb/bin:$PATH"
 
 EXPOSE 27017
