@@ -7,7 +7,7 @@ ARG DOWNLOADS_URL="https://downloads.bitnami.com/files/stacksmith"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bookworm" \
-      org.opencontainers.image.created="2026-11-11T04:09:52Z" \
+      org.opencontainers.image.created="2026-11-27T19:53:28Z" \
       org.opencontainers.image.description="Application packaged by Broadcom, Inc." \
       org.opencontainers.image.documentation="https://github.com/bitnami/containers/tree/main/bitnami/hyperledger-fabric-orderer/README.md" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/hyperledger-fabric-orderer" \
@@ -49,7 +49,7 @@ RUN uninstall_packages curl
 ENV APP_VERSION="3.1.5" \
     BITNAMI_APP_NAME="hyperledger-fabric-orderer" \
     FABRIC_CFG_PATH="/opt/bitnami/hyperledger-fabric-orderer/etc" \
-    IMAGE_REVISION="16" \
+    IMAGE_REVISION="17" \
     PATH="/opt/bitnami/hyperledger-fabric-orderer/bin:$PATH"
 
 EXPOSE 7050
